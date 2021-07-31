@@ -110,8 +110,8 @@ module UpdateEnvironment = {
     environmentId: environmentId,
   }
   type response = unit
-  @module("@aws-sdk/client-cloud9") @new external new_: request => t = "UpdateEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloud9") @new external new: request => t = "UpdateEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEnvironmentStatus = {
@@ -122,8 +122,8 @@ module DescribeEnvironmentStatus = {
     status: environmentStatus,
   }
   @module("@aws-sdk/client-cloud9") @new
-  external new_: request => t = "DescribeEnvironmentStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEnvironmentStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEnvironmentMembership = {
@@ -134,16 +134,16 @@ module DeleteEnvironmentMembership = {
   }
   type response = unit
   @module("@aws-sdk/client-cloud9") @new
-  external new_: request => t = "DeleteEnvironmentMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEnvironmentMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEnvironment = {
   type t
   type request = {environmentId: environmentId}
   type response = unit
-  @module("@aws-sdk/client-cloud9") @new external new_: request => t = "DeleteEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloud9") @new external new: request => t = "DeleteEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEnvironmentMembership = {
@@ -155,8 +155,8 @@ module UpdateEnvironmentMembership = {
   }
   type response = {membership: option<environmentMember>}
   @module("@aws-sdk/client-cloud9") @new
-  external new_: request => t = "UpdateEnvironmentMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEnvironmentMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -166,8 +166,8 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: environmentArn,
   }
   type response = unit
-  @module("@aws-sdk/client-cloud9") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloud9") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEnvironments = {
@@ -180,8 +180,8 @@ module ListEnvironments = {
     environmentIds: option<environmentIdList>,
     nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-cloud9") @new external new_: request => t = "ListEnvironmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloud9") @new external new: request => t = "ListEnvironmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEnvironmentMembership = {
@@ -193,8 +193,8 @@ module CreateEnvironmentMembership = {
   }
   type response = {membership: environmentMember}
   @module("@aws-sdk/client-cloud9") @new
-  external new_: request => t = "CreateEnvironmentMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateEnvironmentMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -204,16 +204,16 @@ module TagResource = {
     @as("ResourceARN") resourceARN: environmentArn,
   }
   type response = unit
-  @module("@aws-sdk/client-cloud9") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloud9") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceARN") resourceARN: environmentArn}
   type response = {@as("Tags") tags: option<tagList_>}
-  @module("@aws-sdk/client-cloud9") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloud9") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEnvironmentMemberships = {
@@ -230,8 +230,8 @@ module DescribeEnvironmentMemberships = {
     memberships: option<environmentMembersList>,
   }
   @module("@aws-sdk/client-cloud9") @new
-  external new_: request => t = "DescribeEnvironmentMembershipsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEnvironmentMembershipsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEnvironmentEC2 = {
@@ -249,14 +249,14 @@ module CreateEnvironmentEC2 = {
     name: environmentName,
   }
   type response = {environmentId: option<environmentId>}
-  @module("@aws-sdk/client-cloud9") @new external new_: request => t = "CreateEnvironmentEC2Command"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloud9") @new external new: request => t = "CreateEnvironmentEC2Command"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEnvironments = {
   type t
   type request = {environmentIds: boundedEnvironmentIdList}
   type response = {environments: option<environmentList>}
-  @module("@aws-sdk/client-cloud9") @new external new_: request => t = "DescribeEnvironmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloud9") @new external new: request => t = "DescribeEnvironmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

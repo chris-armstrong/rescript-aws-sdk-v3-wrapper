@@ -417,8 +417,8 @@ module DeleteBackup = {
     @as("Lifecycle") lifecycle: option<backupLifecycle>,
     @as("BackupId") backupId: option<backupId>,
   }
-  @module("@aws-sdk/client-fsx") @new external new_: request => t = "DeleteBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "DeleteBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelDataRepositoryTask = {
@@ -428,9 +428,8 @@ module CancelDataRepositoryTask = {
     @as("TaskId") taskId: option<taskId>,
     @as("Lifecycle") lifecycle: option<dataRepositoryTaskLifecycle>,
   }
-  @module("@aws-sdk/client-fsx") @new
-  external new_: request => t = "CancelDataRepositoryTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "CancelDataRepositoryTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -440,8 +439,8 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: resourceARN,
   }
   type response = unit
-  @module("@aws-sdk/client-fsx") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -451,8 +450,8 @@ module TagResource = {
     @as("ResourceARN") resourceARN: resourceARN,
   }
   type response = unit
-  @module("@aws-sdk/client-fsx") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -466,8 +465,8 @@ module ListTagsForResource = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Tags") tags: option<tags>,
   }
-  @module("@aws-sdk/client-fsx") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateFileSystemAliases = {
@@ -479,8 +478,8 @@ module DisassociateFileSystemAliases = {
   }
   type response = {@as("Aliases") aliases: option<aliases>}
   @module("@aws-sdk/client-fsx") @new
-  external new_: request => t = "DisassociateFileSystemAliasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateFileSystemAliasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFileSystemAliases = {
@@ -496,8 +495,8 @@ module DescribeFileSystemAliases = {
     @as("Aliases") aliases: option<aliases>,
   }
   @module("@aws-sdk/client-fsx") @new
-  external new_: request => t = "DescribeFileSystemAliasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFileSystemAliasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateFileSystemAliases = {
@@ -509,8 +508,8 @@ module AssociateFileSystemAliases = {
   }
   type response = {@as("Aliases") aliases: option<aliases>}
   @module("@aws-sdk/client-fsx") @new
-  external new_: request => t = "AssociateFileSystemAliasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateFileSystemAliasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFileSystem = {
@@ -527,8 +526,8 @@ module DeleteFileSystem = {
     @as("Lifecycle") lifecycle: option<fileSystemLifecycle>,
     @as("FileSystemId") fileSystemId: option<fileSystemId>,
   }
-  @module("@aws-sdk/client-fsx") @new external new_: request => t = "DeleteFileSystemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "DeleteFileSystemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDataRepositoryTask = {
@@ -542,9 +541,8 @@ module CreateDataRepositoryTask = {
     @as("Type") type_: dataRepositoryTaskType,
   }
   type response = {@as("DataRepositoryTask") dataRepositoryTask: option<dataRepositoryTask>}
-  @module("@aws-sdk/client-fsx") @new
-  external new_: request => t = "CreateDataRepositoryTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "CreateDataRepositoryTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataRepositoryTasks = {
@@ -560,8 +558,8 @@ module DescribeDataRepositoryTasks = {
     @as("DataRepositoryTasks") dataRepositoryTasks: option<dataRepositoryTasks>,
   }
   @module("@aws-sdk/client-fsx") @new
-  external new_: request => t = "DescribeDataRepositoryTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDataRepositoryTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFileSystem = {
@@ -574,8 +572,8 @@ module UpdateFileSystem = {
     @as("FileSystemId") fileSystemId: fileSystemId,
   }
   type response = {@as("FileSystem") fileSystem: option<fileSystem>}
-  @module("@aws-sdk/client-fsx") @new external new_: request => t = "UpdateFileSystemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "UpdateFileSystemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFileSystemFromBackup = {
@@ -593,8 +591,8 @@ module CreateFileSystemFromBackup = {
   }
   type response = {@as("FileSystem") fileSystem: option<fileSystem>}
   @module("@aws-sdk/client-fsx") @new
-  external new_: request => t = "CreateFileSystemFromBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateFileSystemFromBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFileSystem = {
@@ -612,8 +610,8 @@ module CreateFileSystem = {
     @as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
   }
   type response = {@as("FileSystem") fileSystem: option<fileSystem>}
-  @module("@aws-sdk/client-fsx") @new external new_: request => t = "CreateFileSystemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "CreateFileSystemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFileSystems = {
@@ -627,8 +625,8 @@ module DescribeFileSystems = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("FileSystems") fileSystems: option<fileSystems>,
   }
-  @module("@aws-sdk/client-fsx") @new external new_: request => t = "DescribeFileSystemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "DescribeFileSystemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBackup = {
@@ -639,8 +637,8 @@ module CreateBackup = {
     @as("FileSystemId") fileSystemId: fileSystemId,
   }
   type response = {@as("Backup") backup: option<backup>}
-  @module("@aws-sdk/client-fsx") @new external new_: request => t = "CreateBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "CreateBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CopyBackup = {
@@ -654,8 +652,8 @@ module CopyBackup = {
     @as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
   }
   type response = {@as("Backup") backup: option<backup>}
-  @module("@aws-sdk/client-fsx") @new external new_: request => t = "CopyBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "CopyBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBackups = {
@@ -670,6 +668,6 @@ module DescribeBackups = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Backups") backups: option<backups>,
   }
-  @module("@aws-sdk/client-fsx") @new external new_: request => t = "DescribeBackupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fsx") @new external new: request => t = "DescribeBackupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

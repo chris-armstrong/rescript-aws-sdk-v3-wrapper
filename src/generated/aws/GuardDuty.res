@@ -471,8 +471,8 @@ module UpdateThreatIntelSet = {
   }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "UpdateThreatIntelSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateThreatIntelSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateIPSet = {
@@ -485,8 +485,8 @@ module UpdateIPSet = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "UpdateIPSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "UpdateIPSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInvitationsCount = {
@@ -494,8 +494,8 @@ module GetInvitationsCount = {
   type request = unit
   type response = {@as("InvitationsCount") invitationsCount: option<integer_>}
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "GetInvitationsCountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInvitationsCountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableOrganizationAdminAccount = {
@@ -503,8 +503,8 @@ module EnableOrganizationAdminAccount = {
   type request = {@as("AdminAccountId") adminAccountId: string_}
   type response = unit
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "EnableOrganizationAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableOrganizationAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateFromMasterAccount = {
@@ -512,8 +512,8 @@ module DisassociateFromMasterAccount = {
   type request = {@as("DetectorId") detectorId: detectorId}
   type response = unit
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "DisassociateFromMasterAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateFromMasterAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableOrganizationAdminAccount = {
@@ -521,8 +521,8 @@ module DisableOrganizationAdminAccount = {
   type request = {@as("AdminAccountId") adminAccountId: string_}
   type response = unit
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "DisableOrganizationAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableOrganizationAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteThreatIntelSet = {
@@ -533,8 +533,8 @@ module DeleteThreatIntelSet = {
   }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "DeleteThreatIntelSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteThreatIntelSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePublishingDestination = {
@@ -545,8 +545,8 @@ module DeletePublishingDestination = {
   }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "DeletePublishingDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeletePublishingDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteIPSet = {
@@ -556,8 +556,8 @@ module DeleteIPSet = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "DeleteIPSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeleteIPSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFilter = {
@@ -567,16 +567,16 @@ module DeleteFilter = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "DeleteFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeleteFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDetector = {
   type t
   type request = {@as("DetectorId") detectorId: detectorId}
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "DeleteDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeleteDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptInvitation = {
@@ -587,8 +587,8 @@ module AcceptInvitation = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "AcceptInvitationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "AcceptInvitationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePublishingDestination = {
@@ -600,8 +600,8 @@ module UpdatePublishingDestination = {
   }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "UpdatePublishingDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePublishingDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFindingsFeedback = {
@@ -614,8 +614,8 @@ module UpdateFindingsFeedback = {
   }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "UpdateFindingsFeedbackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFindingsFeedbackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -625,8 +625,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: guardDutyArn,
   }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UnarchiveFindings = {
@@ -636,8 +636,8 @@ module UnarchiveFindings = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "UnarchiveFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "UnarchiveFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -647,8 +647,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: guardDutyArn,
   }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThreatIntelSets = {
@@ -663,8 +663,8 @@ module ListThreatIntelSets = {
     @as("ThreatIntelSetIds") threatIntelSetIds: threatIntelSetIds,
   }
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "ListThreatIntelSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListThreatIntelSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -672,8 +672,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: guardDutyArn}
   type response = {@as("Tags") tags: option<tagMap>}
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIPSets = {
@@ -687,8 +687,8 @@ module ListIPSets = {
     @as("NextToken") nextToken: option<string_>,
     @as("IpSetIds") ipSetIds: ipSetIds,
   }
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "ListIPSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListIPSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFilters = {
@@ -702,8 +702,8 @@ module ListFilters = {
     @as("NextToken") nextToken: option<string_>,
     @as("FilterNames") filterNames: filterNames,
   }
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "ListFiltersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListFiltersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDetectors = {
@@ -716,8 +716,8 @@ module ListDetectors = {
     @as("NextToken") nextToken: option<string_>,
     @as("DetectorIds") detectorIds: detectorIds,
   }
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "ListDetectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListDetectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetThreatIntelSet = {
@@ -733,16 +733,16 @@ module GetThreatIntelSet = {
     @as("Format") format: threatIntelSetFormat,
     @as("Name") name: name,
   }
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "GetThreatIntelSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetThreatIntelSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMasterAccount = {
   type t
   type request = {@as("DetectorId") detectorId: detectorId}
   type response = {@as("Master") master: master}
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "GetMasterAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetMasterAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIPSet = {
@@ -758,8 +758,8 @@ module GetIPSet = {
     @as("Format") format: ipSetFormat,
     @as("Name") name: name,
   }
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "GetIPSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetIPSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePublishingDestination = {
@@ -776,8 +776,8 @@ module DescribePublishingDestination = {
     @as("DestinationId") destinationId: string_,
   }
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "DescribePublishingDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePublishingDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateThreatIntelSet = {
@@ -793,8 +793,8 @@ module CreateThreatIntelSet = {
   }
   type response = {@as("ThreatIntelSetId") threatIntelSetId: string_}
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "CreateThreatIntelSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateThreatIntelSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSampleFindings = {
@@ -805,8 +805,8 @@ module CreateSampleFindings = {
   }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "CreateSampleFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSampleFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePublishingDestination = {
@@ -819,8 +819,8 @@ module CreatePublishingDestination = {
   }
   type response = {@as("DestinationId") destinationId: string_}
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "CreatePublishingDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePublishingDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateIPSet = {
@@ -835,8 +835,8 @@ module CreateIPSet = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = {@as("IpSetId") ipSetId: string_}
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "CreateIPSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "CreateIPSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ArchiveFindings = {
@@ -846,8 +846,8 @@ module ArchiveFindings = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "ArchiveFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "ArchiveFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateOrganizationConfiguration = {
@@ -859,8 +859,8 @@ module UpdateOrganizationConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "UpdateOrganizationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateOrganizationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMemberDetectors = {
@@ -872,8 +872,8 @@ module UpdateMemberDetectors = {
   }
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts}
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "UpdateMemberDetectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateMemberDetectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDetector = {
@@ -886,8 +886,8 @@ module UpdateDetector = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "UpdateDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "UpdateDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopMonitoringMembers = {
@@ -898,8 +898,8 @@ module StopMonitoringMembers = {
   }
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts}
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "StopMonitoringMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopMonitoringMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartMonitoringMembers = {
@@ -910,8 +910,8 @@ module StartMonitoringMembers = {
   }
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts}
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "StartMonitoringMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartMonitoringMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPublishingDestinations = {
@@ -926,8 +926,8 @@ module ListPublishingDestinations = {
     @as("Destinations") destinations: destinations,
   }
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "ListPublishingDestinationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPublishingDestinationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOrganizationAdminAccounts = {
@@ -941,8 +941,8 @@ module ListOrganizationAdminAccounts = {
     @as("AdminAccounts") adminAccounts: option<adminAccounts>,
   }
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "ListOrganizationAdminAccountsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListOrganizationAdminAccountsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMembers = {
@@ -957,8 +957,8 @@ module ListMembers = {
     @as("NextToken") nextToken: option<string_>,
     @as("Members") members: option<members>,
   }
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "ListMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInvitations = {
@@ -971,8 +971,8 @@ module ListInvitations = {
     @as("NextToken") nextToken: option<string_>,
     @as("Invitations") invitations: option<invitations>,
   }
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "ListInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InviteMembers = {
@@ -984,8 +984,8 @@ module InviteMembers = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts}
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "InviteMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "InviteMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMembers = {
@@ -998,8 +998,8 @@ module GetMembers = {
     @as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts,
     @as("Members") members: members,
   }
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "GetMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDetector = {
@@ -1015,8 +1015,8 @@ module GetDetector = {
     findingPublishingFrequency: option<findingPublishingFrequency>,
     @as("CreatedAt") createdAt: option<string_>,
   }
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "GetDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateMembers = {
@@ -1027,8 +1027,8 @@ module DisassociateMembers = {
   }
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts}
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "DisassociateMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOrganizationConfiguration = {
@@ -1040,8 +1040,8 @@ module DescribeOrganizationConfiguration = {
     @as("AutoEnable") autoEnable: boolean_,
   }
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "DescribeOrganizationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOrganizationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMembers = {
@@ -1051,25 +1051,24 @@ module DeleteMembers = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts}
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "DeleteMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeleteMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInvitations = {
   type t
   type request = {@as("AccountIds") accountIds: accountIds}
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts}
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "DeleteInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeleteInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeclineInvitations = {
   type t
   type request = {@as("AccountIds") accountIds: accountIds}
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts}
-  @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "DeclineInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "DeclineInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMembers = {
@@ -1079,8 +1078,8 @@ module CreateMembers = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts}
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "CreateMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "CreateMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDetector = {
@@ -1094,8 +1093,8 @@ module CreateDetector = {
     @as("Enable") enable: boolean_,
   }
   type response = {@as("DetectorId") detectorId: option<detectorId>}
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "CreateDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "CreateDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFilter = {
@@ -1109,8 +1108,8 @@ module UpdateFilter = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = {@as("Name") name: filterName}
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "UpdateFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "UpdateFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFindings = {
@@ -1126,8 +1125,8 @@ module ListFindings = {
     @as("NextToken") nextToken: option<string_>,
     @as("FindingIds") findingIds: findingIds,
   }
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "ListFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "ListFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUsageStatistics = {
@@ -1144,9 +1143,8 @@ module GetUsageStatistics = {
     @as("NextToken") nextToken: option<string_>,
     @as("UsageStatistics") usageStatistics: option<usageStatistics>,
   }
-  @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "GetUsageStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetUsageStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMemberDetectors = {
@@ -1160,9 +1158,8 @@ module GetMemberDetectors = {
     @as("MemberDataSourceConfigurations")
     memberDataSourceConfigurations: memberDataSourceConfigurations,
   }
-  @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "GetMemberDetectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetMemberDetectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFindingsStatistics = {
@@ -1174,8 +1171,8 @@ module GetFindingsStatistics = {
   }
   type response = {@as("FindingStatistics") findingStatistics: findingStatistics}
   @module("@aws-sdk/client-guardduty") @new
-  external new_: request => t = "GetFindingsStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetFindingsStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFilter = {
@@ -1192,8 +1189,8 @@ module GetFilter = {
     @as("Description") description: option<filterDescription>,
     @as("Name") name: filterName,
   }
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "GetFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFilter = {
@@ -1209,8 +1206,8 @@ module CreateFilter = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = {@as("Name") name: filterName}
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "CreateFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "CreateFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFindings = {
@@ -1221,6 +1218,6 @@ module GetFindings = {
     @as("DetectorId") detectorId: detectorId,
   }
   type response = {@as("Findings") findings: findings}
-  @module("@aws-sdk/client-guardduty") @new external new_: request => t = "GetFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-guardduty") @new external new: request => t = "GetFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -130,9 +130,8 @@ module RollbackTransaction = {
     resourceArn: arn,
   }
   type response = {transactionStatus: option<transactionStatus>}
-  @module("@aws-sdk/client-rds-data") @new
-  external new_: request => t = "RollbackTransactionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds-data") @new external new: request => t = "RollbackTransactionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CommitTransaction = {
@@ -143,8 +142,8 @@ module CommitTransaction = {
     resourceArn: arn,
   }
   type response = {transactionStatus: option<transactionStatus>}
-  @module("@aws-sdk/client-rds-data") @new external new_: request => t = "CommitTransactionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds-data") @new external new: request => t = "CommitTransactionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BeginTransaction = {
@@ -156,8 +155,8 @@ module BeginTransaction = {
     resourceArn: arn,
   }
   type response = {transactionId: option<id>}
-  @module("@aws-sdk/client-rds-data") @new external new_: request => t = "BeginTransactionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds-data") @new external new: request => t = "BeginTransactionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExecuteStatement = {
@@ -180,8 +179,8 @@ module ExecuteStatement = {
     columnMetadata: option<metadata>,
     records: option<sqlRecords>,
   }
-  @module("@aws-sdk/client-rds-data") @new external new_: request => t = "ExecuteStatementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds-data") @new external new: request => t = "ExecuteStatementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchExecuteStatement = {
@@ -197,8 +196,8 @@ module BatchExecuteStatement = {
   }
   type response = {updateResults: option<updateResults>}
   @module("@aws-sdk/client-rds-data") @new
-  external new_: request => t = "BatchExecuteStatementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchExecuteStatementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExecuteSql = {
@@ -211,6 +210,6 @@ module ExecuteSql = {
     dbClusterOrInstanceArn: arn,
   }
   type response = {sqlStatementResults: option<sqlStatementResults>}
-  @module("@aws-sdk/client-rds-data") @new external new_: request => t = "ExecuteSqlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds-data") @new external new: request => t = "ExecuteSqlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

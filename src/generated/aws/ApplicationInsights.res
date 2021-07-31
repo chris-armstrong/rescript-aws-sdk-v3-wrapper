@@ -248,8 +248,8 @@ module UpdateComponentConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "UpdateComponentConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateComponentConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeComponentConfigurationRecommendation = {
@@ -263,8 +263,8 @@ module DescribeComponentConfigurationRecommendation = {
     @as("ComponentConfiguration") componentConfiguration: option<componentConfiguration>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "DescribeComponentConfigurationRecommendationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeComponentConfigurationRecommendationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeComponentConfiguration = {
@@ -279,8 +279,8 @@ module DescribeComponentConfiguration = {
     @as("Monitor") monitor: option<monitor>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "DescribeComponentConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeComponentConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLogPattern = {
@@ -292,8 +292,8 @@ module DeleteLogPattern = {
   }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "DeleteLogPatternCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteLogPatternCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteComponent = {
@@ -304,8 +304,8 @@ module DeleteComponent = {
   }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "DeleteComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApplication = {
@@ -313,8 +313,8 @@ module DeleteApplication = {
   type request = {@as("ResourceGroupName") resourceGroupName: resourceGroupName}
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "DeleteApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLogPattern = {
@@ -331,8 +331,8 @@ module UpdateLogPattern = {
     @as("ResourceGroupName") resourceGroupName: option<resourceGroupName>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "UpdateLogPatternCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateLogPatternCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateComponent = {
@@ -345,8 +345,8 @@ module UpdateComponent = {
   }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "UpdateComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApplication = {
@@ -360,8 +360,8 @@ module UpdateApplication = {
   }
   type response = {@as("ApplicationInfo") applicationInfo: option<applicationInfo>}
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "UpdateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -372,8 +372,8 @@ module UntagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLogPatternSets = {
@@ -389,8 +389,8 @@ module ListLogPatternSets = {
     @as("ResourceGroupName") resourceGroupName: option<resourceGroupName>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "ListLogPatternSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListLogPatternSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeObservation = {
@@ -398,8 +398,8 @@ module DescribeObservation = {
   type request = {@as("ObservationId") observationId: observationId}
   type response = {@as("Observation") observation: option<observation>}
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "DescribeObservationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeObservationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLogPattern = {
@@ -414,8 +414,8 @@ module DescribeLogPattern = {
     @as("ResourceGroupName") resourceGroupName: option<resourceGroupName>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "DescribeLogPatternCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLogPatternCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeApplication = {
@@ -423,8 +423,8 @@ module DescribeApplication = {
   type request = {@as("ResourceGroupName") resourceGroupName: resourceGroupName}
   type response = {@as("ApplicationInfo") applicationInfo: option<applicationInfo>}
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "DescribeApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLogPattern = {
@@ -441,8 +441,8 @@ module CreateLogPattern = {
     @as("LogPattern") logPattern: option<logPattern>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "CreateLogPatternCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateLogPatternCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateComponent = {
@@ -454,8 +454,8 @@ module CreateComponent = {
   }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "CreateComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -466,8 +466,8 @@ module TagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -475,8 +475,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceARN") resourceARN: amazonResourceName}
   type response = {@as("Tags") tags: option<tagList_>}
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLogPatterns = {
@@ -493,8 +493,8 @@ module ListLogPatterns = {
     @as("ResourceGroupName") resourceGroupName: option<resourceGroupName>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "ListLogPatternsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListLogPatternsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListConfigurationHistory = {
@@ -512,8 +512,8 @@ module ListConfigurationHistory = {
     @as("EventList") eventList: option<configurationEventList>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "ListConfigurationHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListConfigurationHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListApplications = {
@@ -527,8 +527,8 @@ module ListApplications = {
     @as("ApplicationInfoList") applicationInfoList: option<applicationInfoList>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "ListApplicationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListApplicationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProblem = {
@@ -536,8 +536,8 @@ module DescribeProblem = {
   type request = {@as("ProblemId") problemId: problemId}
   type response = {@as("Problem") problem: option<problem>}
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "DescribeProblemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProblemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApplication = {
@@ -551,8 +551,8 @@ module CreateApplication = {
   }
   type response = {@as("ApplicationInfo") applicationInfo: option<applicationInfo>}
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "CreateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProblems = {
@@ -569,8 +569,8 @@ module ListProblems = {
     @as("ProblemList") problemList: option<problemList>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "ListProblemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProblemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProblemObservations = {
@@ -578,8 +578,8 @@ module DescribeProblemObservations = {
   type request = {@as("ProblemId") problemId: problemId}
   type response = {@as("RelatedObservations") relatedObservations: option<relatedObservations>}
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "DescribeProblemObservationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProblemObservationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeComponent = {
@@ -593,8 +593,8 @@ module DescribeComponent = {
     @as("ApplicationComponent") applicationComponent: option<applicationComponent>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "DescribeComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListComponents = {
@@ -609,6 +609,6 @@ module ListComponents = {
     @as("ApplicationComponentList") applicationComponentList: option<applicationComponentList>,
   }
   @module("@aws-sdk/client-applicationinsights") @new
-  external new_: request => t = "ListComponentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListComponentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

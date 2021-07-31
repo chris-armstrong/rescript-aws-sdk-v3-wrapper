@@ -160,8 +160,8 @@ module PromoteResourceShareCreatedFromPolicy = {
   type request = {resourceShareArn: string_}
   type response = {returnValue: option<boolean_>}
   @module("@aws-sdk/client-ram") @new
-  external new_: request => t = "PromoteResourceShareCreatedFromPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PromoteResourceShareCreatedFromPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableSharingWithAwsOrganization = {
@@ -169,8 +169,8 @@ module EnableSharingWithAwsOrganization = {
   type request = unit
   type response = {returnValue: option<boolean_>}
   @module("@aws-sdk/client-ram") @new
-  external new_: request => t = "EnableSharingWithAwsOrganizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableSharingWithAwsOrganizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateResourceSharePermission = {
@@ -185,8 +185,8 @@ module DisassociateResourceSharePermission = {
     returnValue: option<boolean_>,
   }
   @module("@aws-sdk/client-ram") @new
-  external new_: request => t = "DisassociateResourceSharePermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateResourceSharePermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteResourceShare = {
@@ -199,8 +199,8 @@ module DeleteResourceShare = {
     clientToken: option<string_>,
     returnValue: option<boolean_>,
   }
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "DeleteResourceShareCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "DeleteResourceShareCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateResourceSharePermission = {
@@ -216,8 +216,8 @@ module AssociateResourceSharePermission = {
     returnValue: option<boolean_>,
   }
   @module("@aws-sdk/client-ram") @new
-  external new_: request => t = "AssociateResourceSharePermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateResourceSharePermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -227,8 +227,8 @@ module UntagResource = {
     resourceShareArn: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResourcePolicies = {
@@ -243,8 +243,8 @@ module GetResourcePolicies = {
     nextToken: option<string_>,
     policies: option<policyList>,
   }
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "GetResourcePoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "GetResourcePoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPermission = {
@@ -254,8 +254,8 @@ module GetPermission = {
     permissionArn: string_,
   }
   type response = {permission: option<resourceSharePermissionDetail>}
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "GetPermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "GetPermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -265,8 +265,8 @@ module TagResource = {
     resourceShareArn: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResources = {
@@ -284,8 +284,8 @@ module ListResources = {
     nextToken: option<string_>,
     resources: option<resourceList>,
   }
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "ListResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "ListResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResourceTypes = {
@@ -298,8 +298,8 @@ module ListResourceTypes = {
     nextToken: option<string_>,
     resourceTypes: option<serviceNameAndResourceTypeList>,
   }
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "ListResourceTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "ListResourceTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResourceSharePermissions = {
@@ -314,8 +314,8 @@ module ListResourceSharePermissions = {
     permissions: option<resourceSharePermissionList>,
   }
   @module("@aws-sdk/client-ram") @new
-  external new_: request => t = "ListResourceSharePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListResourceSharePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPrincipals = {
@@ -333,8 +333,8 @@ module ListPrincipals = {
     nextToken: option<string_>,
     principals: option<principalList>,
   }
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "ListPrincipalsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "ListPrincipalsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPermissions = {
@@ -348,8 +348,8 @@ module ListPermissions = {
     nextToken: option<string_>,
     permissions: option<resourceSharePermissionList>,
   }
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "ListPermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "ListPermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPendingInvitationResources = {
@@ -364,8 +364,8 @@ module ListPendingInvitationResources = {
     resources: option<resourceList>,
   }
   @module("@aws-sdk/client-ram") @new
-  external new_: request => t = "ListPendingInvitationResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPendingInvitationResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResourceShareAssociations = {
@@ -384,8 +384,8 @@ module GetResourceShareAssociations = {
     resourceShareAssociations: option<resourceShareAssociationList>,
   }
   @module("@aws-sdk/client-ram") @new
-  external new_: request => t = "GetResourceShareAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetResourceShareAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateResourceShare = {
@@ -401,8 +401,8 @@ module DisassociateResourceShare = {
     resourceShareAssociations: option<resourceShareAssociationList>,
   }
   @module("@aws-sdk/client-ram") @new
-  external new_: request => t = "DisassociateResourceShareCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateResourceShareCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateResourceShare = {
@@ -417,8 +417,8 @@ module AssociateResourceShare = {
     clientToken: option<string_>,
     resourceShareAssociations: option<resourceShareAssociationList>,
   }
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "AssociateResourceShareCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "AssociateResourceShareCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateResourceShare = {
@@ -433,8 +433,8 @@ module UpdateResourceShare = {
     clientToken: option<string_>,
     resourceShare: option<resourceShare>,
   }
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "UpdateResourceShareCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "UpdateResourceShareCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectResourceShareInvitation = {
@@ -448,8 +448,8 @@ module RejectResourceShareInvitation = {
     resourceShareInvitation: option<resourceShareInvitation>,
   }
   @module("@aws-sdk/client-ram") @new
-  external new_: request => t = "RejectResourceShareInvitationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectResourceShareInvitationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateResourceShare = {
@@ -467,8 +467,8 @@ module CreateResourceShare = {
     clientToken: option<string_>,
     resourceShare: option<resourceShare>,
   }
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "CreateResourceShareCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "CreateResourceShareCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptResourceShareInvitation = {
@@ -482,8 +482,8 @@ module AcceptResourceShareInvitation = {
     resourceShareInvitation: option<resourceShareInvitation>,
   }
   @module("@aws-sdk/client-ram") @new
-  external new_: request => t = "AcceptResourceShareInvitationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptResourceShareInvitationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResourceShares = {
@@ -501,8 +501,8 @@ module GetResourceShares = {
     nextToken: option<string_>,
     resourceShares: option<resourceShareList>,
   }
-  @module("@aws-sdk/client-ram") @new external new_: request => t = "GetResourceSharesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ram") @new external new: request => t = "GetResourceSharesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResourceShareInvitations = {
@@ -518,6 +518,6 @@ module GetResourceShareInvitations = {
     resourceShareInvitations: option<resourceShareInvitationList>,
   }
   @module("@aws-sdk/client-ram") @new
-  external new_: request => t = "GetResourceShareInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetResourceShareInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

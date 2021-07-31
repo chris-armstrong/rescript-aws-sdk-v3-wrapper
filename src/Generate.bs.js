@@ -199,7 +199,7 @@ function generateOperationModule(moduleName, param) {
   var response = generateOperationStructureType("response", output);
   var inputType = isOperationStructureNone(input) ? "unit" : "request";
   var outputType = isOperationStructureNone(output) ? "Js.Promise.t<unit>" : "Js.Promise.t<response>";
-  return "module " + Util$AwsSdkV3.symbolName(name) + " = {\n" + "  type t;\n" + ("  " + request + "\n") + ("  " + response + "\n") + ("  @module(\"@aws-sdk/client-" + moduleName + "\") @new external new_: (" + inputType + ") => t = \"" + commandName + "\";\n") + ("  @send external rawSend: (awsServiceClient, t) => " + outputType + " = \"send\";\n") + "}\n";
+  return "module " + Util$AwsSdkV3.symbolName(name) + " = {\n" + "  type t;\n" + ("  " + request + "\n") + ("  " + response + "\n") + ("  @module(\"@aws-sdk/client-" + moduleName + "\") @new external new: (" + inputType + ") => t = \"" + commandName + "\";\n") + ("  @send external send: (awsServiceClient, t) => " + outputType + " = \"send\";\n") + "}\n";
 }
 
 function generateTypeTarget(descriptor) {

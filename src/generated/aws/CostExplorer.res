@@ -781,8 +781,8 @@ module UpdateAnomalyMonitor = {
     @as("MonitorArn") monitorArn: genericString,
   }
   type response = {@as("MonitorArn") monitorArn: genericString}
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "UpdateAnomalyMonitorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "UpdateAnomalyMonitorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ProvideAnomalyFeedback = {
@@ -792,8 +792,8 @@ module ProvideAnomalyFeedback = {
     @as("AnomalyId") anomalyId: genericString,
   }
   type response = {@as("AnomalyId") anomalyId: genericString}
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "ProvideAnomalyFeedbackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "ProvideAnomalyFeedbackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCostCategoryDefinition = {
@@ -804,25 +804,24 @@ module DeleteCostCategoryDefinition = {
     @as("CostCategoryArn") costCategoryArn: option<arn>,
   }
   @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "DeleteCostCategoryDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteCostCategoryDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAnomalySubscription = {
   type t
   type request = {@as("SubscriptionArn") subscriptionArn: genericString}
   type response = unit
-  @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "DeleteAnomalySubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "DeleteAnomalySubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAnomalyMonitor = {
   type t
   type request = {@as("MonitorArn") monitorArn: genericString}
   type response = unit
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "DeleteAnomalyMonitorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "DeleteAnomalyMonitorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAnomalySubscription = {
@@ -836,18 +835,16 @@ module UpdateAnomalySubscription = {
     @as("SubscriptionArn") subscriptionArn: genericString,
   }
   type response = {@as("SubscriptionArn") subscriptionArn: genericString}
-  @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "UpdateAnomalySubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "UpdateAnomalySubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAnomalySubscription = {
   type t
   type request = {@as("AnomalySubscription") anomalySubscription: anomalySubscription}
   type response = {@as("SubscriptionArn") subscriptionArn: genericString}
-  @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "CreateAnomalySubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "CreateAnomalySubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCostCategoryDefinitions = {
@@ -862,8 +859,8 @@ module ListCostCategoryDefinitions = {
     @as("CostCategoryReferences") costCategoryReferences: option<costCategoryReferencesList>,
   }
   @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "ListCostCategoryDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCostCategoryDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAnomalySubscriptions = {
@@ -878,8 +875,8 @@ module GetAnomalySubscriptions = {
     @as("NextPageToken") nextPageToken: option<nextPageToken>,
     @as("AnomalySubscriptions") anomalySubscriptions: anomalySubscriptions,
   }
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "GetAnomalySubscriptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetAnomalySubscriptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAnomalies = {
@@ -896,8 +893,8 @@ module GetAnomalies = {
     @as("NextPageToken") nextPageToken: option<nextPageToken>,
     @as("Anomalies") anomalies: anomalies,
   }
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "GetAnomaliesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetAnomaliesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUsageForecast = {
@@ -913,8 +910,8 @@ module GetUsageForecast = {
     @as("ForecastResultsByTime") forecastResultsByTime: option<forecastResultsByTime>,
     @as("Total") total: option<metricValue>,
   }
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "GetUsageForecastCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetUsageForecastCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTags = {
@@ -934,8 +931,8 @@ module GetTags = {
     @as("Tags") tags: tagList_,
     @as("NextPageToken") nextPageToken: option<nextPageToken>,
   }
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "GetTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSavingsPlansUtilizationDetails = {
@@ -956,8 +953,8 @@ module GetSavingsPlansUtilizationDetails = {
     savingsPlansUtilizationDetails: savingsPlansUtilizationDetails,
   }
   @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "GetSavingsPlansUtilizationDetailsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSavingsPlansUtilizationDetailsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSavingsPlansUtilization = {
@@ -974,8 +971,8 @@ module GetSavingsPlansUtilization = {
     savingsPlansUtilizationsByTime: option<savingsPlansUtilizationsByTime>,
   }
   @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "GetSavingsPlansUtilizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSavingsPlansUtilizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSavingsPlansPurchaseRecommendation = {
@@ -997,8 +994,8 @@ module GetSavingsPlansPurchaseRecommendation = {
     @as("Metadata") metadata: option<savingsPlansPurchaseRecommendationMetadata>,
   }
   @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "GetSavingsPlansPurchaseRecommendationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSavingsPlansPurchaseRecommendationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSavingsPlansCoverage = {
@@ -1017,8 +1014,8 @@ module GetSavingsPlansCoverage = {
     @as("NextToken") nextToken: option<nextPageToken>,
     @as("SavingsPlansCoverages") savingsPlansCoverages: savingsPlansCoverages,
   }
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "GetSavingsPlansCoverageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetSavingsPlansCoverageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRightsizingRecommendation = {
@@ -1039,8 +1036,8 @@ module GetRightsizingRecommendation = {
     @as("Metadata") metadata: option<rightsizingRecommendationMetadata>,
   }
   @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "GetRightsizingRecommendationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRightsizingRecommendationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetReservationUtilization = {
@@ -1059,9 +1056,8 @@ module GetReservationUtilization = {
     @as("Total") total: option<reservationAggregates>,
     @as("UtilizationsByTime") utilizationsByTime: utilizationsByTime,
   }
-  @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "GetReservationUtilizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetReservationUtilizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetReservationPurchaseRecommendation = {
@@ -1084,8 +1080,8 @@ module GetReservationPurchaseRecommendation = {
     @as("Metadata") metadata: option<reservationPurchaseRecommendationMetadata>,
   }
   @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "GetReservationPurchaseRecommendationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetReservationPurchaseRecommendationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetReservationCoverage = {
@@ -1105,8 +1101,8 @@ module GetReservationCoverage = {
     @as("Total") total: option<coverage>,
     @as("CoveragesByTime") coveragesByTime: coveragesByTime,
   }
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "GetReservationCoverageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetReservationCoverageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDimensionValues = {
@@ -1127,8 +1123,8 @@ module GetDimensionValues = {
     @as("ReturnSize") returnSize: pageSize,
     @as("DimensionValues") dimensionValues: dimensionValuesWithAttributesList,
   }
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "GetDimensionValuesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetDimensionValuesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCostForecast = {
@@ -1144,8 +1140,8 @@ module GetCostForecast = {
     @as("ForecastResultsByTime") forecastResultsByTime: option<forecastResultsByTime>,
     @as("Total") total: option<metricValue>,
   }
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "GetCostForecastCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetCostForecastCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCostCategories = {
@@ -1166,8 +1162,8 @@ module GetCostCategories = {
     @as("CostCategoryNames") costCategoryNames: option<costCategoryNamesList>,
     @as("NextPageToken") nextPageToken: option<nextPageToken>,
   }
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "GetCostCategoriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetCostCategoriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCostAndUsageWithResources = {
@@ -1188,8 +1184,8 @@ module GetCostAndUsageWithResources = {
     @as("NextPageToken") nextPageToken: option<nextPageToken>,
   }
   @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "GetCostAndUsageWithResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCostAndUsageWithResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCostAndUsage = {
@@ -1209,16 +1205,16 @@ module GetCostAndUsage = {
     @as("GroupDefinitions") groupDefinitions: option<groupDefinitions>,
     @as("NextPageToken") nextPageToken: option<nextPageToken>,
   }
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "GetCostAndUsageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetCostAndUsageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAnomalyMonitor = {
   type t
   type request = {@as("AnomalyMonitor") anomalyMonitor: anomalyMonitor}
   type response = {@as("MonitorArn") monitorArn: genericString}
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "CreateAnomalyMonitorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "CreateAnomalyMonitorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCostCategoryDefinition = {
@@ -1234,8 +1230,8 @@ module UpdateCostCategoryDefinition = {
     @as("CostCategoryArn") costCategoryArn: option<arn>,
   }
   @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "UpdateCostCategoryDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateCostCategoryDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAnomalyMonitors = {
@@ -1249,8 +1245,8 @@ module GetAnomalyMonitors = {
     @as("NextPageToken") nextPageToken: option<nextPageToken>,
     @as("AnomalyMonitors") anomalyMonitors: anomalyMonitors,
   }
-  @module("@aws-sdk/client-ce") @new external new_: request => t = "GetAnomalyMonitorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ce") @new external new: request => t = "GetAnomalyMonitorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCostCategoryDefinition = {
@@ -1266,8 +1262,8 @@ module CreateCostCategoryDefinition = {
     @as("CostCategoryArn") costCategoryArn: option<arn>,
   }
   @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "CreateCostCategoryDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCostCategoryDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCostCategoryDefinition = {
@@ -1278,6 +1274,6 @@ module DescribeCostCategoryDefinition = {
   }
   type response = {@as("CostCategory") costCategory: option<costCategory>}
   @module("@aws-sdk/client-ce") @new
-  external new_: request => t = "DescribeCostCategoryDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCostCategoryDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

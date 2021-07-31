@@ -228,8 +228,8 @@ module SetLoadBalancerListenerSSLCertificate = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "SetLoadBalancerListenerSSLCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SetLoadBalancerListenerSSLCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLoadBalancerPolicy = {
@@ -240,8 +240,8 @@ module DeleteLoadBalancerPolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DeleteLoadBalancerPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteLoadBalancerPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLoadBalancer = {
@@ -249,8 +249,8 @@ module DeleteLoadBalancer = {
   type request = {@as("LoadBalancerName") loadBalancerName: accessPointName}
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DeleteLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLBCookieStickinessPolicy = {
@@ -262,8 +262,8 @@ module CreateLBCookieStickinessPolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "CreateLBCookieStickinessPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateLBCookieStickinessPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAppCookieStickinessPolicy = {
@@ -275,8 +275,8 @@ module CreateAppCookieStickinessPolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "CreateAppCookieStickinessPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAppCookieStickinessPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetLoadBalancerPoliciesOfListener = {
@@ -288,8 +288,8 @@ module SetLoadBalancerPoliciesOfListener = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "SetLoadBalancerPoliciesOfListenerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SetLoadBalancerPoliciesOfListenerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetLoadBalancerPoliciesForBackendServer = {
@@ -301,8 +301,8 @@ module SetLoadBalancerPoliciesForBackendServer = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "SetLoadBalancerPoliciesForBackendServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SetLoadBalancerPoliciesForBackendServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableAvailabilityZonesForLoadBalancer = {
@@ -313,8 +313,8 @@ module EnableAvailabilityZonesForLoadBalancer = {
   }
   type response = {@as("AvailabilityZones") availabilityZones: option<availabilityZones>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "EnableAvailabilityZonesForLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableAvailabilityZonesForLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableAvailabilityZonesForLoadBalancer = {
@@ -325,8 +325,8 @@ module DisableAvailabilityZonesForLoadBalancer = {
   }
   type response = {@as("AvailabilityZones") availabilityZones: option<availabilityZones>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DisableAvailabilityZonesForLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableAvailabilityZonesForLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetachLoadBalancerFromSubnets = {
@@ -337,8 +337,8 @@ module DetachLoadBalancerFromSubnets = {
   }
   type response = {@as("Subnets") subnets: option<subnets>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DetachLoadBalancerFromSubnetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetachLoadBalancerFromSubnetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLoadBalancerListeners = {
@@ -349,8 +349,8 @@ module DeleteLoadBalancerListeners = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DeleteLoadBalancerListenersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteLoadBalancerListenersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ConfigureHealthCheck = {
@@ -361,8 +361,8 @@ module ConfigureHealthCheck = {
   }
   type response = {@as("HealthCheck") healthCheck: option<healthCheck>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "ConfigureHealthCheckCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ConfigureHealthCheckCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachLoadBalancerToSubnets = {
@@ -373,8 +373,8 @@ module AttachLoadBalancerToSubnets = {
   }
   type response = {@as("Subnets") subnets: option<subnets>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "AttachLoadBalancerToSubnetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AttachLoadBalancerToSubnetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ApplySecurityGroupsToLoadBalancer = {
@@ -385,8 +385,8 @@ module ApplySecurityGroupsToLoadBalancer = {
   }
   type response = {@as("SecurityGroups") securityGroups: option<securityGroups>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "ApplySecurityGroupsToLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ApplySecurityGroupsToLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveTags = {
@@ -397,8 +397,8 @@ module RemoveTags = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "RemoveTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterInstancesWithLoadBalancer = {
@@ -409,8 +409,8 @@ module RegisterInstancesWithLoadBalancer = {
   }
   type response = {@as("Instances") instances: option<instances>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "RegisterInstancesWithLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterInstancesWithLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstanceHealth = {
@@ -421,8 +421,8 @@ module DescribeInstanceHealth = {
   }
   type response = {@as("InstanceStates") instanceStates: option<instanceStates>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DescribeInstanceHealthCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInstanceHealthCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccountLimits = {
@@ -436,8 +436,8 @@ module DescribeAccountLimits = {
     @as("Limits") limits: option<limits>,
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DescribeAccountLimitsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAccountLimitsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterInstancesFromLoadBalancer = {
@@ -448,8 +448,8 @@ module DeregisterInstancesFromLoadBalancer = {
   }
   type response = {@as("Instances") instances: option<instances>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DeregisterInstancesFromLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterInstancesFromLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLoadBalancerPolicy = {
@@ -462,8 +462,8 @@ module CreateLoadBalancerPolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "CreateLoadBalancerPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateLoadBalancerPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLoadBalancerListeners = {
@@ -474,8 +474,8 @@ module CreateLoadBalancerListeners = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "CreateLoadBalancerListenersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateLoadBalancerListenersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLoadBalancer = {
@@ -491,8 +491,8 @@ module CreateLoadBalancer = {
   }
   type response = {@as("DNSName") dnsname: option<dnsname>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "CreateLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTags = {
@@ -502,9 +502,8 @@ module AddTags = {
     @as("LoadBalancerNames") loadBalancerNames: loadBalancerNames,
   }
   type response = unit
-  @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "AddTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elasticloadbalancing") @new external new: request => t = "AddTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyLoadBalancerAttributes = {
@@ -518,8 +517,8 @@ module ModifyLoadBalancerAttributes = {
     @as("LoadBalancerName") loadBalancerName: option<accessPointName>,
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "ModifyLoadBalancerAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyLoadBalancerAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLoadBalancerAttributes = {
@@ -529,8 +528,8 @@ module DescribeLoadBalancerAttributes = {
     @as("LoadBalancerAttributes") loadBalancerAttributes: option<loadBalancerAttributes>,
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DescribeLoadBalancerAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLoadBalancerAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTags = {
@@ -538,8 +537,8 @@ module DescribeTags = {
   type request = {@as("LoadBalancerNames") loadBalancerNames: loadBalancerNamesMax20}
   type response = {@as("TagDescriptions") tagDescriptions: option<tagDescriptions>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DescribeTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLoadBalancerPolicyTypes = {
@@ -549,8 +548,8 @@ module DescribeLoadBalancerPolicyTypes = {
     @as("PolicyTypeDescriptions") policyTypeDescriptions: option<policyTypeDescriptions>,
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DescribeLoadBalancerPolicyTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLoadBalancerPolicyTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLoadBalancerPolicies = {
@@ -561,8 +560,8 @@ module DescribeLoadBalancerPolicies = {
   }
   type response = {@as("PolicyDescriptions") policyDescriptions: option<policyDescriptions>}
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DescribeLoadBalancerPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLoadBalancerPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLoadBalancers = {
@@ -577,6 +576,6 @@ module DescribeLoadBalancers = {
     @as("LoadBalancerDescriptions") loadBalancerDescriptions: option<loadBalancerDescriptions>,
   }
   @module("@aws-sdk/client-elasticloadbalancing") @new
-  external new_: request => t = "DescribeLoadBalancersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLoadBalancersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

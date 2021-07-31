@@ -435,8 +435,8 @@ module UpdateDomainContactPrivacy = {
   }
   type response = {@as("OperationId") operationId: operationId}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "UpdateDomainContactPrivacyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDomainContactPrivacyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TransferDomainToAnotherAwsAccount = {
@@ -450,8 +450,8 @@ module TransferDomainToAnotherAwsAccount = {
     @as("OperationId") operationId: option<operationId>,
   }
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "TransferDomainToAnotherAwsAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TransferDomainToAnotherAwsAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RetrieveDomainAuthCode = {
@@ -459,8 +459,8 @@ module RetrieveDomainAuthCode = {
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("AuthCode") authCode: domainAuthCode}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "RetrieveDomainAuthCodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RetrieveDomainAuthCodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResendContactReachabilityEmail = {
@@ -472,8 +472,8 @@ module ResendContactReachabilityEmail = {
     domainName: option<domainName>,
   }
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "ResendContactReachabilityEmailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ResendContactReachabilityEmailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RenewDomain = {
@@ -484,8 +484,8 @@ module RenewDomain = {
     @as("DomainName") domainName: domainName,
   }
   type response = {@as("OperationId") operationId: operationId}
-  @module("@aws-sdk/client-route53domains") @new external new_: request => t = "RenewDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-route53domains") @new external new: request => t = "RenewDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectDomainTransferFromAnotherAwsAccount = {
@@ -493,8 +493,8 @@ module RejectDomainTransferFromAnotherAwsAccount = {
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("OperationId") operationId: option<operationId>}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "RejectDomainTransferFromAnotherAwsAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectDomainTransferFromAnotherAwsAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOperationDetail = {
@@ -509,8 +509,8 @@ module GetOperationDetail = {
     @as("OperationId") operationId: option<operationId>,
   }
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "GetOperationDetailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetOperationDetailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContactReachabilityStatus = {
@@ -521,8 +521,8 @@ module GetContactReachabilityStatus = {
     domainName: option<domainName>,
   }
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "GetContactReachabilityStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetContactReachabilityStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableDomainTransferLock = {
@@ -530,8 +530,8 @@ module EnableDomainTransferLock = {
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("OperationId") operationId: operationId}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "EnableDomainTransferLockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableDomainTransferLockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableDomainAutoRenew = {
@@ -539,8 +539,8 @@ module EnableDomainAutoRenew = {
   type request = {@as("DomainName") domainName: domainName}
   type response = unit
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "EnableDomainAutoRenewCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableDomainAutoRenewCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableDomainTransferLock = {
@@ -548,8 +548,8 @@ module DisableDomainTransferLock = {
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("OperationId") operationId: operationId}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "DisableDomainTransferLockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableDomainTransferLockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableDomainAutoRenew = {
@@ -557,8 +557,8 @@ module DisableDomainAutoRenew = {
   type request = {@as("DomainName") domainName: domainName}
   type response = unit
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "DisableDomainAutoRenewCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableDomainAutoRenewCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CheckDomainAvailability = {
@@ -569,8 +569,8 @@ module CheckDomainAvailability = {
   }
   type response = {@as("Availability") availability: domainAvailability}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "CheckDomainAvailabilityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CheckDomainAvailabilityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelDomainTransferToAnotherAwsAccount = {
@@ -578,8 +578,8 @@ module CancelDomainTransferToAnotherAwsAccount = {
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("OperationId") operationId: option<operationId>}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "CancelDomainTransferToAnotherAwsAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelDomainTransferToAnotherAwsAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptDomainTransferFromAnotherAwsAccount = {
@@ -590,8 +590,8 @@ module AcceptDomainTransferFromAnotherAwsAccount = {
   }
   type response = {@as("OperationId") operationId: option<operationId>}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "AcceptDomainTransferFromAnotherAwsAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptDomainTransferFromAnotherAwsAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTagsForDomain = {
@@ -602,8 +602,8 @@ module DeleteTagsForDomain = {
   }
   type response = unit
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "DeleteTagsForDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTagsForDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CheckDomainTransferability = {
@@ -614,8 +614,8 @@ module CheckDomainTransferability = {
   }
   type response = {@as("Transferability") transferability: domainTransferability}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "CheckDomainTransferabilityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CheckDomainTransferabilityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ViewBilling = {
@@ -630,8 +630,8 @@ module ViewBilling = {
     @as("BillingRecords") billingRecords: option<billingRecords>,
     @as("NextPageMarker") nextPageMarker: option<pageMarker>,
   }
-  @module("@aws-sdk/client-route53domains") @new external new_: request => t = "ViewBillingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-route53domains") @new external new: request => t = "ViewBillingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTagsForDomain = {
@@ -642,8 +642,8 @@ module UpdateTagsForDomain = {
   }
   type response = unit
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "UpdateTagsForDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateTagsForDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForDomain = {
@@ -651,8 +651,8 @@ module ListTagsForDomain = {
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("TagList") tagList_: tagList_}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "ListTagsForDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOperations = {
@@ -667,8 +667,8 @@ module ListOperations = {
     @as("Operations") operations: operationSummaryList,
   }
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "ListOperationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListOperationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDomains = {
@@ -681,8 +681,8 @@ module ListDomains = {
     @as("NextPageMarker") nextPageMarker: option<pageMarker>,
     @as("Domains") domains: domainSummaryList,
   }
-  @module("@aws-sdk/client-route53domains") @new external new_: request => t = "ListDomainsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-route53domains") @new external new: request => t = "ListDomainsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDomainSuggestions = {
@@ -694,8 +694,8 @@ module GetDomainSuggestions = {
   }
   type response = {@as("SuggestionsList") suggestionsList: option<domainSuggestionsList>}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "GetDomainSuggestionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDomainSuggestionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDomainNameservers = {
@@ -707,8 +707,8 @@ module UpdateDomainNameservers = {
   }
   type response = {@as("OperationId") operationId: operationId}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "UpdateDomainNameserversCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDomainNameserversCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDomainContact = {
@@ -721,8 +721,8 @@ module UpdateDomainContact = {
   }
   type response = {@as("OperationId") operationId: operationId}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "UpdateDomainContactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDomainContactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TransferDomain = {
@@ -743,8 +743,8 @@ module TransferDomain = {
   }
   type response = {@as("OperationId") operationId: operationId}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "TransferDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TransferDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterDomain = {
@@ -763,8 +763,8 @@ module RegisterDomain = {
   }
   type response = {@as("OperationId") operationId: operationId}
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "RegisterDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDomainDetail = {
@@ -794,6 +794,6 @@ module GetDomainDetail = {
     @as("DomainName") domainName: domainName,
   }
   @module("@aws-sdk/client-route53domains") @new
-  external new_: request => t = "GetDomainDetailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDomainDetailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

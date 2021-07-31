@@ -200,8 +200,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: policyArn,
   }
   type response = unit
-  @module("@aws-sdk/client-dlm") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dlm") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -211,24 +211,24 @@ module TagResource = {
     @as("ResourceArn") resourceArn: policyArn,
   }
   type response = unit
-  @module("@aws-sdk/client-dlm") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dlm") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: policyArn}
   type response = {@as("Tags") tags: option<tagMap>}
-  @module("@aws-sdk/client-dlm") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dlm") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLifecyclePolicy = {
   type t
   type request = {@as("PolicyId") policyId: policyId}
   type response = unit
-  @module("@aws-sdk/client-dlm") @new external new_: request => t = "DeleteLifecyclePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dlm") @new external new: request => t = "DeleteLifecyclePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLifecyclePolicies = {
@@ -241,8 +241,8 @@ module GetLifecyclePolicies = {
     @as("PolicyIds") policyIds: option<policyIdList>,
   }
   type response = {@as("Policies") policies: option<lifecyclePolicySummaryList>}
-  @module("@aws-sdk/client-dlm") @new external new_: request => t = "GetLifecyclePoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dlm") @new external new: request => t = "GetLifecyclePoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLifecyclePolicy = {
@@ -255,8 +255,8 @@ module UpdateLifecyclePolicy = {
     @as("PolicyId") policyId: policyId,
   }
   type response = unit
-  @module("@aws-sdk/client-dlm") @new external new_: request => t = "UpdateLifecyclePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dlm") @new external new: request => t = "UpdateLifecyclePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLifecyclePolicy = {
@@ -269,14 +269,14 @@ module CreateLifecyclePolicy = {
     @as("ExecutionRoleArn") executionRoleArn: executionRoleArn,
   }
   type response = {@as("PolicyId") policyId: option<policyId>}
-  @module("@aws-sdk/client-dlm") @new external new_: request => t = "CreateLifecyclePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dlm") @new external new: request => t = "CreateLifecyclePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLifecyclePolicy = {
   type t
   type request = {@as("PolicyId") policyId: policyId}
   type response = {@as("Policy") policy: option<lifecyclePolicy>}
-  @module("@aws-sdk/client-dlm") @new external new_: request => t = "GetLifecyclePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dlm") @new external new: request => t = "GetLifecyclePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

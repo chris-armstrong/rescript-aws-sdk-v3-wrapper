@@ -2225,16 +2225,16 @@ module DescribeInputDeviceThumbnail = {
     @as("Body") body: option<inputDeviceThumbnail>,
   }
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "DescribeInputDeviceThumbnailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInputDeviceThumbnailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSchedule = {
   type t
   type request = {@as("ChannelId") channelId: __string}
   type response = unit
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "DeleteScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "DeleteScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInputSecurityGroup = {
@@ -2242,16 +2242,16 @@ module DeleteInputSecurityGroup = {
   type request = {@as("InputSecurityGroupId") inputSecurityGroupId: __string}
   type response = unit
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "DeleteInputSecurityGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteInputSecurityGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInput = {
   type t
   type request = {@as("InputId") inputId: __string}
   type response = unit
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "DeleteInputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "DeleteInputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -2259,8 +2259,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: __string}
   type response = {@as("Tags") tags: option<tags>}
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReservation = {
@@ -2287,8 +2287,8 @@ module DescribeReservation = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "DescribeReservationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReservationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOffering = {
@@ -2307,8 +2307,8 @@ module DescribeOffering = {
     @as("CurrencyCode") currencyCode: option<__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "DescribeOfferingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "DescribeOfferingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTags = {
@@ -2318,8 +2318,8 @@ module DeleteTags = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "DeleteTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "DeleteTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteReservation = {
@@ -2345,8 +2345,8 @@ module DeleteReservation = {
     @as("Count") count: option<__integer>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "DeleteReservationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "DeleteReservationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTags = {
@@ -2356,8 +2356,8 @@ module CreateTags = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "CreateTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "CreateTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateReservation = {
@@ -2367,8 +2367,8 @@ module UpdateReservation = {
     @as("Name") name: option<__string>,
   }
   type response = {@as("Reservation") reservation: option<reservation>}
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "UpdateReservationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "UpdateReservationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateInputDevice = {
@@ -2393,8 +2393,8 @@ module UpdateInputDevice = {
     @as("ConnectionState") connectionState: option<inputDeviceConnectionState>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "UpdateInputDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "UpdateInputDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TransferInputDevice = {
@@ -2407,8 +2407,8 @@ module TransferInputDevice = {
   }
   type response = unit
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "TransferInputDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TransferInputDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectInputDeviceTransfer = {
@@ -2416,8 +2416,8 @@ module RejectInputDeviceTransfer = {
   type request = {@as("InputDeviceId") inputDeviceId: __string}
   type response = unit
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "RejectInputDeviceTransferCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectInputDeviceTransferCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PurchaseOffering = {
@@ -2431,8 +2431,8 @@ module PurchaseOffering = {
     @as("Count") count: __integerMin1,
   }
   type response = {@as("Reservation") reservation: option<reservation>}
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "PurchaseOfferingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "PurchaseOfferingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMultiplexPrograms = {
@@ -2447,8 +2447,8 @@ module ListMultiplexPrograms = {
     @as("MultiplexPrograms") multiplexPrograms: option<__listOfMultiplexProgramSummary>,
   }
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "ListMultiplexProgramsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListMultiplexProgramsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInputDeviceTransfers = {
@@ -2464,8 +2464,8 @@ module ListInputDeviceTransfers = {
     inputDeviceTransfers: option<__listOfTransferringInputDeviceSummary>,
   }
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "ListInputDeviceTransfersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListInputDeviceTransfersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInputSecurityGroup = {
@@ -2480,8 +2480,8 @@ module DescribeInputSecurityGroup = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "DescribeInputSecurityGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInputSecurityGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInputDevice = {
@@ -2502,8 +2502,8 @@ module DescribeInputDevice = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "DescribeInputDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInputDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelInputDeviceTransfer = {
@@ -2511,8 +2511,8 @@ module CancelInputDeviceTransfer = {
   type request = {@as("InputDeviceId") inputDeviceId: __string}
   type response = unit
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "CancelInputDeviceTransferCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelInputDeviceTransferCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchStop = {
@@ -2525,8 +2525,8 @@ module BatchStop = {
     @as("Successful") successful: option<__listOfBatchSuccessfulResultModel>,
     @as("Failed") failed: option<__listOfBatchFailedResultModel>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "BatchStopCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "BatchStopCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchStart = {
@@ -2539,8 +2539,8 @@ module BatchStart = {
     @as("Successful") successful: option<__listOfBatchSuccessfulResultModel>,
     @as("Failed") failed: option<__listOfBatchFailedResultModel>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "BatchStartCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "BatchStartCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDelete = {
@@ -2555,8 +2555,8 @@ module BatchDelete = {
     @as("Successful") successful: option<__listOfBatchSuccessfulResultModel>,
     @as("Failed") failed: option<__listOfBatchFailedResultModel>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "BatchDeleteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "BatchDeleteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptInputDeviceTransfer = {
@@ -2564,8 +2564,8 @@ module AcceptInputDeviceTransfer = {
   type request = {@as("InputDeviceId") inputDeviceId: __string}
   type response = unit
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "AcceptInputDeviceTransferCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptInputDeviceTransferCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateInputSecurityGroup = {
@@ -2577,8 +2577,8 @@ module UpdateInputSecurityGroup = {
   }
   type response = {@as("SecurityGroup") securityGroup: option<inputSecurityGroup>}
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "UpdateInputSecurityGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateInputSecurityGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopMultiplex = {
@@ -2596,8 +2596,8 @@ module StopMultiplex = {
     @as("AvailabilityZones") availabilityZones: option<__listOf__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "StopMultiplexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "StopMultiplexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartMultiplex = {
@@ -2615,8 +2615,8 @@ module StartMultiplex = {
     @as("AvailabilityZones") availabilityZones: option<__listOf__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "StartMultiplexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "StartMultiplexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListReservations = {
@@ -2637,8 +2637,8 @@ module ListReservations = {
     @as("Reservations") reservations: option<__listOfReservation>,
     @as("NextToken") nextToken: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "ListReservationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "ListReservationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOfferings = {
@@ -2661,8 +2661,8 @@ module ListOfferings = {
     @as("Offerings") offerings: option<__listOfOffering>,
     @as("NextToken") nextToken: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "ListOfferingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "ListOfferingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMultiplexes = {
@@ -2675,8 +2675,8 @@ module ListMultiplexes = {
     @as("NextToken") nextToken: option<__string>,
     @as("Multiplexes") multiplexes: option<__listOfMultiplexSummary>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "ListMultiplexesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "ListMultiplexesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMultiplexProgram = {
@@ -2693,8 +2693,8 @@ module DescribeMultiplexProgram = {
     @as("ChannelId") channelId: option<__string>,
   }
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "DescribeMultiplexProgramCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMultiplexProgramCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMultiplex = {
@@ -2712,8 +2712,8 @@ module DescribeMultiplex = {
     @as("AvailabilityZones") availabilityZones: option<__listOf__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "DescribeMultiplexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "DescribeMultiplexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInput = {
@@ -2737,8 +2737,8 @@ module DescribeInput = {
     @as("AttachedChannels") attachedChannels: option<__listOf__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "DescribeInputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "DescribeInputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMultiplexProgram = {
@@ -2755,8 +2755,8 @@ module DeleteMultiplexProgram = {
     @as("ChannelId") channelId: option<__string>,
   }
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "DeleteMultiplexProgramCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteMultiplexProgramCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMultiplex = {
@@ -2774,8 +2774,8 @@ module DeleteMultiplex = {
     @as("AvailabilityZones") availabilityZones: option<__listOf__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "DeleteMultiplexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "DeleteMultiplexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInputSecurityGroup = {
@@ -2786,8 +2786,8 @@ module CreateInputSecurityGroup = {
   }
   type response = {@as("SecurityGroup") securityGroup: option<inputSecurityGroup>}
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "CreateInputSecurityGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateInputSecurityGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMultiplexProgram = {
@@ -2799,8 +2799,8 @@ module UpdateMultiplexProgram = {
   }
   type response = {@as("MultiplexProgram") multiplexProgram: option<multiplexProgram>}
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "UpdateMultiplexProgramCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateMultiplexProgramCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMultiplex = {
@@ -2811,8 +2811,8 @@ module UpdateMultiplex = {
     @as("MultiplexId") multiplexId: __string,
   }
   type response = {@as("Multiplex") multiplex: option<multiplex>}
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "UpdateMultiplexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "UpdateMultiplexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateInput = {
@@ -2828,8 +2828,8 @@ module UpdateInput = {
     @as("Destinations") destinations: option<__listOfInputDestinationRequest>,
   }
   type response = {@as("Input") input: option<input>}
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "UpdateInputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "UpdateInputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInputSecurityGroups = {
@@ -2843,8 +2843,8 @@ module ListInputSecurityGroups = {
     @as("InputSecurityGroups") inputSecurityGroups: option<__listOfInputSecurityGroup>,
   }
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "ListInputSecurityGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListInputSecurityGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInputDevices = {
@@ -2857,8 +2857,8 @@ module ListInputDevices = {
     @as("NextToken") nextToken: option<__string>,
     @as("InputDevices") inputDevices: option<__listOfInputDeviceSummary>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "ListInputDevicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "ListInputDevicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePartnerInput = {
@@ -2869,9 +2869,8 @@ module CreatePartnerInput = {
     @as("InputId") inputId: __string,
   }
   type response = {@as("Input") input: option<input>}
-  @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "CreatePartnerInputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "CreatePartnerInputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMultiplexProgram = {
@@ -2884,8 +2883,8 @@ module CreateMultiplexProgram = {
   }
   type response = {@as("MultiplexProgram") multiplexProgram: option<multiplexProgram>}
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "CreateMultiplexProgramCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateMultiplexProgramCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMultiplex = {
@@ -2898,8 +2897,8 @@ module CreateMultiplex = {
     @as("AvailabilityZones") availabilityZones: __listOf__string,
   }
   type response = {@as("Multiplex") multiplex: option<multiplex>}
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "CreateMultiplexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "CreateMultiplexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInput = {
@@ -2918,8 +2917,8 @@ module CreateInput = {
     @as("Destinations") destinations: option<__listOfInputDestinationRequest>,
   }
   type response = {@as("Input") input: option<input>}
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "CreateInputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "CreateInputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInputs = {
@@ -2932,8 +2931,8 @@ module ListInputs = {
     @as("NextToken") nextToken: option<__string>,
     @as("Inputs") inputs: option<__listOfInput>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "ListInputsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "ListInputsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSchedule = {
@@ -2947,8 +2946,8 @@ module DescribeSchedule = {
     @as("ScheduleActions") scheduleActions: option<__listOfScheduleAction>,
     @as("NextToken") nextToken: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "DescribeScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "DescribeScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopChannel = {
@@ -2973,8 +2972,8 @@ module StopChannel = {
     @as("CdiInputSpecification") cdiInputSpecification: option<cdiInputSpecification>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "StopChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "StopChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartChannel = {
@@ -2999,8 +2998,8 @@ module StartChannel = {
     @as("CdiInputSpecification") cdiInputSpecification: option<cdiInputSpecification>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "StartChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "StartChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeChannel = {
@@ -3025,8 +3024,8 @@ module DescribeChannel = {
     @as("CdiInputSpecification") cdiInputSpecification: option<cdiInputSpecification>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "DescribeChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "DescribeChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteChannel = {
@@ -3051,8 +3050,8 @@ module DeleteChannel = {
     @as("CdiInputSpecification") cdiInputSpecification: option<cdiInputSpecification>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "DeleteChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "DeleteChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchUpdateSchedule = {
@@ -3067,8 +3066,8 @@ module BatchUpdateSchedule = {
     @as("Creates") creates: option<batchScheduleActionCreateResult>,
   }
   @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "BatchUpdateScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchUpdateScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateChannelClass = {
@@ -3079,9 +3078,8 @@ module UpdateChannelClass = {
     @as("ChannelClass") channelClass: channelClass,
   }
   type response = {@as("Channel") channel: option<channel>}
-  @module("@aws-sdk/client-medialive") @new
-  external new_: request => t = "UpdateChannelClassCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "UpdateChannelClassCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateChannel = {
@@ -3098,8 +3096,8 @@ module UpdateChannel = {
     @as("CdiInputSpecification") cdiInputSpecification: option<cdiInputSpecification>,
   }
   type response = {@as("Channel") channel: option<channel>}
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "UpdateChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "UpdateChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChannels = {
@@ -3112,8 +3110,8 @@ module ListChannels = {
     @as("NextToken") nextToken: option<__string>,
     @as("Channels") channels: option<__listOfChannelSummary>,
   }
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "ListChannelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "ListChannelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateChannel = {
@@ -3134,6 +3132,6 @@ module CreateChannel = {
     @as("CdiInputSpecification") cdiInputSpecification: option<cdiInputSpecification>,
   }
   type response = {@as("Channel") channel: option<channel>}
-  @module("@aws-sdk/client-medialive") @new external new_: request => t = "CreateChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-medialive") @new external new: request => t = "CreateChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

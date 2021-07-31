@@ -109,16 +109,16 @@ module DeleteTable = {
     @as("DatabaseName") databaseName: resourceName,
   }
 
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "DeleteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "DeleteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDatabase = {
   type t
   type request = {@as("DatabaseName") databaseName: resourceName}
 
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "DeleteDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "DeleteDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateDatabase = {
@@ -128,8 +128,8 @@ module UpdateDatabase = {
     @as("DatabaseName") databaseName: resourceName,
   }
   type response = {@as("Database") database: option<database>}
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "UpdateDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "UpdateDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -139,16 +139,16 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDatabase = {
   type t
   type request = {@as("DatabaseName") databaseName: resourceName}
   type response = {@as("Database") database: option<database>}
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "DescribeDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "DescribeDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTable = {
@@ -159,8 +159,8 @@ module UpdateTable = {
     @as("DatabaseName") databaseName: resourceName,
   }
   type response = {@as("Table") table: option<table>}
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "UpdateTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "UpdateTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -170,8 +170,8 @@ module TagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -179,8 +179,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceARN") resourceARN: amazonResourceName}
   type response = {@as("Tags") tags: option<tagList_>}
   @module("@aws-sdk/client-timestream") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDatabases = {
@@ -193,8 +193,8 @@ module ListDatabases = {
     @as("NextToken") nextToken: option<string_>,
     @as("Databases") databases: option<databaseList>,
   }
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "ListDatabasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "ListDatabasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTable = {
@@ -204,17 +204,16 @@ module DescribeTable = {
     @as("DatabaseName") databaseName: resourceName,
   }
   type response = {@as("Table") table: option<table>}
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "DescribeTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "DescribeTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpoints = {
   type t
   type request = unit
   type response = {@as("Endpoints") endpoints: endpoints}
-  @module("@aws-sdk/client-timestream") @new
-  external new_: request => t = "DescribeEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "DescribeEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTable = {
@@ -226,8 +225,8 @@ module CreateTable = {
     @as("DatabaseName") databaseName: resourceName,
   }
   type response = {@as("Table") table: option<table>}
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "CreateTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "CreateTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDatabase = {
@@ -238,8 +237,8 @@ module CreateDatabase = {
     @as("DatabaseName") databaseName: resourceName,
   }
   type response = {@as("Database") database: option<database>}
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "CreateDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "CreateDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTables = {
@@ -253,8 +252,8 @@ module ListTables = {
     @as("NextToken") nextToken: option<string_>,
     @as("Tables") tables: option<tableList>,
   }
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "ListTablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "ListTablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module WriteRecords = {
@@ -266,6 +265,6 @@ module WriteRecords = {
     @as("DatabaseName") databaseName: resourceName,
   }
 
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "WriteRecordsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "WriteRecordsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }

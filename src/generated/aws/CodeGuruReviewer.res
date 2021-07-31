@@ -196,8 +196,8 @@ module UntagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -208,8 +208,8 @@ module TagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutRecommendationFeedback = {
@@ -221,8 +221,8 @@ module PutRecommendationFeedback = {
   }
   type response = unit
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "PutRecommendationFeedbackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutRecommendationFeedbackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -230,8 +230,8 @@ module ListTagsForResource = {
   type request = {resourceArn: associationArn}
   type response = {@as("Tags") tags: option<tagMap>}
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRepositoryAssociations = {
@@ -250,8 +250,8 @@ module ListRepositoryAssociations = {
     repositoryAssociationSummaries: option<repositoryAssociationSummaries>,
   }
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "ListRepositoryAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRepositoryAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRecommendations = {
@@ -266,8 +266,8 @@ module ListRecommendations = {
     @as("RecommendationSummaries") recommendationSummaries: option<recommendationSummaries>,
   }
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "ListRecommendationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRecommendationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateRepository = {
@@ -278,8 +278,8 @@ module DisassociateRepository = {
     @as("RepositoryAssociation") repositoryAssociation: option<repositoryAssociation>,
   }
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "DisassociateRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRepositoryAssociation = {
@@ -290,8 +290,8 @@ module DescribeRepositoryAssociation = {
     @as("RepositoryAssociation") repositoryAssociation: option<repositoryAssociation>,
   }
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "DescribeRepositoryAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRepositoryAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRecommendationFeedback = {
@@ -305,8 +305,8 @@ module DescribeRecommendationFeedback = {
     @as("RecommendationFeedback") recommendationFeedback: option<recommendationFeedback>,
   }
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "DescribeRecommendationFeedbackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRecommendationFeedbackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateRepository = {
@@ -322,8 +322,8 @@ module AssociateRepository = {
     @as("RepositoryAssociation") repositoryAssociation: option<repositoryAssociation>,
   }
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "AssociateRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRecommendationFeedback = {
@@ -341,8 +341,8 @@ module ListRecommendationFeedback = {
     recommendationFeedbackSummaries: option<recommendationFeedbackSummaries>,
   }
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "ListRecommendationFeedbackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRecommendationFeedbackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCodeReviews = {
@@ -360,8 +360,8 @@ module ListCodeReviews = {
     @as("CodeReviewSummaries") codeReviewSummaries: option<codeReviewSummaries>,
   }
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "ListCodeReviewsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCodeReviewsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCodeReview = {
@@ -369,8 +369,8 @@ module DescribeCodeReview = {
   type request = {@as("CodeReviewArn") codeReviewArn: arn}
   type response = {@as("CodeReview") codeReview: option<codeReview>}
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "DescribeCodeReviewCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCodeReviewCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCodeReview = {
@@ -383,6 +383,6 @@ module CreateCodeReview = {
   }
   type response = {@as("CodeReview") codeReview: option<codeReview>}
   @module("@aws-sdk/client-codeguru-reviewer") @new
-  external new_: request => t = "CreateCodeReviewCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCodeReviewCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

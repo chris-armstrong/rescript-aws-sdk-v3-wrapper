@@ -278,8 +278,8 @@ module UpdateShardCount = {
     @as("CurrentShardCount") currentShardCount: option<positiveIntegerObject>,
     @as("StreamName") streamName: option<streamName>,
   }
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "UpdateShardCountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "UpdateShardCountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopStreamEncryption = {
@@ -290,9 +290,8 @@ module StopStreamEncryption = {
     @as("StreamName") streamName: streamName,
   }
 
-  @module("@aws-sdk/client-kinesis") @new
-  external new_: request => t = "StopStreamEncryptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "StopStreamEncryptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartStreamEncryption = {
@@ -304,8 +303,8 @@ module StartStreamEncryption = {
   }
 
   @module("@aws-sdk/client-kinesis") @new
-  external new_: request => t = "StartStreamEncryptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "StartStreamEncryptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SplitShard = {
@@ -316,8 +315,8 @@ module SplitShard = {
     @as("StreamName") streamName: streamName,
   }
 
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "SplitShardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "SplitShardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutRecord = {
@@ -334,8 +333,8 @@ module PutRecord = {
     @as("SequenceNumber") sequenceNumber: sequenceNumber,
     @as("ShardId") shardId: shardId,
   }
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "PutRecordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "PutRecordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module MergeShards = {
@@ -346,8 +345,8 @@ module MergeShards = {
     @as("StreamName") streamName: streamName,
   }
 
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "MergeShardsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "MergeShardsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module IncreaseStreamRetentionPeriod = {
@@ -358,8 +357,8 @@ module IncreaseStreamRetentionPeriod = {
   }
 
   @module("@aws-sdk/client-kinesis") @new
-  external new_: request => t = "IncreaseStreamRetentionPeriodCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "IncreaseStreamRetentionPeriodCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetShardIterator = {
@@ -372,8 +371,8 @@ module GetShardIterator = {
     @as("StreamName") streamName: streamName,
   }
   type response = {@as("ShardIterator") shardIterator: option<shardIterator>}
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "GetShardIteratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "GetShardIteratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLimits = {
@@ -383,8 +382,8 @@ module DescribeLimits = {
     @as("OpenShardCount") openShardCount: shardCountObject,
     @as("ShardLimit") shardLimit: shardCountObject,
   }
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "DescribeLimitsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "DescribeLimitsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterStreamConsumer = {
@@ -396,8 +395,8 @@ module DeregisterStreamConsumer = {
   }
 
   @module("@aws-sdk/client-kinesis") @new
-  external new_: request => t = "DeregisterStreamConsumerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeregisterStreamConsumerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteStream = {
@@ -407,8 +406,8 @@ module DeleteStream = {
     @as("StreamName") streamName: streamName,
   }
 
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "DeleteStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "DeleteStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DecreaseStreamRetentionPeriod = {
@@ -419,8 +418,8 @@ module DecreaseStreamRetentionPeriod = {
   }
 
   @module("@aws-sdk/client-kinesis") @new
-  external new_: request => t = "DecreaseStreamRetentionPeriodCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DecreaseStreamRetentionPeriodCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateStream = {
@@ -430,8 +429,8 @@ module CreateStream = {
     @as("StreamName") streamName: streamName,
   }
 
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "CreateStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "CreateStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveTagsFromStream = {
@@ -441,9 +440,8 @@ module RemoveTagsFromStream = {
     @as("StreamName") streamName: streamName,
   }
 
-  @module("@aws-sdk/client-kinesis") @new
-  external new_: request => t = "RemoveTagsFromStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "RemoveTagsFromStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RegisterStreamConsumer = {
@@ -454,8 +452,8 @@ module RegisterStreamConsumer = {
   }
   type response = {@as("Consumer") consumer: consumer}
   @module("@aws-sdk/client-kinesis") @new
-  external new_: request => t = "RegisterStreamConsumerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterStreamConsumerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStreams = {
@@ -468,8 +466,8 @@ module ListStreams = {
     @as("HasMoreStreams") hasMoreStreams: booleanObject,
     @as("StreamNames") streamNames: streamNameList,
   }
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "ListStreamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "ListStreamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableEnhancedMonitoring = {
@@ -484,8 +482,8 @@ module EnableEnhancedMonitoring = {
     @as("StreamName") streamName: option<streamName>,
   }
   @module("@aws-sdk/client-kinesis") @new
-  external new_: request => t = "EnableEnhancedMonitoringCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableEnhancedMonitoringCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableEnhancedMonitoring = {
@@ -500,8 +498,8 @@ module DisableEnhancedMonitoring = {
     @as("StreamName") streamName: option<streamName>,
   }
   @module("@aws-sdk/client-kinesis") @new
-  external new_: request => t = "DisableEnhancedMonitoringCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableEnhancedMonitoringCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStreamConsumer = {
@@ -513,8 +511,8 @@ module DescribeStreamConsumer = {
   }
   type response = {@as("ConsumerDescription") consumerDescription: consumerDescription}
   @module("@aws-sdk/client-kinesis") @new
-  external new_: request => t = "DescribeStreamConsumerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStreamConsumerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTagsToStream = {
@@ -524,8 +522,8 @@ module AddTagsToStream = {
     @as("StreamName") streamName: streamName,
   }
 
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "AddTagsToStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "AddTagsToStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutRecords = {
@@ -539,8 +537,8 @@ module PutRecords = {
     @as("Records") records: putRecordsResultEntryList,
     @as("FailedRecordCount") failedRecordCount: option<positiveIntegerObject>,
   }
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "PutRecordsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "PutRecordsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForStream = {
@@ -554,8 +552,8 @@ module ListTagsForStream = {
     @as("HasMoreTags") hasMoreTags: booleanObject,
     @as("Tags") tags: tagList_,
   }
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "ListTagsForStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "ListTagsForStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStreamConsumers = {
@@ -570,8 +568,8 @@ module ListStreamConsumers = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Consumers") consumers: option<consumerList>,
   }
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "ListStreamConsumersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "ListStreamConsumersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListShards = {
@@ -588,8 +586,8 @@ module ListShards = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Shards") shards: option<shardList>,
   }
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "ListShardsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "ListShardsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRecords = {
@@ -604,8 +602,8 @@ module GetRecords = {
     @as("NextShardIterator") nextShardIterator: option<shardIterator>,
     @as("Records") records: recordList,
   }
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "GetRecordsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "GetRecordsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStreamSummary = {
@@ -615,8 +613,8 @@ module DescribeStreamSummary = {
     @as("StreamDescriptionSummary") streamDescriptionSummary: streamDescriptionSummary,
   }
   @module("@aws-sdk/client-kinesis") @new
-  external new_: request => t = "DescribeStreamSummaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStreamSummaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStream = {
@@ -627,8 +625,8 @@ module DescribeStream = {
     @as("StreamName") streamName: streamName,
   }
   type response = {@as("StreamDescription") streamDescription: streamDescription}
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "DescribeStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "DescribeStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SubscribeToShard = {
@@ -639,6 +637,6 @@ module SubscribeToShard = {
     @as("ConsumerARN") consumerARN: consumerARN,
   }
   type response = {@as("EventStream") eventStream: subscribeToShardEventStream}
-  @module("@aws-sdk/client-kinesis") @new external new_: request => t = "SubscribeToShardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesis") @new external new: request => t = "SubscribeToShardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

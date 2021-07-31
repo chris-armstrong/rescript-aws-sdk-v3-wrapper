@@ -149,8 +149,8 @@ module InitializeCluster = {
     @as("StateMessage") stateMessage: option<stateMessage>,
     @as("State") state: option<clusterState>,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "InitializeClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "InitializeClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteHsm = {
@@ -162,8 +162,8 @@ module DeleteHsm = {
     @as("ClusterId") clusterId: clusterId,
   }
   type response = {@as("HsmId") hsmId: option<hsmId>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "DeleteHsmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DeleteHsmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -173,8 +173,8 @@ module UntagResource = {
     @as("ResourceId") resourceId: resourceId,
   }
   type response = unit
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateHsm = {
@@ -185,8 +185,8 @@ module CreateHsm = {
     @as("ClusterId") clusterId: clusterId,
   }
   type response = {@as("Hsm") hsm: option<hsm>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "CreateHsmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "CreateHsmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -196,8 +196,8 @@ module TagResource = {
     @as("ResourceId") resourceId: resourceId,
   }
   type response = unit
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTags = {
@@ -211,8 +211,8 @@ module ListTags = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("TagList") tagList_: tagList_,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "ListTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ListTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CopyBackupToRegion = {
@@ -223,16 +223,16 @@ module CopyBackupToRegion = {
     @as("DestinationRegion") destinationRegion: region,
   }
   type response = {@as("DestinationBackup") destinationBackup: option<destinationBackup>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "CopyBackupToRegionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "CopyBackupToRegionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreBackup = {
   type t
   type request = {@as("BackupId") backupId: backupId}
   type response = {@as("Backup") backup: option<backup>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "RestoreBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "RestoreBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyCluster = {
@@ -242,8 +242,8 @@ module ModifyCluster = {
     @as("BackupRetentionPolicy") backupRetentionPolicy: backupRetentionPolicy,
   }
   type response = {@as("Cluster") cluster: option<cluster>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "ModifyClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ModifyClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyBackupAttributes = {
@@ -254,24 +254,24 @@ module ModifyBackupAttributes = {
   }
   type response = {@as("Backup") backup: option<backup>}
   @module("@aws-sdk/client-cloudhsm") @new
-  external new_: request => t = "ModifyBackupAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyBackupAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCluster = {
   type t
   type request = {@as("ClusterId") clusterId: clusterId}
   type response = {@as("Cluster") cluster: option<cluster>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "DeleteClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DeleteClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBackup = {
   type t
   type request = {@as("BackupId") backupId: backupId}
   type response = {@as("Backup") backup: option<backup>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "DeleteBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DeleteBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCluster = {
@@ -284,8 +284,8 @@ module CreateCluster = {
     @as("BackupRetentionPolicy") backupRetentionPolicy: option<backupRetentionPolicy>,
   }
   type response = {@as("Cluster") cluster: option<cluster>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "CreateClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "CreateClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeClusters = {
@@ -299,8 +299,8 @@ module DescribeClusters = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Clusters") clusters: option<clusters>,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "DescribeClustersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DescribeClustersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBackups = {
@@ -315,6 +315,6 @@ module DescribeBackups = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Backups") backups: option<backups>,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "DescribeBackupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DescribeBackupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

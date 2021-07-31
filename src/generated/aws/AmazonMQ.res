@@ -194,8 +194,8 @@ module RebootBroker = {
   type t
   type request = {@as("BrokerId") brokerId: __string}
   type response = unit
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "RebootBrokerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "RebootBrokerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfigurationRevision = {
@@ -211,8 +211,8 @@ module DescribeConfigurationRevision = {
     @as("ConfigurationId") configurationId: option<__string>,
   }
   @module("@aws-sdk/client-mq") @new
-  external new_: request => t = "DescribeConfigurationRevisionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConfigurationRevisionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteUser = {
@@ -222,16 +222,16 @@ module DeleteUser = {
     @as("BrokerId") brokerId: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "DeleteUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "DeleteUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBroker = {
   type t
   type request = {@as("BrokerId") brokerId: __string}
   type response = {@as("BrokerId") brokerId: option<__string>}
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "DeleteBrokerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "DeleteBrokerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateUser = {
@@ -244,16 +244,16 @@ module UpdateUser = {
     @as("BrokerId") brokerId: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "UpdateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "UpdateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTags = {
   type t
   type request = {@as("ResourceArn") resourceArn: __string}
   type response = {@as("Tags") tags: option<__mapOf__string>}
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "ListTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "ListTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfiguration = {
@@ -271,8 +271,8 @@ module DescribeConfiguration = {
     @as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "DescribeConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "DescribeConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTags = {
@@ -282,8 +282,8 @@ module DeleteTags = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "DeleteTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "DeleteTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateUser = {
@@ -296,8 +296,8 @@ module CreateUser = {
     @as("BrokerId") brokerId: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "CreateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "CreateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTags = {
@@ -307,8 +307,8 @@ module CreateTags = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "CreateTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "CreateTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateConfiguration = {
@@ -328,8 +328,8 @@ module CreateConfiguration = {
     @as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "CreateConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "CreateConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateConfiguration = {
@@ -347,8 +347,8 @@ module UpdateConfiguration = {
     @as("Created") created: option<__timestampIso8601>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "UpdateConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "UpdateConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateBroker = {
@@ -375,8 +375,8 @@ module UpdateBroker = {
     @as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: option<__boolean>,
     @as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>,
   }
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "UpdateBrokerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "UpdateBrokerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListUsers = {
@@ -392,8 +392,8 @@ module ListUsers = {
     @as("MaxResults") maxResults: option<__integerMin5Max100>,
     @as("BrokerId") brokerId: option<__string>,
   }
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "ListUsersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "ListUsersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListConfigurationRevisions = {
@@ -410,8 +410,8 @@ module ListConfigurationRevisions = {
     @as("ConfigurationId") configurationId: option<__string>,
   }
   @module("@aws-sdk/client-mq") @new
-  external new_: request => t = "ListConfigurationRevisionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListConfigurationRevisionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBrokers = {
@@ -424,8 +424,8 @@ module ListBrokers = {
     @as("NextToken") nextToken: option<__string>,
     @as("BrokerSummaries") brokerSummaries: option<__listOfBrokerSummary>,
   }
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "ListBrokersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "ListBrokersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeUser = {
@@ -441,8 +441,8 @@ module DescribeUser = {
     @as("ConsoleAccess") consoleAccess: option<__boolean>,
     @as("BrokerId") brokerId: option<__string>,
   }
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "DescribeUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "DescribeUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListConfigurations = {
@@ -456,8 +456,8 @@ module ListConfigurations = {
     @as("MaxResults") maxResults: option<__integer>,
     @as("Configurations") configurations: option<__listOfConfiguration>,
   }
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "ListConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "ListConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBroker = {
@@ -494,8 +494,8 @@ module DescribeBroker = {
     @as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: option<__boolean>,
     @as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>,
   }
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "DescribeBrokerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "DescribeBrokerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBroker = {
@@ -525,8 +525,8 @@ module CreateBroker = {
     @as("BrokerId") brokerId: option<__string>,
     @as("BrokerArn") brokerArn: option<__string>,
   }
-  @module("@aws-sdk/client-mq") @new external new_: request => t = "CreateBrokerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "CreateBrokerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBrokerInstanceOptions = {
@@ -544,8 +544,8 @@ module DescribeBrokerInstanceOptions = {
     @as("BrokerInstanceOptions") brokerInstanceOptions: option<__listOfBrokerInstanceOption>,
   }
   @module("@aws-sdk/client-mq") @new
-  external new_: request => t = "DescribeBrokerInstanceOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeBrokerInstanceOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBrokerEngineTypes = {
@@ -560,7 +560,6 @@ module DescribeBrokerEngineTypes = {
     @as("MaxResults") maxResults: option<__integerMin5Max100>,
     @as("BrokerEngineTypes") brokerEngineTypes: option<__listOfBrokerEngineType>,
   }
-  @module("@aws-sdk/client-mq") @new
-  external new_: request => t = "DescribeBrokerEngineTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mq") @new external new: request => t = "DescribeBrokerEngineTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -49,8 +49,8 @@ module GetProducts = {
     @as("PriceList") priceList: option<priceList>,
     @as("FormatVersion") formatVersion: option<string_>,
   }
-  @module("@aws-sdk/client-pricing") @new external new_: request => t = "GetProductsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-pricing") @new external new: request => t = "GetProductsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAttributeValues = {
@@ -65,8 +65,8 @@ module GetAttributeValues = {
     @as("NextToken") nextToken: option<string_>,
     @as("AttributeValues") attributeValues: option<attributeValueList>,
   }
-  @module("@aws-sdk/client-pricing") @new external new_: request => t = "GetAttributeValuesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-pricing") @new external new: request => t = "GetAttributeValuesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeServices = {
@@ -82,6 +82,6 @@ module DescribeServices = {
     @as("FormatVersion") formatVersion: option<string_>,
     @as("Services") services: option<serviceList>,
   }
-  @module("@aws-sdk/client-pricing") @new external new_: request => t = "DescribeServicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-pricing") @new external new: request => t = "DescribeServicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

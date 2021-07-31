@@ -226,16 +226,16 @@ module GetSubscriptionState = {
   type t
   type request = unit
   type response = {@as("SubscriptionState") subscriptionState: subscriptionState}
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "GetSubscriptionStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "GetSubscriptionStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateDRTRole = {
   type t
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "DisassociateDRTRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "DisassociateDRTRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateDRTLogBucket = {
@@ -243,41 +243,40 @@ module DisassociateDRTLogBucket = {
   type request = {@as("LogBucket") logBucket: logBucket}
   type response = unit
   @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "DisassociateDRTLogBucketCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateDRTLogBucketCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSubscription = {
   type t
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "DeleteSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "DeleteSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProtectionGroup = {
   type t
   type request = {@as("ProtectionGroupId") protectionGroupId: protectionGroupId}
   type response = unit
-  @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "DeleteProtectionGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "DeleteProtectionGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProtection = {
   type t
   type request = {@as("ProtectionId") protectionId: protectionId}
   type response = unit
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "DeleteProtectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "DeleteProtectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSubscription = {
   type t
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "CreateSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "CreateSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResourcesInProtectionGroup = {
@@ -292,8 +291,8 @@ module ListResourcesInProtectionGroup = {
     @as("ResourceArns") resourceArns: resourceArnList,
   }
   @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "ListResourcesInProtectionGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListResourcesInProtectionGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDRTAccess = {
@@ -303,16 +302,16 @@ module DescribeDRTAccess = {
     @as("LogBucketList") logBucketList: option<logBucketList>,
     @as("RoleArn") roleArn: option<roleArn>,
   }
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "DescribeDRTAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "DescribeDRTAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSubscription = {
   type t
   type request = {@as("AutoRenew") autoRenew: option<autoRenew>}
   type response = unit
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "UpdateSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "UpdateSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProtectionGroup = {
@@ -325,9 +324,8 @@ module UpdateProtectionGroup = {
     @as("ProtectionGroupId") protectionGroupId: protectionGroupId,
   }
   type response = unit
-  @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "UpdateProtectionGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "UpdateProtectionGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEmergencyContactSettings = {
@@ -335,8 +333,8 @@ module UpdateEmergencyContactSettings = {
   type request = {@as("EmergencyContactList") emergencyContactList: option<emergencyContactList>}
   type response = unit
   @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "UpdateEmergencyContactSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEmergencyContactSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -346,8 +344,8 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -357,16 +355,16 @@ module TagResource = {
     @as("ResourceARN") resourceARN: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceARN") resourceARN: resourceArn}
   type response = {@as("Tags") tags: option<tagList_>}
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableProactiveEngagement = {
@@ -374,8 +372,8 @@ module EnableProactiveEngagement = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "EnableProactiveEngagementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableProactiveEngagementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateHealthCheck = {
@@ -386,8 +384,8 @@ module DisassociateHealthCheck = {
   }
   type response = unit
   @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "DisassociateHealthCheckCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateHealthCheckCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableProactiveEngagement = {
@@ -395,8 +393,8 @@ module DisableProactiveEngagement = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "DisableProactiveEngagementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableProactiveEngagementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProtectionGroup = {
@@ -404,8 +402,8 @@ module DescribeProtectionGroup = {
   type request = {@as("ProtectionGroupId") protectionGroupId: protectionGroupId}
   type response = {@as("ProtectionGroup") protectionGroup: protectionGroup}
   @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "DescribeProtectionGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProtectionGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProtection = {
@@ -415,8 +413,8 @@ module DescribeProtection = {
     @as("ProtectionId") protectionId: option<protectionId>,
   }
   type response = {@as("Protection") protection: option<protection>}
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "DescribeProtectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "DescribeProtectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEmergencyContactSettings = {
@@ -424,8 +422,8 @@ module DescribeEmergencyContactSettings = {
   type request = unit
   type response = {@as("EmergencyContactList") emergencyContactList: option<emergencyContactList>}
   @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "DescribeEmergencyContactSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEmergencyContactSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProtectionGroup = {
@@ -439,9 +437,8 @@ module CreateProtectionGroup = {
     @as("ProtectionGroupId") protectionGroupId: protectionGroupId,
   }
   type response = unit
-  @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "CreateProtectionGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "CreateProtectionGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProtection = {
@@ -452,8 +449,8 @@ module CreateProtection = {
     @as("Name") name: protectionName,
   }
   type response = {@as("ProtectionId") protectionId: option<protectionId>}
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "CreateProtectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "CreateProtectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateProactiveEngagementDetails = {
@@ -461,8 +458,8 @@ module AssociateProactiveEngagementDetails = {
   type request = {@as("EmergencyContactList") emergencyContactList: emergencyContactList}
   type response = unit
   @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "AssociateProactiveEngagementDetailsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateProactiveEngagementDetailsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateHealthCheck = {
@@ -472,25 +469,24 @@ module AssociateHealthCheck = {
     @as("ProtectionId") protectionId: protectionId,
   }
   type response = unit
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "AssociateHealthCheckCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "AssociateHealthCheckCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateDRTRole = {
   type t
   type request = {@as("RoleArn") roleArn: roleArn}
   type response = unit
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "AssociateDRTRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "AssociateDRTRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateDRTLogBucket = {
   type t
   type request = {@as("LogBucket") logBucket: logBucket}
   type response = unit
-  @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "AssociateDRTLogBucketCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "AssociateDRTLogBucketCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProtections = {
@@ -503,8 +499,8 @@ module ListProtections = {
     @as("NextToken") nextToken: option<token>,
     @as("Protections") protections: option<protections>,
   }
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "ListProtectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "ListProtectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProtectionGroups = {
@@ -517,8 +513,8 @@ module ListProtectionGroups = {
     @as("NextToken") nextToken: option<token>,
     @as("ProtectionGroups") protectionGroups: protectionGroups,
   }
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "ListProtectionGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "ListProtectionGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAttacks = {
@@ -534,8 +530,8 @@ module ListAttacks = {
     @as("NextToken") nextToken: option<token>,
     @as("AttackSummaries") attackSummaries: option<attackSummaries>,
   }
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "ListAttacksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "ListAttacksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAttackStatistics = {
@@ -546,22 +542,22 @@ module DescribeAttackStatistics = {
     @as("TimeRange") timeRange: timeRange,
   }
   @module("@aws-sdk/client-shield") @new
-  external new_: request => t = "DescribeAttackStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAttackStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSubscription = {
   type t
   type request = unit
   type response = {@as("Subscription") subscription: option<subscription>}
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "DescribeSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "DescribeSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAttack = {
   type t
   type request = {@as("AttackId") attackId: attackId}
   type response = {@as("Attack") attack: option<attackDetail>}
-  @module("@aws-sdk/client-shield") @new external new_: request => t = "DescribeAttackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-shield") @new external new: request => t = "DescribeAttackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -2760,24 +2760,24 @@ module DisassociateCertificate = {
   type request = {@as("Arn") arn: __string}
   type response = unit
   @module("@aws-sdk/client-mediaconvert") @new
-  external new_: request => t = "DisassociateCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteQueue = {
   type t
   type request = {@as("Name") name: __string}
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "DeleteQueueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "DeleteQueueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePreset = {
   type t
   type request = {@as("Name") name: __string}
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "DeletePresetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "DeletePresetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteJobTemplate = {
@@ -2785,16 +2785,16 @@ module DeleteJobTemplate = {
   type request = {@as("Name") name: __string}
   type response = unit
   @module("@aws-sdk/client-mediaconvert") @new
-  external new_: request => t = "DeleteJobTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteJobTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelJob = {
   type t
   type request = {@as("Id") id: __string}
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "CancelJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "CancelJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateCertificate = {
@@ -2802,8 +2802,8 @@ module AssociateCertificate = {
   type request = {@as("Arn") arn: __string}
   type response = unit
   @module("@aws-sdk/client-mediaconvert") @new
-  external new_: request => t = "AssociateCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -2813,8 +2813,8 @@ module UntagResource = {
     @as("Arn") arn: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -2824,8 +2824,8 @@ module TagResource = {
     @as("Arn") arn: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateQueue = {
@@ -2837,8 +2837,8 @@ module UpdateQueue = {
     @as("Description") description: option<__string>,
   }
   type response = {@as("Queue") queue: option<queue>}
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "UpdateQueueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "UpdateQueueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -2846,16 +2846,16 @@ module ListTagsForResource = {
   type request = {@as("Arn") arn: __string}
   type response = {@as("ResourceTags") resourceTags: option<resourceTags>}
   @module("@aws-sdk/client-mediaconvert") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetQueue = {
   type t
   type request = {@as("Name") name: __string}
   type response = {@as("Queue") queue: option<queue>}
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "GetQueueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "GetQueueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpoints = {
@@ -2870,8 +2870,8 @@ module DescribeEndpoints = {
     @as("Endpoints") endpoints: option<__listOfEndpoint>,
   }
   @module("@aws-sdk/client-mediaconvert") @new
-  external new_: request => t = "DescribeEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateQueue = {
@@ -2885,8 +2885,8 @@ module CreateQueue = {
     @as("Description") description: option<__string>,
   }
   type response = {@as("Queue") queue: option<queue>}
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "CreateQueueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "CreateQueueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListQueues = {
@@ -2901,8 +2901,8 @@ module ListQueues = {
     @as("Queues") queues: option<__listOfQueue>,
     @as("NextToken") nextToken: option<__string>,
   }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "ListQueuesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "ListQueuesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePreset = {
@@ -2914,16 +2914,16 @@ module UpdatePreset = {
     @as("Category") category: option<__string>,
   }
   type response = {@as("Preset") preset: option<preset>}
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "UpdatePresetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "UpdatePresetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPreset = {
   type t
   type request = {@as("Name") name: __string}
   type response = {@as("Preset") preset: option<preset>}
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "GetPresetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "GetPresetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePreset = {
@@ -2936,8 +2936,8 @@ module CreatePreset = {
     @as("Category") category: option<__string>,
   }
   type response = {@as("Preset") preset: option<preset>}
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "CreatePresetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "CreatePresetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPresets = {
@@ -2953,8 +2953,8 @@ module ListPresets = {
     @as("Presets") presets: option<__listOfPreset>,
     @as("NextToken") nextToken: option<__string>,
   }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "ListPresetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "ListPresetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateJobTemplate = {
@@ -2972,24 +2972,24 @@ module UpdateJobTemplate = {
   }
   type response = {@as("JobTemplate") jobTemplate: option<jobTemplate>}
   @module("@aws-sdk/client-mediaconvert") @new
-  external new_: request => t = "UpdateJobTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateJobTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJobTemplate = {
   type t
   type request = {@as("Name") name: __string}
   type response = {@as("JobTemplate") jobTemplate: option<jobTemplate>}
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "GetJobTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "GetJobTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJob = {
   type t
   type request = {@as("Id") id: __string}
   type response = {@as("Job") job: option<job>}
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "GetJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "GetJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateJobTemplate = {
@@ -3008,8 +3008,8 @@ module CreateJobTemplate = {
   }
   type response = {@as("JobTemplate") jobTemplate: option<jobTemplate>}
   @module("@aws-sdk/client-mediaconvert") @new
-  external new_: request => t = "CreateJobTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateJobTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateJob = {
@@ -3030,8 +3030,8 @@ module CreateJob = {
     @as("AccelerationSettings") accelerationSettings: option<accelerationSettings>,
   }
   type response = {@as("Job") job: option<job>}
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "CreateJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "CreateJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobs = {
@@ -3047,8 +3047,8 @@ module ListJobs = {
     @as("NextToken") nextToken: option<__string>,
     @as("Jobs") jobs: option<__listOfJob>,
   }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: request => t = "ListJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconvert") @new external new: request => t = "ListJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobTemplates = {
@@ -3065,6 +3065,6 @@ module ListJobTemplates = {
     @as("JobTemplates") jobTemplates: option<__listOfJobTemplate>,
   }
   @module("@aws-sdk/client-mediaconvert") @new
-  external new_: request => t = "ListJobTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListJobTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

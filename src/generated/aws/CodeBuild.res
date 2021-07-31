@@ -629,8 +629,8 @@ module PutResourcePolicy = {
     policy: nonEmptyString,
   }
   type response = {resourceArn: option<nonEmptyString>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "PutResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "PutResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InvalidateProjectCache = {
@@ -638,8 +638,8 @@ module InvalidateProjectCache = {
   type request = {projectName: nonEmptyString}
   type response = unit
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "InvalidateProjectCacheCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "InvalidateProjectCacheCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportSourceCredentials = {
@@ -653,24 +653,24 @@ module ImportSourceCredentials = {
   }
   type response = {arn: option<nonEmptyString>}
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "ImportSourceCredentialsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ImportSourceCredentialsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResourcePolicy = {
   type t
   type request = {resourceArn: nonEmptyString}
   type response = {policy: option<nonEmptyString>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "GetResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "GetResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWebhook = {
   type t
   type request = {projectName: projectName}
   type response = unit
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "DeleteWebhookCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "DeleteWebhookCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSourceCredentials = {
@@ -678,8 +678,8 @@ module DeleteSourceCredentials = {
   type request = {arn: nonEmptyString}
   type response = {arn: option<nonEmptyString>}
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "DeleteSourceCredentialsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSourceCredentialsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteResourcePolicy = {
@@ -687,8 +687,8 @@ module DeleteResourcePolicy = {
   type request = {resourceArn: nonEmptyString}
   type response = unit
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "DeleteResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteReportGroup = {
@@ -698,24 +698,24 @@ module DeleteReportGroup = {
     arn: nonEmptyString,
   }
   type response = unit
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "DeleteReportGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "DeleteReportGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteReport = {
   type t
   type request = {arn: nonEmptyString}
   type response = unit
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "DeleteReportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "DeleteReportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProject = {
   type t
   type request = {name: nonEmptyString}
   type response = unit
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "DeleteProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "DeleteProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSharedReportGroups = {
@@ -731,8 +731,8 @@ module ListSharedReportGroups = {
     nextToken: option<string_>,
   }
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "ListSharedReportGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSharedReportGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSharedProjects = {
@@ -747,9 +747,8 @@ module ListSharedProjects = {
     projects: option<projectArns>,
     nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "ListSharedProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListSharedProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListReportsForReportGroup = {
@@ -766,8 +765,8 @@ module ListReportsForReportGroup = {
     nextToken: option<string_>,
   }
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "ListReportsForReportGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListReportsForReportGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListReports = {
@@ -782,8 +781,8 @@ module ListReports = {
     reports: option<reportArns>,
     nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "ListReportsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListReportsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListReportGroups = {
@@ -798,8 +797,8 @@ module ListReportGroups = {
     reportGroups: option<reportGroupArns>,
     nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "ListReportGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListReportGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProjects = {
@@ -813,8 +812,8 @@ module ListProjects = {
     projects: option<projectNames>,
     nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "ListProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBuildsForProject = {
@@ -829,8 +828,8 @@ module ListBuildsForProject = {
     ids: option<buildIds>,
   }
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "ListBuildsForProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListBuildsForProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBuilds = {
@@ -843,8 +842,8 @@ module ListBuilds = {
     nextToken: option<string_>,
     ids: option<buildIds>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "ListBuildsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListBuildsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBuildBatchesForProject = {
@@ -861,8 +860,8 @@ module ListBuildBatchesForProject = {
     ids: option<buildBatchIds>,
   }
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "ListBuildBatchesForProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListBuildBatchesForProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBuildBatches = {
@@ -877,8 +876,8 @@ module ListBuildBatches = {
     nextToken: option<string_>,
     ids: option<buildBatchIds>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "ListBuildBatchesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "ListBuildBatchesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSourceCredentials = {
@@ -886,8 +885,8 @@ module ListSourceCredentials = {
   type request = unit
   type response = {sourceCredentialsInfos: option<sourceCredentialsInfos>}
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "ListSourceCredentialsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSourceCredentialsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetReportGroupTrend = {
@@ -902,8 +901,8 @@ module GetReportGroupTrend = {
     stats: option<reportGroupTrendStats>,
   }
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "GetReportGroupTrendCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetReportGroupTrendCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTestCases = {
@@ -918,8 +917,8 @@ module DescribeTestCases = {
     testCases: option<testCases>,
     nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "DescribeTestCasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "DescribeTestCasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCodeCoverages = {
@@ -938,8 +937,8 @@ module DescribeCodeCoverages = {
     nextToken: option<string_>,
   }
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "DescribeCodeCoveragesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCodeCoveragesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBuildBatch = {
@@ -950,8 +949,8 @@ module DeleteBuildBatch = {
     buildsDeleted: option<buildIds>,
     statusCode: option<string_>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "DeleteBuildBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "DeleteBuildBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteBuilds = {
@@ -961,8 +960,8 @@ module BatchDeleteBuilds = {
     buildsNotDeleted: option<buildsNotDeleted>,
     buildsDeleted: option<buildIds>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "BatchDeleteBuildsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "BatchDeleteBuildsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateReportGroup = {
@@ -973,8 +972,8 @@ module UpdateReportGroup = {
     arn: nonEmptyString,
   }
   type response = {reportGroup: option<reportGroup>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "UpdateReportGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "UpdateReportGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReportGroup = {
@@ -986,8 +985,8 @@ module CreateReportGroup = {
     name: reportGroupName,
   }
   type response = {reportGroup: option<reportGroup>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "CreateReportGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "CreateReportGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateWebhook = {
@@ -1000,8 +999,8 @@ module UpdateWebhook = {
     projectName: projectName,
   }
   type response = {webhook: option<webhook>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "UpdateWebhookCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "UpdateWebhookCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWebhook = {
@@ -1013,8 +1012,8 @@ module CreateWebhook = {
     projectName: projectName,
   }
   type response = {webhook: option<webhook>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "CreateWebhookCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "CreateWebhookCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetReports = {
@@ -1024,8 +1023,8 @@ module BatchGetReports = {
     reportsNotFound: option<reportArns>,
     reports: option<reports>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "BatchGetReportsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "BatchGetReportsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetReportGroups = {
@@ -1036,8 +1035,8 @@ module BatchGetReportGroups = {
     reportGroups: option<reportGroups>,
   }
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "BatchGetReportGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchGetReportGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProject = {
@@ -1066,16 +1065,16 @@ module UpdateProject = {
     name: nonEmptyString,
   }
   type response = {project: option<project>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "UpdateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "UpdateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopBuild = {
   type t
   type request = {id: nonEmptyString}
   type response = {build: option<build>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "StopBuildCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "StopBuildCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartBuild = {
@@ -1114,8 +1113,8 @@ module StartBuild = {
     projectName: nonEmptyString,
   }
   type response = {build: option<build>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "StartBuildCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "StartBuildCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RetryBuild = {
@@ -1125,8 +1124,8 @@ module RetryBuild = {
     id: option<nonEmptyString>,
   }
   type response = {build: option<build>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "RetryBuildCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "RetryBuildCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProject = {
@@ -1155,8 +1154,8 @@ module CreateProject = {
     name: projectName,
   }
   type response = {project: option<project>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "CreateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "CreateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetProjects = {
@@ -1166,8 +1165,8 @@ module BatchGetProjects = {
     projectsNotFound: option<projectNames>,
     projects: option<projects>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "BatchGetProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "BatchGetProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetBuilds = {
@@ -1177,16 +1176,16 @@ module BatchGetBuilds = {
     buildsNotFound: option<buildIds>,
     builds: option<builds>,
   }
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "BatchGetBuildsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "BatchGetBuildsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopBuildBatch = {
   type t
   type request = {id: nonEmptyString}
   type response = {buildBatch: option<buildBatch>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "StopBuildBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "StopBuildBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartBuildBatch = {
@@ -1225,8 +1224,8 @@ module StartBuildBatch = {
     projectName: nonEmptyString,
   }
   type response = {buildBatch: option<buildBatch>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "StartBuildBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "StartBuildBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RetryBuildBatch = {
@@ -1237,8 +1236,8 @@ module RetryBuildBatch = {
     id: option<nonEmptyString>,
   }
   type response = {buildBatch: option<buildBatch>}
-  @module("@aws-sdk/client-codebuild") @new external new_: request => t = "RetryBuildBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codebuild") @new external new: request => t = "RetryBuildBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCuratedEnvironmentImages = {
@@ -1246,8 +1245,8 @@ module ListCuratedEnvironmentImages = {
   type request = unit
   type response = {platforms: option<environmentPlatforms>}
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "ListCuratedEnvironmentImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCuratedEnvironmentImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetBuildBatches = {
@@ -1258,6 +1257,6 @@ module BatchGetBuildBatches = {
     buildBatches: option<buildBatches>,
   }
   @module("@aws-sdk/client-codebuild") @new
-  external new_: request => t = "BatchGetBuildBatchesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchGetBuildBatchesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

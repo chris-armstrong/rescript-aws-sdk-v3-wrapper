@@ -111,8 +111,8 @@ module Unsubscribe = {
   }
   type response = {@as("Arn") arn: notificationRuleArn}
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "UnsubscribeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UnsubscribeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTarget = {
@@ -123,8 +123,8 @@ module DeleteTarget = {
   }
   type response = unit
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "DeleteTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteNotificationRule = {
@@ -132,8 +132,8 @@ module DeleteNotificationRule = {
   type request = {@as("Arn") arn: notificationRuleArn}
   type response = {@as("Arn") arn: option<notificationRuleArn>}
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "DeleteNotificationRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteNotificationRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -144,8 +144,8 @@ module UntagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -156,8 +156,8 @@ module TagResource = {
   }
   type response = {@as("Tags") tags: option<tags>}
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Subscribe = {
@@ -169,8 +169,8 @@ module Subscribe = {
   }
   type response = {@as("Arn") arn: option<notificationRuleArn>}
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "SubscribeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SubscribeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -178,8 +178,8 @@ module ListTagsForResource = {
   type request = {@as("Arn") arn: notificationRuleArn}
   type response = {@as("Tags") tags: option<tags>}
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateNotificationRule = {
@@ -194,8 +194,8 @@ module UpdateNotificationRule = {
   }
   type response = unit
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "UpdateNotificationRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateNotificationRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTargets = {
@@ -210,8 +210,8 @@ module ListTargets = {
     @as("Targets") targets: option<targetsBatch>,
   }
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "ListTargetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTargetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListNotificationRules = {
@@ -226,8 +226,8 @@ module ListNotificationRules = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "ListNotificationRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListNotificationRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEventTypes = {
@@ -242,8 +242,8 @@ module ListEventTypes = {
     @as("EventTypes") eventTypes: option<eventTypeBatch>,
   }
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "ListEventTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEventTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNotificationRule = {
@@ -263,8 +263,8 @@ module DescribeNotificationRule = {
     @as("Arn") arn: notificationRuleArn,
   }
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "DescribeNotificationRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNotificationRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNotificationRule = {
@@ -281,6 +281,6 @@ module CreateNotificationRule = {
   }
   type response = {@as("Arn") arn: option<notificationRuleArn>}
   @module("@aws-sdk/client-codestar-notifications") @new
-  external new_: request => t = "CreateNotificationRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateNotificationRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -120,8 +120,8 @@ module UpdateLedgerPermissionsMode = {
     @as("Name") name: option<ledgerName>,
   }
   @module("@aws-sdk/client-qldb") @new
-  external new_: request => t = "UpdateLedgerPermissionsModeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateLedgerPermissionsModeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLedger = {
@@ -137,8 +137,8 @@ module UpdateLedger = {
     @as("Arn") arn: option<arn>,
     @as("Name") name: option<ledgerName>,
   }
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "UpdateLedgerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "UpdateLedgerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLedger = {
@@ -152,16 +152,16 @@ module DescribeLedger = {
     @as("Arn") arn: option<arn>,
     @as("Name") name: option<ledgerName>,
   }
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "DescribeLedgerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "DescribeLedgerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLedger = {
   type t
   type request = {@as("Name") name: ledgerName}
 
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "DeleteLedgerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "DeleteLedgerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CancelJournalKinesisStream = {
@@ -172,8 +172,8 @@ module CancelJournalKinesisStream = {
   }
   type response = {@as("StreamId") streamId: option<uniqueId>}
   @module("@aws-sdk/client-qldb") @new
-  external new_: request => t = "CancelJournalKinesisStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelJournalKinesisStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -183,8 +183,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -194,8 +194,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StreamJournalToKinesis = {
@@ -210,16 +210,16 @@ module StreamJournalToKinesis = {
     @as("LedgerName") ledgerName: ledgerName,
   }
   type response = {@as("StreamId") streamId: option<uniqueId>}
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "StreamJournalToKinesisCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "StreamJournalToKinesisCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: arn}
   type response = {@as("Tags") tags: option<tags>}
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRevision = {
@@ -234,8 +234,8 @@ module GetRevision = {
     @as("Revision") revision: valueHolder,
     @as("Proof") proof: option<valueHolder>,
   }
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "GetRevisionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "GetRevisionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDigest = {
@@ -245,8 +245,8 @@ module GetDigest = {
     @as("DigestTipAddress") digestTipAddress: valueHolder,
     @as("Digest") digest: digest,
   }
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "GetDigestCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "GetDigestCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBlock = {
@@ -260,8 +260,8 @@ module GetBlock = {
     @as("Proof") proof: option<valueHolder>,
     @as("Block") block: valueHolder,
   }
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "GetBlockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "GetBlockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLedger = {
@@ -280,8 +280,8 @@ module CreateLedger = {
     @as("Arn") arn: option<arn>,
     @as("Name") name: option<ledgerName>,
   }
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "CreateLedgerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "CreateLedgerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLedgers = {
@@ -294,8 +294,8 @@ module ListLedgers = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Ledgers") ledgers: option<ledgerList>,
   }
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "ListLedgersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "ListLedgersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExportJournalToS3 = {
@@ -308,8 +308,8 @@ module ExportJournalToS3 = {
     @as("Name") name: ledgerName,
   }
   type response = {@as("ExportId") exportId: uniqueId}
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "ExportJournalToS3Command"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "ExportJournalToS3Command"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJournalKinesisStream = {
@@ -320,8 +320,8 @@ module DescribeJournalKinesisStream = {
   }
   type response = {@as("Stream") stream: option<journalKinesisStreamDescription>}
   @module("@aws-sdk/client-qldb") @new
-  external new_: request => t = "DescribeJournalKinesisStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeJournalKinesisStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJournalKinesisStreamsForLedger = {
@@ -336,8 +336,8 @@ module ListJournalKinesisStreamsForLedger = {
     @as("Streams") streams: option<journalKinesisStreamDescriptionList>,
   }
   @module("@aws-sdk/client-qldb") @new
-  external new_: request => t = "ListJournalKinesisStreamsForLedgerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListJournalKinesisStreamsForLedgerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJournalS3Export = {
@@ -347,9 +347,8 @@ module DescribeJournalS3Export = {
     @as("Name") name: ledgerName,
   }
   type response = {@as("ExportDescription") exportDescription: journalS3ExportDescription}
-  @module("@aws-sdk/client-qldb") @new
-  external new_: request => t = "DescribeJournalS3ExportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "DescribeJournalS3ExportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJournalS3ExportsForLedger = {
@@ -364,8 +363,8 @@ module ListJournalS3ExportsForLedger = {
     @as("JournalS3Exports") journalS3Exports: option<journalS3ExportList>,
   }
   @module("@aws-sdk/client-qldb") @new
-  external new_: request => t = "ListJournalS3ExportsForLedgerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListJournalS3ExportsForLedgerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJournalS3Exports = {
@@ -378,6 +377,6 @@ module ListJournalS3Exports = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("JournalS3Exports") journalS3Exports: option<journalS3ExportList>,
   }
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "ListJournalS3ExportsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "ListJournalS3ExportsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

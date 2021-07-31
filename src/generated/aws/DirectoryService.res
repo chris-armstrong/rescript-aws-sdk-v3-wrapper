@@ -490,8 +490,8 @@ module VerifyTrust = {
   type t
   type request = {@as("TrustId") trustId: trustId}
   type response = {@as("TrustId") trustId: option<trustId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "VerifyTrustCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "VerifyTrustCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTrust = {
@@ -504,8 +504,8 @@ module UpdateTrust = {
     @as("TrustId") trustId: option<trustId>,
     @as("RequestId") requestId: option<requestId>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "UpdateTrustCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "UpdateTrustCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateNumberOfDomainControllers = {
@@ -516,8 +516,8 @@ module UpdateNumberOfDomainControllers = {
   }
   type response = unit
   @module("@aws-sdk/client-ds") @new
-  external new_: request => t = "UpdateNumberOfDomainControllersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateNumberOfDomainControllersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartSchemaExtension = {
@@ -530,16 +530,16 @@ module StartSchemaExtension = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = {@as("SchemaExtensionId") schemaExtensionId: option<schemaExtensionId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "StartSchemaExtensionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "StartSchemaExtensionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreFromSnapshot = {
   type t
   type request = {@as("SnapshotId") snapshotId: snapshotId}
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "RestoreFromSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "RestoreFromSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResetUserPassword = {
@@ -550,24 +550,24 @@ module ResetUserPassword = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "ResetUserPasswordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "ResetUserPasswordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveRegion = {
   type t
   type request = {@as("DirectoryId") directoryId: directoryId}
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "RemoveRegionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "RemoveRegionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectSharedDirectory = {
   type t
   type request = {@as("SharedDirectoryId") sharedDirectoryId: directoryId}
   type response = {@as("SharedDirectoryId") sharedDirectoryId: option<directoryId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "RejectSharedDirectoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "RejectSharedDirectoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterEventTopic = {
@@ -577,8 +577,8 @@ module RegisterEventTopic = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "RegisterEventTopicCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "RegisterEventTopicCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableSso = {
@@ -589,8 +589,8 @@ module EnableSso = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "EnableSsoCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "EnableSsoCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableLDAPS = {
@@ -600,8 +600,8 @@ module EnableLDAPS = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "EnableLDAPSCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "EnableLDAPSCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableClientAuthentication = {
@@ -612,8 +612,8 @@ module EnableClientAuthentication = {
   }
   type response = unit
   @module("@aws-sdk/client-ds") @new
-  external new_: request => t = "EnableClientAuthenticationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableClientAuthenticationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableSso = {
@@ -624,16 +624,16 @@ module DisableSso = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DisableSsoCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DisableSsoCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableRadius = {
   type t
   type request = {@as("DirectoryId") directoryId: directoryId}
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DisableRadiusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DisableRadiusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableLDAPS = {
@@ -643,8 +643,8 @@ module DisableLDAPS = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DisableLDAPSCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DisableLDAPSCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableClientAuthentication = {
@@ -655,8 +655,8 @@ module DisableClientAuthentication = {
   }
   type response = unit
   @module("@aws-sdk/client-ds") @new
-  external new_: request => t = "DisableClientAuthenticationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableClientAuthenticationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterEventTopic = {
@@ -666,8 +666,8 @@ module DeregisterEventTopic = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DeregisterEventTopicCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DeregisterEventTopicCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterCertificate = {
@@ -677,8 +677,8 @@ module DeregisterCertificate = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DeregisterCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DeregisterCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTrust = {
@@ -689,32 +689,32 @@ module DeleteTrust = {
     @as("TrustId") trustId: trustId,
   }
   type response = {@as("TrustId") trustId: option<trustId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DeleteTrustCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DeleteTrustCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSnapshot = {
   type t
   type request = {@as("SnapshotId") snapshotId: snapshotId}
   type response = {@as("SnapshotId") snapshotId: option<snapshotId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DeleteSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DeleteSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLogSubscription = {
   type t
   type request = {@as("DirectoryId") directoryId: directoryId}
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DeleteLogSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DeleteLogSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDirectory = {
   type t
   type request = {@as("DirectoryId") directoryId: directoryId}
   type response = {@as("DirectoryId") directoryId: option<directoryId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DeleteDirectoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DeleteDirectoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteConditionalForwarder = {
@@ -725,8 +725,8 @@ module DeleteConditionalForwarder = {
   }
   type response = unit
   @module("@aws-sdk/client-ds") @new
-  external new_: request => t = "DeleteConditionalForwarderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteConditionalForwarderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSnapshot = {
@@ -736,8 +736,8 @@ module CreateSnapshot = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = {@as("SnapshotId") snapshotId: option<snapshotId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "CreateSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "CreateSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLogSubscription = {
@@ -747,8 +747,8 @@ module CreateLogSubscription = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "CreateLogSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "CreateLogSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAlias = {
@@ -761,8 +761,8 @@ module CreateAlias = {
     @as("Alias") alias: option<aliasName>,
     @as("DirectoryId") directoryId: option<directoryId>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "CreateAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "CreateAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelSchemaExtension = {
@@ -772,8 +772,8 @@ module CancelSchemaExtension = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "CancelSchemaExtensionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "CancelSchemaExtensionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateConditionalForwarder = {
@@ -785,8 +785,8 @@ module UpdateConditionalForwarder = {
   }
   type response = unit
   @module("@aws-sdk/client-ds") @new
-  external new_: request => t = "UpdateConditionalForwarderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateConditionalForwarderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UnshareDirectory = {
@@ -796,8 +796,8 @@ module UnshareDirectory = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = {@as("SharedDirectoryId") sharedDirectoryId: option<directoryId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "UnshareDirectoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "UnshareDirectoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ShareDirectory = {
@@ -809,8 +809,8 @@ module ShareDirectory = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = {@as("SharedDirectoryId") sharedDirectoryId: option<directoryId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "ShareDirectoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "ShareDirectoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveTagsFromResource = {
@@ -820,8 +820,8 @@ module RemoveTagsFromResource = {
     @as("ResourceId") resourceId: resourceId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "RemoveTagsFromResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "RemoveTagsFromResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveIpRoutes = {
@@ -831,8 +831,8 @@ module RemoveIpRoutes = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "RemoveIpRoutesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "RemoveIpRoutesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterCertificate = {
@@ -844,24 +844,24 @@ module RegisterCertificate = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = {@as("CertificateId") certificateId: option<certificateId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "RegisterCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "RegisterCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSnapshotLimits = {
   type t
   type request = {@as("DirectoryId") directoryId: directoryId}
   type response = {@as("SnapshotLimits") snapshotLimits: option<snapshotLimits>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "GetSnapshotLimitsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "GetSnapshotLimitsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDirectoryLimits = {
   type t
   type request = unit
   type response = {@as("DirectoryLimits") directoryLimits: option<directoryLimits>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "GetDirectoryLimitsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "GetDirectoryLimitsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTrust = {
@@ -876,8 +876,8 @@ module CreateTrust = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = {@as("TrustId") trustId: option<trustId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "CreateTrustCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "CreateTrustCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateConditionalForwarder = {
@@ -889,16 +889,16 @@ module CreateConditionalForwarder = {
   }
   type response = unit
   @module("@aws-sdk/client-ds") @new
-  external new_: request => t = "CreateConditionalForwarderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateConditionalForwarderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptSharedDirectory = {
   type t
   type request = {@as("SharedDirectoryId") sharedDirectoryId: directoryId}
   type response = {@as("SharedDirectory") sharedDirectory: option<sharedDirectory>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "AcceptSharedDirectoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "AcceptSharedDirectoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRadius = {
@@ -908,8 +908,8 @@ module UpdateRadius = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "UpdateRadiusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "UpdateRadiusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -923,8 +923,8 @@ module ListTagsForResource = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Tags") tags: option<tags>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSchemaExtensions = {
@@ -938,8 +938,8 @@ module ListSchemaExtensions = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("SchemaExtensionsInfo") schemaExtensionsInfo: option<schemaExtensionsInfo>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "ListSchemaExtensionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "ListSchemaExtensionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLogSubscriptions = {
@@ -953,8 +953,8 @@ module ListLogSubscriptions = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("LogSubscriptions") logSubscriptions: option<logSubscriptions>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "ListLogSubscriptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "ListLogSubscriptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIpRoutes = {
@@ -968,8 +968,8 @@ module ListIpRoutes = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("IpRoutesInfo") ipRoutesInfo: option<ipRoutesInfo>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "ListIpRoutesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "ListIpRoutesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCertificates = {
@@ -983,8 +983,8 @@ module ListCertificates = {
     @as("CertificatesInfo") certificatesInfo: option<certificatesInfo>,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "ListCertificatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "ListCertificatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableRadius = {
@@ -994,8 +994,8 @@ module EnableRadius = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "EnableRadiusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "EnableRadiusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrusts = {
@@ -1010,8 +1010,8 @@ module DescribeTrusts = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Trusts") trusts: option<trusts>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DescribeTrustsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeTrustsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSnapshots = {
@@ -1026,8 +1026,8 @@ module DescribeSnapshots = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Snapshots") snapshots: option<snapshots>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DescribeSnapshotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeSnapshotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSharedDirectories = {
@@ -1042,9 +1042,8 @@ module DescribeSharedDirectories = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("SharedDirectories") sharedDirectories: option<sharedDirectories>,
   }
-  @module("@aws-sdk/client-ds") @new
-  external new_: request => t = "DescribeSharedDirectoriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeSharedDirectoriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLDAPSSettings = {
@@ -1059,8 +1058,8 @@ module DescribeLDAPSSettings = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("LDAPSSettingsInfo") ldapssettingsInfo: option<ldapssettingsInfo>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DescribeLDAPSSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeLDAPSSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEventTopics = {
@@ -1070,8 +1069,8 @@ module DescribeEventTopics = {
     @as("DirectoryId") directoryId: option<directoryId>,
   }
   type response = {@as("EventTopics") eventTopics: option<eventTopics>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DescribeEventTopicsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeEventTopicsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDomainControllers = {
@@ -1086,9 +1085,8 @@ module DescribeDomainControllers = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("DomainControllers") domainControllers: option<domainControllers>,
   }
-  @module("@aws-sdk/client-ds") @new
-  external new_: request => t = "DescribeDomainControllersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeDomainControllersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCertificate = {
@@ -1098,8 +1096,8 @@ module DescribeCertificate = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = {@as("Certificate") certificate: option<certificate>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DescribeCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMicrosoftAD = {
@@ -1114,8 +1112,8 @@ module CreateMicrosoftAD = {
     @as("Name") name: directoryName,
   }
   type response = {@as("DirectoryId") directoryId: option<directoryId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "CreateMicrosoftADCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "CreateMicrosoftADCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDirectory = {
@@ -1130,8 +1128,8 @@ module CreateDirectory = {
     @as("Name") name: directoryName,
   }
   type response = {@as("DirectoryId") directoryId: option<directoryId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "CreateDirectoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "CreateDirectoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ConnectDirectory = {
@@ -1146,8 +1144,8 @@ module ConnectDirectory = {
     @as("Name") name: directoryName,
   }
   type response = {@as("DirectoryId") directoryId: option<directoryId>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "ConnectDirectoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "ConnectDirectoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTagsToResource = {
@@ -1157,8 +1155,8 @@ module AddTagsToResource = {
     @as("ResourceId") resourceId: resourceId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "AddTagsToResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "AddTagsToResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddRegion = {
@@ -1169,8 +1167,8 @@ module AddRegion = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "AddRegionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "AddRegionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddIpRoutes = {
@@ -1182,8 +1180,8 @@ module AddIpRoutes = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "AddIpRoutesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "AddIpRoutesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConditionalForwarders = {
@@ -1196,8 +1194,8 @@ module DescribeConditionalForwarders = {
     @as("ConditionalForwarders") conditionalForwarders: option<conditionalForwarders>,
   }
   @module("@aws-sdk/client-ds") @new
-  external new_: request => t = "DescribeConditionalForwardersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConditionalForwardersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateComputer = {
@@ -1211,8 +1209,8 @@ module CreateComputer = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = {@as("Computer") computer: option<computer>}
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "CreateComputerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "CreateComputerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRegions = {
@@ -1226,8 +1224,8 @@ module DescribeRegions = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("RegionsDescription") regionsDescription: option<regionsDescription>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DescribeRegionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeRegionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDirectories = {
@@ -1241,6 +1239,6 @@ module DescribeDirectories = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("DirectoryDescriptions") directoryDescriptions: option<directoryDescriptions>,
   }
-  @module("@aws-sdk/client-ds") @new external new_: request => t = "DescribeDirectoriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ds") @new external new: request => t = "DescribeDirectoriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

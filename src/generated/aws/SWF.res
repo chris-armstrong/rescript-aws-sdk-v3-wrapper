@@ -864,8 +864,8 @@ module UndeprecateDomain = {
   type t
   type request = {name: domainName}
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "UndeprecateDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "UndeprecateDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TerminateWorkflowExecution = {
@@ -880,8 +880,8 @@ module TerminateWorkflowExecution = {
   }
 
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "TerminateWorkflowExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "TerminateWorkflowExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SignalWorkflowExecution = {
@@ -894,8 +894,8 @@ module SignalWorkflowExecution = {
     domain: domainName,
   }
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "SignalWorkflowExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "SignalWorkflowExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RespondActivityTaskFailed = {
@@ -907,8 +907,8 @@ module RespondActivityTaskFailed = {
   }
 
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "RespondActivityTaskFailedCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RespondActivityTaskFailedCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RespondActivityTaskCompleted = {
@@ -919,8 +919,8 @@ module RespondActivityTaskCompleted = {
   }
 
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "RespondActivityTaskCompletedCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RespondActivityTaskCompletedCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RespondActivityTaskCanceled = {
@@ -931,8 +931,8 @@ module RespondActivityTaskCanceled = {
   }
 
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "RespondActivityTaskCanceledCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RespondActivityTaskCanceledCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RequestCancelWorkflowExecution = {
@@ -944,8 +944,8 @@ module RequestCancelWorkflowExecution = {
   }
 
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "RequestCancelWorkflowExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RequestCancelWorkflowExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RecordActivityTaskHeartbeat = {
@@ -956,16 +956,16 @@ module RecordActivityTaskHeartbeat = {
   }
   type response = {cancelRequested: canceled}
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "RecordActivityTaskHeartbeatCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RecordActivityTaskHeartbeatCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeprecateDomain = {
   type t
   type request = {name: domainName}
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "DeprecateDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "DeprecateDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagResource = {
@@ -975,8 +975,8 @@ module UntagResource = {
     resourceArn: arn,
   }
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UndeprecateWorkflowType = {
@@ -986,8 +986,8 @@ module UndeprecateWorkflowType = {
     domain: domainName,
   }
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "UndeprecateWorkflowTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "UndeprecateWorkflowTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UndeprecateActivityType = {
@@ -997,8 +997,8 @@ module UndeprecateActivityType = {
     domain: domainName,
   }
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "UndeprecateActivityTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "UndeprecateActivityTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartWorkflowExecution = {
@@ -1017,8 +1017,8 @@ module StartWorkflowExecution = {
     domain: domainName,
   }
   type response = {runId: option<workflowRunId>}
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "StartWorkflowExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "StartWorkflowExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterWorkflowType = {
@@ -1036,8 +1036,8 @@ module RegisterWorkflowType = {
     domain: domainName,
   }
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "RegisterWorkflowTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "RegisterWorkflowTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RegisterActivityType = {
@@ -1055,8 +1055,8 @@ module RegisterActivityType = {
     domain: domainName,
   }
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "RegisterActivityTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "RegisterActivityTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PollForActivityTask = {
@@ -1074,8 +1074,8 @@ module PollForActivityTask = {
     activityId: activityId,
     taskToken: taskToken,
   }
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "PollForActivityTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "PollForActivityTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDomain = {
@@ -1085,8 +1085,8 @@ module DescribeDomain = {
     configuration: domainConfiguration,
     domainInfo: domainInfo,
   }
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "DescribeDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "DescribeDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeprecateWorkflowType = {
@@ -1096,8 +1096,8 @@ module DeprecateWorkflowType = {
     domain: domainName,
   }
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "DeprecateWorkflowTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "DeprecateWorkflowTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeprecateActivityType = {
@@ -1107,8 +1107,8 @@ module DeprecateActivityType = {
     domain: domainName,
   }
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "DeprecateActivityTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "DeprecateActivityTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CountPendingDecisionTasks = {
@@ -1122,8 +1122,8 @@ module CountPendingDecisionTasks = {
     count: count,
   }
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "CountPendingDecisionTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CountPendingDecisionTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CountPendingActivityTasks = {
@@ -1137,8 +1137,8 @@ module CountPendingActivityTasks = {
     count: count,
   }
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "CountPendingActivityTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CountPendingActivityTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CountOpenWorkflowExecutions = {
@@ -1155,8 +1155,8 @@ module CountOpenWorkflowExecutions = {
     count: count,
   }
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "CountOpenWorkflowExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CountOpenWorkflowExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CountClosedWorkflowExecutions = {
@@ -1175,8 +1175,8 @@ module CountClosedWorkflowExecutions = {
     count: count,
   }
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "CountClosedWorkflowExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CountClosedWorkflowExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1186,8 +1186,8 @@ module TagResource = {
     resourceArn: arn,
   }
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RegisterDomain = {
@@ -1199,16 +1199,16 @@ module RegisterDomain = {
     name: domainName,
   }
 
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "RegisterDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "RegisterDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {resourceArn: arn}
   type response = {tags: option<resourceTagList>}
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDomains = {
@@ -1223,8 +1223,8 @@ module ListDomains = {
     nextPageToken: option<pageToken>,
     domainInfos: domainInfoList,
   }
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "ListDomainsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "ListDomainsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkflowType = {
@@ -1237,8 +1237,8 @@ module DescribeWorkflowType = {
     configuration: workflowTypeConfiguration,
     typeInfo: workflowTypeInfo,
   }
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "DescribeWorkflowTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "DescribeWorkflowTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkflowExecution = {
@@ -1255,8 +1255,8 @@ module DescribeWorkflowExecution = {
     executionInfo: workflowExecutionInfo,
   }
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "DescribeWorkflowExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWorkflowExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeActivityType = {
@@ -1269,8 +1269,8 @@ module DescribeActivityType = {
     configuration: activityTypeConfiguration,
     typeInfo: activityTypeInfo,
   }
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "DescribeActivityTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "DescribeActivityTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorkflowTypes = {
@@ -1287,8 +1287,8 @@ module ListWorkflowTypes = {
     nextPageToken: option<pageToken>,
     typeInfos: workflowTypeInfoList,
   }
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "ListWorkflowTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "ListWorkflowTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOpenWorkflowExecutions = {
@@ -1308,8 +1308,8 @@ module ListOpenWorkflowExecutions = {
     executionInfos: workflowExecutionInfoList,
   }
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "ListOpenWorkflowExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListOpenWorkflowExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListClosedWorkflowExecutions = {
@@ -1331,8 +1331,8 @@ module ListClosedWorkflowExecutions = {
     executionInfos: workflowExecutionInfoList,
   }
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "ListClosedWorkflowExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListClosedWorkflowExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListActivityTypes = {
@@ -1349,8 +1349,8 @@ module ListActivityTypes = {
     nextPageToken: option<pageToken>,
     typeInfos: activityTypeInfoList,
   }
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "ListActivityTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "ListActivityTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RespondDecisionTaskCompleted = {
@@ -1362,8 +1362,8 @@ module RespondDecisionTaskCompleted = {
   }
 
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "RespondDecisionTaskCompletedCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RespondDecisionTaskCompletedCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PollForDecisionTask = {
@@ -1385,8 +1385,8 @@ module PollForDecisionTask = {
     startedEventId: eventId,
     taskToken: taskToken,
   }
-  @module("@aws-sdk/client-swf") @new external new_: request => t = "PollForDecisionTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-swf") @new external new: request => t = "PollForDecisionTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWorkflowExecutionHistory = {
@@ -1403,6 +1403,6 @@ module GetWorkflowExecutionHistory = {
     events: historyEventList,
   }
   @module("@aws-sdk/client-swf") @new
-  external new_: request => t = "GetWorkflowExecutionHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWorkflowExecutionHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

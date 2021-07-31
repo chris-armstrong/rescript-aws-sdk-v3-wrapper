@@ -95,8 +95,8 @@ module DeleteFHIRDatastore = {
     @as("DatastoreId") datastoreId: datastoreId,
   }
   @module("@aws-sdk/client-healthlake") @new
-  external new_: request => t = "DeleteFHIRDatastoreCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteFHIRDatastoreCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartFHIRImportJob = {
@@ -114,8 +114,8 @@ module StartFHIRImportJob = {
     @as("JobId") jobId: jobId,
   }
   @module("@aws-sdk/client-healthlake") @new
-  external new_: request => t = "StartFHIRImportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartFHIRImportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartFHIRExportJob = {
@@ -133,8 +133,8 @@ module StartFHIRExportJob = {
     @as("JobId") jobId: jobId,
   }
   @module("@aws-sdk/client-healthlake") @new
-  external new_: request => t = "StartFHIRExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartFHIRExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFHIRDatastore = {
@@ -152,8 +152,8 @@ module CreateFHIRDatastore = {
     @as("DatastoreId") datastoreId: datastoreId,
   }
   @module("@aws-sdk/client-healthlake") @new
-  external new_: request => t = "CreateFHIRDatastoreCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateFHIRDatastoreCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFHIRImportJob = {
@@ -164,8 +164,8 @@ module DescribeFHIRImportJob = {
   }
   type response = {@as("ImportJobProperties") importJobProperties: importJobProperties}
   @module("@aws-sdk/client-healthlake") @new
-  external new_: request => t = "DescribeFHIRImportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFHIRImportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFHIRExportJob = {
@@ -176,8 +176,8 @@ module DescribeFHIRExportJob = {
   }
   type response = {@as("ExportJobProperties") exportJobProperties: exportJobProperties}
   @module("@aws-sdk/client-healthlake") @new
-  external new_: request => t = "DescribeFHIRExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFHIRExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFHIRDatastore = {
@@ -185,8 +185,8 @@ module DescribeFHIRDatastore = {
   type request = {@as("DatastoreId") datastoreId: option<datastoreId>}
   type response = {@as("DatastoreProperties") datastoreProperties: datastoreProperties}
   @module("@aws-sdk/client-healthlake") @new
-  external new_: request => t = "DescribeFHIRDatastoreCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFHIRDatastoreCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFHIRDatastores = {
@@ -201,6 +201,6 @@ module ListFHIRDatastores = {
     @as("DatastorePropertiesList") datastorePropertiesList: datastorePropertiesList,
   }
   @module("@aws-sdk/client-healthlake") @new
-  external new_: request => t = "ListFHIRDatastoresCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListFHIRDatastoresCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

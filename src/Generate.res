@@ -164,8 +164,8 @@ let generateOperationModule = (
   `  type t;\n` ++
   `  ${request}\n` ++
   `  ${response}\n` ++
-  `  @module("@aws-sdk/client-${moduleName}") @new external new_: (${inputType}) => t = "${commandName}";\n` ++
-  `  @send external rawSend: (awsServiceClient, t) => ${outputType} = "send";\n` ++ `}\n`
+  `  @module("@aws-sdk/client-${moduleName}") @new external new: (${inputType}) => t = "${commandName}";\n` ++
+  `  @send external send: (awsServiceClient, t) => ${outputType} = "send";\n` ++ `}\n`
 }
 
 let generateTypeTarget = descriptor => {

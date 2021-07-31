@@ -167,24 +167,24 @@ module UpdateTrail = {
     @as("S3BucketName") s3BucketName: option<string_>,
     @as("Name") name: option<string_>,
   }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "UpdateTrailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "UpdateTrailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopLogging = {
   type t
   type request = {@as("Name") name: string_}
   type response = unit
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "StopLoggingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "StopLoggingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartLogging = {
   type t
   type request = {@as("Name") name: string_}
   type response = unit
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "StartLoggingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "StartLoggingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTrailStatus = {
@@ -209,24 +209,24 @@ module GetTrailStatus = {
     @as("LatestDeliveryError") latestDeliveryError: option<string_>,
     @as("IsLogging") isLogging: option<boolean_>,
   }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "GetTrailStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "GetTrailStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTrail = {
   type t
   type request = {@as("Name") name: string_}
   type response = unit
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "DeleteTrailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "DeleteTrailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTrail = {
   type t
   type request = {@as("Name") name: string_}
   type response = {@as("Trail") trail: option<trail>}
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "GetTrailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "GetTrailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveTags = {
@@ -236,8 +236,8 @@ module RemoveTags = {
     @as("ResourceId") resourceId: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "RemoveTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "RemoveTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutInsightSelectors = {
@@ -251,8 +251,8 @@ module PutInsightSelectors = {
     @as("TrailARN") trailARN: option<string_>,
   }
   @module("@aws-sdk/client-cloudtrail") @new
-  external new_: request => t = "PutInsightSelectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutInsightSelectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTrails = {
@@ -262,8 +262,8 @@ module ListTrails = {
     @as("NextToken") nextToken: option<string_>,
     @as("Trails") trails: option<trails>,
   }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "ListTrailsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "ListTrailsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPublicKeys = {
@@ -277,8 +277,8 @@ module ListPublicKeys = {
     @as("NextToken") nextToken: option<string_>,
     @as("PublicKeyList") publicKeyList: option<publicKeyList>,
   }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "ListPublicKeysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "ListPublicKeysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInsightSelectors = {
@@ -289,8 +289,8 @@ module GetInsightSelectors = {
     @as("TrailARN") trailARN: option<string_>,
   }
   @module("@aws-sdk/client-cloudtrail") @new
-  external new_: request => t = "GetInsightSelectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInsightSelectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrails = {
@@ -300,8 +300,8 @@ module DescribeTrails = {
     trailNameList: option<trailNameList>,
   }
   type response = {trailList: option<trailList>}
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "DescribeTrailsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "DescribeTrailsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTrail = {
@@ -335,8 +335,8 @@ module CreateTrail = {
     @as("S3BucketName") s3BucketName: option<string_>,
     @as("Name") name: option<string_>,
   }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "CreateTrailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "CreateTrailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTags = {
@@ -346,8 +346,8 @@ module AddTags = {
     @as("ResourceId") resourceId: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "AddTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "AddTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module LookupEvents = {
@@ -364,8 +364,8 @@ module LookupEvents = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Events") events: option<eventsList>,
   }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "LookupEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "LookupEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTags = {
@@ -378,8 +378,8 @@ module ListTags = {
     @as("NextToken") nextToken: option<string_>,
     @as("ResourceTagList") resourceTagList: option<resourceTagList>,
   }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: request => t = "ListTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "ListTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutEventSelectors = {
@@ -394,9 +394,8 @@ module PutEventSelectors = {
     @as("EventSelectors") eventSelectors: option<eventSelectors>,
     @as("TrailARN") trailARN: option<string_>,
   }
-  @module("@aws-sdk/client-cloudtrail") @new
-  external new_: request => t = "PutEventSelectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "PutEventSelectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEventSelectors = {
@@ -407,7 +406,6 @@ module GetEventSelectors = {
     @as("EventSelectors") eventSelectors: option<eventSelectors>,
     @as("TrailARN") trailARN: option<string_>,
   }
-  @module("@aws-sdk/client-cloudtrail") @new
-  external new_: request => t = "GetEventSelectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudtrail") @new external new: request => t = "GetEventSelectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

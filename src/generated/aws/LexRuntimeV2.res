@@ -307,8 +307,8 @@ module RecognizeUtterance = {
     contentType: option<nonEmptyString>,
     inputMode: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "RecognizeUtteranceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "RecognizeUtteranceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSession = {
@@ -325,8 +325,8 @@ module DeleteSession = {
     botAliasId: option<botAliasIdentifier>,
     botId: option<botIdentifier>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "DeleteSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutSession = {
@@ -349,8 +349,8 @@ module PutSession = {
     messages: option<nonEmptyString>,
     contentType: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "PutSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "PutSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RecognizeText = {
@@ -371,8 +371,8 @@ module RecognizeText = {
     sessionState: option<sessionState>,
     messages: option<messages>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "RecognizeTextCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "RecognizeTextCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSession = {
@@ -389,8 +389,8 @@ module GetSession = {
     messages: option<messages>,
     sessionId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartConversation = {
@@ -404,6 +404,6 @@ module StartConversation = {
     botId: botIdentifier,
   }
   type response = {responseEventStream: option<startConversationResponseEventStream>}
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "StartConversationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "StartConversationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

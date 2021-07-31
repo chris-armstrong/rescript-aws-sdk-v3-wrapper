@@ -717,16 +717,16 @@ module DeleteVPCEConfiguration = {
   type request = {arn: amazonResourceName}
   type response = unit
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "DeleteVPCEConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteVPCEConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteUpload = {
   type t
   type request = {arn: amazonResourceName}
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "DeleteUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "DeleteUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTestGridProject = {
@@ -734,16 +734,16 @@ module DeleteTestGridProject = {
   type request = {projectArn: deviceFarmArn}
   type response = unit
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "DeleteTestGridProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTestGridProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRun = {
   type t
   type request = {arn: amazonResourceName}
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "DeleteRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "DeleteRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRemoteAccessSession = {
@@ -751,16 +751,16 @@ module DeleteRemoteAccessSession = {
   type request = {arn: amazonResourceName}
   type response = unit
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "DeleteRemoteAccessSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteRemoteAccessSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProject = {
   type t
   type request = {arn: amazonResourceName}
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "DeleteProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "DeleteProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteNetworkProfile = {
@@ -768,8 +768,8 @@ module DeleteNetworkProfile = {
   type request = {arn: amazonResourceName}
   type response = unit
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "DeleteNetworkProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteNetworkProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInstanceProfile = {
@@ -777,16 +777,16 @@ module DeleteInstanceProfile = {
   type request = {arn: amazonResourceName}
   type response = unit
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "DeleteInstanceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteInstanceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDevicePool = {
   type t
   type request = {arn: amazonResourceName}
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "DeleteDevicePoolCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "DeleteDevicePoolCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTestGridUrl = {
@@ -799,9 +799,8 @@ module CreateTestGridUrl = {
     expires: option<dateTime>,
     url: option<sensitiveString>,
   }
-  @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "CreateTestGridUrlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "CreateTestGridUrlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateVPCEConfiguration = {
@@ -815,8 +814,8 @@ module UpdateVPCEConfiguration = {
   }
   type response = {vpceConfiguration: option<vpceconfiguration>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "UpdateVPCEConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateVPCEConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateUpload = {
@@ -828,8 +827,8 @@ module UpdateUpload = {
     arn: amazonResourceName,
   }
   type response = {upload: option<upload>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "UpdateUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "UpdateUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProject = {
@@ -840,8 +839,8 @@ module UpdateProject = {
     arn: amazonResourceName,
   }
   type response = {project: option<project>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "UpdateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "UpdateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateNetworkProfile = {
@@ -862,8 +861,8 @@ module UpdateNetworkProfile = {
   }
   type response = {networkProfile: option<networkProfile>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "UpdateNetworkProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateNetworkProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -873,8 +872,8 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: deviceFarmArn,
   }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InstallToRemoteAccessSession = {
@@ -885,8 +884,8 @@ module InstallToRemoteAccessSession = {
   }
   type response = {appUpload: option<upload>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "InstallToRemoteAccessSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "InstallToRemoteAccessSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVPCEConfiguration = {
@@ -894,16 +893,16 @@ module GetVPCEConfiguration = {
   type request = {arn: amazonResourceName}
   type response = {vpceConfiguration: option<vpceconfiguration>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "GetVPCEConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetVPCEConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUpload = {
   type t
   type request = {arn: amazonResourceName}
   type response = {upload: option<upload>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "GetUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "GetUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTestGridSession = {
@@ -915,25 +914,24 @@ module GetTestGridSession = {
   }
   type response = {testGridSession: option<testGridSession>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "GetTestGridSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTestGridSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetProject = {
   type t
   type request = {arn: amazonResourceName}
   type response = {project: option<project>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "GetProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "GetProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetNetworkProfile = {
   type t
   type request = {arn: amazonResourceName}
   type response = {networkProfile: option<networkProfile>}
-  @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "GetNetworkProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "GetNetworkProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVPCEConfiguration = {
@@ -946,8 +944,8 @@ module CreateVPCEConfiguration = {
   }
   type response = {vpceConfiguration: option<vpceconfiguration>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "CreateVPCEConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateVPCEConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateUpload = {
@@ -959,8 +957,8 @@ module CreateUpload = {
     projectArn: amazonResourceName,
   }
   type response = {upload: option<upload>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "CreateUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "CreateUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProject = {
@@ -970,8 +968,8 @@ module CreateProject = {
     name: name,
   }
   type response = {project: option<project>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "CreateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "CreateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNetworkProfile = {
@@ -992,8 +990,8 @@ module CreateNetworkProfile = {
   }
   type response = {networkProfile: option<networkProfile>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "CreateNetworkProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateNetworkProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateInstanceProfile = {
@@ -1008,8 +1006,8 @@ module UpdateInstanceProfile = {
   }
   type response = {instanceProfile: option<instanceProfile>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "UpdateInstanceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateInstanceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1019,8 +1017,8 @@ module TagResource = {
     @as("ResourceARN") resourceARN: deviceFarmArn,
   }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListVPCEConfigurations = {
@@ -1034,8 +1032,8 @@ module ListVPCEConfigurations = {
     vpceConfigurations: option<vpceconfigurations>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListVPCEConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListVPCEConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListUploads = {
@@ -1049,8 +1047,8 @@ module ListUploads = {
     nextToken: option<paginationToken>,
     uploads: option<uploads>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ListUploadsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListUploadsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTestGridSessions = {
@@ -1070,8 +1068,8 @@ module ListTestGridSessions = {
     testGridSessions: option<testGridSessions>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListTestGridSessionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTestGridSessionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTestGridSessionArtifacts = {
@@ -1087,8 +1085,8 @@ module ListTestGridSessionArtifacts = {
     artifacts: option<testGridSessionArtifacts>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListTestGridSessionArtifactsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTestGridSessionArtifactsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTestGridSessionActions = {
@@ -1103,8 +1101,8 @@ module ListTestGridSessionActions = {
     actions: option<testGridSessionActions>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListTestGridSessionActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTestGridSessionActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -1112,8 +1110,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceARN") resourceARN: deviceFarmArn}
   type response = {@as("Tags") tags: option<tagList_>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSamples = {
@@ -1126,8 +1124,8 @@ module ListSamples = {
     nextToken: option<paginationToken>,
     samples: option<samples>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ListSamplesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListSamplesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProjects = {
@@ -1140,8 +1138,8 @@ module ListProjects = {
     nextToken: option<paginationToken>,
     projects: option<projects>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ListProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOfferingPromotions = {
@@ -1152,8 +1150,8 @@ module ListOfferingPromotions = {
     offeringPromotions: option<offeringPromotions>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListOfferingPromotionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListOfferingPromotionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListNetworkProfiles = {
@@ -1168,8 +1166,8 @@ module ListNetworkProfiles = {
     networkProfiles: option<networkProfiles>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListNetworkProfilesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListNetworkProfilesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListArtifacts = {
@@ -1183,24 +1181,24 @@ module ListArtifacts = {
     nextToken: option<paginationToken>,
     artifacts: option<artifacts>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ListArtifactsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListArtifactsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTest = {
   type t
   type request = {arn: amazonResourceName}
   type response = {test: option<test>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "GetTestCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "GetTestCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSuite = {
   type t
   type request = {arn: amazonResourceName}
   type response = {suite: option<suite>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "GetSuiteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "GetSuiteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInstanceProfile = {
@@ -1208,8 +1206,8 @@ module GetInstanceProfile = {
   type request = {arn: amazonResourceName}
   type response = {instanceProfile: option<instanceProfile>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "GetInstanceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInstanceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAccountSettings = {
@@ -1217,8 +1215,8 @@ module GetAccountSettings = {
   type request = unit
   type response = {accountSettings: option<accountSettings>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "GetAccountSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAccountSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInstanceProfile = {
@@ -1232,8 +1230,8 @@ module CreateInstanceProfile = {
   }
   type response = {instanceProfile: option<instanceProfile>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "CreateInstanceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateInstanceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTestGridProject = {
@@ -1246,8 +1244,8 @@ module UpdateTestGridProject = {
   }
   type response = {testGridProject: option<testGridProject>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "UpdateTestGridProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateTestGridProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDevicePool = {
@@ -1261,8 +1259,8 @@ module UpdateDevicePool = {
     arn: amazonResourceName,
   }
   type response = {devicePool: option<devicePool>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "UpdateDevicePoolCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "UpdateDevicePoolCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDeviceInstance = {
@@ -1274,8 +1272,8 @@ module UpdateDeviceInstance = {
   }
   type response = {deviceInstance: option<deviceInstance>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "UpdateDeviceInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDeviceInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTests = {
@@ -1288,8 +1286,8 @@ module ListTests = {
     nextToken: option<paginationToken>,
     tests: option<tests>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ListTestsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListTestsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSuites = {
@@ -1302,8 +1300,8 @@ module ListSuites = {
     nextToken: option<paginationToken>,
     suites: option<suites>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ListSuitesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListSuitesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInstanceProfiles = {
@@ -1317,8 +1315,8 @@ module ListInstanceProfiles = {
     instanceProfiles: option<instanceProfiles>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListInstanceProfilesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListInstanceProfilesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTestGridProject = {
@@ -1326,25 +1324,24 @@ module GetTestGridProject = {
   type request = {projectArn: deviceFarmArn}
   type response = {testGridProject: option<testGridProject>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "GetTestGridProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTestGridProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDevicePool = {
   type t
   type request = {arn: amazonResourceName}
   type response = {devicePool: option<devicePool>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "GetDevicePoolCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "GetDevicePoolCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDeviceInstance = {
   type t
   type request = {arn: amazonResourceName}
   type response = {deviceInstance: option<deviceInstance>}
-  @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "GetDeviceInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "GetDeviceInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTestGridProject = {
@@ -1356,8 +1353,8 @@ module CreateTestGridProject = {
   }
   type response = {testGridProject: option<testGridProject>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "CreateTestGridProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTestGridProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDevicePool = {
@@ -1370,8 +1367,8 @@ module CreateDevicePool = {
     projectArn: amazonResourceName,
   }
   type response = {devicePool: option<devicePool>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "CreateDevicePoolCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "CreateDevicePoolCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTestGridProjects = {
@@ -1385,8 +1382,8 @@ module ListTestGridProjects = {
     testGridProjects: option<testGridProjects>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListTestGridProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTestGridProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDevicePools = {
@@ -1400,8 +1397,8 @@ module ListDevicePools = {
     nextToken: option<paginationToken>,
     devicePools: option<devicePools>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ListDevicePoolsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListDevicePoolsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDeviceInstances = {
@@ -1415,16 +1412,16 @@ module ListDeviceInstances = {
     deviceInstances: option<deviceInstances>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListDeviceInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDeviceInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopRun = {
   type t
   type request = {arn: amazonResourceName}
   type response = {run: option<run>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "StopRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "StopRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ScheduleRun = {
@@ -1440,8 +1437,8 @@ module ScheduleRun = {
     projectArn: amazonResourceName,
   }
   type response = {run: option<run>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ScheduleRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ScheduleRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOfferings = {
@@ -1451,24 +1448,24 @@ module ListOfferings = {
     nextToken: option<paginationToken>,
     offerings: option<offerings>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ListOfferingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListOfferingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRun = {
   type t
   type request = {arn: amazonResourceName}
   type response = {run: option<run>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "GetRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "GetRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDevice = {
   type t
   type request = {arn: amazonResourceName}
   type response = {device: option<device>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "GetDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "GetDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopRemoteAccessSession = {
@@ -1476,16 +1473,16 @@ module StopRemoteAccessSession = {
   type request = {arn: amazonResourceName}
   type response = {remoteAccessSession: option<remoteAccessSession>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "StopRemoteAccessSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopRemoteAccessSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopJob = {
   type t
   type request = {arn: amazonResourceName}
   type response = {job: option<job>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "StopJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "StopJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RenewOffering = {
@@ -1495,8 +1492,8 @@ module RenewOffering = {
     offeringId: offeringIdentifier,
   }
   type response = {offeringTransaction: option<offeringTransaction>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "RenewOfferingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "RenewOfferingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PurchaseOffering = {
@@ -1507,8 +1504,8 @@ module PurchaseOffering = {
     offeringId: offeringIdentifier,
   }
   type response = {offeringTransaction: option<offeringTransaction>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "PurchaseOfferingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "PurchaseOfferingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRuns = {
@@ -1521,8 +1518,8 @@ module ListRuns = {
     nextToken: option<paginationToken>,
     runs: option<runs>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ListRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDevices = {
@@ -1536,8 +1533,8 @@ module ListDevices = {
     nextToken: option<paginationToken>,
     devices: option<devices>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ListDevicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListDevicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRemoteAccessSession = {
@@ -1545,8 +1542,8 @@ module GetRemoteAccessSession = {
   type request = {arn: amazonResourceName}
   type response = {remoteAccessSession: option<remoteAccessSession>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "GetRemoteAccessSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRemoteAccessSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOfferingStatus = {
@@ -1557,17 +1554,16 @@ module GetOfferingStatus = {
     nextPeriod: option<offeringStatusMap>,
     current: option<offeringStatusMap>,
   }
-  @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "GetOfferingStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "GetOfferingStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJob = {
   type t
   type request = {arn: amazonResourceName}
   type response = {job: option<job>}
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "GetJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "GetJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRemoteAccessSession = {
@@ -1588,8 +1584,8 @@ module CreateRemoteAccessSession = {
   }
   type response = {remoteAccessSession: option<remoteAccessSession>}
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "CreateRemoteAccessSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateRemoteAccessSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRemoteAccessSessions = {
@@ -1603,8 +1599,8 @@ module ListRemoteAccessSessions = {
     remoteAccessSessions: option<remoteAccessSessions>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListRemoteAccessSessionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRemoteAccessSessionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOfferingTransactions = {
@@ -1615,8 +1611,8 @@ module ListOfferingTransactions = {
     offeringTransactions: option<offeringTransactions>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListOfferingTransactionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListOfferingTransactionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobs = {
@@ -1629,8 +1625,8 @@ module ListJobs = {
     nextToken: option<paginationToken>,
     jobs: option<jobs>,
   }
-  @module("@aws-sdk/client-devicefarm") @new external new_: request => t = "ListJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-devicefarm") @new external new: request => t = "ListJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDevicePoolCompatibility = {
@@ -1647,8 +1643,8 @@ module GetDevicePoolCompatibility = {
     compatibleDevices: option<devicePoolCompatibilityResults>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "GetDevicePoolCompatibilityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDevicePoolCompatibilityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListUniqueProblems = {
@@ -1662,6 +1658,6 @@ module ListUniqueProblems = {
     uniqueProblems: option<uniqueProblemsByExecutionResultMap>,
   }
   @module("@aws-sdk/client-devicefarm") @new
-  external new_: request => t = "ListUniqueProblemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListUniqueProblemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

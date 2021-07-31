@@ -310,8 +310,8 @@ module GetArtifactUrl = {
     artifactUrl: artifactUrl,
     artifactId: artifactId,
   }
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GetArtifactUrlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "GetArtifactUrlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GenerateAccessLogs = {
@@ -323,8 +323,8 @@ module GenerateAccessLogs = {
     startTime: option<startTime>,
   }
   type response = {logUrl: option<logUrl>}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GenerateAccessLogsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "GenerateAccessLogsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateWebhook = {
@@ -335,8 +335,8 @@ module UpdateWebhook = {
     webhookId: webhookId,
   }
   type response = {webhook: webhook}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "UpdateWebhookCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "UpdateWebhookCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -346,8 +346,8 @@ module UntagResource = {
     resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -357,8 +357,8 @@ module TagResource = {
     resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopJob = {
@@ -369,8 +369,8 @@ module StopJob = {
     appId: appId,
   }
   type response = {jobSummary: jobSummary}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "StopJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "StopJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartJob = {
@@ -386,8 +386,8 @@ module StartJob = {
     appId: appId,
   }
   type response = {jobSummary: jobSummary}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "StartJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "StartJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartDeployment = {
@@ -399,24 +399,24 @@ module StartDeployment = {
     appId: appId,
   }
   type response = {jobSummary: jobSummary}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "StartDeploymentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "StartDeploymentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {resourceArn: resourceArn}
   type response = {tags: option<tagMap>}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWebhook = {
   type t
   type request = {webhookId: webhookId}
   type response = {webhook: webhook}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GetWebhookCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "GetWebhookCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBackendEnvironment = {
@@ -427,16 +427,16 @@ module GetBackendEnvironment = {
   }
   type response = {backendEnvironment: backendEnvironment}
   @module("@aws-sdk/client-amplify") @new
-  external new_: request => t = "GetBackendEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetBackendEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWebhook = {
   type t
   type request = {webhookId: webhookId}
   type response = {webhook: webhook}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "DeleteWebhookCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "DeleteWebhookCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteJob = {
@@ -447,8 +447,8 @@ module DeleteJob = {
     appId: appId,
   }
   type response = {jobSummary: jobSummary}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "DeleteJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "DeleteJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBackendEnvironment = {
@@ -459,8 +459,8 @@ module DeleteBackendEnvironment = {
   }
   type response = {backendEnvironment: backendEnvironment}
   @module("@aws-sdk/client-amplify") @new
-  external new_: request => t = "DeleteBackendEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteBackendEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWebhook = {
@@ -471,8 +471,8 @@ module CreateWebhook = {
     appId: appId,
   }
   type response = {webhook: webhook}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "CreateWebhookCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "CreateWebhookCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDeployment = {
@@ -487,8 +487,8 @@ module CreateDeployment = {
     fileUploadUrls: fileUploadUrls,
     jobId: option<jobId>,
   }
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "CreateDeploymentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "CreateDeploymentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBackendEnvironment = {
@@ -501,8 +501,8 @@ module CreateBackendEnvironment = {
   }
   type response = {backendEnvironment: backendEnvironment}
   @module("@aws-sdk/client-amplify") @new
-  external new_: request => t = "CreateBackendEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateBackendEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateBranch = {
@@ -527,8 +527,8 @@ module UpdateBranch = {
     appId: appId,
   }
   type response = {branch: branch}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "UpdateBranchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "UpdateBranchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWebhooks = {
@@ -542,8 +542,8 @@ module ListWebhooks = {
     nextToken: option<nextToken>,
     webhooks: webhooks,
   }
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListWebhooksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "ListWebhooksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobs = {
@@ -558,8 +558,8 @@ module ListJobs = {
     nextToken: option<nextToken>,
     jobSummaries: jobSummaries,
   }
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "ListJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBackendEnvironments = {
@@ -575,8 +575,8 @@ module ListBackendEnvironments = {
     backendEnvironments: backendEnvironments,
   }
   @module("@aws-sdk/client-amplify") @new
-  external new_: request => t = "ListBackendEnvironmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListBackendEnvironmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListArtifacts = {
@@ -592,8 +592,8 @@ module ListArtifacts = {
     nextToken: option<nextToken>,
     artifacts: artifacts,
   }
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListArtifactsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "ListArtifactsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBranch = {
@@ -603,8 +603,8 @@ module GetBranch = {
     appId: appId,
   }
   type response = {branch: branch}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GetBranchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "GetBranchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBranch = {
@@ -614,8 +614,8 @@ module DeleteBranch = {
     appId: appId,
   }
   type response = {branch: branch}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "DeleteBranchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "DeleteBranchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBranch = {
@@ -641,8 +641,8 @@ module CreateBranch = {
     appId: appId,
   }
   type response = {branch: branch}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "CreateBranchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "CreateBranchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApp = {
@@ -669,8 +669,8 @@ module UpdateApp = {
     appId: appId,
   }
   type response = {app: app}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "UpdateAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "UpdateAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBranches = {
@@ -684,24 +684,24 @@ module ListBranches = {
     nextToken: option<nextToken>,
     branches: branches,
   }
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListBranchesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "ListBranchesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApp = {
   type t
   type request = {appId: appId}
   type response = {app: app}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GetAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "GetAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApp = {
   type t
   type request = {appId: appId}
   type response = {app: app}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "DeleteAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "DeleteAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApp = {
@@ -728,8 +728,8 @@ module CreateApp = {
     name: name,
   }
   type response = {app: app}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "CreateAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "CreateAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDomainAssociation = {
@@ -744,8 +744,8 @@ module UpdateDomainAssociation = {
   }
   type response = {domainAssociation: domainAssociation}
   @module("@aws-sdk/client-amplify") @new
-  external new_: request => t = "UpdateDomainAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDomainAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListApps = {
@@ -758,8 +758,8 @@ module ListApps = {
     nextToken: option<nextToken>,
     apps: apps,
   }
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListAppsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "ListAppsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJob = {
@@ -770,8 +770,8 @@ module GetJob = {
     appId: appId,
   }
   type response = {job: job}
-  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GetJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "GetJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDomainAssociation = {
@@ -781,9 +781,8 @@ module GetDomainAssociation = {
     appId: appId,
   }
   type response = {domainAssociation: domainAssociation}
-  @module("@aws-sdk/client-amplify") @new
-  external new_: request => t = "GetDomainAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplify") @new external new: request => t = "GetDomainAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDomainAssociation = {
@@ -794,8 +793,8 @@ module DeleteDomainAssociation = {
   }
   type response = {domainAssociation: domainAssociation}
   @module("@aws-sdk/client-amplify") @new
-  external new_: request => t = "DeleteDomainAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteDomainAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDomainAssociation = {
@@ -810,8 +809,8 @@ module CreateDomainAssociation = {
   }
   type response = {domainAssociation: domainAssociation}
   @module("@aws-sdk/client-amplify") @new
-  external new_: request => t = "CreateDomainAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDomainAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDomainAssociations = {
@@ -826,6 +825,6 @@ module ListDomainAssociations = {
     domainAssociations: domainAssociations,
   }
   @module("@aws-sdk/client-amplify") @new
-  external new_: request => t = "ListDomainAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDomainAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

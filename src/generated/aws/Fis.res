@@ -273,8 +273,8 @@ module UntagResource = {
     resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-fis") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -284,16 +284,16 @@ module TagResource = {
     resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-fis") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {resourceArn: resourceArn}
   type response = {tags: option<tagMap>}
-  @module("@aws-sdk/client-fis") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListExperiments = {
@@ -306,8 +306,8 @@ module ListExperiments = {
     nextToken: option<nextToken>,
     experiments: option<experimentSummaryList>,
   }
-  @module("@aws-sdk/client-fis") @new external new_: request => t = "ListExperimentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "ListExperimentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListExperimentTemplates = {
@@ -320,16 +320,16 @@ module ListExperimentTemplates = {
     nextToken: option<nextToken>,
     experimentTemplates: option<experimentTemplateSummaryList>,
   }
-  @module("@aws-sdk/client-fis") @new external new_: request => t = "ListExperimentTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "ListExperimentTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAction = {
   type t
   type request = {id: actionId}
   type response = {action: option<action>}
-  @module("@aws-sdk/client-fis") @new external new_: request => t = "GetActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "GetActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListActions = {
@@ -342,8 +342,8 @@ module ListActions = {
     nextToken: option<nextToken>,
     actions: option<actionSummaryList>,
   }
-  @module("@aws-sdk/client-fis") @new external new_: request => t = "ListActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "ListActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateExperimentTemplate = {
@@ -357,17 +357,16 @@ module UpdateExperimentTemplate = {
     id: experimentTemplateId,
   }
   type response = {experimentTemplate: option<experimentTemplate>}
-  @module("@aws-sdk/client-fis") @new
-  external new_: request => t = "UpdateExperimentTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "UpdateExperimentTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopExperiment = {
   type t
   type request = {id: experimentId}
   type response = {experiment: option<experiment>}
-  @module("@aws-sdk/client-fis") @new external new_: request => t = "StopExperimentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "StopExperimentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartExperiment = {
@@ -378,33 +377,32 @@ module StartExperiment = {
     clientToken: clientToken,
   }
   type response = {experiment: option<experiment>}
-  @module("@aws-sdk/client-fis") @new external new_: request => t = "StartExperimentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "StartExperimentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetExperimentTemplate = {
   type t
   type request = {id: experimentTemplateId}
   type response = {experimentTemplate: option<experimentTemplate>}
-  @module("@aws-sdk/client-fis") @new external new_: request => t = "GetExperimentTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "GetExperimentTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetExperiment = {
   type t
   type request = {id: experimentId}
   type response = {experiment: option<experiment>}
-  @module("@aws-sdk/client-fis") @new external new_: request => t = "GetExperimentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "GetExperimentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteExperimentTemplate = {
   type t
   type request = {id: experimentTemplateId}
   type response = {experimentTemplate: option<experimentTemplate>}
-  @module("@aws-sdk/client-fis") @new
-  external new_: request => t = "DeleteExperimentTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "DeleteExperimentTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateExperimentTemplate = {
@@ -419,7 +417,6 @@ module CreateExperimentTemplate = {
     clientToken: clientToken,
   }
   type response = {experimentTemplate: option<experimentTemplate>}
-  @module("@aws-sdk/client-fis") @new
-  external new_: request => t = "CreateExperimentTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fis") @new external new: request => t = "CreateExperimentTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -55,8 +55,8 @@ module DescribeUser = {
     @as("UserId") userId: resourceId,
     @as("UserName") userName: userName,
   }
-  @module("@aws-sdk/client-identitystore") @new external new_: request => t = "DescribeUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-identitystore") @new external new: request => t = "DescribeUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeGroup = {
@@ -69,8 +69,8 @@ module DescribeGroup = {
     @as("DisplayName") displayName: groupDisplayName,
     @as("GroupId") groupId: resourceId,
   }
-  @module("@aws-sdk/client-identitystore") @new external new_: request => t = "DescribeGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-identitystore") @new external new: request => t = "DescribeGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListUsers = {
@@ -85,8 +85,8 @@ module ListUsers = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Users") users: users,
   }
-  @module("@aws-sdk/client-identitystore") @new external new_: request => t = "ListUsersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-identitystore") @new external new: request => t = "ListUsersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListGroups = {
@@ -101,6 +101,6 @@ module ListGroups = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Groups") groups: groups,
   }
-  @module("@aws-sdk/client-identitystore") @new external new_: request => t = "ListGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-identitystore") @new external new: request => t = "ListGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

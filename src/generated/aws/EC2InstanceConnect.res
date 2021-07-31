@@ -35,8 +35,8 @@ module SendSerialConsoleSSHPublicKey = {
     @as("RequestId") requestId: option<requestId>,
   }
   @module("@aws-sdk/client-ec2-instance-connect") @new
-  external new_: request => t = "SendSerialConsoleSSHPublicKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SendSerialConsoleSSHPublicKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendSSHPublicKey = {
@@ -52,6 +52,6 @@ module SendSSHPublicKey = {
     @as("RequestId") requestId: option<requestId>,
   }
   @module("@aws-sdk/client-ec2-instance-connect") @new
-  external new_: request => t = "SendSSHPublicKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SendSSHPublicKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

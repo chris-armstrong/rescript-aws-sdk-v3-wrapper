@@ -353,8 +353,8 @@ module PutNotificationChannel = {
     @as("SnsTopicArn") snsTopicArn: resourceArn,
   }
 
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "PutNotificationChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "PutNotificationChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetProtectionStatus = {
@@ -373,8 +373,8 @@ module GetProtectionStatus = {
     @as("ServiceType") serviceType: option<securityServiceType>,
     @as("AdminAccountId") adminAccountId: option<awsaccountId>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "GetProtectionStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "GetProtectionStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetNotificationChannel = {
@@ -384,8 +384,8 @@ module GetNotificationChannel = {
     @as("SnsRoleName") snsRoleName: option<resourceArn>,
     @as("SnsTopicArn") snsTopicArn: option<resourceArn>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "GetNotificationChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "GetNotificationChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAdminAccount = {
@@ -395,25 +395,24 @@ module GetAdminAccount = {
     @as("RoleStatus") roleStatus: option<accountRoleStatus>,
     @as("AdminAccount") adminAccount: option<awsaccountId>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "GetAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "GetAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateAdminAccount = {
   type t
   type request = unit
 
-  @module("@aws-sdk/client-fms") @new
-  external new_: request => t = "DisassociateAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "DisassociateAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteProtocolsList = {
   type t
   type request = {@as("ListId") listId: listId}
 
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "DeleteProtocolsListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "DeleteProtocolsListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeletePolicy = {
@@ -423,8 +422,8 @@ module DeletePolicy = {
     @as("PolicyId") policyId: policyId,
   }
 
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "DeletePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "DeletePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteNotificationChannel = {
@@ -432,24 +431,24 @@ module DeleteNotificationChannel = {
   type request = unit
 
   @module("@aws-sdk/client-fms") @new
-  external new_: request => t = "DeleteNotificationChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteNotificationChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAppsList = {
   type t
   type request = {@as("ListId") listId: listId}
 
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "DeleteAppsListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "DeleteAppsListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AssociateAdminAccount = {
   type t
   type request = {@as("AdminAccount") adminAccount: awsaccountId}
 
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "AssociateAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "AssociateAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagResource = {
@@ -459,8 +458,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMemberAccounts = {
@@ -473,8 +472,8 @@ module ListMemberAccounts = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("MemberAccounts") memberAccounts: option<memberAccounts>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "ListMemberAccountsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "ListMemberAccountsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -484,16 +483,16 @@ module TagResource = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = {@as("TagList") tagList_: option<tagList_>}
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPolicies = {
@@ -506,8 +505,8 @@ module ListPolicies = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("PolicyList") policyList: option<policySummaryList>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "ListPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "ListPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutProtocolsList = {
@@ -520,8 +519,8 @@ module PutProtocolsList = {
     @as("ProtocolsListArn") protocolsListArn: option<resourceArn>,
     @as("ProtocolsList") protocolsList: option<protocolsListData>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "PutProtocolsListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "PutProtocolsListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutPolicy = {
@@ -534,8 +533,8 @@ module PutPolicy = {
     @as("PolicyArn") policyArn: option<resourceArn>,
     @as("Policy") policy: option<policy>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "PutPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "PutPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProtocolsLists = {
@@ -549,8 +548,8 @@ module ListProtocolsLists = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("ProtocolsLists") protocolsLists: option<protocolsListsData>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "ListProtocolsListsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "ListProtocolsListsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetProtocolsList = {
@@ -563,8 +562,8 @@ module GetProtocolsList = {
     @as("ProtocolsListArn") protocolsListArn: option<resourceArn>,
     @as("ProtocolsList") protocolsList: option<protocolsListData>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "GetProtocolsListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "GetProtocolsListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPolicy = {
@@ -574,8 +573,8 @@ module GetPolicy = {
     @as("PolicyArn") policyArn: option<resourceArn>,
     @as("Policy") policy: option<policy>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "GetPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "GetPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetComplianceDetail = {
@@ -587,8 +586,8 @@ module GetComplianceDetail = {
   type response = {
     @as("PolicyComplianceDetail") policyComplianceDetail: option<policyComplianceDetail>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "GetComplianceDetailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "GetComplianceDetailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAppsList = {
@@ -601,8 +600,8 @@ module PutAppsList = {
     @as("AppsListArn") appsListArn: option<resourceArn>,
     @as("AppsList") appsList: option<appsListData>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "PutAppsListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "PutAppsListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListComplianceStatus = {
@@ -617,8 +616,8 @@ module ListComplianceStatus = {
     @as("PolicyComplianceStatusList")
     policyComplianceStatusList: option<policyComplianceStatusList>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "ListComplianceStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "ListComplianceStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAppsLists = {
@@ -632,8 +631,8 @@ module ListAppsLists = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("AppsLists") appsLists: option<appsListsData>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "ListAppsListsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "ListAppsListsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAppsList = {
@@ -646,8 +645,8 @@ module GetAppsList = {
     @as("AppsListArn") appsListArn: option<resourceArn>,
     @as("AppsList") appsList: option<appsListData>,
   }
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "GetAppsListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "GetAppsListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetViolationDetails = {
@@ -659,6 +658,6 @@ module GetViolationDetails = {
     @as("PolicyId") policyId: policyId,
   }
   type response = {@as("ViolationDetail") violationDetail: option<violationDetail>}
-  @module("@aws-sdk/client-fms") @new external new_: request => t = "GetViolationDetailsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-fms") @new external new: request => t = "GetViolationDetailsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

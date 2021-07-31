@@ -242,8 +242,8 @@ module UpdateBackendJob = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "UpdateBackendJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateBackendJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveBackendConfig = {
@@ -251,8 +251,8 @@ module RemoveBackendConfig = {
   type request = {@as("AppId") appId: __string}
   type response = {@as("Error") error: option<__string>}
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "RemoveBackendConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveBackendConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveAllBackends = {
@@ -269,8 +269,8 @@ module RemoveAllBackends = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "RemoveAllBackendsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveAllBackendsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetToken = {
@@ -285,8 +285,8 @@ module GetToken = {
     @as("ChallengeCode") challengeCode: option<__string>,
     @as("AppId") appId: option<__string>,
   }
-  @module("@aws-sdk/client-amplifybackend") @new external new_: request => t = "GetTokenCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "GetTokenCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBackendJob = {
@@ -306,9 +306,8 @@ module GetBackendJob = {
     @as("BackendEnvironmentName") backendEnvironmentName: option<__string>,
     @as("AppId") appId: option<__string>,
   }
-  @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "GetBackendJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "GetBackendJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBackendAPIModels = {
@@ -323,8 +322,8 @@ module GetBackendAPIModels = {
     @as("Models") models: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "GetBackendAPIModelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetBackendAPIModelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GenerateBackendAPIModels = {
@@ -343,8 +342,8 @@ module GenerateBackendAPIModels = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "GenerateBackendAPIModelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GenerateBackendAPIModelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteToken = {
@@ -354,8 +353,8 @@ module DeleteToken = {
     @as("AppId") appId: __string,
   }
   type response = {@as("IsSuccess") isSuccess: option<__boolean>}
-  @module("@aws-sdk/client-amplifybackend") @new external new_: request => t = "DeleteTokenCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "DeleteTokenCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBackendAuth = {
@@ -374,8 +373,8 @@ module DeleteBackendAuth = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "DeleteBackendAuthCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteBackendAuthCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBackend = {
@@ -392,9 +391,8 @@ module DeleteBackend = {
     @as("BackendEnvironmentName") backendEnvironmentName: option<__string>,
     @as("AppId") appId: option<__string>,
   }
-  @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "DeleteBackendCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "DeleteBackendCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateToken = {
@@ -406,8 +404,8 @@ module CreateToken = {
     @as("ChallengeCode") challengeCode: option<__string>,
     @as("AppId") appId: option<__string>,
   }
-  @module("@aws-sdk/client-amplifybackend") @new external new_: request => t = "CreateTokenCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "CreateTokenCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBackendConfig = {
@@ -423,8 +421,8 @@ module CreateBackendConfig = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "CreateBackendConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateBackendConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBackend = {
@@ -444,9 +442,8 @@ module CreateBackend = {
     @as("BackendEnvironmentName") backendEnvironmentName: option<__string>,
     @as("AppId") appId: option<__string>,
   }
-  @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "CreateBackendCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "CreateBackendCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CloneBackend = {
@@ -464,8 +461,8 @@ module CloneBackend = {
     @as("BackendEnvironmentName") backendEnvironmentName: option<__string>,
     @as("AppId") appId: option<__string>,
   }
-  @module("@aws-sdk/client-amplifybackend") @new external new_: request => t = "CloneBackendCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "CloneBackendCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateBackendConfig = {
@@ -481,8 +478,8 @@ module UpdateBackendConfig = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "UpdateBackendConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateBackendConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBackend = {
@@ -499,8 +496,8 @@ module GetBackend = {
     @as("AppId") appId: option<__string>,
     @as("AmplifyMetaConfig") amplifyMetaConfig: option<__string>,
   }
-  @module("@aws-sdk/client-amplifybackend") @new external new_: request => t = "GetBackendCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "GetBackendCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBackendJobs = {
@@ -519,8 +516,8 @@ module ListBackendJobs = {
     @as("Jobs") jobs: option<listOfBackendJobRespObj>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "ListBackendJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListBackendJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateBackendAPI = {
@@ -540,8 +537,8 @@ module UpdateBackendAPI = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "UpdateBackendAPICommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateBackendAPICommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBackendAPI = {
@@ -559,9 +556,8 @@ module GetBackendAPI = {
     @as("BackendEnvironmentName") backendEnvironmentName: option<__string>,
     @as("AppId") appId: option<__string>,
   }
-  @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "GetBackendAPICommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-amplifybackend") @new external new: request => t = "GetBackendAPICommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBackendAPI = {
@@ -581,8 +577,8 @@ module DeleteBackendAPI = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "DeleteBackendAPICommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteBackendAPICommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBackendAPI = {
@@ -602,8 +598,8 @@ module CreateBackendAPI = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "CreateBackendAPICommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateBackendAPICommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateBackendAuth = {
@@ -623,8 +619,8 @@ module UpdateBackendAuth = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "UpdateBackendAuthCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateBackendAuthCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBackendAuth = {
@@ -642,8 +638,8 @@ module GetBackendAuth = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "GetBackendAuthCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetBackendAuthCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBackendAuth = {
@@ -663,6 +659,6 @@ module CreateBackendAuth = {
     @as("AppId") appId: option<__string>,
   }
   @module("@aws-sdk/client-amplifybackend") @new
-  external new_: request => t = "CreateBackendAuthCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateBackendAuthCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

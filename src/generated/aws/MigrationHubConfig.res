@@ -40,8 +40,8 @@ module GetHomeRegion = {
   type t
   type request = unit
   type response = {@as("HomeRegion") homeRegion: option<homeRegion>}
-  @module("@aws-sdk/client-mgh") @new external new_: request => t = "GetHomeRegionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "GetHomeRegionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateHomeRegionControl = {
@@ -52,8 +52,8 @@ module CreateHomeRegionControl = {
     @as("HomeRegion") homeRegion: homeRegion,
   }
   type response = {@as("HomeRegionControl") homeRegionControl: option<homeRegionControl>}
-  @module("@aws-sdk/client-mgh") @new external new_: request => t = "CreateHomeRegionControlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "CreateHomeRegionControlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeHomeRegionControls = {
@@ -70,6 +70,6 @@ module DescribeHomeRegionControls = {
     @as("HomeRegionControls") homeRegionControls: option<homeRegionControls>,
   }
   @module("@aws-sdk/client-mgh") @new
-  external new_: request => t = "DescribeHomeRegionControlsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeHomeRegionControlsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

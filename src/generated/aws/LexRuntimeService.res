@@ -166,8 +166,8 @@ module PostContent = {
     intentName: option<intentName>,
     contentType: option<httpContentType>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "PostContentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "PostContentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSession = {
@@ -183,8 +183,8 @@ module DeleteSession = {
     botAlias: option<botAlias>,
     botName: option<botName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "DeleteSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutSession = {
@@ -213,8 +213,8 @@ module PutSession = {
     intentName: option<intentName>,
     contentType: option<httpContentType>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "PutSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "PutSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSession = {
@@ -232,8 +232,8 @@ module GetSession = {
     sessionAttributes: option<stringMap>,
     recentIntentSummaryView: option<intentSummaryList>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PostText = {
@@ -263,6 +263,6 @@ module PostText = {
     nluIntentConfidence: option<intentConfidence>,
     intentName: option<intentName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "PostTextCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "PostTextCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

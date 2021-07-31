@@ -305,8 +305,8 @@ module DeleteDBSubnetGroup = {
   type t
   type request = {@as("DBSubnetGroupName") dbsubnetGroupName: string_}
 
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "DeleteDBSubnetGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DeleteDBSubnetGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDBClusterParameterGroup = {
@@ -314,8 +314,8 @@ module DeleteDBClusterParameterGroup = {
   type request = {@as("DBClusterParameterGroupName") dbclusterParameterGroupName: string_}
 
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "DeleteDBClusterParameterGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteDBClusterParameterGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveTagsFromResource = {
@@ -325,8 +325,8 @@ module RemoveTagsFromResource = {
     @as("ResourceName") resourceName: string_,
   }
 
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "RemoveTagsFromResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "RemoveTagsFromResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ResetDBClusterParameterGroup = {
@@ -338,8 +338,8 @@ module ResetDBClusterParameterGroup = {
   }
   type response = {@as("DBClusterParameterGroupName") dbclusterParameterGroupName: option<string_>}
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "ResetDBClusterParameterGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ResetDBClusterParameterGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyDBClusterParameterGroup = {
@@ -350,16 +350,16 @@ module ModifyDBClusterParameterGroup = {
   }
   type response = {@as("DBClusterParameterGroupName") dbclusterParameterGroupName: option<string_>}
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "ModifyDBClusterParameterGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyDBClusterParameterGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDBClusterSnapshot = {
   type t
   type request = {@as("DBClusterSnapshotIdentifier") dbclusterSnapshotIdentifier: string_}
   type response = {@as("DBClusterSnapshot") dbclusterSnapshot: option<dbclusterSnapshot>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "DeleteDBClusterSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DeleteDBClusterSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDBClusterSnapshot = {
@@ -370,8 +370,8 @@ module CreateDBClusterSnapshot = {
     @as("DBClusterSnapshotIdentifier") dbclusterSnapshotIdentifier: string_,
   }
   type response = {@as("DBClusterSnapshot") dbclusterSnapshot: option<dbclusterSnapshot>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "CreateDBClusterSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBClusterSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDBClusterParameterGroup = {
@@ -386,8 +386,8 @@ module CreateDBClusterParameterGroup = {
     @as("DBClusterParameterGroup") dbclusterParameterGroup: option<dbclusterParameterGroup>,
   }
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "CreateDBClusterParameterGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDBClusterParameterGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CopyDBClusterSnapshot = {
@@ -401,8 +401,8 @@ module CopyDBClusterSnapshot = {
     @as("SourceDBClusterSnapshotIdentifier") sourceDBClusterSnapshotIdentifier: string_,
   }
   type response = {@as("DBClusterSnapshot") dbclusterSnapshot: option<dbclusterSnapshot>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "CopyDBClusterSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "CopyDBClusterSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CopyDBClusterParameterGroup = {
@@ -418,8 +418,8 @@ module CopyDBClusterParameterGroup = {
     @as("DBClusterParameterGroup") dbclusterParameterGroup: option<dbclusterParameterGroup>,
   }
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "CopyDBClusterParameterGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CopyDBClusterParameterGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTagsToResource = {
@@ -429,24 +429,24 @@ module AddTagsToResource = {
     @as("ResourceName") resourceName: string_,
   }
 
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "AddTagsToResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "AddTagsToResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopDBCluster = {
   type t
   type request = {@as("DBClusterIdentifier") dbclusterIdentifier: string_}
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "StopDBClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "StopDBClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartDBCluster = {
   type t
   type request = {@as("DBClusterIdentifier") dbclusterIdentifier: string_}
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "StartDBClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "StartDBClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreDBClusterToPointInTime = {
@@ -466,8 +466,8 @@ module RestoreDBClusterToPointInTime = {
   }
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "RestoreDBClusterToPointInTimeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RestoreDBClusterToPointInTimeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreDBClusterFromSnapshot = {
@@ -488,8 +488,8 @@ module RestoreDBClusterFromSnapshot = {
   }
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "RestoreDBClusterFromSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RestoreDBClusterFromSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyDBCluster = {
@@ -511,8 +511,8 @@ module ModifyDBCluster = {
     @as("DBClusterIdentifier") dbclusterIdentifier: string_,
   }
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "ModifyDBClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyDBClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -522,8 +522,8 @@ module ListTagsForResource = {
     @as("ResourceName") resourceName: string_,
   }
   type response = {@as("TagList") tagList_: option<tagList_>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module FailoverDBCluster = {
@@ -533,8 +533,8 @@ module FailoverDBCluster = {
     @as("DBClusterIdentifier") dbclusterIdentifier: option<string_>,
   }
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "FailoverDBClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "FailoverDBClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEvents = {
@@ -554,8 +554,8 @@ module DescribeEvents = {
     @as("Events") events: option<eventList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "DescribeEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEventCategories = {
@@ -567,8 +567,8 @@ module DescribeEventCategories = {
   type response = {
     @as("EventCategoriesMapList") eventCategoriesMapList: option<eventCategoriesMapList>,
   }
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "DescribeEventCategoriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeEventCategoriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEngineDefaultClusterParameters = {
@@ -581,8 +581,8 @@ module DescribeEngineDefaultClusterParameters = {
   }
   type response = {@as("EngineDefaults") engineDefaults: option<engineDefaults>}
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "DescribeEngineDefaultClusterParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEngineDefaultClusterParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDBClusterSnapshots = {
@@ -602,8 +602,8 @@ module DescribeDBClusterSnapshots = {
     @as("Marker") marker: option<string_>,
   }
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "DescribeDBClusterSnapshotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDBClusterSnapshotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDBClusterParameters = {
@@ -620,8 +620,8 @@ module DescribeDBClusterParameters = {
     @as("Parameters") parameters: option<parametersList>,
   }
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "DescribeDBClusterParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDBClusterParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDBClusterParameterGroups = {
@@ -637,8 +637,8 @@ module DescribeDBClusterParameterGroups = {
     @as("Marker") marker: option<string_>,
   }
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "DescribeDBClusterParameterGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDBClusterParameterGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCertificates = {
@@ -653,8 +653,8 @@ module DescribeCertificates = {
     @as("Marker") marker: option<string_>,
     @as("Certificates") certificates: option<certificateList>,
   }
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "DescribeCertificatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeCertificatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDBCluster = {
@@ -665,8 +665,8 @@ module DeleteDBCluster = {
     @as("DBClusterIdentifier") dbclusterIdentifier: string_,
   }
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "DeleteDBClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DeleteDBClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDBCluster = {
@@ -693,8 +693,8 @@ module CreateDBCluster = {
     @as("AvailabilityZones") availabilityZones: option<availabilityZones>,
   }
   type response = {@as("DBCluster") dbcluster: option<dbcluster>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "CreateDBClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ApplyPendingMaintenanceAction = {
@@ -709,8 +709,8 @@ module ApplyPendingMaintenanceAction = {
     resourcePendingMaintenanceActions: option<resourcePendingMaintenanceActions>,
   }
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "ApplyPendingMaintenanceActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ApplyPendingMaintenanceActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyDBSubnetGroup = {
@@ -721,8 +721,8 @@ module ModifyDBSubnetGroup = {
     @as("DBSubnetGroupName") dbsubnetGroupName: string_,
   }
   type response = {@as("DBSubnetGroup") dbsubnetGroup: option<dbsubnetGroup>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "ModifyDBSubnetGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyDBSubnetGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyDBClusterSnapshotAttribute = {
@@ -738,8 +738,8 @@ module ModifyDBClusterSnapshotAttribute = {
     dbclusterSnapshotAttributesResult: option<dbclusterSnapshotAttributesResult>,
   }
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "ModifyDBClusterSnapshotAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyDBClusterSnapshotAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePendingMaintenanceActions = {
@@ -755,8 +755,8 @@ module DescribePendingMaintenanceActions = {
     @as("PendingMaintenanceActions") pendingMaintenanceActions: option<pendingMaintenanceActions>,
   }
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "DescribePendingMaintenanceActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePendingMaintenanceActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOrderableDBInstanceOptions = {
@@ -777,8 +777,8 @@ module DescribeOrderableDBInstanceOptions = {
     orderableDBInstanceOptions: option<orderableDBInstanceOptionsList>,
   }
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "DescribeOrderableDBInstanceOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOrderableDBInstanceOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDBEngineVersions = {
@@ -798,9 +798,8 @@ module DescribeDBEngineVersions = {
     @as("DBEngineVersions") dbengineVersions: option<dbengineVersionList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "DescribeDBEngineVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBEngineVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDBClusters = {
@@ -815,8 +814,8 @@ module DescribeDBClusters = {
     @as("DBClusters") dbclusters: option<dbclusterList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "DescribeDBClustersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBClustersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDBClusterSnapshotAttributes = {
@@ -827,8 +826,8 @@ module DescribeDBClusterSnapshotAttributes = {
     dbclusterSnapshotAttributesResult: option<dbclusterSnapshotAttributesResult>,
   }
   @module("@aws-sdk/client-rds") @new
-  external new_: request => t = "DescribeDBClusterSnapshotAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDBClusterSnapshotAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDBSubnetGroup = {
@@ -840,8 +839,8 @@ module CreateDBSubnetGroup = {
     @as("DBSubnetGroupName") dbsubnetGroupName: string_,
   }
   type response = {@as("DBSubnetGroup") dbsubnetGroup: option<dbsubnetGroup>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "CreateDBSubnetGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBSubnetGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RebootDBInstance = {
@@ -851,8 +850,8 @@ module RebootDBInstance = {
     @as("DBInstanceIdentifier") dbinstanceIdentifier: string_,
   }
   type response = {@as("DBInstance") dbinstance: option<dbinstance>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "RebootDBInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "RebootDBInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyDBInstance = {
@@ -868,8 +867,8 @@ module ModifyDBInstance = {
     @as("DBInstanceIdentifier") dbinstanceIdentifier: string_,
   }
   type response = {@as("DBInstance") dbinstance: option<dbinstance>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "ModifyDBInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "ModifyDBInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDBSubnetGroups = {
@@ -884,16 +883,16 @@ module DescribeDBSubnetGroups = {
     @as("DBSubnetGroups") dbsubnetGroups: option<dbsubnetGroups>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "DescribeDBSubnetGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBSubnetGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDBInstance = {
   type t
   type request = {@as("DBInstanceIdentifier") dbinstanceIdentifier: string_}
   type response = {@as("DBInstance") dbinstance: option<dbinstance>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "DeleteDBInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DeleteDBInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDBInstance = {
@@ -910,8 +909,8 @@ module CreateDBInstance = {
     @as("DBInstanceIdentifier") dbinstanceIdentifier: string_,
   }
   type response = {@as("DBInstance") dbinstance: option<dbinstance>}
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "CreateDBInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "CreateDBInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDBInstances = {
@@ -926,6 +925,6 @@ module DescribeDBInstances = {
     @as("DBInstances") dbinstances: option<dbinstanceList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-rds") @new external new_: request => t = "DescribeDBInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rds") @new external new: request => t = "DescribeDBInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

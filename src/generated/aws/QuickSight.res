@@ -1033,8 +1033,8 @@ module UpdateDashboardPublishedVersion = {
     @as("DashboardId") dashboardId: option<restrictiveResourceId>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "UpdateDashboardPublishedVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDashboardPublishedVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAccountSettings = {
@@ -1049,8 +1049,8 @@ module UpdateAccountSettings = {
     @as("RequestId") requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "UpdateAccountSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAccountSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreAnalysis = {
@@ -1065,8 +1065,8 @@ module RestoreAnalysis = {
     @as("Arn") arn: option<arn>,
     @as("Status") status: option<statusCode>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "RestoreAnalysisCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "RestoreAnalysisCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSessionEmbedUrl = {
@@ -1083,8 +1083,8 @@ module GetSessionEmbedUrl = {
     @as("EmbedUrl") embedUrl: option<embeddingUrl>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "GetSessionEmbedUrlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSessionEmbedUrlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteUserByPrincipalId = {
@@ -1099,8 +1099,8 @@ module DeleteUserByPrincipalId = {
     @as("RequestId") requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DeleteUserByPrincipalIdCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteUserByPrincipalIdCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteUser = {
@@ -1114,8 +1114,8 @@ module DeleteUser = {
     @as("Status") status: option<statusCode>,
     @as("RequestId") requestId: option<string_>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DeleteUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteThemeAlias = {
@@ -1132,8 +1132,8 @@ module DeleteThemeAlias = {
     @as("Arn") arn: option<arn>,
     @as("AliasName") aliasName: option<aliasName>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DeleteThemeAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteThemeAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTheme = {
@@ -1149,8 +1149,8 @@ module DeleteTheme = {
     @as("RequestId") requestId: option<string_>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DeleteThemeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteThemeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTemplateAlias = {
@@ -1168,8 +1168,8 @@ module DeleteTemplateAlias = {
     @as("Status") status: option<statusCode>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DeleteTemplateAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTemplateAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTemplate = {
@@ -1185,8 +1185,8 @@ module DeleteTemplate = {
     @as("Arn") arn: option<arn>,
     @as("RequestId") requestId: option<string_>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DeleteTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteNamespace = {
@@ -1199,8 +1199,8 @@ module DeleteNamespace = {
     @as("Status") status: option<statusCode>,
     @as("RequestId") requestId: option<string_>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DeleteNamespaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteNamespaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteIAMPolicyAssignment = {
@@ -1216,8 +1216,8 @@ module DeleteIAMPolicyAssignment = {
     @as("AssignmentName") assignmentName: option<iampolicyAssignmentName>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DeleteIAMPolicyAssignmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteIAMPolicyAssignmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteGroupMembership = {
@@ -1233,8 +1233,8 @@ module DeleteGroupMembership = {
     @as("RequestId") requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DeleteGroupMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteGroupMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteGroup = {
@@ -1248,8 +1248,8 @@ module DeleteGroup = {
     @as("Status") status: option<statusCode>,
     @as("RequestId") requestId: option<string_>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DeleteGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDataSource = {
@@ -1264,8 +1264,8 @@ module DeleteDataSource = {
     @as("DataSourceId") dataSourceId: option<resourceId>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DeleteDataSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteDataSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDataSet = {
@@ -1280,8 +1280,8 @@ module DeleteDataSet = {
     @as("DataSetId") dataSetId: option<resourceId>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DeleteDataSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteDataSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDashboard = {
@@ -1297,8 +1297,8 @@ module DeleteDashboard = {
     @as("Arn") arn: option<arn>,
     @as("Status") status: option<statusCode>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DeleteDashboardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteDashboardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAnalysis = {
@@ -1316,8 +1316,8 @@ module DeleteAnalysis = {
     @as("Arn") arn: option<arn>,
     @as("Status") status: option<statusCode>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DeleteAnalysisCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DeleteAnalysisCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAccountCustomization = {
@@ -1331,8 +1331,8 @@ module DeleteAccountCustomization = {
     @as("RequestId") requestId: option<string_>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DeleteAccountCustomizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAccountCustomizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateIngestion = {
@@ -1349,8 +1349,8 @@ module CreateIngestion = {
     @as("IngestionId") ingestionId: option<ingestionId>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "CreateIngestionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateIngestionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelIngestion = {
@@ -1366,8 +1366,8 @@ module CancelIngestion = {
     @as("IngestionId") ingestionId: option<ingestionId>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "CancelIngestionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CancelIngestionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateUser = {
@@ -1389,8 +1389,8 @@ module UpdateUser = {
     @as("RequestId") requestId: option<string_>,
     @as("User") user: option<user>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "UpdateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateThemeAlias = {
@@ -1406,8 +1406,8 @@ module UpdateThemeAlias = {
     @as("Status") status: option<statusCode>,
     @as("ThemeAlias") themeAlias: option<themeAlias>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "UpdateThemeAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateThemeAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTemplateAlias = {
@@ -1424,8 +1424,8 @@ module UpdateTemplateAlias = {
     @as("TemplateAlias") templateAlias: option<templateAlias>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "UpdateTemplateAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateTemplateAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateGroup = {
@@ -1441,8 +1441,8 @@ module UpdateGroup = {
     @as("RequestId") requestId: option<string_>,
     @as("Group") group: option<group>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "UpdateGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAccountCustomization = {
@@ -1461,8 +1461,8 @@ module UpdateAccountCustomization = {
     @as("Arn") arn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "UpdateAccountCustomizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAccountCustomizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -1475,8 +1475,8 @@ module UntagResource = {
     @as("Status") status: option<statusCode>,
     @as("RequestId") requestId: option<string_>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterUser = {
@@ -1501,8 +1501,8 @@ module RegisterUser = {
     @as("UserInvitationUrl") userInvitationUrl: option<string_>,
     @as("User") user: option<user>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "RegisterUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "RegisterUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDashboardEmbedUrl = {
@@ -1525,8 +1525,8 @@ module GetDashboardEmbedUrl = {
     @as("EmbedUrl") embedUrl: option<embeddingUrl>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "GetDashboardEmbedUrlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDashboardEmbedUrlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeUser = {
@@ -1541,8 +1541,8 @@ module DescribeUser = {
     @as("RequestId") requestId: option<string_>,
     @as("User") user: option<user>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DescribeUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeThemeAlias = {
@@ -1558,8 +1558,8 @@ module DescribeThemeAlias = {
     @as("ThemeAlias") themeAlias: option<themeAlias>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeThemeAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeThemeAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTemplateAlias = {
@@ -1575,8 +1575,8 @@ module DescribeTemplateAlias = {
     @as("TemplateAlias") templateAlias: option<templateAlias>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeTemplateAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTemplateAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeGroup = {
@@ -1591,8 +1591,8 @@ module DescribeGroup = {
     @as("RequestId") requestId: option<string_>,
     @as("Group") group: option<group>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DescribeGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccountSettings = {
@@ -1604,8 +1604,8 @@ module DescribeAccountSettings = {
     @as("AccountSettings") accountSettings: option<accountSettings>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeAccountSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAccountSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccountCustomization = {
@@ -1624,8 +1624,8 @@ module DescribeAccountCustomization = {
     @as("Arn") arn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeAccountCustomizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAccountCustomizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateThemeAlias = {
@@ -1641,8 +1641,8 @@ module CreateThemeAlias = {
     @as("Status") status: option<statusCode>,
     @as("ThemeAlias") themeAlias: option<themeAlias>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "CreateThemeAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateThemeAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTemplateAlias = {
@@ -1659,8 +1659,8 @@ module CreateTemplateAlias = {
     @as("TemplateAlias") templateAlias: option<templateAlias>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "CreateTemplateAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTemplateAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateGroupMembership = {
@@ -1677,8 +1677,8 @@ module CreateGroupMembership = {
     @as("GroupMember") groupMember: option<groupMember>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "CreateGroupMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateGroupMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateGroup = {
@@ -1694,8 +1694,8 @@ module CreateGroup = {
     @as("RequestId") requestId: option<string_>,
     @as("Group") group: option<group>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "CreateGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateIAMPolicyAssignment = {
@@ -1718,8 +1718,8 @@ module UpdateIAMPolicyAssignment = {
     @as("AssignmentName") assignmentName: option<iampolicyAssignmentName>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "UpdateIAMPolicyAssignmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateIAMPolicyAssignmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1732,8 +1732,8 @@ module TagResource = {
     @as("Status") status: option<statusCode>,
     @as("RequestId") requestId: option<string_>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchDashboards = {
@@ -1750,8 +1750,8 @@ module SearchDashboards = {
     @as("NextToken") nextToken: option<string_>,
     @as("DashboardSummaryList") dashboardSummaryList: option<dashboardSummaryList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "SearchDashboardsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "SearchDashboardsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchAnalyses = {
@@ -1768,8 +1768,8 @@ module SearchAnalyses = {
     @as("NextToken") nextToken: option<string_>,
     @as("AnalysisSummaryList") analysisSummaryList: option<analysisSummaryList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "SearchAnalysesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "SearchAnalysesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListUsers = {
@@ -1786,8 +1786,8 @@ module ListUsers = {
     @as("NextToken") nextToken: option<string_>,
     @as("UserList") userList: option<userList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListUsersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListUsersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListUserGroups = {
@@ -1805,8 +1805,8 @@ module ListUserGroups = {
     @as("NextToken") nextToken: option<string_>,
     @as("GroupList") groupList: option<groupList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListUserGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListUserGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThemes = {
@@ -1823,8 +1823,8 @@ module ListThemes = {
     @as("NextToken") nextToken: option<string_>,
     @as("ThemeSummaryList") themeSummaryList: option<themeSummaryList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListThemesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListThemesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThemeVersions = {
@@ -1841,9 +1841,8 @@ module ListThemeVersions = {
     @as("NextToken") nextToken: option<string_>,
     @as("ThemeVersionSummaryList") themeVersionSummaryList: option<themeVersionSummaryList>,
   }
-  @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "ListThemeVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListThemeVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThemeAliases = {
@@ -1860,8 +1859,8 @@ module ListThemeAliases = {
     @as("Status") status: option<statusCode>,
     @as("ThemeAliasList") themeAliasList: option<themeAliasList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListThemeAliasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListThemeAliasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTemplates = {
@@ -1877,8 +1876,8 @@ module ListTemplates = {
     @as("NextToken") nextToken: option<string_>,
     @as("TemplateSummaryList") templateSummaryList: option<templateSummaryList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTemplateVersions = {
@@ -1897,8 +1896,8 @@ module ListTemplateVersions = {
     templateVersionSummaryList: option<templateVersionSummaryList>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "ListTemplateVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTemplateVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTemplateAliases = {
@@ -1916,8 +1915,8 @@ module ListTemplateAliases = {
     @as("TemplateAliasList") templateAliasList: option<templateAliasList>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "ListTemplateAliasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTemplateAliasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -1929,8 +1928,8 @@ module ListTagsForResource = {
     @as("Tags") tags: option<tagList_>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIAMPolicyAssignmentsForUser = {
@@ -1949,8 +1948,8 @@ module ListIAMPolicyAssignmentsForUser = {
     @as("ActiveAssignments") activeAssignments: option<activeIAMPolicyAssignmentList>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "ListIAMPolicyAssignmentsForUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListIAMPolicyAssignmentsForUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIAMPolicyAssignments = {
@@ -1969,8 +1968,8 @@ module ListIAMPolicyAssignments = {
     @as("IAMPolicyAssignments") iampolicyAssignments: option<iampolicyAssignmentSummaryList>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "ListIAMPolicyAssignmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListIAMPolicyAssignmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListGroups = {
@@ -1987,8 +1986,8 @@ module ListGroups = {
     @as("NextToken") nextToken: option<string_>,
     @as("GroupList") groupList: option<groupList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListGroupMemberships = {
@@ -2007,8 +2006,8 @@ module ListGroupMemberships = {
     @as("GroupMemberList") groupMemberList: option<groupMemberList>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "ListGroupMembershipsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListGroupMembershipsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDashboards = {
@@ -2024,8 +2023,8 @@ module ListDashboards = {
     @as("NextToken") nextToken: option<string_>,
     @as("DashboardSummaryList") dashboardSummaryList: option<dashboardSummaryList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListDashboardsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListDashboardsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDashboardVersions = {
@@ -2044,8 +2043,8 @@ module ListDashboardVersions = {
     dashboardVersionSummaryList: option<dashboardVersionSummaryList>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "ListDashboardVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDashboardVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAnalyses = {
@@ -2061,8 +2060,8 @@ module ListAnalyses = {
     @as("NextToken") nextToken: option<string_>,
     @as("AnalysisSummaryList") analysisSummaryList: option<analysisSummaryList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListAnalysesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListAnalysesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNamespace = {
@@ -2076,9 +2075,8 @@ module DescribeNamespace = {
     @as("RequestId") requestId: option<string_>,
     @as("Namespace") namespace: option<namespaceInfoV2>,
   }
-  @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeNamespaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeNamespaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIngestion = {
@@ -2093,9 +2091,8 @@ module DescribeIngestion = {
     @as("RequestId") requestId: option<string_>,
     @as("Ingestion") ingestion: option<ingestion>,
   }
-  @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeIngestionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeIngestionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNamespace = {
@@ -2115,8 +2112,8 @@ module CreateNamespace = {
     @as("Name") name: option<namespace>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "CreateNamespaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateNamespaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateIAMPolicyAssignment = {
@@ -2139,8 +2136,8 @@ module CreateIAMPolicyAssignment = {
     @as("AssignmentName") assignmentName: option<iampolicyAssignmentName>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "CreateIAMPolicyAssignmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateIAMPolicyAssignmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAccountCustomization = {
@@ -2160,8 +2157,8 @@ module CreateAccountCustomization = {
     @as("Arn") arn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "CreateAccountCustomizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAccountCustomizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateThemePermissions = {
@@ -2180,8 +2177,8 @@ module UpdateThemePermissions = {
     @as("ThemeId") themeId: option<restrictiveResourceId>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "UpdateThemePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateThemePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTemplatePermissions = {
@@ -2200,8 +2197,8 @@ module UpdateTemplatePermissions = {
     @as("TemplateId") templateId: option<restrictiveResourceId>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "UpdateTemplatePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateTemplatePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDataSourcePermissions = {
@@ -2219,8 +2216,8 @@ module UpdateDataSourcePermissions = {
     @as("DataSourceArn") dataSourceArn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "UpdateDataSourcePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDataSourcePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDataSetPermissions = {
@@ -2238,8 +2235,8 @@ module UpdateDataSetPermissions = {
     @as("DataSetArn") dataSetArn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "UpdateDataSetPermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDataSetPermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDashboardPermissions = {
@@ -2258,8 +2255,8 @@ module UpdateDashboardPermissions = {
     @as("DashboardArn") dashboardArn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "UpdateDashboardPermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDashboardPermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAnalysisPermissions = {
@@ -2278,8 +2275,8 @@ module UpdateAnalysisPermissions = {
     @as("AnalysisArn") analysisArn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "UpdateAnalysisPermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAnalysisPermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListNamespaces = {
@@ -2295,8 +2292,8 @@ module ListNamespaces = {
     @as("NextToken") nextToken: option<string_>,
     @as("Namespaces") namespaces: option<namespaces>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListNamespacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListNamespacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIngestions = {
@@ -2313,8 +2310,8 @@ module ListIngestions = {
     @as("NextToken") nextToken: option<string_>,
     @as("Ingestions") ingestions: option<ingestions>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListIngestionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListIngestionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDataSets = {
@@ -2330,8 +2327,8 @@ module ListDataSets = {
     @as("NextToken") nextToken: option<string_>,
     @as("DataSetSummaries") dataSetSummaries: option<dataSetSummaryList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListDataSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListDataSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeThemePermissions = {
@@ -2348,8 +2345,8 @@ module DescribeThemePermissions = {
     @as("ThemeId") themeId: option<restrictiveResourceId>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeThemePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeThemePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTemplatePermissions = {
@@ -2366,8 +2363,8 @@ module DescribeTemplatePermissions = {
     @as("TemplateId") templateId: option<restrictiveResourceId>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeTemplatePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTemplatePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIAMPolicyAssignment = {
@@ -2383,8 +2380,8 @@ module DescribeIAMPolicyAssignment = {
     @as("IAMPolicyAssignment") iampolicyAssignment: option<iampolicyAssignment>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeIAMPolicyAssignmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeIAMPolicyAssignmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataSourcePermissions = {
@@ -2401,8 +2398,8 @@ module DescribeDataSourcePermissions = {
     @as("DataSourceArn") dataSourceArn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeDataSourcePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDataSourcePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataSetPermissions = {
@@ -2419,8 +2416,8 @@ module DescribeDataSetPermissions = {
     @as("DataSetArn") dataSetArn: option<arn>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeDataSetPermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDataSetPermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDashboardPermissions = {
@@ -2437,8 +2434,8 @@ module DescribeDashboardPermissions = {
     @as("DashboardId") dashboardId: option<restrictiveResourceId>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeDashboardPermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDashboardPermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAnalysisPermissions = {
@@ -2455,8 +2452,8 @@ module DescribeAnalysisPermissions = {
     @as("AnalysisId") analysisId: option<restrictiveResourceId>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeAnalysisPermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAnalysisPermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAnalysis = {
@@ -2470,8 +2467,8 @@ module DescribeAnalysis = {
     @as("Status") status: option<statusCode>,
     @as("Analysis") analysis: option<analysis>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DescribeAnalysisCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeAnalysisCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTheme = {
@@ -2492,8 +2489,8 @@ module UpdateTheme = {
     @as("Arn") arn: option<arn>,
     @as("ThemeId") themeId: option<restrictiveResourceId>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "UpdateThemeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateThemeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTemplate = {
@@ -2513,8 +2510,8 @@ module UpdateTemplate = {
     @as("Arn") arn: option<arn>,
     @as("TemplateId") templateId: option<restrictiveResourceId>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "UpdateTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDashboard = {
@@ -2537,8 +2534,8 @@ module UpdateDashboard = {
     @as("VersionArn") versionArn: option<arn>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "UpdateDashboardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateDashboardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAnalysis = {
@@ -2558,8 +2555,8 @@ module UpdateAnalysis = {
     @as("AnalysisId") analysisId: option<restrictiveResourceId>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "UpdateAnalysisCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateAnalysisCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDashboard = {
@@ -2575,9 +2572,8 @@ module DescribeDashboard = {
     @as("Status") status: option<statusCode>,
     @as("Dashboard") dashboard: option<dashboard>,
   }
-  @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeDashboardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeDashboardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTheme = {
@@ -2600,8 +2596,8 @@ module CreateTheme = {
     @as("VersionArn") versionArn: option<arn>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "CreateThemeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateThemeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTemplate = {
@@ -2623,8 +2619,8 @@ module CreateTemplate = {
     @as("VersionArn") versionArn: option<arn>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "CreateTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDashboard = {
@@ -2649,8 +2645,8 @@ module CreateDashboard = {
     @as("VersionArn") versionArn: option<arn>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "CreateDashboardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateDashboardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAnalysis = {
@@ -2672,8 +2668,8 @@ module CreateAnalysis = {
     @as("AnalysisId") analysisId: option<restrictiveResourceId>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "CreateAnalysisCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateAnalysisCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataSource = {
@@ -2688,8 +2684,8 @@ module DescribeDataSource = {
     @as("DataSource") dataSource: option<dataSource>,
   }
   @module("@aws-sdk/client-quicksight") @new
-  external new_: request => t = "DescribeDataSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDataSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDataSource = {
@@ -2710,8 +2706,8 @@ module UpdateDataSource = {
     @as("DataSourceId") dataSourceId: option<resourceId>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "UpdateDataSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateDataSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDataSources = {
@@ -2727,8 +2723,8 @@ module ListDataSources = {
     @as("NextToken") nextToken: option<string_>,
     @as("DataSources") dataSources: option<dataSourceList>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "ListDataSourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "ListDataSourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTheme = {
@@ -2744,8 +2740,8 @@ module DescribeTheme = {
     @as("Status") status: option<statusCode>,
     @as("Theme") theme: option<theme>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DescribeThemeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeThemeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDataSource = {
@@ -2769,8 +2765,8 @@ module CreateDataSource = {
     @as("DataSourceId") dataSourceId: option<resourceId>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "CreateDataSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateDataSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDataSet = {
@@ -2796,8 +2792,8 @@ module UpdateDataSet = {
     @as("DataSetId") dataSetId: option<resourceId>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "UpdateDataSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "UpdateDataSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTemplate = {
@@ -2813,8 +2809,8 @@ module DescribeTemplate = {
     @as("Status") status: option<statusCode>,
     @as("Template") template: option<template>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DescribeTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDataSet = {
@@ -2842,8 +2838,8 @@ module CreateDataSet = {
     @as("DataSetId") dataSetId: option<resourceId>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "CreateDataSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "CreateDataSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataSet = {
@@ -2857,6 +2853,6 @@ module DescribeDataSet = {
     @as("RequestId") requestId: option<string_>,
     @as("DataSet") dataSet: option<dataSet>,
   }
-  @module("@aws-sdk/client-quicksight") @new external new_: request => t = "DescribeDataSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-quicksight") @new external new: request => t = "DescribeDataSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

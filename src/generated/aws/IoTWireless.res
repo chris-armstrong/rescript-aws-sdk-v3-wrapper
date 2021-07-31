@@ -446,8 +446,8 @@ module UpdateDestination = {
   }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "UpdateDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TestWirelessDevice = {
@@ -455,8 +455,8 @@ module TestWirelessDevice = {
   type request = {@as("Id") id: wirelessDeviceId}
   type response = {@as("Result") result: option<result>}
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "TestWirelessDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TestWirelessDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResetResourceLogLevel = {
@@ -467,8 +467,8 @@ module ResetResourceLogLevel = {
   }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "ResetResourceLogLevelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ResetResourceLogLevelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResetAllResourceLogLevels = {
@@ -476,8 +476,8 @@ module ResetAllResourceLogLevels = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "ResetAllResourceLogLevelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ResetAllResourceLogLevelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutResourceLogLevel = {
@@ -489,8 +489,8 @@ module PutResourceLogLevel = {
   }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "PutResourceLogLevelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutResourceLogLevelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWirelessGatewayTask = {
@@ -505,8 +505,8 @@ module GetWirelessGatewayTask = {
     @as("WirelessGatewayId") wirelessGatewayId: option<wirelessGatewayId>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetWirelessGatewayTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWirelessGatewayTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWirelessGatewayStatistics = {
@@ -518,8 +518,8 @@ module GetWirelessGatewayStatistics = {
     @as("WirelessGatewayId") wirelessGatewayId: option<wirelessGatewayId>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetWirelessGatewayStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWirelessGatewayStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWirelessGatewayCertificate = {
@@ -531,8 +531,8 @@ module GetWirelessGatewayCertificate = {
     @as("IotCertificateId") iotCertificateId: option<iotCertificateId>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetWirelessGatewayCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWirelessGatewayCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetServiceEndpoint = {
@@ -544,8 +544,8 @@ module GetServiceEndpoint = {
     @as("ServiceType") serviceType: option<wirelessGatewayServiceType>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetServiceEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetServiceEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResourceLogLevel = {
@@ -556,8 +556,8 @@ module GetResourceLogLevel = {
   }
   type response = {@as("LogLevel") logLevel: option<logLevel>}
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetResourceLogLevelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetResourceLogLevelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDestination = {
@@ -571,8 +571,8 @@ module GetDestination = {
     @as("Name") name: option<destinationName>,
     @as("Arn") arn: option<destinationArn>,
   }
-  @module("@aws-sdk/client-iotwireless") @new external new_: request => t = "GetDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotwireless") @new external new: request => t = "GetDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateWirelessGatewayFromThing = {
@@ -580,8 +580,8 @@ module DisassociateWirelessGatewayFromThing = {
   type request = {@as("Id") id: wirelessGatewayId}
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "DisassociateWirelessGatewayFromThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateWirelessGatewayFromThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateWirelessGatewayFromCertificate = {
@@ -589,8 +589,8 @@ module DisassociateWirelessGatewayFromCertificate = {
   type request = {@as("Id") id: wirelessGatewayId}
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "DisassociateWirelessGatewayFromCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateWirelessGatewayFromCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateWirelessDeviceFromThing = {
@@ -598,8 +598,8 @@ module DisassociateWirelessDeviceFromThing = {
   type request = {@as("Id") id: wirelessDeviceId}
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "DisassociateWirelessDeviceFromThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateWirelessDeviceFromThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateAwsAccountFromPartnerAccount = {
@@ -610,8 +610,8 @@ module DisassociateAwsAccountFromPartnerAccount = {
   }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "DisassociateAwsAccountFromPartnerAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateAwsAccountFromPartnerAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWirelessGatewayTaskDefinition = {
@@ -619,8 +619,8 @@ module DeleteWirelessGatewayTaskDefinition = {
   type request = {@as("Id") id: wirelessGatewayTaskDefinitionId}
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "DeleteWirelessGatewayTaskDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteWirelessGatewayTaskDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWirelessGatewayTask = {
@@ -628,8 +628,8 @@ module DeleteWirelessGatewayTask = {
   type request = {@as("Id") id: wirelessGatewayId}
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "DeleteWirelessGatewayTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteWirelessGatewayTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWirelessGateway = {
@@ -637,8 +637,8 @@ module DeleteWirelessGateway = {
   type request = {@as("Id") id: wirelessGatewayId}
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "DeleteWirelessGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteWirelessGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWirelessDevice = {
@@ -646,8 +646,8 @@ module DeleteWirelessDevice = {
   type request = {@as("Id") id: wirelessDeviceId}
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "DeleteWirelessDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteWirelessDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteServiceProfile = {
@@ -655,8 +655,8 @@ module DeleteServiceProfile = {
   type request = {@as("Id") id: serviceProfileId}
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "DeleteServiceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteServiceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDeviceProfile = {
@@ -664,8 +664,8 @@ module DeleteDeviceProfile = {
   type request = {@as("Id") id: deviceProfileId}
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "DeleteDeviceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteDeviceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDestination = {
@@ -673,8 +673,8 @@ module DeleteDestination = {
   type request = {@as("Name") name: destinationName}
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "DeleteDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWirelessGatewayTask = {
@@ -690,8 +690,8 @@ module CreateWirelessGatewayTask = {
     wirelessGatewayTaskDefinitionId: option<wirelessGatewayTaskDefinitionId>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "CreateWirelessGatewayTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateWirelessGatewayTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateWirelessGatewayWithThing = {
@@ -702,8 +702,8 @@ module AssociateWirelessGatewayWithThing = {
   }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "AssociateWirelessGatewayWithThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateWirelessGatewayWithThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateWirelessGatewayWithCertificate = {
@@ -714,8 +714,8 @@ module AssociateWirelessGatewayWithCertificate = {
   }
   type response = {@as("IotCertificateId") iotCertificateId: option<iotCertificateId>}
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "AssociateWirelessGatewayWithCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateWirelessGatewayWithCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateWirelessDeviceWithThing = {
@@ -726,8 +726,8 @@ module AssociateWirelessDeviceWithThing = {
   }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "AssociateWirelessDeviceWithThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateWirelessDeviceWithThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateWirelessDevice = {
@@ -741,8 +741,8 @@ module UpdateWirelessDevice = {
   }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "UpdateWirelessDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateWirelessDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePartnerAccount = {
@@ -754,8 +754,8 @@ module UpdatePartnerAccount = {
   }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "UpdatePartnerAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePartnerAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -765,8 +765,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-iotwireless") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotwireless") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetServiceProfile = {
@@ -779,8 +779,8 @@ module GetServiceProfile = {
     @as("Arn") arn: option<serviceProfileArn>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetServiceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetServiceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPartnerAccount = {
@@ -794,8 +794,8 @@ module GetPartnerAccount = {
     @as("Sidewalk") sidewalk: option<sidewalkAccountInfoWithFingerprint>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetPartnerAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPartnerAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateWirelessGateway = {
@@ -809,8 +809,8 @@ module UpdateWirelessGateway = {
   }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "UpdateWirelessGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateWirelessGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -820,8 +820,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-iotwireless") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotwireless") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendDataToWirelessDevice = {
@@ -834,8 +834,8 @@ module SendDataToWirelessDevice = {
   }
   type response = {@as("MessageId") messageId: option<messageId>}
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "SendDataToWirelessDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SendDataToWirelessDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -843,8 +843,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: amazonResourceName}
   type response = {@as("Tags") tags: option<tagList_>}
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListServiceProfiles = {
@@ -858,8 +858,8 @@ module ListServiceProfiles = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "ListServiceProfilesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListServiceProfilesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPartnerAccounts = {
@@ -873,8 +873,8 @@ module ListPartnerAccounts = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "ListPartnerAccountsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPartnerAccountsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDeviceProfiles = {
@@ -888,8 +888,8 @@ module ListDeviceProfiles = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "ListDeviceProfilesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDeviceProfilesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDestinations = {
@@ -902,9 +902,8 @@ module ListDestinations = {
     @as("DestinationList") destinationList: option<destinationList>,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "ListDestinationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotwireless") @new external new: request => t = "ListDestinationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWirelessGatewayFirmwareInformation = {
@@ -912,8 +911,8 @@ module GetWirelessGatewayFirmwareInformation = {
   type request = {@as("Id") id: wirelessGatewayId}
   type response = {@as("LoRaWAN") loRaWAN: option<loRaWANGatewayCurrentVersion>}
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetWirelessGatewayFirmwareInformationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWirelessGatewayFirmwareInformationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDeviceProfile = {
@@ -925,9 +924,8 @@ module GetDeviceProfile = {
     @as("Name") name: option<deviceProfileName>,
     @as("Arn") arn: option<deviceProfileArn>,
   }
-  @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetDeviceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotwireless") @new external new: request => t = "GetDeviceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateServiceProfile = {
@@ -943,8 +941,8 @@ module CreateServiceProfile = {
     @as("Arn") arn: option<serviceProfileArn>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "CreateServiceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateServiceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDeviceProfile = {
@@ -960,8 +958,8 @@ module CreateDeviceProfile = {
     @as("Arn") arn: option<deviceProfileArn>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "CreateDeviceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDeviceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDestination = {
@@ -980,8 +978,8 @@ module CreateDestination = {
     @as("Arn") arn: option<destinationArn>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "CreateDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateAwsAccountWithPartnerAccount = {
@@ -996,8 +994,8 @@ module AssociateAwsAccountWithPartnerAccount = {
     @as("Sidewalk") sidewalk: option<sidewalkAccountInfo>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "AssociateAwsAccountWithPartnerAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateAwsAccountWithPartnerAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWirelessGatewayTaskDefinition = {
@@ -1010,8 +1008,8 @@ module GetWirelessGatewayTaskDefinition = {
     @as("AutoCreateTasks") autoCreateTasks: option<autoCreateTasks>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetWirelessGatewayTaskDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWirelessGatewayTaskDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWirelessGateway = {
@@ -1030,8 +1028,8 @@ module GetWirelessGateway = {
     @as("Name") name: option<wirelessGatewayName>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetWirelessGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWirelessGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWirelessDeviceStatistics = {
@@ -1044,8 +1042,8 @@ module GetWirelessDeviceStatistics = {
     @as("WirelessDeviceId") wirelessDeviceId: option<wirelessDeviceId>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetWirelessDeviceStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWirelessDeviceStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWirelessDevice = {
@@ -1067,8 +1065,8 @@ module GetWirelessDevice = {
     @as("Type") type_: option<wirelessDeviceType>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetWirelessDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWirelessDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWirelessGatewayTaskDefinition = {
@@ -1085,8 +1083,8 @@ module CreateWirelessGatewayTaskDefinition = {
     @as("Id") id: option<wirelessGatewayTaskDefinitionId>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "CreateWirelessGatewayTaskDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateWirelessGatewayTaskDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWirelessGateway = {
@@ -1103,8 +1101,8 @@ module CreateWirelessGateway = {
     @as("Arn") arn: option<wirelessGatewayArn>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "CreateWirelessGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateWirelessGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWirelessDevice = {
@@ -1123,8 +1121,8 @@ module CreateWirelessDevice = {
     @as("Arn") arn: option<wirelessDeviceArn>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "CreateWirelessDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateWirelessDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLogLevelsByResourceTypes = {
@@ -1137,8 +1135,8 @@ module UpdateLogLevelsByResourceTypes = {
   }
   type response = unit
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "UpdateLogLevelsByResourceTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateLogLevelsByResourceTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWirelessGatewayTaskDefinitions = {
@@ -1153,8 +1151,8 @@ module ListWirelessGatewayTaskDefinitions = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "ListWirelessGatewayTaskDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListWirelessGatewayTaskDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLogLevelsByResourceTypes = {
@@ -1167,8 +1165,8 @@ module GetLogLevelsByResourceTypes = {
     @as("DefaultLogLevel") defaultLogLevel: option<logLevel>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "GetLogLevelsByResourceTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetLogLevelsByResourceTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWirelessGateways = {
@@ -1182,8 +1180,8 @@ module ListWirelessGateways = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "ListWirelessGatewaysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListWirelessGatewaysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWirelessDevices = {
@@ -1201,6 +1199,6 @@ module ListWirelessDevices = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-iotwireless") @new
-  external new_: request => t = "ListWirelessDevicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListWirelessDevicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

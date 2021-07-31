@@ -688,8 +688,8 @@ module RejectPortfolioShare = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "RejectPortfolioShareCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectPortfolioShareCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAWSOrganizationsAccessStatus = {
@@ -697,8 +697,8 @@ module GetAWSOrganizationsAccessStatus = {
   type request = unit
   type response = {@as("AccessStatus") accessStatus: option<accessStatus>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "GetAWSOrganizationsAccessStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAWSOrganizationsAccessStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableAWSOrganizationsAccess = {
@@ -706,8 +706,8 @@ module EnableAWSOrganizationsAccess = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "EnableAWSOrganizationsAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableAWSOrganizationsAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateTagOptionFromResource = {
@@ -718,8 +718,8 @@ module DisassociateTagOptionFromResource = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DisassociateTagOptionFromResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateTagOptionFromResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateServiceActionFromProvisioningArtifact = {
@@ -732,8 +732,8 @@ module DisassociateServiceActionFromProvisioningArtifact = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DisassociateServiceActionFromProvisioningArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateServiceActionFromProvisioningArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateProductFromPortfolio = {
@@ -745,8 +745,8 @@ module DisassociateProductFromPortfolio = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DisassociateProductFromPortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateProductFromPortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociatePrincipalFromPortfolio = {
@@ -758,8 +758,8 @@ module DisassociatePrincipalFromPortfolio = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DisassociatePrincipalFromPortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociatePrincipalFromPortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateBudgetFromResource = {
@@ -770,8 +770,8 @@ module DisassociateBudgetFromResource = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DisassociateBudgetFromResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateBudgetFromResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableAWSOrganizationsAccess = {
@@ -779,8 +779,8 @@ module DisableAWSOrganizationsAccess = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DisableAWSOrganizationsAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableAWSOrganizationsAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCopyProductStatus = {
@@ -795,8 +795,8 @@ module DescribeCopyProductStatus = {
     @as("CopyProductStatus") copyProductStatus: option<copyProductStatus>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeCopyProductStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCopyProductStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTagOption = {
@@ -804,8 +804,8 @@ module DeleteTagOption = {
   type request = {@as("Id") id: tagOptionId}
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DeleteTagOptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTagOptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteServiceAction = {
@@ -816,8 +816,8 @@ module DeleteServiceAction = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DeleteServiceActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteServiceActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProvisioningArtifact = {
@@ -829,8 +829,8 @@ module DeleteProvisioningArtifact = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DeleteProvisioningArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteProvisioningArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProvisionedProductPlan = {
@@ -842,8 +842,8 @@ module DeleteProvisionedProductPlan = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DeleteProvisionedProductPlanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteProvisionedProductPlanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProduct = {
@@ -853,9 +853,8 @@ module DeleteProduct = {
     @as("AcceptLanguage") acceptLanguage: option<acceptLanguage>,
   }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DeleteProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-servicecatalog") @new external new: request => t = "DeleteProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePortfolio = {
@@ -866,8 +865,8 @@ module DeletePortfolio = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DeletePortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeletePortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteConstraint = {
@@ -878,8 +877,8 @@ module DeleteConstraint = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DeleteConstraintCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteConstraintCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateTagOptionWithResource = {
@@ -890,8 +889,8 @@ module AssociateTagOptionWithResource = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "AssociateTagOptionWithResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateTagOptionWithResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateServiceActionWithProvisioningArtifact = {
@@ -904,8 +903,8 @@ module AssociateServiceActionWithProvisioningArtifact = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "AssociateServiceActionWithProvisioningArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateServiceActionWithProvisioningArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateProductWithPortfolio = {
@@ -918,8 +917,8 @@ module AssociateProductWithPortfolio = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "AssociateProductWithPortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateProductWithPortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociatePrincipalWithPortfolio = {
@@ -932,8 +931,8 @@ module AssociatePrincipalWithPortfolio = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "AssociatePrincipalWithPortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociatePrincipalWithPortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateBudgetWithResource = {
@@ -944,8 +943,8 @@ module AssociateBudgetWithResource = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "AssociateBudgetWithResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateBudgetWithResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptPortfolioShare = {
@@ -957,8 +956,8 @@ module AcceptPortfolioShare = {
   }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "AcceptPortfolioShareCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptPortfolioShareCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTagOption = {
@@ -970,8 +969,8 @@ module UpdateTagOption = {
   }
   type response = {@as("TagOptionDetail") tagOptionDetail: option<tagOptionDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "UpdateTagOptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateTagOptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProvisioningArtifact = {
@@ -992,8 +991,8 @@ module UpdateProvisioningArtifact = {
     provisioningArtifactDetail: option<provisioningArtifactDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "UpdateProvisioningArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateProvisioningArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProvisionedProductProperties = {
@@ -1012,8 +1011,8 @@ module UpdateProvisionedProductProperties = {
     @as("ProvisionedProductId") provisionedProductId: option<id>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "UpdateProvisionedProductPropertiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateProvisionedProductPropertiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePortfolioShare = {
@@ -1030,8 +1029,8 @@ module UpdatePortfolioShare = {
     @as("PortfolioShareToken") portfolioShareToken: option<id>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "UpdatePortfolioShareCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePortfolioShareCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateConstraint = {
@@ -1048,8 +1047,8 @@ module UpdateConstraint = {
     @as("ConstraintDetail") constraintDetail: option<constraintDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "UpdateConstraintCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateConstraintCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPortfolioAccess = {
@@ -1066,8 +1065,8 @@ module ListPortfolioAccess = {
     @as("AccountIds") accountIds: option<accountIds>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListPortfolioAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPortfolioAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTagOption = {
@@ -1075,8 +1074,8 @@ module DescribeTagOption = {
   type request = {@as("Id") id: tagOptionId}
   type response = {@as("TagOptionDetail") tagOptionDetail: option<tagOptionDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeTagOptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTagOptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProvisioningArtifact = {
@@ -1096,8 +1095,8 @@ module DescribeProvisioningArtifact = {
     provisioningArtifactDetail: option<provisioningArtifactDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeProvisioningArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProvisioningArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConstraint = {
@@ -1112,8 +1111,8 @@ module DescribeConstraint = {
     @as("ConstraintDetail") constraintDetail: option<constraintDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeConstraintCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConstraintCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePortfolioShare = {
@@ -1126,8 +1125,8 @@ module DeletePortfolioShare = {
   }
   type response = {@as("PortfolioShareToken") portfolioShareToken: option<id>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DeletePortfolioShareCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeletePortfolioShareCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTagOption = {
@@ -1138,8 +1137,8 @@ module CreateTagOption = {
   }
   type response = {@as("TagOptionDetail") tagOptionDetail: option<tagOptionDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "CreateTagOptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTagOptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePortfolioShare = {
@@ -1153,8 +1152,8 @@ module CreatePortfolioShare = {
   }
   type response = {@as("PortfolioShareToken") portfolioShareToken: option<id>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "CreatePortfolioShareCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePortfolioShareCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateConstraint = {
@@ -1174,8 +1173,8 @@ module CreateConstraint = {
     @as("ConstraintDetail") constraintDetail: option<constraintDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "CreateConstraintCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateConstraintCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateServiceAction = {
@@ -1189,8 +1188,8 @@ module UpdateServiceAction = {
   }
   type response = {@as("ServiceActionDetail") serviceActionDetail: option<serviceActionDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "UpdateServiceActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateServiceActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProduct = {
@@ -1212,9 +1211,8 @@ module UpdateProduct = {
     @as("Tags") tags: option<tags>,
     @as("ProductViewDetail") productViewDetail: option<productViewDetail>,
   }
-  @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "UpdateProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-servicecatalog") @new external new: request => t = "UpdateProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePortfolio = {
@@ -1233,8 +1231,8 @@ module UpdatePortfolio = {
     @as("PortfolioDetail") portfolioDetail: option<portfolioDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "UpdatePortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ScanProvisionedProducts = {
@@ -1250,8 +1248,8 @@ module ScanProvisionedProducts = {
     @as("ProvisionedProducts") provisionedProducts: option<provisionedProductDetails>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ScanProvisionedProductsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ScanProvisionedProductsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagOptions = {
@@ -1266,8 +1264,8 @@ module ListTagOptions = {
     @as("TagOptionDetails") tagOptionDetails: option<tagOptionDetails>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListTagOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStackInstancesForProvisionedProduct = {
@@ -1283,8 +1281,8 @@ module ListStackInstancesForProvisionedProduct = {
     @as("StackInstances") stackInstances: option<stackInstances>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListStackInstancesForProvisionedProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListStackInstancesForProvisionedProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListServiceActionsForProvisioningArtifact = {
@@ -1301,8 +1299,8 @@ module ListServiceActionsForProvisioningArtifact = {
     @as("ServiceActionSummaries") serviceActionSummaries: option<serviceActionSummaries>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListServiceActionsForProvisioningArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListServiceActionsForProvisioningArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListServiceActions = {
@@ -1317,8 +1315,8 @@ module ListServiceActions = {
     @as("ServiceActionSummaries") serviceActionSummaries: option<serviceActionSummaries>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListServiceActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListServiceActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResourcesForTagOption = {
@@ -1334,8 +1332,8 @@ module ListResourcesForTagOption = {
     @as("ResourceDetails") resourceDetails: option<resourceDetails>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListResourcesForTagOptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListResourcesForTagOptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProvisioningArtifacts = {
@@ -1350,8 +1348,8 @@ module ListProvisioningArtifacts = {
     provisioningArtifactDetails: option<provisioningArtifactDetails>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListProvisioningArtifactsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProvisioningArtifactsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProvisionedProductPlans = {
@@ -1368,8 +1366,8 @@ module ListProvisionedProductPlans = {
     @as("ProvisionedProductPlans") provisionedProductPlans: option<provisionedProductPlans>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListProvisionedProductPlansCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProvisionedProductPlansCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPrincipalsForPortfolio = {
@@ -1385,8 +1383,8 @@ module ListPrincipalsForPortfolio = {
     @as("Principals") principals: option<principals>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListPrincipalsForPortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPrincipalsForPortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPortfoliosForProduct = {
@@ -1402,8 +1400,8 @@ module ListPortfoliosForProduct = {
     @as("PortfolioDetails") portfolioDetails: option<portfolioDetails>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListPortfoliosForProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPortfoliosForProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPortfolios = {
@@ -1418,8 +1416,8 @@ module ListPortfolios = {
     @as("PortfolioDetails") portfolioDetails: option<portfolioDetails>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListPortfoliosCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPortfoliosCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOrganizationPortfolioAccess = {
@@ -1436,8 +1434,8 @@ module ListOrganizationPortfolioAccess = {
     @as("OrganizationNodes") organizationNodes: option<organizationNodes>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListOrganizationPortfolioAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListOrganizationPortfolioAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListConstraintsForPortfolio = {
@@ -1454,8 +1452,8 @@ module ListConstraintsForPortfolio = {
     @as("ConstraintDetails") constraintDetails: option<constraintDetails>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListConstraintsForPortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListConstraintsForPortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBudgetsForResource = {
@@ -1471,8 +1469,8 @@ module ListBudgetsForResource = {
     @as("Budgets") budgets: option<budgets>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListBudgetsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListBudgetsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAcceptedPortfolioShares = {
@@ -1488,8 +1486,8 @@ module ListAcceptedPortfolioShares = {
     @as("PortfolioDetails") portfolioDetails: option<portfolioDetails>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListAcceptedPortfolioSharesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAcceptedPortfolioSharesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetProvisionedProductOutputs = {
@@ -1507,8 +1505,8 @@ module GetProvisionedProductOutputs = {
     @as("Outputs") outputs: option<recordOutputs>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "GetProvisionedProductOutputsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetProvisionedProductOutputsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeServiceAction = {
@@ -1519,8 +1517,8 @@ module DescribeServiceAction = {
   }
   type response = {@as("ServiceActionDetail") serviceActionDetail: option<serviceActionDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeServiceActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeServiceActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProvisionedProduct = {
@@ -1535,8 +1533,8 @@ module DescribeProvisionedProduct = {
     @as("ProvisionedProductDetail") provisionedProductDetail: option<provisionedProductDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeProvisionedProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProvisionedProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProductView = {
@@ -1550,8 +1548,8 @@ module DescribeProductView = {
     @as("ProductViewSummary") productViewSummary: option<productViewSummary>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeProductViewCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProductViewCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProduct = {
@@ -1568,8 +1566,8 @@ module DescribeProduct = {
     @as("ProductViewSummary") productViewSummary: option<productViewSummary>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePortfolioShares = {
@@ -1585,8 +1583,8 @@ module DescribePortfolioShares = {
     @as("NextPageToken") nextPageToken: option<pageToken>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribePortfolioSharesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePortfolioSharesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePortfolio = {
@@ -1602,8 +1600,8 @@ module DescribePortfolio = {
     @as("PortfolioDetail") portfolioDetail: option<portfolioDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribePortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateServiceAction = {
@@ -1618,8 +1616,8 @@ module CreateServiceAction = {
   }
   type response = {@as("ServiceActionDetail") serviceActionDetail: option<serviceActionDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "CreateServiceActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateServiceActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProvisioningArtifact = {
@@ -1637,8 +1635,8 @@ module CreateProvisioningArtifact = {
     provisioningArtifactDetail: option<provisioningArtifactDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "CreateProvisioningArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateProvisioningArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProvisionedProductPlan = {
@@ -1664,8 +1662,8 @@ module CreateProvisionedProductPlan = {
     @as("PlanName") planName: option<provisionedProductPlanName>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "CreateProvisionedProductPlanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateProvisionedProductPlanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProduct = {
@@ -1691,9 +1689,8 @@ module CreateProduct = {
     provisioningArtifactDetail: option<provisioningArtifactDetail>,
     @as("ProductViewDetail") productViewDetail: option<productViewDetail>,
   }
-  @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "CreateProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-servicecatalog") @new external new: request => t = "CreateProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePortfolio = {
@@ -1711,8 +1708,8 @@ module CreatePortfolio = {
     @as("PortfolioDetail") portfolioDetail: option<portfolioDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "CreatePortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CopyProduct = {
@@ -1728,8 +1725,8 @@ module CopyProduct = {
     @as("AcceptLanguage") acceptLanguage: option<acceptLanguage>,
   }
   type response = {@as("CopyProductToken") copyProductToken: option<id>}
-  @module("@aws-sdk/client-servicecatalog") @new external new_: request => t = "CopyProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-servicecatalog") @new external new: request => t = "CopyProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDisassociateServiceActionFromProvisioningArtifact = {
@@ -1743,8 +1740,8 @@ module BatchDisassociateServiceActionFromProvisioningArtifact = {
     failedServiceActionAssociations: option<failedServiceActionAssociations>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "BatchDisassociateServiceActionFromProvisioningArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDisassociateServiceActionFromProvisioningArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchAssociateServiceActionWithProvisioningArtifact = {
@@ -1758,8 +1755,8 @@ module BatchAssociateServiceActionWithProvisioningArtifact = {
     failedServiceActionAssociations: option<failedServiceActionAssociations>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "BatchAssociateServiceActionWithProvisioningArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchAssociateServiceActionWithProvisioningArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProvisionedProduct = {
@@ -1781,8 +1778,8 @@ module UpdateProvisionedProduct = {
   }
   type response = {@as("RecordDetail") recordDetail: option<recordDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "UpdateProvisionedProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateProvisionedProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TerminateProvisionedProduct = {
@@ -1797,8 +1794,8 @@ module TerminateProvisionedProduct = {
   }
   type response = {@as("RecordDetail") recordDetail: option<recordDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "TerminateProvisionedProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TerminateProvisionedProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchProductsAsAdmin = {
@@ -1818,8 +1815,8 @@ module SearchProductsAsAdmin = {
     @as("ProductViewDetails") productViewDetails: option<productViewDetails>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "SearchProductsAsAdminCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchProductsAsAdminCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchProducts = {
@@ -1838,8 +1835,8 @@ module SearchProducts = {
     @as("ProductViewSummaries") productViewSummaries: option<productViewSummaries>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "SearchProductsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchProductsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ProvisionProduct = {
@@ -1861,8 +1858,8 @@ module ProvisionProduct = {
   }
   type response = {@as("RecordDetail") recordDetail: option<recordDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ProvisionProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ProvisionProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProvisioningArtifactsForServiceAction = {
@@ -1878,8 +1875,8 @@ module ListProvisioningArtifactsForServiceAction = {
     @as("ProvisioningArtifactViews") provisioningArtifactViews: option<provisioningArtifactViews>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListProvisioningArtifactsForServiceActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProvisioningArtifactsForServiceActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportAsProvisionedProduct = {
@@ -1894,8 +1891,8 @@ module ImportAsProvisionedProduct = {
   }
   type response = {@as("RecordDetail") recordDetail: option<recordDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ImportAsProvisionedProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ImportAsProvisionedProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExecuteProvisionedProductServiceAction = {
@@ -1909,8 +1906,8 @@ module ExecuteProvisionedProductServiceAction = {
   }
   type response = {@as("RecordDetail") recordDetail: option<recordDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ExecuteProvisionedProductServiceActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ExecuteProvisionedProductServiceActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExecuteProvisionedProductPlan = {
@@ -1922,8 +1919,8 @@ module ExecuteProvisionedProductPlan = {
   }
   type response = {@as("RecordDetail") recordDetail: option<recordDetail>}
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ExecuteProvisionedProductPlanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ExecuteProvisionedProductPlanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeServiceActionExecutionParameters = {
@@ -1937,8 +1934,8 @@ module DescribeServiceActionExecutionParameters = {
     @as("ServiceActionParameters") serviceActionParameters: option<executionParameters>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeServiceActionExecutionParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeServiceActionExecutionParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRecord = {
@@ -1955,8 +1952,8 @@ module DescribeRecord = {
     @as("RecordDetail") recordDetail: option<recordDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeRecordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRecordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProductAsAdmin = {
@@ -1976,8 +1973,8 @@ module DescribeProductAsAdmin = {
     @as("ProductViewDetail") productViewDetail: option<productViewDetail>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeProductAsAdminCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProductAsAdminCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchProvisionedProducts = {
@@ -1997,8 +1994,8 @@ module SearchProvisionedProducts = {
     @as("ProvisionedProducts") provisionedProducts: option<provisionedProductAttributes>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "SearchProvisionedProductsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchProvisionedProductsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRecordHistory = {
@@ -2015,8 +2012,8 @@ module ListRecordHistory = {
     @as("RecordDetails") recordDetails: option<recordDetails>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListRecordHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRecordHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLaunchPaths = {
@@ -2032,8 +2029,8 @@ module ListLaunchPaths = {
     @as("LaunchPathSummaries") launchPathSummaries: option<launchPathSummaries>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "ListLaunchPathsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListLaunchPathsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProvisioningParameters = {
@@ -2059,8 +2056,8 @@ module DescribeProvisioningParameters = {
     provisioningArtifactParameters: option<provisioningArtifactParameters>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeProvisioningParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProvisioningParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePortfolioShareStatus = {
@@ -2074,8 +2071,8 @@ module DescribePortfolioShareStatus = {
     @as("PortfolioShareToken") portfolioShareToken: option<id>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribePortfolioShareStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePortfolioShareStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProvisionedProductPlan = {
@@ -2093,6 +2090,6 @@ module DescribeProvisionedProductPlan = {
     provisionedProductPlanDetails: option<provisionedProductPlanDetails>,
   }
   @module("@aws-sdk/client-servicecatalog") @new
-  external new_: request => t = "DescribeProvisionedProductPlanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProvisionedProductPlanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

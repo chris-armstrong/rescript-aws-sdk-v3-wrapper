@@ -824,8 +824,8 @@ module UpdateQuerySuggestionsConfig = {
   }
 
   @module("@aws-sdk/client-kendra") @new
-  external new_: request => t = "UpdateQuerySuggestionsConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateQuerySuggestionsConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopDataSourceSyncJob = {
@@ -835,9 +835,8 @@ module StopDataSourceSyncJob = {
     @as("Id") id: dataSourceId,
   }
 
-  @module("@aws-sdk/client-kendra") @new
-  external new_: request => t = "StopDataSourceSyncJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "StopDataSourceSyncJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartDataSourceSyncJob = {
@@ -848,8 +847,8 @@ module StartDataSourceSyncJob = {
   }
   type response = {@as("ExecutionId") executionId: option<string_>}
   @module("@aws-sdk/client-kendra") @new
-  external new_: request => t = "StartDataSourceSyncJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartDataSourceSyncJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeQuerySuggestionsConfig = {
@@ -869,8 +868,8 @@ module DescribeQuerySuggestionsConfig = {
     @as("Mode") mode: option<mode>,
   }
   @module("@aws-sdk/client-kendra") @new
-  external new_: request => t = "DescribeQuerySuggestionsConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeQuerySuggestionsConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteThesaurus = {
@@ -880,8 +879,8 @@ module DeleteThesaurus = {
     @as("Id") id: thesaurusId,
   }
 
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "DeleteThesaurusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "DeleteThesaurusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteQuerySuggestionsBlockList = {
@@ -892,16 +891,16 @@ module DeleteQuerySuggestionsBlockList = {
   }
 
   @module("@aws-sdk/client-kendra") @new
-  external new_: request => t = "DeleteQuerySuggestionsBlockListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteQuerySuggestionsBlockListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteIndex = {
   type t
   type request = {@as("Id") id: indexId}
 
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "DeleteIndexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "DeleteIndexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteFaq = {
@@ -911,8 +910,8 @@ module DeleteFaq = {
     @as("Id") id: faqId,
   }
 
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "DeleteFaqCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "DeleteFaqCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDataSource = {
@@ -922,17 +921,16 @@ module DeleteDataSource = {
     @as("Id") id: dataSourceId,
   }
 
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "DeleteDataSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "DeleteDataSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ClearQuerySuggestions = {
   type t
   type request = {@as("IndexId") indexId: indexId}
 
-  @module("@aws-sdk/client-kendra") @new
-  external new_: request => t = "ClearQuerySuggestionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "ClearQuerySuggestionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateThesaurus = {
@@ -946,8 +944,8 @@ module UpdateThesaurus = {
     @as("Id") id: thesaurusId,
   }
 
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "UpdateThesaurusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "UpdateThesaurusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateQuerySuggestionsBlockList = {
@@ -962,8 +960,8 @@ module UpdateQuerySuggestionsBlockList = {
   }
 
   @module("@aws-sdk/client-kendra") @new
-  external new_: request => t = "UpdateQuerySuggestionsBlockListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateQuerySuggestionsBlockListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagResource = {
@@ -973,8 +971,8 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeThesaurus = {
@@ -998,8 +996,8 @@ module DescribeThesaurus = {
     @as("IndexId") indexId: option<indexId>,
     @as("Id") id: option<thesaurusId>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "DescribeThesaurusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "DescribeThesaurusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeQuerySuggestionsBlockList = {
@@ -1023,8 +1021,8 @@ module DescribeQuerySuggestionsBlockList = {
     @as("IndexId") indexId: option<indexId>,
   }
   @module("@aws-sdk/client-kendra") @new
-  external new_: request => t = "DescribeQuerySuggestionsBlockListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeQuerySuggestionsBlockListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFaq = {
@@ -1046,8 +1044,8 @@ module DescribeFaq = {
     @as("IndexId") indexId: option<indexId>,
     @as("Id") id: option<faqId>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "DescribeFaqCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "DescribeFaqCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1057,8 +1055,8 @@ module TagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SubmitFeedback = {
@@ -1070,8 +1068,8 @@ module SubmitFeedback = {
     @as("IndexId") indexId: indexId,
   }
 
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "SubmitFeedbackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "SubmitFeedbackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListThesauri = {
@@ -1085,16 +1083,16 @@ module ListThesauri = {
     @as("ThesaurusSummaryItems") thesaurusSummaryItems: option<thesaurusSummaryItems>,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "ListThesauriCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "ListThesauriCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceARN") resourceARN: amazonResourceName}
   type response = {@as("Tags") tags: option<tagList_>}
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListQuerySuggestionsBlockLists = {
@@ -1110,8 +1108,8 @@ module ListQuerySuggestionsBlockLists = {
     blockListSummaryItems: option<querySuggestionsBlockListSummaryItems>,
   }
   @module("@aws-sdk/client-kendra") @new
-  external new_: request => t = "ListQuerySuggestionsBlockListsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListQuerySuggestionsBlockListsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIndices = {
@@ -1125,8 +1123,8 @@ module ListIndices = {
     @as("IndexConfigurationSummaryItems")
     indexConfigurationSummaryItems: option<indexConfigurationSummaryList>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "ListIndicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "ListIndicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFaqs = {
@@ -1140,8 +1138,8 @@ module ListFaqs = {
     @as("FaqSummaryItems") faqSummaryItems: option<faqSummaryItems>,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "ListFaqsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "ListFaqsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDataSources = {
@@ -1155,8 +1153,8 @@ module ListDataSources = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("SummaryItems") summaryItems: option<dataSourceSummaryList>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "ListDataSourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "ListDataSourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateThesaurus = {
@@ -1171,8 +1169,8 @@ module CreateThesaurus = {
     @as("IndexId") indexId: indexId,
   }
   type response = {@as("Id") id: option<thesaurusId>}
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "CreateThesaurusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "CreateThesaurusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateQuerySuggestionsBlockList = {
@@ -1188,8 +1186,8 @@ module CreateQuerySuggestionsBlockList = {
   }
   type response = {@as("Id") id: option<querySuggestionsBlockListId>}
   @module("@aws-sdk/client-kendra") @new
-  external new_: request => t = "CreateQuerySuggestionsBlockListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateQuerySuggestionsBlockListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFaq = {
@@ -1205,8 +1203,8 @@ module CreateFaq = {
     @as("IndexId") indexId: indexId,
   }
   type response = {@as("Id") id: option<faqId>}
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "CreateFaqCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "CreateFaqCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteDocument = {
@@ -1220,8 +1218,8 @@ module BatchDeleteDocument = {
   type response = {
     @as("FailedDocuments") failedDocuments: option<batchDeleteDocumentResponseFailedDocuments>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "BatchDeleteDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "BatchDeleteDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDataSourceSyncJobs = {
@@ -1239,8 +1237,8 @@ module ListDataSourceSyncJobs = {
     @as("History") history: option<dataSourceSyncJobHistoryList>,
   }
   @module("@aws-sdk/client-kendra") @new
-  external new_: request => t = "ListDataSourceSyncJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDataSourceSyncJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateIndex = {
@@ -1258,8 +1256,8 @@ module CreateIndex = {
     @as("Name") name: indexName,
   }
   type response = {@as("Id") id: option<indexId>}
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "CreateIndexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "CreateIndexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateIndex = {
@@ -1276,8 +1274,8 @@ module UpdateIndex = {
     @as("Id") id: indexId,
   }
 
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "UpdateIndexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "UpdateIndexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeIndex = {
@@ -1302,8 +1300,8 @@ module DescribeIndex = {
     @as("Id") id: option<indexId>,
     @as("Name") name: option<indexName>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "DescribeIndexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "DescribeIndexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetQuerySuggestions = {
@@ -1317,8 +1315,8 @@ module GetQuerySuggestions = {
     @as("Suggestions") suggestions: option<suggestionList>,
     @as("QuerySuggestionsId") querySuggestionsId: option<querySuggestionsId>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "GetQuerySuggestionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "GetQuerySuggestionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchPutDocument = {
@@ -1331,8 +1329,8 @@ module BatchPutDocument = {
   type response = {
     @as("FailedDocuments") failedDocuments: option<batchPutDocumentResponseFailedDocuments>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "BatchPutDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "BatchPutDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDataSource = {
@@ -1347,8 +1345,8 @@ module UpdateDataSource = {
     @as("Id") id: dataSourceId,
   }
 
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "UpdateDataSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "UpdateDataSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeDataSource = {
@@ -1371,8 +1369,8 @@ module DescribeDataSource = {
     @as("IndexId") indexId: option<indexId>,
     @as("Id") id: option<dataSourceId>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "DescribeDataSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "DescribeDataSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDataSource = {
@@ -1389,8 +1387,8 @@ module CreateDataSource = {
     @as("Name") name: dataSourceName,
   }
   type response = {@as("Id") id: dataSourceId}
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "CreateDataSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "CreateDataSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Query = {
@@ -1417,6 +1415,6 @@ module Query = {
     @as("ResultItems") resultItems: option<queryResultItemList>,
     @as("QueryId") queryId: option<queryId>,
   }
-  @module("@aws-sdk/client-kendra") @new external new_: request => t = "QueryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kendra") @new external new: request => t = "QueryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

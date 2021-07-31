@@ -390,24 +390,24 @@ module VerifyEmailIdentity = {
   type t
   type request = {@as("EmailAddress") emailAddress: address}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "VerifyEmailIdentityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "VerifyEmailIdentityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module VerifyEmailAddress = {
   type t
   type request = {@as("EmailAddress") emailAddress: address}
 
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "VerifyEmailAddressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "VerifyEmailAddressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module VerifyDomainIdentity = {
   type t
   type request = {@as("Domain") domain: domain}
   type response = {@as("VerificationToken") verificationToken: verificationToken}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "VerifyDomainIdentityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "VerifyDomainIdentityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCustomVerificationEmailTemplate = {
@@ -422,8 +422,8 @@ module UpdateCustomVerificationEmailTemplate = {
   }
 
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "UpdateCustomVerificationEmailTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateCustomVerificationEmailTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateConfigurationSetSendingEnabled = {
@@ -434,8 +434,8 @@ module UpdateConfigurationSetSendingEnabled = {
   }
 
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "UpdateConfigurationSetSendingEnabledCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateConfigurationSetSendingEnabledCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateConfigurationSetReputationMetricsEnabled = {
@@ -446,8 +446,8 @@ module UpdateConfigurationSetReputationMetricsEnabled = {
   }
 
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "UpdateConfigurationSetReputationMetricsEnabledCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateConfigurationSetReputationMetricsEnabledCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateAccountSendingEnabled = {
@@ -455,8 +455,8 @@ module UpdateAccountSendingEnabled = {
   type request = {@as("Enabled") enabled: option<enabled>}
 
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "UpdateAccountSendingEnabledCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateAccountSendingEnabledCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TestRenderTemplate = {
@@ -466,8 +466,8 @@ module TestRenderTemplate = {
     @as("TemplateName") templateName: templateName,
   }
   type response = {@as("RenderedTemplate") renderedTemplate: option<renderedTemplate>}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "TestRenderTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "TestRenderTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetReceiptRulePosition = {
@@ -478,8 +478,8 @@ module SetReceiptRulePosition = {
     @as("RuleSetName") ruleSetName: receiptRuleSetName,
   }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "SetReceiptRulePositionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "SetReceiptRulePositionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetIdentityNotificationTopic = {
@@ -491,8 +491,8 @@ module SetIdentityNotificationTopic = {
   }
   type response = unit
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "SetIdentityNotificationTopicCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SetIdentityNotificationTopicCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetIdentityMailFromDomain = {
@@ -504,8 +504,8 @@ module SetIdentityMailFromDomain = {
   }
   type response = unit
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "SetIdentityMailFromDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SetIdentityMailFromDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetIdentityHeadersInNotificationsEnabled = {
@@ -517,8 +517,8 @@ module SetIdentityHeadersInNotificationsEnabled = {
   }
   type response = unit
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "SetIdentityHeadersInNotificationsEnabledCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SetIdentityHeadersInNotificationsEnabledCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetIdentityFeedbackForwardingEnabled = {
@@ -529,8 +529,8 @@ module SetIdentityFeedbackForwardingEnabled = {
   }
   type response = unit
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "SetIdentityFeedbackForwardingEnabledCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SetIdentityFeedbackForwardingEnabledCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetIdentityDkimEnabled = {
@@ -540,16 +540,16 @@ module SetIdentityDkimEnabled = {
     @as("Identity") identity: identity,
   }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "SetIdentityDkimEnabledCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "SetIdentityDkimEnabledCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetActiveReceiptRuleSet = {
   type t
   type request = {@as("RuleSetName") ruleSetName: option<receiptRuleSetName>}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "SetActiveReceiptRuleSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "SetActiveReceiptRuleSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendCustomVerificationEmail = {
@@ -561,8 +561,8 @@ module SendCustomVerificationEmail = {
   }
   type response = {@as("MessageId") messageId: option<messageId>}
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "SendCustomVerificationEmailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SendCustomVerificationEmailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutIdentityPolicy = {
@@ -573,8 +573,8 @@ module PutIdentityPolicy = {
     @as("Identity") identity: identity,
   }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "PutIdentityPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "PutIdentityPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSendQuota = {
@@ -585,8 +585,8 @@ module GetSendQuota = {
     @as("MaxSendRate") maxSendRate: option<maxSendRate>,
     @as("Max24HourSend") max24HourSend: option<max24HourSend>,
   }
-  @module("@aws-sdk/client-ses") @new external new_: unit => t = "GetSendQuotaCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: unit => t = "GetSendQuotaCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCustomVerificationEmailTemplate = {
@@ -601,16 +601,16 @@ module GetCustomVerificationEmailTemplate = {
     @as("TemplateName") templateName: option<templateName>,
   }
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "GetCustomVerificationEmailTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCustomVerificationEmailTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAccountSendingEnabled = {
   type t
 
   type response = {@as("Enabled") enabled: option<enabled>}
-  @module("@aws-sdk/client-ses") @new external new_: unit => t = "GetAccountSendingEnabledCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: unit => t = "GetAccountSendingEnabledCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVerifiedEmailAddress = {
@@ -618,24 +618,24 @@ module DeleteVerifiedEmailAddress = {
   type request = {@as("EmailAddress") emailAddress: address}
 
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "DeleteVerifiedEmailAddressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteVerifiedEmailAddressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteTemplate = {
   type t
   type request = {@as("TemplateName") templateName: templateName}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "DeleteTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteReceiptRuleSet = {
   type t
   type request = {@as("RuleSetName") ruleSetName: receiptRuleSetName}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "DeleteReceiptRuleSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteReceiptRuleSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteReceiptRule = {
@@ -645,16 +645,16 @@ module DeleteReceiptRule = {
     @as("RuleSetName") ruleSetName: receiptRuleSetName,
   }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "DeleteReceiptRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteReceiptRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteReceiptFilter = {
   type t
   type request = {@as("FilterName") filterName: receiptFilterName}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "DeleteReceiptFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteReceiptFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteIdentityPolicy = {
@@ -664,16 +664,16 @@ module DeleteIdentityPolicy = {
     @as("Identity") identity: identity,
   }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "DeleteIdentityPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteIdentityPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteIdentity = {
   type t
   type request = {@as("Identity") identity: identity}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "DeleteIdentityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteIdentityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCustomVerificationEmailTemplate = {
@@ -681,8 +681,8 @@ module DeleteCustomVerificationEmailTemplate = {
   type request = {@as("TemplateName") templateName: templateName}
 
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "DeleteCustomVerificationEmailTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteCustomVerificationEmailTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteConfigurationSetTrackingOptions = {
@@ -690,8 +690,8 @@ module DeleteConfigurationSetTrackingOptions = {
   type request = {@as("ConfigurationSetName") configurationSetName: configurationSetName}
   type response = unit
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "DeleteConfigurationSetTrackingOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteConfigurationSetTrackingOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteConfigurationSetEventDestination = {
@@ -702,24 +702,24 @@ module DeleteConfigurationSetEventDestination = {
   }
   type response = unit
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "DeleteConfigurationSetEventDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteConfigurationSetEventDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteConfigurationSet = {
   type t
   type request = {@as("ConfigurationSetName") configurationSetName: configurationSetName}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "DeleteConfigurationSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "DeleteConfigurationSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReceiptRuleSet = {
   type t
   type request = {@as("RuleSetName") ruleSetName: receiptRuleSetName}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "CreateReceiptRuleSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "CreateReceiptRuleSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCustomVerificationEmailTemplate = {
@@ -734,8 +734,8 @@ module CreateCustomVerificationEmailTemplate = {
   }
 
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "CreateCustomVerificationEmailTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "CreateCustomVerificationEmailTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CloneReceiptRuleSet = {
@@ -745,24 +745,24 @@ module CloneReceiptRuleSet = {
     @as("RuleSetName") ruleSetName: receiptRuleSetName,
   }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "CloneReceiptRuleSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "CloneReceiptRuleSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module VerifyDomainDkim = {
   type t
   type request = {@as("Domain") domain: domain}
   type response = {@as("DkimTokens") dkimTokens: verificationTokenList}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "VerifyDomainDkimCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "VerifyDomainDkimCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTemplate = {
   type t
   type request = {@as("Template") template: template}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "UpdateTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "UpdateTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateConfigurationSetTrackingOptions = {
@@ -773,8 +773,8 @@ module UpdateConfigurationSetTrackingOptions = {
   }
   type response = unit
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "UpdateConfigurationSetTrackingOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateConfigurationSetTrackingOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReorderReceiptRuleSet = {
@@ -784,8 +784,8 @@ module ReorderReceiptRuleSet = {
     @as("RuleSetName") ruleSetName: receiptRuleSetName,
   }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "ReorderReceiptRuleSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "ReorderReceiptRuleSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutConfigurationSetDeliveryOptions = {
@@ -796,24 +796,24 @@ module PutConfigurationSetDeliveryOptions = {
   }
   type response = unit
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "PutConfigurationSetDeliveryOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutConfigurationSetDeliveryOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListVerifiedEmailAddresses = {
   type t
 
   type response = {@as("VerifiedEmailAddresses") verifiedEmailAddresses: option<addressList>}
-  @module("@aws-sdk/client-ses") @new external new_: unit => t = "ListVerifiedEmailAddressesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: unit => t = "ListVerifiedEmailAddressesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIdentityPolicies = {
   type t
   type request = {@as("Identity") identity: identity}
   type response = {@as("PolicyNames") policyNames: policyNameList}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "ListIdentityPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "ListIdentityPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIdentities = {
@@ -827,16 +827,16 @@ module ListIdentities = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Identities") identities: identityList,
   }
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "ListIdentitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "ListIdentitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTemplate = {
   type t
   type request = {@as("TemplateName") templateName: templateName}
   type response = {@as("Template") template: option<template>}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "GetTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "GetTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIdentityPolicies = {
@@ -846,16 +846,16 @@ module GetIdentityPolicies = {
     @as("Identity") identity: identity,
   }
   type response = {@as("Policies") policies: policyMap}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "GetIdentityPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "GetIdentityPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTemplate = {
   type t
   type request = {@as("Template") template: template}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "CreateTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "CreateTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateConfigurationSetTrackingOptions = {
@@ -866,16 +866,16 @@ module CreateConfigurationSetTrackingOptions = {
   }
   type response = unit
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "CreateConfigurationSetTrackingOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateConfigurationSetTrackingOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateConfigurationSet = {
   type t
   type request = {@as("ConfigurationSet") configurationSet: configurationSet}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "CreateConfigurationSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "CreateConfigurationSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendTemplatedEmail = {
@@ -894,8 +894,8 @@ module SendTemplatedEmail = {
     @as("Source") source: address,
   }
   type response = {@as("MessageId") messageId: messageId}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "SendTemplatedEmailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "SendTemplatedEmailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendRawEmail = {
@@ -911,8 +911,8 @@ module SendRawEmail = {
     @as("Source") source: option<address>,
   }
   type response = {@as("MessageId") messageId: messageId}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "SendRawEmailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "SendRawEmailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTemplates = {
@@ -925,8 +925,8 @@ module ListTemplates = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("TemplatesMetadata") templatesMetadata: option<templateMetadataList>,
   }
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "ListTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "ListTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListReceiptRuleSets = {
@@ -936,8 +936,8 @@ module ListReceiptRuleSets = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("RuleSets") ruleSets: option<receiptRuleSetsLists>,
   }
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "ListReceiptRuleSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "ListReceiptRuleSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCustomVerificationEmailTemplates = {
@@ -952,8 +952,8 @@ module ListCustomVerificationEmailTemplates = {
     customVerificationEmailTemplates: option<customVerificationEmailTemplates>,
   }
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "ListCustomVerificationEmailTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCustomVerificationEmailTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListConfigurationSets = {
@@ -966,16 +966,16 @@ module ListConfigurationSets = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ConfigurationSets") configurationSets: option<configurationSets>,
   }
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "ListConfigurationSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "ListConfigurationSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSendStatistics = {
   type t
 
   type response = {@as("SendDataPoints") sendDataPoints: option<sendDataPointList>}
-  @module("@aws-sdk/client-ses") @new external new_: unit => t = "GetSendStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: unit => t = "GetSendStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIdentityVerificationAttributes = {
@@ -983,8 +983,8 @@ module GetIdentityVerificationAttributes = {
   type request = {@as("Identities") identities: identityList}
   type response = {@as("VerificationAttributes") verificationAttributes: verificationAttributes}
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "GetIdentityVerificationAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetIdentityVerificationAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIdentityNotificationAttributes = {
@@ -992,8 +992,8 @@ module GetIdentityNotificationAttributes = {
   type request = {@as("Identities") identities: identityList}
   type response = {@as("NotificationAttributes") notificationAttributes: notificationAttributes}
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "GetIdentityNotificationAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetIdentityNotificationAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIdentityMailFromDomainAttributes = {
@@ -1003,16 +1003,16 @@ module GetIdentityMailFromDomainAttributes = {
     @as("MailFromDomainAttributes") mailFromDomainAttributes: mailFromDomainAttributes,
   }
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "GetIdentityMailFromDomainAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetIdentityMailFromDomainAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReceiptFilter = {
   type t
   type request = {@as("Filter") filter: receiptFilter}
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "CreateReceiptFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "CreateReceiptFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendEmail = {
@@ -1029,16 +1029,16 @@ module SendEmail = {
     @as("Source") source: address,
   }
   type response = {@as("MessageId") messageId: messageId}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "SendEmailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "SendEmailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListReceiptFilters = {
   type t
   type request = unit
   type response = {@as("Filters") filters: option<receiptFilterList>}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "ListReceiptFiltersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "ListReceiptFiltersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIdentityDkimAttributes = {
@@ -1046,8 +1046,8 @@ module GetIdentityDkimAttributes = {
   type request = {@as("Identities") identities: identityList}
   type response = {@as("DkimAttributes") dkimAttributes: dkimAttributes}
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "GetIdentityDkimAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetIdentityDkimAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateReceiptRule = {
@@ -1057,8 +1057,8 @@ module UpdateReceiptRule = {
     @as("RuleSetName") ruleSetName: receiptRuleSetName,
   }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "UpdateReceiptRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "UpdateReceiptRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateConfigurationSetEventDestination = {
@@ -1069,8 +1069,8 @@ module UpdateConfigurationSetEventDestination = {
   }
   type response = unit
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "UpdateConfigurationSetEventDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateConfigurationSetEventDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendBulkTemplatedEmail = {
@@ -1089,8 +1089,8 @@ module SendBulkTemplatedEmail = {
     @as("Source") source: address,
   }
   type response = {@as("Status") status: bulkEmailDestinationStatusList}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "SendBulkTemplatedEmailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "SendBulkTemplatedEmailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReceiptRule = {
@@ -1100,8 +1100,8 @@ module DescribeReceiptRule = {
     @as("RuleSetName") ruleSetName: receiptRuleSetName,
   }
   type response = {@as("Rule") rule: option<receiptRule>}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "DescribeReceiptRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "DescribeReceiptRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReceiptRule = {
@@ -1112,8 +1112,8 @@ module CreateReceiptRule = {
     @as("RuleSetName") ruleSetName: receiptRuleSetName,
   }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "CreateReceiptRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "CreateReceiptRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateConfigurationSetEventDestination = {
@@ -1124,8 +1124,8 @@ module CreateConfigurationSetEventDestination = {
   }
   type response = unit
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "CreateConfigurationSetEventDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateConfigurationSetEventDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendBounce = {
@@ -1139,8 +1139,8 @@ module SendBounce = {
     @as("OriginalMessageId") originalMessageId: messageId,
   }
   type response = {@as("MessageId") messageId: option<messageId>}
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "SendBounceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "SendBounceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReceiptRuleSet = {
@@ -1150,8 +1150,8 @@ module DescribeReceiptRuleSet = {
     @as("Rules") rules: option<receiptRulesList>,
     @as("Metadata") metadata: option<receiptRuleSetMetadata>,
   }
-  @module("@aws-sdk/client-ses") @new external new_: request => t = "DescribeReceiptRuleSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "DescribeReceiptRuleSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfigurationSet = {
@@ -1168,9 +1168,8 @@ module DescribeConfigurationSet = {
     @as("EventDestinations") eventDestinations: option<eventDestinations>,
     @as("ConfigurationSet") configurationSet: option<configurationSet>,
   }
-  @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "DescribeConfigurationSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ses") @new external new: request => t = "DescribeConfigurationSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeActiveReceiptRuleSet = {
@@ -1181,6 +1180,6 @@ module DescribeActiveReceiptRuleSet = {
     @as("Metadata") metadata: option<receiptRuleSetMetadata>,
   }
   @module("@aws-sdk/client-ses") @new
-  external new_: request => t = "DescribeActiveReceiptRuleSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeActiveReceiptRuleSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

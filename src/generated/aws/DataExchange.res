@@ -270,16 +270,16 @@ module UpdateRevision = {
     @as("Comment") comment: option<__stringMin0Max16384>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "UpdateRevisionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "UpdateRevisionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartJob = {
   type t
   type request = {@as("JobId") jobId: __string}
   type response = unit
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "StartJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "StartJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRevision = {
@@ -289,16 +289,16 @@ module DeleteRevision = {
     @as("DataSetId") dataSetId: __string,
   }
 
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "DeleteRevisionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "DeleteRevisionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDataSet = {
   type t
   type request = {@as("DataSetId") dataSetId: __string}
 
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "DeleteDataSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "DeleteDataSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAsset = {
@@ -309,16 +309,16 @@ module DeleteAsset = {
     @as("AssetId") assetId: __string,
   }
 
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "DeleteAssetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "DeleteAssetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CancelJob = {
   type t
   type request = {@as("JobId") jobId: __string}
 
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "CancelJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "CancelJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateDataSet = {
@@ -340,8 +340,8 @@ module UpdateDataSet = {
     @as("AssetType") assetType: option<assetType>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "UpdateDataSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "UpdateDataSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -351,8 +351,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -362,8 +362,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListTagsForResource = {
@@ -371,8 +371,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: __string}
   type response = {@as("Tags") tags: option<mapOf__string>}
   @module("@aws-sdk/client-dataexchange") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRevision = {
@@ -392,8 +392,8 @@ module GetRevision = {
     @as("Comment") comment: option<__stringMin0Max16384>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "GetRevisionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "GetRevisionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDataSet = {
@@ -412,8 +412,8 @@ module GetDataSet = {
     @as("AssetType") assetType: option<assetType>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "GetDataSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "GetDataSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRevision = {
@@ -434,8 +434,8 @@ module CreateRevision = {
     @as("Comment") comment: option<__stringMin0Max16384>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "CreateRevisionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "CreateRevisionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDataSet = {
@@ -459,8 +459,8 @@ module CreateDataSet = {
     @as("AssetType") assetType: option<assetType>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "CreateDataSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "CreateDataSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAsset = {
@@ -483,8 +483,8 @@ module UpdateAsset = {
     @as("AssetDetails") assetDetails: option<assetDetails>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "UpdateAssetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "UpdateAssetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDataSetRevisions = {
@@ -499,8 +499,8 @@ module ListDataSetRevisions = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-dataexchange") @new
-  external new_: request => t = "ListDataSetRevisionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDataSetRevisionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAsset = {
@@ -522,8 +522,8 @@ module GetAsset = {
     @as("AssetDetails") assetDetails: option<assetDetails>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "GetAssetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "GetAssetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDataSets = {
@@ -537,8 +537,8 @@ module ListDataSets = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("DataSets") dataSets: option<listOfDataSetEntry>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "ListDataSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "ListDataSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRevisionAssets = {
@@ -554,8 +554,8 @@ module ListRevisionAssets = {
     @as("Assets") assets: option<listOfAssetEntry>,
   }
   @module("@aws-sdk/client-dataexchange") @new
-  external new_: request => t = "ListRevisionAssetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRevisionAssetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJob = {
@@ -571,8 +571,8 @@ module GetJob = {
     @as("CreatedAt") createdAt: option<timestamp_>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "GetJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "GetJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateJob = {
@@ -591,8 +591,8 @@ module CreateJob = {
     @as("CreatedAt") createdAt: option<timestamp_>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "CreateJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "CreateJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobs = {
@@ -607,6 +607,6 @@ module ListJobs = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Jobs") jobs: option<listOfJobEntry>,
   }
-  @module("@aws-sdk/client-dataexchange") @new external new_: request => t = "ListJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dataexchange") @new external new: request => t = "ListJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

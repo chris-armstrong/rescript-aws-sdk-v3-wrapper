@@ -104,8 +104,8 @@ module ExecuteStatement = {
     @as("Id") id: option<uuid>,
   }
   @module("@aws-sdk/client-redshift-data") @new
-  external new_: request => t = "ExecuteStatementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ExecuteStatementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStatement = {
@@ -130,8 +130,8 @@ module DescribeStatement = {
     @as("Id") id: uuid,
   }
   @module("@aws-sdk/client-redshift-data") @new
-  external new_: request => t = "DescribeStatementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStatementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelStatement = {
@@ -139,8 +139,8 @@ module CancelStatement = {
   type request = {@as("Id") id: uuid}
   type response = {@as("Status") status: option<baseBoolean>}
   @module("@aws-sdk/client-redshift-data") @new
-  external new_: request => t = "CancelStatementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelStatementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSchemas = {
@@ -159,8 +159,8 @@ module ListSchemas = {
     @as("NextToken") nextToken: option<string_>,
     @as("Schemas") schemas: option<schemaList>,
   }
-  @module("@aws-sdk/client-redshift-data") @new external new_: request => t = "ListSchemasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-redshift-data") @new external new: request => t = "ListSchemasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDatabases = {
@@ -177,8 +177,8 @@ module ListDatabases = {
     @as("NextToken") nextToken: option<string_>,
     @as("Databases") databases: option<databaseList>,
   }
-  @module("@aws-sdk/client-redshift-data") @new external new_: request => t = "ListDatabasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-redshift-data") @new external new: request => t = "ListDatabasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTables = {
@@ -198,8 +198,8 @@ module ListTables = {
     @as("NextToken") nextToken: option<string_>,
     @as("Tables") tables: option<tableList>,
   }
-  @module("@aws-sdk/client-redshift-data") @new external new_: request => t = "ListTablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-redshift-data") @new external new: request => t = "ListTablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStatements = {
@@ -215,9 +215,8 @@ module ListStatements = {
     @as("NextToken") nextToken: option<string_>,
     @as("Statements") statements: statementList,
   }
-  @module("@aws-sdk/client-redshift-data") @new
-  external new_: request => t = "ListStatementsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-redshift-data") @new external new: request => t = "ListStatementsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTable = {
@@ -238,8 +237,8 @@ module DescribeTable = {
     @as("ColumnList") columnList: option<columnList>,
     @as("TableName") tableName: option<string_>,
   }
-  @module("@aws-sdk/client-redshift-data") @new external new_: request => t = "DescribeTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-redshift-data") @new external new: request => t = "DescribeTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStatementResult = {
@@ -255,6 +254,6 @@ module GetStatementResult = {
     @as("Records") records: sqlRecords,
   }
   @module("@aws-sdk/client-redshift-data") @new
-  external new_: request => t = "GetStatementResultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetStatementResultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

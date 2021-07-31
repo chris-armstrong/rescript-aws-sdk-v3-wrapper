@@ -134,8 +134,8 @@ module GetShardIterator = {
     @as("StreamArn") streamArn: streamArn,
   }
   type response = {@as("ShardIterator") shardIterator: option<shardIterator>}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "GetShardIteratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "GetShardIteratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStreams = {
@@ -149,8 +149,8 @@ module ListStreams = {
     @as("LastEvaluatedStreamArn") lastEvaluatedStreamArn: option<streamArn>,
     @as("Streams") streams: option<streamList>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "ListStreamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ListStreamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStream = {
@@ -161,8 +161,8 @@ module DescribeStream = {
     @as("StreamArn") streamArn: streamArn,
   }
   type response = {@as("StreamDescription") streamDescription: option<streamDescription>}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "DescribeStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DescribeStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRecords = {
@@ -175,6 +175,6 @@ module GetRecords = {
     @as("NextShardIterator") nextShardIterator: option<shardIterator>,
     @as("Records") records: option<recordList>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "GetRecordsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "GetRecordsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

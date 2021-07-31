@@ -57,8 +57,8 @@ module UpdateApplication = {
   }
   type response = unit
   @module("@aws-sdk/client-iotfleethub") @new
-  external new_: request => t = "UpdateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApplication = {
@@ -69,8 +69,8 @@ module DeleteApplication = {
   }
   type response = unit
   @module("@aws-sdk/client-iotfleethub") @new
-  external new_: request => t = "DeleteApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -80,8 +80,8 @@ module UntagResource = {
     resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-iotfleethub") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotfleethub") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -91,8 +91,8 @@ module TagResource = {
     resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-iotfleethub") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotfleethub") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -100,8 +100,8 @@ module ListTagsForResource = {
   type request = {resourceArn: resourceArn}
   type response = {tags: option<tagMap>}
   @module("@aws-sdk/client-iotfleethub") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeApplication = {
@@ -122,8 +122,8 @@ module DescribeApplication = {
     applicationId: id,
   }
   @module("@aws-sdk/client-iotfleethub") @new
-  external new_: request => t = "DescribeApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApplication = {
@@ -140,8 +140,8 @@ module CreateApplication = {
     applicationId: id,
   }
   @module("@aws-sdk/client-iotfleethub") @new
-  external new_: request => t = "CreateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListApplications = {
@@ -151,7 +151,6 @@ module ListApplications = {
     nextToken: option<nextToken>,
     applicationSummaries: option<applicationSummaries>,
   }
-  @module("@aws-sdk/client-iotfleethub") @new
-  external new_: request => t = "ListApplicationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotfleethub") @new external new: request => t = "ListApplicationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -653,8 +653,8 @@ module UpdateVolume = {
     @as("VolumeId") volumeId: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "UpdateVolumeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateVolumeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateUserProfile = {
@@ -666,8 +666,8 @@ module UpdateUserProfile = {
     @as("IamUserArn") iamUserArn: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "UpdateUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateRdsDbInstance = {
@@ -678,18 +678,16 @@ module UpdateRdsDbInstance = {
     @as("RdsDbInstanceArn") rdsDbInstanceArn: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "UpdateRdsDbInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateRdsDbInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateMyUserProfile = {
   type t
   type request = {@as("SshPublicKey") sshPublicKey: option<string_>}
 
-  @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "UpdateMyUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateMyUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateElasticIp = {
@@ -699,32 +697,32 @@ module UpdateElasticIp = {
     @as("ElasticIp") elasticIp: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "UpdateElasticIpCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateElasticIpCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UnassignVolume = {
   type t
   type request = {@as("VolumeId") volumeId: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "UnassignVolumeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UnassignVolumeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UnassignInstance = {
   type t
   type request = {@as("InstanceId") instanceId: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "UnassignInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UnassignInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopStack = {
   type t
   type request = {@as("StackId") stackId: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "StopStackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "StopStackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopInstance = {
@@ -734,24 +732,24 @@ module StopInstance = {
     @as("InstanceId") instanceId: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "StopInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "StopInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartStack = {
   type t
   type request = {@as("StackId") stackId: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "StartStackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "StartStackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartInstance = {
   type t
   type request = {@as("InstanceId") instanceId: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "StartInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "StartInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetPermission = {
@@ -764,8 +762,8 @@ module SetPermission = {
     @as("StackId") stackId: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "SetPermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "SetPermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RegisterVolume = {
@@ -775,8 +773,8 @@ module RegisterVolume = {
     @as("Ec2VolumeId") ec2VolumeId: option<string_>,
   }
   type response = {@as("VolumeId") volumeId: option<string_>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "RegisterVolumeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "RegisterVolumeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterRdsDbInstance = {
@@ -789,8 +787,8 @@ module RegisterRdsDbInstance = {
   }
 
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "RegisterRdsDbInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RegisterRdsDbInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RegisterElasticIp = {
@@ -800,8 +798,8 @@ module RegisterElasticIp = {
     @as("ElasticIp") elasticIp: string_,
   }
   type response = {@as("ElasticIp") elasticIp: option<string_>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "RegisterElasticIpCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "RegisterElasticIpCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterEcsCluster = {
@@ -811,16 +809,16 @@ module RegisterEcsCluster = {
     @as("EcsClusterArn") ecsClusterArn: string_,
   }
   type response = {@as("EcsClusterArn") ecsClusterArn: option<string_>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "RegisterEcsClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "RegisterEcsClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RebootInstance = {
   type t
   type request = {@as("InstanceId") instanceId: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "RebootInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "RebootInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetHostnameSuggestion = {
@@ -831,8 +829,8 @@ module GetHostnameSuggestion = {
     @as("LayerId") layerId: option<string_>,
   }
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "GetHostnameSuggestionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetHostnameSuggestionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateElasticIp = {
@@ -840,8 +838,8 @@ module DisassociateElasticIp = {
   type request = {@as("ElasticIp") elasticIp: string_}
 
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DisassociateElasticIpCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DisassociateElasticIpCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DetachElasticLoadBalancer = {
@@ -852,16 +850,16 @@ module DetachElasticLoadBalancer = {
   }
 
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DetachElasticLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DetachElasticLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeregisterVolume = {
   type t
   type request = {@as("VolumeId") volumeId: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DeregisterVolumeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeregisterVolumeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeregisterRdsDbInstance = {
@@ -869,25 +867,24 @@ module DeregisterRdsDbInstance = {
   type request = {@as("RdsDbInstanceArn") rdsDbInstanceArn: string_}
 
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DeregisterRdsDbInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeregisterRdsDbInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeregisterInstance = {
   type t
   type request = {@as("InstanceId") instanceId: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DeregisterInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeregisterInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeregisterElasticIp = {
   type t
   type request = {@as("ElasticIp") elasticIp: string_}
 
-  @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DeregisterElasticIpCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeregisterElasticIpCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeregisterEcsCluster = {
@@ -895,32 +892,32 @@ module DeregisterEcsCluster = {
   type request = {@as("EcsClusterArn") ecsClusterArn: string_}
 
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DeregisterEcsClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeregisterEcsClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteUserProfile = {
   type t
   type request = {@as("IamUserArn") iamUserArn: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DeleteUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeleteUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteStack = {
   type t
   type request = {@as("StackId") stackId: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DeleteStackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeleteStackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteLayer = {
   type t
   type request = {@as("LayerId") layerId: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DeleteLayerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeleteLayerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteInstance = {
@@ -931,16 +928,16 @@ module DeleteInstance = {
     @as("InstanceId") instanceId: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DeleteInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeleteInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteApp = {
   type t
   type request = {@as("AppId") appId: string_}
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DeleteAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DeleteAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateUserProfile = {
@@ -952,8 +949,8 @@ module CreateUserProfile = {
     @as("IamUserArn") iamUserArn: string_,
   }
   type response = {@as("IamUserArn") iamUserArn: option<string_>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "CreateUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "CreateUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachElasticLoadBalancer = {
@@ -964,8 +961,8 @@ module AttachElasticLoadBalancer = {
   }
 
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "AttachElasticLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "AttachElasticLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AssociateElasticIp = {
@@ -975,8 +972,8 @@ module AssociateElasticIp = {
     @as("ElasticIp") elasticIp: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "AssociateElasticIpCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "AssociateElasticIpCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AssignVolume = {
@@ -986,8 +983,8 @@ module AssignVolume = {
     @as("VolumeId") volumeId: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "AssignVolumeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "AssignVolumeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateStack = {
@@ -1013,8 +1010,8 @@ module UpdateStack = {
     @as("StackId") stackId: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "UpdateStackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateStackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateInstance = {
@@ -1034,8 +1031,8 @@ module UpdateInstance = {
     @as("InstanceId") instanceId: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "UpdateInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagResource = {
@@ -1045,8 +1042,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -1056,8 +1053,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RegisterInstance = {
@@ -1072,8 +1069,8 @@ module RegisterInstance = {
     @as("StackId") stackId: string_,
   }
   type response = {@as("InstanceId") instanceId: option<string_>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "RegisterInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "RegisterInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTags = {
@@ -1087,8 +1084,8 @@ module ListTags = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Tags") tags: option<tags>,
   }
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "ListTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "ListTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GrantAccess = {
@@ -1098,8 +1095,8 @@ module GrantAccess = {
     @as("InstanceId") instanceId: string_,
   }
   type response = {@as("TemporaryCredential") temporaryCredential: option<temporaryCredential>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "GrantAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "GrantAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStackProvisioningParameters = {
@@ -1110,16 +1107,16 @@ module DescribeStackProvisioningParameters = {
     @as("AgentInstallerUrl") agentInstallerUrl: option<string_>,
   }
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribeStackProvisioningParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStackProvisioningParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMyUserProfile = {
   type t
 
   type response = {@as("UserProfile") userProfile: option<selfUserProfile>}
-  @module("@aws-sdk/client-opsworks") @new external new_: unit => t = "DescribeMyUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: unit => t = "DescribeMyUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateStack = {
@@ -1146,8 +1143,8 @@ module CreateStack = {
     @as("Name") name: string_,
   }
   type response = {@as("StackId") stackId: option<string_>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "CreateStackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "CreateStackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CloneStack = {
@@ -1177,8 +1174,8 @@ module CloneStack = {
     @as("SourceStackId") sourceStackId: string_,
   }
   type response = {@as("StackId") stackId: option<string_>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "CloneStackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "CloneStackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssignInstance = {
@@ -1188,8 +1185,8 @@ module AssignInstance = {
     @as("InstanceId") instanceId: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "AssignInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "AssignInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateApp = {
@@ -1208,8 +1205,8 @@ module UpdateApp = {
     @as("AppId") appId: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "UpdateAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetTimeBasedAutoScaling = {
@@ -1220,8 +1217,8 @@ module SetTimeBasedAutoScaling = {
   }
 
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "SetTimeBasedAutoScalingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SetTimeBasedAutoScalingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetLoadBasedAutoScaling = {
@@ -1234,8 +1231,8 @@ module SetLoadBasedAutoScaling = {
   }
 
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "SetLoadBasedAutoScalingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SetLoadBasedAutoScalingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeVolumes = {
@@ -1247,8 +1244,8 @@ module DescribeVolumes = {
     @as("InstanceId") instanceId: option<string_>,
   }
   type response = {@as("Volumes") volumes: option<volumes>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DescribeVolumesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DescribeVolumesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeUserProfiles = {
@@ -1256,8 +1253,8 @@ module DescribeUserProfiles = {
   type request = {@as("IamUserArns") iamUserArns: option<strings>}
   type response = {@as("UserProfiles") userProfiles: option<userProfiles>}
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribeUserProfilesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeUserProfilesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStackSummary = {
@@ -1265,8 +1262,8 @@ module DescribeStackSummary = {
   type request = {@as("StackId") stackId: string_}
   type response = {@as("StackSummary") stackSummary: option<stackSummary>}
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribeStackSummaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStackSummaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeServiceErrors = {
@@ -1278,8 +1275,8 @@ module DescribeServiceErrors = {
   }
   type response = {@as("ServiceErrors") serviceErrors: option<serviceErrors>}
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribeServiceErrorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeServiceErrorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRdsDbInstances = {
@@ -1290,8 +1287,8 @@ module DescribeRdsDbInstances = {
   }
   type response = {@as("RdsDbInstances") rdsDbInstances: option<rdsDbInstances>}
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribeRdsDbInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRdsDbInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRaidArrays = {
@@ -1302,8 +1299,8 @@ module DescribeRaidArrays = {
     @as("InstanceId") instanceId: option<string_>,
   }
   type response = {@as("RaidArrays") raidArrays: option<raidArrays>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DescribeRaidArraysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DescribeRaidArraysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePermissions = {
@@ -1313,9 +1310,8 @@ module DescribePermissions = {
     @as("IamUserArn") iamUserArn: option<string_>,
   }
   type response = {@as("Permissions") permissions: option<permissions>}
-  @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DescribePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeElasticIps = {
@@ -1326,8 +1322,8 @@ module DescribeElasticIps = {
     @as("InstanceId") instanceId: option<string_>,
   }
   type response = {@as("ElasticIps") elasticIps: option<elasticIps>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DescribeElasticIpsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DescribeElasticIpsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEcsClusters = {
@@ -1342,9 +1338,8 @@ module DescribeEcsClusters = {
     @as("NextToken") nextToken: option<string_>,
     @as("EcsClusters") ecsClusters: option<ecsClusters>,
   }
-  @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribeEcsClustersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DescribeEcsClustersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCommands = {
@@ -1355,8 +1350,8 @@ module DescribeCommands = {
     @as("DeploymentId") deploymentId: option<string_>,
   }
   type response = {@as("Commands") commands: option<commands>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DescribeCommandsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DescribeCommandsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApp = {
@@ -1376,8 +1371,8 @@ module CreateApp = {
     @as("StackId") stackId: string_,
   }
   type response = {@as("AppId") appId: option<string_>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "CreateAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "CreateAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLayer = {
@@ -1404,16 +1399,16 @@ module UpdateLayer = {
     @as("LayerId") layerId: string_,
   }
 
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "UpdateLayerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "UpdateLayerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeStacks = {
   type t
   type request = {@as("StackIds") stackIds: option<strings>}
   type response = {@as("Stacks") stacks: option<stacks>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DescribeStacksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DescribeStacksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeElasticLoadBalancers = {
@@ -1424,8 +1419,8 @@ module DescribeElasticLoadBalancers = {
   }
   type response = {@as("ElasticLoadBalancers") elasticLoadBalancers: option<elasticLoadBalancers>}
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribeElasticLoadBalancersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeElasticLoadBalancersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAgentVersions = {
@@ -1436,8 +1431,8 @@ module DescribeAgentVersions = {
   }
   type response = {@as("AgentVersions") agentVersions: option<agentVersions>}
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribeAgentVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAgentVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLayer = {
@@ -1465,8 +1460,8 @@ module CreateLayer = {
     @as("StackId") stackId: string_,
   }
   type response = {@as("LayerId") layerId: option<string_>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "CreateLayerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "CreateLayerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInstance = {
@@ -1492,8 +1487,8 @@ module CreateInstance = {
     @as("StackId") stackId: string_,
   }
   type response = {@as("InstanceId") instanceId: option<string_>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "CreateInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "CreateInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDeployment = {
@@ -1508,8 +1503,8 @@ module CreateDeployment = {
     @as("StackId") stackId: string_,
   }
   type response = {@as("DeploymentId") deploymentId: option<string_>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "CreateDeploymentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "CreateDeploymentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTimeBasedAutoScaling = {
@@ -1520,8 +1515,8 @@ module DescribeTimeBasedAutoScaling = {
     timeBasedAutoScalingConfigurations: option<timeBasedAutoScalingConfigurations>,
   }
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribeTimeBasedAutoScalingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTimeBasedAutoScalingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOperatingSystems = {
@@ -1529,8 +1524,8 @@ module DescribeOperatingSystems = {
 
   type response = {@as("OperatingSystems") operatingSystems: option<operatingSystems>}
   @module("@aws-sdk/client-opsworks") @new
-  external new_: unit => t = "DescribeOperatingSystemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "DescribeOperatingSystemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLoadBasedAutoScaling = {
@@ -1541,8 +1536,8 @@ module DescribeLoadBasedAutoScaling = {
     loadBasedAutoScalingConfigurations: option<loadBasedAutoScalingConfigurations>,
   }
   @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribeLoadBasedAutoScalingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLoadBasedAutoScalingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeApps = {
@@ -1552,8 +1547,8 @@ module DescribeApps = {
     @as("StackId") stackId: option<string_>,
   }
   type response = {@as("Apps") apps: option<apps>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DescribeAppsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DescribeAppsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLayers = {
@@ -1563,8 +1558,8 @@ module DescribeLayers = {
     @as("StackId") stackId: option<string_>,
   }
   type response = {@as("Layers") layers: option<layers>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DescribeLayersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DescribeLayersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstances = {
@@ -1575,8 +1570,8 @@ module DescribeInstances = {
     @as("StackId") stackId: option<string_>,
   }
   type response = {@as("Instances") instances: option<instances>}
-  @module("@aws-sdk/client-opsworks") @new external new_: request => t = "DescribeInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DescribeInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDeployments = {
@@ -1587,7 +1582,6 @@ module DescribeDeployments = {
     @as("StackId") stackId: option<string_>,
   }
   type response = {@as("Deployments") deployments: option<deployments>}
-  @module("@aws-sdk/client-opsworks") @new
-  external new_: request => t = "DescribeDeploymentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks") @new external new: request => t = "DescribeDeploymentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

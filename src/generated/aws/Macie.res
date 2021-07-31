@@ -64,17 +64,16 @@ module DisassociateMemberAccount = {
   type request = {memberAccountId: awsaccountId}
 
   @module("@aws-sdk/client-macie") @new
-  external new_: request => t = "DisassociateMemberAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DisassociateMemberAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AssociateMemberAccount = {
   type t
   type request = {memberAccountId: awsaccountId}
 
-  @module("@aws-sdk/client-macie") @new
-  external new_: request => t = "AssociateMemberAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-macie") @new external new: request => t = "AssociateMemberAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListMemberAccounts = {
@@ -87,8 +86,8 @@ module ListMemberAccounts = {
     nextToken: option<nextToken>,
     memberAccounts: option<memberAccounts>,
   }
-  @module("@aws-sdk/client-macie") @new external new_: request => t = "ListMemberAccountsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie") @new external new: request => t = "ListMemberAccountsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateS3Resources = {
@@ -98,8 +97,8 @@ module UpdateS3Resources = {
     memberAccountId: option<awsaccountId>,
   }
   type response = {failedS3Resources: option<failedS3Resources>}
-  @module("@aws-sdk/client-macie") @new external new_: request => t = "UpdateS3ResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie") @new external new: request => t = "UpdateS3ResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListS3Resources = {
@@ -113,8 +112,8 @@ module ListS3Resources = {
     nextToken: option<nextToken>,
     s3Resources: option<s3ResourcesClassification>,
   }
-  @module("@aws-sdk/client-macie") @new external new_: request => t = "ListS3ResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie") @new external new: request => t = "ListS3ResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateS3Resources = {
@@ -125,8 +124,8 @@ module DisassociateS3Resources = {
   }
   type response = {failedS3Resources: option<failedS3Resources>}
   @module("@aws-sdk/client-macie") @new
-  external new_: request => t = "DisassociateS3ResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateS3ResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateS3Resources = {
@@ -136,6 +135,6 @@ module AssociateS3Resources = {
     memberAccountId: option<awsaccountId>,
   }
   type response = {failedS3Resources: option<failedS3Resources>}
-  @module("@aws-sdk/client-macie") @new external new_: request => t = "AssociateS3ResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie") @new external new: request => t = "AssociateS3ResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -99,8 +99,8 @@ module StartReportCreation = {
   type t
   type request = {@as("S3Bucket") s3Bucket: s3Bucket}
   type response = unit
-  @module("@aws-sdk/client-tagging") @new external new_: request => t = "StartReportCreationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-tagging") @new external new: request => t = "StartReportCreationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReportCreation = {
@@ -113,8 +113,8 @@ module DescribeReportCreation = {
     @as("Status") status: option<status>,
   }
   @module("@aws-sdk/client-tagging") @new
-  external new_: request => t = "DescribeReportCreationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReportCreationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTagValues = {
@@ -127,8 +127,8 @@ module GetTagValues = {
     @as("TagValues") tagValues: option<tagValuesOutputList>,
     @as("PaginationToken") paginationToken: option<paginationToken>,
   }
-  @module("@aws-sdk/client-tagging") @new external new_: request => t = "GetTagValuesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-tagging") @new external new: request => t = "GetTagValuesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTagKeys = {
@@ -138,8 +138,8 @@ module GetTagKeys = {
     @as("TagKeys") tagKeys: option<tagKeyList>,
     @as("PaginationToken") paginationToken: option<paginationToken>,
   }
-  @module("@aws-sdk/client-tagging") @new external new_: request => t = "GetTagKeysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-tagging") @new external new: request => t = "GetTagKeysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResources = {
@@ -149,8 +149,8 @@ module UntagResources = {
     @as("ResourceARNList") resourceARNList: resourceARNListForTagUntag,
   }
   type response = {@as("FailedResourcesMap") failedResourcesMap: option<failedResourcesMap>}
-  @module("@aws-sdk/client-tagging") @new external new_: request => t = "UntagResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-tagging") @new external new: request => t = "UntagResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResources = {
@@ -160,8 +160,8 @@ module TagResources = {
     @as("ResourceARNList") resourceARNList: resourceARNListForTagUntag,
   }
   type response = {@as("FailedResourcesMap") failedResourcesMap: option<failedResourcesMap>}
-  @module("@aws-sdk/client-tagging") @new external new_: request => t = "TagResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-tagging") @new external new: request => t = "TagResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetComplianceSummary = {
@@ -179,9 +179,8 @@ module GetComplianceSummary = {
     @as("PaginationToken") paginationToken: option<paginationToken>,
     @as("SummaryList") summaryList: option<summaryList>,
   }
-  @module("@aws-sdk/client-tagging") @new
-  external new_: request => t = "GetComplianceSummaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-tagging") @new external new: request => t = "GetComplianceSummaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResources = {
@@ -200,6 +199,6 @@ module GetResources = {
     @as("ResourceTagMappingList") resourceTagMappingList: option<resourceTagMappingList>,
     @as("PaginationToken") paginationToken: option<paginationToken>,
   }
-  @module("@aws-sdk/client-tagging") @new external new_: request => t = "GetResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-tagging") @new external new: request => t = "GetResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

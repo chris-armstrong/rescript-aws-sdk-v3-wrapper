@@ -1448,8 +1448,8 @@ module UpdateCrawlerSchedule = {
     @as("CrawlerName") crawlerName: nameString,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateCrawlerScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateCrawlerScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopWorkflowRun = {
@@ -1459,48 +1459,48 @@ module StopWorkflowRun = {
     @as("Name") name: nameString,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "StopWorkflowRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StopWorkflowRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopTrigger = {
   type t
   type request = {@as("Name") name: nameString}
   type response = {@as("Name") name: option<nameString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "StopTriggerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StopTriggerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopCrawlerSchedule = {
   type t
   type request = {@as("CrawlerName") crawlerName: nameString}
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "StopCrawlerScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StopCrawlerScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopCrawler = {
   type t
   type request = {@as("Name") name: nameString}
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "StopCrawlerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StopCrawlerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartWorkflowRun = {
   type t
   type request = {@as("Name") name: nameString}
   type response = {@as("RunId") runId: option<idString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "StartWorkflowRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StartWorkflowRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartTrigger = {
   type t
   type request = {@as("Name") name: nameString}
   type response = {@as("Name") name: option<nameString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "StartTriggerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StartTriggerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartMLLabelingSetGenerationTaskRun = {
@@ -1511,8 +1511,8 @@ module StartMLLabelingSetGenerationTaskRun = {
   }
   type response = {@as("TaskRunId") taskRunId: option<hashString>}
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "StartMLLabelingSetGenerationTaskRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartMLLabelingSetGenerationTaskRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartMLEvaluationTaskRun = {
@@ -1520,8 +1520,8 @@ module StartMLEvaluationTaskRun = {
   type request = {@as("TransformId") transformId: hashString}
   type response = {@as("TaskRunId") taskRunId: option<hashString>}
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "StartMLEvaluationTaskRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartMLEvaluationTaskRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartImportLabelsTaskRun = {
@@ -1533,8 +1533,8 @@ module StartImportLabelsTaskRun = {
   }
   type response = {@as("TaskRunId") taskRunId: option<hashString>}
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "StartImportLabelsTaskRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartImportLabelsTaskRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartExportLabelsTaskRun = {
@@ -1545,24 +1545,24 @@ module StartExportLabelsTaskRun = {
   }
   type response = {@as("TaskRunId") taskRunId: option<hashString>}
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "StartExportLabelsTaskRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartExportLabelsTaskRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartCrawlerSchedule = {
   type t
   type request = {@as("CrawlerName") crawlerName: nameString}
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "StartCrawlerScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StartCrawlerScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartCrawler = {
   type t
   type request = {@as("Name") name: nameString}
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "StartCrawlerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StartCrawlerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutResourcePolicy = {
@@ -1575,16 +1575,16 @@ module PutResourcePolicy = {
     @as("PolicyInJson") policyInJson: policyJsonString,
   }
   type response = {@as("PolicyHash") policyHash: option<hashString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "PutResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "PutResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportCatalogToGlue = {
   type t
   type request = {@as("CatalogId") catalogId: option<catalogIdString>}
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ImportCatalogToGlueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ImportCatalogToGlueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResourcePolicy = {
@@ -1596,16 +1596,16 @@ module GetResourcePolicy = {
     @as("PolicyHash") policyHash: option<hashString>,
     @as("PolicyInJson") policyInJson: option<policyJsonString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWorkflow = {
   type t
   type request = {@as("Name") name: nameString}
   type response = {@as("Name") name: option<nameString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteWorkflowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteWorkflowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteUserDefinedFunction = {
@@ -1617,16 +1617,16 @@ module DeleteUserDefinedFunction = {
   }
   type response = unit
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "DeleteUserDefinedFunctionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteUserDefinedFunctionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTrigger = {
   type t
   type request = {@as("Name") name: nameString}
   type response = {@as("Name") name: option<nameString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteTriggerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteTriggerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTableVersion = {
@@ -1638,8 +1638,8 @@ module DeleteTableVersion = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteTableVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteTableVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTable = {
@@ -1650,8 +1650,8 @@ module DeleteTable = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSecurityConfiguration = {
@@ -1659,8 +1659,8 @@ module DeleteSecurityConfiguration = {
   type request = {@as("Name") name: nameString}
   type response = unit
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "DeleteSecurityConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSecurityConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteResourcePolicy = {
@@ -1670,8 +1670,8 @@ module DeleteResourcePolicy = {
     @as("PolicyHashCondition") policyHashCondition: option<hashString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePartitionIndex = {
@@ -1683,32 +1683,32 @@ module DeletePartitionIndex = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeletePartitionIndexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeletePartitionIndexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMLTransform = {
   type t
   type request = {@as("TransformId") transformId: hashString}
   type response = {@as("TransformId") transformId: option<hashString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteMLTransformCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteMLTransformCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteJob = {
   type t
   type request = {@as("JobName") jobName: nameString}
   type response = {@as("JobName") jobName: option<nameString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDevEndpoint = {
   type t
   type request = {@as("EndpointName") endpointName: genericString}
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteDevEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteDevEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDatabase = {
@@ -1718,16 +1718,16 @@ module DeleteDatabase = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCrawler = {
   type t
   type request = {@as("Name") name: nameString}
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteCrawlerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteCrawlerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteConnection = {
@@ -1737,8 +1737,8 @@ module DeleteConnection = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteColumnStatisticsForTable = {
@@ -1751,16 +1751,16 @@ module DeleteColumnStatisticsForTable = {
   }
   type response = unit
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "DeleteColumnStatisticsForTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteColumnStatisticsForTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteClassifier = {
   type t
   type request = {@as("Name") name: nameString}
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteClassifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteClassifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CheckSchemaVersionValidity = {
@@ -1774,8 +1774,8 @@ module CheckSchemaVersionValidity = {
     @as("Valid") valid: option<isVersionValid>,
   }
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "CheckSchemaVersionValidityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CheckSchemaVersionValidityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelMLTaskRun = {
@@ -1789,8 +1789,8 @@ module CancelMLTaskRun = {
     @as("TaskRunId") taskRunId: option<hashString>,
     @as("TransformId") transformId: option<hashString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CancelMLTaskRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CancelMLTaskRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateWorkflow = {
@@ -1802,8 +1802,8 @@ module UpdateWorkflow = {
     @as("Name") name: nameString,
   }
   type response = {@as("Name") name: option<nameString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateWorkflowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateWorkflowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSchema = {
@@ -1819,8 +1819,8 @@ module UpdateSchema = {
     @as("SchemaName") schemaName: option<schemaRegistryNameString>,
     @as("SchemaArn") schemaArn: option<glueResourceArn>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateSchemaCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateSchemaCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRegistry = {
@@ -1833,8 +1833,8 @@ module UpdateRegistry = {
     @as("RegistryArn") registryArn: option<glueResourceArn>,
     @as("RegistryName") registryName: option<schemaRegistryNameString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateRegistryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateRegistryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDevEndpoint = {
@@ -1850,8 +1850,8 @@ module UpdateDevEndpoint = {
     @as("EndpointName") endpointName: genericString,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateDevEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateDevEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -1861,8 +1861,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: glueResourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1872,8 +1872,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: glueResourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartJobRun = {
@@ -1891,8 +1891,8 @@ module StartJobRun = {
     @as("JobName") jobName: nameString,
   }
   type response = {@as("JobRunId") jobRunId: option<idString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "StartJobRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "StartJobRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResumeWorkflowRun = {
@@ -1906,8 +1906,8 @@ module ResumeWorkflowRun = {
     @as("NodeIds") nodeIds: option<nodeIdList>,
     @as("RunId") runId: option<idString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ResumeWorkflowRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ResumeWorkflowRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResetJobBookmark = {
@@ -1917,8 +1917,8 @@ module ResetJobBookmark = {
     @as("JobName") jobName: jobName,
   }
   type response = {@as("JobBookmarkEntry") jobBookmarkEntry: option<jobBookmarkEntry>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ResetJobBookmarkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ResetJobBookmarkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveSchemaVersionMetadata = {
@@ -1940,8 +1940,8 @@ module RemoveSchemaVersionMetadata = {
     @as("SchemaArn") schemaArn: option<glueResourceArn>,
   }
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "RemoveSchemaVersionMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveSchemaVersionMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterSchemaVersion = {
@@ -1955,8 +1955,8 @@ module RegisterSchemaVersion = {
     @as("VersionNumber") versionNumber: option<versionLongNumber>,
     @as("SchemaVersionId") schemaVersionId: option<schemaVersionIdString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "RegisterSchemaVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "RegisterSchemaVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutWorkflowRunProperties = {
@@ -1968,8 +1968,8 @@ module PutWorkflowRunProperties = {
   }
   type response = unit
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "PutWorkflowRunPropertiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutWorkflowRunPropertiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutSchemaVersionMetadata = {
@@ -1991,8 +1991,8 @@ module PutSchemaVersionMetadata = {
     @as("SchemaArn") schemaArn: option<glueResourceArn>,
   }
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "PutSchemaVersionMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutSchemaVersionMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorkflows = {
@@ -2005,8 +2005,8 @@ module ListWorkflows = {
     @as("NextToken") nextToken: option<genericString>,
     @as("Workflows") workflows: option<workflowNames>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ListWorkflowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListWorkflowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTriggers = {
@@ -2021,8 +2021,8 @@ module ListTriggers = {
     @as("NextToken") nextToken: option<genericString>,
     @as("TriggerNames") triggerNames: option<triggerNameList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ListTriggersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListTriggersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobs = {
@@ -2036,8 +2036,8 @@ module ListJobs = {
     @as("NextToken") nextToken: option<genericString>,
     @as("JobNames") jobNames: option<jobNameList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ListJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDevEndpoints = {
@@ -2051,8 +2051,8 @@ module ListDevEndpoints = {
     @as("NextToken") nextToken: option<genericString>,
     @as("DevEndpointNames") devEndpointNames: option<devEndpointNameList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ListDevEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListDevEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCrawlers = {
@@ -2066,8 +2066,8 @@ module ListCrawlers = {
     @as("NextToken") nextToken: option<token>,
     @as("CrawlerNames") crawlerNames: option<crawlerNameList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ListCrawlersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListCrawlersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWorkflowRunProperties = {
@@ -2078,16 +2078,16 @@ module GetWorkflowRunProperties = {
   }
   type response = {@as("RunProperties") runProperties: option<workflowRunProperties>}
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "GetWorkflowRunPropertiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWorkflowRunPropertiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTags = {
   type t
   type request = {@as("ResourceArn") resourceArn: glueResourceArn}
   type response = {@as("Tags") tags: option<tagsMap>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSchemaVersionsDiff = {
@@ -2099,8 +2099,8 @@ module GetSchemaVersionsDiff = {
     @as("SchemaId") schemaId: schemaId,
   }
   type response = {@as("Diff") diff: option<schemaDefinitionDiff>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetSchemaVersionsDiffCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetSchemaVersionsDiffCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSchemaVersion = {
@@ -2119,8 +2119,8 @@ module GetSchemaVersion = {
     @as("SchemaDefinition") schemaDefinition: option<schemaDefinitionString>,
     @as("SchemaVersionId") schemaVersionId: option<schemaVersionIdString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetSchemaVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetSchemaVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSchemaByDefinition = {
@@ -2136,8 +2136,8 @@ module GetSchemaByDefinition = {
     @as("SchemaArn") schemaArn: option<glueResourceArn>,
     @as("SchemaVersionId") schemaVersionId: option<schemaVersionIdString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetSchemaByDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetSchemaByDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSchema = {
@@ -2158,8 +2158,8 @@ module GetSchema = {
     @as("RegistryArn") registryArn: option<glueResourceArn>,
     @as("RegistryName") registryName: option<schemaRegistryNameString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetSchemaCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetSchemaCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRegistry = {
@@ -2173,8 +2173,8 @@ module GetRegistry = {
     @as("RegistryArn") registryArn: option<glueResourceArn>,
     @as("RegistryName") registryName: option<schemaRegistryNameString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetRegistryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetRegistryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJobBookmark = {
@@ -2184,16 +2184,16 @@ module GetJobBookmark = {
     @as("JobName") jobName: jobName,
   }
   type response = {@as("JobBookmarkEntry") jobBookmarkEntry: option<jobBookmarkEntry>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetJobBookmarkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetJobBookmarkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCatalogImportStatus = {
   type t
   type request = {@as("CatalogId") catalogId: option<catalogIdString>}
   type response = {@as("ImportStatus") importStatus: option<catalogImportStatus>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetCatalogImportStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetCatalogImportStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSchema = {
@@ -2204,8 +2204,8 @@ module DeleteSchema = {
     @as("SchemaName") schemaName: option<schemaRegistryNameString>,
     @as("SchemaArn") schemaArn: option<glueResourceArn>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteSchemaCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteSchemaCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRegistry = {
@@ -2216,8 +2216,8 @@ module DeleteRegistry = {
     @as("RegistryArn") registryArn: option<glueResourceArn>,
     @as("RegistryName") registryName: option<schemaRegistryNameString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteRegistryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteRegistryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePartition = {
@@ -2229,8 +2229,8 @@ module DeletePartition = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeletePartitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeletePartitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteColumnStatisticsForPartition = {
@@ -2244,8 +2244,8 @@ module DeleteColumnStatisticsForPartition = {
   }
   type response = unit
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "DeleteColumnStatisticsForPartitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteColumnStatisticsForPartitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWorkflow = {
@@ -2258,8 +2258,8 @@ module CreateWorkflow = {
     @as("Name") name: nameString,
   }
   type response = {@as("Name") name: option<nameString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateWorkflowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateWorkflowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSchema = {
@@ -2289,8 +2289,8 @@ module CreateSchema = {
     @as("RegistryArn") registryArn: option<glueResourceArn>,
     @as("RegistryName") registryName: option<schemaRegistryNameString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateSchemaCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateSchemaCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRegistry = {
@@ -2306,8 +2306,8 @@ module CreateRegistry = {
     @as("RegistryName") registryName: option<schemaRegistryNameString>,
     @as("RegistryArn") registryArn: option<glueResourceArn>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateRegistryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateRegistryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDevEndpoint = {
@@ -2351,8 +2351,8 @@ module CreateDevEndpoint = {
     @as("Status") status: option<genericString>,
     @as("EndpointName") endpointName: option<genericString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateDevEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateDevEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMLTransform = {
@@ -2371,8 +2371,8 @@ module UpdateMLTransform = {
     @as("TransformId") transformId: hashString,
   }
   type response = {@as("TransformId") transformId: option<hashString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateMLTransformCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateMLTransformCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateClassifier = {
@@ -2384,8 +2384,8 @@ module UpdateClassifier = {
     @as("GrokClassifier") grokClassifier: option<updateGrokClassifierRequest>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateClassifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateClassifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutDataCatalogEncryptionSettings = {
@@ -2397,8 +2397,8 @@ module PutDataCatalogEncryptionSettings = {
   }
   type response = unit
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "PutDataCatalogEncryptionSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutDataCatalogEncryptionSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSchemas = {
@@ -2412,8 +2412,8 @@ module ListSchemas = {
     @as("NextToken") nextToken: option<schemaRegistryTokenString>,
     @as("Schemas") schemas: option<schemaListDefinition>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ListSchemasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListSchemasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSchemaVersions = {
@@ -2427,8 +2427,8 @@ module ListSchemaVersions = {
     @as("NextToken") nextToken: option<schemaRegistryTokenString>,
     @as("Schemas") schemas: option<schemaVersionList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ListSchemaVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListSchemaVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRegistries = {
@@ -2441,8 +2441,8 @@ module ListRegistries = {
     @as("NextToken") nextToken: option<schemaRegistryTokenString>,
     @as("Registries") registries: option<registryListDefinition>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ListRegistriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListRegistriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResourcePolicies = {
@@ -2456,8 +2456,8 @@ module GetResourcePolicies = {
     @as("GetResourcePoliciesResponseList")
     getResourcePoliciesResponseList: option<getResourcePoliciesResponseList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetResourcePoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetResourcePoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMLTaskRun = {
@@ -2478,16 +2478,16 @@ module GetMLTaskRun = {
     @as("TaskRunId") taskRunId: option<hashString>,
     @as("TransformId") transformId: option<hashString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetMLTaskRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetMLTaskRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDevEndpoint = {
   type t
   type request = {@as("EndpointName") endpointName: genericString}
   type response = {@as("DevEndpoint") devEndpoint: option<devEndpoint>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetDevEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetDevEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDataCatalogEncryptionSettings = {
@@ -2498,8 +2498,8 @@ module GetDataCatalogEncryptionSettings = {
     dataCatalogEncryptionSettings: option<dataCatalogEncryptionSettings>,
   }
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "GetDataCatalogEncryptionSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDataCatalogEncryptionSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCrawlerMetrics = {
@@ -2513,8 +2513,8 @@ module GetCrawlerMetrics = {
     @as("NextToken") nextToken: option<token>,
     @as("CrawlerMetricsList") crawlerMetricsList: option<crawlerMetricsList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetCrawlerMetricsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetCrawlerMetricsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePartitionIndex = {
@@ -2526,8 +2526,8 @@ module CreatePartitionIndex = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreatePartitionIndexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreatePartitionIndexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMLTransform = {
@@ -2548,8 +2548,8 @@ module CreateMLTransform = {
     @as("Name") name: nameString,
   }
   type response = {@as("TransformId") transformId: option<hashString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateMLTransformCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateMLTransformCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateJob = {
@@ -2576,8 +2576,8 @@ module CreateJob = {
     @as("Name") name: nameString,
   }
   type response = {@as("Name") name: option<nameString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateClassifier = {
@@ -2589,8 +2589,8 @@ module CreateClassifier = {
     @as("GrokClassifier") grokClassifier: option<createGrokClassifierRequest>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateClassifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateClassifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteConnection = {
@@ -2603,8 +2603,8 @@ module BatchDeleteConnection = {
     @as("Errors") errors: option<errorByName>,
     @as("Succeeded") succeeded: option<nameStringList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchDeleteConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchDeleteConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateUserDefinedFunction = {
@@ -2617,8 +2617,8 @@ module UpdateUserDefinedFunction = {
   }
   type response = unit
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "UpdateUserDefinedFunctionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateUserDefinedFunctionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateJob = {
@@ -2628,8 +2628,8 @@ module UpdateJob = {
     @as("JobName") jobName: nameString,
   }
   type response = {@as("JobName") jobName: option<nameString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateConnection = {
@@ -2640,8 +2640,8 @@ module UpdateConnection = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMLTransforms = {
@@ -2657,8 +2657,8 @@ module ListMLTransforms = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("TransformIds") transformIds: transformIdList,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "ListMLTransformsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "ListMLTransformsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUserDefinedFunction = {
@@ -2669,8 +2669,8 @@ module GetUserDefinedFunction = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = {@as("UserDefinedFunction") userDefinedFunction: option<userDefinedFunction>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetUserDefinedFunctionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetUserDefinedFunctionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPlan = {
@@ -2687,8 +2687,8 @@ module GetPlan = {
     @as("ScalaCode") scalaCode: option<scalaCode>,
     @as("PythonScript") pythonScript: option<pythonScript>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetPlanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetPlanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMapping = {
@@ -2699,8 +2699,8 @@ module GetMapping = {
     @as("Source") source: catalogEntry,
   }
   type response = {@as("Mapping") mapping: mappingList}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetMappingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetMappingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJobRun = {
@@ -2711,16 +2711,16 @@ module GetJobRun = {
     @as("JobName") jobName: nameString,
   }
   type response = {@as("JobRun") jobRun: option<jobRun>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetJobRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetJobRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJob = {
   type t
   type request = {@as("JobName") jobName: nameString}
   type response = {@as("Job") job: option<job>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDevEndpoints = {
@@ -2733,8 +2733,8 @@ module GetDevEndpoints = {
     @as("NextToken") nextToken: option<genericString>,
     @as("DevEndpoints") devEndpoints: option<devEndpointList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetDevEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetDevEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetConnection = {
@@ -2745,16 +2745,16 @@ module GetConnection = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = {@as("Connection") connection: option<connection>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetClassifier = {
   type t
   type request = {@as("Name") name: nameString}
   type response = {@as("Classifier") classifier: option<classifier>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetClassifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetClassifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSchemaVersions = {
@@ -2764,8 +2764,8 @@ module DeleteSchemaVersions = {
     @as("SchemaId") schemaId: schemaId,
   }
   type response = {@as("SchemaVersionErrors") schemaVersionErrors: option<schemaVersionErrorList>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "DeleteSchemaVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "DeleteSchemaVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateUserDefinedFunction = {
@@ -2777,8 +2777,8 @@ module CreateUserDefinedFunction = {
   }
   type response = unit
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "CreateUserDefinedFunctionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateUserDefinedFunctionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTrigger = {
@@ -2795,8 +2795,8 @@ module CreateTrigger = {
     @as("Name") name: nameString,
   }
   type response = {@as("Name") name: option<nameString>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateTriggerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateTriggerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSecurityConfiguration = {
@@ -2810,8 +2810,8 @@ module CreateSecurityConfiguration = {
     @as("Name") name: option<nameString>,
   }
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "CreateSecurityConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSecurityConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateConnection = {
@@ -2821,8 +2821,8 @@ module CreateConnection = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchStopJobRun = {
@@ -2836,8 +2836,8 @@ module BatchStopJobRun = {
     @as("SuccessfulSubmissions")
     successfulSubmissions: option<batchStopJobRunSuccessfulSubmissionList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchStopJobRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchStopJobRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetDevEndpoints = {
@@ -2847,8 +2847,8 @@ module BatchGetDevEndpoints = {
     @as("DevEndpointsNotFound") devEndpointsNotFound: option<devEndpointNames>,
     @as("DevEndpoints") devEndpoints: option<devEndpointList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchGetDevEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchGetDevEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteTableVersion = {
@@ -2860,9 +2860,8 @@ module BatchDeleteTableVersion = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = {@as("Errors") errors: option<tableVersionErrors>}
-  @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "BatchDeleteTableVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchDeleteTableVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteTable = {
@@ -2873,8 +2872,8 @@ module BatchDeleteTable = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = {@as("Errors") errors: option<tableErrors>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchDeleteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchDeleteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeletePartition = {
@@ -2886,8 +2885,8 @@ module BatchDeletePartition = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = {@as("Errors") errors: option<partitionErrors>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchDeletePartitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchDeletePartitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTrigger = {
@@ -2897,8 +2896,8 @@ module UpdateTrigger = {
     @as("Name") name: nameString,
   }
   type response = {@as("Trigger") trigger: option<trigger>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateTriggerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateTriggerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDatabase = {
@@ -2909,8 +2908,8 @@ module UpdateDatabase = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCrawler = {
@@ -2932,8 +2931,8 @@ module UpdateCrawler = {
     @as("Name") name: nameString,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateCrawlerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateCrawlerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module QuerySchemaVersionMetadata = {
@@ -2952,8 +2951,8 @@ module QuerySchemaVersionMetadata = {
     @as("MetadataInfoMap") metadataInfoMap: option<metadataInfoMap>,
   }
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "QuerySchemaVersionMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "QuerySchemaVersionMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUserDefinedFunctions = {
@@ -2969,17 +2968,16 @@ module GetUserDefinedFunctions = {
     @as("NextToken") nextToken: option<token>,
     @as("UserDefinedFunctions") userDefinedFunctions: option<userDefinedFunctionList>,
   }
-  @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "GetUserDefinedFunctionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetUserDefinedFunctionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTrigger = {
   type t
   type request = {@as("Name") name: nameString}
   type response = {@as("Trigger") trigger: option<trigger>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetTriggerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetTriggerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSecurityConfiguration = {
@@ -2989,8 +2987,8 @@ module GetSecurityConfiguration = {
     @as("SecurityConfiguration") securityConfiguration: option<securityConfiguration>,
   }
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "GetSecurityConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSecurityConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMLTransform = {
@@ -3017,8 +3015,8 @@ module GetMLTransform = {
     @as("Name") name: option<nameString>,
     @as("TransformId") transformId: option<hashString>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetMLTransformCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetMLTransformCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMLTaskRuns = {
@@ -3034,8 +3032,8 @@ module GetMLTaskRuns = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("TaskRuns") taskRuns: option<taskRunList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetMLTaskRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetMLTaskRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJobs = {
@@ -3048,8 +3046,8 @@ module GetJobs = {
     @as("NextToken") nextToken: option<genericString>,
     @as("Jobs") jobs: option<jobList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJobRuns = {
@@ -3063,8 +3061,8 @@ module GetJobRuns = {
     @as("NextToken") nextToken: option<genericString>,
     @as("JobRuns") jobRuns: option<jobRunList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetJobRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetJobRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDataflowGraph = {
@@ -3074,8 +3072,8 @@ module GetDataflowGraph = {
     @as("DagEdges") dagEdges: option<dagEdges>,
     @as("DagNodes") dagNodes: option<dagNodes>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetDataflowGraphCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetDataflowGraphCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDatabase = {
@@ -3085,8 +3083,8 @@ module GetDatabase = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = {@as("Database") database: option<database>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetConnections = {
@@ -3102,8 +3100,8 @@ module GetConnections = {
     @as("NextToken") nextToken: option<token>,
     @as("ConnectionList") connectionList: option<connectionList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetClassifiers = {
@@ -3116,8 +3114,8 @@ module GetClassifiers = {
     @as("NextToken") nextToken: option<token>,
     @as("Classifiers") classifiers: option<classifierList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetClassifiersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetClassifiersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateScript = {
@@ -3131,8 +3129,8 @@ module CreateScript = {
     @as("ScalaCode") scalaCode: option<scalaCode>,
     @as("PythonScript") pythonScript: option<pythonScript>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateScriptCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateScriptCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDatabase = {
@@ -3142,8 +3140,8 @@ module CreateDatabase = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCrawler = {
@@ -3166,8 +3164,8 @@ module CreateCrawler = {
     @as("Name") name: nameString,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateCrawlerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateCrawlerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetJobs = {
@@ -3177,8 +3175,8 @@ module BatchGetJobs = {
     @as("JobsNotFound") jobsNotFound: option<jobNameList>,
     @as("Jobs") jobs: option<jobList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchGetJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchGetJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTable = {
@@ -3190,8 +3188,8 @@ module UpdateTable = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdateTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdateTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePartition = {
@@ -3204,8 +3202,8 @@ module UpdatePartition = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "UpdatePartitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "UpdatePartitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTriggers = {
@@ -3219,8 +3217,8 @@ module GetTriggers = {
     @as("NextToken") nextToken: option<genericString>,
     @as("Triggers") triggers: option<triggerList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetTriggersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetTriggersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTable = {
@@ -3231,8 +3229,8 @@ module GetTable = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = {@as("Table") table: option<table>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSecurityConfigurations = {
@@ -3246,8 +3244,8 @@ module GetSecurityConfigurations = {
     @as("SecurityConfigurations") securityConfigurations: option<securityConfigurationList>,
   }
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "GetSecurityConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSecurityConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPartition = {
@@ -3259,8 +3257,8 @@ module GetPartition = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = {@as("Partition") partition: option<partition>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetPartitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetPartitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDatabases = {
@@ -3275,16 +3273,16 @@ module GetDatabases = {
     @as("NextToken") nextToken: option<token>,
     @as("DatabaseList") databaseList: databaseList,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetDatabasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetDatabasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCrawler = {
   type t
   type request = {@as("Name") name: nameString}
   type response = {@as("Crawler") crawler: option<crawler>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetCrawlerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetCrawlerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetColumnStatisticsForTable = {
@@ -3300,8 +3298,8 @@ module GetColumnStatisticsForTable = {
     @as("ColumnStatisticsList") columnStatisticsList: option<columnStatisticsList>,
   }
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "GetColumnStatisticsForTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetColumnStatisticsForTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetColumnStatisticsForPartition = {
@@ -3318,8 +3316,8 @@ module GetColumnStatisticsForPartition = {
     @as("ColumnStatisticsList") columnStatisticsList: option<columnStatisticsList>,
   }
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "GetColumnStatisticsForPartitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetColumnStatisticsForPartitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTable = {
@@ -3331,8 +3329,8 @@ module CreateTable = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreateTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreateTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePartition = {
@@ -3344,8 +3342,8 @@ module CreatePartition = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "CreatePartitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "CreatePartitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetTriggers = {
@@ -3355,8 +3353,8 @@ module BatchGetTriggers = {
     @as("TriggersNotFound") triggersNotFound: option<triggerNameList>,
     @as("Triggers") triggers: option<triggerList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchGetTriggersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchGetTriggersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateColumnStatisticsForTable = {
@@ -3369,8 +3367,8 @@ module UpdateColumnStatisticsForTable = {
   }
   type response = {@as("Errors") errors: option<columnStatisticsErrors>}
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "UpdateColumnStatisticsForTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateColumnStatisticsForTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateColumnStatisticsForPartition = {
@@ -3384,8 +3382,8 @@ module UpdateColumnStatisticsForPartition = {
   }
   type response = {@as("Errors") errors: option<columnStatisticsErrors>}
   @module("@aws-sdk/client-glue") @new
-  external new_: request => t = "UpdateColumnStatisticsForPartitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateColumnStatisticsForPartitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchTables = {
@@ -3403,8 +3401,8 @@ module SearchTables = {
     @as("TableList") tableList: option<tableList>,
     @as("NextToken") nextToken: option<token>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "SearchTablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "SearchTablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTables = {
@@ -3420,8 +3418,8 @@ module GetTables = {
     @as("NextToken") nextToken: option<token>,
     @as("TableList") tableList: option<tableList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetTablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetTablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTableVersion = {
@@ -3433,8 +3431,8 @@ module GetTableVersion = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = {@as("TableVersion") tableVersion: option<tableVersion>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetTableVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetTableVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPartitions = {
@@ -3453,8 +3451,8 @@ module GetPartitions = {
     @as("NextToken") nextToken: option<token>,
     @as("Partitions") partitions: option<partitionList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetPartitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetPartitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMLTransforms = {
@@ -3469,8 +3467,8 @@ module GetMLTransforms = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("Transforms") transforms: transformList,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetMLTransformsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetMLTransformsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCrawlers = {
@@ -3483,8 +3481,8 @@ module GetCrawlers = {
     @as("NextToken") nextToken: option<token>,
     @as("Crawlers") crawlers: option<crawlerList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetCrawlersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetCrawlersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetPartition = {
@@ -3499,8 +3497,8 @@ module BatchGetPartition = {
     @as("UnprocessedKeys") unprocessedKeys: option<batchGetPartitionValueList>,
     @as("Partitions") partitions: option<partitionList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchGetPartitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchGetPartitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetCrawlers = {
@@ -3510,8 +3508,8 @@ module BatchGetCrawlers = {
     @as("CrawlersNotFound") crawlersNotFound: option<crawlerNameList>,
     @as("Crawlers") crawlers: option<crawlerList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchGetCrawlersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchGetCrawlersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchCreatePartition = {
@@ -3523,8 +3521,8 @@ module BatchCreatePartition = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = {@as("Errors") errors: option<partitionErrors>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchCreatePartitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchCreatePartitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTableVersions = {
@@ -3540,8 +3538,8 @@ module GetTableVersions = {
     @as("NextToken") nextToken: option<token>,
     @as("TableVersions") tableVersions: option<getTableVersionsList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetTableVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetTableVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPartitionIndexes = {
@@ -3557,8 +3555,8 @@ module GetPartitionIndexes = {
     @as("PartitionIndexDescriptorList")
     partitionIndexDescriptorList: option<partitionIndexDescriptorList>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetPartitionIndexesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetPartitionIndexesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchUpdatePartition = {
@@ -3570,8 +3568,8 @@ module BatchUpdatePartition = {
     @as("CatalogId") catalogId: option<catalogIdString>,
   }
   type response = {@as("Errors") errors: option<batchUpdatePartitionFailureList>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchUpdatePartitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchUpdatePartitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWorkflowRun = {
@@ -3582,8 +3580,8 @@ module GetWorkflowRun = {
     @as("Name") name: nameString,
   }
   type response = {@as("Run") run: option<workflowRun>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetWorkflowRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetWorkflowRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWorkflowRuns = {
@@ -3598,8 +3596,8 @@ module GetWorkflowRuns = {
     @as("NextToken") nextToken: option<genericString>,
     @as("Runs") runs: option<workflowRuns>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetWorkflowRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetWorkflowRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWorkflow = {
@@ -3609,8 +3607,8 @@ module GetWorkflow = {
     @as("Name") name: nameString,
   }
   type response = {@as("Workflow") workflow: option<workflow>}
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "GetWorkflowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "GetWorkflowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetWorkflows = {
@@ -3623,6 +3621,6 @@ module BatchGetWorkflows = {
     @as("MissingWorkflows") missingWorkflows: option<workflowNames>,
     @as("Workflows") workflows: option<workflows>,
   }
-  @module("@aws-sdk/client-glue") @new external new_: request => t = "BatchGetWorkflowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glue") @new external new: request => t = "BatchGetWorkflowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

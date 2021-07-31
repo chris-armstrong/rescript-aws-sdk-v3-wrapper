@@ -205,8 +205,8 @@ module StartStreamTranscription = {
     @as("RequestId") requestId: option<requestId>,
   }
   @module("@aws-sdk/client-transcribe") @new
-  external new_: request => t = "StartStreamTranscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartStreamTranscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartMedicalStreamTranscription = {
@@ -243,6 +243,6 @@ module StartMedicalStreamTranscription = {
     @as("RequestId") requestId: option<requestId>,
   }
   @module("@aws-sdk/client-transcribe") @new
-  external new_: request => t = "StartMedicalStreamTranscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartMedicalStreamTranscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

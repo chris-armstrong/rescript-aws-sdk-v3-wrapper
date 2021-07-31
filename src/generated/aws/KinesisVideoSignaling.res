@@ -42,8 +42,8 @@ module SendAlexaOfferToMaster = {
   }
   type response = {@as("Answer") answer: option<answer>}
   @module("@aws-sdk/client-kinesisvideo") @new
-  external new_: request => t = "SendAlexaOfferToMasterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SendAlexaOfferToMasterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIceServerConfig = {
@@ -56,6 +56,6 @@ module GetIceServerConfig = {
   }
   type response = {@as("IceServerList") iceServerList: option<iceServerList>}
   @module("@aws-sdk/client-kinesisvideo") @new
-  external new_: request => t = "GetIceServerConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetIceServerConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

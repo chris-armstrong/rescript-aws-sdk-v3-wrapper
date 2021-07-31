@@ -166,8 +166,8 @@ module ResolveCase = {
     finalCaseStatus: option<caseStatus>,
     initialCaseStatus: option<caseStatus>,
   }
-  @module("@aws-sdk/client-support") @new external new_: request => t = "ResolveCaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-support") @new external new: request => t = "ResolveCaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RefreshTrustedAdvisorCheck = {
@@ -175,16 +175,16 @@ module RefreshTrustedAdvisorCheck = {
   type request = {checkId: string_}
   type response = {status: trustedAdvisorCheckRefreshStatus}
   @module("@aws-sdk/client-support") @new
-  external new_: request => t = "RefreshTrustedAdvisorCheckCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RefreshTrustedAdvisorCheckCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAttachment = {
   type t
   type request = {attachmentId: attachmentId}
   type response = {attachment: option<attachment>}
-  @module("@aws-sdk/client-support") @new external new_: request => t = "DescribeAttachmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-support") @new external new: request => t = "DescribeAttachmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCase = {
@@ -201,8 +201,8 @@ module CreateCase = {
     subject: subject,
   }
   type response = {caseId: option<caseId>}
-  @module("@aws-sdk/client-support") @new external new_: request => t = "CreateCaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-support") @new external new: request => t = "CreateCaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddCommunicationToCase = {
@@ -215,8 +215,8 @@ module AddCommunicationToCase = {
   }
   type response = {result: option<result>}
   @module("@aws-sdk/client-support") @new
-  external new_: request => t = "AddCommunicationToCaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddCommunicationToCaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrustedAdvisorCheckRefreshStatuses = {
@@ -224,8 +224,8 @@ module DescribeTrustedAdvisorCheckRefreshStatuses = {
   type request = {checkIds: stringList}
   type response = {statuses: trustedAdvisorCheckRefreshStatusList}
   @module("@aws-sdk/client-support") @new
-  external new_: request => t = "DescribeTrustedAdvisorCheckRefreshStatusesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTrustedAdvisorCheckRefreshStatusesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSeverityLevels = {
@@ -233,8 +233,8 @@ module DescribeSeverityLevels = {
   type request = {language: option<language>}
   type response = {severityLevels: option<severityLevelsList>}
   @module("@aws-sdk/client-support") @new
-  external new_: request => t = "DescribeSeverityLevelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSeverityLevelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddAttachmentsToSet = {
@@ -247,8 +247,8 @@ module AddAttachmentsToSet = {
     expiryTime: option<expiryTime>,
     attachmentSetId: option<attachmentSetId>,
   }
-  @module("@aws-sdk/client-support") @new external new_: request => t = "AddAttachmentsToSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-support") @new external new: request => t = "AddAttachmentsToSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrustedAdvisorChecks = {
@@ -256,8 +256,8 @@ module DescribeTrustedAdvisorChecks = {
   type request = {language: string_}
   type response = {checks: trustedAdvisorCheckList}
   @module("@aws-sdk/client-support") @new
-  external new_: request => t = "DescribeTrustedAdvisorChecksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTrustedAdvisorChecksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrustedAdvisorCheckSummaries = {
@@ -265,8 +265,8 @@ module DescribeTrustedAdvisorCheckSummaries = {
   type request = {checkIds: stringList}
   type response = {summaries: trustedAdvisorCheckSummaryList}
   @module("@aws-sdk/client-support") @new
-  external new_: request => t = "DescribeTrustedAdvisorCheckSummariesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTrustedAdvisorCheckSummariesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrustedAdvisorCheckResult = {
@@ -277,8 +277,8 @@ module DescribeTrustedAdvisorCheckResult = {
   }
   type response = {result: option<trustedAdvisorCheckResult>}
   @module("@aws-sdk/client-support") @new
-  external new_: request => t = "DescribeTrustedAdvisorCheckResultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTrustedAdvisorCheckResultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeServices = {
@@ -288,8 +288,8 @@ module DescribeServices = {
     serviceCodeList: option<serviceCodeList>,
   }
   type response = {services: option<serviceList>}
-  @module("@aws-sdk/client-support") @new external new_: request => t = "DescribeServicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-support") @new external new: request => t = "DescribeServicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCommunications = {
@@ -306,8 +306,8 @@ module DescribeCommunications = {
     communications: option<communicationList>,
   }
   @module("@aws-sdk/client-support") @new
-  external new_: request => t = "DescribeCommunicationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCommunicationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCases = {
@@ -327,6 +327,6 @@ module DescribeCases = {
     nextToken: option<nextToken>,
     cases: option<caseList>,
   }
-  @module("@aws-sdk/client-support") @new external new_: request => t = "DescribeCasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-support") @new external new: request => t = "DescribeCasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

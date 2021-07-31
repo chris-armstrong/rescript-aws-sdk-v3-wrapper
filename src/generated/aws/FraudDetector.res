@@ -353,9 +353,8 @@ module UpdateVariable = {
     name: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "UpdateVariableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "UpdateVariableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateModelVersionStatus = {
@@ -368,8 +367,8 @@ module UpdateModelVersionStatus = {
   }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "UpdateModelVersionStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateModelVersionStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateModel = {
@@ -380,8 +379,8 @@ module UpdateModel = {
     modelId: modelIdentifier,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "UpdateModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "UpdateModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDetectorVersionStatus = {
@@ -393,8 +392,8 @@ module UpdateDetectorVersionStatus = {
   }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "UpdateDetectorVersionStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDetectorVersionStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDetectorVersionMetadata = {
@@ -406,8 +405,8 @@ module UpdateDetectorVersionMetadata = {
   }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "UpdateDetectorVersionMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDetectorVersionMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutKMSEncryptionKey = {
@@ -415,25 +414,24 @@ module PutKMSEncryptionKey = {
   type request = {kmsEncryptionKeyArn: kmsEncryptionKeyArn}
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "PutKMSEncryptionKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutKMSEncryptionKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVariable = {
   type t
   type request = {name: string_}
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "DeleteVariableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteVariableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteOutcome = {
   type t
   type request = {name: identifier}
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "DeleteOutcomeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteOutcomeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteModelVersion = {
@@ -445,8 +443,8 @@ module DeleteModelVersion = {
   }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "DeleteModelVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteModelVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteModel = {
@@ -456,16 +454,16 @@ module DeleteModel = {
     modelId: modelIdentifier,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "DeleteModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLabel = {
   type t
   type request = {name: identifier}
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "DeleteLabelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteLabelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteExternalModel = {
@@ -473,8 +471,8 @@ module DeleteExternalModel = {
   type request = {modelEndpoint: sageMakerEndpointIdentifier}
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "DeleteExternalModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteExternalModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEventType = {
@@ -482,8 +480,8 @@ module DeleteEventType = {
   type request = {name: identifier}
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "DeleteEventTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEventTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEvent = {
@@ -493,8 +491,8 @@ module DeleteEvent = {
     eventId: identifier,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "DeleteEventCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteEventCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEntityType = {
@@ -502,8 +500,8 @@ module DeleteEntityType = {
   type request = {name: identifier}
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "DeleteEntityTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEntityTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDetectorVersion = {
@@ -514,17 +512,16 @@ module DeleteDetectorVersion = {
   }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "DeleteDetectorVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteDetectorVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDetector = {
   type t
   type request = {detectorId: identifier}
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "DeleteDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBatchPredictionJob = {
@@ -532,8 +529,8 @@ module DeleteBatchPredictionJob = {
   type request = {jobId: identifier}
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "DeleteBatchPredictionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteBatchPredictionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelBatchPredictionJob = {
@@ -541,8 +538,8 @@ module CancelBatchPredictionJob = {
   type request = {jobId: identifier}
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "CancelBatchPredictionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelBatchPredictionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRuleMetadata = {
@@ -553,8 +550,8 @@ module UpdateRuleMetadata = {
   }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "UpdateRuleMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateRuleMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -564,8 +561,8 @@ module UntagResource = {
     resourceARN: fraudDetectorArn,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetKMSEncryptionKey = {
@@ -573,16 +570,16 @@ module GetKMSEncryptionKey = {
 
   type response = {kmsKey: option<kmskey>}
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: unit => t = "GetKMSEncryptionKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "GetKMSEncryptionKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRule = {
   type t
   type request = {rule: rule}
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "DeleteRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "DeleteRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRuleVersion = {
@@ -597,8 +594,8 @@ module UpdateRuleVersion = {
   }
   type response = {rule: option<rule>}
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "UpdateRuleVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateRuleVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateModelVersion = {
@@ -617,8 +614,8 @@ module UpdateModelVersion = {
     modelId: option<modelIdentifier>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "UpdateModelVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateModelVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDetectorVersion = {
@@ -634,8 +631,8 @@ module UpdateDetectorVersion = {
   }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "UpdateDetectorVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDetectorVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -645,8 +642,8 @@ module TagResource = {
     resourceARN: fraudDetectorArn,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutOutcome = {
@@ -657,8 +654,8 @@ module PutOutcome = {
     name: identifier,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "PutOutcomeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutOutcomeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutLabel = {
@@ -669,8 +666,8 @@ module PutLabel = {
     name: identifier,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "PutLabelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutLabelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutExternalModel = {
@@ -686,8 +683,8 @@ module PutExternalModel = {
   }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "PutExternalModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutExternalModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutEventType = {
@@ -701,8 +698,8 @@ module PutEventType = {
     name: identifier,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "PutEventTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutEventTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutEntityType = {
@@ -713,8 +710,8 @@ module PutEntityType = {
     name: identifier,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "PutEntityTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutEntityTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutDetector = {
@@ -726,8 +723,8 @@ module PutDetector = {
     detectorId: identifier,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "PutDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "PutDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -742,8 +739,8 @@ module ListTagsForResource = {
     tags: option<tagList_>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVariables = {
@@ -757,8 +754,8 @@ module GetVariables = {
     nextToken: option<string_>,
     variables: option<variableList>,
   }
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "GetVariablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetVariablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOutcomes = {
@@ -772,8 +769,8 @@ module GetOutcomes = {
     nextToken: option<string_>,
     outcomes: option<outcomeList>,
   }
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "GetOutcomesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetOutcomesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetModels = {
@@ -788,8 +785,8 @@ module GetModels = {
     models: option<modelList>,
     nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "GetModelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetModelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLabels = {
@@ -803,8 +800,8 @@ module GetLabels = {
     nextToken: option<string_>,
     labels: option<labelList>,
   }
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "GetLabelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetLabelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEntityTypes = {
@@ -818,9 +815,8 @@ module GetEntityTypes = {
     nextToken: option<string_>,
     entityTypes: option<entityTypeList>,
   }
-  @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "GetEntityTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetEntityTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDetectors = {
@@ -834,8 +830,8 @@ module GetDetectors = {
     nextToken: option<string_>,
     detectors: option<detectorList>,
   }
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "GetDetectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetDetectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDetectorVersion = {
@@ -858,8 +854,8 @@ module GetDetectorVersion = {
     detectorId: option<identifier>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "GetDetectorVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDetectorVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBatchPredictionJobs = {
@@ -874,8 +870,8 @@ module GetBatchPredictionJobs = {
     batchPredictions: option<batchPredictionList>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "GetBatchPredictionJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetBatchPredictionJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDetector = {
@@ -892,8 +888,8 @@ module DescribeDetector = {
     detectorId: option<identifier>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "DescribeDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVariable = {
@@ -908,9 +904,8 @@ module CreateVariable = {
     name: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "CreateVariableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "CreateVariableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRule = {
@@ -925,8 +920,8 @@ module CreateRule = {
     ruleId: identifier,
   }
   type response = {rule: option<rule>}
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "CreateRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "CreateRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateModel = {
@@ -939,8 +934,8 @@ module CreateModel = {
     modelId: modelIdentifier,
   }
   type response = unit
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "CreateModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "CreateModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDetectorVersion = {
@@ -960,8 +955,8 @@ module CreateDetectorVersion = {
     detectorId: option<identifier>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "CreateDetectorVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDetectorVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBatchPredictionJob = {
@@ -978,8 +973,8 @@ module CreateBatchPredictionJob = {
   }
   type response = unit
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "CreateBatchPredictionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateBatchPredictionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetVariable = {
@@ -990,8 +985,8 @@ module BatchGetVariable = {
     variables: option<variableList>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "BatchGetVariableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchGetVariableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchCreateVariable = {
@@ -1002,8 +997,8 @@ module BatchCreateVariable = {
   }
   type response = {errors: option<batchCreateVariableErrorList>}
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "BatchCreateVariableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchCreateVariableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRules = {
@@ -1019,8 +1014,8 @@ module GetRules = {
     nextToken: option<string_>,
     ruleDetails: option<ruleDetailList>,
   }
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "GetRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEventTypes = {
@@ -1034,8 +1029,8 @@ module GetEventTypes = {
     nextToken: option<string_>,
     eventTypes: option<eventTypeList>,
   }
-  @module("@aws-sdk/client-frauddetector") @new external new_: request => t = "GetEventTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-frauddetector") @new external new: request => t = "GetEventTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEventPrediction = {
@@ -1055,8 +1050,8 @@ module GetEventPrediction = {
     modelScores: option<listOfModelScores>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "GetEventPredictionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEventPredictionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetModelVersion = {
@@ -1077,8 +1072,8 @@ module GetModelVersion = {
     modelId: option<modelIdentifier>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "GetModelVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetModelVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetExternalModels = {
@@ -1093,8 +1088,8 @@ module GetExternalModels = {
     externalModels: option<externalModelList>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "GetExternalModelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetExternalModelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateModelVersion = {
@@ -1114,8 +1109,8 @@ module CreateModelVersion = {
     modelId: option<modelIdentifier>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "CreateModelVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateModelVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeModelVersions = {
@@ -1132,6 +1127,6 @@ module DescribeModelVersions = {
     modelVersionDetails: option<modelVersionDetailList>,
   }
   @module("@aws-sdk/client-frauddetector") @new
-  external new_: request => t = "DescribeModelVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeModelVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

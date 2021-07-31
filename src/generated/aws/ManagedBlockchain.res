@@ -293,8 +293,8 @@ module VoteOnProposal = {
   }
   type response = unit
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "VoteOnProposalCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "VoteOnProposalCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectInvitation = {
@@ -302,8 +302,8 @@ module RejectInvitation = {
   type request = {@as("InvitationId") invitationId: resourceIdString}
   type response = unit
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "RejectInvitationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectInvitationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteNode = {
@@ -314,9 +314,8 @@ module DeleteNode = {
     @as("NetworkId") networkId: resourceIdString,
   }
   type response = unit
-  @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "DeleteNodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "DeleteNodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMember = {
@@ -327,8 +326,8 @@ module DeleteMember = {
   }
   type response = unit
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "DeleteMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -339,8 +338,8 @@ module UntagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -351,8 +350,8 @@ module TagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -360,8 +359,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: arnString}
   type response = {@as("Tags") tags: option<outputTagMap>}
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProposals = {
@@ -376,8 +375,8 @@ module ListProposals = {
     @as("Proposals") proposals: option<proposalSummaryList>,
   }
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "ListProposalsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProposalsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProposalVotes = {
@@ -393,8 +392,8 @@ module ListProposalVotes = {
     @as("ProposalVotes") proposalVotes: option<proposalVoteList>,
   }
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "ListProposalVotesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProposalVotesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListNodes = {
@@ -410,8 +409,8 @@ module ListNodes = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("Nodes") nodes: option<nodeSummaryList>,
   }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: request => t = "ListNodesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "ListNodesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListNetworks = {
@@ -428,8 +427,8 @@ module ListNetworks = {
     @as("Networks") networks: option<networkSummaryList>,
   }
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "ListNetworksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListNetworksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMembers = {
@@ -447,8 +446,8 @@ module ListMembers = {
     @as("Members") members: option<memberSummaryList>,
   }
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "ListMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInvitations = {
@@ -462,17 +461,16 @@ module ListInvitations = {
     @as("Invitations") invitations: option<invitationList>,
   }
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "ListInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetNetwork = {
   type t
   type request = {@as("NetworkId") networkId: resourceIdString}
   type response = {@as("Network") network: option<network>}
-  @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "GetNetworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "GetNetworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProposal = {
@@ -487,8 +485,8 @@ module CreateProposal = {
   }
   type response = {@as("ProposalId") proposalId: option<resourceIdString>}
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "CreateProposalCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateProposalCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateNode = {
@@ -501,9 +499,8 @@ module UpdateNode = {
     @as("NetworkId") networkId: resourceIdString,
   }
   type response = unit
-  @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "UpdateNodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "UpdateNodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMember = {
@@ -516,8 +513,8 @@ module UpdateMember = {
   }
   type response = unit
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "UpdateMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetProposal = {
@@ -528,8 +525,8 @@ module GetProposal = {
   }
   type response = {@as("Proposal") proposal: option<proposal>}
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "GetProposalCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetProposalCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetNode = {
@@ -540,8 +537,8 @@ module GetNode = {
     @as("NetworkId") networkId: resourceIdString,
   }
   type response = {@as("Node") node: option<node>}
-  @module("@aws-sdk/client-managedblockchain") @new external new_: request => t = "GetNodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "GetNodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMember = {
@@ -551,8 +548,8 @@ module GetMember = {
     @as("NetworkId") networkId: resourceIdString,
   }
   type response = {@as("Member") member: option<member>}
-  @module("@aws-sdk/client-managedblockchain") @new external new_: request => t = "GetMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "GetMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNode = {
@@ -565,9 +562,8 @@ module CreateNode = {
     @as("ClientRequestToken") clientRequestToken: clientRequestTokenString,
   }
   type response = {@as("NodeId") nodeId: option<resourceIdString>}
-  @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "CreateNodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-managedblockchain") @new external new: request => t = "CreateNodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNetwork = {
@@ -588,8 +584,8 @@ module CreateNetwork = {
     @as("NetworkId") networkId: option<resourceIdString>,
   }
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "CreateNetworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateNetworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMember = {
@@ -602,6 +598,6 @@ module CreateMember = {
   }
   type response = {@as("MemberId") memberId: option<resourceIdString>}
   @module("@aws-sdk/client-managedblockchain") @new
-  external new_: request => t = "CreateMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -213,16 +213,16 @@ module PutLexicon = {
     @as("Name") name: lexiconName,
   }
   type response = unit
-  @module("@aws-sdk/client-polly") @new external new_: request => t = "PutLexiconCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-polly") @new external new: request => t = "PutLexiconCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLexicon = {
   type t
   type request = {@as("Name") name: lexiconName}
   type response = unit
-  @module("@aws-sdk/client-polly") @new external new_: request => t = "DeleteLexiconCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-polly") @new external new: request => t = "DeleteLexiconCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SynthesizeSpeech = {
@@ -243,8 +243,8 @@ module SynthesizeSpeech = {
     @as("ContentType") contentType: option<contentType>,
     @as("AudioStream") audioStream: option<audioStream>,
   }
-  @module("@aws-sdk/client-polly") @new external new_: request => t = "SynthesizeSpeechCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-polly") @new external new: request => t = "SynthesizeSpeechCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLexicon = {
@@ -254,8 +254,8 @@ module GetLexicon = {
     @as("LexiconAttributes") lexiconAttributes: option<lexiconAttributes>,
     @as("Lexicon") lexicon: option<lexicon>,
   }
-  @module("@aws-sdk/client-polly") @new external new_: request => t = "GetLexiconCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-polly") @new external new: request => t = "GetLexiconCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartSpeechSynthesisTask = {
@@ -276,17 +276,16 @@ module StartSpeechSynthesisTask = {
   }
   type response = {@as("SynthesisTask") synthesisTask: option<synthesisTask>}
   @module("@aws-sdk/client-polly") @new
-  external new_: request => t = "StartSpeechSynthesisTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartSpeechSynthesisTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSpeechSynthesisTask = {
   type t
   type request = {@as("TaskId") taskId: taskId}
   type response = {@as("SynthesisTask") synthesisTask: option<synthesisTask>}
-  @module("@aws-sdk/client-polly") @new
-  external new_: request => t = "GetSpeechSynthesisTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-polly") @new external new: request => t = "GetSpeechSynthesisTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSpeechSynthesisTasks = {
@@ -301,8 +300,8 @@ module ListSpeechSynthesisTasks = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-polly") @new
-  external new_: request => t = "ListSpeechSynthesisTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSpeechSynthesisTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLexicons = {
@@ -312,8 +311,8 @@ module ListLexicons = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Lexicons") lexicons: option<lexiconDescriptionList>,
   }
-  @module("@aws-sdk/client-polly") @new external new_: request => t = "ListLexiconsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-polly") @new external new: request => t = "ListLexiconsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVoices = {
@@ -329,6 +328,6 @@ module DescribeVoices = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Voices") voices: option<voiceList>,
   }
-  @module("@aws-sdk/client-polly") @new external new_: request => t = "DescribeVoicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-polly") @new external new: request => t = "DescribeVoicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

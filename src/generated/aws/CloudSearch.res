@@ -329,24 +329,24 @@ module ListDomainNames = {
   type t
 
   type response = {@as("DomainNames") domainNames: option<domainNameMap>}
-  @module("@aws-sdk/client-cloudsearch") @new external new_: unit => t = "ListDomainNamesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: unit => t = "ListDomainNamesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module IndexDocuments = {
   type t
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("FieldNames") fieldNames: option<fieldNameList>}
-  @module("@aws-sdk/client-cloudsearch") @new external new_: request => t = "IndexDocumentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "IndexDocumentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BuildSuggesters = {
   type t
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("FieldNames") fieldNames: option<fieldNameList>}
-  @module("@aws-sdk/client-cloudsearch") @new external new_: request => t = "BuildSuggestersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "BuildSuggestersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateServiceAccessPolicies = {
@@ -357,8 +357,8 @@ module UpdateServiceAccessPolicies = {
   }
   type response = {@as("AccessPolicies") accessPolicies: accessPoliciesStatus}
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "UpdateServiceAccessPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateServiceAccessPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateScalingParameters = {
@@ -369,8 +369,8 @@ module UpdateScalingParameters = {
   }
   type response = {@as("ScalingParameters") scalingParameters: scalingParametersStatus}
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "UpdateScalingParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateScalingParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDomainEndpointOptions = {
@@ -383,8 +383,8 @@ module UpdateDomainEndpointOptions = {
     @as("DomainEndpointOptions") domainEndpointOptions: option<domainEndpointOptionsStatus>,
   }
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "UpdateDomainEndpointOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDomainEndpointOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAvailabilityOptions = {
@@ -397,8 +397,8 @@ module UpdateAvailabilityOptions = {
     @as("AvailabilityOptions") availabilityOptions: option<availabilityOptionsStatus>,
   }
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "UpdateAvailabilityOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAvailabilityOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeServiceAccessPolicies = {
@@ -409,8 +409,8 @@ module DescribeServiceAccessPolicies = {
   }
   type response = {@as("AccessPolicies") accessPolicies: accessPoliciesStatus}
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DescribeServiceAccessPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeServiceAccessPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeScalingParameters = {
@@ -418,8 +418,8 @@ module DescribeScalingParameters = {
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("ScalingParameters") scalingParameters: scalingParametersStatus}
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DescribeScalingParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeScalingParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDomainEndpointOptions = {
@@ -432,8 +432,8 @@ module DescribeDomainEndpointOptions = {
     @as("DomainEndpointOptions") domainEndpointOptions: option<domainEndpointOptionsStatus>,
   }
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DescribeDomainEndpointOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDomainEndpointOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAvailabilityOptions = {
@@ -446,8 +446,8 @@ module DescribeAvailabilityOptions = {
     @as("AvailabilityOptions") availabilityOptions: option<availabilityOptionsStatus>,
   }
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DescribeAvailabilityOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAvailabilityOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteExpression = {
@@ -457,17 +457,16 @@ module DeleteExpression = {
     @as("DomainName") domainName: domainName,
   }
   type response = {@as("Expression") expression: expressionStatus}
-  @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DeleteExpressionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DeleteExpressionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDomain = {
   type t
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("DomainStatus") domainStatus: option<domainStatus>}
-  @module("@aws-sdk/client-cloudsearch") @new external new_: request => t = "DeleteDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DeleteDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DefineExpression = {
@@ -477,17 +476,16 @@ module DefineExpression = {
     @as("DomainName") domainName: domainName,
   }
   type response = {@as("Expression") expression: expressionStatus}
-  @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DefineExpressionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DefineExpressionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDomain = {
   type t
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("DomainStatus") domainStatus: option<domainStatus>}
-  @module("@aws-sdk/client-cloudsearch") @new external new_: request => t = "CreateDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "CreateDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeExpressions = {
@@ -499,16 +497,16 @@ module DescribeExpressions = {
   }
   type response = {@as("Expressions") expressions: expressionStatusList}
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DescribeExpressionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeExpressionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDomains = {
   type t
   type request = {@as("DomainNames") domainNames: option<domainNameList>}
   type response = {@as("DomainStatusList") domainStatusList: domainStatusList}
-  @module("@aws-sdk/client-cloudsearch") @new external new_: request => t = "DescribeDomainsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DescribeDomainsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSuggester = {
@@ -518,8 +516,8 @@ module DeleteSuggester = {
     @as("DomainName") domainName: domainName,
   }
   type response = {@as("Suggester") suggester: suggesterStatus}
-  @module("@aws-sdk/client-cloudsearch") @new external new_: request => t = "DeleteSuggesterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DeleteSuggesterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteIndexField = {
@@ -529,9 +527,8 @@ module DeleteIndexField = {
     @as("DomainName") domainName: domainName,
   }
   type response = {@as("IndexField") indexField: indexFieldStatus}
-  @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DeleteIndexFieldCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DeleteIndexFieldCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAnalysisScheme = {
@@ -542,8 +539,8 @@ module DeleteAnalysisScheme = {
   }
   type response = {@as("AnalysisScheme") analysisScheme: analysisSchemeStatus}
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DeleteAnalysisSchemeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAnalysisSchemeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DefineSuggester = {
@@ -553,8 +550,8 @@ module DefineSuggester = {
     @as("DomainName") domainName: domainName,
   }
   type response = {@as("Suggester") suggester: suggesterStatus}
-  @module("@aws-sdk/client-cloudsearch") @new external new_: request => t = "DefineSuggesterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DefineSuggesterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DefineIndexField = {
@@ -564,9 +561,8 @@ module DefineIndexField = {
     @as("DomainName") domainName: domainName,
   }
   type response = {@as("IndexField") indexField: indexFieldStatus}
-  @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DefineIndexFieldCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "DefineIndexFieldCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DefineAnalysisScheme = {
@@ -577,8 +573,8 @@ module DefineAnalysisScheme = {
   }
   type response = {@as("AnalysisScheme") analysisScheme: analysisSchemeStatus}
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DefineAnalysisSchemeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DefineAnalysisSchemeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSuggesters = {
@@ -590,8 +586,8 @@ module DescribeSuggesters = {
   }
   type response = {@as("Suggesters") suggesters: suggesterStatusList}
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DescribeSuggestersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSuggestersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIndexFields = {
@@ -603,8 +599,8 @@ module DescribeIndexFields = {
   }
   type response = {@as("IndexFields") indexFields: indexFieldStatusList}
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DescribeIndexFieldsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeIndexFieldsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAnalysisSchemes = {
@@ -616,6 +612,6 @@ module DescribeAnalysisSchemes = {
   }
   type response = {@as("AnalysisSchemes") analysisSchemes: analysisSchemeStatusList}
   @module("@aws-sdk/client-cloudsearch") @new
-  external new_: request => t = "DescribeAnalysisSchemesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAnalysisSchemesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -243,16 +243,16 @@ module DeleteOriginEndpoint = {
   type request = {@as("Id") id: __string}
   type response = unit
   @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "DeleteOriginEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteOriginEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteChannel = {
   type t
   type request = {@as("Id") id: __string}
   type response = unit
-  @module("@aws-sdk/client-mediapackage") @new external new_: request => t = "DeleteChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediapackage") @new external new: request => t = "DeleteChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -262,8 +262,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-mediapackage") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-mediapackage") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -273,8 +273,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-mediapackage") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-mediapackage") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListTagsForResource = {
@@ -282,8 +282,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: __string}
   type response = {@as("Tags") tags: option<__mapOf__string>}
   @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeHarvestJob = {
@@ -301,8 +301,8 @@ module DescribeHarvestJob = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "DescribeHarvestJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeHarvestJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateHarvestJob = {
@@ -326,8 +326,8 @@ module CreateHarvestJob = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "CreateHarvestJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateHarvestJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateChannel = {
@@ -345,8 +345,8 @@ module UpdateChannel = {
     @as("Description") description: option<__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mediapackage") @new external new_: request => t = "UpdateChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediapackage") @new external new: request => t = "UpdateChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RotateIngestEndpointCredentials = {
@@ -365,8 +365,8 @@ module RotateIngestEndpointCredentials = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "RotateIngestEndpointCredentialsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RotateIngestEndpointCredentialsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RotateChannelCredentials = {
@@ -382,8 +382,8 @@ module RotateChannelCredentials = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "RotateChannelCredentialsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RotateChannelCredentialsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListHarvestJobs = {
@@ -398,9 +398,8 @@ module ListHarvestJobs = {
     @as("NextToken") nextToken: option<__string>,
     @as("HarvestJobs") harvestJobs: option<__listOfHarvestJob>,
   }
-  @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "ListHarvestJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediapackage") @new external new: request => t = "ListHarvestJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeChannel = {
@@ -415,9 +414,8 @@ module DescribeChannel = {
     @as("Description") description: option<__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "DescribeChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediapackage") @new external new: request => t = "DescribeChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateChannel = {
@@ -436,8 +434,8 @@ module CreateChannel = {
     @as("Description") description: option<__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mediapackage") @new external new_: request => t = "CreateChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediapackage") @new external new: request => t = "CreateChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ConfigureLogs = {
@@ -456,8 +454,8 @@ module ConfigureLogs = {
     @as("Description") description: option<__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mediapackage") @new external new_: request => t = "ConfigureLogsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediapackage") @new external new: request => t = "ConfigureLogsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateOriginEndpoint = {
@@ -495,8 +493,8 @@ module UpdateOriginEndpoint = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "UpdateOriginEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateOriginEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOriginEndpoint = {
@@ -521,8 +519,8 @@ module DescribeOriginEndpoint = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "DescribeOriginEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOriginEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateOriginEndpoint = {
@@ -562,8 +560,8 @@ module CreateOriginEndpoint = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "CreateOriginEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateOriginEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChannels = {
@@ -576,8 +574,8 @@ module ListChannels = {
     @as("NextToken") nextToken: option<__string>,
     @as("Channels") channels: option<__listOfChannel>,
   }
-  @module("@aws-sdk/client-mediapackage") @new external new_: request => t = "ListChannelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediapackage") @new external new: request => t = "ListChannelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOriginEndpoints = {
@@ -592,6 +590,6 @@ module ListOriginEndpoints = {
     @as("NextToken") nextToken: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage") @new
-  external new_: request => t = "ListOriginEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListOriginEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

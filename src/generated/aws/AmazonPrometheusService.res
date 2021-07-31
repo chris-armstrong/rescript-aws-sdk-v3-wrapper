@@ -65,8 +65,8 @@ module UpdateWorkspaceAlias = {
     workspaceId: workspaceId,
   }
 
-  @module("@aws-sdk/client-aps") @new external new_: request => t = "UpdateWorkspaceAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-aps") @new external new: request => t = "UpdateWorkspaceAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteWorkspace = {
@@ -76,8 +76,8 @@ module DeleteWorkspace = {
     workspaceId: workspaceId,
   }
 
-  @module("@aws-sdk/client-aps") @new external new_: request => t = "DeleteWorkspaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-aps") @new external new: request => t = "DeleteWorkspaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateWorkspace = {
@@ -91,16 +91,16 @@ module CreateWorkspace = {
     arn: workspaceArn,
     workspaceId: workspaceId,
   }
-  @module("@aws-sdk/client-aps") @new external new_: request => t = "CreateWorkspaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-aps") @new external new: request => t = "CreateWorkspaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkspace = {
   type t
   type request = {workspaceId: workspaceId}
   type response = {workspace: workspaceDescription}
-  @module("@aws-sdk/client-aps") @new external new_: request => t = "DescribeWorkspaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-aps") @new external new: request => t = "DescribeWorkspaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorkspaces = {
@@ -114,6 +114,6 @@ module ListWorkspaces = {
     nextToken: option<paginationToken>,
     workspaces: workspaceSummaryList,
   }
-  @module("@aws-sdk/client-aps") @new external new_: request => t = "ListWorkspacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-aps") @new external new: request => t = "ListWorkspacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

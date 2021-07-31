@@ -317,8 +317,8 @@ module UpdateSubnetChangeProtection = {
     @as("UpdateToken") updateToken: option<updateToken>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "UpdateSubnetChangeProtectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSubnetChangeProtectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFirewallPolicyChangeProtection = {
@@ -336,8 +336,8 @@ module UpdateFirewallPolicyChangeProtection = {
     @as("UpdateToken") updateToken: option<updateToken>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "UpdateFirewallPolicyChangeProtectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFirewallPolicyChangeProtectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFirewallDescription = {
@@ -355,8 +355,8 @@ module UpdateFirewallDescription = {
     @as("FirewallArn") firewallArn: option<resourceArn>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "UpdateFirewallDescriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFirewallDescriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFirewallDeleteProtection = {
@@ -374,8 +374,8 @@ module UpdateFirewallDeleteProtection = {
     @as("FirewallArn") firewallArn: option<resourceArn>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "UpdateFirewallDeleteProtectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFirewallDeleteProtectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutResourcePolicy = {
@@ -386,8 +386,8 @@ module PutResourcePolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "PutResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeResourcePolicy = {
@@ -395,8 +395,8 @@ module DescribeResourcePolicy = {
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = {@as("Policy") policy: option<policyString>}
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "DescribeResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteResourcePolicy = {
@@ -404,8 +404,8 @@ module DeleteResourcePolicy = {
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = unit
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "DeleteResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateFirewallPolicy = {
@@ -423,8 +423,8 @@ module AssociateFirewallPolicy = {
     @as("FirewallArn") firewallArn: option<resourceArn>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "AssociateFirewallPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateFirewallPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -435,8 +435,8 @@ module UntagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -446,9 +446,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-network-firewall") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -463,8 +462,8 @@ module ListTagsForResource = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRuleGroups = {
@@ -478,8 +477,8 @@ module ListRuleGroups = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "ListRuleGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRuleGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFirewalls = {
@@ -494,8 +493,8 @@ module ListFirewalls = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "ListFirewallsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListFirewallsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFirewallPolicies = {
@@ -509,8 +508,8 @@ module ListFirewallPolicies = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "ListFirewallPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListFirewallPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateSubnets = {
@@ -528,8 +527,8 @@ module DisassociateSubnets = {
     @as("FirewallArn") firewallArn: option<resourceArn>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "DisassociateSubnetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateSubnetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateSubnets = {
@@ -547,8 +546,8 @@ module AssociateSubnets = {
     @as("FirewallArn") firewallArn: option<resourceArn>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "AssociateSubnetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateSubnetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRuleGroup = {
@@ -560,8 +559,8 @@ module DeleteRuleGroup = {
   }
   type response = {@as("RuleGroupResponse") ruleGroupResponse: ruleGroupResponse}
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "DeleteRuleGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteRuleGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFirewallPolicy = {
@@ -572,8 +571,8 @@ module DeleteFirewallPolicy = {
   }
   type response = {@as("FirewallPolicyResponse") firewallPolicyResponse: firewallPolicyResponse}
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "DeleteFirewallPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteFirewallPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLoggingConfiguration = {
@@ -589,8 +588,8 @@ module UpdateLoggingConfiguration = {
     @as("FirewallArn") firewallArn: option<resourceArn>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "UpdateLoggingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateLoggingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLoggingConfiguration = {
@@ -604,8 +603,8 @@ module DescribeLoggingConfiguration = {
     @as("FirewallArn") firewallArn: option<resourceArn>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "DescribeLoggingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLoggingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFirewall = {
@@ -620,8 +619,8 @@ module DescribeFirewall = {
     @as("UpdateToken") updateToken: option<updateToken>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "DescribeFirewallCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFirewallCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFirewall = {
@@ -635,8 +634,8 @@ module DeleteFirewall = {
     @as("Firewall") firewall: option<firewall>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "DeleteFirewallCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteFirewallCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFirewall = {
@@ -657,8 +656,8 @@ module CreateFirewall = {
     @as("Firewall") firewall: option<firewall>,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "CreateFirewallCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateFirewallCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFirewallPolicy = {
@@ -676,8 +675,8 @@ module UpdateFirewallPolicy = {
     @as("UpdateToken") updateToken: updateToken,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "UpdateFirewallPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFirewallPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFirewallPolicy = {
@@ -692,8 +691,8 @@ module DescribeFirewallPolicy = {
     @as("UpdateToken") updateToken: updateToken,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "DescribeFirewallPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFirewallPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFirewallPolicy = {
@@ -710,8 +709,8 @@ module CreateFirewallPolicy = {
     @as("UpdateToken") updateToken: updateToken,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "CreateFirewallPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateFirewallPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRuleGroup = {
@@ -731,8 +730,8 @@ module UpdateRuleGroup = {
     @as("UpdateToken") updateToken: updateToken,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "UpdateRuleGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateRuleGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRuleGroup = {
@@ -748,8 +747,8 @@ module DescribeRuleGroup = {
     @as("UpdateToken") updateToken: updateToken,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "DescribeRuleGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRuleGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRuleGroup = {
@@ -769,6 +768,6 @@ module CreateRuleGroup = {
     @as("UpdateToken") updateToken: updateToken,
   }
   @module("@aws-sdk/client-network-firewall") @new
-  external new_: request => t = "CreateRuleGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateRuleGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

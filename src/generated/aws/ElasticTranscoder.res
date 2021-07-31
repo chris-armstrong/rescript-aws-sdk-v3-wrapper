@@ -373,8 +373,8 @@ module DeletePreset = {
   type request = {@as("Id") id: id}
   type response = unit
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "DeletePresetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeletePresetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePipeline = {
@@ -382,16 +382,16 @@ module DeletePipeline = {
   type request = {@as("Id") id: id}
   type response = unit
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "DeletePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeletePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelJob = {
   type t
   type request = {@as("Id") id: id}
   type response = unit
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: request => t = "CancelJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elastictranscoder") @new external new: request => t = "CancelJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TestRole = {
@@ -406,17 +406,16 @@ module TestRole = {
     @as("Messages") messages: option<exceptionMessages>,
     @as("Success") success: option<success>,
   }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: request => t = "TestRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elastictranscoder") @new external new: request => t = "TestRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReadPreset = {
   type t
   type request = {@as("Id") id: id}
   type response = {@as("Preset") preset: option<preset>}
-  @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "ReadPresetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elastictranscoder") @new external new: request => t = "ReadPresetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePreset = {
@@ -434,8 +433,8 @@ module CreatePreset = {
     @as("Preset") preset: option<preset>,
   }
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "CreatePresetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePresetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePipelineStatus = {
@@ -446,8 +445,8 @@ module UpdatePipelineStatus = {
   }
   type response = {@as("Pipeline") pipeline: option<pipeline>}
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "UpdatePipelineStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePipelineStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePipelineNotifications = {
@@ -458,8 +457,8 @@ module UpdatePipelineNotifications = {
   }
   type response = {@as("Pipeline") pipeline: option<pipeline>}
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "UpdatePipelineNotificationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePipelineNotificationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePipeline = {
@@ -479,8 +478,8 @@ module UpdatePipeline = {
     @as("Pipeline") pipeline: option<pipeline>,
   }
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "UpdatePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReadPipeline = {
@@ -491,8 +490,8 @@ module ReadPipeline = {
     @as("Pipeline") pipeline: option<pipeline>,
   }
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "ReadPipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ReadPipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPresets = {
@@ -506,8 +505,8 @@ module ListPresets = {
     @as("Presets") presets: option<presets>,
   }
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "ListPresetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPresetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePipeline = {
@@ -527,8 +526,8 @@ module CreatePipeline = {
     @as("Pipeline") pipeline: option<pipeline>,
   }
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "CreatePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPipelines = {
@@ -542,16 +541,16 @@ module ListPipelines = {
     @as("Pipelines") pipelines: option<pipelines>,
   }
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "ListPipelinesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPipelinesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReadJob = {
   type t
   type request = {@as("Id") id: id}
   type response = {@as("Job") job: option<job>}
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: request => t = "ReadJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elastictranscoder") @new external new: request => t = "ReadJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateJob = {
@@ -567,8 +566,8 @@ module CreateJob = {
     @as("PipelineId") pipelineId: id,
   }
   type response = {@as("Job") job: option<job>}
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: request => t = "CreateJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elastictranscoder") @new external new: request => t = "CreateJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobsByStatus = {
@@ -583,8 +582,8 @@ module ListJobsByStatus = {
     @as("Jobs") jobs: option<jobs>,
   }
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "ListJobsByStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListJobsByStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobsByPipeline = {
@@ -599,6 +598,6 @@ module ListJobsByPipeline = {
     @as("Jobs") jobs: option<jobs>,
   }
   @module("@aws-sdk/client-elastictranscoder") @new
-  external new_: request => t = "ListJobsByPipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListJobsByPipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

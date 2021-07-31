@@ -128,8 +128,8 @@ module SetTaskStatus = {
     taskId: taskId,
   }
   type response = unit
-  @module("@aws-sdk/client-datapipeline") @new external new_: request => t = "SetTaskStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datapipeline") @new external new: request => t = "SetTaskStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReportTaskRunnerHeartbeat = {
@@ -141,8 +141,8 @@ module ReportTaskRunnerHeartbeat = {
   }
   type response = {terminate: boolean_}
   @module("@aws-sdk/client-datapipeline") @new
-  external new_: request => t = "ReportTaskRunnerHeartbeatCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ReportTaskRunnerHeartbeatCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EvaluateExpression = {
@@ -154,16 +154,16 @@ module EvaluateExpression = {
   }
   type response = {evaluatedExpression: longString}
   @module("@aws-sdk/client-datapipeline") @new
-  external new_: request => t = "EvaluateExpressionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EvaluateExpressionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePipeline = {
   type t
   type request = {pipelineId: id}
 
-  @module("@aws-sdk/client-datapipeline") @new external new_: request => t = "DeletePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-datapipeline") @new external new: request => t = "DeletePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeactivatePipeline = {
@@ -174,8 +174,8 @@ module DeactivatePipeline = {
   }
   type response = unit
   @module("@aws-sdk/client-datapipeline") @new
-  external new_: request => t = "DeactivatePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeactivatePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetStatus = {
@@ -186,8 +186,8 @@ module SetStatus = {
     pipelineId: id,
   }
 
-  @module("@aws-sdk/client-datapipeline") @new external new_: request => t = "SetStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-datapipeline") @new external new: request => t = "SetStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveTags = {
@@ -197,8 +197,8 @@ module RemoveTags = {
     pipelineId: id,
   }
   type response = unit
-  @module("@aws-sdk/client-datapipeline") @new external new_: request => t = "RemoveTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datapipeline") @new external new: request => t = "RemoveTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReportTaskProgress = {
@@ -209,8 +209,8 @@ module ReportTaskProgress = {
   }
   type response = {canceled: boolean_}
   @module("@aws-sdk/client-datapipeline") @new
-  external new_: request => t = "ReportTaskProgressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ReportTaskProgressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPipelines = {
@@ -221,8 +221,8 @@ module ListPipelines = {
     marker: option<string_>,
     pipelineIdList: pipelineList,
   }
-  @module("@aws-sdk/client-datapipeline") @new external new_: request => t = "ListPipelinesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datapipeline") @new external new: request => t = "ListPipelinesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePipeline = {
@@ -234,8 +234,8 @@ module CreatePipeline = {
     name: id,
   }
   type response = {pipelineId: id}
-  @module("@aws-sdk/client-datapipeline") @new external new_: request => t = "CreatePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datapipeline") @new external new: request => t = "CreatePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTags = {
@@ -245,8 +245,8 @@ module AddTags = {
     pipelineId: id,
   }
   type response = unit
-  @module("@aws-sdk/client-datapipeline") @new external new_: request => t = "AddTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datapipeline") @new external new: request => t = "AddTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ActivatePipeline = {
@@ -258,8 +258,8 @@ module ActivatePipeline = {
   }
   type response = unit
   @module("@aws-sdk/client-datapipeline") @new
-  external new_: request => t = "ActivatePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ActivatePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ValidatePipelineDefinition = {
@@ -276,8 +276,8 @@ module ValidatePipelineDefinition = {
     validationErrors: option<validationErrors>,
   }
   @module("@aws-sdk/client-datapipeline") @new
-  external new_: request => t = "ValidatePipelineDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ValidatePipelineDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutPipelineDefinition = {
@@ -294,8 +294,8 @@ module PutPipelineDefinition = {
     validationErrors: option<validationErrors>,
   }
   @module("@aws-sdk/client-datapipeline") @new
-  external new_: request => t = "PutPipelineDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutPipelineDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPipelineDefinition = {
@@ -310,8 +310,8 @@ module GetPipelineDefinition = {
     pipelineObjects: option<pipelineObjectList>,
   }
   @module("@aws-sdk/client-datapipeline") @new
-  external new_: request => t = "GetPipelineDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPipelineDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePipelines = {
@@ -319,8 +319,8 @@ module DescribePipelines = {
   type request = {pipelineIds: idList}
   type response = {pipelineDescriptionList: pipelineDescriptionList}
   @module("@aws-sdk/client-datapipeline") @new
-  external new_: request => t = "DescribePipelinesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePipelinesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeObjects = {
@@ -336,9 +336,8 @@ module DescribeObjects = {
     marker: option<string_>,
     pipelineObjects: pipelineObjectList,
   }
-  @module("@aws-sdk/client-datapipeline") @new
-  external new_: request => t = "DescribeObjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datapipeline") @new external new: request => t = "DescribeObjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module QueryObjects = {
@@ -355,8 +354,8 @@ module QueryObjects = {
     marker: option<string_>,
     ids: option<idList>,
   }
-  @module("@aws-sdk/client-datapipeline") @new external new_: request => t = "QueryObjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datapipeline") @new external new: request => t = "QueryObjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PollForTask = {
@@ -367,6 +366,6 @@ module PollForTask = {
     workerGroup: string_,
   }
   type response = {taskObject: option<taskObject>}
-  @module("@aws-sdk/client-datapipeline") @new external new_: request => t = "PollForTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datapipeline") @new external new: request => t = "PollForTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

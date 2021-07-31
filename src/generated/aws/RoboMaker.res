@@ -571,8 +571,8 @@ module RestartSimulationJob = {
   type request = {job: arn}
   type response = unit
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "RestartSimulationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RestartSimulationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterRobot = {
@@ -585,8 +585,8 @@ module RegisterRobot = {
     robot: option<arn>,
     fleet: option<arn>,
   }
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "RegisterRobotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "RegisterRobotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWorldTemplateBody = {
@@ -597,8 +597,8 @@ module GetWorldTemplateBody = {
   }
   type response = {templateBody: option<json>}
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "GetWorldTemplateBodyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWorldTemplateBodyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterRobot = {
@@ -611,8 +611,8 @@ module DeregisterRobot = {
     robot: option<arn>,
     fleet: option<arn>,
   }
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "DeregisterRobotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "DeregisterRobotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWorldTemplate = {
@@ -620,8 +620,8 @@ module DeleteWorldTemplate = {
   type request = {template: arn}
   type response = unit
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "DeleteWorldTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteWorldTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSimulationApplication = {
@@ -632,8 +632,8 @@ module DeleteSimulationApplication = {
   }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "DeleteSimulationApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSimulationApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRobotApplication = {
@@ -644,24 +644,24 @@ module DeleteRobotApplication = {
   }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "DeleteRobotApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteRobotApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRobot = {
   type t
   type request = {robot: arn}
   type response = unit
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "DeleteRobotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "DeleteRobotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFleet = {
   type t
   type request = {fleet: arn}
   type response = unit
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "DeleteFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "DeleteFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelWorldGenerationJob = {
@@ -669,8 +669,8 @@ module CancelWorldGenerationJob = {
   type request = {job: arn}
   type response = unit
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CancelWorldGenerationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelWorldGenerationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelWorldExportJob = {
@@ -678,8 +678,8 @@ module CancelWorldExportJob = {
   type request = {job: arn}
   type response = unit
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CancelWorldExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelWorldExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelSimulationJobBatch = {
@@ -687,8 +687,8 @@ module CancelSimulationJobBatch = {
   type request = {batch: arn}
   type response = unit
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CancelSimulationJobBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelSimulationJobBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelSimulationJob = {
@@ -696,8 +696,8 @@ module CancelSimulationJob = {
   type request = {job: arn}
   type response = unit
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CancelSimulationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelSimulationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelDeploymentJob = {
@@ -705,8 +705,8 @@ module CancelDeploymentJob = {
   type request = {job: arn}
   type response = unit
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CancelDeploymentJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelDeploymentJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateWorldTemplate = {
@@ -724,8 +724,8 @@ module UpdateWorldTemplate = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "UpdateWorldTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateWorldTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -735,8 +735,8 @@ module UntagResource = {
     resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -746,8 +746,8 @@ module TagResource = {
     resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -755,8 +755,8 @@ module ListTagsForResource = {
   type request = {resourceArn: arn}
   type response = {tags: option<tagMap>}
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorldTemplate = {
@@ -771,8 +771,8 @@ module DescribeWorldTemplate = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "DescribeWorldTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWorldTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorldExportJob = {
@@ -791,8 +791,8 @@ module DescribeWorldExportJob = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "DescribeWorldExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWorldExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorld = {
@@ -805,8 +805,8 @@ module DescribeWorld = {
     generationJob: option<arn>,
     arn: option<arn>,
   }
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "DescribeWorldCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "DescribeWorldCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRobot = {
@@ -824,8 +824,8 @@ module DescribeRobot = {
     name: option<name>,
     arn: option<arn>,
   }
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "DescribeRobotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "DescribeRobotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWorldTemplate = {
@@ -845,8 +845,8 @@ module CreateWorldTemplate = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CreateWorldTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateWorldTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWorldGenerationJob = {
@@ -870,8 +870,8 @@ module CreateWorldGenerationJob = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CreateWorldGenerationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateWorldGenerationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWorldExportJob = {
@@ -894,8 +894,8 @@ module CreateWorldExportJob = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CreateWorldExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateWorldExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRobot = {
@@ -914,8 +914,8 @@ module CreateRobot = {
     name: option<name>,
     arn: option<arn>,
   }
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "CreateRobotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "CreateRobotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFleet = {
@@ -930,16 +930,16 @@ module CreateFleet = {
     name: option<name>,
     arn: option<arn>,
   }
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "CreateFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "CreateFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteWorlds = {
   type t
   type request = {worlds: arns}
   type response = {unprocessedWorlds: option<arns>}
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "BatchDeleteWorldsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "BatchDeleteWorldsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSimulationApplication = {
@@ -964,8 +964,8 @@ module UpdateSimulationApplication = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "UpdateSimulationApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSimulationApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRobotApplication = {
@@ -986,8 +986,8 @@ module UpdateRobotApplication = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "UpdateRobotApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateRobotApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorldTemplates = {
@@ -1000,9 +1000,8 @@ module ListWorldTemplates = {
     nextToken: option<paginationToken>,
     templateSummaries: option<templateSummaries>,
   }
-  @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "ListWorldTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListWorldTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSimulationApplication = {
@@ -1024,8 +1023,8 @@ module DescribeSimulationApplication = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "DescribeSimulationApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSimulationApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRobotApplication = {
@@ -1045,8 +1044,8 @@ module DescribeRobotApplication = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "DescribeRobotApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRobotApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFleet = {
@@ -1062,8 +1061,8 @@ module DescribeFleet = {
     arn: option<arn>,
     name: option<name>,
   }
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "DescribeFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "DescribeFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSimulationApplicationVersion = {
@@ -1084,8 +1083,8 @@ module CreateSimulationApplicationVersion = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CreateSimulationApplicationVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSimulationApplicationVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSimulationApplication = {
@@ -1111,8 +1110,8 @@ module CreateSimulationApplication = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CreateSimulationApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSimulationApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRobotApplicationVersion = {
@@ -1131,8 +1130,8 @@ module CreateRobotApplicationVersion = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CreateRobotApplicationVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateRobotApplicationVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRobotApplication = {
@@ -1154,8 +1153,8 @@ module CreateRobotApplication = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CreateRobotApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateRobotApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorlds = {
@@ -1169,8 +1168,8 @@ module ListWorlds = {
     nextToken: option<paginationToken>,
     worldSummaries: option<worldSummaries>,
   }
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "ListWorldsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListWorldsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorldGenerationJobs = {
@@ -1185,8 +1184,8 @@ module ListWorldGenerationJobs = {
     worldGenerationJobSummaries: worldGenerationJobSummaries,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "ListWorldGenerationJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListWorldGenerationJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorldExportJobs = {
@@ -1201,8 +1200,8 @@ module ListWorldExportJobs = {
     worldExportJobSummaries: worldExportJobSummaries,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "ListWorldExportJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListWorldExportJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSimulationJobs = {
@@ -1216,9 +1215,8 @@ module ListSimulationJobs = {
     nextToken: option<paginationToken>,
     simulationJobSummaries: simulationJobSummaries,
   }
-  @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "ListSimulationJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListSimulationJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSimulationJobBatches = {
@@ -1233,8 +1231,8 @@ module ListSimulationJobBatches = {
     simulationJobBatchSummaries: option<simulationJobBatchSummaries>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "ListSimulationJobBatchesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSimulationJobBatchesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSimulationApplications = {
@@ -1250,8 +1248,8 @@ module ListSimulationApplications = {
     simulationApplicationSummaries: option<simulationApplicationSummaries>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "ListSimulationApplicationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSimulationApplicationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRobots = {
@@ -1265,8 +1263,8 @@ module ListRobots = {
     nextToken: option<paginationToken>,
     robots: option<robots>,
   }
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "ListRobotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListRobotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRobotApplications = {
@@ -1282,8 +1280,8 @@ module ListRobotApplications = {
     robotApplicationSummaries: option<robotApplicationSummaries>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "ListRobotApplicationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRobotApplicationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFleets = {
@@ -1297,8 +1295,8 @@ module ListFleets = {
     nextToken: option<paginationToken>,
     fleetDetails: option<fleets>,
   }
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "ListFleetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListFleetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SyncDeploymentJob = {
@@ -1317,8 +1315,8 @@ module SyncDeploymentJob = {
     fleet: option<arn>,
     arn: option<arn>,
   }
-  @module("@aws-sdk/client-robomaker") @new external new_: request => t = "SyncDeploymentJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "SyncDeploymentJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorldGenerationJob = {
@@ -1338,8 +1336,8 @@ module DescribeWorldGenerationJob = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "DescribeWorldGenerationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWorldGenerationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDeploymentJob = {
@@ -1358,8 +1356,8 @@ module DescribeDeploymentJob = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "DescribeDeploymentJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDeploymentJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDeploymentJob = {
@@ -1383,8 +1381,8 @@ module CreateDeploymentJob = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CreateDeploymentJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDeploymentJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDeploymentJobs = {
@@ -1398,9 +1396,8 @@ module ListDeploymentJobs = {
     nextToken: option<paginationToken>,
     deploymentJobs: option<deploymentJobs>,
   }
-  @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "ListDeploymentJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-robomaker") @new external new: request => t = "ListDeploymentJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSimulationJob = {
@@ -1430,8 +1427,8 @@ module DescribeSimulationJob = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "DescribeSimulationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSimulationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSimulationJob = {
@@ -1471,8 +1468,8 @@ module CreateSimulationJob = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "CreateSimulationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSimulationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDescribeSimulationJob = {
@@ -1483,8 +1480,8 @@ module BatchDescribeSimulationJob = {
     jobs: option<simulationJobs>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "BatchDescribeSimulationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDescribeSimulationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartSimulationJobBatch = {
@@ -1509,8 +1506,8 @@ module StartSimulationJobBatch = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "StartSimulationJobBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartSimulationJobBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSimulationJobBatch = {
@@ -1531,6 +1528,6 @@ module DescribeSimulationJobBatch = {
     arn: option<arn>,
   }
   @module("@aws-sdk/client-robomaker") @new
-  external new_: request => t = "DescribeSimulationJobBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSimulationJobBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -237,8 +237,8 @@ module UpdatePrimaryEmailAddress = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "UpdatePrimaryEmailAddressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePrimaryEmailAddressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMailboxQuota = {
@@ -249,8 +249,8 @@ module UpdateMailboxQuota = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "UpdateMailboxQuotaCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "UpdateMailboxQuotaCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartMailboxExportJob = {
@@ -267,8 +267,8 @@ module StartMailboxExportJob = {
   }
   type response = {@as("JobId") jobId: option<mailboxExportJobId>}
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "StartMailboxExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartMailboxExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResetPassword = {
@@ -279,8 +279,8 @@ module ResetPassword = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "ResetPasswordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "ResetPasswordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterToWorkMail = {
@@ -291,8 +291,8 @@ module RegisterToWorkMail = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "RegisterToWorkMailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "RegisterToWorkMailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMailboxDetails = {
@@ -305,8 +305,8 @@ module GetMailboxDetails = {
     @as("MailboxSize") mailboxSize: option<mailboxSize>,
     @as("MailboxQuota") mailboxQuota: option<mailboxQuota>,
   }
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "GetMailboxDetailsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "GetMailboxDetailsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateMemberFromGroup = {
@@ -318,8 +318,8 @@ module DisassociateMemberFromGroup = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "DisassociateMemberFromGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateMemberFromGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateDelegateFromResource = {
@@ -331,8 +331,8 @@ module DisassociateDelegateFromResource = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "DisassociateDelegateFromResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateDelegateFromResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeUser = {
@@ -351,8 +351,8 @@ module DescribeUser = {
     @as("Name") name: option<userName>,
     @as("UserId") userId: option<workMailIdentifier>,
   }
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "DescribeUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "DescribeUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOrganization = {
@@ -370,8 +370,8 @@ module DescribeOrganization = {
     @as("OrganizationId") organizationId: option<organizationId>,
   }
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "DescribeOrganizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOrganizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMailboxExportJob = {
@@ -395,8 +395,8 @@ module DescribeMailboxExportJob = {
     @as("EntityId") entityId: option<workMailIdentifier>,
   }
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "DescribeMailboxExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMailboxExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeGroup = {
@@ -413,8 +413,8 @@ module DescribeGroup = {
     @as("Name") name: option<groupName>,
     @as("GroupId") groupId: option<workMailIdentifier>,
   }
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "DescribeGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "DescribeGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterFromWorkMail = {
@@ -425,8 +425,8 @@ module DeregisterFromWorkMail = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "DeregisterFromWorkMailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterFromWorkMailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteUser = {
@@ -436,8 +436,8 @@ module DeleteUser = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "DeleteUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRetentionPolicy = {
@@ -448,8 +448,8 @@ module DeleteRetentionPolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "DeleteRetentionPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteRetentionPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteResource = {
@@ -459,8 +459,8 @@ module DeleteResource = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "DeleteResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteOrganization = {
@@ -474,8 +474,8 @@ module DeleteOrganization = {
     @as("State") state: option<string_>,
     @as("OrganizationId") organizationId: option<organizationId>,
   }
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "DeleteOrganizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteOrganizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMobileDeviceAccessRule = {
@@ -486,8 +486,8 @@ module DeleteMobileDeviceAccessRule = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "DeleteMobileDeviceAccessRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteMobileDeviceAccessRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMailboxPermissions = {
@@ -499,8 +499,8 @@ module DeleteMailboxPermissions = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "DeleteMailboxPermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteMailboxPermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteGroup = {
@@ -510,8 +510,8 @@ module DeleteGroup = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "DeleteGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAlias = {
@@ -522,8 +522,8 @@ module DeleteAlias = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "DeleteAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "DeleteAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAccessControlRule = {
@@ -534,8 +534,8 @@ module DeleteAccessControlRule = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "DeleteAccessControlRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAccessControlRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateUser = {
@@ -547,8 +547,8 @@ module CreateUser = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = {@as("UserId") userId: option<workMailIdentifier>}
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "CreateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "CreateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateResource = {
@@ -559,8 +559,8 @@ module CreateResource = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = {@as("ResourceId") resourceId: option<resourceId>}
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "CreateResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "CreateResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateGroup = {
@@ -570,8 +570,8 @@ module CreateGroup = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = {@as("GroupId") groupId: option<workMailIdentifier>}
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "CreateGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "CreateGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAlias = {
@@ -582,8 +582,8 @@ module CreateAlias = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "CreateAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "CreateAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelMailboxExportJob = {
@@ -595,8 +595,8 @@ module CancelMailboxExportJob = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "CancelMailboxExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelMailboxExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateMemberToGroup = {
@@ -608,8 +608,8 @@ module AssociateMemberToGroup = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "AssociateMemberToGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateMemberToGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateDelegateToResource = {
@@ -621,8 +621,8 @@ module AssociateDelegateToResource = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "AssociateDelegateToResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateDelegateToResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateResource = {
@@ -634,8 +634,8 @@ module UpdateResource = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "UpdateResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "UpdateResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMobileDeviceAccessRule = {
@@ -657,8 +657,8 @@ module UpdateMobileDeviceAccessRule = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "UpdateMobileDeviceAccessRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateMobileDeviceAccessRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -668,8 +668,8 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutMailboxPermissions = {
@@ -682,8 +682,8 @@ module PutMailboxPermissions = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "PutMailboxPermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutMailboxPermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAccessControlRule = {
@@ -702,8 +702,8 @@ module PutAccessControlRule = {
   }
   type response = unit
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "PutAccessControlRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutAccessControlRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAliases = {
@@ -718,8 +718,8 @@ module ListAliases = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Aliases") aliases: option<aliases>,
   }
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "ListAliasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "ListAliasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAccessControlEffect = {
@@ -735,8 +735,8 @@ module GetAccessControlEffect = {
     @as("Effect") effect: option<accessControlRuleEffect>,
   }
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "GetAccessControlEffectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAccessControlEffectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeResource = {
@@ -755,8 +755,8 @@ module DescribeResource = {
     @as("Email") email: option<emailAddress>,
     @as("ResourceId") resourceId: option<resourceId>,
   }
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "DescribeResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "DescribeResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMobileDeviceAccessRule = {
@@ -780,8 +780,8 @@ module CreateMobileDeviceAccessRule = {
     @as("MobileDeviceAccessRuleId") mobileDeviceAccessRuleId: option<mobileDeviceAccessRuleId>,
   }
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "CreateMobileDeviceAccessRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateMobileDeviceAccessRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -791,8 +791,8 @@ module TagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutRetentionPolicy = {
@@ -805,8 +805,8 @@ module PutRetentionPolicy = {
     @as("OrganizationId") organizationId: organizationId,
   }
   type response = unit
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "PutRetentionPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "PutRetentionPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListUsers = {
@@ -820,17 +820,16 @@ module ListUsers = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Users") users: option<users>,
   }
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "ListUsersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "ListUsersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceARN") resourceARN: amazonResourceName}
   type response = {@as("Tags") tags: option<tagList_>}
-  @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResources = {
@@ -844,8 +843,8 @@ module ListResources = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Resources") resources: option<resources>,
   }
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "ListResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "ListResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResourceDelegates = {
@@ -861,8 +860,8 @@ module ListResourceDelegates = {
     @as("Delegates") delegates: option<resourceDelegates>,
   }
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "ListResourceDelegatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListResourceDelegatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOrganizations = {
@@ -875,8 +874,8 @@ module ListOrganizations = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("OrganizationSummaries") organizationSummaries: option<organizationSummaries>,
   }
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "ListOrganizationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "ListOrganizationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMailboxExportJobs = {
@@ -891,8 +890,8 @@ module ListMailboxExportJobs = {
     @as("Jobs") jobs: option<jobs>,
   }
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "ListMailboxExportJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListMailboxExportJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListGroups = {
@@ -906,8 +905,8 @@ module ListGroups = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Groups") groups: option<groups>,
   }
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "ListGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "ListGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListGroupMembers = {
@@ -922,8 +921,8 @@ module ListGroupMembers = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Members") members: option<members>,
   }
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "ListGroupMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "ListGroupMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMobileDeviceAccessEffect = {
@@ -940,8 +939,8 @@ module GetMobileDeviceAccessEffect = {
     @as("Effect") effect: option<mobileDeviceAccessRuleEffect>,
   }
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "GetMobileDeviceAccessEffectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetMobileDeviceAccessEffectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDefaultRetentionPolicy = {
@@ -954,8 +953,8 @@ module GetDefaultRetentionPolicy = {
     @as("Id") id: option<shortString>,
   }
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "GetDefaultRetentionPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDefaultRetentionPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateOrganization = {
@@ -969,8 +968,8 @@ module CreateOrganization = {
     @as("DirectoryId") directoryId: option<directoryId>,
   }
   type response = {@as("OrganizationId") organizationId: option<organizationId>}
-  @module("@aws-sdk/client-workmail") @new external new_: request => t = "CreateOrganizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workmail") @new external new: request => t = "CreateOrganizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMobileDeviceAccessRules = {
@@ -978,8 +977,8 @@ module ListMobileDeviceAccessRules = {
   type request = {@as("OrganizationId") organizationId: organizationId}
   type response = {@as("Rules") rules: option<mobileDeviceAccessRulesList>}
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "ListMobileDeviceAccessRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListMobileDeviceAccessRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMailboxPermissions = {
@@ -995,8 +994,8 @@ module ListMailboxPermissions = {
     @as("Permissions") permissions: option<permissions>,
   }
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "ListMailboxPermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListMailboxPermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAccessControlRules = {
@@ -1004,6 +1003,6 @@ module ListAccessControlRules = {
   type request = {@as("OrganizationId") organizationId: organizationId}
   type response = {@as("Rules") rules: option<accessControlRulesList>}
   @module("@aws-sdk/client-workmail") @new
-  external new_: request => t = "ListAccessControlRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAccessControlRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

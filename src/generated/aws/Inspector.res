@@ -493,8 +493,8 @@ module UpdateAssessmentTarget = {
   }
 
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "UpdateAssessmentTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateAssessmentTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UnsubscribeFromEvent = {
@@ -506,8 +506,8 @@ module UnsubscribeFromEvent = {
   }
 
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "UnsubscribeFromEventCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UnsubscribeFromEventCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SubscribeToEvent = {
@@ -518,8 +518,8 @@ module SubscribeToEvent = {
     resourceArn: arn,
   }
 
-  @module("@aws-sdk/client-inspector") @new external new_: request => t = "SubscribeToEventCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-inspector") @new external new: request => t = "SubscribeToEventCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopAssessmentRun = {
@@ -529,8 +529,8 @@ module StopAssessmentRun = {
     assessmentRunArn: arn,
   }
 
-  @module("@aws-sdk/client-inspector") @new external new_: request => t = "StopAssessmentRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-inspector") @new external new: request => t = "StopAssessmentRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RegisterCrossAccountAccessRole = {
@@ -538,8 +538,8 @@ module RegisterCrossAccountAccessRole = {
   type request = {roleArn: arn}
 
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "RegisterCrossAccountAccessRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RegisterCrossAccountAccessRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeCrossAccountAccessRole = {
@@ -551,8 +551,8 @@ module DescribeCrossAccountAccessRole = {
     roleArn: arn,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: unit => t = "DescribeCrossAccountAccessRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "DescribeCrossAccountAccessRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateExclusionsPreview = {
@@ -560,8 +560,8 @@ module CreateExclusionsPreview = {
   type request = {assessmentTemplateArn: arn}
   type response = {previewToken: uuid}
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "CreateExclusionsPreviewCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateExclusionsPreviewCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAssessmentTarget = {
@@ -572,8 +572,8 @@ module CreateAssessmentTarget = {
   }
   type response = {assessmentTargetArn: arn}
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "CreateAssessmentTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAssessmentTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRulesPackages = {
@@ -586,8 +586,8 @@ module ListRulesPackages = {
     nextToken: option<paginationToken>,
     rulesPackageArns: listReturnedArnList,
   }
-  @module("@aws-sdk/client-inspector") @new external new_: request => t = "ListRulesPackagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-inspector") @new external new: request => t = "ListRulesPackagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListExclusions = {
@@ -601,8 +601,8 @@ module ListExclusions = {
     nextToken: option<paginationToken>,
     exclusionArns: listReturnedArnList,
   }
-  @module("@aws-sdk/client-inspector") @new external new_: request => t = "ListExclusionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-inspector") @new external new: request => t = "ListExclusionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssessmentTargets = {
@@ -617,8 +617,8 @@ module ListAssessmentTargets = {
     assessmentTargetArns: listReturnedArnList,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "ListAssessmentTargetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAssessmentTargetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAssessmentReport = {
@@ -633,8 +633,8 @@ module GetAssessmentReport = {
     status: reportStatus,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "GetAssessmentReportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAssessmentReportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAssessmentTemplate = {
@@ -642,8 +642,8 @@ module DeleteAssessmentTemplate = {
   type request = {assessmentTemplateArn: arn}
 
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "DeleteAssessmentTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteAssessmentTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAssessmentTarget = {
@@ -651,8 +651,8 @@ module DeleteAssessmentTarget = {
   type request = {assessmentTargetArn: arn}
 
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "DeleteAssessmentTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteAssessmentTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAssessmentRun = {
@@ -660,8 +660,8 @@ module DeleteAssessmentRun = {
   type request = {assessmentRunArn: arn}
 
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "DeleteAssessmentRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteAssessmentRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartAssessmentRun = {
@@ -671,9 +671,8 @@ module StartAssessmentRun = {
     assessmentTemplateArn: arn,
   }
   type response = {assessmentRunArn: arn}
-  @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "StartAssessmentRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-inspector") @new external new: request => t = "StartAssessmentRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetTagsForResource = {
@@ -683,9 +682,8 @@ module SetTagsForResource = {
     resourceArn: arn,
   }
 
-  @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "SetTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-inspector") @new external new: request => t = "SetTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveAttributesFromFindings = {
@@ -696,8 +694,8 @@ module RemoveAttributesFromFindings = {
   }
   type response = {failedItems: failedItems}
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "RemoveAttributesFromFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveAttributesFromFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PreviewAgents = {
@@ -711,8 +709,8 @@ module PreviewAgents = {
     nextToken: option<paginationToken>,
     agentPreviews: agentPreviewList,
   }
-  @module("@aws-sdk/client-inspector") @new external new_: request => t = "PreviewAgentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-inspector") @new external new: request => t = "PreviewAgentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -720,8 +718,8 @@ module ListTagsForResource = {
   type request = {resourceArn: arn}
   type response = {tags: tagList_}
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssessmentTemplates = {
@@ -737,8 +735,8 @@ module ListAssessmentTemplates = {
     assessmentTemplateArns: listReturnedArnList,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "ListAssessmentTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAssessmentTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssessmentRuns = {
@@ -753,9 +751,8 @@ module ListAssessmentRuns = {
     nextToken: option<paginationToken>,
     assessmentRunArns: listReturnedArnList,
   }
-  @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "ListAssessmentRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-inspector") @new external new: request => t = "ListAssessmentRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTelemetryMetadata = {
@@ -763,8 +760,8 @@ module GetTelemetryMetadata = {
   type request = {assessmentRunArn: arn}
   type response = {telemetryMetadata: telemetryMetadataList}
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "GetTelemetryMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTelemetryMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRulesPackages = {
@@ -778,8 +775,8 @@ module DescribeRulesPackages = {
     rulesPackages: rulesPackageList,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "DescribeRulesPackagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRulesPackagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAssessmentTargets = {
@@ -790,8 +787,8 @@ module DescribeAssessmentTargets = {
     assessmentTargets: assessmentTargetList,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "DescribeAssessmentTargetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAssessmentTargetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateResourceGroup = {
@@ -799,8 +796,8 @@ module CreateResourceGroup = {
   type request = {resourceGroupTags: resourceGroupTags}
   type response = {resourceGroupArn: arn}
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "CreateResourceGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateResourceGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAssessmentTemplate = {
@@ -814,8 +811,8 @@ module CreateAssessmentTemplate = {
   }
   type response = {assessmentTemplateArn: arn}
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "CreateAssessmentTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAssessmentTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddAttributesToFindings = {
@@ -826,8 +823,8 @@ module AddAttributesToFindings = {
   }
   type response = {failedItems: failedItems}
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "AddAttributesToFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddAttributesToFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFindings = {
@@ -842,8 +839,8 @@ module ListFindings = {
     nextToken: option<paginationToken>,
     findingArns: listReturnedArnList,
   }
-  @module("@aws-sdk/client-inspector") @new external new_: request => t = "ListFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-inspector") @new external new: request => t = "ListFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEventSubscriptions = {
@@ -858,8 +855,8 @@ module ListEventSubscriptions = {
     subscriptions: subscriptionList,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "ListEventSubscriptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEventSubscriptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssessmentRunAgents = {
@@ -875,8 +872,8 @@ module ListAssessmentRunAgents = {
     assessmentRunAgents: assessmentRunAgentList,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "ListAssessmentRunAgentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAssessmentRunAgentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetExclusionsPreview = {
@@ -894,8 +891,8 @@ module GetExclusionsPreview = {
     previewStatus: previewStatus,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "GetExclusionsPreviewCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetExclusionsPreviewCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeResourceGroups = {
@@ -906,8 +903,8 @@ module DescribeResourceGroups = {
     resourceGroups: resourceGroupList,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "DescribeResourceGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeResourceGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeExclusions = {
@@ -920,9 +917,8 @@ module DescribeExclusions = {
     failedItems: failedItems,
     exclusions: exclusionMap,
   }
-  @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "DescribeExclusionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-inspector") @new external new: request => t = "DescribeExclusionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAssessmentTemplates = {
@@ -933,8 +929,8 @@ module DescribeAssessmentTemplates = {
     assessmentTemplates: assessmentTemplateList,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "DescribeAssessmentTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAssessmentTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAssessmentRuns = {
@@ -945,8 +941,8 @@ module DescribeAssessmentRuns = {
     assessmentRuns: assessmentRunList,
   }
   @module("@aws-sdk/client-inspector") @new
-  external new_: request => t = "DescribeAssessmentRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAssessmentRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFindings = {
@@ -959,6 +955,6 @@ module DescribeFindings = {
     failedItems: failedItems,
     findings: findingList,
   }
-  @module("@aws-sdk/client-inspector") @new external new_: request => t = "DescribeFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-inspector") @new external new: request => t = "DescribeFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

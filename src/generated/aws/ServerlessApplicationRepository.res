@@ -112,8 +112,8 @@ module UnshareApplication = {
   }
 
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "UnshareApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UnshareApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetCloudFormationTemplate = {
@@ -132,8 +132,8 @@ module GetCloudFormationTemplate = {
     @as("ApplicationId") applicationId: option<__string>,
   }
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "GetCloudFormationTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCloudFormationTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApplication = {
@@ -141,8 +141,8 @@ module DeleteApplication = {
   type request = {@as("ApplicationId") applicationId: __string}
 
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "DeleteApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateCloudFormationTemplate = {
@@ -161,8 +161,8 @@ module CreateCloudFormationTemplate = {
     @as("ApplicationId") applicationId: option<__string>,
   }
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "CreateCloudFormationTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCloudFormationTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListApplicationVersions = {
@@ -177,8 +177,8 @@ module ListApplicationVersions = {
     @as("NextToken") nextToken: option<__string>,
   }
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "ListApplicationVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListApplicationVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListApplicationDependencies = {
@@ -194,8 +194,8 @@ module ListApplicationDependencies = {
     @as("Dependencies") dependencies: option<__listOfApplicationDependencySummary>,
   }
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "ListApplicationDependenciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListApplicationDependenciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutApplicationPolicy = {
@@ -206,8 +206,8 @@ module PutApplicationPolicy = {
   }
   type response = {@as("Statements") statements: option<__listOfApplicationPolicyStatement>}
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "PutApplicationPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutApplicationPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListApplications = {
@@ -221,8 +221,8 @@ module ListApplications = {
     @as("Applications") applications: option<__listOfApplicationSummary>,
   }
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "ListApplicationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListApplicationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApplicationPolicy = {
@@ -230,8 +230,8 @@ module GetApplicationPolicy = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("Statements") statements: option<__listOfApplicationPolicyStatement>}
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "GetApplicationPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetApplicationPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCloudFormationChangeSet = {
@@ -258,8 +258,8 @@ module CreateCloudFormationChangeSet = {
     @as("ApplicationId") applicationId: option<__string>,
   }
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "CreateCloudFormationChangeSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCloudFormationChangeSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApplicationVersion = {
@@ -284,8 +284,8 @@ module CreateApplicationVersion = {
     @as("ApplicationId") applicationId: option<__string>,
   }
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "CreateApplicationVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateApplicationVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApplication = {
@@ -315,8 +315,8 @@ module UpdateApplication = {
     @as("ApplicationId") applicationId: option<__string>,
   }
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "UpdateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApplication = {
@@ -341,8 +341,8 @@ module GetApplication = {
     @as("ApplicationId") applicationId: option<__string>,
   }
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "GetApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApplication = {
@@ -380,6 +380,6 @@ module CreateApplication = {
     @as("ApplicationId") applicationId: option<__string>,
   }
   @module("@aws-sdk/client-serverlessrepo") @new
-  external new_: request => t = "CreateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

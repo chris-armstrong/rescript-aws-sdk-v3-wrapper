@@ -58,16 +58,16 @@ module UpdateDeviceState = {
     @as("DeviceId") deviceId: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-iot1click") @new external new_: request => t = "UpdateDeviceStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot1click") @new external new: request => t = "UpdateDeviceStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UnclaimDevice = {
   type t
   type request = {@as("DeviceId") deviceId: __string}
   type response = {@as("State") state: option<__string>}
-  @module("@aws-sdk/client-iot1click") @new external new_: request => t = "UnclaimDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot1click") @new external new: request => t = "UnclaimDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InitiateDeviceClaim = {
@@ -75,8 +75,8 @@ module InitiateDeviceClaim = {
   type request = {@as("DeviceId") deviceId: __string}
   type response = {@as("State") state: option<__string>}
   @module("@aws-sdk/client-iot1click") @new
-  external new_: request => t = "InitiateDeviceClaimCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "InitiateDeviceClaimCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ClaimDevicesByClaimCode = {
@@ -87,8 +87,8 @@ module ClaimDevicesByClaimCode = {
     @as("ClaimCode") claimCode: option<__stringMin12Max40>,
   }
   @module("@aws-sdk/client-iot1click") @new
-  external new_: request => t = "ClaimDevicesByClaimCodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ClaimDevicesByClaimCodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -98,8 +98,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-iot1click") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot1click") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -109,8 +109,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-iot1click") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot1click") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListTagsForResource = {
@@ -118,8 +118,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: __string}
   type response = {@as("Tags") tags: option<__mapOf__string>}
   @module("@aws-sdk/client-iot1click") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InvokeDeviceMethod = {
@@ -130,9 +130,8 @@ module InvokeDeviceMethod = {
     @as("DeviceId") deviceId: __string,
   }
   type response = {@as("DeviceMethodResponse") deviceMethodResponse: option<__string>}
-  @module("@aws-sdk/client-iot1click") @new
-  external new_: request => t = "InvokeDeviceMethodCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot1click") @new external new: request => t = "InvokeDeviceMethodCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module FinalizeDeviceClaim = {
@@ -143,24 +142,24 @@ module FinalizeDeviceClaim = {
   }
   type response = {@as("State") state: option<__string>}
   @module("@aws-sdk/client-iot1click") @new
-  external new_: request => t = "FinalizeDeviceClaimCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "FinalizeDeviceClaimCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDeviceMethods = {
   type t
   type request = {@as("DeviceId") deviceId: __string}
   type response = {@as("DeviceMethods") deviceMethods: option<__listOfDeviceMethod>}
-  @module("@aws-sdk/client-iot1click") @new external new_: request => t = "GetDeviceMethodsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot1click") @new external new: request => t = "GetDeviceMethodsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDevice = {
   type t
   type request = {@as("DeviceId") deviceId: __string}
   type response = {@as("DeviceDescription") deviceDescription: option<deviceDescription>}
-  @module("@aws-sdk/client-iot1click") @new external new_: request => t = "DescribeDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot1click") @new external new: request => t = "DescribeDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDevices = {
@@ -174,8 +173,8 @@ module ListDevices = {
     @as("NextToken") nextToken: option<__string>,
     @as("Devices") devices: option<__listOfDeviceDescription>,
   }
-  @module("@aws-sdk/client-iot1click") @new external new_: request => t = "ListDevicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot1click") @new external new: request => t = "ListDevicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDeviceEvents = {
@@ -191,6 +190,6 @@ module ListDeviceEvents = {
     @as("NextToken") nextToken: option<__string>,
     @as("Events") events: option<__listOfDeviceEvent>,
   }
-  @module("@aws-sdk/client-iot1click") @new external new_: request => t = "ListDeviceEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot1click") @new external new: request => t = "ListDeviceEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

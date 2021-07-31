@@ -485,8 +485,8 @@ module UpdateLaunchProfileMember = {
   }
   type response = {member: option<launchProfileMembership>}
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "UpdateLaunchProfileMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateLaunchProfileMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -496,8 +496,8 @@ module UntagResource = {
     resourceArn: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -507,16 +507,16 @@ module TagResource = {
     resourceArn: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {resourceArn: __string}
   type response = {tags: option<tags>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStudioMember = {
@@ -526,8 +526,8 @@ module GetStudioMember = {
     principalId: __string,
   }
   type response = {member: option<studioMembership>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "GetStudioMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "GetStudioMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStreamingSessionStream = {
@@ -539,8 +539,8 @@ module GetStreamingSessionStream = {
   }
   type response = {stream: option<streamingSessionStream>}
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "GetStreamingSessionStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetStreamingSessionStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLaunchProfileMember = {
@@ -552,16 +552,16 @@ module GetLaunchProfileMember = {
   }
   type response = {member: option<launchProfileMembership>}
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "GetLaunchProfileMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetLaunchProfileMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEula = {
   type t
   type request = {eulaId: __string}
   type response = {eula: option<eula>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "GetEulaCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "GetEulaCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteStudioMember = {
@@ -572,8 +572,8 @@ module DeleteStudioMember = {
     clientToken: option<clientToken>,
   }
   type response = unit
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "DeleteStudioMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "DeleteStudioMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLaunchProfileMember = {
@@ -586,8 +586,8 @@ module DeleteLaunchProfileMember = {
   }
   type response = unit
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "DeleteLaunchProfileMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteLaunchProfileMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateStreamingSessionStream = {
@@ -600,8 +600,8 @@ module CreateStreamingSessionStream = {
   }
   type response = {stream: option<streamingSessionStream>}
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "CreateStreamingSessionStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateStreamingSessionStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateStudio = {
@@ -614,8 +614,8 @@ module UpdateStudio = {
     adminRoleArn: option<__string>,
   }
   type response = {studio: option<studio>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "UpdateStudioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "UpdateStudioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateStreamingImage = {
@@ -628,8 +628,8 @@ module UpdateStreamingImage = {
     clientToken: option<clientToken>,
   }
   type response = {streamingImage: option<streamingImage>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "UpdateStreamingImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "UpdateStreamingImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartStudioSSOConfigurationRepair = {
@@ -640,8 +640,8 @@ module StartStudioSSOConfigurationRepair = {
   }
   type response = {studio: option<studio>}
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "StartStudioSSOConfigurationRepairCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartStudioSSOConfigurationRepairCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutStudioMembers = {
@@ -653,8 +653,8 @@ module PutStudioMembers = {
     clientToken: option<clientToken>,
   }
   type response = unit
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "PutStudioMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "PutStudioMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutLaunchProfileMembers = {
@@ -668,8 +668,8 @@ module PutLaunchProfileMembers = {
   }
   type response = unit
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "PutLaunchProfileMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutLaunchProfileMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStudioMembers = {
@@ -683,8 +683,8 @@ module ListStudioMembers = {
     nextToken: option<__string>,
     members: option<studioMembershipList>,
   }
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "ListStudioMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "ListStudioMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLaunchProfileMembers = {
@@ -700,8 +700,8 @@ module ListLaunchProfileMembers = {
     members: option<launchProfileMembershipList>,
   }
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "ListLaunchProfileMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListLaunchProfileMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEulas = {
@@ -714,8 +714,8 @@ module ListEulas = {
     nextToken: option<__string>,
     eulas: option<eulaList>,
   }
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "ListEulasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "ListEulasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEulaAcceptances = {
@@ -729,16 +729,16 @@ module ListEulaAcceptances = {
     nextToken: option<__string>,
     eulaAcceptances: option<eulaAcceptanceList>,
   }
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "ListEulaAcceptancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "ListEulaAcceptancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStudio = {
   type t
   type request = {studioId: __string}
   type response = {studio: option<studio>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "GetStudioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "GetStudioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStreamingSession = {
@@ -748,8 +748,8 @@ module GetStreamingSession = {
     sessionId: __string,
   }
   type response = {session: option<streamingSession>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "GetStreamingSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "GetStreamingSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStreamingImage = {
@@ -759,8 +759,8 @@ module GetStreamingImage = {
     streamingImageId: __string,
   }
   type response = {streamingImage: option<streamingImage>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "GetStreamingImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "GetStreamingImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteStudio = {
@@ -770,8 +770,8 @@ module DeleteStudio = {
     clientToken: option<clientToken>,
   }
   type response = {studio: option<studio>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "DeleteStudioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "DeleteStudioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteStreamingSession = {
@@ -783,8 +783,8 @@ module DeleteStreamingSession = {
   }
   type response = {session: option<streamingSession>}
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "DeleteStreamingSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteStreamingSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteStreamingImage = {
@@ -795,8 +795,8 @@ module DeleteStreamingImage = {
     clientToken: option<clientToken>,
   }
   type response = {streamingImage: option<streamingImage>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "DeleteStreamingImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "DeleteStreamingImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateStudio = {
@@ -811,8 +811,8 @@ module CreateStudio = {
     adminRoleArn: __string,
   }
   type response = {studio: option<studio>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "CreateStudioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "CreateStudioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateStreamingSession = {
@@ -827,8 +827,8 @@ module CreateStreamingSession = {
   }
   type response = {session: option<streamingSession>}
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "CreateStreamingSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateStreamingSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateStreamingImage = {
@@ -842,8 +842,8 @@ module CreateStreamingImage = {
     clientToken: option<clientToken>,
   }
   type response = {streamingImage: option<streamingImage>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "CreateStreamingImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "CreateStreamingImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptEulas = {
@@ -854,8 +854,8 @@ module AcceptEulas = {
     clientToken: option<clientToken>,
   }
   type response = {eulaAcceptances: option<eulaAcceptanceList>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "AcceptEulasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "AcceptEulasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLaunchProfile = {
@@ -871,8 +871,8 @@ module UpdateLaunchProfile = {
     clientToken: option<clientToken>,
   }
   type response = {launchProfile: option<launchProfile>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "UpdateLaunchProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "UpdateLaunchProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStudios = {
@@ -882,8 +882,8 @@ module ListStudios = {
     studios: option<studioList>,
     nextToken: option<__string>,
   }
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "ListStudiosCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "ListStudiosCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStreamingSessions = {
@@ -898,9 +898,8 @@ module ListStreamingSessions = {
     sessions: option<streamingSessionList>,
     nextToken: option<__string>,
   }
-  @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "ListStreamingSessionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "ListStreamingSessionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStreamingImages = {
@@ -914,8 +913,8 @@ module ListStreamingImages = {
     streamingImages: option<streamingImageList>,
     nextToken: option<__string>,
   }
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "ListStreamingImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "ListStreamingImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLaunchProfileDetails = {
@@ -930,8 +929,8 @@ module GetLaunchProfileDetails = {
     launchProfile: option<launchProfile>,
   }
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "GetLaunchProfileDetailsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetLaunchProfileDetailsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLaunchProfile = {
@@ -941,8 +940,8 @@ module GetLaunchProfile = {
     launchProfileId: __string,
   }
   type response = {launchProfile: option<launchProfile>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "GetLaunchProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "GetLaunchProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLaunchProfile = {
@@ -953,8 +952,8 @@ module DeleteLaunchProfile = {
     clientToken: option<clientToken>,
   }
   type response = {launchProfile: option<launchProfile>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "DeleteLaunchProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "DeleteLaunchProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLaunchProfile = {
@@ -971,8 +970,8 @@ module CreateLaunchProfile = {
     clientToken: option<clientToken>,
   }
   type response = {launchProfile: option<launchProfile>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "CreateLaunchProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "CreateLaunchProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLaunchProfiles = {
@@ -988,8 +987,8 @@ module ListLaunchProfiles = {
     nextToken: option<__string>,
     launchProfiles: option<launchProfileList>,
   }
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "ListLaunchProfilesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "ListLaunchProfilesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLaunchProfileInitialization = {
@@ -1003,8 +1002,8 @@ module GetLaunchProfileInitialization = {
   }
   type response = {launchProfileInitialization: option<launchProfileInitialization>}
   @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "GetLaunchProfileInitializationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetLaunchProfileInitializationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateStudioComponent = {
@@ -1023,9 +1022,8 @@ module UpdateStudioComponent = {
     clientToken: option<clientToken>,
   }
   type response = {studioComponent: option<studioComponent>}
-  @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "UpdateStudioComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "UpdateStudioComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStudioComponent = {
@@ -1035,8 +1033,8 @@ module GetStudioComponent = {
     studioComponentId: __string,
   }
   type response = {studioComponent: option<studioComponent>}
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "GetStudioComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "GetStudioComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteStudioComponent = {
@@ -1047,9 +1045,8 @@ module DeleteStudioComponent = {
     clientToken: option<clientToken>,
   }
   type response = {studioComponent: option<studioComponent>}
-  @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "DeleteStudioComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "DeleteStudioComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateStudioComponent = {
@@ -1068,9 +1065,8 @@ module CreateStudioComponent = {
     clientToken: option<clientToken>,
   }
   type response = {studioComponent: option<studioComponent>}
-  @module("@aws-sdk/client-nimble") @new
-  external new_: request => t = "CreateStudioComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "CreateStudioComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStudioComponents = {
@@ -1086,6 +1082,6 @@ module ListStudioComponents = {
     studioComponents: option<studioComponentList>,
     nextToken: option<__string>,
   }
-  @module("@aws-sdk/client-nimble") @new external new_: request => t = "ListStudioComponentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-nimble") @new external new: request => t = "ListStudioComponentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

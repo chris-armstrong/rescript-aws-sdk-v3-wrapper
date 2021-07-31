@@ -243,8 +243,8 @@ module UploadLayerPart = {
     repositoryName: option<repositoryName>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "UploadLayerPartCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "UploadLayerPartCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartLifecyclePolicyPreview = {
@@ -261,8 +261,8 @@ module StartLifecyclePolicyPreview = {
     registryId: option<registryId>,
   }
   @module("@aws-sdk/client-ecr") @new
-  external new_: request => t = "StartLifecyclePolicyPreviewCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartLifecyclePolicyPreviewCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetRepositoryPolicy = {
@@ -278,8 +278,8 @@ module SetRepositoryPolicy = {
     repositoryName: option<repositoryName>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "SetRepositoryPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "SetRepositoryPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutRegistryPolicy = {
@@ -289,8 +289,8 @@ module PutRegistryPolicy = {
     policyText: option<registryPolicyText>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "PutRegistryPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "PutRegistryPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutLifecyclePolicy = {
@@ -305,8 +305,8 @@ module PutLifecyclePolicy = {
     repositoryName: option<repositoryName>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "PutLifecyclePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "PutLifecyclePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutImageTagMutability = {
@@ -321,8 +321,8 @@ module PutImageTagMutability = {
     repositoryName: option<repositoryName>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "PutImageTagMutabilityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "PutImageTagMutabilityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InitiateLayerUpload = {
@@ -335,8 +335,8 @@ module InitiateLayerUpload = {
     partSize: option<partSize>,
     uploadId: option<uploadId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "InitiateLayerUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "InitiateLayerUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRepositoryPolicy = {
@@ -350,8 +350,8 @@ module GetRepositoryPolicy = {
     repositoryName: option<repositoryName>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "GetRepositoryPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "GetRepositoryPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRegistryPolicy = {
@@ -361,8 +361,8 @@ module GetRegistryPolicy = {
     policyText: option<registryPolicyText>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "GetRegistryPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "GetRegistryPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLifecyclePolicy = {
@@ -377,8 +377,8 @@ module GetLifecyclePolicy = {
     repositoryName: option<repositoryName>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "GetLifecyclePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "GetLifecyclePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDownloadUrlForLayer = {
@@ -392,8 +392,8 @@ module GetDownloadUrlForLayer = {
     layerDigest: option<layerDigest>,
     downloadUrl: option<url>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "GetDownloadUrlForLayerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "GetDownloadUrlForLayerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRepositoryPolicy = {
@@ -407,8 +407,8 @@ module DeleteRepositoryPolicy = {
     repositoryName: option<repositoryName>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "DeleteRepositoryPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "DeleteRepositoryPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRegistryPolicy = {
@@ -418,8 +418,8 @@ module DeleteRegistryPolicy = {
     policyText: option<registryPolicyText>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "DeleteRegistryPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "DeleteRegistryPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLifecyclePolicy = {
@@ -434,8 +434,8 @@ module DeleteLifecyclePolicy = {
     repositoryName: option<repositoryName>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "DeleteLifecyclePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "DeleteLifecyclePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -445,8 +445,8 @@ module UntagResource = {
     resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartImageScan = {
@@ -462,8 +462,8 @@ module StartImageScan = {
     repositoryName: option<repositoryName>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "StartImageScanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "StartImageScanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutImageScanningConfiguration = {
@@ -479,8 +479,8 @@ module PutImageScanningConfiguration = {
     registryId: option<registryId>,
   }
   @module("@aws-sdk/client-ecr") @new
-  external new_: request => t = "PutImageScanningConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutImageScanningConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CompleteLayerUpload = {
@@ -497,8 +497,8 @@ module CompleteLayerUpload = {
     repositoryName: option<repositoryName>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "CompleteLayerUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "CompleteLayerUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -508,8 +508,8 @@ module TagResource = {
     resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutImage = {
@@ -523,16 +523,16 @@ module PutImage = {
     registryId: option<registryId>,
   }
   type response = {image: option<image>}
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "PutImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "PutImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {resourceArn: arn}
   type response = {tags: option<tagList_>}
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListImages = {
@@ -548,16 +548,16 @@ module ListImages = {
     nextToken: option<nextToken>,
     imageIds: option<imageIdentifierList>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "ListImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "ListImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAuthorizationToken = {
   type t
   type request = {registryIds: option<getAuthorizationTokenRegistryIdList>}
   type response = {authorizationData: option<authorizationDataList>}
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "GetAuthorizationTokenCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "GetAuthorizationTokenCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRepository = {
@@ -568,8 +568,8 @@ module DeleteRepository = {
     registryId: option<registryId>,
   }
   type response = {repository: option<repository>}
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "DeleteRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "DeleteRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRepository = {
@@ -582,8 +582,8 @@ module CreateRepository = {
     repositoryName: repositoryName,
   }
   type response = {repository: option<repository>}
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "CreateRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "CreateRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchCheckLayerAvailability = {
@@ -598,8 +598,8 @@ module BatchCheckLayerAvailability = {
     layers: option<layerList>,
   }
   @module("@aws-sdk/client-ecr") @new
-  external new_: request => t = "BatchCheckLayerAvailabilityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchCheckLayerAvailabilityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLifecyclePolicyPreview = {
@@ -622,8 +622,8 @@ module GetLifecyclePolicyPreview = {
     registryId: option<registryId>,
   }
   @module("@aws-sdk/client-ecr") @new
-  external new_: request => t = "GetLifecyclePolicyPreviewCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetLifecyclePolicyPreviewCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRepositories = {
@@ -638,8 +638,8 @@ module DescribeRepositories = {
     nextToken: option<nextToken>,
     repositories: option<repositoryList>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "DescribeRepositoriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "DescribeRepositoriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetImage = {
@@ -654,8 +654,8 @@ module BatchGetImage = {
     failures: option<imageFailureList>,
     images: option<imageList>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "BatchGetImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "BatchGetImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteImage = {
@@ -669,8 +669,8 @@ module BatchDeleteImage = {
     failures: option<imageFailureList>,
     imageIds: option<imageIdentifierList>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "BatchDeleteImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "BatchDeleteImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeImages = {
@@ -687,8 +687,8 @@ module DescribeImages = {
     nextToken: option<nextToken>,
     imageDetails: option<imageDetailList>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "DescribeImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "DescribeImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutReplicationConfiguration = {
@@ -696,8 +696,8 @@ module PutReplicationConfiguration = {
   type request = {replicationConfiguration: replicationConfiguration}
   type response = {replicationConfiguration: option<replicationConfiguration>}
   @module("@aws-sdk/client-ecr") @new
-  external new_: request => t = "PutReplicationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutReplicationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRegistry = {
@@ -707,8 +707,8 @@ module DescribeRegistry = {
     replicationConfiguration: option<replicationConfiguration>,
     registryId: option<registryId>,
   }
-  @module("@aws-sdk/client-ecr") @new external new_: request => t = "DescribeRegistryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecr") @new external new: request => t = "DescribeRegistryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeImageScanFindings = {
@@ -729,6 +729,6 @@ module DescribeImageScanFindings = {
     registryId: option<registryId>,
   }
   @module("@aws-sdk/client-ecr") @new
-  external new_: request => t = "DescribeImageScanFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeImageScanFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

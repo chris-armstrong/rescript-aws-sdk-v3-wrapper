@@ -114,8 +114,8 @@ module UploadDocuments = {
     adds: option<adds>,
     status: option<string_>,
   }
-  @module("@aws-sdk/client-cloudsearch") @new external new_: request => t = "UploadDocumentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "UploadDocumentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Suggest = {
@@ -129,8 +129,8 @@ module Suggest = {
     suggest: option<suggestModel>,
     status: option<suggestStatus>,
   }
-  @module("@aws-sdk/client-cloudsearch") @new external new_: request => t = "SuggestCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "SuggestCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Search = {
@@ -157,6 +157,6 @@ module Search = {
     hits: option<hits>,
     status: option<searchStatus>,
   }
-  @module("@aws-sdk/client-cloudsearch") @new external new_: request => t = "SearchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudsearch") @new external new: request => t = "SearchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

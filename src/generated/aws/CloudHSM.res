@@ -75,8 +75,8 @@ module ModifyLunaClient = {
     @as("ClientArn") clientArn: clientArn,
   }
   type response = {@as("ClientArn") clientArn: option<clientArn>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "ModifyLunaClientCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ModifyLunaClientCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyHsm = {
@@ -90,8 +90,8 @@ module ModifyHsm = {
     @as("HsmArn") hsmArn: hsmArn,
   }
   type response = {@as("HsmArn") hsmArn: option<hsmArn>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "ModifyHsmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ModifyHsmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLunaClient = {
@@ -107,32 +107,32 @@ module DescribeLunaClient = {
     @as("Certificate") certificate: option<certificate>,
     @as("ClientArn") clientArn: option<clientArn>,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "DescribeLunaClientCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DescribeLunaClientCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLunaClient = {
   type t
   type request = {@as("ClientArn") clientArn: clientArn}
   type response = {@as("Status") status: string_}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "DeleteLunaClientCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DeleteLunaClientCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteHsm = {
   type t
   type request = {@as("HsmArn") hsmArn: hsmArn}
   type response = {@as("Status") status: string_}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "DeleteHsmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DeleteHsmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteHapg = {
   type t
   type request = {@as("HapgArn") hapgArn: hapgArn}
   type response = {@as("Status") status: string_}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "DeleteHapgCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DeleteHapgCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLunaClient = {
@@ -142,8 +142,8 @@ module CreateLunaClient = {
     @as("Label") label: option<clientLabel>,
   }
   type response = {@as("ClientArn") clientArn: option<clientArn>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "CreateLunaClientCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "CreateLunaClientCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateHsm = {
@@ -159,16 +159,16 @@ module CreateHsm = {
     @as("SubnetId") subnetId: subnetId,
   }
   type response = {@as("HsmArn") hsmArn: option<hsmArn>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "CreateHsmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "CreateHsmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateHapg = {
   type t
   type request = {@as("Label") label: label}
   type response = {@as("HapgArn") hapgArn: option<hapgArn>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "CreateHapgCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "CreateHapgCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveTagsFromResource = {
@@ -179,8 +179,8 @@ module RemoveTagsFromResource = {
   }
   type response = {@as("Status") status: string_}
   @module("@aws-sdk/client-cloudhsm") @new
-  external new_: request => t = "RemoveTagsFromResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveTagsFromResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyHapg = {
@@ -191,8 +191,8 @@ module ModifyHapg = {
     @as("HapgArn") hapgArn: hapgArn,
   }
   type response = {@as("HapgArn") hapgArn: option<hapgArn>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "ModifyHapgCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ModifyHapgCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLunaClients = {
@@ -202,8 +202,8 @@ module ListLunaClients = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("ClientList") clientList: clientList,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "ListLunaClientsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ListLunaClientsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListHsms = {
@@ -213,8 +213,8 @@ module ListHsms = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("HsmList") hsmList: option<hsmList>,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "ListHsmsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ListHsmsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListHapgs = {
@@ -224,16 +224,16 @@ module ListHapgs = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("HapgList") hapgList: hapgList,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "ListHapgsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ListHapgsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAvailableZones = {
   type t
   type request = unit
   type response = {@as("AZList") azlist: option<azlist>}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "ListAvailableZonesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ListAvailableZonesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetConfig = {
@@ -248,8 +248,8 @@ module GetConfig = {
     @as("ConfigFile") configFile: option<string_>,
     @as("ConfigType") configType: option<string_>,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "GetConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "GetConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeHsm = {
@@ -281,8 +281,8 @@ module DescribeHsm = {
     @as("Status") status: option<hsmStatus>,
     @as("HsmArn") hsmArn: option<hsmArn>,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "DescribeHsmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DescribeHsmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeHapg = {
@@ -299,17 +299,16 @@ module DescribeHapg = {
     @as("HapgSerial") hapgSerial: option<string_>,
     @as("HapgArn") hapgArn: option<hapgArn>,
   }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "DescribeHapgCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "DescribeHapgCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: string_}
   type response = {@as("TagList") tagList_: tagList_}
-  @module("@aws-sdk/client-cloudhsm") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTagsToResource = {
@@ -319,6 +318,6 @@ module AddTagsToResource = {
     @as("ResourceArn") resourceArn: string_,
   }
   type response = {@as("Status") status: string_}
-  @module("@aws-sdk/client-cloudhsm") @new external new_: request => t = "AddTagsToResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cloudhsm") @new external new: request => t = "AddTagsToResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

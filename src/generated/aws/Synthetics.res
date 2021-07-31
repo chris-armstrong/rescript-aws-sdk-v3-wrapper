@@ -162,24 +162,24 @@ module StopCanary = {
   type t
   type request = {@as("Name") name: canaryName}
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: request => t = "StopCanaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-synthetics") @new external new: request => t = "StopCanaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartCanary = {
   type t
   type request = {@as("Name") name: canaryName}
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: request => t = "StartCanaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-synthetics") @new external new: request => t = "StartCanaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCanary = {
   type t
   type request = {@as("Name") name: canaryName}
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: request => t = "DeleteCanaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-synthetics") @new external new: request => t = "DeleteCanaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -189,8 +189,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: canaryArn,
   }
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-synthetics") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -200,8 +200,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: canaryArn,
   }
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-synthetics") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -209,8 +209,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: canaryArn}
   type response = {@as("Tags") tags: option<tagMap>}
   @module("@aws-sdk/client-synthetics") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCanary = {
@@ -227,8 +227,8 @@ module UpdateCanary = {
     @as("Name") name: canaryName,
   }
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: request => t = "UpdateCanaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-synthetics") @new external new: request => t = "UpdateCanaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRuntimeVersions = {
@@ -242,8 +242,8 @@ module DescribeRuntimeVersions = {
     @as("RuntimeVersions") runtimeVersions: option<runtimeVersionList>,
   }
   @module("@aws-sdk/client-synthetics") @new
-  external new_: request => t = "DescribeRuntimeVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRuntimeVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCanaryRuns = {
@@ -257,16 +257,16 @@ module GetCanaryRuns = {
     @as("NextToken") nextToken: option<token>,
     @as("CanaryRuns") canaryRuns: option<canaryRuns>,
   }
-  @module("@aws-sdk/client-synthetics") @new external new_: request => t = "GetCanaryRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-synthetics") @new external new: request => t = "GetCanaryRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCanary = {
   type t
   type request = {@as("Name") name: canaryName}
   type response = {@as("Canary") canary: option<canary>}
-  @module("@aws-sdk/client-synthetics") @new external new_: request => t = "GetCanaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-synthetics") @new external new: request => t = "GetCanaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCanary = {
@@ -285,8 +285,8 @@ module CreateCanary = {
     @as("Name") name: canaryName,
   }
   type response = {@as("Canary") canary: option<canary>}
-  @module("@aws-sdk/client-synthetics") @new external new_: request => t = "CreateCanaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-synthetics") @new external new: request => t = "CreateCanaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCanariesLastRun = {
@@ -300,8 +300,8 @@ module DescribeCanariesLastRun = {
     @as("CanariesLastRun") canariesLastRun: option<canariesLastRun>,
   }
   @module("@aws-sdk/client-synthetics") @new
-  external new_: request => t = "DescribeCanariesLastRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCanariesLastRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCanaries = {
@@ -314,6 +314,6 @@ module DescribeCanaries = {
     @as("NextToken") nextToken: option<token>,
     @as("Canaries") canaries: option<canaries>,
   }
-  @module("@aws-sdk/client-synthetics") @new external new_: request => t = "DescribeCanariesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-synthetics") @new external new: request => t = "DescribeCanariesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

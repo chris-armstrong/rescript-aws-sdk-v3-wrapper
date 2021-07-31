@@ -228,16 +228,16 @@ module ResendValidationEmail = {
     @as("CertificateArn") certificateArn: arn,
   }
 
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "ResendValidationEmailCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "ResendValidationEmailCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RenewCertificate = {
   type t
   type request = {@as("CertificateArn") certificateArn: arn}
 
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "RenewCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "RenewCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetCertificate = {
@@ -247,8 +247,8 @@ module GetCertificate = {
     @as("CertificateChain") certificateChain: option<certificateChain>,
     @as("Certificate") certificate: option<certificateBody>,
   }
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "GetCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "GetCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExportCertificate = {
@@ -262,16 +262,16 @@ module ExportCertificate = {
     @as("CertificateChain") certificateChain: option<certificateChain>,
     @as("Certificate") certificate: option<certificateBody>,
   }
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "ExportCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "ExportCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCertificate = {
   type t
   type request = {@as("CertificateArn") certificateArn: arn}
 
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "DeleteCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "DeleteCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateCertificateOptions = {
@@ -281,9 +281,8 @@ module UpdateCertificateOptions = {
     @as("CertificateArn") certificateArn: arn,
   }
 
-  @module("@aws-sdk/client-acm") @new
-  external new_: request => t = "UpdateCertificateOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "UpdateCertificateOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutAccountConfiguration = {
@@ -293,16 +292,16 @@ module PutAccountConfiguration = {
     @as("ExpiryEvents") expiryEvents: option<expiryEventsConfiguration>,
   }
 
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "PutAccountConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "PutAccountConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetAccountConfiguration = {
   type t
 
   type response = {@as("ExpiryEvents") expiryEvents: option<expiryEventsConfiguration>}
-  @module("@aws-sdk/client-acm") @new external new_: unit => t = "GetAccountConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-acm") @new external new: unit => t = "GetAccountConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RequestCertificate = {
@@ -318,8 +317,8 @@ module RequestCertificate = {
     @as("DomainName") domainName: domainNameString,
   }
   type response = {@as("CertificateArn") certificateArn: option<arn>}
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "RequestCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "RequestCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveTagsFromCertificate = {
@@ -330,16 +329,16 @@ module RemoveTagsFromCertificate = {
   }
 
   @module("@aws-sdk/client-acm") @new
-  external new_: request => t = "RemoveTagsFromCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RemoveTagsFromCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListTagsForCertificate = {
   type t
   type request = {@as("CertificateArn") certificateArn: arn}
   type response = {@as("Tags") tags: option<tagList_>}
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "ListTagsForCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "ListTagsForCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCertificates = {
@@ -354,8 +353,8 @@ module ListCertificates = {
     @as("CertificateSummaryList") certificateSummaryList: option<certificateSummaryList>,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "ListCertificatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "ListCertificatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportCertificate = {
@@ -368,8 +367,8 @@ module ImportCertificate = {
     @as("CertificateArn") certificateArn: option<arn>,
   }
   type response = {@as("CertificateArn") certificateArn: option<arn>}
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "ImportCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "ImportCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTagsToCertificate = {
@@ -379,14 +378,14 @@ module AddTagsToCertificate = {
     @as("CertificateArn") certificateArn: arn,
   }
 
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "AddTagsToCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "AddTagsToCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeCertificate = {
   type t
   type request = {@as("CertificateArn") certificateArn: arn}
   type response = {@as("Certificate") certificate: option<certificateDetail>}
-  @module("@aws-sdk/client-acm") @new external new_: request => t = "DescribeCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-acm") @new external new: request => t = "DescribeCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

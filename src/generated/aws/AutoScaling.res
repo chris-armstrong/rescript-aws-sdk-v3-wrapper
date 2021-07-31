@@ -610,8 +610,8 @@ module SetInstanceHealth = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "SetInstanceHealthCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SetInstanceHealthCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetDesiredCapacity = {
@@ -623,8 +623,8 @@ module SetDesiredCapacity = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "SetDesiredCapacityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SetDesiredCapacityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RecordLifecycleActionHeartbeat = {
@@ -637,8 +637,8 @@ module RecordLifecycleActionHeartbeat = {
   }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "RecordLifecycleActionHeartbeatCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RecordLifecycleActionHeartbeatCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutWarmPool = {
@@ -650,8 +650,8 @@ module PutWarmPool = {
     @as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
   }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: request => t = "PutWarmPoolCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "PutWarmPoolCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutScheduledUpdateGroupAction = {
@@ -670,8 +670,8 @@ module PutScheduledUpdateGroupAction = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "PutScheduledUpdateGroupActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "PutScheduledUpdateGroupActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutLifecycleHook = {
@@ -687,9 +687,8 @@ module PutLifecycleHook = {
     @as("LifecycleHookName") lifecycleHookName: asciiStringMaxLen255,
   }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "PutLifecycleHookCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "PutLifecycleHookCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExecutePolicy = {
@@ -702,8 +701,8 @@ module ExecutePolicy = {
     @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
   }
 
-  @module("@aws-sdk/client-autoscaling") @new external new_: request => t = "ExecutePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "ExecutePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeAccountLimits = {
@@ -719,8 +718,8 @@ module DescribeAccountLimits = {
     maxNumberOfAutoScalingGroups: option<maxNumberOfAutoScalingGroups>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: unit => t = "DescribeAccountLimitsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "DescribeAccountLimitsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWarmPool = {
@@ -730,8 +729,8 @@ module DeleteWarmPool = {
     @as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
   }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: request => t = "DeleteWarmPoolCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DeleteWarmPoolCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteScheduledAction = {
@@ -742,8 +741,8 @@ module DeleteScheduledAction = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DeleteScheduledActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteScheduledActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeletePolicy = {
@@ -753,8 +752,8 @@ module DeletePolicy = {
     @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
   }
 
-  @module("@aws-sdk/client-autoscaling") @new external new_: request => t = "DeletePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DeletePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteNotificationConfiguration = {
@@ -765,8 +764,8 @@ module DeleteNotificationConfiguration = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DeleteNotificationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteNotificationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteLifecycleHook = {
@@ -777,8 +776,8 @@ module DeleteLifecycleHook = {
   }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DeleteLifecycleHookCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteLifecycleHookCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLaunchConfiguration = {
@@ -786,8 +785,8 @@ module DeleteLaunchConfiguration = {
   type request = {@as("LaunchConfigurationName") launchConfigurationName: xmlStringMaxLen255}
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DeleteLaunchConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteLaunchConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAutoScalingGroup = {
@@ -798,8 +797,8 @@ module DeleteAutoScalingGroup = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DeleteAutoScalingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteAutoScalingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CompleteLifecycleAction = {
@@ -813,8 +812,8 @@ module CompleteLifecycleAction = {
   }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "CompleteLifecycleActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CompleteLifecycleActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelInstanceRefresh = {
@@ -822,8 +821,8 @@ module CancelInstanceRefresh = {
   type request = {@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255}
   type response = {@as("InstanceRefreshId") instanceRefreshId: option<xmlStringMaxLen255>}
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "CancelInstanceRefreshCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelInstanceRefreshCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TerminateInstanceInAutoScalingGroup = {
@@ -835,8 +834,8 @@ module TerminateInstanceInAutoScalingGroup = {
   }
   type response = {@as("Activity") activity: option<activity>}
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "TerminateInstanceInAutoScalingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TerminateInstanceInAutoScalingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SuspendProcesses = {
@@ -846,9 +845,8 @@ module SuspendProcesses = {
     @as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
   }
 
-  @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "SuspendProcessesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "SuspendProcessesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetInstanceProtection = {
@@ -860,8 +858,8 @@ module SetInstanceProtection = {
   }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "SetInstanceProtectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SetInstanceProtectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResumeProcesses = {
@@ -871,8 +869,8 @@ module ResumeProcesses = {
     @as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
   }
 
-  @module("@aws-sdk/client-autoscaling") @new external new_: request => t = "ResumeProcessesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "ResumeProcessesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutNotificationConfiguration = {
@@ -884,8 +882,8 @@ module PutNotificationConfiguration = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "PutNotificationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "PutNotificationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module EnableMetricsCollection = {
@@ -897,8 +895,8 @@ module EnableMetricsCollection = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "EnableMetricsCollectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "EnableMetricsCollectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableMetricsCollection = {
@@ -909,8 +907,8 @@ module DisableMetricsCollection = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DisableMetricsCollectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DisableMetricsCollectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DetachLoadBalancers = {
@@ -921,8 +919,8 @@ module DetachLoadBalancers = {
   }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DetachLoadBalancersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetachLoadBalancersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetachLoadBalancerTargetGroups = {
@@ -933,8 +931,8 @@ module DetachLoadBalancerTargetGroups = {
   }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DetachLoadBalancerTargetGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetachLoadBalancerTargetGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTerminationPolicyTypes = {
@@ -944,8 +942,8 @@ module DescribeTerminationPolicyTypes = {
     @as("TerminationPolicyTypes") terminationPolicyTypes: option<terminationPolicies>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: unit => t = "DescribeTerminationPolicyTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "DescribeTerminationPolicyTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLifecycleHookTypes = {
@@ -955,8 +953,8 @@ module DescribeLifecycleHookTypes = {
     @as("LifecycleHookTypes") lifecycleHookTypes: option<autoScalingNotificationTypes>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: unit => t = "DescribeLifecycleHookTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "DescribeLifecycleHookTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAutoScalingNotificationTypes = {
@@ -967,8 +965,8 @@ module DescribeAutoScalingNotificationTypes = {
     autoScalingNotificationTypes: option<autoScalingNotificationTypes>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: unit => t = "DescribeAutoScalingNotificationTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "DescribeAutoScalingNotificationTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachLoadBalancers = {
@@ -979,8 +977,8 @@ module AttachLoadBalancers = {
   }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "AttachLoadBalancersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AttachLoadBalancersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachLoadBalancerTargetGroups = {
@@ -991,8 +989,8 @@ module AttachLoadBalancerTargetGroups = {
   }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "AttachLoadBalancerTargetGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AttachLoadBalancerTargetGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachInstances = {
@@ -1002,8 +1000,8 @@ module AttachInstances = {
     @as("InstanceIds") instanceIds: option<instanceIds>,
   }
 
-  @module("@aws-sdk/client-autoscaling") @new external new_: request => t = "AttachInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "AttachInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartInstanceRefresh = {
@@ -1015,8 +1013,8 @@ module StartInstanceRefresh = {
   }
   type response = {@as("InstanceRefreshId") instanceRefreshId: option<xmlStringMaxLen255>}
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "StartInstanceRefreshCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartInstanceRefreshCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExitStandby = {
@@ -1026,8 +1024,8 @@ module ExitStandby = {
     @as("InstanceIds") instanceIds: option<instanceIds>,
   }
   type response = {@as("Activities") activities: option<activities>}
-  @module("@aws-sdk/client-autoscaling") @new external new_: request => t = "ExitStandbyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "ExitStandbyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnterStandby = {
@@ -1039,8 +1037,8 @@ module EnterStandby = {
     @as("InstanceIds") instanceIds: option<instanceIds>,
   }
   type response = {@as("Activities") activities: option<activities>}
-  @module("@aws-sdk/client-autoscaling") @new external new_: request => t = "EnterStandbyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "EnterStandbyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetachInstances = {
@@ -1052,8 +1050,8 @@ module DetachInstances = {
     @as("InstanceIds") instanceIds: option<instanceIds>,
   }
   type response = {@as("Activities") activities: option<activities>}
-  @module("@aws-sdk/client-autoscaling") @new external new_: request => t = "DetachInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DetachInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeScheduledActions = {
@@ -1072,8 +1070,8 @@ module DescribeScheduledActions = {
     scheduledUpdateGroupActions: option<scheduledUpdateGroupActions>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribeScheduledActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeScheduledActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeScalingProcessTypes = {
@@ -1081,8 +1079,8 @@ module DescribeScalingProcessTypes = {
 
   type response = {@as("Processes") processes: option<processes>}
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: unit => t = "DescribeScalingProcessTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "DescribeScalingProcessTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeScalingActivities = {
@@ -1099,8 +1097,8 @@ module DescribeScalingActivities = {
     @as("Activities") activities: activities,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribeScalingActivitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeScalingActivitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNotificationConfigurations = {
@@ -1115,8 +1113,8 @@ module DescribeNotificationConfigurations = {
     @as("NotificationConfigurations") notificationConfigurations: notificationConfigurations,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribeNotificationConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNotificationConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMetricCollectionTypes = {
@@ -1127,8 +1125,8 @@ module DescribeMetricCollectionTypes = {
     @as("Metrics") metrics: option<metricCollectionTypes>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: unit => t = "DescribeMetricCollectionTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "DescribeMetricCollectionTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLoadBalancers = {
@@ -1143,8 +1141,8 @@ module DescribeLoadBalancers = {
     @as("LoadBalancers") loadBalancers: option<loadBalancerStates>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribeLoadBalancersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLoadBalancersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLoadBalancerTargetGroups = {
@@ -1159,8 +1157,8 @@ module DescribeLoadBalancerTargetGroups = {
     @as("LoadBalancerTargetGroups") loadBalancerTargetGroups: option<loadBalancerTargetGroupStates>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribeLoadBalancerTargetGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLoadBalancerTargetGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLifecycleHooks = {
@@ -1171,8 +1169,8 @@ module DescribeLifecycleHooks = {
   }
   type response = {@as("LifecycleHooks") lifecycleHooks: option<lifecycleHooks>}
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribeLifecycleHooksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLifecycleHooksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAdjustmentTypes = {
@@ -1180,16 +1178,16 @@ module DescribeAdjustmentTypes = {
 
   type response = {@as("AdjustmentTypes") adjustmentTypes: option<adjustmentTypes>}
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: unit => t = "DescribeAdjustmentTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "DescribeAdjustmentTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTags = {
   type t
   type request = {@as("Tags") tags: tags}
 
-  @module("@aws-sdk/client-autoscaling") @new external new_: request => t = "DeleteTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DeleteTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateOrUpdateTags = {
@@ -1197,8 +1195,8 @@ module CreateOrUpdateTags = {
   type request = {@as("Tags") tags: tags}
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "CreateOrUpdateTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "CreateOrUpdateTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module BatchPutScheduledUpdateGroupAction = {
@@ -1213,8 +1211,8 @@ module BatchPutScheduledUpdateGroupAction = {
     failedScheduledUpdateGroupActions: option<failedScheduledUpdateGroupActionRequests>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "BatchPutScheduledUpdateGroupActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchPutScheduledUpdateGroupActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteScheduledAction = {
@@ -1228,8 +1226,8 @@ module BatchDeleteScheduledAction = {
     failedScheduledActions: option<failedScheduledUpdateGroupActionRequests>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "BatchDeleteScheduledActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDeleteScheduledActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWarmPool = {
@@ -1244,9 +1242,8 @@ module DescribeWarmPool = {
     @as("Instances") instances: option<instances>,
     @as("WarmPoolConfiguration") warmPoolConfiguration: option<warmPoolConfiguration>,
   }
-  @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribeWarmPoolCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DescribeWarmPoolCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTags = {
@@ -1260,8 +1257,8 @@ module DescribeTags = {
     @as("NextToken") nextToken: option<xmlString>,
     @as("Tags") tags: option<tagDescriptionList>,
   }
-  @module("@aws-sdk/client-autoscaling") @new external new_: request => t = "DescribeTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DescribeTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAutoScalingInstances = {
@@ -1276,8 +1273,8 @@ module DescribeAutoScalingInstances = {
     @as("AutoScalingInstances") autoScalingInstances: option<autoScalingInstances>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribeAutoScalingInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAutoScalingInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLaunchConfiguration = {
@@ -1306,8 +1303,8 @@ module CreateLaunchConfiguration = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "CreateLaunchConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "CreateLaunchConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutScalingPolicy = {
@@ -1334,9 +1331,8 @@ module PutScalingPolicy = {
     @as("Alarms") alarms: option<alarms>,
     @as("PolicyARN") policyARN: option<resourceName>,
   }
-  @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "PutScalingPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "PutScalingPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPredictiveScalingForecast = {
@@ -1353,8 +1349,8 @@ module GetPredictiveScalingForecast = {
     @as("LoadForecast") loadForecast: loadForecasts,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "GetPredictiveScalingForecastCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPredictiveScalingForecastCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstanceRefreshes = {
@@ -1370,8 +1366,8 @@ module DescribeInstanceRefreshes = {
     @as("InstanceRefreshes") instanceRefreshes: option<instanceRefreshes>,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribeInstanceRefreshesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInstanceRefreshesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAutoScalingGroup = {
@@ -1399,8 +1395,8 @@ module UpdateAutoScalingGroup = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "UpdateAutoScalingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateAutoScalingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeLaunchConfigurations = {
@@ -1415,8 +1411,8 @@ module DescribeLaunchConfigurations = {
     @as("LaunchConfigurations") launchConfigurations: launchConfigurations,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribeLaunchConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLaunchConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAutoScalingGroup = {
@@ -1450,8 +1446,8 @@ module CreateAutoScalingGroup = {
   }
 
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "CreateAutoScalingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "CreateAutoScalingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribePolicies = {
@@ -1467,9 +1463,8 @@ module DescribePolicies = {
     @as("NextToken") nextToken: option<xmlString>,
     @as("ScalingPolicies") scalingPolicies: option<scalingPolicies>,
   }
-  @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribePoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-autoscaling") @new external new: request => t = "DescribePoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAutoScalingGroups = {
@@ -1484,6 +1479,6 @@ module DescribeAutoScalingGroups = {
     @as("AutoScalingGroups") autoScalingGroups: autoScalingGroups,
   }
   @module("@aws-sdk/client-autoscaling") @new
-  external new_: request => t = "DescribeAutoScalingGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAutoScalingGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

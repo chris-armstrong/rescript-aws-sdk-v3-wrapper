@@ -204,24 +204,24 @@ module TestIdentityProvider = {
     @as("Response") response: option<response>,
   }
   @module("@aws-sdk/client-transfer") @new
-  external new_: request => t = "TestIdentityProviderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TestIdentityProviderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopServer = {
   type t
   type request = {@as("ServerId") serverId: serverId}
 
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "StopServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "StopServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartServer = {
   type t
   type request = {@as("ServerId") serverId: serverId}
 
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "StartServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "StartServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ImportSshPublicKey = {
@@ -236,8 +236,8 @@ module ImportSshPublicKey = {
     @as("SshPublicKeyId") sshPublicKeyId: sshPublicKeyId,
     @as("ServerId") serverId: serverId,
   }
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "ImportSshPublicKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "ImportSshPublicKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteUser = {
@@ -247,8 +247,8 @@ module DeleteUser = {
     @as("ServerId") serverId: serverId,
   }
 
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "DeleteUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "DeleteUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteSshPublicKey = {
@@ -259,16 +259,16 @@ module DeleteSshPublicKey = {
     @as("ServerId") serverId: serverId,
   }
 
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "DeleteSshPublicKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "DeleteSshPublicKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteServer = {
   type t
   type request = {@as("ServerId") serverId: serverId}
 
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "DeleteServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "DeleteServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAccess = {
@@ -278,8 +278,8 @@ module DeleteAccess = {
     @as("ServerId") serverId: serverId,
   }
 
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "DeleteAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "DeleteAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagResource = {
@@ -289,8 +289,8 @@ module UntagResource = {
     @as("Arn") arn: arn,
   }
 
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListSecurityPolicies = {
@@ -304,8 +304,8 @@ module ListSecurityPolicies = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-transfer") @new
-  external new_: request => t = "ListSecurityPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSecurityPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateUser = {
@@ -324,8 +324,8 @@ module UpdateUser = {
     @as("UserName") userName: userName,
     @as("ServerId") serverId: serverId,
   }
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "UpdateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "UpdateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateServer = {
@@ -342,8 +342,8 @@ module UpdateServer = {
     @as("Certificate") certificate: option<certificate>,
   }
   type response = {@as("ServerId") serverId: serverId}
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "UpdateServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "UpdateServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAccess = {
@@ -362,8 +362,8 @@ module UpdateAccess = {
     @as("ExternalId") externalId: externalId,
     @as("ServerId") serverId: serverId,
   }
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "UpdateAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "UpdateAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -373,8 +373,8 @@ module TagResource = {
     @as("Arn") arn: arn,
   }
 
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListUsers = {
@@ -389,8 +389,8 @@ module ListUsers = {
     @as("ServerId") serverId: serverId,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "ListUsersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "ListUsersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -405,9 +405,8 @@ module ListTagsForResource = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Arn") arn: option<arn>,
   }
-  @module("@aws-sdk/client-transfer") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListServers = {
@@ -420,8 +419,8 @@ module ListServers = {
     @as("Servers") servers: listedServers,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "ListServersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "ListServersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAccesses = {
@@ -436,8 +435,8 @@ module ListAccesses = {
     @as("ServerId") serverId: serverId,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "ListAccessesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "ListAccessesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSecurityPolicy = {
@@ -445,8 +444,8 @@ module DescribeSecurityPolicy = {
   type request = {@as("SecurityPolicyName") securityPolicyName: securityPolicyName}
   type response = {@as("SecurityPolicy") securityPolicy: describedSecurityPolicy}
   @module("@aws-sdk/client-transfer") @new
-  external new_: request => t = "DescribeSecurityPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSecurityPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateUser = {
@@ -467,8 +466,8 @@ module CreateUser = {
     @as("UserName") userName: userName,
     @as("ServerId") serverId: serverId,
   }
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "CreateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "CreateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateServer = {
@@ -487,8 +486,8 @@ module CreateServer = {
     @as("Certificate") certificate: option<certificate>,
   }
   type response = {@as("ServerId") serverId: serverId}
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "CreateServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "CreateServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAccess = {
@@ -507,8 +506,8 @@ module CreateAccess = {
     @as("ExternalId") externalId: externalId,
     @as("ServerId") serverId: serverId,
   }
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "CreateAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "CreateAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeUser = {
@@ -521,16 +520,16 @@ module DescribeUser = {
     @as("User") user: describedUser,
     @as("ServerId") serverId: serverId,
   }
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "DescribeUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "DescribeUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeServer = {
   type t
   type request = {@as("ServerId") serverId: serverId}
   type response = {@as("Server") server: describedServer}
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "DescribeServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "DescribeServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccess = {
@@ -543,6 +542,6 @@ module DescribeAccess = {
     @as("Access") access: describedAccess,
     @as("ServerId") serverId: serverId,
   }
-  @module("@aws-sdk/client-transfer") @new external new_: request => t = "DescribeAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-transfer") @new external new: request => t = "DescribeAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

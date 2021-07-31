@@ -151,16 +151,16 @@ module DeleteServer = {
   type t
   type request = {@as("ServerName") serverName: serverName}
   type response = unit
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "DeleteServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DeleteServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBackup = {
   type t
   type request = {@as("BackupId") backupId: backupId}
   type response = unit
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "DeleteBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DeleteBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -170,8 +170,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: awsopsWorksCMResourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -181,8 +181,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: awsopsWorksCMResourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -197,8 +197,8 @@ module ListTagsForResource = {
     @as("Tags") tags: option<tagList_>,
   }
   @module("@aws-sdk/client-opsworks-cm") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExportServerEngineAttribute = {
@@ -213,8 +213,8 @@ module ExportServerEngineAttribute = {
     @as("EngineAttribute") engineAttribute: option<engineAttribute>,
   }
   @module("@aws-sdk/client-opsworks-cm") @new
-  external new_: request => t = "ExportServerEngineAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ExportServerEngineAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateNode = {
@@ -228,9 +228,8 @@ module DisassociateNode = {
     @as("NodeAssociationStatusToken")
     nodeAssociationStatusToken: option<nodeAssociationStatusToken>,
   }
-  @module("@aws-sdk/client-opsworks-cm") @new
-  external new_: request => t = "DisassociateNodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DisassociateNodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNodeAssociationStatus = {
@@ -244,8 +243,8 @@ module DescribeNodeAssociationStatus = {
     @as("NodeAssociationStatus") nodeAssociationStatus: option<nodeAssociationStatus>,
   }
   @module("@aws-sdk/client-opsworks-cm") @new
-  external new_: request => t = "DescribeNodeAssociationStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNodeAssociationStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEvents = {
@@ -259,8 +258,8 @@ module DescribeEvents = {
     @as("NextToken") nextToken: option<string_>,
     @as("ServerEvents") serverEvents: option<serverEvents>,
   }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "DescribeEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DescribeEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccountAttributes = {
@@ -268,8 +267,8 @@ module DescribeAccountAttributes = {
   type request = unit
   type response = {@as("Attributes") attributes: option<accountAttributes>}
   @module("@aws-sdk/client-opsworks-cm") @new
-  external new_: request => t = "DescribeAccountAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAccountAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBackup = {
@@ -280,8 +279,8 @@ module CreateBackup = {
     @as("ServerName") serverName: serverName,
   }
   type response = {@as("Backup") backup: option<backup>}
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "CreateBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "CreateBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateNode = {
@@ -295,8 +294,8 @@ module AssociateNode = {
     @as("NodeAssociationStatusToken")
     nodeAssociationStatusToken: option<nodeAssociationStatusToken>,
   }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "AssociateNodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "AssociateNodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateServerEngineAttributes = {
@@ -308,8 +307,8 @@ module UpdateServerEngineAttributes = {
   }
   type response = {@as("Server") server: option<server>}
   @module("@aws-sdk/client-opsworks-cm") @new
-  external new_: request => t = "UpdateServerEngineAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateServerEngineAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateServer = {
@@ -322,8 +321,8 @@ module UpdateServer = {
     @as("DisableAutomatedBackup") disableAutomatedBackup: option<boolean_>,
   }
   type response = {@as("Server") server: option<server>}
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "UpdateServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "UpdateServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartMaintenance = {
@@ -333,9 +332,8 @@ module StartMaintenance = {
     @as("ServerName") serverName: serverName,
   }
   type response = {@as("Server") server: option<server>}
-  @module("@aws-sdk/client-opsworks-cm") @new
-  external new_: request => t = "StartMaintenanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "StartMaintenanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreServer = {
@@ -347,8 +345,8 @@ module RestoreServer = {
     @as("BackupId") backupId: backupId,
   }
   type response = {@as("Server") server: option<server>}
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "RestoreServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "RestoreServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBackups = {
@@ -363,8 +361,8 @@ module DescribeBackups = {
     @as("NextToken") nextToken: option<string_>,
     @as("Backups") backups: option<backups>,
   }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "DescribeBackupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DescribeBackupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateServer = {
@@ -393,8 +391,8 @@ module CreateServer = {
     @as("AssociatePublicIpAddress") associatePublicIpAddress: option<boolean_>,
   }
   type response = {@as("Server") server: option<server>}
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "CreateServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "CreateServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeServers = {
@@ -408,6 +406,6 @@ module DescribeServers = {
     @as("NextToken") nextToken: option<string_>,
     @as("Servers") servers: option<servers>,
   }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: request => t = "DescribeServersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-opsworks-cm") @new external new: request => t = "DescribeServersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -52,16 +52,16 @@ module StopHumanLoop = {
   type t
   type request = {@as("HumanLoopName") humanLoopName: humanLoopName}
   type response = unit
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "StopHumanLoopCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopHumanLoopCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteHumanLoop = {
   type t
   type request = {@as("HumanLoopName") humanLoopName: humanLoopName}
   type response = unit
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteHumanLoopCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteHumanLoopCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeHumanLoop = {
@@ -77,8 +77,8 @@ module DescribeHumanLoop = {
     @as("FailureReason") failureReason: option<string_>,
     @as("CreationTime") creationTime: timestamp_,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeHumanLoopCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeHumanLoopCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartHumanLoop = {
@@ -90,8 +90,8 @@ module StartHumanLoop = {
     @as("HumanLoopName") humanLoopName: humanLoopName,
   }
   type response = {@as("HumanLoopArn") humanLoopArn: option<humanLoopArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "StartHumanLoopCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StartHumanLoopCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListHumanLoops = {
@@ -108,6 +108,6 @@ module ListHumanLoops = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("HumanLoopSummaries") humanLoopSummaries: humanLoopSummaries,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListHumanLoopsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListHumanLoopsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

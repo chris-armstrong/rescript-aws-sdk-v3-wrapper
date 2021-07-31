@@ -92,8 +92,8 @@ module ExportProject = {
     downloadUrl: option<downloadUrl>,
   }
   @module("@aws-sdk/client-awsmobilehubservice") @new
-  external new_: request => t = "ExportProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ExportProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExportBundle = {
@@ -105,8 +105,8 @@ module ExportBundle = {
   }
   type response = {downloadUrl: option<downloadUrl>}
   @module("@aws-sdk/client-awsmobilehubservice") @new
-  external new_: request => t = "ExportBundleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ExportBundleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProjects = {
@@ -120,8 +120,8 @@ module ListProjects = {
     projects: option<projectSummaries>,
   }
   @module("@aws-sdk/client-awsmobilehubservice") @new
-  external new_: request => t = "ListProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBundle = {
@@ -129,8 +129,8 @@ module DescribeBundle = {
   type request = {bundleId: bundleId}
   type response = {details: option<bundleDetails>}
   @module("@aws-sdk/client-awsmobilehubservice") @new
-  external new_: request => t = "DescribeBundleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeBundleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBundles = {
@@ -144,8 +144,8 @@ module ListBundles = {
     bundleList: option<bundleList>,
   }
   @module("@aws-sdk/client-awsmobilehubservice") @new
-  external new_: request => t = "ListBundlesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListBundlesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProject = {
@@ -156,8 +156,8 @@ module DeleteProject = {
     deletedResources: option<resources>,
   }
   @module("@aws-sdk/client-awsmobilehubservice") @new
-  external new_: request => t = "DeleteProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProject = {
@@ -168,8 +168,8 @@ module UpdateProject = {
   }
   type response = {details: option<projectDetails>}
   @module("@aws-sdk/client-awsmobilehubservice") @new
-  external new_: request => t = "UpdateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProject = {
@@ -180,8 +180,8 @@ module DescribeProject = {
   }
   type response = {details: option<projectDetails>}
   @module("@aws-sdk/client-awsmobilehubservice") @new
-  external new_: request => t = "DescribeProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProject = {
@@ -194,6 +194,6 @@ module CreateProject = {
   }
   type response = {details: option<projectDetails>}
   @module("@aws-sdk/client-awsmobilehubservice") @new
-  external new_: request => t = "CreateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

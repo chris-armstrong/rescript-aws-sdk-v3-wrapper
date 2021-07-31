@@ -98,8 +98,8 @@ module PutSnapshotBlock = {
     @as("ChecksumAlgorithm") checksumAlgorithm: option<checksumAlgorithm>,
     @as("Checksum") checksum: option<checksum>,
   }
-  @module("@aws-sdk/client-ebs") @new external new_: request => t = "PutSnapshotBlockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ebs") @new external new: request => t = "PutSnapshotBlockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSnapshotBlock = {
@@ -115,8 +115,8 @@ module GetSnapshotBlock = {
     @as("BlockData") blockData: option<blockData>,
     @as("DataLength") dataLength: option<dataLength>,
   }
-  @module("@aws-sdk/client-ebs") @new external new_: request => t = "GetSnapshotBlockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ebs") @new external new: request => t = "GetSnapshotBlockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CompleteSnapshot = {
@@ -129,8 +129,8 @@ module CompleteSnapshot = {
     @as("SnapshotId") snapshotId: snapshotId,
   }
   type response = {@as("Status") status: option<status>}
-  @module("@aws-sdk/client-ebs") @new external new_: request => t = "CompleteSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ebs") @new external new: request => t = "CompleteSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartSnapshot = {
@@ -157,8 +157,8 @@ module StartSnapshot = {
     @as("SnapshotId") snapshotId: option<snapshotId>,
     @as("Description") description: option<description>,
   }
-  @module("@aws-sdk/client-ebs") @new external new_: request => t = "StartSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ebs") @new external new: request => t = "StartSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSnapshotBlocks = {
@@ -176,8 +176,8 @@ module ListSnapshotBlocks = {
     @as("ExpiryTime") expiryTime: option<timeStamp>,
     @as("Blocks") blocks: option<blocks>,
   }
-  @module("@aws-sdk/client-ebs") @new external new_: request => t = "ListSnapshotBlocksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ebs") @new external new: request => t = "ListSnapshotBlocksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChangedBlocks = {
@@ -196,6 +196,6 @@ module ListChangedBlocks = {
     @as("ExpiryTime") expiryTime: option<timeStamp>,
     @as("ChangedBlocks") changedBlocks: option<changedBlocks>,
   }
-  @module("@aws-sdk/client-ebs") @new external new_: request => t = "ListChangedBlocksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ebs") @new external new: request => t = "ListChangedBlocksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

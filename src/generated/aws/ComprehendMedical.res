@@ -288,8 +288,8 @@ module StopRxNormInferenceJob = {
   type request = {@as("JobId") jobId: jobId}
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "StopRxNormInferenceJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopRxNormInferenceJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopPHIDetectionJob = {
@@ -297,8 +297,8 @@ module StopPHIDetectionJob = {
   type request = {@as("JobId") jobId: jobId}
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "StopPHIDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopPHIDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopICD10CMInferenceJob = {
@@ -306,8 +306,8 @@ module StopICD10CMInferenceJob = {
   type request = {@as("JobId") jobId: jobId}
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "StopICD10CMInferenceJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopICD10CMInferenceJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopEntitiesDetectionV2Job = {
@@ -315,8 +315,8 @@ module StopEntitiesDetectionV2Job = {
   type request = {@as("JobId") jobId: jobId}
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "StopEntitiesDetectionV2JobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopEntitiesDetectionV2JobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartRxNormInferenceJob = {
@@ -332,8 +332,8 @@ module StartRxNormInferenceJob = {
   }
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "StartRxNormInferenceJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartRxNormInferenceJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartPHIDetectionJob = {
@@ -349,8 +349,8 @@ module StartPHIDetectionJob = {
   }
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "StartPHIDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartPHIDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartICD10CMInferenceJob = {
@@ -366,8 +366,8 @@ module StartICD10CMInferenceJob = {
   }
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "StartICD10CMInferenceJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartICD10CMInferenceJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartEntitiesDetectionV2Job = {
@@ -383,8 +383,8 @@ module StartEntitiesDetectionV2Job = {
   }
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "StartEntitiesDetectionV2JobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartEntitiesDetectionV2JobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRxNormInferenceJob = {
@@ -395,8 +395,8 @@ module DescribeRxNormInferenceJob = {
     comprehendMedicalAsyncJobProperties: option<comprehendMedicalAsyncJobProperties>,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "DescribeRxNormInferenceJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRxNormInferenceJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePHIDetectionJob = {
@@ -407,8 +407,8 @@ module DescribePHIDetectionJob = {
     comprehendMedicalAsyncJobProperties: option<comprehendMedicalAsyncJobProperties>,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "DescribePHIDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePHIDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeICD10CMInferenceJob = {
@@ -419,8 +419,8 @@ module DescribeICD10CMInferenceJob = {
     comprehendMedicalAsyncJobProperties: option<comprehendMedicalAsyncJobProperties>,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "DescribeICD10CMInferenceJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeICD10CMInferenceJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEntitiesDetectionV2Job = {
@@ -431,8 +431,8 @@ module DescribeEntitiesDetectionV2Job = {
     comprehendMedicalAsyncJobProperties: option<comprehendMedicalAsyncJobProperties>,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "DescribeEntitiesDetectionV2JobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEntitiesDetectionV2JobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRxNormInferenceJobs = {
@@ -448,8 +448,8 @@ module ListRxNormInferenceJobs = {
     comprehendMedicalAsyncJobPropertiesList: option<comprehendMedicalAsyncJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "ListRxNormInferenceJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRxNormInferenceJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPHIDetectionJobs = {
@@ -465,8 +465,8 @@ module ListPHIDetectionJobs = {
     comprehendMedicalAsyncJobPropertiesList: option<comprehendMedicalAsyncJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "ListPHIDetectionJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPHIDetectionJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListICD10CMInferenceJobs = {
@@ -482,8 +482,8 @@ module ListICD10CMInferenceJobs = {
     comprehendMedicalAsyncJobPropertiesList: option<comprehendMedicalAsyncJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "ListICD10CMInferenceJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListICD10CMInferenceJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEntitiesDetectionV2Jobs = {
@@ -499,8 +499,8 @@ module ListEntitiesDetectionV2Jobs = {
     comprehendMedicalAsyncJobPropertiesList: option<comprehendMedicalAsyncJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "ListEntitiesDetectionV2JobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEntitiesDetectionV2JobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InferRxNorm = {
@@ -512,8 +512,8 @@ module InferRxNorm = {
     @as("Entities") entities: rxNormEntityList,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "InferRxNormCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "InferRxNormCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InferICD10CM = {
@@ -525,8 +525,8 @@ module InferICD10CM = {
     @as("Entities") entities: icd10CMEntityList,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "InferICD10CMCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "InferICD10CMCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectPHI = {
@@ -537,8 +537,8 @@ module DetectPHI = {
     @as("PaginationToken") paginationToken: option<string_>,
     @as("Entities") entities: entityList,
   }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: request => t = "DetectPHICommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehendmedical") @new external new: request => t = "DetectPHICommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectEntitiesV2 = {
@@ -551,8 +551,8 @@ module DetectEntitiesV2 = {
     @as("Entities") entities: entityList,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "DetectEntitiesV2Command"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetectEntitiesV2Command"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectEntities = {
@@ -565,6 +565,6 @@ module DetectEntities = {
     @as("Entities") entities: entityList,
   }
   @module("@aws-sdk/client-comprehendmedical") @new
-  external new_: request => t = "DetectEntitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetectEntitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

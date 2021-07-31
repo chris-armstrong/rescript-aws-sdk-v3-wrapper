@@ -221,8 +221,8 @@ module GetRepositoryEndpoint = {
   }
   type response = {repositoryEndpoint: option<string_>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "GetRepositoryEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRepositoryEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPackageVersionReadme = {
@@ -245,8 +245,8 @@ module GetPackageVersionReadme = {
     format: option<packageFormat>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "GetPackageVersionReadmeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPackageVersionReadmeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPackageVersionAsset = {
@@ -269,8 +269,8 @@ module GetPackageVersionAsset = {
     asset: option<asset>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "GetPackageVersionAssetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPackageVersionAssetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAuthorizationToken = {
@@ -285,8 +285,8 @@ module GetAuthorizationToken = {
     authorizationToken: option<string_>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "GetAuthorizationTokenCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAuthorizationTokenCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -296,8 +296,8 @@ module UntagResource = {
     resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-codeartifact") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codeartifact") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutRepositoryPermissionsPolicy = {
@@ -311,8 +311,8 @@ module PutRepositoryPermissionsPolicy = {
   }
   type response = {policy: option<resourcePolicy>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "PutRepositoryPermissionsPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutRepositoryPermissionsPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutDomainPermissionsPolicy = {
@@ -325,8 +325,8 @@ module PutDomainPermissionsPolicy = {
   }
   type response = {policy: option<resourcePolicy>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "PutDomainPermissionsPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutDomainPermissionsPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRepositoryPermissionsPolicy = {
@@ -338,8 +338,8 @@ module GetRepositoryPermissionsPolicy = {
   }
   type response = {policy: option<resourcePolicy>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "GetRepositoryPermissionsPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRepositoryPermissionsPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDomainPermissionsPolicy = {
@@ -350,8 +350,8 @@ module GetDomainPermissionsPolicy = {
   }
   type response = {policy: option<resourcePolicy>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "GetDomainPermissionsPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDomainPermissionsPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDomain = {
@@ -361,8 +361,8 @@ module DescribeDomain = {
     domain: domainName,
   }
   type response = {domain: option<domainDescription>}
-  @module("@aws-sdk/client-codeartifact") @new external new_: request => t = "DescribeDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codeartifact") @new external new: request => t = "DescribeDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRepositoryPermissionsPolicy = {
@@ -375,8 +375,8 @@ module DeleteRepositoryPermissionsPolicy = {
   }
   type response = {policy: option<resourcePolicy>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "DeleteRepositoryPermissionsPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteRepositoryPermissionsPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDomainPermissionsPolicy = {
@@ -388,8 +388,8 @@ module DeleteDomainPermissionsPolicy = {
   }
   type response = {policy: option<resourcePolicy>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "DeleteDomainPermissionsPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteDomainPermissionsPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDomain = {
@@ -399,8 +399,8 @@ module DeleteDomain = {
     domain: domainName,
   }
   type response = {domain: option<domainDescription>}
-  @module("@aws-sdk/client-codeartifact") @new external new_: request => t = "DeleteDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codeartifact") @new external new: request => t = "DeleteDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePackageVersionsStatus = {
@@ -422,8 +422,8 @@ module UpdatePackageVersionsStatus = {
     successfulVersions: option<successfulPackageVersionInfoMap>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "UpdatePackageVersionsStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePackageVersionsStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -433,8 +433,8 @@ module TagResource = {
     resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-codeartifact") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codeartifact") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -442,8 +442,8 @@ module ListTagsForResource = {
   type request = {resourceArn: arn}
   type response = {tags: option<tagList_>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRepositoriesInDomain = {
@@ -461,8 +461,8 @@ module ListRepositoriesInDomain = {
     repositories: option<repositorySummaryList>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "ListRepositoriesInDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRepositoriesInDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRepositories = {
@@ -477,8 +477,8 @@ module ListRepositories = {
     repositories: option<repositorySummaryList>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "ListRepositoriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRepositoriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPackages = {
@@ -497,8 +497,8 @@ module ListPackages = {
     nextToken: option<paginationToken>,
     packages: option<packageSummaryList>,
   }
-  @module("@aws-sdk/client-codeartifact") @new external new_: request => t = "ListPackagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codeartifact") @new external new: request => t = "ListPackagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPackageVersions = {
@@ -524,8 +524,8 @@ module ListPackageVersions = {
     defaultDisplayVersion: option<packageVersion>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "ListPackageVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPackageVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPackageVersionDependencies = {
@@ -550,8 +550,8 @@ module ListPackageVersionDependencies = {
     format: option<packageFormat>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "ListPackageVersionDependenciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPackageVersionDependenciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDomains = {
@@ -564,8 +564,8 @@ module ListDomains = {
     nextToken: option<paginationToken>,
     domains: option<domainSummaryList>,
   }
-  @module("@aws-sdk/client-codeartifact") @new external new_: request => t = "ListDomainsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codeartifact") @new external new: request => t = "ListDomainsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisposePackageVersions = {
@@ -586,8 +586,8 @@ module DisposePackageVersions = {
     successfulVersions: option<successfulPackageVersionInfoMap>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "DisposePackageVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisposePackageVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePackageVersions = {
@@ -607,8 +607,8 @@ module DeletePackageVersions = {
     successfulVersions: option<successfulPackageVersionInfoMap>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "DeletePackageVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeletePackageVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDomain = {
@@ -619,8 +619,8 @@ module CreateDomain = {
     domain: domainName,
   }
   type response = {domain: option<domainDescription>}
-  @module("@aws-sdk/client-codeartifact") @new external new_: request => t = "CreateDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codeartifact") @new external new: request => t = "CreateDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CopyPackageVersions = {
@@ -643,8 +643,8 @@ module CopyPackageVersions = {
     successfulVersions: option<successfulPackageVersionInfoMap>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "CopyPackageVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CopyPackageVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRepository = {
@@ -658,8 +658,8 @@ module UpdateRepository = {
   }
   type response = {repository: option<repositoryDescription>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "UpdateRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPackageVersionAssets = {
@@ -685,8 +685,8 @@ module ListPackageVersionAssets = {
     format: option<packageFormat>,
   }
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "ListPackageVersionAssetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPackageVersionAssetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateExternalConnection = {
@@ -699,8 +699,8 @@ module DisassociateExternalConnection = {
   }
   type response = {repository: option<repositoryDescription>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "DisassociateExternalConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateExternalConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRepository = {
@@ -712,8 +712,8 @@ module DescribeRepository = {
   }
   type response = {repository: option<repositoryDescription>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "DescribeRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePackageVersion = {
@@ -729,8 +729,8 @@ module DescribePackageVersion = {
   }
   type response = {packageVersion: packageVersionDescription}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "DescribePackageVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePackageVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRepository = {
@@ -742,8 +742,8 @@ module DeleteRepository = {
   }
   type response = {repository: option<repositoryDescription>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "DeleteRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRepository = {
@@ -758,8 +758,8 @@ module CreateRepository = {
   }
   type response = {repository: option<repositoryDescription>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "CreateRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateExternalConnection = {
@@ -772,6 +772,6 @@ module AssociateExternalConnection = {
   }
   type response = {repository: option<repositoryDescription>}
   @module("@aws-sdk/client-codeartifact") @new
-  external new_: request => t = "AssociateExternalConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateExternalConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

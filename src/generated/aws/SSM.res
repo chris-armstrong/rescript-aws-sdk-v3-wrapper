@@ -2153,8 +2153,8 @@ module UpdateServiceSetting = {
     @as("SettingId") settingId: serviceSettingId,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "UpdateServiceSettingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateServiceSettingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateManagedInstanceRole = {
@@ -2165,8 +2165,8 @@ module UpdateManagedInstanceRole = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "UpdateManagedInstanceRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateManagedInstanceRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMaintenanceWindow = {
@@ -2202,16 +2202,16 @@ module UpdateMaintenanceWindow = {
     @as("Name") name: option<maintenanceWindowName>,
     @as("WindowId") windowId: option<maintenanceWindowId>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "UpdateMaintenanceWindowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateMaintenanceWindowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TerminateSession = {
   type t
   type request = {@as("SessionId") sessionId: sessionId}
   type response = {@as("SessionId") sessionId: option<sessionId>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "TerminateSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "TerminateSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopAutomationExecution = {
@@ -2221,8 +2221,8 @@ module StopAutomationExecution = {
     @as("AutomationExecutionId") automationExecutionId: automationExecutionId,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "StopAutomationExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "StopAutomationExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResumeSession = {
@@ -2233,8 +2233,8 @@ module ResumeSession = {
     @as("TokenValue") tokenValue: option<tokenValue>,
     @as("SessionId") sessionId: option<sessionId>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ResumeSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ResumeSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterPatchBaselineForPatchGroup = {
@@ -2248,8 +2248,8 @@ module RegisterPatchBaselineForPatchGroup = {
     @as("BaselineId") baselineId: option<baselineId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "RegisterPatchBaselineForPatchGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterPatchBaselineForPatchGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterDefaultPatchBaseline = {
@@ -2257,8 +2257,8 @@ module RegisterDefaultPatchBaseline = {
   type request = {@as("BaselineId") baselineId: baselineId}
   type response = {@as("BaselineId") baselineId: option<baselineId>}
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "RegisterDefaultPatchBaselineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterDefaultPatchBaselineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPatchBaselineForPatchGroup = {
@@ -2273,8 +2273,8 @@ module GetPatchBaselineForPatchGroup = {
     @as("BaselineId") baselineId: option<baselineId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "GetPatchBaselineForPatchGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPatchBaselineForPatchGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMaintenanceWindowExecutionTaskInvocation = {
@@ -2299,8 +2299,8 @@ module GetMaintenanceWindowExecutionTaskInvocation = {
     @as("WindowExecutionId") windowExecutionId: option<maintenanceWindowExecutionId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "GetMaintenanceWindowExecutionTaskInvocationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetMaintenanceWindowExecutionTaskInvocationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMaintenanceWindow = {
@@ -2324,8 +2324,8 @@ module GetMaintenanceWindow = {
     @as("Name") name: option<maintenanceWindowName>,
     @as("WindowId") windowId: option<maintenanceWindowId>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetMaintenanceWindowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetMaintenanceWindowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDefaultPatchBaseline = {
@@ -2335,8 +2335,8 @@ module GetDefaultPatchBaseline = {
     @as("OperatingSystem") operatingSystem: option<operatingSystem>,
     @as("BaselineId") baselineId: option<baselineId>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetDefaultPatchBaselineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetDefaultPatchBaselineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetConnectionStatus = {
@@ -2346,8 +2346,8 @@ module GetConnectionStatus = {
     @as("Status") status: option<connectionStatus>,
     @as("Target") target: option<sessionTarget>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetConnectionStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetConnectionStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePatchGroupState = {
@@ -2373,8 +2373,8 @@ module DescribePatchGroupState = {
     @as("InstancesWithInstalledPatches") instancesWithInstalledPatches: option<integer_>,
     @as("Instances") instances: option<integer_>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DescribePatchGroupStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribePatchGroupStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterTaskFromMaintenanceWindow = {
@@ -2388,8 +2388,8 @@ module DeregisterTaskFromMaintenanceWindow = {
     @as("WindowId") windowId: option<maintenanceWindowId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DeregisterTaskFromMaintenanceWindowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterTaskFromMaintenanceWindowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterTargetFromMaintenanceWindow = {
@@ -2404,8 +2404,8 @@ module DeregisterTargetFromMaintenanceWindow = {
     @as("WindowId") windowId: option<maintenanceWindowId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DeregisterTargetFromMaintenanceWindowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterTargetFromMaintenanceWindowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterPatchBaselineForPatchGroup = {
@@ -2419,8 +2419,8 @@ module DeregisterPatchBaselineForPatchGroup = {
     @as("BaselineId") baselineId: option<baselineId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DeregisterPatchBaselineForPatchGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterPatchBaselineForPatchGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterManagedInstance = {
@@ -2428,8 +2428,8 @@ module DeregisterManagedInstance = {
   type request = {@as("InstanceId") instanceId: managedInstanceId}
   type response = unit
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DeregisterManagedInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterManagedInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteResourceDataSync = {
@@ -2439,40 +2439,40 @@ module DeleteResourceDataSync = {
     @as("SyncName") syncName: resourceDataSyncName,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DeleteResourceDataSyncCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteResourceDataSyncCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePatchBaseline = {
   type t
   type request = {@as("BaselineId") baselineId: baselineId}
   type response = {@as("BaselineId") baselineId: option<baselineId>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DeletePatchBaselineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DeletePatchBaselineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteParameter = {
   type t
   type request = {@as("Name") name: psparameterName}
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DeleteParameterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteParameterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteOpsMetadata = {
   type t
   type request = {@as("OpsMetadataArn") opsMetadataArn: opsMetadataArn}
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DeleteOpsMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteOpsMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMaintenanceWindow = {
   type t
   type request = {@as("WindowId") windowId: maintenanceWindowId}
   type response = {@as("WindowId") windowId: option<maintenanceWindowId>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DeleteMaintenanceWindowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteMaintenanceWindowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDocument = {
@@ -2484,8 +2484,8 @@ module DeleteDocument = {
     @as("Name") name: documentName,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DeleteDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAssociation = {
@@ -2496,16 +2496,16 @@ module DeleteAssociation = {
     @as("Name") name: option<documentARN>,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DeleteAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteActivation = {
   type t
   type request = {@as("ActivationId") activationId: activationId}
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DeleteActivationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteActivationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelMaintenanceWindowExecution = {
@@ -2513,8 +2513,8 @@ module CancelMaintenanceWindowExecution = {
   type request = {@as("WindowExecutionId") windowExecutionId: maintenanceWindowExecutionId}
   type response = {@as("WindowExecutionId") windowExecutionId: option<maintenanceWindowExecutionId>}
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "CancelMaintenanceWindowExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelMaintenanceWindowExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDocumentDefaultVersion = {
@@ -2525,8 +2525,8 @@ module UpdateDocumentDefaultVersion = {
   }
   type response = {@as("Description") description: option<documentDefaultVersionDescription>}
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "UpdateDocumentDefaultVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDocumentDefaultVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UnlabelParameterVersion = {
@@ -2540,24 +2540,24 @@ module UnlabelParameterVersion = {
     @as("InvalidLabels") invalidLabels: option<parameterLabelList>,
     @as("RemovedLabels") removedLabels: option<parameterLabelList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "UnlabelParameterVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "UnlabelParameterVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartAssociationsOnce = {
   type t
   type request = {@as("AssociationIds") associationIds: associationIdList}
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "StartAssociationsOnceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "StartAssociationsOnceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResetServiceSetting = {
   type t
   type request = {@as("SettingId") settingId: serviceSettingId}
   type response = {@as("ServiceSetting") serviceSetting: option<serviceSetting>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ResetServiceSettingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ResetServiceSettingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveTagsFromResource = {
@@ -2568,8 +2568,8 @@ module RemoveTagsFromResource = {
     @as("ResourceType") resourceType: resourceTypeForTagging,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "RemoveTagsFromResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "RemoveTagsFromResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyDocumentPermission = {
@@ -2582,9 +2582,8 @@ module ModifyDocumentPermission = {
     @as("Name") name: documentName,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "ModifyDocumentPermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ModifyDocumentPermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module LabelParameterVersion = {
@@ -2598,16 +2597,16 @@ module LabelParameterVersion = {
     @as("ParameterVersion") parameterVersion: option<psparameterVersion>,
     @as("InvalidLabels") invalidLabels: option<parameterLabelList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "LabelParameterVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "LabelParameterVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetServiceSetting = {
   type t
   type request = {@as("SettingId") settingId: serviceSettingId}
   type response = {@as("ServiceSetting") serviceSetting: option<serviceSetting>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetServiceSettingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetServiceSettingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetParameter = {
@@ -2617,8 +2616,8 @@ module GetParameter = {
     @as("Name") name: psparameterName,
   }
   type response = {@as("Parameter") parameter: option<parameter>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetParameterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetParameterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMaintenanceWindowExecution = {
@@ -2633,8 +2632,8 @@ module GetMaintenanceWindowExecution = {
     @as("WindowExecutionId") windowExecutionId: option<maintenanceWindowExecutionId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "GetMaintenanceWindowExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetMaintenanceWindowExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCommandInvocation = {
@@ -2663,8 +2662,8 @@ module GetCommandInvocation = {
     @as("InstanceId") instanceId: option<instanceId>,
     @as("CommandId") commandId: option<commandId>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetCommandInvocationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetCommandInvocationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCalendarState = {
@@ -2678,8 +2677,8 @@ module GetCalendarState = {
     @as("AtTime") atTime: option<iso8601String>,
     @as("State") state: option<calendarState>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetCalendarStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetCalendarStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateOpsItemRelatedItem = {
@@ -2690,8 +2689,8 @@ module DisassociateOpsItemRelatedItem = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DisassociateOpsItemRelatedItemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateOpsItemRelatedItemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteParameters = {
@@ -2701,8 +2700,8 @@ module DeleteParameters = {
     @as("InvalidParameters") invalidParameters: option<parameterNameList>,
     @as("DeletedParameters") deletedParameters: option<parameterNameList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DeleteParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelCommand = {
@@ -2712,8 +2711,8 @@ module CancelCommand = {
     @as("CommandId") commandId: commandId,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "CancelCommandCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "CancelCommandCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateOpsItemRelatedItem = {
@@ -2726,8 +2725,8 @@ module AssociateOpsItemRelatedItem = {
   }
   type response = {@as("AssociationId") associationId: option<opsItemRelatedItemAssociationId>}
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "AssociateOpsItemRelatedItemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateOpsItemRelatedItemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateOpsMetadata = {
@@ -2738,8 +2737,8 @@ module UpdateOpsMetadata = {
     @as("OpsMetadataArn") opsMetadataArn: opsMetadataArn,
   }
   type response = {@as("OpsMetadataArn") opsMetadataArn: option<opsMetadataArn>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "UpdateOpsMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateOpsMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateOpsItem = {
@@ -2762,8 +2761,8 @@ module UpdateOpsItem = {
     @as("Description") description: option<opsItemDescription>,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "UpdateOpsItemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateOpsItemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartSession = {
@@ -2778,8 +2777,8 @@ module StartSession = {
     @as("TokenValue") tokenValue: option<tokenValue>,
     @as("SessionId") sessionId: option<sessionId>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "StartSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "StartSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendAutomationSignal = {
@@ -2790,8 +2789,8 @@ module SendAutomationSignal = {
     @as("AutomationExecutionId") automationExecutionId: automationExecutionId,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "SendAutomationSignalCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "SendAutomationSignalCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutParameter = {
@@ -2813,8 +2812,8 @@ module PutParameter = {
     @as("Tier") tier: option<parameterTier>,
     @as("Version") version: option<psparameterVersion>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "PutParameterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "PutParameterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -2824,8 +2823,8 @@ module ListTagsForResource = {
     @as("ResourceType") resourceType: resourceTypeForTagging,
   }
   type response = {@as("TagList") tagList_: option<tagList_>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDocumentVersions = {
@@ -2839,8 +2838,8 @@ module ListDocumentVersions = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("DocumentVersions") documentVersions: option<documentVersionList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListDocumentVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListDocumentVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetParameters = {
@@ -2853,8 +2852,8 @@ module GetParameters = {
     @as("InvalidParameters") invalidParameters: option<parameterNameList>,
     @as("Parameters") parameters: option<parameterList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOpsMetadata = {
@@ -2869,8 +2868,8 @@ module GetOpsMetadata = {
     @as("Metadata") metadata: option<metadataMap>,
     @as("ResourceId") resourceId: option<opsMetadataResourceId>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetOpsMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetOpsMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDocument = {
@@ -2896,8 +2895,8 @@ module GetDocument = {
     @as("CreatedDate") createdDate: option<dateTime>,
     @as("Name") name: option<documentARN>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePatchProperties = {
@@ -2913,8 +2912,8 @@ module DescribePatchProperties = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Properties") properties: option<patchPropertiesList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DescribePatchPropertiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribePatchPropertiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstancePatchStates = {
@@ -2929,8 +2928,8 @@ module DescribeInstancePatchStates = {
     @as("InstancePatchStates") instancePatchStates: option<instancePatchStateList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeInstancePatchStatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInstancePatchStatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEffectiveInstanceAssociations = {
@@ -2945,8 +2944,8 @@ module DescribeEffectiveInstanceAssociations = {
     @as("Associations") associations: option<instanceAssociationList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeEffectiveInstanceAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEffectiveInstanceAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDocumentPermission = {
@@ -2963,8 +2962,8 @@ module DescribeDocumentPermission = {
     @as("AccountIds") accountIds: option<accountIdList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeDocumentPermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDocumentPermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAssociationExecutions = {
@@ -2980,8 +2979,8 @@ module DescribeAssociationExecutions = {
     @as("AssociationExecutions") associationExecutions: option<associationExecutionsList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeAssociationExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAssociationExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateOpsMetadata = {
@@ -2992,8 +2991,8 @@ module CreateOpsMetadata = {
     @as("ResourceId") resourceId: opsMetadataResourceId,
   }
   type response = {@as("OpsMetadataArn") opsMetadataArn: option<opsMetadataArn>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "CreateOpsMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "CreateOpsMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateOpsItem = {
@@ -3016,8 +3015,8 @@ module CreateOpsItem = {
     @as("Description") description: opsItemDescription,
   }
   type response = {@as("OpsItemId") opsItemId: option<string_>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "CreateOpsItemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "CreateOpsItemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMaintenanceWindow = {
@@ -3038,8 +3037,8 @@ module CreateMaintenanceWindow = {
     @as("Name") name: maintenanceWindowName,
   }
   type response = {@as("WindowId") windowId: option<maintenanceWindowId>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "CreateMaintenanceWindowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "CreateMaintenanceWindowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateActivation = {
@@ -3056,8 +3055,8 @@ module CreateActivation = {
     @as("ActivationCode") activationCode: option<activationCode>,
     @as("ActivationId") activationId: option<activationId>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "CreateActivationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "CreateActivationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTagsToResource = {
@@ -3068,8 +3067,8 @@ module AddTagsToResource = {
     @as("ResourceType") resourceType: resourceTypeForTagging,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "AddTagsToResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "AddTagsToResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMaintenanceWindowTarget = {
@@ -3092,8 +3091,8 @@ module UpdateMaintenanceWindowTarget = {
     @as("WindowId") windowId: option<maintenanceWindowId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "UpdateMaintenanceWindowTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateMaintenanceWindowTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDocumentMetadata = {
@@ -3104,8 +3103,8 @@ module UpdateDocumentMetadata = {
     @as("Name") name: documentName,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "UpdateDocumentMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateDocumentMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDocument = {
@@ -3121,8 +3120,8 @@ module UpdateDocument = {
     @as("Content") content: documentContent,
   }
   type response = {@as("DocumentDescription") documentDescription: option<documentDescription>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "UpdateDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartAutomationExecution = {
@@ -3144,9 +3143,8 @@ module StartAutomationExecution = {
   type response = {
     @as("AutomationExecutionId") automationExecutionId: option<automationExecutionId>,
   }
-  @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "StartAutomationExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "StartAutomationExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterTargetWithMaintenanceWindow = {
@@ -3162,8 +3160,8 @@ module RegisterTargetWithMaintenanceWindow = {
   }
   type response = {@as("WindowTargetId") windowTargetId: option<maintenanceWindowTargetId>}
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "RegisterTargetWithMaintenanceWindowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterTargetWithMaintenanceWindowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutComplianceItems = {
@@ -3178,8 +3176,8 @@ module PutComplianceItems = {
     @as("ResourceId") resourceId: complianceResourceId,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "PutComplianceItemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "PutComplianceItemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOpsMetadata = {
@@ -3193,8 +3191,8 @@ module ListOpsMetadata = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("OpsMetadataList") opsMetadataList: option<opsMetadataList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListOpsMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListOpsMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOpsItemRelatedItems = {
@@ -3209,8 +3207,8 @@ module ListOpsItemRelatedItems = {
     @as("Summaries") summaries: option<opsItemRelatedItemSummaries>,
     @as("NextToken") nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListOpsItemRelatedItemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListOpsItemRelatedItemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOpsItemEvents = {
@@ -3224,8 +3222,8 @@ module ListOpsItemEvents = {
     @as("Summaries") summaries: option<opsItemEventSummaries>,
     @as("NextToken") nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListOpsItemEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListOpsItemEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInventoryEntries = {
@@ -3245,8 +3243,8 @@ module ListInventoryEntries = {
     @as("InstanceId") instanceId: option<instanceId>,
     @as("TypeName") typeName: option<inventoryItemTypeName>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListInventoryEntriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListInventoryEntriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListComplianceItems = {
@@ -3262,8 +3260,8 @@ module ListComplianceItems = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ComplianceItems") complianceItems: option<complianceItemList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListComplianceItemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListComplianceItemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetParametersByPath = {
@@ -3280,16 +3278,16 @@ module GetParametersByPath = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Parameters") parameters: option<parameterList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetParametersByPathCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetParametersByPathCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOpsItem = {
   type t
   type request = {@as("OpsItemId") opsItemId: opsItemId}
   type response = {@as("OpsItem") opsItem: option<opsItem>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetOpsItemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetOpsItemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSessions = {
@@ -3304,8 +3302,8 @@ module DescribeSessions = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Sessions") sessions: option<sessionList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DescribeSessionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribeSessionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePatchGroups = {
@@ -3319,8 +3317,8 @@ module DescribePatchGroups = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Mappings") mappings: option<patchGroupPatchBaselineMappingList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DescribePatchGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribePatchGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePatchBaselines = {
@@ -3334,8 +3332,8 @@ module DescribePatchBaselines = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("BaselineIdentities") baselineIdentities: option<patchBaselineIdentityList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DescribePatchBaselinesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribePatchBaselinesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMaintenanceWindowsForTarget = {
@@ -3351,8 +3349,8 @@ module DescribeMaintenanceWindowsForTarget = {
     @as("WindowIdentities") windowIdentities: option<maintenanceWindowsForTargetList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeMaintenanceWindowsForTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMaintenanceWindowsForTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMaintenanceWindows = {
@@ -3367,8 +3365,8 @@ module DescribeMaintenanceWindows = {
     @as("WindowIdentities") windowIdentities: option<maintenanceWindowIdentityList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeMaintenanceWindowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMaintenanceWindowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMaintenanceWindowSchedule = {
@@ -3387,8 +3385,8 @@ module DescribeMaintenanceWindowSchedule = {
     scheduledWindowExecutions: option<scheduledWindowExecutionList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeMaintenanceWindowScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMaintenanceWindowScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMaintenanceWindowExecutions = {
@@ -3404,8 +3402,8 @@ module DescribeMaintenanceWindowExecutions = {
     @as("WindowExecutions") windowExecutions: option<maintenanceWindowExecutionList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeMaintenanceWindowExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMaintenanceWindowExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMaintenanceWindowExecutionTasks = {
@@ -3422,8 +3420,8 @@ module DescribeMaintenanceWindowExecutionTasks = {
     windowExecutionTaskIdentities: option<maintenanceWindowExecutionTaskIdentityList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeMaintenanceWindowExecutionTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMaintenanceWindowExecutionTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMaintenanceWindowExecutionTaskInvocations = {
@@ -3443,8 +3441,8 @@ module DescribeMaintenanceWindowExecutionTaskInvocations = {
     >,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeMaintenanceWindowExecutionTaskInvocationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMaintenanceWindowExecutionTaskInvocationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstancePatches = {
@@ -3459,8 +3457,8 @@ module DescribeInstancePatches = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Patches") patches: option<patchComplianceDataList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DescribeInstancePatchesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribeInstancePatchesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstancePatchStatesForPatchGroup = {
@@ -3476,8 +3474,8 @@ module DescribeInstancePatchStatesForPatchGroup = {
     @as("InstancePatchStates") instancePatchStates: option<instancePatchStatesList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeInstancePatchStatesForPatchGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInstancePatchStatesForPatchGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDocument = {
@@ -3488,8 +3486,8 @@ module DescribeDocument = {
     @as("Name") name: documentARN,
   }
   type response = {@as("Document") document: option<documentDescription>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DescribeDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribeDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAvailablePatches = {
@@ -3503,9 +3501,8 @@ module DescribeAvailablePatches = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Patches") patches: option<patchList>,
   }
-  @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeAvailablePatchesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribeAvailablePatchesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAssociationExecutionTargets = {
@@ -3523,8 +3520,8 @@ module DescribeAssociationExecutionTargets = {
     associationExecutionTargets: option<associationExecutionTargetsList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeAssociationExecutionTargetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAssociationExecutionTargetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInventory = {
@@ -3540,8 +3537,8 @@ module DeleteInventory = {
     @as("TypeName") typeName: option<inventoryItemTypeName>,
     @as("DeletionId") deletionId: option<uuid>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DeleteInventoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DeleteInventoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDocument = {
@@ -3559,8 +3556,8 @@ module CreateDocument = {
     @as("Content") content: documentContent,
   }
   type response = {@as("DocumentDescription") documentDescription: option<documentDescription>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "CreateDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "CreateDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateResourceDataSync = {
@@ -3571,8 +3568,8 @@ module UpdateResourceDataSync = {
     @as("SyncName") syncName: resourceDataSyncName,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "UpdateResourceDataSyncCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateResourceDataSyncCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMaintenanceWindowTask = {
@@ -3611,8 +3608,8 @@ module UpdateMaintenanceWindowTask = {
     @as("WindowId") windowId: option<maintenanceWindowId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "UpdateMaintenanceWindowTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateMaintenanceWindowTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAssociationStatus = {
@@ -3625,8 +3622,8 @@ module UpdateAssociationStatus = {
   type response = {
     @as("AssociationDescription") associationDescription: option<associationDescription>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "UpdateAssociationStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateAssociationStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAssociation = {
@@ -3654,8 +3651,8 @@ module UpdateAssociation = {
   type response = {
     @as("AssociationDescription") associationDescription: option<associationDescription>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "UpdateAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdateAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendCommand = {
@@ -3680,8 +3677,8 @@ module SendCommand = {
     @as("InstanceIds") instanceIds: option<instanceIdList>,
   }
   type response = {@as("Command") command: option<command>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "SendCommandCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "SendCommandCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterTaskWithMaintenanceWindow = {
@@ -3705,8 +3702,8 @@ module RegisterTaskWithMaintenanceWindow = {
   }
   type response = {@as("WindowTaskId") windowTaskId: option<maintenanceWindowTaskId>}
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "RegisterTaskWithMaintenanceWindowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterTaskWithMaintenanceWindowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutInventory = {
@@ -3716,8 +3713,8 @@ module PutInventory = {
     @as("InstanceId") instanceId: instanceId,
   }
   type response = {@as("Message") message: option<putInventoryMessage>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "PutInventoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "PutInventoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResourceComplianceSummaries = {
@@ -3733,8 +3730,8 @@ module ListResourceComplianceSummaries = {
     resourceComplianceSummaryItems: option<resourceComplianceSummaryItemList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "ListResourceComplianceSummariesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListResourceComplianceSummariesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDocuments = {
@@ -3749,8 +3746,8 @@ module ListDocuments = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("DocumentIdentifiers") documentIdentifiers: option<documentIdentifierList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListDocumentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListDocumentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListComplianceSummaries = {
@@ -3764,8 +3761,8 @@ module ListComplianceSummaries = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ComplianceSummaryItems") complianceSummaryItems: option<complianceSummaryItemList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListComplianceSummariesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListComplianceSummariesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCommandInvocations = {
@@ -3782,8 +3779,8 @@ module ListCommandInvocations = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("CommandInvocations") commandInvocations: option<commandInvocationList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListCommandInvocationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListCommandInvocationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetParameterHistory = {
@@ -3798,8 +3795,8 @@ module GetParameterHistory = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Parameters") parameters: option<parameterHistoryList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetParameterHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetParameterHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMaintenanceWindowTask = {
@@ -3825,9 +3822,8 @@ module GetMaintenanceWindowTask = {
     @as("WindowTaskId") windowTaskId: option<maintenanceWindowTaskId>,
     @as("WindowId") windowId: option<maintenanceWindowId>,
   }
-  @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "GetMaintenanceWindowTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetMaintenanceWindowTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMaintenanceWindowExecutionTask = {
@@ -3852,8 +3848,8 @@ module GetMaintenanceWindowExecutionTask = {
     @as("WindowExecutionId") windowExecutionId: option<maintenanceWindowExecutionId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "GetMaintenanceWindowExecutionTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetMaintenanceWindowExecutionTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInventorySchema = {
@@ -3869,8 +3865,8 @@ module GetInventorySchema = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Schemas") schemas: option<inventoryItemSchemaResultList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetInventorySchemaCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetInventorySchemaCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeParameters = {
@@ -3885,8 +3881,8 @@ module DescribeParameters = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Parameters") parameters: option<parameterMetadataList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DescribeParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribeParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOpsItems = {
@@ -3900,8 +3896,8 @@ module DescribeOpsItems = {
     @as("OpsItemSummaries") opsItemSummaries: option<opsItemSummaries>,
     @as("NextToken") nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DescribeOpsItemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribeOpsItemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstanceInformation = {
@@ -3918,8 +3914,8 @@ module DescribeInstanceInformation = {
     @as("InstanceInformationList") instanceInformationList: option<instanceInformationList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeInstanceInformationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInstanceInformationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstanceAssociationsStatus = {
@@ -3935,8 +3931,8 @@ module DescribeInstanceAssociationsStatus = {
     instanceAssociationStatusInfos: option<instanceAssociationStatusInfos>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeInstanceAssociationsStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInstanceAssociationsStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEffectivePatchesForPatchBaseline = {
@@ -3951,8 +3947,8 @@ module DescribeEffectivePatchesForPatchBaseline = {
     @as("EffectivePatches") effectivePatches: option<effectivePatchList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeEffectivePatchesForPatchBaselineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEffectivePatchesForPatchBaselineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAssociation = {
@@ -3966,8 +3962,8 @@ module DescribeAssociation = {
   type response = {
     @as("AssociationDescription") associationDescription: option<associationDescription>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DescribeAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribeAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeActivations = {
@@ -3981,8 +3977,8 @@ module DescribeActivations = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ActivationList") activationList: option<activationList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "DescribeActivationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "DescribeActivationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateResourceDataSync = {
@@ -3994,8 +3990,8 @@ module CreateResourceDataSync = {
     @as("SyncName") syncName: resourceDataSyncName,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "CreateResourceDataSyncCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "CreateResourceDataSyncCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAssociation = {
@@ -4022,8 +4018,8 @@ module CreateAssociation = {
   type response = {
     @as("AssociationDescription") associationDescription: option<associationDescription>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "CreateAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "CreateAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartChangeRequestExecution = {
@@ -4044,8 +4040,8 @@ module StartChangeRequestExecution = {
     @as("AutomationExecutionId") automationExecutionId: option<automationExecutionId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "StartChangeRequestExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartChangeRequestExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDocumentMetadataHistory = {
@@ -4065,8 +4061,8 @@ module ListDocumentMetadataHistory = {
     @as("Name") name: option<documentName>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "ListDocumentMetadataHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDocumentMetadataHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCommands = {
@@ -4082,8 +4078,8 @@ module ListCommands = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Commands") commands: option<commandList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListCommandsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListCommandsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssociations = {
@@ -4097,8 +4093,8 @@ module ListAssociations = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Associations") associations: option<associationList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssociationVersions = {
@@ -4112,8 +4108,8 @@ module ListAssociationVersions = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("AssociationVersions") associationVersions: option<associationVersionList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListAssociationVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListAssociationVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMaintenanceWindowTasks = {
@@ -4129,8 +4125,8 @@ module DescribeMaintenanceWindowTasks = {
     @as("Tasks") tasks: option<maintenanceWindowTaskList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeMaintenanceWindowTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMaintenanceWindowTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMaintenanceWindowTargets = {
@@ -4146,8 +4142,8 @@ module DescribeMaintenanceWindowTargets = {
     @as("Targets") targets: option<maintenanceWindowTargetList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeMaintenanceWindowTargetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMaintenanceWindowTargetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInventoryDeletions = {
@@ -4162,8 +4158,8 @@ module DescribeInventoryDeletions = {
     @as("InventoryDeletions") inventoryDeletions: option<inventoryDeletionsList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeInventoryDeletionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInventoryDeletionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAutomationStepExecutions = {
@@ -4180,8 +4176,8 @@ module DescribeAutomationStepExecutions = {
     @as("StepExecutions") stepExecutions: option<stepExecutionList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeAutomationStepExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAutomationStepExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResourceDataSync = {
@@ -4195,16 +4191,16 @@ module ListResourceDataSync = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ResourceDataSyncItems") resourceDataSyncItems: option<resourceDataSyncItemList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "ListResourceDataSyncCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "ListResourceDataSyncCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAutomationExecution = {
   type t
   type request = {@as("AutomationExecutionId") automationExecutionId: automationExecutionId}
   type response = {@as("AutomationExecution") automationExecution: option<automationExecution>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetAutomationExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetAutomationExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAssociationBatch = {
@@ -4214,8 +4210,8 @@ module CreateAssociationBatch = {
     @as("Failed") failed: option<failedCreateAssociationList>,
     @as("Successful") successful: option<associationDescriptionList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "CreateAssociationBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "CreateAssociationBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePatchBaseline = {
@@ -4252,8 +4248,8 @@ module UpdatePatchBaseline = {
     @as("Name") name: option<baselineName>,
     @as("BaselineId") baselineId: option<baselineId>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "UpdatePatchBaselineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "UpdatePatchBaselineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPatchBaseline = {
@@ -4277,8 +4273,8 @@ module GetPatchBaseline = {
     @as("Name") name: option<baselineName>,
     @as("BaselineId") baselineId: option<baselineId>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetPatchBaselineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetPatchBaselineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAutomationExecutions = {
@@ -4294,8 +4290,8 @@ module DescribeAutomationExecutions = {
     automationExecutionMetadataList: option<automationExecutionMetadataList>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "DescribeAutomationExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAutomationExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePatchBaseline = {
@@ -4317,8 +4313,8 @@ module CreatePatchBaseline = {
     @as("OperatingSystem") operatingSystem: option<operatingSystem>,
   }
   type response = {@as("BaselineId") baselineId: option<baselineId>}
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "CreatePatchBaselineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "CreatePatchBaselineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDeployablePatchSnapshotForInstance = {
@@ -4335,8 +4331,8 @@ module GetDeployablePatchSnapshotForInstance = {
     @as("InstanceId") instanceId: option<instanceId>,
   }
   @module("@aws-sdk/client-ssm") @new
-  external new_: request => t = "GetDeployablePatchSnapshotForInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDeployablePatchSnapshotForInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOpsSummary = {
@@ -4353,8 +4349,8 @@ module GetOpsSummary = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Entities") entities: option<opsEntityList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetOpsSummaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetOpsSummaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInventory = {
@@ -4370,6 +4366,6 @@ module GetInventory = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Entities") entities: option<inventoryResultEntityList>,
   }
-  @module("@aws-sdk/client-ssm") @new external new_: request => t = "GetInventoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm") @new external new: request => t = "GetInventoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

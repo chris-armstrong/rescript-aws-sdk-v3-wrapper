@@ -217,8 +217,8 @@ module UpdateKeyDescription = {
     @as("KeyId") keyId: keyIdType,
   }
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "UpdateKeyDescriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "UpdateKeyDescriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateCustomKeyStore = {
@@ -230,8 +230,8 @@ module UpdateCustomKeyStore = {
     @as("CustomKeyStoreId") customKeyStoreId: customKeyStoreIdType,
   }
   type response = unit
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "UpdateCustomKeyStoreCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "UpdateCustomKeyStoreCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAlias = {
@@ -241,8 +241,8 @@ module UpdateAlias = {
     @as("AliasName") aliasName: aliasNameType,
   }
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "UpdateAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "UpdateAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ScheduleKeyDeletion = {
@@ -255,8 +255,8 @@ module ScheduleKeyDeletion = {
     @as("DeletionDate") deletionDate: option<dateType>,
     @as("KeyId") keyId: option<keyIdType>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "ScheduleKeyDeletionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "ScheduleKeyDeletionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RevokeGrant = {
@@ -266,8 +266,8 @@ module RevokeGrant = {
     @as("KeyId") keyId: keyIdType,
   }
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "RevokeGrantCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "RevokeGrantCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RetireGrant = {
@@ -278,8 +278,8 @@ module RetireGrant = {
     @as("GrantToken") grantToken: option<grantTokenType>,
   }
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "RetireGrantCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "RetireGrantCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutKeyPolicy = {
@@ -291,8 +291,8 @@ module PutKeyPolicy = {
     @as("KeyId") keyId: keyIdType,
   }
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "PutKeyPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "PutKeyPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ImportKeyMaterial = {
@@ -305,8 +305,8 @@ module ImportKeyMaterial = {
     @as("KeyId") keyId: keyIdType,
   }
   type response = unit
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "ImportKeyMaterialCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "ImportKeyMaterialCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetParametersForImport = {
@@ -322,16 +322,16 @@ module GetParametersForImport = {
     @as("ImportToken") importToken: option<ciphertextType>,
     @as("KeyId") keyId: option<keyIdType>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "GetParametersForImportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "GetParametersForImportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetKeyRotationStatus = {
   type t
   type request = {@as("KeyId") keyId: keyIdType}
   type response = {@as("KeyRotationEnabled") keyRotationEnabled: option<booleanType>}
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "GetKeyRotationStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "GetKeyRotationStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetKeyPolicy = {
@@ -341,8 +341,8 @@ module GetKeyPolicy = {
     @as("KeyId") keyId: keyIdType,
   }
   type response = {@as("Policy") policy: option<policyType>}
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "GetKeyPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "GetKeyPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GenerateRandom = {
@@ -352,49 +352,48 @@ module GenerateRandom = {
     @as("NumberOfBytes") numberOfBytes: option<numberOfBytesType>,
   }
   type response = {@as("Plaintext") plaintext: option<plaintextType>}
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "GenerateRandomCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "GenerateRandomCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableKeyRotation = {
   type t
   type request = {@as("KeyId") keyId: keyIdType}
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "EnableKeyRotationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "EnableKeyRotationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module EnableKey = {
   type t
   type request = {@as("KeyId") keyId: keyIdType}
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "EnableKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "EnableKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisconnectCustomKeyStore = {
   type t
   type request = {@as("CustomKeyStoreId") customKeyStoreId: customKeyStoreIdType}
   type response = unit
-  @module("@aws-sdk/client-kms") @new
-  external new_: request => t = "DisconnectCustomKeyStoreCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "DisconnectCustomKeyStoreCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableKeyRotation = {
   type t
   type request = {@as("KeyId") keyId: keyIdType}
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "DisableKeyRotationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "DisableKeyRotationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableKey = {
   type t
   type request = {@as("KeyId") keyId: keyIdType}
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "DisableKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "DisableKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteImportedKeyMaterial = {
@@ -402,24 +401,24 @@ module DeleteImportedKeyMaterial = {
   type request = {@as("KeyId") keyId: keyIdType}
 
   @module("@aws-sdk/client-kms") @new
-  external new_: request => t = "DeleteImportedKeyMaterialCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteImportedKeyMaterialCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteCustomKeyStore = {
   type t
   type request = {@as("CustomKeyStoreId") customKeyStoreId: customKeyStoreIdType}
   type response = unit
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "DeleteCustomKeyStoreCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "DeleteCustomKeyStoreCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAlias = {
   type t
   type request = {@as("AliasName") aliasName: aliasNameType}
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "DeleteAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "DeleteAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateCustomKeyStore = {
@@ -431,8 +430,8 @@ module CreateCustomKeyStore = {
     @as("CustomKeyStoreName") customKeyStoreName: customKeyStoreNameType,
   }
   type response = {@as("CustomKeyStoreId") customKeyStoreId: option<customKeyStoreIdType>}
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "CreateCustomKeyStoreCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "CreateCustomKeyStoreCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAlias = {
@@ -442,24 +441,24 @@ module CreateAlias = {
     @as("AliasName") aliasName: aliasNameType,
   }
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "CreateAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "CreateAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ConnectCustomKeyStore = {
   type t
   type request = {@as("CustomKeyStoreId") customKeyStoreId: customKeyStoreIdType}
   type response = unit
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "ConnectCustomKeyStoreCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "ConnectCustomKeyStoreCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelKeyDeletion = {
   type t
   type request = {@as("KeyId") keyId: keyIdType}
   type response = {@as("KeyId") keyId: option<keyIdType>}
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "CancelKeyDeletionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "CancelKeyDeletionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Verify = {
@@ -477,8 +476,8 @@ module Verify = {
     @as("SignatureValid") signatureValid: option<booleanType>,
     @as("KeyId") keyId: option<keyIdType>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "VerifyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "VerifyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -488,8 +487,8 @@ module UntagResource = {
     @as("KeyId") keyId: keyIdType,
   }
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module Sign = {
@@ -506,8 +505,8 @@ module Sign = {
     @as("Signature") signature: option<ciphertextType>,
     @as("KeyId") keyId: option<keyIdType>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "SignCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "SignCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReEncrypt = {
@@ -531,8 +530,8 @@ module ReEncrypt = {
     @as("SourceKeyId") sourceKeyId: option<keyIdType>,
     @as("CiphertextBlob") ciphertextBlob: option<ciphertextType>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "ReEncryptCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "ReEncryptCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListKeyPolicies = {
@@ -547,8 +546,8 @@ module ListKeyPolicies = {
     @as("NextMarker") nextMarker: option<markerType>,
     @as("PolicyNames") policyNames: option<policyNameList>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "ListKeyPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "ListKeyPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPublicKey = {
@@ -565,8 +564,8 @@ module GetPublicKey = {
     @as("PublicKey") publicKey: option<publicKeyType>,
     @as("KeyId") keyId: option<keyIdType>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "GetPublicKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "GetPublicKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GenerateDataKeyWithoutPlaintext = {
@@ -583,8 +582,8 @@ module GenerateDataKeyWithoutPlaintext = {
     @as("CiphertextBlob") ciphertextBlob: option<ciphertextType>,
   }
   @module("@aws-sdk/client-kms") @new
-  external new_: request => t = "GenerateDataKeyWithoutPlaintextCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GenerateDataKeyWithoutPlaintextCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GenerateDataKeyPairWithoutPlaintext = {
@@ -602,8 +601,8 @@ module GenerateDataKeyPairWithoutPlaintext = {
     @as("PrivateKeyCiphertextBlob") privateKeyCiphertextBlob: option<ciphertextType>,
   }
   @module("@aws-sdk/client-kms") @new
-  external new_: request => t = "GenerateDataKeyPairWithoutPlaintextCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GenerateDataKeyPairWithoutPlaintextCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GenerateDataKeyPair = {
@@ -621,8 +620,8 @@ module GenerateDataKeyPair = {
     @as("PrivateKeyPlaintext") privateKeyPlaintext: option<plaintextType>,
     @as("PrivateKeyCiphertextBlob") privateKeyCiphertextBlob: option<ciphertextType>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "GenerateDataKeyPairCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "GenerateDataKeyPairCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GenerateDataKey = {
@@ -639,8 +638,8 @@ module GenerateDataKey = {
     @as("Plaintext") plaintext: option<plaintextType>,
     @as("CiphertextBlob") ciphertextBlob: option<ciphertextType>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "GenerateDataKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "GenerateDataKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Encrypt = {
@@ -657,8 +656,8 @@ module Encrypt = {
     @as("KeyId") keyId: option<keyIdType>,
     @as("CiphertextBlob") ciphertextBlob: option<ciphertextType>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "EncryptCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "EncryptCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Decrypt = {
@@ -675,8 +674,8 @@ module Decrypt = {
     @as("Plaintext") plaintext: option<plaintextType>,
     @as("KeyId") keyId: option<keyIdType>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "DecryptCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "DecryptCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -686,8 +685,8 @@ module TagResource = {
     @as("KeyId") keyId: keyIdType,
   }
 
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListResourceTags = {
@@ -702,8 +701,8 @@ module ListResourceTags = {
     @as("NextMarker") nextMarker: option<markerType>,
     @as("Tags") tags: option<tagList_>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "ListResourceTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "ListResourceTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListKeys = {
@@ -717,8 +716,8 @@ module ListKeys = {
     @as("NextMarker") nextMarker: option<markerType>,
     @as("Keys") keys: option<keyList>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "ListKeysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "ListKeysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAliases = {
@@ -733,8 +732,8 @@ module ListAliases = {
     @as("NextMarker") nextMarker: option<markerType>,
     @as("Aliases") aliases: option<aliasList>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "ListAliasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "ListAliasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeKey = {
@@ -744,8 +743,8 @@ module DescribeKey = {
     @as("KeyId") keyId: keyIdType,
   }
   type response = {@as("KeyMetadata") keyMetadata: option<keyMetadata>}
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "DescribeKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "DescribeKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCustomKeyStores = {
@@ -761,8 +760,8 @@ module DescribeCustomKeyStores = {
     @as("NextMarker") nextMarker: option<markerType>,
     @as("CustomKeyStores") customKeyStores: option<customKeyStoresList>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "DescribeCustomKeyStoresCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "DescribeCustomKeyStoresCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateKey = {
@@ -778,8 +777,8 @@ module CreateKey = {
     @as("Policy") policy: option<policyType>,
   }
   type response = {@as("KeyMetadata") keyMetadata: option<keyMetadata>}
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "CreateKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "CreateKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateGrant = {
@@ -797,8 +796,8 @@ module CreateGrant = {
     @as("GrantId") grantId: option<grantIdType>,
     @as("GrantToken") grantToken: option<grantTokenType>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "CreateGrantCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "CreateGrantCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRetirableGrants = {
@@ -813,8 +812,8 @@ module ListRetirableGrants = {
     @as("NextMarker") nextMarker: option<markerType>,
     @as("Grants") grants: option<grantList>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "ListRetirableGrantsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "ListRetirableGrantsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListGrants = {
@@ -831,6 +830,6 @@ module ListGrants = {
     @as("NextMarker") nextMarker: option<markerType>,
     @as("Grants") grants: option<grantList>,
   }
-  @module("@aws-sdk/client-kms") @new external new_: request => t = "ListGrantsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kms") @new external new: request => t = "ListGrantsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

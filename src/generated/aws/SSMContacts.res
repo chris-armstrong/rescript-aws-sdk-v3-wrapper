@@ -146,8 +146,8 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateContactChannel = {
@@ -159,8 +159,8 @@ module UpdateContactChannel = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "UpdateContactChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateContactChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -170,8 +170,8 @@ module TagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopEngagement = {
@@ -181,8 +181,8 @@ module StopEngagement = {
     @as("EngagementId") engagementId: ssmContactsArn,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: request => t = "StopEngagementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "StopEngagementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartEngagement = {
@@ -198,9 +198,8 @@ module StartEngagement = {
     @as("ContactId") contactId: ssmContactsArn,
   }
   type response = {@as("EngagementArn") engagementArn: ssmContactsArn}
-  @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "StartEngagementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "StartEngagementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendActivationCode = {
@@ -208,8 +207,8 @@ module SendActivationCode = {
   type request = {@as("ContactChannelId") contactChannelId: ssmContactsArn}
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "SendActivationCodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SendActivationCodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutContactPolicy = {
@@ -220,8 +219,8 @@ module PutContactPolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "PutContactPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutContactPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -229,8 +228,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceARN") resourceARN: amazonResourceName}
   type response = {@as("Tags") tags: option<tagsList>}
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPagesByEngagement = {
@@ -245,8 +244,8 @@ module ListPagesByEngagement = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "ListPagesByEngagementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPagesByEngagementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPagesByContact = {
@@ -261,8 +260,8 @@ module ListPagesByContact = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "ListPagesByContactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPagesByContactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPageReceipts = {
@@ -277,8 +276,8 @@ module ListPageReceipts = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "ListPageReceiptsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPageReceiptsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEngagements = {
@@ -293,9 +292,8 @@ module ListEngagements = {
     @as("Engagements") engagements: engagementsList,
     @as("NextToken") nextToken: option<paginationToken>,
   }
-  @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "ListEngagementsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "ListEngagementsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListContacts = {
@@ -310,8 +308,8 @@ module ListContacts = {
     @as("Contacts") contacts: option<contactsList>,
     @as("NextToken") nextToken: option<paginationToken>,
   }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: request => t = "ListContactsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "ListContactsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContactPolicy = {
@@ -322,8 +320,8 @@ module GetContactPolicy = {
     @as("ContactArn") contactArn: option<ssmContactsArn>,
   }
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "GetContactPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetContactPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContactChannel = {
@@ -338,8 +336,8 @@ module GetContactChannel = {
     @as("ContactArn") contactArn: ssmContactsArn,
   }
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "GetContactChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetContactChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePage = {
@@ -359,8 +357,8 @@ module DescribePage = {
     @as("EngagementArn") engagementArn: ssmContactsArn,
     @as("PageArn") pageArn: ssmContactsArn,
   }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: request => t = "DescribePageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "DescribePageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEngagement = {
@@ -379,8 +377,8 @@ module DescribeEngagement = {
     @as("ContactArn") contactArn: ssmContactsArn,
   }
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "DescribeEngagementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEngagementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteContactChannel = {
@@ -388,16 +386,16 @@ module DeleteContactChannel = {
   type request = {@as("ContactChannelId") contactChannelId: ssmContactsArn}
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "DeleteContactChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteContactChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteContact = {
   type t
   type request = {@as("ContactId") contactId: ssmContactsArn}
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: request => t = "DeleteContactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "DeleteContactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeactivateContactChannel = {
@@ -405,8 +403,8 @@ module DeactivateContactChannel = {
   type request = {@as("ContactChannelId") contactChannelId: ssmContactsArn}
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "DeactivateContactChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeactivateContactChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateContactChannel = {
@@ -421,8 +419,8 @@ module CreateContactChannel = {
   }
   type response = {@as("ContactChannelArn") contactChannelArn: ssmContactsArn}
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "CreateContactChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateContactChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ActivateContactChannel = {
@@ -433,8 +431,8 @@ module ActivateContactChannel = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "ActivateContactChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ActivateContactChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptPage = {
@@ -447,8 +445,8 @@ module AcceptPage = {
     @as("PageId") pageId: ssmContactsArn,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: request => t = "AcceptPageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "AcceptPageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListContactChannels = {
@@ -463,8 +461,8 @@ module ListContactChannels = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-ssm-contacts") @new
-  external new_: request => t = "ListContactChannelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListContactChannelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateContact = {
@@ -475,8 +473,8 @@ module UpdateContact = {
     @as("ContactId") contactId: ssmContactsArn,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: request => t = "UpdateContactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "UpdateContactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContact = {
@@ -489,8 +487,8 @@ module GetContact = {
     @as("Alias") alias: contactAlias,
     @as("ContactArn") contactArn: ssmContactsArn,
   }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: request => t = "GetContactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "GetContactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateContact = {
@@ -504,6 +502,6 @@ module CreateContact = {
     @as("Alias") alias: contactAlias,
   }
   type response = {@as("ContactArn") contactArn: ssmContactsArn}
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: request => t = "CreateContactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-contacts") @new external new: request => t = "CreateContactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -340,8 +340,8 @@ module StopExecution = {
     executionArn: arn,
   }
   type response = {stopDate: timestamp_}
-  @module("@aws-sdk/client-states") @new external new_: request => t = "StopExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "StopExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartExecution = {
@@ -356,8 +356,8 @@ module StartExecution = {
     startDate: timestamp_,
     executionArn: arn,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "StartExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "StartExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendTaskSuccess = {
@@ -367,16 +367,16 @@ module SendTaskSuccess = {
     taskToken: taskToken,
   }
   type response = unit
-  @module("@aws-sdk/client-states") @new external new_: request => t = "SendTaskSuccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "SendTaskSuccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendTaskHeartbeat = {
   type t
   type request = {taskToken: taskToken}
   type response = unit
-  @module("@aws-sdk/client-states") @new external new_: request => t = "SendTaskHeartbeatCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "SendTaskHeartbeatCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendTaskFailure = {
@@ -387,8 +387,8 @@ module SendTaskFailure = {
     taskToken: taskToken,
   }
   type response = unit
-  @module("@aws-sdk/client-states") @new external new_: request => t = "SendTaskFailureCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "SendTaskFailureCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetActivityTask = {
@@ -401,8 +401,8 @@ module GetActivityTask = {
     input: option<sensitiveDataJobInput>,
     taskToken: option<taskToken>,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "GetActivityTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "GetActivityTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeActivity = {
@@ -413,24 +413,24 @@ module DescribeActivity = {
     name: name,
     activityArn: arn,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "DescribeActivityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "DescribeActivityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteStateMachine = {
   type t
   type request = {stateMachineArn: arn}
   type response = unit
-  @module("@aws-sdk/client-states") @new external new_: request => t = "DeleteStateMachineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "DeleteStateMachineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteActivity = {
   type t
   type request = {activityArn: arn}
   type response = unit
-  @module("@aws-sdk/client-states") @new external new_: request => t = "DeleteActivityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "DeleteActivityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -440,8 +440,8 @@ module UntagResource = {
     resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-states") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartSyncExecution = {
@@ -468,8 +468,8 @@ module StartSyncExecution = {
     stateMachineArn: option<arn>,
     executionArn: arn,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "StartSyncExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "StartSyncExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeExecution = {
@@ -488,8 +488,8 @@ module DescribeExecution = {
     stateMachineArn: arn,
     executionArn: arn,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "DescribeExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "DescribeExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -499,16 +499,16 @@ module TagResource = {
     resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-states") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {resourceArn: arn}
   type response = {tags: option<tagList_>}
-  @module("@aws-sdk/client-states") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStateMachines = {
@@ -521,8 +521,8 @@ module ListStateMachines = {
     nextToken: option<pageToken>,
     stateMachines: stateMachineList,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "ListStateMachinesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "ListStateMachinesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListExecutions = {
@@ -537,8 +537,8 @@ module ListExecutions = {
     nextToken: option<listExecutionsPageToken>,
     executions: executionList,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "ListExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "ListExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListActivities = {
@@ -551,8 +551,8 @@ module ListActivities = {
     nextToken: option<pageToken>,
     activities: activityList,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "ListActivitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "ListActivitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateActivity = {
@@ -565,8 +565,8 @@ module CreateActivity = {
     creationDate: timestamp_,
     activityArn: arn,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "CreateActivityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "CreateActivityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateStateMachine = {
@@ -579,8 +579,8 @@ module UpdateStateMachine = {
     stateMachineArn: arn,
   }
   type response = {updateDate: timestamp_}
-  @module("@aws-sdk/client-states") @new external new_: request => t = "UpdateStateMachineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "UpdateStateMachineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetExecutionHistory = {
@@ -596,8 +596,8 @@ module GetExecutionHistory = {
     nextToken: option<pageToken>,
     events: historyEventList,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "GetExecutionHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "GetExecutionHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStateMachineForExecution = {
@@ -613,8 +613,8 @@ module DescribeStateMachineForExecution = {
     stateMachineArn: arn,
   }
   @module("@aws-sdk/client-states") @new
-  external new_: request => t = "DescribeStateMachineForExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStateMachineForExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStateMachine = {
@@ -631,8 +631,8 @@ module DescribeStateMachine = {
     name: name,
     stateMachineArn: arn,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "DescribeStateMachineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "DescribeStateMachineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateStateMachine = {
@@ -650,6 +650,6 @@ module CreateStateMachine = {
     creationDate: timestamp_,
     stateMachineArn: arn,
   }
-  @module("@aws-sdk/client-states") @new external new_: request => t = "CreateStateMachineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-states") @new external new: request => t = "CreateStateMachineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

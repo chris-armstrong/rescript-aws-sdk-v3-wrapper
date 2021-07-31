@@ -527,8 +527,8 @@ module GetAccountStatus = {
   type request = unit
   type response = {status: option<accountStatus>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "GetAccountStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAccountStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ValidateAssessmentReportIntegrity = {
@@ -542,8 +542,8 @@ module ValidateAssessmentReportIntegrity = {
     signatureValid: option<boolean_>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "ValidateAssessmentReportIntegrityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ValidateAssessmentReportIntegrityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -553,8 +553,8 @@ module UntagResource = {
     resourceArn: auditManagerArn,
   }
   type response = unit
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -564,8 +564,8 @@ module TagResource = {
     resourceArn: auditManagerArn,
   }
   type response = unit
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterOrganizationAdminAccount = {
@@ -576,8 +576,8 @@ module RegisterOrganizationAdminAccount = {
     adminAccountId: option<accountId>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "RegisterOrganizationAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterOrganizationAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterAccount = {
@@ -587,9 +587,8 @@ module RegisterAccount = {
     kmsKey: option<kmsKey>,
   }
   type response = {status: option<accountStatus>}
-  @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "RegisterAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "RegisterAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -597,8 +596,8 @@ module ListTagsForResource = {
   type request = {resourceArn: auditManagerArn}
   type response = {tags: option<tagMap>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListNotifications = {
@@ -612,8 +611,8 @@ module ListNotifications = {
     notifications: option<notifications>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "ListNotificationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListNotificationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListKeywordsForDataSource = {
@@ -628,8 +627,8 @@ module ListKeywordsForDataSource = {
     keywords: option<keywords>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "ListKeywordsForDataSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListKeywordsForDataSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListControls = {
@@ -643,8 +642,8 @@ module ListControls = {
     nextToken: option<token>,
     controlMetadataList: option<controlMetadataList>,
   }
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "ListControlsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "ListControlsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssessmentReports = {
@@ -658,8 +657,8 @@ module ListAssessmentReports = {
     assessmentReports: option<assessmentReportsMetadata>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "ListAssessmentReportsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAssessmentReportsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssessmentFrameworks = {
@@ -674,8 +673,8 @@ module ListAssessmentFrameworks = {
     frameworkMetadataList: option<frameworkMetadataList>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "ListAssessmentFrameworksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAssessmentFrameworksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetServicesInScope = {
@@ -683,8 +682,8 @@ module GetServicesInScope = {
   type request = unit
   type response = {serviceMetadata: option<serviceMetadataList>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "GetServicesInScopeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetServicesInScopeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOrganizationAdminAccount = {
@@ -695,8 +694,8 @@ module GetOrganizationAdminAccount = {
     adminAccountId: option<accountId>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "GetOrganizationAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetOrganizationAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEvidenceFoldersByAssessmentControl = {
@@ -713,8 +712,8 @@ module GetEvidenceFoldersByAssessmentControl = {
     evidenceFolders: option<assessmentEvidenceFolders>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "GetEvidenceFoldersByAssessmentControlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEvidenceFoldersByAssessmentControlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEvidenceFoldersByAssessment = {
@@ -729,8 +728,8 @@ module GetEvidenceFoldersByAssessment = {
     evidenceFolders: option<assessmentEvidenceFolders>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "GetEvidenceFoldersByAssessmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEvidenceFoldersByAssessmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEvidenceFolder = {
@@ -742,8 +741,8 @@ module GetEvidenceFolder = {
   }
   type response = {evidenceFolder: option<assessmentEvidenceFolder>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "GetEvidenceFolderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEvidenceFolderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDelegations = {
@@ -756,8 +755,8 @@ module GetDelegations = {
     nextToken: option<token>,
     delegations: option<delegationMetadataList>,
   }
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "GetDelegationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "GetDelegationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetChangeLogs = {
@@ -773,8 +772,8 @@ module GetChangeLogs = {
     nextToken: option<token>,
     changeLogs: option<changeLogs>,
   }
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "GetChangeLogsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "GetChangeLogsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAssessmentReportUrl = {
@@ -785,8 +784,8 @@ module GetAssessmentReportUrl = {
   }
   type response = {preSignedUrl: option<url>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "GetAssessmentReportUrlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAssessmentReportUrlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateAssessmentReportEvidenceFolder = {
@@ -797,8 +796,8 @@ module DisassociateAssessmentReportEvidenceFolder = {
   }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "DisassociateAssessmentReportEvidenceFolderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateAssessmentReportEvidenceFolderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterOrganizationAdminAccount = {
@@ -806,8 +805,8 @@ module DeregisterOrganizationAdminAccount = {
   type request = {adminAccountId: option<accountId>}
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "DeregisterOrganizationAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterOrganizationAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterAccount = {
@@ -815,16 +814,16 @@ module DeregisterAccount = {
   type request = unit
   type response = {status: option<accountStatus>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "DeregisterAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteControl = {
   type t
   type request = {controlId: uuid}
   type response = unit
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "DeleteControlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "DeleteControlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAssessmentReport = {
@@ -835,8 +834,8 @@ module DeleteAssessmentReport = {
   }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "DeleteAssessmentReportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAssessmentReportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAssessmentFramework = {
@@ -844,8 +843,8 @@ module DeleteAssessmentFramework = {
   type request = {frameworkId: uuid}
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "DeleteAssessmentFrameworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAssessmentFrameworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAssessment = {
@@ -853,8 +852,8 @@ module DeleteAssessment = {
   type request = {assessmentId: uuid}
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "DeleteAssessmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAssessmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAssessmentReport = {
@@ -866,8 +865,8 @@ module CreateAssessmentReport = {
   }
   type response = {assessmentReport: option<assessmentReport>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "CreateAssessmentReportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAssessmentReportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDisassociateAssessmentReportEvidence = {
@@ -882,8 +881,8 @@ module BatchDisassociateAssessmentReportEvidence = {
     evidenceIds: option<evidenceIds>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "BatchDisassociateAssessmentReportEvidenceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDisassociateAssessmentReportEvidenceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteDelegationByAssessment = {
@@ -894,8 +893,8 @@ module BatchDeleteDelegationByAssessment = {
   }
   type response = {errors: option<batchDeleteDelegationByAssessmentErrors>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "BatchDeleteDelegationByAssessmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDeleteDelegationByAssessmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchAssociateAssessmentReportEvidence = {
@@ -910,8 +909,8 @@ module BatchAssociateAssessmentReportEvidence = {
     evidenceIds: option<evidenceIds>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "BatchAssociateAssessmentReportEvidenceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchAssociateAssessmentReportEvidenceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateAssessmentReportEvidenceFolder = {
@@ -922,8 +921,8 @@ module AssociateAssessmentReportEvidenceFolder = {
   }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "AssociateAssessmentReportEvidenceFolderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateAssessmentReportEvidenceFolderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSettings = {
@@ -935,8 +934,8 @@ module UpdateSettings = {
     snsTopic: option<snsArn>,
   }
   type response = {settings: option<settings>}
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "UpdateSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "UpdateSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAssessmentControl = {
@@ -950,16 +949,16 @@ module UpdateAssessmentControl = {
   }
   type response = {control: option<assessmentControl>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "UpdateAssessmentControlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAssessmentControlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSettings = {
   type t
   type request = {attribute: settingAttribute}
   type response = {settings: option<settings>}
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "GetSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "GetSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEvidence = {
@@ -971,8 +970,8 @@ module GetEvidence = {
     assessmentId: uuid,
   }
   type response = {evidence: option<evidence>}
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "GetEvidenceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "GetEvidenceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchImportEvidenceToAssessmentControl = {
@@ -985,8 +984,8 @@ module BatchImportEvidenceToAssessmentControl = {
   }
   type response = {errors: option<batchImportEvidenceToAssessmentControlErrors>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "BatchImportEvidenceToAssessmentControlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchImportEvidenceToAssessmentControlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchCreateDelegationByAssessment = {
@@ -1000,8 +999,8 @@ module BatchCreateDelegationByAssessment = {
     delegations: option<delegations>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "BatchCreateDelegationByAssessmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchCreateDelegationByAssessmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateControl = {
@@ -1016,8 +1015,8 @@ module UpdateControl = {
     controlId: uuid,
   }
   type response = {control: option<control>}
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "UpdateControlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "UpdateControlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssessments = {
@@ -1030,9 +1029,8 @@ module ListAssessments = {
     nextToken: option<token>,
     assessmentMetadata: option<listAssessmentMetadata>,
   }
-  @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "ListAssessmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "ListAssessmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEvidenceByEvidenceFolder = {
@@ -1049,16 +1047,16 @@ module GetEvidenceByEvidenceFolder = {
     evidence: option<evidenceList>,
   }
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "GetEvidenceByEvidenceFolderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEvidenceByEvidenceFolderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetControl = {
   type t
   type request = {controlId: uuid}
   type response = {control: option<control>}
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "GetControlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "GetControlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateControl = {
@@ -1073,8 +1071,8 @@ module CreateControl = {
     name: controlName,
   }
   type response = {control: option<control>}
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "CreateControlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "CreateControlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAssessmentControlSetStatus = {
@@ -1087,8 +1085,8 @@ module UpdateAssessmentControlSetStatus = {
   }
   type response = {controlSet: option<assessmentControlSet>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "UpdateAssessmentControlSetStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAssessmentControlSetStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAssessmentStatus = {
@@ -1099,8 +1097,8 @@ module UpdateAssessmentStatus = {
   }
   type response = {assessment: option<assessment>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "UpdateAssessmentStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAssessmentStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAssessmentFramework = {
@@ -1114,8 +1112,8 @@ module UpdateAssessmentFramework = {
   }
   type response = {framework: option<framework>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "UpdateAssessmentFrameworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAssessmentFrameworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAssessment = {
@@ -1130,8 +1128,8 @@ module UpdateAssessment = {
   }
   type response = {assessment: option<assessment>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "UpdateAssessmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAssessmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAssessmentFramework = {
@@ -1139,8 +1137,8 @@ module GetAssessmentFramework = {
   type request = {frameworkId: uuid}
   type response = {framework: option<framework>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "GetAssessmentFrameworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAssessmentFrameworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAssessment = {
@@ -1150,8 +1148,8 @@ module GetAssessment = {
     userRole: option<role>,
     assessment: option<assessment>,
   }
-  @module("@aws-sdk/client-auditmanager") @new external new_: request => t = "GetAssessmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-auditmanager") @new external new: request => t = "GetAssessmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAssessmentFramework = {
@@ -1165,8 +1163,8 @@ module CreateAssessmentFramework = {
   }
   type response = {framework: option<framework>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "CreateAssessmentFrameworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAssessmentFrameworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAssessment = {
@@ -1182,6 +1180,6 @@ module CreateAssessment = {
   }
   type response = {assessment: option<assessment>}
   @module("@aws-sdk/client-auditmanager") @new
-  external new_: request => t = "CreateAssessmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAssessmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

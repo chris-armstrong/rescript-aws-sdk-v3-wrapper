@@ -189,16 +189,16 @@ module StopChannel = {
   type t
   type request = {@as("ChannelName") channelName: __string}
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "StopChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "StopChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartChannel = {
   type t
   type request = {@as("ChannelName") channelName: __string}
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "StartChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "StartChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutChannelPolicy = {
@@ -208,18 +208,16 @@ module PutChannelPolicy = {
     @as("ChannelName") channelName: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "PutChannelPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "PutChannelPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetChannelPolicy = {
   type t
   type request = {@as("ChannelName") channelName: __string}
   type response = {@as("Policy") policy: option<__string>}
-  @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "GetChannelPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "GetChannelPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVodSource = {
@@ -229,8 +227,8 @@ module DeleteVodSource = {
     @as("SourceLocationName") sourceLocationName: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "DeleteVodSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "DeleteVodSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSourceLocation = {
@@ -238,8 +236,8 @@ module DeleteSourceLocation = {
   type request = {@as("SourceLocationName") sourceLocationName: __string}
   type response = unit
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "DeleteSourceLocationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSourceLocationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProgram = {
@@ -249,8 +247,8 @@ module DeleteProgram = {
     @as("ChannelName") channelName: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "DeleteProgramCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "DeleteProgramCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePlaybackConfiguration = {
@@ -258,8 +256,8 @@ module DeletePlaybackConfiguration = {
   type request = {@as("Name") name: __string}
   type response = unit
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "DeletePlaybackConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeletePlaybackConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteChannelPolicy = {
@@ -267,16 +265,16 @@ module DeleteChannelPolicy = {
   type request = {@as("ChannelName") channelName: __string}
   type response = unit
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "DeleteChannelPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteChannelPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteChannel = {
   type t
   type request = {@as("ChannelName") channelName: __string}
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "DeleteChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "DeleteChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSourceLocation = {
@@ -300,8 +298,8 @@ module UpdateSourceLocation = {
     @as("AccessConfiguration") accessConfiguration: option<accessConfiguration>,
   }
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "UpdateSourceLocationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSourceLocationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -311,8 +309,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -322,8 +320,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListTagsForResource = {
@@ -331,8 +329,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: __string}
   type response = {@as("Tags") tags: option<__mapOf__string>}
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSourceLocation = {
@@ -350,8 +348,8 @@ module DescribeSourceLocation = {
     @as("AccessConfiguration") accessConfiguration: option<accessConfiguration>,
   }
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "DescribeSourceLocationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSourceLocationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSourceLocation = {
@@ -376,8 +374,8 @@ module CreateSourceLocation = {
     @as("AccessConfiguration") accessConfiguration: option<accessConfiguration>,
   }
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "CreateSourceLocationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSourceLocationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateVodSource = {
@@ -396,8 +394,8 @@ module UpdateVodSource = {
     @as("CreationTime") creationTime: option<__timestampUnix>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "UpdateVodSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "UpdateVodSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutPlaybackConfiguration = {
@@ -440,8 +438,8 @@ module PutPlaybackConfiguration = {
     @as("AdDecisionServerUrl") adDecisionServerUrl: option<__string>,
   }
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "PutPlaybackConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutPlaybackConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPlaybackConfiguration = {
@@ -469,8 +467,8 @@ module GetPlaybackConfiguration = {
     @as("AdDecisionServerUrl") adDecisionServerUrl: option<__string>,
   }
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "GetPlaybackConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPlaybackConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetChannelSchedule = {
@@ -486,8 +484,8 @@ module GetChannelSchedule = {
     @as("Items") items: option<__listOfScheduleEntry>,
   }
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "GetChannelScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetChannelScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVodSource = {
@@ -506,8 +504,8 @@ module DescribeVodSource = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "DescribeVodSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeVodSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVodSource = {
@@ -527,8 +525,8 @@ module CreateVodSource = {
     @as("CreationTime") creationTime: option<__timestampUnix>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "CreateVodSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "CreateVodSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateChannel = {
@@ -547,8 +545,8 @@ module UpdateChannel = {
     @as("ChannelName") channelName: option<__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "UpdateChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "UpdateChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSourceLocations = {
@@ -562,8 +560,8 @@ module ListSourceLocations = {
     @as("Items") items: option<__listOfSourceLocation>,
   }
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "ListSourceLocationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSourceLocationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProgram = {
@@ -581,8 +579,8 @@ module DescribeProgram = {
     @as("Arn") arn: option<__string>,
     @as("AdBreaks") adBreaks: option<__listOfAdBreak>,
   }
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "DescribeProgramCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "DescribeProgramCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeChannel = {
@@ -598,8 +596,8 @@ module DescribeChannel = {
     @as("ChannelName") channelName: option<__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "DescribeChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "DescribeChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProgram = {
@@ -621,8 +619,8 @@ module CreateProgram = {
     @as("Arn") arn: option<__string>,
     @as("AdBreaks") adBreaks: option<__listOfAdBreak>,
   }
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "CreateProgramCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "CreateProgramCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateChannel = {
@@ -643,8 +641,8 @@ module CreateChannel = {
     @as("ChannelName") channelName: option<__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "CreateChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "CreateChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListVodSources = {
@@ -658,8 +656,8 @@ module ListVodSources = {
     @as("NextToken") nextToken: option<__string>,
     @as("Items") items: option<__listOfVodSource>,
   }
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "ListVodSourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "ListVodSourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPlaybackConfigurations = {
@@ -673,8 +671,8 @@ module ListPlaybackConfigurations = {
     @as("Items") items: option<__listOfPlaybackConfiguration>,
   }
   @module("@aws-sdk/client-mediatailor") @new
-  external new_: request => t = "ListPlaybackConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPlaybackConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChannels = {
@@ -687,6 +685,6 @@ module ListChannels = {
     @as("NextToken") nextToken: option<__string>,
     @as("Items") items: option<__listOfChannel>,
   }
-  @module("@aws-sdk/client-mediatailor") @new external new_: request => t = "ListChannelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediatailor") @new external new: request => t = "ListChannelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

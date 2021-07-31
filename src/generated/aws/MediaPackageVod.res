@@ -155,8 +155,8 @@ module DeletePackagingGroup = {
   type request = {@as("Id") id: __string}
   type response = unit
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "DeletePackagingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeletePackagingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePackagingConfiguration = {
@@ -164,17 +164,16 @@ module DeletePackagingConfiguration = {
   type request = {@as("Id") id: __string}
   type response = unit
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "DeletePackagingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeletePackagingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAsset = {
   type t
   type request = {@as("Id") id: __string}
   type response = unit
-  @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "DeleteAssetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediapackage-vod") @new external new: request => t = "DeleteAssetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePackagingGroup = {
@@ -192,8 +191,8 @@ module UpdatePackagingGroup = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "UpdatePackagingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePackagingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -204,8 +203,8 @@ module UntagResource = {
   }
 
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -215,9 +214,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-mediapackage-vod") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListTagsForResource = {
@@ -225,8 +223,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: __string}
   type response = {@as("Tags") tags: option<__mapOf__string>}
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePackagingGroup = {
@@ -241,8 +239,8 @@ module DescribePackagingGroup = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "DescribePackagingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePackagingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePackagingGroup = {
@@ -262,8 +260,8 @@ module CreatePackagingGroup = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "CreatePackagingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePackagingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ConfigureLogs = {
@@ -281,8 +279,8 @@ module ConfigureLogs = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "ConfigureLogsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ConfigureLogsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAsset = {
@@ -300,8 +298,8 @@ module DescribeAsset = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "DescribeAssetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAssetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAsset = {
@@ -325,9 +323,8 @@ module CreateAsset = {
     @as("CreatedAt") createdAt: option<__string>,
     @as("Arn") arn: option<__string>,
   }
-  @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "CreateAssetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediapackage-vod") @new external new: request => t = "CreateAssetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPackagingGroups = {
@@ -341,8 +338,8 @@ module ListPackagingGroups = {
     @as("NextToken") nextToken: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "ListPackagingGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPackagingGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssets = {
@@ -356,8 +353,8 @@ module ListAssets = {
     @as("NextToken") nextToken: option<__string>,
     @as("Assets") assets: option<__listOfAssetShallow>,
   }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: request => t = "ListAssetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediapackage-vod") @new external new: request => t = "ListAssetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePackagingConfiguration = {
@@ -374,8 +371,8 @@ module DescribePackagingConfiguration = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "DescribePackagingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePackagingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePackagingConfiguration = {
@@ -400,8 +397,8 @@ module CreatePackagingConfiguration = {
     @as("Arn") arn: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "CreatePackagingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePackagingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPackagingConfigurations = {
@@ -416,6 +413,6 @@ module ListPackagingConfigurations = {
     @as("NextToken") nextToken: option<__string>,
   }
   @module("@aws-sdk/client-mediapackage-vod") @new
-  external new_: request => t = "ListPackagingConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPackagingConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

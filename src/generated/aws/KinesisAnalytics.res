@@ -352,8 +352,8 @@ module StopApplication = {
   type request = {@as("ApplicationName") applicationName: applicationName}
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "StopApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApplicationReferenceDataSource = {
@@ -365,8 +365,8 @@ module DeleteApplicationReferenceDataSource = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "DeleteApplicationReferenceDataSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteApplicationReferenceDataSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApplicationOutput = {
@@ -378,8 +378,8 @@ module DeleteApplicationOutput = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "DeleteApplicationOutputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteApplicationOutputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApplicationInputProcessingConfiguration = {
@@ -391,8 +391,8 @@ module DeleteApplicationInputProcessingConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "DeleteApplicationInputProcessingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteApplicationInputProcessingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApplicationCloudWatchLoggingOption = {
@@ -404,8 +404,8 @@ module DeleteApplicationCloudWatchLoggingOption = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "DeleteApplicationCloudWatchLoggingOptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteApplicationCloudWatchLoggingOptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApplication = {
@@ -416,8 +416,8 @@ module DeleteApplication = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "DeleteApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -428,8 +428,8 @@ module UntagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddApplicationCloudWatchLoggingOption = {
@@ -441,8 +441,8 @@ module AddApplicationCloudWatchLoggingOption = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "AddApplicationCloudWatchLoggingOptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddApplicationCloudWatchLoggingOptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -452,9 +452,8 @@ module TagResource = {
     @as("ResourceARN") resourceARN: kinesisAnalyticsARN,
   }
   type response = unit
-  @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesisanalytics") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -462,8 +461,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceARN") resourceARN: kinesisAnalyticsARN}
   type response = {@as("Tags") tags: option<tags>}
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListApplications = {
@@ -477,8 +476,8 @@ module ListApplications = {
     @as("ApplicationSummaries") applicationSummaries: applicationSummaries,
   }
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "ListApplicationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListApplicationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddApplicationOutput = {
@@ -490,8 +489,8 @@ module AddApplicationOutput = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "AddApplicationOutputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddApplicationOutputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddApplicationInputProcessingConfiguration = {
@@ -504,8 +503,8 @@ module AddApplicationInputProcessingConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "AddApplicationInputProcessingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddApplicationInputProcessingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartApplication = {
@@ -516,8 +515,8 @@ module StartApplication = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "StartApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DiscoverInputSchema = {
@@ -538,8 +537,8 @@ module DiscoverInputSchema = {
     @as("InputSchema") inputSchema: option<sourceSchema>,
   }
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "DiscoverInputSchemaCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DiscoverInputSchemaCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddApplicationReferenceDataSource = {
@@ -551,8 +550,8 @@ module AddApplicationReferenceDataSource = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "AddApplicationReferenceDataSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddApplicationReferenceDataSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddApplicationInput = {
@@ -564,8 +563,8 @@ module AddApplicationInput = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "AddApplicationInputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddApplicationInputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApplication = {
@@ -581,8 +580,8 @@ module CreateApplication = {
   }
   type response = {@as("ApplicationSummary") applicationSummary: applicationSummary}
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "CreateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApplication = {
@@ -594,8 +593,8 @@ module UpdateApplication = {
   }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "UpdateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeApplication = {
@@ -603,6 +602,6 @@ module DescribeApplication = {
   type request = {@as("ApplicationName") applicationName: applicationName}
   type response = {@as("ApplicationDetail") applicationDetail: applicationDetail}
   @module("@aws-sdk/client-kinesisanalytics") @new
-  external new_: request => t = "DescribeApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -222,8 +222,8 @@ module UploadMultipartPart = {
     accountId: string_,
   }
   type response = {checksum: option<string_>}
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "UploadMultipartPartCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "UploadMultipartPartCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UploadArchive = {
@@ -240,8 +240,8 @@ module UploadArchive = {
     checksum: option<string_>,
     location: option<string_>,
   }
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "UploadArchiveCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "UploadArchiveCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PurchaseProvisionedCapacity = {
@@ -249,8 +249,8 @@ module PurchaseProvisionedCapacity = {
   type request = {accountId: string_}
   type response = {capacityId: option<string_>}
   @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "PurchaseProvisionedCapacityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PurchaseProvisionedCapacityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InitiateMultipartUpload = {
@@ -266,8 +266,8 @@ module InitiateMultipartUpload = {
     location: option<string_>,
   }
   @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "InitiateMultipartUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "InitiateMultipartUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVaultLock = {
@@ -282,8 +282,8 @@ module GetVaultLock = {
     @as("State") state: option<string_>,
     @as("Policy") policy: option<string_>,
   }
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "GetVaultLockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "GetVaultLockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJobOutput = {
@@ -303,8 +303,8 @@ module GetJobOutput = {
     checksum: option<string_>,
     body: option<stream>,
   }
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "GetJobOutputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "GetJobOutputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVault = {
@@ -314,8 +314,8 @@ module DescribeVault = {
     accountId: string_,
   }
   type response = describeVaultOutput
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "DescribeVaultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "DescribeVaultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVaultNotifications = {
@@ -326,8 +326,8 @@ module DeleteVaultNotifications = {
   }
 
   @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "DeleteVaultNotificationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteVaultNotificationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVaultAccessPolicy = {
@@ -338,8 +338,8 @@ module DeleteVaultAccessPolicy = {
   }
 
   @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "DeleteVaultAccessPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteVaultAccessPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVault = {
@@ -349,8 +349,8 @@ module DeleteVault = {
     accountId: string_,
   }
 
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "DeleteVaultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "DeleteVaultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteArchive = {
@@ -361,8 +361,8 @@ module DeleteArchive = {
     accountId: string_,
   }
 
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "DeleteArchiveCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "DeleteArchiveCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateVault = {
@@ -372,8 +372,8 @@ module CreateVault = {
     accountId: string_,
   }
   type response = {location: option<string_>}
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "CreateVaultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "CreateVaultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CompleteVaultLock = {
@@ -384,8 +384,8 @@ module CompleteVaultLock = {
     accountId: string_,
   }
 
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "CompleteVaultLockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "CompleteVaultLockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CompleteMultipartUpload = {
@@ -403,8 +403,8 @@ module CompleteMultipartUpload = {
     location: option<string_>,
   }
   @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "CompleteMultipartUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CompleteMultipartUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AbortVaultLock = {
@@ -414,8 +414,8 @@ module AbortVaultLock = {
     accountId: string_,
   }
 
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "AbortVaultLockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "AbortVaultLockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AbortMultipartUpload = {
@@ -426,9 +426,8 @@ module AbortMultipartUpload = {
     accountId: string_,
   }
 
-  @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "AbortMultipartUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "AbortMultipartUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetVaultAccessPolicy = {
@@ -439,9 +438,8 @@ module SetVaultAccessPolicy = {
     accountId: string_,
   }
 
-  @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "SetVaultAccessPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "SetVaultAccessPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveTagsFromVault = {
@@ -452,8 +450,8 @@ module RemoveTagsFromVault = {
     accountId: string_,
   }
 
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "RemoveTagsFromVaultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "RemoveTagsFromVaultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListTagsForVault = {
@@ -463,8 +461,8 @@ module ListTagsForVault = {
     accountId: string_,
   }
   type response = {@as("Tags") tags: option<tagMap>}
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "ListTagsForVaultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "ListTagsForVaultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InitiateVaultLock = {
@@ -475,8 +473,8 @@ module InitiateVaultLock = {
     accountId: string_,
   }
   type response = {lockId: option<string_>}
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "InitiateVaultLockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "InitiateVaultLockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVaultAccessPolicy = {
@@ -486,9 +484,8 @@ module GetVaultAccessPolicy = {
     accountId: string_,
   }
   type response = {policy: option<vaultAccessPolicy>}
-  @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "GetVaultAccessPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "GetVaultAccessPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTagsToVault = {
@@ -499,8 +496,8 @@ module AddTagsToVault = {
     accountId: string_,
   }
 
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "AddTagsToVaultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "AddTagsToVaultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetVaultNotifications = {
@@ -512,8 +509,8 @@ module SetVaultNotifications = {
   }
 
   @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "SetVaultNotificationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SetVaultNotificationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListVaults = {
@@ -527,8 +524,8 @@ module ListVaults = {
     @as("Marker") marker: option<string_>,
     @as("VaultList") vaultList: option<vaultList>,
   }
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "ListVaultsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "ListVaultsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProvisionedCapacity = {
@@ -538,8 +535,8 @@ module ListProvisionedCapacity = {
     @as("ProvisionedCapacityList") provisionedCapacityList: option<provisionedCapacityList>,
   }
   @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "ListProvisionedCapacityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProvisionedCapacityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListParts = {
@@ -560,8 +557,8 @@ module ListParts = {
     @as("VaultARN") vaultARN: option<string_>,
     @as("MultipartUploadId") multipartUploadId: option<string_>,
   }
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "ListPartsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "ListPartsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMultipartUploads = {
@@ -576,9 +573,8 @@ module ListMultipartUploads = {
     @as("Marker") marker: option<string_>,
     @as("UploadsList") uploadsList: option<uploadsList>,
   }
-  @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "ListMultipartUploadsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "ListMultipartUploadsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVaultNotifications = {
@@ -589,8 +585,8 @@ module GetVaultNotifications = {
   }
   type response = {vaultNotificationConfig: option<vaultNotificationConfig>}
   @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "GetVaultNotificationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetVaultNotificationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetDataRetrievalPolicy = {
@@ -601,8 +597,8 @@ module SetDataRetrievalPolicy = {
   }
 
   @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "SetDataRetrievalPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SetDataRetrievalPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetDataRetrievalPolicy = {
@@ -610,8 +606,8 @@ module GetDataRetrievalPolicy = {
   type request = {accountId: string_}
   type response = {@as("Policy") policy: option<dataRetrievalPolicy>}
   @module("@aws-sdk/client-glacier") @new
-  external new_: request => t = "GetDataRetrievalPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDataRetrievalPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJob = {
@@ -622,8 +618,8 @@ module DescribeJob = {
     accountId: string_,
   }
   type response = glacierJobDescription
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "DescribeJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "DescribeJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InitiateJob = {
@@ -638,8 +634,8 @@ module InitiateJob = {
     jobId: option<string_>,
     location: option<string_>,
   }
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "InitiateJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "InitiateJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobs = {
@@ -656,6 +652,6 @@ module ListJobs = {
     @as("Marker") marker: option<string_>,
     @as("JobList") jobList: option<jobList>,
   }
-  @module("@aws-sdk/client-glacier") @new external new_: request => t = "ListJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-glacier") @new external new: request => t = "ListJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

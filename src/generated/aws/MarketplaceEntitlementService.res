@@ -57,6 +57,6 @@ module GetEntitlements = {
     @as("Entitlements") entitlements: option<entitlementList>,
   }
   @module("@aws-sdk/client-aws-marketplace") @new
-  external new_: request => t = "GetEntitlementsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEntitlementsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

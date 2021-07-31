@@ -129,16 +129,16 @@ module VerifySMSSandboxPhoneNumber = {
   }
   type response = unit
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "VerifySMSSandboxPhoneNumberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "VerifySMSSandboxPhoneNumberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Unsubscribe = {
   type t
   type request = {@as("SubscriptionArn") subscriptionArn: subscriptionARN}
 
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "UnsubscribeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "UnsubscribeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetTopicAttributes = {
@@ -149,8 +149,8 @@ module SetTopicAttributes = {
     @as("TopicArn") topicArn: topicARN,
   }
 
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "SetTopicAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "SetTopicAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetSubscriptionAttributes = {
@@ -162,8 +162,8 @@ module SetSubscriptionAttributes = {
   }
 
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "SetSubscriptionAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SetSubscriptionAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemovePermission = {
@@ -173,16 +173,16 @@ module RemovePermission = {
     @as("TopicArn") topicArn: topicARN,
   }
 
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "RemovePermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "RemovePermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module OptInPhoneNumber = {
   type t
   type request = {phoneNumber: phoneNumber}
   type response = unit
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "OptInPhoneNumberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "OptInPhoneNumberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSMSSandboxAccountStatus = {
@@ -190,16 +190,16 @@ module GetSMSSandboxAccountStatus = {
   type request = unit
   type response = {@as("IsInSandbox") isInSandbox: boolean_}
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "GetSMSSandboxAccountStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSMSSandboxAccountStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTopic = {
   type t
   type request = {@as("TopicArn") topicArn: topicARN}
 
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "DeleteTopicCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "DeleteTopicCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteSMSSandboxPhoneNumber = {
@@ -207,8 +207,8 @@ module DeleteSMSSandboxPhoneNumber = {
   type request = {@as("PhoneNumber") phoneNumber: phoneNumberString}
   type response = unit
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "DeleteSMSSandboxPhoneNumberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSMSSandboxPhoneNumberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePlatformApplication = {
@@ -216,16 +216,16 @@ module DeletePlatformApplication = {
   type request = {@as("PlatformApplicationArn") platformApplicationArn: string_}
 
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "DeletePlatformApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeletePlatformApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteEndpoint = {
   type t
   type request = {@as("EndpointArn") endpointArn: string_}
 
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "DeleteEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "DeleteEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateSMSSandboxPhoneNumber = {
@@ -236,8 +236,8 @@ module CreateSMSSandboxPhoneNumber = {
   }
   type response = unit
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "CreateSMSSandboxPhoneNumberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSMSSandboxPhoneNumberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ConfirmSubscription = {
@@ -248,8 +248,8 @@ module ConfirmSubscription = {
     @as("TopicArn") topicArn: topicARN,
   }
   type response = {@as("SubscriptionArn") subscriptionArn: option<subscriptionARN>}
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "ConfirmSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "ConfirmSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CheckIfPhoneNumberIsOptedOut = {
@@ -257,8 +257,8 @@ module CheckIfPhoneNumberIsOptedOut = {
   type request = {phoneNumber: phoneNumber}
   type response = {isOptedOut: option<boolean_>}
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "CheckIfPhoneNumberIsOptedOutCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CheckIfPhoneNumberIsOptedOutCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -268,8 +268,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Subscribe = {
@@ -282,16 +282,16 @@ module Subscribe = {
     @as("TopicArn") topicArn: topicARN,
   }
   type response = {@as("SubscriptionArn") subscriptionArn: option<subscriptionARN>}
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "SubscribeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "SubscribeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetSMSAttributes = {
   type t
   type request = {attributes: mapStringToString}
   type response = unit
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "SetSMSAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "SetSMSAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetPlatformApplicationAttributes = {
@@ -302,8 +302,8 @@ module SetPlatformApplicationAttributes = {
   }
 
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "SetPlatformApplicationAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SetPlatformApplicationAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetEndpointAttributes = {
@@ -313,8 +313,8 @@ module SetEndpointAttributes = {
     @as("EndpointArn") endpointArn: string_,
   }
 
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "SetEndpointAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "SetEndpointAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListPhoneNumbersOptedOut = {
@@ -324,17 +324,16 @@ module ListPhoneNumbersOptedOut = {
     nextToken: option<string_>,
     phoneNumbers: option<phoneNumberList>,
   }
-  @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "ListPhoneNumbersOptedOutCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "ListPhoneNumbersOptedOutCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTopicAttributes = {
   type t
   type request = {@as("TopicArn") topicArn: topicARN}
   type response = {@as("Attributes") attributes: option<topicAttributesMap>}
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "GetTopicAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "GetTopicAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSubscriptionAttributes = {
@@ -342,16 +341,16 @@ module GetSubscriptionAttributes = {
   type request = {@as("SubscriptionArn") subscriptionArn: subscriptionARN}
   type response = {@as("Attributes") attributes: option<subscriptionAttributesMap>}
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "GetSubscriptionAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSubscriptionAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSMSAttributes = {
   type t
   type request = {attributes: option<listString>}
   type response = {attributes: option<mapStringToString>}
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "GetSMSAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "GetSMSAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPlatformApplicationAttributes = {
@@ -359,16 +358,16 @@ module GetPlatformApplicationAttributes = {
   type request = {@as("PlatformApplicationArn") platformApplicationArn: string_}
   type response = {@as("Attributes") attributes: option<mapStringToString>}
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "GetPlatformApplicationAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPlatformApplicationAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEndpointAttributes = {
   type t
   type request = {@as("EndpointArn") endpointArn: string_}
   type response = {@as("Attributes") attributes: option<mapStringToString>}
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "GetEndpointAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "GetEndpointAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePlatformEndpoint = {
@@ -380,8 +379,8 @@ module CreatePlatformEndpoint = {
     @as("PlatformApplicationArn") platformApplicationArn: string_,
   }
   type response = {@as("EndpointArn") endpointArn: option<string_>}
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "CreatePlatformEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "CreatePlatformEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePlatformApplication = {
@@ -393,8 +392,8 @@ module CreatePlatformApplication = {
   }
   type response = {@as("PlatformApplicationArn") platformApplicationArn: option<string_>}
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "CreatePlatformApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePlatformApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddPermission = {
@@ -406,8 +405,8 @@ module AddPermission = {
     @as("TopicArn") topicArn: topicARN,
   }
 
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "AddPermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "AddPermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -417,8 +416,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Publish = {
@@ -438,8 +437,8 @@ module Publish = {
     @as("SequenceNumber") sequenceNumber: option<string_>,
     @as("MessageId") messageId: option<messageId>,
   }
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "PublishCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "PublishCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTopics = {
@@ -449,16 +448,16 @@ module ListTopics = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Topics") topics: option<topicsList>,
   }
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "ListTopicsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "ListTopicsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: amazonResourceName}
   type response = {@as("Tags") tags: option<tagList_>}
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSubscriptionsByTopic = {
@@ -471,9 +470,8 @@ module ListSubscriptionsByTopic = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Subscriptions") subscriptions: option<subscriptionsList>,
   }
-  @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "ListSubscriptionsByTopicCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "ListSubscriptionsByTopicCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSubscriptions = {
@@ -483,8 +481,8 @@ module ListSubscriptions = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Subscriptions") subscriptions: option<subscriptionsList>,
   }
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "ListSubscriptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "ListSubscriptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSMSSandboxPhoneNumbers = {
@@ -498,8 +496,8 @@ module ListSMSSandboxPhoneNumbers = {
     @as("PhoneNumbers") phoneNumbers: smssandboxPhoneNumberList,
   }
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "ListSMSSandboxPhoneNumbersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSMSSandboxPhoneNumbersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTopic = {
@@ -510,8 +508,8 @@ module CreateTopic = {
     @as("Name") name: topicName,
   }
   type response = {@as("TopicArn") topicArn: option<topicARN>}
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "CreateTopicCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "CreateTopicCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPlatformApplications = {
@@ -521,9 +519,8 @@ module ListPlatformApplications = {
     @as("NextToken") nextToken: option<string_>,
     @as("PlatformApplications") platformApplications: option<listOfPlatformApplications>,
   }
-  @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "ListPlatformApplicationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "ListPlatformApplicationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOriginationNumbers = {
@@ -536,8 +533,8 @@ module ListOriginationNumbers = {
     @as("PhoneNumbers") phoneNumbers: option<phoneNumberInformationList>,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-sns") @new external new_: request => t = "ListOriginationNumbersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sns") @new external new: request => t = "ListOriginationNumbersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEndpointsByPlatformApplication = {
@@ -551,6 +548,6 @@ module ListEndpointsByPlatformApplication = {
     @as("Endpoints") endpoints: option<listOfEndpoints>,
   }
   @module("@aws-sdk/client-sns") @new
-  external new_: request => t = "ListEndpointsByPlatformApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEndpointsByPlatformApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

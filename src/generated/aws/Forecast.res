@@ -293,16 +293,16 @@ module StopResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: arn}
 
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "StopResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "StopResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteResourceTree = {
   type t
   type request = {@as("ResourceArn") resourceArn: arn}
 
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "DeleteResourceTreeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "DeleteResourceTreeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeletePredictorBacktestExportJob = {
@@ -310,16 +310,16 @@ module DeletePredictorBacktestExportJob = {
   type request = {@as("PredictorBacktestExportJobArn") predictorBacktestExportJobArn: arn}
 
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "DeletePredictorBacktestExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeletePredictorBacktestExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeletePredictor = {
   type t
   type request = {@as("PredictorArn") predictorArn: arn}
 
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "DeletePredictorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "DeletePredictorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteForecastExportJob = {
@@ -327,16 +327,16 @@ module DeleteForecastExportJob = {
   type request = {@as("ForecastExportJobArn") forecastExportJobArn: arn}
 
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "DeleteForecastExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteForecastExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteForecast = {
   type t
   type request = {@as("ForecastArn") forecastArn: arn}
 
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "DeleteForecastCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "DeleteForecastCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDatasetImportJob = {
@@ -344,24 +344,24 @@ module DeleteDatasetImportJob = {
   type request = {@as("DatasetImportJobArn") datasetImportJobArn: arn}
 
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "DeleteDatasetImportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteDatasetImportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDatasetGroup = {
   type t
   type request = {@as("DatasetGroupArn") datasetGroupArn: arn}
 
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "DeleteDatasetGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "DeleteDatasetGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDataset = {
   type t
   type request = {@as("DatasetArn") datasetArn: arn}
 
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "DeleteDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "DeleteDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateDatasetGroup = {
@@ -371,8 +371,8 @@ module UpdateDatasetGroup = {
     @as("DatasetGroupArn") datasetGroupArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "UpdateDatasetGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "UpdateDatasetGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -382,8 +382,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeForecast = {
@@ -401,8 +401,8 @@ module DescribeForecast = {
     @as("ForecastName") forecastName: option<name>,
     @as("ForecastArn") forecastArn: option<arn>,
   }
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "DescribeForecastCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "DescribeForecastCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDatasetGroup = {
@@ -418,8 +418,8 @@ module DescribeDatasetGroup = {
     @as("DatasetGroupName") datasetGroupName: option<name>,
   }
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "DescribeDatasetGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDatasetGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -429,17 +429,16 @@ module TagResource = {
     @as("ResourceArn") resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: arn}
   type response = {@as("Tags") tags: option<tags>}
-  @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPredictors = {
@@ -453,8 +452,8 @@ module ListPredictors = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Predictors") predictors: option<predictors>,
   }
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "ListPredictorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "ListPredictorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListForecasts = {
@@ -468,8 +467,8 @@ module ListForecasts = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Forecasts") forecasts: option<forecasts>,
   }
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "ListForecastsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "ListForecastsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDatasets = {
@@ -482,8 +481,8 @@ module ListDatasets = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Datasets") datasets: option<datasets>,
   }
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "ListDatasetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "ListDatasetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDatasetGroups = {
@@ -496,8 +495,8 @@ module ListDatasetGroups = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("DatasetGroups") datasetGroups: option<datasetGroups>,
   }
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "ListDatasetGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "ListDatasetGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePredictorBacktestExportJob = {
@@ -514,8 +513,8 @@ module DescribePredictorBacktestExportJob = {
     @as("PredictorBacktestExportJobArn") predictorBacktestExportJobArn: option<arn>,
   }
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "DescribePredictorBacktestExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePredictorBacktestExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeForecastExportJob = {
@@ -532,8 +531,8 @@ module DescribeForecastExportJob = {
     @as("ForecastExportJobArn") forecastExportJobArn: option<arn>,
   }
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "DescribeForecastExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeForecastExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDatasetImportJob = {
@@ -557,8 +556,8 @@ module DescribeDatasetImportJob = {
     @as("DatasetImportJobName") datasetImportJobName: option<name>,
   }
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "DescribeDatasetImportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDatasetImportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePredictorBacktestExportJob = {
@@ -571,8 +570,8 @@ module CreatePredictorBacktestExportJob = {
   }
   type response = {@as("PredictorBacktestExportJobArn") predictorBacktestExportJobArn: option<arn>}
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "CreatePredictorBacktestExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePredictorBacktestExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateForecastExportJob = {
@@ -585,8 +584,8 @@ module CreateForecastExportJob = {
   }
   type response = {@as("ForecastExportJobArn") forecastExportJobArn: option<arn>}
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "CreateForecastExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateForecastExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateForecast = {
@@ -598,8 +597,8 @@ module CreateForecast = {
     @as("ForecastName") forecastName: name,
   }
   type response = {@as("ForecastArn") forecastArn: option<arn>}
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "CreateForecastCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "CreateForecastCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDatasetImportJob = {
@@ -616,8 +615,8 @@ module CreateDatasetImportJob = {
   }
   type response = {@as("DatasetImportJobArn") datasetImportJobArn: option<arn>}
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "CreateDatasetImportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDatasetImportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDatasetGroup = {
@@ -629,8 +628,8 @@ module CreateDatasetGroup = {
     @as("DatasetGroupName") datasetGroupName: name,
   }
   type response = {@as("DatasetGroupArn") datasetGroupArn: option<arn>}
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "CreateDatasetGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "CreateDatasetGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataset = {
@@ -648,8 +647,8 @@ module DescribeDataset = {
     @as("DatasetName") datasetName: option<name>,
     @as("DatasetArn") datasetArn: option<arn>,
   }
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "DescribeDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "DescribeDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDataset = {
@@ -664,8 +663,8 @@ module CreateDataset = {
     @as("DatasetName") datasetName: name,
   }
   type response = {@as("DatasetArn") datasetArn: option<arn>}
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "CreateDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "CreateDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPredictorBacktestExportJobs = {
@@ -681,8 +680,8 @@ module ListPredictorBacktestExportJobs = {
     predictorBacktestExportJobs: option<predictorBacktestExportJobs>,
   }
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "ListPredictorBacktestExportJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPredictorBacktestExportJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListForecastExportJobs = {
@@ -697,8 +696,8 @@ module ListForecastExportJobs = {
     @as("ForecastExportJobs") forecastExportJobs: option<forecastExportJobs>,
   }
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "ListForecastExportJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListForecastExportJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDatasetImportJobs = {
@@ -713,8 +712,8 @@ module ListDatasetImportJobs = {
     @as("DatasetImportJobs") datasetImportJobs: option<datasetImportJobs>,
   }
   @module("@aws-sdk/client-forecast") @new
-  external new_: request => t = "ListDatasetImportJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDatasetImportJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePredictor = {
@@ -744,8 +743,8 @@ module DescribePredictor = {
     @as("PredictorName") predictorName: option<name>,
     @as("PredictorArn") predictorArn: option<name>,
   }
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "DescribePredictorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "DescribePredictorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePredictor = {
@@ -767,8 +766,8 @@ module CreatePredictor = {
     @as("PredictorName") predictorName: name,
   }
   type response = {@as("PredictorArn") predictorArn: option<arn>}
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "CreatePredictorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "CreatePredictorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAccuracyMetrics = {
@@ -779,6 +778,6 @@ module GetAccuracyMetrics = {
     @as("PredictorEvaluationResults")
     predictorEvaluationResults: option<predictorEvaluationResults>,
   }
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "GetAccuracyMetricsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "GetAccuracyMetricsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

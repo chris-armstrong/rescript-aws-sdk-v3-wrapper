@@ -78,6 +78,6 @@ module ListRealtimeContactAnalysisSegments = {
     @as("Segments") segments: realtimeContactAnalysisSegments,
   }
   @module("@aws-sdk/client-connect") @new
-  external new_: request => t = "ListRealtimeContactAnalysisSegmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRealtimeContactAnalysisSegmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

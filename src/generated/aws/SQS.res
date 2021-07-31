@@ -141,16 +141,16 @@ module RemovePermission = {
     @as("QueueUrl") queueUrl: string_,
   }
 
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "RemovePermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "RemovePermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PurgeQueue = {
   type t
   type request = {@as("QueueUrl") queueUrl: string_}
 
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "PurgeQueueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "PurgeQueueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetQueueUrl = {
@@ -160,16 +160,16 @@ module GetQueueUrl = {
     @as("QueueName") queueName: string_,
   }
   type response = {@as("QueueUrl") queueUrl: option<string_>}
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "GetQueueUrlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "GetQueueUrlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteQueue = {
   type t
   type request = {@as("QueueUrl") queueUrl: string_}
 
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "DeleteQueueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "DeleteQueueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteMessage = {
@@ -179,8 +179,8 @@ module DeleteMessage = {
     @as("QueueUrl") queueUrl: string_,
   }
 
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "DeleteMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "DeleteMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ChangeMessageVisibility = {
@@ -191,8 +191,8 @@ module ChangeMessageVisibility = {
     @as("QueueUrl") queueUrl: string_,
   }
 
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "ChangeMessageVisibilityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "ChangeMessageVisibilityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagQueue = {
@@ -202,8 +202,8 @@ module UntagQueue = {
     @as("QueueUrl") queueUrl: string_,
   }
 
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "UntagQueueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "UntagQueueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagQueue = {
@@ -213,8 +213,8 @@ module TagQueue = {
     @as("QueueUrl") queueUrl: string_,
   }
 
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "TagQueueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "TagQueueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetQueueAttributes = {
@@ -224,8 +224,8 @@ module SetQueueAttributes = {
     @as("QueueUrl") queueUrl: string_,
   }
 
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "SetQueueAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "SetQueueAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListQueues = {
@@ -239,16 +239,16 @@ module ListQueues = {
     @as("QueueUrls") queueUrls: option<queueUrlList>,
     @as("NextToken") nextToken: option<token>,
   }
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "ListQueuesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "ListQueuesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListQueueTags = {
   type t
   type request = {@as("QueueUrl") queueUrl: string_}
   type response = {@as("Tags") tags: option<tagMap>}
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "ListQueueTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "ListQueueTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDeadLetterSourceQueues = {
@@ -263,8 +263,8 @@ module ListDeadLetterSourceQueues = {
     queueUrls: queueUrlList,
   }
   @module("@aws-sdk/client-sqs") @new
-  external new_: request => t = "ListDeadLetterSourceQueuesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDeadLetterSourceQueuesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetQueueAttributes = {
@@ -274,8 +274,8 @@ module GetQueueAttributes = {
     @as("QueueUrl") queueUrl: string_,
   }
   type response = {@as("Attributes") attributes: option<queueAttributeMap>}
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "GetQueueAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "GetQueueAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateQueue = {
@@ -286,8 +286,8 @@ module CreateQueue = {
     @as("QueueName") queueName: string_,
   }
   type response = {@as("QueueUrl") queueUrl: option<string_>}
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "CreateQueueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "CreateQueueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddPermission = {
@@ -299,8 +299,8 @@ module AddPermission = {
     @as("QueueUrl") queueUrl: string_,
   }
 
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "AddPermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "AddPermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteMessageBatch = {
@@ -313,8 +313,8 @@ module DeleteMessageBatch = {
     @as("Failed") failed: batchResultErrorEntryList,
     @as("Successful") successful: deleteMessageBatchResultEntryList,
   }
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "DeleteMessageBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "DeleteMessageBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ChangeMessageVisibilityBatch = {
@@ -328,8 +328,8 @@ module ChangeMessageVisibilityBatch = {
     @as("Successful") successful: changeMessageVisibilityBatchResultEntryList,
   }
   @module("@aws-sdk/client-sqs") @new
-  external new_: request => t = "ChangeMessageVisibilityBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ChangeMessageVisibilityBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendMessage = {
@@ -350,8 +350,8 @@ module SendMessage = {
     @as("MD5OfMessageAttributes") md5OfMessageAttributes: option<string_>,
     @as("MD5OfMessageBody") md5OfMessageBody: option<string_>,
   }
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "SendMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "SendMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendMessageBatch = {
@@ -364,8 +364,8 @@ module SendMessageBatch = {
     @as("Failed") failed: batchResultErrorEntryList,
     @as("Successful") successful: sendMessageBatchResultEntryList,
   }
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "SendMessageBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "SendMessageBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReceiveMessage = {
@@ -380,6 +380,6 @@ module ReceiveMessage = {
     @as("QueueUrl") queueUrl: string_,
   }
   type response = {@as("Messages") messages: option<messageList>}
-  @module("@aws-sdk/client-sqs") @new external new_: request => t = "ReceiveMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sqs") @new external new: request => t = "ReceiveMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

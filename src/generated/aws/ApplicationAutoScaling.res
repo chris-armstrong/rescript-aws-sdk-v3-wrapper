@@ -237,8 +237,8 @@ module DeregisterScalableTarget = {
   }
   type response = unit
   @module("@aws-sdk/client-application-autoscaling") @new
-  external new_: request => t = "DeregisterScalableTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterScalableTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteScheduledAction = {
@@ -251,8 +251,8 @@ module DeleteScheduledAction = {
   }
   type response = unit
   @module("@aws-sdk/client-application-autoscaling") @new
-  external new_: request => t = "DeleteScheduledActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteScheduledActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteScalingPolicy = {
@@ -265,8 +265,8 @@ module DeleteScalingPolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-application-autoscaling") @new
-  external new_: request => t = "DeleteScalingPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteScalingPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterScalableTarget = {
@@ -282,8 +282,8 @@ module RegisterScalableTarget = {
   }
   type response = unit
   @module("@aws-sdk/client-application-autoscaling") @new
-  external new_: request => t = "RegisterScalableTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterScalableTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutScheduledAction = {
@@ -301,8 +301,8 @@ module PutScheduledAction = {
   }
   type response = unit
   @module("@aws-sdk/client-application-autoscaling") @new
-  external new_: request => t = "PutScheduledActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutScheduledActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeScalingActivities = {
@@ -319,8 +319,8 @@ module DescribeScalingActivities = {
     @as("ScalingActivities") scalingActivities: option<scalingActivities>,
   }
   @module("@aws-sdk/client-application-autoscaling") @new
-  external new_: request => t = "DescribeScalingActivitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeScalingActivitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeScheduledActions = {
@@ -338,8 +338,8 @@ module DescribeScheduledActions = {
     @as("ScheduledActions") scheduledActions: option<scheduledActions>,
   }
   @module("@aws-sdk/client-application-autoscaling") @new
-  external new_: request => t = "DescribeScheduledActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeScheduledActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeScalableTargets = {
@@ -356,8 +356,8 @@ module DescribeScalableTargets = {
     @as("ScalableTargets") scalableTargets: option<scalableTargets>,
   }
   @module("@aws-sdk/client-application-autoscaling") @new
-  external new_: request => t = "DescribeScalableTargetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeScalableTargetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutScalingPolicy = {
@@ -378,8 +378,8 @@ module PutScalingPolicy = {
     @as("PolicyARN") policyARN: resourceIdMaxLen1600,
   }
   @module("@aws-sdk/client-application-autoscaling") @new
-  external new_: request => t = "PutScalingPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutScalingPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeScalingPolicies = {
@@ -397,6 +397,6 @@ module DescribeScalingPolicies = {
     @as("ScalingPolicies") scalingPolicies: option<scalingPolicies>,
   }
   @module("@aws-sdk/client-application-autoscaling") @new
-  external new_: request => t = "DescribeScalingPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeScalingPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

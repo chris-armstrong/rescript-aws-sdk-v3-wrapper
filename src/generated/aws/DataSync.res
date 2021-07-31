@@ -236,41 +236,40 @@ module UpdateAgent = {
     @as("AgentArn") agentArn: agentArn,
   }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "UpdateAgentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateAgentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTask = {
   type t
   type request = {@as("TaskArn") taskArn: taskArn}
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "DeleteTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "DeleteTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLocation = {
   type t
   type request = {@as("LocationArn") locationArn: locationArn}
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "DeleteLocationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "DeleteLocationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAgent = {
   type t
   type request = {@as("AgentArn") agentArn: agentArn}
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "DeleteAgentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "DeleteAgentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelTaskExecution = {
   type t
   type request = {@as("TaskExecutionArn") taskExecutionArn: taskExecutionArn}
   type response = unit
-  @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "CancelTaskExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "CancelTaskExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTaskExecution = {
@@ -280,9 +279,8 @@ module UpdateTaskExecution = {
     @as("TaskExecutionArn") taskExecutionArn: taskExecutionArn,
   }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "UpdateTaskExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateTaskExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLocationSmb = {
@@ -297,8 +295,8 @@ module UpdateLocationSmb = {
     @as("LocationArn") locationArn: locationArn,
   }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "UpdateLocationSmbCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateLocationSmbCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLocationObjectStorage = {
@@ -314,8 +312,8 @@ module UpdateLocationObjectStorage = {
   }
   type response = unit
   @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "UpdateLocationObjectStorageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateLocationObjectStorageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -325,8 +323,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: taggableResourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocationSmb = {
@@ -341,9 +339,8 @@ module DescribeLocationSmb = {
     @as("LocationUri") locationUri: option<locationUri>,
     @as("LocationArn") locationArn: option<locationArn>,
   }
-  @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "DescribeLocationSmbCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "DescribeLocationSmbCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocationS3 = {
@@ -357,8 +354,8 @@ module DescribeLocationS3 = {
     @as("LocationUri") locationUri: option<locationUri>,
     @as("LocationArn") locationArn: option<locationArn>,
   }
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "DescribeLocationS3Command"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "DescribeLocationS3Command"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocationObjectStorage = {
@@ -374,8 +371,8 @@ module DescribeLocationObjectStorage = {
     @as("LocationArn") locationArn: option<locationArn>,
   }
   @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "DescribeLocationObjectStorageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLocationObjectStorageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocationFsxWindows = {
@@ -390,8 +387,8 @@ module DescribeLocationFsxWindows = {
     @as("LocationArn") locationArn: option<locationArn>,
   }
   @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "DescribeLocationFsxWindowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLocationFsxWindowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTask = {
@@ -405,8 +402,8 @@ module UpdateTask = {
     @as("TaskArn") taskArn: taskArn,
   }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "UpdateTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLocationNfs = {
@@ -418,8 +415,8 @@ module UpdateLocationNfs = {
     @as("LocationArn") locationArn: locationArn,
   }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "UpdateLocationNfsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "UpdateLocationNfsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -429,8 +426,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: taggableResourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartTaskExecution = {
@@ -441,8 +438,8 @@ module StartTaskExecution = {
     @as("TaskArn") taskArn: taskArn,
   }
   type response = {@as("TaskExecutionArn") taskExecutionArn: option<taskExecutionArn>}
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "StartTaskExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "StartTaskExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTaskExecutions = {
@@ -456,8 +453,8 @@ module ListTaskExecutions = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("TaskExecutions") taskExecutions: option<taskExecutionList>,
   }
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "ListTaskExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "ListTaskExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -471,9 +468,8 @@ module ListTagsForResource = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Tags") tags: option<outputTagList>,
   }
-  @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAgents = {
@@ -486,8 +482,8 @@ module ListAgents = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Agents") agents: option<agentList>,
   }
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "ListAgentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "ListAgentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTaskExecution = {
@@ -508,8 +504,8 @@ module DescribeTaskExecution = {
     @as("TaskExecutionArn") taskExecutionArn: option<taskExecutionArn>,
   }
   @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "DescribeTaskExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTaskExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTask = {
@@ -534,8 +530,8 @@ module DescribeTask = {
     @as("Status") status: option<taskStatus>,
     @as("TaskArn") taskArn: option<taskArn>,
   }
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "DescribeTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "DescribeTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocationNfs = {
@@ -548,9 +544,8 @@ module DescribeLocationNfs = {
     @as("LocationUri") locationUri: option<locationUri>,
     @as("LocationArn") locationArn: option<locationArn>,
   }
-  @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "DescribeLocationNfsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "DescribeLocationNfsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocationEfs = {
@@ -562,9 +557,8 @@ module DescribeLocationEfs = {
     @as("LocationUri") locationUri: option<locationUri>,
     @as("LocationArn") locationArn: option<locationArn>,
   }
-  @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "DescribeLocationEfsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "DescribeLocationEfsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAgent = {
@@ -579,8 +573,8 @@ module DescribeAgent = {
     @as("Name") name: option<tagValue>,
     @as("AgentArn") agentArn: option<agentArn>,
   }
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "DescribeAgentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "DescribeAgentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTask = {
@@ -596,8 +590,8 @@ module CreateTask = {
     @as("SourceLocationArn") sourceLocationArn: locationArn,
   }
   type response = {@as("TaskArn") taskArn: option<taskArn>}
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "CreateTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "CreateTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLocationSmb = {
@@ -613,8 +607,8 @@ module CreateLocationSmb = {
     @as("Subdirectory") subdirectory: smbSubdirectory,
   }
   type response = {@as("LocationArn") locationArn: option<locationArn>}
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "CreateLocationSmbCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "CreateLocationSmbCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLocationS3 = {
@@ -628,8 +622,8 @@ module CreateLocationS3 = {
     @as("Subdirectory") subdirectory: option<s3Subdirectory>,
   }
   type response = {@as("LocationArn") locationArn: option<locationArn>}
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "CreateLocationS3Command"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "CreateLocationS3Command"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLocationObjectStorage = {
@@ -647,8 +641,8 @@ module CreateLocationObjectStorage = {
   }
   type response = {@as("LocationArn") locationArn: option<locationArn>}
   @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "CreateLocationObjectStorageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateLocationObjectStorageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLocationNfs = {
@@ -661,8 +655,8 @@ module CreateLocationNfs = {
     @as("Subdirectory") subdirectory: nfsSubdirectory,
   }
   type response = {@as("LocationArn") locationArn: option<locationArn>}
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "CreateLocationNfsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "CreateLocationNfsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLocationFsxWindows = {
@@ -678,8 +672,8 @@ module CreateLocationFsxWindows = {
   }
   type response = {@as("LocationArn") locationArn: option<locationArn>}
   @module("@aws-sdk/client-datasync") @new
-  external new_: request => t = "CreateLocationFsxWindowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateLocationFsxWindowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLocationEfs = {
@@ -691,8 +685,8 @@ module CreateLocationEfs = {
     @as("Subdirectory") subdirectory: option<efsSubdirectory>,
   }
   type response = {@as("LocationArn") locationArn: option<locationArn>}
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "CreateLocationEfsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "CreateLocationEfsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAgent = {
@@ -706,8 +700,8 @@ module CreateAgent = {
     @as("ActivationKey") activationKey: activationKey,
   }
   type response = {@as("AgentArn") agentArn: option<agentArn>}
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "CreateAgentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "CreateAgentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTasks = {
@@ -721,8 +715,8 @@ module ListTasks = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Tasks") tasks: option<taskList>,
   }
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "ListTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "ListTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLocations = {
@@ -736,6 +730,6 @@ module ListLocations = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Locations") locations: option<locationList>,
   }
-  @module("@aws-sdk/client-datasync") @new external new_: request => t = "ListLocationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-datasync") @new external new: request => t = "ListLocationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

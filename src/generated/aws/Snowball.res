@@ -251,8 +251,8 @@ module UpdateLongTermPricing = {
   }
   type response = unit
   @module("@aws-sdk/client-snowball") @new
-  external new_: request => t = "UpdateLongTermPricingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateLongTermPricingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateJobShipmentState = {
@@ -263,16 +263,16 @@ module UpdateJobShipmentState = {
   }
   type response = unit
   @module("@aws-sdk/client-snowball") @new
-  external new_: request => t = "UpdateJobShipmentStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateJobShipmentStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSoftwareUpdates = {
   type t
   type request = {@as("JobId") jobId: jobId}
   type response = {@as("UpdatesURI") updatesURI: option<string_>}
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "GetSoftwareUpdatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "GetSoftwareUpdatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSnowballUsage = {
@@ -282,24 +282,24 @@ module GetSnowballUsage = {
     @as("SnowballsInUse") snowballsInUse: option<integer_>,
     @as("SnowballLimit") snowballLimit: option<integer_>,
   }
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "GetSnowballUsageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "GetSnowballUsageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJobUnlockCode = {
   type t
   type request = {@as("JobId") jobId: jobId}
   type response = {@as("UnlockCode") unlockCode: option<string_>}
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "GetJobUnlockCodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "GetJobUnlockCodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJobManifest = {
   type t
   type request = {@as("JobId") jobId: jobId}
   type response = {@as("ManifestURI") manifestURI: option<string_>}
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "GetJobManifestCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "GetJobManifestCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReturnShippingLabel = {
@@ -310,8 +310,8 @@ module DescribeReturnShippingLabel = {
     @as("Status") status: option<shippingLabelStatus>,
   }
   @module("@aws-sdk/client-snowball") @new
-  external new_: request => t = "DescribeReturnShippingLabelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReturnShippingLabelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReturnShippingLabel = {
@@ -322,8 +322,8 @@ module CreateReturnShippingLabel = {
   }
   type response = {@as("Status") status: option<shippingLabelStatus>}
   @module("@aws-sdk/client-snowball") @new
-  external new_: request => t = "CreateReturnShippingLabelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateReturnShippingLabelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLongTermPricing = {
@@ -335,40 +335,40 @@ module CreateLongTermPricing = {
   }
   type response = {@as("LongTermPricingId") longTermPricingId: option<longTermPricingId>}
   @module("@aws-sdk/client-snowball") @new
-  external new_: request => t = "CreateLongTermPricingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateLongTermPricingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelJob = {
   type t
   type request = {@as("JobId") jobId: jobId}
   type response = unit
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "CancelJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "CancelJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelCluster = {
   type t
   type request = {@as("ClusterId") clusterId: clusterId}
   type response = unit
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "CancelClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "CancelClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAddress = {
   type t
   type request = {@as("AddressId") addressId: addressId}
   type response = {@as("Address") address: option<address>}
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "DescribeAddressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "DescribeAddressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAddress = {
   type t
   type request = {@as("Address") address: address}
   type response = {@as("AddressId") addressId: option<string_>}
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "CreateAddressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "CreateAddressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobs = {
@@ -381,8 +381,8 @@ module ListJobs = {
     @as("NextToken") nextToken: option<string_>,
     @as("JobListEntries") jobListEntries: option<jobListEntryList>,
   }
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "ListJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "ListJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCompatibleImages = {
@@ -396,8 +396,8 @@ module ListCompatibleImages = {
     @as("CompatibleImages") compatibleImages: option<compatibleImageList>,
   }
   @module("@aws-sdk/client-snowball") @new
-  external new_: request => t = "ListCompatibleImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCompatibleImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListClusters = {
@@ -410,8 +410,8 @@ module ListClusters = {
     @as("NextToken") nextToken: option<string_>,
     @as("ClusterListEntries") clusterListEntries: option<clusterListEntryList>,
   }
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "ListClustersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "ListClustersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListClusterJobs = {
@@ -425,8 +425,8 @@ module ListClusterJobs = {
     @as("NextToken") nextToken: option<string_>,
     @as("JobListEntries") jobListEntries: option<jobListEntryList>,
   }
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "ListClusterJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "ListClusterJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAddresses = {
@@ -439,8 +439,8 @@ module DescribeAddresses = {
     @as("NextToken") nextToken: option<string_>,
     @as("Addresses") addresses: option<addressList>,
   }
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "DescribeAddressesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "DescribeAddressesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLongTermPricing = {
@@ -453,9 +453,8 @@ module ListLongTermPricing = {
     @as("NextToken") nextToken: option<string_>,
     @as("LongTermPricingEntries") longTermPricingEntries: option<longTermPricingEntryList>,
   }
-  @module("@aws-sdk/client-snowball") @new
-  external new_: request => t = "ListLongTermPricingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "ListLongTermPricingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateJob = {
@@ -472,8 +471,8 @@ module UpdateJob = {
     @as("JobId") jobId: jobId,
   }
   type response = unit
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "UpdateJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "UpdateJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCluster = {
@@ -489,8 +488,8 @@ module UpdateCluster = {
     @as("ClusterId") clusterId: clusterId,
   }
   type response = unit
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "UpdateClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "UpdateClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateJob = {
@@ -513,8 +512,8 @@ module CreateJob = {
     @as("JobType") jobType: option<jobType>,
   }
   type response = {@as("JobId") jobId: option<jobId>}
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "CreateJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "CreateJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCluster = {
@@ -533,16 +532,16 @@ module CreateCluster = {
     @as("JobType") jobType: jobType,
   }
   type response = {@as("ClusterId") clusterId: option<clusterId>}
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "CreateClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "CreateClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCluster = {
   type t
   type request = {@as("ClusterId") clusterId: clusterId}
   type response = {@as("ClusterMetadata") clusterMetadata: option<clusterMetadata>}
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "DescribeClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "DescribeClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJob = {
@@ -552,6 +551,6 @@ module DescribeJob = {
     @as("SubJobMetadata") subJobMetadata: option<jobMetadataList>,
     @as("JobMetadata") jobMetadata: option<jobMetadata>,
   }
-  @module("@aws-sdk/client-snowball") @new external new_: request => t = "DescribeJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-snowball") @new external new: request => t = "DescribeJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

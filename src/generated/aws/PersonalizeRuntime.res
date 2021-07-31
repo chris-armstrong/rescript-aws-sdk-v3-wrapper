@@ -50,8 +50,8 @@ module GetRecommendations = {
     itemList: option<itemList>,
   }
   @module("@aws-sdk/client-personalize") @new
-  external new_: request => t = "GetRecommendationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRecommendationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPersonalizedRanking = {
@@ -69,6 +69,6 @@ module GetPersonalizedRanking = {
     personalizedRanking: option<itemList>,
   }
   @module("@aws-sdk/client-personalize") @new
-  external new_: request => t = "GetPersonalizedRankingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPersonalizedRankingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

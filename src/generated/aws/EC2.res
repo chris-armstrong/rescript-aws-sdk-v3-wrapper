@@ -5611,8 +5611,8 @@ module StartVpcEndpointServicePrivateDnsVerification = {
   }
   type response = {@as("ReturnValue") returnValue: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "StartVpcEndpointServicePrivateDnsVerificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartVpcEndpointServicePrivateDnsVerificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendDiagnosticInterrupt = {
@@ -5622,8 +5622,8 @@ module SendDiagnosticInterrupt = {
     @as("InstanceId") instanceId: instanceId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "SendDiagnosticInterruptCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "SendDiagnosticInterruptCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RestoreAddressToClassic = {
@@ -5636,8 +5636,8 @@ module RestoreAddressToClassic = {
     @as("Status") status: option<status>,
     @as("PublicIp") publicIp: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "RestoreAddressToClassicCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "RestoreAddressToClassicCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResetSnapshotAttribute = {
@@ -5648,8 +5648,8 @@ module ResetSnapshotAttribute = {
     @as("Attribute") attribute: snapshotAttributeName,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ResetSnapshotAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ResetSnapshotAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ResetNetworkInterfaceAttribute = {
@@ -5661,8 +5661,8 @@ module ResetNetworkInterfaceAttribute = {
   }
 
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ResetNetworkInterfaceAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "ResetNetworkInterfaceAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ResetInstanceAttribute = {
@@ -5673,8 +5673,8 @@ module ResetInstanceAttribute = {
     @as("Attribute") attribute: instanceAttributeName,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ResetInstanceAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ResetInstanceAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ResetImageAttribute = {
@@ -5685,8 +5685,8 @@ module ResetImageAttribute = {
     @as("Attribute") attribute: resetImageAttributeName,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ResetImageAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ResetImageAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ResetFpgaImageAttribute = {
@@ -5697,16 +5697,16 @@ module ResetFpgaImageAttribute = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ResetFpgaImageAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ResetFpgaImageAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResetEbsDefaultKmsKeyId = {
   type t
   type request = {@as("DryRun") dryRun: option<boolean_>}
   type response = {@as("KmsKeyId") kmsKeyId: option<string_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ResetEbsDefaultKmsKeyIdCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ResetEbsDefaultKmsKeyIdCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReplaceRoute = {
@@ -5731,8 +5731,8 @@ module ReplaceRoute = {
     @as("DestinationCidrBlock") destinationCidrBlock: option<string_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ReplaceRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ReplaceRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ReplaceNetworkAclAssociation = {
@@ -5744,8 +5744,8 @@ module ReplaceNetworkAclAssociation = {
   }
   type response = {@as("NewAssociationId") newAssociationId: option<string_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ReplaceNetworkAclAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ReplaceNetworkAclAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReleaseAddress = {
@@ -5757,8 +5757,8 @@ module ReleaseAddress = {
     @as("AllocationId") allocationId: option<allocationId>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ReleaseAddressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ReleaseAddressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RejectVpcPeeringConnection = {
@@ -5769,8 +5769,8 @@ module RejectVpcPeeringConnection = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "RejectVpcPeeringConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectVpcPeeringConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module MoveAddressToVpc = {
@@ -5783,8 +5783,8 @@ module MoveAddressToVpc = {
     @as("Status") status: option<status>,
     @as("AllocationId") allocationId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "MoveAddressToVpcCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "MoveAddressToVpcCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyVpcTenancy = {
@@ -5795,8 +5795,8 @@ module ModifyVpcTenancy = {
     @as("VpcId") vpcId: vpcId,
   }
   type response = {@as("ReturnValue") returnValue: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyVpcTenancyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyVpcTenancyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyInstancePlacement = {
@@ -5811,8 +5811,8 @@ module ModifyInstancePlacement = {
     @as("Affinity") affinity: option<affinity>,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyInstancePlacementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyInstancePlacementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyIdentityIdFormat = {
@@ -5823,8 +5823,8 @@ module ModifyIdentityIdFormat = {
     @as("PrincipalArn") principalArn: string_,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyIdentityIdFormatCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyIdentityIdFormatCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ModifyIdFormat = {
@@ -5834,8 +5834,8 @@ module ModifyIdFormat = {
     @as("Resource") resource: string_,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyIdFormatCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyIdFormatCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ModifyEbsDefaultKmsKeyId = {
@@ -5845,9 +5845,8 @@ module ModifyEbsDefaultKmsKeyId = {
     @as("KmsKeyId") kmsKeyId: kmsKeyId,
   }
   type response = {@as("KmsKeyId") kmsKeyId: option<string_>}
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyEbsDefaultKmsKeyIdCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyEbsDefaultKmsKeyIdCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyCapacityReservation = {
@@ -5862,8 +5861,8 @@ module ModifyCapacityReservation = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyCapacityReservationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyCapacityReservationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyAvailabilityZoneGroup = {
@@ -5875,8 +5874,8 @@ module ModifyAvailabilityZoneGroup = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyAvailabilityZoneGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyAvailabilityZoneGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportClientVpnClientCertificateRevocationList = {
@@ -5888,8 +5887,8 @@ module ImportClientVpnClientCertificateRevocationList = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ImportClientVpnClientCertificateRevocationListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ImportClientVpnClientCertificateRevocationListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSerialConsoleAccessStatus = {
@@ -5897,8 +5896,8 @@ module GetSerialConsoleAccessStatus = {
   type request = {@as("DryRun") dryRun: option<boolean_>}
   type response = {@as("SerialConsoleAccessEnabled") serialConsoleAccessEnabled: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetSerialConsoleAccessStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSerialConsoleAccessStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPasswordData = {
@@ -5912,8 +5911,8 @@ module GetPasswordData = {
     @as("PasswordData") passwordData: option<string_>,
     @as("InstanceId") instanceId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "GetPasswordDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "GetPasswordDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEbsEncryptionByDefault = {
@@ -5921,16 +5920,16 @@ module GetEbsEncryptionByDefault = {
   type request = {@as("DryRun") dryRun: option<boolean_>}
   type response = {@as("EbsEncryptionByDefault") ebsEncryptionByDefault: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetEbsEncryptionByDefaultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEbsEncryptionByDefaultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEbsDefaultKmsKeyId = {
   type t
   type request = {@as("DryRun") dryRun: option<boolean_>}
   type response = {@as("KmsKeyId") kmsKeyId: option<string_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "GetEbsDefaultKmsKeyIdCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "GetEbsDefaultKmsKeyIdCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetConsoleScreenshot = {
@@ -5944,8 +5943,8 @@ module GetConsoleScreenshot = {
     @as("InstanceId") instanceId: option<string_>,
     @as("ImageData") imageData: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "GetConsoleScreenshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "GetConsoleScreenshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetConsoleOutput = {
@@ -5960,8 +5959,8 @@ module GetConsoleOutput = {
     @as("Output") output: option<string_>,
     @as("InstanceId") instanceId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "GetConsoleOutputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "GetConsoleOutputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExportClientVpnClientConfiguration = {
@@ -5972,8 +5971,8 @@ module ExportClientVpnClientConfiguration = {
   }
   type response = {@as("ClientConfiguration") clientConfiguration: option<string_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ExportClientVpnClientConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ExportClientVpnClientConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableVpcClassicLinkDnsSupport = {
@@ -5981,8 +5980,8 @@ module EnableVpcClassicLinkDnsSupport = {
   type request = {@as("VpcId") vpcId: option<vpcId>}
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "EnableVpcClassicLinkDnsSupportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableVpcClassicLinkDnsSupportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableVpcClassicLink = {
@@ -5992,8 +5991,8 @@ module EnableVpcClassicLink = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "EnableVpcClassicLinkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "EnableVpcClassicLinkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableVolumeIO = {
@@ -6003,8 +6002,8 @@ module EnableVolumeIO = {
     @as("DryRun") dryRun: option<boolean_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "EnableVolumeIOCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "EnableVolumeIOCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module EnableVgwRoutePropagation = {
@@ -6016,8 +6015,8 @@ module EnableVgwRoutePropagation = {
   }
 
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "EnableVgwRoutePropagationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "EnableVgwRoutePropagationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module EnableSerialConsoleAccess = {
@@ -6025,8 +6024,8 @@ module EnableSerialConsoleAccess = {
   type request = {@as("DryRun") dryRun: option<boolean_>}
   type response = {@as("SerialConsoleAccessEnabled") serialConsoleAccessEnabled: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "EnableSerialConsoleAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableSerialConsoleAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableEbsEncryptionByDefault = {
@@ -6034,8 +6033,8 @@ module EnableEbsEncryptionByDefault = {
   type request = {@as("DryRun") dryRun: option<boolean_>}
   type response = {@as("EbsEncryptionByDefault") ebsEncryptionByDefault: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "EnableEbsEncryptionByDefaultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableEbsEncryptionByDefaultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateRouteTable = {
@@ -6045,8 +6044,8 @@ module DisassociateRouteTable = {
     @as("AssociationId") associationId: routeTableAssociationId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DisassociateRouteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DisassociateRouteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisassociateEnclaveCertificateIamRole = {
@@ -6058,8 +6057,8 @@ module DisassociateEnclaveCertificateIamRole = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisassociateEnclaveCertificateIamRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateEnclaveCertificateIamRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateAddress = {
@@ -6070,8 +6069,8 @@ module DisassociateAddress = {
     @as("AssociationId") associationId: option<elasticIpAssociationId>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DisassociateAddressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DisassociateAddressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableVpcClassicLinkDnsSupport = {
@@ -6079,8 +6078,8 @@ module DisableVpcClassicLinkDnsSupport = {
   type request = {@as("VpcId") vpcId: option<vpcId>}
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisableVpcClassicLinkDnsSupportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableVpcClassicLinkDnsSupportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableVpcClassicLink = {
@@ -6090,8 +6089,8 @@ module DisableVpcClassicLink = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DisableVpcClassicLinkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DisableVpcClassicLinkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableVgwRoutePropagation = {
@@ -6103,8 +6102,8 @@ module DisableVgwRoutePropagation = {
   }
 
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisableVgwRoutePropagationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DisableVgwRoutePropagationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableSerialConsoleAccess = {
@@ -6112,8 +6111,8 @@ module DisableSerialConsoleAccess = {
   type request = {@as("DryRun") dryRun: option<boolean_>}
   type response = {@as("SerialConsoleAccessEnabled") serialConsoleAccessEnabled: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisableSerialConsoleAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableSerialConsoleAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableEbsEncryptionByDefault = {
@@ -6121,8 +6120,8 @@ module DisableEbsEncryptionByDefault = {
   type request = {@as("DryRun") dryRun: option<boolean_>}
   type response = {@as("EbsEncryptionByDefault") ebsEncryptionByDefault: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisableEbsEncryptionByDefaultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableEbsEncryptionByDefaultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetachVpnGateway = {
@@ -6133,8 +6132,8 @@ module DetachVpnGateway = {
     @as("VpcId") vpcId: vpcId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DetachVpnGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DetachVpnGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DetachVolume = {
@@ -6147,8 +6146,8 @@ module DetachVolume = {
     @as("Device") device: option<string_>,
   }
   type response = volumeAttachment
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DetachVolumeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DetachVolumeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetachNetworkInterface = {
@@ -6159,8 +6158,8 @@ module DetachNetworkInterface = {
     @as("AttachmentId") attachmentId: networkInterfaceAttachmentId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DetachNetworkInterfaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DetachNetworkInterfaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DetachInternetGateway = {
@@ -6171,8 +6170,8 @@ module DetachInternetGateway = {
     @as("DryRun") dryRun: option<boolean_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DetachInternetGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DetachInternetGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DetachClassicLinkVpc = {
@@ -6183,8 +6182,8 @@ module DetachClassicLinkVpc = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DetachClassicLinkVpcCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DetachClassicLinkVpcCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterImage = {
@@ -6194,8 +6193,8 @@ module DeregisterImage = {
     @as("ImageId") imageId: imageId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeregisterImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeregisterImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVpnGateway = {
@@ -6205,8 +6204,8 @@ module DeleteVpnGateway = {
     @as("VpnGatewayId") vpnGatewayId: vpnGatewayId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteVpnGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVpnGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVpnConnectionRoute = {
@@ -6216,9 +6215,8 @@ module DeleteVpnConnectionRoute = {
     @as("DestinationCidrBlock") destinationCidrBlock: string_,
   }
 
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteVpnConnectionRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVpnConnectionRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVpnConnection = {
@@ -6228,8 +6226,8 @@ module DeleteVpnConnection = {
     @as("VpnConnectionId") vpnConnectionId: vpnConnectionId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteVpnConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVpnConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVpcPeeringConnection = {
@@ -6240,8 +6238,8 @@ module DeleteVpcPeeringConnection = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteVpcPeeringConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteVpcPeeringConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVpc = {
@@ -6251,8 +6249,8 @@ module DeleteVpc = {
     @as("VpcId") vpcId: vpcId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteVpcCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVpcCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVolume = {
@@ -6262,8 +6260,8 @@ module DeleteVolume = {
     @as("VolumeId") volumeId: volumeId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteVolumeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVolumeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteTrafficMirrorTarget = {
@@ -6274,8 +6272,8 @@ module DeleteTrafficMirrorTarget = {
   }
   type response = {@as("TrafficMirrorTargetId") trafficMirrorTargetId: option<string_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTrafficMirrorTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTrafficMirrorTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTrafficMirrorSession = {
@@ -6286,8 +6284,8 @@ module DeleteTrafficMirrorSession = {
   }
   type response = {@as("TrafficMirrorSessionId") trafficMirrorSessionId: option<string_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTrafficMirrorSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTrafficMirrorSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTrafficMirrorFilterRule = {
@@ -6298,8 +6296,8 @@ module DeleteTrafficMirrorFilterRule = {
   }
   type response = {@as("TrafficMirrorFilterRuleId") trafficMirrorFilterRuleId: option<string_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTrafficMirrorFilterRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTrafficMirrorFilterRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTrafficMirrorFilter = {
@@ -6310,8 +6308,8 @@ module DeleteTrafficMirrorFilter = {
   }
   type response = {@as("TrafficMirrorFilterId") trafficMirrorFilterId: option<string_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTrafficMirrorFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTrafficMirrorFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSubnet = {
@@ -6321,8 +6319,8 @@ module DeleteSubnet = {
     @as("SubnetId") subnetId: subnetId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteSubnetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteSubnetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteSpotDatafeedSubscription = {
@@ -6330,8 +6328,8 @@ module DeleteSpotDatafeedSubscription = {
   type request = {@as("DryRun") dryRun: option<boolean_>}
 
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteSpotDatafeedSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteSpotDatafeedSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteSnapshot = {
@@ -6341,8 +6339,8 @@ module DeleteSnapshot = {
     @as("SnapshotId") snapshotId: snapshotId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteSecurityGroup = {
@@ -6353,8 +6351,8 @@ module DeleteSecurityGroup = {
     @as("GroupId") groupId: option<securityGroupId>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteSecurityGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteSecurityGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteRouteTable = {
@@ -6364,8 +6362,8 @@ module DeleteRouteTable = {
     @as("DryRun") dryRun: option<boolean_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteRouteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteRouteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteRoute = {
@@ -6378,8 +6376,8 @@ module DeleteRoute = {
     @as("DestinationCidrBlock") destinationCidrBlock: option<string_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeletePlacementGroup = {
@@ -6389,8 +6387,8 @@ module DeletePlacementGroup = {
     @as("DryRun") dryRun: option<boolean_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeletePlacementGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeletePlacementGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteNetworkInterfacePermission = {
@@ -6402,8 +6400,8 @@ module DeleteNetworkInterfacePermission = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteNetworkInterfacePermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteNetworkInterfacePermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteNetworkInterface = {
@@ -6413,8 +6411,8 @@ module DeleteNetworkInterface = {
     @as("DryRun") dryRun: option<boolean_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteNetworkInterfaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteNetworkInterfaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteNetworkInsightsPath = {
@@ -6427,8 +6425,8 @@ module DeleteNetworkInsightsPath = {
     @as("NetworkInsightsPathId") networkInsightsPathId: option<networkInsightsPathId>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteNetworkInsightsPathCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteNetworkInsightsPathCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteNetworkInsightsAnalysis = {
@@ -6441,8 +6439,8 @@ module DeleteNetworkInsightsAnalysis = {
     @as("NetworkInsightsAnalysisId") networkInsightsAnalysisId: option<networkInsightsAnalysisId>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteNetworkInsightsAnalysisCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteNetworkInsightsAnalysisCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteNetworkAclEntry = {
@@ -6454,8 +6452,8 @@ module DeleteNetworkAclEntry = {
     @as("DryRun") dryRun: option<boolean_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteNetworkAclEntryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteNetworkAclEntryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteNetworkAcl = {
@@ -6465,8 +6463,8 @@ module DeleteNetworkAcl = {
     @as("DryRun") dryRun: option<boolean_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteNetworkAclCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteNetworkAclCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteNatGateway = {
@@ -6476,8 +6474,8 @@ module DeleteNatGateway = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("NatGatewayId") natGatewayId: option<string_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteNatGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteNatGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteKeyPair = {
@@ -6488,8 +6486,8 @@ module DeleteKeyPair = {
     @as("KeyName") keyName: option<keyPairName>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteKeyPairCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteKeyPairCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteInternetGateway = {
@@ -6499,8 +6497,8 @@ module DeleteInternetGateway = {
     @as("DryRun") dryRun: option<boolean_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteInternetGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteInternetGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteFpgaImage = {
@@ -6510,8 +6508,8 @@ module DeleteFpgaImage = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteFpgaImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteFpgaImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEgressOnlyInternetGateway = {
@@ -6522,8 +6520,8 @@ module DeleteEgressOnlyInternetGateway = {
   }
   type response = {@as("ReturnCode") returnCode: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteEgressOnlyInternetGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEgressOnlyInternetGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDhcpOptions = {
@@ -6533,8 +6531,8 @@ module DeleteDhcpOptions = {
     @as("DhcpOptionsId") dhcpOptionsId: dhcpOptionsId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteDhcpOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteDhcpOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteCustomerGateway = {
@@ -6544,8 +6542,8 @@ module DeleteCustomerGateway = {
     @as("CustomerGatewayId") customerGatewayId: customerGatewayId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteCustomerGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteCustomerGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateVpnConnectionRoute = {
@@ -6555,9 +6553,8 @@ module CreateVpnConnectionRoute = {
     @as("DestinationCidrBlock") destinationCidrBlock: string_,
   }
 
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateVpnConnectionRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateVpnConnectionRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateRoute = {
@@ -6581,8 +6578,8 @@ module CreateRoute = {
     @as("DestinationCidrBlock") destinationCidrBlock: option<string_>,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CopyImage = {
@@ -6599,8 +6596,8 @@ module CopyImage = {
     @as("ClientToken") clientToken: option<string_>,
   }
   type response = {@as("ImageId") imageId: option<string_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CopyImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CopyImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CopyFpgaImage = {
@@ -6614,8 +6611,8 @@ module CopyFpgaImage = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("FpgaImageId") fpgaImageId: option<string_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CopyFpgaImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CopyFpgaImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ConfirmProductInstance = {
@@ -6629,8 +6626,8 @@ module ConfirmProductInstance = {
     @as("Return") return: option<boolean_>,
     @as("OwnerId") ownerId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ConfirmProductInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ConfirmProductInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelImportTask = {
@@ -6645,16 +6642,16 @@ module CancelImportTask = {
     @as("PreviousState") previousState: option<string_>,
     @as("ImportTaskId") importTaskId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CancelImportTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CancelImportTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelExportTask = {
   type t
   type request = {@as("ExportTaskId") exportTaskId: exportVmTaskId}
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CancelExportTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CancelExportTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CancelConversionTask = {
@@ -6665,8 +6662,8 @@ module CancelConversionTask = {
     @as("ConversionTaskId") conversionTaskId: conversionTaskId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CancelConversionTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CancelConversionTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CancelCapacityReservation = {
@@ -6677,8 +6674,8 @@ module CancelCapacityReservation = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CancelCapacityReservationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelCapacityReservationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachVolume = {
@@ -6690,8 +6687,8 @@ module AttachVolume = {
     @as("Device") device: string_,
   }
   type response = volumeAttachment
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AttachVolumeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AttachVolumeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachNetworkInterface = {
@@ -6707,8 +6704,8 @@ module AttachNetworkInterface = {
     @as("NetworkCardIndex") networkCardIndex: option<integer_>,
     @as("AttachmentId") attachmentId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AttachNetworkInterfaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AttachNetworkInterfaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachInternetGateway = {
@@ -6719,8 +6716,8 @@ module AttachInternetGateway = {
     @as("DryRun") dryRun: option<boolean_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AttachInternetGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AttachInternetGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AssociateEnclaveCertificateIamRole = {
@@ -6736,8 +6733,8 @@ module AssociateEnclaveCertificateIamRole = {
     @as("CertificateS3BucketName") certificateS3BucketName: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AssociateEnclaveCertificateIamRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateEnclaveCertificateIamRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateDhcpOptions = {
@@ -6748,8 +6745,8 @@ module AssociateDhcpOptions = {
     @as("DhcpOptionsId") dhcpOptionsId: defaultingDhcpOptionsId,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AssociateDhcpOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AssociateDhcpOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AssociateAddress = {
@@ -6764,8 +6761,8 @@ module AssociateAddress = {
     @as("AllocationId") allocationId: option<allocationId>,
   }
   type response = {@as("AssociationId") associationId: option<string_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AssociateAddressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AssociateAddressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module WithdrawByoipCidr = {
@@ -6775,8 +6772,8 @@ module WithdrawByoipCidr = {
     @as("Cidr") cidr: string_,
   }
   type response = {@as("ByoipCidr") byoipCidr: option<byoipCidr>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "WithdrawByoipCidrCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "WithdrawByoipCidrCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UnassignPrivateIpAddresses = {
@@ -6787,8 +6784,8 @@ module UnassignPrivateIpAddresses = {
   }
 
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "UnassignPrivateIpAddressesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UnassignPrivateIpAddressesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UnassignIpv6Addresses = {
@@ -6801,8 +6798,8 @@ module UnassignIpv6Addresses = {
     @as("UnassignedIpv6Addresses") unassignedIpv6Addresses: option<ipv6AddressList>,
     @as("NetworkInterfaceId") networkInterfaceId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "UnassignIpv6AddressesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "UnassignIpv6AddressesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RevokeClientVpnIngress = {
@@ -6815,8 +6812,8 @@ module RevokeClientVpnIngress = {
     @as("ClientVpnEndpointId") clientVpnEndpointId: clientVpnEndpointId,
   }
   type response = {@as("Status") status: option<clientVpnAuthorizationRuleStatus>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "RevokeClientVpnIngressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "RevokeClientVpnIngressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReportInstanceStatus = {
@@ -6831,8 +6828,8 @@ module ReportInstanceStatus = {
     @as("Description") description: option<string_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ReportInstanceStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ReportInstanceStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ReplaceRouteTableAssociation = {
@@ -6847,8 +6844,8 @@ module ReplaceRouteTableAssociation = {
     @as("NewAssociationId") newAssociationId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ReplaceRouteTableAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ReplaceRouteTableAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReplaceNetworkAclEntry = {
@@ -6866,8 +6863,8 @@ module ReplaceNetworkAclEntry = {
     @as("CidrBlock") cidrBlock: option<string_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ReplaceNetworkAclEntryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ReplaceNetworkAclEntryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RebootInstances = {
@@ -6877,8 +6874,8 @@ module RebootInstances = {
     @as("InstanceIds") instanceIds: instanceIdStringList,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "RebootInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "RebootInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PurchaseReservedInstancesOffering = {
@@ -6892,8 +6889,8 @@ module PurchaseReservedInstancesOffering = {
   }
   type response = {@as("ReservedInstancesId") reservedInstancesId: option<string_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "PurchaseReservedInstancesOfferingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PurchaseReservedInstancesOfferingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyVpcPeeringConnectionOptions = {
@@ -6913,8 +6910,8 @@ module ModifyVpcPeeringConnectionOptions = {
     accepterPeeringConnectionOptions: option<peeringConnectionOptions>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyVpcPeeringConnectionOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyVpcPeeringConnectionOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyVpcEndpointServicePermissions = {
@@ -6927,8 +6924,8 @@ module ModifyVpcEndpointServicePermissions = {
   }
   type response = {@as("ReturnValue") returnValue: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyVpcEndpointServicePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyVpcEndpointServicePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyVpcEndpointServiceConfiguration = {
@@ -6946,8 +6943,8 @@ module ModifyVpcEndpointServiceConfiguration = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyVpcEndpointServiceConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyVpcEndpointServiceConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyVpcEndpointConnectionNotification = {
@@ -6960,8 +6957,8 @@ module ModifyVpcEndpointConnectionNotification = {
   }
   type response = {@as("ReturnValue") returnValue: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyVpcEndpointConnectionNotificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyVpcEndpointConnectionNotificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyVpcEndpoint = {
@@ -6980,8 +6977,8 @@ module ModifyVpcEndpoint = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyVpcEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyVpcEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyVpcAttribute = {
@@ -6992,8 +6989,8 @@ module ModifyVpcAttribute = {
     @as("EnableDnsHostnames") enableDnsHostnames: option<attributeBooleanValue>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyVpcAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyVpcAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ModifyVolumeAttribute = {
@@ -7004,8 +7001,8 @@ module ModifyVolumeAttribute = {
     @as("AutoEnableIO") autoEnableIO: option<attributeBooleanValue>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyVolumeAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyVolumeAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ModifyVolume = {
@@ -7020,8 +7017,8 @@ module ModifyVolume = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("VolumeModification") volumeModification: option<volumeModification>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyVolumeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyVolumeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifySubnetAttribute = {
@@ -7034,8 +7031,8 @@ module ModifySubnetAttribute = {
     @as("AssignIpv6AddressOnCreation") assignIpv6AddressOnCreation: option<attributeBooleanValue>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifySubnetAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifySubnetAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ModifyNetworkInterfaceAttribute = {
@@ -7050,8 +7047,8 @@ module ModifyNetworkInterfaceAttribute = {
   }
 
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyNetworkInterfaceAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "ModifyNetworkInterfaceAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ModifyInstanceMetadataOptions = {
@@ -7068,8 +7065,8 @@ module ModifyInstanceMetadataOptions = {
     @as("InstanceId") instanceId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyInstanceMetadataOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyInstanceMetadataOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyInstanceEventStartTime = {
@@ -7082,8 +7079,8 @@ module ModifyInstanceEventStartTime = {
   }
   type response = {@as("Event") event: option<instanceStatusEvent>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyInstanceEventStartTimeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyInstanceEventStartTimeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyDefaultCreditSpecification = {
@@ -7098,8 +7095,8 @@ module ModifyDefaultCreditSpecification = {
     instanceFamilyCreditSpecification: option<instanceFamilyCreditSpecification>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyDefaultCreditSpecificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyDefaultCreditSpecificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDefaultCreditSpecification = {
@@ -7113,8 +7110,8 @@ module GetDefaultCreditSpecification = {
     instanceFamilyCreditSpecification: option<instanceFamilyCreditSpecification>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetDefaultCreditSpecificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDefaultCreditSpecificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExportClientVpnClientCertificateRevocationList = {
@@ -7128,8 +7125,8 @@ module ExportClientVpnClientCertificateRevocationList = {
     @as("CertificateRevocationList") certificateRevocationList: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ExportClientVpnClientCertificateRevocationListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ExportClientVpnClientCertificateRevocationListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableTransitGatewayRouteTablePropagation = {
@@ -7141,8 +7138,8 @@ module EnableTransitGatewayRouteTablePropagation = {
   }
   type response = {@as("Propagation") propagation: option<transitGatewayPropagation>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "EnableTransitGatewayRouteTablePropagationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableTransitGatewayRouteTablePropagationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateTransitGatewayRouteTable = {
@@ -7154,8 +7151,8 @@ module DisassociateTransitGatewayRouteTable = {
   }
   type response = {@as("Association") association: option<transitGatewayAssociation>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisassociateTransitGatewayRouteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateTransitGatewayRouteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateClientVpnTargetNetwork = {
@@ -7170,8 +7167,8 @@ module DisassociateClientVpnTargetNetwork = {
     @as("AssociationId") associationId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisassociateClientVpnTargetNetworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateClientVpnTargetNetworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableTransitGatewayRouteTablePropagation = {
@@ -7183,8 +7180,8 @@ module DisableTransitGatewayRouteTablePropagation = {
   }
   type response = {@as("Propagation") propagation: option<transitGatewayPropagation>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisableTransitGatewayRouteTablePropagationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableTransitGatewayRouteTablePropagationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpcAttribute = {
@@ -7199,8 +7196,8 @@ module DescribeVpcAttribute = {
     @as("EnableDnsHostnames") enableDnsHostnames: option<attributeBooleanValue>,
     @as("VpcId") vpcId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeVpcAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpcAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeprovisionByoipCidr = {
@@ -7210,8 +7207,8 @@ module DeprovisionByoipCidr = {
     @as("Cidr") cidr: string_,
   }
   type response = {@as("ByoipCidr") byoipCidr: option<byoipCidr>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeprovisionByoipCidrCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeprovisionByoipCidrCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLocalGatewayRoute = {
@@ -7222,8 +7219,8 @@ module DeleteLocalGatewayRoute = {
     @as("DestinationCidrBlock") destinationCidrBlock: string_,
   }
   type response = {@as("Route") route: option<localGatewayRoute>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteLocalGatewayRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteLocalGatewayRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteClientVpnRoute = {
@@ -7235,8 +7232,8 @@ module DeleteClientVpnRoute = {
     @as("ClientVpnEndpointId") clientVpnEndpointId: clientVpnEndpointId,
   }
   type response = {@as("Status") status: option<clientVpnRouteStatus>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteClientVpnRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteClientVpnRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteClientVpnEndpoint = {
@@ -7246,8 +7243,8 @@ module DeleteClientVpnEndpoint = {
     @as("ClientVpnEndpointId") clientVpnEndpointId: clientVpnEndpointId,
   }
   type response = {@as("Status") status: option<clientVpnEndpointStatus>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteClientVpnEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteClientVpnEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNetworkAclEntry = {
@@ -7265,8 +7262,8 @@ module CreateNetworkAclEntry = {
     @as("CidrBlock") cidrBlock: option<string_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateNetworkAclEntryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateNetworkAclEntryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateLocalGatewayRoute = {
@@ -7279,8 +7276,8 @@ module CreateLocalGatewayRoute = {
     @as("DestinationCidrBlock") destinationCidrBlock: string_,
   }
   type response = {@as("Route") route: option<localGatewayRoute>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateLocalGatewayRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateLocalGatewayRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateClientVpnRoute = {
@@ -7294,8 +7291,8 @@ module CreateClientVpnRoute = {
     @as("ClientVpnEndpointId") clientVpnEndpointId: clientVpnEndpointId,
   }
   type response = {@as("Status") status: option<clientVpnRouteStatus>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateClientVpnRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateClientVpnRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AuthorizeClientVpnIngress = {
@@ -7311,8 +7308,8 @@ module AuthorizeClientVpnIngress = {
   }
   type response = {@as("Status") status: option<clientVpnAuthorizationRuleStatus>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AuthorizeClientVpnIngressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AuthorizeClientVpnIngressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachVpnGateway = {
@@ -7323,8 +7320,8 @@ module AttachVpnGateway = {
     @as("VpcId") vpcId: vpcId,
   }
   type response = {@as("VpcAttachment") vpcAttachment: option<vpcAttachment>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AttachVpnGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AttachVpnGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachClassicLinkVpc = {
@@ -7336,8 +7333,8 @@ module AttachClassicLinkVpc = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AttachClassicLinkVpcCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AttachClassicLinkVpcCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateTransitGatewayRouteTable = {
@@ -7349,8 +7346,8 @@ module AssociateTransitGatewayRouteTable = {
   }
   type response = {@as("Association") association: option<transitGatewayAssociation>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AssociateTransitGatewayRouteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateTransitGatewayRouteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateRouteTable = {
@@ -7365,8 +7362,8 @@ module AssociateRouteTable = {
     @as("AssociationState") associationState: option<routeTableAssociationState>,
     @as("AssociationId") associationId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AssociateRouteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AssociateRouteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateClientVpnTargetNetwork = {
@@ -7382,8 +7379,8 @@ module AssociateClientVpnTargetNetwork = {
     @as("AssociationId") associationId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AssociateClientVpnTargetNetworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateClientVpnTargetNetworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssignIpv6Addresses = {
@@ -7397,8 +7394,8 @@ module AssignIpv6Addresses = {
     @as("NetworkInterfaceId") networkInterfaceId: option<string_>,
     @as("AssignedIpv6Addresses") assignedIpv6Addresses: option<ipv6AddressList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AssignIpv6AddressesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AssignIpv6AddressesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ApplySecurityGroupsToClientVpnTargetNetwork = {
@@ -7411,8 +7408,8 @@ module ApplySecurityGroupsToClientVpnTargetNetwork = {
   }
   type response = {@as("SecurityGroupIds") securityGroupIds: option<clientVpnSecurityGroupIdSet>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ApplySecurityGroupsToClientVpnTargetNetworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ApplySecurityGroupsToClientVpnTargetNetworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AdvertiseByoipCidr = {
@@ -7422,8 +7419,8 @@ module AdvertiseByoipCidr = {
     @as("Cidr") cidr: string_,
   }
   type response = {@as("ByoipCidr") byoipCidr: option<byoipCidr>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AdvertiseByoipCidrCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AdvertiseByoipCidrCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResetAddressAttribute = {
@@ -7434,8 +7431,8 @@ module ResetAddressAttribute = {
     @as("AllocationId") allocationId: allocationId,
   }
   type response = {@as("Address") address: option<addressAttribute>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ResetAddressAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ResetAddressAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReplaceIamInstanceProfileAssociation = {
@@ -7449,8 +7446,8 @@ module ReplaceIamInstanceProfileAssociation = {
     iamInstanceProfileAssociation: option<iamInstanceProfileAssociation>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ReplaceIamInstanceProfileAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ReplaceIamInstanceProfileAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterTransitGatewayMulticastGroupSources = {
@@ -7467,8 +7464,8 @@ module RegisterTransitGatewayMulticastGroupSources = {
     registeredMulticastGroupSources: option<transitGatewayMulticastRegisteredGroupSources>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "RegisterTransitGatewayMulticastGroupSourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterTransitGatewayMulticastGroupSourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterTransitGatewayMulticastGroupMembers = {
@@ -7485,8 +7482,8 @@ module RegisterTransitGatewayMulticastGroupMembers = {
     registeredMulticastGroupMembers: option<transitGatewayMulticastRegisteredGroupMembers>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "RegisterTransitGatewayMulticastGroupMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterTransitGatewayMulticastGroupMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterInstanceEventNotificationAttributes = {
@@ -7499,8 +7496,8 @@ module RegisterInstanceEventNotificationAttributes = {
     @as("InstanceTagAttribute") instanceTagAttribute: option<instanceTagNotificationAttribute>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "RegisterInstanceEventNotificationAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterInstanceEventNotificationAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyTransitGatewayPrefixListReference = {
@@ -7518,8 +7515,8 @@ module ModifyTransitGatewayPrefixListReference = {
     transitGatewayPrefixListReference: option<transitGatewayPrefixListReference>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyTransitGatewayPrefixListReferenceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyTransitGatewayPrefixListReferenceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyTrafficMirrorFilterRule = {
@@ -7542,8 +7539,8 @@ module ModifyTrafficMirrorFilterRule = {
     @as("TrafficMirrorFilterRule") trafficMirrorFilterRule: option<trafficMirrorFilterRule>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyTrafficMirrorFilterRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyTrafficMirrorFilterRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyReservedInstances = {
@@ -7556,8 +7553,8 @@ module ModifyReservedInstances = {
   type response = {
     @as("ReservedInstancesModificationId") reservedInstancesModificationId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyReservedInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyReservedInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyInstanceCapacityReservationAttributes = {
@@ -7570,8 +7567,8 @@ module ModifyInstanceCapacityReservationAttributes = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyInstanceCapacityReservationAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyInstanceCapacityReservationAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyClientVpnEndpoint = {
@@ -7591,8 +7588,8 @@ module ModifyClientVpnEndpoint = {
     @as("ClientVpnEndpointId") clientVpnEndpointId: clientVpnEndpointId,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyClientVpnEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyClientVpnEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyAddressAttribute = {
@@ -7603,8 +7600,8 @@ module ModifyAddressAttribute = {
     @as("AllocationId") allocationId: allocationId,
   }
   type response = {@as("Address") address: option<addressAttribute>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyAddressAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyAddressAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetManagedPrefixListEntries = {
@@ -7621,8 +7618,8 @@ module GetManagedPrefixListEntries = {
     @as("Entries") entries: option<prefixListEntrySet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetManagedPrefixListEntriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetManagedPrefixListEntriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetManagedPrefixListAssociations = {
@@ -7638,8 +7635,8 @@ module GetManagedPrefixListAssociations = {
     @as("PrefixListAssociations") prefixListAssociations: option<prefixListAssociationSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetManagedPrefixListAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetManagedPrefixListAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetGroupsForCapacityReservation = {
@@ -7655,8 +7652,8 @@ module GetGroupsForCapacityReservation = {
     @as("NextToken") nextToken: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetGroupsForCapacityReservationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetGroupsForCapacityReservationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCapacityReservationUsage = {
@@ -7677,8 +7674,8 @@ module GetCapacityReservationUsage = {
     @as("NextToken") nextToken: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetCapacityReservationUsageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCapacityReservationUsageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAssociatedIpv6PoolCidrs = {
@@ -7694,8 +7691,8 @@ module GetAssociatedIpv6PoolCidrs = {
     @as("Ipv6CidrAssociations") ipv6CidrAssociations: option<ipv6CidrAssociationSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetAssociatedIpv6PoolCidrsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAssociatedIpv6PoolCidrsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAssociatedEnclaveCertificateIamRoles = {
@@ -7706,8 +7703,8 @@ module GetAssociatedEnclaveCertificateIamRoles = {
   }
   type response = {@as("AssociatedRoles") associatedRoles: option<associatedRolesList>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetAssociatedEnclaveCertificateIamRolesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAssociatedEnclaveCertificateIamRolesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateVpcCidrBlock = {
@@ -7718,9 +7715,8 @@ module DisassociateVpcCidrBlock = {
     @as("CidrBlockAssociation") cidrBlockAssociation: option<vpcCidrBlockAssociation>,
     @as("Ipv6CidrBlockAssociation") ipv6CidrBlockAssociation: option<vpcIpv6CidrBlockAssociation>,
   }
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisassociateVpcCidrBlockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DisassociateVpcCidrBlockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateSubnetCidrBlock = {
@@ -7732,8 +7728,8 @@ module DisassociateSubnetCidrBlock = {
     ipv6CidrBlockAssociation: option<subnetIpv6CidrBlockAssociation>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisassociateSubnetCidrBlockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateSubnetCidrBlockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateIamInstanceProfile = {
@@ -7744,8 +7740,8 @@ module DisassociateIamInstanceProfile = {
     iamInstanceProfileAssociation: option<iamInstanceProfileAssociation>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisassociateIamInstanceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateIamInstanceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpcClassicLinkDnsSupport = {
@@ -7760,8 +7756,8 @@ module DescribeVpcClassicLinkDnsSupport = {
     @as("NextToken") nextToken: option<describeVpcClassicLinkDnsSupportNextToken>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeVpcClassicLinkDnsSupportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeVpcClassicLinkDnsSupportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVolumeAttribute = {
@@ -7776,8 +7772,8 @@ module DescribeVolumeAttribute = {
     @as("ProductCodes") productCodes: option<productCodeList>,
     @as("AutoEnableIO") autoEnableIO: option<attributeBooleanValue>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeVolumeAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVolumeAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSpotFleetInstances = {
@@ -7794,8 +7790,8 @@ module DescribeSpotFleetInstances = {
     @as("ActiveInstances") activeInstances: option<activeInstanceSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeSpotFleetInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSpotFleetInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSpotDatafeedSubscription = {
@@ -7805,8 +7801,8 @@ module DescribeSpotDatafeedSubscription = {
     @as("SpotDatafeedSubscription") spotDatafeedSubscription: option<spotDatafeedSubscription>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeSpotDatafeedSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSpotDatafeedSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSnapshotAttribute = {
@@ -7822,8 +7818,8 @@ module DescribeSnapshotAttribute = {
     @as("CreateVolumePermissions") createVolumePermissions: option<createVolumePermissionList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeSnapshotAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSnapshotAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSecurityGroupReferences = {
@@ -7836,8 +7832,8 @@ module DescribeSecurityGroupReferences = {
     @as("SecurityGroupReferenceSet") securityGroupReferenceSet: option<securityGroupReferences>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeSecurityGroupReferencesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSecurityGroupReferencesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNetworkInterfaceAttribute = {
@@ -7855,8 +7851,8 @@ module DescribeNetworkInterfaceAttribute = {
     @as("Attachment") attachment: option<networkInterfaceAttachment>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeNetworkInterfaceAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNetworkInterfaceAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstanceEventNotificationAttributes = {
@@ -7866,8 +7862,8 @@ module DescribeInstanceEventNotificationAttributes = {
     @as("InstanceTagAttribute") instanceTagAttribute: option<instanceTagNotificationAttribute>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeInstanceEventNotificationAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInstanceEventNotificationAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIdentityIdFormat = {
@@ -7877,17 +7873,16 @@ module DescribeIdentityIdFormat = {
     @as("PrincipalArn") principalArn: string_,
   }
   type response = {@as("Statuses") statuses: option<idFormatList>}
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeIdentityIdFormatCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeIdentityIdFormatCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIdFormat = {
   type t
   type request = {@as("Resource") resource: option<string_>}
   type response = {@as("Statuses") statuses: option<idFormatList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeIdFormatCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeIdFormatCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeByoipCidrs = {
@@ -7901,8 +7896,8 @@ module DescribeByoipCidrs = {
     @as("NextToken") nextToken: option<string_>,
     @as("ByoipCidrs") byoipCidrs: option<byoipCidrSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeByoipCidrsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeByoipCidrsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAggregateIdFormat = {
@@ -7913,8 +7908,8 @@ module DescribeAggregateIdFormat = {
     @as("UseLongIdsAggregated") useLongIdsAggregated: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeAggregateIdFormatCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAggregateIdFormatCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterTransitGatewayMulticastGroupSources = {
@@ -7931,8 +7926,8 @@ module DeregisterTransitGatewayMulticastGroupSources = {
     deregisteredMulticastGroupSources: option<transitGatewayMulticastDeregisteredGroupSources>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeregisterTransitGatewayMulticastGroupSourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterTransitGatewayMulticastGroupSourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterTransitGatewayMulticastGroupMembers = {
@@ -7949,8 +7944,8 @@ module DeregisterTransitGatewayMulticastGroupMembers = {
     deregisteredMulticastGroupMembers: option<transitGatewayMulticastDeregisteredGroupMembers>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeregisterTransitGatewayMulticastGroupMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterTransitGatewayMulticastGroupMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterInstanceEventNotificationAttributes = {
@@ -7963,8 +7958,8 @@ module DeregisterInstanceEventNotificationAttributes = {
     @as("InstanceTagAttribute") instanceTagAttribute: option<instanceTagNotificationAttribute>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeregisterInstanceEventNotificationAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterInstanceEventNotificationAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTransitGatewayPrefixListReference = {
@@ -7979,8 +7974,8 @@ module DeleteTransitGatewayPrefixListReference = {
     transitGatewayPrefixListReference: option<transitGatewayPrefixListReference>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTransitGatewayPrefixListReferenceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTransitGatewayPrefixListReferenceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTags = {
@@ -7991,8 +7986,8 @@ module DeleteTags = {
     @as("DryRun") dryRun: option<boolean_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateVpcEndpointConnectionNotification = {
@@ -8010,8 +8005,8 @@ module CreateVpcEndpointConnectionNotification = {
     @as("ConnectionNotification") connectionNotification: option<connectionNotification>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateVpcEndpointConnectionNotificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateVpcEndpointConnectionNotificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTransitGatewayPrefixListReference = {
@@ -8029,8 +8024,8 @@ module CreateTransitGatewayPrefixListReference = {
     transitGatewayPrefixListReference: option<transitGatewayPrefixListReference>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTransitGatewayPrefixListReferenceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTransitGatewayPrefixListReferenceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTrafficMirrorFilterRule = {
@@ -8054,8 +8049,8 @@ module CreateTrafficMirrorFilterRule = {
     @as("TrafficMirrorFilterRule") trafficMirrorFilterRule: option<trafficMirrorFilterRule>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTrafficMirrorFilterRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTrafficMirrorFilterRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTags = {
@@ -8066,8 +8061,8 @@ module CreateTags = {
     @as("DryRun") dryRun: option<boolean_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateStoreImageTask = {
@@ -8079,8 +8074,8 @@ module CreateStoreImageTask = {
     @as("ImageId") imageId: imageId,
   }
   type response = {@as("ObjectKey") objectKey: option<string_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateStoreImageTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateStoreImageTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSpotDatafeedSubscription = {
@@ -8094,8 +8089,8 @@ module CreateSpotDatafeedSubscription = {
     @as("SpotDatafeedSubscription") spotDatafeedSubscription: option<spotDatafeedSubscription>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateSpotDatafeedSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSpotDatafeedSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNetworkInterfacePermission = {
@@ -8111,8 +8106,8 @@ module CreateNetworkInterfacePermission = {
     @as("InterfacePermission") interfacePermission: option<networkInterfacePermission>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateNetworkInterfacePermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateNetworkInterfacePermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelSpotInstanceRequests = {
@@ -8126,8 +8121,8 @@ module CancelSpotInstanceRequests = {
     cancelledSpotInstanceRequests: option<cancelledSpotInstanceRequestList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CancelSpotInstanceRequestsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelSpotInstanceRequestsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateVpcCidrBlock = {
@@ -8145,8 +8140,8 @@ module AssociateVpcCidrBlock = {
     @as("CidrBlockAssociation") cidrBlockAssociation: option<vpcCidrBlockAssociation>,
     @as("Ipv6CidrBlockAssociation") ipv6CidrBlockAssociation: option<vpcIpv6CidrBlockAssociation>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AssociateVpcCidrBlockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AssociateVpcCidrBlockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateSubnetCidrBlock = {
@@ -8160,9 +8155,8 @@ module AssociateSubnetCidrBlock = {
     @as("Ipv6CidrBlockAssociation")
     ipv6CidrBlockAssociation: option<subnetIpv6CidrBlockAssociation>,
   }
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AssociateSubnetCidrBlockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AssociateSubnetCidrBlockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateIamInstanceProfile = {
@@ -8176,8 +8170,8 @@ module AssociateIamInstanceProfile = {
     iamInstanceProfileAssociation: option<iamInstanceProfileAssociation>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AssociateIamInstanceProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateIamInstanceProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssignPrivateIpAddresses = {
@@ -8193,9 +8187,8 @@ module AssignPrivateIpAddresses = {
     assignedPrivateIpAddresses: option<assignedPrivateIpAddressList>,
     @as("NetworkInterfaceId") networkInterfaceId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AssignPrivateIpAddressesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AssignPrivateIpAddressesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptReservedInstancesExchangeQuote = {
@@ -8207,8 +8200,8 @@ module AcceptReservedInstancesExchangeQuote = {
   }
   type response = {@as("ExchangeId") exchangeId: option<string_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AcceptReservedInstancesExchangeQuoteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptReservedInstancesExchangeQuoteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UnmonitorInstances = {
@@ -8218,8 +8211,8 @@ module UnmonitorInstances = {
     @as("InstanceIds") instanceIds: instanceIdStringList,
   }
   type response = {@as("InstanceMonitorings") instanceMonitorings: option<instanceMonitoringList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "UnmonitorInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "UnmonitorInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TerminateInstances = {
@@ -8231,8 +8224,8 @@ module TerminateInstances = {
   type response = {
     @as("TerminatingInstances") terminatingInstances: option<instanceStateChangeList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "TerminateInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "TerminateInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TerminateClientVpnConnections = {
@@ -8249,8 +8242,8 @@ module TerminateClientVpnConnections = {
     @as("ClientVpnEndpointId") clientVpnEndpointId: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "TerminateClientVpnConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TerminateClientVpnConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopInstances = {
@@ -8262,8 +8255,8 @@ module StopInstances = {
     @as("InstanceIds") instanceIds: instanceIdStringList,
   }
   type response = {@as("StoppingInstances") stoppingInstances: option<instanceStateChangeList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "StopInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "StopInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartInstances = {
@@ -8274,8 +8267,8 @@ module StartInstances = {
     @as("InstanceIds") instanceIds: instanceIdStringList,
   }
   type response = {@as("StartingInstances") startingInstances: option<instanceStateChangeList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "StartInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "StartInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchTransitGatewayMulticastGroups = {
@@ -8293,8 +8286,8 @@ module SearchTransitGatewayMulticastGroups = {
     @as("MulticastGroups") multicastGroups: option<transitGatewayMulticastGroupList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "SearchTransitGatewayMulticastGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchTransitGatewayMulticastGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchLocalGatewayRoutes = {
@@ -8310,9 +8303,8 @@ module SearchLocalGatewayRoutes = {
     @as("NextToken") nextToken: option<string_>,
     @as("Routes") routes: option<localGatewayRouteList>,
   }
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "SearchLocalGatewayRoutesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "SearchLocalGatewayRoutesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreManagedPrefixListVersion = {
@@ -8325,8 +8317,8 @@ module RestoreManagedPrefixListVersion = {
   }
   type response = {@as("PrefixList") prefixList: option<managedPrefixList>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "RestoreManagedPrefixListVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RestoreManagedPrefixListVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReplaceTransitGatewayRoute = {
@@ -8341,8 +8333,8 @@ module ReplaceTransitGatewayRoute = {
   }
   type response = {@as("Route") route: option<transitGatewayRoute>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ReplaceTransitGatewayRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ReplaceTransitGatewayRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReleaseHosts = {
@@ -8352,8 +8344,8 @@ module ReleaseHosts = {
     @as("Unsuccessful") unsuccessful: option<unsuccessfulItemList>,
     @as("Successful") successful: option<responseHostIdList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ReleaseHostsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ReleaseHostsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectVpcEndpointConnections = {
@@ -8365,8 +8357,8 @@ module RejectVpcEndpointConnections = {
   }
   type response = {@as("Unsuccessful") unsuccessful: option<unsuccessfulItemSet>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "RejectVpcEndpointConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectVpcEndpointConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectTransitGatewayVpcAttachment = {
@@ -8380,8 +8372,8 @@ module RejectTransitGatewayVpcAttachment = {
     transitGatewayVpcAttachment: option<transitGatewayVpcAttachment>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "RejectTransitGatewayVpcAttachmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectTransitGatewayVpcAttachmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectTransitGatewayPeeringAttachment = {
@@ -8395,8 +8387,8 @@ module RejectTransitGatewayPeeringAttachment = {
     transitGatewayPeeringAttachment: option<transitGatewayPeeringAttachment>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "RejectTransitGatewayPeeringAttachmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectTransitGatewayPeeringAttachmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectTransitGatewayMulticastDomainAssociations = {
@@ -8413,8 +8405,8 @@ module RejectTransitGatewayMulticastDomainAssociations = {
     @as("Associations") associations: option<transitGatewayMulticastDomainAssociations>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "RejectTransitGatewayMulticastDomainAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectTransitGatewayMulticastDomainAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterImage = {
@@ -8436,8 +8428,8 @@ module RegisterImage = {
     @as("ImageLocation") imageLocation: option<string_>,
   }
   type response = {@as("ImageId") imageId: option<string_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "RegisterImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "RegisterImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module MonitorInstances = {
@@ -8447,8 +8439,8 @@ module MonitorInstances = {
     @as("InstanceIds") instanceIds: instanceIdStringList,
   }
   type response = {@as("InstanceMonitorings") instanceMonitorings: option<instanceMonitoringList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "MonitorInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "MonitorInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyTransitGatewayVpcAttachment = {
@@ -8465,8 +8457,8 @@ module ModifyTransitGatewayVpcAttachment = {
     transitGatewayVpcAttachment: option<transitGatewayVpcAttachment>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyTransitGatewayVpcAttachmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyTransitGatewayVpcAttachmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyTransitGateway = {
@@ -8478,8 +8470,8 @@ module ModifyTransitGateway = {
     @as("TransitGatewayId") transitGatewayId: transitGatewayId,
   }
   type response = {@as("TransitGateway") transitGateway: option<transitGateway>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyTransitGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyTransitGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyTrafficMirrorSession = {
@@ -8497,8 +8489,8 @@ module ModifyTrafficMirrorSession = {
   }
   type response = {@as("TrafficMirrorSession") trafficMirrorSession: option<trafficMirrorSession>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyTrafficMirrorSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyTrafficMirrorSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifySnapshotAttribute = {
@@ -8514,8 +8506,8 @@ module ModifySnapshotAttribute = {
     @as("Attribute") attribute: option<snapshotAttributeName>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifySnapshotAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifySnapshotAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ModifyManagedPrefixList = {
@@ -8529,8 +8521,8 @@ module ModifyManagedPrefixList = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("PrefixList") prefixList: option<managedPrefixList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyManagedPrefixListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyManagedPrefixListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyLaunchTemplate = {
@@ -8543,8 +8535,8 @@ module ModifyLaunchTemplate = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("LaunchTemplate") launchTemplate: option<launchTemplate>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyLaunchTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyLaunchTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyInstanceCreditSpecification = {
@@ -8562,8 +8554,8 @@ module ModifyInstanceCreditSpecification = {
     successfulInstanceCreditSpecifications: option<successfulInstanceCreditSpecificationSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyInstanceCreditSpecificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyInstanceCreditSpecificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyInstanceAttribute = {
@@ -8589,8 +8581,8 @@ module ModifyInstanceAttribute = {
     @as("SourceDestCheck") sourceDestCheck: option<attributeBooleanValue>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyInstanceAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyInstanceAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ModifyImageAttribute = {
@@ -8608,8 +8600,8 @@ module ModifyImageAttribute = {
     @as("Attribute") attribute: option<string_>,
   }
 
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyImageAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyImageAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ModifyHosts = {
@@ -8625,8 +8617,8 @@ module ModifyHosts = {
     @as("Unsuccessful") unsuccessful: option<unsuccessfulItemList>,
     @as("Successful") successful: option<responseHostIdList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyHostsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyHostsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyFpgaImageAttribute = {
@@ -8644,9 +8636,8 @@ module ModifyFpgaImageAttribute = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("FpgaImageAttribute") fpgaImageAttribute: option<fpgaImageAttribute>}
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyFpgaImageAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyFpgaImageAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTransitGatewayRouteTablePropagations = {
@@ -8664,8 +8655,8 @@ module GetTransitGatewayRouteTablePropagations = {
     transitGatewayRouteTablePropagations: option<transitGatewayRouteTablePropagationList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetTransitGatewayRouteTablePropagationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTransitGatewayRouteTablePropagationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTransitGatewayRouteTableAssociations = {
@@ -8682,8 +8673,8 @@ module GetTransitGatewayRouteTableAssociations = {
     @as("Associations") associations: option<transitGatewayRouteTableAssociationList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetTransitGatewayRouteTableAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTransitGatewayRouteTableAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTransitGatewayPrefixListReferences = {
@@ -8701,8 +8692,8 @@ module GetTransitGatewayPrefixListReferences = {
     transitGatewayPrefixListReferences: option<transitGatewayPrefixListReferenceSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetTransitGatewayPrefixListReferencesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTransitGatewayPrefixListReferencesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTransitGatewayMulticastDomainAssociations = {
@@ -8721,8 +8712,8 @@ module GetTransitGatewayMulticastDomainAssociations = {
     multicastDomainAssociations: option<transitGatewayMulticastDomainAssociationList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetTransitGatewayMulticastDomainAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTransitGatewayMulticastDomainAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTransitGatewayAttachmentPropagations = {
@@ -8740,8 +8731,8 @@ module GetTransitGatewayAttachmentPropagations = {
     transitGatewayAttachmentPropagations: option<transitGatewayAttachmentPropagationList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetTransitGatewayAttachmentPropagationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTransitGatewayAttachmentPropagationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetReservedInstancesExchangeQuote = {
@@ -8766,8 +8757,8 @@ module GetReservedInstancesExchangeQuote = {
     @as("CurrencyCode") currencyCode: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetReservedInstancesExchangeQuoteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetReservedInstancesExchangeQuoteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetHostReservationPurchasePreview = {
@@ -8783,8 +8774,8 @@ module GetHostReservationPurchasePreview = {
     @as("CurrencyCode") currencyCode: option<currencyCodeValues>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetHostReservationPurchasePreviewCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetHostReservationPurchasePreviewCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFlowLogsIntegrationTemplate = {
@@ -8797,8 +8788,8 @@ module GetFlowLogsIntegrationTemplate = {
   }
   type response = {@as("Result") result: option<string_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "GetFlowLogsIntegrationTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetFlowLogsIntegrationTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCoipPoolUsage = {
@@ -8815,8 +8806,8 @@ module GetCoipPoolUsage = {
     @as("CoipAddressUsages") coipAddressUsages: option<coipAddressUsageSet>,
     @as("CoipPoolId") coipPoolId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "GetCoipPoolUsageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "GetCoipPoolUsageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExportTransitGatewayRoutes = {
@@ -8829,8 +8820,8 @@ module ExportTransitGatewayRoutes = {
   }
   type response = {@as("S3Location") s3Location: option<string_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ExportTransitGatewayRoutesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ExportTransitGatewayRoutesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateTransitGatewayMulticastDomain = {
@@ -8847,8 +8838,8 @@ module DisassociateTransitGatewayMulticastDomain = {
     @as("Associations") associations: option<transitGatewayMulticastDomainAssociations>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisassociateTransitGatewayMulticastDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateTransitGatewayMulticastDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpcEndpointServicePermissions = {
@@ -8865,8 +8856,8 @@ module DescribeVpcEndpointServicePermissions = {
     @as("AllowedPrincipals") allowedPrincipals: option<allowedPrincipalSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeVpcEndpointServicePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeVpcEndpointServicePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpcEndpointConnectionNotifications = {
@@ -8883,8 +8874,8 @@ module DescribeVpcEndpointConnectionNotifications = {
     @as("ConnectionNotificationSet") connectionNotificationSet: option<connectionNotificationSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeVpcEndpointConnectionNotificationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeVpcEndpointConnectionNotificationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVolumesModifications = {
@@ -8901,8 +8892,8 @@ module DescribeVolumesModifications = {
     @as("VolumesModifications") volumesModifications: option<volumeModificationList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeVolumesModificationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeVolumesModificationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTags = {
@@ -8917,8 +8908,8 @@ module DescribeTags = {
     @as("Tags") tags: option<tagDescriptionList>,
     @as("NextToken") nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStoreImageTasks = {
@@ -8934,8 +8925,8 @@ module DescribeStoreImageTasks = {
     @as("NextToken") nextToken: option<string_>,
     @as("StoreImageTaskResults") storeImageTaskResults: option<storeImageTaskResultSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeStoreImageTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeStoreImageTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSpotPriceHistory = {
@@ -8955,9 +8946,8 @@ module DescribeSpotPriceHistory = {
     @as("SpotPriceHistory") spotPriceHistory: option<spotPriceHistoryList>,
     @as("NextToken") nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeSpotPriceHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeSpotPriceHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSpotFleetRequestHistory = {
@@ -8978,8 +8968,8 @@ module DescribeSpotFleetRequestHistory = {
     @as("HistoryRecords") historyRecords: option<historyRecords>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeSpotFleetRequestHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSpotFleetRequestHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRegions = {
@@ -8991,8 +8981,8 @@ module DescribeRegions = {
     @as("Filters") filters: option<filterList>,
   }
   type response = {@as("Regions") regions: option<regionList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeRegionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeRegionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePrefixLists = {
@@ -9008,8 +8998,8 @@ module DescribePrefixLists = {
     @as("PrefixLists") prefixLists: option<prefixListSet>,
     @as("NextToken") nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribePrefixListsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribePrefixListsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNetworkInterfacePermissions = {
@@ -9027,8 +9017,8 @@ module DescribeNetworkInterfacePermissions = {
     networkInterfacePermissions: option<networkInterfacePermissionList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeNetworkInterfacePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNetworkInterfacePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMovingAddresses = {
@@ -9044,8 +9034,8 @@ module DescribeMovingAddresses = {
     @as("NextToken") nextToken: option<string_>,
     @as("MovingAddressStatuses") movingAddressStatuses: option<movingAddressStatusSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeMovingAddressesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeMovingAddressesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstanceTypeOfferings = {
@@ -9062,8 +9052,8 @@ module DescribeInstanceTypeOfferings = {
     @as("InstanceTypeOfferings") instanceTypeOfferings: option<instanceTypeOfferingsList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeInstanceTypeOfferingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInstanceTypeOfferingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstanceCreditSpecifications = {
@@ -9081,8 +9071,8 @@ module DescribeInstanceCreditSpecifications = {
     instanceCreditSpecifications: option<instanceCreditSpecificationList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeInstanceCreditSpecificationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInstanceCreditSpecificationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstanceAttribute = {
@@ -9112,8 +9102,8 @@ module DescribeInstanceAttribute = {
     @as("Groups") groups: option<groupIdentifierList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeInstanceAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInstanceAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeImageAttribute = {
@@ -9134,8 +9124,8 @@ module DescribeImageAttribute = {
     @as("ImageId") imageId: option<string_>,
     @as("BlockDeviceMappings") blockDeviceMappings: option<blockDeviceMappingList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeImageAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeImageAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIamInstanceProfileAssociations = {
@@ -9152,8 +9142,8 @@ module DescribeIamInstanceProfileAssociations = {
     iamInstanceProfileAssociations: option<iamInstanceProfileAssociationSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeIamInstanceProfileAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeIamInstanceProfileAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeHostReservationOfferings = {
@@ -9171,8 +9161,8 @@ module DescribeHostReservationOfferings = {
     @as("NextToken") nextToken: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeHostReservationOfferingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeHostReservationOfferingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFpgaImageAttribute = {
@@ -9184,8 +9174,8 @@ module DescribeFpgaImageAttribute = {
   }
   type response = {@as("FpgaImageAttribute") fpgaImageAttribute: option<fpgaImageAttribute>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeFpgaImageAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFpgaImageAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFleetInstances = {
@@ -9202,8 +9192,8 @@ module DescribeFleetInstances = {
     @as("NextToken") nextToken: option<string_>,
     @as("ActiveInstances") activeInstances: option<activeInstanceSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeFleetInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeFleetInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFleetHistory = {
@@ -9223,8 +9213,8 @@ module DescribeFleetHistory = {
     @as("LastEvaluatedTime") lastEvaluatedTime: option<dateTime>,
     @as("HistoryRecords") historyRecords: option<historyRecordSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeFleetHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeFleetHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFastSnapshotRestores = {
@@ -9240,8 +9230,8 @@ module DescribeFastSnapshotRestores = {
     @as("FastSnapshotRestores") fastSnapshotRestores: option<describeFastSnapshotRestoreSuccessSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeFastSnapshotRestoresCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFastSnapshotRestoresCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeClientVpnTargetNetworks = {
@@ -9259,8 +9249,8 @@ module DescribeClientVpnTargetNetworks = {
     @as("ClientVpnTargetNetworks") clientVpnTargetNetworks: option<targetNetworkSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeClientVpnTargetNetworksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeClientVpnTargetNetworksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeClientVpnRoutes = {
@@ -9276,8 +9266,8 @@ module DescribeClientVpnRoutes = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Routes") routes: option<clientVpnRouteSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeClientVpnRoutesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeClientVpnRoutesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeClientVpnConnections = {
@@ -9294,8 +9284,8 @@ module DescribeClientVpnConnections = {
     @as("Connections") connections: option<clientVpnConnectionSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeClientVpnConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeClientVpnConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeClientVpnAuthorizationRules = {
@@ -9312,8 +9302,8 @@ module DescribeClientVpnAuthorizationRules = {
     @as("AuthorizationRules") authorizationRules: option<authorizationRuleSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeClientVpnAuthorizationRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeClientVpnAuthorizationRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAddressesAttribute = {
@@ -9330,8 +9320,8 @@ module DescribeAddressesAttribute = {
     @as("Addresses") addresses: option<addressSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeAddressesAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAddressesAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVpcEndpoints = {
@@ -9341,8 +9331,8 @@ module DeleteVpcEndpoints = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("Unsuccessful") unsuccessful: option<unsuccessfulItemSet>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteVpcEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteVpcEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVpcEndpointServiceConfigurations = {
@@ -9353,8 +9343,8 @@ module DeleteVpcEndpointServiceConfigurations = {
   }
   type response = {@as("Unsuccessful") unsuccessful: option<unsuccessfulItemSet>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteVpcEndpointServiceConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteVpcEndpointServiceConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVpcEndpointConnectionNotifications = {
@@ -9365,8 +9355,8 @@ module DeleteVpcEndpointConnectionNotifications = {
   }
   type response = {@as("Unsuccessful") unsuccessful: option<unsuccessfulItemSet>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteVpcEndpointConnectionNotificationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteVpcEndpointConnectionNotificationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTransitGatewayVpcAttachment = {
@@ -9380,8 +9370,8 @@ module DeleteTransitGatewayVpcAttachment = {
     transitGatewayVpcAttachment: option<transitGatewayVpcAttachment>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTransitGatewayVpcAttachmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTransitGatewayVpcAttachmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTransitGatewayRouteTable = {
@@ -9394,8 +9384,8 @@ module DeleteTransitGatewayRouteTable = {
     @as("TransitGatewayRouteTable") transitGatewayRouteTable: option<transitGatewayRouteTable>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTransitGatewayRouteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTransitGatewayRouteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTransitGatewayRoute = {
@@ -9407,8 +9397,8 @@ module DeleteTransitGatewayRoute = {
   }
   type response = {@as("Route") route: option<transitGatewayRoute>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTransitGatewayRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTransitGatewayRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTransitGatewayPeeringAttachment = {
@@ -9422,8 +9412,8 @@ module DeleteTransitGatewayPeeringAttachment = {
     transitGatewayPeeringAttachment: option<transitGatewayPeeringAttachment>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTransitGatewayPeeringAttachmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTransitGatewayPeeringAttachmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTransitGatewayMulticastDomain = {
@@ -9438,8 +9428,8 @@ module DeleteTransitGatewayMulticastDomain = {
     transitGatewayMulticastDomain: option<transitGatewayMulticastDomain>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTransitGatewayMulticastDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTransitGatewayMulticastDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTransitGatewayConnect = {
@@ -9452,8 +9442,8 @@ module DeleteTransitGatewayConnect = {
     @as("TransitGatewayConnect") transitGatewayConnect: option<transitGatewayConnect>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTransitGatewayConnectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTransitGatewayConnectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTransitGateway = {
@@ -9463,8 +9453,8 @@ module DeleteTransitGateway = {
     @as("TransitGatewayId") transitGatewayId: transitGatewayId,
   }
   type response = {@as("TransitGateway") transitGateway: option<transitGateway>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteTransitGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteTransitGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteQueuedReservedInstances = {
@@ -9480,8 +9470,8 @@ module DeleteQueuedReservedInstances = {
     successfulQueuedPurchaseDeletions: option<successfulQueuedPurchaseDeletionSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteQueuedReservedInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteQueuedReservedInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteManagedPrefixList = {
@@ -9491,8 +9481,8 @@ module DeleteManagedPrefixList = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("PrefixList") prefixList: option<managedPrefixList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteManagedPrefixListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteManagedPrefixListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLocalGatewayRouteTableVpcAssociation = {
@@ -9507,8 +9497,8 @@ module DeleteLocalGatewayRouteTableVpcAssociation = {
     localGatewayRouteTableVpcAssociation: option<localGatewayRouteTableVpcAssociation>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteLocalGatewayRouteTableVpcAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteLocalGatewayRouteTableVpcAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLaunchTemplateVersions = {
@@ -9530,8 +9520,8 @@ module DeleteLaunchTemplateVersions = {
     >,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteLaunchTemplateVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteLaunchTemplateVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLaunchTemplate = {
@@ -9542,8 +9532,8 @@ module DeleteLaunchTemplate = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("LaunchTemplate") launchTemplate: option<launchTemplate>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteLaunchTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteLaunchTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFlowLogs = {
@@ -9553,8 +9543,8 @@ module DeleteFlowLogs = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("Unsuccessful") unsuccessful: option<unsuccessfulItemSet>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteFlowLogsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteFlowLogsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFleets = {
@@ -9568,8 +9558,8 @@ module DeleteFleets = {
     @as("UnsuccessfulFleetDeletions") unsuccessfulFleetDeletions: option<deleteFleetErrorSet>,
     @as("SuccessfulFleetDeletions") successfulFleetDeletions: option<deleteFleetSuccessSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteFleetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteFleetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCarrierGateway = {
@@ -9579,8 +9569,8 @@ module DeleteCarrierGateway = {
     @as("CarrierGatewayId") carrierGatewayId: carrierGatewayId,
   }
   type response = {@as("CarrierGateway") carrierGateway: option<carrierGateway>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DeleteCarrierGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DeleteCarrierGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTransitGatewayRoute = {
@@ -9595,8 +9585,8 @@ module CreateTransitGatewayRoute = {
   }
   type response = {@as("Route") route: option<transitGatewayRoute>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTransitGatewayRouteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTransitGatewayRouteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelSpotFleetRequests = {
@@ -9612,8 +9602,8 @@ module CancelSpotFleetRequests = {
     @as("SuccessfulFleetRequests")
     successfulFleetRequests: option<cancelSpotFleetRequestsSuccessSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CancelSpotFleetRequestsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CancelSpotFleetRequestsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelBundleTask = {
@@ -9623,8 +9613,8 @@ module CancelBundleTask = {
     @as("BundleId") bundleId: bundleId,
   }
   type response = {@as("BundleTask") bundleTask: option<bundleTask>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CancelBundleTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CancelBundleTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BundleInstance = {
@@ -9635,8 +9625,8 @@ module BundleInstance = {
     @as("InstanceId") instanceId: instanceId,
   }
   type response = {@as("BundleTask") bundleTask: option<bundleTask>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "BundleInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "BundleInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateTransitGatewayMulticastDomain = {
@@ -9653,8 +9643,8 @@ module AssociateTransitGatewayMulticastDomain = {
     @as("Associations") associations: option<transitGatewayMulticastDomainAssociations>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AssociateTransitGatewayMulticastDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateTransitGatewayMulticastDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptVpcEndpointConnections = {
@@ -9666,8 +9656,8 @@ module AcceptVpcEndpointConnections = {
   }
   type response = {@as("Unsuccessful") unsuccessful: option<unsuccessfulItemSet>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AcceptVpcEndpointConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptVpcEndpointConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptTransitGatewayVpcAttachment = {
@@ -9681,8 +9671,8 @@ module AcceptTransitGatewayVpcAttachment = {
     transitGatewayVpcAttachment: option<transitGatewayVpcAttachment>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AcceptTransitGatewayVpcAttachmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptTransitGatewayVpcAttachmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptTransitGatewayPeeringAttachment = {
@@ -9696,8 +9686,8 @@ module AcceptTransitGatewayPeeringAttachment = {
     transitGatewayPeeringAttachment: option<transitGatewayPeeringAttachment>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AcceptTransitGatewayPeeringAttachmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptTransitGatewayPeeringAttachmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptTransitGatewayMulticastDomainAssociations = {
@@ -9714,8 +9704,8 @@ module AcceptTransitGatewayMulticastDomainAssociations = {
     @as("Associations") associations: option<transitGatewayMulticastDomainAssociations>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AcceptTransitGatewayMulticastDomainAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptTransitGatewayMulticastDomainAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSecurityGroupRuleDescriptionsIngress = {
@@ -9728,8 +9718,8 @@ module UpdateSecurityGroupRuleDescriptionsIngress = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "UpdateSecurityGroupRuleDescriptionsIngressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSecurityGroupRuleDescriptionsIngressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSecurityGroupRuleDescriptionsEgress = {
@@ -9742,8 +9732,8 @@ module UpdateSecurityGroupRuleDescriptionsEgress = {
   }
   type response = {@as("Return") return: option<boolean_>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "UpdateSecurityGroupRuleDescriptionsEgressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSecurityGroupRuleDescriptionsEgressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchTransitGatewayRoutes = {
@@ -9759,8 +9749,8 @@ module SearchTransitGatewayRoutes = {
     @as("Routes") routes: option<transitGatewayRouteList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "SearchTransitGatewayRoutesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchTransitGatewayRoutesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RevokeSecurityGroupIngress = {
@@ -9782,8 +9772,8 @@ module RevokeSecurityGroupIngress = {
     @as("Return") return: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "RevokeSecurityGroupIngressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RevokeSecurityGroupIngressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RevokeSecurityGroupEgress = {
@@ -9804,8 +9794,8 @@ module RevokeSecurityGroupEgress = {
     @as("Return") return: option<boolean_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "RevokeSecurityGroupEgressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RevokeSecurityGroupEgressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PurchaseScheduledInstances = {
@@ -9819,8 +9809,8 @@ module PurchaseScheduledInstances = {
     @as("ScheduledInstanceSet") scheduledInstanceSet: option<purchasedScheduledInstanceSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "PurchaseScheduledInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PurchaseScheduledInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PurchaseHostReservation = {
@@ -9840,8 +9830,8 @@ module PurchaseHostReservation = {
     @as("CurrencyCode") currencyCode: option<currencyCodeValues>,
     @as("ClientToken") clientToken: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "PurchaseHostReservationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "PurchaseHostReservationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ProvisionByoipCidr = {
@@ -9855,8 +9845,8 @@ module ProvisionByoipCidr = {
     @as("Cidr") cidr: string_,
   }
   type response = {@as("ByoipCidr") byoipCidr: option<byoipCidr>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ProvisionByoipCidrCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ProvisionByoipCidrCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyTrafficMirrorFilterNetworkServices = {
@@ -9869,8 +9859,8 @@ module ModifyTrafficMirrorFilterNetworkServices = {
   }
   type response = {@as("TrafficMirrorFilter") trafficMirrorFilter: option<trafficMirrorFilter>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyTrafficMirrorFilterNetworkServicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyTrafficMirrorFilterNetworkServicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifySpotFleetRequest = {
@@ -9884,8 +9874,8 @@ module ModifySpotFleetRequest = {
     excessCapacityTerminationPolicy: option<excessCapacityTerminationPolicy>,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifySpotFleetRequestCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifySpotFleetRequestCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportSnapshot = {
@@ -9907,8 +9897,8 @@ module ImportSnapshot = {
     @as("ImportTaskId") importTaskId: option<string_>,
     @as("Description") description: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ImportSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ImportSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportKeyPair = {
@@ -9925,8 +9915,8 @@ module ImportKeyPair = {
     @as("KeyName") keyName: option<string_>,
     @as("KeyFingerprint") keyFingerprint: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ImportKeyPairCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ImportKeyPairCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportImage = {
@@ -9966,8 +9956,8 @@ module ImportImage = {
     @as("Description") description: option<string_>,
     @as("Architecture") architecture: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ImportImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ImportImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExportImage = {
@@ -9994,8 +9984,8 @@ module ExportImage = {
     @as("DiskImageFormat") diskImageFormat: option<diskImageFormat>,
     @as("Description") description: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ExportImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ExportImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpnGateways = {
@@ -10006,8 +9996,8 @@ module DescribeVpnGateways = {
     @as("Filters") filters: option<filterList>,
   }
   type response = {@as("VpnGateways") vpnGateways: option<vpnGatewayList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeVpnGatewaysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpnGatewaysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpcEndpoints = {
@@ -10023,8 +10013,8 @@ module DescribeVpcEndpoints = {
     @as("NextToken") nextToken: option<string_>,
     @as("VpcEndpoints") vpcEndpoints: option<vpcEndpointSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeVpcEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpcEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpcEndpointServices = {
@@ -10042,8 +10032,8 @@ module DescribeVpcEndpointServices = {
     @as("ServiceNames") serviceNames: option<valueStringList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeVpcEndpointServicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeVpcEndpointServicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpcEndpointServiceConfigurations = {
@@ -10060,8 +10050,8 @@ module DescribeVpcEndpointServiceConfigurations = {
     @as("ServiceConfigurations") serviceConfigurations: option<serviceConfigurationSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeVpcEndpointServiceConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeVpcEndpointServiceConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpcEndpointConnections = {
@@ -10077,8 +10067,8 @@ module DescribeVpcEndpointConnections = {
     @as("VpcEndpointConnections") vpcEndpointConnections: option<vpcEndpointConnectionSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeVpcEndpointConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeVpcEndpointConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpcClassicLink = {
@@ -10089,8 +10079,8 @@ module DescribeVpcClassicLink = {
     @as("Filters") filters: option<filterList>,
   }
   type response = {@as("Vpcs") vpcs: option<vpcClassicLinkList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeVpcClassicLinkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpcClassicLinkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVolumes = {
@@ -10106,8 +10096,8 @@ module DescribeVolumes = {
     @as("NextToken") nextToken: option<string_>,
     @as("Volumes") volumes: option<volumeList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeVolumesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVolumesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTransitGateways = {
@@ -10123,8 +10113,8 @@ module DescribeTransitGateways = {
     @as("NextToken") nextToken: option<string_>,
     @as("TransitGateways") transitGateways: option<transitGatewayList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeTransitGatewaysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeTransitGatewaysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTransitGatewayVpcAttachments = {
@@ -10143,8 +10133,8 @@ module DescribeTransitGatewayVpcAttachments = {
     transitGatewayVpcAttachments: option<transitGatewayVpcAttachmentList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeTransitGatewayVpcAttachmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTransitGatewayVpcAttachmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTransitGatewayRouteTables = {
@@ -10163,8 +10153,8 @@ module DescribeTransitGatewayRouteTables = {
     transitGatewayRouteTables: option<transitGatewayRouteTableList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeTransitGatewayRouteTablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTransitGatewayRouteTablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTransitGatewayPeeringAttachments = {
@@ -10183,8 +10173,8 @@ module DescribeTransitGatewayPeeringAttachments = {
     transitGatewayPeeringAttachments: option<transitGatewayPeeringAttachmentList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeTransitGatewayPeeringAttachmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTransitGatewayPeeringAttachmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTransitGatewayMulticastDomains = {
@@ -10203,8 +10193,8 @@ module DescribeTransitGatewayMulticastDomains = {
     transitGatewayMulticastDomains: option<transitGatewayMulticastDomainList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeTransitGatewayMulticastDomainsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTransitGatewayMulticastDomainsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTransitGatewayConnects = {
@@ -10222,8 +10212,8 @@ module DescribeTransitGatewayConnects = {
     @as("TransitGatewayConnects") transitGatewayConnects: option<transitGatewayConnectList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeTransitGatewayConnectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTransitGatewayConnectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTransitGatewayAttachments = {
@@ -10242,8 +10232,8 @@ module DescribeTransitGatewayAttachments = {
     transitGatewayAttachments: option<transitGatewayAttachmentList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeTransitGatewayAttachmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTransitGatewayAttachmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrafficMirrorTargets = {
@@ -10260,8 +10250,8 @@ module DescribeTrafficMirrorTargets = {
     @as("TrafficMirrorTargets") trafficMirrorTargets: option<trafficMirrorTargetSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeTrafficMirrorTargetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTrafficMirrorTargetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrafficMirrorSessions = {
@@ -10278,8 +10268,8 @@ module DescribeTrafficMirrorSessions = {
     @as("TrafficMirrorSessions") trafficMirrorSessions: option<trafficMirrorSessionSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeTrafficMirrorSessionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTrafficMirrorSessionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSnapshots = {
@@ -10297,8 +10287,8 @@ module DescribeSnapshots = {
     @as("NextToken") nextToken: option<string_>,
     @as("Snapshots") snapshots: option<snapshotList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeSnapshotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeSnapshotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeScheduledInstances = {
@@ -10316,8 +10306,8 @@ module DescribeScheduledInstances = {
     @as("NextToken") nextToken: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeScheduledInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeScheduledInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeScheduledInstanceAvailability = {
@@ -10338,8 +10328,8 @@ module DescribeScheduledInstanceAvailability = {
     @as("NextToken") nextToken: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeScheduledInstanceAvailabilityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeScheduledInstanceAvailabilityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReservedInstancesOfferings = {
@@ -10368,8 +10358,8 @@ module DescribeReservedInstancesOfferings = {
     reservedInstancesOfferings: option<reservedInstancesOfferingList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeReservedInstancesOfferingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReservedInstancesOfferingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReservedInstancesListings = {
@@ -10385,8 +10375,8 @@ module DescribeReservedInstancesListings = {
     reservedInstancesListings: option<reservedInstancesListingList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeReservedInstancesListingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReservedInstancesListingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReservedInstances = {
@@ -10400,8 +10390,8 @@ module DescribeReservedInstances = {
   }
   type response = {@as("ReservedInstances") reservedInstances: option<reservedInstancesList>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeReservedInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReservedInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReplaceRootVolumeTasks = {
@@ -10418,8 +10408,8 @@ module DescribeReplaceRootVolumeTasks = {
     @as("ReplaceRootVolumeTasks") replaceRootVolumeTasks: option<replaceRootVolumeTasks>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeReplaceRootVolumeTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReplaceRootVolumeTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePublicIpv4Pools = {
@@ -10434,8 +10424,8 @@ module DescribePublicIpv4Pools = {
     @as("NextToken") nextToken: option<string_>,
     @as("PublicIpv4Pools") publicIpv4Pools: option<publicIpv4PoolSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribePublicIpv4PoolsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribePublicIpv4PoolsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePrincipalIdFormat = {
@@ -10451,8 +10441,8 @@ module DescribePrincipalIdFormat = {
     @as("Principals") principals: option<principalIdFormatList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribePrincipalIdFormatCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePrincipalIdFormatCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePlacementGroups = {
@@ -10464,8 +10454,8 @@ module DescribePlacementGroups = {
     @as("Filters") filters: option<filterList>,
   }
   type response = {@as("PlacementGroups") placementGroups: option<placementGroupList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribePlacementGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribePlacementGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNetworkInsightsPaths = {
@@ -10482,8 +10472,8 @@ module DescribeNetworkInsightsPaths = {
     @as("NetworkInsightsPaths") networkInsightsPaths: option<networkInsightsPathList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeNetworkInsightsPathsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNetworkInsightsPathsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNatGateways = {
@@ -10499,8 +10489,8 @@ module DescribeNatGateways = {
     @as("NextToken") nextToken: option<string_>,
     @as("NatGateways") natGateways: option<natGatewayList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeNatGatewaysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeNatGatewaysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeManagedPrefixLists = {
@@ -10517,8 +10507,8 @@ module DescribeManagedPrefixLists = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeManagedPrefixListsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeManagedPrefixListsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocalGateways = {
@@ -10534,8 +10524,8 @@ module DescribeLocalGateways = {
     @as("NextToken") nextToken: option<string_>,
     @as("LocalGateways") localGateways: option<localGatewaySet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeLocalGatewaysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeLocalGatewaysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocalGatewayVirtualInterfaces = {
@@ -10554,8 +10544,8 @@ module DescribeLocalGatewayVirtualInterfaces = {
     localGatewayVirtualInterfaces: option<localGatewayVirtualInterfaceSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeLocalGatewayVirtualInterfacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLocalGatewayVirtualInterfacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocalGatewayVirtualInterfaceGroups = {
@@ -10574,8 +10564,8 @@ module DescribeLocalGatewayVirtualInterfaceGroups = {
     localGatewayVirtualInterfaceGroups: option<localGatewayVirtualInterfaceGroupSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeLocalGatewayVirtualInterfaceGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLocalGatewayVirtualInterfaceGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocalGatewayRouteTables = {
@@ -10592,8 +10582,8 @@ module DescribeLocalGatewayRouteTables = {
     @as("LocalGatewayRouteTables") localGatewayRouteTables: option<localGatewayRouteTableSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeLocalGatewayRouteTablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLocalGatewayRouteTablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocalGatewayRouteTableVpcAssociations = {
@@ -10612,8 +10602,8 @@ module DescribeLocalGatewayRouteTableVpcAssociations = {
     localGatewayRouteTableVpcAssociations: option<localGatewayRouteTableVpcAssociationSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeLocalGatewayRouteTableVpcAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLocalGatewayRouteTableVpcAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations = {
@@ -10636,9 +10626,9 @@ module DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations = {
     >,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t =
+  external new: request => t =
     "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLaunchTemplates = {
@@ -10655,8 +10645,8 @@ module DescribeLaunchTemplates = {
     @as("NextToken") nextToken: option<string_>,
     @as("LaunchTemplates") launchTemplates: option<launchTemplateSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeLaunchTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeLaunchTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeKeyPairs = {
@@ -10668,8 +10658,8 @@ module DescribeKeyPairs = {
     @as("Filters") filters: option<filterList>,
   }
   type response = {@as("KeyPairs") keyPairs: option<keyPairList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeKeyPairsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeKeyPairsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIpv6Pools = {
@@ -10685,8 +10675,8 @@ module DescribeIpv6Pools = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Ipv6Pools") ipv6Pools: option<ipv6PoolSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeIpv6PoolsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeIpv6PoolsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInternetGateways = {
@@ -10702,9 +10692,8 @@ module DescribeInternetGateways = {
     @as("NextToken") nextToken: option<string_>,
     @as("InternetGateways") internetGateways: option<internetGatewayList>,
   }
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeInternetGatewaysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeInternetGatewaysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeImportSnapshotTasks = {
@@ -10721,8 +10710,8 @@ module DescribeImportSnapshotTasks = {
     @as("ImportSnapshotTasks") importSnapshotTasks: option<importSnapshotTaskList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeImportSnapshotTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeImportSnapshotTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeHostReservations = {
@@ -10737,9 +10726,8 @@ module DescribeHostReservations = {
     @as("NextToken") nextToken: option<string_>,
     @as("HostReservationSet") hostReservationSet: option<hostReservationSet>,
   }
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeHostReservationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeHostReservationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFpgaImages = {
@@ -10756,8 +10744,8 @@ module DescribeFpgaImages = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("FpgaImages") fpgaImages: option<fpgaImageList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeFpgaImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeFpgaImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFlowLogs = {
@@ -10773,8 +10761,8 @@ module DescribeFlowLogs = {
     @as("NextToken") nextToken: option<string_>,
     @as("FlowLogs") flowLogs: option<flowLogSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeFlowLogsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeFlowLogsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeExportTasks = {
@@ -10784,8 +10772,8 @@ module DescribeExportTasks = {
     @as("ExportTaskIds") exportTaskIds: option<exportTaskIdStringList>,
   }
   type response = {@as("ExportTasks") exportTasks: option<exportTaskList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeExportTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeExportTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeExportImageTasks = {
@@ -10801,9 +10789,8 @@ module DescribeExportImageTasks = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ExportImageTasks") exportImageTasks: option<exportImageTaskList>,
   }
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeExportImageTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeExportImageTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeElasticGpus = {
@@ -10820,8 +10807,8 @@ module DescribeElasticGpus = {
     @as("MaxResults") maxResults: option<integer_>,
     @as("ElasticGpuSet") elasticGpuSet: option<elasticGpuSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeElasticGpusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeElasticGpusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEgressOnlyInternetGateways = {
@@ -10840,8 +10827,8 @@ module DescribeEgressOnlyInternetGateways = {
     egressOnlyInternetGateways: option<egressOnlyInternetGatewayList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeEgressOnlyInternetGatewaysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEgressOnlyInternetGatewaysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCustomerGateways = {
@@ -10852,9 +10839,8 @@ module DescribeCustomerGateways = {
     @as("CustomerGatewayIds") customerGatewayIds: option<customerGatewayIdStringList>,
   }
   type response = {@as("CustomerGateways") customerGateways: option<customerGatewayList>}
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeCustomerGatewaysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeCustomerGatewaysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCoipPools = {
@@ -10870,8 +10856,8 @@ module DescribeCoipPools = {
     @as("NextToken") nextToken: option<string_>,
     @as("CoipPools") coipPools: option<coipPoolSet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeCoipPoolsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeCoipPoolsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeClassicLinkInstances = {
@@ -10888,8 +10874,8 @@ module DescribeClassicLinkInstances = {
     @as("Instances") instances: option<classicLinkInstanceList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeClassicLinkInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeClassicLinkInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCarrierGateways = {
@@ -10905,8 +10891,8 @@ module DescribeCarrierGateways = {
     @as("NextToken") nextToken: option<string_>,
     @as("CarrierGateways") carrierGateways: option<carrierGatewaySet>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeCarrierGatewaysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeCarrierGatewaysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCapacityReservations = {
@@ -10923,8 +10909,8 @@ module DescribeCapacityReservations = {
     @as("NextToken") nextToken: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeCapacityReservationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCapacityReservationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBundleTasks = {
@@ -10935,8 +10921,8 @@ module DescribeBundleTasks = {
     @as("BundleIds") bundleIds: option<bundleIdStringList>,
   }
   type response = {@as("BundleTasks") bundleTasks: option<bundleTaskList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeBundleTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeBundleTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAvailabilityZones = {
@@ -10950,8 +10936,8 @@ module DescribeAvailabilityZones = {
   }
   type response = {@as("AvailabilityZones") availabilityZones: option<availabilityZoneList>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeAvailabilityZonesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAvailabilityZonesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAddresses = {
@@ -10963,8 +10949,8 @@ module DescribeAddresses = {
     @as("Filters") filters: option<filterList>,
   }
   type response = {@as("Addresses") addresses: option<addressList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeAddressesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeAddressesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccountAttributes = {
@@ -10975,8 +10961,8 @@ module DescribeAccountAttributes = {
   }
   type response = {@as("AccountAttributes") accountAttributes: option<accountAttributeList>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeAccountAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAccountAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTransitGatewayConnectPeer = {
@@ -10989,8 +10975,8 @@ module DeleteTransitGatewayConnectPeer = {
     @as("TransitGatewayConnectPeer") transitGatewayConnectPeer: option<transitGatewayConnectPeer>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DeleteTransitGatewayConnectPeerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTransitGatewayConnectPeerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVpnGateway = {
@@ -11003,8 +10989,8 @@ module CreateVpnGateway = {
     @as("AvailabilityZone") availabilityZone: option<string_>,
   }
   type response = {@as("VpnGateway") vpnGateway: option<vpnGateway>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateVpnGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateVpnGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVpcPeeringConnection = {
@@ -11019,8 +11005,8 @@ module CreateVpcPeeringConnection = {
   }
   type response = {@as("VpcPeeringConnection") vpcPeeringConnection: option<vpcPeeringConnection>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateVpcPeeringConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateVpcPeeringConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVpcEndpointServiceConfiguration = {
@@ -11039,8 +11025,8 @@ module CreateVpcEndpointServiceConfiguration = {
     @as("ServiceConfiguration") serviceConfiguration: option<serviceConfiguration>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateVpcEndpointServiceConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateVpcEndpointServiceConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVpcEndpoint = {
@@ -11062,8 +11048,8 @@ module CreateVpcEndpoint = {
     @as("ClientToken") clientToken: option<string_>,
     @as("VpcEndpoint") vpcEndpoint: option<vpcEndpoint>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateVpcEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateVpcEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVpc = {
@@ -11079,8 +11065,8 @@ module CreateVpc = {
     @as("CidrBlock") cidrBlock: string_,
   }
   type response = {@as("Vpc") vpc: option<vpc>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateVpcCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateVpcCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVolume = {
@@ -11100,8 +11086,8 @@ module CreateVolume = {
     @as("AvailabilityZone") availabilityZone: string_,
   }
   type response = volume
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateVolumeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateVolumeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTransitGatewayVpcAttachment = {
@@ -11119,8 +11105,8 @@ module CreateTransitGatewayVpcAttachment = {
     transitGatewayVpcAttachment: option<transitGatewayVpcAttachment>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTransitGatewayVpcAttachmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTransitGatewayVpcAttachmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTransitGatewayRouteTable = {
@@ -11134,8 +11120,8 @@ module CreateTransitGatewayRouteTable = {
     @as("TransitGatewayRouteTable") transitGatewayRouteTable: option<transitGatewayRouteTable>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTransitGatewayRouteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTransitGatewayRouteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTransitGatewayPeeringAttachment = {
@@ -11153,8 +11139,8 @@ module CreateTransitGatewayPeeringAttachment = {
     transitGatewayPeeringAttachment: option<transitGatewayPeeringAttachment>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTransitGatewayPeeringAttachmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTransitGatewayPeeringAttachmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTransitGatewayMulticastDomain = {
@@ -11170,8 +11156,8 @@ module CreateTransitGatewayMulticastDomain = {
     transitGatewayMulticastDomain: option<transitGatewayMulticastDomain>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTransitGatewayMulticastDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTransitGatewayMulticastDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTransitGatewayConnectPeer = {
@@ -11189,8 +11175,8 @@ module CreateTransitGatewayConnectPeer = {
     @as("TransitGatewayConnectPeer") transitGatewayConnectPeer: option<transitGatewayConnectPeer>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTransitGatewayConnectPeerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTransitGatewayConnectPeerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTransitGatewayConnect = {
@@ -11206,8 +11192,8 @@ module CreateTransitGatewayConnect = {
     @as("TransitGatewayConnect") transitGatewayConnect: option<transitGatewayConnect>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTransitGatewayConnectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTransitGatewayConnectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTransitGateway = {
@@ -11219,8 +11205,8 @@ module CreateTransitGateway = {
     @as("Description") description: option<string_>,
   }
   type response = {@as("TransitGateway") transitGateway: option<transitGateway>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateTransitGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateTransitGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTrafficMirrorTarget = {
@@ -11238,8 +11224,8 @@ module CreateTrafficMirrorTarget = {
     @as("TrafficMirrorTarget") trafficMirrorTarget: option<trafficMirrorTarget>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTrafficMirrorTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTrafficMirrorTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTrafficMirrorSession = {
@@ -11261,8 +11247,8 @@ module CreateTrafficMirrorSession = {
     @as("TrafficMirrorSession") trafficMirrorSession: option<trafficMirrorSession>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTrafficMirrorSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTrafficMirrorSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTrafficMirrorFilter = {
@@ -11278,8 +11264,8 @@ module CreateTrafficMirrorFilter = {
     @as("TrafficMirrorFilter") trafficMirrorFilter: option<trafficMirrorFilter>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateTrafficMirrorFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTrafficMirrorFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSubnet = {
@@ -11295,8 +11281,8 @@ module CreateSubnet = {
     @as("TagSpecifications") tagSpecifications: option<tagSpecificationList>,
   }
   type response = {@as("Subnet") subnet: option<subnet>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateSubnetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateSubnetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSnapshots = {
@@ -11310,8 +11296,8 @@ module CreateSnapshots = {
     @as("Description") description: option<string_>,
   }
   type response = {@as("Snapshots") snapshots: option<snapshotSet>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateSnapshotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateSnapshotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSnapshot = {
@@ -11324,8 +11310,8 @@ module CreateSnapshot = {
     @as("Description") description: option<string_>,
   }
   type response = snapshot
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSecurityGroup = {
@@ -11341,8 +11327,8 @@ module CreateSecurityGroup = {
     @as("Tags") tags: option<tagList_>,
     @as("GroupId") groupId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateSecurityGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateSecurityGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRouteTable = {
@@ -11353,8 +11339,8 @@ module CreateRouteTable = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("RouteTable") routeTable: option<routeTable>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateRouteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateRouteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRestoreImageTask = {
@@ -11367,8 +11353,8 @@ module CreateRestoreImageTask = {
     @as("Bucket") bucket: string_,
   }
   type response = {@as("ImageId") imageId: option<string_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateRestoreImageTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateRestoreImageTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReservedInstancesListing = {
@@ -11384,8 +11370,8 @@ module CreateReservedInstancesListing = {
     reservedInstancesListings: option<reservedInstancesListingList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateReservedInstancesListingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateReservedInstancesListingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReplaceRootVolumeTask = {
@@ -11401,8 +11387,8 @@ module CreateReplaceRootVolumeTask = {
     @as("ReplaceRootVolumeTask") replaceRootVolumeTask: option<replaceRootVolumeTask>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateReplaceRootVolumeTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateReplaceRootVolumeTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePlacementGroup = {
@@ -11415,8 +11401,8 @@ module CreatePlacementGroup = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("PlacementGroup") placementGroup: option<placementGroup>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreatePlacementGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreatePlacementGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNetworkInterface = {
@@ -11439,8 +11425,8 @@ module CreateNetworkInterface = {
     @as("ClientToken") clientToken: option<string_>,
     @as("NetworkInterface") networkInterface: option<networkInterface>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateNetworkInterfaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateNetworkInterfaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNetworkInsightsPath = {
@@ -11458,8 +11444,8 @@ module CreateNetworkInsightsPath = {
   }
   type response = {@as("NetworkInsightsPath") networkInsightsPath: option<networkInsightsPath>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateNetworkInsightsPathCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateNetworkInsightsPathCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNetworkAcl = {
@@ -11470,8 +11456,8 @@ module CreateNetworkAcl = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("NetworkAcl") networkAcl: option<networkAcl>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateNetworkAclCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateNetworkAclCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNatGateway = {
@@ -11487,8 +11473,8 @@ module CreateNatGateway = {
     @as("NatGateway") natGateway: option<natGateway>,
     @as("ClientToken") clientToken: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateNatGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateNatGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateManagedPrefixList = {
@@ -11503,8 +11489,8 @@ module CreateManagedPrefixList = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("PrefixList") prefixList: option<managedPrefixList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateManagedPrefixListCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateManagedPrefixListCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLocalGatewayRouteTableVpcAssociation = {
@@ -11520,8 +11506,8 @@ module CreateLocalGatewayRouteTableVpcAssociation = {
     localGatewayRouteTableVpcAssociation: option<localGatewayRouteTableVpcAssociation>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateLocalGatewayRouteTableVpcAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateLocalGatewayRouteTableVpcAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateKeyPair = {
@@ -11538,8 +11524,8 @@ module CreateKeyPair = {
     @as("KeyMaterial") keyMaterial: option<sensitiveUserData>,
     @as("KeyFingerprint") keyFingerprint: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateKeyPairCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateKeyPairCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInternetGateway = {
@@ -11549,8 +11535,8 @@ module CreateInternetGateway = {
     @as("TagSpecifications") tagSpecifications: option<tagSpecificationList>,
   }
   type response = {@as("InternetGateway") internetGateway: option<internetGateway>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateInternetGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateInternetGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInstanceExportTask = {
@@ -11563,9 +11549,8 @@ module CreateInstanceExportTask = {
     @as("Description") description: option<string_>,
   }
   type response = {@as("ExportTask") exportTask: option<exportTask>}
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateInstanceExportTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateInstanceExportTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateImage = {
@@ -11580,8 +11565,8 @@ module CreateImage = {
     @as("BlockDeviceMappings") blockDeviceMappings: option<blockDeviceMappingRequestList>,
   }
   type response = {@as("ImageId") imageId: option<string_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFpgaImage = {
@@ -11599,8 +11584,8 @@ module CreateFpgaImage = {
     @as("FpgaImageGlobalId") fpgaImageGlobalId: option<string_>,
     @as("FpgaImageId") fpgaImageId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateFpgaImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateFpgaImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFlowLogs = {
@@ -11624,8 +11609,8 @@ module CreateFlowLogs = {
     @as("FlowLogIds") flowLogIds: option<valueStringList>,
     @as("ClientToken") clientToken: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateFlowLogsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateFlowLogsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEgressOnlyInternetGateway = {
@@ -11641,16 +11626,16 @@ module CreateEgressOnlyInternetGateway = {
     @as("ClientToken") clientToken: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateEgressOnlyInternetGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateEgressOnlyInternetGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDefaultVpc = {
   type t
   type request = {@as("DryRun") dryRun: option<boolean_>}
   type response = {@as("Vpc") vpc: option<vpc>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateDefaultVpcCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateDefaultVpcCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDefaultSubnet = {
@@ -11660,8 +11645,8 @@ module CreateDefaultSubnet = {
     @as("AvailabilityZone") availabilityZone: string_,
   }
   type response = {@as("Subnet") subnet: option<subnet>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateDefaultSubnetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateDefaultSubnetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCustomerGateway = {
@@ -11676,8 +11661,8 @@ module CreateCustomerGateway = {
     @as("BgpAsn") bgpAsn: integer_,
   }
   type response = {@as("CustomerGateway") customerGateway: option<customerGateway>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateCustomerGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateCustomerGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateClientVpnEndpoint = {
@@ -11705,8 +11690,8 @@ module CreateClientVpnEndpoint = {
     @as("Status") status: option<clientVpnEndpointStatus>,
     @as("ClientVpnEndpointId") clientVpnEndpointId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateClientVpnEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateClientVpnEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCarrierGateway = {
@@ -11718,8 +11703,8 @@ module CreateCarrierGateway = {
     @as("VpcId") vpcId: vpcId,
   }
   type response = {@as("CarrierGateway") carrierGateway: option<carrierGateway>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateCarrierGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateCarrierGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCapacityReservation = {
@@ -11743,8 +11728,8 @@ module CreateCapacityReservation = {
   }
   type response = {@as("CapacityReservation") capacityReservation: option<capacityReservation>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateCapacityReservationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCapacityReservationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CopySnapshot = {
@@ -11765,8 +11750,8 @@ module CopySnapshot = {
     @as("Tags") tags: option<tagList_>,
     @as("SnapshotId") snapshotId: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CopySnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CopySnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelReservedInstancesListing = {
@@ -11779,8 +11764,8 @@ module CancelReservedInstancesListing = {
     reservedInstancesListings: option<reservedInstancesListingList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CancelReservedInstancesListingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelReservedInstancesListingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AuthorizeSecurityGroupIngress = {
@@ -11799,8 +11784,8 @@ module AuthorizeSecurityGroupIngress = {
   }
 
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AuthorizeSecurityGroupIngressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "AuthorizeSecurityGroupIngressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AuthorizeSecurityGroupEgress = {
@@ -11818,8 +11803,8 @@ module AuthorizeSecurityGroupEgress = {
   }
 
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AuthorizeSecurityGroupEgressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "AuthorizeSecurityGroupEgressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AllocateHosts = {
@@ -11835,8 +11820,8 @@ module AllocateHosts = {
     @as("AutoPlacement") autoPlacement: option<autoPlacement>,
   }
   type response = {@as("HostIds") hostIds: option<responseHostIdList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AllocateHostsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AllocateHostsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AllocateAddress = {
@@ -11860,8 +11845,8 @@ module AllocateAddress = {
     @as("AllocationId") allocationId: option<string_>,
     @as("PublicIp") publicIp: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "AllocateAddressCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "AllocateAddressCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptVpcPeeringConnection = {
@@ -11872,8 +11857,8 @@ module AcceptVpcPeeringConnection = {
   }
   type response = {@as("VpcPeeringConnection") vpcPeeringConnection: option<vpcPeeringConnection>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "AcceptVpcPeeringConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptVpcPeeringConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RunScheduledInstances = {
@@ -11886,8 +11871,8 @@ module RunScheduledInstances = {
     @as("ClientToken") clientToken: option<string_>,
   }
   type response = {@as("InstanceIdSet") instanceIdSet: option<instanceIdSet>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "RunScheduledInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "RunScheduledInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyFleet = {
@@ -11903,8 +11888,8 @@ module ModifyFleet = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("Return") return: option<boolean_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportVolume = {
@@ -11917,8 +11902,8 @@ module ImportVolume = {
     @as("AvailabilityZone") availabilityZone: string_,
   }
   type response = {@as("ConversionTask") conversionTask: option<conversionTask>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ImportVolumeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ImportVolumeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportInstance = {
@@ -11931,8 +11916,8 @@ module ImportInstance = {
     @as("Description") description: option<string_>,
   }
   type response = {@as("ConversionTask") conversionTask: option<conversionTask>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ImportInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ImportInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLaunchTemplateData = {
@@ -11942,8 +11927,8 @@ module GetLaunchTemplateData = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("LaunchTemplateData") launchTemplateData: option<responseLaunchTemplateData>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "GetLaunchTemplateDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "GetLaunchTemplateDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableFastSnapshotRestores = {
@@ -11958,8 +11943,8 @@ module EnableFastSnapshotRestores = {
     @as("Successful") successful: option<enableFastSnapshotRestoreSuccessSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "EnableFastSnapshotRestoresCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableFastSnapshotRestoresCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableFastSnapshotRestores = {
@@ -11974,8 +11959,8 @@ module DisableFastSnapshotRestores = {
     @as("Successful") successful: option<disableFastSnapshotRestoreSuccessSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DisableFastSnapshotRestoresCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableFastSnapshotRestoresCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpcs = {
@@ -11991,8 +11976,8 @@ module DescribeVpcs = {
     @as("NextToken") nextToken: option<string_>,
     @as("Vpcs") vpcs: option<vpcList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeVpcsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpcsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpcPeeringConnections = {
@@ -12009,8 +11994,8 @@ module DescribeVpcPeeringConnections = {
     @as("VpcPeeringConnections") vpcPeeringConnections: option<vpcPeeringConnectionList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeVpcPeeringConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeVpcPeeringConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVolumeStatus = {
@@ -12026,8 +12011,8 @@ module DescribeVolumeStatus = {
     @as("VolumeStatuses") volumeStatuses: option<volumeStatusList>,
     @as("NextToken") nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeVolumeStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVolumeStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTransitGatewayConnectPeers = {
@@ -12046,8 +12031,8 @@ module DescribeTransitGatewayConnectPeers = {
     transitGatewayConnectPeers: option<transitGatewayConnectPeerList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeTransitGatewayConnectPeersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTransitGatewayConnectPeersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrafficMirrorFilters = {
@@ -12064,8 +12049,8 @@ module DescribeTrafficMirrorFilters = {
     @as("TrafficMirrorFilters") trafficMirrorFilters: option<trafficMirrorFilterSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeTrafficMirrorFiltersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTrafficMirrorFiltersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSubnets = {
@@ -12081,8 +12066,8 @@ module DescribeSubnets = {
     @as("NextToken") nextToken: option<string_>,
     @as("Subnets") subnets: option<subnetList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeSubnetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeSubnetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRouteTables = {
@@ -12098,8 +12083,8 @@ module DescribeRouteTables = {
     @as("NextToken") nextToken: option<string_>,
     @as("RouteTables") routeTables: option<routeTableList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeRouteTablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeRouteTablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReservedInstancesModifications = {
@@ -12116,8 +12101,8 @@ module DescribeReservedInstancesModifications = {
     @as("NextToken") nextToken: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeReservedInstancesModificationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReservedInstancesModificationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNetworkInterfaces = {
@@ -12134,8 +12119,8 @@ module DescribeNetworkInterfaces = {
     @as("NetworkInterfaces") networkInterfaces: option<networkInterfaceList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeNetworkInterfacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNetworkInterfacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNetworkAcls = {
@@ -12151,8 +12136,8 @@ module DescribeNetworkAcls = {
     @as("NextToken") nextToken: option<string_>,
     @as("NetworkAcls") networkAcls: option<networkAclList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeNetworkAclsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeNetworkAclsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstanceStatus = {
@@ -12169,8 +12154,8 @@ module DescribeInstanceStatus = {
     @as("NextToken") nextToken: option<string_>,
     @as("InstanceStatuses") instanceStatuses: option<instanceStatusList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeInstanceStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeInstanceStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeImportImageTasks = {
@@ -12186,9 +12171,8 @@ module DescribeImportImageTasks = {
     @as("NextToken") nextToken: option<string_>,
     @as("ImportImageTasks") importImageTasks: option<importImageTaskList>,
   }
-  @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeImportImageTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeImportImageTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeImages = {
@@ -12201,8 +12185,8 @@ module DescribeImages = {
     @as("ExecutableUsers") executableUsers: option<executableByStringList>,
   }
   type response = {@as("Images") images: option<imageList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeHosts = {
@@ -12217,8 +12201,8 @@ module DescribeHosts = {
     @as("NextToken") nextToken: option<string_>,
     @as("Hosts") hosts: option<hostList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeHostsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeHostsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeClientVpnEndpoints = {
@@ -12235,8 +12219,8 @@ module DescribeClientVpnEndpoints = {
     @as("ClientVpnEndpoints") clientVpnEndpoints: option<endpointSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeClientVpnEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeClientVpnEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLaunchTemplate = {
@@ -12253,8 +12237,8 @@ module CreateLaunchTemplate = {
     @as("Warning") warning: option<validationWarning>,
     @as("LaunchTemplate") launchTemplate: option<launchTemplate>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateLaunchTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateLaunchTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFleet = {
@@ -12281,8 +12265,8 @@ module CreateFleet = {
     @as("Errors") errors: option<createFleetErrorsSet>,
     @as("FleetId") fleetId: option<fleetId>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDhcpOptions = {
@@ -12293,8 +12277,8 @@ module CreateDhcpOptions = {
     @as("DhcpConfigurations") dhcpConfigurations: newDhcpConfigurationList,
   }
   type response = {@as("DhcpOptions") dhcpOptions: option<dhcpOptions>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateDhcpOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateDhcpOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartNetworkInsightsAnalysis = {
@@ -12310,8 +12294,8 @@ module StartNetworkInsightsAnalysis = {
     @as("NetworkInsightsAnalysis") networkInsightsAnalysis: option<networkInsightsAnalysis>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "StartNetworkInsightsAnalysisCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartNetworkInsightsAnalysisCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyVpnTunnelOptions = {
@@ -12323,8 +12307,8 @@ module ModifyVpnTunnelOptions = {
     @as("VpnConnectionId") vpnConnectionId: vpnConnectionId,
   }
   type response = {@as("VpnConnection") vpnConnection: option<vpnConnection>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyVpnTunnelOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyVpnTunnelOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyVpnTunnelCertificate = {
@@ -12336,8 +12320,8 @@ module ModifyVpnTunnelCertificate = {
   }
   type response = {@as("VpnConnection") vpnConnection: option<vpnConnection>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyVpnTunnelCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyVpnTunnelCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyVpnConnectionOptions = {
@@ -12352,8 +12336,8 @@ module ModifyVpnConnectionOptions = {
   }
   type response = {@as("VpnConnection") vpnConnection: option<vpnConnection>}
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "ModifyVpnConnectionOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyVpnConnectionOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyVpnConnection = {
@@ -12366,8 +12350,8 @@ module ModifyVpnConnection = {
     @as("VpnConnectionId") vpnConnectionId: vpnConnectionId,
   }
   type response = {@as("VpnConnection") vpnConnection: option<vpnConnection>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "ModifyVpnConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "ModifyVpnConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStaleSecurityGroups = {
@@ -12383,8 +12367,8 @@ module DescribeStaleSecurityGroups = {
     @as("NextToken") nextToken: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeStaleSecurityGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStaleSecurityGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSecurityGroups = {
@@ -12401,8 +12385,8 @@ module DescribeSecurityGroups = {
     @as("NextToken") nextToken: option<string_>,
     @as("SecurityGroups") securityGroups: option<securityGroupList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeSecurityGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeSecurityGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstanceTypes = {
@@ -12418,8 +12402,8 @@ module DescribeInstanceTypes = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("InstanceTypes") instanceTypes: option<instanceTypeInfoList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeInstanceTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeInstanceTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDhcpOptions = {
@@ -12435,8 +12419,8 @@ module DescribeDhcpOptions = {
     @as("NextToken") nextToken: option<string_>,
     @as("DhcpOptions") dhcpOptions: option<dhcpOptionsList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeDhcpOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeDhcpOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConversionTasks = {
@@ -12446,8 +12430,8 @@ module DescribeConversionTasks = {
     @as("ConversionTaskIds") conversionTaskIds: option<conversionIdStringList>,
   }
   type response = {@as("ConversionTasks") conversionTasks: option<describeConversionTaskList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeConversionTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeConversionTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVpnConnection = {
@@ -12462,8 +12446,8 @@ module CreateVpnConnection = {
     @as("CustomerGatewayId") customerGatewayId: customerGatewayId,
   }
   type response = {@as("VpnConnection") vpnConnection: option<vpnConnection>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "CreateVpnConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "CreateVpnConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLaunchTemplateVersion = {
@@ -12482,8 +12466,8 @@ module CreateLaunchTemplateVersion = {
     @as("LaunchTemplateVersion") launchTemplateVersion: option<launchTemplateVersion>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "CreateLaunchTemplateVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateLaunchTemplateVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RunInstances = {
@@ -12531,8 +12515,8 @@ module RunInstances = {
     @as("BlockDeviceMappings") blockDeviceMappings: option<blockDeviceMappingRequestList>,
   }
   type response = reservation
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "RunInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "RunInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RequestSpotInstances = {
@@ -12556,8 +12540,8 @@ module RequestSpotInstances = {
   type response = {
     @as("SpotInstanceRequests") spotInstanceRequests: option<spotInstanceRequestList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "RequestSpotInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "RequestSpotInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RequestSpotFleet = {
@@ -12567,8 +12551,8 @@ module RequestSpotFleet = {
     @as("DryRun") dryRun: option<boolean_>,
   }
   type response = {@as("SpotFleetRequestId") spotFleetRequestId: option<string_>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "RequestSpotFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "RequestSpotFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVpnConnections = {
@@ -12579,8 +12563,8 @@ module DescribeVpnConnections = {
     @as("Filters") filters: option<filterList>,
   }
   type response = {@as("VpnConnections") vpnConnections: option<vpnConnectionList>}
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeVpnConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeVpnConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSpotInstanceRequests = {
@@ -12597,8 +12581,8 @@ module DescribeSpotInstanceRequests = {
     @as("SpotInstanceRequests") spotInstanceRequests: option<spotInstanceRequestList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeSpotInstanceRequestsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSpotInstanceRequestsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNetworkInsightsAnalyses = {
@@ -12619,8 +12603,8 @@ module DescribeNetworkInsightsAnalyses = {
     @as("NetworkInsightsAnalyses") networkInsightsAnalyses: option<networkInsightsAnalysisList>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeNetworkInsightsAnalysesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNetworkInsightsAnalysesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLaunchTemplateVersions = {
@@ -12641,8 +12625,8 @@ module DescribeLaunchTemplateVersions = {
     @as("LaunchTemplateVersions") launchTemplateVersions: option<launchTemplateVersionSet>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeLaunchTemplateVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLaunchTemplateVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFleets = {
@@ -12658,8 +12642,8 @@ module DescribeFleets = {
     @as("Fleets") fleets: option<fleetSet>,
     @as("NextToken") nextToken: option<string_>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeFleetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeFleetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSpotFleetRequests = {
@@ -12675,8 +12659,8 @@ module DescribeSpotFleetRequests = {
     @as("NextToken") nextToken: option<string_>,
   }
   @module("@aws-sdk/client-ec2") @new
-  external new_: request => t = "DescribeSpotFleetRequestsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSpotFleetRequestsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstances = {
@@ -12692,6 +12676,6 @@ module DescribeInstances = {
     @as("NextToken") nextToken: option<string_>,
     @as("Reservations") reservations: option<reservationList>,
   }
-  @module("@aws-sdk/client-ec2") @new external new_: request => t = "DescribeInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ec2") @new external new: request => t = "DescribeInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

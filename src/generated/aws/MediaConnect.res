@@ -422,8 +422,8 @@ module StopFlow = {
     @as("Status") status: option<status>,
     @as("FlowArn") flowArn: option<__string>,
   }
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "StopFlowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "StopFlowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartFlow = {
@@ -433,8 +433,8 @@ module StartFlow = {
     @as("Status") status: option<status>,
     @as("FlowArn") flowArn: option<__string>,
   }
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "StartFlowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "StartFlowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RevokeFlowEntitlement = {
@@ -448,8 +448,8 @@ module RevokeFlowEntitlement = {
     @as("EntitlementArn") entitlementArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "RevokeFlowEntitlementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RevokeFlowEntitlementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveFlowSource = {
@@ -463,8 +463,8 @@ module RemoveFlowSource = {
     @as("FlowArn") flowArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "RemoveFlowSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveFlowSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveFlowOutput = {
@@ -478,8 +478,8 @@ module RemoveFlowOutput = {
     @as("FlowArn") flowArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "RemoveFlowOutputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveFlowOutputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveFlowMediaStream = {
@@ -493,8 +493,8 @@ module RemoveFlowMediaStream = {
     @as("FlowArn") flowArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "RemoveFlowMediaStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveFlowMediaStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFlow = {
@@ -504,8 +504,8 @@ module DeleteFlow = {
     @as("Status") status: option<status>,
     @as("FlowArn") flowArn: option<__string>,
   }
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "DeleteFlowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "DeleteFlowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -515,8 +515,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -526,8 +526,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveFlowVpcInterface = {
@@ -542,8 +542,8 @@ module RemoveFlowVpcInterface = {
     @as("FlowArn") flowArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "RemoveFlowVpcInterfaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveFlowVpcInterfaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -551,8 +551,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: __string}
   type response = {@as("Tags") tags: option<__mapOf__string>}
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFlowEntitlement = {
@@ -570,8 +570,8 @@ module UpdateFlowEntitlement = {
     @as("Entitlement") entitlement: option<entitlement>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "UpdateFlowEntitlementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFlowEntitlementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PurchaseOffering = {
@@ -583,8 +583,8 @@ module PurchaseOffering = {
   }
   type response = {@as("Reservation") reservation: option<reservation>}
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "PurchaseOfferingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PurchaseOfferingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFlows = {
@@ -597,8 +597,8 @@ module ListFlows = {
     @as("NextToken") nextToken: option<__string>,
     @as("Flows") flows: option<__listOfListedFlow>,
   }
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "ListFlowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "ListFlowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEntitlements = {
@@ -612,8 +612,8 @@ module ListEntitlements = {
     @as("Entitlements") entitlements: option<__listOfListedEntitlement>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "ListEntitlementsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEntitlementsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReservation = {
@@ -621,8 +621,8 @@ module DescribeReservation = {
   type request = {@as("ReservationArn") reservationArn: __string}
   type response = {@as("Reservation") reservation: option<reservation>}
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "DescribeReservationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReservationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOffering = {
@@ -630,8 +630,8 @@ module DescribeOffering = {
   type request = {@as("OfferingArn") offeringArn: __string}
   type response = {@as("Offering") offering: option<offering>}
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "DescribeOfferingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOfferingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFlowMediaStream = {
@@ -650,8 +650,8 @@ module UpdateFlowMediaStream = {
     @as("FlowArn") flowArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "UpdateFlowMediaStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFlowMediaStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListReservations = {
@@ -665,8 +665,8 @@ module ListReservations = {
     @as("NextToken") nextToken: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "ListReservationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListReservationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOfferings = {
@@ -679,8 +679,8 @@ module ListOfferings = {
     @as("Offerings") offerings: option<__listOfOffering>,
     @as("NextToken") nextToken: option<__string>,
   }
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "ListOfferingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "ListOfferingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GrantFlowEntitlements = {
@@ -694,8 +694,8 @@ module GrantFlowEntitlements = {
     @as("Entitlements") entitlements: option<__listOfEntitlement>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "GrantFlowEntitlementsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GrantFlowEntitlementsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddFlowVpcInterfaces = {
@@ -709,8 +709,8 @@ module AddFlowVpcInterfaces = {
     @as("FlowArn") flowArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "AddFlowVpcInterfacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddFlowVpcInterfacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddFlowMediaStreams = {
@@ -724,8 +724,8 @@ module AddFlowMediaStreams = {
     @as("FlowArn") flowArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "AddFlowMediaStreamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddFlowMediaStreamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFlowSource = {
@@ -753,8 +753,8 @@ module UpdateFlowSource = {
     @as("FlowArn") flowArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "UpdateFlowSourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFlowSourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFlowOutput = {
@@ -782,8 +782,8 @@ module UpdateFlowOutput = {
     @as("FlowArn") flowArn: option<__string>,
   }
   @module("@aws-sdk/client-mediaconnect") @new
-  external new_: request => t = "UpdateFlowOutputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFlowOutputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddFlowSources = {
@@ -796,8 +796,8 @@ module AddFlowSources = {
     @as("Sources") sources: option<__listOfSource>,
     @as("FlowArn") flowArn: option<__string>,
   }
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "AddFlowSourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "AddFlowSourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddFlowOutputs = {
@@ -810,8 +810,8 @@ module AddFlowOutputs = {
     @as("Outputs") outputs: option<__listOfOutput>,
     @as("FlowArn") flowArn: option<__string>,
   }
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "AddFlowOutputsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "AddFlowOutputsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFlow = {
@@ -821,8 +821,8 @@ module UpdateFlow = {
     @as("FlowArn") flowArn: __string,
   }
   type response = {@as("Flow") flow: option<flow>}
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "UpdateFlowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "UpdateFlowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFlow = {
@@ -832,8 +832,8 @@ module DescribeFlow = {
     @as("Messages") messages: option<messages>,
     @as("Flow") flow: option<flow>,
   }
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "DescribeFlowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "DescribeFlowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFlow = {
@@ -850,6 +850,6 @@ module CreateFlow = {
     @as("AvailabilityZone") availabilityZone: option<__string>,
   }
   type response = {@as("Flow") flow: option<flow>}
-  @module("@aws-sdk/client-mediaconnect") @new external new_: request => t = "CreateFlowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediaconnect") @new external new: request => t = "CreateFlowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -489,8 +489,8 @@ module UpdateProject = {
     projectId: id,
   }
   type response = unit
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "UpdateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateGatewayCapabilityConfiguration = {
@@ -505,8 +505,8 @@ module UpdateGatewayCapabilityConfiguration = {
     capabilityNamespace: capabilityNamespace,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "UpdateGatewayCapabilityConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateGatewayCapabilityConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateGateway = {
@@ -516,8 +516,8 @@ module UpdateGateway = {
     gatewayId: id,
   }
 
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "UpdateGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateDashboard = {
@@ -530,8 +530,8 @@ module UpdateDashboard = {
     dashboardId: id,
   }
   type response = unit
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "UpdateDashboardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateDashboardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAssetProperty = {
@@ -545,8 +545,8 @@ module UpdateAssetProperty = {
   }
 
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "UpdateAssetPropertyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateAssetPropertyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisassociateAssets = {
@@ -559,8 +559,8 @@ module DisassociateAssets = {
   }
 
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "DisassociateAssetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DisassociateAssetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeProject = {
@@ -575,8 +575,8 @@ module DescribeProject = {
     projectArn: arn,
     projectId: id,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "DescribeProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DescribeProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeGatewayCapabilityConfiguration = {
@@ -592,8 +592,8 @@ module DescribeGatewayCapabilityConfiguration = {
     gatewayId: id,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "DescribeGatewayCapabilityConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeGatewayCapabilityConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDashboard = {
@@ -610,8 +610,8 @@ module DescribeDashboard = {
     dashboardId: id,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "DescribeDashboardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDashboardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProject = {
@@ -621,16 +621,16 @@ module DeleteProject = {
     projectId: id,
   }
   type response = unit
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "DeleteProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteGateway = {
   type t
   type request = {gatewayId: id}
 
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "DeleteGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDashboard = {
@@ -640,8 +640,8 @@ module DeleteDashboard = {
     dashboardId: id,
   }
   type response = unit
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "DeleteDashboardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteDashboardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAccessPolicy = {
@@ -652,8 +652,8 @@ module DeleteAccessPolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "DeleteAccessPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAccessPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateAssets = {
@@ -665,8 +665,8 @@ module AssociateAssets = {
     assetId: id,
   }
 
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "AssociateAssetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "AssociateAssetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagResource = {
@@ -676,8 +676,8 @@ module UntagResource = {
     resourceArn: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -687,8 +687,8 @@ module TagResource = {
     resourceArn: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutLoggingOptions = {
@@ -696,8 +696,8 @@ module PutLoggingOptions = {
   type request = {loggingOptions: loggingOptions}
   type response = unit
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "PutLoggingOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutLoggingOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -705,8 +705,8 @@ module ListTagsForResource = {
   type request = {resourceArn: amazonResourceName}
   type response = {tags: option<tagMap>}
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProjectAssets = {
@@ -721,8 +721,8 @@ module ListProjectAssets = {
     assetIds: assetIDs,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "ListProjectAssetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProjectAssetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLoggingOptions = {
@@ -730,8 +730,8 @@ module DescribeLoggingOptions = {
   type request = unit
   type response = {loggingOptions: loggingOptions}
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "DescribeLoggingOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLoggingOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProject = {
@@ -747,8 +747,8 @@ module CreateProject = {
     projectArn: arn,
     projectId: id,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "CreateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "CreateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDashboard = {
@@ -765,8 +765,8 @@ module CreateDashboard = {
     dashboardArn: arn,
     dashboardId: id,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "CreateDashboardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "CreateDashboardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePortal = {
@@ -783,8 +783,8 @@ module UpdatePortal = {
     portalId: id,
   }
   type response = {portalStatus: portalStatus}
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "UpdatePortalCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdatePortalCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAsset = {
@@ -795,8 +795,8 @@ module UpdateAsset = {
     assetId: id,
   }
   type response = {assetStatus: assetStatus}
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "UpdateAssetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateAssetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAccessPolicy = {
@@ -810,8 +810,8 @@ module UpdateAccessPolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "UpdateAccessPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAccessPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutDefaultEncryptionConfiguration = {
@@ -826,8 +826,8 @@ module PutDefaultEncryptionConfiguration = {
     encryptionType: encryptionType,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "PutDefaultEncryptionConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutDefaultEncryptionConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProjects = {
@@ -841,8 +841,8 @@ module ListProjects = {
     nextToken: option<nextToken>,
     projectSummaries: projectSummaries,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "ListProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDashboards = {
@@ -856,8 +856,8 @@ module ListDashboards = {
     nextToken: option<nextToken>,
     dashboardSummaries: dashboardSummaries,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "ListDashboardsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListDashboardsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAssetPropertyValue = {
@@ -869,8 +869,8 @@ module GetAssetPropertyValue = {
   }
   type response = {propertyValue: option<assetPropertyValue>}
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "GetAssetPropertyValueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAssetPropertyValueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePortal = {
@@ -893,8 +893,8 @@ module DescribePortal = {
     portalArn: arn,
     portalId: id,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "DescribePortalCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DescribePortalCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeGateway = {
@@ -909,8 +909,8 @@ module DescribeGateway = {
     gatewayName: name,
     gatewayId: id,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "DescribeGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DescribeGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDefaultEncryptionConfiguration = {
@@ -922,8 +922,8 @@ module DescribeDefaultEncryptionConfiguration = {
     encryptionType: encryptionType,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "DescribeDefaultEncryptionConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDefaultEncryptionConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccessPolicy = {
@@ -939,8 +939,8 @@ module DescribeAccessPolicy = {
     accessPolicyId: id,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "DescribeAccessPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAccessPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePortal = {
@@ -950,8 +950,8 @@ module DeletePortal = {
     portalId: id,
   }
   type response = {portalStatus: portalStatus}
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "DeletePortalCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeletePortalCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAssetModel = {
@@ -961,9 +961,8 @@ module DeleteAssetModel = {
     assetModelId: id,
   }
   type response = {assetModelStatus: assetModelStatus}
-  @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "DeleteAssetModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteAssetModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAsset = {
@@ -973,8 +972,8 @@ module DeleteAsset = {
     assetId: id,
   }
   type response = {assetStatus: assetStatus}
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "DeleteAssetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DeleteAssetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePortal = {
@@ -998,8 +997,8 @@ module CreatePortal = {
     portalArn: arn,
     portalId: id,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "CreatePortalCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "CreatePortalCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateGateway = {
@@ -1013,8 +1012,8 @@ module CreateGateway = {
     gatewayArn: arn,
     gatewayId: id,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "CreateGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "CreateGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAsset = {
@@ -1030,8 +1029,8 @@ module CreateAsset = {
     assetArn: arn,
     assetId: id,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "CreateAssetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "CreateAssetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAccessPolicy = {
@@ -1048,8 +1047,8 @@ module CreateAccessPolicy = {
     accessPolicyId: id,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "CreateAccessPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAccessPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDisassociateProjectAssets = {
@@ -1061,8 +1060,8 @@ module BatchDisassociateProjectAssets = {
   }
   type response = {errors: option<batchDisassociateProjectAssetsErrors>}
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "BatchDisassociateProjectAssetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDisassociateProjectAssetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchAssociateProjectAssets = {
@@ -1074,8 +1073,8 @@ module BatchAssociateProjectAssets = {
   }
   type response = {errors: option<batchAssociateProjectAssetsErrors>}
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "BatchAssociateProjectAssetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchAssociateProjectAssetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssetRelationships = {
@@ -1091,8 +1090,8 @@ module ListAssetRelationships = {
     assetRelationshipSummaries: assetRelationshipSummaries,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "ListAssetRelationshipsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAssetRelationshipsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInterpolatedAssetPropertyValues = {
@@ -1116,8 +1115,8 @@ module GetInterpolatedAssetPropertyValues = {
     interpolatedAssetPropertyValues: interpolatedAssetPropertyValues,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "GetInterpolatedAssetPropertyValuesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInterpolatedAssetPropertyValuesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAssetPropertyValueHistory = {
@@ -1138,8 +1137,8 @@ module GetAssetPropertyValueHistory = {
     assetPropertyValueHistory: assetPropertyValueHistory,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "GetAssetPropertyValueHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAssetPropertyValueHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAssetPropertyAggregates = {
@@ -1162,8 +1161,8 @@ module GetAssetPropertyAggregates = {
     aggregatedValues: aggregatedValues,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "GetAssetPropertyAggregatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAssetPropertyAggregatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPortals = {
@@ -1176,8 +1175,8 @@ module ListPortals = {
     nextToken: option<nextToken>,
     portalSummaries: option<portalSummaries>,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "ListPortalsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListPortalsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListGateways = {
@@ -1190,8 +1189,8 @@ module ListGateways = {
     nextToken: option<nextToken>,
     gatewaySummaries: gatewaySummaries,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "ListGatewaysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListGatewaysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssociatedAssets = {
@@ -1208,8 +1207,8 @@ module ListAssociatedAssets = {
     assetSummaries: associatedAssetsSummaries,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "ListAssociatedAssetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAssociatedAssetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssets = {
@@ -1224,8 +1223,8 @@ module ListAssets = {
     nextToken: option<nextToken>,
     assetSummaries: assetSummaries,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "ListAssetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListAssetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssetModels = {
@@ -1238,8 +1237,8 @@ module ListAssetModels = {
     nextToken: option<nextToken>,
     assetModelSummaries: assetModelSummaries,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "ListAssetModelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "ListAssetModelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAccessPolicies = {
@@ -1258,8 +1257,8 @@ module ListAccessPolicies = {
     accessPolicySummaries: accessPolicySummaries,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "ListAccessPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAccessPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAsset = {
@@ -1277,8 +1276,8 @@ module DescribeAsset = {
     assetArn: arn,
     assetId: id,
   }
-  @module("@aws-sdk/client-iotsitewise") @new external new_: request => t = "DescribeAssetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "DescribeAssetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchPutAssetPropertyValue = {
@@ -1286,8 +1285,8 @@ module BatchPutAssetPropertyValue = {
   type request = {entries: putAssetPropertyValueEntries}
   type response = {errorEntries: batchPutAssetPropertyErrorEntries}
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "BatchPutAssetPropertyValueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchPutAssetPropertyValueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAssetProperty = {
@@ -1304,8 +1303,8 @@ module DescribeAssetProperty = {
     assetId: id,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "DescribeAssetPropertyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAssetPropertyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAssetModel = {
@@ -1320,9 +1319,8 @@ module UpdateAssetModel = {
     assetModelId: id,
   }
   type response = {assetModelStatus: assetModelStatus}
-  @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "UpdateAssetModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "UpdateAssetModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAssetModel = {
@@ -1341,8 +1339,8 @@ module DescribeAssetModel = {
     assetModelId: id,
   }
   @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "DescribeAssetModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAssetModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAssetModel = {
@@ -1361,7 +1359,6 @@ module CreateAssetModel = {
     assetModelArn: arn,
     assetModelId: id,
   }
-  @module("@aws-sdk/client-iotsitewise") @new
-  external new_: request => t = "CreateAssetModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotsitewise") @new external new: request => t = "CreateAssetModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

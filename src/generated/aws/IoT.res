@@ -1769,8 +1769,8 @@ module UpdateTopicRuleDestination = {
   }
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "UpdateTopicRuleDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateTopicRuleDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRoleAlias = {
@@ -1784,8 +1784,8 @@ module UpdateRoleAlias = {
     roleAliasArn: option<roleAliasArn>,
     roleAlias: option<roleAlias>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateRoleAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateRoleAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCustomMetric = {
@@ -1802,8 +1802,8 @@ module UpdateCustomMetric = {
     metricArn: option<customMetricArn>,
     metricName: option<metricName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateCustomMetricCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateCustomMetricCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCertificate = {
@@ -1813,8 +1813,8 @@ module UpdateCertificate = {
     certificateId: certificateId,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TransferCertificate = {
@@ -1825,8 +1825,8 @@ module TransferCertificate = {
     certificateId: certificateId,
   }
   type response = {transferredCertificateArn: option<certificateArn>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "TransferCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "TransferCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopThingRegistrationTask = {
@@ -1834,8 +1834,8 @@ module StopThingRegistrationTask = {
   type request = {taskId: taskId}
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "StopThingRegistrationTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopThingRegistrationTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartThingRegistrationTask = {
@@ -1848,8 +1848,8 @@ module StartThingRegistrationTask = {
   }
   type response = {taskId: option<taskId>}
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "StartThingRegistrationTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartThingRegistrationTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetV2LoggingOptions = {
@@ -1860,8 +1860,8 @@ module SetV2LoggingOptions = {
     roleArn: option<awsArn>,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "SetV2LoggingOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "SetV2LoggingOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetDefaultPolicyVersion = {
@@ -1871,8 +1871,8 @@ module SetDefaultPolicyVersion = {
     policyName: policyName,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "SetDefaultPolicyVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "SetDefaultPolicyVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetDefaultAuthorizer = {
@@ -1882,8 +1882,8 @@ module SetDefaultAuthorizer = {
     authorizerArn: option<authorizerArn>,
     authorizerName: option<authorizerName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "SetDefaultAuthorizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "SetDefaultAuthorizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveThingFromThingGroup = {
@@ -1896,8 +1896,8 @@ module RemoveThingFromThingGroup = {
   }
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "RemoveThingFromThingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveThingFromThingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveThingFromBillingGroup = {
@@ -1910,8 +1910,8 @@ module RemoveThingFromBillingGroup = {
   }
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "RemoveThingFromBillingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveThingFromBillingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectCertificateTransfer = {
@@ -1922,8 +1922,8 @@ module RejectCertificateTransfer = {
   }
 
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "RejectCertificateTransferCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RejectCertificateTransferCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RegisterCertificateWithoutCA = {
@@ -1937,8 +1937,8 @@ module RegisterCertificateWithoutCA = {
     certificateArn: option<certificateArn>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "RegisterCertificateWithoutCACommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterCertificateWithoutCACommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterCertificate = {
@@ -1953,8 +1953,8 @@ module RegisterCertificate = {
     certificateId: option<certificateId>,
     certificateArn: option<certificateArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "RegisterCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "RegisterCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetV2LoggingOptions = {
@@ -1965,16 +1965,16 @@ module GetV2LoggingOptions = {
     defaultLogLevel: option<logLevel>,
     roleArn: option<awsArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetV2LoggingOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetV2LoggingOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRegistrationCode = {
   type t
   type request = unit
   type response = {registrationCode: option<registrationCode>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetRegistrationCodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetRegistrationCodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPolicyVersion = {
@@ -1993,8 +1993,8 @@ module GetPolicyVersion = {
     policyName: option<policyName>,
     policyArn: option<policyArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetPolicyVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetPolicyVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPolicy = {
@@ -2009,8 +2009,8 @@ module GetPolicy = {
     policyArn: option<policyArn>,
     policyName: option<policyName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLoggingOptions = {
@@ -2020,16 +2020,16 @@ module GetLoggingOptions = {
     logLevel: option<logLevel>,
     roleArn: option<awsArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetLoggingOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetLoggingOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJobDocument = {
   type t
   type request = {jobId: jobId}
   type response = {document: option<jobDocument>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetJobDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetJobDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCardinality = {
@@ -2041,24 +2041,24 @@ module GetCardinality = {
     indexName: option<indexName>,
   }
   type response = {cardinality: option<count>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetCardinalityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetCardinalityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableTopicRule = {
   type t
   type request = {ruleName: ruleName}
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "EnableTopicRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "EnableTopicRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableTopicRule = {
   type t
   type request = {ruleName: ruleName}
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DisableTopicRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DisableTopicRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DetachThingPrincipal = {
@@ -2068,8 +2068,8 @@ module DetachThingPrincipal = {
     thingName: thingName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DetachThingPrincipalCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DetachThingPrincipalCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetachSecurityProfile = {
@@ -2079,8 +2079,8 @@ module DetachSecurityProfile = {
     securityProfileName: securityProfileName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DetachSecurityProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DetachSecurityProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetachPrincipalPolicy = {
@@ -2090,8 +2090,8 @@ module DetachPrincipalPolicy = {
     policyName: policyName,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DetachPrincipalPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DetachPrincipalPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DetachPolicy = {
@@ -2101,8 +2101,8 @@ module DetachPolicy = {
     policyName: policyName,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DetachPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DetachPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeThingRegistrationTask = {
@@ -2123,8 +2123,8 @@ module DescribeThingRegistrationTask = {
     taskId: option<taskId>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DescribeThingRegistrationTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeThingRegistrationTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProvisioningTemplateVersion = {
@@ -2140,8 +2140,8 @@ module DescribeProvisioningTemplateVersion = {
     versionId: option<templateVersionId>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DescribeProvisioningTemplateVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProvisioningTemplateVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIndex = {
@@ -2152,16 +2152,16 @@ module DescribeIndex = {
     indexStatus: option<indexStatus>,
     indexName: option<indexName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeIndexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeIndexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpoint = {
   type t
   type request = {endpointType: option<endpointType>}
   type response = {endpointAddress: option<endpointAddress>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCustomMetric = {
@@ -2175,8 +2175,8 @@ module DescribeCustomMetric = {
     metricArn: option<customMetricArn>,
     metricName: option<metricName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeCustomMetricCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeCustomMetricCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeprecateThingType = {
@@ -2186,8 +2186,8 @@ module DeprecateThingType = {
     thingTypeName: thingTypeName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeprecateThingTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeprecateThingTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteV2LoggingLevel = {
@@ -2197,8 +2197,8 @@ module DeleteV2LoggingLevel = {
     targetType: logTargetType,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteV2LoggingLevelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteV2LoggingLevelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteTopicRuleDestination = {
@@ -2206,24 +2206,24 @@ module DeleteTopicRuleDestination = {
   type request = {arn: awsArn}
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DeleteTopicRuleDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTopicRuleDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTopicRule = {
   type t
   type request = {ruleName: ruleName}
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteTopicRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteTopicRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteThingType = {
   type t
   type request = {thingTypeName: thingTypeName}
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteThingTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteThingTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteThingGroup = {
@@ -2233,8 +2233,8 @@ module DeleteThingGroup = {
     thingGroupName: thingGroupName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteThingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteThingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteThing = {
@@ -2244,16 +2244,16 @@ module DeleteThing = {
     thingName: thingName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteStream = {
   type t
   type request = {streamId: streamId}
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSecurityProfile = {
@@ -2263,32 +2263,32 @@ module DeleteSecurityProfile = {
     securityProfileName: securityProfileName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteSecurityProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteSecurityProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteScheduledAudit = {
   type t
   type request = {scheduledAuditName: scheduledAuditName}
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteScheduledAuditCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteScheduledAuditCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRoleAlias = {
   type t
   type request = {roleAlias: roleAlias}
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteRoleAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteRoleAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRegistrationCode = {
   type t
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteRegistrationCodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteRegistrationCodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProvisioningTemplateVersion = {
@@ -2299,8 +2299,8 @@ module DeleteProvisioningTemplateVersion = {
   }
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DeleteProvisioningTemplateVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteProvisioningTemplateVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProvisioningTemplate = {
@@ -2308,8 +2308,8 @@ module DeleteProvisioningTemplate = {
   type request = {templateName: templateName}
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DeleteProvisioningTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteProvisioningTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePolicyVersion = {
@@ -2319,16 +2319,16 @@ module DeletePolicyVersion = {
     policyName: policyName,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeletePolicyVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeletePolicyVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeletePolicy = {
   type t
   type request = {policyName: policyName}
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeletePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeletePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteOTAUpdate = {
@@ -2339,24 +2339,24 @@ module DeleteOTAUpdate = {
     otaUpdateId: otaupdateId,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteOTAUpdateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteOTAUpdateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMitigationAction = {
   type t
   type request = {actionName: mitigationActionName}
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteMitigationActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteMitigationActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteJobTemplate = {
   type t
   type request = {jobTemplateId: jobTemplateId}
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteJobTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteJobTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteJobExecution = {
@@ -2369,8 +2369,8 @@ module DeleteJobExecution = {
     jobId: jobId,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteJobExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteJobExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteJob = {
@@ -2381,8 +2381,8 @@ module DeleteJob = {
     jobId: jobId,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDynamicThingGroup = {
@@ -2392,8 +2392,8 @@ module DeleteDynamicThingGroup = {
     thingGroupName: thingGroupName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteDynamicThingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteDynamicThingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDomainConfiguration = {
@@ -2401,24 +2401,24 @@ module DeleteDomainConfiguration = {
   type request = {domainConfigurationName: domainConfigurationName}
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DeleteDomainConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteDomainConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDimension = {
   type t
   type request = {name: dimensionName}
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteDimensionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteDimensionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCustomMetric = {
   type t
   type request = {metricName: metricName}
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteCustomMetricCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteCustomMetricCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCertificate = {
@@ -2428,16 +2428,16 @@ module DeleteCertificate = {
     certificateId: certificateId,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteCACertificate = {
   type t
   type request = {certificateId: certificateId}
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteCACertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteCACertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBillingGroup = {
@@ -2447,16 +2447,16 @@ module DeleteBillingGroup = {
     billingGroupName: billingGroupName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteBillingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteBillingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAuthorizer = {
   type t
   type request = {authorizerName: authorizerName}
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteAuthorizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteAuthorizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAccountAuditConfiguration = {
@@ -2464,8 +2464,8 @@ module DeleteAccountAuditConfiguration = {
   type request = {deleteScheduledAudits: option<deleteScheduledAudits>}
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DeleteAccountAuditConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAccountAuditConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProvisioningTemplateVersion = {
@@ -2482,8 +2482,8 @@ module CreateProvisioningTemplateVersion = {
     templateArn: option<templateArn>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "CreateProvisioningTemplateVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateProvisioningTemplateVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePolicyVersion = {
@@ -2499,8 +2499,8 @@ module CreatePolicyVersion = {
     policyDocument: option<policyDocument>,
     policyArn: option<policyArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreatePolicyVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreatePolicyVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCertificateFromCsr = {
@@ -2514,9 +2514,8 @@ module CreateCertificateFromCsr = {
     certificateId: option<certificateId>,
     certificateArn: option<certificateArn>,
   }
-  @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "CreateCertificateFromCsrCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateCertificateFromCsrCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ConfirmTopicRuleDestination = {
@@ -2524,16 +2523,16 @@ module ConfirmTopicRuleDestination = {
   type request = {confirmationToken: confirmationToken}
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ConfirmTopicRuleDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ConfirmTopicRuleDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ClearDefaultAuthorizer = {
   type t
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ClearDefaultAuthorizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ClearDefaultAuthorizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelJob = {
@@ -2549,8 +2548,8 @@ module CancelJob = {
     jobId: option<jobId>,
     jobArn: option<jobArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CancelJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CancelJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelDetectMitigationActionsTask = {
@@ -2558,8 +2557,8 @@ module CancelDetectMitigationActionsTask = {
   type request = {taskId: mitigationActionsTaskId}
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "CancelDetectMitigationActionsTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelDetectMitigationActionsTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelCertificateTransfer = {
@@ -2567,16 +2566,16 @@ module CancelCertificateTransfer = {
   type request = {certificateId: certificateId}
 
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "CancelCertificateTransferCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "CancelCertificateTransferCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CancelAuditTask = {
   type t
   type request = {taskId: auditTaskId}
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CancelAuditTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CancelAuditTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelAuditMitigationActionsTask = {
@@ -2584,8 +2583,8 @@ module CancelAuditMitigationActionsTask = {
   type request = {taskId: mitigationActionsTaskId}
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "CancelAuditMitigationActionsTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelAuditMitigationActionsTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachThingPrincipal = {
@@ -2595,8 +2594,8 @@ module AttachThingPrincipal = {
     thingName: thingName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "AttachThingPrincipalCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "AttachThingPrincipalCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachSecurityProfile = {
@@ -2606,8 +2605,8 @@ module AttachSecurityProfile = {
     securityProfileName: securityProfileName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "AttachSecurityProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "AttachSecurityProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachPrincipalPolicy = {
@@ -2617,8 +2616,8 @@ module AttachPrincipalPolicy = {
     policyName: policyName,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "AttachPrincipalPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "AttachPrincipalPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AttachPolicy = {
@@ -2628,8 +2627,8 @@ module AttachPolicy = {
     policyName: policyName,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "AttachPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "AttachPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AddThingToThingGroup = {
@@ -2642,8 +2641,8 @@ module AddThingToThingGroup = {
     thingGroupName: option<thingGroupName>,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "AddThingToThingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "AddThingToThingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddThingToBillingGroup = {
@@ -2655,8 +2654,8 @@ module AddThingToBillingGroup = {
     billingGroupName: option<billingGroupName>,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "AddThingToBillingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "AddThingToBillingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptCertificateTransfer = {
@@ -2667,8 +2666,8 @@ module AcceptCertificateTransfer = {
   }
 
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "AcceptCertificateTransferCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "AcceptCertificateTransferCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateThingGroupsForThing = {
@@ -2681,8 +2680,8 @@ module UpdateThingGroupsForThing = {
   }
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "UpdateThingGroupsForThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateThingGroupsForThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateScheduledAudit = {
@@ -2695,8 +2694,8 @@ module UpdateScheduledAudit = {
     frequency: option<auditFrequency>,
   }
   type response = {scheduledAuditArn: option<scheduledAuditArn>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateScheduledAuditCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateScheduledAuditCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProvisioningTemplate = {
@@ -2712,8 +2711,8 @@ module UpdateProvisioningTemplate = {
   }
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "UpdateProvisioningTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateProvisioningTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDomainConfiguration = {
@@ -2729,8 +2728,8 @@ module UpdateDomainConfiguration = {
     domainConfigurationName: option<reservedDomainConfigurationName>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "UpdateDomainConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDomainConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDimension = {
@@ -2747,8 +2746,8 @@ module UpdateDimension = {
     arn: option<dimensionArn>,
     name: option<dimensionName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateDimensionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateDimensionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCACertificate = {
@@ -2761,8 +2760,8 @@ module UpdateCACertificate = {
     certificateId: certificateId,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateCACertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateCACertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateBillingGroup = {
@@ -2773,8 +2772,8 @@ module UpdateBillingGroup = {
     billingGroupName: billingGroupName,
   }
   type response = {version: option<version>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateBillingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateBillingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAuthorizer = {
@@ -2790,8 +2789,8 @@ module UpdateAuthorizer = {
     authorizerArn: option<authorizerArn>,
     authorizerName: option<authorizerName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateAuthorizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateAuthorizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -2801,16 +2800,16 @@ module UntagResource = {
     resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartOnDemandAuditTask = {
   type t
   type request = {targetCheckNames: targetAuditCheckNames}
   type response = {taskId: option<auditTaskId>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "StartOnDemandAuditTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "StartOnDemandAuditTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetV2LoggingLevel = {
@@ -2820,16 +2819,16 @@ module SetV2LoggingLevel = {
     logTarget: logTarget,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "SetV2LoggingLevelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "SetV2LoggingLevelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetLoggingOptions = {
   type t
   type request = {loggingOptionsPayload: loggingOptionsPayload}
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "SetLoggingOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "SetLoggingOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RegisterThing = {
@@ -2842,8 +2841,8 @@ module RegisterThing = {
     resourceArns: option<resourceArns>,
     certificatePem: option<certificatePem>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "RegisterThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "RegisterThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThingsInThingGroup = {
@@ -2858,8 +2857,8 @@ module ListThingsInThingGroup = {
     nextToken: option<nextToken>,
     things: option<thingNameList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListThingsInThingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingsInThingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThingsInBillingGroup = {
@@ -2873,9 +2872,8 @@ module ListThingsInBillingGroup = {
     nextToken: option<nextToken>,
     things: option<thingNameList>,
   }
-  @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListThingsInBillingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingsInBillingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThingRegistrationTasks = {
@@ -2890,8 +2888,8 @@ module ListThingRegistrationTasks = {
     taskIds: option<taskIdList>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListThingRegistrationTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListThingRegistrationTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThingRegistrationTaskReports = {
@@ -2908,8 +2906,8 @@ module ListThingRegistrationTaskReports = {
     resourceLinks: option<s3FileUrlList>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListThingRegistrationTaskReportsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListThingRegistrationTaskReportsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThingPrincipals = {
@@ -2923,8 +2921,8 @@ module ListThingPrincipals = {
     nextToken: option<nextToken>,
     principals: option<principals>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListThingPrincipalsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingPrincipalsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTargetsForPolicy = {
@@ -2938,8 +2936,8 @@ module ListTargetsForPolicy = {
     nextMarker: option<marker>,
     targets: option<policyTargets>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListTargetsForPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListTargetsForPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRoleAliases = {
@@ -2953,8 +2951,8 @@ module ListRoleAliases = {
     nextMarker: option<marker>,
     roleAliases: option<roleAliases>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListRoleAliasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListRoleAliasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPrincipalThings = {
@@ -2968,8 +2966,8 @@ module ListPrincipalThings = {
     nextToken: option<nextToken>,
     things: option<thingNameList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListPrincipalThingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListPrincipalThingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPolicyPrincipals = {
@@ -2984,8 +2982,8 @@ module ListPolicyPrincipals = {
     nextMarker: option<marker>,
     principals: option<principals>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListPolicyPrincipalsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListPolicyPrincipalsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIndices = {
@@ -2998,8 +2996,8 @@ module ListIndices = {
     nextToken: option<nextToken>,
     indexNames: option<indexNamesList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListIndicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListIndicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDimensions = {
@@ -3012,8 +3010,8 @@ module ListDimensions = {
     nextToken: option<nextToken>,
     dimensionNames: option<dimensionNames>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListDimensionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListDimensionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCustomMetrics = {
@@ -3026,8 +3024,8 @@ module ListCustomMetrics = {
     nextToken: option<nextToken>,
     metricNames: option<metricNames>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListCustomMetricsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListCustomMetricsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStatistics = {
@@ -3039,8 +3037,8 @@ module GetStatistics = {
     indexName: option<indexName>,
   }
   type response = {statistics: option<statistics>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeThing = {
@@ -3056,8 +3054,8 @@ module DescribeThing = {
     thingName: option<thingName>,
     defaultClientId: option<clientId>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeScheduledAudit = {
@@ -3071,16 +3069,16 @@ module DescribeScheduledAudit = {
     dayOfMonth: option<dayOfMonth>,
     frequency: option<auditFrequency>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeScheduledAuditCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeScheduledAuditCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRoleAlias = {
   type t
   type request = {roleAlias: roleAlias}
   type response = {roleAliasDescription: option<roleAliasDescription>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeRoleAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeRoleAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProvisioningTemplate = {
@@ -3099,8 +3097,8 @@ module DescribeProvisioningTemplate = {
     templateArn: option<templateArn>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DescribeProvisioningTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProvisioningTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDimension = {
@@ -3114,8 +3112,8 @@ module DescribeDimension = {
     arn: option<dimensionArn>,
     name: option<dimensionName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeDimensionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeDimensionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBillingGroup = {
@@ -3129,8 +3127,8 @@ module DescribeBillingGroup = {
     billingGroupId: option<billingGroupId>,
     billingGroupName: option<billingGroupName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeBillingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeBillingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProvisioningClaim = {
@@ -3142,8 +3140,8 @@ module CreateProvisioningClaim = {
     certificatePem: option<certificatePem>,
     certificateId: option<certificateId>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateProvisioningClaimCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateProvisioningClaimCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateKeysAndCertificate = {
@@ -3155,9 +3153,8 @@ module CreateKeysAndCertificate = {
     certificateId: option<certificateId>,
     certificateArn: option<certificateArn>,
   }
-  @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "CreateKeysAndCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateKeysAndCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelJobExecution = {
@@ -3170,8 +3167,8 @@ module CancelJobExecution = {
     jobId: jobId,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CancelJobExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CancelJobExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AssociateTargetsWithJob = {
@@ -3187,8 +3184,8 @@ module AssociateTargetsWithJob = {
     jobId: option<jobId>,
     jobArn: option<jobArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "AssociateTargetsWithJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "AssociateTargetsWithJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateThing = {
@@ -3201,8 +3198,8 @@ module UpdateThing = {
     thingName: thingName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEventConfigurations = {
@@ -3210,8 +3207,8 @@ module UpdateEventConfigurations = {
   type request = {eventConfigurations: option<eventConfigurations>}
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "UpdateEventConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEventConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAuditSuppression = {
@@ -3224,8 +3221,8 @@ module UpdateAuditSuppression = {
     checkName: auditCheckName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateAuditSuppressionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateAuditSuppressionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAccountAuditConfiguration = {
@@ -3237,8 +3234,8 @@ module UpdateAccountAuditConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "UpdateAccountAuditConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAccountAuditConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TestInvokeAuthorizer = {
@@ -3258,8 +3255,8 @@ module TestInvokeAuthorizer = {
     principalId: option<principalId>,
     isAuthenticated: option<isAuthenticated>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "TestInvokeAuthorizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "TestInvokeAuthorizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -3269,8 +3266,8 @@ module TagResource = {
     resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartDetectMitigationActionsTask = {
@@ -3286,8 +3283,8 @@ module StartDetectMitigationActionsTask = {
   }
   type response = {taskId: option<mitigationActionsTaskId>}
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "StartDetectMitigationActionsTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartDetectMitigationActionsTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterCACertificate = {
@@ -3304,8 +3301,8 @@ module RegisterCACertificate = {
     certificateId: option<certificateId>,
     certificateArn: option<certificateArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "RegisterCACertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "RegisterCACertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTopicRules = {
@@ -3320,8 +3317,8 @@ module ListTopicRules = {
     nextToken: option<nextToken>,
     rules: option<topicRuleList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListTopicRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListTopicRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThingGroupsForThing = {
@@ -3335,8 +3332,8 @@ module ListThingGroupsForThing = {
     nextToken: option<nextToken>,
     thingGroups: option<thingGroupNameAndArnList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListThingGroupsForThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingGroupsForThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThingGroups = {
@@ -3352,8 +3349,8 @@ module ListThingGroups = {
     nextToken: option<nextToken>,
     thingGroups: option<thingGroupNameAndArnList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListThingGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTargetsForSecurityProfile = {
@@ -3368,8 +3365,8 @@ module ListTargetsForSecurityProfile = {
     securityProfileTargets: option<securityProfileTargets>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListTargetsForSecurityProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTargetsForSecurityProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -3382,8 +3379,8 @@ module ListTagsForResource = {
     nextToken: option<nextToken>,
     tags: option<tagList_>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStreams = {
@@ -3397,8 +3394,8 @@ module ListStreams = {
     nextToken: option<nextToken>,
     streams: option<streamsSummary>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListStreamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListStreamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSecurityProfiles = {
@@ -3413,8 +3410,8 @@ module ListSecurityProfiles = {
     nextToken: option<nextToken>,
     securityProfileIdentifiers: option<securityProfileIdentifiers>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListSecurityProfilesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListSecurityProfilesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListScheduledAudits = {
@@ -3427,8 +3424,8 @@ module ListScheduledAudits = {
     nextToken: option<nextToken>,
     scheduledAudits: option<scheduledAuditMetadataList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListScheduledAuditsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListScheduledAuditsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProvisioningTemplates = {
@@ -3442,8 +3439,8 @@ module ListProvisioningTemplates = {
     templates: option<provisioningTemplateListing>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListProvisioningTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProvisioningTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProvisioningTemplateVersions = {
@@ -3458,8 +3455,8 @@ module ListProvisioningTemplateVersions = {
     versions: option<provisioningTemplateVersionListing>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListProvisioningTemplateVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProvisioningTemplateVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPrincipalPolicies = {
@@ -3474,16 +3471,16 @@ module ListPrincipalPolicies = {
     nextMarker: option<marker>,
     policies: option<policies>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListPrincipalPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListPrincipalPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPolicyVersions = {
   type t
   type request = {policyName: policyName}
   type response = {policyVersions: option<policyVersions>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListPolicyVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListPolicyVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPolicies = {
@@ -3497,8 +3494,8 @@ module ListPolicies = {
     nextMarker: option<marker>,
     policies: option<policies>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOutgoingCertificates = {
@@ -3512,9 +3509,8 @@ module ListOutgoingCertificates = {
     nextMarker: option<marker>,
     outgoingCertificates: option<outgoingCertificates>,
   }
-  @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListOutgoingCertificatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListOutgoingCertificatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOTAUpdates = {
@@ -3528,8 +3524,8 @@ module ListOTAUpdates = {
     nextToken: option<nextToken>,
     otaUpdates: option<otaupdatesSummary>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListOTAUpdatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListOTAUpdatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMitigationActions = {
@@ -3543,8 +3539,8 @@ module ListMitigationActions = {
     nextToken: option<nextToken>,
     actionIdentifiers: option<mitigationActionIdentifierList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListMitigationActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListMitigationActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobs = {
@@ -3562,8 +3558,8 @@ module ListJobs = {
     nextToken: option<nextToken>,
     jobs: option<jobSummaryList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobTemplates = {
@@ -3576,8 +3572,8 @@ module ListJobTemplates = {
     nextToken: option<nextToken>,
     jobTemplates: option<jobTemplateSummaryList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListJobTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListJobTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDomainConfigurations = {
@@ -3591,9 +3587,8 @@ module ListDomainConfigurations = {
     nextMarker: option<marker>,
     domainConfigurations: option<domainConfigurations>,
   }
-  @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListDomainConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListDomainConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDetectMitigationActionsExecutions = {
@@ -3612,8 +3607,8 @@ module ListDetectMitigationActionsExecutions = {
     actionsExecutions: option<detectMitigationActionExecutionList>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListDetectMitigationActionsExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDetectMitigationActionsExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCertificatesByCA = {
@@ -3628,8 +3623,8 @@ module ListCertificatesByCA = {
     nextMarker: option<marker>,
     certificates: option<certificates>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListCertificatesByCACommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListCertificatesByCACommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCertificates = {
@@ -3643,8 +3638,8 @@ module ListCertificates = {
     nextMarker: option<marker>,
     certificates: option<certificates>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListCertificatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListCertificatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCACertificates = {
@@ -3658,8 +3653,8 @@ module ListCACertificates = {
     nextMarker: option<marker>,
     certificates: option<cacertificates>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListCACertificatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListCACertificatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBillingGroups = {
@@ -3673,8 +3668,8 @@ module ListBillingGroups = {
     nextToken: option<nextToken>,
     billingGroups: option<billingGroupNameAndArnList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListBillingGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListBillingGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAuthorizers = {
@@ -3689,8 +3684,8 @@ module ListAuthorizers = {
     nextMarker: option<marker>,
     authorizers: option<authorizers>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListAuthorizersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListAuthorizersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAuditTasks = {
@@ -3707,8 +3702,8 @@ module ListAuditTasks = {
     nextToken: option<nextToken>,
     tasks: option<auditTaskMetadataList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListAuditTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListAuditTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAuditMitigationActionsTasks = {
@@ -3727,8 +3722,8 @@ module ListAuditMitigationActionsTasks = {
     tasks: option<auditMitigationActionsTaskMetadataList>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListAuditMitigationActionsTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAuditMitigationActionsTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAuditMitigationActionsExecutions = {
@@ -3745,8 +3740,8 @@ module ListAuditMitigationActionsExecutions = {
     actionsExecutions: option<auditMitigationActionExecutionMetadataList>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListAuditMitigationActionsExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAuditMitigationActionsExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAttachedPolicies = {
@@ -3761,8 +3756,8 @@ module ListAttachedPolicies = {
     nextMarker: option<marker>,
     policies: option<policies>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListAttachedPoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListAttachedPoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPercentiles = {
@@ -3775,8 +3770,8 @@ module GetPercentiles = {
     indexName: option<indexName>,
   }
   type response = {percentiles: option<percentiles>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetPercentilesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetPercentilesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEffectivePolicies = {
@@ -3787,8 +3782,8 @@ module GetEffectivePolicies = {
     principal: option<principal>,
   }
   type response = {effectivePolicies: option<effectivePolicies>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetEffectivePoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetEffectivePoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBehaviorModelTrainingSummaries = {
@@ -3803,8 +3798,8 @@ module GetBehaviorModelTrainingSummaries = {
     summaries: option<behaviorModelTrainingSummaries>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "GetBehaviorModelTrainingSummariesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetBehaviorModelTrainingSummariesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeThingType = {
@@ -3817,8 +3812,8 @@ module DescribeThingType = {
     thingTypeId: option<thingTypeId>,
     thingTypeName: option<thingTypeName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeThingTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeThingTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEventConfigurations = {
@@ -3830,8 +3825,8 @@ module DescribeEventConfigurations = {
     eventConfigurations: option<eventConfigurations>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DescribeEventConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEventConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDomainConfiguration = {
@@ -3849,8 +3844,8 @@ module DescribeDomainConfiguration = {
     domainConfigurationName: option<reservedDomainConfigurationName>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DescribeDomainConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDomainConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDefaultAuthorizer = {
@@ -3858,16 +3853,16 @@ module DescribeDefaultAuthorizer = {
   type request = unit
   type response = {authorizerDescription: option<authorizerDescription>}
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DescribeDefaultAuthorizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDefaultAuthorizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCertificate = {
   type t
   type request = {certificateId: certificateId}
   type response = {certificateDescription: option<certificateDescription>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCACertificate = {
@@ -3877,16 +3872,16 @@ module DescribeCACertificate = {
     registrationConfig: option<registrationConfig>,
     certificateDescription: option<cacertificateDescription>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeCACertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeCACertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAuthorizer = {
   type t
   type request = {authorizerName: authorizerName}
   type response = {authorizerDescription: option<authorizerDescription>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeAuthorizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeAuthorizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAuditTask = {
@@ -3900,8 +3895,8 @@ module DescribeAuditTask = {
     taskType: option<auditTaskType>,
     taskStatus: option<auditTaskStatus>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeAuditTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeAuditTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAuditSuppression = {
@@ -3917,9 +3912,8 @@ module DescribeAuditSuppression = {
     resourceIdentifier: option<resourceIdentifier>,
     checkName: option<auditCheckName>,
   }
-  @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DescribeAuditSuppressionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeAuditSuppressionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccountAuditConfiguration = {
@@ -3931,8 +3925,8 @@ module DescribeAccountAuditConfiguration = {
     roleArn: option<roleArn>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DescribeAccountAuditConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAccountAuditConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAuditSuppression = {
@@ -3942,8 +3936,8 @@ module DeleteAuditSuppression = {
     checkName: auditCheckName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DeleteAuditSuppressionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DeleteAuditSuppressionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateThingType = {
@@ -3958,8 +3952,8 @@ module CreateThingType = {
     thingTypeArn: option<thingTypeArn>,
     thingTypeName: option<thingTypeName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateThingTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateThingTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateThing = {
@@ -3975,8 +3969,8 @@ module CreateThing = {
     thingArn: option<thingArn>,
     thingName: option<thingName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateScheduledAudit = {
@@ -3990,8 +3984,8 @@ module CreateScheduledAudit = {
     frequency: auditFrequency,
   }
   type response = {scheduledAuditArn: option<scheduledAuditArn>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateScheduledAuditCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateScheduledAuditCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRoleAlias = {
@@ -4006,8 +4000,8 @@ module CreateRoleAlias = {
     roleAliasArn: option<roleAliasArn>,
     roleAlias: option<roleAlias>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateRoleAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateRoleAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProvisioningTemplate = {
@@ -4027,8 +4021,8 @@ module CreateProvisioningTemplate = {
     templateArn: option<templateArn>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "CreateProvisioningTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateProvisioningTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePolicy = {
@@ -4044,8 +4038,8 @@ module CreatePolicy = {
     policyArn: option<policyArn>,
     policyName: option<policyName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreatePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreatePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDomainConfiguration = {
@@ -4064,8 +4058,8 @@ module CreateDomainConfiguration = {
     domainConfigurationName: option<domainConfigurationName>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "CreateDomainConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDomainConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDimension = {
@@ -4081,8 +4075,8 @@ module CreateDimension = {
     arn: option<dimensionArn>,
     name: option<dimensionName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateDimensionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateDimensionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCustomMetric = {
@@ -4098,8 +4092,8 @@ module CreateCustomMetric = {
     metricArn: option<customMetricArn>,
     metricName: option<metricName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateCustomMetricCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateCustomMetricCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBillingGroup = {
@@ -4114,8 +4108,8 @@ module CreateBillingGroup = {
     billingGroupArn: option<billingGroupArn>,
     billingGroupName: option<billingGroupName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateBillingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateBillingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAuthorizer = {
@@ -4133,8 +4127,8 @@ module CreateAuthorizer = {
     authorizerArn: option<authorizerArn>,
     authorizerName: option<authorizerName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateAuthorizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateAuthorizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAuditSuppression = {
@@ -4148,8 +4142,8 @@ module CreateAuditSuppression = {
     checkName: auditCheckName,
   }
   type response = unit
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateAuditSuppressionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateAuditSuppressionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateThingGroup = {
@@ -4160,8 +4154,8 @@ module UpdateThingGroup = {
     thingGroupName: thingGroupName,
   }
   type response = {version: option<version>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateThingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateThingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateStream = {
@@ -4178,8 +4172,8 @@ module UpdateStream = {
     streamArn: option<streamArn>,
     streamId: option<streamId>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMitigationAction = {
@@ -4193,8 +4187,8 @@ module UpdateMitigationAction = {
     actionId: option<mitigationActionId>,
     actionArn: option<mitigationActionArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateMitigationActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateMitigationActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateJob = {
@@ -4209,8 +4203,8 @@ module UpdateJob = {
     jobId: jobId,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateIndexingConfiguration = {
@@ -4221,8 +4215,8 @@ module UpdateIndexingConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "UpdateIndexingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateIndexingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDynamicThingGroup = {
@@ -4236,8 +4230,8 @@ module UpdateDynamicThingGroup = {
     thingGroupName: thingGroupName,
   }
   type response = {version: option<version>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateDynamicThingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateDynamicThingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartAuditMitigationActionsTask = {
@@ -4250,8 +4244,8 @@ module StartAuditMitigationActionsTask = {
   }
   type response = {taskId: option<mitigationActionsTaskId>}
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "StartAuditMitigationActionsTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartAuditMitigationActionsTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchIndex = {
@@ -4268,8 +4262,8 @@ module SearchIndex = {
     things: option<thingDocumentList>,
     nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "SearchIndexCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "SearchIndexCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListV2LoggingLevels = {
@@ -4283,8 +4277,8 @@ module ListV2LoggingLevels = {
     nextToken: option<nextToken>,
     logTargetConfigurations: option<logTargetConfigurations>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListV2LoggingLevelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListV2LoggingLevelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThings = {
@@ -4301,8 +4295,8 @@ module ListThings = {
     nextToken: option<nextToken>,
     things: option<thingAttributeList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListThingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSecurityProfilesForTarget = {
@@ -4318,8 +4312,8 @@ module ListSecurityProfilesForTarget = {
     securityProfileTargetMappings: option<securityProfileTargetMappings>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListSecurityProfilesForTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSecurityProfilesForTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobExecutionsForThing = {
@@ -4336,8 +4330,8 @@ module ListJobExecutionsForThing = {
     executionSummaries: option<jobExecutionSummaryForThingList>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListJobExecutionsForThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListJobExecutionsForThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobExecutionsForJob = {
@@ -4352,16 +4346,16 @@ module ListJobExecutionsForJob = {
     nextToken: option<nextToken>,
     executionSummaries: option<jobExecutionSummaryForJobList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListJobExecutionsForJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListJobExecutionsForJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTopicRuleDestination = {
   type t
   type request = {arn: awsArn}
   type response = {topicRuleDestination: option<topicRuleDestination>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetTopicRuleDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetTopicRuleDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIndexingConfiguration = {
@@ -4371,9 +4365,8 @@ module GetIndexingConfiguration = {
     thingGroupIndexingConfiguration: option<thingGroupIndexingConfiguration>,
     thingIndexingConfiguration: option<thingIndexingConfiguration>,
   }
-  @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "GetIndexingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetIndexingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeThingGroup = {
@@ -4391,8 +4384,8 @@ module DescribeThingGroup = {
     thingGroupId: option<thingGroupId>,
     thingGroupName: option<thingGroupName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeThingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeThingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMitigationAction = {
@@ -4408,9 +4401,8 @@ module DescribeMitigationAction = {
     actionType: option<mitigationActionType>,
     actionName: option<mitigationActionName>,
   }
-  @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DescribeMitigationActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeMitigationActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJobTemplate = {
@@ -4428,8 +4420,8 @@ module DescribeJobTemplate = {
     jobTemplateId: option<jobTemplateId>,
     jobTemplateArn: option<jobTemplateArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeJobTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeJobTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJobExecution = {
@@ -4440,8 +4432,8 @@ module DescribeJobExecution = {
     jobId: jobId,
   }
   type response = {execution: option<jobExecution>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeJobExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeJobExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTopicRuleDestination = {
@@ -4449,8 +4441,8 @@ module CreateTopicRuleDestination = {
   type request = {destinationConfiguration: topicRuleDestinationConfiguration}
   type response = {topicRuleDestination: option<topicRuleDestination>}
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "CreateTopicRuleDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTopicRuleDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateThingGroup = {
@@ -4466,8 +4458,8 @@ module CreateThingGroup = {
     thingGroupArn: option<thingGroupArn>,
     thingGroupName: option<thingGroupName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateThingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateThingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateStream = {
@@ -4485,8 +4477,8 @@ module CreateStream = {
     streamArn: option<streamArn>,
     streamId: option<streamId>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMitigationAction = {
@@ -4501,8 +4493,8 @@ module CreateMitigationAction = {
     actionId: option<mitigationActionId>,
     actionArn: option<mitigationActionArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateMitigationActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateMitigationActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateJobTemplate = {
@@ -4523,8 +4515,8 @@ module CreateJobTemplate = {
     jobTemplateId: option<jobTemplateId>,
     jobTemplateArn: option<jobTemplateArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateJobTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateJobTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateJob = {
@@ -4549,8 +4541,8 @@ module CreateJob = {
     jobId: option<jobId>,
     jobArn: option<jobArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDynamicThingGroup = {
@@ -4571,8 +4563,8 @@ module CreateDynamicThingGroup = {
     thingGroupArn: option<thingGroupArn>,
     thingGroupName: option<thingGroupName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateDynamicThingGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateDynamicThingGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTopicRuleDestinations = {
@@ -4586,8 +4578,8 @@ module ListTopicRuleDestinations = {
     destinationSummaries: option<topicRuleDestinationSummaries>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListTopicRuleDestinationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTopicRuleDestinationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListThingTypes = {
@@ -4601,8 +4593,8 @@ module ListThingTypes = {
     nextToken: option<nextToken>,
     thingTypes: option<thingTypeList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListThingTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListThingTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAuditSuppressions = {
@@ -4618,16 +4610,16 @@ module ListAuditSuppressions = {
     nextToken: option<nextToken>,
     suppressions: option<auditSuppressionList>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListAuditSuppressionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListAuditSuppressionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStream = {
   type t
   type request = {streamId: streamId}
   type response = {streamInfo: option<streamInfo>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJob = {
@@ -4637,8 +4629,8 @@ module DescribeJob = {
     job: option<job>,
     documentSource: option<jobDocumentSource>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ValidateSecurityProfileBehaviors = {
@@ -4649,8 +4641,8 @@ module ValidateSecurityProfileBehaviors = {
     valid: option<valid>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ValidateSecurityProfileBehaviorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ValidateSecurityProfileBehaviorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSecurityProfile = {
@@ -4679,8 +4671,8 @@ module UpdateSecurityProfile = {
     securityProfileArn: option<securityProfileArn>,
     securityProfileName: option<securityProfileName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "UpdateSecurityProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "UpdateSecurityProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSecurityProfile = {
@@ -4698,8 +4690,8 @@ module DescribeSecurityProfile = {
     securityProfileArn: option<securityProfileArn>,
     securityProfileName: option<securityProfileName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeSecurityProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeSecurityProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAuditMitigationActionsTask = {
@@ -4715,16 +4707,16 @@ module DescribeAuditMitigationActionsTask = {
     taskStatus: option<auditMitigationActionsTaskStatus>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DescribeAuditMitigationActionsTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAuditMitigationActionsTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAuditFinding = {
   type t
   type request = {findingId: findingId}
   type response = {finding: option<auditFinding>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "DescribeAuditFindingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "DescribeAuditFindingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSecurityProfile = {
@@ -4742,8 +4734,8 @@ module CreateSecurityProfile = {
     securityProfileArn: option<securityProfileArn>,
     securityProfileName: option<securityProfileName>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateSecurityProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateSecurityProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TestAuthorization = {
@@ -4757,8 +4749,8 @@ module TestAuthorization = {
     principal: option<principal>,
   }
   type response = {authResults: option<authResults>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "TestAuthorizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "TestAuthorizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListViolationEvents = {
@@ -4777,8 +4769,8 @@ module ListViolationEvents = {
     nextToken: option<nextToken>,
     violationEvents: option<violationEvents>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListViolationEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListViolationEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAuditFindings = {
@@ -4797,8 +4789,8 @@ module ListAuditFindings = {
     nextToken: option<nextToken>,
     findings: option<auditFindings>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListAuditFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListAuditFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListActiveViolations = {
@@ -4815,8 +4807,8 @@ module ListActiveViolations = {
     nextToken: option<nextToken>,
     activeViolations: option<activeViolations>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ListActiveViolationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ListActiveViolationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDetectMitigationActionsTask = {
@@ -4824,8 +4816,8 @@ module DescribeDetectMitigationActionsTask = {
   type request = {taskId: mitigationActionsTaskId}
   type response = {taskSummary: option<detectMitigationActionsTaskSummary>}
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "DescribeDetectMitigationActionsTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDetectMitigationActionsTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateOTAUpdate = {
@@ -4852,8 +4844,8 @@ module CreateOTAUpdate = {
     awsIotJobId: option<awsIotJobId>,
     otaUpdateId: option<otaupdateId>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateOTAUpdateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateOTAUpdateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDetectMitigationActionsTasks = {
@@ -4869,16 +4861,16 @@ module ListDetectMitigationActionsTasks = {
     tasks: option<detectMitigationActionsTaskSummaryList>,
   }
   @module("@aws-sdk/client-iot") @new
-  external new_: request => t = "ListDetectMitigationActionsTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDetectMitigationActionsTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOTAUpdate = {
   type t
   type request = {otaUpdateId: otaupdateId}
   type response = {otaUpdateInfo: option<otaupdateInfo>}
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetOTAUpdateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetOTAUpdateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReplaceTopicRule = {
@@ -4888,8 +4880,8 @@ module ReplaceTopicRule = {
     ruleName: ruleName,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "ReplaceTopicRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "ReplaceTopicRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetTopicRule = {
@@ -4899,8 +4891,8 @@ module GetTopicRule = {
     rule: option<topicRule>,
     ruleArn: option<ruleArn>,
   }
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "GetTopicRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "GetTopicRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTopicRule = {
@@ -4911,6 +4903,6 @@ module CreateTopicRule = {
     ruleName: ruleName,
   }
 
-  @module("@aws-sdk/client-iot") @new external new_: request => t = "CreateTopicRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iot") @new external new: request => t = "CreateTopicRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }

@@ -250,8 +250,8 @@ module UpdateTimelineEvent = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "UpdateTimelineEventCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateTimelineEventCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDeletionProtection = {
@@ -263,8 +263,8 @@ module UpdateDeletionProtection = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "UpdateDeletionProtectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDeletionProtectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutResourcePolicy = {
@@ -275,8 +275,8 @@ module PutResourcePolicy = {
   }
   type response = {policyId: policyId}
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "PutResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTimelineEvent = {
@@ -287,8 +287,8 @@ module DeleteTimelineEvent = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "DeleteTimelineEventCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTimelineEventCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteResponsePlan = {
@@ -296,8 +296,8 @@ module DeleteResponsePlan = {
   type request = {arn: arn}
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "DeleteResponsePlanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteResponsePlanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteResourcePolicy = {
@@ -308,8 +308,8 @@ module DeleteResourcePolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "DeleteResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteReplicationSet = {
@@ -317,8 +317,8 @@ module DeleteReplicationSet = {
   type request = {arn: arn}
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "DeleteReplicationSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteReplicationSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteIncidentRecord = {
@@ -326,8 +326,8 @@ module DeleteIncidentRecord = {
   type request = {arn: arn}
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "DeleteIncidentRecordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteIncidentRecordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTimelineEvent = {
@@ -344,8 +344,8 @@ module CreateTimelineEvent = {
     incidentRecordArn: arn,
   }
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "CreateTimelineEventCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTimelineEventCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -355,8 +355,8 @@ module UntagResource = {
     resourceArn: baseString,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-incidents") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -366,8 +366,8 @@ module TagResource = {
     resourceArn: baseString,
   }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-incidents") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -375,8 +375,8 @@ module ListTagsForResource = {
   type request = {resourceArn: baseString}
   type response = {tags: tagMap}
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListReplicationSets = {
@@ -390,8 +390,8 @@ module ListReplicationSets = {
     replicationSetArns: replicationSetArnList,
   }
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "ListReplicationSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListReplicationSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTimelineEvent = {
@@ -402,8 +402,8 @@ module GetTimelineEvent = {
   }
   type response = {event: timelineEvent}
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "GetTimelineEventCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTimelineEventCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateIncidentRecord = {
@@ -420,8 +420,8 @@ module UpdateIncidentRecord = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "UpdateIncidentRecordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateIncidentRecordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResponsePlans = {
@@ -435,8 +435,8 @@ module ListResponsePlans = {
     responsePlanSummaries: responsePlanSummaryList,
   }
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "ListResponsePlansCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListResponsePlansCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResourcePolicies = {
@@ -451,8 +451,8 @@ module GetResourcePolicies = {
     resourcePolicies: resourcePolicyList,
   }
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "GetResourcePoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetResourcePoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReplicationSet = {
@@ -463,8 +463,8 @@ module CreateReplicationSet = {
   }
   type response = {arn: arn}
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "CreateReplicationSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateReplicationSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateReplicationSet = {
@@ -476,8 +476,8 @@ module UpdateReplicationSet = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "UpdateReplicationSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateReplicationSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetReplicationSet = {
@@ -485,8 +485,8 @@ module GetReplicationSet = {
   type request = {arn: arn}
   type response = {replicationSet: replicationSet}
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "GetReplicationSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetReplicationSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIncidentRecord = {
@@ -494,8 +494,8 @@ module GetIncidentRecord = {
   type request = {arn: arn}
   type response = {incidentRecord: incidentRecord}
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "GetIncidentRecordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetIncidentRecordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateResponsePlan = {
@@ -515,8 +515,8 @@ module UpdateResponsePlan = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "UpdateResponsePlanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateResponsePlanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRelatedItems = {
@@ -528,8 +528,8 @@ module UpdateRelatedItems = {
   }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "UpdateRelatedItemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateRelatedItemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartIncident = {
@@ -543,8 +543,8 @@ module StartIncident = {
     clientToken: option<clientToken>,
   }
   type response = {incidentRecordArn: arn}
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: request => t = "StartIncidentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ssm-incidents") @new external new: request => t = "StartIncidentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTimelineEvents = {
@@ -562,8 +562,8 @@ module ListTimelineEvents = {
     eventSummaries: eventSummaryList,
   }
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "ListTimelineEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTimelineEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRelatedItems = {
@@ -578,8 +578,8 @@ module ListRelatedItems = {
     relatedItems: relatedItemList,
   }
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "ListRelatedItemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListRelatedItemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIncidentRecords = {
@@ -594,8 +594,8 @@ module ListIncidentRecords = {
     incidentRecordSummaries: incidentRecordSummaryList,
   }
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "ListIncidentRecordsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListIncidentRecordsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResponsePlan = {
@@ -611,8 +611,8 @@ module GetResponsePlan = {
     arn: arn,
   }
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "GetResponsePlanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetResponsePlanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateResponsePlan = {
@@ -629,6 +629,6 @@ module CreateResponsePlan = {
   }
   type response = {arn: arn}
   @module("@aws-sdk/client-ssm-incidents") @new
-  external new_: request => t = "CreateResponsePlanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateResponsePlanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

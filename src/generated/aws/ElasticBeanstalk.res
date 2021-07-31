@@ -645,8 +645,8 @@ module SwapEnvironmentCNAMEs = {
   }
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "SwapEnvironmentCNAMEsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SwapEnvironmentCNAMEsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RestartAppServer = {
@@ -657,8 +657,8 @@ module RestartAppServer = {
   }
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "RestartAppServerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RestartAppServerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RequestEnvironmentInfo = {
@@ -670,8 +670,8 @@ module RequestEnvironmentInfo = {
   }
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "RequestEnvironmentInfoCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RequestEnvironmentInfoCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RebuildEnvironment = {
@@ -682,8 +682,8 @@ module RebuildEnvironment = {
   }
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "RebuildEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RebuildEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisassociateEnvironmentOperationsRole = {
@@ -691,8 +691,8 @@ module DisassociateEnvironmentOperationsRole = {
   type request = {@as("EnvironmentName") environmentName: environmentName}
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DisassociateEnvironmentOperationsRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DisassociateEnvironmentOperationsRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteEnvironmentConfiguration = {
@@ -703,8 +703,8 @@ module DeleteEnvironmentConfiguration = {
   }
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DeleteEnvironmentConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteEnvironmentConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteConfigurationTemplate = {
@@ -715,8 +715,8 @@ module DeleteConfigurationTemplate = {
   }
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DeleteConfigurationTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteConfigurationTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteApplicationVersion = {
@@ -728,8 +728,8 @@ module DeleteApplicationVersion = {
   }
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DeleteApplicationVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteApplicationVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteApplication = {
@@ -740,8 +740,8 @@ module DeleteApplication = {
   }
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DeleteApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateStorageLocation = {
@@ -749,8 +749,8 @@ module CreateStorageLocation = {
 
   type response = {@as("S3Bucket") s3Bucket: option<s3Bucket>}
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: unit => t = "CreateStorageLocationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "CreateStorageLocationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CheckDNSAvailability = {
@@ -761,8 +761,8 @@ module CheckDNSAvailability = {
     @as("Available") available: option<cnameAvailability>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "CheckDNSAvailabilityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CheckDNSAvailabilityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateEnvironmentOperationsRole = {
@@ -773,8 +773,8 @@ module AssociateEnvironmentOperationsRole = {
   }
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "AssociateEnvironmentOperationsRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "AssociateEnvironmentOperationsRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ApplyEnvironmentManagedAction = {
@@ -791,8 +791,8 @@ module ApplyEnvironmentManagedAction = {
     @as("ActionId") actionId: option<string_>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "ApplyEnvironmentManagedActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ApplyEnvironmentManagedActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AbortEnvironmentUpdate = {
@@ -803,8 +803,8 @@ module AbortEnvironmentUpdate = {
   }
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "AbortEnvironmentUpdateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "AbortEnvironmentUpdateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ValidateConfigurationSettings = {
@@ -817,8 +817,8 @@ module ValidateConfigurationSettings = {
   }
   type response = {@as("Messages") messages: option<validationMessagesList>}
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "ValidateConfigurationSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ValidateConfigurationSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTagsForResource = {
@@ -830,8 +830,8 @@ module UpdateTagsForResource = {
   }
 
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "UpdateTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateConfigurationTemplate = {
@@ -845,8 +845,8 @@ module UpdateConfigurationTemplate = {
   }
   type response = configurationSettingsDescription
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "UpdateConfigurationTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateConfigurationTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApplicationVersion = {
@@ -860,8 +860,8 @@ module UpdateApplicationVersion = {
     @as("ApplicationVersion") applicationVersion: option<applicationVersionDescription>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "UpdateApplicationVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApplicationVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RetrieveEnvironmentInfo = {
@@ -873,8 +873,8 @@ module RetrieveEnvironmentInfo = {
   }
   type response = {@as("EnvironmentInfo") environmentInfo: option<environmentInfoDescriptionList>}
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "RetrieveEnvironmentInfoCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RetrieveEnvironmentInfoCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -885,8 +885,8 @@ module ListTagsForResource = {
     @as("ResourceArn") resourceArn: option<resourceArn>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEvents = {
@@ -910,8 +910,8 @@ module DescribeEvents = {
     @as("Events") events: option<eventDescriptionList>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribeEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEnvironmentManagedActions = {
@@ -923,8 +923,8 @@ module DescribeEnvironmentManagedActions = {
   }
   type response = {@as("ManagedActions") managedActions: option<managedActions>}
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribeEnvironmentManagedActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEnvironmentManagedActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEnvironmentManagedActionHistory = {
@@ -940,8 +940,8 @@ module DescribeEnvironmentManagedActionHistory = {
     @as("ManagedActionHistoryItems") managedActionHistoryItems: option<managedActionHistoryItems>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribeEnvironmentManagedActionHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEnvironmentManagedActionHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEnvironmentHealth = {
@@ -962,8 +962,8 @@ module DescribeEnvironmentHealth = {
     @as("EnvironmentName") environmentName: option<environmentName>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribeEnvironmentHealthCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEnvironmentHealthCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccountAttributes = {
@@ -971,8 +971,8 @@ module DescribeAccountAttributes = {
 
   type response = {@as("ResourceQuotas") resourceQuotas: option<resourceQuotas>}
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: unit => t = "DescribeAccountAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "DescribeAccountAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePlatformVersion = {
@@ -980,8 +980,8 @@ module DeletePlatformVersion = {
   type request = {@as("PlatformArn") platformArn: option<platformArn>}
   type response = {@as("PlatformSummary") platformSummary: option<platformSummary>}
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DeletePlatformVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeletePlatformVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePlatformVersion = {
@@ -999,8 +999,8 @@ module CreatePlatformVersion = {
     @as("PlatformSummary") platformSummary: option<platformSummary>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "CreatePlatformVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePlatformVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateConfigurationTemplate = {
@@ -1018,8 +1018,8 @@ module CreateConfigurationTemplate = {
   }
   type response = configurationSettingsDescription
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "CreateConfigurationTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateConfigurationTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApplicationVersion = {
@@ -1039,8 +1039,8 @@ module CreateApplicationVersion = {
     @as("ApplicationVersion") applicationVersion: option<applicationVersionDescription>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "CreateApplicationVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateApplicationVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApplicationResourceLifecycle = {
@@ -1055,8 +1055,8 @@ module UpdateApplicationResourceLifecycle = {
     @as("ApplicationName") applicationName: option<applicationName>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "UpdateApplicationResourceLifecycleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApplicationResourceLifecycleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPlatformVersions = {
@@ -1071,8 +1071,8 @@ module ListPlatformVersions = {
     @as("PlatformSummaryList") platformSummaryList: option<platformSummaryList>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "ListPlatformVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPlatformVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPlatformBranches = {
@@ -1087,8 +1087,8 @@ module ListPlatformBranches = {
     @as("PlatformBranchSummaryList") platformBranchSummaryList: option<platformBranchSummaryList>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "ListPlatformBranchesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPlatformBranchesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAvailableSolutionStacks = {
@@ -1099,8 +1099,8 @@ module ListAvailableSolutionStacks = {
     @as("SolutionStacks") solutionStacks: option<availableSolutionStackNamesList>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: unit => t = "ListAvailableSolutionStacksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "ListAvailableSolutionStacksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePlatformVersion = {
@@ -1108,8 +1108,8 @@ module DescribePlatformVersion = {
   type request = {@as("PlatformArn") platformArn: option<platformArn>}
   type response = {@as("PlatformDescription") platformDescription: option<platformDescription>}
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribePlatformVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePlatformVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEnvironmentResources = {
@@ -1122,8 +1122,8 @@ module DescribeEnvironmentResources = {
     @as("EnvironmentResources") environmentResources: option<environmentResourceDescription>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribeEnvironmentResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEnvironmentResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfigurationOptions = {
@@ -1142,8 +1142,8 @@ module DescribeConfigurationOptions = {
     @as("SolutionStackName") solutionStackName: option<solutionStackName>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribeConfigurationOptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConfigurationOptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeApplicationVersions = {
@@ -1159,8 +1159,8 @@ module DescribeApplicationVersions = {
     @as("ApplicationVersions") applicationVersions: option<applicationVersionDescriptionList>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribeApplicationVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeApplicationVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEnvironment = {
@@ -1181,8 +1181,8 @@ module UpdateEnvironment = {
   }
   type response = environmentDescription
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "UpdateEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApplication = {
@@ -1193,8 +1193,8 @@ module UpdateApplication = {
   }
   type response = {@as("Application") application: option<applicationDescription>}
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "UpdateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TerminateEnvironment = {
@@ -1207,8 +1207,8 @@ module TerminateEnvironment = {
   }
   type response = environmentDescription
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "TerminateEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TerminateEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInstancesHealth = {
@@ -1225,8 +1225,8 @@ module DescribeInstancesHealth = {
     @as("InstanceHealthList") instanceHealthList: option<instanceHealthList>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribeInstancesHealthCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInstancesHealthCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfigurationSettings = {
@@ -1241,8 +1241,8 @@ module DescribeConfigurationSettings = {
     configurationSettings: option<configurationSettingsDescriptionList>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribeConfigurationSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConfigurationSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEnvironment = {
@@ -1265,8 +1265,8 @@ module CreateEnvironment = {
   }
   type response = environmentDescription
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "CreateEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApplication = {
@@ -1280,8 +1280,8 @@ module CreateApplication = {
   }
   type response = {@as("Application") application: option<applicationDescription>}
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "CreateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeApplications = {
@@ -1289,8 +1289,8 @@ module DescribeApplications = {
   type request = {@as("ApplicationNames") applicationNames: option<applicationNamesList>}
   type response = {@as("Applications") applications: option<applicationDescriptionList>}
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribeApplicationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeApplicationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEnvironments = {
@@ -1310,8 +1310,8 @@ module DescribeEnvironments = {
     @as("Environments") environments: option<environmentDescriptionsList>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "DescribeEnvironmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEnvironmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ComposeEnvironments = {
@@ -1326,6 +1326,6 @@ module ComposeEnvironments = {
     @as("Environments") environments: option<environmentDescriptionsList>,
   }
   @module("@aws-sdk/client-elasticbeanstalk") @new
-  external new_: request => t = "ComposeEnvironmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ComposeEnvironmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

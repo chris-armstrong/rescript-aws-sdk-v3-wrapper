@@ -74,8 +74,8 @@ module StartSupportDataExport = {
   }
   type response = {dataSetRequestId: option<dataSetRequestId>}
   @module("@aws-sdk/client-marketplacecommerceanalytics") @new
-  external new_: request => t = "StartSupportDataExportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartSupportDataExportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GenerateDataSet = {
@@ -91,6 +91,6 @@ module GenerateDataSet = {
   }
   type response = {dataSetRequestId: option<dataSetRequestId>}
   @module("@aws-sdk/client-marketplacecommerceanalytics") @new
-  external new_: request => t = "GenerateDataSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GenerateDataSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

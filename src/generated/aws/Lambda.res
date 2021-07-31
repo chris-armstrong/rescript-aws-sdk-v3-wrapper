@@ -446,8 +446,8 @@ module RemovePermission = {
     @as("FunctionName") functionName: functionName,
   }
 
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "RemovePermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "RemovePermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveLayerVersionPermission = {
@@ -460,8 +460,8 @@ module RemoveLayerVersionPermission = {
   }
 
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "RemoveLayerVersionPermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RemoveLayerVersionPermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutProvisionedConcurrencyConfig = {
@@ -483,8 +483,8 @@ module PutProvisionedConcurrencyConfig = {
     requestedProvisionedConcurrentExecutions: option<positiveInteger>,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "PutProvisionedConcurrencyConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutProvisionedConcurrencyConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutFunctionConcurrency = {
@@ -495,8 +495,8 @@ module PutFunctionConcurrency = {
   }
   type response = concurrency
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "PutFunctionConcurrencyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutFunctionConcurrencyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutFunctionCodeSigningConfig = {
@@ -510,8 +510,8 @@ module PutFunctionCodeSigningConfig = {
     @as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "PutFunctionCodeSigningConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutFunctionCodeSigningConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InvokeAsync = {
@@ -521,8 +521,8 @@ module InvokeAsync = {
     @as("FunctionName") functionName: namespacedFunctionName,
   }
   type response = {@as("Status") status: option<httpStatus>}
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "InvokeAsyncCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "InvokeAsyncCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Invoke = {
@@ -542,8 +542,8 @@ module Invoke = {
     @as("FunctionError") functionError: option<string_>,
     @as("StatusCode") statusCode: option<integer_>,
   }
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "InvokeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "InvokeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetProvisionedConcurrencyConfig = {
@@ -564,8 +564,8 @@ module GetProvisionedConcurrencyConfig = {
     requestedProvisionedConcurrentExecutions: option<positiveInteger>,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "GetProvisionedConcurrencyConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetProvisionedConcurrencyConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPolicy = {
@@ -578,8 +578,8 @@ module GetPolicy = {
     @as("RevisionId") revisionId: option<string_>,
     @as("Policy") policy: option<string_>,
   }
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "GetPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "GetPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLayerVersionPolicy = {
@@ -592,9 +592,8 @@ module GetLayerVersionPolicy = {
     @as("RevisionId") revisionId: option<string_>,
     @as("Policy") policy: option<string_>,
   }
-  @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "GetLayerVersionPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "GetLayerVersionPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFunctionConcurrency = {
@@ -605,8 +604,8 @@ module GetFunctionConcurrency = {
     reservedConcurrentExecutions: option<reservedConcurrentExecutions>,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "GetFunctionConcurrencyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetFunctionConcurrencyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFunctionCodeSigningConfig = {
@@ -617,8 +616,8 @@ module GetFunctionCodeSigningConfig = {
     @as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "GetFunctionCodeSigningConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetFunctionCodeSigningConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProvisionedConcurrencyConfig = {
@@ -629,8 +628,8 @@ module DeleteProvisionedConcurrencyConfig = {
   }
 
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "DeleteProvisionedConcurrencyConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteProvisionedConcurrencyConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteLayerVersion = {
@@ -640,8 +639,8 @@ module DeleteLayerVersion = {
     @as("LayerName") layerName: layerName,
   }
 
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "DeleteLayerVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "DeleteLayerVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteFunctionEventInvokeConfig = {
@@ -652,8 +651,8 @@ module DeleteFunctionEventInvokeConfig = {
   }
 
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "DeleteFunctionEventInvokeConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteFunctionEventInvokeConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteFunctionConcurrency = {
@@ -661,8 +660,8 @@ module DeleteFunctionConcurrency = {
   type request = {@as("FunctionName") functionName: functionName}
 
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "DeleteFunctionConcurrencyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteFunctionConcurrencyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteFunctionCodeSigningConfig = {
@@ -670,8 +669,8 @@ module DeleteFunctionCodeSigningConfig = {
   type request = {@as("FunctionName") functionName: functionName}
 
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "DeleteFunctionCodeSigningConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteFunctionCodeSigningConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteFunction = {
@@ -681,8 +680,8 @@ module DeleteFunction = {
     @as("FunctionName") functionName: functionName,
   }
 
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "DeleteFunctionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "DeleteFunctionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteCodeSigningConfig = {
@@ -690,8 +689,8 @@ module DeleteCodeSigningConfig = {
   type request = {@as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn}
   type response = unit
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "DeleteCodeSigningConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteCodeSigningConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAlias = {
@@ -701,8 +700,8 @@ module DeleteAlias = {
     @as("FunctionName") functionName: functionName,
   }
 
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "DeleteAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "DeleteAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AddPermission = {
@@ -719,8 +718,8 @@ module AddPermission = {
     @as("FunctionName") functionName: functionName,
   }
   type response = {@as("Statement") statement: option<string_>}
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "AddPermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "AddPermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddLayerVersionPermission = {
@@ -739,8 +738,8 @@ module AddLayerVersionPermission = {
     @as("Statement") statement: option<string_>,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "AddLayerVersionPermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddLayerVersionPermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -750,8 +749,8 @@ module UntagResource = {
     @as("Resource") resource: functionArn,
   }
 
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -761,8 +760,8 @@ module TagResource = {
     @as("Resource") resource: functionArn,
   }
 
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PublishLayerVersion = {
@@ -784,16 +783,16 @@ module PublishLayerVersion = {
     @as("LayerArn") layerArn: option<layerArn>,
     @as("Content") content: option<layerVersionContentOutput>,
   }
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "PublishLayerVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "PublishLayerVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTags = {
   type t
   type request = {@as("Resource") resource: functionArn}
   type response = {@as("Tags") tags: option<tags>}
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "ListTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "ListTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFunctionsByCodeSigningConfig = {
@@ -808,8 +807,8 @@ module ListFunctionsByCodeSigningConfig = {
     @as("NextMarker") nextMarker: option<string_>,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "ListFunctionsByCodeSigningConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListFunctionsByCodeSigningConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLayerVersionByArn = {
@@ -825,8 +824,8 @@ module GetLayerVersionByArn = {
     @as("LayerArn") layerArn: option<layerArn>,
     @as("Content") content: option<layerVersionContentOutput>,
   }
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "GetLayerVersionByArnCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "GetLayerVersionByArnCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLayerVersion = {
@@ -845,8 +844,8 @@ module GetLayerVersion = {
     @as("LayerArn") layerArn: option<layerArn>,
     @as("Content") content: option<layerVersionContentOutput>,
   }
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "GetLayerVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "GetLayerVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAccountSettings = {
@@ -856,8 +855,8 @@ module GetAccountSettings = {
     @as("AccountUsage") accountUsage: option<accountUsage>,
     @as("AccountLimit") accountLimit: option<accountLimit>,
   }
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "GetAccountSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "GetAccountSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFunctionEventInvokeConfig = {
@@ -871,8 +870,8 @@ module UpdateFunctionEventInvokeConfig = {
   }
   type response = functionEventInvokeConfig
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "UpdateFunctionEventInvokeConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFunctionEventInvokeConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAlias = {
@@ -886,8 +885,8 @@ module UpdateAlias = {
     @as("FunctionName") functionName: functionName,
   }
   type response = aliasConfiguration
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "UpdateAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "UpdateAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutFunctionEventInvokeConfig = {
@@ -901,8 +900,8 @@ module PutFunctionEventInvokeConfig = {
   }
   type response = functionEventInvokeConfig
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "PutFunctionEventInvokeConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutFunctionEventInvokeConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProvisionedConcurrencyConfigs = {
@@ -918,8 +917,8 @@ module ListProvisionedConcurrencyConfigs = {
     provisionedConcurrencyConfigs: option<provisionedConcurrencyConfigList>,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "ListProvisionedConcurrencyConfigsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProvisionedConcurrencyConfigsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFunctionEventInvokeConfig = {
@@ -930,8 +929,8 @@ module GetFunctionEventInvokeConfig = {
   }
   type response = functionEventInvokeConfig
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "GetFunctionEventInvokeConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetFunctionEventInvokeConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAlias = {
@@ -941,8 +940,8 @@ module GetAlias = {
     @as("FunctionName") functionName: functionName,
   }
   type response = aliasConfiguration
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "GetAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "GetAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAlias = {
@@ -955,8 +954,8 @@ module CreateAlias = {
     @as("FunctionName") functionName: functionName,
   }
   type response = aliasConfiguration
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "CreateAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "CreateAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFunctionConfiguration = {
@@ -981,8 +980,8 @@ module UpdateFunctionConfiguration = {
   }
   type response = functionConfiguration
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "UpdateFunctionConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFunctionConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFunctionCode = {
@@ -999,8 +998,8 @@ module UpdateFunctionCode = {
     @as("FunctionName") functionName: functionName,
   }
   type response = functionConfiguration
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "UpdateFunctionCodeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "UpdateFunctionCodeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEventSourceMapping = {
@@ -1026,8 +1025,8 @@ module UpdateEventSourceMapping = {
   }
   type response = eventSourceMappingConfiguration
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "UpdateEventSourceMappingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEventSourceMappingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCodeSigningConfig = {
@@ -1040,8 +1039,8 @@ module UpdateCodeSigningConfig = {
   }
   type response = {@as("CodeSigningConfig") codeSigningConfig: codeSigningConfig}
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "UpdateCodeSigningConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateCodeSigningConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PublishVersion = {
@@ -1053,8 +1052,8 @@ module PublishVersion = {
     @as("FunctionName") functionName: functionName,
   }
   type response = functionConfiguration
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "PublishVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "PublishVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLayerVersions = {
@@ -1069,8 +1068,8 @@ module ListLayerVersions = {
     @as("LayerVersions") layerVersions: option<layerVersionsList>,
     @as("NextMarker") nextMarker: option<string_>,
   }
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "ListLayerVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "ListLayerVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFunctionConfiguration = {
@@ -1081,25 +1080,24 @@ module GetFunctionConfiguration = {
   }
   type response = functionConfiguration
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "GetFunctionConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetFunctionConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEventSourceMapping = {
   type t
   type request = {@as("UUID") uuid: string_}
   type response = eventSourceMappingConfiguration
-  @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "GetEventSourceMappingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "GetEventSourceMappingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCodeSigningConfig = {
   type t
   type request = {@as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn}
   type response = {@as("CodeSigningConfig") codeSigningConfig: codeSigningConfig}
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "GetCodeSigningConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "GetCodeSigningConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEventSourceMapping = {
@@ -1107,8 +1105,8 @@ module DeleteEventSourceMapping = {
   type request = {@as("UUID") uuid: string_}
   type response = eventSourceMappingConfiguration
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "DeleteEventSourceMappingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEventSourceMappingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFunction = {
@@ -1136,8 +1134,8 @@ module CreateFunction = {
     @as("FunctionName") functionName: functionName,
   }
   type response = functionConfiguration
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "CreateFunctionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "CreateFunctionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEventSourceMapping = {
@@ -1168,8 +1166,8 @@ module CreateEventSourceMapping = {
   }
   type response = eventSourceMappingConfiguration
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "CreateEventSourceMappingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateEventSourceMappingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCodeSigningConfig = {
@@ -1181,8 +1179,8 @@ module CreateCodeSigningConfig = {
   }
   type response = {@as("CodeSigningConfig") codeSigningConfig: codeSigningConfig}
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "CreateCodeSigningConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCodeSigningConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLayers = {
@@ -1196,8 +1194,8 @@ module ListLayers = {
     @as("Layers") layers: option<layersList>,
     @as("NextMarker") nextMarker: option<string_>,
   }
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "ListLayersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "ListLayersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFunctionEventInvokeConfigs = {
@@ -1213,8 +1211,8 @@ module ListFunctionEventInvokeConfigs = {
     functionEventInvokeConfigs: option<functionEventInvokeConfigList>,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "ListFunctionEventInvokeConfigsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListFunctionEventInvokeConfigsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCodeSigningConfigs = {
@@ -1228,8 +1226,8 @@ module ListCodeSigningConfigs = {
     @as("NextMarker") nextMarker: option<string_>,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "ListCodeSigningConfigsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCodeSigningConfigsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAliases = {
@@ -1244,8 +1242,8 @@ module ListAliases = {
     @as("Aliases") aliases: option<aliasList>,
     @as("NextMarker") nextMarker: option<string_>,
   }
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "ListAliasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "ListAliasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFunction = {
@@ -1260,8 +1258,8 @@ module GetFunction = {
     @as("Code") code: option<functionCodeLocation>,
     @as("Configuration") configuration: option<functionConfiguration>,
   }
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "GetFunctionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "GetFunctionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListVersionsByFunction = {
@@ -1276,8 +1274,8 @@ module ListVersionsByFunction = {
     @as("NextMarker") nextMarker: option<string_>,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "ListVersionsByFunctionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListVersionsByFunctionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFunctions = {
@@ -1292,8 +1290,8 @@ module ListFunctions = {
     @as("Functions") functions: option<functionList>,
     @as("NextMarker") nextMarker: option<string_>,
   }
-  @module("@aws-sdk/client-lambda") @new external new_: request => t = "ListFunctionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lambda") @new external new: request => t = "ListFunctionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEventSourceMappings = {
@@ -1309,6 +1307,6 @@ module ListEventSourceMappings = {
     @as("NextMarker") nextMarker: option<string_>,
   }
   @module("@aws-sdk/client-lambda") @new
-  external new_: request => t = "ListEventSourceMappingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEventSourceMappingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

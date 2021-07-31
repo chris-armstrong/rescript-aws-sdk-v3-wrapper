@@ -330,8 +330,8 @@ module GetExport = {
     version: option<numericalVersion>,
     name: option<name>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetExportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetExportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteUtterances = {
@@ -341,8 +341,8 @@ module DeleteUtterances = {
     botName: botName,
   }
 
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "DeleteUtterancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteUtterancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteBotChannelAssociation = {
@@ -354,8 +354,8 @@ module DeleteBotChannelAssociation = {
   }
 
   @module("@aws-sdk/client-lex") @new
-  external new_: request => t = "DeleteBotChannelAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteBotChannelAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagResource = {
@@ -365,8 +365,8 @@ module UntagResource = {
     resourceArn: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetImport = {
@@ -381,8 +381,8 @@ module GetImport = {
     resourceType: option<resourceType>,
     name: option<name>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetImportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetImportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBotChannelAssociation = {
@@ -403,9 +403,8 @@ module GetBotChannelAssociation = {
     description: option<description>,
     name: option<botChannelName>,
   }
-  @module("@aws-sdk/client-lex") @new
-  external new_: request => t = "GetBotChannelAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotChannelAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSlotTypeVersion = {
@@ -415,16 +414,16 @@ module DeleteSlotTypeVersion = {
     name: slotTypeName,
   }
 
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "DeleteSlotTypeVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteSlotTypeVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteSlotType = {
   type t
   type request = {name: slotTypeName}
 
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "DeleteSlotTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteSlotTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteIntentVersion = {
@@ -434,16 +433,16 @@ module DeleteIntentVersion = {
     name: intentName,
   }
 
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "DeleteIntentVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteIntentVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteIntent = {
   type t
   type request = {name: intentName}
 
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "DeleteIntentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteIntentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteBotVersion = {
@@ -453,8 +452,8 @@ module DeleteBotVersion = {
     name: botName,
   }
 
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "DeleteBotVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteBotVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteBotAlias = {
@@ -464,16 +463,16 @@ module DeleteBotAlias = {
     name: aliasName,
   }
 
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "DeleteBotAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteBotAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteBot = {
   type t
   type request = {name: botName}
 
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "DeleteBotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "DeleteBotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -483,8 +482,8 @@ module TagResource = {
     resourceArn: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartImport = {
@@ -504,16 +503,16 @@ module StartImport = {
     resourceType: option<resourceType>,
     name: option<name>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "StartImportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "StartImportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {resourceArn: amazonResourceName}
   type response = {tags: option<tagList_>}
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSlotTypes = {
@@ -527,8 +526,8 @@ module GetSlotTypes = {
     nextToken: option<nextToken>,
     slotTypes: option<slotTypeMetadataList>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetSlotTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetSlotTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSlotTypeVersions = {
@@ -542,8 +541,8 @@ module GetSlotTypeVersions = {
     nextToken: option<nextToken>,
     slotTypes: option<slotTypeMetadataList>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetSlotTypeVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetSlotTypeVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIntents = {
@@ -557,8 +556,8 @@ module GetIntents = {
     nextToken: option<nextToken>,
     intents: option<intentMetadataList>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetIntentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetIntentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIntentVersions = {
@@ -572,8 +571,8 @@ module GetIntentVersions = {
     nextToken: option<nextToken>,
     intents: option<intentMetadataList>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetIntentVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetIntentVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBuiltinIntent = {
@@ -584,8 +583,8 @@ module GetBuiltinIntent = {
     supportedLocales: option<localeList>,
     signature: option<builtinIntentSignature>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetBuiltinIntentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetBuiltinIntentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBots = {
@@ -599,8 +598,8 @@ module GetBots = {
     nextToken: option<nextToken>,
     bots: option<botMetadataList>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetBotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBotVersions = {
@@ -614,8 +613,8 @@ module GetBotVersions = {
     nextToken: option<nextToken>,
     bots: option<botMetadataList>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetBotVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutSlotType = {
@@ -643,8 +642,8 @@ module PutSlotType = {
     description: option<description>,
     name: option<slotTypeName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "PutSlotTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "PutSlotTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutBotAlias = {
@@ -669,8 +668,8 @@ module PutBotAlias = {
     description: option<description>,
     name: option<aliasName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "PutBotAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "PutBotAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutBot = {
@@ -715,8 +714,8 @@ module PutBot = {
     description: option<description>,
     name: option<botName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "PutBotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "PutBotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSlotType = {
@@ -737,8 +736,8 @@ module GetSlotType = {
     description: option<description>,
     name: option<slotTypeName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetSlotTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetSlotTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBuiltinSlotTypes = {
@@ -753,8 +752,8 @@ module GetBuiltinSlotTypes = {
     nextToken: option<nextToken>,
     slotTypes: option<builtinSlotTypeMetadataList>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetBuiltinSlotTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetBuiltinSlotTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBuiltinIntents = {
@@ -769,8 +768,8 @@ module GetBuiltinIntents = {
     nextToken: option<nextToken>,
     intents: option<builtinIntentMetadataList>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetBuiltinIntentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetBuiltinIntentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBotChannelAssociations = {
@@ -787,8 +786,8 @@ module GetBotChannelAssociations = {
     botChannelAssociations: option<botChannelAssociationList>,
   }
   @module("@aws-sdk/client-lex") @new
-  external new_: request => t = "GetBotChannelAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetBotChannelAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBotAlias = {
@@ -807,8 +806,8 @@ module GetBotAlias = {
     description: option<description>,
     name: option<aliasName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetBotAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBot = {
@@ -837,8 +836,8 @@ module GetBot = {
     description: option<description>,
     name: option<botName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetBotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSlotTypeVersion = {
@@ -859,8 +858,8 @@ module CreateSlotTypeVersion = {
     description: option<description>,
     name: option<slotTypeName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "CreateSlotTypeVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "CreateSlotTypeVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBotVersion = {
@@ -888,8 +887,8 @@ module CreateBotVersion = {
     description: option<description>,
     name: option<botName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "CreateBotVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "CreateBotVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUtterancesView = {
@@ -903,8 +902,8 @@ module GetUtterancesView = {
     utterances: option<listsOfUtterances>,
     botName: option<botName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetUtterancesViewCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetUtterancesViewCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutIntent = {
@@ -948,8 +947,8 @@ module PutIntent = {
     description: option<description>,
     name: option<intentName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "PutIntentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "PutIntentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIntent = {
@@ -978,8 +977,8 @@ module GetIntent = {
     description: option<description>,
     name: option<intentName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetIntentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetIntentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBotAliases = {
@@ -994,8 +993,8 @@ module GetBotAliases = {
     nextToken: option<nextToken>,
     @as("BotAliases") botAliases: option<botAliasMetadataList>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "GetBotAliasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "GetBotAliasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateIntentVersion = {
@@ -1024,6 +1023,6 @@ module CreateIntentVersion = {
     description: option<description>,
     name: option<intentName>,
   }
-  @module("@aws-sdk/client-lex") @new external new_: request => t = "CreateIntentVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lex") @new external new: request => t = "CreateIntentVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

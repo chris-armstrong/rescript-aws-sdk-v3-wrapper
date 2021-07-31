@@ -406,24 +406,24 @@ module UpdateReplicationJob = {
     replicationJobId: replicationJobId,
   }
   type response = unit
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "UpdateReplicationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "UpdateReplicationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TerminateApp = {
   type t
   type request = {appId: option<appId>}
   type response = unit
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "TerminateAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "TerminateAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopAppReplication = {
   type t
   type request = {appId: option<appId>}
   type response = unit
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "StopAppReplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "StopAppReplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartOnDemandReplicationRun = {
@@ -434,8 +434,8 @@ module StartOnDemandReplicationRun = {
   }
   type response = {replicationRunId: option<replicationRunId>}
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "StartOnDemandReplicationRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartOnDemandReplicationRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartOnDemandAppReplication = {
@@ -446,64 +446,64 @@ module StartOnDemandAppReplication = {
   }
   type response = unit
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "StartOnDemandAppReplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartOnDemandAppReplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartAppReplication = {
   type t
   type request = {appId: option<appId>}
   type response = unit
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "StartAppReplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "StartAppReplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module LaunchApp = {
   type t
   type request = {appId: option<appId>}
   type response = unit
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "LaunchAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "LaunchAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportServerCatalog = {
   type t
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "ImportServerCatalogCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "ImportServerCatalogCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportAppCatalog = {
   type t
   type request = {roleName: option<roleName>}
   type response = unit
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "ImportAppCatalogCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "ImportAppCatalogCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateConnector = {
   type t
   type request = {connectorId: connectorId}
   type response = unit
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "DisassociateConnectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "DisassociateConnectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteServerCatalog = {
   type t
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "DeleteServerCatalogCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "DeleteServerCatalogCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteReplicationJob = {
   type t
   type request = {replicationJobId: replicationJobId}
   type response = unit
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "DeleteReplicationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "DeleteReplicationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAppValidationConfiguration = {
@@ -511,8 +511,8 @@ module DeleteAppValidationConfiguration = {
   type request = {appId: appIdWithValidation}
   type response = unit
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "DeleteAppValidationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAppValidationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAppReplicationConfiguration = {
@@ -520,8 +520,8 @@ module DeleteAppReplicationConfiguration = {
   type request = {appId: option<appId>}
   type response = unit
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "DeleteAppReplicationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAppReplicationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAppLaunchConfiguration = {
@@ -529,8 +529,8 @@ module DeleteAppLaunchConfiguration = {
   type request = {appId: option<appId>}
   type response = unit
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "DeleteAppLaunchConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAppLaunchConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApp = {
@@ -541,8 +541,8 @@ module DeleteApp = {
     appId: option<appId>,
   }
   type response = unit
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "DeleteAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "DeleteAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReplicationJob = {
@@ -560,8 +560,8 @@ module CreateReplicationJob = {
     serverId: serverId,
   }
   type response = {replicationJobId: option<replicationJobId>}
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "CreateReplicationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "CreateReplicationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module NotifyAppValidationOutput = {
@@ -572,8 +572,8 @@ module NotifyAppValidationOutput = {
   }
   type response = unit
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "NotifyAppValidationOutputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "NotifyAppValidationOutputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GenerateTemplate = {
@@ -583,8 +583,8 @@ module GenerateTemplate = {
     appId: option<appId>,
   }
   type response = {s3Location: option<s3Location>}
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "GenerateTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "GenerateTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GenerateChangeSet = {
@@ -594,8 +594,8 @@ module GenerateChangeSet = {
     appId: option<appId>,
   }
   type response = {s3Location: option<s3Location>}
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "GenerateChangeSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "GenerateChangeSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListApps = {
@@ -609,8 +609,8 @@ module ListApps = {
     nextToken: option<nextToken>,
     apps: option<apps>,
   }
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "ListAppsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "ListAppsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetConnectors = {
@@ -623,8 +623,8 @@ module GetConnectors = {
     nextToken: option<nextToken>,
     connectorList: option<connectorList>,
   }
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "GetConnectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "GetConnectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetServers = {
@@ -640,8 +640,8 @@ module GetServers = {
     serverCatalogStatus: option<serverCatalogStatus>,
     lastModifiedOn: option<timestamp_>,
   }
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "GetServersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "GetServersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetReplicationRuns = {
@@ -656,8 +656,8 @@ module GetReplicationRuns = {
     replicationRunList: option<replicationRunList>,
     replicationJob: option<replicationJob>,
   }
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "GetReplicationRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "GetReplicationRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetReplicationJobs = {
@@ -671,8 +671,8 @@ module GetReplicationJobs = {
     nextToken: option<nextToken>,
     replicationJobList: option<replicationJobList>,
   }
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "GetReplicationJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "GetReplicationJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApp = {
@@ -690,16 +690,16 @@ module UpdateApp = {
     serverGroups: option<serverGroups>,
     appSummary: option<appSummary>,
   }
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "UpdateAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "UpdateAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAppValidationOutput = {
   type t
   type request = {appId: appIdWithValidation}
   type response = {validationOutputList: option<validationOutputList>}
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "GetAppValidationOutputCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "GetAppValidationOutputCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApp = {
@@ -710,8 +710,8 @@ module GetApp = {
     serverGroups: option<serverGroups>,
     appSummary: option<appSummary>,
   }
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "GetAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "GetAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApp = {
@@ -729,8 +729,8 @@ module CreateApp = {
     serverGroups: option<serverGroups>,
     appSummary: option<appSummary>,
   }
-  @module("@aws-sdk/client-sms") @new external new_: request => t = "CreateAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms") @new external new: request => t = "CreateAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAppValidationConfiguration = {
@@ -742,8 +742,8 @@ module PutAppValidationConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "PutAppValidationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutAppValidationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAppReplicationConfiguration = {
@@ -754,8 +754,8 @@ module PutAppReplicationConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "PutAppReplicationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutAppReplicationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAppLaunchConfiguration = {
@@ -768,8 +768,8 @@ module PutAppLaunchConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "PutAppLaunchConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutAppLaunchConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAppValidationConfiguration = {
@@ -780,8 +780,8 @@ module GetAppValidationConfiguration = {
     appValidationConfigurations: option<appValidationConfigurations>,
   }
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "GetAppValidationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAppValidationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAppReplicationConfiguration = {
@@ -791,8 +791,8 @@ module GetAppReplicationConfiguration = {
     serverGroupReplicationConfigurations: option<serverGroupReplicationConfigurations>,
   }
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "GetAppReplicationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAppReplicationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAppLaunchConfiguration = {
@@ -805,6 +805,6 @@ module GetAppLaunchConfiguration = {
     appId: option<appId>,
   }
   @module("@aws-sdk/client-sms") @new
-  external new_: request => t = "GetAppLaunchConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAppLaunchConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

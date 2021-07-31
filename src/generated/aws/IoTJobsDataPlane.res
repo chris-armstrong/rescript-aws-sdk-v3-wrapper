@@ -89,8 +89,8 @@ module UpdateJobExecution = {
     executionState: option<jobExecutionState>,
   }
   @module("@aws-sdk/client-iot-jobs-data") @new
-  external new_: request => t = "UpdateJobExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateJobExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartNextPendingJobExecution = {
@@ -102,8 +102,8 @@ module StartNextPendingJobExecution = {
   }
   type response = {execution: option<jobExecution>}
   @module("@aws-sdk/client-iot-jobs-data") @new
-  external new_: request => t = "StartNextPendingJobExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartNextPendingJobExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPendingJobExecutions = {
@@ -114,8 +114,8 @@ module GetPendingJobExecutions = {
     inProgressJobs: option<jobExecutionSummaryList>,
   }
   @module("@aws-sdk/client-iot-jobs-data") @new
-  external new_: request => t = "GetPendingJobExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPendingJobExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJobExecution = {
@@ -128,6 +128,6 @@ module DescribeJobExecution = {
   }
   type response = {execution: option<jobExecution>}
   @module("@aws-sdk/client-iot-jobs-data") @new
-  external new_: request => t = "DescribeJobExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeJobExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -42,6 +42,6 @@ module QueryForecast = {
     @as("ForecastArn") forecastArn: arn,
   }
   type response = {@as("Forecast") forecast: option<forecast>}
-  @module("@aws-sdk/client-forecast") @new external new_: request => t = "QueryForecastCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-forecast") @new external new: request => t = "QueryForecastCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

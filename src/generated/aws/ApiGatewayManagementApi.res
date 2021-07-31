@@ -29,16 +29,16 @@ module PostToConnection = {
     @as("Data") data: data,
   }
 
-  @module("@aws-sdk/client-apigateway") @new external new_: request => t = "PostToConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-apigateway") @new external new: request => t = "PostToConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteConnection = {
   type t
   type request = {@as("ConnectionId") connectionId: __string}
 
-  @module("@aws-sdk/client-apigateway") @new external new_: request => t = "DeleteConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-apigateway") @new external new: request => t = "DeleteConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetConnection = {
@@ -49,6 +49,6 @@ module GetConnection = {
     @as("Identity") identity: option<identity>,
     @as("ConnectedAt") connectedAt: option<__timestampIso8601>,
   }
-  @module("@aws-sdk/client-apigateway") @new external new_: request => t = "GetConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-apigateway") @new external new: request => t = "GetConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

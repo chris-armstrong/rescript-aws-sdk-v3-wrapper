@@ -434,8 +434,8 @@ module StartImagePipelineExecution = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "StartImagePipelineExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartImagePipelineExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutImageRecipePolicy = {
@@ -449,8 +449,8 @@ module PutImageRecipePolicy = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "PutImageRecipePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutImageRecipePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutImagePolicy = {
@@ -463,8 +463,8 @@ module PutImagePolicy = {
     imageArn: option<imageBuildVersionArn>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new external new_: request => t = "PutImagePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "PutImagePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutContainerRecipePolicy = {
@@ -478,8 +478,8 @@ module PutContainerRecipePolicy = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "PutContainerRecipePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutContainerRecipePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutComponentPolicy = {
@@ -493,8 +493,8 @@ module PutComponentPolicy = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "PutComponentPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutComponentPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetImageRecipePolicy = {
@@ -505,8 +505,8 @@ module GetImageRecipePolicy = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "GetImageRecipePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetImageRecipePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetImagePolicy = {
@@ -516,8 +516,8 @@ module GetImagePolicy = {
     policy: option<resourcePolicyDocument>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new external new_: request => t = "GetImagePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "GetImagePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContainerRecipePolicy = {
@@ -528,8 +528,8 @@ module GetContainerRecipePolicy = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "GetContainerRecipePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetContainerRecipePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetComponentPolicy = {
@@ -540,8 +540,8 @@ module GetComponentPolicy = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "GetComponentPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetComponentPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInfrastructureConfiguration = {
@@ -552,8 +552,8 @@ module DeleteInfrastructureConfiguration = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "DeleteInfrastructureConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteInfrastructureConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteImageRecipe = {
@@ -564,8 +564,8 @@ module DeleteImageRecipe = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "DeleteImageRecipeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteImageRecipeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteImagePipeline = {
@@ -576,8 +576,8 @@ module DeleteImagePipeline = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "DeleteImagePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteImagePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteImage = {
@@ -587,8 +587,8 @@ module DeleteImage = {
     imageBuildVersionArn: option<imageBuildVersionArn>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new external new_: request => t = "DeleteImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "DeleteImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDistributionConfiguration = {
@@ -599,8 +599,8 @@ module DeleteDistributionConfiguration = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "DeleteDistributionConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteDistributionConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteContainerRecipe = {
@@ -611,8 +611,8 @@ module DeleteContainerRecipe = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "DeleteContainerRecipeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteContainerRecipeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteComponent = {
@@ -622,9 +622,8 @@ module DeleteComponent = {
     componentBuildVersionArn: option<componentBuildVersionArn>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "DeleteComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "DeleteComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelImageCreation = {
@@ -639,8 +638,8 @@ module CancelImageCreation = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "CancelImageCreationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelImageCreationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateImagePipeline = {
@@ -664,8 +663,8 @@ module UpdateImagePipeline = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "UpdateImagePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateImagePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -675,8 +674,8 @@ module UntagResource = {
     resourceArn: imageBuilderArn,
   }
   type response = unit
-  @module("@aws-sdk/client-imagebuilder") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -686,8 +685,8 @@ module TagResource = {
     resourceArn: imageBuilderArn,
   }
   type response = unit
-  @module("@aws-sdk/client-imagebuilder") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -695,8 +694,8 @@ module ListTagsForResource = {
   type request = {resourceArn: imageBuilderArn}
   type response = {tags: option<tagMap>}
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportComponent = {
@@ -720,9 +719,8 @@ module ImportComponent = {
     clientToken: option<clientToken>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "ImportComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "ImportComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateImagePipeline = {
@@ -747,8 +745,8 @@ module CreateImagePipeline = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "CreateImagePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateImagePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateImage = {
@@ -768,8 +766,8 @@ module CreateImage = {
     clientToken: option<clientToken>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new external new_: request => t = "CreateImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "CreateImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateComponent = {
@@ -792,9 +790,8 @@ module CreateComponent = {
     clientToken: option<clientToken>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "CreateComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "CreateComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateInfrastructureConfiguration = {
@@ -819,8 +816,8 @@ module UpdateInfrastructureConfiguration = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "UpdateInfrastructureConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateInfrastructureConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListImagePackages = {
@@ -836,8 +833,8 @@ module ListImagePackages = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "ListImagePackagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListImagePackagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetImagePipeline = {
@@ -848,8 +845,8 @@ module GetImagePipeline = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "GetImagePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetImagePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetComponent = {
@@ -859,8 +856,8 @@ module GetComponent = {
     component: option<component>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new external new_: request => t = "GetComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "GetComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInfrastructureConfiguration = {
@@ -886,8 +883,8 @@ module CreateInfrastructureConfiguration = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "CreateInfrastructureConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateInfrastructureConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInfrastructureConfigurations = {
@@ -903,8 +900,8 @@ module ListInfrastructureConfigurations = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "ListInfrastructureConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListInfrastructureConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListImages = {
@@ -922,8 +919,8 @@ module ListImages = {
     imageVersionList: option<imageVersionList>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new external new_: request => t = "ListImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "ListImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListImageRecipes = {
@@ -940,8 +937,8 @@ module ListImageRecipes = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "ListImageRecipesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListImageRecipesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListImagePipelines = {
@@ -957,8 +954,8 @@ module ListImagePipelines = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "ListImagePipelinesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListImagePipelinesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDistributionConfigurations = {
@@ -974,8 +971,8 @@ module ListDistributionConfigurations = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "ListDistributionConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDistributionConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListContainerRecipes = {
@@ -992,8 +989,8 @@ module ListContainerRecipes = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "ListContainerRecipesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListContainerRecipesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListComponents = {
@@ -1010,8 +1007,8 @@ module ListComponents = {
     componentVersionList: option<componentVersionList>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new external new_: request => t = "ListComponentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "ListComponentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListComponentBuildVersions = {
@@ -1027,8 +1024,8 @@ module ListComponentBuildVersions = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "ListComponentBuildVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListComponentBuildVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInfrastructureConfiguration = {
@@ -1039,8 +1036,8 @@ module GetInfrastructureConfiguration = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "GetInfrastructureConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInfrastructureConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateImageRecipe = {
@@ -1062,8 +1059,8 @@ module CreateImageRecipe = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "CreateImageRecipeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateImageRecipeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetImageRecipe = {
@@ -1073,8 +1070,8 @@ module GetImageRecipe = {
     imageRecipe: option<imageRecipe>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new external new_: request => t = "GetImageRecipeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "GetImageRecipeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateContainerRecipe = {
@@ -1103,8 +1100,8 @@ module CreateContainerRecipe = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "CreateContainerRecipeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateContainerRecipeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDistributionConfiguration = {
@@ -1121,8 +1118,8 @@ module UpdateDistributionConfiguration = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "UpdateDistributionConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDistributionConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContainerRecipe = {
@@ -1133,8 +1130,8 @@ module GetContainerRecipe = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "GetContainerRecipeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetContainerRecipeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDistributionConfiguration = {
@@ -1152,8 +1149,8 @@ module CreateDistributionConfiguration = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "CreateDistributionConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDistributionConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListImagePipelineImages = {
@@ -1170,8 +1167,8 @@ module ListImagePipelineImages = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "ListImagePipelineImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListImagePipelineImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListImageBuildVersions = {
@@ -1188,8 +1185,8 @@ module ListImageBuildVersions = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "ListImageBuildVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListImageBuildVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDistributionConfiguration = {
@@ -1200,8 +1197,8 @@ module GetDistributionConfiguration = {
     requestId: option<nonEmptyString>,
   }
   @module("@aws-sdk/client-imagebuilder") @new
-  external new_: request => t = "GetDistributionConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDistributionConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetImage = {
@@ -1211,6 +1208,6 @@ module GetImage = {
     image: option<image>,
     requestId: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-imagebuilder") @new external new_: request => t = "GetImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-imagebuilder") @new external new: request => t = "GetImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

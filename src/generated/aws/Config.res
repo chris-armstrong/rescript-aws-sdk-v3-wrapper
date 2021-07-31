@@ -975,8 +975,8 @@ module StopConfigurationRecorder = {
   type request = {@as("ConfigurationRecorderName") configurationRecorderName: recorderName}
 
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "StopConfigurationRecorderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "StopConfigurationRecorderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartConfigurationRecorder = {
@@ -984,25 +984,24 @@ module StartConfigurationRecorder = {
   type request = {@as("ConfigurationRecorderName") configurationRecorderName: recorderName}
 
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "StartConfigurationRecorderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "StartConfigurationRecorderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeliverConfigSnapshot = {
   type t
   type request = {deliveryChannelName: channelName}
   type response = {configSnapshotId: option<string_>}
-  @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeliverConfigSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "DeliverConfigSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteStoredQuery = {
   type t
   type request = {@as("QueryName") queryName: queryName}
   type response = unit
-  @module("@aws-sdk/client-config") @new external new_: request => t = "DeleteStoredQueryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "DeleteStoredQueryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRetentionConfiguration = {
@@ -1012,8 +1011,8 @@ module DeleteRetentionConfiguration = {
   }
 
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeleteRetentionConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteRetentionConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteResourceConfig = {
@@ -1023,8 +1022,8 @@ module DeleteResourceConfig = {
     @as("ResourceType") resourceType: resourceTypeString,
   }
 
-  @module("@aws-sdk/client-config") @new external new_: request => t = "DeleteResourceConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "DeleteResourceConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteRemediationConfiguration = {
@@ -1035,8 +1034,8 @@ module DeleteRemediationConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeleteRemediationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteRemediationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePendingAggregationRequest = {
@@ -1047,8 +1046,8 @@ module DeletePendingAggregationRequest = {
   }
 
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeletePendingAggregationRequestCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeletePendingAggregationRequestCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteOrganizationConformancePack = {
@@ -1059,8 +1058,8 @@ module DeleteOrganizationConformancePack = {
   }
 
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeleteOrganizationConformancePackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteOrganizationConformancePackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteOrganizationConfigRule = {
@@ -1070,8 +1069,8 @@ module DeleteOrganizationConfigRule = {
   }
 
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeleteOrganizationConfigRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteOrganizationConfigRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteEvaluationResults = {
@@ -1079,26 +1078,24 @@ module DeleteEvaluationResults = {
   type request = {@as("ConfigRuleName") configRuleName: stringWithCharLimit64}
   type response = unit
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeleteEvaluationResultsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEvaluationResultsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDeliveryChannel = {
   type t
   type request = {@as("DeliveryChannelName") deliveryChannelName: channelName}
 
-  @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeleteDeliveryChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "DeleteDeliveryChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteConformancePack = {
   type t
   type request = {@as("ConformancePackName") conformancePackName: conformancePackName}
 
-  @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeleteConformancePackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "DeleteConformancePackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteConfigurationRecorder = {
@@ -1106,8 +1103,8 @@ module DeleteConfigurationRecorder = {
   type request = {@as("ConfigurationRecorderName") configurationRecorderName: recorderName}
 
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeleteConfigurationRecorderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteConfigurationRecorderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteConfigurationAggregator = {
@@ -1117,16 +1114,16 @@ module DeleteConfigurationAggregator = {
   }
 
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeleteConfigurationAggregatorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteConfigurationAggregatorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteConfigRule = {
   type t
   type request = {@as("ConfigRuleName") configRuleName: configRuleName}
 
-  @module("@aws-sdk/client-config") @new external new_: request => t = "DeleteConfigRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "DeleteConfigRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAggregationAuthorization = {
@@ -1137,8 +1134,8 @@ module DeleteAggregationAuthorization = {
   }
 
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeleteAggregationAuthorizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteAggregationAuthorizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagResource = {
@@ -1148,8 +1145,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: amazonResourceName,
   }
 
-  @module("@aws-sdk/client-config") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartConfigRulesEvaluation = {
@@ -1157,8 +1154,8 @@ module StartConfigRulesEvaluation = {
   type request = {@as("ConfigRuleNames") configRuleNames: option<reevaluateConfigRuleNames>}
   type response = unit
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "StartConfigRulesEvaluationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartConfigRulesEvaluationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutRetentionConfiguration = {
@@ -1168,8 +1165,8 @@ module PutRetentionConfiguration = {
     @as("RetentionConfiguration") retentionConfiguration: option<retentionConfiguration>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "PutRetentionConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutRetentionConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutResourceConfig = {
@@ -1183,8 +1180,8 @@ module PutResourceConfig = {
     @as("ResourceType") resourceType: resourceTypeString,
   }
 
-  @module("@aws-sdk/client-config") @new external new_: request => t = "PutResourceConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "PutResourceConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutExternalEvaluation = {
@@ -1194,17 +1191,16 @@ module PutExternalEvaluation = {
     @as("ConfigRuleName") configRuleName: configRuleName,
   }
   type response = unit
-  @module("@aws-sdk/client-config") @new
-  external new_: request => t = "PutExternalEvaluationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "PutExternalEvaluationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStoredQuery = {
   type t
   type request = {@as("QueryName") queryName: queryName}
   type response = {@as("StoredQuery") storedQuery: option<storedQuery>}
-  @module("@aws-sdk/client-config") @new external new_: request => t = "GetStoredQueryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "GetStoredQueryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1214,8 +1210,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: amazonResourceName,
   }
 
-  @module("@aws-sdk/client-config") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartRemediationExecution = {
@@ -1229,8 +1225,8 @@ module StartRemediationExecution = {
     @as("FailureMessage") failureMessage: option<string_>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "StartRemediationExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartRemediationExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutStoredQuery = {
@@ -1240,8 +1236,8 @@ module PutStoredQuery = {
     @as("StoredQuery") storedQuery: storedQuery,
   }
   type response = {@as("QueryArn") queryArn: option<queryArn>}
-  @module("@aws-sdk/client-config") @new external new_: request => t = "PutStoredQueryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "PutStoredQueryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutOrganizationConformancePack = {
@@ -1262,8 +1258,8 @@ module PutOrganizationConformancePack = {
     organizationConformancePackArn: option<stringWithCharLimit256>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "PutOrganizationConformancePackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutOrganizationConformancePackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutOrganizationConfigRule = {
@@ -1280,8 +1276,8 @@ module PutOrganizationConfigRule = {
     @as("OrganizationConfigRuleArn") organizationConfigRuleArn: option<stringWithCharLimit256>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "PutOrganizationConfigRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutOrganizationConfigRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutEvaluations = {
@@ -1292,16 +1288,16 @@ module PutEvaluations = {
     @as("Evaluations") evaluations: option<evaluations>,
   }
   type response = {@as("FailedEvaluations") failedEvaluations: option<evaluations>}
-  @module("@aws-sdk/client-config") @new external new_: request => t = "PutEvaluationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "PutEvaluationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutDeliveryChannel = {
   type t
   type request = {@as("DeliveryChannel") deliveryChannel: deliveryChannel}
 
-  @module("@aws-sdk/client-config") @new external new_: request => t = "PutDeliveryChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "PutDeliveryChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutConformancePack = {
@@ -1316,8 +1312,8 @@ module PutConformancePack = {
     @as("ConformancePackName") conformancePackName: conformancePackName,
   }
   type response = {@as("ConformancePackArn") conformancePackArn: option<conformancePackArn>}
-  @module("@aws-sdk/client-config") @new external new_: request => t = "PutConformancePackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "PutConformancePackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAggregationAuthorization = {
@@ -1331,8 +1327,8 @@ module PutAggregationAuthorization = {
     @as("AggregationAuthorization") aggregationAuthorization: option<aggregationAuthorization>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "PutAggregationAuthorizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutAggregationAuthorizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -1346,8 +1342,8 @@ module ListTagsForResource = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Tags") tags: option<tagList_>,
   }
-  @module("@aws-sdk/client-config") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStoredQueries = {
@@ -1360,8 +1356,8 @@ module ListStoredQueries = {
     @as("NextToken") nextToken: option<string_>,
     @as("StoredQueryMetadata") storedQueryMetadata: option<storedQueryMetadataList>,
   }
-  @module("@aws-sdk/client-config") @new external new_: request => t = "ListStoredQueriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "ListStoredQueriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDiscoveredResources = {
@@ -1379,8 +1375,8 @@ module ListDiscoveredResources = {
     resourceIdentifiers: option<resourceIdentifierList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "ListDiscoveredResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDiscoveredResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAggregateDiscoveredResources = {
@@ -1397,8 +1393,8 @@ module ListAggregateDiscoveredResources = {
     @as("ResourceIdentifiers") resourceIdentifiers: option<discoveredResourceIdentifierList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "ListAggregateDiscoveredResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAggregateDiscoveredResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOrganizationConformancePackDetailedStatus = {
@@ -1418,8 +1414,8 @@ module GetOrganizationConformancePackDetailedStatus = {
     >,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetOrganizationConformancePackDetailedStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetOrganizationConformancePackDetailedStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOrganizationConfigRuleDetailedStatus = {
@@ -1436,8 +1432,8 @@ module GetOrganizationConfigRuleDetailedStatus = {
     organizationConfigRuleDetailedStatus: option<organizationConfigRuleDetailedStatus>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetOrganizationConfigRuleDetailedStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetOrganizationConfigRuleDetailedStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDiscoveredResourceCounts = {
@@ -1453,8 +1449,8 @@ module GetDiscoveredResourceCounts = {
     totalDiscoveredResources: option<long>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetDiscoveredResourceCountsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDiscoveredResourceCountsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetConformancePackComplianceSummary = {
@@ -1470,8 +1466,8 @@ module GetConformancePackComplianceSummary = {
     conformancePackComplianceSummaryList: option<conformancePackComplianceSummaryList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetConformancePackComplianceSummaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetConformancePackComplianceSummaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetComplianceSummaryByConfigRule = {
@@ -1479,8 +1475,8 @@ module GetComplianceSummaryByConfigRule = {
 
   type response = {@as("ComplianceSummary") complianceSummary: option<complianceSummary>}
   @module("@aws-sdk/client-config") @new
-  external new_: unit => t = "GetComplianceSummaryByConfigRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "GetComplianceSummaryByConfigRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAggregateDiscoveredResourceCounts = {
@@ -1499,8 +1495,8 @@ module GetAggregateDiscoveredResourceCounts = {
     @as("TotalDiscoveredResources") totalDiscoveredResources: long,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetAggregateDiscoveredResourceCountsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAggregateDiscoveredResourceCountsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRetentionConfigurations = {
@@ -1515,8 +1511,8 @@ module DescribeRetentionConfigurations = {
     @as("RetentionConfigurations") retentionConfigurations: option<retentionConfigurationList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeRetentionConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRetentionConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRemediationExceptions = {
@@ -1532,8 +1528,8 @@ module DescribeRemediationExceptions = {
     @as("RemediationExceptions") remediationExceptions: option<remediationExceptions>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeRemediationExceptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRemediationExceptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePendingAggregationRequests = {
@@ -1548,8 +1544,8 @@ module DescribePendingAggregationRequests = {
     pendingAggregationRequests: option<pendingAggregationRequestList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribePendingAggregationRequestsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePendingAggregationRequestsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOrganizationConformancePackStatuses = {
@@ -1566,8 +1562,8 @@ module DescribeOrganizationConformancePackStatuses = {
     organizationConformancePackStatuses: option<organizationConformancePackStatuses>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeOrganizationConformancePackStatusesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOrganizationConformancePackStatusesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOrganizationConfigRuleStatuses = {
@@ -1584,8 +1580,8 @@ module DescribeOrganizationConfigRuleStatuses = {
     organizationConfigRuleStatuses: option<organizationConfigRuleStatuses>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeOrganizationConfigRuleStatusesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOrganizationConfigRuleStatusesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConformancePackStatus = {
@@ -1601,8 +1597,8 @@ module DescribeConformancePackStatus = {
     conformancePackStatusDetails: option<conformancePackStatusDetailsList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeConformancePackStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConformancePackStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfigurationRecorderStatus = {
@@ -1616,8 +1612,8 @@ module DescribeConfigurationRecorderStatus = {
     configurationRecordersStatus: option<configurationRecorderStatusList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeConfigurationRecorderStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConfigurationRecorderStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfigurationAggregatorSourcesStatus = {
@@ -1634,8 +1630,8 @@ module DescribeConfigurationAggregatorSourcesStatus = {
     aggregatedSourceStatusList: option<aggregatedSourceStatusList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeConfigurationAggregatorSourcesStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConfigurationAggregatorSourcesStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfigRuleEvaluationStatus = {
@@ -1651,8 +1647,8 @@ module DescribeConfigRuleEvaluationStatus = {
     configRulesEvaluationStatus: option<configRuleEvaluationStatusList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeConfigRuleEvaluationStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConfigRuleEvaluationStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAggregationAuthorizations = {
@@ -1667,8 +1663,8 @@ module DescribeAggregationAuthorizations = {
     aggregationAuthorizations: option<aggregationAuthorizationList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeAggregationAuthorizationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAggregationAuthorizationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SelectResourceConfig = {
@@ -1683,8 +1679,8 @@ module SelectResourceConfig = {
     @as("QueryInfo") queryInfo: option<queryInfo>,
     @as("Results") results: option<results>,
   }
-  @module("@aws-sdk/client-config") @new external new_: request => t = "SelectResourceConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "SelectResourceConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SelectAggregateResourceConfig = {
@@ -1702,8 +1698,8 @@ module SelectAggregateResourceConfig = {
     @as("Results") results: option<results>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "SelectAggregateResourceConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SelectAggregateResourceConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutConfigurationRecorder = {
@@ -1711,8 +1707,8 @@ module PutConfigurationRecorder = {
   type request = {@as("ConfigurationRecorder") configurationRecorder: configurationRecorder}
 
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "PutConfigurationRecorderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "PutConfigurationRecorderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetAggregateResourceConfig = {
@@ -1723,8 +1719,8 @@ module GetAggregateResourceConfig = {
   }
   type response = {@as("ConfigurationItem") configurationItem: option<configurationItem>}
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetAggregateResourceConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAggregateResourceConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAggregateConformancePackComplianceSummary = {
@@ -1745,8 +1741,8 @@ module GetAggregateConformancePackComplianceSummary = {
     >,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetAggregateConformancePackComplianceSummaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAggregateConformancePackComplianceSummaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDeliveryChannels = {
@@ -1754,8 +1750,8 @@ module DescribeDeliveryChannels = {
   type request = {@as("DeliveryChannelNames") deliveryChannelNames: option<deliveryChannelNameList>}
   type response = {@as("DeliveryChannels") deliveryChannels: option<deliveryChannelList>}
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeDeliveryChannelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDeliveryChannelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDeliveryChannelStatus = {
@@ -1765,8 +1761,8 @@ module DescribeDeliveryChannelStatus = {
     @as("DeliveryChannelsStatus") deliveryChannelsStatus: option<deliveryChannelStatusList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeDeliveryChannelStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDeliveryChannelStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConformancePackCompliance = {
@@ -1784,8 +1780,8 @@ module DescribeConformancePackCompliance = {
     @as("ConformancePackName") conformancePackName: conformancePackName,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeConformancePackComplianceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConformancePackComplianceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAggregateComplianceByConformancePacks = {
@@ -1802,8 +1798,8 @@ module DescribeAggregateComplianceByConformancePacks = {
     aggregateComplianceByConformancePacks: option<aggregateComplianceByConformancePackList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeAggregateComplianceByConformancePacksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAggregateComplianceByConformancePacksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetResourceConfig = {
@@ -1814,8 +1810,8 @@ module BatchGetResourceConfig = {
     baseConfigurationItems: option<baseConfigurationItems>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "BatchGetResourceConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchGetResourceConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetAggregateResourceConfig = {
@@ -1830,8 +1826,8 @@ module BatchGetAggregateResourceConfig = {
     @as("BaseConfigurationItems") baseConfigurationItems: option<baseConfigurationItems>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "BatchGetAggregateResourceConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchGetAggregateResourceConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutRemediationExceptions = {
@@ -1844,8 +1840,8 @@ module PutRemediationExceptions = {
   }
   type response = {@as("FailedBatches") failedBatches: option<failedRemediationExceptionBatches>}
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "PutRemediationExceptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutRemediationExceptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutConfigurationAggregator = {
@@ -1862,8 +1858,8 @@ module PutConfigurationAggregator = {
     @as("ConfigurationAggregator") configurationAggregator: option<configurationAggregator>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "PutConfigurationAggregatorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutConfigurationAggregatorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutConfigRule = {
@@ -1873,8 +1869,8 @@ module PutConfigRule = {
     @as("ConfigRule") configRule: configRule,
   }
 
-  @module("@aws-sdk/client-config") @new external new_: request => t = "PutConfigRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "PutConfigRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetResourceConfigHistory = {
@@ -1893,8 +1889,8 @@ module GetResourceConfigHistory = {
     configurationItems: option<configurationItemList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetResourceConfigHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetResourceConfigHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetConformancePackComplianceDetails = {
@@ -1912,8 +1908,8 @@ module GetConformancePackComplianceDetails = {
     @as("ConformancePackName") conformancePackName: conformancePackName,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetConformancePackComplianceDetailsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetConformancePackComplianceDetailsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetComplianceSummaryByResourceType = {
@@ -1924,8 +1920,8 @@ module GetComplianceSummaryByResourceType = {
     complianceSummariesByResourceType: option<complianceSummariesByResourceType>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetComplianceSummaryByResourceTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetComplianceSummaryByResourceTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetComplianceDetailsByResource = {
@@ -1941,8 +1937,8 @@ module GetComplianceDetailsByResource = {
     @as("EvaluationResults") evaluationResults: option<evaluationResults>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetComplianceDetailsByResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetComplianceDetailsByResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetComplianceDetailsByConfigRule = {
@@ -1958,8 +1954,8 @@ module GetComplianceDetailsByConfigRule = {
     @as("EvaluationResults") evaluationResults: option<evaluationResults>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetComplianceDetailsByConfigRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetComplianceDetailsByConfigRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAggregateConfigRuleComplianceSummary = {
@@ -1978,8 +1974,8 @@ module GetAggregateConfigRuleComplianceSummary = {
     @as("GroupByKey") groupByKey: option<stringWithCharLimit256>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetAggregateConfigRuleComplianceSummaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAggregateConfigRuleComplianceSummaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAggregateComplianceDetailsByConfigRule = {
@@ -1999,8 +1995,8 @@ module GetAggregateComplianceDetailsByConfigRule = {
     aggregateEvaluationResults: option<aggregateEvaluationResultList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "GetAggregateComplianceDetailsByConfigRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAggregateComplianceDetailsByConfigRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRemediationExecutionStatus = {
@@ -2017,8 +2013,8 @@ module DescribeRemediationExecutionStatus = {
     remediationExecutionStatuses: option<remediationExecutionStatuses>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeRemediationExecutionStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRemediationExecutionStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOrganizationConformancePacks = {
@@ -2035,8 +2031,8 @@ module DescribeOrganizationConformancePacks = {
     organizationConformancePacks: option<organizationConformancePacks>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeOrganizationConformancePacksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOrganizationConformancePacksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOrganizationConfigRules = {
@@ -2052,8 +2048,8 @@ module DescribeOrganizationConfigRules = {
     @as("OrganizationConfigRules") organizationConfigRules: option<organizationConfigRules>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeOrganizationConfigRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOrganizationConfigRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConformancePacks = {
@@ -2068,8 +2064,8 @@ module DescribeConformancePacks = {
     @as("ConformancePackDetails") conformancePackDetails: option<conformancePackDetailList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeConformancePacksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConformancePacksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfigurationRecorders = {
@@ -2082,8 +2078,8 @@ module DescribeConfigurationRecorders = {
     @as("ConfigurationRecorders") configurationRecorders: option<configurationRecorderList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeConfigurationRecordersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConfigurationRecordersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeComplianceByResource = {
@@ -2100,8 +2096,8 @@ module DescribeComplianceByResource = {
     @as("ComplianceByResources") complianceByResources: option<complianceByResources>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeComplianceByResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeComplianceByResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeComplianceByConfigRule = {
@@ -2116,8 +2112,8 @@ module DescribeComplianceByConfigRule = {
     @as("ComplianceByConfigRules") complianceByConfigRules: option<complianceByConfigRules>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeComplianceByConfigRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeComplianceByConfigRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAggregateComplianceByConfigRules = {
@@ -2134,8 +2130,8 @@ module DescribeAggregateComplianceByConfigRules = {
     aggregateComplianceByConfigRules: option<aggregateComplianceByConfigRuleList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeAggregateComplianceByConfigRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAggregateComplianceByConfigRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRemediationExceptions = {
@@ -2148,8 +2144,8 @@ module DeleteRemediationExceptions = {
     @as("FailedBatches") failedBatches: option<failedDeleteRemediationExceptionsBatches>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DeleteRemediationExceptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteRemediationExceptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfigurationAggregators = {
@@ -2165,8 +2161,8 @@ module DescribeConfigurationAggregators = {
     @as("ConfigurationAggregators") configurationAggregators: option<configurationAggregatorList>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeConfigurationAggregatorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConfigurationAggregatorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfigRules = {
@@ -2179,8 +2175,8 @@ module DescribeConfigRules = {
     @as("NextToken") nextToken: option<string_>,
     @as("ConfigRules") configRules: option<configRules>,
   }
-  @module("@aws-sdk/client-config") @new external new_: request => t = "DescribeConfigRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-config") @new external new: request => t = "DescribeConfigRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRemediationConfigurations = {
@@ -2190,8 +2186,8 @@ module DescribeRemediationConfigurations = {
     @as("RemediationConfigurations") remediationConfigurations: option<remediationConfigurations>,
   }
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "DescribeRemediationConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRemediationConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutRemediationConfigurations = {
@@ -2201,6 +2197,6 @@ module PutRemediationConfigurations = {
   }
   type response = {@as("FailedBatches") failedBatches: option<failedRemediationBatches>}
   @module("@aws-sdk/client-config") @new
-  external new_: request => t = "PutRemediationConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutRemediationConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -694,8 +694,8 @@ module UpgradeElasticsearchDomain = {
     @as("DomainName") domainName: option<domainName>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "UpgradeElasticsearchDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpgradeElasticsearchDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PurchaseReservedElasticsearchInstanceOffering = {
@@ -710,8 +710,8 @@ module PurchaseReservedElasticsearchInstanceOffering = {
     @as("ReservedElasticsearchInstanceId") reservedElasticsearchInstanceId: option<guid>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "PurchaseReservedElasticsearchInstanceOfferingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PurchaseReservedElasticsearchInstanceOfferingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUpgradeStatus = {
@@ -722,16 +722,16 @@ module GetUpgradeStatus = {
     @as("StepStatus") stepStatus: option<upgradeStatus>,
     @as("UpgradeStep") upgradeStep: option<upgradeStep>,
   }
-  @module("@aws-sdk/client-es") @new external new_: request => t = "GetUpgradeStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "GetUpgradeStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteElasticsearchServiceRole = {
   type t
 
   @module("@aws-sdk/client-es") @new
-  external new_: unit => t = "DeleteElasticsearchServiceRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: unit => t = "DeleteElasticsearchServiceRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartElasticsearchServiceSoftwareUpdate = {
@@ -741,8 +741,8 @@ module StartElasticsearchServiceSoftwareUpdate = {
     @as("ServiceSoftwareOptions") serviceSoftwareOptions: option<serviceSoftwareOptions>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "StartElasticsearchServiceSoftwareUpdateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartElasticsearchServiceSoftwareUpdateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveTags = {
@@ -752,8 +752,8 @@ module RemoveTags = {
     @as("ARN") arn: arn,
   }
 
-  @module("@aws-sdk/client-es") @new external new_: request => t = "RemoveTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "RemoveTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListElasticsearchVersions = {
@@ -766,9 +766,8 @@ module ListElasticsearchVersions = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ElasticsearchVersions") elasticsearchVersions: option<elasticsearchVersionList>,
   }
-  @module("@aws-sdk/client-es") @new
-  external new_: request => t = "ListElasticsearchVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "ListElasticsearchVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListElasticsearchInstanceTypes = {
@@ -785,8 +784,8 @@ module ListElasticsearchInstanceTypes = {
     elasticsearchInstanceTypes: option<elasticsearchInstanceTypeList>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "ListElasticsearchInstanceTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListElasticsearchInstanceTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateOutboundCrossClusterSearchConnection = {
@@ -805,8 +804,8 @@ module CreateOutboundCrossClusterSearchConnection = {
     @as("SourceDomainInfo") sourceDomainInfo: option<domainInformation>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "CreateOutboundCrossClusterSearchConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateOutboundCrossClusterSearchConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelElasticsearchServiceSoftwareUpdate = {
@@ -816,8 +815,8 @@ module CancelElasticsearchServiceSoftwareUpdate = {
     @as("ServiceSoftwareOptions") serviceSoftwareOptions: option<serviceSoftwareOptions>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "CancelElasticsearchServiceSoftwareUpdateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelElasticsearchServiceSoftwareUpdateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePackage = {
@@ -829,8 +828,8 @@ module UpdatePackage = {
     @as("PackageID") packageID: packageID,
   }
   type response = {@as("PackageDetails") packageDetails: option<packageDetails>}
-  @module("@aws-sdk/client-es") @new external new_: request => t = "UpdatePackageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "UpdatePackageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectInboundCrossClusterSearchConnection = {
@@ -844,24 +843,24 @@ module RejectInboundCrossClusterSearchConnection = {
     crossClusterSearchConnection: option<inboundCrossClusterSearchConnection>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "RejectInboundCrossClusterSearchConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectInboundCrossClusterSearchConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTags = {
   type t
   type request = {@as("ARN") arn: arn}
   type response = {@as("TagList") tagList_: option<tagList_>}
-  @module("@aws-sdk/client-es") @new external new_: request => t = "ListTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "ListTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDomainNames = {
   type t
 
   type response = {@as("DomainNames") domainNames: option<domainInfoList>}
-  @module("@aws-sdk/client-es") @new external new_: unit => t = "ListDomainNamesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: unit => t = "ListDomainNamesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPackageVersionHistory = {
@@ -876,8 +875,8 @@ module GetPackageVersionHistory = {
     @as("PackageVersionHistoryList") packageVersionHistoryList: option<packageVersionHistoryList>,
     @as("PackageID") packageID: option<packageID>,
   }
-  @module("@aws-sdk/client-es") @new external new_: request => t = "GetPackageVersionHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "GetPackageVersionHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DissociatePackage = {
@@ -887,16 +886,16 @@ module DissociatePackage = {
     @as("PackageID") packageID: packageID,
   }
   type response = {@as("DomainPackageDetails") domainPackageDetails: option<domainPackageDetails>}
-  @module("@aws-sdk/client-es") @new external new_: request => t = "DissociatePackageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "DissociatePackageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePackage = {
   type t
   type request = {@as("PackageID") packageID: packageID}
   type response = {@as("PackageDetails") packageDetails: option<packageDetails>}
-  @module("@aws-sdk/client-es") @new external new_: request => t = "DeletePackageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "DeletePackageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteOutboundCrossClusterSearchConnection = {
@@ -910,8 +909,8 @@ module DeleteOutboundCrossClusterSearchConnection = {
     crossClusterSearchConnection: option<outboundCrossClusterSearchConnection>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "DeleteOutboundCrossClusterSearchConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteOutboundCrossClusterSearchConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInboundCrossClusterSearchConnection = {
@@ -925,8 +924,8 @@ module DeleteInboundCrossClusterSearchConnection = {
     crossClusterSearchConnection: option<inboundCrossClusterSearchConnection>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "DeleteInboundCrossClusterSearchConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteInboundCrossClusterSearchConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePackage = {
@@ -938,8 +937,8 @@ module CreatePackage = {
     @as("PackageName") packageName: packageName,
   }
   type response = {@as("PackageDetails") packageDetails: option<packageDetails>}
-  @module("@aws-sdk/client-es") @new external new_: request => t = "CreatePackageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "CreatePackageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociatePackage = {
@@ -949,8 +948,8 @@ module AssociatePackage = {
     @as("PackageID") packageID: packageID,
   }
   type response = {@as("DomainPackageDetails") domainPackageDetails: option<domainPackageDetails>}
-  @module("@aws-sdk/client-es") @new external new_: request => t = "AssociatePackageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "AssociatePackageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTags = {
@@ -960,8 +959,8 @@ module AddTags = {
     @as("ARN") arn: arn,
   }
 
-  @module("@aws-sdk/client-es") @new external new_: request => t = "AddTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "AddTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AcceptInboundCrossClusterSearchConnection = {
@@ -975,8 +974,8 @@ module AcceptInboundCrossClusterSearchConnection = {
     crossClusterSearchConnection: option<inboundCrossClusterSearchConnection>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "AcceptInboundCrossClusterSearchConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptInboundCrossClusterSearchConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPackagesForDomain = {
@@ -990,8 +989,8 @@ module ListPackagesForDomain = {
     @as("NextToken") nextToken: option<string_>,
     @as("DomainPackageDetailsList") domainPackageDetailsList: option<domainPackageDetailsList>,
   }
-  @module("@aws-sdk/client-es") @new external new_: request => t = "ListPackagesForDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "ListPackagesForDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDomainsForPackage = {
@@ -1005,8 +1004,8 @@ module ListDomainsForPackage = {
     @as("NextToken") nextToken: option<string_>,
     @as("DomainPackageDetailsList") domainPackageDetailsList: option<domainPackageDetailsList>,
   }
-  @module("@aws-sdk/client-es") @new external new_: request => t = "ListDomainsForPackageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "ListDomainsForPackageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCompatibleElasticsearchVersions = {
@@ -1017,8 +1016,8 @@ module GetCompatibleElasticsearchVersions = {
     compatibleElasticsearchVersions: option<compatibleElasticsearchVersionsList>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "GetCompatibleElasticsearchVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCompatibleElasticsearchVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePackages = {
@@ -1032,8 +1031,8 @@ module DescribePackages = {
     @as("NextToken") nextToken: option<string_>,
     @as("PackageDetailsList") packageDetailsList: option<packageDetailsList>,
   }
-  @module("@aws-sdk/client-es") @new external new_: request => t = "DescribePackagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "DescribePackagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOutboundCrossClusterSearchConnections = {
@@ -1049,8 +1048,8 @@ module DescribeOutboundCrossClusterSearchConnections = {
     crossClusterSearchConnections: option<outboundCrossClusterSearchConnections>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "DescribeOutboundCrossClusterSearchConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOutboundCrossClusterSearchConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInboundCrossClusterSearchConnections = {
@@ -1066,8 +1065,8 @@ module DescribeInboundCrossClusterSearchConnections = {
     crossClusterSearchConnections: option<inboundCrossClusterSearchConnections>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "DescribeInboundCrossClusterSearchConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInboundCrossClusterSearchConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReservedElasticsearchInstances = {
@@ -1083,8 +1082,8 @@ module DescribeReservedElasticsearchInstances = {
     @as("NextToken") nextToken: option<string_>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "DescribeReservedElasticsearchInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReservedElasticsearchInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReservedElasticsearchInstanceOfferings = {
@@ -1101,8 +1100,8 @@ module DescribeReservedElasticsearchInstanceOfferings = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "DescribeReservedElasticsearchInstanceOfferingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReservedElasticsearchInstanceOfferingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeElasticsearchDomain = {
@@ -1110,8 +1109,8 @@ module DescribeElasticsearchDomain = {
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("DomainStatus") domainStatus: elasticsearchDomainStatus}
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "DescribeElasticsearchDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeElasticsearchDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDomainAutoTunes = {
@@ -1125,17 +1124,16 @@ module DescribeDomainAutoTunes = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("AutoTunes") autoTunes: option<autoTuneList>,
   }
-  @module("@aws-sdk/client-es") @new external new_: request => t = "DescribeDomainAutoTunesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "DescribeDomainAutoTunesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteElasticsearchDomain = {
   type t
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("DomainStatus") domainStatus: option<elasticsearchDomainStatus>}
-  @module("@aws-sdk/client-es") @new
-  external new_: request => t = "DeleteElasticsearchDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "DeleteElasticsearchDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateElasticsearchDomain = {
@@ -1161,9 +1159,8 @@ module CreateElasticsearchDomain = {
     @as("DomainName") domainName: domainName,
   }
   type response = {@as("DomainStatus") domainStatus: option<elasticsearchDomainStatus>}
-  @module("@aws-sdk/client-es") @new
-  external new_: request => t = "CreateElasticsearchDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "CreateElasticsearchDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUpgradeHistory = {
@@ -1177,8 +1174,8 @@ module GetUpgradeHistory = {
     @as("NextToken") nextToken: option<string_>,
     @as("UpgradeHistories") upgradeHistories: option<upgradeHistoryList>,
   }
-  @module("@aws-sdk/client-es") @new external new_: request => t = "GetUpgradeHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-es") @new external new: request => t = "GetUpgradeHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeElasticsearchDomains = {
@@ -1186,8 +1183,8 @@ module DescribeElasticsearchDomains = {
   type request = {@as("DomainNames") domainNames: domainNameList}
   type response = {@as("DomainStatusList") domainStatusList: elasticsearchDomainStatusList}
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "DescribeElasticsearchDomainsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeElasticsearchDomainsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateElasticsearchDomainConfig = {
@@ -1212,8 +1209,8 @@ module UpdateElasticsearchDomainConfig = {
   }
   type response = {@as("DomainConfig") domainConfig: elasticsearchDomainConfig}
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "UpdateElasticsearchDomainConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateElasticsearchDomainConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeElasticsearchDomainConfig = {
@@ -1221,8 +1218,8 @@ module DescribeElasticsearchDomainConfig = {
   type request = {@as("DomainName") domainName: domainName}
   type response = {@as("DomainConfig") domainConfig: elasticsearchDomainConfig}
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "DescribeElasticsearchDomainConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeElasticsearchDomainConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeElasticsearchInstanceTypeLimits = {
@@ -1234,6 +1231,6 @@ module DescribeElasticsearchInstanceTypeLimits = {
   }
   type response = {@as("LimitsByRole") limitsByRole: option<limitsByRole>}
   @module("@aws-sdk/client-es") @new
-  external new_: request => t = "DescribeElasticsearchInstanceTypeLimitsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeElasticsearchInstanceTypeLimitsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

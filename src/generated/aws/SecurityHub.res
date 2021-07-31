@@ -2218,8 +2218,8 @@ module UpdateStandardsControl = {
   }
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "UpdateStandardsControlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateStandardsControlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSecurityHubConfiguration = {
@@ -2227,8 +2227,8 @@ module UpdateSecurityHubConfiguration = {
   type request = {@as("AutoEnableControls") autoEnableControls: option<boolean_>}
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "UpdateSecurityHubConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSecurityHubConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateOrganizationConfiguration = {
@@ -2236,8 +2236,8 @@ module UpdateOrganizationConfiguration = {
   type request = {@as("AutoEnable") autoEnable: boolean_}
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "UpdateOrganizationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateOrganizationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateActionTarget = {
@@ -2249,8 +2249,8 @@ module UpdateActionTarget = {
   }
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "UpdateActionTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateActionTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInvitationsCount = {
@@ -2258,8 +2258,8 @@ module GetInvitationsCount = {
   type request = unit
   type response = {@as("InvitationsCount") invitationsCount: option<integer_>}
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "GetInvitationsCountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInvitationsCountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableOrganizationAdminAccount = {
@@ -2267,8 +2267,8 @@ module EnableOrganizationAdminAccount = {
   type request = {@as("AdminAccountId") adminAccountId: nonEmptyString}
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "EnableOrganizationAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableOrganizationAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableImportFindingsForProduct = {
@@ -2276,8 +2276,8 @@ module EnableImportFindingsForProduct = {
   type request = {@as("ProductArn") productArn: nonEmptyString}
   type response = {@as("ProductSubscriptionArn") productSubscriptionArn: option<nonEmptyString>}
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "EnableImportFindingsForProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableImportFindingsForProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateFromMasterAccount = {
@@ -2285,8 +2285,8 @@ module DisassociateFromMasterAccount = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DisassociateFromMasterAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateFromMasterAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateFromAdministratorAccount = {
@@ -2294,8 +2294,8 @@ module DisassociateFromAdministratorAccount = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DisassociateFromAdministratorAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateFromAdministratorAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableSecurityHub = {
@@ -2303,8 +2303,8 @@ module DisableSecurityHub = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DisableSecurityHubCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableSecurityHubCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableOrganizationAdminAccount = {
@@ -2312,8 +2312,8 @@ module DisableOrganizationAdminAccount = {
   type request = {@as("AdminAccountId") adminAccountId: nonEmptyString}
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DisableOrganizationAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableOrganizationAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableImportFindingsForProduct = {
@@ -2321,8 +2321,8 @@ module DisableImportFindingsForProduct = {
   type request = {@as("ProductSubscriptionArn") productSubscriptionArn: nonEmptyString}
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DisableImportFindingsForProductCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableImportFindingsForProductCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOrganizationConfiguration = {
@@ -2333,8 +2333,8 @@ module DescribeOrganizationConfiguration = {
     @as("AutoEnable") autoEnable: option<boolean_>,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DescribeOrganizationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOrganizationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeHub = {
@@ -2345,16 +2345,16 @@ module DescribeHub = {
     @as("SubscribedAt") subscribedAt: option<nonEmptyString>,
     @as("HubArn") hubArn: option<nonEmptyString>,
   }
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "DescribeHubCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "DescribeHubCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInsight = {
   type t
   type request = {@as("InsightArn") insightArn: nonEmptyString}
   type response = {@as("InsightArn") insightArn: nonEmptyString}
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "DeleteInsightCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "DeleteInsightCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteActionTarget = {
@@ -2362,8 +2362,8 @@ module DeleteActionTarget = {
   type request = {@as("ActionTargetArn") actionTargetArn: nonEmptyString}
   type response = {@as("ActionTargetArn") actionTargetArn: nonEmptyString}
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DeleteActionTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteActionTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateActionTarget = {
@@ -2375,8 +2375,8 @@ module CreateActionTarget = {
   }
   type response = {@as("ActionTargetArn") actionTargetArn: nonEmptyString}
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "CreateActionTargetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateActionTargetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptInvitation = {
@@ -2386,9 +2386,8 @@ module AcceptInvitation = {
     @as("MasterId") masterId: nonEmptyString,
   }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "AcceptInvitationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "AcceptInvitationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptAdministratorInvitation = {
@@ -2399,8 +2398,8 @@ module AcceptAdministratorInvitation = {
   }
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "AcceptAdministratorInvitationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptAdministratorInvitationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -2410,8 +2409,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -2421,8 +2420,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -2430,8 +2429,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = {@as("Tags") tags: option<tagMap>}
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEnabledProductsForImport = {
@@ -2445,17 +2444,16 @@ module ListEnabledProductsForImport = {
     @as("ProductSubscriptions") productSubscriptions: option<productSubscriptionArnList>,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "ListEnabledProductsForImportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEnabledProductsForImportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMasterAccount = {
   type t
   type request = unit
   type response = {@as("Master") master: option<invitation>}
-  @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "GetMasterAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "GetMasterAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAdministratorAccount = {
@@ -2463,8 +2461,8 @@ module GetAdministratorAccount = {
   type request = unit
   type response = {@as("Administrator") administrator: option<invitation>}
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "GetAdministratorAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAdministratorAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableSecurityHub = {
@@ -2475,8 +2473,8 @@ module EnableSecurityHub = {
   }
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "EnableSecurityHubCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableSecurityHubCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateMembers = {
@@ -2484,8 +2482,8 @@ module DisassociateMembers = {
   type request = {@as("AccountIds") accountIds: accountIdList}
   type response = unit
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DisassociateMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOrganizationAdminAccounts = {
@@ -2499,8 +2497,8 @@ module ListOrganizationAdminAccounts = {
     @as("AdminAccounts") adminAccounts: option<adminAccounts>,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "ListOrganizationAdminAccountsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListOrganizationAdminAccountsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMembers = {
@@ -2514,8 +2512,8 @@ module ListMembers = {
     @as("NextToken") nextToken: option<nonEmptyString>,
     @as("Members") members: option<memberList>,
   }
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "ListMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "ListMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInvitations = {
@@ -2528,16 +2526,16 @@ module ListInvitations = {
     @as("NextToken") nextToken: option<nonEmptyString>,
     @as("Invitations") invitations: option<invitationList>,
   }
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "ListInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "ListInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InviteMembers = {
   type t
   type request = {@as("AccountIds") accountIds: accountIdList}
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: option<resultList>}
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "InviteMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "InviteMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMembers = {
@@ -2547,8 +2545,8 @@ module GetMembers = {
     @as("UnprocessedAccounts") unprocessedAccounts: option<resultList>,
     @as("Members") members: option<memberList>,
   }
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "GetMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "GetMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStandards = {
@@ -2562,8 +2560,8 @@ module DescribeStandards = {
     @as("Standards") standards: option<standards>,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DescribeStandardsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStandardsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeActionTargets = {
@@ -2578,16 +2576,16 @@ module DescribeActionTargets = {
     @as("ActionTargets") actionTargets: actionTargetList,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DescribeActionTargetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeActionTargetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMembers = {
   type t
   type request = {@as("AccountIds") accountIds: accountIdList}
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: option<resultList>}
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "DeleteMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "DeleteMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInvitations = {
@@ -2595,8 +2593,8 @@ module DeleteInvitations = {
   type request = {@as("AccountIds") accountIds: accountIdList}
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: option<resultList>}
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DeleteInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeclineInvitations = {
@@ -2604,16 +2602,16 @@ module DeclineInvitations = {
   type request = {@as("AccountIds") accountIds: accountIdList}
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: option<resultList>}
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DeclineInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeclineInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMembers = {
   type t
   type request = {@as("AccountDetails") accountDetails: accountDetailsList}
   type response = {@as("UnprocessedAccounts") unprocessedAccounts: option<resultList>}
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "CreateMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "CreateMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInsightResults = {
@@ -2621,8 +2619,8 @@ module GetInsightResults = {
   type request = {@as("InsightArn") insightArn: nonEmptyString}
   type response = {@as("InsightResults") insightResults: insightResults}
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "GetInsightResultsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInsightResultsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEnabledStandards = {
@@ -2637,8 +2635,8 @@ module GetEnabledStandards = {
     @as("StandardsSubscriptions") standardsSubscriptions: option<standardsSubscriptions>,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "GetEnabledStandardsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEnabledStandardsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStandardsControls = {
@@ -2653,8 +2651,8 @@ module DescribeStandardsControls = {
     @as("Controls") controls: option<standardsControls>,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DescribeStandardsControlsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStandardsControlsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProducts = {
@@ -2668,9 +2666,8 @@ module DescribeProducts = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Products") products: productsList,
   }
-  @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "DescribeProductsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "DescribeProductsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchUpdateFindings = {
@@ -2692,8 +2689,8 @@ module BatchUpdateFindings = {
     @as("ProcessedFindings") processedFindings: awsSecurityFindingIdentifierList,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "BatchUpdateFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchUpdateFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchEnableStandards = {
@@ -2706,8 +2703,8 @@ module BatchEnableStandards = {
     @as("StandardsSubscriptions") standardsSubscriptions: option<standardsSubscriptions>,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "BatchEnableStandardsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchEnableStandardsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDisableStandards = {
@@ -2719,8 +2716,8 @@ module BatchDisableStandards = {
     @as("StandardsSubscriptions") standardsSubscriptions: option<standardsSubscriptions>,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "BatchDisableStandardsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDisableStandardsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateInsight = {
@@ -2732,8 +2729,8 @@ module UpdateInsight = {
     @as("InsightArn") insightArn: nonEmptyString,
   }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "UpdateInsightCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "UpdateInsightCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFindings = {
@@ -2744,8 +2741,8 @@ module UpdateFindings = {
     @as("Filters") filters: awsSecurityFindingFilters,
   }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "UpdateFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "UpdateFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInsight = {
@@ -2756,8 +2753,8 @@ module CreateInsight = {
     @as("Name") name: nonEmptyString,
   }
   type response = {@as("InsightArn") insightArn: nonEmptyString}
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "CreateInsightCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "CreateInsightCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInsights = {
@@ -2771,8 +2768,8 @@ module GetInsights = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Insights") insights: insightList,
   }
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "GetInsightsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "GetInsightsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFindings = {
@@ -2787,8 +2784,8 @@ module GetFindings = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Findings") findings: awsSecurityFindingList,
   }
-  @module("@aws-sdk/client-securityhub") @new external new_: request => t = "GetFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-securityhub") @new external new: request => t = "GetFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchImportFindings = {
@@ -2800,6 +2797,6 @@ module BatchImportFindings = {
     @as("FailedCount") failedCount: integer_,
   }
   @module("@aws-sdk/client-securityhub") @new
-  external new_: request => t = "BatchImportFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchImportFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

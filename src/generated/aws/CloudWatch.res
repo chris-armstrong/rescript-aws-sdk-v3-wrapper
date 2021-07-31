@@ -407,8 +407,8 @@ module SetAlarmState = {
     @as("AlarmName") alarmName: alarmName,
   }
 
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "SetAlarmStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "SetAlarmStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetMetricWidgetImage = {
@@ -419,8 +419,8 @@ module GetMetricWidgetImage = {
   }
   type response = {@as("MetricWidgetImage") metricWidgetImage: option<metricWidgetImage>}
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "GetMetricWidgetImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetMetricWidgetImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDashboard = {
@@ -431,8 +431,8 @@ module GetDashboard = {
     @as("DashboardBody") dashboardBody: option<dashboardBody>,
     @as("DashboardArn") dashboardArn: option<dashboardArn>,
   }
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "GetDashboardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "GetDashboardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMetricStream = {
@@ -440,8 +440,8 @@ module DeleteMetricStream = {
   type request = {@as("Name") name: metricStreamName}
   type response = unit
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "DeleteMetricStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteMetricStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -451,17 +451,16 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopMetricStreams = {
   type t
   type request = {@as("Names") names: metricStreamNames}
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "StopMetricStreamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "StopMetricStreamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartMetricStreams = {
@@ -469,8 +468,8 @@ module StartMetricStreams = {
   type request = {@as("Names") names: metricStreamNames}
   type response = unit
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "StartMetricStreamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartMetricStreamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableAlarmActions = {
@@ -478,8 +477,8 @@ module EnableAlarmActions = {
   type request = {@as("AlarmNames") alarmNames: alarmNames}
 
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "EnableAlarmActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "EnableAlarmActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableAlarmActions = {
@@ -487,24 +486,24 @@ module DisableAlarmActions = {
   type request = {@as("AlarmNames") alarmNames: alarmNames}
 
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "DisableAlarmActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DisableAlarmActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDashboards = {
   type t
   type request = {@as("DashboardNames") dashboardNames: dashboardNames}
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "DeleteDashboardsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "DeleteDashboardsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAlarms = {
   type t
   type request = {@as("AlarmNames") alarmNames: alarmNames}
 
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "DeleteAlarmsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "DeleteAlarmsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -514,8 +513,8 @@ module TagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutMetricStream = {
@@ -530,8 +529,8 @@ module PutMetricStream = {
     @as("Name") name: metricStreamName,
   }
   type response = {@as("Arn") arn: option<amazonResourceName>}
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "PutMetricStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "PutMetricStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutInsightRule = {
@@ -543,8 +542,8 @@ module PutInsightRule = {
     @as("RuleName") ruleName: insightRuleName,
   }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "PutInsightRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "PutInsightRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutDashboard = {
@@ -557,8 +556,8 @@ module PutDashboard = {
     @as("DashboardValidationMessages")
     dashboardValidationMessages: option<dashboardValidationMessages>,
   }
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "PutDashboardCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "PutDashboardCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutCompositeAlarm = {
@@ -574,9 +573,8 @@ module PutCompositeAlarm = {
     @as("ActionsEnabled") actionsEnabled: option<actionsEnabled>,
   }
 
-  @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "PutCompositeAlarmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "PutCompositeAlarmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListTagsForResource = {
@@ -584,8 +582,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceARN") resourceARN: amazonResourceName}
   type response = {@as("Tags") tags: option<tagList_>}
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMetricStreams = {
@@ -598,9 +596,8 @@ module ListMetricStreams = {
     @as("Entries") entries: option<metricStreamEntries>,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "ListMetricStreamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "ListMetricStreamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDashboards = {
@@ -613,8 +610,8 @@ module ListDashboards = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("DashboardEntries") dashboardEntries: option<dashboardEntries>,
   }
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "ListDashboardsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "ListDashboardsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMetricStream = {
@@ -632,8 +629,8 @@ module GetMetricStream = {
     @as("Name") name: option<metricStreamName>,
     @as("Arn") arn: option<amazonResourceName>,
   }
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "GetMetricStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "GetMetricStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableInsightRules = {
@@ -641,8 +638,8 @@ module EnableInsightRules = {
   type request = {@as("RuleNames") ruleNames: insightRuleNames}
   type response = {@as("Failures") failures: option<batchFailures>}
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "EnableInsightRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableInsightRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableInsightRules = {
@@ -650,8 +647,8 @@ module DisableInsightRules = {
   type request = {@as("RuleNames") ruleNames: insightRuleNames}
   type response = {@as("Failures") failures: option<batchFailures>}
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "DisableInsightRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableInsightRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInsightRules = {
@@ -665,8 +662,8 @@ module DescribeInsightRules = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "DescribeInsightRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInsightRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAlarmHistory = {
@@ -686,8 +683,8 @@ module DescribeAlarmHistory = {
     @as("AlarmHistoryItems") alarmHistoryItems: option<alarmHistoryItems>,
   }
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "DescribeAlarmHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAlarmHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInsightRules = {
@@ -695,8 +692,8 @@ module DeleteInsightRules = {
   type request = {@as("RuleNames") ruleNames: insightRuleNames}
   type response = {@as("Failures") failures: option<batchFailures>}
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "DeleteInsightRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteInsightRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAnomalyDetector = {
@@ -709,8 +706,8 @@ module DeleteAnomalyDetector = {
   }
   type response = unit
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "DeleteAnomalyDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAnomalyDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAnomalyDetector = {
@@ -724,8 +721,8 @@ module PutAnomalyDetector = {
   }
   type response = unit
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "PutAnomalyDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutAnomalyDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMetricStatistics = {
@@ -746,8 +743,8 @@ module GetMetricStatistics = {
     @as("Label") label: option<metricLabel>,
   }
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "GetMetricStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetMetricStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutMetricData = {
@@ -757,8 +754,8 @@ module PutMetricData = {
     @as("Namespace") namespace: namespace,
   }
 
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "PutMetricDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "PutMetricDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListMetrics = {
@@ -774,8 +771,8 @@ module ListMetrics = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Metrics") metrics: option<metrics>,
   }
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "ListMetricsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "ListMetricsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInsightRuleReport = {
@@ -798,8 +795,8 @@ module GetInsightRuleReport = {
     @as("KeyLabels") keyLabels: option<insightRuleContributorKeyLabels>,
   }
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "GetInsightRuleReportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInsightRuleReportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAnomalyDetectors = {
@@ -816,8 +813,8 @@ module DescribeAnomalyDetectors = {
     @as("AnomalyDetectors") anomalyDetectors: option<anomalyDetectors>,
   }
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "DescribeAnomalyDetectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAnomalyDetectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutMetricAlarm = {
@@ -848,8 +845,8 @@ module PutMetricAlarm = {
     @as("AlarmName") alarmName: alarmName,
   }
 
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "PutMetricAlarmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "PutMetricAlarmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetMetricData = {
@@ -868,8 +865,8 @@ module GetMetricData = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("MetricDataResults") metricDataResults: option<metricDataResults>,
   }
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "GetMetricDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "GetMetricDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAlarmsForMetric = {
@@ -885,8 +882,8 @@ module DescribeAlarmsForMetric = {
   }
   type response = {@as("MetricAlarms") metricAlarms: option<metricAlarms>}
   @module("@aws-sdk/client-monitoring") @new
-  external new_: request => t = "DescribeAlarmsForMetricCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAlarmsForMetricCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAlarms = {
@@ -907,6 +904,6 @@ module DescribeAlarms = {
     @as("MetricAlarms") metricAlarms: option<metricAlarms>,
     @as("CompositeAlarms") compositeAlarms: option<compositeAlarms>,
   }
-  @module("@aws-sdk/client-monitoring") @new external new_: request => t = "DescribeAlarmsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-monitoring") @new external new: request => t = "DescribeAlarmsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

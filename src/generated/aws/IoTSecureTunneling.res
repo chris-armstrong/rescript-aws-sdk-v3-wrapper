@@ -78,8 +78,8 @@ module CloseTunnel = {
   }
   type response = unit
   @module("@aws-sdk/client-iotsecuredtunneling") @new
-  external new_: request => t = "CloseTunnelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CloseTunnelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -90,8 +90,8 @@ module UntagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-iotsecuredtunneling") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -102,8 +102,8 @@ module TagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-iotsecuredtunneling") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module OpenTunnel = {
@@ -121,8 +121,8 @@ module OpenTunnel = {
     tunnelId: option<tunnelId>,
   }
   @module("@aws-sdk/client-iotsecuredtunneling") @new
-  external new_: request => t = "OpenTunnelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "OpenTunnelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTunnels = {
@@ -137,8 +137,8 @@ module ListTunnels = {
     tunnelSummaries: option<tunnelSummaryList>,
   }
   @module("@aws-sdk/client-iotsecuredtunneling") @new
-  external new_: request => t = "ListTunnelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTunnelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -146,8 +146,8 @@ module ListTagsForResource = {
   type request = {resourceArn: amazonResourceName}
   type response = {tags: option<tagList_>}
   @module("@aws-sdk/client-iotsecuredtunneling") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTunnel = {
@@ -155,6 +155,6 @@ module DescribeTunnel = {
   type request = {tunnelId: tunnelId}
   type response = {tunnel: option<tunnel>}
   @module("@aws-sdk/client-iotsecuredtunneling") @new
-  external new_: request => t = "DescribeTunnelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTunnelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

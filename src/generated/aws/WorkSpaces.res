@@ -396,8 +396,8 @@ module UpdateWorkspaceImagePermission = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "UpdateWorkspaceImagePermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateWorkspaceImagePermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateWorkspaceBundle = {
@@ -408,16 +408,16 @@ module UpdateWorkspaceBundle = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "UpdateWorkspaceBundleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateWorkspaceBundleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreWorkspace = {
   type t
   type request = {@as("WorkspaceId") workspaceId: workspaceId}
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "RestoreWorkspaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "RestoreWorkspaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyWorkspaceState = {
@@ -428,8 +428,8 @@ module ModifyWorkspaceState = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "ModifyWorkspaceStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyWorkspaceStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyAccount = {
@@ -440,8 +440,8 @@ module ModifyAccount = {
     @as("DedicatedTenancySupport") dedicatedTenancySupport: option<dedicatedTenancySupportEnum>,
   }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "ModifyAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "ModifyAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module MigrateWorkspace = {
@@ -454,8 +454,8 @@ module MigrateWorkspace = {
     @as("TargetWorkspaceId") targetWorkspaceId: option<workspaceId>,
     @as("SourceWorkspaceId") sourceWorkspaceId: option<workspaceId>,
   }
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "MigrateWorkspaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "MigrateWorkspaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateConnectionAlias = {
@@ -463,8 +463,8 @@ module DisassociateConnectionAlias = {
   type request = {@as("AliasId") aliasId: connectionAliasId}
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DisassociateConnectionAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateConnectionAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccount = {
@@ -476,8 +476,8 @@ module DescribeAccount = {
     @as("DedicatedTenancySupport")
     dedicatedTenancySupport: option<dedicatedTenancySupportResultEnum>,
   }
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "DescribeAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "DescribeAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterWorkspaceDirectory = {
@@ -485,8 +485,8 @@ module DeregisterWorkspaceDirectory = {
   type request = {@as("DirectoryId") directoryId: directoryId}
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DeregisterWorkspaceDirectoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterWorkspaceDirectoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWorkspaceImage = {
@@ -494,8 +494,8 @@ module DeleteWorkspaceImage = {
   type request = {@as("ImageId") imageId: workspaceImageId}
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DeleteWorkspaceImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteWorkspaceImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWorkspaceBundle = {
@@ -503,16 +503,16 @@ module DeleteWorkspaceBundle = {
   type request = {@as("BundleId") bundleId: option<bundleId>}
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DeleteWorkspaceBundleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteWorkspaceBundleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteIpGroup = {
   type t
   type request = {@as("GroupId") groupId: ipGroupId}
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "DeleteIpGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "DeleteIpGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteConnectionAlias = {
@@ -520,8 +520,8 @@ module DeleteConnectionAlias = {
   type request = {@as("AliasId") aliasId: connectionAliasId}
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DeleteConnectionAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteConnectionAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateConnectionAlias = {
@@ -532,8 +532,8 @@ module AssociateConnectionAlias = {
   }
   type response = {@as("ConnectionIdentifier") connectionIdentifier: option<connectionIdentifier>}
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "AssociateConnectionAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateConnectionAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateConnectionAliasPermission = {
@@ -544,8 +544,8 @@ module UpdateConnectionAliasPermission = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "UpdateConnectionAliasPermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateConnectionAliasPermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RevokeIpRules = {
@@ -555,8 +555,8 @@ module RevokeIpRules = {
     @as("GroupId") groupId: ipGroupId,
   }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "RevokeIpRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "RevokeIpRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyWorkspaceProperties = {
@@ -567,8 +567,8 @@ module ModifyWorkspaceProperties = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "ModifyWorkspacePropertiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyWorkspacePropertiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyWorkspaceCreationProperties = {
@@ -579,8 +579,8 @@ module ModifyWorkspaceCreationProperties = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "ModifyWorkspaceCreationPropertiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyWorkspaceCreationPropertiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyWorkspaceAccessProperties = {
@@ -591,8 +591,8 @@ module ModifyWorkspaceAccessProperties = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "ModifyWorkspaceAccessPropertiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyWorkspaceAccessPropertiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifySelfservicePermissions = {
@@ -603,8 +603,8 @@ module ModifySelfservicePermissions = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "ModifySelfservicePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifySelfservicePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyClientProperties = {
@@ -615,8 +615,8 @@ module ModifyClientProperties = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "ModifyClientPropertiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyClientPropertiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAvailableManagementCidrRanges = {
@@ -632,8 +632,8 @@ module ListAvailableManagementCidrRanges = {
     @as("ManagementCidrRanges") managementCidrRanges: option<dedicatedTenancyCidrRangeList>,
   }
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "ListAvailableManagementCidrRangesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAvailableManagementCidrRangesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateIpGroups = {
@@ -644,8 +644,8 @@ module DisassociateIpGroups = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DisassociateIpGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateIpGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTags = {
@@ -655,8 +655,8 @@ module DeleteTags = {
     @as("ResourceId") resourceId: nonEmptyString,
   }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "DeleteTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "DeleteTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateIpGroups = {
@@ -666,9 +666,8 @@ module AssociateIpGroups = {
     @as("DirectoryId") directoryId: directoryId,
   }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "AssociateIpGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "AssociateIpGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRulesOfIpGroup = {
@@ -679,8 +678,8 @@ module UpdateRulesOfIpGroup = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "UpdateRulesOfIpGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateRulesOfIpGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TerminateWorkspaces = {
@@ -690,24 +689,24 @@ module TerminateWorkspaces = {
   }
   type response = {@as("FailedRequests") failedRequests: option<failedTerminateWorkspaceRequests>}
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "TerminateWorkspacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TerminateWorkspacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopWorkspaces = {
   type t
   type request = {@as("StopWorkspaceRequests") stopWorkspaceRequests: stopWorkspaceRequests}
   type response = {@as("FailedRequests") failedRequests: option<failedStopWorkspaceRequests>}
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "StopWorkspacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "StopWorkspacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartWorkspaces = {
   type t
   type request = {@as("StartWorkspaceRequests") startWorkspaceRequests: startWorkspaceRequests}
   type response = {@as("FailedRequests") failedRequests: option<failedStartWorkspaceRequests>}
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "StartWorkspacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "StartWorkspacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterWorkspaceDirectory = {
@@ -722,8 +721,8 @@ module RegisterWorkspaceDirectory = {
   }
   type response = unit
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "RegisterWorkspaceDirectoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterWorkspaceDirectoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RebuildWorkspaces = {
@@ -732,17 +731,16 @@ module RebuildWorkspaces = {
     @as("RebuildWorkspaceRequests") rebuildWorkspaceRequests: rebuildWorkspaceRequests,
   }
   type response = {@as("FailedRequests") failedRequests: option<failedRebuildWorkspaceRequests>}
-  @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "RebuildWorkspacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "RebuildWorkspacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RebootWorkspaces = {
   type t
   type request = {@as("RebootWorkspaceRequests") rebootWorkspaceRequests: rebootWorkspaceRequests}
   type response = {@as("FailedRequests") failedRequests: option<failedRebootWorkspaceRequests>}
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "RebootWorkspacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "RebootWorkspacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportWorkspaceImage = {
@@ -757,8 +755,8 @@ module ImportWorkspaceImage = {
   }
   type response = {@as("ImageId") imageId: option<workspaceImageId>}
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "ImportWorkspaceImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ImportWorkspaceImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkspacesConnectionStatus = {
@@ -773,8 +771,8 @@ module DescribeWorkspacesConnectionStatus = {
     workspacesConnectionStatus: option<workspaceConnectionStatusList>,
   }
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DescribeWorkspacesConnectionStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWorkspacesConnectionStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkspaceSnapshots = {
@@ -785,8 +783,8 @@ module DescribeWorkspaceSnapshots = {
     @as("RebuildSnapshots") rebuildSnapshots: option<snapshotList>,
   }
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DescribeWorkspaceSnapshotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWorkspaceSnapshotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkspaceImagePermissions = {
@@ -802,16 +800,16 @@ module DescribeWorkspaceImagePermissions = {
     @as("ImageId") imageId: option<workspaceImageId>,
   }
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DescribeWorkspaceImagePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWorkspaceImagePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTags = {
   type t
   type request = {@as("ResourceId") resourceId: nonEmptyString}
   type response = {@as("TagList") tagList_: option<tagList_>}
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "DescribeTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "DescribeTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConnectionAliasPermissions = {
@@ -828,8 +826,8 @@ module DescribeConnectionAliasPermissions = {
     @as("AliasId") aliasId: option<connectionAliasId>,
   }
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DescribeConnectionAliasPermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConnectionAliasPermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccountModifications = {
@@ -840,8 +838,8 @@ module DescribeAccountModifications = {
     @as("AccountModifications") accountModifications: option<accountModificationList>,
   }
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DescribeAccountModificationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAccountModificationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWorkspaceBundle = {
@@ -857,8 +855,8 @@ module CreateWorkspaceBundle = {
   }
   type response = {@as("WorkspaceBundle") workspaceBundle: option<workspaceBundle>}
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "CreateWorkspaceBundleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateWorkspaceBundleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTags = {
@@ -868,8 +866,8 @@ module CreateTags = {
     @as("ResourceId") resourceId: nonEmptyString,
   }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "CreateTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "CreateTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateIpGroup = {
@@ -881,8 +879,8 @@ module CreateIpGroup = {
     @as("GroupName") groupName: ipGroupName,
   }
   type response = {@as("GroupId") groupId: option<ipGroupId>}
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "CreateIpGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "CreateIpGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateConnectionAlias = {
@@ -893,8 +891,8 @@ module CreateConnectionAlias = {
   }
   type response = {@as("AliasId") aliasId: option<connectionAliasId>}
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "CreateConnectionAliasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateConnectionAliasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CopyWorkspaceImage = {
@@ -908,8 +906,8 @@ module CopyWorkspaceImage = {
   }
   type response = {@as("ImageId") imageId: option<workspaceImageId>}
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "CopyWorkspaceImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CopyWorkspaceImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AuthorizeIpRules = {
@@ -919,8 +917,8 @@ module AuthorizeIpRules = {
     @as("GroupId") groupId: ipGroupId,
   }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "AuthorizeIpRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "AuthorizeIpRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkspaceImages = {
@@ -936,8 +934,8 @@ module DescribeWorkspaceImages = {
     @as("Images") images: option<workspaceImageList>,
   }
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DescribeWorkspaceImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWorkspaceImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkspaceDirectories = {
@@ -952,8 +950,8 @@ module DescribeWorkspaceDirectories = {
     @as("Directories") directories: option<directoryList>,
   }
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DescribeWorkspaceDirectoriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWorkspaceDirectoriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkspaceBundles = {
@@ -968,8 +966,8 @@ module DescribeWorkspaceBundles = {
     @as("Bundles") bundles: option<bundleList>,
   }
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DescribeWorkspaceBundlesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWorkspaceBundlesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeClientProperties = {
@@ -977,8 +975,8 @@ module DescribeClientProperties = {
   type request = {@as("ResourceIds") resourceIds: resourceIdList}
   type response = {@as("ClientPropertiesList") clientPropertiesList: option<clientPropertiesList>}
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DescribeClientPropertiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeClientPropertiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkspaces = {
@@ -996,8 +994,8 @@ module DescribeWorkspaces = {
     @as("Workspaces") workspaces: option<workspaceList>,
   }
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DescribeWorkspacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWorkspacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIpGroups = {
@@ -1011,8 +1009,8 @@ module DescribeIpGroups = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("Result") result: option<workspacesIpGroupsList>,
   }
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "DescribeIpGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "DescribeIpGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConnectionAliases = {
@@ -1028,8 +1026,8 @@ module DescribeConnectionAliases = {
     @as("ConnectionAliases") connectionAliases: option<connectionAliasList>,
   }
   @module("@aws-sdk/client-workspaces") @new
-  external new_: request => t = "DescribeConnectionAliasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConnectionAliasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWorkspaces = {
@@ -1039,6 +1037,6 @@ module CreateWorkspaces = {
     @as("PendingRequests") pendingRequests: option<workspaceList>,
     @as("FailedRequests") failedRequests: option<failedCreateWorkspaceRequests>,
   }
-  @module("@aws-sdk/client-workspaces") @new external new_: request => t = "CreateWorkspacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workspaces") @new external new: request => t = "CreateWorkspacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

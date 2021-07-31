@@ -185,8 +185,8 @@ module RevokeSigningProfile = {
     profileName: profileName,
   }
 
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "RevokeSigningProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "RevokeSigningProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RevokeSignature = {
@@ -197,8 +197,8 @@ module RevokeSignature = {
     jobId: jobId,
   }
 
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "RevokeSignatureCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "RevokeSignatureCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveProfilePermission = {
@@ -210,16 +210,16 @@ module RemoveProfilePermission = {
   }
   type response = {revisionId: option<string_>}
   @module("@aws-sdk/client-signer") @new
-  external new_: request => t = "RemoveProfilePermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveProfilePermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelSigningProfile = {
   type t
   type request = {profileName: profileName}
 
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "CancelSigningProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "CancelSigningProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AddProfilePermission = {
@@ -233,8 +233,8 @@ module AddProfilePermission = {
     profileName: profileName,
   }
   type response = {revisionId: option<string_>}
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "AddProfilePermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "AddProfilePermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -244,8 +244,8 @@ module UntagResource = {
     resourceArn: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -255,16 +255,16 @@ module TagResource = {
     resourceArn: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {resourceArn: string_}
   type response = {tags: option<tagMap>}
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartSigningJob = {
@@ -280,8 +280,8 @@ module StartSigningJob = {
     jobOwner: option<accountId>,
     jobId: option<jobId>,
   }
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "StartSigningJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "StartSigningJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutSigningProfile = {
@@ -300,8 +300,8 @@ module PutSigningProfile = {
     profileVersion: option<profileVersion>,
     arn: option<string_>,
   }
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "PutSigningProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "PutSigningProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProfilePermissions = {
@@ -317,8 +317,8 @@ module ListProfilePermissions = {
     revisionId: option<string_>,
   }
   @module("@aws-sdk/client-signer") @new
-  external new_: request => t = "ListProfilePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProfilePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSigningProfile = {
@@ -343,8 +343,8 @@ module GetSigningProfile = {
     profileVersion: option<profileVersion>,
     profileName: option<profileName>,
   }
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "GetSigningProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "GetSigningProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSigningJob = {
@@ -371,8 +371,8 @@ module DescribeSigningJob = {
     source: option<source>,
     jobId: option<jobId>,
   }
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "DescribeSigningJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "DescribeSigningJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSigningProfiles = {
@@ -388,8 +388,8 @@ module ListSigningProfiles = {
     nextToken: option<nextToken>,
     profiles: option<signingProfiles>,
   }
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "ListSigningProfilesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "ListSigningProfilesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSigningPlatform = {
@@ -406,8 +406,8 @@ module GetSigningPlatform = {
     displayName: option<displayName>,
     platformId: option<platformId>,
   }
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "GetSigningPlatformCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "GetSigningPlatformCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSigningJobs = {
@@ -427,8 +427,8 @@ module ListSigningJobs = {
     nextToken: option<nextToken>,
     jobs: option<signingJobs>,
   }
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "ListSigningJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "ListSigningJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSigningPlatforms = {
@@ -444,6 +444,6 @@ module ListSigningPlatforms = {
     nextToken: option<string_>,
     platforms: option<signingPlatforms>,
   }
-  @module("@aws-sdk/client-signer") @new external new_: request => t = "ListSigningPlatformsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-signer") @new external new: request => t = "ListSigningPlatformsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

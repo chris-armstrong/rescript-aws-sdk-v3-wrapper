@@ -3338,8 +3338,8 @@ module EnableSagemakerServicecatalogPortfolio = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "EnableSagemakerServicecatalogPortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableSagemakerServicecatalogPortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableSagemakerServicecatalogPortfolio = {
@@ -3347,8 +3347,8 @@ module DisableSagemakerServicecatalogPortfolio = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DisableSagemakerServicecatalogPortfolioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableSagemakerServicecatalogPortfolioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTrial = {
@@ -3358,8 +3358,8 @@ module UpdateTrial = {
     @as("TrialName") trialName: experimentEntityName,
   }
   type response = {@as("TrialArn") trialArn: option<trialArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateTrialCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateTrialCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePipelineExecution = {
@@ -3372,8 +3372,8 @@ module UpdatePipelineExecution = {
   }
   type response = {@as("PipelineExecutionArn") pipelineExecutionArn: option<pipelineExecutionArn>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "UpdatePipelineExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePipelineExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePipeline = {
@@ -3386,8 +3386,8 @@ module UpdatePipeline = {
     @as("PipelineName") pipelineName: pipelineName,
   }
   type response = {@as("PipelineArn") pipelineArn: option<pipelineArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdatePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdatePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateModelPackage = {
@@ -3398,9 +3398,8 @@ module UpdateModelPackage = {
     @as("ModelPackageArn") modelPackageArn: modelPackageArn,
   }
   type response = {@as("ModelPackageArn") modelPackageArn: modelPackageArn}
-  @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "UpdateModelPackageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateModelPackageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateExperiment = {
@@ -3411,32 +3410,32 @@ module UpdateExperiment = {
     @as("ExperimentName") experimentName: experimentEntityName,
   }
   type response = {@as("ExperimentArn") experimentArn: option<experimentArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateExperimentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateExperimentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopTransformJob = {
   type t
   type request = {@as("TransformJobName") transformJobName: transformJobName}
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "StopTransformJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopTransformJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopTrainingJob = {
   type t
   type request = {@as("TrainingJobName") trainingJobName: trainingJobName}
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "StopTrainingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopTrainingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopProcessingJob = {
   type t
   type request = {@as("ProcessingJobName") processingJobName: processingJobName}
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "StopProcessingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopProcessingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopPipelineExecution = {
@@ -3447,8 +3446,8 @@ module StopPipelineExecution = {
   }
   type response = {@as("PipelineExecutionArn") pipelineExecutionArn: option<pipelineExecutionArn>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "StopPipelineExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopPipelineExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopNotebookInstance = {
@@ -3456,8 +3455,8 @@ module StopNotebookInstance = {
   type request = {@as("NotebookInstanceName") notebookInstanceName: notebookInstanceName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "StopNotebookInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "StopNotebookInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopMonitoringSchedule = {
@@ -3465,16 +3464,16 @@ module StopMonitoringSchedule = {
   type request = {@as("MonitoringScheduleName") monitoringScheduleName: monitoringScheduleName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "StopMonitoringScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "StopMonitoringScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopLabelingJob = {
   type t
   type request = {@as("LabelingJobName") labelingJobName: labelingJobName}
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "StopLabelingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopLabelingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopHyperParameterTuningJob = {
@@ -3484,8 +3483,8 @@ module StopHyperParameterTuningJob = {
   }
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "StopHyperParameterTuningJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "StopHyperParameterTuningJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopEdgePackagingJob = {
@@ -3493,25 +3492,24 @@ module StopEdgePackagingJob = {
   type request = {@as("EdgePackagingJobName") edgePackagingJobName: entityName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "StopEdgePackagingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "StopEdgePackagingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopCompilationJob = {
   type t
   type request = {@as("CompilationJobName") compilationJobName: entityName}
 
-  @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "StopCompilationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopCompilationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopAutoMLJob = {
   type t
   type request = {@as("AutoMLJobName") autoMLJobName: autoMLJobName}
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "StopAutoMLJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "StopAutoMLJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartNotebookInstance = {
@@ -3519,8 +3517,8 @@ module StartNotebookInstance = {
   type request = {@as("NotebookInstanceName") notebookInstanceName: notebookInstanceName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "StartNotebookInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "StartNotebookInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartMonitoringSchedule = {
@@ -3528,8 +3526,8 @@ module StartMonitoringSchedule = {
   type request = {@as("MonitoringScheduleName") monitoringScheduleName: monitoringScheduleName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "StartMonitoringScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "StartMonitoringScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutModelPackageGroupPolicy = {
@@ -3540,8 +3538,8 @@ module PutModelPackageGroupPolicy = {
   }
   type response = {@as("ModelPackageGroupArn") modelPackageGroupArn: modelPackageGroupArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "PutModelPackageGroupPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutModelPackageGroupPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSagemakerServicecatalogPortfolioStatus = {
@@ -3549,8 +3547,8 @@ module GetSagemakerServicecatalogPortfolioStatus = {
   type request = unit
   type response = {@as("Status") status: option<sagemakerServicecatalogStatus>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "GetSagemakerServicecatalogPortfolioStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSagemakerServicecatalogPortfolioStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetModelPackageGroupPolicy = {
@@ -3558,8 +3556,8 @@ module GetModelPackageGroupPolicy = {
   type request = {@as("ModelPackageGroupName") modelPackageGroupName: entityName}
   type response = {@as("ResourcePolicy") resourcePolicy: policyString}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "GetModelPackageGroupPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetModelPackageGroupPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateTrialComponent = {
@@ -3573,8 +3571,8 @@ module DisassociateTrialComponent = {
     @as("TrialComponentArn") trialComponentArn: option<trialComponentArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DisassociateTrialComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateTrialComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePipelineDefinitionForExecution = {
@@ -3585,8 +3583,8 @@ module DescribePipelineDefinitionForExecution = {
     @as("PipelineDefinition") pipelineDefinition: option<pipelineDefinition>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribePipelineDefinitionForExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePipelineDefinitionForExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeImageVersion = {
@@ -3607,8 +3605,8 @@ module DescribeImageVersion = {
     @as("BaseImage") baseImage: option<imageBaseImage>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeImageVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeImageVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeImage = {
@@ -3625,24 +3623,24 @@ module DescribeImage = {
     @as("Description") description: option<imageDescription>,
     @as("CreationTime") creationTime: option<timestamp_>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWorkteam = {
   type t
   type request = {@as("WorkteamName") workteamName: workteamName}
   type response = {@as("Success") success: success}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteWorkteamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteWorkteamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWorkforce = {
   type t
   type request = {@as("WorkforceName") workforceName: workforceName}
   type response = unit
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteWorkforceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteWorkforceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteUserProfile = {
@@ -3652,8 +3650,8 @@ module DeleteUserProfile = {
     @as("DomainId") domainId: domainId,
   }
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteTrialComponent = {
@@ -3661,24 +3659,24 @@ module DeleteTrialComponent = {
   type request = {@as("TrialComponentName") trialComponentName: experimentEntityName}
   type response = {@as("TrialComponentArn") trialComponentArn: option<trialComponentArn>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteTrialComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteTrialComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTrial = {
   type t
   type request = {@as("TrialName") trialName: experimentEntityName}
   type response = {@as("TrialArn") trialArn: option<trialArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteTrialCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteTrialCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProject = {
   type t
   type request = {@as("ProjectName") projectName: projectEntityName}
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeletePipeline = {
@@ -3688,8 +3686,8 @@ module DeletePipeline = {
     @as("PipelineName") pipelineName: pipelineName,
   }
   type response = {@as("PipelineArn") pipelineArn: option<pipelineArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeletePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeletePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteNotebookInstanceLifecycleConfig = {
@@ -3700,8 +3698,8 @@ module DeleteNotebookInstanceLifecycleConfig = {
   }
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteNotebookInstanceLifecycleConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteNotebookInstanceLifecycleConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteNotebookInstance = {
@@ -3709,8 +3707,8 @@ module DeleteNotebookInstance = {
   type request = {@as("NotebookInstanceName") notebookInstanceName: notebookInstanceName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteNotebookInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteNotebookInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteMonitoringSchedule = {
@@ -3718,8 +3716,8 @@ module DeleteMonitoringSchedule = {
   type request = {@as("MonitoringScheduleName") monitoringScheduleName: monitoringScheduleName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteMonitoringScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteMonitoringScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteModelQualityJobDefinition = {
@@ -3727,8 +3725,8 @@ module DeleteModelQualityJobDefinition = {
   type request = {@as("JobDefinitionName") jobDefinitionName: monitoringJobDefinitionName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteModelQualityJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteModelQualityJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteModelPackageGroupPolicy = {
@@ -3736,8 +3734,8 @@ module DeleteModelPackageGroupPolicy = {
   type request = {@as("ModelPackageGroupName") modelPackageGroupName: entityName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteModelPackageGroupPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteModelPackageGroupPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteModelPackageGroup = {
@@ -3745,17 +3743,16 @@ module DeleteModelPackageGroup = {
   type request = {@as("ModelPackageGroupName") modelPackageGroupName: arnOrName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteModelPackageGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteModelPackageGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteModelPackage = {
   type t
   type request = {@as("ModelPackageName") modelPackageName: versionedArnOrName}
 
-  @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteModelPackageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteModelPackageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteModelExplainabilityJobDefinition = {
@@ -3763,8 +3760,8 @@ module DeleteModelExplainabilityJobDefinition = {
   type request = {@as("JobDefinitionName") jobDefinitionName: monitoringJobDefinitionName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteModelExplainabilityJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteModelExplainabilityJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteModelBiasJobDefinition = {
@@ -3772,16 +3769,16 @@ module DeleteModelBiasJobDefinition = {
   type request = {@as("JobDefinitionName") jobDefinitionName: monitoringJobDefinitionName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteModelBiasJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteModelBiasJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteModel = {
   type t
   type request = {@as("ModelName") modelName: modelName}
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteImageVersion = {
@@ -3791,25 +3788,24 @@ module DeleteImageVersion = {
     @as("ImageName") imageName: imageName,
   }
   type response = unit
-  @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteImageVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteImageVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteImage = {
   type t
   type request = {@as("ImageName") imageName: imageName}
   type response = unit
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteHumanTaskUi = {
   type t
   type request = {@as("HumanTaskUiName") humanTaskUiName: humanTaskUiName}
   type response = unit
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteHumanTaskUiCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteHumanTaskUiCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFlowDefinition = {
@@ -3817,25 +3813,24 @@ module DeleteFlowDefinition = {
   type request = {@as("FlowDefinitionName") flowDefinitionName: flowDefinitionName}
   type response = unit
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteFlowDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteFlowDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFeatureGroup = {
   type t
   type request = {@as("FeatureGroupName") featureGroupName: featureGroupName}
 
-  @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteFeatureGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteFeatureGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteExperiment = {
   type t
   type request = {@as("ExperimentName") experimentName: experimentEntityName}
   type response = {@as("ExperimentArn") experimentArn: option<experimentArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteExperimentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteExperimentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEndpointConfig = {
@@ -3843,24 +3838,24 @@ module DeleteEndpointConfig = {
   type request = {@as("EndpointConfigName") endpointConfigName: endpointConfigName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteEndpointConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteEndpointConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteEndpoint = {
   type t
   type request = {@as("EndpointName") endpointName: endpointName}
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDeviceFleet = {
   type t
   type request = {@as("DeviceFleetName") deviceFleetName: entityName}
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteDeviceFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteDeviceFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDataQualityJobDefinition = {
@@ -3868,16 +3863,16 @@ module DeleteDataQualityJobDefinition = {
   type request = {@as("JobDefinitionName") jobDefinitionName: monitoringJobDefinitionName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteDataQualityJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteDataQualityJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteContext = {
   type t
   type request = {@as("ContextName") contextName: experimentEntityName}
   type response = {@as("ContextArn") contextArn: option<contextArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteContextCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteContextCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCodeRepository = {
@@ -3885,8 +3880,8 @@ module DeleteCodeRepository = {
   type request = {@as("CodeRepositoryName") codeRepositoryName: entityName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteCodeRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteCodeRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAssociation = {
@@ -3899,8 +3894,8 @@ module DeleteAssociation = {
     @as("DestinationArn") destinationArn: option<associationEntityArn>,
     @as("SourceArn") sourceArn: option<associationEntityArn>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAppImageConfig = {
@@ -3908,8 +3903,8 @@ module DeleteAppImageConfig = {
   type request = {@as("AppImageConfigName") appImageConfigName: appImageConfigName}
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DeleteAppImageConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteAppImageConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteApp = {
@@ -3921,24 +3916,24 @@ module DeleteApp = {
     @as("DomainId") domainId: domainId,
   }
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAlgorithm = {
   type t
   type request = {@as("AlgorithmName") algorithmName: entityName}
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteAlgorithmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteAlgorithmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAction = {
   type t
   type request = {@as("ActionName") actionName: experimentEntityName}
   type response = {@as("ActionArn") actionArn: option<actionArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePresignedNotebookInstanceUrl = {
@@ -3950,8 +3945,8 @@ module CreatePresignedNotebookInstanceUrl = {
   }
   type response = {@as("AuthorizedUrl") authorizedUrl: option<notebookInstanceUrl>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreatePresignedNotebookInstanceUrlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePresignedNotebookInstanceUrlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePresignedDomainUrl = {
@@ -3965,8 +3960,8 @@ module CreatePresignedDomainUrl = {
   }
   type response = {@as("AuthorizedUrl") authorizedUrl: option<presignedDomainUrl>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreatePresignedDomainUrlCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePresignedDomainUrlCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateImageVersion = {
@@ -3977,9 +3972,8 @@ module CreateImageVersion = {
     @as("BaseImage") baseImage: imageBaseImage,
   }
   type response = {@as("ImageVersionArn") imageVersionArn: option<imageVersionArn>}
-  @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateImageVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateImageVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateTrialComponent = {
@@ -3993,8 +3987,8 @@ module AssociateTrialComponent = {
     @as("TrialComponentArn") trialComponentArn: option<trialComponentArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "AssociateTrialComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateTrialComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddAssociation = {
@@ -4008,8 +4002,8 @@ module AddAssociation = {
     @as("DestinationArn") destinationArn: option<associationEntityArn>,
     @as("SourceArn") sourceArn: option<associationEntityArn>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "AddAssociationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "AddAssociationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateNotebookInstance = {
@@ -4036,8 +4030,8 @@ module UpdateNotebookInstance = {
   }
   type response = unit
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "UpdateNotebookInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateNotebookInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateImage = {
@@ -4050,8 +4044,8 @@ module UpdateImage = {
     @as("DeleteProperties") deleteProperties: option<imageDeletePropertyList>,
   }
   type response = {@as("ImageArn") imageArn: option<imageArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDeviceFleet = {
@@ -4063,8 +4057,8 @@ module UpdateDeviceFleet = {
     @as("DeviceFleetName") deviceFleetName: entityName,
   }
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateDeviceFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateDeviceFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateContext = {
@@ -4076,8 +4070,8 @@ module UpdateContext = {
     @as("ContextName") contextName: experimentEntityName,
   }
   type response = {@as("ContextArn") contextArn: option<contextArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateContextCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateContextCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCodeRepository = {
@@ -4088,8 +4082,8 @@ module UpdateCodeRepository = {
   }
   type response = {@as("CodeRepositoryArn") codeRepositoryArn: codeRepositoryArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "UpdateCodeRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateCodeRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateArtifact = {
@@ -4101,8 +4095,8 @@ module UpdateArtifact = {
     @as("ArtifactArn") artifactArn: artifactArn,
   }
   type response = {@as("ArtifactArn") artifactArn: option<artifactArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAction = {
@@ -4115,8 +4109,8 @@ module UpdateAction = {
     @as("ActionName") actionName: experimentEntityName,
   }
   type response = {@as("ActionArn") actionArn: option<actionArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrial = {
@@ -4134,8 +4128,8 @@ module DescribeTrial = {
     @as("TrialArn") trialArn: option<trialArn>,
     @as("TrialName") trialName: option<experimentEntityName>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeTrialCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeTrialCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSubscribedWorkteam = {
@@ -4143,8 +4137,8 @@ module DescribeSubscribedWorkteam = {
   type request = {@as("WorkteamArn") workteamArn: workteamArn}
   type response = {@as("SubscribedWorkteam") subscribedWorkteam: subscribedWorkteam}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeSubscribedWorkteamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSubscribedWorkteamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePipelineExecution = {
@@ -4163,8 +4157,8 @@ module DescribePipelineExecution = {
     @as("PipelineArn") pipelineArn: option<pipelineArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribePipelineExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePipelineExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePipeline = {
@@ -4184,8 +4178,8 @@ module DescribePipeline = {
     @as("PipelineName") pipelineName: option<pipelineName>,
     @as("PipelineArn") pipelineArn: option<pipelineArn>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNotebookInstance = {
@@ -4216,8 +4210,8 @@ module DescribeNotebookInstance = {
     @as("NotebookInstanceArn") notebookInstanceArn: option<notebookInstanceArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeNotebookInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNotebookInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeModelPackageGroup = {
@@ -4232,8 +4226,8 @@ module DescribeModelPackageGroup = {
     @as("ModelPackageGroupName") modelPackageGroupName: entityName,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeModelPackageGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeModelPackageGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeHumanTaskUi = {
@@ -4247,8 +4241,8 @@ module DescribeHumanTaskUi = {
     @as("HumanTaskUiArn") humanTaskUiArn: humanTaskUiArn,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeHumanTaskUiCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeHumanTaskUiCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeExperiment = {
@@ -4265,9 +4259,8 @@ module DescribeExperiment = {
     @as("ExperimentArn") experimentArn: option<experimentArn>,
     @as("ExperimentName") experimentName: option<experimentEntityName>,
   }
-  @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeExperimentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeExperimentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEdgePackagingJob = {
@@ -4290,8 +4283,8 @@ module DescribeEdgePackagingJob = {
     @as("EdgePackagingJobArn") edgePackagingJobArn: edgePackagingJobArn,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeEdgePackagingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEdgePackagingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDeviceFleet = {
@@ -4308,8 +4301,8 @@ module DescribeDeviceFleet = {
     @as("DeviceFleetName") deviceFleetName: entityName,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeDeviceFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDeviceFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeContext = {
@@ -4327,8 +4320,8 @@ module DescribeContext = {
     @as("ContextArn") contextArn: option<contextArn>,
     @as("ContextName") contextName: option<experimentEntityName>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeContextCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeContextCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCodeRepository = {
@@ -4342,8 +4335,8 @@ module DescribeCodeRepository = {
     @as("CodeRepositoryName") codeRepositoryName: entityName,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeCodeRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCodeRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeApp = {
@@ -4367,8 +4360,8 @@ module DescribeApp = {
     @as("AppType") appType: option<appType>,
     @as("AppArn") appArn: option<appArn>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAction = {
@@ -4388,8 +4381,8 @@ module DescribeAction = {
     @as("ActionArn") actionArn: option<actionArn>,
     @as("ActionName") actionName: option<experimentEntityName>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterDevices = {
@@ -4399,8 +4392,8 @@ module DeregisterDevices = {
     @as("DeviceFleetName") deviceFleetName: entityName,
   }
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeregisterDevicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeregisterDevicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteTags = {
@@ -4410,8 +4403,8 @@ module DeleteTags = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDomain = {
@@ -4421,8 +4414,8 @@ module DeleteDomain = {
     @as("DomainId") domainId: domainId,
   }
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateTrialComponent = {
@@ -4442,8 +4435,8 @@ module UpdateTrialComponent = {
   }
   type response = {@as("TrialComponentArn") trialComponentArn: option<trialComponentArn>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "UpdateTrialComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateTrialComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateNotebookInstanceLifecycleConfig = {
@@ -4456,8 +4449,8 @@ module UpdateNotebookInstanceLifecycleConfig = {
   }
   type response = unit
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "UpdateNotebookInstanceLifecycleConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateNotebookInstanceLifecycleConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEndpointWeightsAndCapacities = {
@@ -4468,8 +4461,8 @@ module UpdateEndpointWeightsAndCapacities = {
   }
   type response = {@as("EndpointArn") endpointArn: endpointArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "UpdateEndpointWeightsAndCapacitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEndpointWeightsAndCapacitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDevices = {
@@ -4479,8 +4472,8 @@ module UpdateDevices = {
     @as("DeviceFleetName") deviceFleetName: entityName,
   }
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateDevicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateDevicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartPipelineExecution = {
@@ -4495,8 +4488,8 @@ module StartPipelineExecution = {
   }
   type response = {@as("PipelineExecutionArn") pipelineExecutionArn: option<pipelineExecutionArn>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "StartPipelineExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartPipelineExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RenderUiTemplate = {
@@ -4511,8 +4504,8 @@ module RenderUiTemplate = {
     @as("Errors") errors: renderingErrorList,
     @as("RenderedContent") renderedContent: string_,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "RenderUiTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "RenderUiTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterDevices = {
@@ -4523,8 +4516,8 @@ module RegisterDevices = {
     @as("DeviceFleetName") deviceFleetName: entityName,
   }
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "RegisterDevicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "RegisterDevicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListUserProfiles = {
@@ -4541,8 +4534,8 @@ module ListUserProfiles = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("UserProfiles") userProfiles: option<userProfileList>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListUserProfilesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListUserProfilesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTransformJobs = {
@@ -4563,8 +4556,8 @@ module ListTransformJobs = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("TransformJobSummaries") transformJobSummaries: transformJobSummaries,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListTransformJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListTransformJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTrainingJobs = {
@@ -4585,8 +4578,8 @@ module ListTrainingJobs = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("TrainingJobSummaries") trainingJobSummaries: trainingJobSummaries,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListTrainingJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListTrainingJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTags = {
@@ -4600,8 +4593,8 @@ module ListTags = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Tags") tags: option<tagList_>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSubscribedWorkteams = {
@@ -4616,8 +4609,8 @@ module ListSubscribedWorkteams = {
     @as("SubscribedWorkteams") subscribedWorkteams: subscribedWorkteams,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListSubscribedWorkteamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSubscribedWorkteamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProjects = {
@@ -4635,8 +4628,8 @@ module ListProjects = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ProjectSummaryList") projectSummaryList: projectSummaryList,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProcessingJobs = {
@@ -4657,9 +4650,8 @@ module ListProcessingJobs = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ProcessingJobSummaries") processingJobSummaries: processingJobSummaries,
   }
-  @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListProcessingJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListProcessingJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPipelines = {
@@ -4677,8 +4669,8 @@ module ListPipelines = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("PipelineSummaries") pipelineSummaries: option<pipelineSummaryList>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListPipelinesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListPipelinesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPipelineParametersForExecution = {
@@ -4693,8 +4685,8 @@ module ListPipelineParametersForExecution = {
     @as("PipelineParameters") pipelineParameters: option<parameterList>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListPipelineParametersForExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPipelineParametersForExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPipelineExecutions = {
@@ -4714,8 +4706,8 @@ module ListPipelineExecutions = {
     pipelineExecutionSummaries: option<pipelineExecutionSummaryList>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListPipelineExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPipelineExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListNotebookInstanceLifecycleConfigs = {
@@ -4737,8 +4729,8 @@ module ListNotebookInstanceLifecycleConfigs = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListNotebookInstanceLifecycleConfigsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListNotebookInstanceLifecycleConfigsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMonitoringSchedules = {
@@ -4764,8 +4756,8 @@ module ListMonitoringSchedules = {
     @as("MonitoringScheduleSummaries") monitoringScheduleSummaries: monitoringScheduleSummaryList,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListMonitoringSchedulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListMonitoringSchedulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMonitoringExecutions = {
@@ -4794,8 +4786,8 @@ module ListMonitoringExecutions = {
     monitoringExecutionSummaries: monitoringExecutionSummaryList,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListMonitoringExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListMonitoringExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListModels = {
@@ -4813,8 +4805,8 @@ module ListModels = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("Models") models: modelSummaryList,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListModelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListModelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListModelQualityJobDefinitions = {
@@ -4834,8 +4826,8 @@ module ListModelQualityJobDefinitions = {
     @as("JobDefinitionSummaries") jobDefinitionSummaries: monitoringJobDefinitionSummaryList,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListModelQualityJobDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListModelQualityJobDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListModelPackages = {
@@ -4856,8 +4848,8 @@ module ListModelPackages = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ModelPackageSummaryList") modelPackageSummaryList: modelPackageSummaryList,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListModelPackagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListModelPackagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListModelPackageGroups = {
@@ -4876,8 +4868,8 @@ module ListModelPackageGroups = {
     @as("ModelPackageGroupSummaryList") modelPackageGroupSummaryList: modelPackageGroupSummaryList,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListModelPackageGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListModelPackageGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListModelExplainabilityJobDefinitions = {
@@ -4897,8 +4889,8 @@ module ListModelExplainabilityJobDefinitions = {
     @as("JobDefinitionSummaries") jobDefinitionSummaries: monitoringJobDefinitionSummaryList,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListModelExplainabilityJobDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListModelExplainabilityJobDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListModelBiasJobDefinitions = {
@@ -4918,8 +4910,8 @@ module ListModelBiasJobDefinitions = {
     @as("JobDefinitionSummaries") jobDefinitionSummaries: monitoringJobDefinitionSummaryList,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListModelBiasJobDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListModelBiasJobDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListImages = {
@@ -4939,8 +4931,8 @@ module ListImages = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Images") images: option<images>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListImageVersions = {
@@ -4960,8 +4952,8 @@ module ListImageVersions = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ImageVersions") imageVersions: option<imageVersions>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListImageVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListImageVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListHumanTaskUis = {
@@ -4977,8 +4969,8 @@ module ListHumanTaskUis = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("HumanTaskUiSummaries") humanTaskUiSummaries: humanTaskUiSummaries,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListHumanTaskUisCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListHumanTaskUisCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFlowDefinitions = {
@@ -4995,8 +4987,8 @@ module ListFlowDefinitions = {
     @as("FlowDefinitionSummaries") flowDefinitionSummaries: flowDefinitionSummaries,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListFlowDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListFlowDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEndpoints = {
@@ -5017,8 +5009,8 @@ module ListEndpoints = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("Endpoints") endpoints: endpointSummaryList,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEndpointConfigs = {
@@ -5037,8 +5029,8 @@ module ListEndpointConfigs = {
     @as("EndpointConfigs") endpointConfigs: endpointConfigSummaryList,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListEndpointConfigsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEndpointConfigsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEdgePackagingJobs = {
@@ -5061,8 +5053,8 @@ module ListEdgePackagingJobs = {
     @as("EdgePackagingJobSummaries") edgePackagingJobSummaries: edgePackagingJobSummaries,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListEdgePackagingJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEdgePackagingJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDomains = {
@@ -5075,8 +5067,8 @@ module ListDomains = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Domains") domains: option<domainList>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListDomainsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListDomainsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDeviceFleets = {
@@ -5096,8 +5088,8 @@ module ListDeviceFleets = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("DeviceFleetSummaries") deviceFleetSummaries: deviceFleetSummaries,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListDeviceFleetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListDeviceFleetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDataQualityJobDefinitions = {
@@ -5117,8 +5109,8 @@ module ListDataQualityJobDefinitions = {
     @as("JobDefinitionSummaries") jobDefinitionSummaries: monitoringJobDefinitionSummaryList,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListDataQualityJobDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDataQualityJobDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCompilationJobs = {
@@ -5140,8 +5132,8 @@ module ListCompilationJobs = {
     @as("CompilationJobSummaries") compilationJobSummaries: compilationJobSummaries,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListCompilationJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCompilationJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListApps = {
@@ -5158,8 +5150,8 @@ module ListApps = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Apps") apps: option<appList>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListAppsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListAppsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAlgorithms = {
@@ -5177,8 +5169,8 @@ module ListAlgorithms = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("AlgorithmSummaryList") algorithmSummaryList: algorithmSummaryList,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListAlgorithmsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListAlgorithmsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSearchSuggestions = {
@@ -5191,8 +5183,8 @@ module GetSearchSuggestions = {
     @as("PropertyNameSuggestions") propertyNameSuggestions: option<propertyNameSuggestionList>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "GetSearchSuggestionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSearchSuggestionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDeviceFleetReport = {
@@ -5209,8 +5201,8 @@ module GetDeviceFleetReport = {
     @as("DeviceFleetArn") deviceFleetArn: deviceFleetArn,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "GetDeviceFleetReportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDeviceFleetReportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrialComponent = {
@@ -5235,8 +5227,8 @@ module DescribeTrialComponent = {
     @as("TrialComponentName") trialComponentName: option<experimentEntityName>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeTrialComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTrialComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNotebookInstanceLifecycleConfig = {
@@ -5256,8 +5248,8 @@ module DescribeNotebookInstanceLifecycleConfig = {
     notebookInstanceLifecycleConfigArn: option<notebookInstanceLifecycleConfigArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeNotebookInstanceLifecycleConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNotebookInstanceLifecycleConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFeatureGroup = {
@@ -5283,8 +5275,8 @@ module DescribeFeatureGroup = {
     @as("FeatureGroupArn") featureGroupArn: featureGroupArn,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeFeatureGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFeatureGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDevice = {
@@ -5306,8 +5298,8 @@ module DescribeDevice = {
     @as("DeviceName") deviceName: entityName,
     @as("DeviceArn") deviceArn: option<deviceArn>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCompilationJob = {
@@ -5330,8 +5322,8 @@ module DescribeCompilationJob = {
     @as("CompilationJobName") compilationJobName: entityName,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeCompilationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCompilationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWorkforce = {
@@ -5344,8 +5336,8 @@ module CreateWorkforce = {
     @as("CognitoConfig") cognitoConfig: option<cognitoConfig>,
   }
   type response = {@as("WorkforceArn") workforceArn: workforceArn}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateWorkforceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateWorkforceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTrialComponent = {
@@ -5364,8 +5356,8 @@ module CreateTrialComponent = {
   }
   type response = {@as("TrialComponentArn") trialComponentArn: option<trialComponentArn>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateTrialComponentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateTrialComponentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTrial = {
@@ -5378,8 +5370,8 @@ module CreateTrial = {
     @as("TrialName") trialName: experimentEntityName,
   }
   type response = {@as("TrialArn") trialArn: option<trialArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateTrialCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateTrialCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePipeline = {
@@ -5394,8 +5386,8 @@ module CreatePipeline = {
     @as("PipelineName") pipelineName: pipelineName,
   }
   type response = {@as("PipelineArn") pipelineArn: option<pipelineArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreatePipelineCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreatePipelineCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNotebookInstanceLifecycleConfig = {
@@ -5411,8 +5403,8 @@ module CreateNotebookInstanceLifecycleConfig = {
     notebookInstanceLifecycleConfigArn: option<notebookInstanceLifecycleConfigArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateNotebookInstanceLifecycleConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateNotebookInstanceLifecycleConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNotebookInstance = {
@@ -5436,8 +5428,8 @@ module CreateNotebookInstance = {
   }
   type response = {@as("NotebookInstanceArn") notebookInstanceArn: option<notebookInstanceArn>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateNotebookInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateNotebookInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateModelPackageGroup = {
@@ -5449,8 +5441,8 @@ module CreateModelPackageGroup = {
   }
   type response = {@as("ModelPackageGroupArn") modelPackageGroupArn: modelPackageGroupArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateModelPackageGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateModelPackageGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateImage = {
@@ -5463,8 +5455,8 @@ module CreateImage = {
     @as("Description") description: option<imageDescription>,
   }
   type response = {@as("ImageArn") imageArn: option<imageArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateHumanTaskUi = {
@@ -5475,8 +5467,8 @@ module CreateHumanTaskUi = {
     @as("HumanTaskUiName") humanTaskUiName: humanTaskUiName,
   }
   type response = {@as("HumanTaskUiArn") humanTaskUiArn: humanTaskUiArn}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateHumanTaskUiCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateHumanTaskUiCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFeatureGroup = {
@@ -5493,9 +5485,8 @@ module CreateFeatureGroup = {
     @as("FeatureGroupName") featureGroupName: featureGroupName,
   }
   type response = {@as("FeatureGroupArn") featureGroupArn: featureGroupArn}
-  @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateFeatureGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateFeatureGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateExperiment = {
@@ -5507,8 +5498,8 @@ module CreateExperiment = {
     @as("ExperimentName") experimentName: experimentEntityName,
   }
   type response = {@as("ExperimentArn") experimentArn: option<experimentArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateExperimentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateExperimentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEndpoint = {
@@ -5519,8 +5510,8 @@ module CreateEndpoint = {
     @as("EndpointName") endpointName: endpointName,
   }
   type response = {@as("EndpointArn") endpointArn: endpointArn}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEdgePackagingJob = {
@@ -5537,8 +5528,8 @@ module CreateEdgePackagingJob = {
   }
 
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateEdgePackagingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "CreateEdgePackagingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateDeviceFleet = {
@@ -5551,8 +5542,8 @@ module CreateDeviceFleet = {
     @as("DeviceFleetName") deviceFleetName: entityName,
   }
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateDeviceFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateDeviceFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateContext = {
@@ -5566,8 +5557,8 @@ module CreateContext = {
     @as("ContextName") contextName: experimentEntityName,
   }
   type response = {@as("ContextArn") contextArn: option<contextArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateContextCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateContextCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCompilationJob = {
@@ -5582,8 +5573,8 @@ module CreateCompilationJob = {
   }
   type response = {@as("CompilationJobArn") compilationJobArn: compilationJobArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateCompilationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCompilationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCodeRepository = {
@@ -5595,8 +5586,8 @@ module CreateCodeRepository = {
   }
   type response = {@as("CodeRepositoryArn") codeRepositoryArn: codeRepositoryArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateCodeRepositoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCodeRepositoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApp = {
@@ -5610,8 +5601,8 @@ module CreateApp = {
     @as("DomainId") domainId: domainId,
   }
   type response = {@as("AppArn") appArn: option<appArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAction = {
@@ -5627,8 +5618,8 @@ module CreateAction = {
     @as("ActionName") actionName: experimentEntityName,
   }
   type response = {@as("ActionArn") actionArn: option<actionArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTags = {
@@ -5638,8 +5629,8 @@ module AddTags = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
   type response = {@as("Tags") tags: option<tagList_>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "AddTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "AddTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateWorkforce = {
@@ -5650,8 +5641,8 @@ module UpdateWorkforce = {
     @as("WorkforceName") workforceName: workforceName,
   }
   type response = {@as("Workforce") workforce: workforce}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateWorkforceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateWorkforceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTrainingJob = {
@@ -5663,8 +5654,8 @@ module UpdateTrainingJob = {
     @as("TrainingJobName") trainingJobName: trainingJobName,
   }
   type response = {@as("TrainingJobArn") trainingJobArn: trainingJobArn}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateTrainingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateTrainingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAppImageConfig = {
@@ -5675,8 +5666,8 @@ module UpdateAppImageConfig = {
   }
   type response = {@as("AppImageConfigArn") appImageConfigArn: option<appImageConfigArn>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "UpdateAppImageConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAppImageConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTrials = {
@@ -5695,8 +5686,8 @@ module ListTrials = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("TrialSummaries") trialSummaries: option<trialSummaries>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListTrialsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListTrialsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTrialComponents = {
@@ -5717,8 +5708,8 @@ module ListTrialComponents = {
     @as("TrialComponentSummaries") trialComponentSummaries: option<trialComponentSummaries>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListTrialComponentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTrialComponentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTrainingJobsForHyperParameterTuningJob = {
@@ -5736,8 +5727,8 @@ module ListTrainingJobsForHyperParameterTuningJob = {
     @as("TrainingJobSummaries") trainingJobSummaries: hyperParameterTrainingJobSummaries,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListTrainingJobsForHyperParameterTuningJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTrainingJobsForHyperParameterTuningJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListNotebookInstances = {
@@ -5765,8 +5756,8 @@ module ListNotebookInstances = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListNotebookInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListNotebookInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLabelingJobsForWorkteam = {
@@ -5786,8 +5777,8 @@ module ListLabelingJobsForWorkteam = {
     @as("LabelingJobSummaryList") labelingJobSummaryList: labelingJobForWorkteamSummaryList,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListLabelingJobsForWorkteamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListLabelingJobsForWorkteamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListHyperParameterTuningJobs = {
@@ -5810,8 +5801,8 @@ module ListHyperParameterTuningJobs = {
     hyperParameterTuningJobSummaries: hyperParameterTuningJobSummaries,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListHyperParameterTuningJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListHyperParameterTuningJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFeatureGroups = {
@@ -5831,8 +5822,8 @@ module ListFeatureGroups = {
     @as("NextToken") nextToken: nextToken,
     @as("FeatureGroupSummaries") featureGroupSummaries: featureGroupSummaries,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListFeatureGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListFeatureGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListExperiments = {
@@ -5849,8 +5840,8 @@ module ListExperiments = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ExperimentSummaries") experimentSummaries: option<experimentSummaries>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListExperimentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListExperimentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListContexts = {
@@ -5869,8 +5860,8 @@ module ListContexts = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ContextSummaries") contextSummaries: option<contextSummaries>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListContextsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListContextsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCodeRepositories = {
@@ -5891,8 +5882,8 @@ module ListCodeRepositories = {
     @as("CodeRepositorySummaryList") codeRepositorySummaryList: codeRepositorySummaryList,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListCodeRepositoriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCodeRepositoriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssociations = {
@@ -5914,8 +5905,8 @@ module ListAssociations = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("AssociationSummaries") associationSummaries: option<associationSummaries>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListActions = {
@@ -5934,16 +5925,16 @@ module ListActions = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ActionSummaries") actionSummaries: option<actionSummaries>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkforce = {
   type t
   type request = {@as("WorkforceName") workforceName: workforceName}
   type response = {@as("Workforce") workforce: workforce}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeWorkforceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeWorkforceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTransformJob = {
@@ -5972,8 +5963,8 @@ module DescribeTransformJob = {
     @as("TransformJobName") transformJobName: transformJobName,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeTransformJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTransformJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProject = {
@@ -5992,8 +5983,8 @@ module DescribeProject = {
     @as("ProjectName") projectName: projectEntityName,
     @as("ProjectArn") projectArn: projectArn,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLabelingJob = {
@@ -6021,8 +6012,8 @@ module DescribeLabelingJob = {
     @as("LabelingJobStatus") labelingJobStatus: labelingJobStatus,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeLabelingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeLabelingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFlowDefinition = {
@@ -6041,8 +6032,8 @@ module DescribeFlowDefinition = {
     @as("FlowDefinitionArn") flowDefinitionArn: flowDefinitionArn,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeFlowDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFlowDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpointConfig = {
@@ -6057,8 +6048,8 @@ module DescribeEndpointConfig = {
     @as("EndpointConfigName") endpointConfigName: endpointConfigName,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeEndpointConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEndpointConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeArtifact = {
@@ -6076,8 +6067,8 @@ module DescribeArtifact = {
     @as("ArtifactArn") artifactArn: option<artifactArn>,
     @as("ArtifactName") artifactName: option<experimentEntityName>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAppImageConfig = {
@@ -6091,8 +6082,8 @@ module DescribeAppImageConfig = {
     @as("AppImageConfigArn") appImageConfigArn: option<appImageConfigArn>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeAppImageConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAppImageConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteArtifact = {
@@ -6102,8 +6093,8 @@ module DeleteArtifact = {
     @as("ArtifactArn") artifactArn: option<artifactArn>,
   }
   type response = {@as("ArtifactArn") artifactArn: option<artifactArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTransformJob = {
@@ -6124,9 +6115,8 @@ module CreateTransformJob = {
     @as("TransformJobName") transformJobName: transformJobName,
   }
   type response = {@as("TransformJobArn") transformJobArn: transformJobArn}
-  @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateTransformJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateTransformJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProject = {
@@ -6142,8 +6132,8 @@ module CreateProject = {
     @as("ProjectId") projectId: projectId,
     @as("ProjectArn") projectArn: projectArn,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLabelingJob = {
@@ -6162,8 +6152,8 @@ module CreateLabelingJob = {
     @as("LabelingJobName") labelingJobName: labelingJobName,
   }
   type response = {@as("LabelingJobArn") labelingJobArn: labelingJobArn}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateLabelingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateLabelingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFlowDefinition = {
@@ -6179,8 +6169,8 @@ module CreateFlowDefinition = {
   }
   type response = {@as("FlowDefinitionArn") flowDefinitionArn: flowDefinitionArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateFlowDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateFlowDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEndpointConfig = {
@@ -6194,8 +6184,8 @@ module CreateEndpointConfig = {
   }
   type response = {@as("EndpointConfigArn") endpointConfigArn: endpointConfigArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateEndpointConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateEndpointConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateArtifact = {
@@ -6209,8 +6199,8 @@ module CreateArtifact = {
     @as("ArtifactName") artifactName: option<experimentEntityName>,
   }
   type response = {@as("ArtifactArn") artifactArn: option<artifactArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAppImageConfig = {
@@ -6222,8 +6212,8 @@ module CreateAppImageConfig = {
   }
   type response = {@as("AppImageConfigArn") appImageConfigArn: option<appImageConfigArn>}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateAppImageConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAppImageConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateUserProfile = {
@@ -6234,8 +6224,8 @@ module UpdateUserProfile = {
     @as("DomainId") domainId: domainId,
   }
   type response = {@as("UserProfileArn") userProfileArn: option<userProfileArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEndpoint = {
@@ -6249,8 +6239,8 @@ module UpdateEndpoint = {
     @as("EndpointName") endpointName: endpointName,
   }
   type response = {@as("EndpointArn") endpointArn: endpointArn}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDomain = {
@@ -6260,8 +6250,8 @@ module UpdateDomain = {
     @as("DomainId") domainId: domainId,
   }
   type response = {@as("DomainArn") domainArn: option<domainArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorkforces = {
@@ -6277,8 +6267,8 @@ module ListWorkforces = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Workforces") workforces: workforces,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListWorkforcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListWorkforcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPipelineExecutionSteps = {
@@ -6294,8 +6284,8 @@ module ListPipelineExecutionSteps = {
     @as("PipelineExecutionSteps") pipelineExecutionSteps: option<pipelineExecutionStepList>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListPipelineExecutionStepsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPipelineExecutionStepsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDevices = {
@@ -6311,8 +6301,8 @@ module ListDevices = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("DeviceSummaries") deviceSummaries: deviceSummaries,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListDevicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListDevicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAutoMLJobs = {
@@ -6333,8 +6323,8 @@ module ListAutoMLJobs = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("AutoMLJobSummaries") autoMLJobSummaries: autoMLJobSummaries,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListAutoMLJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListAutoMLJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeUserProfile = {
@@ -6358,8 +6348,8 @@ module DescribeUserProfile = {
     @as("DomainId") domainId: option<domainId>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProcessingJob = {
@@ -6389,8 +6379,8 @@ module DescribeProcessingJob = {
     @as("ProcessingInputs") processingInputs: option<processingInputs>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeProcessingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProcessingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeModelQualityJobDefinition = {
@@ -6411,8 +6401,8 @@ module DescribeModelQualityJobDefinition = {
     @as("JobDefinitionArn") jobDefinitionArn: monitoringJobDefinitionArn,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeModelQualityJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeModelQualityJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeModelExplainabilityJobDefinition = {
@@ -6435,8 +6425,8 @@ module DescribeModelExplainabilityJobDefinition = {
     @as("JobDefinitionArn") jobDefinitionArn: monitoringJobDefinitionArn,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeModelExplainabilityJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeModelExplainabilityJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeModelBiasJobDefinition = {
@@ -6456,8 +6446,8 @@ module DescribeModelBiasJobDefinition = {
     @as("JobDefinitionArn") jobDefinitionArn: monitoringJobDefinitionArn,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeModelBiasJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeModelBiasJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeModel = {
@@ -6474,8 +6464,8 @@ module DescribeModel = {
     @as("PrimaryContainer") primaryContainer: option<containerDefinition>,
     @as("ModelName") modelName: modelName,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpoint = {
@@ -6493,8 +6483,8 @@ module DescribeEndpoint = {
     @as("EndpointArn") endpointArn: endpointArn,
     @as("EndpointName") endpointName: endpointName,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDomain = {
@@ -6520,8 +6510,8 @@ module DescribeDomain = {
     @as("DomainId") domainId: option<domainId>,
     @as("DomainArn") domainArn: option<domainArn>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataQualityJobDefinition = {
@@ -6541,8 +6531,8 @@ module DescribeDataQualityJobDefinition = {
     @as("JobDefinitionArn") jobDefinitionArn: monitoringJobDefinitionArn,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeDataQualityJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDataQualityJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAutoMLJob = {
@@ -6572,8 +6562,8 @@ module DescribeAutoMLJob = {
     @as("AutoMLJobArn") autoMLJobArn: autoMLJobArn,
     @as("AutoMLJobName") autoMLJobName: autoMLJobName,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeAutoMLJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeAutoMLJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWorkteam = {
@@ -6587,8 +6577,8 @@ module CreateWorkteam = {
     @as("WorkteamName") workteamName: workteamName,
   }
   type response = {@as("WorkteamArn") workteamArn: option<workteamArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateWorkteamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateWorkteamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateUserProfile = {
@@ -6603,8 +6593,8 @@ module CreateUserProfile = {
     @as("DomainId") domainId: domainId,
   }
   type response = {@as("UserProfileArn") userProfileArn: option<userProfileArn>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProcessingJob = {
@@ -6624,8 +6614,8 @@ module CreateProcessingJob = {
   }
   type response = {@as("ProcessingJobArn") processingJobArn: processingJobArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateProcessingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateProcessingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateModelQualityJobDefinition = {
@@ -6645,8 +6635,8 @@ module CreateModelQualityJobDefinition = {
   }
   type response = {@as("JobDefinitionArn") jobDefinitionArn: monitoringJobDefinitionArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateModelQualityJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateModelQualityJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateModelExplainabilityJobDefinition = {
@@ -6668,8 +6658,8 @@ module CreateModelExplainabilityJobDefinition = {
   }
   type response = {@as("JobDefinitionArn") jobDefinitionArn: monitoringJobDefinitionArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateModelExplainabilityJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateModelExplainabilityJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateModelBiasJobDefinition = {
@@ -6688,8 +6678,8 @@ module CreateModelBiasJobDefinition = {
   }
   type response = {@as("JobDefinitionArn") jobDefinitionArn: monitoringJobDefinitionArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateModelBiasJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateModelBiasJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateModel = {
@@ -6705,8 +6695,8 @@ module CreateModel = {
     @as("ModelName") modelName: modelName,
   }
   type response = {@as("ModelArn") modelArn: modelArn}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDomain = {
@@ -6726,8 +6716,8 @@ module CreateDomain = {
     @as("Url") url: option<string1024>,
     @as("DomainArn") domainArn: option<domainArn>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDataQualityJobDefinition = {
@@ -6746,8 +6736,8 @@ module CreateDataQualityJobDefinition = {
   }
   type response = {@as("JobDefinitionArn") jobDefinitionArn: monitoringJobDefinitionArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateDataQualityJobDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDataQualityJobDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAutoMLJob = {
@@ -6766,8 +6756,8 @@ module CreateAutoMLJob = {
     @as("AutoMLJobName") autoMLJobName: autoMLJobName,
   }
   type response = {@as("AutoMLJobArn") autoMLJobArn: autoMLJobArn}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateAutoMLJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateAutoMLJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateWorkteam = {
@@ -6779,8 +6769,8 @@ module UpdateWorkteam = {
     @as("WorkteamName") workteamName: workteamName,
   }
   type response = {@as("Workteam") workteam: workteam}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "UpdateWorkteamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "UpdateWorkteamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLabelingJobs = {
@@ -6801,8 +6791,8 @@ module ListLabelingJobs = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("LabelingJobSummaryList") labelingJobSummaryList: option<labelingJobSummaryList>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListLabelingJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListLabelingJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCandidatesForAutoMLJob = {
@@ -6821,8 +6811,8 @@ module ListCandidatesForAutoMLJob = {
     @as("Candidates") candidates: autoMLCandidates,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListCandidatesForAutoMLJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCandidatesForAutoMLJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListArtifacts = {
@@ -6841,8 +6831,8 @@ module ListArtifacts = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ArtifactSummaries") artifactSummaries: option<artifactSummaries>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListArtifactsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListArtifactsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAppImageConfigs = {
@@ -6863,16 +6853,16 @@ module ListAppImageConfigs = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "ListAppImageConfigsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAppImageConfigsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWorkteam = {
   type t
   type request = {@as("WorkteamName") workteamName: workteamName}
   type response = {@as("Workteam") workteam: workteam}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeWorkteamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeWorkteamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTrainingJob = {
@@ -6926,8 +6916,8 @@ module DescribeTrainingJob = {
     @as("TrainingJobName") trainingJobName: trainingJobName,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeTrainingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTrainingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTrainingJob = {
@@ -6959,8 +6949,8 @@ module CreateTrainingJob = {
     @as("TrainingJobName") trainingJobName: trainingJobName,
   }
   type response = {@as("TrainingJobArn") trainingJobArn: trainingJobArn}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateTrainingJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateTrainingJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMonitoringSchedule = {
@@ -6971,8 +6961,8 @@ module UpdateMonitoringSchedule = {
   }
   type response = {@as("MonitoringScheduleArn") monitoringScheduleArn: monitoringScheduleArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "UpdateMonitoringScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateMonitoringScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorkteams = {
@@ -6988,8 +6978,8 @@ module ListWorkteams = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Workteams") workteams: workteams,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "ListWorkteamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "ListWorkteamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMonitoringSchedule = {
@@ -7009,8 +6999,8 @@ module DescribeMonitoringSchedule = {
     @as("MonitoringScheduleArn") monitoringScheduleArn: monitoringScheduleArn,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeMonitoringScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMonitoringScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMonitoringSchedule = {
@@ -7022,8 +7012,8 @@ module CreateMonitoringSchedule = {
   }
   type response = {@as("MonitoringScheduleArn") monitoringScheduleArn: monitoringScheduleArn}
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateMonitoringScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateMonitoringScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeModelPackage = {
@@ -7053,8 +7043,8 @@ module DescribeModelPackage = {
     @as("ModelPackageName") modelPackageName: entityName,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeModelPackageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeModelPackageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeHyperParameterTuningJob = {
@@ -7083,8 +7073,8 @@ module DescribeHyperParameterTuningJob = {
     @as("HyperParameterTuningJobName") hyperParameterTuningJobName: hyperParameterTuningJobName,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "DescribeHyperParameterTuningJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeHyperParameterTuningJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateModelPackage = {
@@ -7106,9 +7096,8 @@ module CreateModelPackage = {
     @as("ModelPackageName") modelPackageName: option<entityName>,
   }
   type response = {@as("ModelPackageArn") modelPackageArn: modelPackageArn}
-  @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateModelPackageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateModelPackageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateHyperParameterTuningJob = {
@@ -7127,8 +7116,8 @@ module CreateHyperParameterTuningJob = {
     @as("HyperParameterTuningJobArn") hyperParameterTuningJobArn: hyperParameterTuningJobArn,
   }
   @module("@aws-sdk/client-sagemaker") @new
-  external new_: request => t = "CreateHyperParameterTuningJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateHyperParameterTuningJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAlgorithm = {
@@ -7148,8 +7137,8 @@ module DescribeAlgorithm = {
     @as("AlgorithmArn") algorithmArn: algorithmArn,
     @as("AlgorithmName") algorithmName: entityName,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DescribeAlgorithmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DescribeAlgorithmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAlgorithm = {
@@ -7165,8 +7154,8 @@ module CreateAlgorithm = {
     @as("AlgorithmName") algorithmName: entityName,
   }
   type response = {@as("AlgorithmArn") algorithmArn: algorithmArn}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "CreateAlgorithmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "CreateAlgorithmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Search = {
@@ -7183,6 +7172,6 @@ module Search = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Results") results: option<searchResultsList>,
   }
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "SearchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "SearchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

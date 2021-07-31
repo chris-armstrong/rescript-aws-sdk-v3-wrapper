@@ -34,8 +34,8 @@ module UpdateThingShadow = {
     thingName: thingName,
   }
   type response = {payload: option<jsonDocument>}
-  @module("@aws-sdk/client-iotdata") @new external new_: request => t = "UpdateThingShadowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotdata") @new external new: request => t = "UpdateThingShadowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Publish = {
@@ -46,8 +46,8 @@ module Publish = {
     topic: topic,
   }
 
-  @module("@aws-sdk/client-iotdata") @new external new_: request => t = "PublishCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-iotdata") @new external new: request => t = "PublishCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetThingShadow = {
@@ -57,8 +57,8 @@ module GetThingShadow = {
     thingName: thingName,
   }
   type response = {payload: option<jsonDocument>}
-  @module("@aws-sdk/client-iotdata") @new external new_: request => t = "GetThingShadowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotdata") @new external new: request => t = "GetThingShadowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteThingShadow = {
@@ -68,8 +68,8 @@ module DeleteThingShadow = {
     thingName: thingName,
   }
   type response = {payload: jsonDocument}
-  @module("@aws-sdk/client-iotdata") @new external new_: request => t = "DeleteThingShadowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotdata") @new external new: request => t = "DeleteThingShadowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListNamedShadowsForThing = {
@@ -85,6 +85,6 @@ module ListNamedShadowsForThing = {
     results: option<namedShadowList>,
   }
   @module("@aws-sdk/client-iotdata") @new
-  external new_: request => t = "ListNamedShadowsForThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListNamedShadowsForThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

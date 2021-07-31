@@ -189,8 +189,8 @@ module UpdateDatasetEntries = {
   }
   type response = {@as("Status") status: option<datasetStatus>}
   @module("@aws-sdk/client-lookoutvision") @new
-  external new_: request => t = "UpdateDatasetEntriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDatasetEntriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopModel = {
@@ -201,8 +201,8 @@ module StopModel = {
     @as("ProjectName") projectName: projectName,
   }
   type response = {@as("Status") status: option<modelHostingStatus>}
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "StopModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "StopModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartModel = {
@@ -214,8 +214,8 @@ module StartModel = {
     @as("ProjectName") projectName: projectName,
   }
   type response = {@as("Status") status: option<modelHostingStatus>}
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "StartModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "StartModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProject = {
@@ -225,8 +225,8 @@ module DeleteProject = {
     @as("ProjectName") projectName: projectName,
   }
   type response = {@as("ProjectArn") projectArn: option<projectArn>}
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "DeleteProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "DeleteProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteModel = {
@@ -237,8 +237,8 @@ module DeleteModel = {
     @as("ProjectName") projectName: projectName,
   }
   type response = {@as("ModelArn") modelArn: option<modelArn>}
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "DeleteModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "DeleteModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDataset = {
@@ -249,8 +249,8 @@ module DeleteDataset = {
     @as("ProjectName") projectName: projectName,
   }
   type response = unit
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "DeleteDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "DeleteDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -260,8 +260,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: tagArn,
   }
   type response = unit
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDatasetEntries = {
@@ -282,8 +282,8 @@ module ListDatasetEntries = {
     @as("DatasetEntries") datasetEntries: option<datasetEntryList>,
   }
   @module("@aws-sdk/client-lookoutvision") @new
-  external new_: request => t = "ListDatasetEntriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDatasetEntriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProject = {
@@ -293,8 +293,8 @@ module CreateProject = {
     @as("ProjectName") projectName: projectName,
   }
   type response = {@as("ProjectMetadata") projectMetadata: option<projectMetadata>}
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "CreateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "CreateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -304,8 +304,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: tagArn,
   }
   type response = unit
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -313,8 +313,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: tagArn}
   type response = {@as("Tags") tags: option<tagList_>}
   @module("@aws-sdk/client-lookoutvision") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProjects = {
@@ -327,8 +327,8 @@ module ListProjects = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("Projects") projects: option<projectMetadataList>,
   }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "ListProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "ListProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectAnomalies = {
@@ -341,8 +341,8 @@ module DetectAnomalies = {
   }
   type response = {@as("DetectAnomalyResult") detectAnomalyResult: option<detectAnomalyResult>}
   @module("@aws-sdk/client-lookoutvision") @new
-  external new_: request => t = "DetectAnomaliesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetectAnomaliesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataset = {
@@ -353,8 +353,8 @@ module DescribeDataset = {
   }
   type response = {@as("DatasetDescription") datasetDescription: option<datasetDescription>}
   @module("@aws-sdk/client-lookoutvision") @new
-  external new_: request => t = "DescribeDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateModel = {
@@ -368,8 +368,8 @@ module CreateModel = {
     @as("ProjectName") projectName: projectName,
   }
   type response = {@as("ModelMetadata") modelMetadata: option<modelMetadata>}
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "CreateModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "CreateModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListModels = {
@@ -383,8 +383,8 @@ module ListModels = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("Models") models: option<modelMetadataList>,
   }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "ListModelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "ListModelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProject = {
@@ -392,8 +392,8 @@ module DescribeProject = {
   type request = {@as("ProjectName") projectName: projectName}
   type response = {@as("ProjectDescription") projectDescription: option<projectDescription>}
   @module("@aws-sdk/client-lookoutvision") @new
-  external new_: request => t = "DescribeProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeModel = {
@@ -403,8 +403,8 @@ module DescribeModel = {
     @as("ProjectName") projectName: projectName,
   }
   type response = {@as("ModelDescription") modelDescription: option<modelDescription>}
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "DescribeModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "DescribeModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDataset = {
@@ -416,6 +416,6 @@ module CreateDataset = {
     @as("ProjectName") projectName: projectName,
   }
   type response = {@as("DatasetMetadata") datasetMetadata: option<datasetMetadata>}
-  @module("@aws-sdk/client-lookoutvision") @new external new_: request => t = "CreateDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutvision") @new external new: request => t = "CreateDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

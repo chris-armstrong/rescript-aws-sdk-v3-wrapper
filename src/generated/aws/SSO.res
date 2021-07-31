@@ -48,8 +48,8 @@ module Logout = {
   type t
   type request = {accessToken: accessTokenType}
 
-  @module("@aws-sdk/client-awsssoportal") @new external new_: request => t = "LogoutCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-awsssoportal") @new external new: request => t = "LogoutCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetRoleCredentials = {
@@ -61,8 +61,8 @@ module GetRoleCredentials = {
   }
   type response = {roleCredentials: option<roleCredentials>}
   @module("@aws-sdk/client-awsssoportal") @new
-  external new_: request => t = "GetRoleCredentialsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRoleCredentialsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAccounts = {
@@ -76,8 +76,8 @@ module ListAccounts = {
     accountList: option<accountListType>,
     nextToken: option<nextTokenType>,
   }
-  @module("@aws-sdk/client-awsssoportal") @new external new_: request => t = "ListAccountsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-awsssoportal") @new external new: request => t = "ListAccountsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAccountRoles = {
@@ -93,6 +93,6 @@ module ListAccountRoles = {
     nextToken: option<nextTokenType>,
   }
   @module("@aws-sdk/client-awsssoportal") @new
-  external new_: request => t = "ListAccountRolesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAccountRolesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

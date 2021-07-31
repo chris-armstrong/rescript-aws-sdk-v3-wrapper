@@ -1331,8 +1331,8 @@ module IsVpcPeered = {
   type t
   type request = unit
   type response = {isPeered: option<boolean_>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "IsVpcPeeredCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "IsVpcPeeredCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabaseMasterUserPassword = {
@@ -1346,8 +1346,8 @@ module GetRelationalDatabaseMasterUserPassword = {
     masterUserPassword: option<sensitiveString>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabaseMasterUserPasswordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabaseMasterUserPasswordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDistributionLatestCacheReset = {
@@ -1358,8 +1358,8 @@ module GetDistributionLatestCacheReset = {
     status: option<string_>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetDistributionLatestCacheResetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDistributionLatestCacheResetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DownloadDefaultKeyPair = {
@@ -1370,8 +1370,8 @@ module DownloadDefaultKeyPair = {
     publicKeyBase64: option<base64>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DownloadDefaultKeyPairCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DownloadDefaultKeyPairCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteContainerService = {
@@ -1379,8 +1379,8 @@ module DeleteContainerService = {
   type request = {serviceName: containerServiceName}
   type response = unit
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteContainerServiceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteContainerServiceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteContainerImage = {
@@ -1391,8 +1391,8 @@ module DeleteContainerImage = {
   }
   type response = unit
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteContainerImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteContainerImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterContainerImage = {
@@ -1404,8 +1404,8 @@ module RegisterContainerImage = {
   }
   type response = {containerImage: option<containerImage>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "RegisterContainerImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterContainerImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabaseLogStreams = {
@@ -1413,16 +1413,16 @@ module GetRelationalDatabaseLogStreams = {
   type request = {relationalDatabaseName: resourceName}
   type response = {logStreams: option<stringList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabaseLogStreamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabaseLogStreamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInstanceState = {
   type t
   type request = {instanceName: resourceName}
   type response = {state: option<instanceState>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetInstanceStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetInstanceStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetActiveNames = {
@@ -1432,8 +1432,8 @@ module GetActiveNames = {
     nextPageToken: option<string_>,
     activeNames: option<stringList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetActiveNamesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetActiveNamesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateContainerServiceRegistryLogin = {
@@ -1441,8 +1441,8 @@ module CreateContainerServiceRegistryLogin = {
   type request = unit
   type response = {registryLogin: option<containerServiceRegistryLogin>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateContainerServiceRegistryLoginCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateContainerServiceRegistryLoginCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDistributionBundle = {
@@ -1453,16 +1453,16 @@ module UpdateDistributionBundle = {
   }
   type response = {operation: option<operation>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "UpdateDistributionBundleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDistributionBundleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UnpeerVpc = {
   type t
   type request = unit
   type response = {operation: option<operation>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "UnpeerVpcCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "UnpeerVpcCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ResetDistributionCache = {
@@ -1474,16 +1474,16 @@ module ResetDistributionCache = {
     status: option<string_>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "ResetDistributionCacheCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ResetDistributionCacheCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PeerVpc = {
   type t
   type request = unit
   type response = {operation: option<operation>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "PeerVpcCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "PeerVpcCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module OpenInstancePublicPorts = {
@@ -1494,8 +1494,8 @@ module OpenInstancePublicPorts = {
   }
   type response = {operation: option<operation>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "OpenInstancePublicPortsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "OpenInstancePublicPortsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportKeyPair = {
@@ -1505,16 +1505,16 @@ module ImportKeyPair = {
     keyPairName: resourceName,
   }
   type response = {operation: option<operation>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "ImportKeyPairCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "ImportKeyPairCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStaticIp = {
   type t
   type request = {staticIpName: resourceName}
   type response = {staticIp: option<staticIp>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetStaticIpCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetStaticIpCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabaseParameters = {
@@ -1528,8 +1528,8 @@ module GetRelationalDatabaseParameters = {
     parameters: option<relationalDatabaseParameterList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabaseParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabaseParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabaseMetricData = {
@@ -1548,8 +1548,8 @@ module GetRelationalDatabaseMetricData = {
     metricName: option<relationalDatabaseMetricName>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabaseMetricDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabaseMetricDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabaseLogEvents = {
@@ -1568,8 +1568,8 @@ module GetRelationalDatabaseLogEvents = {
     resourceLogEvents: option<logEventList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabaseLogEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabaseLogEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabaseBundles = {
@@ -1580,8 +1580,8 @@ module GetRelationalDatabaseBundles = {
     bundles: option<relationalDatabaseBundleList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabaseBundlesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabaseBundlesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabaseBlueprints = {
@@ -1592,16 +1592,16 @@ module GetRelationalDatabaseBlueprints = {
     blueprints: option<relationalDatabaseBlueprintList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabaseBlueprintsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabaseBlueprintsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOperation = {
   type t
   type request = {operationId: nonEmptyString}
   type response = {operation: option<operation>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetOperationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetOperationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLoadBalancerMetricData = {
@@ -1620,8 +1620,8 @@ module GetLoadBalancerMetricData = {
     metricName: option<loadBalancerMetricName>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetLoadBalancerMetricDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetLoadBalancerMetricDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInstanceMetricData = {
@@ -1640,8 +1640,8 @@ module GetInstanceMetricData = {
     metricName: option<instanceMetricName>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetInstanceMetricDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInstanceMetricDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDistributionMetricData = {
@@ -1660,8 +1660,8 @@ module GetDistributionMetricData = {
     metricName: option<distributionMetricName>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetDistributionMetricDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDistributionMetricDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDistributionBundles = {
@@ -1669,8 +1669,8 @@ module GetDistributionBundles = {
   type request = unit
   type response = {bundles: option<distributionBundleList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetDistributionBundlesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDistributionBundlesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContainerServicePowers = {
@@ -1678,8 +1678,8 @@ module GetContainerServicePowers = {
   type request = unit
   type response = {powers: option<containerServicePowerList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetContainerServicePowersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetContainerServicePowersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContainerServiceMetricData = {
@@ -1697,8 +1697,8 @@ module GetContainerServiceMetricData = {
     metricName: option<containerServiceMetricName>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetContainerServiceMetricDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetContainerServiceMetricDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContainerLog = {
@@ -1715,17 +1715,16 @@ module GetContainerLog = {
     nextPageToken: option<string_>,
     logEvents: option<containerServiceLogEventList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetContainerLogCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetContainerLogCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContainerImages = {
   type t
   type request = {serviceName: containerServiceName}
   type response = {containerImages: option<containerImageList>}
-  @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetContainerImagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetContainerImagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContainerAPIMetadata = {
@@ -1733,8 +1732,8 @@ module GetContainerAPIMetadata = {
   type request = unit
   type response = {metadata: option<containerServiceMetadataEntryList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetContainerAPIMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetContainerAPIMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBlueprints = {
@@ -1747,8 +1746,8 @@ module GetBlueprints = {
     nextPageToken: option<string_>,
     blueprints: option<blueprintList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetBlueprintsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetBlueprintsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetachCertificateFromDistribution = {
@@ -1756,16 +1755,16 @@ module DetachCertificateFromDistribution = {
   type request = {distributionName: resourceName}
   type response = {operation: option<operation>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DetachCertificateFromDistributionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetachCertificateFromDistributionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteKeyPair = {
   type t
   type request = {keyPairName: resourceName}
   type response = {operation: option<operation>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "DeleteKeyPairCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteKeyPairCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDomainEntry = {
@@ -1775,25 +1774,24 @@ module DeleteDomainEntry = {
     domainName: domainName,
   }
   type response = {operation: option<operation>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "DeleteDomainEntryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteDomainEntryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDomain = {
   type t
   type request = {domainName: domainName}
   type response = {operation: option<operation>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "DeleteDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDistribution = {
   type t
   type request = {distributionName: option<resourceName>}
   type response = {operation: option<operation>}
-  @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteDistributionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteDistributionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDomainEntry = {
@@ -1803,8 +1801,8 @@ module CreateDomainEntry = {
     domainName: domainName,
   }
   type response = {operation: option<operation>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "CreateDomainEntryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "CreateDomainEntryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDomain = {
@@ -1814,8 +1812,8 @@ module CreateDomain = {
     domainName: domainName,
   }
   type response = {operation: option<operation>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "CreateDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "CreateDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CloseInstancePublicPorts = {
@@ -1826,8 +1824,8 @@ module CloseInstancePublicPorts = {
   }
   type response = {operation: option<operation>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CloseInstancePublicPortsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CloseInstancePublicPortsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachCertificateToDistribution = {
@@ -1838,8 +1836,8 @@ module AttachCertificateToDistribution = {
   }
   type response = {operation: option<operation>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "AttachCertificateToDistributionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AttachCertificateToDistributionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRelationalDatabaseParameters = {
@@ -1850,8 +1848,8 @@ module UpdateRelationalDatabaseParameters = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "UpdateRelationalDatabaseParametersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateRelationalDatabaseParametersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRelationalDatabase = {
@@ -1870,8 +1868,8 @@ module UpdateRelationalDatabase = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "UpdateRelationalDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateRelationalDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLoadBalancerAttribute = {
@@ -1883,8 +1881,8 @@ module UpdateLoadBalancerAttribute = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "UpdateLoadBalancerAttributeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateLoadBalancerAttributeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDomainEntry = {
@@ -1894,8 +1892,8 @@ module UpdateDomainEntry = {
     domainName: domainName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "UpdateDomainEntryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "UpdateDomainEntryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDistribution = {
@@ -1909,9 +1907,8 @@ module UpdateDistribution = {
     distributionName: resourceName,
   }
   type response = {operation: option<operation>}
-  @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "UpdateDistributionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "UpdateDistributionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -1922,8 +1919,8 @@ module UntagResource = {
     resourceName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TestAlarm = {
@@ -1933,8 +1930,8 @@ module TestAlarm = {
     alarmName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "TestAlarmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "TestAlarmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1945,8 +1942,8 @@ module TagResource = {
     resourceName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopRelationalDatabase = {
@@ -1957,8 +1954,8 @@ module StopRelationalDatabase = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "StopRelationalDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopRelationalDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopInstance = {
@@ -1968,8 +1965,8 @@ module StopInstance = {
     instanceName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "StopInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "StopInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartRelationalDatabase = {
@@ -1977,16 +1974,16 @@ module StartRelationalDatabase = {
   type request = {relationalDatabaseName: resourceName}
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "StartRelationalDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartRelationalDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartInstance = {
   type t
   type request = {instanceName: resourceName}
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "StartInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "StartInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetIpAddressType = {
@@ -1997,8 +1994,8 @@ module SetIpAddressType = {
     resourceType: resourceType,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "SetIpAddressTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "SetIpAddressTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendContactMethodVerification = {
@@ -2006,16 +2003,16 @@ module SendContactMethodVerification = {
   type request = {protocol: contactMethodVerificationProtocol}
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "SendContactMethodVerificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SendContactMethodVerificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReleaseStaticIp = {
   type t
   type request = {staticIpName: resourceName}
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "ReleaseStaticIpCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "ReleaseStaticIpCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RebootRelationalDatabase = {
@@ -2023,16 +2020,16 @@ module RebootRelationalDatabase = {
   type request = {relationalDatabaseName: resourceName}
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "RebootRelationalDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RebootRelationalDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RebootInstance = {
   type t
   type request = {instanceName: resourceName}
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "RebootInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "RebootInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutInstancePublicPorts = {
@@ -2043,8 +2040,8 @@ module PutInstancePublicPorts = {
   }
   type response = {operation: option<operation>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "PutInstancePublicPortsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutInstancePublicPortsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAlarm = {
@@ -2063,8 +2060,8 @@ module PutAlarm = {
     alarmName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "PutAlarmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "PutAlarmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetStaticIps = {
@@ -2074,8 +2071,8 @@ module GetStaticIps = {
     nextPageToken: option<string_>,
     staticIps: option<staticIpList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetStaticIpsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetStaticIpsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabaseSnapshot = {
@@ -2083,8 +2080,8 @@ module GetRelationalDatabaseSnapshot = {
   type request = {relationalDatabaseSnapshotName: resourceName}
   type response = {relationalDatabaseSnapshot: option<relationalDatabaseSnapshot>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabaseSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabaseSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabaseEvents = {
@@ -2099,8 +2096,8 @@ module GetRelationalDatabaseEvents = {
     relationalDatabaseEvents: option<relationalDatabaseEventList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabaseEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabaseEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabase = {
@@ -2108,8 +2105,8 @@ module GetRelationalDatabase = {
   type request = {relationalDatabaseName: resourceName}
   type response = {relationalDatabase: option<relationalDatabase>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOperationsForResource = {
@@ -2124,8 +2121,8 @@ module GetOperationsForResource = {
     operations: option<operationList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetOperationsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetOperationsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOperations = {
@@ -2135,24 +2132,24 @@ module GetOperations = {
     nextPageToken: option<string_>,
     operations: option<operationList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetOperationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetOperationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLoadBalancer = {
   type t
   type request = {loadBalancerName: resourceName}
   type response = {loadBalancer: option<loadBalancer>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetKeyPair = {
   type t
   type request = {keyPairName: resourceName}
   type response = {keyPair: option<keyPair>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetKeyPairCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetKeyPairCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInstancePortStates = {
@@ -2160,8 +2157,8 @@ module GetInstancePortStates = {
   type request = {instanceName: resourceName}
   type response = {portStates: option<instancePortStateList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetInstancePortStatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInstancePortStatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInstanceAccessDetails = {
@@ -2172,32 +2169,32 @@ module GetInstanceAccessDetails = {
   }
   type response = {accessDetails: option<instanceAccessDetails>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetInstanceAccessDetailsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInstanceAccessDetailsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDiskSnapshot = {
   type t
   type request = {diskSnapshotName: resourceName}
   type response = {diskSnapshot: option<diskSnapshot>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetDiskSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetDiskSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDisk = {
   type t
   type request = {diskName: resourceName}
   type response = {disk: option<disk>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetDiskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetDiskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContactMethods = {
   type t
   type request = {protocols: option<contactProtocolsList>}
   type response = {contactMethods: option<contactMethodsList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetContactMethodsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetContactMethodsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBundles = {
@@ -2210,8 +2207,8 @@ module GetBundles = {
     nextPageToken: option<string_>,
     bundles: option<bundleList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetBundlesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetBundlesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAlarms = {
@@ -2225,16 +2222,16 @@ module GetAlarms = {
     nextPageToken: option<string_>,
     alarms: option<alarmsList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetAlarmsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetAlarmsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExportSnapshot = {
   type t
   type request = {sourceSnapshotName: resourceName}
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "ExportSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "ExportSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableAddOn = {
@@ -2244,8 +2241,8 @@ module EnableAddOn = {
     resourceName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "EnableAddOnCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "EnableAddOnCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableAddOn = {
@@ -2255,16 +2252,16 @@ module DisableAddOn = {
     addOnType: addOnType,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "DisableAddOnCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DisableAddOnCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetachStaticIp = {
   type t
   type request = {staticIpName: resourceName}
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "DetachStaticIpCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DetachStaticIpCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetachInstancesFromLoadBalancer = {
@@ -2275,16 +2272,16 @@ module DetachInstancesFromLoadBalancer = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DetachInstancesFromLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetachInstancesFromLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetachDisk = {
   type t
   type request = {diskName: resourceName}
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "DetachDiskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DetachDiskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRelationalDatabaseSnapshot = {
@@ -2292,8 +2289,8 @@ module DeleteRelationalDatabaseSnapshot = {
   type request = {relationalDatabaseSnapshotName: resourceName}
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteRelationalDatabaseSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteRelationalDatabaseSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRelationalDatabase = {
@@ -2305,8 +2302,8 @@ module DeleteRelationalDatabase = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteRelationalDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteRelationalDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLoadBalancerTlsCertificate = {
@@ -2318,17 +2315,16 @@ module DeleteLoadBalancerTlsCertificate = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteLoadBalancerTlsCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteLoadBalancerTlsCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLoadBalancer = {
   type t
   type request = {loadBalancerName: resourceName}
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteKnownHostKeys = {
@@ -2336,8 +2332,8 @@ module DeleteKnownHostKeys = {
   type request = {instanceName: resourceName}
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteKnownHostKeysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteKnownHostKeysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInstanceSnapshot = {
@@ -2345,8 +2341,8 @@ module DeleteInstanceSnapshot = {
   type request = {instanceSnapshotName: resourceName}
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteInstanceSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteInstanceSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInstance = {
@@ -2356,17 +2352,16 @@ module DeleteInstance = {
     instanceName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "DeleteInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDiskSnapshot = {
   type t
   type request = {diskSnapshotName: resourceName}
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteDiskSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteDiskSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDisk = {
@@ -2376,8 +2371,8 @@ module DeleteDisk = {
     diskName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "DeleteDiskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteDiskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteContactMethod = {
@@ -2385,16 +2380,16 @@ module DeleteContactMethod = {
   type request = {protocol: contactProtocol}
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteContactMethodCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteContactMethodCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCertificate = {
   type t
   type request = {certificateName: certificateName}
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "DeleteCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAutoSnapshot = {
@@ -2404,17 +2399,16 @@ module DeleteAutoSnapshot = {
     resourceName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "DeleteAutoSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteAutoSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAlarm = {
   type t
   type request = {alarmName: resourceName}
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "DeleteAlarmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "DeleteAlarmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRelationalDatabaseSnapshot = {
@@ -2426,8 +2420,8 @@ module CreateRelationalDatabaseSnapshot = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateRelationalDatabaseSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateRelationalDatabaseSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRelationalDatabaseFromSnapshot = {
@@ -2445,8 +2439,8 @@ module CreateRelationalDatabaseFromSnapshot = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateRelationalDatabaseFromSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateRelationalDatabaseFromSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRelationalDatabase = {
@@ -2466,8 +2460,8 @@ module CreateRelationalDatabase = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateRelationalDatabaseCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateRelationalDatabaseCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLoadBalancerTlsCertificate = {
@@ -2481,8 +2475,8 @@ module CreateLoadBalancerTlsCertificate = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateLoadBalancerTlsCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateLoadBalancerTlsCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLoadBalancer = {
@@ -2498,9 +2492,8 @@ module CreateLoadBalancer = {
     loadBalancerName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "CreateLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateKeyPair = {
@@ -2515,8 +2508,8 @@ module CreateKeyPair = {
     publicKeyBase64: option<base64>,
     keyPair: option<keyPair>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "CreateKeyPairCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "CreateKeyPairCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInstancesFromSnapshot = {
@@ -2538,8 +2531,8 @@ module CreateInstancesFromSnapshot = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateInstancesFromSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateInstancesFromSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInstances = {
@@ -2557,8 +2550,8 @@ module CreateInstances = {
     instanceNames: stringList,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "CreateInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "CreateInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInstanceSnapshot = {
@@ -2570,8 +2563,8 @@ module CreateInstanceSnapshot = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateInstanceSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateInstanceSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDiskSnapshot = {
@@ -2583,9 +2576,8 @@ module CreateDiskSnapshot = {
     diskName: option<resourceName>,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateDiskSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "CreateDiskSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDiskFromSnapshot = {
@@ -2603,8 +2595,8 @@ module CreateDiskFromSnapshot = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateDiskFromSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDiskFromSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDisk = {
@@ -2617,8 +2609,8 @@ module CreateDisk = {
     diskName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "CreateDiskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "CreateDiskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateContactMethod = {
@@ -2629,8 +2621,8 @@ module CreateContactMethod = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateContactMethodCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateContactMethodCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCloudFormationStack = {
@@ -2638,8 +2630,8 @@ module CreateCloudFormationStack = {
   type request = {instances: instanceEntryList}
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateCloudFormationStackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCloudFormationStackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CopySnapshot = {
@@ -2653,8 +2645,8 @@ module CopySnapshot = {
     sourceSnapshotName: option<resourceName>,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "CopySnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "CopySnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachStaticIp = {
@@ -2664,8 +2656,8 @@ module AttachStaticIp = {
     staticIpName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "AttachStaticIpCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "AttachStaticIpCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachLoadBalancerTlsCertificate = {
@@ -2676,8 +2668,8 @@ module AttachLoadBalancerTlsCertificate = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "AttachLoadBalancerTlsCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AttachLoadBalancerTlsCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachInstancesToLoadBalancer = {
@@ -2688,8 +2680,8 @@ module AttachInstancesToLoadBalancer = {
   }
   type response = {operations: option<operationList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "AttachInstancesToLoadBalancerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AttachInstancesToLoadBalancerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AttachDisk = {
@@ -2700,16 +2692,16 @@ module AttachDisk = {
     diskName: resourceName,
   }
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "AttachDiskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "AttachDiskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AllocateStaticIp = {
   type t
   type request = {staticIpName: resourceName}
   type response = {operations: option<operationList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "AllocateStaticIpCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "AllocateStaticIpCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabases = {
@@ -2720,8 +2712,8 @@ module GetRelationalDatabases = {
     relationalDatabases: option<relationalDatabaseList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRelationalDatabaseSnapshots = {
@@ -2732,8 +2724,8 @@ module GetRelationalDatabaseSnapshots = {
     relationalDatabaseSnapshots: option<relationalDatabaseSnapshotList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetRelationalDatabaseSnapshotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRelationalDatabaseSnapshotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRegions = {
@@ -2743,8 +2735,8 @@ module GetRegions = {
     includeAvailabilityZones: option<boolean_>,
   }
   type response = {regions: option<regionList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetRegionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetRegionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLoadBalancers = {
@@ -2754,8 +2746,8 @@ module GetLoadBalancers = {
     nextPageToken: option<string_>,
     loadBalancers: option<loadBalancerList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetLoadBalancersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetLoadBalancersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetKeyPairs = {
@@ -2765,16 +2757,16 @@ module GetKeyPairs = {
     nextPageToken: option<string_>,
     keyPairs: option<keyPairList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetKeyPairsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetKeyPairsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDomain = {
   type t
   type request = {domainName: domainName}
   type response = {domain: option<domain>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDisks = {
@@ -2784,8 +2776,8 @@ module GetDisks = {
     nextPageToken: option<string_>,
     disks: option<diskList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetDisksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetDisksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDiskSnapshots = {
@@ -2795,8 +2787,8 @@ module GetDiskSnapshots = {
     nextPageToken: option<string_>,
     diskSnapshots: option<diskSnapshotList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetDiskSnapshotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetDiskSnapshotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCloudFormationStackRecords = {
@@ -2807,8 +2799,8 @@ module GetCloudFormationStackRecords = {
     cloudFormationStackRecords: option<cloudFormationStackRecordList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetCloudFormationStackRecordsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCloudFormationStackRecordsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAutoSnapshots = {
@@ -2819,8 +2811,8 @@ module GetAutoSnapshots = {
     resourceType: option<resourceType>,
     resourceName: option<resourceName>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetAutoSnapshotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetAutoSnapshotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDistribution = {
@@ -2839,9 +2831,8 @@ module CreateDistribution = {
     operation: option<operation>,
     distribution: option<lightsailDistribution>,
   }
-  @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateDistributionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "CreateDistributionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateContainerService = {
@@ -2855,8 +2846,8 @@ module UpdateContainerService = {
   }
   type response = {containerService: option<containerService>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "UpdateContainerServiceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateContainerServiceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLoadBalancerTlsCertificates = {
@@ -2864,8 +2855,8 @@ module GetLoadBalancerTlsCertificates = {
   type request = {loadBalancerName: resourceName}
   type response = {tlsCertificates: option<loadBalancerTlsCertificateList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetLoadBalancerTlsCertificatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetLoadBalancerTlsCertificatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInstanceSnapshot = {
@@ -2873,8 +2864,8 @@ module GetInstanceSnapshot = {
   type request = {instanceSnapshotName: resourceName}
   type response = {instanceSnapshot: option<instanceSnapshot>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetInstanceSnapshotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInstanceSnapshotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDomains = {
@@ -2884,8 +2875,8 @@ module GetDomains = {
     nextPageToken: option<string_>,
     domains: option<domainList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetDomainsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetDomainsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDistributions = {
@@ -2898,8 +2889,8 @@ module GetDistributions = {
     nextPageToken: option<string_>,
     distributions: option<distributionList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetDistributionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetDistributionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContainerServiceDeployments = {
@@ -2907,8 +2898,8 @@ module GetContainerServiceDeployments = {
   type request = {serviceName: containerServiceName}
   type response = {deployments: option<containerServiceDeploymentList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetContainerServiceDeploymentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetContainerServiceDeploymentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateContainerServiceDeployment = {
@@ -2920,8 +2911,8 @@ module CreateContainerServiceDeployment = {
   }
   type response = {containerService: option<containerService>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateContainerServiceDeploymentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateContainerServiceDeploymentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateContainerService = {
@@ -2936,8 +2927,8 @@ module CreateContainerService = {
   }
   type response = {containerService: option<containerService>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "CreateContainerServiceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateContainerServiceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInstanceSnapshots = {
@@ -2948,16 +2939,16 @@ module GetInstanceSnapshots = {
     instanceSnapshots: option<instanceSnapshotList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetInstanceSnapshotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetInstanceSnapshotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInstance = {
   type t
   type request = {instanceName: resourceName}
   type response = {instance: option<instance>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetExportSnapshotRecords = {
@@ -2968,8 +2959,8 @@ module GetExportSnapshotRecords = {
     exportSnapshotRecords: option<exportSnapshotRecordList>,
   }
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetExportSnapshotRecordsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetExportSnapshotRecordsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContainerServices = {
@@ -2977,8 +2968,8 @@ module GetContainerServices = {
   type request = {serviceName: option<containerServiceName>}
   type response = {containerServices: option<containerServiceList>}
   @module("@aws-sdk/client-lightsail") @new
-  external new_: request => t = "GetContainerServicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetContainerServicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCertificate = {
@@ -2993,8 +2984,8 @@ module CreateCertificate = {
     operations: option<operationList>,
     certificate: option<certificateSummary>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "CreateCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "CreateCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInstances = {
@@ -3004,8 +2995,8 @@ module GetInstances = {
     nextPageToken: option<string_>,
     instances: option<instanceList>,
   }
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCertificates = {
@@ -3016,6 +3007,6 @@ module GetCertificates = {
     certificateStatuses: option<certificateStatusList>,
   }
   type response = {certificates: option<certificateSummaryList>}
-  @module("@aws-sdk/client-lightsail") @new external new_: request => t = "GetCertificatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lightsail") @new external new: request => t = "GetCertificatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

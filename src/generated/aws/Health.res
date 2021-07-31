@@ -218,16 +218,16 @@ module EnableHealthServiceAccessForOrganization = {
   type t
 
   @module("@aws-sdk/client-health") @new
-  external new_: unit => t = "EnableHealthServiceAccessForOrganizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: unit => t = "EnableHealthServiceAccessForOrganizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisableHealthServiceAccessForOrganization = {
   type t
 
   @module("@aws-sdk/client-health") @new
-  external new_: unit => t = "DisableHealthServiceAccessForOrganizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: unit => t = "DisableHealthServiceAccessForOrganizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeHealthServiceStatusForOrganization = {
@@ -237,8 +237,8 @@ module DescribeHealthServiceStatusForOrganization = {
     healthServiceAccessStatusForOrganization: option<healthServiceAccessStatusForOrganization>,
   }
   @module("@aws-sdk/client-health") @new
-  external new_: unit => t = "DescribeHealthServiceStatusForOrganizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: unit => t = "DescribeHealthServiceStatusForOrganizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAffectedAccountsForOrganization = {
@@ -254,8 +254,8 @@ module DescribeAffectedAccountsForOrganization = {
     affectedAccounts: option<affectedAccountsList>,
   }
   @module("@aws-sdk/client-health") @new
-  external new_: request => t = "DescribeAffectedAccountsForOrganizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAffectedAccountsForOrganizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEventsForOrganization = {
@@ -271,8 +271,8 @@ module DescribeEventsForOrganization = {
     events: option<organizationEventList>,
   }
   @module("@aws-sdk/client-health") @new
-  external new_: request => t = "DescribeEventsForOrganizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEventsForOrganizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEventTypes = {
@@ -287,8 +287,8 @@ module DescribeEventTypes = {
     nextToken: option<nextToken>,
     eventTypes: option<eventTypeList>,
   }
-  @module("@aws-sdk/client-health") @new external new_: request => t = "DescribeEventTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-health") @new external new: request => t = "DescribeEventTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEntityAggregates = {
@@ -296,8 +296,8 @@ module DescribeEntityAggregates = {
   type request = {eventArns: option<eventArnsList>}
   type response = {entityAggregates: option<entityAggregateList>}
   @module("@aws-sdk/client-health") @new
-  external new_: request => t = "DescribeEntityAggregatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEntityAggregatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEvents = {
@@ -312,8 +312,8 @@ module DescribeEvents = {
     nextToken: option<nextToken>,
     events: option<eventList>,
   }
-  @module("@aws-sdk/client-health") @new external new_: request => t = "DescribeEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-health") @new external new: request => t = "DescribeEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEventDetailsForOrganization = {
@@ -327,8 +327,8 @@ module DescribeEventDetailsForOrganization = {
     successfulSet: option<describeEventDetailsForOrganizationSuccessfulSet>,
   }
   @module("@aws-sdk/client-health") @new
-  external new_: request => t = "DescribeEventDetailsForOrganizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEventDetailsForOrganizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEventDetails = {
@@ -341,8 +341,8 @@ module DescribeEventDetails = {
     failedSet: option<describeEventDetailsFailedSet>,
     successfulSet: option<describeEventDetailsSuccessfulSet>,
   }
-  @module("@aws-sdk/client-health") @new external new_: request => t = "DescribeEventDetailsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-health") @new external new: request => t = "DescribeEventDetailsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEventAggregates = {
@@ -358,8 +358,8 @@ module DescribeEventAggregates = {
     eventAggregates: option<eventAggregateList>,
   }
   @module("@aws-sdk/client-health") @new
-  external new_: request => t = "DescribeEventAggregatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEventAggregatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAffectedEntitiesForOrganization = {
@@ -376,8 +376,8 @@ module DescribeAffectedEntitiesForOrganization = {
     entities: option<entityList>,
   }
   @module("@aws-sdk/client-health") @new
-  external new_: request => t = "DescribeAffectedEntitiesForOrganizationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAffectedEntitiesForOrganizationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAffectedEntities = {
@@ -393,6 +393,6 @@ module DescribeAffectedEntities = {
     entities: option<entityList>,
   }
   @module("@aws-sdk/client-health") @new
-  external new_: request => t = "DescribeAffectedEntitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAffectedEntitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

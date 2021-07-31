@@ -86,8 +86,8 @@ module GetWorkingLocation = {
     s3Uri: option<stringValueLength1to1024>,
   }
   @module("@aws-sdk/client-finspace-api") @new
-  external new_: request => t = "GetWorkingLocationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetWorkingLocationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetProgrammaticAccessCredentials = {
@@ -101,8 +101,8 @@ module GetProgrammaticAccessCredentials = {
     credentials: option<credentials>,
   }
   @module("@aws-sdk/client-finspace-api") @new
-  external new_: request => t = "GetProgrammaticAccessCredentialsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetProgrammaticAccessCredentialsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateChangeset = {
@@ -117,7 +117,6 @@ module CreateChangeset = {
     datasetId: idType,
   }
   type response = {changeset: option<changesetInfo>}
-  @module("@aws-sdk/client-finspace-api") @new
-  external new_: request => t = "CreateChangesetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-finspace-api") @new external new: request => t = "CreateChangesetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

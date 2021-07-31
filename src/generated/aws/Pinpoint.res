@@ -1517,8 +1517,8 @@ module UpdateVoiceChannel = {
   }
   type response = {@as("VoiceChannelResponse") voiceChannelResponse: voiceChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateVoiceChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateVoiceChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTemplateActiveVersion = {
@@ -1530,8 +1530,8 @@ module UpdateTemplateActiveVersion = {
   }
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateTemplateActiveVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateTemplateActiveVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSmsChannel = {
@@ -1542,8 +1542,8 @@ module UpdateSmsChannel = {
   }
   type response = {@as("SMSChannelResponse") smschannelResponse: smschannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateSmsChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSmsChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateGcmChannel = {
@@ -1554,8 +1554,8 @@ module UpdateGcmChannel = {
   }
   type response = {@as("GCMChannelResponse") gcmchannelResponse: gcmchannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateGcmChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateGcmChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEmailChannel = {
@@ -1566,8 +1566,8 @@ module UpdateEmailChannel = {
   }
   type response = {@as("EmailChannelResponse") emailChannelResponse: emailChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateEmailChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEmailChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateBaiduChannel = {
@@ -1578,8 +1578,8 @@ module UpdateBaiduChannel = {
   }
   type response = {@as("BaiduChannelResponse") baiduChannelResponse: baiduChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateBaiduChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateBaiduChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApnsVoipSandboxChannel = {
@@ -1594,8 +1594,8 @@ module UpdateApnsVoipSandboxChannel = {
     apnsvoipSandboxChannelResponse: apnsvoipSandboxChannelResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateApnsVoipSandboxChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApnsVoipSandboxChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApnsVoipChannel = {
@@ -1606,8 +1606,8 @@ module UpdateApnsVoipChannel = {
   }
   type response = {@as("APNSVoipChannelResponse") apnsvoipChannelResponse: apnsvoipChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateApnsVoipChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApnsVoipChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApnsSandboxChannel = {
@@ -1620,8 +1620,8 @@ module UpdateApnsSandboxChannel = {
     @as("APNSSandboxChannelResponse") apnssandboxChannelResponse: apnssandboxChannelResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateApnsSandboxChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApnsSandboxChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApnsChannel = {
@@ -1632,8 +1632,8 @@ module UpdateApnsChannel = {
   }
   type response = {@as("APNSChannelResponse") apnschannelResponse: apnschannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateApnsChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApnsChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAdmChannel = {
@@ -1644,8 +1644,8 @@ module UpdateAdmChannel = {
   }
   type response = {@as("ADMChannelResponse") admchannelResponse: admchannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateAdmChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAdmChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -1656,8 +1656,8 @@ module UntagResource = {
   }
 
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutEventStream = {
@@ -1668,8 +1668,8 @@ module PutEventStream = {
   }
   type response = {@as("EventStream") eventStream: eventStream}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "PutEventStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutEventStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PhoneNumberValidate = {
@@ -1677,8 +1677,8 @@ module PhoneNumberValidate = {
   type request = {@as("NumberValidateRequest") numberValidateRequest: numberValidateRequest}
   type response = {@as("NumberValidateResponse") numberValidateResponse: numberValidateResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "PhoneNumberValidateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PhoneNumberValidateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVoiceChannel = {
@@ -1686,8 +1686,8 @@ module GetVoiceChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("VoiceChannelResponse") voiceChannelResponse: voiceChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetVoiceChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetVoiceChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSmsChannel = {
@@ -1695,8 +1695,8 @@ module GetSmsChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("SMSChannelResponse") smschannelResponse: smschannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetSmsChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSmsChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetGcmChannel = {
@@ -1704,8 +1704,8 @@ module GetGcmChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("GCMChannelResponse") gcmchannelResponse: gcmchannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetGcmChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetGcmChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEventStream = {
@@ -1713,8 +1713,8 @@ module GetEventStream = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("EventStream") eventStream: eventStream}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetEventStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEventStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEmailChannel = {
@@ -1722,8 +1722,8 @@ module GetEmailChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("EmailChannelResponse") emailChannelResponse: emailChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetEmailChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEmailChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBaiduChannel = {
@@ -1731,8 +1731,8 @@ module GetBaiduChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("BaiduChannelResponse") baiduChannelResponse: baiduChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetBaiduChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetBaiduChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApnsVoipSandboxChannel = {
@@ -1743,8 +1743,8 @@ module GetApnsVoipSandboxChannel = {
     apnsvoipSandboxChannelResponse: apnsvoipSandboxChannelResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetApnsVoipSandboxChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetApnsVoipSandboxChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApnsVoipChannel = {
@@ -1752,8 +1752,8 @@ module GetApnsVoipChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("APNSVoipChannelResponse") apnsvoipChannelResponse: apnsvoipChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetApnsVoipChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetApnsVoipChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApnsSandboxChannel = {
@@ -1763,8 +1763,8 @@ module GetApnsSandboxChannel = {
     @as("APNSSandboxChannelResponse") apnssandboxChannelResponse: apnssandboxChannelResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetApnsSandboxChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetApnsSandboxChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApnsChannel = {
@@ -1772,8 +1772,8 @@ module GetApnsChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("APNSChannelResponse") apnschannelResponse: apnschannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetApnsChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetApnsChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAdmChannel = {
@@ -1781,8 +1781,8 @@ module GetAdmChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("ADMChannelResponse") admchannelResponse: admchannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetAdmChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAdmChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVoiceTemplate = {
@@ -1793,8 +1793,8 @@ module DeleteVoiceTemplate = {
   }
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteVoiceTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteVoiceTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVoiceChannel = {
@@ -1802,8 +1802,8 @@ module DeleteVoiceChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("VoiceChannelResponse") voiceChannelResponse: voiceChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteVoiceChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteVoiceChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSmsTemplate = {
@@ -1814,8 +1814,8 @@ module DeleteSmsTemplate = {
   }
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteSmsTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSmsTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSmsChannel = {
@@ -1823,8 +1823,8 @@ module DeleteSmsChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("SMSChannelResponse") smschannelResponse: smschannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteSmsChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSmsChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePushTemplate = {
@@ -1835,8 +1835,8 @@ module DeletePushTemplate = {
   }
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeletePushTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeletePushTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteGcmChannel = {
@@ -1844,8 +1844,8 @@ module DeleteGcmChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("GCMChannelResponse") gcmchannelResponse: gcmchannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteGcmChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteGcmChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEventStream = {
@@ -1853,8 +1853,8 @@ module DeleteEventStream = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("EventStream") eventStream: eventStream}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteEventStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEventStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEmailTemplate = {
@@ -1865,8 +1865,8 @@ module DeleteEmailTemplate = {
   }
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteEmailTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEmailTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEmailChannel = {
@@ -1874,8 +1874,8 @@ module DeleteEmailChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("EmailChannelResponse") emailChannelResponse: emailChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteEmailChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEmailChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBaiduChannel = {
@@ -1883,8 +1883,8 @@ module DeleteBaiduChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("BaiduChannelResponse") baiduChannelResponse: baiduChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteBaiduChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteBaiduChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApnsVoipSandboxChannel = {
@@ -1895,8 +1895,8 @@ module DeleteApnsVoipSandboxChannel = {
     apnsvoipSandboxChannelResponse: apnsvoipSandboxChannelResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteApnsVoipSandboxChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteApnsVoipSandboxChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApnsVoipChannel = {
@@ -1904,8 +1904,8 @@ module DeleteApnsVoipChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("APNSVoipChannelResponse") apnsvoipChannelResponse: apnsvoipChannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteApnsVoipChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteApnsVoipChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApnsSandboxChannel = {
@@ -1915,8 +1915,8 @@ module DeleteApnsSandboxChannel = {
     @as("APNSSandboxChannelResponse") apnssandboxChannelResponse: apnssandboxChannelResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteApnsSandboxChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteApnsSandboxChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApnsChannel = {
@@ -1924,8 +1924,8 @@ module DeleteApnsChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("APNSChannelResponse") apnschannelResponse: apnschannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteApnsChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteApnsChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAdmChannel = {
@@ -1933,8 +1933,8 @@ module DeleteAdmChannel = {
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("ADMChannelResponse") admchannelResponse: admchannelResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteAdmChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAdmChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateVoiceTemplate = {
@@ -1947,8 +1947,8 @@ module UpdateVoiceTemplate = {
   }
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateVoiceTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateVoiceTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSmsTemplate = {
@@ -1961,8 +1961,8 @@ module UpdateSmsTemplate = {
   }
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateSmsTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSmsTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRecommenderConfiguration = {
@@ -1977,8 +1977,8 @@ module UpdateRecommenderConfiguration = {
     recommenderConfigurationResponse: recommenderConfigurationResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateRecommenderConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateRecommenderConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePushTemplate = {
@@ -1992,8 +1992,8 @@ module UpdatePushTemplate = {
   }
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdatePushTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdatePushTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEmailTemplate = {
@@ -2006,8 +2006,8 @@ module UpdateEmailTemplate = {
   }
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateEmailTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEmailTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApplicationSettings = {
@@ -2021,8 +2021,8 @@ module UpdateApplicationSettings = {
     @as("ApplicationSettingsResource") applicationSettingsResource: applicationSettingsResource,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateApplicationSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateApplicationSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -2032,8 +2032,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: __string,
   }
 
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveAttributes = {
@@ -2045,8 +2045,8 @@ module RemoveAttributes = {
   }
   type response = {@as("AttributesResource") attributesResource: attributesResource}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "RemoveAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -2054,8 +2054,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: __string}
   type response = {@as("TagsModel") tagsModel: tagsModel}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVoiceTemplate = {
@@ -2066,8 +2066,8 @@ module GetVoiceTemplate = {
   }
   type response = {@as("VoiceTemplateResponse") voiceTemplateResponse: voiceTemplateResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetVoiceTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetVoiceTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSmsTemplate = {
@@ -2078,8 +2078,8 @@ module GetSmsTemplate = {
   }
   type response = {@as("SMSTemplateResponse") smstemplateResponse: smstemplateResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetSmsTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSmsTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRecommenderConfiguration = {
@@ -2090,8 +2090,8 @@ module GetRecommenderConfiguration = {
     recommenderConfigurationResponse: recommenderConfigurationResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetRecommenderConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRecommenderConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPushTemplate = {
@@ -2105,8 +2105,8 @@ module GetPushTemplate = {
     pushNotificationTemplateResponse: pushNotificationTemplateResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetPushTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPushTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJourneyExecutionMetrics = {
@@ -2122,8 +2122,8 @@ module GetJourneyExecutionMetrics = {
     journeyExecutionMetricsResponse: journeyExecutionMetricsResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetJourneyExecutionMetricsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetJourneyExecutionMetricsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJourneyExecutionActivityMetrics = {
@@ -2140,8 +2140,8 @@ module GetJourneyExecutionActivityMetrics = {
     journeyExecutionActivityMetricsResponse: journeyExecutionActivityMetricsResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetJourneyExecutionActivityMetricsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetJourneyExecutionActivityMetricsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetImportJob = {
@@ -2151,9 +2151,8 @@ module GetImportJob = {
     @as("ApplicationId") applicationId: __string,
   }
   type response = {@as("ImportJobResponse") importJobResponse: importJobResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetImportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetImportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetExportJob = {
@@ -2163,9 +2162,8 @@ module GetExportJob = {
     @as("ApplicationId") applicationId: __string,
   }
   type response = {@as("ExportJobResponse") exportJobResponse: exportJobResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEmailTemplate = {
@@ -2176,8 +2174,8 @@ module GetEmailTemplate = {
   }
   type response = {@as("EmailTemplateResponse") emailTemplateResponse: emailTemplateResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetEmailTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEmailTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApplicationSettings = {
@@ -2187,16 +2185,16 @@ module GetApplicationSettings = {
     @as("ApplicationSettingsResource") applicationSettingsResource: applicationSettingsResource,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetApplicationSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetApplicationSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApp = {
   type t
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("ApplicationResponse") applicationResponse: applicationResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "GetAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRecommenderConfiguration = {
@@ -2207,16 +2205,16 @@ module DeleteRecommenderConfiguration = {
     recommenderConfigurationResponse: recommenderConfigurationResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteRecommenderConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteRecommenderConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApp = {
   type t
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("ApplicationResponse") applicationResponse: applicationResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "DeleteAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "DeleteAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVoiceTemplate = {
@@ -2229,8 +2227,8 @@ module CreateVoiceTemplate = {
     @as("CreateTemplateMessageBody") createTemplateMessageBody: createTemplateMessageBody,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "CreateVoiceTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateVoiceTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSmsTemplate = {
@@ -2243,8 +2241,8 @@ module CreateSmsTemplate = {
     @as("CreateTemplateMessageBody") createTemplateMessageBody: createTemplateMessageBody,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "CreateSmsTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSmsTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRecommenderConfiguration = {
@@ -2258,8 +2256,8 @@ module CreateRecommenderConfiguration = {
     recommenderConfigurationResponse: recommenderConfigurationResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "CreateRecommenderConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateRecommenderConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePushTemplate = {
@@ -2273,8 +2271,8 @@ module CreatePushTemplate = {
     @as("CreateTemplateMessageBody") createTemplateMessageBody: createTemplateMessageBody,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "CreatePushTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreatePushTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateImportJob = {
@@ -2285,8 +2283,8 @@ module CreateImportJob = {
   }
   type response = {@as("ImportJobResponse") importJobResponse: importJobResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "CreateImportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateImportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateExportJob = {
@@ -2297,8 +2295,8 @@ module CreateExportJob = {
   }
   type response = {@as("ExportJobResponse") exportJobResponse: exportJobResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "CreateExportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateExportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEmailTemplate = {
@@ -2311,8 +2309,8 @@ module CreateEmailTemplate = {
     @as("CreateTemplateMessageBody") createTemplateMessageBody: createTemplateMessageBody,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "CreateEmailTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateEmailTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApp = {
@@ -2321,8 +2319,8 @@ module CreateApp = {
     @as("CreateApplicationRequest") createApplicationRequest: createApplicationRequest,
   }
   type response = {@as("ApplicationResponse") applicationResponse: applicationResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "CreateAppCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "CreateAppCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTemplateVersions = {
@@ -2337,16 +2335,16 @@ module ListTemplateVersions = {
     @as("TemplateVersionsResponse") templateVersionsResponse: templateVersionsResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "ListTemplateVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTemplateVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetChannels = {
   type t
   type request = {@as("ApplicationId") applicationId: __string}
   type response = {@as("ChannelsResponse") channelsResponse: channelsResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "GetChannelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetChannelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCampaignActivities = {
@@ -2359,8 +2357,8 @@ module GetCampaignActivities = {
   }
   type response = {@as("ActivitiesResponse") activitiesResponse: activitiesResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetCampaignActivitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCampaignActivitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEndpoint = {
@@ -2372,8 +2370,8 @@ module UpdateEndpoint = {
   }
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTemplates = {
@@ -2386,8 +2384,8 @@ module ListTemplates = {
   }
   type response = {@as("TemplatesResponse") templatesResponse: templatesResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "ListTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSegmentImportJobs = {
@@ -2400,8 +2398,8 @@ module GetSegmentImportJobs = {
   }
   type response = {@as("ImportJobsResponse") importJobsResponse: importJobsResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetSegmentImportJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSegmentImportJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSegmentExportJobs = {
@@ -2414,8 +2412,8 @@ module GetSegmentExportJobs = {
   }
   type response = {@as("ExportJobsResponse") exportJobsResponse: exportJobsResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetSegmentExportJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSegmentExportJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRecommenderConfigurations = {
@@ -2429,8 +2427,8 @@ module GetRecommenderConfigurations = {
     listRecommenderConfigurationsResponse: listRecommenderConfigurationsResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetRecommenderConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRecommenderConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetImportJobs = {
@@ -2442,8 +2440,8 @@ module GetImportJobs = {
   }
   type response = {@as("ImportJobsResponse") importJobsResponse: importJobsResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetImportJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetImportJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetExportJobs = {
@@ -2455,8 +2453,8 @@ module GetExportJobs = {
   }
   type response = {@as("ExportJobsResponse") exportJobsResponse: exportJobsResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetExportJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetExportJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEndpoint = {
@@ -2466,8 +2464,8 @@ module GetEndpoint = {
     @as("ApplicationId") applicationId: __string,
   }
   type response = {@as("EndpointResponse") endpointResponse: endpointResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "GetEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApps = {
@@ -2477,8 +2475,8 @@ module GetApps = {
     @as("PageSize") pageSize: option<__string>,
   }
   type response = {@as("ApplicationsResponse") applicationsResponse: applicationsResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "GetAppsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetAppsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEndpoint = {
@@ -2489,8 +2487,8 @@ module DeleteEndpoint = {
   }
   type response = {@as("EndpointResponse") endpointResponse: endpointResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendUsersMessages = {
@@ -2503,8 +2501,8 @@ module SendUsersMessages = {
     @as("SendUsersMessageResponse") sendUsersMessageResponse: sendUsersMessageResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "SendUsersMessagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SendUsersMessagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendMessages = {
@@ -2514,9 +2512,8 @@ module SendMessages = {
     @as("ApplicationId") applicationId: __string,
   }
   type response = {@as("MessageResponse") messageResponse: messageResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "SendMessagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "SendMessagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEndpointsBatch = {
@@ -2527,8 +2524,8 @@ module UpdateEndpointsBatch = {
   }
   type response = {@as("MessageBody") messageBody: messageBody}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateEndpointsBatchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEndpointsBatchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUserEndpoints = {
@@ -2539,8 +2536,8 @@ module GetUserEndpoints = {
   }
   type response = {@as("EndpointsResponse") endpointsResponse: endpointsResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetUserEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetUserEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJourneyDateRangeKpi = {
@@ -2558,8 +2555,8 @@ module GetJourneyDateRangeKpi = {
     @as("JourneyDateRangeKpiResponse") journeyDateRangeKpiResponse: journeyDateRangeKpiResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetJourneyDateRangeKpiCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetJourneyDateRangeKpiCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCampaignDateRangeKpi = {
@@ -2577,8 +2574,8 @@ module GetCampaignDateRangeKpi = {
     @as("CampaignDateRangeKpiResponse") campaignDateRangeKpiResponse: campaignDateRangeKpiResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetCampaignDateRangeKpiCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCampaignDateRangeKpiCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApplicationDateRangeKpi = {
@@ -2596,8 +2593,8 @@ module GetApplicationDateRangeKpi = {
     applicationDateRangeKpiResponse: applicationDateRangeKpiResponse,
   }
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetApplicationDateRangeKpiCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetApplicationDateRangeKpiCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteUserEndpoints = {
@@ -2608,8 +2605,8 @@ module DeleteUserEndpoints = {
   }
   type response = {@as("EndpointsResponse") endpointsResponse: endpointsResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteUserEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteUserEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutEvents = {
@@ -2619,8 +2616,8 @@ module PutEvents = {
     @as("ApplicationId") applicationId: __string,
   }
   type response = {@as("EventsResponse") eventsResponse: eventsResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "PutEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "PutEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSegment = {
@@ -2632,8 +2629,8 @@ module UpdateSegment = {
   }
   type response = {@as("SegmentResponse") segmentResponse: segmentResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateSegmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSegmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCampaign = {
@@ -2645,8 +2642,8 @@ module UpdateCampaign = {
   }
   type response = {@as("CampaignResponse") campaignResponse: campaignResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateCampaignCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateCampaignCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSegmentVersion = {
@@ -2658,8 +2655,8 @@ module GetSegmentVersion = {
   }
   type response = {@as("SegmentResponse") segmentResponse: segmentResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetSegmentVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSegmentVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSegment = {
@@ -2669,8 +2666,8 @@ module GetSegment = {
     @as("ApplicationId") applicationId: __string,
   }
   type response = {@as("SegmentResponse") segmentResponse: segmentResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "GetSegmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetSegmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCampaignVersion = {
@@ -2682,8 +2679,8 @@ module GetCampaignVersion = {
   }
   type response = {@as("CampaignResponse") campaignResponse: campaignResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetCampaignVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCampaignVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCampaign = {
@@ -2693,8 +2690,8 @@ module GetCampaign = {
     @as("ApplicationId") applicationId: __string,
   }
   type response = {@as("CampaignResponse") campaignResponse: campaignResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "GetCampaignCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetCampaignCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSegment = {
@@ -2705,8 +2702,8 @@ module DeleteSegment = {
   }
   type response = {@as("SegmentResponse") segmentResponse: segmentResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteSegmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSegmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCampaign = {
@@ -2717,8 +2714,8 @@ module DeleteCampaign = {
   }
   type response = {@as("CampaignResponse") campaignResponse: campaignResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteCampaignCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteCampaignCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSegment = {
@@ -2729,8 +2726,8 @@ module CreateSegment = {
   }
   type response = {@as("SegmentResponse") segmentResponse: segmentResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "CreateSegmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSegmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCampaign = {
@@ -2741,8 +2738,8 @@ module CreateCampaign = {
   }
   type response = {@as("CampaignResponse") campaignResponse: campaignResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "CreateCampaignCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCampaignCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSegments = {
@@ -2753,8 +2750,8 @@ module GetSegments = {
     @as("ApplicationId") applicationId: __string,
   }
   type response = {@as("SegmentsResponse") segmentsResponse: segmentsResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "GetSegmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetSegmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSegmentVersions = {
@@ -2767,8 +2764,8 @@ module GetSegmentVersions = {
   }
   type response = {@as("SegmentsResponse") segmentsResponse: segmentsResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetSegmentVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSegmentVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCampaigns = {
@@ -2779,9 +2776,8 @@ module GetCampaigns = {
     @as("ApplicationId") applicationId: __string,
   }
   type response = {@as("CampaignsResponse") campaignsResponse: campaignsResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetCampaignsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetCampaignsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCampaignVersions = {
@@ -2794,8 +2790,8 @@ module GetCampaignVersions = {
   }
   type response = {@as("CampaignsResponse") campaignsResponse: campaignsResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "GetCampaignVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCampaignVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateJourneyState = {
@@ -2807,8 +2803,8 @@ module UpdateJourneyState = {
   }
   type response = {@as("JourneyResponse") journeyResponse: journeyResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateJourneyStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateJourneyStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateJourney = {
@@ -2820,8 +2816,8 @@ module UpdateJourney = {
   }
   type response = {@as("JourneyResponse") journeyResponse: journeyResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "UpdateJourneyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateJourneyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJourney = {
@@ -2831,8 +2827,8 @@ module GetJourney = {
     @as("ApplicationId") applicationId: __string,
   }
   type response = {@as("JourneyResponse") journeyResponse: journeyResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: request => t = "GetJourneyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "GetJourneyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteJourney = {
@@ -2843,8 +2839,8 @@ module DeleteJourney = {
   }
   type response = {@as("JourneyResponse") journeyResponse: journeyResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "DeleteJourneyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteJourneyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateJourney = {
@@ -2855,8 +2851,8 @@ module CreateJourney = {
   }
   type response = {@as("JourneyResponse") journeyResponse: journeyResponse}
   @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "CreateJourneyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateJourneyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJourneys = {
@@ -2867,7 +2863,6 @@ module ListJourneys = {
     @as("ApplicationId") applicationId: __string,
   }
   type response = {@as("JourneysResponse") journeysResponse: journeysResponse}
-  @module("@aws-sdk/client-mobiletargeting") @new
-  external new_: request => t = "ListJourneysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mobiletargeting") @new external new: request => t = "ListJourneysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

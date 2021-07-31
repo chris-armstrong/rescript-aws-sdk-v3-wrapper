@@ -214,9 +214,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: resourceARN,
   }
   type response = unit
-  @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -226,8 +225,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: resourceARN,
   }
   type response = unit
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterTransitGateway = {
@@ -241,8 +240,8 @@ module RegisterTransitGateway = {
     transitGatewayRegistration: option<transitGatewayRegistration>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "RegisterTransitGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterTransitGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -250,8 +249,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: resourceARN}
   type response = {@as("TagList") tagList_: option<tagList_>}
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTransitGatewayConnectPeerAssociations = {
@@ -268,8 +267,8 @@ module GetTransitGatewayConnectPeerAssociations = {
     transitGatewayConnectPeerAssociations: option<transitGatewayConnectPeerAssociationList>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "GetTransitGatewayConnectPeerAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTransitGatewayConnectPeerAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLinkAssociations = {
@@ -286,8 +285,8 @@ module GetLinkAssociations = {
     @as("LinkAssociations") linkAssociations: option<linkAssociationList>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "GetLinkAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetLinkAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCustomerGatewayAssociations = {
@@ -304,8 +303,8 @@ module GetCustomerGatewayAssociations = {
     customerGatewayAssociations: option<customerGatewayAssociationList>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "GetCustomerGatewayAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCustomerGatewayAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateTransitGatewayConnectPeer = {
@@ -319,8 +318,8 @@ module DisassociateTransitGatewayConnectPeer = {
     transitGatewayConnectPeerAssociation: option<transitGatewayConnectPeerAssociation>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "DisassociateTransitGatewayConnectPeerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateTransitGatewayConnectPeerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateLink = {
@@ -332,8 +331,8 @@ module DisassociateLink = {
   }
   type response = {@as("LinkAssociation") linkAssociation: option<linkAssociation>}
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "DisassociateLinkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateLinkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateCustomerGateway = {
@@ -347,8 +346,8 @@ module DisassociateCustomerGateway = {
     customerGatewayAssociation: option<customerGatewayAssociation>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "DisassociateCustomerGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateCustomerGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterTransitGateway = {
@@ -362,8 +361,8 @@ module DeregisterTransitGateway = {
     transitGatewayRegistration: option<transitGatewayRegistration>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "DeregisterTransitGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterTransitGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateTransitGatewayConnectPeer = {
@@ -379,8 +378,8 @@ module AssociateTransitGatewayConnectPeer = {
     transitGatewayConnectPeerAssociation: option<transitGatewayConnectPeerAssociation>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "AssociateTransitGatewayConnectPeerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateTransitGatewayConnectPeerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateLink = {
@@ -391,9 +390,8 @@ module AssociateLink = {
     @as("GlobalNetworkId") globalNetworkId: string_,
   }
   type response = {@as("LinkAssociation") linkAssociation: option<linkAssociation>}
-  @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "AssociateLinkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "AssociateLinkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateCustomerGateway = {
@@ -409,8 +407,8 @@ module AssociateCustomerGateway = {
     customerGatewayAssociation: option<customerGatewayAssociation>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "AssociateCustomerGatewayCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateCustomerGatewayCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSite = {
@@ -422,8 +420,8 @@ module UpdateSite = {
     @as("GlobalNetworkId") globalNetworkId: string_,
   }
   type response = {@as("Site") site: option<site>}
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "UpdateSiteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "UpdateSiteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateLink = {
@@ -437,8 +435,8 @@ module UpdateLink = {
     @as("GlobalNetworkId") globalNetworkId: string_,
   }
   type response = {@as("Link") link: option<link>}
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "UpdateLinkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "UpdateLinkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateGlobalNetwork = {
@@ -449,8 +447,8 @@ module UpdateGlobalNetwork = {
   }
   type response = {@as("GlobalNetwork") globalNetwork: option<globalNetwork>}
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "UpdateGlobalNetworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateGlobalNetworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDevice = {
@@ -468,8 +466,8 @@ module UpdateDevice = {
     @as("GlobalNetworkId") globalNetworkId: string_,
   }
   type response = {@as("Device") device: option<device>}
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "UpdateDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "UpdateDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateConnection = {
@@ -483,8 +481,8 @@ module UpdateConnection = {
   }
   type response = {@as("Connection") connection: option<connection>}
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "UpdateConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTransitGatewayRegistrations = {
@@ -501,8 +499,8 @@ module GetTransitGatewayRegistrations = {
     transitGatewayRegistrations: option<transitGatewayRegistrationList>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "GetTransitGatewayRegistrationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTransitGatewayRegistrationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSite = {
@@ -512,8 +510,8 @@ module DeleteSite = {
     @as("GlobalNetworkId") globalNetworkId: string_,
   }
   type response = {@as("Site") site: option<site>}
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "DeleteSiteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "DeleteSiteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLink = {
@@ -523,8 +521,8 @@ module DeleteLink = {
     @as("GlobalNetworkId") globalNetworkId: string_,
   }
   type response = {@as("Link") link: option<link>}
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "DeleteLinkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "DeleteLinkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteGlobalNetwork = {
@@ -532,8 +530,8 @@ module DeleteGlobalNetwork = {
   type request = {@as("GlobalNetworkId") globalNetworkId: string_}
   type response = {@as("GlobalNetwork") globalNetwork: option<globalNetwork>}
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "DeleteGlobalNetworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteGlobalNetworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDevice = {
@@ -543,8 +541,8 @@ module DeleteDevice = {
     @as("GlobalNetworkId") globalNetworkId: string_,
   }
   type response = {@as("Device") device: option<device>}
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "DeleteDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "DeleteDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteConnection = {
@@ -555,8 +553,8 @@ module DeleteConnection = {
   }
   type response = {@as("Connection") connection: option<connection>}
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "DeleteConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSite = {
@@ -568,8 +566,8 @@ module CreateSite = {
     @as("GlobalNetworkId") globalNetworkId: string_,
   }
   type response = {@as("Site") site: option<site>}
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "CreateSiteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "CreateSiteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLink = {
@@ -584,8 +582,8 @@ module CreateLink = {
     @as("GlobalNetworkId") globalNetworkId: string_,
   }
   type response = {@as("Link") link: option<link>}
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "CreateLinkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "CreateLinkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateGlobalNetwork = {
@@ -596,8 +594,8 @@ module CreateGlobalNetwork = {
   }
   type response = {@as("GlobalNetwork") globalNetwork: option<globalNetwork>}
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "CreateGlobalNetworkCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateGlobalNetworkCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDevice = {
@@ -615,8 +613,8 @@ module CreateDevice = {
     @as("GlobalNetworkId") globalNetworkId: string_,
   }
   type response = {@as("Device") device: option<device>}
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "CreateDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "CreateDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateConnection = {
@@ -632,8 +630,8 @@ module CreateConnection = {
   }
   type response = {@as("Connection") connection: option<connection>}
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "CreateConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSites = {
@@ -648,8 +646,8 @@ module GetSites = {
     @as("NextToken") nextToken: option<string_>,
     @as("Sites") sites: option<siteList>,
   }
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "GetSitesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "GetSitesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLinks = {
@@ -667,8 +665,8 @@ module GetLinks = {
     @as("NextToken") nextToken: option<string_>,
     @as("Links") links: option<linkList>,
   }
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "GetLinksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "GetLinksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDevices = {
@@ -684,8 +682,8 @@ module GetDevices = {
     @as("NextToken") nextToken: option<string_>,
     @as("Devices") devices: option<deviceList>,
   }
-  @module("@aws-sdk/client-networkmanager") @new external new_: request => t = "GetDevicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-networkmanager") @new external new: request => t = "GetDevicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetConnections = {
@@ -702,8 +700,8 @@ module GetConnections = {
     @as("Connections") connections: option<connectionList>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "GetConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeGlobalNetworks = {
@@ -718,6 +716,6 @@ module DescribeGlobalNetworks = {
     @as("GlobalNetworks") globalNetworks: option<globalNetworkList>,
   }
   @module("@aws-sdk/client-networkmanager") @new
-  external new_: request => t = "DescribeGlobalNetworksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeGlobalNetworksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

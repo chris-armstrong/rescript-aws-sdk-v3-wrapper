@@ -633,8 +633,8 @@ module StopStreamProcessor = {
   type request = {@as("Name") name: streamProcessorName}
   type response = unit
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "StopStreamProcessorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopStreamProcessorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopProjectVersion = {
@@ -642,8 +642,8 @@ module StopProjectVersion = {
   type request = {@as("ProjectVersionArn") projectVersionArn: projectVersionArn}
   type response = {@as("Status") status: option<projectVersionStatus>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "StopProjectVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopProjectVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartStreamProcessor = {
@@ -651,8 +651,8 @@ module StartStreamProcessor = {
   type request = {@as("Name") name: streamProcessorName}
   type response = unit
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "StartStreamProcessorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartStreamProcessorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartProjectVersion = {
@@ -663,8 +663,8 @@ module StartProjectVersion = {
   }
   type response = {@as("Status") status: option<projectVersionStatus>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "StartProjectVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartProjectVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCollection = {
@@ -677,8 +677,8 @@ module DescribeCollection = {
     @as("FaceCount") faceCount: option<ulong>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "DescribeCollectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCollectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteStreamProcessor = {
@@ -686,8 +686,8 @@ module DeleteStreamProcessor = {
   type request = {@as("Name") name: streamProcessorName}
   type response = unit
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "DeleteStreamProcessorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteStreamProcessorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProjectVersion = {
@@ -695,33 +695,32 @@ module DeleteProjectVersion = {
   type request = {@as("ProjectVersionArn") projectVersionArn: projectVersionArn}
   type response = {@as("Status") status: option<projectVersionStatus>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "DeleteProjectVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteProjectVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProject = {
   type t
   type request = {@as("ProjectArn") projectArn: projectArn}
   type response = {@as("Status") status: option<projectStatus>}
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "DeleteProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "DeleteProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCollection = {
   type t
   type request = {@as("CollectionId") collectionId: collectionId}
   type response = {@as("StatusCode") statusCode: option<uinteger>}
-  @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "DeleteCollectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "DeleteCollectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProject = {
   type t
   type request = {@as("ProjectName") projectName: projectName}
   type response = {@as("ProjectArn") projectArn: option<projectArn>}
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "CreateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "CreateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -731,8 +730,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -742,8 +741,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -751,8 +750,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = {@as("Tags") tags: option<tagMap>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCollections = {
@@ -766,8 +765,8 @@ module ListCollections = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("CollectionIds") collectionIds: option<collectionIdList>,
   }
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "ListCollectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "ListCollectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCelebrityInfo = {
@@ -777,9 +776,8 @@ module GetCelebrityInfo = {
     @as("Name") name: option<string_>,
     @as("Urls") urls: option<urls>,
   }
-  @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "GetCelebrityInfoCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "GetCelebrityInfoCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFaces = {
@@ -789,8 +787,8 @@ module DeleteFaces = {
     @as("CollectionId") collectionId: collectionId,
   }
   type response = {@as("DeletedFaces") deletedFaces: option<faceIdList>}
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "DeleteFacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "DeleteFacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCollection = {
@@ -804,9 +802,8 @@ module CreateCollection = {
     @as("CollectionArn") collectionArn: option<string_>,
     @as("StatusCode") statusCode: option<uinteger>,
   }
-  @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "CreateCollectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "CreateCollectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartSegmentDetection = {
@@ -821,8 +818,8 @@ module StartSegmentDetection = {
   }
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "StartSegmentDetectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartSegmentDetectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartPersonTracking = {
@@ -835,8 +832,8 @@ module StartPersonTracking = {
   }
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "StartPersonTrackingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartPersonTrackingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartLabelDetection = {
@@ -850,8 +847,8 @@ module StartLabelDetection = {
   }
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "StartLabelDetectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartLabelDetectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartFaceSearch = {
@@ -865,8 +862,8 @@ module StartFaceSearch = {
     @as("Video") video: video,
   }
   type response = {@as("JobId") jobId: option<jobId>}
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "StartFaceSearchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "StartFaceSearchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartFaceDetection = {
@@ -880,8 +877,8 @@ module StartFaceDetection = {
   }
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "StartFaceDetectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartFaceDetectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartContentModeration = {
@@ -895,8 +892,8 @@ module StartContentModeration = {
   }
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "StartContentModerationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartContentModerationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartCelebrityRecognition = {
@@ -909,8 +906,8 @@ module StartCelebrityRecognition = {
   }
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "StartCelebrityRecognitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartCelebrityRecognitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStreamProcessors = {
@@ -924,8 +921,8 @@ module ListStreamProcessors = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "ListStreamProcessorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListStreamProcessorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStreamProcessor = {
@@ -944,8 +941,8 @@ module DescribeStreamProcessor = {
     @as("Name") name: option<streamProcessorName>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "DescribeStreamProcessorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStreamProcessorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProjects = {
@@ -958,9 +955,8 @@ module DescribeProjects = {
     @as("NextToken") nextToken: option<extendedPaginationToken>,
     @as("ProjectDescriptions") projectDescriptions: option<projectDescriptions>,
   }
-  @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "DescribeProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "DescribeProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateStreamProcessor = {
@@ -975,8 +971,8 @@ module CreateStreamProcessor = {
   }
   type response = {@as("StreamProcessorArn") streamProcessorArn: option<streamProcessorArn>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "CreateStreamProcessorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateStreamProcessorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFaces = {
@@ -991,8 +987,8 @@ module ListFaces = {
     @as("NextToken") nextToken: option<string_>,
     @as("Faces") faces: option<faceList>,
   }
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "ListFacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "ListFacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSegmentDetection = {
@@ -1012,8 +1008,8 @@ module GetSegmentDetection = {
     @as("JobStatus") jobStatus: option<videoJobStatus>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "GetSegmentDetectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSegmentDetectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetContentModeration = {
@@ -1033,8 +1029,8 @@ module GetContentModeration = {
     @as("JobStatus") jobStatus: option<videoJobStatus>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "GetContentModerationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetContentModerationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectModerationLabels = {
@@ -1050,8 +1046,8 @@ module DetectModerationLabels = {
     @as("ModerationLabels") moderationLabels: option<moderationLabels>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "DetectModerationLabelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetectModerationLabelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartTextDetection = {
@@ -1065,8 +1061,8 @@ module StartTextDetection = {
   }
   type response = {@as("JobId") jobId: option<jobId>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "StartTextDetectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartTextDetectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchFacesByImage = {
@@ -1085,8 +1081,8 @@ module SearchFacesByImage = {
     @as("SearchedFaceBoundingBox") searchedFaceBoundingBox: option<boundingBox>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "SearchFacesByImageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchFacesByImageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchFaces = {
@@ -1102,8 +1098,8 @@ module SearchFaces = {
     @as("FaceMatches") faceMatches: option<faceMatchList>,
     @as("SearchedFaceId") searchedFaceId: option<faceId>,
   }
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "SearchFacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "SearchFacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectFaces = {
@@ -1116,8 +1112,8 @@ module DetectFaces = {
     @as("OrientationCorrection") orientationCorrection: option<orientationCorrection>,
     @as("FaceDetails") faceDetails: option<faceDetailList>,
   }
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "DetectFacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "DetectFacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RecognizeCelebrities = {
@@ -1129,8 +1125,8 @@ module RecognizeCelebrities = {
     @as("CelebrityFaces") celebrityFaces: option<celebrityList>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "RecognizeCelebritiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RecognizeCelebritiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module IndexFaces = {
@@ -1149,8 +1145,8 @@ module IndexFaces = {
     @as("OrientationCorrection") orientationCorrection: option<orientationCorrection>,
     @as("FaceRecords") faceRecords: option<faceRecordList>,
   }
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "IndexFacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "IndexFacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFaceDetection = {
@@ -1167,9 +1163,8 @@ module GetFaceDetection = {
     @as("StatusMessage") statusMessage: option<statusMessage>,
     @as("JobStatus") jobStatus: option<videoJobStatus>,
   }
-  @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "GetFaceDetectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "GetFaceDetectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectText = {
@@ -1182,8 +1177,8 @@ module DetectText = {
     @as("TextModelVersion") textModelVersion: option<string_>,
     @as("TextDetections") textDetections: option<textDetectionList>,
   }
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "DetectTextCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "DetectTextCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectLabels = {
@@ -1198,8 +1193,8 @@ module DetectLabels = {
     @as("OrientationCorrection") orientationCorrection: option<orientationCorrection>,
     @as("Labels") labels: option<labels>,
   }
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "DetectLabelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "DetectLabelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectCustomLabels = {
@@ -1212,8 +1207,8 @@ module DetectCustomLabels = {
   }
   type response = {@as("CustomLabels") customLabels: option<customLabels>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "DetectCustomLabelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetectCustomLabelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProjectVersion = {
@@ -1229,8 +1224,8 @@ module CreateProjectVersion = {
   }
   type response = {@as("ProjectVersionArn") projectVersionArn: option<projectVersionArn>}
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "CreateProjectVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateProjectVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CompareFaces = {
@@ -1250,8 +1245,8 @@ module CompareFaces = {
     @as("FaceMatches") faceMatches: option<compareFacesMatchList>,
     @as("SourceImageFace") sourceImageFace: option<comparedSourceImageFace>,
   }
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "CompareFacesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "CompareFacesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTextDetection = {
@@ -1269,9 +1264,8 @@ module GetTextDetection = {
     @as("StatusMessage") statusMessage: option<statusMessage>,
     @as("JobStatus") jobStatus: option<videoJobStatus>,
   }
-  @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "GetTextDetectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "GetTextDetectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPersonTracking = {
@@ -1290,8 +1284,8 @@ module GetPersonTracking = {
     @as("JobStatus") jobStatus: option<videoJobStatus>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "GetPersonTrackingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetPersonTrackingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLabelDetection = {
@@ -1311,8 +1305,8 @@ module GetLabelDetection = {
     @as("JobStatus") jobStatus: option<videoJobStatus>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "GetLabelDetectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetLabelDetectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFaceSearch = {
@@ -1330,8 +1324,8 @@ module GetFaceSearch = {
     @as("StatusMessage") statusMessage: option<statusMessage>,
     @as("JobStatus") jobStatus: option<videoJobStatus>,
   }
-  @module("@aws-sdk/client-rekognition") @new external new_: request => t = "GetFaceSearchCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-rekognition") @new external new: request => t = "GetFaceSearchCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCelebrityRecognition = {
@@ -1350,8 +1344,8 @@ module GetCelebrityRecognition = {
     @as("JobStatus") jobStatus: option<videoJobStatus>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "GetCelebrityRecognitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCelebrityRecognitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectProtectiveEquipment = {
@@ -1367,8 +1361,8 @@ module DetectProtectiveEquipment = {
     @as("ProtectiveEquipmentModelVersion") protectiveEquipmentModelVersion: option<string_>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "DetectProtectiveEquipmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetectProtectiveEquipmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProjectVersions = {
@@ -1385,6 +1379,6 @@ module DescribeProjectVersions = {
     projectVersionDescriptions: option<projectVersionDescriptions>,
   }
   @module("@aws-sdk/client-rekognition") @new
-  external new_: request => t = "DescribeProjectVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeProjectVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

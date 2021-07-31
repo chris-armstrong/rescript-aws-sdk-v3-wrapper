@@ -251,8 +251,8 @@ module GetNamespaceDeletionStatus = {
     namespaceArn: option<arn>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "GetNamespaceDeletionStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetNamespaceDeletionStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DissociateEntityFromThing = {
@@ -263,8 +263,8 @@ module DissociateEntityFromThing = {
   }
   type response = unit
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "DissociateEntityFromThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DissociateEntityFromThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNamespace = {
@@ -278,8 +278,8 @@ module DescribeNamespace = {
     namespaceArn: option<arn>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "DescribeNamespaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNamespaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeprecateSystemTemplate = {
@@ -287,8 +287,8 @@ module DeprecateSystemTemplate = {
   type request = {id: urn}
   type response = unit
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "DeprecateSystemTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeprecateSystemTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeprecateFlowTemplate = {
@@ -296,8 +296,8 @@ module DeprecateFlowTemplate = {
   type request = {id: urn}
   type response = unit
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "DeprecateFlowTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeprecateFlowTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSystemTemplate = {
@@ -305,8 +305,8 @@ module DeleteSystemTemplate = {
   type request = {id: urn}
   type response = unit
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "DeleteSystemTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSystemTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSystemInstance = {
@@ -314,8 +314,8 @@ module DeleteSystemInstance = {
   type request = {id: option<urn>}
   type response = unit
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "DeleteSystemInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSystemInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteNamespace = {
@@ -326,8 +326,8 @@ module DeleteNamespace = {
     namespaceArn: option<arn>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "DeleteNamespaceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteNamespaceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFlowTemplate = {
@@ -335,8 +335,8 @@ module DeleteFlowTemplate = {
   type request = {id: urn}
   type response = unit
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "DeleteFlowTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteFlowTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateEntityToThing = {
@@ -348,8 +348,8 @@ module AssociateEntityToThing = {
   }
   type response = unit
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "AssociateEntityToThingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateEntityToThingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UploadEntityDefinitions = {
@@ -361,8 +361,8 @@ module UploadEntityDefinitions = {
   }
   type response = {uploadId: uploadId}
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "UploadEntityDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UploadEntityDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSystemTemplate = {
@@ -374,8 +374,8 @@ module UpdateSystemTemplate = {
   }
   type response = {summary: option<systemTemplateSummary>}
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "UpdateSystemTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSystemTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFlowTemplate = {
@@ -387,8 +387,8 @@ module UpdateFlowTemplate = {
   }
   type response = {summary: option<flowTemplateSummary>}
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "UpdateFlowTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateFlowTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -398,9 +398,8 @@ module UntagResource = {
     resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotthingsgraph") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UndeploySystemInstance = {
@@ -408,8 +407,8 @@ module UndeploySystemInstance = {
   type request = {id: option<urn>}
   type response = {summary: option<systemInstanceSummary>}
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "UndeploySystemInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UndeploySystemInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUploadStatus = {
@@ -425,8 +424,8 @@ module GetUploadStatus = {
     uploadId: uploadId,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "GetUploadStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetUploadStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeploySystemInstance = {
@@ -437,8 +436,8 @@ module DeploySystemInstance = {
     summary: systemInstanceSummary,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "DeploySystemInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeploySystemInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSystemTemplate = {
@@ -449,8 +448,8 @@ module CreateSystemTemplate = {
   }
   type response = {summary: option<systemTemplateSummary>}
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "CreateSystemTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSystemTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFlowTemplate = {
@@ -461,8 +460,8 @@ module CreateFlowTemplate = {
   }
   type response = {summary: option<flowTemplateSummary>}
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "CreateFlowTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateFlowTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -472,8 +471,8 @@ module TagResource = {
     resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-iotthingsgraph") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotthingsgraph") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchThings = {
@@ -488,8 +487,8 @@ module SearchThings = {
     nextToken: option<nextToken>,
     things: option<things>,
   }
-  @module("@aws-sdk/client-iotthingsgraph") @new external new_: request => t = "SearchThingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotthingsgraph") @new external new: request => t = "SearchThingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchFlowExecutions = {
@@ -507,8 +506,8 @@ module SearchFlowExecutions = {
     summaries: option<flowExecutionSummaries>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "SearchFlowExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchFlowExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -523,8 +522,8 @@ module ListTagsForResource = {
     tags: option<tagList_>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFlowExecutionMessages = {
@@ -539,8 +538,8 @@ module ListFlowExecutionMessages = {
     messages: option<flowExecutionMessages>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "ListFlowExecutionMessagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListFlowExecutionMessagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSystemTemplateRevisions = {
@@ -555,8 +554,8 @@ module GetSystemTemplateRevisions = {
     summaries: option<systemTemplateSummaries>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "GetSystemTemplateRevisionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSystemTemplateRevisionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSystemTemplate = {
@@ -567,8 +566,8 @@ module GetSystemTemplate = {
   }
   type response = {description: option<systemTemplateDescription>}
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "GetSystemTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSystemTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFlowTemplateRevisions = {
@@ -583,8 +582,8 @@ module GetFlowTemplateRevisions = {
     summaries: option<flowTemplateSummaries>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "GetFlowTemplateRevisionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetFlowTemplateRevisionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFlowTemplate = {
@@ -595,8 +594,8 @@ module GetFlowTemplate = {
   }
   type response = {description: option<flowTemplateDescription>}
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "GetFlowTemplateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetFlowTemplateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSystemInstance = {
@@ -612,8 +611,8 @@ module CreateSystemInstance = {
   }
   type response = {summary: option<systemInstanceSummary>}
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "CreateSystemInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSystemInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchSystemTemplates = {
@@ -628,8 +627,8 @@ module SearchSystemTemplates = {
     summaries: option<systemTemplateSummaries>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "SearchSystemTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchSystemTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchSystemInstances = {
@@ -644,8 +643,8 @@ module SearchSystemInstances = {
     summaries: option<systemInstanceSummaries>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "SearchSystemInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchSystemInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchFlowTemplates = {
@@ -660,8 +659,8 @@ module SearchFlowTemplates = {
     summaries: option<flowTemplateSummaries>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "SearchFlowTemplatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchFlowTemplatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchEntities = {
@@ -678,8 +677,8 @@ module SearchEntities = {
     descriptions: option<entityDescriptions>,
   }
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "SearchEntitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchEntitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSystemInstance = {
@@ -687,8 +686,8 @@ module GetSystemInstance = {
   type request = {id: urn}
   type response = {description: option<systemInstanceDescription>}
   @module("@aws-sdk/client-iotthingsgraph") @new
-  external new_: request => t = "GetSystemInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSystemInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEntities = {
@@ -698,6 +697,6 @@ module GetEntities = {
     ids: urns,
   }
   type response = {descriptions: option<entityDescriptions>}
-  @module("@aws-sdk/client-iotthingsgraph") @new external new_: request => t = "GetEntitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotthingsgraph") @new external new: request => t = "GetEntitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

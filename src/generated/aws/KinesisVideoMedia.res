@@ -48,6 +48,6 @@ module GetMedia = {
     @as("Payload") payload: option<payload>,
     @as("ContentType") contentType: option<contentType>,
   }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: request => t = "GetMediaCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-kinesisvideo") @new external new: request => t = "GetMediaCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

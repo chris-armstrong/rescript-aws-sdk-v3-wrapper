@@ -142,8 +142,8 @@ module UpdateSecretVersionStage = {
     @as("ARN") arn: option<secretARNType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "UpdateSecretVersionStageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSecretVersionStageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSecret = {
@@ -161,8 +161,8 @@ module UpdateSecret = {
     @as("Name") name: option<secretNameType>,
     @as("ARN") arn: option<secretARNType>,
   }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: request => t = "UpdateSecretCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "UpdateSecretCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopReplicationToReplica = {
@@ -170,8 +170,8 @@ module StopReplicationToReplica = {
   type request = {@as("SecretId") secretId: secretIdType}
   type response = {@as("ARN") arn: option<secretARNType>}
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "StopReplicationToReplicaCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopReplicationToReplicaCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreSecret = {
@@ -181,9 +181,8 @@ module RestoreSecret = {
     @as("Name") name: option<secretNameType>,
     @as("ARN") arn: option<secretARNType>,
   }
-  @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "RestoreSecretCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "RestoreSecretCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutResourcePolicy = {
@@ -198,8 +197,8 @@ module PutResourcePolicy = {
     @as("ARN") arn: option<secretARNType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "PutResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResourcePolicy = {
@@ -211,8 +210,8 @@ module GetResourcePolicy = {
     @as("ARN") arn: option<secretARNType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "GetResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRandomPassword = {
@@ -229,8 +228,8 @@ module GetRandomPassword = {
   }
   type response = {@as("RandomPassword") randomPassword: option<randomPasswordType>}
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "GetRandomPasswordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRandomPasswordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSecret = {
@@ -245,8 +244,8 @@ module DeleteSecret = {
     @as("Name") name: option<secretNameType>,
     @as("ARN") arn: option<secretARNType>,
   }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: request => t = "DeleteSecretCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "DeleteSecretCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteResourcePolicy = {
@@ -257,8 +256,8 @@ module DeleteResourcePolicy = {
     @as("ARN") arn: option<secretARNType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "DeleteResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelRotateSecret = {
@@ -270,8 +269,8 @@ module CancelRotateSecret = {
     @as("ARN") arn: option<secretARNType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "CancelRotateSecretCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelRotateSecretCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -281,9 +280,8 @@ module UntagResource = {
     @as("SecretId") secretId: secretIdType,
   }
 
-  @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RotateSecret = {
@@ -299,8 +297,8 @@ module RotateSecret = {
     @as("Name") name: option<secretNameType>,
     @as("ARN") arn: option<secretARNType>,
   }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: request => t = "RotateSecretCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "RotateSecretCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutSecretValue = {
@@ -319,8 +317,8 @@ module PutSecretValue = {
     @as("ARN") arn: option<secretARNType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "PutSecretValueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutSecretValueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSecretValue = {
@@ -340,8 +338,8 @@ module GetSecretValue = {
     @as("ARN") arn: option<secretARNType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "GetSecretValueCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSecretValueCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ValidateResourcePolicy = {
@@ -355,8 +353,8 @@ module ValidateResourcePolicy = {
     @as("PolicyValidationPassed") policyValidationPassed: option<booleanType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "ValidateResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ValidateResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -366,8 +364,8 @@ module TagResource = {
     @as("SecretId") secretId: secretIdType,
   }
 
-  @module("@aws-sdk/client-secretsmanager") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ReplicateSecretToRegions = {
@@ -382,8 +380,8 @@ module ReplicateSecretToRegions = {
     @as("ARN") arn: option<secretARNType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "ReplicateSecretToRegionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ReplicateSecretToRegionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveRegionsFromReplication = {
@@ -397,8 +395,8 @@ module RemoveRegionsFromReplication = {
     @as("ARN") arn: option<secretARNType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "RemoveRegionsFromReplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveRegionsFromReplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSecret = {
@@ -424,8 +422,8 @@ module DescribeSecret = {
     @as("ARN") arn: option<secretARNType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "DescribeSecretCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSecretCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSecret = {
@@ -447,8 +445,8 @@ module CreateSecret = {
     @as("Name") name: option<secretNameType>,
     @as("ARN") arn: option<secretARNType>,
   }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: request => t = "CreateSecretCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "CreateSecretCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSecretVersionIds = {
@@ -466,8 +464,8 @@ module ListSecretVersionIds = {
     @as("Versions") versions: option<secretVersionsListType>,
   }
   @module("@aws-sdk/client-secretsmanager") @new
-  external new_: request => t = "ListSecretVersionIdsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSecretVersionIdsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSecrets = {
@@ -482,6 +480,6 @@ module ListSecrets = {
     @as("NextToken") nextToken: option<nextTokenType>,
     @as("SecretList") secretList: option<secretListType>,
   }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: request => t = "ListSecretsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-secretsmanager") @new external new: request => t = "ListSecretsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

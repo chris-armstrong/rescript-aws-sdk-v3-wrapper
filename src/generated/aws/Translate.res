@@ -163,16 +163,16 @@ module StopTextTranslationJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-translate") @new
-  external new_: request => t = "StopTextTranslationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopTextTranslationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTerminology = {
   type t
   type request = {@as("Name") name: resourceName}
 
-  @module("@aws-sdk/client-translate") @new external new_: request => t = "DeleteTerminologyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-translate") @new external new: request => t = "DeleteTerminologyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteParallelData = {
@@ -182,9 +182,8 @@ module DeleteParallelData = {
     @as("Status") status: option<parallelDataStatus>,
     @as("Name") name: option<resourceName>,
   }
-  @module("@aws-sdk/client-translate") @new
-  external new_: request => t = "DeleteParallelDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-translate") @new external new: request => t = "DeleteParallelDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateParallelData = {
@@ -201,9 +200,8 @@ module UpdateParallelData = {
     @as("Status") status: option<parallelDataStatus>,
     @as("Name") name: option<resourceName>,
   }
-  @module("@aws-sdk/client-translate") @new
-  external new_: request => t = "UpdateParallelDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-translate") @new external new: request => t = "UpdateParallelDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartTextTranslationJob = {
@@ -224,8 +222,8 @@ module StartTextTranslationJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-translate") @new
-  external new_: request => t = "StartTextTranslationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartTextTranslationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateParallelData = {
@@ -241,9 +239,8 @@ module CreateParallelData = {
     @as("Status") status: option<parallelDataStatus>,
     @as("Name") name: option<resourceName>,
   }
-  @module("@aws-sdk/client-translate") @new
-  external new_: request => t = "CreateParallelDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-translate") @new external new: request => t = "CreateParallelDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportTerminology = {
@@ -258,8 +255,8 @@ module ImportTerminology = {
   type response = {
     @as("TerminologyProperties") terminologyProperties: option<terminologyProperties>,
   }
-  @module("@aws-sdk/client-translate") @new external new_: request => t = "ImportTerminologyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-translate") @new external new: request => t = "ImportTerminologyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTerminology = {
@@ -272,8 +269,8 @@ module GetTerminology = {
     @as("TerminologyDataLocation") terminologyDataLocation: option<terminologyDataLocation>,
     @as("TerminologyProperties") terminologyProperties: option<terminologyProperties>,
   }
-  @module("@aws-sdk/client-translate") @new external new_: request => t = "GetTerminologyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-translate") @new external new: request => t = "GetTerminologyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetParallelData = {
@@ -286,8 +283,8 @@ module GetParallelData = {
     @as("DataLocation") dataLocation: option<parallelDataDataLocation>,
     @as("ParallelDataProperties") parallelDataProperties: option<parallelDataProperties>,
   }
-  @module("@aws-sdk/client-translate") @new external new_: request => t = "GetParallelDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-translate") @new external new: request => t = "GetParallelDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTextTranslationJob = {
@@ -298,8 +295,8 @@ module DescribeTextTranslationJob = {
     textTranslationJobProperties: option<textTranslationJobProperties>,
   }
   @module("@aws-sdk/client-translate") @new
-  external new_: request => t = "DescribeTextTranslationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTextTranslationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTextTranslationJobs = {
@@ -315,8 +312,8 @@ module ListTextTranslationJobs = {
     textTranslationJobPropertiesList: option<textTranslationJobPropertiesList>,
   }
   @module("@aws-sdk/client-translate") @new
-  external new_: request => t = "ListTextTranslationJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTextTranslationJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTerminologies = {
@@ -329,8 +326,8 @@ module ListTerminologies = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("TerminologyPropertiesList") terminologyPropertiesList: option<terminologyPropertiesList>,
   }
-  @module("@aws-sdk/client-translate") @new external new_: request => t = "ListTerminologiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-translate") @new external new: request => t = "ListTerminologiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListParallelData = {
@@ -344,8 +341,8 @@ module ListParallelData = {
     @as("ParallelDataPropertiesList")
     parallelDataPropertiesList: option<parallelDataPropertiesList>,
   }
-  @module("@aws-sdk/client-translate") @new external new_: request => t = "ListParallelDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-translate") @new external new: request => t = "ListParallelDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TranslateText = {
@@ -362,6 +359,6 @@ module TranslateText = {
     @as("SourceLanguageCode") sourceLanguageCode: languageCodeString,
     @as("TranslatedText") translatedText: string_,
   }
-  @module("@aws-sdk/client-translate") @new external new_: request => t = "TranslateTextCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-translate") @new external new: request => t = "TranslateTextCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -340,8 +340,8 @@ module UpdateAnomalyDetector = {
   }
   type response = {@as("AnomalyDetectorArn") anomalyDetectorArn: option<arn>}
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "UpdateAnomalyDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAnomalyDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -351,9 +351,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -363,8 +362,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutFeedback = {
@@ -375,8 +374,8 @@ module PutFeedback = {
     @as("AnomalyDetectorArn") anomalyDetectorArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: request => t = "PutFeedbackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "PutFeedbackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -384,8 +383,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: arn}
   type response = {@as("Tags") tags: option<tagMap>}
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFeedback = {
@@ -401,8 +400,8 @@ module GetFeedback = {
     @as("AnomalyGroupTimeSeriesFeedback")
     anomalyGroupTimeSeriesFeedback: option<timeSeriesFeedbackList>,
   }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: request => t = "GetFeedbackCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "GetFeedbackCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAnomalyDetector = {
@@ -421,8 +420,8 @@ module DescribeAnomalyDetector = {
     @as("AnomalyDetectorArn") anomalyDetectorArn: option<arn>,
   }
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "DescribeAnomalyDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAnomalyDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAnomalyDetectionExecutions = {
@@ -438,8 +437,8 @@ module DescribeAnomalyDetectionExecutions = {
     @as("ExecutionList") executionList: option<executionList>,
   }
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "DescribeAnomalyDetectionExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAnomalyDetectionExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAnomalyDetector = {
@@ -447,16 +446,16 @@ module DeleteAnomalyDetector = {
   type request = {@as("AnomalyDetectorArn") anomalyDetectorArn: arn}
   type response = unit
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "DeleteAnomalyDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteAnomalyDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAlert = {
   type t
   type request = {@as("AlertArn") alertArn: arn}
   type response = unit
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: request => t = "DeleteAlertCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "DeleteAlertCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAnomalyDetector = {
@@ -471,8 +470,8 @@ module CreateAnomalyDetector = {
   }
   type response = {@as("AnomalyDetectorArn") anomalyDetectorArn: option<arn>}
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "CreateAnomalyDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAnomalyDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAlert = {
@@ -486,8 +485,8 @@ module CreateAlert = {
     @as("AlertName") alertName: alertName,
   }
   type response = {@as("AlertArn") alertArn: option<arn>}
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: request => t = "CreateAlertCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "CreateAlertCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BackTestAnomalyDetector = {
@@ -495,8 +494,8 @@ module BackTestAnomalyDetector = {
   type request = {@as("AnomalyDetectorArn") anomalyDetectorArn: arn}
   type response = unit
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "BackTestAnomalyDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BackTestAnomalyDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ActivateAnomalyDetector = {
@@ -504,8 +503,8 @@ module ActivateAnomalyDetector = {
   type request = {@as("AnomalyDetectorArn") anomalyDetectorArn: arn}
   type response = unit
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "ActivateAnomalyDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ActivateAnomalyDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMetricSets = {
@@ -520,8 +519,8 @@ module ListMetricSets = {
     @as("MetricSetSummaryList") metricSetSummaryList: option<metricSetSummaryList>,
   }
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "ListMetricSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListMetricSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAnomalyGroupSummaries = {
@@ -538,8 +537,8 @@ module ListAnomalyGroupSummaries = {
     @as("AnomalyGroupSummaryList") anomalyGroupSummaryList: option<anomalyGroupSummaryList>,
   }
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "ListAnomalyGroupSummariesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAnomalyGroupSummariesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAnomalyDetectors = {
@@ -554,8 +553,8 @@ module ListAnomalyDetectors = {
     anomalyDetectorSummaryList: option<anomalyDetectorSummaryList>,
   }
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "ListAnomalyDetectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAnomalyDetectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAlerts = {
@@ -569,17 +568,16 @@ module ListAlerts = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("AlertSummaryList") alertSummaryList: option<alertSummaryList>,
   }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: request => t = "ListAlertsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "ListAlertsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAlert = {
   type t
   type request = {@as("AlertArn") alertArn: arn}
   type response = {@as("Alert") alert: option<alert>}
-  @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "DescribeAlertCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "DescribeAlertCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAnomalyGroupTimeSeries = {
@@ -599,8 +597,8 @@ module ListAnomalyGroupTimeSeries = {
     @as("AnomalyGroupId") anomalyGroupId: option<uuid>,
   }
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "ListAnomalyGroupTimeSeriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAnomalyGroupTimeSeriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSampleData = {
@@ -610,9 +608,8 @@ module GetSampleData = {
     @as("SampleRows") sampleRows: option<sampleRows>,
     @as("HeaderValues") headerValues: option<headerValueList>,
   }
-  @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "GetSampleDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutmetrics") @new external new: request => t = "GetSampleDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMetricSet = {
@@ -629,8 +626,8 @@ module UpdateMetricSet = {
   }
   type response = {@as("MetricSetArn") metricSetArn: option<arn>}
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "UpdateMetricSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateMetricSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMetricSet = {
@@ -652,8 +649,8 @@ module DescribeMetricSet = {
     @as("MetricSetArn") metricSetArn: option<arn>,
   }
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "DescribeMetricSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeMetricSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMetricSet = {
@@ -673,8 +670,8 @@ module CreateMetricSet = {
   }
   type response = {@as("MetricSetArn") metricSetArn: option<arn>}
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "CreateMetricSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateMetricSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAnomalyGroup = {
@@ -685,6 +682,6 @@ module GetAnomalyGroup = {
   }
   type response = {@as("AnomalyGroup") anomalyGroup: option<anomalyGroup>}
   @module("@aws-sdk/client-lookoutmetrics") @new
-  external new_: request => t = "GetAnomalyGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAnomalyGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

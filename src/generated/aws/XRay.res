@@ -474,8 +474,8 @@ module DeleteGroup = {
     @as("GroupName") groupName: option<groupName>,
   }
   type response = unit
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "DeleteGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "DeleteGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -485,8 +485,8 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutEncryptionConfig = {
@@ -496,16 +496,16 @@ module PutEncryptionConfig = {
     @as("KeyId") keyId: option<encryptionKeyId>,
   }
   type response = {@as("EncryptionConfig") encryptionConfig: option<encryptionConfig>}
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "PutEncryptionConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "PutEncryptionConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEncryptionConfig = {
   type t
   type request = unit
   type response = {@as("EncryptionConfig") encryptionConfig: option<encryptionConfig>}
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetEncryptionConfigCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetEncryptionConfigCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateGroup = {
@@ -517,8 +517,8 @@ module UpdateGroup = {
     @as("GroupName") groupName: option<groupName>,
   }
   type response = {@as("Group") group: option<group>}
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "UpdateGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "UpdateGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -528,8 +528,8 @@ module TagResource = {
     @as("ResourceARN") resourceARN: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutTraceSegments = {
@@ -538,8 +538,8 @@ module PutTraceSegments = {
   type response = {
     @as("UnprocessedTraceSegments") unprocessedTraceSegments: option<unprocessedTraceSegmentList>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "PutTraceSegmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "PutTraceSegmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -552,8 +552,8 @@ module ListTagsForResource = {
     @as("NextToken") nextToken: option<string_>,
     @as("Tags") tags: option<tagList_>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSamplingTargets = {
@@ -566,8 +566,8 @@ module GetSamplingTargets = {
     @as("LastRuleModification") lastRuleModification: option<timestamp_>,
     @as("SamplingTargetDocuments") samplingTargetDocuments: option<samplingTargetDocumentList>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetSamplingTargetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetSamplingTargetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSamplingStatisticSummaries = {
@@ -579,8 +579,8 @@ module GetSamplingStatisticSummaries = {
     samplingStatisticSummaries: option<samplingStatisticSummaryList>,
   }
   @module("@aws-sdk/client-xray") @new
-  external new_: request => t = "GetSamplingStatisticSummariesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSamplingStatisticSummariesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetGroup = {
@@ -590,8 +590,8 @@ module GetGroup = {
     @as("GroupName") groupName: option<groupName>,
   }
   type response = {@as("Group") group: option<group>}
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateGroup = {
@@ -603,16 +603,16 @@ module CreateGroup = {
     @as("GroupName") groupName: groupName,
   }
   type response = {@as("Group") group: option<group>}
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "CreateGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "CreateGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSamplingRule = {
   type t
   type request = {@as("SamplingRuleUpdate") samplingRuleUpdate: samplingRuleUpdate}
   type response = {@as("SamplingRuleRecord") samplingRuleRecord: option<samplingRuleRecord>}
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "UpdateSamplingRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "UpdateSamplingRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutTelemetryRecords = {
@@ -624,8 +624,8 @@ module PutTelemetryRecords = {
     @as("TelemetryRecords") telemetryRecords: telemetryRecordList,
   }
   type response = unit
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "PutTelemetryRecordsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "PutTelemetryRecordsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetGroups = {
@@ -635,8 +635,8 @@ module GetGroups = {
     @as("NextToken") nextToken: option<string_>,
     @as("Groups") groups: option<groupSummaryList>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSamplingRule = {
@@ -646,8 +646,8 @@ module DeleteSamplingRule = {
     @as("RuleName") ruleName: option<string_>,
   }
   type response = {@as("SamplingRuleRecord") samplingRuleRecord: option<samplingRuleRecord>}
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "DeleteSamplingRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "DeleteSamplingRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSamplingRule = {
@@ -657,8 +657,8 @@ module CreateSamplingRule = {
     @as("SamplingRule") samplingRule: samplingRule,
   }
   type response = {@as("SamplingRuleRecord") samplingRuleRecord: option<samplingRuleRecord>}
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "CreateSamplingRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "CreateSamplingRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTimeSeriesServiceStatistics = {
@@ -680,8 +680,8 @@ module GetTimeSeriesServiceStatistics = {
     timeSeriesServiceStatistics: option<timeSeriesServiceStatisticsList>,
   }
   @module("@aws-sdk/client-xray") @new
-  external new_: request => t = "GetTimeSeriesServiceStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetTimeSeriesServiceStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSamplingRules = {
@@ -691,8 +691,8 @@ module GetSamplingRules = {
     @as("NextToken") nextToken: option<string_>,
     @as("SamplingRuleRecords") samplingRuleRecords: option<samplingRuleRecordList>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetSamplingRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetSamplingRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInsightImpactGraph = {
@@ -712,8 +712,8 @@ module GetInsightImpactGraph = {
     @as("StartTime") startTime: option<timestamp_>,
     @as("InsightId") insightId: option<insightId>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetInsightImpactGraphCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetInsightImpactGraphCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetTraces = {
@@ -727,16 +727,16 @@ module BatchGetTraces = {
     @as("UnprocessedTraceIds") unprocessedTraceIds: option<unprocessedTraceIdList>,
     @as("Traces") traces: option<traceList>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "BatchGetTracesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "BatchGetTracesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInsight = {
   type t
   type request = {@as("InsightId") insightId: insightId}
   type response = {@as("Insight") insight: option<insight>}
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetInsightCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetInsightCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInsightSummaries = {
@@ -754,8 +754,8 @@ module GetInsightSummaries = {
     @as("NextToken") nextToken: option<token>,
     @as("InsightSummaries") insightSummaries: option<insightSummaryList>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetInsightSummariesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetInsightSummariesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInsightEvents = {
@@ -769,8 +769,8 @@ module GetInsightEvents = {
     @as("NextToken") nextToken: option<token>,
     @as("InsightEvents") insightEvents: option<insightEventList>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetInsightEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetInsightEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTraceGraph = {
@@ -783,8 +783,8 @@ module GetTraceGraph = {
     @as("NextToken") nextToken: option<string_>,
     @as("Services") services: option<serviceList>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetTraceGraphCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetTraceGraphCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetServiceGraph = {
@@ -803,8 +803,8 @@ module GetServiceGraph = {
     @as("EndTime") endTime: option<timestamp_>,
     @as("StartTime") startTime: option<timestamp_>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetServiceGraphCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetServiceGraphCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTraceSummaries = {
@@ -824,6 +824,6 @@ module GetTraceSummaries = {
     @as("ApproximateTime") approximateTime: option<timestamp_>,
     @as("TraceSummaries") traceSummaries: option<traceSummaryList>,
   }
-  @module("@aws-sdk/client-xray") @new external new_: request => t = "GetTraceSummariesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-xray") @new external new: request => t = "GetTraceSummariesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

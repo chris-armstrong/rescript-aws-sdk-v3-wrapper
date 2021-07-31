@@ -113,8 +113,8 @@ module DescribeEntity = {
     @as("EntityType") entityType: option<entityType>,
   }
   @module("@aws-sdk/client-aws-marketplace") @new
-  external new_: request => t = "DescribeEntityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEntityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelChangeSet = {
@@ -128,8 +128,8 @@ module CancelChangeSet = {
     @as("ChangeSetId") changeSetId: option<resourceId>,
   }
   @module("@aws-sdk/client-aws-marketplace") @new
-  external new_: request => t = "CancelChangeSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelChangeSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartChangeSet = {
@@ -145,8 +145,8 @@ module StartChangeSet = {
     @as("ChangeSetId") changeSetId: option<resourceId>,
   }
   @module("@aws-sdk/client-aws-marketplace") @new
-  external new_: request => t = "StartChangeSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartChangeSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEntities = {
@@ -163,9 +163,8 @@ module ListEntities = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("EntitySummaryList") entitySummaryList: option<entitySummaryList>,
   }
-  @module("@aws-sdk/client-aws-marketplace") @new
-  external new_: request => t = "ListEntitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-aws-marketplace") @new external new: request => t = "ListEntitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChangeSets = {
@@ -182,8 +181,8 @@ module ListChangeSets = {
     @as("ChangeSetSummaryList") changeSetSummaryList: option<changeSetSummaryList>,
   }
   @module("@aws-sdk/client-aws-marketplace") @new
-  external new_: request => t = "ListChangeSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListChangeSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeChangeSet = {
@@ -204,6 +203,6 @@ module DescribeChangeSet = {
     @as("ChangeSetId") changeSetId: option<resourceId>,
   }
   @module("@aws-sdk/client-aws-marketplace") @new
-  external new_: request => t = "DescribeChangeSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeChangeSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

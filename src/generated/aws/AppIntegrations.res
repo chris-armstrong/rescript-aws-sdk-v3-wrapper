@@ -60,8 +60,8 @@ module UpdateEventIntegration = {
   }
   type response = unit
   @module("@aws-sdk/client-app-integrations") @new
-  external new_: request => t = "UpdateEventIntegrationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEventIntegrationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEventIntegration = {
@@ -69,8 +69,8 @@ module DeleteEventIntegration = {
   type request = {@as("Name") name: name}
   type response = unit
   @module("@aws-sdk/client-app-integrations") @new
-  external new_: request => t = "DeleteEventIntegrationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEventIntegrationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -81,8 +81,8 @@ module UntagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-app-integrations") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -92,9 +92,8 @@ module TagResource = {
     resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-app-integrations") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-app-integrations") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -102,8 +101,8 @@ module ListTagsForResource = {
   type request = {resourceArn: arn}
   type response = {tags: option<tagMap>}
   @module("@aws-sdk/client-app-integrations") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEventIntegration = {
@@ -118,8 +117,8 @@ module GetEventIntegration = {
     @as("Name") name: option<name>,
   }
   @module("@aws-sdk/client-app-integrations") @new
-  external new_: request => t = "GetEventIntegrationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetEventIntegrationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEventIntegration = {
@@ -134,8 +133,8 @@ module CreateEventIntegration = {
   }
   type response = {@as("EventIntegrationArn") eventIntegrationArn: option<arn>}
   @module("@aws-sdk/client-app-integrations") @new
-  external new_: request => t = "CreateEventIntegrationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateEventIntegrationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEventIntegrations = {
@@ -149,8 +148,8 @@ module ListEventIntegrations = {
     @as("EventIntegrations") eventIntegrations: option<eventIntegrationsList>,
   }
   @module("@aws-sdk/client-app-integrations") @new
-  external new_: request => t = "ListEventIntegrationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEventIntegrationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEventIntegrationAssociations = {
@@ -166,6 +165,6 @@ module ListEventIntegrationAssociations = {
     eventIntegrationAssociations: option<eventIntegrationAssociationsList>,
   }
   @module("@aws-sdk/client-app-integrations") @new
-  external new_: request => t = "ListEventIntegrationAssociationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEventIntegrationAssociationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

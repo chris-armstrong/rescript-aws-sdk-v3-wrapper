@@ -257,8 +257,8 @@ module UpdateApplication = {
     configurationId: applicationId,
   }
   type response = unit
-  @module("@aws-sdk/client-discovery") @new external new_: request => t = "UpdateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-discovery") @new external new: request => t = "UpdateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopContinuousExport = {
@@ -269,16 +269,16 @@ module StopContinuousExport = {
     startTime: option<timeStamp>,
   }
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "StopContinuousExportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopContinuousExportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExportConfigurations = {
   type t
 
   type response = {exportId: option<configurationsExportId>}
-  @module("@aws-sdk/client-discovery") @new external new_: unit => t = "ExportConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-discovery") @new external new: unit => t = "ExportConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApplication = {
@@ -288,8 +288,8 @@ module CreateApplication = {
     name: string_,
   }
   type response = {configurationId: option<string_>}
-  @module("@aws-sdk/client-discovery") @new external new_: request => t = "CreateApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-discovery") @new external new: request => t = "CreateApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartImportTask = {
@@ -300,8 +300,8 @@ module StartImportTask = {
     clientRequestToken: option<clientRequestToken>,
   }
   type response = {task: option<importTask>}
-  @module("@aws-sdk/client-discovery") @new external new_: request => t = "StartImportTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-discovery") @new external new: request => t = "StartImportTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartContinuousExport = {
@@ -315,8 +315,8 @@ module StartContinuousExport = {
     exportId: option<configurationsExportId>,
   }
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "StartContinuousExportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartContinuousExportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDiscoverySummary = {
@@ -331,8 +331,8 @@ module GetDiscoverySummary = {
     servers: option<long>,
   }
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "GetDiscoverySummaryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetDiscoverySummaryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateConfigurationItemsFromApplication = {
@@ -343,17 +343,16 @@ module DisassociateConfigurationItemsFromApplication = {
   }
   type response = unit
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "DisassociateConfigurationItemsFromApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateConfigurationItemsFromApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApplications = {
   type t
   type request = {configurationIds: applicationIdsList}
   type response = unit
-  @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "DeleteApplicationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-discovery") @new external new: request => t = "DeleteApplicationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateConfigurationItemsToApplication = {
@@ -364,8 +363,8 @@ module AssociateConfigurationItemsToApplication = {
   }
   type response = unit
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "AssociateConfigurationItemsToApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateConfigurationItemsToApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopDataCollectionByAgentIds = {
@@ -373,8 +372,8 @@ module StopDataCollectionByAgentIds = {
   type request = {agentIds: agentIds}
   type response = {agentsConfigurationStatus: option<agentConfigurationStatusList>}
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "StopDataCollectionByAgentIdsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopDataCollectionByAgentIdsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartDataCollectionByAgentIds = {
@@ -382,8 +381,8 @@ module StartDataCollectionByAgentIds = {
   type request = {agentIds: agentIds}
   type response = {agentsConfigurationStatus: option<agentConfigurationStatusList>}
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "StartDataCollectionByAgentIdsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartDataCollectionByAgentIdsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListServerNeighbors = {
@@ -401,8 +400,8 @@ module ListServerNeighbors = {
     neighbors: neighborDetailsList,
   }
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "ListServerNeighborsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListServerNeighborsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeExportConfigurations = {
@@ -417,8 +416,8 @@ module DescribeExportConfigurations = {
     exportsInfo: option<exportsInfo>,
   }
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "DescribeExportConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeExportConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConfigurations = {
@@ -426,8 +425,8 @@ module DescribeConfigurations = {
   type request = {configurationIds: configurationIdList}
   type response = {configurations: option<describeConfigurationsAttributes>}
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "DescribeConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTags = {
@@ -437,8 +436,8 @@ module DeleteTags = {
     configurationIds: configurationIdList,
   }
   type response = unit
-  @module("@aws-sdk/client-discovery") @new external new_: request => t = "DeleteTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-discovery") @new external new: request => t = "DeleteTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTags = {
@@ -448,8 +447,8 @@ module CreateTags = {
     configurationIds: configurationIdList,
   }
   type response = unit
-  @module("@aws-sdk/client-discovery") @new external new_: request => t = "CreateTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-discovery") @new external new: request => t = "CreateTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteImportData = {
@@ -457,8 +456,8 @@ module BatchDeleteImportData = {
   type request = {importTaskIds: toDeleteIdentifierList}
   type response = {errors: option<batchDeleteImportDataErrorList>}
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "BatchDeleteImportDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDeleteImportDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartExportTask = {
@@ -470,8 +469,8 @@ module StartExportTask = {
     exportDataFormat: option<exportDataFormats>,
   }
   type response = {exportId: option<configurationsExportId>}
-  @module("@aws-sdk/client-discovery") @new external new_: request => t = "StartExportTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-discovery") @new external new: request => t = "StartExportTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListConfigurations = {
@@ -487,9 +486,8 @@ module ListConfigurations = {
     nextToken: option<nextToken>,
     configurations: option<configurations>,
   }
-  @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "ListConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-discovery") @new external new: request => t = "ListConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTags = {
@@ -503,8 +501,8 @@ module DescribeTags = {
     nextToken: option<nextToken>,
     tags: option<configurationTagSet>,
   }
-  @module("@aws-sdk/client-discovery") @new external new_: request => t = "DescribeTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-discovery") @new external new: request => t = "DescribeTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeImportTasks = {
@@ -519,8 +517,8 @@ module DescribeImportTasks = {
     nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "DescribeImportTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeImportTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeExportTasks = {
@@ -536,8 +534,8 @@ module DescribeExportTasks = {
     exportsInfo: option<exportsInfo>,
   }
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "DescribeExportTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeExportTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeContinuousExports = {
@@ -552,8 +550,8 @@ module DescribeContinuousExports = {
     descriptions: option<continuousExportDescriptions>,
   }
   @module("@aws-sdk/client-discovery") @new
-  external new_: request => t = "DescribeContinuousExportsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeContinuousExportsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAgents = {
@@ -568,6 +566,6 @@ module DescribeAgents = {
     nextToken: option<nextToken>,
     agentsInfo: option<agentsInfo>,
   }
-  @module("@aws-sdk/client-discovery") @new external new_: request => t = "DescribeAgentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-discovery") @new external new: request => t = "DescribeAgentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

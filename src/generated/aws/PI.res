@@ -80,8 +80,8 @@ module DescribeDimensionKeys = {
     @as("AlignedEndTime") alignedEndTime: option<isotimestamp>,
     @as("AlignedStartTime") alignedStartTime: option<isotimestamp>,
   }
-  @module("@aws-sdk/client-pi") @new external new_: request => t = "DescribeDimensionKeysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-pi") @new external new: request => t = "DescribeDimensionKeysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResourceMetrics = {
@@ -103,6 +103,6 @@ module GetResourceMetrics = {
     @as("AlignedEndTime") alignedEndTime: option<isotimestamp>,
     @as("AlignedStartTime") alignedStartTime: option<isotimestamp>,
   }
-  @module("@aws-sdk/client-pi") @new external new_: request => t = "GetResourceMetricsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-pi") @new external new: request => t = "GetResourceMetricsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

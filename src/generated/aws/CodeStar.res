@@ -124,8 +124,8 @@ module UpdateUserProfile = {
     displayName: option<userProfileDisplayName>,
     userArn: userArn,
   }
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "UpdateUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "UpdateUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTeamMember = {
@@ -141,8 +141,8 @@ module UpdateTeamMember = {
     projectRole: option<role>,
     userArn: option<userArn>,
   }
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "UpdateTeamMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "UpdateTeamMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProject = {
@@ -153,8 +153,8 @@ module UpdateProject = {
     id: projectId,
   }
   type response = unit
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "UpdateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "UpdateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateTeamMember = {
@@ -165,8 +165,8 @@ module DisassociateTeamMember = {
   }
   type response = unit
   @module("@aws-sdk/client-codestar") @new
-  external new_: request => t = "DisassociateTeamMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateTeamMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeUserProfile = {
@@ -180,17 +180,16 @@ module DescribeUserProfile = {
     displayName: option<userProfileDisplayName>,
     userArn: userArn,
   }
-  @module("@aws-sdk/client-codestar") @new
-  external new_: request => t = "DescribeUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "DescribeUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteUserProfile = {
   type t
   type request = {userArn: userArn}
   type response = {userArn: userArn}
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "DeleteUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "DeleteUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProject = {
@@ -204,8 +203,8 @@ module DeleteProject = {
     projectArn: option<projectArn>,
     stackId: option<stackId>,
   }
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "DeleteProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "DeleteProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateUserProfile = {
@@ -224,8 +223,8 @@ module CreateUserProfile = {
     displayName: option<userProfileDisplayName>,
     userArn: userArn,
   }
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "CreateUserProfileCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "CreateUserProfileCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateTeamMember = {
@@ -238,9 +237,8 @@ module AssociateTeamMember = {
     projectId: projectId,
   }
   type response = {clientRequestToken: option<clientRequestToken>}
-  @module("@aws-sdk/client-codestar") @new
-  external new_: request => t = "AssociateTeamMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "AssociateTeamMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagProject = {
@@ -250,8 +248,8 @@ module UntagProject = {
     id: projectId,
   }
   type response = unit
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "UntagProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "UntagProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagProject = {
@@ -261,8 +259,8 @@ module TagProject = {
     id: projectId,
   }
   type response = {tags: option<tags>}
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "TagProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "TagProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForProject = {
@@ -276,8 +274,8 @@ module ListTagsForProject = {
     nextToken: option<paginationToken>,
     tags: option<tags>,
   }
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "ListTagsForProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "ListTagsForProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProject = {
@@ -294,8 +292,8 @@ module DescribeProject = {
     id: option<projectId>,
     name: option<projectName>,
   }
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "DescribeProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "DescribeProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListUserProfiles = {
@@ -308,8 +306,8 @@ module ListUserProfiles = {
     nextToken: option<paginationToken>,
     userProfiles: userProfilesList,
   }
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "ListUserProfilesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "ListUserProfilesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTeamMembers = {
@@ -323,8 +321,8 @@ module ListTeamMembers = {
     nextToken: option<paginationToken>,
     teamMembers: teamMemberResult,
   }
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "ListTeamMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "ListTeamMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResources = {
@@ -338,8 +336,8 @@ module ListResources = {
     nextToken: option<paginationToken>,
     resources: option<resourcesResult>,
   }
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "ListResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "ListResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProjects = {
@@ -352,8 +350,8 @@ module ListProjects = {
     nextToken: option<paginationToken>,
     projects: projectsList,
   }
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "ListProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "ListProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProject = {
@@ -373,6 +371,6 @@ module CreateProject = {
     arn: projectArn,
     id: projectId,
   }
-  @module("@aws-sdk/client-codestar") @new external new_: request => t = "CreateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-codestar") @new external new: request => t = "CreateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

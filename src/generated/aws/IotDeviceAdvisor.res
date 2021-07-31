@@ -124,8 +124,8 @@ module StopSuiteRun = {
   }
   type response = unit
   @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "StopSuiteRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopSuiteRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSuiteRunReport = {
@@ -136,8 +136,8 @@ module GetSuiteRunReport = {
   }
   type response = {qualificationReportDownloadUrl: option<qualificationReportDownloadUrl>}
   @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "GetSuiteRunReportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSuiteRunReportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSuiteDefinition = {
@@ -145,8 +145,8 @@ module DeleteSuiteDefinition = {
   type request = {suiteDefinitionId: uuid}
   type response = unit
   @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "DeleteSuiteDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSuiteDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -157,8 +157,8 @@ module UntagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -168,9 +168,8 @@ module TagResource = {
     resourceArn: amazonResourceName,
   }
   type response = unit
-  @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -178,8 +177,8 @@ module ListTagsForResource = {
   type request = {resourceArn: amazonResourceName}
   type response = {tags: option<tagMap>}
   @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartSuiteRun = {
@@ -196,8 +195,8 @@ module StartSuiteRun = {
     suiteRunId: option<uuid>,
   }
   @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "StartSuiteRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartSuiteRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSuiteRuns = {
@@ -213,8 +212,8 @@ module ListSuiteRuns = {
     suiteRunsList: option<suiteRunsList>,
   }
   @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "ListSuiteRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSuiteRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSuiteDefinition = {
@@ -232,8 +231,8 @@ module UpdateSuiteDefinition = {
     suiteDefinitionId: option<uuid>,
   }
   @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "UpdateSuiteDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSuiteDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSuiteDefinition = {
@@ -253,8 +252,8 @@ module GetSuiteDefinition = {
     suiteDefinitionId: option<uuid>,
   }
   @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "GetSuiteDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSuiteDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSuiteDefinition = {
@@ -270,8 +269,8 @@ module CreateSuiteDefinition = {
     suiteDefinitionId: option<uuid>,
   }
   @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "CreateSuiteDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSuiteDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSuiteDefinitions = {
@@ -285,8 +284,8 @@ module ListSuiteDefinitions = {
     suiteDefinitionInformationList: option<suiteDefinitionInformationList>,
   }
   @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "ListSuiteDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSuiteDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSuiteRun = {
@@ -308,7 +307,6 @@ module GetSuiteRun = {
     suiteDefinitionVersion: option<suiteDefinitionVersion>,
     suiteDefinitionId: option<uuid>,
   }
-  @module("@aws-sdk/client-iotdeviceadvisor") @new
-  external new_: request => t = "GetSuiteRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new: request => t = "GetSuiteRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

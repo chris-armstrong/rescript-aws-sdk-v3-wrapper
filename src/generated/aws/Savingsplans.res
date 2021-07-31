@@ -246,8 +246,8 @@ module DeleteQueuedSavingsPlan = {
   type request = {savingsPlanId: savingsPlanId}
   type response = unit
   @module("@aws-sdk/client-savingsplans") @new
-  external new_: request => t = "DeleteQueuedSavingsPlanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteQueuedSavingsPlanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -257,8 +257,8 @@ module UntagResource = {
     resourceArn: savingsPlanArn,
   }
   type response = unit
-  @module("@aws-sdk/client-savingsplans") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-savingsplans") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -268,8 +268,8 @@ module TagResource = {
     resourceArn: savingsPlanArn,
   }
   type response = unit
-  @module("@aws-sdk/client-savingsplans") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-savingsplans") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -277,8 +277,8 @@ module ListTagsForResource = {
   type request = {resourceArn: savingsPlanArn}
   type response = {tags: option<tagMap>}
   @module("@aws-sdk/client-savingsplans") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSavingsPlan = {
@@ -293,8 +293,8 @@ module CreateSavingsPlan = {
   }
   type response = {savingsPlanId: option<savingsPlanId>}
   @module("@aws-sdk/client-savingsplans") @new
-  external new_: request => t = "CreateSavingsPlanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSavingsPlanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSavingsPlans = {
@@ -312,8 +312,8 @@ module DescribeSavingsPlans = {
     savingsPlans: option<savingsPlanList>,
   }
   @module("@aws-sdk/client-savingsplans") @new
-  external new_: request => t = "DescribeSavingsPlansCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSavingsPlansCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSavingsPlansOfferings = {
@@ -338,8 +338,8 @@ module DescribeSavingsPlansOfferings = {
     searchResults: option<savingsPlanOfferingsList>,
   }
   @module("@aws-sdk/client-savingsplans") @new
-  external new_: request => t = "DescribeSavingsPlansOfferingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSavingsPlansOfferingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSavingsPlansOfferingRates = {
@@ -361,8 +361,8 @@ module DescribeSavingsPlansOfferingRates = {
     searchResults: option<savingsPlanOfferingRatesList>,
   }
   @module("@aws-sdk/client-savingsplans") @new
-  external new_: request => t = "DescribeSavingsPlansOfferingRatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSavingsPlansOfferingRatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSavingsPlanRates = {
@@ -379,6 +379,6 @@ module DescribeSavingsPlanRates = {
     savingsPlanId: option<savingsPlanId>,
   }
   @module("@aws-sdk/client-savingsplans") @new
-  external new_: request => t = "DescribeSavingsPlanRatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSavingsPlanRatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

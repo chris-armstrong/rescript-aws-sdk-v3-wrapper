@@ -189,8 +189,8 @@ module ListTables = {
     nextToken: option<paginationToken>,
     tables: tables,
   }
-  @module("@aws-sdk/client-honeycode") @new external new_: request => t = "ListTablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-honeycode") @new external new: request => t = "ListTablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTableColumns = {
@@ -205,8 +205,8 @@ module ListTableColumns = {
     nextToken: option<paginationToken>,
     tableColumns: tableColumns,
   }
-  @module("@aws-sdk/client-honeycode") @new external new_: request => t = "ListTableColumnsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-honeycode") @new external new: request => t = "ListTableColumnsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InvokeScreenAutomation = {
@@ -222,8 +222,8 @@ module InvokeScreenAutomation = {
   }
   type response = {workbookCursor: workbookCursor}
   @module("@aws-sdk/client-honeycode") @new
-  external new_: request => t = "InvokeScreenAutomationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "InvokeScreenAutomationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteTableRows = {
@@ -239,8 +239,8 @@ module BatchDeleteTableRows = {
     workbookCursor: workbookCursor,
   }
   @module("@aws-sdk/client-honeycode") @new
-  external new_: request => t = "BatchDeleteTableRowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDeleteTableRowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartTableDataImportJob = {
@@ -258,8 +258,8 @@ module StartTableDataImportJob = {
     jobId: jobId,
   }
   @module("@aws-sdk/client-honeycode") @new
-  external new_: request => t = "StartTableDataImportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartTableDataImportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module QueryTableRows = {
@@ -277,8 +277,8 @@ module QueryTableRows = {
     rows: tableRows,
     columnIds: resourceIds,
   }
-  @module("@aws-sdk/client-honeycode") @new external new_: request => t = "QueryTableRowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-honeycode") @new external new: request => t = "QueryTableRowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTableRows = {
@@ -297,8 +297,8 @@ module ListTableRows = {
     rows: tableRows,
     columnIds: resourceIds,
   }
-  @module("@aws-sdk/client-honeycode") @new external new_: request => t = "ListTableRowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-honeycode") @new external new: request => t = "ListTableRowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchUpsertTableRows = {
@@ -315,8 +315,8 @@ module BatchUpsertTableRows = {
     rows: upsertRowsResultMap,
   }
   @module("@aws-sdk/client-honeycode") @new
-  external new_: request => t = "BatchUpsertTableRowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchUpsertTableRowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchUpdateTableRows = {
@@ -332,8 +332,8 @@ module BatchUpdateTableRows = {
     workbookCursor: workbookCursor,
   }
   @module("@aws-sdk/client-honeycode") @new
-  external new_: request => t = "BatchUpdateTableRowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchUpdateTableRowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchCreateTableRows = {
@@ -350,8 +350,8 @@ module BatchCreateTableRows = {
     workbookCursor: workbookCursor,
   }
   @module("@aws-sdk/client-honeycode") @new
-  external new_: request => t = "BatchCreateTableRowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchCreateTableRowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTableDataImportJob = {
@@ -367,8 +367,8 @@ module DescribeTableDataImportJob = {
     jobStatus: tableDataImportJobStatus,
   }
   @module("@aws-sdk/client-honeycode") @new
-  external new_: request => t = "DescribeTableDataImportJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTableDataImportJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetScreenData = {
@@ -386,6 +386,6 @@ module GetScreenData = {
     workbookCursor: workbookCursor,
     results: resultSetMap,
   }
-  @module("@aws-sdk/client-honeycode") @new external new_: request => t = "GetScreenDataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-honeycode") @new external new: request => t = "GetScreenDataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

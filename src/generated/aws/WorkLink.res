@@ -112,8 +112,8 @@ module UpdateIdentityProviderConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "UpdateIdentityProviderConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateIdentityProviderConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFleetMetadata = {
@@ -124,9 +124,8 @@ module UpdateFleetMetadata = {
     @as("FleetArn") fleetArn: fleetArn,
   }
   type response = unit
-  @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "UpdateFleetMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "UpdateFleetMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDomainMetadata = {
@@ -138,8 +137,8 @@ module UpdateDomainMetadata = {
   }
   type response = unit
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "UpdateDomainMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDomainMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDevicePolicyConfiguration = {
@@ -150,8 +149,8 @@ module UpdateDevicePolicyConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "UpdateDevicePolicyConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateDevicePolicyConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAuditStreamConfiguration = {
@@ -162,8 +161,8 @@ module UpdateAuditStreamConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "UpdateAuditStreamConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAuditStreamConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SignOutUser = {
@@ -173,8 +172,8 @@ module SignOutUser = {
     @as("FleetArn") fleetArn: fleetArn,
   }
   type response = unit
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "SignOutUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "SignOutUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RevokeDomainAccess = {
@@ -184,8 +183,8 @@ module RevokeDomainAccess = {
     @as("FleetArn") fleetArn: fleetArn,
   }
   type response = unit
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "RevokeDomainAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "RevokeDomainAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreDomainAccess = {
@@ -195,9 +194,8 @@ module RestoreDomainAccess = {
     @as("FleetArn") fleetArn: fleetArn,
   }
   type response = unit
-  @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "RestoreDomainAccessCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "RestoreDomainAccessCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateWebsiteCertificateAuthority = {
@@ -208,8 +206,8 @@ module DisassociateWebsiteCertificateAuthority = {
   }
   type response = unit
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "DisassociateWebsiteCertificateAuthorityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateWebsiteCertificateAuthorityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateWebsiteAuthorizationProvider = {
@@ -220,8 +218,8 @@ module DisassociateWebsiteAuthorizationProvider = {
   }
   type response = unit
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "DisassociateWebsiteAuthorizationProviderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateWebsiteAuthorizationProviderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateDomain = {
@@ -231,8 +229,8 @@ module DisassociateDomain = {
     @as("FleetArn") fleetArn: fleetArn,
   }
   type response = unit
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "DisassociateDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "DisassociateDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeWebsiteCertificateAuthority = {
@@ -247,8 +245,8 @@ module DescribeWebsiteCertificateAuthority = {
     @as("Certificate") certificate: option<certificate>,
   }
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "DescribeWebsiteCertificateAuthorityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeWebsiteCertificateAuthorityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIdentityProviderConfiguration = {
@@ -260,8 +258,8 @@ module DescribeIdentityProviderConfiguration = {
     @as("IdentityProviderType") identityProviderType: option<identityProviderType>,
   }
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "DescribeIdentityProviderConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeIdentityProviderConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDomain = {
@@ -277,8 +275,8 @@ module DescribeDomain = {
     @as("DisplayName") displayName: option<displayName>,
     @as("DomainName") domainName: option<domainName>,
   }
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "DescribeDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "DescribeDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDevicePolicyConfiguration = {
@@ -286,8 +284,8 @@ module DescribeDevicePolicyConfiguration = {
   type request = {@as("FleetArn") fleetArn: fleetArn}
   type response = {@as("DeviceCaCertificate") deviceCaCertificate: option<certificate>}
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "DescribeDevicePolicyConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDevicePolicyConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDevice = {
@@ -307,8 +305,8 @@ module DescribeDevice = {
     @as("Model") model: option<deviceModel>,
     @as("Status") status: option<deviceStatus>,
   }
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "DescribeDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "DescribeDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAuditStreamConfiguration = {
@@ -316,16 +314,16 @@ module DescribeAuditStreamConfiguration = {
   type request = {@as("FleetArn") fleetArn: fleetArn}
   type response = {@as("AuditStreamArn") auditStreamArn: option<auditStreamArn>}
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "DescribeAuditStreamConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAuditStreamConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFleet = {
   type t
   type request = {@as("FleetArn") fleetArn: fleetArn}
   type response = unit
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "DeleteFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "DeleteFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateWebsiteCertificateAuthority = {
@@ -337,8 +335,8 @@ module AssociateWebsiteCertificateAuthority = {
   }
   type response = {@as("WebsiteCaId") websiteCaId: option<id>}
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "AssociateWebsiteCertificateAuthorityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateWebsiteCertificateAuthorityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateWebsiteAuthorizationProvider = {
@@ -350,8 +348,8 @@ module AssociateWebsiteAuthorizationProvider = {
   }
   type response = {@as("AuthorizationProviderId") authorizationProviderId: option<id>}
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "AssociateWebsiteAuthorizationProviderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateWebsiteAuthorizationProviderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateDomain = {
@@ -363,8 +361,8 @@ module AssociateDomain = {
     @as("FleetArn") fleetArn: fleetArn,
   }
   type response = unit
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "AssociateDomainCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "AssociateDomainCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCompanyNetworkConfiguration = {
@@ -377,8 +375,8 @@ module UpdateCompanyNetworkConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "UpdateCompanyNetworkConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateCompanyNetworkConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -388,8 +386,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: fleetArn,
   }
   type response = unit
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -399,17 +397,16 @@ module TagResource = {
     @as("ResourceArn") resourceArn: fleetArn,
   }
   type response = unit
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: fleetArn}
   type response = {@as("Tags") tags: option<tagMap>}
-  @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFleetMetadata = {
@@ -426,8 +423,8 @@ module DescribeFleetMetadata = {
     @as("CreatedTime") createdTime: option<dateTime>,
   }
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "DescribeFleetMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFleetMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCompanyNetworkConfiguration = {
@@ -439,8 +436,8 @@ module DescribeCompanyNetworkConfiguration = {
     @as("VpcId") vpcId: option<vpcId>,
   }
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "DescribeCompanyNetworkConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCompanyNetworkConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFleet = {
@@ -452,8 +449,8 @@ module CreateFleet = {
     @as("FleetName") fleetName: fleetName,
   }
   type response = {@as("FleetArn") fleetArn: option<fleetArn>}
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "CreateFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "CreateFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWebsiteCertificateAuthorities = {
@@ -469,8 +466,8 @@ module ListWebsiteCertificateAuthorities = {
     websiteCertificateAuthorities: option<websiteCaSummaryList>,
   }
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "ListWebsiteCertificateAuthoritiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListWebsiteCertificateAuthoritiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWebsiteAuthorizationProviders = {
@@ -486,8 +483,8 @@ module ListWebsiteAuthorizationProviders = {
     websiteAuthorizationProviders: option<websiteAuthorizationProvidersSummaryList>,
   }
   @module("@aws-sdk/client-worklink") @new
-  external new_: request => t = "ListWebsiteAuthorizationProvidersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListWebsiteAuthorizationProvidersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDomains = {
@@ -501,8 +498,8 @@ module ListDomains = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Domains") domains: option<domainSummaryList>,
   }
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "ListDomainsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "ListDomainsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDevices = {
@@ -516,8 +513,8 @@ module ListDevices = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Devices") devices: option<deviceSummaryList>,
   }
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "ListDevicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "ListDevicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFleets = {
@@ -530,6 +527,6 @@ module ListFleets = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("FleetSummaryList") fleetSummaryList: option<fleetSummaryList>,
   }
-  @module("@aws-sdk/client-worklink") @new external new_: request => t = "ListFleetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-worklink") @new external new: request => t = "ListFleetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

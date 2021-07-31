@@ -772,24 +772,24 @@ module PutPermissionPolicy = {
     @as("ResourceArn") resourceArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "PutPermissionPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "PutPermissionPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPermissionPolicy = {
   type t
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = {@as("Policy") policy: option<policyString>}
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "GetPermissionPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetPermissionPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateWebACL = {
   type t
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = unit
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "DisassociateWebACLCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "DisassociateWebACLCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWebACL = {
@@ -801,8 +801,8 @@ module DeleteWebACL = {
     @as("Name") name: entityName,
   }
   type response = unit
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "DeleteWebACLCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "DeleteWebACLCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRuleGroup = {
@@ -814,8 +814,8 @@ module DeleteRuleGroup = {
     @as("Name") name: entityName,
   }
   type response = unit
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "DeleteRuleGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "DeleteRuleGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRegexPatternSet = {
@@ -827,17 +827,16 @@ module DeleteRegexPatternSet = {
     @as("Name") name: entityName,
   }
   type response = unit
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "DeleteRegexPatternSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "DeleteRegexPatternSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeletePermissionPolicy = {
   type t
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = unit
-  @module("@aws-sdk/client-wafv2") @new
-  external new_: request => t = "DeletePermissionPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "DeletePermissionPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteLoggingConfiguration = {
@@ -845,8 +844,8 @@ module DeleteLoggingConfiguration = {
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = unit
   @module("@aws-sdk/client-wafv2") @new
-  external new_: request => t = "DeleteLoggingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteLoggingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteIPSet = {
@@ -858,8 +857,8 @@ module DeleteIPSet = {
     @as("Name") name: entityName,
   }
   type response = unit
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "DeleteIPSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "DeleteIPSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFirewallManagerRuleGroups = {
@@ -870,8 +869,8 @@ module DeleteFirewallManagerRuleGroups = {
   }
   type response = {@as("NextWebACLLockToken") nextWebACLLockToken: option<lockToken>}
   @module("@aws-sdk/client-wafv2") @new
-  external new_: request => t = "DeleteFirewallManagerRuleGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteFirewallManagerRuleGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateWebACL = {
@@ -881,8 +880,8 @@ module AssociateWebACL = {
     @as("WebACLArn") webACLArn: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "AssociateWebACLCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "AssociateWebACLCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateIPSet = {
@@ -896,8 +895,8 @@ module UpdateIPSet = {
     @as("Name") name: entityName,
   }
   type response = {@as("NextLockToken") nextLockToken: option<lockToken>}
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "UpdateIPSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "UpdateIPSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -907,8 +906,8 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListResourcesForWebACL = {
@@ -918,9 +917,8 @@ module ListResourcesForWebACL = {
     @as("WebACLArn") webACLArn: resourceArn,
   }
   type response = {@as("ResourceArns") resourceArns: option<resourceArns>}
-  @module("@aws-sdk/client-wafv2") @new
-  external new_: request => t = "ListResourcesForWebACLCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListResourcesForWebACLCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRegexPatternSet = {
@@ -934,8 +932,8 @@ module UpdateRegexPatternSet = {
     @as("Name") name: entityName,
   }
   type response = {@as("NextLockToken") nextLockToken: option<lockToken>}
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "UpdateRegexPatternSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "UpdateRegexPatternSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -945,8 +943,8 @@ module TagResource = {
     @as("ResourceARN") resourceARN: resourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWebACLs = {
@@ -960,8 +958,8 @@ module ListWebACLs = {
     @as("WebACLs") webACLs: option<webACLSummaries>,
     @as("NextMarker") nextMarker: option<nextMarker>,
   }
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "ListWebACLsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListWebACLsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRuleGroups = {
@@ -975,8 +973,8 @@ module ListRuleGroups = {
     @as("RuleGroups") ruleGroups: option<ruleGroupSummaries>,
     @as("NextMarker") nextMarker: option<nextMarker>,
   }
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "ListRuleGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListRuleGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRegexPatternSets = {
@@ -990,8 +988,8 @@ module ListRegexPatternSets = {
     @as("RegexPatternSets") regexPatternSets: option<regexPatternSetSummaries>,
     @as("NextMarker") nextMarker: option<nextMarker>,
   }
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "ListRegexPatternSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListRegexPatternSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIPSets = {
@@ -1005,8 +1003,8 @@ module ListIPSets = {
     @as("IPSets") ipsets: option<ipsetSummaries>,
     @as("NextMarker") nextMarker: option<nextMarker>,
   }
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "ListIPSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListIPSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAvailableManagedRuleGroups = {
@@ -1021,8 +1019,8 @@ module ListAvailableManagedRuleGroups = {
     @as("NextMarker") nextMarker: option<nextMarker>,
   }
   @module("@aws-sdk/client-wafv2") @new
-  external new_: request => t = "ListAvailableManagedRuleGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAvailableManagedRuleGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRateBasedStatementManagedKeys = {
@@ -1038,8 +1036,8 @@ module GetRateBasedStatementManagedKeys = {
     @as("ManagedKeysIPV4") managedKeysIPV4: option<rateBasedStatementManagedKeysIPSet>,
   }
   @module("@aws-sdk/client-wafv2") @new
-  external new_: request => t = "GetRateBasedStatementManagedKeysCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetRateBasedStatementManagedKeysCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIPSet = {
@@ -1053,8 +1051,8 @@ module GetIPSet = {
     @as("LockToken") lockToken: option<lockToken>,
     @as("IPSet") ipset: option<ipset>,
   }
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "GetIPSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetIPSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRegexPatternSet = {
@@ -1067,8 +1065,8 @@ module CreateRegexPatternSet = {
     @as("Name") name: entityName,
   }
   type response = {@as("Summary") summary: option<regexPatternSetSummary>}
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "CreateRegexPatternSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "CreateRegexPatternSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateIPSet = {
@@ -1082,8 +1080,8 @@ module CreateIPSet = {
     @as("Name") name: entityName,
   }
   type response = {@as("Summary") summary: option<ipsetSummary>}
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "CreateIPSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "CreateIPSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -1097,8 +1095,8 @@ module ListTagsForResource = {
     @as("TagInfoForResource") tagInfoForResource: option<tagInfoForResource>,
     @as("NextMarker") nextMarker: option<nextMarker>,
   }
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRegexPatternSet = {
@@ -1112,8 +1110,8 @@ module GetRegexPatternSet = {
     @as("LockToken") lockToken: option<lockToken>,
     @as("RegexPatternSet") regexPatternSet: option<regexPatternSet>,
   }
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "GetRegexPatternSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetRegexPatternSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSampledRequests = {
@@ -1130,8 +1128,8 @@ module GetSampledRequests = {
     @as("PopulationSize") populationSize: option<populationSize>,
     @as("SampledRequests") sampledRequests: option<sampledHTTPRequests>,
   }
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "GetSampledRequestsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetSampledRequestsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutLoggingConfiguration = {
@@ -1139,8 +1137,8 @@ module PutLoggingConfiguration = {
   type request = {@as("LoggingConfiguration") loggingConfiguration: loggingConfiguration}
   type response = {@as("LoggingConfiguration") loggingConfiguration: option<loggingConfiguration>}
   @module("@aws-sdk/client-wafv2") @new
-  external new_: request => t = "PutLoggingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutLoggingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLoggingConfiguration = {
@@ -1148,8 +1146,8 @@ module GetLoggingConfiguration = {
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = {@as("LoggingConfiguration") loggingConfiguration: option<loggingConfiguration>}
   @module("@aws-sdk/client-wafv2") @new
-  external new_: request => t = "GetLoggingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetLoggingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeManagedRuleGroup = {
@@ -1167,8 +1165,8 @@ module DescribeManagedRuleGroup = {
     @as("Capacity") capacity: option<capacityUnit>,
   }
   @module("@aws-sdk/client-wafv2") @new
-  external new_: request => t = "DescribeManagedRuleGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeManagedRuleGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListLoggingConfigurations = {
@@ -1183,8 +1181,8 @@ module ListLoggingConfigurations = {
     @as("LoggingConfigurations") loggingConfigurations: option<loggingConfigurations>,
   }
   @module("@aws-sdk/client-wafv2") @new
-  external new_: request => t = "ListLoggingConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListLoggingConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateWebACL = {
@@ -1201,8 +1199,8 @@ module UpdateWebACL = {
     @as("Name") name: entityName,
   }
   type response = {@as("NextLockToken") nextLockToken: option<lockToken>}
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "UpdateWebACLCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "UpdateWebACLCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRuleGroup = {
@@ -1218,8 +1216,8 @@ module UpdateRuleGroup = {
     @as("Name") name: entityName,
   }
   type response = {@as("NextLockToken") nextLockToken: option<lockToken>}
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "UpdateRuleGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "UpdateRuleGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWebACL = {
@@ -1235,8 +1233,8 @@ module CreateWebACL = {
     @as("Name") name: entityName,
   }
   type response = {@as("Summary") summary: option<webACLSummary>}
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "CreateWebACLCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "CreateWebACLCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRuleGroup = {
@@ -1252,8 +1250,8 @@ module CreateRuleGroup = {
     @as("Name") name: entityName,
   }
   type response = {@as("Summary") summary: option<ruleGroupSummary>}
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "CreateRuleGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "CreateRuleGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CheckCapacity = {
@@ -1263,8 +1261,8 @@ module CheckCapacity = {
     @as("Scope") scope: scope,
   }
   type response = {@as("Capacity") capacity: option<consumedCapacity>}
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "CheckCapacityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "CheckCapacityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRuleGroup = {
@@ -1278,16 +1276,16 @@ module GetRuleGroup = {
     @as("LockToken") lockToken: option<lockToken>,
     @as("RuleGroup") ruleGroup: option<ruleGroup>,
   }
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "GetRuleGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetRuleGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWebACLForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = {@as("WebACL") webACL: option<webACL>}
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "GetWebACLForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetWebACLForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWebACL = {
@@ -1301,6 +1299,6 @@ module GetWebACL = {
     @as("LockToken") lockToken: option<lockToken>,
     @as("WebACL") webACL: option<webACL>,
   }
-  @module("@aws-sdk/client-wafv2") @new external new_: request => t = "GetWebACLCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-wafv2") @new external new: request => t = "GetWebACLCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

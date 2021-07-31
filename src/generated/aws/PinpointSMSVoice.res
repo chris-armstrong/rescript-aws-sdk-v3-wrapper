@@ -81,8 +81,8 @@ module DeleteConfigurationSetEventDestination = {
   }
   type response = unit
   @module("@aws-sdk/client-sms-voice") @new
-  external new_: request => t = "DeleteConfigurationSetEventDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteConfigurationSetEventDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteConfigurationSet = {
@@ -90,8 +90,8 @@ module DeleteConfigurationSet = {
   type request = {@as("ConfigurationSetName") configurationSetName: __string}
   type response = unit
   @module("@aws-sdk/client-sms-voice") @new
-  external new_: request => t = "DeleteConfigurationSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteConfigurationSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateConfigurationSet = {
@@ -101,8 +101,8 @@ module CreateConfigurationSet = {
   }
   type response = unit
   @module("@aws-sdk/client-sms-voice") @new
-  external new_: request => t = "CreateConfigurationSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateConfigurationSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListConfigurationSets = {
@@ -116,8 +116,8 @@ module ListConfigurationSets = {
     @as("ConfigurationSets") configurationSets: option<configurationSets>,
   }
   @module("@aws-sdk/client-sms-voice") @new
-  external new_: request => t = "ListConfigurationSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListConfigurationSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateConfigurationSetEventDestination = {
@@ -129,8 +129,8 @@ module UpdateConfigurationSetEventDestination = {
   }
   type response = unit
   @module("@aws-sdk/client-sms-voice") @new
-  external new_: request => t = "UpdateConfigurationSetEventDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateConfigurationSetEventDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendVoiceMessage = {
@@ -143,8 +143,8 @@ module SendVoiceMessage = {
     @as("CallerId") callerId: option<string_>,
   }
   type response = {@as("MessageId") messageId: option<string_>}
-  @module("@aws-sdk/client-sms-voice") @new external new_: request => t = "SendVoiceMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sms-voice") @new external new: request => t = "SendVoiceMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateConfigurationSetEventDestination = {
@@ -156,8 +156,8 @@ module CreateConfigurationSetEventDestination = {
   }
   type response = unit
   @module("@aws-sdk/client-sms-voice") @new
-  external new_: request => t = "CreateConfigurationSetEventDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateConfigurationSetEventDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetConfigurationSetEventDestinations = {
@@ -165,6 +165,6 @@ module GetConfigurationSetEventDestinations = {
   type request = {@as("ConfigurationSetName") configurationSetName: __string}
   type response = {@as("EventDestinations") eventDestinations: option<eventDestinations>}
   @module("@aws-sdk/client-sms-voice") @new
-  external new_: request => t = "GetConfigurationSetEventDestinationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetConfigurationSetEventDestinationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

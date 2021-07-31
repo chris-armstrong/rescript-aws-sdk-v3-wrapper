@@ -373,8 +373,8 @@ module StopJobRun = {
     @as("Name") name: jobName,
   }
   type response = {@as("RunId") runId: jobRunId}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "StopJobRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "StopJobRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartProjectSession = {
@@ -387,17 +387,16 @@ module StartProjectSession = {
     @as("ClientSessionId") clientSessionId: option<clientSessionId>,
     @as("Name") name: projectName,
   }
-  @module("@aws-sdk/client-databrew") @new
-  external new_: request => t = "StartProjectSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "StartProjectSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartJobRun = {
   type t
   type request = {@as("Name") name: jobName}
   type response = {@as("RunId") runId: jobRunId}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "StartJobRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "StartJobRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PublishRecipe = {
@@ -407,16 +406,16 @@ module PublishRecipe = {
     @as("Description") description: option<recipeDescription>,
   }
   type response = {@as("Name") name: recipeName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "PublishRecipeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "PublishRecipeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSchedule = {
   type t
   type request = {@as("Name") name: scheduleName}
   type response = {@as("Name") name: scheduleName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "DeleteScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DeleteScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteRecipeVersion = {
@@ -429,33 +428,32 @@ module DeleteRecipeVersion = {
     @as("RecipeVersion") recipeVersion: recipeVersion,
     @as("Name") name: recipeName,
   }
-  @module("@aws-sdk/client-databrew") @new
-  external new_: request => t = "DeleteRecipeVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DeleteRecipeVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProject = {
   type t
   type request = {@as("Name") name: projectName}
   type response = {@as("Name") name: projectName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "DeleteProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DeleteProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteJob = {
   type t
   type request = {@as("Name") name: jobName}
   type response = {@as("Name") name: jobName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "DeleteJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DeleteJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDataset = {
   type t
   type request = {@as("Name") name: datasetName}
   type response = {@as("Name") name: datasetName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "DeleteDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DeleteDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSchedule = {
@@ -466,8 +464,8 @@ module UpdateSchedule = {
     @as("JobNames") jobNames: option<jobNameList>,
   }
   type response = {@as("Name") name: scheduleName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "UpdateScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProject = {
@@ -481,8 +479,8 @@ module UpdateProject = {
     @as("Name") name: projectName,
     @as("LastModifiedDate") lastModifiedDate: option<date>,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "UpdateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProfileJob = {
@@ -500,8 +498,8 @@ module UpdateProfileJob = {
     @as("EncryptionKeyArn") encryptionKeyArn: option<encryptionKeyArn>,
   }
   type response = {@as("Name") name: jobName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "UpdateProfileJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateProfileJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -511,8 +509,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -522,17 +520,16 @@ module TagResource = {
     @as("ResourceArn") resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: arn}
   type response = {@as("Tags") tags: option<tagMap>}
-  @module("@aws-sdk/client-databrew") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSchedule = {
@@ -549,8 +546,8 @@ module DescribeSchedule = {
     @as("CreatedBy") createdBy: option<createdBy>,
     @as("CreateDate") createDate: option<date>,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "DescribeScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeProject = {
@@ -572,8 +569,8 @@ module DescribeProject = {
     @as("CreatedBy") createdBy: option<createdBy>,
     @as("CreateDate") createDate: option<date>,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "DescribeProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSchedule = {
@@ -585,8 +582,8 @@ module CreateSchedule = {
     @as("JobNames") jobNames: option<jobNameList>,
   }
   type response = {@as("Name") name: scheduleName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "CreateScheduleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateScheduleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProject = {
@@ -600,8 +597,8 @@ module CreateProject = {
     @as("DatasetName") datasetName: datasetName,
   }
   type response = {@as("Name") name: projectName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "CreateProjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateProjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProfileJob = {
@@ -621,8 +618,8 @@ module CreateProfileJob = {
     @as("DatasetName") datasetName: datasetName,
   }
   type response = {@as("Name") name: jobName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "CreateProfileJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateProfileJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeleteRecipeVersion = {
@@ -636,8 +633,8 @@ module BatchDeleteRecipeVersion = {
     @as("Name") name: recipeName,
   }
   @module("@aws-sdk/client-databrew") @new
-  external new_: request => t = "BatchDeleteRecipeVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDeleteRecipeVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendProjectSessionAction = {
@@ -656,8 +653,8 @@ module SendProjectSessionAction = {
     @as("Result") result: option<result>,
   }
   @module("@aws-sdk/client-databrew") @new
-  external new_: request => t = "SendProjectSessionActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SendProjectSessionActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSchedules = {
@@ -671,8 +668,8 @@ module ListSchedules = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Schedules") schedules: scheduleList,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "ListSchedulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "ListSchedulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProjects = {
@@ -685,8 +682,8 @@ module ListProjects = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Projects") projects: projectList,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "ListProjectsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "ListProjectsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRecipeJob = {
@@ -703,8 +700,8 @@ module UpdateRecipeJob = {
     @as("EncryptionKeyArn") encryptionKeyArn: option<encryptionKeyArn>,
   }
   type response = {@as("Name") name: jobName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "UpdateRecipeJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateRecipeJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRecipe = {
@@ -715,8 +712,8 @@ module UpdateRecipe = {
     @as("Description") description: option<recipeDescription>,
   }
   type response = {@as("Name") name: recipeName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "UpdateRecipeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateRecipeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRecipe = {
@@ -740,8 +737,8 @@ module DescribeRecipe = {
     @as("CreateDate") createDate: option<date>,
     @as("CreatedBy") createdBy: option<createdBy>,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "DescribeRecipeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeRecipeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJobRun = {
@@ -767,8 +764,8 @@ module DescribeJobRun = {
     @as("CompletedOn") completedOn: option<date>,
     @as("Attempt") attempt: option<attempt>,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "DescribeJobRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeJobRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJob = {
@@ -796,8 +793,8 @@ module DescribeJob = {
     @as("CreatedBy") createdBy: option<createdBy>,
     @as("CreateDate") createDate: option<date>,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "DescribeJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRecipeJob = {
@@ -818,8 +815,8 @@ module CreateRecipeJob = {
     @as("DatasetName") datasetName: option<datasetName>,
   }
   type response = {@as("Name") name: jobName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "CreateRecipeJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateRecipeJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRecipe = {
@@ -831,8 +828,8 @@ module CreateRecipe = {
     @as("Description") description: option<recipeDescription>,
   }
   type response = {@as("Name") name: recipeName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "CreateRecipeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateRecipeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDataset = {
@@ -845,8 +842,8 @@ module UpdateDataset = {
     @as("Name") name: datasetName,
   }
   type response = {@as("Name") name: datasetName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "UpdateDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "UpdateDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataset = {
@@ -866,8 +863,8 @@ module DescribeDataset = {
     @as("CreateDate") createDate: option<date>,
     @as("CreatedBy") createdBy: option<createdBy>,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "DescribeDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "DescribeDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDataset = {
@@ -881,8 +878,8 @@ module CreateDataset = {
     @as("Name") name: datasetName,
   }
   type response = {@as("Name") name: datasetName}
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "CreateDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "CreateDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRecipes = {
@@ -896,8 +893,8 @@ module ListRecipes = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Recipes") recipes: recipeList,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "ListRecipesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "ListRecipesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRecipeVersions = {
@@ -911,8 +908,8 @@ module ListRecipeVersions = {
     @as("Recipes") recipes: recipeList,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "ListRecipeVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "ListRecipeVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobs = {
@@ -927,8 +924,8 @@ module ListJobs = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Jobs") jobs: jobList,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "ListJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "ListJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobRuns = {
@@ -942,8 +939,8 @@ module ListJobRuns = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("JobRuns") jobRuns: jobRunList,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "ListJobRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "ListJobRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDatasets = {
@@ -956,6 +953,6 @@ module ListDatasets = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Datasets") datasets: datasetList,
   }
-  @module("@aws-sdk/client-databrew") @new external new_: request => t = "ListDatasetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-databrew") @new external new: request => t = "ListDatasetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

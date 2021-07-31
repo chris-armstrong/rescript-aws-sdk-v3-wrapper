@@ -250,8 +250,8 @@ module ListAlarms = {
     nextToken: option<nextToken>,
     alarmSummaries: option<alarmSummaries>,
   }
-  @module("@aws-sdk/client-ioteventsdata") @new external new_: request => t = "ListAlarmsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ioteventsdata") @new external new: request => t = "ListAlarmsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchSnoozeAlarm = {
@@ -259,8 +259,8 @@ module BatchSnoozeAlarm = {
   type request = {snoozeActionRequests: snoozeAlarmActionRequests}
   type response = {errorEntries: option<batchAlarmActionErrorEntries>}
   @module("@aws-sdk/client-ioteventsdata") @new
-  external new_: request => t = "BatchSnoozeAlarmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchSnoozeAlarmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchResetAlarm = {
@@ -268,8 +268,8 @@ module BatchResetAlarm = {
   type request = {resetActionRequests: resetAlarmActionRequests}
   type response = {errorEntries: option<batchAlarmActionErrorEntries>}
   @module("@aws-sdk/client-ioteventsdata") @new
-  external new_: request => t = "BatchResetAlarmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchResetAlarmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchEnableAlarm = {
@@ -277,8 +277,8 @@ module BatchEnableAlarm = {
   type request = {enableActionRequests: enableAlarmActionRequests}
   type response = {errorEntries: option<batchAlarmActionErrorEntries>}
   @module("@aws-sdk/client-ioteventsdata") @new
-  external new_: request => t = "BatchEnableAlarmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchEnableAlarmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDisableAlarm = {
@@ -286,8 +286,8 @@ module BatchDisableAlarm = {
   type request = {disableActionRequests: disableAlarmActionRequests}
   type response = {errorEntries: option<batchAlarmActionErrorEntries>}
   @module("@aws-sdk/client-ioteventsdata") @new
-  external new_: request => t = "BatchDisableAlarmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDisableAlarmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchAcknowledgeAlarm = {
@@ -295,8 +295,8 @@ module BatchAcknowledgeAlarm = {
   type request = {acknowledgeActionRequests: acknowledgeAlarmActionRequests}
   type response = {errorEntries: option<batchAlarmActionErrorEntries>}
   @module("@aws-sdk/client-ioteventsdata") @new
-  external new_: request => t = "BatchAcknowledgeAlarmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchAcknowledgeAlarmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDetectors = {
@@ -311,8 +311,8 @@ module ListDetectors = {
     nextToken: option<nextToken>,
     detectorSummaries: option<detectorSummaries>,
   }
-  @module("@aws-sdk/client-ioteventsdata") @new external new_: request => t = "ListDetectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ioteventsdata") @new external new: request => t = "ListDetectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchPutMessage = {
@@ -323,8 +323,8 @@ module BatchPutMessage = {
     batchPutMessageErrorEntries: option<batchPutMessageErrorEntries>,
   }
   @module("@aws-sdk/client-ioteventsdata") @new
-  external new_: request => t = "BatchPutMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchPutMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDetector = {
@@ -335,8 +335,8 @@ module DescribeDetector = {
   }
   type response = {detector: option<detector>}
   @module("@aws-sdk/client-ioteventsdata") @new
-  external new_: request => t = "DescribeDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAlarm = {
@@ -346,8 +346,8 @@ module DescribeAlarm = {
     alarmModelName: alarmModelName,
   }
   type response = {alarm: option<alarm>}
-  @module("@aws-sdk/client-ioteventsdata") @new external new_: request => t = "DescribeAlarmCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ioteventsdata") @new external new: request => t = "DescribeAlarmCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchUpdateDetector = {
@@ -355,6 +355,6 @@ module BatchUpdateDetector = {
   type request = {detectors: updateDetectorRequests}
   type response = {batchUpdateDetectorErrorEntries: option<batchUpdateDetectorErrorEntries>}
   @module("@aws-sdk/client-ioteventsdata") @new
-  external new_: request => t = "BatchUpdateDetectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchUpdateDetectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

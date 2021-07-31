@@ -260,8 +260,8 @@ module UpdateHITTypeOfHIT = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "UpdateHITTypeOfHITCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateHITTypeOfHITCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateHITReviewStatus = {
@@ -272,8 +272,8 @@ module UpdateHITReviewStatus = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "UpdateHITReviewStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateHITReviewStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateExpirationForHIT = {
@@ -284,8 +284,8 @@ module UpdateExpirationForHIT = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "UpdateExpirationForHITCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateExpirationForHITCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendBonus = {
@@ -298,8 +298,8 @@ module SendBonus = {
     @as("WorkerId") workerId: customerId,
   }
   type response = unit
-  @module("@aws-sdk/client-mturk-requester") @new external new_: request => t = "SendBonusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mturk-requester") @new external new: request => t = "SendBonusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectQualificationRequest = {
@@ -310,8 +310,8 @@ module RejectQualificationRequest = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "RejectQualificationRequestCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectQualificationRequestCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RejectAssignment = {
@@ -322,8 +322,8 @@ module RejectAssignment = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "RejectAssignmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RejectAssignmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFileUploadURL = {
@@ -334,8 +334,8 @@ module GetFileUploadURL = {
   }
   type response = {@as("FileUploadURL") fileUploadURL: option<string_>}
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "GetFileUploadURLCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetFileUploadURLCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAccountBalance = {
@@ -346,8 +346,8 @@ module GetAccountBalance = {
     @as("AvailableBalance") availableBalance: option<currencyAmount>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "GetAccountBalanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAccountBalanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateQualificationFromWorker = {
@@ -359,8 +359,8 @@ module DisassociateQualificationFromWorker = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "DisassociateQualificationFromWorkerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateQualificationFromWorkerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWorkerBlock = {
@@ -371,8 +371,8 @@ module DeleteWorkerBlock = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "DeleteWorkerBlockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteWorkerBlockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteQualificationType = {
@@ -380,16 +380,16 @@ module DeleteQualificationType = {
   type request = {@as("QualificationTypeId") qualificationTypeId: entityId}
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "DeleteQualificationTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteQualificationTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteHIT = {
   type t
   type request = {@as("HITId") hitid: entityId}
   type response = unit
-  @module("@aws-sdk/client-mturk-requester") @new external new_: request => t = "DeleteHITCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mturk-requester") @new external new: request => t = "DeleteHITCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWorkerBlock = {
@@ -400,8 +400,8 @@ module CreateWorkerBlock = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "CreateWorkerBlockCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateWorkerBlockCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAdditionalAssignmentsForHIT = {
@@ -413,8 +413,8 @@ module CreateAdditionalAssignmentsForHIT = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "CreateAdditionalAssignmentsForHITCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAdditionalAssignmentsForHITCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateQualificationWithWorker = {
@@ -427,8 +427,8 @@ module AssociateQualificationWithWorker = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "AssociateQualificationWithWorkerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateQualificationWithWorkerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ApproveAssignment = {
@@ -440,8 +440,8 @@ module ApproveAssignment = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "ApproveAssignmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ApproveAssignmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptQualificationRequest = {
@@ -452,8 +452,8 @@ module AcceptQualificationRequest = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "AcceptQualificationRequestCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AcceptQualificationRequestCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateQualificationType = {
@@ -471,8 +471,8 @@ module UpdateQualificationType = {
   }
   type response = {@as("QualificationType") qualificationType: option<qualificationType>}
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "UpdateQualificationTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateQualificationTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetQualificationType = {
@@ -480,8 +480,8 @@ module GetQualificationType = {
   type request = {@as("QualificationTypeId") qualificationTypeId: entityId}
   type response = {@as("QualificationType") qualificationType: option<qualificationType>}
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "GetQualificationTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetQualificationTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateQualificationType = {
@@ -500,8 +500,8 @@ module CreateQualificationType = {
   }
   type response = {@as("QualificationType") qualificationType: option<qualificationType>}
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "CreateQualificationTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateQualificationTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateNotificationSettings = {
@@ -513,8 +513,8 @@ module UpdateNotificationSettings = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "UpdateNotificationSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateNotificationSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendTestEventNotification = {
@@ -525,8 +525,8 @@ module SendTestEventNotification = {
   }
   type response = unit
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "SendTestEventNotificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SendTestEventNotificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module NotifyWorkers = {
@@ -541,8 +541,8 @@ module NotifyWorkers = {
     notifyWorkersFailureStatuses: option<notifyWorkersFailureStatusList>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "NotifyWorkersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "NotifyWorkersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorkerBlocks = {
@@ -557,8 +557,8 @@ module ListWorkerBlocks = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "ListWorkerBlocksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListWorkerBlocksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListQualificationTypes = {
@@ -576,8 +576,8 @@ module ListQualificationTypes = {
     @as("NumResults") numResults: option<integer_>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "ListQualificationTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListQualificationTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListQualificationRequests = {
@@ -593,8 +593,8 @@ module ListQualificationRequests = {
     @as("NumResults") numResults: option<integer_>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "ListQualificationRequestsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListQualificationRequestsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBonusPayments = {
@@ -611,8 +611,8 @@ module ListBonusPayments = {
     @as("NumResults") numResults: option<integer_>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "ListBonusPaymentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListBonusPaymentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAssignmentsForHIT = {
@@ -629,8 +629,8 @@ module ListAssignmentsForHIT = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "ListAssignmentsForHITCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAssignmentsForHITCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetQualificationScore = {
@@ -641,8 +641,8 @@ module GetQualificationScore = {
   }
   type response = {@as("Qualification") qualification: option<qualification>}
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "GetQualificationScoreCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetQualificationScoreCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWorkersWithQualificationType = {
@@ -659,8 +659,8 @@ module ListWorkersWithQualificationType = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "ListWorkersWithQualificationTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListWorkersWithQualificationTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateHITType = {
@@ -677,16 +677,16 @@ module CreateHITType = {
   }
   type response = {@as("HITTypeId") hittypeId: option<entityId>}
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "CreateHITTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateHITTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetHIT = {
   type t
   type request = {@as("HITId") hitid: entityId}
   type response = {@as("HIT") hit: option<hit>}
-  @module("@aws-sdk/client-mturk-requester") @new external new_: request => t = "GetHITCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mturk-requester") @new external new: request => t = "GetHITCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAssignment = {
@@ -697,8 +697,8 @@ module GetAssignment = {
     @as("Assignment") assignment: option<assignment>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "GetAssignmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAssignmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListReviewableHITs = {
@@ -715,8 +715,8 @@ module ListReviewableHITs = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "ListReviewableHITsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListReviewableHITsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListReviewPolicyResultsForHIT = {
@@ -738,8 +738,8 @@ module ListReviewPolicyResultsForHIT = {
     @as("HITId") hitid: option<entityId>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "ListReviewPolicyResultsForHITCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListReviewPolicyResultsForHITCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListHITsForQualificationType = {
@@ -755,8 +755,8 @@ module ListHITsForQualificationType = {
     @as("NextToken") nextToken: option<paginationToken>,
   }
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "ListHITsForQualificationTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListHITsForQualificationTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListHITs = {
@@ -770,8 +770,8 @@ module ListHITs = {
     @as("NumResults") numResults: option<integer_>,
     @as("NextToken") nextToken: option<paginationToken>,
   }
-  @module("@aws-sdk/client-mturk-requester") @new external new_: request => t = "ListHITsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mturk-requester") @new external new: request => t = "ListHITsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateHITWithHITType = {
@@ -790,8 +790,8 @@ module CreateHITWithHITType = {
   }
   type response = {@as("HIT") hit: option<hit>}
   @module("@aws-sdk/client-mturk-requester") @new
-  external new_: request => t = "CreateHITWithHITTypeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateHITWithHITTypeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateHIT = {
@@ -816,6 +816,6 @@ module CreateHIT = {
     @as("MaxAssignments") maxAssignments: option<integer_>,
   }
   type response = {@as("HIT") hit: option<hit>}
-  @module("@aws-sdk/client-mturk-requester") @new external new_: request => t = "CreateHITCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mturk-requester") @new external new: request => t = "CreateHITCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

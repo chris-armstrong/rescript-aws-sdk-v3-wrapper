@@ -206,8 +206,8 @@ module StopInferenceScheduler = {
     @as("ModelArn") modelArn: option<modelArn>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "StopInferenceSchedulerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopInferenceSchedulerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartInferenceScheduler = {
@@ -223,17 +223,16 @@ module StartInferenceScheduler = {
     @as("ModelArn") modelArn: option<modelArn>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "StartInferenceSchedulerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartInferenceSchedulerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteModel = {
   type t
   type request = {@as("ModelName") modelName: modelName}
 
-  @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "DeleteModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-lookoutequipment") @new external new: request => t = "DeleteModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteInferenceScheduler = {
@@ -243,8 +242,8 @@ module DeleteInferenceScheduler = {
   }
 
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "DeleteInferenceSchedulerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteInferenceSchedulerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDataset = {
@@ -252,8 +251,8 @@ module DeleteDataset = {
   type request = {@as("DatasetName") datasetName: datasetIdentifier}
 
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "DeleteDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagResource = {
@@ -264,8 +263,8 @@ module UntagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateInferenceScheduler = {
@@ -280,8 +279,8 @@ module UpdateInferenceScheduler = {
   }
 
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "UpdateInferenceSchedulerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateInferenceSchedulerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -291,9 +290,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: amazonResourceArn,
   }
   type response = unit
-  @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutequipment") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartDataIngestionJob = {
@@ -309,8 +307,8 @@ module StartDataIngestionJob = {
     @as("JobId") jobId: option<ingestionJobId>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "StartDataIngestionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartDataIngestionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -318,8 +316,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: amazonResourceArn}
   type response = {@as("Tags") tags: option<tagList_>}
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListModels = {
@@ -335,8 +333,8 @@ module ListModels = {
     @as("ModelSummaries") modelSummaries: option<modelSummaries>,
     @as("NextToken") nextToken: option<nextToken>,
   }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: request => t = "ListModelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutequipment") @new external new: request => t = "ListModelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInferenceSchedulers = {
@@ -354,8 +352,8 @@ module ListInferenceSchedulers = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "ListInferenceSchedulersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListInferenceSchedulersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDatasets = {
@@ -370,8 +368,8 @@ module ListDatasets = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "ListDatasetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDatasetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeModel = {
@@ -401,8 +399,8 @@ module DescribeModel = {
     @as("ModelName") modelName: option<modelName>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "DescribeModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeInferenceScheduler = {
@@ -426,8 +424,8 @@ module DescribeInferenceScheduler = {
     @as("ModelArn") modelArn: option<modelArn>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "DescribeInferenceSchedulerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeInferenceSchedulerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataset = {
@@ -445,8 +443,8 @@ module DescribeDataset = {
     @as("DatasetName") datasetName: option<datasetName>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "DescribeDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataIngestionJob = {
@@ -463,8 +461,8 @@ module DescribeDataIngestionJob = {
     @as("JobId") jobId: option<ingestionJobId>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "DescribeDataIngestionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDataIngestionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateModel = {
@@ -489,9 +487,8 @@ module CreateModel = {
     @as("Status") status: option<modelStatus>,
     @as("ModelArn") modelArn: option<modelArn>,
   }
-  @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "CreateModelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-lookoutequipment") @new external new: request => t = "CreateModelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInferenceScheduler = {
@@ -514,8 +511,8 @@ module CreateInferenceScheduler = {
     @as("InferenceSchedulerArn") inferenceSchedulerArn: option<inferenceSchedulerArn>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "CreateInferenceSchedulerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateInferenceSchedulerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDataset = {
@@ -533,8 +530,8 @@ module CreateDataset = {
     @as("DatasetName") datasetName: option<datasetName>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "CreateDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInferenceExecutions = {
@@ -553,8 +550,8 @@ module ListInferenceExecutions = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "ListInferenceExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListInferenceExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDataIngestionJobs = {
@@ -570,6 +567,6 @@ module ListDataIngestionJobs = {
     @as("NextToken") nextToken: option<nextToken>,
   }
   @module("@aws-sdk/client-lookoutequipment") @new
-  external new_: request => t = "ListDataIngestionJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDataIngestionJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

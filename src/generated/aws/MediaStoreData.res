@@ -58,8 +58,8 @@ module PutObject = {
     @as("ETag") etag: option<etag>,
     @as("ContentSHA256") contentSHA256: option<sha256Hash>,
   }
-  @module("@aws-sdk/client-mediastore") @new external new_: request => t = "PutObjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediastore") @new external new: request => t = "PutObjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetObject = {
@@ -78,8 +78,8 @@ module GetObject = {
     @as("CacheControl") cacheControl: option<stringPrimitive>,
     @as("Body") body: option<payloadBlob>,
   }
-  @module("@aws-sdk/client-mediastore") @new external new_: request => t = "GetObjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediastore") @new external new: request => t = "GetObjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeObject = {
@@ -92,16 +92,16 @@ module DescribeObject = {
     @as("ContentType") contentType: option<contentType>,
     @as("ETag") etag: option<etag>,
   }
-  @module("@aws-sdk/client-mediastore") @new external new_: request => t = "DescribeObjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediastore") @new external new: request => t = "DescribeObjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteObject = {
   type t
   type request = {@as("Path") path: pathNaming}
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: request => t = "DeleteObjectCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediastore") @new external new: request => t = "DeleteObjectCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListItems = {
@@ -115,6 +115,6 @@ module ListItems = {
     @as("NextToken") nextToken: option<paginationToken>,
     @as("Items") items: option<itemList>,
   }
-  @module("@aws-sdk/client-mediastore") @new external new_: request => t = "ListItemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mediastore") @new external new: request => t = "ListItemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

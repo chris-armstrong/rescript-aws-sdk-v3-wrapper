@@ -83,16 +83,16 @@ module DeleteReportDefinition = {
   type t
   type request = {@as("ReportName") reportName: option<reportName>}
   type response = {@as("ResponseMessage") responseMessage: option<deleteResponseMessage>}
-  @module("@aws-sdk/client-cur") @new external new_: request => t = "DeleteReportDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cur") @new external new: request => t = "DeleteReportDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutReportDefinition = {
   type t
   type request = {@as("ReportDefinition") reportDefinition: reportDefinition}
   type response = unit
-  @module("@aws-sdk/client-cur") @new external new_: request => t = "PutReportDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cur") @new external new: request => t = "PutReportDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyReportDefinition = {
@@ -102,8 +102,8 @@ module ModifyReportDefinition = {
     @as("ReportName") reportName: reportName,
   }
   type response = unit
-  @module("@aws-sdk/client-cur") @new external new_: request => t = "ModifyReportDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cur") @new external new: request => t = "ModifyReportDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReportDefinitions = {
@@ -117,6 +117,6 @@ module DescribeReportDefinitions = {
     @as("ReportDefinitions") reportDefinitions: option<reportDefinitionList>,
   }
   @module("@aws-sdk/client-cur") @new
-  external new_: request => t = "DescribeReportDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReportDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -116,8 +116,8 @@ module SendMessage = {
     @as("AbsoluteTime") absoluteTime: option<instant>,
     @as("Id") id: option<chatItemId>,
   }
-  @module("@aws-sdk/client-connect") @new external new_: request => t = "SendMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-connect") @new external new: request => t = "SendMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendEvent = {
@@ -132,8 +132,8 @@ module SendEvent = {
     @as("AbsoluteTime") absoluteTime: option<instant>,
     @as("Id") id: option<chatItemId>,
   }
-  @module("@aws-sdk/client-connect") @new external new_: request => t = "SendEventCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-connect") @new external new: request => t = "SendEventCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAttachment = {
@@ -146,8 +146,8 @@ module GetAttachment = {
     @as("UrlExpiry") urlExpiry: option<iso8601Datetime>,
     @as("Url") url: option<preSignedAttachmentUrl>,
   }
-  @module("@aws-sdk/client-connect") @new external new_: request => t = "GetAttachmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-connect") @new external new: request => t = "GetAttachmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisconnectParticipant = {
@@ -158,8 +158,8 @@ module DisconnectParticipant = {
   }
   type response = unit
   @module("@aws-sdk/client-connect") @new
-  external new_: request => t = "DisconnectParticipantCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisconnectParticipantCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateParticipantConnection = {
@@ -173,8 +173,8 @@ module CreateParticipantConnection = {
     @as("Websocket") websocket: option<websocket>,
   }
   @module("@aws-sdk/client-connect") @new
-  external new_: request => t = "CreateParticipantConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateParticipantConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CompleteAttachmentUpload = {
@@ -186,8 +186,8 @@ module CompleteAttachmentUpload = {
   }
   type response = unit
   @module("@aws-sdk/client-connect") @new
-  external new_: request => t = "CompleteAttachmentUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CompleteAttachmentUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartAttachmentUpload = {
@@ -204,8 +204,8 @@ module StartAttachmentUpload = {
     @as("AttachmentId") attachmentId: option<artifactId>,
   }
   @module("@aws-sdk/client-connect") @new
-  external new_: request => t = "StartAttachmentUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartAttachmentUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetTranscript = {
@@ -224,6 +224,6 @@ module GetTranscript = {
     @as("Transcript") transcript: option<transcript>,
     @as("InitialContactId") initialContactId: option<contactId>,
   }
-  @module("@aws-sdk/client-connect") @new external new_: request => t = "GetTranscriptCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-connect") @new external new: request => t = "GetTranscriptCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

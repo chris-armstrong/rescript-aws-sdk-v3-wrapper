@@ -343,8 +343,8 @@ module RemoveResourcePermission = {
   }
 
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "RemoveResourcePermissionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RemoveResourcePermissionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveAllResourcePermissions = {
@@ -355,8 +355,8 @@ module RemoveAllResourcePermissions = {
   }
 
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "RemoveAllResourcePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RemoveAllResourcePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateFolder = {
@@ -369,8 +369,8 @@ module UpdateFolder = {
     @as("AuthenticationToken") authenticationToken: option<authenticationHeaderType>,
   }
 
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "UpdateFolderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "UpdateFolderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateDocumentVersion = {
@@ -383,8 +383,8 @@ module UpdateDocumentVersion = {
   }
 
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "UpdateDocumentVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateDocumentVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateDocument = {
@@ -397,8 +397,8 @@ module UpdateDocument = {
     @as("AuthenticationToken") authenticationToken: option<authenticationHeaderType>,
   }
 
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "UpdateDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "UpdateDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteUser = {
@@ -408,8 +408,8 @@ module DeleteUser = {
     @as("AuthenticationToken") authenticationToken: option<authenticationHeaderType>,
   }
 
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "DeleteUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteNotificationSubscription = {
@@ -420,8 +420,8 @@ module DeleteNotificationSubscription = {
   }
 
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "DeleteNotificationSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteNotificationSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteLabels = {
@@ -433,8 +433,8 @@ module DeleteLabels = {
     @as("ResourceId") resourceId: resourceIdType,
   }
   type response = unit
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "DeleteLabelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteLabelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFolderContents = {
@@ -445,8 +445,8 @@ module DeleteFolderContents = {
   }
 
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "DeleteFolderContentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteFolderContentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteFolder = {
@@ -456,8 +456,8 @@ module DeleteFolder = {
     @as("AuthenticationToken") authenticationToken: option<authenticationHeaderType>,
   }
 
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "DeleteFolderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteFolderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDocument = {
@@ -467,8 +467,8 @@ module DeleteDocument = {
     @as("AuthenticationToken") authenticationToken: option<authenticationHeaderType>,
   }
 
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "DeleteDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteCustomMetadata = {
@@ -482,8 +482,8 @@ module DeleteCustomMetadata = {
   }
   type response = unit
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "DeleteCustomMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteCustomMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteComment = {
@@ -495,8 +495,8 @@ module DeleteComment = {
     @as("AuthenticationToken") authenticationToken: option<authenticationHeaderType>,
   }
 
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "DeleteCommentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeleteCommentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeactivateUser = {
@@ -506,8 +506,8 @@ module DeactivateUser = {
     @as("UserId") userId: idType,
   }
 
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "DeactivateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "DeactivateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateNotificationSubscription = {
@@ -520,8 +520,8 @@ module CreateNotificationSubscription = {
   }
   type response = {@as("Subscription") subscription: option<subscription>}
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "CreateNotificationSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateNotificationSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLabels = {
@@ -532,8 +532,8 @@ module CreateLabels = {
     @as("ResourceId") resourceId: resourceIdType,
   }
   type response = unit
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "CreateLabelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "CreateLabelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCustomMetadata = {
@@ -546,8 +546,8 @@ module CreateCustomMetadata = {
   }
   type response = unit
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "CreateCustomMetadataCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCustomMetadataCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AbortDocumentVersionUpload = {
@@ -559,8 +559,8 @@ module AbortDocumentVersionUpload = {
   }
 
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "AbortDocumentVersionUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "AbortDocumentVersionUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetFolder = {
@@ -574,8 +574,8 @@ module GetFolder = {
     @as("CustomMetadata") customMetadata: option<customMetadataMap>,
     @as("Metadata") metadata: option<folderMetadata>,
   }
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "GetFolderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetFolderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDocumentVersion = {
@@ -591,8 +591,8 @@ module GetDocumentVersion = {
     @as("CustomMetadata") customMetadata: option<customMetadataMap>,
     @as("Metadata") metadata: option<documentVersionMetadata>,
   }
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "GetDocumentVersionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetDocumentVersionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNotificationSubscriptions = {
@@ -607,8 +607,8 @@ module DescribeNotificationSubscriptions = {
     @as("Subscriptions") subscriptions: option<subscriptionList>,
   }
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "DescribeNotificationSubscriptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNotificationSubscriptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeGroups = {
@@ -624,8 +624,8 @@ module DescribeGroups = {
     @as("Marker") marker: option<markerType>,
     @as("Groups") groups: option<groupMetadataList>,
   }
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "DescribeGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "DescribeGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFolder = {
@@ -636,8 +636,8 @@ module CreateFolder = {
     @as("AuthenticationToken") authenticationToken: option<authenticationHeaderType>,
   }
   type response = {@as("Metadata") metadata: option<folderMetadata>}
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "CreateFolderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "CreateFolderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddResourcePermissions = {
@@ -650,8 +650,8 @@ module AddResourcePermissions = {
   }
   type response = {@as("ShareResults") shareResults: option<shareResultsList>}
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "AddResourcePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddResourcePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateUser = {
@@ -668,8 +668,8 @@ module UpdateUser = {
     @as("AuthenticationToken") authenticationToken: option<authenticationHeaderType>,
   }
   type response = {@as("User") user: option<user>}
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "UpdateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "UpdateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InitiateDocumentVersionUpload = {
@@ -689,8 +689,8 @@ module InitiateDocumentVersionUpload = {
     @as("Metadata") metadata: option<documentMetadata>,
   }
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "InitiateDocumentVersionUploadCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "InitiateDocumentVersionUploadCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFolderPath = {
@@ -703,8 +703,8 @@ module GetFolderPath = {
     @as("AuthenticationToken") authenticationToken: option<authenticationHeaderType>,
   }
   type response = {@as("Path") path: option<resourcePath>}
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "GetFolderPathCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetFolderPathCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDocumentPath = {
@@ -717,8 +717,8 @@ module GetDocumentPath = {
     @as("AuthenticationToken") authenticationToken: option<authenticationHeaderType>,
   }
   type response = {@as("Path") path: option<resourcePath>}
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "GetDocumentPathCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetDocumentPathCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDocument = {
@@ -732,16 +732,16 @@ module GetDocument = {
     @as("CustomMetadata") customMetadata: option<customMetadataMap>,
     @as("Metadata") metadata: option<documentMetadata>,
   }
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "GetDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCurrentUser = {
   type t
   type request = {@as("AuthenticationToken") authenticationToken: authenticationHeaderType}
   type response = {@as("User") user: option<user>}
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "GetCurrentUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetCurrentUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRootFolders = {
@@ -755,9 +755,8 @@ module DescribeRootFolders = {
     @as("Marker") marker: option<pageMarkerType>,
     @as("Folders") folders: option<folderMetadataList>,
   }
-  @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "DescribeRootFoldersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "DescribeRootFoldersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDocumentVersions = {
@@ -775,8 +774,8 @@ module DescribeDocumentVersions = {
     @as("DocumentVersions") documentVersions: option<documentVersionMetadataList>,
   }
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "DescribeDocumentVersionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDocumentVersionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateUser = {
@@ -793,8 +792,8 @@ module CreateUser = {
     @as("OrganizationId") organizationId: option<idType>,
   }
   type response = {@as("User") user: option<user>}
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "CreateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "CreateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ActivateUser = {
@@ -804,8 +803,8 @@ module ActivateUser = {
     @as("UserId") userId: idType,
   }
   type response = {@as("User") user: option<user>}
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "ActivateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "ActivateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetResources = {
@@ -822,8 +821,8 @@ module GetResources = {
     @as("Documents") documents: option<documentMetadataList>,
     @as("Folders") folders: option<folderMetadataList>,
   }
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "GetResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "GetResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeUsers = {
@@ -845,8 +844,8 @@ module DescribeUsers = {
     @as("TotalNumberOfUsers") totalNumberOfUsers: option<sizeType>,
     @as("Users") users: option<organizationUserList>,
   }
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "DescribeUsersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "DescribeUsersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeResourcePermissions = {
@@ -863,8 +862,8 @@ module DescribeResourcePermissions = {
     @as("Principals") principals: option<principalList>,
   }
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "DescribeResourcePermissionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeResourcePermissionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeFolderContents = {
@@ -885,8 +884,8 @@ module DescribeFolderContents = {
     @as("Folders") folders: option<folderMetadataList>,
   }
   @module("@aws-sdk/client-workdocs") @new
-  external new_: request => t = "DescribeFolderContentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeFolderContentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateComment = {
@@ -902,8 +901,8 @@ module CreateComment = {
     @as("AuthenticationToken") authenticationToken: option<authenticationHeaderType>,
   }
   type response = {@as("Comment") comment: option<comment>}
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "CreateCommentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "CreateCommentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeComments = {
@@ -919,8 +918,8 @@ module DescribeComments = {
     @as("Marker") marker: option<markerType>,
     @as("Comments") comments: option<commentList>,
   }
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "DescribeCommentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "DescribeCommentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeActivities = {
@@ -941,6 +940,6 @@ module DescribeActivities = {
     @as("Marker") marker: option<markerType>,
     @as("UserActivities") userActivities: option<userActivities>,
   }
-  @module("@aws-sdk/client-workdocs") @new external new_: request => t = "DescribeActivitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-workdocs") @new external new: request => t = "DescribeActivitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

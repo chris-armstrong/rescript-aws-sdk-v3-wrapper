@@ -84,16 +84,16 @@ module GetCallerIdentity = {
     @as("Account") account: option<accountType>,
     @as("UserId") userId: option<userIdType>,
   }
-  @module("@aws-sdk/client-sts") @new external new_: request => t = "GetCallerIdentityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sts") @new external new: request => t = "GetCallerIdentityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAccessKeyInfo = {
   type t
   type request = {@as("AccessKeyId") accessKeyId: accessKeyIdType}
   type response = {@as("Account") account: option<accountType>}
-  @module("@aws-sdk/client-sts") @new external new_: request => t = "GetAccessKeyInfoCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sts") @new external new: request => t = "GetAccessKeyInfoCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DecodeAuthorizationMessage = {
@@ -101,8 +101,8 @@ module DecodeAuthorizationMessage = {
   type request = {@as("EncodedMessage") encodedMessage: encodedMessageType}
   type response = {@as("DecodedMessage") decodedMessage: option<decodedMessageType>}
   @module("@aws-sdk/client-sts") @new
-  external new_: request => t = "DecodeAuthorizationMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DecodeAuthorizationMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSessionToken = {
@@ -113,8 +113,8 @@ module GetSessionToken = {
     @as("DurationSeconds") durationSeconds: option<durationSecondsType>,
   }
   type response = {@as("Credentials") credentials: option<credentials>}
-  @module("@aws-sdk/client-sts") @new external new_: request => t = "GetSessionTokenCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sts") @new external new: request => t = "GetSessionTokenCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFederationToken = {
@@ -131,8 +131,8 @@ module GetFederationToken = {
     @as("FederatedUser") federatedUser: option<federatedUser>,
     @as("Credentials") credentials: option<credentials>,
   }
-  @module("@aws-sdk/client-sts") @new external new_: request => t = "GetFederationTokenCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sts") @new external new: request => t = "GetFederationTokenCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssumeRoleWithWebIdentity = {
@@ -156,8 +156,8 @@ module AssumeRoleWithWebIdentity = {
     @as("Credentials") credentials: option<credentials>,
   }
   @module("@aws-sdk/client-sts") @new
-  external new_: request => t = "AssumeRoleWithWebIdentityCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssumeRoleWithWebIdentityCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssumeRoleWithSAML = {
@@ -181,8 +181,8 @@ module AssumeRoleWithSAML = {
     @as("AssumedRoleUser") assumedRoleUser: option<assumedRoleUser>,
     @as("Credentials") credentials: option<credentials>,
   }
-  @module("@aws-sdk/client-sts") @new external new_: request => t = "AssumeRoleWithSAMLCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sts") @new external new: request => t = "AssumeRoleWithSAMLCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssumeRole = {
@@ -206,6 +206,6 @@ module AssumeRole = {
     @as("AssumedRoleUser") assumedRoleUser: option<assumedRoleUser>,
     @as("Credentials") credentials: option<credentials>,
   }
-  @module("@aws-sdk/client-sts") @new external new_: request => t = "AssumeRoleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sts") @new external new: request => t = "AssumeRoleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -74,8 +74,8 @@ module DeleteEnvironment = {
   type t
   type request = {environmentId: idType}
   type response = unit
-  @module("@aws-sdk/client-finspace") @new external new_: request => t = "DeleteEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-finspace") @new external new: request => t = "DeleteEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -85,8 +85,8 @@ module UntagResource = {
     resourceArn: environmentArn,
   }
   type response = unit
-  @module("@aws-sdk/client-finspace") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-finspace") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -96,17 +96,16 @@ module TagResource = {
     resourceArn: environmentArn,
   }
   type response = unit
-  @module("@aws-sdk/client-finspace") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-finspace") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {resourceArn: environmentArn}
   type response = {tags: option<tagMap>}
-  @module("@aws-sdk/client-finspace") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-finspace") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEnvironment = {
@@ -124,8 +123,8 @@ module CreateEnvironment = {
     environmentArn: option<environmentArn>,
     environmentId: option<idType>,
   }
-  @module("@aws-sdk/client-finspace") @new external new_: request => t = "CreateEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-finspace") @new external new: request => t = "CreateEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEnvironment = {
@@ -138,16 +137,16 @@ module UpdateEnvironment = {
     environmentId: idType,
   }
   type response = {environment: option<environment>}
-  @module("@aws-sdk/client-finspace") @new external new_: request => t = "UpdateEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-finspace") @new external new: request => t = "UpdateEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEnvironment = {
   type t
   type request = {environmentId: idType}
   type response = {environment: option<environment>}
-  @module("@aws-sdk/client-finspace") @new external new_: request => t = "GetEnvironmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-finspace") @new external new: request => t = "GetEnvironmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEnvironments = {
@@ -160,6 +159,6 @@ module ListEnvironments = {
     nextToken: option<paginationToken>,
     environments: option<environmentList>,
   }
-  @module("@aws-sdk/client-finspace") @new external new_: request => t = "ListEnvironmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-finspace") @new external new: request => t = "ListEnvironmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

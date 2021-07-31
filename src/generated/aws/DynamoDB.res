@@ -899,8 +899,8 @@ module UpdateContributorInsights = {
     @as("TableName") tableName: option<tableName>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "UpdateContributorInsightsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateContributorInsightsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableKinesisStreamingDestination = {
@@ -915,8 +915,8 @@ module EnableKinesisStreamingDestination = {
     @as("TableName") tableName: option<tableName>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "EnableKinesisStreamingDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableKinesisStreamingDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableKinesisStreamingDestination = {
@@ -931,8 +931,8 @@ module DisableKinesisStreamingDestination = {
     @as("TableName") tableName: option<tableName>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "DisableKinesisStreamingDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableKinesisStreamingDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLimits = {
@@ -944,8 +944,8 @@ module DescribeLimits = {
     @as("AccountMaxWriteCapacityUnits") accountMaxWriteCapacityUnits: option<positiveLongObject>,
     @as("AccountMaxReadCapacityUnits") accountMaxReadCapacityUnits: option<positiveLongObject>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "DescribeLimitsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DescribeLimitsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTimeToLive = {
@@ -957,8 +957,8 @@ module UpdateTimeToLive = {
   type response = {
     @as("TimeToLiveSpecification") timeToLiveSpecification: option<timeToLiveSpecification>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "UpdateTimeToLiveCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "UpdateTimeToLiveCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -968,8 +968,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: resourceArnString,
   }
 
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListTables = {
@@ -982,8 +982,8 @@ module ListTables = {
     @as("LastEvaluatedTableName") lastEvaluatedTableName: option<tableName>,
     @as("TableNames") tableNames: option<tableNameList>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "ListTablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ListTablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExportTableToPointInTime = {
@@ -1001,8 +1001,8 @@ module ExportTableToPointInTime = {
   }
   type response = {@as("ExportDescription") exportDescription: option<exportDescription>}
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "ExportTableToPointInTimeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ExportTableToPointInTimeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTimeToLive = {
@@ -1011,16 +1011,16 @@ module DescribeTimeToLive = {
   type response = {
     @as("TimeToLiveDescription") timeToLiveDescription: option<timeToLiveDescription>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "DescribeTimeToLiveCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DescribeTimeToLiveCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeExport = {
   type t
   type request = {@as("ExportArn") exportArn: exportArn}
   type response = {@as("ExportDescription") exportDescription: option<exportDescription>}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "DescribeExportCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DescribeExportCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeContributorInsights = {
@@ -1039,8 +1039,8 @@ module DescribeContributorInsights = {
     @as("TableName") tableName: option<tableName>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "DescribeContributorInsightsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeContributorInsightsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBackup = {
@@ -1050,8 +1050,8 @@ module CreateBackup = {
     @as("TableName") tableName: tableName,
   }
   type response = {@as("BackupDetails") backupDetails: option<backupDetails>}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "CreateBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "CreateBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateContinuousBackups = {
@@ -1066,8 +1066,8 @@ module UpdateContinuousBackups = {
     continuousBackupsDescription: option<continuousBackupsDescription>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "UpdateContinuousBackupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateContinuousBackupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1077,8 +1077,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: resourceArnString,
   }
 
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListTagsOfResource = {
@@ -1091,8 +1091,8 @@ module ListTagsOfResource = {
     @as("NextToken") nextToken: option<nextTokenString>,
     @as("Tags") tags: option<tagList_>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "ListTagsOfResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ListTagsOfResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListExports = {
@@ -1106,8 +1106,8 @@ module ListExports = {
     @as("NextToken") nextToken: option<exportNextToken>,
     @as("ExportSummaries") exportSummaries: option<exportSummaries>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "ListExportsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ListExportsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListContributorInsights = {
@@ -1123,8 +1123,8 @@ module ListContributorInsights = {
     contributorInsightsSummaries: option<contributorInsightsSummaries>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "ListContributorInsightsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListContributorInsightsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBackups = {
@@ -1141,8 +1141,8 @@ module ListBackups = {
     @as("LastEvaluatedBackupArn") lastEvaluatedBackupArn: option<backupArn>,
     @as("BackupSummaries") backupSummaries: option<backupSummaries>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "ListBackupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ListBackupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeKinesisStreamingDestination = {
@@ -1154,16 +1154,16 @@ module DescribeKinesisStreamingDestination = {
     @as("TableName") tableName: option<tableName>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "DescribeKinesisStreamingDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeKinesisStreamingDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpoints = {
   type t
   type request = unit
   type response = {@as("Endpoints") endpoints: endpoints}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "DescribeEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DescribeEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeContinuousBackups = {
@@ -1174,8 +1174,8 @@ module DescribeContinuousBackups = {
     continuousBackupsDescription: option<continuousBackupsDescription>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "DescribeContinuousBackupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeContinuousBackupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListGlobalTables = {
@@ -1189,8 +1189,8 @@ module ListGlobalTables = {
     @as("LastEvaluatedGlobalTableName") lastEvaluatedGlobalTableName: option<tableName>,
     @as("GlobalTables") globalTables: option<globalTableList>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "ListGlobalTablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ListGlobalTablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTable = {
@@ -1207,8 +1207,8 @@ module UpdateTable = {
     @as("AttributeDefinitions") attributeDefinitions: option<attributeDefinitions>,
   }
   type response = {@as("TableDescription") tableDescription: option<tableDescription>}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "UpdateTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "UpdateTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateGlobalTable = {
@@ -1220,8 +1220,8 @@ module UpdateGlobalTable = {
   type response = {
     @as("GlobalTableDescription") globalTableDescription: option<globalTableDescription>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "UpdateGlobalTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "UpdateGlobalTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreTableToPointInTime = {
@@ -1242,8 +1242,8 @@ module RestoreTableToPointInTime = {
   }
   type response = {@as("TableDescription") tableDescription: option<tableDescription>}
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "RestoreTableToPointInTimeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RestoreTableToPointInTimeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestoreTableFromBackup = {
@@ -1261,16 +1261,16 @@ module RestoreTableFromBackup = {
   }
   type response = {@as("TableDescription") tableDescription: option<tableDescription>}
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "RestoreTableFromBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RestoreTableFromBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTable = {
   type t
   type request = {@as("TableName") tableName: tableName}
   type response = {@as("Table") table: option<tableDescription>}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "DescribeTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DescribeTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeGlobalTable = {
@@ -1279,33 +1279,32 @@ module DescribeGlobalTable = {
   type response = {
     @as("GlobalTableDescription") globalTableDescription: option<globalTableDescription>,
   }
-  @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "DescribeGlobalTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DescribeGlobalTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBackup = {
   type t
   type request = {@as("BackupArn") backupArn: backupArn}
   type response = {@as("BackupDescription") backupDescription: option<backupDescription>}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "DescribeBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DescribeBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTable = {
   type t
   type request = {@as("TableName") tableName: tableName}
   type response = {@as("TableDescription") tableDescription: option<tableDescription>}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "DeleteTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DeleteTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBackup = {
   type t
   type request = {@as("BackupArn") backupArn: backupArn}
   type response = {@as("BackupDescription") backupDescription: option<backupDescription>}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "DeleteBackupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DeleteBackupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTable = {
@@ -1323,8 +1322,8 @@ module CreateTable = {
     @as("AttributeDefinitions") attributeDefinitions: attributeDefinitions,
   }
   type response = {@as("TableDescription") tableDescription: option<tableDescription>}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "CreateTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "CreateTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateGlobalTable = {
@@ -1336,8 +1335,8 @@ module CreateGlobalTable = {
   type response = {
     @as("GlobalTableDescription") globalTableDescription: option<globalTableDescription>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "CreateGlobalTableCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "CreateGlobalTableCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateGlobalTableSettings = {
@@ -1360,8 +1359,8 @@ module UpdateGlobalTableSettings = {
     @as("GlobalTableName") globalTableName: option<tableName>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "UpdateGlobalTableSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateGlobalTableSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeGlobalTableSettings = {
@@ -1372,8 +1371,8 @@ module DescribeGlobalTableSettings = {
     @as("GlobalTableName") globalTableName: option<tableName>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "DescribeGlobalTableSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeGlobalTableSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTableReplicaAutoScaling = {
@@ -1391,8 +1390,8 @@ module UpdateTableReplicaAutoScaling = {
     tableAutoScalingDescription: option<tableAutoScalingDescription>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "UpdateTableReplicaAutoScalingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateTableReplicaAutoScalingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTableReplicaAutoScaling = {
@@ -1403,8 +1402,8 @@ module DescribeTableReplicaAutoScaling = {
     tableAutoScalingDescription: option<tableAutoScalingDescription>,
   }
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "DescribeTableReplicaAutoScalingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTableReplicaAutoScalingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetItem = {
@@ -1422,8 +1421,8 @@ module GetItem = {
     @as("ConsumedCapacity") consumedCapacity: option<consumedCapacity>,
     @as("Item") item: option<attributeMap>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "GetItemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "GetItemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExecuteStatement = {
@@ -1438,8 +1437,8 @@ module ExecuteStatement = {
     @as("NextToken") nextToken: option<partiQLNextToken>,
     @as("Items") items: option<itemList>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "ExecuteStatementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ExecuteStatementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateItem = {
@@ -1464,8 +1463,8 @@ module UpdateItem = {
     @as("ConsumedCapacity") consumedCapacity: option<consumedCapacity>,
     @as("Attributes") attributes: option<attributeMap>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "UpdateItemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "UpdateItemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Scan = {
@@ -1495,8 +1494,8 @@ module Scan = {
     @as("Count") count: option<integer_>,
     @as("Items") items: option<itemList>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "ScanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ScanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Query = {
@@ -1527,8 +1526,8 @@ module Query = {
     @as("Count") count: option<integer_>,
     @as("Items") items: option<itemList>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "QueryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "QueryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutItem = {
@@ -1551,8 +1550,8 @@ module PutItem = {
     @as("ConsumedCapacity") consumedCapacity: option<consumedCapacity>,
     @as("Attributes") attributes: option<attributeMap>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "PutItemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "PutItemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExecuteTransaction = {
@@ -1562,8 +1561,8 @@ module ExecuteTransaction = {
     @as("TransactStatements") transactStatements: parameterizedStatements,
   }
   type response = {@as("Responses") responses: option<itemResponseList>}
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "ExecuteTransactionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "ExecuteTransactionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteItem = {
@@ -1586,8 +1585,8 @@ module DeleteItem = {
     @as("ConsumedCapacity") consumedCapacity: option<consumedCapacity>,
     @as("Attributes") attributes: option<attributeMap>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "DeleteItemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "DeleteItemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchExecuteStatement = {
@@ -1595,8 +1594,8 @@ module BatchExecuteStatement = {
   type request = {@as("Statements") statements: partiQLBatchRequest}
   type response = {@as("Responses") responses: option<partiQLBatchResponse>}
   @module("@aws-sdk/client-dynamodb") @new
-  external new_: request => t = "BatchExecuteStatementCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchExecuteStatementCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TransactWriteItems = {
@@ -1612,8 +1611,8 @@ module TransactWriteItems = {
     @as("ItemCollectionMetrics") itemCollectionMetrics: option<itemCollectionMetricsPerTable>,
     @as("ConsumedCapacity") consumedCapacity: option<consumedCapacityMultiple>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "TransactWriteItemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "TransactWriteItemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TransactGetItems = {
@@ -1626,8 +1625,8 @@ module TransactGetItems = {
     @as("Responses") responses: option<itemResponseList>,
     @as("ConsumedCapacity") consumedCapacity: option<consumedCapacityMultiple>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "TransactGetItemsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "TransactGetItemsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetItem = {
@@ -1641,8 +1640,8 @@ module BatchGetItem = {
     @as("UnprocessedKeys") unprocessedKeys: option<batchGetRequestMap>,
     @as("Responses") responses: option<batchGetResponseMap>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "BatchGetItemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "BatchGetItemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchWriteItem = {
@@ -1658,6 +1657,6 @@ module BatchWriteItem = {
     @as("ItemCollectionMetrics") itemCollectionMetrics: option<itemCollectionMetricsPerTable>,
     @as("UnprocessedItems") unprocessedItems: option<batchWriteItemRequestMap>,
   }
-  @module("@aws-sdk/client-dynamodb") @new external new_: request => t = "BatchWriteItemCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dynamodb") @new external new: request => t = "BatchWriteItemCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

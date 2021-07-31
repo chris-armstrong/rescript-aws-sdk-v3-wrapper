@@ -57,8 +57,8 @@ module DeleteReportDefinition = {
   type request = {reportId: reportId}
   type response = {reportId: option<reportId>}
   @module("@aws-sdk/client-application-cost-profiler") @new
-  external new_: request => t = "DeleteReportDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteReportDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateReportDefinition = {
@@ -72,8 +72,8 @@ module UpdateReportDefinition = {
   }
   type response = {reportId: option<reportId>}
   @module("@aws-sdk/client-application-cost-profiler") @new
-  external new_: request => t = "UpdateReportDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateReportDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutReportDefinition = {
@@ -87,8 +87,8 @@ module PutReportDefinition = {
   }
   type response = {reportId: option<reportId>}
   @module("@aws-sdk/client-application-cost-profiler") @new
-  external new_: request => t = "PutReportDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutReportDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportApplicationUsage = {
@@ -96,8 +96,8 @@ module ImportApplicationUsage = {
   type request = {sourceS3Location: sourceS3Location}
   type response = {importId: importId}
   @module("@aws-sdk/client-application-cost-profiler") @new
-  external new_: request => t = "ImportApplicationUsageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ImportApplicationUsageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetReportDefinition = {
@@ -113,8 +113,8 @@ module GetReportDefinition = {
     reportId: reportId,
   }
   @module("@aws-sdk/client-application-cost-profiler") @new
-  external new_: request => t = "GetReportDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetReportDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListReportDefinitions = {
@@ -128,6 +128,6 @@ module ListReportDefinitions = {
     reportDefinitions: option<reportDefinitionList>,
   }
   @module("@aws-sdk/client-application-cost-profiler") @new
-  external new_: request => t = "ListReportDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListReportDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

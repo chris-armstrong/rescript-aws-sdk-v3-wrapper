@@ -115,8 +115,8 @@ module NotifyApplicationState = {
     @as("ApplicationId") applicationId: applicationId,
   }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: request => t = "NotifyApplicationStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "NotifyApplicationStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportMigrationTask = {
@@ -127,8 +127,8 @@ module ImportMigrationTask = {
     @as("ProgressUpdateStream") progressUpdateStream: progressUpdateStream,
   }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: request => t = "ImportMigrationTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "ImportMigrationTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateDiscoveredResource = {
@@ -141,8 +141,8 @@ module DisassociateDiscoveredResource = {
   }
   type response = unit
   @module("@aws-sdk/client-mgh") @new
-  external new_: request => t = "DisassociateDiscoveredResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateDiscoveredResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateCreatedArtifact = {
@@ -155,8 +155,8 @@ module DisassociateCreatedArtifact = {
   }
   type response = unit
   @module("@aws-sdk/client-mgh") @new
-  external new_: request => t = "DisassociateCreatedArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateCreatedArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeApplicationState = {
@@ -166,9 +166,8 @@ module DescribeApplicationState = {
     @as("LastUpdatedTime") lastUpdatedTime: option<updateDateTime>,
     @as("ApplicationStatus") applicationStatus: option<applicationStatus>,
   }
-  @module("@aws-sdk/client-mgh") @new
-  external new_: request => t = "DescribeApplicationStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "DescribeApplicationStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteProgressUpdateStream = {
@@ -179,8 +178,8 @@ module DeleteProgressUpdateStream = {
   }
   type response = unit
   @module("@aws-sdk/client-mgh") @new
-  external new_: request => t = "DeleteProgressUpdateStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteProgressUpdateStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProgressUpdateStream = {
@@ -191,8 +190,8 @@ module CreateProgressUpdateStream = {
   }
   type response = unit
   @module("@aws-sdk/client-mgh") @new
-  external new_: request => t = "CreateProgressUpdateStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateProgressUpdateStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module NotifyMigrationTaskState = {
@@ -206,9 +205,8 @@ module NotifyMigrationTaskState = {
     @as("ProgressUpdateStream") progressUpdateStream: progressUpdateStream,
   }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new
-  external new_: request => t = "NotifyMigrationTaskStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "NotifyMigrationTaskStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateDiscoveredResource = {
@@ -221,8 +219,8 @@ module AssociateDiscoveredResource = {
   }
   type response = unit
   @module("@aws-sdk/client-mgh") @new
-  external new_: request => t = "AssociateDiscoveredResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateDiscoveredResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateCreatedArtifact = {
@@ -234,9 +232,8 @@ module AssociateCreatedArtifact = {
     @as("ProgressUpdateStream") progressUpdateStream: progressUpdateStream,
   }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new
-  external new_: request => t = "AssociateCreatedArtifactCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "AssociateCreatedArtifactCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutResourceAttributes = {
@@ -248,8 +245,8 @@ module PutResourceAttributes = {
     @as("ProgressUpdateStream") progressUpdateStream: progressUpdateStream,
   }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: request => t = "PutResourceAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "PutResourceAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProgressUpdateStreams = {
@@ -264,8 +261,8 @@ module ListProgressUpdateStreams = {
     progressUpdateStreamSummaryList: option<progressUpdateStreamSummaryList>,
   }
   @module("@aws-sdk/client-mgh") @new
-  external new_: request => t = "ListProgressUpdateStreamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListProgressUpdateStreamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMigrationTasks = {
@@ -279,8 +276,8 @@ module ListMigrationTasks = {
     @as("MigrationTaskSummaryList") migrationTaskSummaryList: option<migrationTaskSummaryList>,
     @as("NextToken") nextToken: option<token>,
   }
-  @module("@aws-sdk/client-mgh") @new external new_: request => t = "ListMigrationTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "ListMigrationTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDiscoveredResources = {
@@ -295,8 +292,8 @@ module ListDiscoveredResources = {
     @as("DiscoveredResourceList") discoveredResourceList: option<discoveredResourceList>,
     @as("NextToken") nextToken: option<token>,
   }
-  @module("@aws-sdk/client-mgh") @new external new_: request => t = "ListDiscoveredResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "ListDiscoveredResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCreatedArtifacts = {
@@ -311,8 +308,8 @@ module ListCreatedArtifacts = {
     @as("CreatedArtifactList") createdArtifactList: option<createdArtifactList>,
     @as("NextToken") nextToken: option<token>,
   }
-  @module("@aws-sdk/client-mgh") @new external new_: request => t = "ListCreatedArtifactsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "ListCreatedArtifactsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListApplicationStates = {
@@ -326,8 +323,8 @@ module ListApplicationStates = {
     @as("NextToken") nextToken: option<token>,
     @as("ApplicationStateList") applicationStateList: option<applicationStateList>,
   }
-  @module("@aws-sdk/client-mgh") @new external new_: request => t = "ListApplicationStatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "ListApplicationStatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMigrationTask = {
@@ -337,6 +334,6 @@ module DescribeMigrationTask = {
     @as("ProgressUpdateStream") progressUpdateStream: progressUpdateStream,
   }
   type response = {@as("MigrationTask") migrationTask: option<migrationTask>}
-  @module("@aws-sdk/client-mgh") @new external new_: request => t = "DescribeMigrationTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-mgh") @new external new: request => t = "DescribeMigrationTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

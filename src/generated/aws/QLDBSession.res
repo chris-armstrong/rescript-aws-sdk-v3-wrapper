@@ -111,6 +111,6 @@ module SendCommand = {
     @as("StartTransaction") startTransaction: option<startTransactionResult>,
     @as("StartSession") startSession: option<startSessionResult>,
   }
-  @module("@aws-sdk/client-qldb") @new external new_: request => t = "SendCommandCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-qldb") @new external new: request => t = "SendCommandCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

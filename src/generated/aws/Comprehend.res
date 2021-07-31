@@ -608,8 +608,8 @@ module UpdateEndpoint = {
     @as("EndpointArn") endpointArn: comprehendEndpointArn,
   }
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "UpdateEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "UpdateEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopTrainingEntityRecognizer = {
@@ -617,8 +617,8 @@ module StopTrainingEntityRecognizer = {
   type request = {@as("EntityRecognizerArn") entityRecognizerArn: entityRecognizerArn}
   type response = unit
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StopTrainingEntityRecognizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopTrainingEntityRecognizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopTrainingDocumentClassifier = {
@@ -626,8 +626,8 @@ module StopTrainingDocumentClassifier = {
   type request = {@as("DocumentClassifierArn") documentClassifierArn: documentClassifierArn}
   type response = unit
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StopTrainingDocumentClassifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopTrainingDocumentClassifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopSentimentDetectionJob = {
@@ -638,8 +638,8 @@ module StopSentimentDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StopSentimentDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopSentimentDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopPiiEntitiesDetectionJob = {
@@ -650,8 +650,8 @@ module StopPiiEntitiesDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StopPiiEntitiesDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopPiiEntitiesDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopKeyPhrasesDetectionJob = {
@@ -662,8 +662,8 @@ module StopKeyPhrasesDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StopKeyPhrasesDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopKeyPhrasesDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopEventsDetectionJob = {
@@ -674,8 +674,8 @@ module StopEventsDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StopEventsDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopEventsDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopEntitiesDetectionJob = {
@@ -686,8 +686,8 @@ module StopEntitiesDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StopEntitiesDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopEntitiesDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopDominantLanguageDetectionJob = {
@@ -698,8 +698,8 @@ module StopDominantLanguageDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StopDominantLanguageDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StopDominantLanguageDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEntityRecognizer = {
@@ -707,16 +707,16 @@ module DeleteEntityRecognizer = {
   type request = {@as("EntityRecognizerArn") entityRecognizerArn: entityRecognizerArn}
   type response = unit
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DeleteEntityRecognizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteEntityRecognizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEndpoint = {
   type t
   type request = {@as("EndpointArn") endpointArn: comprehendEndpointArn}
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "DeleteEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "DeleteEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDocumentClassifier = {
@@ -724,8 +724,8 @@ module DeleteDocumentClassifier = {
   type request = {@as("DocumentClassifierArn") documentClassifierArn: documentClassifierArn}
   type response = unit
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DeleteDocumentClassifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteDocumentClassifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -735,8 +735,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: comprehendArn,
   }
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartEventsDetectionJob = {
@@ -755,8 +755,8 @@ module StartEventsDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StartEventsDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartEventsDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectSentiment = {
@@ -769,16 +769,16 @@ module DetectSentiment = {
     @as("SentimentScore") sentimentScore: option<sentimentScore>,
     @as("Sentiment") sentiment: option<sentimentType>,
   }
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "DetectSentimentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "DetectSentimentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpoint = {
   type t
   type request = {@as("EndpointArn") endpointArn: comprehendEndpointArn}
   type response = {@as("EndpointProperties") endpointProperties: option<endpointProperties>}
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "DescribeEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "DescribeEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -788,8 +788,8 @@ module TagResource = {
     @as("ResourceArn") resourceArn: comprehendArn,
   }
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartTopicsDetectionJob = {
@@ -809,8 +809,8 @@ module StartTopicsDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StartTopicsDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartTopicsDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartSentimentDetectionJob = {
@@ -830,8 +830,8 @@ module StartSentimentDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StartSentimentDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartSentimentDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartPiiEntitiesDetectionJob = {
@@ -851,8 +851,8 @@ module StartPiiEntitiesDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StartPiiEntitiesDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartPiiEntitiesDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartKeyPhrasesDetectionJob = {
@@ -872,8 +872,8 @@ module StartKeyPhrasesDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StartKeyPhrasesDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartKeyPhrasesDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartEntitiesDetectionJob = {
@@ -894,8 +894,8 @@ module StartEntitiesDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StartEntitiesDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartEntitiesDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartDominantLanguageDetectionJob = {
@@ -914,8 +914,8 @@ module StartDominantLanguageDetectionJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StartDominantLanguageDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartDominantLanguageDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartDocumentClassificationJob = {
@@ -935,8 +935,8 @@ module StartDocumentClassificationJob = {
     @as("JobId") jobId: option<jobId>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "StartDocumentClassificationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartDocumentClassificationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -947,8 +947,8 @@ module ListTagsForResource = {
     @as("ResourceArn") resourceArn: option<comprehendArn>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEndpoints = {
@@ -962,8 +962,8 @@ module ListEndpoints = {
     @as("NextToken") nextToken: option<string_>,
     @as("EndpointPropertiesList") endpointPropertiesList: option<endpointPropertiesList>,
   }
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "ListEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "ListEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectPiiEntities = {
@@ -973,9 +973,8 @@ module DetectPiiEntities = {
     @as("Text") text: string_,
   }
   type response = {@as("Entities") entities: option<listOfPiiEntities>}
-  @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DetectPiiEntitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "DetectPiiEntitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectKeyPhrases = {
@@ -985,8 +984,8 @@ module DetectKeyPhrases = {
     @as("Text") text: customerInputString,
   }
   type response = {@as("KeyPhrases") keyPhrases: option<listOfKeyPhrases>}
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "DetectKeyPhrasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "DetectKeyPhrasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectEntities = {
@@ -997,8 +996,8 @@ module DetectEntities = {
     @as("Text") text: customerInputString,
   }
   type response = {@as("Entities") entities: option<listOfEntities>}
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "DetectEntitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "DetectEntitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectDominantLanguage = {
@@ -1006,8 +1005,8 @@ module DetectDominantLanguage = {
   type request = {@as("Text") text: customerInputString}
   type response = {@as("Languages") languages: option<listOfDominantLanguages>}
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DetectDominantLanguageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DetectDominantLanguageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEventsDetectionJob = {
@@ -1018,8 +1017,8 @@ module DescribeEventsDetectionJob = {
     eventsDetectionJobProperties: option<eventsDetectionJobProperties>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DescribeEventsDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEventsDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEndpoint = {
@@ -1033,8 +1032,8 @@ module CreateEndpoint = {
     @as("EndpointName") endpointName: comprehendEndpointName,
   }
   type response = {@as("EndpointArn") endpointArn: option<comprehendEndpointArn>}
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "CreateEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "CreateEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ContainsPiiEntities = {
@@ -1045,8 +1044,8 @@ module ContainsPiiEntities = {
   }
   type response = {@as("Labels") labels: option<listOfEntityLabels>}
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ContainsPiiEntitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ContainsPiiEntitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ClassifyDocument = {
@@ -1059,8 +1058,8 @@ module ClassifyDocument = {
     @as("Labels") labels: option<listOfLabels>,
     @as("Classes") classes: option<listOfClasses>,
   }
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "ClassifyDocumentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "ClassifyDocumentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEventsDetectionJobs = {
@@ -1076,8 +1075,8 @@ module ListEventsDetectionJobs = {
     eventsDetectionJobPropertiesList: option<eventsDetectionJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ListEventsDetectionJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEventsDetectionJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DetectSyntax = {
@@ -1087,8 +1086,8 @@ module DetectSyntax = {
     @as("Text") text: customerInputString,
   }
   type response = {@as("SyntaxTokens") syntaxTokens: option<listOfSyntaxTokens>}
-  @module("@aws-sdk/client-comprehend") @new external new_: request => t = "DetectSyntaxCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "DetectSyntaxCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTopicsDetectionJob = {
@@ -1099,8 +1098,8 @@ module DescribeTopicsDetectionJob = {
     topicsDetectionJobProperties: option<topicsDetectionJobProperties>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DescribeTopicsDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeTopicsDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSentimentDetectionJob = {
@@ -1111,8 +1110,8 @@ module DescribeSentimentDetectionJob = {
     sentimentDetectionJobProperties: option<sentimentDetectionJobProperties>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DescribeSentimentDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSentimentDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePiiEntitiesDetectionJob = {
@@ -1123,8 +1122,8 @@ module DescribePiiEntitiesDetectionJob = {
     piiEntitiesDetectionJobProperties: option<piiEntitiesDetectionJobProperties>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DescribePiiEntitiesDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePiiEntitiesDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeKeyPhrasesDetectionJob = {
@@ -1135,8 +1134,8 @@ module DescribeKeyPhrasesDetectionJob = {
     keyPhrasesDetectionJobProperties: option<keyPhrasesDetectionJobProperties>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DescribeKeyPhrasesDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeKeyPhrasesDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEntitiesDetectionJob = {
@@ -1147,8 +1146,8 @@ module DescribeEntitiesDetectionJob = {
     entitiesDetectionJobProperties: option<entitiesDetectionJobProperties>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DescribeEntitiesDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEntitiesDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDominantLanguageDetectionJob = {
@@ -1159,8 +1158,8 @@ module DescribeDominantLanguageDetectionJob = {
     dominantLanguageDetectionJobProperties: option<dominantLanguageDetectionJobProperties>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DescribeDominantLanguageDetectionJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDominantLanguageDetectionJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDocumentClassificationJob = {
@@ -1171,8 +1170,8 @@ module DescribeDocumentClassificationJob = {
     documentClassificationJobProperties: option<documentClassificationJobProperties>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DescribeDocumentClassificationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDocumentClassificationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDetectSentiment = {
@@ -1186,8 +1185,8 @@ module BatchDetectSentiment = {
     @as("ResultList") resultList: listOfDetectSentimentResult,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "BatchDetectSentimentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDetectSentimentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTopicsDetectionJobs = {
@@ -1203,8 +1202,8 @@ module ListTopicsDetectionJobs = {
     topicsDetectionJobPropertiesList: option<topicsDetectionJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ListTopicsDetectionJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTopicsDetectionJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSentimentDetectionJobs = {
@@ -1220,8 +1219,8 @@ module ListSentimentDetectionJobs = {
     sentimentDetectionJobPropertiesList: option<sentimentDetectionJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ListSentimentDetectionJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSentimentDetectionJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPiiEntitiesDetectionJobs = {
@@ -1237,8 +1236,8 @@ module ListPiiEntitiesDetectionJobs = {
     piiEntitiesDetectionJobPropertiesList: option<piiEntitiesDetectionJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ListPiiEntitiesDetectionJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListPiiEntitiesDetectionJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListKeyPhrasesDetectionJobs = {
@@ -1254,8 +1253,8 @@ module ListKeyPhrasesDetectionJobs = {
     keyPhrasesDetectionJobPropertiesList: option<keyPhrasesDetectionJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ListKeyPhrasesDetectionJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListKeyPhrasesDetectionJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEntitiesDetectionJobs = {
@@ -1271,8 +1270,8 @@ module ListEntitiesDetectionJobs = {
     entitiesDetectionJobPropertiesList: option<entitiesDetectionJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ListEntitiesDetectionJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEntitiesDetectionJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDominantLanguageDetectionJobs = {
@@ -1288,8 +1287,8 @@ module ListDominantLanguageDetectionJobs = {
     dominantLanguageDetectionJobPropertiesList: option<dominantLanguageDetectionJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ListDominantLanguageDetectionJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDominantLanguageDetectionJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDocumentClassificationJobs = {
@@ -1305,8 +1304,8 @@ module ListDocumentClassificationJobs = {
     documentClassificationJobPropertiesList: option<documentClassificationJobPropertiesList>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ListDocumentClassificationJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDocumentClassificationJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEntityRecognizer = {
@@ -1324,8 +1323,8 @@ module CreateEntityRecognizer = {
   }
   type response = {@as("EntityRecognizerArn") entityRecognizerArn: option<entityRecognizerArn>}
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "CreateEntityRecognizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateEntityRecognizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDocumentClassifier = {
@@ -1347,8 +1346,8 @@ module CreateDocumentClassifier = {
     @as("DocumentClassifierArn") documentClassifierArn: option<documentClassifierArn>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "CreateDocumentClassifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateDocumentClassifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDetectKeyPhrases = {
@@ -1362,8 +1361,8 @@ module BatchDetectKeyPhrases = {
     @as("ResultList") resultList: listOfDetectKeyPhrasesResult,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "BatchDetectKeyPhrasesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDetectKeyPhrasesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDetectEntities = {
@@ -1377,8 +1376,8 @@ module BatchDetectEntities = {
     @as("ResultList") resultList: listOfDetectEntitiesResult,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "BatchDetectEntitiesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDetectEntitiesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDetectDominantLanguage = {
@@ -1389,8 +1388,8 @@ module BatchDetectDominantLanguage = {
     @as("ResultList") resultList: listOfDetectDominantLanguageResult,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "BatchDetectDominantLanguageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchDetectDominantLanguageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEntityRecognizer = {
@@ -1401,8 +1400,8 @@ module DescribeEntityRecognizer = {
     entityRecognizerProperties: option<entityRecognizerProperties>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DescribeEntityRecognizerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEntityRecognizerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDocumentClassifier = {
@@ -1413,8 +1412,8 @@ module DescribeDocumentClassifier = {
     documentClassifierProperties: option<documentClassifierProperties>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "DescribeDocumentClassifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeDocumentClassifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDetectSyntax = {
@@ -1427,9 +1426,8 @@ module BatchDetectSyntax = {
     @as("ErrorList") errorList: batchItemErrorList,
     @as("ResultList") resultList: listOfDetectSyntaxResult,
   }
-  @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "BatchDetectSyntaxCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-comprehend") @new external new: request => t = "BatchDetectSyntaxCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEntityRecognizers = {
@@ -1445,8 +1443,8 @@ module ListEntityRecognizers = {
     entityRecognizerPropertiesList: option<entityRecognizerPropertiesList>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ListEntityRecognizersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEntityRecognizersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDocumentClassifiers = {
@@ -1462,6 +1460,6 @@ module ListDocumentClassifiers = {
     documentClassifierPropertiesList: option<documentClassifierPropertiesList>,
   }
   @module("@aws-sdk/client-comprehend") @new
-  external new_: request => t = "ListDocumentClassifiersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListDocumentClassifiersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -68,16 +68,16 @@ module DeleteSite = {
   type t
   type request = {@as("SiteId") siteId: siteId}
   type response = unit
-  @module("@aws-sdk/client-outposts") @new external new_: request => t = "DeleteSiteCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-outposts") @new external new: request => t = "DeleteSiteCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteOutpost = {
   type t
   type request = {@as("OutpostId") outpostId: outpostId}
   type response = unit
-  @module("@aws-sdk/client-outposts") @new external new_: request => t = "DeleteOutpostCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-outposts") @new external new: request => t = "DeleteOutpostCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -87,8 +87,8 @@ module UntagResource = {
     @as("ResourceArn") resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-outposts") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-outposts") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -98,17 +98,16 @@ module TagResource = {
     @as("ResourceArn") resourceArn: arn,
   }
   type response = unit
-  @module("@aws-sdk/client-outposts") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-outposts") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: arn}
   type response = {@as("Tags") tags: option<tagMap>}
-  @module("@aws-sdk/client-outposts") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-outposts") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOutpostInstanceTypes = {
@@ -125,16 +124,16 @@ module GetOutpostInstanceTypes = {
     @as("InstanceTypes") instanceTypes: option<instanceTypeListDefinition>,
   }
   @module("@aws-sdk/client-outposts") @new
-  external new_: request => t = "GetOutpostInstanceTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetOutpostInstanceTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetOutpost = {
   type t
   type request = {@as("OutpostId") outpostId: outpostId}
   type response = {@as("Outpost") outpost: option<outpost>}
-  @module("@aws-sdk/client-outposts") @new external new_: request => t = "GetOutpostCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-outposts") @new external new: request => t = "GetOutpostCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateOutpost = {
@@ -148,8 +147,8 @@ module CreateOutpost = {
     @as("Name") name: outpostName,
   }
   type response = {@as("Outpost") outpost: option<outpost>}
-  @module("@aws-sdk/client-outposts") @new external new_: request => t = "CreateOutpostCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-outposts") @new external new: request => t = "CreateOutpostCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSites = {
@@ -162,8 +161,8 @@ module ListSites = {
     @as("NextToken") nextToken: option<token>,
     @as("Sites") sites: option<siteListDefinition>,
   }
-  @module("@aws-sdk/client-outposts") @new external new_: request => t = "ListSitesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-outposts") @new external new: request => t = "ListSitesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOutposts = {
@@ -176,6 +175,6 @@ module ListOutposts = {
     @as("NextToken") nextToken: option<token>,
     @as("Outposts") outposts: option<outpostListDefinition>,
   }
-  @module("@aws-sdk/client-outposts") @new external new_: request => t = "ListOutpostsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-outposts") @new external new: request => t = "ListOutpostsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -825,8 +825,8 @@ module DiscoverPollEndpoint = {
     telemetryEndpoint: option<string_>,
     endpoint: option<string_>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DiscoverPollEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DiscoverPollEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -836,8 +836,8 @@ module UntagResource = {
     resourceArn: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAccountSettingDefault = {
@@ -847,9 +847,8 @@ module PutAccountSettingDefault = {
     name: settingName,
   }
   type response = {setting: option<setting>}
-  @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "PutAccountSettingDefaultCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "PutAccountSettingDefaultCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAccountSetting = {
@@ -860,8 +859,8 @@ module PutAccountSetting = {
     name: settingName,
   }
   type response = {setting: option<setting>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "PutAccountSettingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "PutAccountSettingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTasks = {
@@ -881,8 +880,8 @@ module ListTasks = {
     nextToken: option<string_>,
     taskArns: option<stringList>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "ListTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "ListTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTaskDefinitions = {
@@ -898,8 +897,8 @@ module ListTaskDefinitions = {
     nextToken: option<string_>,
     taskDefinitionArns: option<stringList>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "ListTaskDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "ListTaskDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTaskDefinitionFamilies = {
@@ -915,8 +914,8 @@ module ListTaskDefinitionFamilies = {
     families: option<stringList>,
   }
   @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "ListTaskDefinitionFamiliesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTaskDefinitionFamiliesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListServices = {
@@ -932,8 +931,8 @@ module ListServices = {
     nextToken: option<string_>,
     serviceArns: option<stringList>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "ListServicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "ListServicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListContainerInstances = {
@@ -949,8 +948,8 @@ module ListContainerInstances = {
     nextToken: option<string_>,
     containerInstanceArns: option<stringList>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "ListContainerInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "ListContainerInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListClusters = {
@@ -963,8 +962,8 @@ module ListClusters = {
     nextToken: option<string_>,
     clusterArns: option<stringList>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "ListClustersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "ListClustersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ExecuteCommand = {
@@ -984,8 +983,8 @@ module ExecuteCommand = {
     containerArn: option<string_>,
     clusterArn: option<string_>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "ExecuteCommandCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "ExecuteCommandCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAccountSetting = {
@@ -995,8 +994,8 @@ module DeleteAccountSetting = {
     name: settingName,
   }
   type response = {setting: option<setting>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DeleteAccountSettingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DeleteAccountSettingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1006,8 +1005,8 @@ module TagResource = {
     resourceArn: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SubmitContainerStateChange = {
@@ -1024,8 +1023,8 @@ module SubmitContainerStateChange = {
   }
   type response = {acknowledgment: option<string_>}
   @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "SubmitContainerStateChangeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SubmitContainerStateChangeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SubmitAttachmentStateChanges = {
@@ -1036,8 +1035,8 @@ module SubmitAttachmentStateChanges = {
   }
   type response = {acknowledgment: option<string_>}
   @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "SubmitAttachmentStateChangesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SubmitAttachmentStateChangesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAttributes = {
@@ -1047,16 +1046,16 @@ module PutAttributes = {
     cluster: option<string_>,
   }
   type response = {attributes: option<attributes>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "PutAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "PutAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {resourceArn: string_}
   type response = {tags: option<tags>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAttributes = {
@@ -1073,8 +1072,8 @@ module ListAttributes = {
     nextToken: option<string_>,
     attributes: option<attributes>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "ListAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "ListAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAccountSettings = {
@@ -1091,8 +1090,8 @@ module ListAccountSettings = {
     nextToken: option<string_>,
     settings: option<settings>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "ListAccountSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "ListAccountSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteAttributes = {
@@ -1102,8 +1101,8 @@ module DeleteAttributes = {
     cluster: option<string_>,
   }
   type response = {attributes: option<attributes>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DeleteAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DeleteAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCapacityProvider = {
@@ -1113,16 +1112,16 @@ module UpdateCapacityProvider = {
     name: string_,
   }
   type response = {capacityProvider: option<capacityProvider>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "UpdateCapacityProviderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "UpdateCapacityProviderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCapacityProvider = {
   type t
   type request = {capacityProvider: string_}
   type response = {capacityProvider: option<capacityProvider>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DeleteCapacityProviderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DeleteCapacityProviderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCapacityProvider = {
@@ -1133,8 +1132,8 @@ module CreateCapacityProvider = {
     name: string_,
   }
   type response = {capacityProvider: option<capacityProvider>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "CreateCapacityProviderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "CreateCapacityProviderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateTaskSet = {
@@ -1146,8 +1145,8 @@ module UpdateTaskSet = {
     cluster: string_,
   }
   type response = {taskSet: option<taskSet>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "UpdateTaskSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "UpdateTaskSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateServicePrimaryTaskSet = {
@@ -1159,8 +1158,8 @@ module UpdateServicePrimaryTaskSet = {
   }
   type response = {taskSet: option<taskSet>}
   @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "UpdateServicePrimaryTaskSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateServicePrimaryTaskSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SubmitTaskStateChange = {
@@ -1178,8 +1177,8 @@ module SubmitTaskStateChange = {
     cluster: option<string_>,
   }
   type response = {acknowledgment: option<string_>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "SubmitTaskStateChangeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "SubmitTaskStateChangeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCapacityProviders = {
@@ -1196,8 +1195,8 @@ module DescribeCapacityProviders = {
     capacityProviders: option<capacityProviders>,
   }
   @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "DescribeCapacityProvidersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCapacityProvidersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteTaskSet = {
@@ -1209,8 +1208,8 @@ module DeleteTaskSet = {
     cluster: string_,
   }
   type response = {taskSet: option<taskSet>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DeleteTaskSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DeleteTaskSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateTaskSet = {
@@ -1231,8 +1230,8 @@ module CreateTaskSet = {
     service: string_,
   }
   type response = {taskSet: option<taskSet>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "CreateTaskSetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "CreateTaskSetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateContainerAgent = {
@@ -1242,8 +1241,8 @@ module UpdateContainerAgent = {
     cluster: option<string_>,
   }
   type response = {containerInstance: option<containerInstance>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "UpdateContainerAgentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "UpdateContainerAgentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateClusterSettings = {
@@ -1253,8 +1252,8 @@ module UpdateClusterSettings = {
     cluster: string_,
   }
   type response = {cluster: option<cluster>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "UpdateClusterSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "UpdateClusterSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCluster = {
@@ -1265,8 +1264,8 @@ module UpdateCluster = {
     cluster: string_,
   }
   type response = {cluster: option<cluster>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "UpdateClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "UpdateClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterContainerInstance = {
@@ -1284,8 +1283,8 @@ module RegisterContainerInstance = {
   }
   type response = {containerInstance: option<containerInstance>}
   @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "RegisterContainerInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegisterContainerInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutClusterCapacityProviders = {
@@ -1297,8 +1296,8 @@ module PutClusterCapacityProviders = {
   }
   type response = {cluster: option<cluster>}
   @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "PutClusterCapacityProvidersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutClusterCapacityProvidersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTaskSets = {
@@ -1313,8 +1312,8 @@ module DescribeTaskSets = {
     failures: option<failures>,
     taskSets: option<taskSets>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DescribeTaskSetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DescribeTaskSetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterContainerInstance = {
@@ -1326,16 +1325,16 @@ module DeregisterContainerInstance = {
   }
   type response = {containerInstance: option<containerInstance>}
   @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "DeregisterContainerInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeregisterContainerInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCluster = {
   type t
   type request = {cluster: string_}
   type response = {cluster: option<cluster>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DeleteClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DeleteClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCluster = {
@@ -1349,8 +1348,8 @@ module CreateCluster = {
     clusterName: option<string_>,
   }
   type response = {cluster: option<cluster>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "CreateClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "CreateClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateService = {
@@ -1371,8 +1370,8 @@ module UpdateService = {
     cluster: option<string_>,
   }
   type response = {service: option<service>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "UpdateServiceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "UpdateServiceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateContainerInstancesState = {
@@ -1387,8 +1386,8 @@ module UpdateContainerInstancesState = {
     containerInstances: option<containerInstances>,
   }
   @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "UpdateContainerInstancesStateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateContainerInstancesStateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopTask = {
@@ -1399,8 +1398,8 @@ module StopTask = {
     cluster: option<string_>,
   }
   type response = {task: option<task>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "StopTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "StopTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeContainerInstances = {
@@ -1415,8 +1414,8 @@ module DescribeContainerInstances = {
     containerInstances: option<containerInstances>,
   }
   @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "DescribeContainerInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeContainerInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeClusters = {
@@ -1429,8 +1428,8 @@ module DescribeClusters = {
     failures: option<failures>,
     clusters: option<clusters>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DescribeClustersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DescribeClustersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteService = {
@@ -1441,8 +1440,8 @@ module DeleteService = {
     cluster: option<string_>,
   }
   type response = {service: option<service>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DeleteServiceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DeleteServiceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateService = {
@@ -1472,8 +1471,8 @@ module CreateService = {
     cluster: option<string_>,
   }
   type response = {service: option<service>}
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "CreateServiceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "CreateServiceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartTask = {
@@ -1496,8 +1495,8 @@ module StartTask = {
     failures: option<failures>,
     tasks: option<tasks>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "StartTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "StartTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RunTask = {
@@ -1525,8 +1524,8 @@ module RunTask = {
     failures: option<failures>,
     tasks: option<tasks>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "RunTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "RunTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterTaskDefinition = {
@@ -1553,8 +1552,8 @@ module RegisterTaskDefinition = {
     tags: option<tags>,
     taskDefinition: option<taskDefinition>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "RegisterTaskDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "RegisterTaskDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTasks = {
@@ -1568,8 +1567,8 @@ module DescribeTasks = {
     failures: option<failures>,
     tasks: option<tasks>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DescribeTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DescribeTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTaskDefinition = {
@@ -1582,8 +1581,8 @@ module DescribeTaskDefinition = {
     tags: option<tags>,
     taskDefinition: option<taskDefinition>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DescribeTaskDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DescribeTaskDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeServices = {
@@ -1597,15 +1596,14 @@ module DescribeServices = {
     failures: option<failures>,
     services: option<services>,
   }
-  @module("@aws-sdk/client-ecs") @new external new_: request => t = "DescribeServicesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DescribeServicesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeregisterTaskDefinition = {
   type t
   type request = {taskDefinition: string_}
   type response = {taskDefinition: option<taskDefinition>}
-  @module("@aws-sdk/client-ecs") @new
-  external new_: request => t = "DeregisterTaskDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-ecs") @new external new: request => t = "DeregisterTaskDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

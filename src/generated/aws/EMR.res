@@ -926,8 +926,8 @@ module UpdateStudioSessionMapping = {
   }
 
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "UpdateStudioSessionMappingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateStudioSessionMappingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StopNotebookExecution = {
@@ -935,8 +935,8 @@ module StopNotebookExecution = {
   type request = {@as("NotebookExecutionId") notebookExecutionId: xmlStringMaxLen256}
 
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "StopNotebookExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "StopNotebookExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveManagedScalingPolicy = {
@@ -944,8 +944,8 @@ module RemoveManagedScalingPolicy = {
   type request = {@as("ClusterId") clusterId: clusterId}
   type response = unit
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "RemoveManagedScalingPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveManagedScalingPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveAutoScalingPolicy = {
@@ -956,8 +956,8 @@ module RemoveAutoScalingPolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "RemoveAutoScalingPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RemoveAutoScalingPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyCluster = {
@@ -968,8 +968,8 @@ module ModifyCluster = {
   }
   type response = {@as("StepConcurrencyLevel") stepConcurrencyLevel: option<integer_>}
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ModifyClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSecurityConfiguration = {
@@ -981,8 +981,8 @@ module DescribeSecurityConfiguration = {
     @as("Name") name: option<xmlString>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "DescribeSecurityConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSecurityConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteStudioSessionMapping = {
@@ -995,8 +995,8 @@ module DeleteStudioSessionMapping = {
   }
 
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "DeleteStudioSessionMappingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteStudioSessionMappingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteStudio = {
@@ -1004,8 +1004,8 @@ module DeleteStudio = {
   type request = {@as("StudioId") studioId: xmlStringMaxLen256}
 
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "DeleteStudioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteStudioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteSecurityConfiguration = {
@@ -1013,8 +1013,8 @@ module DeleteSecurityConfiguration = {
   type request = {@as("Name") name: xmlString}
   type response = unit
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "DeleteSecurityConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteSecurityConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateStudioSessionMapping = {
@@ -1028,8 +1028,8 @@ module CreateStudioSessionMapping = {
   }
 
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "CreateStudioSessionMappingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "CreateStudioSessionMappingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateSecurityConfiguration = {
@@ -1043,8 +1043,8 @@ module CreateSecurityConfiguration = {
     @as("Name") name: xmlString,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "CreateSecurityConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSecurityConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateStudio = {
@@ -1058,8 +1058,8 @@ module UpdateStudio = {
   }
 
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "UpdateStudioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdateStudioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TerminateJobFlows = {
@@ -1067,8 +1067,8 @@ module TerminateJobFlows = {
   type request = {@as("JobFlowIds") jobFlowIds: xmlStringList}
 
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "TerminateJobFlowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "TerminateJobFlowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetVisibleToAllUsers = {
@@ -1079,8 +1079,8 @@ module SetVisibleToAllUsers = {
   }
 
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "SetVisibleToAllUsersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SetVisibleToAllUsersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SetTerminationProtection = {
@@ -1091,8 +1091,8 @@ module SetTerminationProtection = {
   }
 
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "SetTerminationProtectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SetTerminationProtectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module RemoveTags = {
@@ -1102,8 +1102,8 @@ module RemoveTags = {
     @as("ResourceId") resourceId: resourceId,
   }
   type response = unit
-  @module("@aws-sdk/client-elasticmapreduce") @new external new_: request => t = "RemoveTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "RemoveTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyInstanceFleet = {
@@ -1114,8 +1114,8 @@ module ModifyInstanceFleet = {
   }
 
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ModifyInstanceFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "ModifyInstanceFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetStudioSessionMapping = {
@@ -1128,8 +1128,8 @@ module GetStudioSessionMapping = {
   }
   type response = {@as("SessionMapping") sessionMapping: option<sessionMappingDetail>}
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "GetStudioSessionMappingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetStudioSessionMappingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartNotebookExecution = {
@@ -1147,8 +1147,8 @@ module StartNotebookExecution = {
   }
   type response = {@as("NotebookExecutionId") notebookExecutionId: option<xmlStringMaxLen256>}
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "StartNotebookExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartNotebookExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutManagedScalingPolicy = {
@@ -1159,8 +1159,8 @@ module PutManagedScalingPolicy = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "PutManagedScalingPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutManagedScalingPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStudios = {
@@ -1170,9 +1170,8 @@ module ListStudios = {
     @as("Marker") marker: option<marker>,
     @as("Studios") studios: option<studioSummaryList>,
   }
-  @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ListStudiosCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "ListStudiosCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListStudioSessionMappings = {
@@ -1187,8 +1186,8 @@ module ListStudioSessionMappings = {
     @as("SessionMappings") sessionMappings: option<sessionMappingSummaryList>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ListStudioSessionMappingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListStudioSessionMappingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSecurityConfigurations = {
@@ -1199,8 +1198,8 @@ module ListSecurityConfigurations = {
     @as("SecurityConfigurations") securityConfigurations: option<securityConfigurationList>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ListSecurityConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSecurityConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListNotebookExecutions = {
@@ -1217,8 +1216,8 @@ module ListNotebookExecutions = {
     @as("NotebookExecutions") notebookExecutions: option<notebookExecutionSummaryList>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ListNotebookExecutionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListNotebookExecutionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetManagedScalingPolicy = {
@@ -1226,8 +1225,8 @@ module GetManagedScalingPolicy = {
   type request = {@as("ClusterId") clusterId: clusterId}
   type response = {@as("ManagedScalingPolicy") managedScalingPolicy: option<managedScalingPolicy>}
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "GetManagedScalingPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetManagedScalingPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateStudio = {
@@ -1250,8 +1249,8 @@ module CreateStudio = {
     @as("StudioId") studioId: option<xmlStringMaxLen256>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "CreateStudioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateStudioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelSteps = {
@@ -1262,9 +1261,8 @@ module CancelSteps = {
     @as("ClusterId") clusterId: xmlStringMaxLen256,
   }
   type response = {@as("CancelStepsInfoList") cancelStepsInfoList: option<cancelStepsInfoList>}
-  @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "CancelStepsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "CancelStepsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTags = {
@@ -1274,8 +1272,8 @@ module AddTags = {
     @as("ResourceId") resourceId: resourceId,
   }
   type response = unit
-  @module("@aws-sdk/client-elasticmapreduce") @new external new_: request => t = "AddTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "AddTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBootstrapActions = {
@@ -1289,8 +1287,8 @@ module ListBootstrapActions = {
     @as("BootstrapActions") bootstrapActions: option<commandList>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ListBootstrapActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListBootstrapActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStudio = {
@@ -1298,8 +1296,8 @@ module DescribeStudio = {
   type request = {@as("StudioId") studioId: xmlStringMaxLen256}
   type response = {@as("Studio") studio: option<studio>}
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "DescribeStudioCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStudioCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeStep = {
@@ -1310,8 +1308,8 @@ module DescribeStep = {
   }
   type response = {@as("Step") step: option<step>}
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "DescribeStepCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeStepCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNotebookExecution = {
@@ -1319,8 +1317,8 @@ module DescribeNotebookExecution = {
   type request = {@as("NotebookExecutionId") notebookExecutionId: xmlStringMaxLen256}
   type response = {@as("NotebookExecution") notebookExecution: option<notebookExecution>}
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "DescribeNotebookExecutionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNotebookExecutionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSteps = {
@@ -1335,8 +1333,8 @@ module ListSteps = {
     @as("Marker") marker: option<marker>,
     @as("Steps") steps: option<stepSummaryList>,
   }
-  @module("@aws-sdk/client-elasticmapreduce") @new external new_: request => t = "ListStepsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "ListStepsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInstances = {
@@ -1355,8 +1353,8 @@ module ListInstances = {
     @as("Instances") instances: option<instanceList>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ListInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListClusters = {
@@ -1372,8 +1370,8 @@ module ListClusters = {
     @as("Clusters") clusters: option<clusterSummaryList>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ListClustersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListClustersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddJobFlowSteps = {
@@ -1384,8 +1382,8 @@ module AddJobFlowSteps = {
   }
   type response = {@as("StepIds") stepIds: option<stepIdsList>}
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "AddJobFlowStepsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddJobFlowStepsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAutoScalingPolicy = {
@@ -1402,8 +1400,8 @@ module PutAutoScalingPolicy = {
     @as("ClusterId") clusterId: option<clusterId>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "PutAutoScalingPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutAutoScalingPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJobFlows = {
@@ -1416,8 +1414,8 @@ module DescribeJobFlows = {
   }
   type response = {@as("JobFlows") jobFlows: option<jobFlowDetailList>}
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "DescribeJobFlowsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeJobFlowsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutBlockPublicAccessConfiguration = {
@@ -1428,8 +1426,8 @@ module PutBlockPublicAccessConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "PutBlockPublicAccessConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutBlockPublicAccessConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBlockPublicAccessConfiguration = {
@@ -1442,8 +1440,8 @@ module GetBlockPublicAccessConfiguration = {
     blockPublicAccessConfiguration: blockPublicAccessConfiguration,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "GetBlockPublicAccessConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetBlockPublicAccessConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCluster = {
@@ -1451,8 +1449,8 @@ module DescribeCluster = {
   type request = {@as("ClusterId") clusterId: clusterId}
   type response = {@as("Cluster") cluster: option<cluster>}
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "DescribeClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyInstanceGroups = {
@@ -1463,8 +1461,8 @@ module ModifyInstanceGroups = {
   }
 
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ModifyInstanceGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "ModifyInstanceGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ListInstanceGroups = {
@@ -1478,8 +1476,8 @@ module ListInstanceGroups = {
     @as("InstanceGroups") instanceGroups: option<instanceGroupList>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ListInstanceGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListInstanceGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddInstanceGroups = {
@@ -1494,8 +1492,8 @@ module AddInstanceGroups = {
     @as("JobFlowId") jobFlowId: option<xmlStringMaxLen256>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "AddInstanceGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddInstanceGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddInstanceFleet = {
@@ -1510,8 +1508,8 @@ module AddInstanceFleet = {
     @as("ClusterId") clusterId: option<xmlStringMaxLen256>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "AddInstanceFleetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddInstanceFleetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInstanceFleets = {
@@ -1525,8 +1523,8 @@ module ListInstanceFleets = {
     @as("InstanceFleets") instanceFleets: option<instanceFleetList>,
   }
   @module("@aws-sdk/client-elasticmapreduce") @new
-  external new_: request => t = "ListInstanceFleetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListInstanceFleetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RunJobFlow = {
@@ -1564,6 +1562,6 @@ module RunJobFlow = {
     @as("ClusterArn") clusterArn: option<arnType>,
     @as("JobFlowId") jobFlowId: option<xmlStringMaxLen256>,
   }
-  @module("@aws-sdk/client-elasticmapreduce") @new external new_: request => t = "RunJobFlowCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-elasticmapreduce") @new external new: request => t = "RunJobFlowCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

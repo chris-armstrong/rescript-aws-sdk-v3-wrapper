@@ -289,8 +289,8 @@ module StopQuery = {
   type t
   type request = {queryId: queryId}
   type response = {success: option<success>}
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "StopQueryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "StopQueryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutSubscriptionFilter = {
@@ -304,8 +304,8 @@ module PutSubscriptionFilter = {
     logGroupName: logGroupName,
   }
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "PutSubscriptionFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "PutSubscriptionFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutRetentionPolicy = {
@@ -315,8 +315,8 @@ module PutRetentionPolicy = {
     logGroupName: logGroupName,
   }
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "PutRetentionPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "PutRetentionPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutDestinationPolicy = {
@@ -326,16 +326,16 @@ module PutDestinationPolicy = {
     destinationName: destinationName,
   }
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "PutDestinationPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "PutDestinationPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DisassociateKmsKey = {
   type t
   type request = {logGroupName: logGroupName}
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DisassociateKmsKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DisassociateKmsKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteSubscriptionFilter = {
@@ -346,32 +346,32 @@ module DeleteSubscriptionFilter = {
   }
 
   @module("@aws-sdk/client-logs") @new
-  external new_: request => t = "DeleteSubscriptionFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteSubscriptionFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteRetentionPolicy = {
   type t
   type request = {logGroupName: logGroupName}
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DeleteRetentionPolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteRetentionPolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteResourcePolicy = {
   type t
   type request = {policyName: option<policyName>}
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DeleteResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteQueryDefinition = {
   type t
   type request = {queryDefinitionId: queryId}
   type response = {success: option<success>}
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DeleteQueryDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteQueryDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMetricFilter = {
@@ -381,8 +381,8 @@ module DeleteMetricFilter = {
     logGroupName: logGroupName,
   }
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DeleteMetricFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteMetricFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteLogStream = {
@@ -392,24 +392,24 @@ module DeleteLogStream = {
     logGroupName: logGroupName,
   }
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DeleteLogStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteLogStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteLogGroup = {
   type t
   type request = {logGroupName: logGroupName}
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DeleteLogGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteLogGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteDestination = {
   type t
   type request = {destinationName: destinationName}
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DeleteDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DeleteDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateLogStream = {
@@ -419,8 +419,8 @@ module CreateLogStream = {
     logGroupName: logGroupName,
   }
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "CreateLogStreamCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "CreateLogStreamCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateExportTask = {
@@ -435,16 +435,16 @@ module CreateExportTask = {
     taskName: option<exportTaskName>,
   }
   type response = {taskId: option<exportTaskId>}
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "CreateExportTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "CreateExportTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelExportTask = {
   type t
   type request = {taskId: exportTaskId}
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "CancelExportTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "CancelExportTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AssociateKmsKey = {
@@ -454,8 +454,8 @@ module AssociateKmsKey = {
     logGroupName: logGroupName,
   }
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "AssociateKmsKeyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "AssociateKmsKeyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagLogGroup = {
@@ -465,8 +465,8 @@ module UntagLogGroup = {
     logGroupName: logGroupName,
   }
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "UntagLogGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "UntagLogGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagLogGroup = {
@@ -476,8 +476,8 @@ module TagLogGroup = {
     logGroupName: logGroupName,
   }
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "TagLogGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "TagLogGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutResourcePolicy = {
@@ -487,8 +487,8 @@ module PutResourcePolicy = {
     policyName: option<policyName>,
   }
   type response = {resourcePolicy: option<resourcePolicy>}
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "PutResourcePolicyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "PutResourcePolicyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutQueryDefinition = {
@@ -500,8 +500,8 @@ module PutQueryDefinition = {
     name: queryDefinitionName,
   }
   type response = {queryDefinitionId: option<queryId>}
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "PutQueryDefinitionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "PutQueryDefinitionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutDestination = {
@@ -512,24 +512,24 @@ module PutDestination = {
     destinationName: destinationName,
   }
   type response = {destination: option<destination>}
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "PutDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "PutDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsLogGroup = {
   type t
   type request = {logGroupName: logGroupName}
   type response = {tags: option<tags>}
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "ListTagsLogGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "ListTagsLogGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLogRecord = {
   type t
   type request = {logRecordPointer: logRecordPointer}
   type response = {logRecord: option<logRecord>}
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "GetLogRecordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "GetLogRecordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateLogGroup = {
@@ -540,8 +540,8 @@ module CreateLogGroup = {
     logGroupName: logGroupName,
   }
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "CreateLogGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "CreateLogGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module StartQuery = {
@@ -555,8 +555,8 @@ module StartQuery = {
     logGroupName: option<logGroupName>,
   }
   type response = {queryId: option<queryId>}
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "StartQueryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "StartQueryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutLogEvents = {
@@ -571,8 +571,8 @@ module PutLogEvents = {
     rejectedLogEventsInfo: option<rejectedLogEventsInfo>,
     nextSequenceToken: option<sequenceToken>,
   }
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "PutLogEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "PutLogEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLogGroupFields = {
@@ -582,8 +582,8 @@ module GetLogGroupFields = {
     logGroupName: logGroupName,
   }
   type response = {logGroupFields: option<logGroupFieldList>}
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "GetLogGroupFieldsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "GetLogGroupFieldsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetLogEvents = {
@@ -602,8 +602,8 @@ module GetLogEvents = {
     nextForwardToken: option<nextToken>,
     events: option<outputLogEvents>,
   }
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "GetLogEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "GetLogEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module FilterLogEvents = {
@@ -624,8 +624,8 @@ module FilterLogEvents = {
     searchedLogStreams: option<searchedLogStreams>,
     events: option<filteredLogEvents>,
   }
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "FilterLogEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "FilterLogEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSubscriptionFilters = {
@@ -641,8 +641,8 @@ module DescribeSubscriptionFilters = {
     subscriptionFilters: option<subscriptionFilters>,
   }
   @module("@aws-sdk/client-logs") @new
-  external new_: request => t = "DescribeSubscriptionFiltersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSubscriptionFiltersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeResourcePolicies = {
@@ -656,8 +656,8 @@ module DescribeResourcePolicies = {
     resourcePolicies: option<resourcePolicies>,
   }
   @module("@aws-sdk/client-logs") @new
-  external new_: request => t = "DescribeResourcePoliciesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeResourcePoliciesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeQueries = {
@@ -672,8 +672,8 @@ module DescribeQueries = {
     nextToken: option<nextToken>,
     queries: option<queryInfoList>,
   }
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DescribeQueriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DescribeQueriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLogStreams = {
@@ -690,8 +690,8 @@ module DescribeLogStreams = {
     nextToken: option<nextToken>,
     logStreams: option<logStreams>,
   }
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DescribeLogStreamsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DescribeLogStreamsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeLogGroups = {
@@ -705,8 +705,8 @@ module DescribeLogGroups = {
     nextToken: option<nextToken>,
     logGroups: option<logGroups>,
   }
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DescribeLogGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DescribeLogGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDestinations = {
@@ -720,8 +720,8 @@ module DescribeDestinations = {
     nextToken: option<nextToken>,
     destinations: option<destinations>,
   }
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DescribeDestinationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DescribeDestinationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TestMetricFilter = {
@@ -731,8 +731,8 @@ module TestMetricFilter = {
     filterPattern: filterPattern,
   }
   type response = {matches: option<metricFilterMatches>}
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "TestMetricFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "TestMetricFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutMetricFilter = {
@@ -744,8 +744,8 @@ module PutMetricFilter = {
     logGroupName: logGroupName,
   }
 
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "PutMetricFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "PutMetricFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetQueryResults = {
@@ -756,8 +756,8 @@ module GetQueryResults = {
     statistics: option<queryStatistics>,
     results: option<queryResults>,
   }
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "GetQueryResultsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "GetQueryResultsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeQueryDefinitions = {
@@ -772,8 +772,8 @@ module DescribeQueryDefinitions = {
     queryDefinitions: option<queryDefinitionList>,
   }
   @module("@aws-sdk/client-logs") @new
-  external new_: request => t = "DescribeQueryDefinitionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeQueryDefinitionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeExportTasks = {
@@ -788,8 +788,8 @@ module DescribeExportTasks = {
     nextToken: option<nextToken>,
     exportTasks: option<exportTasks>,
   }
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DescribeExportTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DescribeExportTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeMetricFilters = {
@@ -806,6 +806,6 @@ module DescribeMetricFilters = {
     nextToken: option<nextToken>,
     metricFilters: option<metricFilters>,
   }
-  @module("@aws-sdk/client-logs") @new external new_: request => t = "DescribeMetricFiltersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-logs") @new external new: request => t = "DescribeMetricFiltersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

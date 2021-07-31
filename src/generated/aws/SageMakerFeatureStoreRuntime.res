@@ -33,8 +33,8 @@ module DeleteRecord = {
     @as("FeatureGroupName") featureGroupName: featureGroupName,
   }
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "DeleteRecordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "DeleteRecordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutRecord = {
@@ -44,8 +44,8 @@ module PutRecord = {
     @as("FeatureGroupName") featureGroupName: featureGroupName,
   }
 
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "PutRecordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "PutRecordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetRecord = {
@@ -56,6 +56,6 @@ module GetRecord = {
     @as("FeatureGroupName") featureGroupName: featureGroupName,
   }
   type response = {@as("Record") record: option<record>}
-  @module("@aws-sdk/client-sagemaker") @new external new_: request => t = "GetRecordCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-sagemaker") @new external new: request => t = "GetRecordCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

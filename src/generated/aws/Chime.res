@@ -713,8 +713,8 @@ module UpdatePhoneNumberSettings = {
   type request = {@as("CallingName") callingName: callingName}
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "UpdatePhoneNumberSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "UpdatePhoneNumberSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateChannelReadMarker = {
@@ -725,8 +725,8 @@ module UpdateChannelReadMarker = {
   }
   type response = {@as("ChannelArn") channelArn: option<chimeArn>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "UpdateChannelReadMarkerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateChannelReadMarkerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateChannelMessage = {
@@ -742,8 +742,8 @@ module UpdateChannelMessage = {
     @as("MessageId") messageId: option<messageId>,
     @as("ChannelArn") channelArn: option<chimeArn>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateChannelMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateChannelMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateChannel = {
@@ -756,8 +756,8 @@ module UpdateChannel = {
     @as("ChannelArn") channelArn: chimeArn,
   }
   type response = {@as("ChannelArn") channelArn: option<chimeArn>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAppInstanceUser = {
@@ -768,8 +768,8 @@ module UpdateAppInstanceUser = {
     @as("AppInstanceUserArn") appInstanceUserArn: chimeArn,
   }
   type response = {@as("AppInstanceUserArn") appInstanceUserArn: option<chimeArn>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateAppInstanceUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateAppInstanceUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAppInstance = {
@@ -780,8 +780,8 @@ module UpdateAppInstance = {
     @as("AppInstanceArn") appInstanceArn: chimeArn,
   }
   type response = {@as("AppInstanceArn") appInstanceArn: option<chimeArn>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateAppInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateAppInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SendChannelMessage = {
@@ -799,8 +799,8 @@ module SendChannelMessage = {
     @as("MessageId") messageId: option<messageId>,
     @as("ChannelArn") channelArn: option<chimeArn>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "SendChannelMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "SendChannelMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RedactRoomMessage = {
@@ -811,8 +811,8 @@ module RedactRoomMessage = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = unit
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "RedactRoomMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "RedactRoomMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RedactConversationMessage = {
@@ -824,8 +824,8 @@ module RedactConversationMessage = {
   }
   type response = unit
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "RedactConversationMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RedactConversationMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RedactChannelMessage = {
@@ -839,8 +839,8 @@ module RedactChannelMessage = {
     @as("MessageId") messageId: option<messageId>,
     @as("ChannelArn") channelArn: option<chimeArn>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "RedactChannelMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "RedactChannelMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module LogoutUser = {
@@ -850,8 +850,8 @@ module LogoutUser = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = unit
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "LogoutUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "LogoutUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPhoneNumberSettings = {
@@ -861,8 +861,8 @@ module GetPhoneNumberSettings = {
     @as("CallingNameUpdatedTimestamp") callingNameUpdatedTimestamp: option<iso8601Timestamp>,
     @as("CallingName") callingName: option<callingName>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: unit => t = "GetPhoneNumberSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: unit => t = "GetPhoneNumberSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociatePhoneNumberFromUser = {
@@ -873,8 +873,8 @@ module DisassociatePhoneNumberFromUser = {
   }
   type response = unit
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DisassociatePhoneNumberFromUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociatePhoneNumberFromUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVoiceConnectorTermination = {
@@ -882,8 +882,8 @@ module DeleteVoiceConnectorTermination = {
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString}
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteVoiceConnectorTerminationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteVoiceConnectorTerminationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVoiceConnectorStreamingConfiguration = {
@@ -891,8 +891,8 @@ module DeleteVoiceConnectorStreamingConfiguration = {
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString}
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteVoiceConnectorStreamingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteVoiceConnectorStreamingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVoiceConnectorProxy = {
@@ -900,8 +900,8 @@ module DeleteVoiceConnectorProxy = {
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString128}
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteVoiceConnectorProxyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteVoiceConnectorProxyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVoiceConnectorOrigination = {
@@ -909,8 +909,8 @@ module DeleteVoiceConnectorOrigination = {
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString}
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteVoiceConnectorOriginationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteVoiceConnectorOriginationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVoiceConnectorGroup = {
@@ -918,8 +918,8 @@ module DeleteVoiceConnectorGroup = {
   type request = {@as("VoiceConnectorGroupId") voiceConnectorGroupId: nonEmptyString}
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteVoiceConnectorGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteVoiceConnectorGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVoiceConnectorEmergencyCallingConfiguration = {
@@ -927,24 +927,24 @@ module DeleteVoiceConnectorEmergencyCallingConfiguration = {
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString}
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteVoiceConnectorEmergencyCallingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteVoiceConnectorEmergencyCallingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteVoiceConnector = {
   type t
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString}
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteVoiceConnectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteVoiceConnectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteSipRule = {
   type t
   type request = {@as("SipRuleId") sipRuleId: nonEmptyString}
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteSipRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteSipRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteSipMediaApplication = {
@@ -952,8 +952,8 @@ module DeleteSipMediaApplication = {
   type request = {@as("SipMediaApplicationId") sipMediaApplicationId: nonEmptyString}
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteSipMediaApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteSipMediaApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteRoomMembership = {
@@ -964,8 +964,8 @@ module DeleteRoomMembership = {
     @as("AccountId") accountId: nonEmptyString,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteRoomMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteRoomMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteRoom = {
@@ -975,8 +975,8 @@ module DeleteRoom = {
     @as("AccountId") accountId: nonEmptyString,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteRoomCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteRoomCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteProxySession = {
@@ -986,24 +986,24 @@ module DeleteProxySession = {
     @as("VoiceConnectorId") voiceConnectorId: nonEmptyString128,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteProxySessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteProxySessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeletePhoneNumber = {
   type t
   type request = {@as("PhoneNumberId") phoneNumberId: string_}
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeletePhoneNumberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeletePhoneNumberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteMeeting = {
   type t
   type request = {@as("MeetingId") meetingId: guidString}
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteMeetingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteMeetingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteEventsConfiguration = {
@@ -1014,8 +1014,8 @@ module DeleteEventsConfiguration = {
   }
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteEventsConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteEventsConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteChannelModerator = {
@@ -1026,9 +1026,8 @@ module DeleteChannelModerator = {
     @as("ChannelArn") channelArn: chimeArn,
   }
 
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteChannelModeratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteChannelModeratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteChannelMessage = {
@@ -1039,8 +1038,8 @@ module DeleteChannelMessage = {
     @as("ChannelArn") channelArn: chimeArn,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteChannelMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteChannelMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteChannelMembership = {
@@ -1052,8 +1051,8 @@ module DeleteChannelMembership = {
   }
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteChannelMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteChannelMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteChannelBan = {
@@ -1064,8 +1063,8 @@ module DeleteChannelBan = {
     @as("ChannelArn") channelArn: chimeArn,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteChannelBanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteChannelBanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteChannel = {
@@ -1075,8 +1074,8 @@ module DeleteChannel = {
     @as("ChannelArn") channelArn: chimeArn,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAttendee = {
@@ -1086,16 +1085,16 @@ module DeleteAttendee = {
     @as("MeetingId") meetingId: guidString,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteAttendeeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAttendeeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAppInstanceUser = {
   type t
   type request = {@as("AppInstanceUserArn") appInstanceUserArn: chimeArn}
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteAppInstanceUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAppInstanceUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAppInstanceStreamingConfigurations = {
@@ -1103,8 +1102,8 @@ module DeleteAppInstanceStreamingConfigurations = {
   type request = {@as("AppInstanceArn") appInstanceArn: chimeArn}
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteAppInstanceStreamingConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteAppInstanceStreamingConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAppInstanceAdmin = {
@@ -1114,25 +1113,24 @@ module DeleteAppInstanceAdmin = {
     @as("AppInstanceAdminArn") appInstanceAdminArn: chimeArn,
   }
 
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteAppInstanceAdminCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAppInstanceAdminCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAppInstance = {
   type t
   type request = {@as("AppInstanceArn") appInstanceArn: chimeArn}
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteAppInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAppInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAccount = {
   type t
   type request = {@as("AccountId") accountId: nonEmptyString}
   type response = unit
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DeleteAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DeleteAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMeetingDialOut = {
@@ -1144,8 +1142,8 @@ module CreateMeetingDialOut = {
     @as("MeetingId") meetingId: guidString,
   }
   type response = {@as("TransactionId") transactionId: option<guidString>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateMeetingDialOutCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateMeetingDialOutCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociatePhoneNumberWithUser = {
@@ -1157,8 +1155,8 @@ module AssociatePhoneNumberWithUser = {
   }
   type response = unit
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "AssociatePhoneNumberWithUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociatePhoneNumberWithUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateVoiceConnector = {
@@ -1169,8 +1167,8 @@ module UpdateVoiceConnector = {
     @as("VoiceConnectorId") voiceConnectorId: nonEmptyString,
   }
   type response = {@as("VoiceConnector") voiceConnector: option<voiceConnector>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateVoiceConnectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateVoiceConnectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRoom = {
@@ -1181,8 +1179,8 @@ module UpdateRoom = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("Room") room: option<room>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateRoomCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateRoomCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateGlobalSettings = {
@@ -1192,8 +1190,8 @@ module UpdateGlobalSettings = {
     @as("BusinessCalling") businessCalling: businessCallingSettings,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateGlobalSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateGlobalSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateBot = {
@@ -1204,8 +1202,8 @@ module UpdateBot = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("Bot") bot: option<bot>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateBotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateBotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAccountSettings = {
@@ -1215,8 +1213,8 @@ module UpdateAccountSettings = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = unit
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateAccountSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateAccountSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -1226,8 +1224,8 @@ module UntagResource = {
     @as("ResourceARN") resourceARN: arn,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagMeeting = {
@@ -1237,8 +1235,8 @@ module UntagMeeting = {
     @as("MeetingId") meetingId: guidString,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UntagMeetingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UntagMeetingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UntagAttendee = {
@@ -1249,8 +1247,8 @@ module UntagAttendee = {
     @as("MeetingId") meetingId: guidString,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UntagAttendeeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UntagAttendeeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module SearchAvailablePhoneNumbers = {
@@ -1270,8 +1268,8 @@ module SearchAvailablePhoneNumbers = {
     @as("E164PhoneNumbers") e164PhoneNumbers: option<e164PhoneNumberList>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "SearchAvailablePhoneNumbersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SearchAvailablePhoneNumbersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegenerateSecurityToken = {
@@ -1282,8 +1280,8 @@ module RegenerateSecurityToken = {
   }
   type response = {@as("Bot") bot: option<bot>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "RegenerateSecurityTokenCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RegenerateSecurityTokenCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutVoiceConnectorLoggingConfiguration = {
@@ -1294,8 +1292,8 @@ module PutVoiceConnectorLoggingConfiguration = {
   }
   type response = {@as("LoggingConfiguration") loggingConfiguration: option<loggingConfiguration>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "PutVoiceConnectorLoggingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutVoiceConnectorLoggingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutSipMediaApplicationLoggingConfiguration = {
@@ -1310,8 +1308,8 @@ module PutSipMediaApplicationLoggingConfiguration = {
     sipMediaApplicationLoggingConfiguration: option<sipMediaApplicationLoggingConfiguration>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "PutSipMediaApplicationLoggingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutSipMediaApplicationLoggingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutEventsConfiguration = {
@@ -1323,9 +1321,8 @@ module PutEventsConfiguration = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("EventsConfiguration") eventsConfiguration: option<eventsConfiguration>}
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "PutEventsConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "PutEventsConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListVoiceConnectorTerminationCredentials = {
@@ -1333,8 +1330,8 @@ module ListVoiceConnectorTerminationCredentials = {
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString}
   type response = {@as("Usernames") usernames: option<sensitiveStringList>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "ListVoiceConnectorTerminationCredentialsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListVoiceConnectorTerminationCredentialsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVoiceConnectorTerminationHealth = {
@@ -1342,8 +1339,8 @@ module GetVoiceConnectorTerminationHealth = {
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString}
   type response = {@as("TerminationHealth") terminationHealth: option<terminationHealth>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetVoiceConnectorTerminationHealthCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetVoiceConnectorTerminationHealthCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVoiceConnectorLoggingConfiguration = {
@@ -1351,16 +1348,16 @@ module GetVoiceConnectorLoggingConfiguration = {
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString}
   type response = {@as("LoggingConfiguration") loggingConfiguration: option<loggingConfiguration>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetVoiceConnectorLoggingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetVoiceConnectorLoggingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVoiceConnector = {
   type t
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString}
   type response = {@as("VoiceConnector") voiceConnector: option<voiceConnector>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetVoiceConnectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetVoiceConnectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSipMediaApplicationLoggingConfiguration = {
@@ -1371,8 +1368,8 @@ module GetSipMediaApplicationLoggingConfiguration = {
     sipMediaApplicationLoggingConfiguration: option<sipMediaApplicationLoggingConfiguration>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetSipMediaApplicationLoggingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetSipMediaApplicationLoggingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRoom = {
@@ -1382,8 +1379,8 @@ module GetRoom = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("Room") room: option<room>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetRoomCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetRoomCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMessagingSessionEndpoint = {
@@ -1391,8 +1388,8 @@ module GetMessagingSessionEndpoint = {
   type request = unit
   type response = {@as("Endpoint") endpoint: option<messagingSessionEndpoint>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetMessagingSessionEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetMessagingSessionEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetGlobalSettings = {
@@ -1402,8 +1399,8 @@ module GetGlobalSettings = {
     @as("VoiceConnector") voiceConnector: option<voiceConnectorSettings>,
     @as("BusinessCalling") businessCalling: option<businessCallingSettings>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: unit => t = "GetGlobalSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: unit => t = "GetGlobalSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetEventsConfiguration = {
@@ -1413,9 +1410,8 @@ module GetEventsConfiguration = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("EventsConfiguration") eventsConfiguration: option<eventsConfiguration>}
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetEventsConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetEventsConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBot = {
@@ -1425,8 +1421,8 @@ module GetBot = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("Bot") bot: option<bot>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetBotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetBotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAttendee = {
@@ -1436,16 +1432,16 @@ module GetAttendee = {
     @as("MeetingId") meetingId: guidString,
   }
   type response = {@as("Attendee") attendee: option<attendee>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetAttendeeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetAttendeeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAccountSettings = {
   type t
   type request = {@as("AccountId") accountId: nonEmptyString}
   type response = {@as("AccountSettings") accountSettings: option<accountSettings>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetAccountSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetAccountSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateSigninDelegateGroupsFromAccount = {
@@ -1456,8 +1452,8 @@ module DisassociateSigninDelegateGroupsFromAccount = {
   }
   type response = unit
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DisassociateSigninDelegateGroupsFromAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateSigninDelegateGroupsFromAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAppInstanceUser = {
@@ -1465,16 +1461,16 @@ module DescribeAppInstanceUser = {
   type request = {@as("AppInstanceUserArn") appInstanceUserArn: chimeArn}
   type response = {@as("AppInstanceUser") appInstanceUser: option<appInstanceUser>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DescribeAppInstanceUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAppInstanceUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAppInstance = {
   type t
   type request = {@as("AppInstanceArn") appInstanceArn: chimeArn}
   type response = {@as("AppInstance") appInstance: option<appInstance>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DescribeAppInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DescribeAppInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteVoiceConnectorTerminationCredentials = {
@@ -1485,8 +1481,8 @@ module DeleteVoiceConnectorTerminationCredentials = {
   }
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DeleteVoiceConnectorTerminationCredentialsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteVoiceConnectorTerminationCredentialsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module CreateVoiceConnector = {
@@ -1497,8 +1493,8 @@ module CreateVoiceConnector = {
     @as("Name") name: voiceConnectorName,
   }
   type response = {@as("VoiceConnector") voiceConnector: option<voiceConnector>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateVoiceConnectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateVoiceConnectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSipMediaApplicationCall = {
@@ -1512,8 +1508,8 @@ module CreateSipMediaApplicationCall = {
     @as("SipMediaApplicationCall") sipMediaApplicationCall: option<sipMediaApplicationCall>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "CreateSipMediaApplicationCallCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSipMediaApplicationCallCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRoom = {
@@ -1524,8 +1520,8 @@ module CreateRoom = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("Room") room: option<room>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateRoomCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateRoomCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateChannelModerator = {
@@ -1539,9 +1535,8 @@ module CreateChannelModerator = {
     @as("ChannelModerator") channelModerator: option<identity>,
     @as("ChannelArn") channelArn: option<chimeArn>,
   }
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "CreateChannelModeratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateChannelModeratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateChannelMembership = {
@@ -1557,8 +1552,8 @@ module CreateChannelMembership = {
     @as("ChannelArn") channelArn: option<chimeArn>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "CreateChannelMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateChannelMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateChannelBan = {
@@ -1572,8 +1567,8 @@ module CreateChannelBan = {
     @as("Member") member: option<identity>,
     @as("ChannelArn") channelArn: option<chimeArn>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateChannelBanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateChannelBanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBot = {
@@ -1584,8 +1579,8 @@ module CreateBot = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("Bot") bot: option<bot>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateBotCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateBotCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAppInstanceAdmin = {
@@ -1598,9 +1593,8 @@ module CreateAppInstanceAdmin = {
     @as("AppInstanceArn") appInstanceArn: option<chimeArn>,
     @as("AppInstanceAdmin") appInstanceAdmin: option<identity>,
   }
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "CreateAppInstanceAdminCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateAppInstanceAdminCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateUserSettings = {
@@ -1611,8 +1605,8 @@ module UpdateUserSettings = {
     @as("AccountId") accountId: string_,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateUserSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateUserSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateUser = {
@@ -1625,8 +1619,8 @@ module UpdateUser = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("User") user: option<user>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRoomMembership = {
@@ -1638,8 +1632,8 @@ module UpdateRoomMembership = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("RoomMembership") roomMembership: option<roomMembership>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateRoomMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateRoomMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1649,8 +1643,8 @@ module TagResource = {
     @as("ResourceARN") resourceARN: arn,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagMeeting = {
@@ -1660,8 +1654,8 @@ module TagMeeting = {
     @as("MeetingId") meetingId: guidString,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "TagMeetingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "TagMeetingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagAttendee = {
@@ -1672,8 +1666,8 @@ module TagAttendee = {
     @as("MeetingId") meetingId: guidString,
   }
 
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "TagAttendeeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "TagAttendeeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module ResetPersonalPIN = {
@@ -1683,8 +1677,8 @@ module ResetPersonalPIN = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("User") user: option<user>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ResetPersonalPINCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ResetPersonalPINCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutVoiceConnectorTerminationCredentials = {
@@ -1695,8 +1689,8 @@ module PutVoiceConnectorTerminationCredentials = {
   }
 
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "PutVoiceConnectorTerminationCredentialsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "PutVoiceConnectorTerminationCredentialsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module PutVoiceConnectorTermination = {
@@ -1707,8 +1701,8 @@ module PutVoiceConnectorTermination = {
   }
   type response = {@as("Termination") termination: option<termination>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "PutVoiceConnectorTerminationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutVoiceConnectorTerminationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutVoiceConnectorProxy = {
@@ -1721,9 +1715,8 @@ module PutVoiceConnectorProxy = {
     @as("VoiceConnectorId") voiceConnectorId: nonEmptyString128,
   }
   type response = {@as("Proxy") proxy: option<proxy>}
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "PutVoiceConnectorProxyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "PutVoiceConnectorProxyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutRetentionSettings = {
@@ -1736,8 +1729,8 @@ module PutRetentionSettings = {
     @as("InitiateDeletionTimestamp") initiateDeletionTimestamp: option<iso8601Timestamp>,
     @as("RetentionSettings") retentionSettings: option<retentionSettings>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "PutRetentionSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "PutRetentionSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAppInstanceStreamingConfigurations = {
@@ -1752,8 +1745,8 @@ module PutAppInstanceStreamingConfigurations = {
     appInstanceStreamingConfigurations: option<appInstanceStreamingConfigurationList>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "PutAppInstanceStreamingConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutAppInstanceStreamingConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutAppInstanceRetentionSettings = {
@@ -1768,8 +1761,8 @@ module PutAppInstanceRetentionSettings = {
     appInstanceRetentionSettings: option<appInstanceRetentionSettings>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "PutAppInstanceRetentionSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutAppInstanceRetentionSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListVoiceConnectors = {
@@ -1782,16 +1775,16 @@ module ListVoiceConnectors = {
     @as("NextToken") nextToken: option<string_>,
     @as("VoiceConnectors") voiceConnectors: option<voiceConnectorList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListVoiceConnectorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListVoiceConnectorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceARN") resourceARN: arn}
   type response = {@as("Tags") tags: option<tagList_>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRooms = {
@@ -1806,16 +1799,16 @@ module ListRooms = {
     @as("NextToken") nextToken: option<string_>,
     @as("Rooms") rooms: option<roomList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListRoomsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListRoomsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMeetingTags = {
   type t
   type request = {@as("MeetingId") meetingId: guidString}
   type response = {@as("Tags") tags: option<tagList_>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListMeetingTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListMeetingTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChannels = {
@@ -1831,8 +1824,8 @@ module ListChannels = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("Channels") channels: option<channelSummaryList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListChannelsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListChannelsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBots = {
@@ -1846,8 +1839,8 @@ module ListBots = {
     @as("NextToken") nextToken: option<string_>,
     @as("Bots") bots: option<botList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListBotsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListBotsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAttendees = {
@@ -1861,8 +1854,8 @@ module ListAttendees = {
     @as("NextToken") nextToken: option<string_>,
     @as("Attendees") attendees: option<attendeeList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListAttendeesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListAttendeesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAttendeeTags = {
@@ -1872,8 +1865,8 @@ module ListAttendeeTags = {
     @as("MeetingId") meetingId: guidString,
   }
   type response = {@as("Tags") tags: option<tagList_>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListAttendeeTagsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListAttendeeTagsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAppInstances = {
@@ -1886,8 +1879,8 @@ module ListAppInstances = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("AppInstances") appInstances: option<appInstanceList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListAppInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListAppInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAppInstanceUsers = {
@@ -1902,8 +1895,8 @@ module ListAppInstanceUsers = {
     @as("AppInstanceUsers") appInstanceUsers: option<appInstanceUserList>,
     @as("AppInstanceArn") appInstanceArn: option<chimeArn>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListAppInstanceUsersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListAppInstanceUsersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module InviteUsers = {
@@ -1914,8 +1907,8 @@ module InviteUsers = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("Invites") invites: option<inviteList>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "InviteUsersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "InviteUsersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVoiceConnectorTermination = {
@@ -1923,17 +1916,16 @@ module GetVoiceConnectorTermination = {
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString}
   type response = {@as("Termination") termination: option<termination>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetVoiceConnectorTerminationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetVoiceConnectorTerminationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVoiceConnectorProxy = {
   type t
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString128}
   type response = {@as("Proxy") proxy: option<proxy>}
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetVoiceConnectorProxyCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetVoiceConnectorProxyCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUserSettings = {
@@ -1943,8 +1935,8 @@ module GetUserSettings = {
     @as("AccountId") accountId: string_,
   }
   type response = {@as("UserSettings") userSettings: option<userSettings>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetUserSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetUserSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUser = {
@@ -1954,8 +1946,8 @@ module GetUser = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("User") user: option<user>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetRetentionSettings = {
@@ -1965,16 +1957,16 @@ module GetRetentionSettings = {
     @as("InitiateDeletionTimestamp") initiateDeletionTimestamp: option<iso8601Timestamp>,
     @as("RetentionSettings") retentionSettings: option<retentionSettings>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetRetentionSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetRetentionSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMeeting = {
   type t
   type request = {@as("MeetingId") meetingId: guidString}
   type response = {@as("Meeting") meeting: option<meeting>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetMeetingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetMeetingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetChannelMessage = {
@@ -1985,8 +1977,8 @@ module GetChannelMessage = {
     @as("ChannelArn") channelArn: chimeArn,
   }
   type response = {@as("ChannelMessage") channelMessage: option<channelMessage>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetChannelMessageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetChannelMessageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAppInstanceStreamingConfigurations = {
@@ -1997,8 +1989,8 @@ module GetAppInstanceStreamingConfigurations = {
     appInstanceStreamingConfigurations: option<appInstanceStreamingConfigurationList>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetAppInstanceStreamingConfigurationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAppInstanceStreamingConfigurationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAppInstanceRetentionSettings = {
@@ -2010,8 +2002,8 @@ module GetAppInstanceRetentionSettings = {
     appInstanceRetentionSettings: option<appInstanceRetentionSettings>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetAppInstanceRetentionSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAppInstanceRetentionSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociatePhoneNumbersFromVoiceConnectorGroup = {
@@ -2022,8 +2014,8 @@ module DisassociatePhoneNumbersFromVoiceConnectorGroup = {
   }
   type response = {@as("PhoneNumberErrors") phoneNumberErrors: option<phoneNumberErrorList>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DisassociatePhoneNumbersFromVoiceConnectorGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociatePhoneNumbersFromVoiceConnectorGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociatePhoneNumbersFromVoiceConnector = {
@@ -2034,8 +2026,8 @@ module DisassociatePhoneNumbersFromVoiceConnector = {
   }
   type response = {@as("PhoneNumberErrors") phoneNumberErrors: option<phoneNumberErrorList>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DisassociatePhoneNumbersFromVoiceConnectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociatePhoneNumbersFromVoiceConnectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeChannelModerator = {
@@ -2047,8 +2039,8 @@ module DescribeChannelModerator = {
   }
   type response = {@as("ChannelModerator") channelModerator: option<channelModerator>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DescribeChannelModeratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeChannelModeratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeChannelModeratedByAppInstanceUser = {
@@ -2060,8 +2052,8 @@ module DescribeChannelModeratedByAppInstanceUser = {
   }
   type response = {@as("Channel") channel: option<channelModeratedByAppInstanceUserSummary>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DescribeChannelModeratedByAppInstanceUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeChannelModeratedByAppInstanceUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeChannelMembershipForAppInstanceUser = {
@@ -2075,8 +2067,8 @@ module DescribeChannelMembershipForAppInstanceUser = {
     @as("ChannelMembership") channelMembership: option<channelMembershipForAppInstanceUserSummary>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DescribeChannelMembershipForAppInstanceUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeChannelMembershipForAppInstanceUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeChannelMembership = {
@@ -2088,8 +2080,8 @@ module DescribeChannelMembership = {
   }
   type response = {@as("ChannelMembership") channelMembership: option<channelMembership>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DescribeChannelMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeChannelMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeChannelBan = {
@@ -2100,8 +2092,8 @@ module DescribeChannelBan = {
     @as("ChannelArn") channelArn: chimeArn,
   }
   type response = {@as("ChannelBan") channelBan: option<channelBan>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DescribeChannelBanCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DescribeChannelBanCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeChannel = {
@@ -2111,8 +2103,8 @@ module DescribeChannel = {
     @as("ChannelArn") channelArn: chimeArn,
   }
   type response = {@as("Channel") channel: option<channel>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "DescribeChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "DescribeChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAppInstanceAdmin = {
@@ -2123,8 +2115,8 @@ module DescribeAppInstanceAdmin = {
   }
   type response = {@as("AppInstanceAdmin") appInstanceAdmin: option<appInstanceAdmin>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "DescribeAppInstanceAdminCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAppInstanceAdminCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateUser = {
@@ -2136,8 +2128,8 @@ module CreateUser = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("User") user: option<user>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateRoomMembership = {
@@ -2149,8 +2141,8 @@ module CreateRoomMembership = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("RoomMembership") roomMembership: option<roomMembership>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateRoomMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateRoomMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMeeting = {
@@ -2165,8 +2157,8 @@ module CreateMeeting = {
     @as("ClientRequestToken") clientRequestToken: clientRequestToken,
   }
   type response = {@as("Meeting") meeting: option<meeting>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateMeetingCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateMeetingCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateChannel = {
@@ -2182,8 +2174,8 @@ module CreateChannel = {
     @as("AppInstanceArn") appInstanceArn: chimeArn,
   }
   type response = {@as("ChannelArn") channelArn: option<chimeArn>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateChannelCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateChannelCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAttendee = {
@@ -2194,8 +2186,8 @@ module CreateAttendee = {
     @as("MeetingId") meetingId: guidString,
   }
   type response = {@as("Attendee") attendee: option<attendee>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateAttendeeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateAttendeeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAppInstanceUser = {
@@ -2209,8 +2201,8 @@ module CreateAppInstanceUser = {
     @as("AppInstanceArn") appInstanceArn: chimeArn,
   }
   type response = {@as("AppInstanceUserArn") appInstanceUserArn: option<chimeArn>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateAppInstanceUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateAppInstanceUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAppInstance = {
@@ -2222,8 +2214,8 @@ module CreateAppInstance = {
     @as("Name") name: nonEmptyResourceName,
   }
   type response = {@as("AppInstanceArn") appInstanceArn: option<chimeArn>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateAppInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateAppInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchUpdatePhoneNumber = {
@@ -2233,9 +2225,8 @@ module BatchUpdatePhoneNumber = {
     updatePhoneNumberRequestItems: updatePhoneNumberRequestItemList,
   }
   type response = {@as("PhoneNumberErrors") phoneNumberErrors: option<phoneNumberErrorList>}
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "BatchUpdatePhoneNumberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "BatchUpdatePhoneNumberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchUnsuspendUser = {
@@ -2245,8 +2236,8 @@ module BatchUnsuspendUser = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("UserErrors") userErrors: option<userErrorList>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "BatchUnsuspendUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "BatchUnsuspendUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchSuspendUser = {
@@ -2256,17 +2247,16 @@ module BatchSuspendUser = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("UserErrors") userErrors: option<userErrorList>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "BatchSuspendUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "BatchSuspendUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchDeletePhoneNumber = {
   type t
   type request = {@as("PhoneNumberIds") phoneNumberIds: nonEmptyStringList}
   type response = {@as("PhoneNumberErrors") phoneNumberErrors: option<phoneNumberErrorList>}
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "BatchDeletePhoneNumberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "BatchDeletePhoneNumberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchCreateRoomMembership = {
@@ -2278,8 +2268,8 @@ module BatchCreateRoomMembership = {
   }
   type response = {@as("Errors") errors: option<memberErrorList>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "BatchCreateRoomMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchCreateRoomMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociateSigninDelegateGroupsWithAccount = {
@@ -2290,8 +2280,8 @@ module AssociateSigninDelegateGroupsWithAccount = {
   }
   type response = unit
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "AssociateSigninDelegateGroupsWithAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociateSigninDelegateGroupsWithAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociatePhoneNumbersWithVoiceConnectorGroup = {
@@ -2303,8 +2293,8 @@ module AssociatePhoneNumbersWithVoiceConnectorGroup = {
   }
   type response = {@as("PhoneNumberErrors") phoneNumberErrors: option<phoneNumberErrorList>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "AssociatePhoneNumbersWithVoiceConnectorGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociatePhoneNumbersWithVoiceConnectorGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AssociatePhoneNumbersWithVoiceConnector = {
@@ -2316,8 +2306,8 @@ module AssociatePhoneNumbersWithVoiceConnector = {
   }
   type response = {@as("PhoneNumberErrors") phoneNumberErrors: option<phoneNumberErrorList>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "AssociatePhoneNumbersWithVoiceConnectorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AssociatePhoneNumbersWithVoiceConnectorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateVoiceConnectorGroup = {
@@ -2329,8 +2319,8 @@ module UpdateVoiceConnectorGroup = {
   }
   type response = {@as("VoiceConnectorGroup") voiceConnectorGroup: option<voiceConnectorGroup>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "UpdateVoiceConnectorGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateVoiceConnectorGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSipRule = {
@@ -2342,8 +2332,8 @@ module UpdateSipRule = {
     @as("SipRuleId") sipRuleId: nonEmptyString,
   }
   type response = {@as("SipRule") sipRule: option<sipRule>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateSipRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateSipRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSipMediaApplication = {
@@ -2355,8 +2345,8 @@ module UpdateSipMediaApplication = {
   }
   type response = {@as("SipMediaApplication") sipMediaApplication: option<sipMediaApplication>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "UpdateSipMediaApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateSipMediaApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateProxySession = {
@@ -2368,8 +2358,8 @@ module UpdateProxySession = {
     @as("VoiceConnectorId") voiceConnectorId: nonEmptyString128,
   }
   type response = {@as("ProxySession") proxySession: option<proxySession>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateProxySessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateProxySessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdatePhoneNumber = {
@@ -2380,8 +2370,8 @@ module UpdatePhoneNumber = {
     @as("PhoneNumberId") phoneNumberId: string_,
   }
   type response = {@as("PhoneNumber") phoneNumber: option<phoneNumber>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdatePhoneNumberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdatePhoneNumberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAccount = {
@@ -2391,16 +2381,16 @@ module UpdateAccount = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("Account") account: option<account>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "UpdateAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "UpdateAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RestorePhoneNumber = {
   type t
   type request = {@as("PhoneNumberId") phoneNumberId: nonEmptyString}
   type response = {@as("PhoneNumber") phoneNumber: option<phoneNumber>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "RestorePhoneNumberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "RestorePhoneNumberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutVoiceConnectorStreamingConfiguration = {
@@ -2413,8 +2403,8 @@ module PutVoiceConnectorStreamingConfiguration = {
     @as("StreamingConfiguration") streamingConfiguration: option<streamingConfiguration>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "PutVoiceConnectorStreamingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutVoiceConnectorStreamingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutVoiceConnectorOrigination = {
@@ -2425,8 +2415,8 @@ module PutVoiceConnectorOrigination = {
   }
   type response = {@as("Origination") origination: option<origination>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "PutVoiceConnectorOriginationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutVoiceConnectorOriginationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutVoiceConnectorEmergencyCallingConfiguration = {
@@ -2441,8 +2431,8 @@ module PutVoiceConnectorEmergencyCallingConfiguration = {
     emergencyCallingConfiguration: option<emergencyCallingConfiguration>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "PutVoiceConnectorEmergencyCallingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutVoiceConnectorEmergencyCallingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListUsers = {
@@ -2458,8 +2448,8 @@ module ListUsers = {
     @as("NextToken") nextToken: option<string_>,
     @as("Users") users: option<userList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListUsersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListUsersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSupportedPhoneNumberCountries = {
@@ -2469,8 +2459,8 @@ module ListSupportedPhoneNumberCountries = {
     @as("PhoneNumberCountries") phoneNumberCountries: option<phoneNumberCountriesList>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "ListSupportedPhoneNumberCountriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSupportedPhoneNumberCountriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRoomMemberships = {
@@ -2485,8 +2475,8 @@ module ListRoomMemberships = {
     @as("NextToken") nextToken: option<string_>,
     @as("RoomMemberships") roomMemberships: option<roomMembershipList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListRoomMembershipsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListRoomMembershipsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMeetings = {
@@ -2499,8 +2489,8 @@ module ListMeetings = {
     @as("NextToken") nextToken: option<string_>,
     @as("Meetings") meetings: option<meetingList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListMeetingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListMeetingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChannelsModeratedByAppInstanceUser = {
@@ -2516,8 +2506,8 @@ module ListChannelsModeratedByAppInstanceUser = {
     @as("Channels") channels: option<channelModeratedByAppInstanceUserSummaryList>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "ListChannelsModeratedByAppInstanceUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListChannelsModeratedByAppInstanceUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChannelModerators = {
@@ -2533,8 +2523,8 @@ module ListChannelModerators = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ChannelArn") channelArn: option<chimeArn>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListChannelModeratorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListChannelModeratorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChannelMessages = {
@@ -2553,8 +2543,8 @@ module ListChannelMessages = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ChannelArn") channelArn: option<chimeArn>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListChannelMessagesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListChannelMessagesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChannelMembershipsForAppInstanceUser = {
@@ -2571,8 +2561,8 @@ module ListChannelMembershipsForAppInstanceUser = {
     channelMemberships: option<channelMembershipForAppInstanceUserSummaryList>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "ListChannelMembershipsForAppInstanceUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListChannelMembershipsForAppInstanceUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChannelMemberships = {
@@ -2589,9 +2579,8 @@ module ListChannelMemberships = {
     @as("ChannelMemberships") channelMemberships: option<channelMembershipSummaryList>,
     @as("ChannelArn") channelArn: option<chimeArn>,
   }
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "ListChannelMembershipsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListChannelMembershipsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListChannelBans = {
@@ -2607,8 +2596,8 @@ module ListChannelBans = {
     @as("NextToken") nextToken: option<nextToken>,
     @as("ChannelArn") channelArn: option<chimeArn>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListChannelBansCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListChannelBansCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAppInstanceAdmins = {
@@ -2623,8 +2612,8 @@ module ListAppInstanceAdmins = {
     @as("AppInstanceAdmins") appInstanceAdmins: option<appInstanceAdminList>,
     @as("AppInstanceArn") appInstanceArn: option<chimeArn>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListAppInstanceAdminsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListAppInstanceAdminsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVoiceConnectorStreamingConfiguration = {
@@ -2634,8 +2623,8 @@ module GetVoiceConnectorStreamingConfiguration = {
     @as("StreamingConfiguration") streamingConfiguration: option<streamingConfiguration>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetVoiceConnectorStreamingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetVoiceConnectorStreamingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVoiceConnectorOrigination = {
@@ -2643,17 +2632,16 @@ module GetVoiceConnectorOrigination = {
   type request = {@as("VoiceConnectorId") voiceConnectorId: nonEmptyString}
   type response = {@as("Origination") origination: option<origination>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetVoiceConnectorOriginationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetVoiceConnectorOriginationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVoiceConnectorGroup = {
   type t
   type request = {@as("VoiceConnectorGroupId") voiceConnectorGroupId: nonEmptyString}
   type response = {@as("VoiceConnectorGroup") voiceConnectorGroup: option<voiceConnectorGroup>}
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetVoiceConnectorGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetVoiceConnectorGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetVoiceConnectorEmergencyCallingConfiguration = {
@@ -2664,25 +2652,24 @@ module GetVoiceConnectorEmergencyCallingConfiguration = {
     emergencyCallingConfiguration: option<emergencyCallingConfiguration>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetVoiceConnectorEmergencyCallingConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetVoiceConnectorEmergencyCallingConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSipRule = {
   type t
   type request = {@as("SipRuleId") sipRuleId: nonEmptyString}
   type response = {@as("SipRule") sipRule: option<sipRule>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetSipRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetSipRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetSipMediaApplication = {
   type t
   type request = {@as("SipMediaApplicationId") sipMediaApplicationId: nonEmptyString}
   type response = {@as("SipMediaApplication") sipMediaApplication: option<sipMediaApplication>}
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "GetSipMediaApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetSipMediaApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetProxySession = {
@@ -2692,32 +2679,32 @@ module GetProxySession = {
     @as("VoiceConnectorId") voiceConnectorId: nonEmptyString128,
   }
   type response = {@as("ProxySession") proxySession: option<proxySession>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetProxySessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetProxySessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPhoneNumberOrder = {
   type t
   type request = {@as("PhoneNumberOrderId") phoneNumberOrderId: guidString}
   type response = {@as("PhoneNumberOrder") phoneNumberOrder: option<phoneNumberOrder>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetPhoneNumberOrderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetPhoneNumberOrderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetPhoneNumber = {
   type t
   type request = {@as("PhoneNumberId") phoneNumberId: string_}
   type response = {@as("PhoneNumber") phoneNumber: option<phoneNumber>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetPhoneNumberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetPhoneNumberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAccount = {
   type t
   type request = {@as("AccountId") accountId: nonEmptyString}
   type response = {@as("Account") account: option<account>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "GetAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "GetAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVoiceConnectorGroup = {
@@ -2728,8 +2715,8 @@ module CreateVoiceConnectorGroup = {
   }
   type response = {@as("VoiceConnectorGroup") voiceConnectorGroup: option<voiceConnectorGroup>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "CreateVoiceConnectorGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateVoiceConnectorGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSipRule = {
@@ -2742,8 +2729,8 @@ module CreateSipRule = {
     @as("Name") name: sipRuleName,
   }
   type response = {@as("SipRule") sipRule: option<sipRule>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateSipRuleCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateSipRuleCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSipMediaApplication = {
@@ -2755,8 +2742,8 @@ module CreateSipMediaApplication = {
   }
   type response = {@as("SipMediaApplication") sipMediaApplication: option<sipMediaApplication>}
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "CreateSipMediaApplicationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateSipMediaApplicationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateProxySession = {
@@ -2772,8 +2759,8 @@ module CreateProxySession = {
     @as("VoiceConnectorId") voiceConnectorId: nonEmptyString128,
   }
   type response = {@as("ProxySession") proxySession: option<proxySession>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateProxySessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateProxySessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreatePhoneNumberOrder = {
@@ -2783,17 +2770,16 @@ module CreatePhoneNumberOrder = {
     @as("ProductType") productType: phoneNumberProductType,
   }
   type response = {@as("PhoneNumberOrder") phoneNumberOrder: option<phoneNumberOrder>}
-  @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "CreatePhoneNumberOrderCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreatePhoneNumberOrderCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAccount = {
   type t
   type request = {@as("Name") name: accountName}
   type response = {@as("Account") account: option<account>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "CreateAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "CreateAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchUpdateUser = {
@@ -2803,8 +2789,8 @@ module BatchUpdateUser = {
     @as("AccountId") accountId: nonEmptyString,
   }
   type response = {@as("UserErrors") userErrors: option<userErrorList>}
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "BatchUpdateUserCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "BatchUpdateUserCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchCreateChannelMembership = {
@@ -2820,8 +2806,8 @@ module BatchCreateChannelMembership = {
     @as("BatchChannelMemberships") batchChannelMemberships: option<batchChannelMemberships>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "BatchCreateChannelMembershipCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchCreateChannelMembershipCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListVoiceConnectorGroups = {
@@ -2835,8 +2821,8 @@ module ListVoiceConnectorGroups = {
     @as("VoiceConnectorGroups") voiceConnectorGroups: option<voiceConnectorGroupList>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "ListVoiceConnectorGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListVoiceConnectorGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSipRules = {
@@ -2850,8 +2836,8 @@ module ListSipRules = {
     @as("NextToken") nextToken: option<nextTokenString>,
     @as("SipRules") sipRules: option<sipRuleList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListSipRulesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListSipRulesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListSipMediaApplications = {
@@ -2865,8 +2851,8 @@ module ListSipMediaApplications = {
     @as("SipMediaApplications") sipMediaApplications: option<sipMediaApplicationList>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "ListSipMediaApplicationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListSipMediaApplicationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListProxySessions = {
@@ -2881,8 +2867,8 @@ module ListProxySessions = {
     @as("NextToken") nextToken: option<nextTokenString>,
     @as("ProxySessions") proxySessions: option<proxySessions>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListProxySessionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListProxySessionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPhoneNumbers = {
@@ -2899,8 +2885,8 @@ module ListPhoneNumbers = {
     @as("NextToken") nextToken: option<string_>,
     @as("PhoneNumbers") phoneNumbers: option<phoneNumberList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListPhoneNumbersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListPhoneNumbersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListPhoneNumberOrders = {
@@ -2913,8 +2899,8 @@ module ListPhoneNumberOrders = {
     @as("NextToken") nextToken: option<string_>,
     @as("PhoneNumberOrders") phoneNumberOrders: option<phoneNumberOrderList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListPhoneNumberOrdersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListPhoneNumberOrdersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAccounts = {
@@ -2929,8 +2915,8 @@ module ListAccounts = {
     @as("NextToken") nextToken: option<string_>,
     @as("Accounts") accounts: option<accountList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "ListAccountsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "ListAccountsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMeetingWithAttendees = {
@@ -2951,8 +2937,8 @@ module CreateMeetingWithAttendees = {
     @as("Meeting") meeting: option<meeting>,
   }
   @module("@aws-sdk/client-chime") @new
-  external new_: request => t = "CreateMeetingWithAttendeesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateMeetingWithAttendeesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchCreateAttendee = {
@@ -2965,6 +2951,6 @@ module BatchCreateAttendee = {
     @as("Errors") errors: option<batchCreateAttendeeErrorList>,
     @as("Attendees") attendees: option<attendeeList>,
   }
-  @module("@aws-sdk/client-chime") @new external new_: request => t = "BatchCreateAttendeeCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-chime") @new external new: request => t = "BatchCreateAttendeeCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

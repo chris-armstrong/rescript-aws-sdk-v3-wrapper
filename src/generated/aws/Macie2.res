@@ -845,8 +845,8 @@ module UpdateOrganizationConfiguration = {
   type request = {autoEnable: __boolean}
   type response = unit
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "UpdateOrganizationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateOrganizationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMemberSession = {
@@ -856,8 +856,8 @@ module UpdateMemberSession = {
     id: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "UpdateMemberSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "UpdateMemberSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateMacieSession = {
@@ -867,8 +867,8 @@ module UpdateMacieSession = {
     findingPublishingFrequency: option<findingPublishingFrequency>,
   }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "UpdateMacieSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "UpdateMacieSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateClassificationJob = {
@@ -879,8 +879,8 @@ module UpdateClassificationJob = {
   }
   type response = unit
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "UpdateClassificationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateClassificationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMacieSession = {
@@ -893,16 +893,16 @@ module GetMacieSession = {
     findingPublishingFrequency: option<findingPublishingFrequency>,
     createdAt: option<__timestampIso8601>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "GetMacieSessionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetMacieSessionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetInvitationsCount = {
   type t
   type request = unit
   type response = {invitationsCount: option<__long>}
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "GetInvitationsCountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetInvitationsCountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableOrganizationAdminAccount = {
@@ -913,8 +913,8 @@ module EnableOrganizationAdminAccount = {
   }
   type response = unit
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "EnableOrganizationAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "EnableOrganizationAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module EnableMacie = {
@@ -925,16 +925,16 @@ module EnableMacie = {
     clientToken: option<__string>,
   }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "EnableMacieCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "EnableMacieCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateMember = {
   type t
   type request = {id: __string}
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "DisassociateMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "DisassociateMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateFromMasterAccount = {
@@ -942,8 +942,8 @@ module DisassociateFromMasterAccount = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "DisassociateFromMasterAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateFromMasterAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisassociateFromAdministratorAccount = {
@@ -951,8 +951,8 @@ module DisassociateFromAdministratorAccount = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "DisassociateFromAdministratorAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisassociateFromAdministratorAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableOrganizationAdminAccount = {
@@ -960,16 +960,16 @@ module DisableOrganizationAdminAccount = {
   type request = {adminAccountId: __string}
   type response = unit
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "DisableOrganizationAdminAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DisableOrganizationAdminAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DisableMacie = {
   type t
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "DisableMacieCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "DisableMacieCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOrganizationConfiguration = {
@@ -980,24 +980,24 @@ module DescribeOrganizationConfiguration = {
     autoEnable: option<__boolean>,
   }
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "DescribeOrganizationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOrganizationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteMember = {
   type t
   type request = {id: __string}
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "DeleteMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "DeleteMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteFindingsFilter = {
   type t
   type request = {id: __string}
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "DeleteFindingsFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "DeleteFindingsFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCustomDataIdentifier = {
@@ -1005,8 +1005,8 @@ module DeleteCustomDataIdentifier = {
   type request = {id: __string}
   type response = unit
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "DeleteCustomDataIdentifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteCustomDataIdentifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AcceptInvitation = {
@@ -1017,8 +1017,8 @@ module AcceptInvitation = {
     administratorAccountId: option<__string>,
   }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "AcceptInvitationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "AcceptInvitationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -1028,8 +1028,8 @@ module UntagResource = {
     resourceArn: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TestCustomDataIdentifier = {
@@ -1043,8 +1043,8 @@ module TestCustomDataIdentifier = {
   }
   type response = {matchCount: option<__integer>}
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "TestCustomDataIdentifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TestCustomDataIdentifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -1054,8 +1054,8 @@ module TagResource = {
     resourceArn: __string,
   }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutFindingsPublicationConfiguration = {
@@ -1066,16 +1066,16 @@ module PutFindingsPublicationConfiguration = {
   }
   type response = unit
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "PutFindingsPublicationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutFindingsPublicationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {resourceArn: __string}
   type response = {tags: option<tagMap>}
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMember = {
@@ -1092,16 +1092,16 @@ module GetMember = {
     administratorAccountId: option<__string>,
     accountId: option<__string>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "GetMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetMasterAccount = {
   type t
   type request = unit
   type response = {master: option<invitation>}
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "GetMasterAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetMasterAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFindingsPublicationConfiguration = {
@@ -1109,8 +1109,8 @@ module GetFindingsPublicationConfiguration = {
   type request = unit
   type response = {securityHubConfiguration: option<securityHubConfiguration>}
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "GetFindingsPublicationConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetFindingsPublicationConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetCustomDataIdentifier = {
@@ -1130,8 +1130,8 @@ module GetCustomDataIdentifier = {
     arn: option<__string>,
   }
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "GetCustomDataIdentifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCustomDataIdentifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBucketStatistics = {
@@ -1154,8 +1154,8 @@ module GetBucketStatistics = {
     bucketCountByEffectivePermission: option<bucketCountByEffectivePermission>,
     bucketCount: option<__long>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "GetBucketStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetBucketStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetAdministratorAccount = {
@@ -1163,16 +1163,16 @@ module GetAdministratorAccount = {
   type request = unit
   type response = {administrator: option<invitation>}
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "GetAdministratorAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetAdministratorAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSampleFindings = {
   type t
   type request = {findingTypes: option<__listOfFindingType>}
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "CreateSampleFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "CreateSampleFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateMember = {
@@ -1182,8 +1182,8 @@ module CreateMember = {
     account: accountDetail,
   }
   type response = {arn: option<__string>}
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "CreateMemberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "CreateMemberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCustomDataIdentifier = {
@@ -1200,8 +1200,8 @@ module CreateCustomDataIdentifier = {
   }
   type response = {customDataIdentifierId: option<__string>}
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "CreateCustomDataIdentifierCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCustomDataIdentifierCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module PutClassificationExportConfiguration = {
@@ -1209,8 +1209,8 @@ module PutClassificationExportConfiguration = {
   type request = {configuration: classificationExportConfiguration}
   type response = {configuration: option<classificationExportConfiguration>}
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "PutClassificationExportConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "PutClassificationExportConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListOrganizationAdminAccounts = {
@@ -1224,8 +1224,8 @@ module ListOrganizationAdminAccounts = {
     adminAccounts: option<__listOfAdminAccount>,
   }
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "ListOrganizationAdminAccountsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListOrganizationAdminAccountsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListInvitations = {
@@ -1238,8 +1238,8 @@ module ListInvitations = {
     nextToken: option<__string>,
     invitations: option<__listOfInvitation>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "ListInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "ListInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCustomDataIdentifiers = {
@@ -1253,8 +1253,8 @@ module ListCustomDataIdentifiers = {
     items: option<__listOfCustomDataIdentifierSummary>,
   }
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "ListCustomDataIdentifiersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCustomDataIdentifiersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUsageTotals = {
@@ -1264,8 +1264,8 @@ module GetUsageTotals = {
     usageTotals: option<__listOfUsageTotal>,
     timeRange: option<timeRange>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "GetUsageTotalsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetUsageTotalsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetClassificationExportConfiguration = {
@@ -1273,24 +1273,24 @@ module GetClassificationExportConfiguration = {
   type request = unit
   type response = {configuration: option<classificationExportConfiguration>}
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "GetClassificationExportConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetClassificationExportConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteInvitations = {
   type t
   type request = {accountIds: __listOf__string}
   type response = {unprocessedAccounts: option<__listOfUnprocessedAccount>}
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "DeleteInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "DeleteInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeclineInvitations = {
   type t
   type request = {accountIds: __listOf__string}
   type response = {unprocessedAccounts: option<__listOfUnprocessedAccount>}
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "DeclineInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "DeclineInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateInvitations = {
@@ -1301,8 +1301,8 @@ module CreateInvitations = {
     accountIds: __listOf__string,
   }
   type response = {unprocessedAccounts: option<__listOfUnprocessedAccount>}
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "CreateInvitationsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "CreateInvitationsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BatchGetCustomDataIdentifiers = {
@@ -1313,8 +1313,8 @@ module BatchGetCustomDataIdentifiers = {
     customDataIdentifiers: option<__listOfBatchGetCustomDataIdentifierSummary>,
   }
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "BatchGetCustomDataIdentifiersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "BatchGetCustomDataIdentifiersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListMembers = {
@@ -1328,8 +1328,8 @@ module ListMembers = {
     nextToken: option<__string>,
     members: option<__listOfMember>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "ListMembersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "ListMembersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFindingsFilters = {
@@ -1342,8 +1342,8 @@ module ListFindingsFilters = {
     nextToken: option<__string>,
     findingsFilterListItems: option<__listOfFindingsFilterListItem>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "ListFindingsFiltersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "ListFindingsFiltersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateFindingsFilter = {
@@ -1360,8 +1360,8 @@ module UpdateFindingsFilter = {
     id: option<__string>,
     arn: option<__string>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "UpdateFindingsFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "UpdateFindingsFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListFindings = {
@@ -1376,8 +1376,8 @@ module ListFindings = {
     nextToken: option<__string>,
     findingIds: option<__listOf__string>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "ListFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "ListFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFindingsFilter = {
@@ -1393,8 +1393,8 @@ module GetFindingsFilter = {
     arn: option<__string>,
     action: option<findingsFilterAction>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "GetFindingsFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetFindingsFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFindingStatistics = {
@@ -1406,8 +1406,8 @@ module GetFindingStatistics = {
     findingCriteria: option<findingCriteria>,
   }
   type response = {countsByGroup: option<__listOfGroupCount>}
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "GetFindingStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetFindingStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateFindingsFilter = {
@@ -1425,8 +1425,8 @@ module CreateFindingsFilter = {
     id: option<__string>,
     arn: option<__string>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "CreateFindingsFilterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "CreateFindingsFilterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetUsageStatistics = {
@@ -1443,8 +1443,8 @@ module GetUsageStatistics = {
     records: option<__listOfUsageRecord>,
     nextToken: option<__string>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "GetUsageStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetUsageStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBuckets = {
@@ -1459,8 +1459,8 @@ module DescribeBuckets = {
     nextToken: option<__string>,
     buckets: option<__listOfBucketMetadata>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "DescribeBucketsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "DescribeBucketsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SearchResources = {
@@ -1475,8 +1475,8 @@ module SearchResources = {
     nextToken: option<__string>,
     matchingResources: option<__listOfMatchingResource>,
   }
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "SearchResourcesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "SearchResourcesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeClassificationJob = {
@@ -1503,8 +1503,8 @@ module DescribeClassificationJob = {
     clientToken: option<__string>,
   }
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "DescribeClassificationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeClassificationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateClassificationJob = {
@@ -1526,8 +1526,8 @@ module CreateClassificationJob = {
     jobArn: option<__string>,
   }
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "CreateClassificationJobCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateClassificationJobCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListClassificationJobs = {
@@ -1543,8 +1543,8 @@ module ListClassificationJobs = {
     items: option<__listOfJobSummary>,
   }
   @module("@aws-sdk/client-macie2") @new
-  external new_: request => t = "ListClassificationJobsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListClassificationJobsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetFindings = {
@@ -1554,6 +1554,6 @@ module GetFindings = {
     findingIds: __listOf__string,
   }
   type response = {findings: option<__listOfFinding>}
-  @module("@aws-sdk/client-macie2") @new external new_: request => t = "GetFindingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-macie2") @new external new: request => t = "GetFindingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

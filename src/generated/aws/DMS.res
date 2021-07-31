@@ -684,8 +684,8 @@ module DeleteReplicationSubnetGroup = {
   type request = {@as("ReplicationSubnetGroupIdentifier") replicationSubnetGroupIdentifier: string_}
   type response = unit
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DeleteReplicationSubnetGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteReplicationSubnetGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TestConnection = {
@@ -695,8 +695,8 @@ module TestConnection = {
     @as("ReplicationInstanceArn") replicationInstanceArn: string_,
   }
   type response = {@as("Connection") connection: option<connection>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "TestConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "TestConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveTagsFromResource = {
@@ -706,8 +706,8 @@ module RemoveTagsFromResource = {
     @as("ResourceArn") resourceArn: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "RemoveTagsFromResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "RemoveTagsFromResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RefreshSchemas = {
@@ -717,8 +717,8 @@ module RefreshSchemas = {
     @as("EndpointArn") endpointArn: string_,
   }
   type response = {@as("RefreshSchemasStatus") refreshSchemasStatus: option<refreshSchemasStatus>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "RefreshSchemasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "RefreshSchemasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSchemas = {
@@ -732,8 +732,8 @@ module DescribeSchemas = {
     @as("Schemas") schemas: option<schemaList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DescribeSchemasCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeSchemasCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeRefreshSchemasStatus = {
@@ -741,8 +741,8 @@ module DescribeRefreshSchemasStatus = {
   type request = {@as("EndpointArn") endpointArn: string_}
   type response = {@as("RefreshSchemasStatus") refreshSchemasStatus: option<refreshSchemasStatus>}
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeRefreshSchemasStatusCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeRefreshSchemasStatusCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeApplicableIndividualAssessments = {
@@ -762,8 +762,8 @@ module DescribeApplicableIndividualAssessments = {
     individualAssessmentNames: option<individualAssessmentNameList>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeApplicableIndividualAssessmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeApplicableIndividualAssessmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteConnection = {
@@ -773,24 +773,24 @@ module DeleteConnection = {
     @as("EndpointArn") endpointArn: string_,
   }
   type response = {@as("Connection") connection: option<connection>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DeleteConnectionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DeleteConnectionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteCertificate = {
   type t
   type request = {@as("CertificateArn") certificateArn: string_}
   type response = {@as("Certificate") certificate: option<certificate>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DeleteCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DeleteCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopReplicationTask = {
   type t
   type request = {@as("ReplicationTaskArn") replicationTaskArn: string_}
   type response = {@as("ReplicationTask") replicationTask: option<replicationTask>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "StopReplicationTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "StopReplicationTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartReplicationTaskAssessmentRun = {
@@ -811,8 +811,8 @@ module StartReplicationTaskAssessmentRun = {
     replicationTaskAssessmentRun: option<replicationTaskAssessmentRun>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "StartReplicationTaskAssessmentRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartReplicationTaskAssessmentRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartReplicationTaskAssessment = {
@@ -820,8 +820,8 @@ module StartReplicationTaskAssessment = {
   type request = {@as("ReplicationTaskArn") replicationTaskArn: string_}
   type response = {@as("ReplicationTask") replicationTask: option<replicationTask>}
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "StartReplicationTaskAssessmentCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "StartReplicationTaskAssessmentCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartReplicationTask = {
@@ -834,8 +834,8 @@ module StartReplicationTask = {
     @as("ReplicationTaskArn") replicationTaskArn: string_,
   }
   type response = {@as("ReplicationTask") replicationTask: option<replicationTask>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "StartReplicationTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "StartReplicationTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ReloadTables = {
@@ -846,8 +846,8 @@ module ReloadTables = {
     @as("ReplicationTaskArn") replicationTaskArn: string_,
   }
   type response = {@as("ReplicationTaskArn") replicationTaskArn: option<string_>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "ReloadTablesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "ReloadTablesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module MoveReplicationTask = {
@@ -857,8 +857,8 @@ module MoveReplicationTask = {
     @as("ReplicationTaskArn") replicationTaskArn: string_,
   }
   type response = {@as("ReplicationTask") replicationTask: option<replicationTask>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "MoveReplicationTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "MoveReplicationTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyReplicationTask = {
@@ -875,8 +875,8 @@ module ModifyReplicationTask = {
     @as("ReplicationTaskArn") replicationTaskArn: string_,
   }
   type response = {@as("ReplicationTask") replicationTask: option<replicationTask>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "ModifyReplicationTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "ModifyReplicationTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyEventSubscription = {
@@ -889,8 +889,8 @@ module ModifyEventSubscription = {
     @as("SubscriptionName") subscriptionName: string_,
   }
   type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "ModifyEventSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "ModifyEventSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyEndpoint = {
@@ -929,16 +929,16 @@ module ModifyEndpoint = {
     @as("EndpointArn") endpointArn: string_,
   }
   type response = {@as("Endpoint") endpoint: option<endpoint>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "ModifyEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "ModifyEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
   type t
   type request = {@as("ResourceArn") resourceArn: string_}
   type response = {@as("TagList") tagList_: option<tagList_>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ImportCertificate = {
@@ -950,8 +950,8 @@ module ImportCertificate = {
     @as("CertificateIdentifier") certificateIdentifier: string_,
   }
   type response = {@as("Certificate") certificate: option<certificate>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "ImportCertificateCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "ImportCertificateCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReplicationTaskAssessmentResults = {
@@ -968,8 +968,8 @@ module DescribeReplicationTaskAssessmentResults = {
     @as("Marker") marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeReplicationTaskAssessmentResultsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReplicationTaskAssessmentResultsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReplicationInstanceTaskLogs = {
@@ -986,8 +986,8 @@ module DescribeReplicationInstanceTaskLogs = {
     @as("ReplicationInstanceArn") replicationInstanceArn: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeReplicationInstanceTaskLogsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReplicationInstanceTaskLogsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccountAttributes = {
@@ -998,8 +998,8 @@ module DescribeAccountAttributes = {
     @as("AccountQuotas") accountQuotas: option<accountQuotaList>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeAccountAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAccountAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteReplicationTaskAssessmentRun = {
@@ -1010,32 +1010,32 @@ module DeleteReplicationTaskAssessmentRun = {
     replicationTaskAssessmentRun: option<replicationTaskAssessmentRun>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DeleteReplicationTaskAssessmentRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteReplicationTaskAssessmentRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteReplicationTask = {
   type t
   type request = {@as("ReplicationTaskArn") replicationTaskArn: string_}
   type response = {@as("ReplicationTask") replicationTask: option<replicationTask>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DeleteReplicationTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DeleteReplicationTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEventSubscription = {
   type t
   type request = {@as("SubscriptionName") subscriptionName: string_}
   type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DeleteEventSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DeleteEventSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteEndpoint = {
   type t
   type request = {@as("EndpointArn") endpointArn: string_}
   type response = {@as("Endpoint") endpoint: option<endpoint>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DeleteEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DeleteEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReplicationTask = {
@@ -1056,8 +1056,8 @@ module CreateReplicationTask = {
     @as("ReplicationTaskIdentifier") replicationTaskIdentifier: string_,
   }
   type response = {@as("ReplicationTask") replicationTask: option<replicationTask>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "CreateReplicationTaskCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "CreateReplicationTaskCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEventSubscription = {
@@ -1072,8 +1072,8 @@ module CreateEventSubscription = {
     @as("SubscriptionName") subscriptionName: string_,
   }
   type response = {@as("EventSubscription") eventSubscription: option<eventSubscription>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "CreateEventSubscriptionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "CreateEventSubscriptionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEndpoint = {
@@ -1114,8 +1114,8 @@ module CreateEndpoint = {
     @as("EndpointIdentifier") endpointIdentifier: string_,
   }
   type response = {@as("Endpoint") endpoint: option<endpoint>}
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "CreateEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "CreateEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelReplicationTaskAssessmentRun = {
@@ -1126,8 +1126,8 @@ module CancelReplicationTaskAssessmentRun = {
     replicationTaskAssessmentRun: option<replicationTaskAssessmentRun>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "CancelReplicationTaskAssessmentRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CancelReplicationTaskAssessmentRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddTagsToResource = {
@@ -1137,8 +1137,8 @@ module AddTagsToResource = {
     @as("ResourceArn") resourceArn: string_,
   }
   type response = unit
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "AddTagsToResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "AddTagsToResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeTableStatistics = {
@@ -1154,8 +1154,8 @@ module DescribeTableStatistics = {
     @as("TableStatistics") tableStatistics: option<tableStatisticsList>,
     @as("ReplicationTaskArn") replicationTaskArn: option<string_>,
   }
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DescribeTableStatisticsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeTableStatisticsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReplicationTasks = {
@@ -1170,9 +1170,8 @@ module DescribeReplicationTasks = {
     @as("ReplicationTasks") replicationTasks: option<replicationTaskList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeReplicationTasksCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeReplicationTasksCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReplicationTaskIndividualAssessments = {
@@ -1188,8 +1187,8 @@ module DescribeReplicationTaskIndividualAssessments = {
     @as("Marker") marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeReplicationTaskIndividualAssessmentsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReplicationTaskIndividualAssessmentsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReplicationTaskAssessmentRuns = {
@@ -1205,8 +1204,8 @@ module DescribeReplicationTaskAssessmentRuns = {
     @as("Marker") marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeReplicationTaskAssessmentRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReplicationTaskAssessmentRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeOrderableReplicationInstances = {
@@ -1221,8 +1220,8 @@ module DescribeOrderableReplicationInstances = {
     orderableReplicationInstances: option<orderableReplicationInstanceList>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeOrderableReplicationInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeOrderableReplicationInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEvents = {
@@ -1242,8 +1241,8 @@ module DescribeEvents = {
     @as("Events") events: option<eventList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DescribeEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEventSubscriptions = {
@@ -1259,8 +1258,8 @@ module DescribeEventSubscriptions = {
     @as("Marker") marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeEventSubscriptionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEventSubscriptionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEventCategories = {
@@ -1272,8 +1271,8 @@ module DescribeEventCategories = {
   type response = {
     @as("EventCategoryGroupList") eventCategoryGroupList: option<eventCategoryGroupList>,
   }
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DescribeEventCategoriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEventCategoriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpoints = {
@@ -1287,8 +1286,8 @@ module DescribeEndpoints = {
     @as("Endpoints") endpoints: option<endpointList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DescribeEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpointTypes = {
@@ -1302,8 +1301,8 @@ module DescribeEndpointTypes = {
     @as("SupportedEndpointTypes") supportedEndpointTypes: option<supportedEndpointTypeList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DescribeEndpointTypesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEndpointTypesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpointSettings = {
@@ -1317,9 +1316,8 @@ module DescribeEndpointSettings = {
     @as("EndpointSettings") endpointSettings: option<endpointSettingsList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeEndpointSettingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeEndpointSettingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeConnections = {
@@ -1333,8 +1331,8 @@ module DescribeConnections = {
     @as("Connections") connections: option<connectionList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DescribeConnectionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeConnectionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCertificates = {
@@ -1348,8 +1346,8 @@ module DescribeCertificates = {
     @as("Certificates") certificates: option<certificateList>,
     @as("Marker") marker: option<string_>,
   }
-  @module("@aws-sdk/client-dms") @new external new_: request => t = "DescribeCertificatesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-dms") @new external new: request => t = "DescribeCertificatesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ApplyPendingMaintenanceAction = {
@@ -1364,8 +1362,8 @@ module ApplyPendingMaintenanceAction = {
     resourcePendingMaintenanceActions: option<resourcePendingMaintenanceActions>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "ApplyPendingMaintenanceActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ApplyPendingMaintenanceActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyReplicationSubnetGroup = {
@@ -1379,8 +1377,8 @@ module ModifyReplicationSubnetGroup = {
     @as("ReplicationSubnetGroup") replicationSubnetGroup: option<replicationSubnetGroup>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "ModifyReplicationSubnetGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyReplicationSubnetGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribePendingMaintenanceActions = {
@@ -1396,8 +1394,8 @@ module DescribePendingMaintenanceActions = {
     @as("PendingMaintenanceActions") pendingMaintenanceActions: option<pendingMaintenanceActions>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribePendingMaintenanceActionsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribePendingMaintenanceActionsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReplicationSubnetGroup = {
@@ -1412,8 +1410,8 @@ module CreateReplicationSubnetGroup = {
     @as("ReplicationSubnetGroup") replicationSubnetGroup: option<replicationSubnetGroup>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "CreateReplicationSubnetGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateReplicationSubnetGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RebootReplicationInstance = {
@@ -1424,8 +1422,8 @@ module RebootReplicationInstance = {
   }
   type response = {@as("ReplicationInstance") replicationInstance: option<replicationInstance>}
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "RebootReplicationInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "RebootReplicationInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ModifyReplicationInstance = {
@@ -1445,8 +1443,8 @@ module ModifyReplicationInstance = {
   }
   type response = {@as("ReplicationInstance") replicationInstance: option<replicationInstance>}
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "ModifyReplicationInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ModifyReplicationInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReplicationSubnetGroups = {
@@ -1461,8 +1459,8 @@ module DescribeReplicationSubnetGroups = {
     @as("Marker") marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeReplicationSubnetGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReplicationSubnetGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteReplicationInstance = {
@@ -1470,8 +1468,8 @@ module DeleteReplicationInstance = {
   type request = {@as("ReplicationInstanceArn") replicationInstanceArn: string_}
   type response = {@as("ReplicationInstance") replicationInstance: option<replicationInstance>}
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DeleteReplicationInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteReplicationInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateReplicationInstance = {
@@ -1495,8 +1493,8 @@ module CreateReplicationInstance = {
   }
   type response = {@as("ReplicationInstance") replicationInstance: option<replicationInstance>}
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "CreateReplicationInstanceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateReplicationInstanceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeReplicationInstances = {
@@ -1511,6 +1509,6 @@ module DescribeReplicationInstances = {
     @as("Marker") marker: option<string_>,
   }
   @module("@aws-sdk/client-dms") @new
-  external new_: request => t = "DescribeReplicationInstancesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeReplicationInstancesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

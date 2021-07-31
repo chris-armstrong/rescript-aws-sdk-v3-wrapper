@@ -80,17 +80,16 @@ module CancelQuery = {
   type t
   type request = {@as("QueryId") queryId: queryId}
   type response = {@as("CancellationMessage") cancellationMessage: option<string_>}
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "CancelQueryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "CancelQueryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpoints = {
   type t
   type request = unit
   type response = {@as("Endpoints") endpoints: endpoints}
-  @module("@aws-sdk/client-timestream") @new
-  external new_: request => t = "DescribeEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "DescribeEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module Query = {
@@ -108,6 +107,6 @@ module Query = {
     @as("NextToken") nextToken: option<string_>,
     @as("QueryId") queryId: queryId,
   }
-  @module("@aws-sdk/client-timestream") @new external new_: request => t = "QueryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-timestream") @new external new: request => t = "QueryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

@@ -113,8 +113,8 @@ module UnsubscribeFromDataset = {
   }
   type response = unit
   @module("@aws-sdk/client-cognito-sync") @new
-  external new_: request => t = "UnsubscribeFromDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UnsubscribeFromDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SubscribeToDataset = {
@@ -127,8 +127,8 @@ module SubscribeToDataset = {
   }
   type response = unit
   @module("@aws-sdk/client-cognito-sync") @new
-  external new_: request => t = "SubscribeToDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SubscribeToDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RegisterDevice = {
@@ -140,8 +140,8 @@ module RegisterDevice = {
     @as("IdentityPoolId") identityPoolId: identityPoolId,
   }
   type response = {@as("DeviceId") deviceId: option<deviceId>}
-  @module("@aws-sdk/client-cognito-sync") @new external new_: request => t = "RegisterDeviceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cognito-sync") @new external new: request => t = "RegisterDeviceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBulkPublishDetails = {
@@ -155,16 +155,16 @@ module GetBulkPublishDetails = {
     @as("IdentityPoolId") identityPoolId: option<identityPoolId>,
   }
   @module("@aws-sdk/client-cognito-sync") @new
-  external new_: request => t = "GetBulkPublishDetailsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetBulkPublishDetailsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module BulkPublish = {
   type t
   type request = {@as("IdentityPoolId") identityPoolId: identityPoolId}
   type response = {@as("IdentityPoolId") identityPoolId: option<identityPoolId>}
-  @module("@aws-sdk/client-cognito-sync") @new external new_: request => t = "BulkPublishCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cognito-sync") @new external new: request => t = "BulkPublishCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetCognitoEvents = {
@@ -175,8 +175,8 @@ module SetCognitoEvents = {
   }
 
   @module("@aws-sdk/client-cognito-sync") @new
-  external new_: request => t = "SetCognitoEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "SetCognitoEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetCognitoEvents = {
@@ -184,8 +184,8 @@ module GetCognitoEvents = {
   type request = {@as("IdentityPoolId") identityPoolId: identityPoolId}
   type response = {@as("Events") events: option<events>}
   @module("@aws-sdk/client-cognito-sync") @new
-  external new_: request => t = "GetCognitoEventsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetCognitoEventsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIdentityUsage = {
@@ -196,8 +196,8 @@ module DescribeIdentityUsage = {
   }
   type response = {@as("IdentityUsage") identityUsage: option<identityUsage>}
   @module("@aws-sdk/client-cognito-sync") @new
-  external new_: request => t = "DescribeIdentityUsageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeIdentityUsageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeIdentityPoolUsage = {
@@ -205,8 +205,8 @@ module DescribeIdentityPoolUsage = {
   type request = {@as("IdentityPoolId") identityPoolId: identityPoolId}
   type response = {@as("IdentityPoolUsage") identityPoolUsage: option<identityPoolUsage>}
   @module("@aws-sdk/client-cognito-sync") @new
-  external new_: request => t = "DescribeIdentityPoolUsageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeIdentityPoolUsageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeDataset = {
@@ -217,9 +217,8 @@ module DescribeDataset = {
     @as("IdentityPoolId") identityPoolId: identityPoolId,
   }
   type response = {@as("Dataset") dataset: option<dataset>}
-  @module("@aws-sdk/client-cognito-sync") @new
-  external new_: request => t = "DescribeDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cognito-sync") @new external new: request => t = "DescribeDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDataset = {
@@ -230,8 +229,8 @@ module DeleteDataset = {
     @as("IdentityPoolId") identityPoolId: identityPoolId,
   }
   type response = {@as("Dataset") dataset: option<dataset>}
-  @module("@aws-sdk/client-cognito-sync") @new external new_: request => t = "DeleteDatasetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cognito-sync") @new external new: request => t = "DeleteDatasetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateRecords = {
@@ -246,8 +245,8 @@ module UpdateRecords = {
     @as("IdentityPoolId") identityPoolId: identityPoolId,
   }
   type response = {@as("Records") records: option<recordList>}
-  @module("@aws-sdk/client-cognito-sync") @new external new_: request => t = "UpdateRecordsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cognito-sync") @new external new: request => t = "UpdateRecordsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module SetIdentityPoolConfiguration = {
@@ -263,8 +262,8 @@ module SetIdentityPoolConfiguration = {
     @as("IdentityPoolId") identityPoolId: option<identityPoolId>,
   }
   @module("@aws-sdk/client-cognito-sync") @new
-  external new_: request => t = "SetIdentityPoolConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "SetIdentityPoolConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListRecords = {
@@ -290,8 +289,8 @@ module ListRecords = {
     @as("NextToken") nextToken: option<string_>,
     @as("Records") records: option<recordList>,
   }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: request => t = "ListRecordsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cognito-sync") @new external new: request => t = "ListRecordsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListIdentityPoolUsage = {
@@ -307,8 +306,8 @@ module ListIdentityPoolUsage = {
     @as("IdentityPoolUsages") identityPoolUsages: option<identityPoolUsageList>,
   }
   @module("@aws-sdk/client-cognito-sync") @new
-  external new_: request => t = "ListIdentityPoolUsageCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListIdentityPoolUsageCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDatasets = {
@@ -324,8 +323,8 @@ module ListDatasets = {
     @as("Count") count: option<integer_>,
     @as("Datasets") datasets: option<datasetList>,
   }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: request => t = "ListDatasetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-cognito-sync") @new external new: request => t = "ListDatasetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetIdentityPoolConfiguration = {
@@ -337,6 +336,6 @@ module GetIdentityPoolConfiguration = {
     @as("IdentityPoolId") identityPoolId: option<identityPoolId>,
   }
   @module("@aws-sdk/client-cognito-sync") @new
-  external new_: request => t = "GetIdentityPoolConfigurationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "GetIdentityPoolConfigurationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

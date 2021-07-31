@@ -163,8 +163,8 @@ module DeleteVirtualCluster = {
   type request = {id: resourceIdString}
   type response = {id: option<resourceIdString>}
   @module("@aws-sdk/client-emr-containers") @new
-  external new_: request => t = "DeleteVirtualClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteVirtualClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteManagedEndpoint = {
@@ -178,8 +178,8 @@ module DeleteManagedEndpoint = {
     id: option<resourceIdString>,
   }
   @module("@aws-sdk/client-emr-containers") @new
-  external new_: request => t = "DeleteManagedEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeleteManagedEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CancelJobRun = {
@@ -192,8 +192,8 @@ module CancelJobRun = {
     virtualClusterId: option<resourceIdString>,
     id: option<resourceIdString>,
   }
-  @module("@aws-sdk/client-emr-containers") @new external new_: request => t = "CancelJobRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-emr-containers") @new external new: request => t = "CancelJobRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -203,9 +203,8 @@ module UntagResource = {
     resourceArn: rsiArn,
   }
   type response = unit
-  @module("@aws-sdk/client-emr-containers") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-emr-containers") @new external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
@@ -215,8 +214,8 @@ module TagResource = {
     resourceArn: rsiArn,
   }
   type response = unit
-  @module("@aws-sdk/client-emr-containers") @new external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-emr-containers") @new external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -224,8 +223,8 @@ module ListTagsForResource = {
   type request = {resourceArn: rsiArn}
   type response = {tags: option<tagMap>}
   @module("@aws-sdk/client-emr-containers") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateVirtualCluster = {
@@ -242,8 +241,8 @@ module CreateVirtualCluster = {
     id: option<resourceIdString>,
   }
   @module("@aws-sdk/client-emr-containers") @new
-  external new_: request => t = "CreateVirtualClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateVirtualClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeVirtualCluster = {
@@ -251,8 +250,8 @@ module DescribeVirtualCluster = {
   type request = {id: resourceIdString}
   type response = {virtualCluster: option<virtualCluster>}
   @module("@aws-sdk/client-emr-containers") @new
-  external new_: request => t = "DescribeVirtualClusterCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeVirtualClusterCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListVirtualClusters = {
@@ -271,8 +270,8 @@ module ListVirtualClusters = {
     virtualClusters: option<virtualClusters>,
   }
   @module("@aws-sdk/client-emr-containers") @new
-  external new_: request => t = "ListVirtualClustersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListVirtualClustersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartJobRun = {
@@ -293,8 +292,8 @@ module StartJobRun = {
     name: option<resourceNameString>,
     id: option<resourceIdString>,
   }
-  @module("@aws-sdk/client-emr-containers") @new external new_: request => t = "StartJobRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-emr-containers") @new external new: request => t = "StartJobRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateManagedEndpoint = {
@@ -317,8 +316,8 @@ module CreateManagedEndpoint = {
     id: option<resourceIdString>,
   }
   @module("@aws-sdk/client-emr-containers") @new
-  external new_: request => t = "CreateManagedEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateManagedEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeManagedEndpoint = {
@@ -329,8 +328,8 @@ module DescribeManagedEndpoint = {
   }
   type response = {endpoint: option<endpoint>}
   @module("@aws-sdk/client-emr-containers") @new
-  external new_: request => t = "DescribeManagedEndpointCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeManagedEndpointCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeJobRun = {
@@ -341,8 +340,8 @@ module DescribeJobRun = {
   }
   type response = {jobRun: option<jobRun>}
   @module("@aws-sdk/client-emr-containers") @new
-  external new_: request => t = "DescribeJobRunCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeJobRunCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListManagedEndpoints = {
@@ -361,8 +360,8 @@ module ListManagedEndpoints = {
     endpoints: option<endpoints>,
   }
   @module("@aws-sdk/client-emr-containers") @new
-  external new_: request => t = "ListManagedEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListManagedEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobRuns = {
@@ -380,6 +379,6 @@ module ListJobRuns = {
     nextToken: option<nextToken>,
     jobRuns: option<jobRuns>,
   }
-  @module("@aws-sdk/client-emr-containers") @new external new_: request => t = "ListJobRunsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-emr-containers") @new external new: request => t = "ListJobRunsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

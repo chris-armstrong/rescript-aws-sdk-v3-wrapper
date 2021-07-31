@@ -226,8 +226,8 @@ module DeleteListener = {
   type request = {@as("ListenerArn") listenerArn: genericString}
 
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DeleteListenerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteListenerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteEndpointGroup = {
@@ -235,8 +235,8 @@ module DeleteEndpointGroup = {
   type request = {@as("EndpointGroupArn") endpointGroupArn: genericString}
 
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DeleteEndpointGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteEndpointGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteCustomRoutingListener = {
@@ -244,8 +244,8 @@ module DeleteCustomRoutingListener = {
   type request = {@as("ListenerArn") listenerArn: genericString}
 
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DeleteCustomRoutingListenerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteCustomRoutingListenerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteCustomRoutingEndpointGroup = {
@@ -253,8 +253,8 @@ module DeleteCustomRoutingEndpointGroup = {
   type request = {@as("EndpointGroupArn") endpointGroupArn: genericString}
 
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DeleteCustomRoutingEndpointGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteCustomRoutingEndpointGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteCustomRoutingAccelerator = {
@@ -262,8 +262,8 @@ module DeleteCustomRoutingAccelerator = {
   type request = {@as("AcceleratorArn") acceleratorArn: genericString}
 
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DeleteCustomRoutingAcceleratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteCustomRoutingAcceleratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DeleteAccelerator = {
@@ -271,8 +271,8 @@ module DeleteAccelerator = {
   type request = {@as("AcceleratorArn") acceleratorArn: genericString}
 
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DeleteAcceleratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DeleteAcceleratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module UpdateCustomRoutingAcceleratorAttributes = {
@@ -287,8 +287,8 @@ module UpdateCustomRoutingAcceleratorAttributes = {
     @as("AcceleratorAttributes") acceleratorAttributes: option<customRoutingAcceleratorAttributes>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "UpdateCustomRoutingAcceleratorAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateCustomRoutingAcceleratorAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAcceleratorAttributes = {
@@ -303,8 +303,8 @@ module UpdateAcceleratorAttributes = {
     @as("AcceleratorAttributes") acceleratorAttributes: option<acceleratorAttributes>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "UpdateAcceleratorAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAcceleratorAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
@@ -315,8 +315,8 @@ module UntagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "UntagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UntagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module RemoveCustomRoutingEndpoints = {
@@ -327,8 +327,8 @@ module RemoveCustomRoutingEndpoints = {
   }
 
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "RemoveCustomRoutingEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "RemoveCustomRoutingEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module DescribeCustomRoutingAcceleratorAttributes = {
@@ -338,8 +338,8 @@ module DescribeCustomRoutingAcceleratorAttributes = {
     @as("AcceleratorAttributes") acceleratorAttributes: option<customRoutingAcceleratorAttributes>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DescribeCustomRoutingAcceleratorAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCustomRoutingAcceleratorAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAcceleratorAttributes = {
@@ -349,8 +349,8 @@ module DescribeAcceleratorAttributes = {
     @as("AcceleratorAttributes") acceleratorAttributes: option<acceleratorAttributes>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DescribeAcceleratorAttributesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAcceleratorAttributesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DenyCustomRoutingTraffic = {
@@ -364,8 +364,8 @@ module DenyCustomRoutingTraffic = {
   }
 
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DenyCustomRoutingTrafficCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "DenyCustomRoutingTrafficCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module AllowCustomRoutingTraffic = {
@@ -379,8 +379,8 @@ module AllowCustomRoutingTraffic = {
   }
 
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "AllowCustomRoutingTrafficCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
+  external new: request => t = "AllowCustomRoutingTrafficCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module TagResource = {
@@ -391,8 +391,8 @@ module TagResource = {
   }
   type response = unit
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "TagResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "TagResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
@@ -400,8 +400,8 @@ module ListTagsForResource = {
   type request = {@as("ResourceArn") resourceArn: resourceArn}
   type response = {@as("Tags") tags: option<tags>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "ListTagsForResourceCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListTagsForResourceCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AddCustomRoutingEndpoints = {
@@ -415,8 +415,8 @@ module AddCustomRoutingEndpoints = {
     @as("EndpointDescriptions") endpointDescriptions: option<customRoutingEndpointDescriptions>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "AddCustomRoutingEndpointsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AddCustomRoutingEndpointsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module WithdrawByoipCidr = {
@@ -424,8 +424,8 @@ module WithdrawByoipCidr = {
   type request = {@as("Cidr") cidr: genericString}
   type response = {@as("ByoipCidr") byoipCidr: option<byoipCidr>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "WithdrawByoipCidrCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "WithdrawByoipCidrCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateListener = {
@@ -438,8 +438,8 @@ module UpdateListener = {
   }
   type response = {@as("Listener") listener: option<listener>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "UpdateListenerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateListenerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateEndpointGroup = {
@@ -458,8 +458,8 @@ module UpdateEndpointGroup = {
   }
   type response = {@as("EndpointGroup") endpointGroup: option<endpointGroup>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "UpdateEndpointGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateEndpointGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCustomRoutingListener = {
@@ -470,8 +470,8 @@ module UpdateCustomRoutingListener = {
   }
   type response = {@as("Listener") listener: option<customRoutingListener>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "UpdateCustomRoutingListenerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateCustomRoutingListenerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ProvisionByoipCidr = {
@@ -482,8 +482,8 @@ module ProvisionByoipCidr = {
   }
   type response = {@as("ByoipCidr") byoipCidr: option<byoipCidr>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "ProvisionByoipCidrCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ProvisionByoipCidrCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCustomRoutingPortMappings = {
@@ -499,8 +499,8 @@ module ListCustomRoutingPortMappings = {
     @as("PortMappings") portMappings: option<portMappings>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "ListCustomRoutingPortMappingsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCustomRoutingPortMappingsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeListener = {
@@ -508,8 +508,8 @@ module DescribeListener = {
   type request = {@as("ListenerArn") listenerArn: genericString}
   type response = {@as("Listener") listener: option<listener>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DescribeListenerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeListenerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeEndpointGroup = {
@@ -517,8 +517,8 @@ module DescribeEndpointGroup = {
   type request = {@as("EndpointGroupArn") endpointGroupArn: genericString}
   type response = {@as("EndpointGroup") endpointGroup: option<endpointGroup>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DescribeEndpointGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeEndpointGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCustomRoutingListener = {
@@ -526,8 +526,8 @@ module DescribeCustomRoutingListener = {
   type request = {@as("ListenerArn") listenerArn: genericString}
   type response = {@as("Listener") listener: option<customRoutingListener>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DescribeCustomRoutingListenerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCustomRoutingListenerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeprovisionByoipCidr = {
@@ -535,8 +535,8 @@ module DeprovisionByoipCidr = {
   type request = {@as("Cidr") cidr: genericString}
   type response = {@as("ByoipCidr") byoipCidr: option<byoipCidr>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DeprovisionByoipCidrCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DeprovisionByoipCidrCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateListener = {
@@ -550,8 +550,8 @@ module CreateListener = {
   }
   type response = {@as("Listener") listener: option<listener>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "CreateListenerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateListenerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateEndpointGroup = {
@@ -572,8 +572,8 @@ module CreateEndpointGroup = {
   }
   type response = {@as("EndpointGroup") endpointGroup: option<endpointGroup>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "CreateEndpointGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateEndpointGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCustomRoutingListener = {
@@ -585,8 +585,8 @@ module CreateCustomRoutingListener = {
   }
   type response = {@as("Listener") listener: option<customRoutingListener>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "CreateCustomRoutingListenerCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCustomRoutingListenerCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module AdvertiseByoipCidr = {
@@ -594,8 +594,8 @@ module AdvertiseByoipCidr = {
   type request = {@as("Cidr") cidr: genericString}
   type response = {@as("ByoipCidr") byoipCidr: option<byoipCidr>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "AdvertiseByoipCidrCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "AdvertiseByoipCidrCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateCustomRoutingAccelerator = {
@@ -608,8 +608,8 @@ module UpdateCustomRoutingAccelerator = {
   }
   type response = {@as("Accelerator") accelerator: option<customRoutingAccelerator>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "UpdateCustomRoutingAcceleratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateCustomRoutingAcceleratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateAccelerator = {
@@ -622,8 +622,8 @@ module UpdateAccelerator = {
   }
   type response = {@as("Accelerator") accelerator: option<accelerator>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "UpdateAcceleratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "UpdateAcceleratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListListeners = {
@@ -638,8 +638,8 @@ module ListListeners = {
     @as("Listeners") listeners: option<listeners>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "ListListenersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListListenersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListEndpointGroups = {
@@ -654,8 +654,8 @@ module ListEndpointGroups = {
     @as("EndpointGroups") endpointGroups: option<endpointGroups>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "ListEndpointGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListEndpointGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCustomRoutingPortMappingsByDestination = {
@@ -671,8 +671,8 @@ module ListCustomRoutingPortMappingsByDestination = {
     @as("DestinationPortMappings") destinationPortMappings: option<destinationPortMappings>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "ListCustomRoutingPortMappingsByDestinationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCustomRoutingPortMappingsByDestinationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCustomRoutingListeners = {
@@ -687,8 +687,8 @@ module ListCustomRoutingListeners = {
     @as("Listeners") listeners: option<customRoutingListeners>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "ListCustomRoutingListenersCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCustomRoutingListenersCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListByoipCidrs = {
@@ -702,8 +702,8 @@ module ListByoipCidrs = {
     @as("ByoipCidrs") byoipCidrs: option<byoipCidrs>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "ListByoipCidrsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListByoipCidrsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCustomRoutingEndpointGroup = {
@@ -711,8 +711,8 @@ module DescribeCustomRoutingEndpointGroup = {
   type request = {@as("EndpointGroupArn") endpointGroupArn: genericString}
   type response = {@as("EndpointGroup") endpointGroup: option<customRoutingEndpointGroup>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DescribeCustomRoutingEndpointGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCustomRoutingEndpointGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeCustomRoutingAccelerator = {
@@ -720,8 +720,8 @@ module DescribeCustomRoutingAccelerator = {
   type request = {@as("AcceleratorArn") acceleratorArn: genericString}
   type response = {@as("Accelerator") accelerator: option<customRoutingAccelerator>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DescribeCustomRoutingAcceleratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeCustomRoutingAcceleratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeAccelerator = {
@@ -729,8 +729,8 @@ module DescribeAccelerator = {
   type request = {@as("AcceleratorArn") acceleratorArn: genericString}
   type response = {@as("Accelerator") accelerator: option<accelerator>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "DescribeAcceleratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeAcceleratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCustomRoutingEndpointGroup = {
@@ -744,8 +744,8 @@ module CreateCustomRoutingEndpointGroup = {
   }
   type response = {@as("EndpointGroup") endpointGroup: option<customRoutingEndpointGroup>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "CreateCustomRoutingEndpointGroupCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCustomRoutingEndpointGroupCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateCustomRoutingAccelerator = {
@@ -760,8 +760,8 @@ module CreateCustomRoutingAccelerator = {
   }
   type response = {@as("Accelerator") accelerator: option<customRoutingAccelerator>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "CreateCustomRoutingAcceleratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateCustomRoutingAcceleratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateAccelerator = {
@@ -776,8 +776,8 @@ module CreateAccelerator = {
   }
   type response = {@as("Accelerator") accelerator: option<accelerator>}
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "CreateAcceleratorCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "CreateAcceleratorCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCustomRoutingEndpointGroups = {
@@ -792,8 +792,8 @@ module ListCustomRoutingEndpointGroups = {
     @as("EndpointGroups") endpointGroups: option<customRoutingEndpointGroups>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "ListCustomRoutingEndpointGroupsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCustomRoutingEndpointGroupsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListCustomRoutingAccelerators = {
@@ -807,8 +807,8 @@ module ListCustomRoutingAccelerators = {
     @as("Accelerators") accelerators: option<customRoutingAccelerators>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "ListCustomRoutingAcceleratorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListCustomRoutingAcceleratorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAccelerators = {
@@ -822,6 +822,6 @@ module ListAccelerators = {
     @as("Accelerators") accelerators: option<accelerators>,
   }
   @module("@aws-sdk/client-globalaccelerator") @new
-  external new_: request => t = "ListAcceleratorsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "ListAcceleratorsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

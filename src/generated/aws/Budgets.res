@@ -235,8 +235,8 @@ module ExecuteBudgetAction = {
     @as("BudgetName") budgetName: budgetName,
     @as("AccountId") accountId: accountId,
   }
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "ExecuteBudgetActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "ExecuteBudgetActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBudget = {
@@ -246,8 +246,8 @@ module DeleteBudget = {
     @as("AccountId") accountId: accountId,
   }
   type response = unit
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "DeleteBudgetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "DeleteBudgetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateSubscriber = {
@@ -260,8 +260,8 @@ module UpdateSubscriber = {
     @as("AccountId") accountId: accountId,
   }
   type response = unit
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "UpdateSubscriberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "UpdateSubscriberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateNotification = {
@@ -273,8 +273,8 @@ module UpdateNotification = {
     @as("AccountId") accountId: accountId,
   }
   type response = unit
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "UpdateNotificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "UpdateNotificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteSubscriber = {
@@ -286,8 +286,8 @@ module DeleteSubscriber = {
     @as("AccountId") accountId: accountId,
   }
   type response = unit
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "DeleteSubscriberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "DeleteSubscriberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteNotification = {
@@ -298,8 +298,8 @@ module DeleteNotification = {
     @as("AccountId") accountId: accountId,
   }
   type response = unit
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "DeleteNotificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "DeleteNotificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateSubscriber = {
@@ -311,8 +311,8 @@ module CreateSubscriber = {
     @as("AccountId") accountId: accountId,
   }
   type response = unit
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "CreateSubscriberCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "CreateSubscriberCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeSubscribersForNotification = {
@@ -329,8 +329,8 @@ module DescribeSubscribersForNotification = {
     @as("Subscribers") subscribers: option<subscribers>,
   }
   @module("@aws-sdk/client-budgets") @new
-  external new_: request => t = "DescribeSubscribersForNotificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeSubscribersForNotificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeNotificationsForBudget = {
@@ -346,8 +346,8 @@ module DescribeNotificationsForBudget = {
     @as("Notifications") notifications: option<notifications>,
   }
   @module("@aws-sdk/client-budgets") @new
-  external new_: request => t = "DescribeNotificationsForBudgetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeNotificationsForBudgetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateNotification = {
@@ -359,8 +359,8 @@ module CreateNotification = {
     @as("AccountId") accountId: accountId,
   }
   type response = unit
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "CreateNotificationCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "CreateNotificationCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateBudget = {
@@ -370,8 +370,8 @@ module UpdateBudget = {
     @as("AccountId") accountId: accountId,
   }
   type response = unit
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "UpdateBudgetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "UpdateBudgetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBudget = {
@@ -381,8 +381,8 @@ module DescribeBudget = {
     @as("AccountId") accountId: accountId,
   }
   type response = {@as("Budget") budget: option<budget>}
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "DescribeBudgetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "DescribeBudgetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBudgetAction = {
@@ -403,8 +403,8 @@ module CreateBudgetAction = {
     @as("BudgetName") budgetName: budgetName,
     @as("AccountId") accountId: accountId,
   }
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "CreateBudgetActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "CreateBudgetActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateBudgetAction = {
@@ -426,8 +426,8 @@ module UpdateBudgetAction = {
     @as("BudgetName") budgetName: budgetName,
     @as("AccountId") accountId: accountId,
   }
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "UpdateBudgetActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "UpdateBudgetActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBudgets = {
@@ -441,8 +441,8 @@ module DescribeBudgets = {
     @as("NextToken") nextToken: option<genericString>,
     @as("Budgets") budgets: option<budgets>,
   }
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "DescribeBudgetsCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "DescribeBudgetsCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBudgetPerformanceHistory = {
@@ -459,8 +459,8 @@ module DescribeBudgetPerformanceHistory = {
     @as("BudgetPerformanceHistory") budgetPerformanceHistory: option<budgetPerformanceHistory>,
   }
   @module("@aws-sdk/client-budgets") @new
-  external new_: request => t = "DescribeBudgetPerformanceHistoryCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeBudgetPerformanceHistoryCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBudgetAction = {
@@ -475,9 +475,8 @@ module DescribeBudgetAction = {
     @as("BudgetName") budgetName: budgetName,
     @as("AccountId") accountId: accountId,
   }
-  @module("@aws-sdk/client-budgets") @new
-  external new_: request => t = "DescribeBudgetActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "DescribeBudgetActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBudgetAction = {
@@ -492,8 +491,8 @@ module DeleteBudgetAction = {
     @as("BudgetName") budgetName: budgetName,
     @as("AccountId") accountId: accountId,
   }
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "DeleteBudgetActionCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "DeleteBudgetActionCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBudget = {
@@ -505,8 +504,8 @@ module CreateBudget = {
     @as("AccountId") accountId: accountId,
   }
   type response = unit
-  @module("@aws-sdk/client-budgets") @new external new_: request => t = "CreateBudgetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  @module("@aws-sdk/client-budgets") @new external new: request => t = "CreateBudgetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBudgetActionsForBudget = {
@@ -522,8 +521,8 @@ module DescribeBudgetActionsForBudget = {
     @as("Actions") actions: actions,
   }
   @module("@aws-sdk/client-budgets") @new
-  external new_: request => t = "DescribeBudgetActionsForBudgetCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeBudgetActionsForBudgetCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBudgetActionsForAccount = {
@@ -538,8 +537,8 @@ module DescribeBudgetActionsForAccount = {
     @as("Actions") actions: actions,
   }
   @module("@aws-sdk/client-budgets") @new
-  external new_: request => t = "DescribeBudgetActionsForAccountCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeBudgetActionsForAccountCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeBudgetActionHistories = {
@@ -557,6 +556,6 @@ module DescribeBudgetActionHistories = {
     @as("ActionHistories") actionHistories: actionHistories,
   }
   @module("@aws-sdk/client-budgets") @new
-  external new_: request => t = "DescribeBudgetActionHistoriesCommand"
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
+  external new: request => t = "DescribeBudgetActionHistoriesCommand"
+  @send external send: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
