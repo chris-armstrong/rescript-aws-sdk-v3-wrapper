@@ -80,11 +80,11 @@ function parseServiceTrait(traitResult) {
 
 function parseEnumNameValue($$enum) {
   var obj_ = Json.Decode.parseObject($$enum);
-  var key_ = Json.Decode.parseString(Json.Decode.field(obj_, "key"));
+  var name_ = Json.Decode.parseString(Json.Decode.field(obj_, "name"));
   var value_ = Json.Decode.parseString(Json.Decode.field(obj_, "value"));
-  return Json.ResultHelpers.map2(key_, value_, (function (key, value) {
+  return Json.ResultHelpers.map2(name_, value_, (function (name, value) {
                 return {
-                        key: key,
+                        name: name,
                         value: value
                       };
               }));

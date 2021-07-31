@@ -32,7 +32,7 @@ type serviceDetails = {
 }
 
 type enumPair = {
-  key: string,
+  name: string,
   value: string,
 }
 
@@ -127,9 +127,9 @@ let parseServiceTrait = traitResult => {
 
 let parseEnumNameValue = (enum): Belt.Result.t<enumPair, jsonParseError> => {
   let obj_ = parseObject(enum)
-  let key_ = obj_->field("key")->parseString
+  let name_ = obj_->field("name")->parseString
   let value_ = obj_->field("value")->parseString
-  map2(key_, value_, (key, value) => {key: key, value: value})
+  map2(name_, value_, (name, value) => {name, value: value})
 }
 
 let parseTrait = (name, value: t<jsonTreeRef, jsonParseError>) => {
