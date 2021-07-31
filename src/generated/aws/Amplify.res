@@ -275,7 +275,7 @@ module GetArtifactUrl = {
 @as("artifactId") artifactId: option<artifactId>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetArtifactUrlCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GenerateAccessLogs = {
@@ -290,7 +290,7 @@ module GenerateAccessLogs = {
 @as("logUrl") logUrl: logUrl
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GenerateAccessLogsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateWebhook = {
@@ -304,7 +304,7 @@ module UpdateWebhook = {
 @as("webhook") webhook: option<webhook>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "UpdateWebhookCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
@@ -315,7 +315,7 @@ module UntagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
@@ -326,7 +326,7 @@ module TagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module StopJob = {
@@ -340,7 +340,7 @@ module StopJob = {
 @as("jobSummary") jobSummary: option<jobSummary>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "StopJobCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module StartJob = {
@@ -359,7 +359,7 @@ module StartJob = {
 @as("jobSummary") jobSummary: option<jobSummary>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "StartJobCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module StartDeployment = {
@@ -374,7 +374,7 @@ module StartDeployment = {
 @as("jobSummary") jobSummary: option<jobSummary>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "StartDeploymentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
@@ -386,7 +386,7 @@ module ListTagsForResource = {
 @as("tags") tags: tagMap
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetWebhook = {
@@ -398,7 +398,7 @@ module GetWebhook = {
 @as("webhook") webhook: option<webhook>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetWebhookCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBackendEnvironment = {
@@ -411,7 +411,7 @@ module GetBackendEnvironment = {
 @as("backendEnvironment") backendEnvironment: option<backendEnvironment>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetBackendEnvironmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteWebhook = {
@@ -423,7 +423,7 @@ module DeleteWebhook = {
 @as("webhook") webhook: option<webhook>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteWebhookCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteJob = {
@@ -437,7 +437,7 @@ module DeleteJob = {
 @as("jobSummary") jobSummary: option<jobSummary>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteJobCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteBackendEnvironment = {
@@ -450,7 +450,7 @@ module DeleteBackendEnvironment = {
 @as("backendEnvironment") backendEnvironment: option<backendEnvironment>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteBackendEnvironmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateWebhook = {
@@ -464,7 +464,7 @@ module CreateWebhook = {
 @as("webhook") webhook: option<webhook>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateWebhookCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDeployment = {
@@ -480,7 +480,7 @@ module CreateDeployment = {
 @as("jobId") jobId: jobId
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateDeploymentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBackendEnvironment = {
@@ -495,7 +495,7 @@ module CreateBackendEnvironment = {
 @as("backendEnvironment") backendEnvironment: option<backendEnvironment>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateBackendEnvironmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateBranch = {
@@ -523,7 +523,7 @@ module UpdateBranch = {
 @as("branch") branch: option<branch>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "UpdateBranchCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListWebhooks = {
@@ -538,7 +538,7 @@ module ListWebhooks = {
 @as("webhooks") webhooks: option<webhooks>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "ListWebhooksCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListJobs = {
@@ -554,7 +554,7 @@ module ListJobs = {
 @as("jobSummaries") jobSummaries: option<jobSummaries>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "ListJobsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBackendEnvironments = {
@@ -570,7 +570,7 @@ module ListBackendEnvironments = {
 @as("backendEnvironments") backendEnvironments: option<backendEnvironments>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "ListBackendEnvironmentsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListArtifacts = {
@@ -587,7 +587,7 @@ module ListArtifacts = {
 @as("artifacts") artifacts: option<artifacts>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "ListArtifactsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBranch = {
@@ -600,7 +600,7 @@ module GetBranch = {
 @as("branch") branch: option<branch>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetBranchCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteBranch = {
@@ -613,7 +613,7 @@ module DeleteBranch = {
 @as("branch") branch: option<branch>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteBranchCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBranch = {
@@ -642,7 +642,7 @@ module CreateBranch = {
 @as("branch") branch: option<branch>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateBranchCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateApp = {
@@ -672,7 +672,7 @@ module UpdateApp = {
 @as("app") app: option<app>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "UpdateAppCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBranches = {
@@ -687,7 +687,7 @@ module ListBranches = {
 @as("branches") branches: option<branches>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "ListBranchesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetApp = {
@@ -699,7 +699,7 @@ module GetApp = {
 @as("app") app: option<app>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetAppCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApp = {
@@ -711,7 +711,7 @@ module DeleteApp = {
 @as("app") app: option<app>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteAppCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApp = {
@@ -741,7 +741,7 @@ module CreateApp = {
 @as("app") app: option<app>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateAppCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDomainAssociation = {
@@ -758,7 +758,7 @@ module UpdateDomainAssociation = {
 @as("domainAssociation") domainAssociation: option<domainAssociation>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "UpdateDomainAssociationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListApps = {
@@ -772,7 +772,7 @@ module ListApps = {
 @as("apps") apps: option<apps>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "ListAppsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetJob = {
@@ -786,7 +786,7 @@ module GetJob = {
 @as("job") job: option<job>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetJobCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDomainAssociation = {
@@ -799,7 +799,7 @@ module GetDomainAssociation = {
 @as("domainAssociation") domainAssociation: option<domainAssociation>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetDomainAssociationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDomainAssociation = {
@@ -812,7 +812,7 @@ module DeleteDomainAssociation = {
 @as("domainAssociation") domainAssociation: option<domainAssociation>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteDomainAssociationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDomainAssociation = {
@@ -829,7 +829,7 @@ module CreateDomainAssociation = {
 @as("domainAssociation") domainAssociation: option<domainAssociation>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateDomainAssociationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDomainAssociations = {
@@ -844,5 +844,5 @@ module ListDomainAssociations = {
 @as("domainAssociations") domainAssociations: option<domainAssociations>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "ListDomainAssociationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

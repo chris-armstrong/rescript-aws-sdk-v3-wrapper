@@ -64,6 +64,7 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
         name: name,
         descriptor: descriptor,
         targets: Dependencies.getTargets(descriptor),
+        recursWith: None
       })
       let shapesWithTargets = Dependencies.order(shapesWithTargets)
 
@@ -74,6 +75,8 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
         | _ => false
         }
       )
+
+      let (recursiveShapes, allStructures) = Array.partition(allStructures, ({ recursWith}) => Option.isSome(recursWith))
 
       // Simplify operations to their constituent parts
       let operations = Array.keepMap(operationShapes, shape =>
@@ -97,7 +100,7 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
       )
 
       // Group operation structure with input/output dependencies
-      let operationModuleParts = Array.map(operations, ((name, details, targets)) => {
+      let operationModuleParts = Array.map(operations, ((name, details, _)) => {
         let {input, output} = details
         let inputString = Belt.Option.getWithDefault(input, "")
         let outputString = Belt.Option.getWithDefault(output, "")
@@ -123,6 +126,7 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
           let codeSnippets = Array.map(remainingStructures, shape =>
             generateTypeBlock(packagingName, {name: shape.name, descriptor: shape.descriptor})
           )
+          // let recursiveCodeSnippets = generateRecursiveTypeBlock(packagingName, Array.map(recursiveShapes, (s):Shape.t => { name: s.name, descriptor: s.descriptor}))
           Ok({
             code: Array.concat(codeSnippets, operationSnippets)->Array.joinWith("\n", x => x),
             moduleName: moduleName,

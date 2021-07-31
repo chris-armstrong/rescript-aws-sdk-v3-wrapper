@@ -147,7 +147,7 @@ module DeleteScalingPlan = {
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling-plans") @new external new_: (Js.Promise.t<request>) => t = "DeleteScalingPlanCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetScalingPlanResourceForecastData = {
@@ -166,7 +166,7 @@ module GetScalingPlanResourceForecastData = {
 @as("Datapoints") datapoints: option<datapoints>
 }
   @module("@aws-sdk/client-autoscaling-plans") @new external new_: (Js.Promise.t<request>) => t = "GetScalingPlanResourceForecastDataCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateScalingPlan = {
@@ -179,7 +179,7 @@ module UpdateScalingPlan = {
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling-plans") @new external new_: (Js.Promise.t<request>) => t = "UpdateScalingPlanCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateScalingPlan = {
@@ -193,7 +193,7 @@ module CreateScalingPlan = {
 @as("ScalingPlanVersion") scalingPlanVersion: option<scalingPlanVersion>
 }
   @module("@aws-sdk/client-autoscaling-plans") @new external new_: (Js.Promise.t<request>) => t = "CreateScalingPlanCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScalingPlanResources = {
@@ -209,7 +209,7 @@ module DescribeScalingPlanResources = {
 @as("ScalingPlanResources") scalingPlanResources: scalingPlanResources
 }
   @module("@aws-sdk/client-autoscaling-plans") @new external new_: (Js.Promise.t<request>) => t = "DescribeScalingPlanResourcesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScalingPlans = {
@@ -226,5 +226,5 @@ module DescribeScalingPlans = {
 @as("ScalingPlans") scalingPlans: scalingPlans
 }
   @module("@aws-sdk/client-autoscaling-plans") @new external new_: (Js.Promise.t<request>) => t = "DescribeScalingPlansCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -641,7 +641,7 @@ module StopFlow = {
 @as("flowArn") flowArn: flowArn
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "StopFlowCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module StartFlow = {
@@ -655,7 +655,7 @@ module StartFlow = {
 @as("flowArn") flowArn: flowArn
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "StartFlowCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFlow = {
@@ -666,7 +666,7 @@ module DeleteFlow = {
 }
   type response = unit
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "DeleteFlowCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteConnectorProfile = {
@@ -677,7 +677,7 @@ module DeleteConnectorProfile = {
 }
   type response = unit
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "DeleteConnectorProfileCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
@@ -688,7 +688,7 @@ module UntagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
@@ -699,7 +699,7 @@ module TagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
@@ -711,7 +711,7 @@ module ListTagsForResource = {
 @as("tags") tags: tagMap
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFlows = {
@@ -725,7 +725,7 @@ module ListFlows = {
 @as("flows") flows: flowList
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "ListFlowsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListConnectorEntities = {
@@ -739,7 +739,7 @@ module ListConnectorEntities = {
 @as("connectorEntityMap") connectorEntityMap: option<connectorEntityMap>
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "ListConnectorEntitiesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateConnectorProfile = {
@@ -753,7 +753,7 @@ module UpdateConnectorProfile = {
 @as("connectorProfileArn") connectorProfileArn: connectorProfileArn
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "UpdateConnectorProfileCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeFlowExecutionRecords = {
@@ -768,7 +768,7 @@ module DescribeFlowExecutionRecords = {
 @as("flowExecutions") flowExecutions: flowExecutionList
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "DescribeFlowExecutionRecordsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConnectorProfiles = {
@@ -784,7 +784,7 @@ module DescribeConnectorProfiles = {
 @as("connectorProfileDetails") connectorProfileDetails: connectorProfileDetailList
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "DescribeConnectorProfilesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateConnectorProfile = {
@@ -800,7 +800,7 @@ module CreateConnectorProfile = {
 @as("connectorProfileArn") connectorProfileArn: connectorProfileArn
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "CreateConnectorProfileCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConnectors = {
@@ -814,7 +814,7 @@ module DescribeConnectors = {
 @as("connectorConfigurations") connectorConfigurations: connectorConfigurationsMap
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "DescribeConnectorsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConnectorEntity = {
@@ -828,7 +828,7 @@ module DescribeConnectorEntity = {
 @as("connectorEntityFields") connectorEntityFields: option<connectorEntityFieldList>
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "DescribeConnectorEntityCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFlow = {
@@ -845,7 +845,7 @@ module UpdateFlow = {
 @as("flowStatus") flowStatus: flowStatus
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "UpdateFlowCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeFlow = {
@@ -872,7 +872,7 @@ module DescribeFlow = {
 @as("flowArn") flowArn: flowArn
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "DescribeFlowCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFlow = {
@@ -892,5 +892,5 @@ module CreateFlow = {
 @as("flowArn") flowArn: flowArn
 }
   @module("@aws-sdk/client-appflow") @new external new_: (Js.Promise.t<request>) => t = "CreateFlowCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

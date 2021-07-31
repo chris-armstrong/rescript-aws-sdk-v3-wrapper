@@ -25,7 +25,7 @@ type amazonawsInteger = int;
 type id = string
 type growthType = [@as("EXPONENTIAL") #EXPONENTIAL | @as("LINEAR") #LINEAR]
 type growthFactor = float;
-type float = float;
+type amazonawsFloat = float;
 type environmentState = [@as("ROLLED_BACK") #ROLLED_BACK | @as("ROLLING_BACK") #ROLLING_BACK | @as("DEPLOYING") #DEPLOYING | @as("READY_FOR_DEPLOYMENT") #READY_FOR_DEPLOYMENT]
 type description = string
 type deploymentStrategyId = string
@@ -121,7 +121,7 @@ module ValidateConfiguration = {
 }
   
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "ValidateConfigurationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module UpdateDeploymentStrategy = {
@@ -136,7 +136,7 @@ module UpdateDeploymentStrategy = {
 }
   type response = deploymentStrategy;
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "UpdateDeploymentStrategyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateApplication = {
@@ -148,7 +148,7 @@ module UpdateApplication = {
 }
   type response = application;
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "UpdateApplicationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetHostedConfigurationVersion = {
@@ -167,7 +167,7 @@ module GetHostedConfigurationVersion = {
 @as("ApplicationId") applicationId: id
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "GetHostedConfigurationVersionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDeploymentStrategy = {
@@ -177,7 +177,7 @@ module GetDeploymentStrategy = {
 }
   type response = deploymentStrategy;
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentStrategyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetConfiguration = {
@@ -195,7 +195,7 @@ module GetConfiguration = {
 @as("Content") content: blob
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "GetConfigurationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetApplication = {
@@ -205,7 +205,7 @@ module GetApplication = {
 }
   type response = application;
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "GetApplicationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteHostedConfigurationVersion = {
@@ -217,7 +217,7 @@ module DeleteHostedConfigurationVersion = {
 }
   
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "DeleteHostedConfigurationVersionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteEnvironment = {
@@ -228,7 +228,7 @@ module DeleteEnvironment = {
 }
   
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "DeleteEnvironmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteDeploymentStrategy = {
@@ -238,7 +238,7 @@ module DeleteDeploymentStrategy = {
 }
   
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "DeleteDeploymentStrategyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteConfigurationProfile = {
@@ -249,7 +249,7 @@ module DeleteConfigurationProfile = {
 }
   
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "DeleteConfigurationProfileCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteApplication = {
@@ -259,7 +259,7 @@ module DeleteApplication = {
 }
   
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateHostedConfigurationVersion = {
@@ -281,7 +281,7 @@ module CreateHostedConfigurationVersion = {
 @as("ApplicationId") applicationId: id
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "CreateHostedConfigurationVersionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
@@ -292,7 +292,7 @@ module UntagResource = {
 }
   
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module TagResource = {
@@ -303,7 +303,7 @@ module TagResource = {
 }
   
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListTagsForResource = {
@@ -315,7 +315,7 @@ module ListTagsForResource = {
 @as("Tags") tags: tagMap
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDeploymentStrategy = {
@@ -332,7 +332,7 @@ module CreateDeploymentStrategy = {
 }
   type response = deploymentStrategy;
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "CreateDeploymentStrategyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApplication = {
@@ -344,7 +344,7 @@ module CreateApplication = {
 }
   type response = application;
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "CreateApplicationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateEnvironment = {
@@ -358,7 +358,7 @@ module UpdateEnvironment = {
 }
   type response = environment;
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "UpdateEnvironmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateConfigurationProfile = {
@@ -381,7 +381,7 @@ module UpdateConfigurationProfile = {
 @as("ApplicationId") applicationId: id
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "UpdateConfigurationProfileCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module StopDeployment = {
@@ -412,7 +412,7 @@ module StopDeployment = {
 @as("ApplicationId") applicationId: id
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "StopDeploymentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module StartDeployment = {
@@ -447,7 +447,7 @@ module StartDeployment = {
 @as("ApplicationId") applicationId: id
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "StartDeploymentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListHostedConfigurationVersions = {
@@ -463,7 +463,7 @@ module ListHostedConfigurationVersions = {
 @as("Items") items: hostedConfigurationVersionSummaryList
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "ListHostedConfigurationVersionsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDeployments = {
@@ -479,7 +479,7 @@ module ListDeployments = {
 @as("Items") items: deploymentList
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "ListDeploymentsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDeploymentStrategies = {
@@ -493,7 +493,7 @@ module ListDeploymentStrategies = {
 @as("Items") items: deploymentStrategyList
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "ListDeploymentStrategiesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListApplications = {
@@ -507,7 +507,7 @@ module ListApplications = {
 @as("Items") items: applicationList
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEnvironment = {
@@ -518,7 +518,7 @@ module GetEnvironment = {
 }
   type response = environment;
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "GetEnvironmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDeployment = {
@@ -549,7 +549,7 @@ module GetDeployment = {
 @as("ApplicationId") applicationId: id
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetConfigurationProfile = {
@@ -568,7 +568,7 @@ module GetConfigurationProfile = {
 @as("ApplicationId") applicationId: id
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "GetConfigurationProfileCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateEnvironment = {
@@ -582,7 +582,7 @@ module CreateEnvironment = {
 }
   type response = environment;
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "CreateEnvironmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateConfigurationProfile = {
@@ -606,7 +606,7 @@ module CreateConfigurationProfile = {
 @as("ApplicationId") applicationId: id
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "CreateConfigurationProfileCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListConfigurationProfiles = {
@@ -621,7 +621,7 @@ module ListConfigurationProfiles = {
 @as("Items") items: configurationProfileSummaryList
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "ListConfigurationProfilesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEnvironments = {
@@ -636,5 +636,5 @@ module ListEnvironments = {
 @as("Items") items: environmentList
 }
   @module("@aws-sdk/client-appconfig") @new external new_: (Js.Promise.t<request>) => t = "ListEnvironmentsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

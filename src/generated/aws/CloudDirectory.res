@@ -533,7 +533,7 @@ module UpgradePublishedSchema = {
 @as("UpgradedSchemaArn") upgradedSchemaArn: arn
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "UpgradePublishedSchemaCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpgradeAppliedSchema = {
@@ -548,7 +548,7 @@ module UpgradeAppliedSchema = {
 @as("UpgradedSchemaArn") upgradedSchemaArn: arn
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "UpgradeAppliedSchemaCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateSchema = {
@@ -561,7 +561,7 @@ module UpdateSchema = {
 @as("SchemaArn") schemaArn: arn
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "UpdateSchemaCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module PutSchemaFromJson = {
@@ -574,7 +574,7 @@ module PutSchemaFromJson = {
 @as("Arn") arn: arn
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "PutSchemaFromJsonCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module PublishSchema = {
@@ -589,7 +589,7 @@ module PublishSchema = {
 @as("PublishedSchemaArn") publishedSchemaArn: arn
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "PublishSchemaCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSchemaAsJson = {
@@ -602,7 +602,7 @@ module GetSchemaAsJson = {
 @as("Name") name: schemaName
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "GetSchemaAsJsonCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAppliedSchemaVersion = {
@@ -614,7 +614,7 @@ module GetAppliedSchemaVersion = {
 @as("AppliedSchemaArn") appliedSchemaArn: arn
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "GetAppliedSchemaVersionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableDirectory = {
@@ -626,7 +626,7 @@ module EnableDirectory = {
 @as("DirectoryArn") directoryArn: option<arn>
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "EnableDirectoryCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DisableDirectory = {
@@ -638,7 +638,7 @@ module DisableDirectory = {
 @as("DirectoryArn") directoryArn: option<arn>
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "DisableDirectoryCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteTypedLinkFacet = {
@@ -649,7 +649,7 @@ module DeleteTypedLinkFacet = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "DeleteTypedLinkFacetCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteSchema = {
@@ -661,7 +661,7 @@ module DeleteSchema = {
 @as("SchemaArn") schemaArn: arn
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "DeleteSchemaCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFacet = {
@@ -672,7 +672,7 @@ module DeleteFacet = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "DeleteFacetCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDirectory = {
@@ -684,7 +684,7 @@ module DeleteDirectory = {
 @as("DirectoryArn") directoryArn: option<arn>
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "DeleteDirectoryCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSchema = {
@@ -696,7 +696,7 @@ module CreateSchema = {
 @as("SchemaArn") schemaArn: arn
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "CreateSchemaCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDirectory = {
@@ -712,7 +712,7 @@ module CreateDirectory = {
 @as("DirectoryArn") directoryArn: option<directoryArn>
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "CreateDirectoryCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ApplySchema = {
@@ -726,7 +726,7 @@ module ApplySchema = {
 @as("AppliedSchemaArn") appliedSchemaArn: arn
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ApplySchemaCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
@@ -737,7 +737,7 @@ module UntagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module RemoveFacetFromObject = {
@@ -749,7 +749,7 @@ module RemoveFacetFromObject = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "RemoveFacetFromObjectCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTypedLinkFacetNames = {
@@ -764,7 +764,7 @@ module ListTypedLinkFacetNames = {
 @as("FacetNames") facetNames: typedLinkNameList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListTypedLinkFacetNamesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPublishedSchemaArns = {
@@ -779,7 +779,7 @@ module ListPublishedSchemaArns = {
 @as("SchemaArns") schemaArns: arns
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListPublishedSchemaArnsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPolicyAttachments = {
@@ -796,7 +796,7 @@ module ListPolicyAttachments = {
 @as("ObjectIdentifiers") objectIdentifiers: objectIdentifierList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListPolicyAttachmentsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListObjectPolicies = {
@@ -813,7 +813,7 @@ module ListObjectPolicies = {
 @as("AttachedPolicyIds") attachedPolicyIds: objectIdentifierList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListObjectPoliciesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListObjectChildren = {
@@ -830,7 +830,7 @@ module ListObjectChildren = {
 @as("Children") children: linkNameToObjectIdentifierMap
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListObjectChildrenCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListManagedSchemaArns = {
@@ -845,7 +845,7 @@ module ListManagedSchemaArns = {
 @as("SchemaArns") schemaArns: arns
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListManagedSchemaArnsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFacetNames = {
@@ -860,7 +860,7 @@ module ListFacetNames = {
 @as("FacetNames") facetNames: facetNameList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListFacetNamesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDevelopmentSchemaArns = {
@@ -874,7 +874,7 @@ module ListDevelopmentSchemaArns = {
 @as("SchemaArns") schemaArns: arns
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListDevelopmentSchemaArnsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAppliedSchemaArns = {
@@ -890,7 +890,7 @@ module ListAppliedSchemaArns = {
 @as("SchemaArns") schemaArns: arns
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListAppliedSchemaArnsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetTypedLinkFacetInformation = {
@@ -903,7 +903,7 @@ module GetTypedLinkFacetInformation = {
 @as("IdentityAttributeOrder") identityAttributeOrder: attributeNameList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "GetTypedLinkFacetInformationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFacet = {
@@ -916,7 +916,7 @@ module GetFacet = {
 @as("Facet") facet: facet
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "GetFacetCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDirectory = {
@@ -928,7 +928,7 @@ module GetDirectory = {
 @as("Directory") directory: option<directory>
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "GetDirectoryCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DetachPolicy = {
@@ -940,7 +940,7 @@ module DetachPolicy = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "DetachPolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DetachObject = {
@@ -954,7 +954,7 @@ module DetachObject = {
 @as("DetachedObjectIdentifier") detachedObjectIdentifier: objectIdentifier
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "DetachObjectCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DetachFromIndex = {
@@ -968,7 +968,7 @@ module DetachFromIndex = {
 @as("DetachedObjectIdentifier") detachedObjectIdentifier: objectIdentifier
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "DetachFromIndexCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteObject = {
@@ -979,7 +979,7 @@ module DeleteObject = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "DeleteObjectCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module AttachToIndex = {
@@ -993,7 +993,7 @@ module AttachToIndex = {
 @as("AttachedObjectIdentifier") attachedObjectIdentifier: objectIdentifier
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "AttachToIndexCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module AttachPolicy = {
@@ -1005,7 +1005,7 @@ module AttachPolicy = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "AttachPolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module AttachObject = {
@@ -1020,7 +1020,7 @@ module AttachObject = {
 @as("AttachedObjectIdentifier") attachedObjectIdentifier: objectIdentifier
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "AttachObjectCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
@@ -1031,7 +1031,7 @@ module TagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
@@ -1046,7 +1046,7 @@ module ListTagsForResource = {
 @as("Tags") tags: tagList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListObjectParents = {
@@ -1065,7 +1065,7 @@ module ListObjectParents = {
 @as("Parents") parents: objectIdentifierToLinkNameMap
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListObjectParentsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDirectories = {
@@ -1080,7 +1080,7 @@ module ListDirectories = {
 @as("Directories") directories: option<directoryList>
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListDirectoriesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetObjectInformation = {
@@ -1095,7 +1095,7 @@ module GetObjectInformation = {
 @as("SchemaFacets") schemaFacets: schemaFacetList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "GetObjectInformationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateIndex = {
@@ -1111,7 +1111,7 @@ module CreateIndex = {
 @as("ObjectIdentifier") objectIdentifier: objectIdentifier
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "CreateIndexCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListObjectParentPaths = {
@@ -1127,7 +1127,7 @@ module ListObjectParentPaths = {
 @as("PathToObjectIdentifiersList") pathToObjectIdentifiersList: pathToObjectIdentifiersList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListObjectParentPathsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListObjectAttributes = {
@@ -1145,7 +1145,7 @@ module ListObjectAttributes = {
 @as("Attributes") attributes: attributeKeyAndValueList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListObjectAttributesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetObjectAttributes = {
@@ -1161,7 +1161,7 @@ module GetObjectAttributes = {
 @as("Attributes") attributes: attributeKeyAndValueList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "GetObjectAttributesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateObject = {
@@ -1177,7 +1177,7 @@ module CreateObject = {
 @as("ObjectIdentifier") objectIdentifier: objectIdentifier
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "CreateObjectCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module AddFacetToObject = {
@@ -1190,7 +1190,7 @@ module AddFacetToObject = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "AddFacetToObjectCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateObjectAttributes = {
@@ -1204,7 +1204,7 @@ module UpdateObjectAttributes = {
 @as("ObjectIdentifier") objectIdentifier: objectIdentifier
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "UpdateObjectAttributesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateLinkAttributes = {
@@ -1216,7 +1216,7 @@ module UpdateLinkAttributes = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "UpdateLinkAttributesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module LookupPolicy = {
@@ -1232,7 +1232,7 @@ module LookupPolicy = {
 @as("PolicyToPathList") policyToPathList: policyToPathList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "LookupPolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLinkAttributes = {
@@ -1247,7 +1247,7 @@ module GetLinkAttributes = {
 @as("Attributes") attributes: attributeKeyAndValueList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "GetLinkAttributesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DetachTypedLink = {
@@ -1258,7 +1258,7 @@ module DetachTypedLink = {
 }
   
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "DetachTypedLinkCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module AttachTypedLink = {
@@ -1274,7 +1274,7 @@ module AttachTypedLink = {
 @as("TypedLinkSpecifier") typedLinkSpecifier: typedLinkSpecifier
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "AttachTypedLinkCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTypedLinkFacetAttributes = {
@@ -1290,7 +1290,7 @@ module ListTypedLinkFacetAttributes = {
 @as("Attributes") attributes: typedLinkAttributeDefinitionList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListTypedLinkFacetAttributesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListOutgoingTypedLinks = {
@@ -1309,7 +1309,7 @@ module ListOutgoingTypedLinks = {
 @as("TypedLinkSpecifiers") typedLinkSpecifiers: typedLinkSpecifierList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListOutgoingTypedLinksCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListIndex = {
@@ -1327,7 +1327,7 @@ module ListIndex = {
 @as("IndexAttachments") indexAttachments: indexAttachmentList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListIndexCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListIncomingTypedLinks = {
@@ -1346,7 +1346,7 @@ module ListIncomingTypedLinks = {
 @as("LinkSpecifiers") linkSpecifiers: typedLinkSpecifierList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListIncomingTypedLinksCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAttachedIndices = {
@@ -1363,7 +1363,7 @@ module ListAttachedIndices = {
 @as("IndexAttachments") indexAttachments: indexAttachmentList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListAttachedIndicesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateTypedLinkFacet = {
@@ -1376,7 +1376,7 @@ module UpdateTypedLinkFacet = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "UpdateTypedLinkFacetCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFacetAttributes = {
@@ -1392,7 +1392,7 @@ module ListFacetAttributes = {
 @as("Attributes") attributes: facetAttributeList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "ListFacetAttributesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateTypedLinkFacet = {
@@ -1403,7 +1403,7 @@ module CreateTypedLinkFacet = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "CreateTypedLinkFacetCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFacet = {
@@ -1417,7 +1417,7 @@ module CreateFacet = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "CreateFacetCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFacet = {
@@ -1430,7 +1430,7 @@ module UpdateFacet = {
 }
   type response = unit
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "UpdateFacetCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchWrite = {
@@ -1443,7 +1443,7 @@ module BatchWrite = {
 @as("Responses") responses: batchWriteOperationResponseList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "BatchWriteCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchRead = {
@@ -1457,5 +1457,5 @@ module BatchRead = {
 @as("Responses") responses: batchReadOperationResponseList
 }
   @module("@aws-sdk/client-clouddirectory") @new external new_: (Js.Promise.t<request>) => t = "BatchReadCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

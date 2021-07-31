@@ -4,7 +4,7 @@ type apiInteger = int;
 type apiTimestamp = Js.Date.t;
 type apiLong = float;
 type timestamp = Js.Date.t;
-type string = string
+type amazonawsString = string
 type windowMinutes = float;
 type tagValue = string
 type tagKey = string
@@ -41,30 +41,30 @@ type backupJobState = [@as("EXPIRED") #EXPIRED | @as("FAILED") #FAILED | @as("CO
 type accountId = string
 type aRN = string
 type tags = Js.Dict.t< tagValue>
-type tagKeyList = array<string>
+type tagKeyList = array<amazonawsString>
 type restoreJobsListMember = {
 @as("ResourceType") resourceType: resourceType,
 @as("CreatedResourceArn") createdResourceArn: aRN,
 @as("ExpectedCompletionTimeMinutes") expectedCompletionTimeMinutes: amazonawsLong,
 @as("IamRoleArn") iamRoleArn: iAMRoleArn,
 @as("BackupSizeInBytes") backupSizeInBytes: amazonawsLong,
-@as("PercentDone") percentDone: string,
-@as("StatusMessage") statusMessage: string,
+@as("PercentDone") percentDone: amazonawsString,
+@as("StatusMessage") statusMessage: amazonawsString,
 @as("Status") status: restoreJobStatus,
 @as("CompletionDate") completionDate: timestamp,
 @as("CreationDate") creationDate: timestamp,
 @as("RecoveryPointArn") recoveryPointArn: aRN,
-@as("RestoreJobId") restoreJobId: string,
+@as("RestoreJobId") restoreJobId: amazonawsString,
 @as("AccountId") accountId: accountId
 }
 type resourceTypes = array<resourceType>
 type resourceTypeOptInPreference = Js.Dict.t< isEnabled>
 type resourceArns = array<aRN>
 type recoveryPointCreator = {
-@as("BackupRuleId") backupRuleId: string,
-@as("BackupPlanVersion") backupPlanVersion: string,
+@as("BackupRuleId") backupRuleId: amazonawsString,
+@as("BackupPlanVersion") backupPlanVersion: amazonawsString,
 @as("BackupPlanArn") backupPlanArn: aRN,
-@as("BackupPlanId") backupPlanId: string
+@as("BackupPlanId") backupPlanId: amazonawsString
 }
 type recoveryPointByResource = {
 @as("BackupVaultName") backupVaultName: backupVaultName,
@@ -96,7 +96,7 @@ type calculatedLifecycle = {
 }
 type backupVaultListMember = {
 @as("NumberOfRecoveryPoints") numberOfRecoveryPoints: long2,
-@as("CreatorRequestId") creatorRequestId: string,
+@as("CreatorRequestId") creatorRequestId: amazonawsString,
 @as("EncryptionKeyArn") encryptionKeyArn: aRN,
 @as("CreationDate") creationDate: timestamp,
 @as("BackupVaultArn") backupVaultArn: aRN,
@@ -105,15 +105,15 @@ type backupVaultListMember = {
 type backupVaultEvents = array<backupVaultEvent>
 type backupSelectionsListMember = {
 @as("IamRoleArn") iamRoleArn: iAMRoleArn,
-@as("CreatorRequestId") creatorRequestId: string,
+@as("CreatorRequestId") creatorRequestId: amazonawsString,
 @as("CreationDate") creationDate: timestamp,
-@as("BackupPlanId") backupPlanId: string,
+@as("BackupPlanId") backupPlanId: amazonawsString,
 @as("SelectionName") selectionName: backupSelectionName,
-@as("SelectionId") selectionId: string
+@as("SelectionId") selectionId: amazonawsString
 }
 type backupPlanTemplatesListMember = {
-@as("BackupPlanTemplateName") backupPlanTemplateName: string,
-@as("BackupPlanTemplateId") backupPlanTemplateId: string
+@as("BackupPlanTemplateName") backupPlanTemplateName: amazonawsString,
+@as("BackupPlanTemplateId") backupPlanTemplateId: amazonawsString
 }
 type backupOptions = Js.Dict.t< backupOptionValue>
 type restoreJobsList = array<restoreJobsListMember>
@@ -144,7 +144,7 @@ type copyJob = {
 @as("CreatedBy") createdBy: recoveryPointCreator,
 @as("IamRoleArn") iamRoleArn: iAMRoleArn,
 @as("BackupSizeInBytes") backupSizeInBytes: amazonawsLong,
-@as("StatusMessage") statusMessage: string,
+@as("StatusMessage") statusMessage: amazonawsString,
 @as("State") state: copyJobState,
 @as("CompletionDate") completionDate: timestamp,
 @as("CreationDate") creationDate: timestamp,
@@ -153,7 +153,7 @@ type copyJob = {
 @as("DestinationBackupVaultArn") destinationBackupVaultArn: aRN,
 @as("SourceRecoveryPointArn") sourceRecoveryPointArn: aRN,
 @as("SourceBackupVaultArn") sourceBackupVaultArn: aRN,
-@as("CopyJobId") copyJobId: string,
+@as("CopyJobId") copyJobId: amazonawsString,
 @as("AccountId") accountId: accountId
 }
 type copyAction = {
@@ -164,7 +164,7 @@ type backupVaultList = array<backupVaultListMember>
 type backupSelectionsList = array<backupSelectionsListMember>
 type backupPlanTemplatesList = array<backupPlanTemplatesListMember>
 type backupJob = {
-@as("BackupType") backupType: string,
+@as("BackupType") backupType: amazonawsString,
 @as("BackupOptions") backupOptions: backupOptions,
 @as("BytesTransferred") bytesTransferred: amazonawsLong,
 @as("ResourceType") resourceType: resourceType,
@@ -173,8 +173,8 @@ type backupJob = {
 @as("CreatedBy") createdBy: recoveryPointCreator,
 @as("IamRoleArn") iamRoleArn: iAMRoleArn,
 @as("BackupSizeInBytes") backupSizeInBytes: amazonawsLong,
-@as("PercentDone") percentDone: string,
-@as("StatusMessage") statusMessage: string,
+@as("PercentDone") percentDone: amazonawsString,
+@as("StatusMessage") statusMessage: amazonawsString,
 @as("State") state: backupJobState,
 @as("CompletionDate") completionDate: timestamp,
 @as("CreationDate") creationDate: timestamp,
@@ -182,7 +182,7 @@ type backupJob = {
 @as("RecoveryPointArn") recoveryPointArn: aRN,
 @as("BackupVaultArn") backupVaultArn: aRN,
 @as("BackupVaultName") backupVaultName: backupVaultName,
-@as("BackupJobId") backupJobId: string,
+@as("BackupJobId") backupJobId: amazonawsString,
 @as("AccountId") accountId: accountId
 }
 type advancedBackupSetting = {
@@ -214,7 +214,7 @@ type backupRuleInput = {
 type backupRule = {
 @as("EnableContinuousBackup") enableContinuousBackup: amazonawsBoolean,
 @as("CopyActions") copyActions: copyActions,
-@as("RuleId") ruleId: string,
+@as("RuleId") ruleId: amazonawsString,
 @as("RecoveryPointTags") recoveryPointTags: tags,
 @as("Lifecycle") lifecycle: lifecycle,
 @as("CompletionWindowMinutes") completionWindowMinutes: windowMinutes,
@@ -226,12 +226,12 @@ type backupRule = {
 type backupPlansListMember = {
 @as("AdvancedBackupSettings") advancedBackupSettings: advancedBackupSettings,
 @as("LastExecutionDate") lastExecutionDate: timestamp,
-@as("CreatorRequestId") creatorRequestId: string,
+@as("CreatorRequestId") creatorRequestId: amazonawsString,
 @as("BackupPlanName") backupPlanName: backupPlanName,
-@as("VersionId") versionId: string,
+@as("VersionId") versionId: amazonawsString,
 @as("DeletionDate") deletionDate: timestamp,
 @as("CreationDate") creationDate: timestamp,
-@as("BackupPlanId") backupPlanId: string,
+@as("BackupPlanId") backupPlanId: amazonawsString,
 @as("BackupPlanArn") backupPlanArn: aRN
 }
 type backupRulesInput = array<backupRuleInput>
@@ -253,11 +253,11 @@ type clientType;
 module StopBackupJob = {
   type t;
   type request = {
-@as("BackupJobId") backupJobId: option<string>
+@as("BackupJobId") backupJobId: option<amazonawsString>
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "StopBackupJobCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBackupVaultAccessPolicy = {
@@ -268,7 +268,7 @@ module PutBackupVaultAccessPolicy = {
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "PutBackupVaultAccessPolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetBackupVaultAccessPolicy = {
@@ -282,19 +282,19 @@ module GetBackupVaultAccessPolicy = {
 @as("BackupVaultName") backupVaultName: backupVaultName
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "GetBackupVaultAccessPolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ExportBackupPlanTemplate = {
   type t;
   type request = {
-@as("BackupPlanId") backupPlanId: option<string>
+@as("BackupPlanId") backupPlanId: option<amazonawsString>
 }
   type response = {
-@as("BackupPlanTemplateJson") backupPlanTemplateJson: string
+@as("BackupPlanTemplateJson") backupPlanTemplateJson: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ExportBackupPlanTemplateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateRecoveryPoint = {
@@ -305,7 +305,7 @@ module DisassociateRecoveryPoint = {
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DisassociateRecoveryPointCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DescribeRestoreJob = {
@@ -319,17 +319,17 @@ module DescribeRestoreJob = {
 @as("ExpectedCompletionTimeMinutes") expectedCompletionTimeMinutes: amazonawsLong,
 @as("IamRoleArn") iamRoleArn: iAMRoleArn,
 @as("BackupSizeInBytes") backupSizeInBytes: amazonawsLong,
-@as("PercentDone") percentDone: string,
-@as("StatusMessage") statusMessage: string,
+@as("PercentDone") percentDone: amazonawsString,
+@as("StatusMessage") statusMessage: amazonawsString,
 @as("Status") status: restoreJobStatus,
 @as("CompletionDate") completionDate: timestamp,
 @as("CreationDate") creationDate: timestamp,
 @as("RecoveryPointArn") recoveryPointArn: aRN,
-@as("RestoreJobId") restoreJobId: string,
+@as("RestoreJobId") restoreJobId: amazonawsString,
 @as("AccountId") accountId: accountId
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DescribeRestoreJobCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeProtectedResource = {
@@ -343,24 +343,24 @@ module DescribeProtectedResource = {
 @as("ResourceArn") resourceArn: aRN
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DescribeProtectedResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBackupVault = {
   type t;
   type request = {
-@as("BackupVaultName") backupVaultName: option<string>
+@as("BackupVaultName") backupVaultName: option<amazonawsString>
 }
   type response = {
 @as("NumberOfRecoveryPoints") numberOfRecoveryPoints: long2,
-@as("CreatorRequestId") creatorRequestId: string,
+@as("CreatorRequestId") creatorRequestId: amazonawsString,
 @as("CreationDate") creationDate: timestamp,
 @as("EncryptionKeyArn") encryptionKeyArn: aRN,
 @as("BackupVaultArn") backupVaultArn: aRN,
-@as("BackupVaultName") backupVaultName: string
+@as("BackupVaultName") backupVaultName: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DescribeBackupVaultCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteRecoveryPoint = {
@@ -371,7 +371,7 @@ module DeleteRecoveryPoint = {
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DeleteRecoveryPointCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBackupVaultNotifications = {
@@ -381,7 +381,7 @@ module DeleteBackupVaultNotifications = {
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DeleteBackupVaultNotificationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBackupVaultAccessPolicy = {
@@ -391,43 +391,43 @@ module DeleteBackupVaultAccessPolicy = {
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DeleteBackupVaultAccessPolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBackupVault = {
   type t;
   type request = {
-@as("BackupVaultName") backupVaultName: option<string>
+@as("BackupVaultName") backupVaultName: option<amazonawsString>
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DeleteBackupVaultCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBackupSelection = {
   type t;
   type request = {
-@as("SelectionId") selectionId: option<string>,
-@as("BackupPlanId") backupPlanId: option<string>
+@as("SelectionId") selectionId: option<amazonawsString>,
+@as("BackupPlanId") backupPlanId: option<amazonawsString>
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DeleteBackupSelectionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBackupPlan = {
   type t;
   type request = {
-@as("BackupPlanId") backupPlanId: option<string>
+@as("BackupPlanId") backupPlanId: option<amazonawsString>
 }
   type response = {
-@as("VersionId") versionId: string,
+@as("VersionId") versionId: amazonawsString,
 @as("DeletionDate") deletionDate: timestamp,
 @as("BackupPlanArn") backupPlanArn: aRN,
-@as("BackupPlanId") backupPlanId: string
+@as("BackupPlanId") backupPlanId: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DeleteBackupPlanCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateRegionSettings = {
@@ -437,7 +437,7 @@ module UpdateRegionSettings = {
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "UpdateRegionSettingsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module UpdateRecoveryPointLifecycle = {
@@ -454,7 +454,7 @@ module UpdateRecoveryPointLifecycle = {
 @as("BackupVaultArn") backupVaultArn: aRN
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "UpdateRecoveryPointLifecycleCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateGlobalSettings = {
@@ -464,7 +464,7 @@ module UpdateGlobalSettings = {
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "UpdateGlobalSettingsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module UntagResource = {
@@ -475,7 +475,7 @@ module UntagResource = {
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module TagResource = {
@@ -486,14 +486,14 @@ module TagResource = {
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module StartRestoreJob = {
   type t;
   type request = {
 @as("ResourceType") resourceType: resourceType,
-@as("IdempotencyToken") idempotencyToken: string,
+@as("IdempotencyToken") idempotencyToken: amazonawsString,
 @as("IamRoleArn") iamRoleArn: option<iAMRoleArn>,
 @as("Metadata") metadata: option<metadata>,
 @as("RecoveryPointArn") recoveryPointArn: option<aRN>
@@ -502,14 +502,14 @@ module StartRestoreJob = {
 @as("RestoreJobId") restoreJobId: restoreJobId
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "StartRestoreJobCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module StartCopyJob = {
   type t;
   type request = {
 @as("Lifecycle") lifecycle: lifecycle,
-@as("IdempotencyToken") idempotencyToken: string,
+@as("IdempotencyToken") idempotencyToken: amazonawsString,
 @as("IamRoleArn") iamRoleArn: option<iAMRoleArn>,
 @as("DestinationBackupVaultArn") destinationBackupVaultArn: option<aRN>,
 @as("SourceBackupVaultName") sourceBackupVaultName: option<backupVaultName>,
@@ -517,10 +517,10 @@ module StartCopyJob = {
 }
   type response = {
 @as("CreationDate") creationDate: timestamp,
-@as("CopyJobId") copyJobId: string
+@as("CopyJobId") copyJobId: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "StartCopyJobCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module StartBackupJob = {
@@ -531,7 +531,7 @@ module StartBackupJob = {
 @as("Lifecycle") lifecycle: lifecycle,
 @as("CompleteWindowMinutes") completeWindowMinutes: windowMinutes,
 @as("StartWindowMinutes") startWindowMinutes: windowMinutes,
-@as("IdempotencyToken") idempotencyToken: string,
+@as("IdempotencyToken") idempotencyToken: amazonawsString,
 @as("IamRoleArn") iamRoleArn: option<iAMRoleArn>,
 @as("ResourceArn") resourceArn: option<aRN>,
 @as("BackupVaultName") backupVaultName: option<backupVaultName>
@@ -539,10 +539,10 @@ module StartBackupJob = {
   type response = {
 @as("CreationDate") creationDate: timestamp,
 @as("RecoveryPointArn") recoveryPointArn: aRN,
-@as("BackupJobId") backupJobId: string
+@as("BackupJobId") backupJobId: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "StartBackupJobCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module PutBackupVaultNotifications = {
@@ -554,22 +554,22 @@ module PutBackupVaultNotifications = {
 }
   
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "PutBackupVaultNotificationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListTags = {
   type t;
   type request = {
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string,
+@as("NextToken") nextToken: amazonawsString,
 @as("ResourceArn") resourceArn: option<aRN>
 }
   type response = {
 @as("Tags") tags: tags,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListTagsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSupportedResourceTypes = {
@@ -579,7 +579,7 @@ module GetSupportedResourceTypes = {
 @as("ResourceTypes") resourceTypes: resourceTypes
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<unit>) => t = "GetSupportedResourceTypesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetRecoveryPointRestoreMetadata = {
@@ -594,7 +594,7 @@ module GetRecoveryPointRestoreMetadata = {
 @as("BackupVaultArn") backupVaultArn: aRN
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "GetRecoveryPointRestoreMetadataCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBackupVaultNotifications = {
@@ -609,7 +609,7 @@ module GetBackupVaultNotifications = {
 @as("BackupVaultName") backupVaultName: backupVaultName
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "GetBackupVaultNotificationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRegionSettings = {
@@ -619,7 +619,7 @@ module DescribeRegionSettings = {
 @as("ResourceTypeOptInPreference") resourceTypeOptInPreference: resourceTypeOptInPreference
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DescribeRegionSettingsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRecoveryPoint = {
@@ -649,7 +649,7 @@ module DescribeRecoveryPoint = {
 @as("RecoveryPointArn") recoveryPointArn: aRN
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DescribeRecoveryPointCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeGlobalSettings = {
@@ -660,16 +660,16 @@ module DescribeGlobalSettings = {
 @as("GlobalSettings") globalSettings: globalSettings
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DescribeGlobalSettingsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBackupJob = {
   type t;
   type request = {
-@as("BackupJobId") backupJobId: option<string>
+@as("BackupJobId") backupJobId: option<amazonawsString>
 }
   type response = {
-@as("BackupType") backupType: string,
+@as("BackupType") backupType: amazonawsString,
 @as("BackupOptions") backupOptions: backupOptions,
 @as("StartBy") startBy: timestamp,
 @as("ExpectedCompletionDate") expectedCompletionDate: timestamp,
@@ -678,8 +678,8 @@ module DescribeBackupJob = {
 @as("CreatedBy") createdBy: recoveryPointCreator,
 @as("IamRoleArn") iamRoleArn: iAMRoleArn,
 @as("BackupSizeInBytes") backupSizeInBytes: amazonawsLong,
-@as("PercentDone") percentDone: string,
-@as("StatusMessage") statusMessage: string,
+@as("PercentDone") percentDone: amazonawsString,
+@as("StatusMessage") statusMessage: amazonawsString,
 @as("State") state: backupJobState,
 @as("CompletionDate") completionDate: timestamp,
 @as("CreationDate") creationDate: timestamp,
@@ -687,17 +687,17 @@ module DescribeBackupJob = {
 @as("RecoveryPointArn") recoveryPointArn: aRN,
 @as("BackupVaultArn") backupVaultArn: aRN,
 @as("BackupVaultName") backupVaultName: backupVaultName,
-@as("BackupJobId") backupJobId: string,
+@as("BackupJobId") backupJobId: amazonawsString,
 @as("AccountId") accountId: accountId
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DescribeBackupJobCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBackupVault = {
   type t;
   type request = {
-@as("CreatorRequestId") creatorRequestId: string,
+@as("CreatorRequestId") creatorRequestId: amazonawsString,
 @as("EncryptionKeyArn") encryptionKeyArn: aRN,
 @as("BackupVaultTags") backupVaultTags: tags,
 @as("BackupVaultName") backupVaultName: option<backupVaultName>
@@ -708,7 +708,7 @@ module CreateBackupVault = {
 @as("BackupVaultName") backupVaultName: backupVaultName
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "CreateBackupVaultCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRestoreJobs = {
@@ -719,98 +719,98 @@ module ListRestoreJobs = {
 @as("ByCreatedBefore") byCreatedBefore: timestamp,
 @as("ByAccountId") byAccountId: accountId,
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   type response = {
-@as("NextToken") nextToken: string,
+@as("NextToken") nextToken: amazonawsString,
 @as("RestoreJobs") restoreJobs: restoreJobsList
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListRestoreJobsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRecoveryPointsByResource = {
   type t;
   type request = {
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string,
+@as("NextToken") nextToken: amazonawsString,
 @as("ResourceArn") resourceArn: option<aRN>
 }
   type response = {
 @as("RecoveryPoints") recoveryPoints: recoveryPointByResourceList,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListRecoveryPointsByResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListProtectedResources = {
   type t;
   type request = {
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   type response = {
-@as("NextToken") nextToken: string,
+@as("NextToken") nextToken: amazonawsString,
 @as("Results") results: protectedResourcesList
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListProtectedResourcesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBackupVaults = {
   type t;
   type request = {
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   type response = {
-@as("NextToken") nextToken: string,
+@as("NextToken") nextToken: amazonawsString,
 @as("BackupVaultList") backupVaultList: backupVaultList
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListBackupVaultsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBackupSelections = {
   type t;
   type request = {
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string,
-@as("BackupPlanId") backupPlanId: option<string>
+@as("NextToken") nextToken: amazonawsString,
+@as("BackupPlanId") backupPlanId: option<amazonawsString>
 }
   type response = {
 @as("BackupSelectionsList") backupSelectionsList: backupSelectionsList,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListBackupSelectionsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBackupPlanTemplates = {
   type t;
   type request = {
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   type response = {
 @as("BackupPlanTemplatesList") backupPlanTemplatesList: backupPlanTemplatesList,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListBackupPlanTemplatesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCopyJob = {
   type t;
   type request = {
-@as("CopyJobId") copyJobId: option<string>
+@as("CopyJobId") copyJobId: option<amazonawsString>
 }
   type response = {
 @as("CopyJob") copyJob: copyJob
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "DescribeCopyJobCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRecoveryPointsByBackupVault = {
@@ -818,40 +818,40 @@ module ListRecoveryPointsByBackupVault = {
   type request = {
 @as("ByCreatedAfter") byCreatedAfter: timestamp,
 @as("ByCreatedBefore") byCreatedBefore: timestamp,
-@as("ByBackupPlanId") byBackupPlanId: string,
+@as("ByBackupPlanId") byBackupPlanId: amazonawsString,
 @as("ByResourceType") byResourceType: resourceType,
 @as("ByResourceArn") byResourceArn: aRN,
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string,
+@as("NextToken") nextToken: amazonawsString,
 @as("BackupVaultName") backupVaultName: option<backupVaultName>
 }
   type response = {
 @as("RecoveryPoints") recoveryPoints: recoveryPointByBackupVaultList,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListRecoveryPointsByBackupVaultCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCopyJobs = {
   type t;
   type request = {
 @as("ByAccountId") byAccountId: accountId,
-@as("ByDestinationVaultArn") byDestinationVaultArn: string,
+@as("ByDestinationVaultArn") byDestinationVaultArn: amazonawsString,
 @as("ByResourceType") byResourceType: resourceType,
 @as("ByCreatedAfter") byCreatedAfter: timestamp,
 @as("ByCreatedBefore") byCreatedBefore: timestamp,
 @as("ByState") byState: copyJobState,
 @as("ByResourceArn") byResourceArn: aRN,
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   type response = {
-@as("NextToken") nextToken: string,
+@as("NextToken") nextToken: amazonawsString,
 @as("CopyJobs") copyJobs: copyJobsList
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListCopyJobsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBackupJobs = {
@@ -865,47 +865,47 @@ module ListBackupJobs = {
 @as("ByState") byState: backupJobState,
 @as("ByResourceArn") byResourceArn: aRN,
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   type response = {
-@as("NextToken") nextToken: string,
+@as("NextToken") nextToken: amazonawsString,
 @as("BackupJobs") backupJobs: backupJobsList
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListBackupJobsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBackupSelection = {
   type t;
   type request = {
-@as("SelectionId") selectionId: option<string>,
-@as("BackupPlanId") backupPlanId: option<string>
+@as("SelectionId") selectionId: option<amazonawsString>,
+@as("BackupPlanId") backupPlanId: option<amazonawsString>
 }
   type response = {
-@as("CreatorRequestId") creatorRequestId: string,
+@as("CreatorRequestId") creatorRequestId: amazonawsString,
 @as("CreationDate") creationDate: timestamp,
-@as("BackupPlanId") backupPlanId: string,
-@as("SelectionId") selectionId: string,
+@as("BackupPlanId") backupPlanId: amazonawsString,
+@as("SelectionId") selectionId: amazonawsString,
 @as("BackupSelection") backupSelection: backupSelection
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "GetBackupSelectionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBackupSelection = {
   type t;
   type request = {
-@as("CreatorRequestId") creatorRequestId: string,
+@as("CreatorRequestId") creatorRequestId: amazonawsString,
 @as("BackupSelection") backupSelection: option<backupSelection>,
-@as("BackupPlanId") backupPlanId: option<string>
+@as("BackupPlanId") backupPlanId: option<amazonawsString>
 }
   type response = {
 @as("CreationDate") creationDate: timestamp,
-@as("BackupPlanId") backupPlanId: string,
-@as("SelectionId") selectionId: string
+@as("BackupPlanId") backupPlanId: amazonawsString,
+@as("SelectionId") selectionId: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "CreateBackupSelectionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBackupPlans = {
@@ -913,107 +913,107 @@ module ListBackupPlans = {
   type request = {
 @as("IncludeDeleted") includeDeleted: amazonawsBoolean,
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   type response = {
 @as("BackupPlansList") backupPlansList: backupPlansList,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListBackupPlansCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBackupPlanVersions = {
   type t;
   type request = {
 @as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: string,
-@as("BackupPlanId") backupPlanId: option<string>
+@as("NextToken") nextToken: amazonawsString,
+@as("BackupPlanId") backupPlanId: option<amazonawsString>
 }
   type response = {
 @as("BackupPlanVersionsList") backupPlanVersionsList: backupPlanVersionsList,
-@as("NextToken") nextToken: string
+@as("NextToken") nextToken: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "ListBackupPlanVersionsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateBackupPlan = {
   type t;
   type request = {
 @as("BackupPlan") backupPlan: option<backupPlanInput>,
-@as("BackupPlanId") backupPlanId: option<string>
+@as("BackupPlanId") backupPlanId: option<amazonawsString>
 }
   type response = {
 @as("AdvancedBackupSettings") advancedBackupSettings: advancedBackupSettings,
-@as("VersionId") versionId: string,
+@as("VersionId") versionId: amazonawsString,
 @as("CreationDate") creationDate: timestamp,
 @as("BackupPlanArn") backupPlanArn: aRN,
-@as("BackupPlanId") backupPlanId: string
+@as("BackupPlanId") backupPlanId: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "UpdateBackupPlanCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBackupPlanFromTemplate = {
   type t;
   type request = {
-@as("BackupPlanTemplateId") backupPlanTemplateId: option<string>
+@as("BackupPlanTemplateId") backupPlanTemplateId: option<amazonawsString>
 }
   type response = {
 @as("BackupPlanDocument") backupPlanDocument: backupPlan
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "GetBackupPlanFromTemplateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBackupPlanFromJSON = {
   type t;
   type request = {
-@as("BackupPlanTemplateJson") backupPlanTemplateJson: option<string>
+@as("BackupPlanTemplateJson") backupPlanTemplateJson: option<amazonawsString>
 }
   type response = {
 @as("BackupPlan") backupPlan: backupPlan
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "GetBackupPlanFromJSONCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBackupPlan = {
   type t;
   type request = {
-@as("VersionId") versionId: string,
-@as("BackupPlanId") backupPlanId: option<string>
+@as("VersionId") versionId: amazonawsString,
+@as("BackupPlanId") backupPlanId: option<amazonawsString>
 }
   type response = {
 @as("AdvancedBackupSettings") advancedBackupSettings: advancedBackupSettings,
 @as("LastExecutionDate") lastExecutionDate: timestamp,
 @as("DeletionDate") deletionDate: timestamp,
 @as("CreationDate") creationDate: timestamp,
-@as("CreatorRequestId") creatorRequestId: string,
-@as("VersionId") versionId: string,
+@as("CreatorRequestId") creatorRequestId: amazonawsString,
+@as("VersionId") versionId: amazonawsString,
 @as("BackupPlanArn") backupPlanArn: aRN,
-@as("BackupPlanId") backupPlanId: string,
+@as("BackupPlanId") backupPlanId: amazonawsString,
 @as("BackupPlan") backupPlan: backupPlan
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "GetBackupPlanCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBackupPlan = {
   type t;
   type request = {
-@as("CreatorRequestId") creatorRequestId: string,
+@as("CreatorRequestId") creatorRequestId: amazonawsString,
 @as("BackupPlanTags") backupPlanTags: tags,
 @as("BackupPlan") backupPlan: option<backupPlanInput>
 }
   type response = {
 @as("AdvancedBackupSettings") advancedBackupSettings: advancedBackupSettings,
-@as("VersionId") versionId: string,
+@as("VersionId") versionId: amazonawsString,
 @as("CreationDate") creationDate: timestamp,
 @as("BackupPlanArn") backupPlanArn: aRN,
-@as("BackupPlanId") backupPlanId: string
+@as("BackupPlanId") backupPlanId: amazonawsString
 }
   @module("@aws-sdk/client-backup") @new external new_: (Js.Promise.t<request>) => t = "CreateBackupPlanCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

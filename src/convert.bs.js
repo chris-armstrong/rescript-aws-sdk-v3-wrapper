@@ -96,7 +96,8 @@ function convert(parsed) {
           return {
                   name: param.name,
                   descriptor: descriptor,
-                  targets: Dependencies.getTargets(descriptor)
+                  targets: Dependencies.getTargets(descriptor),
+                  recursWith: undefined
                 };
         }));
   var shapesWithTargets$1 = Dependencies.order(shapesWithTargets);
@@ -108,7 +109,10 @@ function convert(parsed) {
             return true;
           }
         }));
-  var allStructures = match[1];
+  var match$1 = Belt_Array.partition(match[1], (function (param) {
+          return Belt_Option.isSome(param.recursWith);
+        }));
+  var allStructures = match$1[1];
   var operations = Belt_Array.keepMap(match[0], (function (shape) {
           var details = shape.descriptor;
           if (typeof details === "number" || details.TAG !== /* OperationShape */1) {
@@ -124,7 +128,7 @@ function convert(parsed) {
   var operationDependencies = Belt_Array.concatMany(Belt_Array.map(operations, (function (param) {
               return param[2];
             })));
-  var match$1 = Belt_Array.partition(allStructures, (function (structure) {
+  var match$2 = Belt_Array.partition(allStructures, (function (structure) {
           var name = structure.name;
           var tmp = structure.descriptor;
           if (typeof tmp === "number" || !(tmp.TAG === /* StructureShape */2 && operationDependencies.includes(name))) {
@@ -137,8 +141,8 @@ function convert(parsed) {
                         }));
           }
         }));
-  var remainingStructures = match$1[1];
-  var operationStructures = match$1[0];
+  var remainingStructures = match$2[1];
+  var operationStructures = match$2[0];
   var operationModuleParts = Belt_Array.map(operations, (function (param) {
           var details = param[1];
           var inputString = Belt_Option.getWithDefault(details.input, "");

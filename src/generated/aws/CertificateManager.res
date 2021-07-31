@@ -137,7 +137,7 @@ module ResendValidationEmail = {
 }
   
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "ResendValidationEmailCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module RenewCertificate = {
@@ -147,7 +147,7 @@ module RenewCertificate = {
 }
   
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "RenewCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetCertificate = {
@@ -160,7 +160,7 @@ module GetCertificate = {
 @as("Certificate") certificate: certificateBody
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "GetCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ExportCertificate = {
@@ -175,7 +175,7 @@ module ExportCertificate = {
 @as("Certificate") certificate: certificateBody
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "ExportCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteCertificate = {
@@ -185,7 +185,7 @@ module DeleteCertificate = {
 }
   
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "DeleteCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module UpdateCertificateOptions = {
@@ -196,7 +196,7 @@ module UpdateCertificateOptions = {
 }
   
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "UpdateCertificateOptionsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutAccountConfiguration = {
@@ -207,7 +207,7 @@ module PutAccountConfiguration = {
 }
   
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "PutAccountConfigurationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetAccountConfiguration = {
@@ -217,7 +217,7 @@ module GetAccountConfiguration = {
 @as("ExpiryEvents") expiryEvents: expiryEventsConfiguration
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<unit>) => t = "GetAccountConfigurationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module RequestCertificate = {
@@ -236,7 +236,7 @@ module RequestCertificate = {
 @as("CertificateArn") certificateArn: arn
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "RequestCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module RemoveTagsFromCertificate = {
@@ -247,7 +247,7 @@ module RemoveTagsFromCertificate = {
 }
   
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "RemoveTagsFromCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListTagsForCertificate = {
@@ -259,7 +259,7 @@ module ListTagsForCertificate = {
 @as("Tags") tags: tagList
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCertificates = {
@@ -275,7 +275,7 @@ module ListCertificates = {
 @as("NextToken") nextToken: nextToken
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "ListCertificatesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ImportCertificate = {
@@ -291,7 +291,7 @@ module ImportCertificate = {
 @as("CertificateArn") certificateArn: arn
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "ImportCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module AddTagsToCertificate = {
@@ -302,7 +302,7 @@ module AddTagsToCertificate = {
 }
   
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "AddTagsToCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DescribeCertificate = {
@@ -314,5 +314,5 @@ module DescribeCertificate = {
 @as("Certificate") certificate: certificateDetail
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "DescribeCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

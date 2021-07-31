@@ -6,7 +6,13 @@ Array.forEach(files, file => {
   Js.log(`Reading ${path}`)
   let parsed =NodeJs.Fs.readFileSync(path, ())->NodeJs.Buffer.toString->Json.Decode.parseJson(Parse.parseModel)
   let generated = switch parsed {
-    | Ok(shapes) => Ok(shapes)->Convert.convert
+    | Ok(shapes) => {
+      switch Convert.convert(Ok(shapes)) {
+        | Ok(result) => Ok(result)
+        | exception Dependencies.CycleError(_, _) => Error("cycle error - skip for now")
+        | Error(x) => Error(x)
+      }
+    }
     | Error(error) => Error(Json.Decode.jsonParseErrorToString(error))
   }
 

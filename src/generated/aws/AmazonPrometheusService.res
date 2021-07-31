@@ -47,7 +47,7 @@ module UpdateWorkspaceAlias = {
 }
   
   @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "UpdateWorkspaceAliasCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteWorkspace = {
@@ -58,7 +58,7 @@ module DeleteWorkspace = {
 }
   
   @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "DeleteWorkspaceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateWorkspace = {
@@ -73,7 +73,7 @@ module CreateWorkspace = {
 @as("workspaceId") workspaceId: option<workspaceId>
 }
   @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "CreateWorkspaceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeWorkspace = {
@@ -85,7 +85,7 @@ module DescribeWorkspace = {
 @as("workspace") workspace: option<workspaceDescription>
 }
   @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkspaceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListWorkspaces = {
@@ -100,5 +100,5 @@ module ListWorkspaces = {
 @as("workspaces") workspaces: option<workspaceSummaryList>
 }
   @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "ListWorkspacesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

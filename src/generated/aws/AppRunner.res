@@ -208,7 +208,7 @@ module StartDeployment = {
 @as("OperationId") operationId: option<uUID>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "StartDeploymentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
@@ -219,7 +219,7 @@ module UntagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAutoScalingConfiguration = {
@@ -231,7 +231,7 @@ module DescribeAutoScalingConfiguration = {
 @as("AutoScalingConfiguration") autoScalingConfiguration: option<autoScalingConfiguration>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DescribeAutoScalingConfigurationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteConnection = {
@@ -243,7 +243,7 @@ module DeleteConnection = {
 @as("Connection") connection: connection
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DeleteConnectionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAutoScalingConfiguration = {
@@ -255,7 +255,7 @@ module DeleteAutoScalingConfiguration = {
 @as("AutoScalingConfiguration") autoScalingConfiguration: option<autoScalingConfiguration>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DeleteAutoScalingConfigurationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
@@ -266,7 +266,7 @@ module TagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
@@ -278,7 +278,7 @@ module ListTagsForResource = {
 @as("Tags") tags: tagList
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListServices = {
@@ -292,7 +292,7 @@ module ListServices = {
 @as("ServiceSummaryList") serviceSummaryList: option<serviceSummaryList>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ListServicesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListOperations = {
@@ -307,7 +307,7 @@ module ListOperations = {
 @as("OperationSummaryList") operationSummaryList: operationSummaryList
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ListOperationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListConnections = {
@@ -322,7 +322,7 @@ module ListConnections = {
 @as("ConnectionSummaryList") connectionSummaryList: option<connectionSummaryList>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ListConnectionsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAutoScalingConfigurations = {
@@ -338,7 +338,7 @@ module ListAutoScalingConfigurations = {
 @as("AutoScalingConfigurationSummaryList") autoScalingConfigurationSummaryList: option<autoScalingConfigurationSummaryList>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ListAutoScalingConfigurationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateConnection = {
@@ -352,7 +352,7 @@ module CreateConnection = {
 @as("Connection") connection: option<connection>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "CreateConnectionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAutoScalingConfiguration = {
@@ -368,7 +368,7 @@ module CreateAutoScalingConfiguration = {
 @as("AutoScalingConfiguration") autoScalingConfiguration: option<autoScalingConfiguration>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "CreateAutoScalingConfigurationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateCustomDomain = {
@@ -383,7 +383,7 @@ module DisassociateCustomDomain = {
 @as("DNSTarget") dNSTarget: option<amazonawsString>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DisassociateCustomDomainCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateCustomDomain = {
@@ -399,7 +399,7 @@ module AssociateCustomDomain = {
 @as("DNSTarget") dNSTarget: option<amazonawsString>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "AssociateCustomDomainCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCustomDomains = {
@@ -416,7 +416,7 @@ module DescribeCustomDomains = {
 @as("DNSTarget") dNSTarget: option<amazonawsString>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DescribeCustomDomainsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateService = {
@@ -433,7 +433,7 @@ module UpdateService = {
 @as("Service") service: option<service>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "UpdateServiceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ResumeService = {
@@ -446,7 +446,7 @@ module ResumeService = {
 @as("Service") service: option<service>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ResumeServiceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module PauseService = {
@@ -459,7 +459,7 @@ module PauseService = {
 @as("Service") service: option<service>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "PauseServiceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeService = {
@@ -471,7 +471,7 @@ module DescribeService = {
 @as("Service") service: option<service>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DescribeServiceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteService = {
@@ -484,7 +484,7 @@ module DeleteService = {
 @as("Service") service: option<service>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DeleteServiceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateService = {
@@ -503,5 +503,5 @@ module CreateService = {
 @as("Service") service: option<service>
 }
   @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "CreateServiceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

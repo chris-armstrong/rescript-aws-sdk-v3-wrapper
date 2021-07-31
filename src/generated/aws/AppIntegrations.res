@@ -52,7 +52,7 @@ module UpdateEventIntegration = {
 }
   type response = unit
   @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "UpdateEventIntegrationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteEventIntegration = {
@@ -62,7 +62,7 @@ module DeleteEventIntegration = {
 }
   type response = unit
   @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "DeleteEventIntegrationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
@@ -73,7 +73,7 @@ module UntagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
@@ -84,7 +84,7 @@ module TagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
@@ -96,7 +96,7 @@ module ListTagsForResource = {
 @as("tags") tags: tagMap
 }
   @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEventIntegration = {
@@ -113,7 +113,7 @@ module GetEventIntegration = {
 @as("Name") name: name
 }
   @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "GetEventIntegrationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateEventIntegration = {
@@ -130,7 +130,7 @@ module CreateEventIntegration = {
 @as("EventIntegrationArn") eventIntegrationArn: arn
 }
   @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "CreateEventIntegrationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEventIntegrations = {
@@ -144,7 +144,7 @@ module ListEventIntegrations = {
 @as("EventIntegrations") eventIntegrations: eventIntegrationsList
 }
   @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "ListEventIntegrationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEventIntegrationAssociations = {
@@ -159,5 +159,5 @@ module ListEventIntegrationAssociations = {
 @as("EventIntegrationAssociations") eventIntegrationAssociations: eventIntegrationAssociationsList
 }
   @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "ListEventIntegrationAssociationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

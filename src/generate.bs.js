@@ -3,6 +3,7 @@
 
 var Util = require("./util.bs.js");
 var Trait = require("./trait.bs.js");
+var $$String = require("rescript/lib/js/string.js");
 var Js_option = require("rescript/lib/js/js_option.js");
 var Belt_Array = require("rescript/lib/js/belt_Array.js");
 var Belt_Option = require("rescript/lib/js/belt_Option.js");
@@ -30,17 +31,20 @@ function safeTypeName(target) {
         return namespacePrefix + "Boolean";
     case "Double" :
         return namespacePrefix + "Double";
+    case "Float" :
+        return namespacePrefix + "Float";
     case "Integer" :
         return namespacePrefix + "Integer";
     case "Long" :
         return namespacePrefix + "Long";
-    case "String" :
-        return namespacePrefix + "String";
     case "Timestamp" :
         return namespacePrefix + "Timestamp";
     case "Export" :
     case "export" :
         return "export_";
+    case "String" :
+    case "string" :
+        return namespacePrefix + "String";
     case "Type" :
     case "type" :
         return "type_";
@@ -57,7 +61,7 @@ function safeConstructorName(name) {
 }
 
 function safeVariantName(name) {
-  return name.replace(new RegExp("-|#|:|\\.", "g"), "_");
+  return name.replace(new RegExp("-|#|:|\\.|/", "g"), "_");
 }
 
 function generateIntegerShape(name) {
@@ -216,7 +220,7 @@ function generateOperationModule(moduleName, param) {
   var response = generateOperationStructureType("response", output);
   var inputType = isOperationStructureNone(input) ? "Js.Promise.t<unit>" : "Js.Promise.t<request>";
   var outputType = isOperationStructureNone(output) ? "Js.Promise.t<unit>" : "Js.Promise.t<response>";
-  return "module " + Util.symbolName(name) + " = {\n" + "  type t;\n" + ("  " + request + "\n") + ("  " + response + "\n") + ("  @module(\"@aws-sdk/client-" + moduleName + "\") @new external new_: (" + inputType + ") => t = \"" + commandName + "\";\n") + ("  @send external send: (clientType, t) => " + outputType + " = \"send\";\n") + "}\n";
+  return "module " + Util.symbolName(name) + " = {\n" + "  type t;\n" + ("  " + request + "\n") + ("  " + response + "\n") + ("  @module(\"@aws-sdk/client-" + moduleName + "\") @new external new_: (" + inputType + ") => t = \"" + commandName + "\";\n") + ("  @send external rawSend: (clientType, t) => " + outputType + " = \"send\";\n") + "}\n";
 }
 
 function generateTypeBlock(serviceName, param) {
@@ -263,6 +267,18 @@ function generateTypeBlock(serviceName, param) {
   }
 }
 
+function generateRecursiveTypeBlock(serviceName, shapes) {
+  var shapeTypes = Belt_Array.map(shapes, (function (shape) {
+          return generateTypeBlock(serviceName, shape);
+        }));
+  var blocks = Belt_Array.map(shapeTypes, (function (shapeType) {
+          return $$String.sub(shapeType, 5, shapeType.length);
+        }));
+  return "type rec " + Belt_Array.joinWith(blocks, " and ", (function (block) {
+                return block;
+              }));
+}
+
 exports.safeMemberName = safeMemberName;
 exports.safeTypeName = safeTypeName;
 exports.safeConstructorName = safeConstructorName;
@@ -290,4 +306,5 @@ exports.generateOperationStructureType = generateOperationStructureType;
 exports.isOperationStructureNone = isOperationStructureNone;
 exports.generateOperationModule = generateOperationModule;
 exports.generateTypeBlock = generateTypeBlock;
+exports.generateRecursiveTypeBlock = generateRecursiveTypeBlock;
 /* No side effect */

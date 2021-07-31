@@ -139,6 +139,7 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
   | "smithy.api#tags" => value->parseArray(parseString)->map(tags => Trait.TagsTrait(tags))
   | "smithy.api#deprecated" => Ok(Trait.DeprecatedTrait)
   | "smithy.api#mediaType" => parseString(value)->map(mediaType => Trait.MediaTypeTrait(mediaType))
+  | "aws.protocols#restXml" => Ok(Trait.AwsProtocolRestXmlTrait)
   | _ => raise(UnknownTrait(name))
   }
   traitValue

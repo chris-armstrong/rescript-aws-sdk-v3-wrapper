@@ -14,12 +14,14 @@ let safeTypeName = (target) => {
     Belt.Option.getWithDefault(Js.String2.split(namespace, ".")[1], "")
   switch name {
   | "String" => namespacePrefix ++ "String"
+  | "string" => namespacePrefix ++ "String"
   | "Integer" => namespacePrefix ++ "Integer"
   | "Boolean" => namespacePrefix ++ "Boolean"
   | "Bool" => namespacePrefix ++ "Bool"
   | "Long" => namespacePrefix ++ "Long"
   | "Timestamp" => namespacePrefix ++ "Timestamp"
   | "Double" => namespacePrefix ++ "Double"
+  | "Float" => namespacePrefix ++ "Float"
   | "type" => "type_"
   | "Type" => "type_"
   | "unit" => "unit_"
@@ -37,7 +39,7 @@ let safeConstructorName = name => {
 }
 
 let safeVariantName = name =>
-  name->Js.String2.replaceByRe(Js.Re.fromStringWithFlags("-|#|:|\\.", ~flags="g"), "_")
+  name->Js.String2.replaceByRe(Js.Re.fromStringWithFlags("-|#|:|\\.|/", ~flags="g"), "_")
 
 let generateIntegerShape = name =>
   `type ${safeTypeName(name)} = int;`
@@ -178,7 +180,7 @@ let generateOperationModule = (
   `  ${request}\n` ++
   `  ${response}\n` ++
   `  @module("@aws-sdk/client-${moduleName}") @new external new_: (${inputType}) => t = "${commandName}";\n` ++
-  `  @send external send: (clientType, t) => ${outputType} = "send";\n` ++
+  `  @send external rawSend: (clientType, t) => ${outputType} = "send";\n` ++
   `}\n`
 }
 
@@ -202,4 +204,10 @@ let generateTypeBlock = (serviceName, { name, descriptor }: Shape.t) => {
   | OperationShape(_) => "" // generated separately, no need to do here
   | SetShape(details) => generateSetShape(name, details)
   }
+}
+
+let generateRecursiveTypeBlock = (serviceName, shapes: array<Shape.t>) => {
+  let shapeTypes = Array.map(shapes, shape => generateTypeBlock(serviceName, shape))
+  let blocks = Array.map(shapeTypes, shapeType => String.sub(shapeType, 5, String.length(shapeType)))
+  "type rec "++ Array.joinWith(blocks, " and ", block => block)
 }

@@ -127,12 +127,12 @@ function parseTrait(name, value) {
     case "aws.protocols#awsJson1_0" :
         return {
                 TAG: /* Ok */0,
-                _0: /* AwsProtocolAwsJson1_0Trait */11
+                _0: /* AwsProtocolAwsJson1_0Trait */12
               };
     case "aws.protocols#awsJson1_1" :
         return {
                 TAG: /* Ok */0,
-                _0: /* AwsProtocolAwsJson1_1Trait */12
+                _0: /* AwsProtocolAwsJson1_1Trait */13
               };
     case "aws.protocols#awsQuery" :
         return {
@@ -144,20 +144,25 @@ function parseTrait(name, value) {
                 TAG: /* Ok */0,
                 _0: /* AwsProtocolRestJson1Trait */3
               };
+    case "aws.protocols#restXml" :
+        return {
+                TAG: /* Ok */0,
+                _0: /* AwsProtocolRestXmlTrait */4
+              };
     case "smithy.api#box" :
         return {
                 TAG: /* Ok */0,
-                _0: /* BoxTrait */13
+                _0: /* BoxTrait */14
               };
     case "smithy.api#cors" :
         return {
                 TAG: /* Ok */0,
-                _0: /* CorsTrait */4
+                _0: /* CorsTrait */5
               };
     case "smithy.api#deprecated" :
         return {
                 TAG: /* Ok */0,
-                _0: /* DeprecatedTrait */17
+                _0: /* DeprecatedTrait */18
               };
     case "smithy.api#documentation" :
         return Belt_Result.map(Json.Decode.parseString(value), (function (documentation) {
@@ -197,32 +202,32 @@ function parseTrait(name, value) {
     case "smithy.api#httpHeader" :
         return {
                 TAG: /* Ok */0,
-                _0: /* HttpHeaderTrait */9
+                _0: /* HttpHeaderTrait */10
               };
     case "smithy.api#httpLabel" :
         return {
                 TAG: /* Ok */0,
-                _0: /* HttpLabelTrait */7
+                _0: /* HttpLabelTrait */8
               };
     case "smithy.api#httpPayload" :
         return {
                 TAG: /* Ok */0,
-                _0: /* HttpPayloadTrait */15
+                _0: /* HttpPayloadTrait */16
               };
     case "smithy.api#httpQuery" :
         return {
                 TAG: /* Ok */0,
-                _0: /* HttpQueryTrait */8
+                _0: /* HttpQueryTrait */9
               };
     case "smithy.api#httpQueryParams" :
         return {
                 TAG: /* Ok */0,
-                _0: /* HttpQueryParams */16
+                _0: /* HttpQueryParams */17
               };
     case "smithy.api#idempotencyToken" :
         return {
                 TAG: /* Ok */0,
-                _0: /* IdempotencyTokenTrait */6
+                _0: /* IdempotencyTokenTrait */7
               };
     case "smithy.api#jsonName" :
         return Belt_Result.map(Json.Decode.parseString(value), (function (jsonName) {
@@ -250,7 +255,7 @@ function parseTrait(name, value) {
     case "smithy.api#paginated" :
         return {
                 TAG: /* Ok */0,
-                _0: /* PaginatedTrait */5
+                _0: /* PaginatedTrait */6
               };
     case "smithy.api#pattern" :
         return Belt_Result.map(Json.Decode.parseString(value), (function (pattern) {
@@ -285,12 +290,12 @@ function parseTrait(name, value) {
     case "smithy.api#retryable" :
         return {
                 TAG: /* Ok */0,
-                _0: /* RetryableTrait */10
+                _0: /* RetryableTrait */11
               };
     case "smithy.api#sensitive" :
         return {
                 TAG: /* Ok */0,
-                _0: /* SensitiveTrait */14
+                _0: /* SensitiveTrait */15
               };
     case "smithy.api#tags" :
         return Belt_Result.map(Json.Decode.parseArray(value, Json.Decode.parseString), (function (tags) {

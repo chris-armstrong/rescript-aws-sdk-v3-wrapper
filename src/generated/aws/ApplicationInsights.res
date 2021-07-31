@@ -213,7 +213,7 @@ module UpdateComponentConfiguration = {
 }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "UpdateComponentConfigurationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeComponentConfigurationRecommendation = {
@@ -227,7 +227,7 @@ module DescribeComponentConfigurationRecommendation = {
 @as("ComponentConfiguration") componentConfiguration: componentConfiguration
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "DescribeComponentConfigurationRecommendationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeComponentConfiguration = {
@@ -242,7 +242,7 @@ module DescribeComponentConfiguration = {
 @as("Monitor") monitor: monitor
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "DescribeComponentConfigurationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteLogPattern = {
@@ -254,7 +254,7 @@ module DeleteLogPattern = {
 }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "DeleteLogPatternCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteComponent = {
@@ -265,7 +265,7 @@ module DeleteComponent = {
 }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "DeleteComponentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApplication = {
@@ -275,7 +275,7 @@ module DeleteApplication = {
 }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateLogPattern = {
@@ -292,7 +292,7 @@ module UpdateLogPattern = {
 @as("ResourceGroupName") resourceGroupName: resourceGroupName
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "UpdateLogPatternCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateComponent = {
@@ -305,7 +305,7 @@ module UpdateComponent = {
 }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "UpdateComponentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateApplication = {
@@ -321,7 +321,7 @@ module UpdateApplication = {
 @as("ApplicationInfo") applicationInfo: applicationInfo
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "UpdateApplicationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
@@ -332,7 +332,7 @@ module UntagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListLogPatternSets = {
@@ -348,7 +348,7 @@ module ListLogPatternSets = {
 @as("ResourceGroupName") resourceGroupName: resourceGroupName
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "ListLogPatternSetsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeObservation = {
@@ -360,7 +360,7 @@ module DescribeObservation = {
 @as("Observation") observation: observation
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "DescribeObservationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLogPattern = {
@@ -375,7 +375,7 @@ module DescribeLogPattern = {
 @as("ResourceGroupName") resourceGroupName: resourceGroupName
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "DescribeLogPatternCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeApplication = {
@@ -387,7 +387,7 @@ module DescribeApplication = {
 @as("ApplicationInfo") applicationInfo: applicationInfo
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "DescribeApplicationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateLogPattern = {
@@ -404,7 +404,7 @@ module CreateLogPattern = {
 @as("LogPattern") logPattern: logPattern
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "CreateLogPatternCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateComponent = {
@@ -416,7 +416,7 @@ module CreateComponent = {
 }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "CreateComponentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
@@ -427,7 +427,7 @@ module TagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
@@ -439,7 +439,7 @@ module ListTagsForResource = {
 @as("Tags") tags: tagList
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListLogPatterns = {
@@ -456,7 +456,7 @@ module ListLogPatterns = {
 @as("ResourceGroupName") resourceGroupName: resourceGroupName
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "ListLogPatternsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListConfigurationHistory = {
@@ -474,7 +474,7 @@ module ListConfigurationHistory = {
 @as("EventList") eventList: configurationEventList
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "ListConfigurationHistoryCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListApplications = {
@@ -488,7 +488,7 @@ module ListApplications = {
 @as("ApplicationInfoList") applicationInfoList: applicationInfoList
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeProblem = {
@@ -500,7 +500,7 @@ module DescribeProblem = {
 @as("Problem") problem: problem
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "DescribeProblemCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApplication = {
@@ -516,7 +516,7 @@ module CreateApplication = {
 @as("ApplicationInfo") applicationInfo: applicationInfo
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "CreateApplicationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListProblems = {
@@ -533,7 +533,7 @@ module ListProblems = {
 @as("ProblemList") problemList: problemList
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "ListProblemsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeProblemObservations = {
@@ -545,7 +545,7 @@ module DescribeProblemObservations = {
 @as("RelatedObservations") relatedObservations: relatedObservations
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "DescribeProblemObservationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeComponent = {
@@ -559,7 +559,7 @@ module DescribeComponent = {
 @as("ApplicationComponent") applicationComponent: applicationComponent
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "DescribeComponentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListComponents = {
@@ -574,5 +574,5 @@ module ListComponents = {
 @as("ApplicationComponentList") applicationComponentList: applicationComponentList
 }
   @module("@aws-sdk/client-applicationinsights") @new external new_: (Js.Promise.t<request>) => t = "ListComponentsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -363,7 +363,7 @@ module UpdateFindings = {
 }
   
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "UpdateFindingsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module UntagResource = {
@@ -374,7 +374,7 @@ module UntagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
@@ -385,7 +385,7 @@ module TagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module StartResourceScan = {
@@ -396,7 +396,7 @@ module StartResourceScan = {
 }
   
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "StartResourceScanCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListTagsForResource = {
@@ -408,7 +408,7 @@ module ListTagsForResource = {
 @as("tags") tags: tagsMap
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAnalyzedResource = {
@@ -421,7 +421,7 @@ module GetAnalyzedResource = {
 @as("resource") resource: analyzedResource
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "GetAnalyzedResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteArchiveRule = {
@@ -433,7 +433,7 @@ module DeleteArchiveRule = {
 }
   
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "DeleteArchiveRuleCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteAnalyzer = {
@@ -444,7 +444,7 @@ module DeleteAnalyzer = {
 }
   
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "DeleteAnalyzerCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module CancelPolicyGeneration = {
@@ -454,7 +454,7 @@ module CancelPolicyGeneration = {
 }
   type response = unit
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "CancelPolicyGenerationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ApplyArchiveRule = {
@@ -466,7 +466,7 @@ module ApplyArchiveRule = {
 }
   
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ApplyArchiveRuleCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module UpdateArchiveRule = {
@@ -479,7 +479,7 @@ module UpdateArchiveRule = {
 }
   
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "UpdateArchiveRuleCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListPolicyGenerations = {
@@ -494,7 +494,7 @@ module ListPolicyGenerations = {
 @as("policyGenerations") policyGenerations: option<policyGenerationList>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ListPolicyGenerationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAnalyzedResources = {
@@ -510,7 +510,7 @@ module ListAnalyzedResources = {
 @as("analyzedResources") analyzedResources: option<analyzedResourcesList>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ListAnalyzedResourcesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAnalyzer = {
@@ -522,7 +522,7 @@ module GetAnalyzer = {
 @as("analyzer") analyzer: option<analyzerSummary>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "GetAnalyzerCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateArchiveRule = {
@@ -535,7 +535,7 @@ module CreateArchiveRule = {
 }
   
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "CreateArchiveRuleCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module StartPolicyGeneration = {
@@ -549,7 +549,7 @@ module StartPolicyGeneration = {
 @as("jobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "StartPolicyGenerationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAnalyzers = {
@@ -564,7 +564,7 @@ module ListAnalyzers = {
 @as("analyzers") analyzers: option<analyzersList>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ListAnalyzersCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAccessPreviews = {
@@ -579,7 +579,7 @@ module ListAccessPreviews = {
 @as("accessPreviews") accessPreviews: option<accessPreviewsList>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ListAccessPreviewsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFinding = {
@@ -592,7 +592,7 @@ module GetFinding = {
 @as("finding") finding: finding
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "GetFindingCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetArchiveRule = {
@@ -605,7 +605,7 @@ module GetArchiveRule = {
 @as("archiveRule") archiveRule: option<archiveRuleSummary>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "GetArchiveRuleCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFindings = {
@@ -622,7 +622,7 @@ module ListFindings = {
 @as("findings") findings: option<findingsList>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ListFindingsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListArchiveRules = {
@@ -637,7 +637,7 @@ module ListArchiveRules = {
 @as("archiveRules") archiveRules: option<archiveRulesList>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ListArchiveRulesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAccessPreviewFindings = {
@@ -654,7 +654,7 @@ module ListAccessPreviewFindings = {
 @as("findings") findings: option<accessPreviewFindingsList>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ListAccessPreviewFindingsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAnalyzer = {
@@ -670,7 +670,7 @@ module CreateAnalyzer = {
 @as("arn") arn: analyzerArn
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "CreateAnalyzerCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetGeneratedPolicy = {
@@ -685,7 +685,7 @@ module GetGeneratedPolicy = {
 @as("jobDetails") jobDetails: option<jobDetails>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "GetGeneratedPolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ValidatePolicy = {
@@ -702,7 +702,7 @@ module ValidatePolicy = {
 @as("findings") findings: option<validatePolicyFindingList>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ValidatePolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAccessPreview = {
@@ -716,7 +716,7 @@ module CreateAccessPreview = {
 @as("id") id: option<accessPreviewId>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "CreateAccessPreviewCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAccessPreview = {
@@ -729,5 +729,5 @@ module GetAccessPreview = {
 @as("accessPreview") accessPreview: option<accessPreview>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "GetAccessPreviewCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

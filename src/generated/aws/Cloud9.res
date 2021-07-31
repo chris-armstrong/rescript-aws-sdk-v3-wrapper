@@ -71,7 +71,7 @@ module UpdateEnvironment = {
 }
   type response = unit
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "UpdateEnvironmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEnvironmentStatus = {
@@ -84,7 +84,7 @@ module DescribeEnvironmentStatus = {
 @as("status") status: option<environmentStatus>
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "DescribeEnvironmentStatusCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteEnvironmentMembership = {
@@ -95,7 +95,7 @@ module DeleteEnvironmentMembership = {
 }
   type response = unit
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "DeleteEnvironmentMembershipCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteEnvironment = {
@@ -105,7 +105,7 @@ module DeleteEnvironment = {
 }
   type response = unit
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "DeleteEnvironmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateEnvironmentMembership = {
@@ -119,7 +119,7 @@ module UpdateEnvironmentMembership = {
 @as("membership") membership: environmentMember
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "UpdateEnvironmentMembershipCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
@@ -130,7 +130,7 @@ module UntagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEnvironments = {
@@ -144,7 +144,7 @@ module ListEnvironments = {
 @as("nextToken") nextToken: amazonawsString
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "ListEnvironmentsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateEnvironmentMembership = {
@@ -158,7 +158,7 @@ module CreateEnvironmentMembership = {
 @as("membership") membership: option<environmentMember>
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "CreateEnvironmentMembershipCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
@@ -169,7 +169,7 @@ module TagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
@@ -181,7 +181,7 @@ module ListTagsForResource = {
 @as("Tags") tags: tagList
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEnvironmentMemberships = {
@@ -198,7 +198,7 @@ module DescribeEnvironmentMemberships = {
 @as("memberships") memberships: environmentMembersList
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "DescribeEnvironmentMembershipsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateEnvironmentEC2 = {
@@ -219,7 +219,7 @@ module CreateEnvironmentEC2 = {
 @as("environmentId") environmentId: environmentId
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "CreateEnvironmentEC2Command";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEnvironments = {
@@ -231,5 +231,5 @@ module DescribeEnvironments = {
 @as("environments") environments: environmentList
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (Js.Promise.t<request>) => t = "DescribeEnvironmentsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

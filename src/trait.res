@@ -34,6 +34,7 @@ type t =
   | ApiXmlNamespaceTrait(string)
   | AwsProtocolAwsQueryTrait
   | AwsProtocolRestJson1Trait
+  | AwsProtocolRestXmlTrait
   | EnumTrait(array<enumPair>)
   | CorsTrait
   | PaginatedTrait

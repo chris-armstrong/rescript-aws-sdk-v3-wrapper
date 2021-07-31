@@ -209,7 +209,7 @@ module StartSchemaCreation = {
 @as("status") status: schemaStatus
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "StartSchemaCreationCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSchemaCreationStatus = {
@@ -222,7 +222,7 @@ module GetSchemaCreationStatus = {
 @as("status") status: schemaStatus
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "GetSchemaCreationStatusCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetIntrospectionSchema = {
@@ -236,7 +236,7 @@ module GetIntrospectionSchema = {
 @as("schema") schema: blob
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "GetIntrospectionSchemaCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module FlushApiCache = {
@@ -246,7 +246,7 @@ module FlushApiCache = {
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "FlushApiCacheCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteType = {
@@ -257,7 +257,7 @@ module DeleteType = {
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "DeleteTypeCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteResolver = {
@@ -269,7 +269,7 @@ module DeleteResolver = {
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "DeleteResolverCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteGraphqlApi = {
@@ -279,7 +279,7 @@ module DeleteGraphqlApi = {
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "DeleteGraphqlApiCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFunction = {
@@ -290,7 +290,7 @@ module DeleteFunction = {
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "DeleteFunctionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDataSource = {
@@ -301,7 +301,7 @@ module DeleteDataSource = {
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "DeleteDataSourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApiKey = {
@@ -312,7 +312,7 @@ module DeleteApiKey = {
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "DeleteApiKeyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApiCache = {
@@ -322,7 +322,7 @@ module DeleteApiCache = {
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "DeleteApiCacheCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateType = {
@@ -337,7 +337,7 @@ module UpdateType = {
 @as("type") type_: type_
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "UpdateTypeCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateApiKey = {
@@ -352,7 +352,7 @@ module UpdateApiKey = {
 @as("apiKey") apiKey: apiKey
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "UpdateApiKeyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateApiCache = {
@@ -367,7 +367,7 @@ module UpdateApiCache = {
 @as("apiCache") apiCache: apiCache
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "UpdateApiCacheCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
@@ -378,7 +378,7 @@ module UntagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
@@ -389,7 +389,7 @@ module TagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
@@ -401,7 +401,7 @@ module ListTagsForResource = {
 @as("tags") tags: tagMap
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetType = {
@@ -415,7 +415,7 @@ module GetType = {
 @as("type") type_: type_
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "GetTypeCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetApiCache = {
@@ -427,7 +427,7 @@ module GetApiCache = {
 @as("apiCache") apiCache: apiCache
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "GetApiCacheCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateType = {
@@ -441,7 +441,7 @@ module CreateType = {
 @as("type") type_: type_
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "CreateTypeCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApiKey = {
@@ -455,7 +455,7 @@ module CreateApiKey = {
 @as("apiKey") apiKey: apiKey
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "CreateApiKeyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApiCache = {
@@ -472,7 +472,7 @@ module CreateApiCache = {
 @as("apiCache") apiCache: apiCache
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "CreateApiCacheCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTypes = {
@@ -488,7 +488,7 @@ module ListTypes = {
 @as("types") types: typeList
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "ListTypesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListApiKeys = {
@@ -503,7 +503,7 @@ module ListApiKeys = {
 @as("apiKeys") apiKeys: apiKeys
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "ListApiKeysCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateResolver = {
@@ -524,7 +524,7 @@ module UpdateResolver = {
 @as("resolver") resolver: resolver
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "UpdateResolverCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFunction = {
@@ -544,7 +544,7 @@ module UpdateFunction = {
 @as("functionConfiguration") functionConfiguration: functionConfiguration
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "UpdateFunctionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResolver = {
@@ -558,7 +558,7 @@ module GetResolver = {
 @as("resolver") resolver: resolver
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "GetResolverCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFunction = {
@@ -571,7 +571,7 @@ module GetFunction = {
 @as("functionConfiguration") functionConfiguration: functionConfiguration
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "GetFunctionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateResolver = {
@@ -592,7 +592,7 @@ module CreateResolver = {
 @as("resolver") resolver: resolver
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "CreateResolverCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFunction = {
@@ -611,7 +611,7 @@ module CreateFunction = {
 @as("functionConfiguration") functionConfiguration: functionConfiguration
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "CreateFunctionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateGraphqlApi = {
@@ -630,7 +630,7 @@ module UpdateGraphqlApi = {
 @as("graphqlApi") graphqlApi: graphqlApi
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "UpdateGraphqlApiCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDataSource = {
@@ -651,7 +651,7 @@ module UpdateDataSource = {
 @as("dataSource") dataSource: dataSource
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "UpdateDataSourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResolversByFunction = {
@@ -667,7 +667,7 @@ module ListResolversByFunction = {
 @as("resolvers") resolvers: resolvers
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "ListResolversByFunctionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResolvers = {
@@ -683,7 +683,7 @@ module ListResolvers = {
 @as("resolvers") resolvers: resolvers
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "ListResolversCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFunctions = {
@@ -698,7 +698,7 @@ module ListFunctions = {
 @as("functions") functions: functions
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "ListFunctionsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetGraphqlApi = {
@@ -710,7 +710,7 @@ module GetGraphqlApi = {
 @as("graphqlApi") graphqlApi: graphqlApi
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "GetGraphqlApiCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDataSource = {
@@ -723,7 +723,7 @@ module GetDataSource = {
 @as("dataSource") dataSource: dataSource
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "GetDataSourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateGraphqlApi = {
@@ -742,7 +742,7 @@ module CreateGraphqlApi = {
 @as("graphqlApi") graphqlApi: graphqlApi
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "CreateGraphqlApiCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDataSource = {
@@ -763,7 +763,7 @@ module CreateDataSource = {
 @as("dataSource") dataSource: dataSource
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "CreateDataSourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListGraphqlApis = {
@@ -777,7 +777,7 @@ module ListGraphqlApis = {
 @as("graphqlApis") graphqlApis: graphqlApis
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "ListGraphqlApisCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDataSources = {
@@ -792,5 +792,5 @@ module ListDataSources = {
 @as("dataSources") dataSources: dataSources
 }
   @module("@aws-sdk/client-appsync") @new external new_: (Js.Promise.t<request>) => t = "ListDataSourcesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

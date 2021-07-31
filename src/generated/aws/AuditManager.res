@@ -463,7 +463,7 @@ module GetAccountStatus = {
 @as("status") status: accountStatus
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetAccountStatusCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ValidateAssessmentReportIntegrity = {
@@ -479,7 +479,7 @@ module ValidateAssessmentReportIntegrity = {
 @as("signatureValid") signatureValid: amazonawsBoolean
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "ValidateAssessmentReportIntegrityCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
@@ -490,7 +490,7 @@ module UntagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
@@ -501,7 +501,7 @@ module TagResource = {
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterOrganizationAdminAccount = {
@@ -514,7 +514,7 @@ module RegisterOrganizationAdminAccount = {
 @as("adminAccountId") adminAccountId: accountId
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "RegisterOrganizationAdminAccountCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterAccount = {
@@ -527,7 +527,7 @@ module RegisterAccount = {
 @as("status") status: accountStatus
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "RegisterAccountCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
@@ -539,7 +539,7 @@ module ListTagsForResource = {
 @as("tags") tags: tagMap
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListNotifications = {
@@ -553,7 +553,7 @@ module ListNotifications = {
 @as("notifications") notifications: notifications
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "ListNotificationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListKeywordsForDataSource = {
@@ -568,7 +568,7 @@ module ListKeywordsForDataSource = {
 @as("keywords") keywords: keywords
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "ListKeywordsForDataSourceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListControls = {
@@ -583,7 +583,7 @@ module ListControls = {
 @as("controlMetadataList") controlMetadataList: controlMetadataList
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "ListControlsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssessmentReports = {
@@ -597,7 +597,7 @@ module ListAssessmentReports = {
 @as("assessmentReports") assessmentReports: assessmentReportsMetadata
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "ListAssessmentReportsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssessmentFrameworks = {
@@ -612,7 +612,7 @@ module ListAssessmentFrameworks = {
 @as("frameworkMetadataList") frameworkMetadataList: frameworkMetadataList
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "ListAssessmentFrameworksCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetServicesInScope = {
@@ -622,7 +622,7 @@ module GetServicesInScope = {
 @as("serviceMetadata") serviceMetadata: serviceMetadataList
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetServicesInScopeCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetOrganizationAdminAccount = {
@@ -633,7 +633,7 @@ module GetOrganizationAdminAccount = {
 @as("adminAccountId") adminAccountId: accountId
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetOrganizationAdminAccountCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEvidenceFoldersByAssessmentControl = {
@@ -650,7 +650,7 @@ module GetEvidenceFoldersByAssessmentControl = {
 @as("evidenceFolders") evidenceFolders: assessmentEvidenceFolders
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetEvidenceFoldersByAssessmentControlCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEvidenceFoldersByAssessment = {
@@ -665,7 +665,7 @@ module GetEvidenceFoldersByAssessment = {
 @as("evidenceFolders") evidenceFolders: assessmentEvidenceFolders
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetEvidenceFoldersByAssessmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEvidenceFolder = {
@@ -679,7 +679,7 @@ module GetEvidenceFolder = {
 @as("evidenceFolder") evidenceFolder: assessmentEvidenceFolder
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetEvidenceFolderCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDelegations = {
@@ -693,7 +693,7 @@ module GetDelegations = {
 @as("delegations") delegations: delegationMetadataList
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetDelegationsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetChangeLogs = {
@@ -710,7 +710,7 @@ module GetChangeLogs = {
 @as("changeLogs") changeLogs: changeLogs
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetChangeLogsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAssessmentReportUrl = {
@@ -723,7 +723,7 @@ module GetAssessmentReportUrl = {
 @as("preSignedUrl") preSignedUrl: uRL
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetAssessmentReportUrlCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateAssessmentReportEvidenceFolder = {
@@ -734,7 +734,7 @@ module DisassociateAssessmentReportEvidenceFolder = {
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "DisassociateAssessmentReportEvidenceFolderCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterOrganizationAdminAccount = {
@@ -744,7 +744,7 @@ module DeregisterOrganizationAdminAccount = {
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "DeregisterOrganizationAdminAccountCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterAccount = {
@@ -754,7 +754,7 @@ module DeregisterAccount = {
 @as("status") status: accountStatus
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "DeregisterAccountCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteControl = {
@@ -764,7 +764,7 @@ module DeleteControl = {
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "DeleteControlCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAssessmentReport = {
@@ -775,7 +775,7 @@ module DeleteAssessmentReport = {
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "DeleteAssessmentReportCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAssessmentFramework = {
@@ -785,7 +785,7 @@ module DeleteAssessmentFramework = {
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "DeleteAssessmentFrameworkCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAssessment = {
@@ -795,7 +795,7 @@ module DeleteAssessment = {
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "DeleteAssessmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAssessmentReport = {
@@ -809,7 +809,7 @@ module CreateAssessmentReport = {
 @as("assessmentReport") assessmentReport: assessmentReport
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "CreateAssessmentReportCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchDisassociateAssessmentReportEvidence = {
@@ -824,7 +824,7 @@ module BatchDisassociateAssessmentReportEvidence = {
 @as("evidenceIds") evidenceIds: evidenceIds
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "BatchDisassociateAssessmentReportEvidenceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchDeleteDelegationByAssessment = {
@@ -837,7 +837,7 @@ module BatchDeleteDelegationByAssessment = {
 @as("errors") errors: batchDeleteDelegationByAssessmentErrors
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "BatchDeleteDelegationByAssessmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchAssociateAssessmentReportEvidence = {
@@ -852,7 +852,7 @@ module BatchAssociateAssessmentReportEvidence = {
 @as("evidenceIds") evidenceIds: evidenceIds
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "BatchAssociateAssessmentReportEvidenceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateAssessmentReportEvidenceFolder = {
@@ -863,7 +863,7 @@ module AssociateAssessmentReportEvidenceFolder = {
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "AssociateAssessmentReportEvidenceFolderCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateSettings = {
@@ -878,7 +878,7 @@ module UpdateSettings = {
 @as("settings") settings: settings
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateSettingsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAssessmentControl = {
@@ -894,7 +894,7 @@ module UpdateAssessmentControl = {
 @as("control") control: assessmentControl
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateAssessmentControlCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSettings = {
@@ -906,7 +906,7 @@ module GetSettings = {
 @as("settings") settings: settings
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetSettingsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEvidence = {
@@ -921,7 +921,7 @@ module GetEvidence = {
 @as("evidence") evidence: evidence
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetEvidenceCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchImportEvidenceToAssessmentControl = {
@@ -936,7 +936,7 @@ module BatchImportEvidenceToAssessmentControl = {
 @as("errors") errors: batchImportEvidenceToAssessmentControlErrors
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "BatchImportEvidenceToAssessmentControlCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchCreateDelegationByAssessment = {
@@ -950,7 +950,7 @@ module BatchCreateDelegationByAssessment = {
 @as("delegations") delegations: delegations
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "BatchCreateDelegationByAssessmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateControl = {
@@ -968,7 +968,7 @@ module UpdateControl = {
 @as("control") control: control
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateControlCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssessments = {
@@ -982,7 +982,7 @@ module ListAssessments = {
 @as("assessmentMetadata") assessmentMetadata: listAssessmentMetadata
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "ListAssessmentsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEvidenceByEvidenceFolder = {
@@ -999,7 +999,7 @@ module GetEvidenceByEvidenceFolder = {
 @as("evidence") evidence: evidenceList
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetEvidenceByEvidenceFolderCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetControl = {
@@ -1011,7 +1011,7 @@ module GetControl = {
 @as("control") control: control
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetControlCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateControl = {
@@ -1029,7 +1029,7 @@ module CreateControl = {
 @as("control") control: control
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "CreateControlCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAssessmentControlSetStatus = {
@@ -1044,7 +1044,7 @@ module UpdateAssessmentControlSetStatus = {
 @as("controlSet") controlSet: assessmentControlSet
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateAssessmentControlSetStatusCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAssessmentStatus = {
@@ -1057,7 +1057,7 @@ module UpdateAssessmentStatus = {
 @as("assessment") assessment: assessment
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateAssessmentStatusCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAssessmentFramework = {
@@ -1073,7 +1073,7 @@ module UpdateAssessmentFramework = {
 @as("framework") framework: framework
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateAssessmentFrameworkCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAssessment = {
@@ -1090,7 +1090,7 @@ module UpdateAssessment = {
 @as("assessment") assessment: assessment
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateAssessmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAssessmentFramework = {
@@ -1102,7 +1102,7 @@ module GetAssessmentFramework = {
 @as("framework") framework: framework
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetAssessmentFrameworkCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAssessment = {
@@ -1115,7 +1115,7 @@ module GetAssessment = {
 @as("assessment") assessment: assessment
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "GetAssessmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAssessmentFramework = {
@@ -1131,7 +1131,7 @@ module CreateAssessmentFramework = {
 @as("framework") framework: framework
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "CreateAssessmentFrameworkCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAssessment = {
@@ -1149,5 +1149,5 @@ module CreateAssessment = {
 @as("assessment") assessment: assessment
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (Js.Promise.t<request>) => t = "CreateAssessmentCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

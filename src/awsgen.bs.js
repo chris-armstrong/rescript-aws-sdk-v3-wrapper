@@ -7,6 +7,8 @@ var Path = require("path");
 var Parse = require("./parse.bs.js");
 var Convert = require("./convert.bs.js");
 var Belt_Array = require("rescript/lib/js/belt_Array.js");
+var Dependencies = require("./dependencies.bs.js");
+var Caml_js_exceptions = require("rescript/lib/js/caml_js_exceptions.js");
 
 var basepath = "aws-sdk-js-v3/codegen/sdk-codegen/aws-models";
 
@@ -17,13 +19,43 @@ Belt_Array.forEach(files, (function (file) {
         console.log("Reading " + path);
         var parsed = Json.Decode.parseJson(Fs.readFileSync(path, undefined).toString(), Parse.parseModel);
         var generated;
-        generated = parsed.TAG === /* Ok */0 ? Convert.convert({
-                TAG: /* Ok */0,
-                _0: parsed._0
-              }) : ({
-              TAG: /* Error */1,
-              _0: Json.Decode.jsonParseErrorToString(parsed._0)
-            });
+        if (parsed.TAG === /* Ok */0) {
+          var exit = 0;
+          var result;
+          try {
+            result = Convert.convert({
+                  TAG: /* Ok */0,
+                  _0: parsed._0
+                });
+            exit = 1;
+          }
+          catch (raw_exn){
+            var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+            if (exn.RE_EXN_ID === Dependencies.CycleError) {
+              generated = {
+                TAG: /* Error */1,
+                _0: "cycle error - skip for now"
+              };
+            } else {
+              throw exn;
+            }
+          }
+          if (exit === 1) {
+            generated = result.TAG === /* Ok */0 ? ({
+                  TAG: /* Ok */0,
+                  _0: result._0
+                }) : ({
+                  TAG: /* Error */1,
+                  _0: result._0
+                });
+          }
+          
+        } else {
+          generated = {
+            TAG: /* Error */1,
+            _0: Json.Decode.jsonParseErrorToString(parsed._0)
+          };
+        }
         if (generated.TAG === /* Ok */0) {
           var match = generated._0;
           var moduleName = match.moduleName;

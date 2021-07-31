@@ -147,7 +147,7 @@ module DeregisterScalableTarget = {
 }
   type response = unit
   @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeregisterScalableTargetCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteScheduledAction = {
@@ -160,7 +160,7 @@ module DeleteScheduledAction = {
 }
   type response = unit
   @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeleteScheduledActionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteScalingPolicy = {
@@ -173,7 +173,7 @@ module DeleteScalingPolicy = {
 }
   type response = unit
   @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeleteScalingPolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterScalableTarget = {
@@ -189,7 +189,7 @@ module RegisterScalableTarget = {
 }
   type response = unit
   @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "RegisterScalableTargetCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module PutScheduledAction = {
@@ -207,7 +207,7 @@ module PutScheduledAction = {
 }
   type response = unit
   @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "PutScheduledActionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScalingActivities = {
@@ -224,7 +224,7 @@ module DescribeScalingActivities = {
 @as("ScalingActivities") scalingActivities: scalingActivities
 }
   @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeScalingActivitiesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScheduledActions = {
@@ -242,7 +242,7 @@ module DescribeScheduledActions = {
 @as("ScheduledActions") scheduledActions: scheduledActions
 }
   @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeScheduledActionsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScalableTargets = {
@@ -259,7 +259,7 @@ module DescribeScalableTargets = {
 @as("ScalableTargets") scalableTargets: scalableTargets
 }
   @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeScalableTargetsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module PutScalingPolicy = {
@@ -278,7 +278,7 @@ module PutScalingPolicy = {
 @as("PolicyARN") policyARN: option<resourceIdMaxLen1600>
 }
   @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "PutScalingPolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScalingPolicies = {
@@ -296,5 +296,5 @@ module DescribeScalingPolicies = {
 @as("ScalingPolicies") scalingPolicies: scalingPolicies
 }
   @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeScalingPoliciesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

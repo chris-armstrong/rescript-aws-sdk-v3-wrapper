@@ -206,7 +206,7 @@ module RevokeCertificate = {
 }
   
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "RevokeCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module RestoreCertificateAuthority = {
@@ -216,7 +216,7 @@ module RestoreCertificateAuthority = {
 }
   
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "RestoreCertificateAuthorityCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutPolicy = {
@@ -227,7 +227,7 @@ module PutPolicy = {
 }
   
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "PutPolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module ImportCertificateAuthorityCertificate = {
@@ -239,7 +239,7 @@ module ImportCertificateAuthorityCertificate = {
 }
   
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "ImportCertificateAuthorityCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetPolicy = {
@@ -251,7 +251,7 @@ module GetPolicy = {
 @as("Policy") policy: aWSPolicy
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "GetPolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetCertificateAuthorityCsr = {
@@ -263,7 +263,7 @@ module GetCertificateAuthorityCsr = {
 @as("Csr") csr: csrBody
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "GetCertificateAuthorityCsrCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetCertificateAuthorityCertificate = {
@@ -276,7 +276,7 @@ module GetCertificateAuthorityCertificate = {
 @as("Certificate") certificate: certificateBody
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "GetCertificateAuthorityCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module GetCertificate = {
@@ -290,7 +290,7 @@ module GetCertificate = {
 @as("Certificate") certificate: certificateBody
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "GetCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCertificateAuthorityAuditReport = {
@@ -306,7 +306,7 @@ module DescribeCertificateAuthorityAuditReport = {
 @as("AuditReportStatus") auditReportStatus: auditReportStatus
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "DescribeCertificateAuthorityAuditReportCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DeletePolicy = {
@@ -316,7 +316,7 @@ module DeletePolicy = {
 }
   
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "DeletePolicyCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeletePermission = {
@@ -328,7 +328,7 @@ module DeletePermission = {
 }
   
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "DeletePermissionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteCertificateAuthority = {
@@ -339,7 +339,7 @@ module DeleteCertificateAuthority = {
 }
   
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "DeleteCertificateAuthorityCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateCertificateAuthorityAuditReport = {
@@ -354,7 +354,7 @@ module CreateCertificateAuthorityAuditReport = {
 @as("AuditReportId") auditReportId: auditReportId
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "CreateCertificateAuthorityAuditReportCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreatePermission = {
@@ -367,7 +367,7 @@ module CreatePermission = {
 }
   
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "CreatePermissionCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module UpdateCertificateAuthority = {
@@ -379,7 +379,7 @@ module UpdateCertificateAuthority = {
 }
   
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "UpdateCertificateAuthorityCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module UntagCertificateAuthority = {
@@ -390,7 +390,7 @@ module UntagCertificateAuthority = {
 }
   
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "UntagCertificateAuthorityCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module TagCertificateAuthority = {
@@ -401,7 +401,7 @@ module TagCertificateAuthority = {
 }
   
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "TagCertificateAuthorityCommand";
-  @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListTags = {
@@ -416,7 +416,7 @@ module ListTags = {
 @as("Tags") tags: tagList
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "ListTagsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPermissions = {
@@ -431,7 +431,7 @@ module ListPermissions = {
 @as("Permissions") permissions: permissionList
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "ListPermissionsCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCertificateAuthority = {
@@ -448,7 +448,7 @@ module CreateCertificateAuthority = {
 @as("CertificateAuthorityArn") certificateAuthorityArn: arn
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "CreateCertificateAuthorityCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module IssueCertificate = {
@@ -467,7 +467,7 @@ module IssueCertificate = {
 @as("CertificateArn") certificateArn: arn
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "IssueCertificateCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCertificateAuthority = {
@@ -479,7 +479,7 @@ module DescribeCertificateAuthority = {
 @as("CertificateAuthority") certificateAuthority: certificateAuthority
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "DescribeCertificateAuthorityCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCertificateAuthorities = {
@@ -494,5 +494,5 @@ module ListCertificateAuthorities = {
 @as("CertificateAuthorities") certificateAuthorities: certificateAuthorities
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "ListCertificateAuthoritiesCommand";
-  @send external send: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
