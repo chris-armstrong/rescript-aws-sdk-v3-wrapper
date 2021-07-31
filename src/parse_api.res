@@ -68,6 +68,7 @@ type structureShapeDetails = {
 type listShapeDetails = {target: string, traits: option<array<trait>>}
 type operationShapeDetails = {
   input: string,
+  output: option<string>,
   errors: option<array<string>>,
   documentation: option<string>,
 }
@@ -129,7 +130,7 @@ let parseEnumNameValue = (enum): Belt.Result.t<enumPair, jsonParseError> => {
   let obj_ = parseObject(enum)
   let name_ = obj_->field("name")->parseString
   let value_ = obj_->field("value")->parseString
-  map2(name_, value_, (name, value) => {name, value: value})
+  map2(name_, value_, (name, value) => {name: name, value: value})
 }
 
 let parseTrait = (name, value: t<jsonTreeRef, jsonParseError>) => {
@@ -158,7 +159,7 @@ let parseTrait = (name, value: t<jsonTreeRef, jsonParseError>) => {
 }
 
 let parseListShape = (shapeName, shape) => {
-  let target_ = shape->field("member")->extractTargetSpec->map(symbolName)
+  let target_ = shape->field("member")->extractTargetSpec
   let traits_ = optional(shape->field("traits")->parseRecord(parseTrait))
   map2(target_, traits_, (target, traits) => ListShape(shapeName, {target: target, traits: traits}))
 }
@@ -187,19 +188,22 @@ let parseStructureShape = (shapeName, value) => {
 }
 
 let parseOperationShape = (shapeName, shape) => {
-  let inputTarget = shape->field("input")->extractTargetSpec->map(symbolName)
+  let inputTarget = shape->field("input")->extractTargetSpec
+  let outputTarget = optional(shape->field("output")->extractTargetSpec)
   let errors = optional(shape->field("errors")->parseArray(extractTargetSpec))
   let documentation = optional(
     shape->field("traits")->parseObject->field("smithy.api#documentation")->parseString,
   )
-  map3(inputTarget, errors, documentation, (
+  map4(inputTarget, outputTarget, errors, documentation, (
     inputValue,
+    outputValue,
     errorsValue,
     documentationValue,
   ) => OperationShape(
     shapeName,
     {
       input: inputValue,
+      output: outputValue,
       errors: errorsValue,
       documentation: documentationValue,
     },
@@ -264,6 +268,6 @@ let parseShapes = shapesModel => parseRecord(shapesModel, parseShape)
 let parseModel = baseModel => baseModel->parseObject->field("shapes")->parseShapes
 
 let parse = filename => {
-  let file = NodeJs.Fs.readFileSync(filename, ());
+  let file = NodeJs.Fs.readFileSync(filename, ())
   parseJson(NodeJs.Buffer.toString(file), parseModel)
-} 
+}

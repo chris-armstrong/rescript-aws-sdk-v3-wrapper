@@ -146,6 +146,14 @@ module ResultHelpers = {
     | (_, Error(error2), _) => Error(error2)
     | (_, _, Error(error3)) => Error(error3)
     }
+  let map4 = (r1, r2, r3, r4, mapper) =>
+    switch (r1, r2, r3, r4) {
+    | (Ok(r1), Ok(r2), Ok(r3), Ok(r4)) => Ok(mapper(r1, r2, r3, r4))
+    | (Error(e1), _, _, _) => Error(e1)
+    | (_, Error(e2), _, _) => Error(e2)
+    | (_, _, Error(e3), _) => Error(e3)
+    | (_, _, _, Error(e4)) => Error(e4)
+    }
   let map5 = (r1, r2, r3, r4, r5, mapper) =>
     switch (r1, r2, r3, r4, r5) {
     | (Ok(r1), Ok(r2), Ok(r3), Ok(r4), Ok(r5)) => Ok(mapper(r1, r2, r3, r4, r5))

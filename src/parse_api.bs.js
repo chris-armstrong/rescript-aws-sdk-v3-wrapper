@@ -197,7 +197,7 @@ function parseTrait(name, value) {
 }
 
 function parseListShape(shapeName, shape) {
-  var target_ = Belt_Result.map(extractTargetSpec(Json.Decode.field(shape, "member")), symbolName);
+  var target_ = extractTargetSpec(Json.Decode.field(shape, "member"));
   var traits_ = Json.Decode.optional(Json.Decode.parseRecord(Json.Decode.field(shape, "traits"), parseTrait));
   return Json.ResultHelpers.map2(target_, traits_, (function (target, traits) {
                 return {
@@ -245,15 +245,17 @@ function parseStructureShape(shapeName, value) {
 }
 
 function parseOperationShape(shapeName, shape) {
-  var inputTarget = Belt_Result.map(extractTargetSpec(Json.Decode.field(shape, "input")), symbolName);
+  var inputTarget = extractTargetSpec(Json.Decode.field(shape, "input"));
+  var outputTarget = Json.Decode.optional(extractTargetSpec(Json.Decode.field(shape, "output")));
   var errors = Json.Decode.optional(Json.Decode.parseArray(Json.Decode.field(shape, "errors"), extractTargetSpec));
   var documentation = Json.Decode.optional(Json.Decode.parseString(Json.Decode.field(Json.Decode.parseObject(Json.Decode.field(shape, "traits")), "smithy.api#documentation")));
-  return Json.ResultHelpers.map3(inputTarget, errors, documentation, (function (inputValue, errorsValue, documentationValue) {
+  return Json.ResultHelpers.map4(inputTarget, outputTarget, errors, documentation, (function (inputValue, outputValue, errorsValue, documentationValue) {
                 return {
                         TAG: /* OperationShape */1,
                         _0: shapeName,
                         _1: {
                           input: inputValue,
+                          output: outputValue,
                           errors: errorsValue,
                           documentation: documentationValue
                         }

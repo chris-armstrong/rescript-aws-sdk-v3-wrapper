@@ -348,6 +348,41 @@ function map3(result1, result2, result3, mapper) {
   }
 }
 
+function map4(r1, r2, r3, r4, mapper) {
+  if (r1.TAG === /* Ok */0) {
+    if (r2.TAG === /* Ok */0) {
+      if (r3.TAG === /* Ok */0) {
+        if (r4.TAG === /* Ok */0) {
+          return {
+                  TAG: /* Ok */0,
+                  _0: Curry._4(mapper, r1._0, r2._0, r3._0, r4._0)
+                };
+        } else {
+          return {
+                  TAG: /* Error */1,
+                  _0: r4._0
+                };
+        }
+      } else {
+        return {
+                TAG: /* Error */1,
+                _0: r3._0
+              };
+      }
+    } else {
+      return {
+              TAG: /* Error */1,
+              _0: r2._0
+            };
+    }
+  } else {
+    return {
+            TAG: /* Error */1,
+            _0: r1._0
+          };
+  }
+}
+
 function map5(r1, r2, r3, r4, r5, mapper) {
   if (r1.TAG === /* Ok */0) {
     if (r2.TAG === /* Ok */0) {
@@ -424,6 +459,7 @@ function mapOptional(resultWithOption, mapper) {
 var ResultHelpers = {
   map2: map2,
   map3: map3,
+  map4: map4,
   map5: map5,
   mapOptional: mapOptional
 };
