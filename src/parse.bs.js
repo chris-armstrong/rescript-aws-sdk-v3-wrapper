@@ -70,7 +70,7 @@ function parseServiceTrait(traitResult) {
 
 function parseEnumNameValue($$enum) {
   var obj_ = Json.Decode.parseObject($$enum);
-  var name_ = Json.Decode.parseString(Json.Decode.field(obj_, "name"));
+  var name_ = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(obj_, "name")), Json.Decode.parseString);
   var value_ = Json.Decode.parseString(Json.Decode.field(obj_, "value"));
   return Json.ResultHelpers.map2(name_, value_, (function (name, value) {
                 return {
@@ -83,8 +83,8 @@ function parseEnumNameValue($$enum) {
 function parseArnReferenceTrait(value) {
   var record = Json.Decode.parseObject(value);
   var type__ = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(record, "type")), Json.Decode.parseString);
-  var service_ = Json.Decode.parseString(Json.Decode.field(record, "service"));
-  var resource_ = Json.Decode.parseString(Json.Decode.field(record, "resource"));
+  var service_ = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(record, "service")), Json.Decode.parseString);
+  var resource_ = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(record, "resource")), Json.Decode.parseString);
   return Json.ResultHelpers.map3(type__, service_, resource_, (function (type_, service, resource) {
                 return {
                         TAG: /* AwsApiArnReferenceTrait */13,
@@ -115,6 +115,19 @@ function parseTrait(name, value) {
         return Belt_Result.map(parseArnReferenceTrait(value), (function (arnNamespace) {
                       return arnNamespace;
                     }));
+    case "aws.api#clientEndpointDiscovery" :
+        var obj = Json.Decode.parseObject(value);
+        var operation = Json.Decode.parseString(Json.Decode.field(obj, "operation"));
+        var error = Json.Decode.parseString(Json.Decode.field(obj, "error"));
+        return Json.ResultHelpers.map2(operation, error, (function (operation, error) {
+                      return {
+                              TAG: /* AwsApiClientEndpointDiscoveryTrait */18,
+                              _0: {
+                                operation: operation,
+                                error: error
+                              }
+                            };
+                    }));
     case "aws.api#service" :
         return parseServiceTrait(value);
     case "aws.auth#sigv4" :
@@ -139,6 +152,18 @@ function parseTrait(name, value) {
                 TAG: /* Ok */0,
                 _0: /* AwsProtocolAwsQueryTrait */2
               };
+    case "aws.protocols#ec2Query" :
+        return {
+                TAG: /* Ok */0,
+                _0: /* AwsProtocolEc2QueryTrait */19
+              };
+    case "aws.protocols#ec2QueryName" :
+        return Belt_Result.map(Json.Decode.parseString(value), (function (queryName) {
+                      return {
+                              TAG: /* AwsProtocolEc2QueryNameTrait */19,
+                              _0: queryName
+                            };
+                    }));
     case "aws.protocols#restJson1" :
         return {
                 TAG: /* Ok */0,
@@ -192,6 +217,51 @@ function parseTrait(name, value) {
                               };
                       }
                     }));
+    case "smithy.api#eventPayload" :
+        return {
+                TAG: /* Ok */0,
+                _0: /* EventPayloadTrait */24
+              };
+    case "smithy.api#externalDocumentation" :
+        var documentation = Json.Decode.field(Json.Decode.parseObject(value), "Documentation");
+        var specification = Json.Decode.field(Json.Decode.parseObject(value), "Specification");
+        if (documentation.TAG === /* Ok */0) {
+          return Belt_Result.map(Json.Decode.parseString({
+                          TAG: /* Ok */0,
+                          _0: documentation._0
+                        }), (function (link) {
+                        return {
+                                TAG: /* ExternalDocumentationTrait */21,
+                                _0: {
+                                  TAG: /* DocumentationLink */0,
+                                  _0: link
+                                }
+                              };
+                      }));
+        } else if (specification.TAG === /* Ok */0) {
+          return Belt_Result.map(Json.Decode.parseString({
+                          TAG: /* Ok */0,
+                          _0: specification._0
+                        }), (function (link) {
+                        return {
+                                TAG: /* ExternalDocumentationTrait */21,
+                                _0: {
+                                  TAG: /* SpecificationLink */1,
+                                  _0: link
+                                }
+                              };
+                      }));
+        } else {
+          return {
+                  TAG: /* Error */1,
+                  _0: documentation._0
+                };
+        }
+    case "smithy.api#hostLabel" :
+        return {
+                TAG: /* Ok */0,
+                _0: /* HostLabelTrait */22
+              };
     case "smithy.api#httpError" :
         return Belt_Result.map(Json.Decode.parseNumber(value), (function (error) {
                       return {
@@ -214,6 +284,13 @@ function parseTrait(name, value) {
                 TAG: /* Ok */0,
                 _0: /* HttpPayloadTrait */16
               };
+    case "smithy.api#httpPrefixHeaders" :
+        return Belt_Result.map(Json.Decode.parseString(value), (function (httpPrefixHeader) {
+                      return {
+                              TAG: /* HttpPrefixHeadersTrait */20,
+                              _0: httpPrefixHeader
+                            };
+                    }));
     case "smithy.api#httpQuery" :
         return {
                 TAG: /* Ok */0,
@@ -223,6 +300,11 @@ function parseTrait(name, value) {
         return {
                 TAG: /* Ok */0,
                 _0: /* HttpQueryParams */17
+              };
+    case "smithy.api#httpResponseCode" :
+        return {
+                TAG: /* Ok */0,
+                _0: /* HttpResponseCodeTrait */20
               };
     case "smithy.api#idempotencyToken" :
         return {
@@ -238,7 +320,7 @@ function parseTrait(name, value) {
                     }));
     case "smithy.api#length" :
         var record = Json.Decode.parseObject(value);
-        return Json.ResultHelpers.map2(Json.Decode.parseInteger(Json.Decode.field(record, "min")), Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(record, "max")), Json.Decode.parseInteger), (function (min, max) {
+        return Json.ResultHelpers.map2(Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(record, "min")), Json.Decode.parseInteger), Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(record, "max")), Json.Decode.parseInteger), (function (min, max) {
                       return {
                               TAG: /* LengthTrait */11,
                               _0: min,
@@ -265,9 +347,9 @@ function parseTrait(name, value) {
                             };
                     }));
     case "smithy.api#range" :
-        var obj = Json.Decode.parseObject(value);
-        var min = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(obj, "min")), Json.Decode.parseInteger);
-        var max = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(obj, "max")), Json.Decode.parseInteger);
+        var obj$1 = Json.Decode.parseObject(value);
+        var min = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(obj$1, "min")), Json.Decode.parseInteger);
+        var max = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(obj$1, "max")), Json.Decode.parseInteger);
         return Json.ResultHelpers.map2(min, max, (function (min, max) {
                       return {
                               TAG: /* RangeTrait */10,
@@ -297,6 +379,11 @@ function parseTrait(name, value) {
                 TAG: /* Ok */0,
                 _0: /* SensitiveTrait */15
               };
+    case "smithy.api#streaming" :
+        return {
+                TAG: /* Ok */0,
+                _0: /* StreamingTrait */21
+              };
     case "smithy.api#tags" :
         return Belt_Result.map(Json.Decode.parseArray(value, Json.Decode.parseString), (function (tags) {
                       return {
@@ -318,6 +405,11 @@ function parseTrait(name, value) {
                               _0: title
                             };
                     }));
+    case "smithy.api#xmlAttribute" :
+        return {
+                TAG: /* Ok */0,
+                _0: /* XmlAttributeTrait */23
+              };
     case "smithy.api#xmlFlattened" :
         return {
                 TAG: /* Ok */0,

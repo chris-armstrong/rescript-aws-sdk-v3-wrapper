@@ -49,7 +49,7 @@ let parseServiceTrait = traitResult => {
 
 let parseEnumNameValue = (enum): Result.t<Trait.enumPair, jsonParseError> => {
   let obj_ = parseObject(enum)
-  let name_ = obj_->field("name")->parseString
+  let name_ = optional(obj_->field("name"))->mapOptional(parseString)
   let value_ = obj_->field("value")->parseString
   map2(name_, value_, (name, value) => {
     open Trait
@@ -60,8 +60,8 @@ let parseEnumNameValue = (enum): Result.t<Trait.enumPair, jsonParseError> => {
 let parseArnReferenceTrait = (value): Result.t<Trait.t, jsonParseError> => {
   let record = parseObject(value)
   let type__ = optional(record->field("type"))->mapOptional(parseString)
-  let service_ = record->field("service")->parseString
-  let resource_ = record->field("resource")->parseString
+  let service_ = optional(record->field("service"))->mapOptional(parseString)
+  let resource_ = optional(record->field("resource"))->mapOptional(parseString)
   map3(type__, service_, resource_, (type_, service, resource) => Trait.AwsApiArnReferenceTrait({
     type_: type_,
     service: service,
@@ -120,7 +120,7 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
   | "smithy.api#length" => {
       let record = value->parseObject
       map2(
-        record->field("min")->parseInteger,
+        optional(record->field("min"))->mapOptional(parseInteger),
         optional(record->field("max"))->mapOptional(parseInteger),
         (min, max) => Trait.LengthTrait(min, max),
       )
@@ -140,6 +140,29 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
   | "smithy.api#deprecated" => Ok(Trait.DeprecatedTrait)
   | "smithy.api#mediaType" => parseString(value)->map(mediaType => Trait.MediaTypeTrait(mediaType))
   | "aws.protocols#restXml" => Ok(Trait.AwsProtocolRestXmlTrait)
+  | "aws.api#clientEndpointDiscovery" => {
+    let obj = parseObject(value)
+    let operation = obj->field("operation")->parseString
+    let error = obj->field("error")->parseString
+    map2(operation, error, (operation, error) => Trait.AwsApiClientEndpointDiscoveryTrait({ operation, error }))
+  }
+  | "aws.protocols#ec2QueryName" => value->parseString->map(queryName => Trait.AwsProtocolEc2QueryNameTrait(queryName))
+  | "aws.protocols#ec2Query" => Ok(Trait.AwsProtocolEc2QueryTrait)
+  | "smithy.api#httpResponseCode" => Ok(Trait.HttpResponseCodeTrait)
+  | "smithy.api#streaming" => Ok(Trait.StreamingTrait)
+  | "smithy.api#hostLabel" => Ok(Trait.HostLabelTrait)
+  | "smithy.api#httpPrefixHeaders" => value->parseString->map(httpPrefixHeader => Trait.HttpPrefixHeadersTrait(httpPrefixHeader))
+  | "smithy.api#xmlAttribute" => Ok(Trait.XmlAttributeTrait)
+  | "smithy.api#externalDocumentation" => {
+    let documentation = value->parseObject->field("Documentation")
+    let specification = value->parseObject->field("Specification")
+    switch (documentation, specification) {
+      | (Ok(link), _) => Ok(link)->parseString->map(link => Trait.ExternalDocumentationTrait(Trait.DocumentationLink(link)))
+      | (_, Ok(link)) => Ok(link)->parseString->map(link => Trait.ExternalDocumentationTrait(Trait.SpecificationLink(link)))
+      | (Error(x), Error(_)) => Error(x)
+    }
+  }
+  | "smithy.api#eventPayload" => Ok(Trait.EventPayloadTrait)
   | _ => raise(UnknownTrait(name))
   }
   traitValue

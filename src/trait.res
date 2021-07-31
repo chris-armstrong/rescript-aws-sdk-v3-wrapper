@@ -7,7 +7,7 @@ type serviceDetails = {
 }
 
 type enumPair = {
-  name: string,
+  name: option<string>,
   value: string,
 }
 
@@ -15,11 +15,15 @@ type errorTraitType = Server | Client
 
 type arnReferenceDetails = {
   type_: option<string>,
-  service: string,
-  resource: string,
+  service: option<string>,
+  resource: option<string>,
 }
 
 type reference = { resource: string, service: option<string> };
+
+type clientEndpointDiscoveryDetails = {operation: string, error: string}
+
+type externalDocumentationType = DocumentationLink(string) | SpecificationLink(string)
 
 type t =
   | DocumentationTrait(string)
@@ -45,7 +49,7 @@ type t =
   | HttpHeaderTrait
   | RetryableTrait
   | RangeTrait(option<int>, option<int>)
-  | LengthTrait(int, option<int>)
+  | LengthTrait(option<int>, option<int>)
   | TimestampFormatTrait(string)
   | AwsProtocolAwsJson1_0Trait
   | AwsProtocolAwsJson1_1Trait
@@ -59,6 +63,16 @@ type t =
   | TagsTrait(array<string>)
   | DeprecatedTrait
   | MediaTypeTrait(string)
+  | AwsApiClientEndpointDiscoveryTrait(clientEndpointDiscoveryDetails)
+  | AwsProtocolEc2QueryNameTrait(string)
+  | AwsProtocolEc2QueryTrait
+  | HttpResponseCodeTrait
+  | StreamingTrait
+  | HostLabelTrait
+  | HttpPrefixHeadersTrait(string)
+  | XmlAttributeTrait
+  | ExternalDocumentationTrait(externalDocumentationType)
+  | EventPayloadTrait
 
 let isEnumTrait = trait =>
   switch trait {
