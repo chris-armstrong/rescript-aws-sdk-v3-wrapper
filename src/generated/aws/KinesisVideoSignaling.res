@@ -1,11 +1,19 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type username = string
 type uri = string
-type ttl = int;
+type ttl = int
 type service = [@as("TURN") #TURN]
 type resourceARN = string
 type password = string
@@ -15,39 +23,39 @@ type clientId = string
 type answer = string
 type uris = array<uri>
 type iceServer = {
-@as("Ttl") ttl: ttl,
-@as("Password") password: password,
-@as("Username") username: username,
-@as("Uris") uris: uris
+@as("Ttl") ttl: option<ttl>,
+@as("Password") password: option<password>,
+@as("Username") username: option<username>,
+@as("Uris") uris: option<uris>
 }
 type iceServerList = array<iceServer>
-type clientType;
-@module("@aws-sdk/client-kinesisvideo") @new external createClient: unit => clientType = "KinesisVideoSignalingClient";
+type awsServiceClient;
+@module("@aws-sdk/client-kinesisvideo") @new external createClient: unit => awsServiceClient = "KinesisVideoSignalingClient";
 module SendAlexaOfferToMaster = {
   type t;
   type request = {
-@as("MessagePayload") messagePayload: option<messagePayload>,
-@as("SenderClientId") senderClientId: option<clientId>,
-@as("ChannelARN") channelARN: option<resourceARN>
+@as("MessagePayload") messagePayload: messagePayload,
+@as("SenderClientId") senderClientId: clientId,
+@as("ChannelARN") channelARN: resourceARN
 }
   type response = {
-@as("Answer") answer: answer
+@as("Answer") answer: option<answer>
 }
   @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "SendAlexaOfferToMasterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetIceServerConfig = {
   type t;
   type request = {
-@as("Username") username: username,
-@as("Service") service: service,
-@as("ClientId") clientId: clientId,
-@as("ChannelARN") channelARN: option<resourceARN>
+@as("Username") username: option<username>,
+@as("Service") service: option<service>,
+@as("ClientId") clientId: option<clientId>,
+@as("ChannelARN") channelARN: resourceARN
 }
   type response = {
-@as("IceServerList") iceServerList: iceServerList
+@as("IceServerList") iceServerList: option<iceServerList>
 }
   @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetIceServerConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

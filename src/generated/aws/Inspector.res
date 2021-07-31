@@ -1,188 +1,194 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
 type version = string
 type url = string
-type uUID = string
-type amazonawsTimestamp = Js.Date.t;
+type uuid = string
+type timestamp_ = Js.Date.t;
 type text = string
 type tagValue = string
 type tagKey = string
-type stopAction = [@as("SKIP_EVALUATION") #SKIP_EVALUATION | @as("START_EVALUATION") #START_EVALUATION]
+type stopAction = [@as("SKIP_EVALUATION") #SKIPEVALUATION | @as("START_EVALUATION") #STARTEVALUATION]
 type severity = [@as("Undefined") #Undefined | @as("Informational") #Informational | @as("High") #High | @as("Medium") #Medium | @as("Low") #Low]
 type serviceName = string
 type scopeValue = string
-type scopeType = [@as("RULES_PACKAGE_ARN") #RULES_PACKAGE_ARN | @as("INSTANCE_ID") #INSTANCE_ID]
+type scopeType = [@as("RULES_PACKAGE_ARN") #RULESPACKAGEARN | @as("INSTANCE_ID") #INSTANCEID]
 type rulesPackageName = string
 type ruleName = string
 type reportType = [@as("FULL") #FULL | @as("FINDING") #FINDING]
-type reportStatus = [@as("COMPLETED") #COMPLETED | @as("FAILED") #FAILED | @as("WORK_IN_PROGRESS") #WORK_IN_PROGRESS]
+type reportStatus = [@as("COMPLETED") #COMPLETED | @as("FAILED") #FAILED | @as("WORK_IN_PROGRESS") #WORKINPROGRESS]
 type reportFileFormat = [@as("PDF") #PDF | @as("HTML") #HTML]
 type providerName = string
-type previewStatus = [@as("COMPLETED") #COMPLETED | @as("WORK_IN_PROGRESS") #WORK_IN_PROGRESS]
-type previewAgentsMaxResults = int;
+type previewStatus = [@as("COMPLETED") #COMPLETED | @as("WORK_IN_PROGRESS") #WORKINPROGRESS]
+type previewAgentsMaxResults = int
 type paginationToken = string
 type operatingSystem = string
-type numericVersion = int;
-type numericSeverity = float;
-type noSuchEntityErrorCode = [@as("IAM_ROLE_DOES_NOT_EXIST") #IAM_ROLE_DOES_NOT_EXIST | @as("SNS_TOPIC_DOES_NOT_EXIST") #SNS_TOPIC_DOES_NOT_EXIST | @as("RULES_PACKAGE_DOES_NOT_EXIST") #RULES_PACKAGE_DOES_NOT_EXIST | @as("RESOURCE_GROUP_DOES_NOT_EXIST") #RESOURCE_GROUP_DOES_NOT_EXIST | @as("FINDING_DOES_NOT_EXIST") #FINDING_DOES_NOT_EXIST | @as("ASSESSMENT_RUN_DOES_NOT_EXIST") #ASSESSMENT_RUN_DOES_NOT_EXIST | @as("ASSESSMENT_TEMPLATE_DOES_NOT_EXIST") #ASSESSMENT_TEMPLATE_DOES_NOT_EXIST | @as("ASSESSMENT_TARGET_DOES_NOT_EXIST") #ASSESSMENT_TARGET_DOES_NOT_EXIST]
+type numericVersion = int
+type numericSeverity = float
+type noSuchEntityErrorCode = [@as("IAM_ROLE_DOES_NOT_EXIST") #IAMROLEDOESNOTEXIST | @as("SNS_TOPIC_DOES_NOT_EXIST") #SNSTOPICDOESNOTEXIST | @as("RULES_PACKAGE_DOES_NOT_EXIST") #RULESPACKAGEDOESNOTEXIST | @as("RESOURCE_GROUP_DOES_NOT_EXIST") #RESOURCEGROUPDOESNOTEXIST | @as("FINDING_DOES_NOT_EXIST") #FINDINGDOESNOTEXIST | @as("ASSESSMENT_RUN_DOES_NOT_EXIST") #ASSESSMENTRUNDOESNOTEXIST | @as("ASSESSMENT_TEMPLATE_DOES_NOT_EXIST") #ASSESSMENTTEMPLATEDOESNOTEXIST | @as("ASSESSMENT_TARGET_DOES_NOT_EXIST") #ASSESSMENTTARGETDOESNOTEXIST]
 type namePattern = string
 type messageType = string
 type message = string
-type amazonawsLong = float;
-type locale = [@as("EN_US") #EN_US]
-type listMaxResults = int;
-type listEventSubscriptionsMaxResults = int;
-type limitExceededErrorCode = [@as("EVENT_SUBSCRIPTION_LIMIT_EXCEEDED") #EVENT_SUBSCRIPTION_LIMIT_EXCEEDED | @as("RESOURCE_GROUP_LIMIT_EXCEEDED") #RESOURCE_GROUP_LIMIT_EXCEEDED | @as("ASSESSMENT_RUN_LIMIT_EXCEEDED") #ASSESSMENT_RUN_LIMIT_EXCEEDED | @as("ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED") #ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED | @as("ASSESSMENT_TARGET_LIMIT_EXCEEDED") #ASSESSMENT_TARGET_LIMIT_EXCEEDED]
+type long = float
+type locale = [@as("EN_US") #ENUS]
+type listMaxResults = int
+type listEventSubscriptionsMaxResults = int
+type limitExceededErrorCode = [@as("EVENT_SUBSCRIPTION_LIMIT_EXCEEDED") #EVENTSUBSCRIPTIONLIMITEXCEEDED | @as("RESOURCE_GROUP_LIMIT_EXCEEDED") #RESOURCEGROUPLIMITEXCEEDED | @as("ASSESSMENT_RUN_LIMIT_EXCEEDED") #ASSESSMENTRUNLIMITEXCEEDED | @as("ASSESSMENT_TEMPLATE_LIMIT_EXCEEDED") #ASSESSMENTTEMPLATELIMITEXCEEDED | @as("ASSESSMENT_TARGET_LIMIT_EXCEEDED") #ASSESSMENTTARGETLIMITEXCEEDED]
 type kernelVersion = string
 type ipv4Address = string
-type iocConfidence = int;
-type invalidInputErrorCode = [@as("INVALID_NUMBER_OF_SEVERITIES") #INVALID_NUMBER_OF_SEVERITIES | @as("INVALID_NUMBER_OF_RULE_NAMES") #INVALID_NUMBER_OF_RULE_NAMES | @as("INVALID_NUMBER_OF_AUTO_SCALING_GROUPS") #INVALID_NUMBER_OF_AUTO_SCALING_GROUPS | @as("INVALID_NUMBER_OF_AGENT_IDS") #INVALID_NUMBER_OF_AGENT_IDS | @as("INVALID_NUMBER_OF_USER_ATTRIBUTES") #INVALID_NUMBER_OF_USER_ATTRIBUTES | @as("INVALID_NUMBER_OF_ATTRIBUTES") #INVALID_NUMBER_OF_ATTRIBUTES | @as("INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS") #INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS | @as("INVALID_NUMBER_OF_TAGS") #INVALID_NUMBER_OF_TAGS | @as("INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES") #INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES | @as("INVALID_NUMBER_OF_RULES_PACKAGE_ARNS") #INVALID_NUMBER_OF_RULES_PACKAGE_ARNS | @as("INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS") #INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS | @as("INVALID_NUMBER_OF_FINDING_ARNS") #INVALID_NUMBER_OF_FINDING_ARNS | @as("INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS") #INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS | @as("INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS") #INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS | @as("INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS") #INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS | @as("ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN") #ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN | @as("ASSESSMENT_TARGET_NAME_ALREADY_TAKEN") #ASSESSMENT_TARGET_NAME_ALREADY_TAKEN | @as("INVALID_EVENT") #INVALID_EVENT | @as("INVALID_LOCALE") #INVALID_LOCALE | @as("INVALID_SEVERITY") #INVALID_SEVERITY | @as("INVALID_RULE_NAME") #INVALID_RULE_NAME | @as("INVALID_AUTO_SCALING_GROUP") #INVALID_AUTO_SCALING_GROUP | @as("INVALID_AGENT_ID") #INVALID_AGENT_ID | @as("INVALID_MAX_RESULTS") #INVALID_MAX_RESULTS | @as("INVALID_PAGINATION_TOKEN") #INVALID_PAGINATION_TOKEN | @as("INVALID_USER_ATTRIBUTE_VALUE") #INVALID_USER_ATTRIBUTE_VALUE | @as("INVALID_USER_ATTRIBUTE_KEY") #INVALID_USER_ATTRIBUTE_KEY | @as("INVALID_USER_ATTRIBUTE") #INVALID_USER_ATTRIBUTE | @as("INVALID_ATTRIBUTE") #INVALID_ATTRIBUTE | @as("INVALID_RESOURCE_GROUP_TAG_VALUE") #INVALID_RESOURCE_GROUP_TAG_VALUE | @as("INVALID_RESOURCE_GROUP_TAG_KEY") #INVALID_RESOURCE_GROUP_TAG_KEY | @as("INVALID_TAG_VALUE") #INVALID_TAG_VALUE | @as("INVALID_TAG_KEY") #INVALID_TAG_KEY | @as("INVALID_TAG") #INVALID_TAG | @as("INVALID_ASSESSMENT_RUN_STATE") #INVALID_ASSESSMENT_RUN_STATE | @as("INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE") #INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE | @as("INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE") #INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE | @as("INVALID_ASSESSMENT_RUN_START_TIME_RANGE") #INVALID_ASSESSMENT_RUN_START_TIME_RANGE | @as("INVALID_ASSESSMENT_RUN_DURATION_RANGE") #INVALID_ASSESSMENT_RUN_DURATION_RANGE | @as("INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE") #INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE | @as("INVALID_ASSESSMENT_TEMPLATE_DURATION") #INVALID_ASSESSMENT_TEMPLATE_DURATION | @as("INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN") #INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN | @as("INVALID_ASSESSMENT_TEMPLATE_NAME") #INVALID_ASSESSMENT_TEMPLATE_NAME | @as("INVALID_ASSESSMENT_TARGET_NAME_PATTERN") #INVALID_ASSESSMENT_TARGET_NAME_PATTERN | @as("INVALID_ASSESSMENT_TARGET_NAME") #INVALID_ASSESSMENT_TARGET_NAME | @as("INVALID_IAM_ROLE_ARN") #INVALID_IAM_ROLE_ARN | @as("INVALID_SNS_TOPIC_ARN") #INVALID_SNS_TOPIC_ARN | @as("INVALID_RESOURCE_ARN") #INVALID_RESOURCE_ARN | @as("INVALID_RULES_PACKAGE_ARN") #INVALID_RULES_PACKAGE_ARN | @as("INVALID_RESOURCE_GROUP_ARN") #INVALID_RESOURCE_GROUP_ARN | @as("INVALID_FINDING_ARN") #INVALID_FINDING_ARN | @as("INVALID_ASSESSMENT_RUN_ARN") #INVALID_ASSESSMENT_RUN_ARN | @as("INVALID_ASSESSMENT_TEMPLATE_ARN") #INVALID_ASSESSMENT_TEMPLATE_ARN | @as("INVALID_ASSESSMENT_TARGET_ARN") #INVALID_ASSESSMENT_TARGET_ARN]
-type invalidCrossAccountRoleErrorCode = [@as("ROLE_DOES_NOT_HAVE_CORRECT_POLICY") #ROLE_DOES_NOT_HAVE_CORRECT_POLICY | @as("ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP") #ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP]
-type inspectorEvent = [@as("OTHER") #OTHER | @as("FINDING_REPORTED") #FINDING_REPORTED | @as("ASSESSMENT_RUN_STATE_CHANGED") #ASSESSMENT_RUN_STATE_CHANGED | @as("ASSESSMENT_RUN_COMPLETED") #ASSESSMENT_RUN_COMPLETED | @as("ASSESSMENT_RUN_STARTED") #ASSESSMENT_RUN_STARTED]
+type iocConfidence = int
+type invalidInputErrorCode = [@as("INVALID_NUMBER_OF_SEVERITIES") #INVALIDNUMBEROFSEVERITIES | @as("INVALID_NUMBER_OF_RULE_NAMES") #INVALIDNUMBEROFRULENAMES | @as("INVALID_NUMBER_OF_AUTO_SCALING_GROUPS") #INVALIDNUMBEROFAUTOSCALINGGROUPS | @as("INVALID_NUMBER_OF_AGENT_IDS") #INVALIDNUMBEROFAGENTIDS | @as("INVALID_NUMBER_OF_USER_ATTRIBUTES") #INVALIDNUMBEROFUSERATTRIBUTES | @as("INVALID_NUMBER_OF_ATTRIBUTES") #INVALIDNUMBEROFATTRIBUTES | @as("INVALID_NUMBER_OF_RESOURCE_GROUP_TAGS") #INVALIDNUMBEROFRESOURCEGROUPTAGS | @as("INVALID_NUMBER_OF_TAGS") #INVALIDNUMBEROFTAGS | @as("INVALID_NUMBER_OF_ASSESSMENT_RUN_STATES") #INVALIDNUMBEROFASSESSMENTRUNSTATES | @as("INVALID_NUMBER_OF_RULES_PACKAGE_ARNS") #INVALIDNUMBEROFRULESPACKAGEARNS | @as("INVALID_NUMBER_OF_RESOURCE_GROUP_ARNS") #INVALIDNUMBEROFRESOURCEGROUPARNS | @as("INVALID_NUMBER_OF_FINDING_ARNS") #INVALIDNUMBEROFFINDINGARNS | @as("INVALID_NUMBER_OF_ASSESSMENT_RUN_ARNS") #INVALIDNUMBEROFASSESSMENTRUNARNS | @as("INVALID_NUMBER_OF_ASSESSMENT_TEMPLATE_ARNS") #INVALIDNUMBEROFASSESSMENTTEMPLATEARNS | @as("INVALID_NUMBER_OF_ASSESSMENT_TARGET_ARNS") #INVALIDNUMBEROFASSESSMENTTARGETARNS | @as("ASSESSMENT_TEMPLATE_NAME_ALREADY_TAKEN") #ASSESSMENTTEMPLATENAMEALREADYTAKEN | @as("ASSESSMENT_TARGET_NAME_ALREADY_TAKEN") #ASSESSMENTTARGETNAMEALREADYTAKEN | @as("INVALID_EVENT") #INVALIDEVENT | @as("INVALID_LOCALE") #INVALIDLOCALE | @as("INVALID_SEVERITY") #INVALIDSEVERITY | @as("INVALID_RULE_NAME") #INVALIDRULENAME | @as("INVALID_AUTO_SCALING_GROUP") #INVALIDAUTOSCALINGGROUP | @as("INVALID_AGENT_ID") #INVALIDAGENTID | @as("INVALID_MAX_RESULTS") #INVALIDMAXRESULTS | @as("INVALID_PAGINATION_TOKEN") #INVALIDPAGINATIONTOKEN | @as("INVALID_USER_ATTRIBUTE_VALUE") #INVALIDUSERATTRIBUTEVALUE | @as("INVALID_USER_ATTRIBUTE_KEY") #INVALIDUSERATTRIBUTEKEY | @as("INVALID_USER_ATTRIBUTE") #INVALIDUSERATTRIBUTE | @as("INVALID_ATTRIBUTE") #INVALIDATTRIBUTE | @as("INVALID_RESOURCE_GROUP_TAG_VALUE") #INVALIDRESOURCEGROUPTAGVALUE | @as("INVALID_RESOURCE_GROUP_TAG_KEY") #INVALIDRESOURCEGROUPTAGKEY | @as("INVALID_TAG_VALUE") #INVALIDTAGVALUE | @as("INVALID_TAG_KEY") #INVALIDTAGKEY | @as("INVALID_TAG") #INVALIDTAG | @as("INVALID_ASSESSMENT_RUN_STATE") #INVALIDASSESSMENTRUNSTATE | @as("INVALID_ASSESSMENT_RUN_STATE_CHANGE_TIME_RANGE") #INVALIDASSESSMENTRUNSTATECHANGETIMERANGE | @as("INVALID_ASSESSMENT_RUN_COMPLETION_TIME_RANGE") #INVALIDASSESSMENTRUNCOMPLETIONTIMERANGE | @as("INVALID_ASSESSMENT_RUN_START_TIME_RANGE") #INVALIDASSESSMENTRUNSTARTTIMERANGE | @as("INVALID_ASSESSMENT_RUN_DURATION_RANGE") #INVALIDASSESSMENTRUNDURATIONRANGE | @as("INVALID_ASSESSMENT_TEMPLATE_DURATION_RANGE") #INVALIDASSESSMENTTEMPLATEDURATIONRANGE | @as("INVALID_ASSESSMENT_TEMPLATE_DURATION") #INVALIDASSESSMENTTEMPLATEDURATION | @as("INVALID_ASSESSMENT_TEMPLATE_NAME_PATTERN") #INVALIDASSESSMENTTEMPLATENAMEPATTERN | @as("INVALID_ASSESSMENT_TEMPLATE_NAME") #INVALIDASSESSMENTTEMPLATENAME | @as("INVALID_ASSESSMENT_TARGET_NAME_PATTERN") #INVALIDASSESSMENTTARGETNAMEPATTERN | @as("INVALID_ASSESSMENT_TARGET_NAME") #INVALIDASSESSMENTTARGETNAME | @as("INVALID_IAM_ROLE_ARN") #INVALIDIAMROLEARN | @as("INVALID_SNS_TOPIC_ARN") #INVALIDSNSTOPICARN | @as("INVALID_RESOURCE_ARN") #INVALIDRESOURCEARN | @as("INVALID_RULES_PACKAGE_ARN") #INVALIDRULESPACKAGEARN | @as("INVALID_RESOURCE_GROUP_ARN") #INVALIDRESOURCEGROUPARN | @as("INVALID_FINDING_ARN") #INVALIDFINDINGARN | @as("INVALID_ASSESSMENT_RUN_ARN") #INVALIDASSESSMENTRUNARN | @as("INVALID_ASSESSMENT_TEMPLATE_ARN") #INVALIDASSESSMENTTEMPLATEARN | @as("INVALID_ASSESSMENT_TARGET_ARN") #INVALIDASSESSMENTTARGETARN]
+type invalidCrossAccountRoleErrorCode = [@as("ROLE_DOES_NOT_HAVE_CORRECT_POLICY") #ROLEDOESNOTHAVECORRECTPOLICY | @as("ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP") #ROLEDOESNOTEXISTORINVALIDTRUSTRELATIONSHIP]
+type inspectorEvent = [@as("OTHER") #OTHER | @as("FINDING_REPORTED") #FINDINGREPORTED | @as("ASSESSMENT_RUN_STATE_CHANGED") #ASSESSMENTRUNSTATECHANGED | @as("ASSESSMENT_RUN_COMPLETED") #ASSESSMENTRUNCOMPLETED | @as("ASSESSMENT_RUN_STARTED") #ASSESSMENTRUNSTARTED]
 type hostname = string
 type findingId = string
-type findingCount = int;
-type failedItemErrorCode = [@as("INTERNAL_ERROR") #INTERNAL_ERROR | @as("LIMIT_EXCEEDED") #LIMIT_EXCEEDED | @as("ACCESS_DENIED") #ACCESS_DENIED | @as("ITEM_DOES_NOT_EXIST") #ITEM_DOES_NOT_EXIST | @as("DUPLICATE_ARN") #DUPLICATE_ARN | @as("INVALID_ARN") #INVALID_ARN]
+type findingCount = int
+type failedItemErrorCode = [@as("INTERNAL_ERROR") #INTERNALERROR | @as("LIMIT_EXCEEDED") #LIMITEXCEEDED | @as("ACCESS_DENIED") #ACCESSDENIED | @as("ITEM_DOES_NOT_EXIST") #ITEMDOESNOTEXIST | @as("DUPLICATE_ARN") #DUPLICATEARN | @as("INVALID_ARN") #INVALIDARN]
 type errorMessage = string
-type amazonawsBool = bool;
+type bool_ = bool
 type autoScalingGroup = string
 type attributeValue = string
 type attributeKey = string
-type assetType = [@as("ec2-instance") #ec2_instance]
+type assetType = [@as("ec2-instance") #Ec2Instance]
 type assessmentTemplateName = string
 type assessmentTargetName = string
-type assessmentRunState = [@as("CANCELED") #CANCELED | @as("COMPLETED_WITH_ERRORS") #COMPLETED_WITH_ERRORS | @as("COMPLETED") #COMPLETED | @as("ERROR") #ERROR | @as("FAILED") #FAILED | @as("EVALUATING_RULES") #EVALUATING_RULES | @as("START_EVALUATING_RULES_PENDING") #START_EVALUATING_RULES_PENDING | @as("DATA_COLLECTED") #DATA_COLLECTED | @as("STOP_DATA_COLLECTION_PENDING") #STOP_DATA_COLLECTION_PENDING | @as("COLLECTING_DATA") #COLLECTING_DATA | @as("START_DATA_COLLECTION_IN_PROGRESS") #START_DATA_COLLECTION_IN_PROGRESS | @as("START_DATA_COLLECTION_PENDING") #START_DATA_COLLECTION_PENDING | @as("CREATED") #CREATED]
-type assessmentRunNotificationSnsStatusCode = [@as("INTERNAL_ERROR") #INTERNAL_ERROR | @as("ACCESS_DENIED") #ACCESS_DENIED | @as("TOPIC_DOES_NOT_EXIST") #TOPIC_DOES_NOT_EXIST | @as("SUCCESS") #SUCCESS]
+type assessmentRunState = [@as("CANCELED") #CANCELED | @as("COMPLETED_WITH_ERRORS") #COMPLETEDWITHERRORS | @as("COMPLETED") #COMPLETED | @as("ERROR") #ERROR | @as("FAILED") #FAILED | @as("EVALUATING_RULES") #EVALUATINGRULES | @as("START_EVALUATING_RULES_PENDING") #STARTEVALUATINGRULESPENDING | @as("DATA_COLLECTED") #DATACOLLECTED | @as("STOP_DATA_COLLECTION_PENDING") #STOPDATACOLLECTIONPENDING | @as("COLLECTING_DATA") #COLLECTINGDATA | @as("START_DATA_COLLECTION_IN_PROGRESS") #STARTDATACOLLECTIONINPROGRESS | @as("START_DATA_COLLECTION_PENDING") #STARTDATACOLLECTIONPENDING | @as("CREATED") #CREATED]
+type assessmentRunNotificationSnsStatusCode = [@as("INTERNAL_ERROR") #INTERNALERROR | @as("ACCESS_DENIED") #ACCESSDENIED | @as("TOPIC_DOES_NOT_EXIST") #TOPICDOESNOTEXIST | @as("SUCCESS") #SUCCESS]
 type assessmentRunName = string
-type assessmentRunDuration = int;
-type arnCount = int;
+type assessmentRunDuration = int
+type arnCount = int
 type arn = string
 type amiId = string
 type agentVersion = string
 type agentId = string
 type agentHealthCode = [@as("UNKNOWN") #UNKNOWN | @as("THROTTLED") #THROTTLED | @as("UNHEALTHY") #UNHEALTHY | @as("SHUTDOWN") #SHUTDOWN | @as("RUNNING") #RUNNING | @as("IDLE") #IDLE]
 type agentHealth = [@as("UNKNOWN") #UNKNOWN | @as("UNHEALTHY") #UNHEALTHY | @as("HEALTHY") #HEALTHY]
-type accessDeniedErrorCode = [@as("ACCESS_DENIED_TO_IAM_ROLE") #ACCESS_DENIED_TO_IAM_ROLE | @as("ACCESS_DENIED_TO_SNS_TOPIC") #ACCESS_DENIED_TO_SNS_TOPIC | @as("ACCESS_DENIED_TO_RULES_PACKAGE") #ACCESS_DENIED_TO_RULES_PACKAGE | @as("ACCESS_DENIED_TO_RESOURCE_GROUP") #ACCESS_DENIED_TO_RESOURCE_GROUP | @as("ACCESS_DENIED_TO_FINDING") #ACCESS_DENIED_TO_FINDING | @as("ACCESS_DENIED_TO_ASSESSMENT_RUN") #ACCESS_DENIED_TO_ASSESSMENT_RUN | @as("ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE") #ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE | @as("ACCESS_DENIED_TO_ASSESSMENT_TARGET") #ACCESS_DENIED_TO_ASSESSMENT_TARGET]
+type accessDeniedErrorCode = [@as("ACCESS_DENIED_TO_IAM_ROLE") #ACCESSDENIEDTOIAMROLE | @as("ACCESS_DENIED_TO_SNS_TOPIC") #ACCESSDENIEDTOSNSTOPIC | @as("ACCESS_DENIED_TO_RULES_PACKAGE") #ACCESSDENIEDTORULESPACKAGE | @as("ACCESS_DENIED_TO_RESOURCE_GROUP") #ACCESSDENIEDTORESOURCEGROUP | @as("ACCESS_DENIED_TO_FINDING") #ACCESSDENIEDTOFINDING | @as("ACCESS_DENIED_TO_ASSESSMENT_RUN") #ACCESSDENIEDTOASSESSMENTRUN | @as("ACCESS_DENIED_TO_ASSESSMENT_TEMPLATE") #ACCESSDENIEDTOASSESSMENTTEMPLATE | @as("ACCESS_DENIED_TO_ASSESSMENT_TARGET") #ACCESSDENIEDTOASSESSMENTTARGET]
 type userAttributeKeyList = array<attributeKey>
 type timestampRange = {
-@as("endDate") endDate: amazonawsTimestamp,
-@as("beginDate") beginDate: amazonawsTimestamp
+endDate: option<timestamp_>,
+beginDate: option<timestamp_>
 }
 type telemetryMetadata = {
-@as("dataSize") dataSize: amazonawsLong,
-@as("count") count: option<amazonawsLong>,
-@as("messageType") messageType: option<messageType>
+dataSize: option<long>,
+count: long,
+messageType: messageType
 }
 type tag = {
-@as("value") value: tagValue,
-@as("key") key: option<tagKey>
+value: option<tagValue>,
+key: tagKey
 }
 type severityList = array<severity>
 type securityGroup = {
-@as("groupId") groupId: text,
-@as("groupName") groupName: text
+groupId: option<text>,
+groupName: option<text>
 }
 type scope = {
-@as("value") value: scopeValue,
-@as("key") key: scopeType
+value: option<scopeValue>,
+key: option<scopeType>
 }
 type rulesPackage = {
-@as("description") description: text,
-@as("provider") provider: option<providerName>,
-@as("version") version: option<version>,
-@as("name") name: option<rulesPackageName>,
-@as("arn") arn: option<arn>
+description: option<text>,
+provider: providerName,
+version: version,
+name: rulesPackageName,
+arn: arn
 }
 type ruleNameList = array<ruleName>
 type resourceGroupTag = {
-@as("value") value: tagValue,
-@as("key") key: option<tagKey>
+value: option<tagValue>,
+key: tagKey
 }
 type privateIp = {
-@as("privateIpAddress") privateIpAddress: text,
-@as("privateDnsName") privateDnsName: text
+privateIpAddress: option<text>,
+privateDnsName: option<text>
 }
 type listReturnedArnList = array<arn>
 type listParentArnList = array<arn>
 type ipv6Addresses = array<text>
 type ipv4AddressList = array<ipv4Address>
 type inspectorServiceAttributes = {
-@as("rulesPackageArn") rulesPackageArn: arn,
-@as("assessmentRunArn") assessmentRunArn: arn,
-@as("schemaVersion") schemaVersion: option<numericVersion>
+rulesPackageArn: option<arn>,
+assessmentRunArn: option<arn>,
+schemaVersion: numericVersion
 }
 type filterRulesPackageArnList = array<arn>
 type failedItemDetails = {
-@as("retryable") retryable: option<amazonawsBool>,
-@as("failureCode") failureCode: option<failedItemErrorCode>
+retryable: bool_,
+failureCode: failedItemErrorCode
 }
 type eventSubscription = {
-@as("subscribedAt") subscribedAt: option<amazonawsTimestamp>,
-@as("event") event: option<inspectorEvent>
+subscribedAt: timestamp_,
+event: inspectorEvent
 }
 type durationRange = {
-@as("maxSeconds") maxSeconds: assessmentRunDuration,
-@as("minSeconds") minSeconds: assessmentRunDuration
+maxSeconds: option<assessmentRunDuration>,
+minSeconds: option<assessmentRunDuration>
 }
 type batchDescribeExclusionsArnList = array<arn>
 type batchDescribeArnList = array<arn>
 type autoScalingGroupList = array<autoScalingGroup>
 type attribute = {
-@as("value") value: attributeValue,
-@as("key") key: option<attributeKey>
+value: option<attributeValue>,
+key: attributeKey
 }
 type assessmentTemplateRulesPackageArnList = array<arn>
 type assessmentTargetFilter = {
-@as("assessmentTargetNamePattern") assessmentTargetNamePattern: namePattern
+assessmentTargetNamePattern: option<namePattern>
 }
 type assessmentTarget = {
-@as("updatedAt") updatedAt: option<amazonawsTimestamp>,
-@as("createdAt") createdAt: option<amazonawsTimestamp>,
-@as("resourceGroupArn") resourceGroupArn: arn,
-@as("name") name: option<assessmentTargetName>,
-@as("arn") arn: option<arn>
+updatedAt: timestamp_,
+createdAt: timestamp_,
+resourceGroupArn: option<arn>,
+name: assessmentTargetName,
+arn: arn
 }
 type assessmentRunStateList = array<assessmentRunState>
 type assessmentRunStateChange = {
-@as("state") state: option<assessmentRunState>,
-@as("stateChangedAt") stateChangedAt: option<amazonawsTimestamp>
+state: assessmentRunState,
+stateChangedAt: timestamp_
 }
 type assessmentRunNotification = {
-@as("snsPublishStatusCode") snsPublishStatusCode: assessmentRunNotificationSnsStatusCode,
-@as("snsTopicArn") snsTopicArn: arn,
-@as("error") error: option<amazonawsBool>,
-@as("message") message: message,
-@as("event") event: option<inspectorEvent>,
-@as("date") date: option<amazonawsTimestamp>
+snsPublishStatusCode: option<assessmentRunNotificationSnsStatusCode>,
+snsTopicArn: option<arn>,
+error: bool_,
+message: option<message>,
+event: inspectorEvent,
+date: timestamp_
 }
 type assessmentRunInProgressArnList = array<arn>
 type assessmentRunFindingCounts = Js.Dict.t< findingCount>
 type assessmentRulesPackageArnList = array<arn>
 type agentPreview = {
-@as("ipv4Address") ipv4Address: ipv4Address,
-@as("kernelVersion") kernelVersion: kernelVersion,
-@as("operatingSystem") operatingSystem: operatingSystem,
-@as("agentVersion") agentVersion: agentVersion,
-@as("agentHealth") agentHealth: agentHealth,
-@as("autoScalingGroup") autoScalingGroup: autoScalingGroup,
-@as("agentId") agentId: option<agentId>,
-@as("hostname") hostname: hostname
+ipv4Address: option<ipv4Address>,
+kernelVersion: option<kernelVersion>,
+operatingSystem: option<operatingSystem>,
+agentVersion: option<agentVersion>,
+agentHealth: option<agentHealth>,
+autoScalingGroup: option<autoScalingGroup>,
+agentId: agentId,
+hostname: option<hostname>
 }
 type agentIdList = array<agentId>
 type agentHealthList = array<agentHealth>
 type agentHealthCodeList = array<agentHealthCode>
 type agentAlreadyRunningAssessment = {
-@as("assessmentRunArn") assessmentRunArn: option<arn>,
-@as("agentId") agentId: option<agentId>
+assessmentRunArn: arn,
+agentId: agentId
 }
 type addRemoveAttributesFindingArnList = array<arn>
 type userAttributeList = array<attribute>
 type telemetryMetadataList = array<telemetryMetadata>
 type tags = array<tag>
-type tagList = array<tag>
+type tagList_ = array<tag>
 type securityGroups = array<securityGroup>
 type scopeList = array<scope>
 type rulesPackageList = array<rulesPackage>
@@ -192,111 +198,111 @@ type failedItems = Js.Dict.t< failedItemDetails>
 type eventSubscriptionList = array<eventSubscription>
 type attributeList = array<attribute>
 type assessmentTemplateFilter = {
-@as("rulesPackageArns") rulesPackageArns: filterRulesPackageArnList,
-@as("durationRange") durationRange: durationRange,
-@as("namePattern") namePattern: namePattern
+rulesPackageArns: option<filterRulesPackageArnList>,
+durationRange: option<durationRange>,
+namePattern: option<namePattern>
 }
 type assessmentTargetList = array<assessmentTarget>
 type assessmentRunStateChangeList = array<assessmentRunStateChange>
 type assessmentRunNotificationList = array<assessmentRunNotification>
 type assessmentRunFilter = {
-@as("stateChangeTimeRange") stateChangeTimeRange: timestampRange,
-@as("completionTimeRange") completionTimeRange: timestampRange,
-@as("startTimeRange") startTimeRange: timestampRange,
-@as("rulesPackageArns") rulesPackageArns: filterRulesPackageArnList,
-@as("durationRange") durationRange: durationRange,
-@as("states") states: assessmentRunStateList,
-@as("namePattern") namePattern: namePattern
+stateChangeTimeRange: option<timestampRange>,
+completionTimeRange: option<timestampRange>,
+startTimeRange: option<timestampRange>,
+rulesPackageArns: option<filterRulesPackageArnList>,
+durationRange: option<durationRange>,
+states: option<assessmentRunStateList>,
+namePattern: option<namePattern>
 }
 type agentPreviewList = array<agentPreview>
 type agentFilter = {
-@as("agentHealthCodes") agentHealthCodes: option<agentHealthCodeList>,
-@as("agentHealths") agentHealths: option<agentHealthList>
+agentHealthCodes: agentHealthCodeList,
+agentHealths: agentHealthList
 }
 type agentAlreadyRunningAssessmentList = array<agentAlreadyRunningAssessment>
 type subscription = {
-@as("eventSubscriptions") eventSubscriptions: option<eventSubscriptionList>,
-@as("topicArn") topicArn: option<arn>,
-@as("resourceArn") resourceArn: option<arn>
+eventSubscriptions: eventSubscriptionList,
+topicArn: arn,
+resourceArn: arn
 }
 type resourceGroup = {
-@as("createdAt") createdAt: option<amazonawsTimestamp>,
-@as("tags") tags: option<resourceGroupTags>,
-@as("arn") arn: option<arn>
+createdAt: timestamp_,
+tags: resourceGroupTags,
+arn: arn
 }
 type networkInterface = {
-@as("securityGroups") securityGroups: securityGroups,
-@as("ipv6Addresses") ipv6Addresses: ipv6Addresses,
-@as("publicIp") publicIp: text,
-@as("publicDnsName") publicDnsName: text,
-@as("privateIpAddresses") privateIpAddresses: privateIpAddresses,
-@as("privateIpAddress") privateIpAddress: text,
-@as("privateDnsName") privateDnsName: text,
-@as("vpcId") vpcId: text,
-@as("subnetId") subnetId: text,
-@as("networkInterfaceId") networkInterfaceId: text
+securityGroups: option<securityGroups>,
+ipv6Addresses: option<ipv6Addresses>,
+publicIp: option<text>,
+publicDnsName: option<text>,
+privateIpAddresses: option<privateIpAddresses>,
+privateIpAddress: option<text>,
+privateDnsName: option<text>,
+vpcId: option<text>,
+subnetId: option<text>,
+networkInterfaceId: option<text>
 }
 type findingFilter = {
-@as("creationTimeRange") creationTimeRange: timestampRange,
-@as("userAttributes") userAttributes: attributeList,
-@as("attributes") attributes: attributeList,
-@as("rulesPackageArns") rulesPackageArns: filterRulesPackageArnList,
-@as("severities") severities: severityList,
-@as("ruleNames") ruleNames: ruleNameList,
-@as("autoScalingGroups") autoScalingGroups: autoScalingGroupList,
-@as("agentIds") agentIds: agentIdList
+creationTimeRange: option<timestampRange>,
+userAttributes: option<attributeList>,
+attributes: option<attributeList>,
+rulesPackageArns: option<filterRulesPackageArnList>,
+severities: option<severityList>,
+ruleNames: option<ruleNameList>,
+autoScalingGroups: option<autoScalingGroupList>,
+agentIds: option<agentIdList>
 }
 type exclusionPreview = {
-@as("attributes") attributes: attributeList,
-@as("scopes") scopes: option<scopeList>,
-@as("recommendation") recommendation: option<text>,
-@as("description") description: option<text>,
-@as("title") title: option<text>
+attributes: option<attributeList>,
+scopes: scopeList,
+recommendation: text,
+description: text,
+title: text
 }
 type exclusion = {
-@as("attributes") attributes: attributeList,
-@as("scopes") scopes: option<scopeList>,
-@as("recommendation") recommendation: option<text>,
-@as("description") description: option<text>,
-@as("title") title: option<text>,
-@as("arn") arn: option<arn>
+attributes: option<attributeList>,
+scopes: scopeList,
+recommendation: text,
+description: text,
+title: text,
+arn: arn
 }
 type assessmentTemplate = {
-@as("createdAt") createdAt: option<amazonawsTimestamp>,
-@as("assessmentRunCount") assessmentRunCount: option<arnCount>,
-@as("lastAssessmentRunArn") lastAssessmentRunArn: arn,
-@as("userAttributesForFindings") userAttributesForFindings: option<userAttributeList>,
-@as("rulesPackageArns") rulesPackageArns: option<assessmentTemplateRulesPackageArnList>,
-@as("durationInSeconds") durationInSeconds: option<assessmentRunDuration>,
-@as("assessmentTargetArn") assessmentTargetArn: option<arn>,
-@as("name") name: option<assessmentTemplateName>,
-@as("arn") arn: option<arn>
+createdAt: timestamp_,
+assessmentRunCount: arnCount,
+lastAssessmentRunArn: option<arn>,
+userAttributesForFindings: userAttributeList,
+rulesPackageArns: assessmentTemplateRulesPackageArnList,
+durationInSeconds: assessmentRunDuration,
+assessmentTargetArn: arn,
+name: assessmentTemplateName,
+arn: arn
 }
 type assessmentRunAgent = {
-@as("telemetryMetadata") telemetryMetadata: option<telemetryMetadataList>,
-@as("autoScalingGroup") autoScalingGroup: autoScalingGroup,
-@as("agentHealthDetails") agentHealthDetails: message,
-@as("agentHealthCode") agentHealthCode: option<agentHealthCode>,
-@as("agentHealth") agentHealth: option<agentHealth>,
-@as("assessmentRunArn") assessmentRunArn: option<arn>,
-@as("agentId") agentId: option<agentId>
+telemetryMetadata: telemetryMetadataList,
+autoScalingGroup: option<autoScalingGroup>,
+agentHealthDetails: option<message>,
+agentHealthCode: agentHealthCode,
+agentHealth: agentHealth,
+assessmentRunArn: arn,
+agentId: agentId
 }
 type assessmentRun = {
-@as("findingCounts") findingCounts: option<assessmentRunFindingCounts>,
-@as("notifications") notifications: option<assessmentRunNotificationList>,
-@as("stateChanges") stateChanges: option<assessmentRunStateChangeList>,
-@as("dataCollected") dataCollected: option<amazonawsBool>,
-@as("stateChangedAt") stateChangedAt: option<amazonawsTimestamp>,
-@as("completedAt") completedAt: amazonawsTimestamp,
-@as("startedAt") startedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: option<amazonawsTimestamp>,
-@as("userAttributesForFindings") userAttributesForFindings: option<userAttributeList>,
-@as("rulesPackageArns") rulesPackageArns: option<assessmentRulesPackageArnList>,
-@as("durationInSeconds") durationInSeconds: option<assessmentRunDuration>,
-@as("state") state: option<assessmentRunState>,
-@as("assessmentTemplateArn") assessmentTemplateArn: option<arn>,
-@as("name") name: option<assessmentRunName>,
-@as("arn") arn: option<arn>
+findingCounts: assessmentRunFindingCounts,
+notifications: assessmentRunNotificationList,
+stateChanges: assessmentRunStateChangeList,
+dataCollected: bool_,
+stateChangedAt: timestamp_,
+completedAt: option<timestamp_>,
+startedAt: option<timestamp_>,
+createdAt: timestamp_,
+userAttributesForFindings: userAttributeList,
+rulesPackageArns: assessmentRulesPackageArnList,
+durationInSeconds: assessmentRunDuration,
+state: assessmentRunState,
+assessmentTemplateArn: arn,
+name: assessmentRunName,
+arn: arn
 }
 type subscriptionList = array<subscription>
 type resourceGroupList = array<resourceGroup>
@@ -307,525 +313,525 @@ type assessmentTemplateList = array<assessmentTemplate>
 type assessmentRunList = array<assessmentRun>
 type assessmentRunAgentList = array<assessmentRunAgent>
 type assetAttributes = {
-@as("networkInterfaces") networkInterfaces: networkInterfaces,
-@as("tags") tags: tags,
-@as("ipv4Addresses") ipv4Addresses: ipv4AddressList,
-@as("hostname") hostname: hostname,
-@as("amiId") amiId: amiId,
-@as("autoScalingGroup") autoScalingGroup: autoScalingGroup,
-@as("agentId") agentId: agentId,
-@as("schemaVersion") schemaVersion: option<numericVersion>
+networkInterfaces: option<networkInterfaces>,
+tags: option<tags>,
+ipv4Addresses: option<ipv4AddressList>,
+hostname: option<hostname>,
+amiId: option<amiId>,
+autoScalingGroup: option<autoScalingGroup>,
+agentId: option<agentId>,
+schemaVersion: numericVersion
 }
 type finding = {
-@as("updatedAt") updatedAt: option<amazonawsTimestamp>,
-@as("createdAt") createdAt: option<amazonawsTimestamp>,
-@as("userAttributes") userAttributes: option<userAttributeList>,
-@as("attributes") attributes: option<attributeList>,
-@as("indicatorOfCompromise") indicatorOfCompromise: amazonawsBool,
-@as("confidence") confidence: iocConfidence,
-@as("numericSeverity") numericSeverity: numericSeverity,
-@as("severity") severity: severity,
-@as("recommendation") recommendation: text,
-@as("description") description: text,
-@as("title") title: text,
-@as("id") id: findingId,
-@as("assetAttributes") assetAttributes: assetAttributes,
-@as("assetType") assetType: assetType,
-@as("serviceAttributes") serviceAttributes: inspectorServiceAttributes,
-@as("service") service: serviceName,
-@as("schemaVersion") schemaVersion: numericVersion,
-@as("arn") arn: option<arn>
+updatedAt: timestamp_,
+createdAt: timestamp_,
+userAttributes: userAttributeList,
+attributes: attributeList,
+indicatorOfCompromise: option<bool_>,
+confidence: option<iocConfidence>,
+numericSeverity: option<numericSeverity>,
+severity: option<severity>,
+recommendation: option<text>,
+description: option<text>,
+title: option<text>,
+id: option<findingId>,
+assetAttributes: option<assetAttributes>,
+assetType: option<assetType>,
+serviceAttributes: option<inspectorServiceAttributes>,
+service: option<serviceName>,
+schemaVersion: option<numericVersion>,
+arn: arn
 }
 type findingList = array<finding>
-type clientType;
-@module("@aws-sdk/client-inspector") @new external createClient: unit => clientType = "InspectorClient";
+type awsServiceClient;
+@module("@aws-sdk/client-inspector") @new external createClient: unit => awsServiceClient = "InspectorClient";
 module UpdateAssessmentTarget = {
   type t;
   type request = {
-@as("resourceGroupArn") resourceGroupArn: arn,
-@as("assessmentTargetName") assessmentTargetName: option<assessmentTargetName>,
-@as("assessmentTargetArn") assessmentTargetArn: option<arn>
+resourceGroupArn: option<arn>,
+assessmentTargetName: assessmentTargetName,
+assessmentTargetArn: arn
 }
   
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "UpdateAssessmentTargetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module UnsubscribeFromEvent = {
   type t;
   type request = {
-@as("topicArn") topicArn: option<arn>,
-@as("event") event: option<inspectorEvent>,
-@as("resourceArn") resourceArn: option<arn>
+topicArn: arn,
+event: inspectorEvent,
+resourceArn: arn
 }
   
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "UnsubscribeFromEventCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module SubscribeToEvent = {
   type t;
   type request = {
-@as("topicArn") topicArn: option<arn>,
-@as("event") event: option<inspectorEvent>,
-@as("resourceArn") resourceArn: option<arn>
+topicArn: arn,
+event: inspectorEvent,
+resourceArn: arn
 }
   
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "SubscribeToEventCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module StopAssessmentRun = {
   type t;
   type request = {
-@as("stopAction") stopAction: stopAction,
-@as("assessmentRunArn") assessmentRunArn: option<arn>
+stopAction: option<stopAction>,
+assessmentRunArn: arn
 }
   
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "StopAssessmentRunCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RegisterCrossAccountAccessRole = {
   type t;
   type request = {
-@as("roleArn") roleArn: option<arn>
+roleArn: arn
 }
   
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "RegisterCrossAccountAccessRoleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DescribeCrossAccountAccessRole = {
   type t;
   
   type response = {
-@as("registeredAt") registeredAt: option<amazonawsTimestamp>,
-@as("valid") valid: option<amazonawsBool>,
-@as("roleArn") roleArn: option<arn>
+registeredAt: timestamp_,
+valid: bool_,
+roleArn: arn
 }
   @module("@aws-sdk/client-inspector") @new external new_: (unit) => t = "DescribeCrossAccountAccessRoleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateExclusionsPreview = {
   type t;
   type request = {
-@as("assessmentTemplateArn") assessmentTemplateArn: option<arn>
+assessmentTemplateArn: arn
 }
   type response = {
-@as("previewToken") previewToken: option<uUID>
+previewToken: uuid
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "CreateExclusionsPreviewCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAssessmentTarget = {
   type t;
   type request = {
-@as("resourceGroupArn") resourceGroupArn: arn,
-@as("assessmentTargetName") assessmentTargetName: option<assessmentTargetName>
+resourceGroupArn: option<arn>,
+assessmentTargetName: assessmentTargetName
 }
   type response = {
-@as("assessmentTargetArn") assessmentTargetArn: option<arn>
+assessmentTargetArn: arn
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "CreateAssessmentTargetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRulesPackages = {
   type t;
   type request = {
-@as("maxResults") maxResults: listMaxResults,
-@as("nextToken") nextToken: paginationToken
+maxResults: option<listMaxResults>,
+nextToken: option<paginationToken>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("rulesPackageArns") rulesPackageArns: option<listReturnedArnList>
+nextToken: option<paginationToken>,
+rulesPackageArns: listReturnedArnList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "ListRulesPackagesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListExclusions = {
   type t;
   type request = {
-@as("maxResults") maxResults: listMaxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("assessmentRunArn") assessmentRunArn: option<arn>
+maxResults: option<listMaxResults>,
+nextToken: option<paginationToken>,
+assessmentRunArn: arn
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("exclusionArns") exclusionArns: option<listReturnedArnList>
+nextToken: option<paginationToken>,
+exclusionArns: listReturnedArnList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "ListExclusionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssessmentTargets = {
   type t;
   type request = {
-@as("maxResults") maxResults: listMaxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("filter") filter: assessmentTargetFilter
+maxResults: option<listMaxResults>,
+nextToken: option<paginationToken>,
+filter: option<assessmentTargetFilter>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("assessmentTargetArns") assessmentTargetArns: option<listReturnedArnList>
+nextToken: option<paginationToken>,
+assessmentTargetArns: listReturnedArnList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "ListAssessmentTargetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAssessmentReport = {
   type t;
   type request = {
-@as("reportType") reportType: option<reportType>,
-@as("reportFileFormat") reportFileFormat: option<reportFileFormat>,
-@as("assessmentRunArn") assessmentRunArn: option<arn>
+reportType: reportType,
+reportFileFormat: reportFileFormat,
+assessmentRunArn: arn
 }
   type response = {
-@as("url") url: url,
-@as("status") status: option<reportStatus>
+url: option<url>,
+status: reportStatus
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "GetAssessmentReportCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAssessmentTemplate = {
   type t;
   type request = {
-@as("assessmentTemplateArn") assessmentTemplateArn: option<arn>
+assessmentTemplateArn: arn
 }
   
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "DeleteAssessmentTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteAssessmentTarget = {
   type t;
   type request = {
-@as("assessmentTargetArn") assessmentTargetArn: option<arn>
+assessmentTargetArn: arn
 }
   
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "DeleteAssessmentTargetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteAssessmentRun = {
   type t;
   type request = {
-@as("assessmentRunArn") assessmentRunArn: option<arn>
+assessmentRunArn: arn
 }
   
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "DeleteAssessmentRunCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module StartAssessmentRun = {
   type t;
   type request = {
-@as("assessmentRunName") assessmentRunName: assessmentRunName,
-@as("assessmentTemplateArn") assessmentTemplateArn: option<arn>
+assessmentRunName: option<assessmentRunName>,
+assessmentTemplateArn: arn
 }
   type response = {
-@as("assessmentRunArn") assessmentRunArn: option<arn>
+assessmentRunArn: arn
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "StartAssessmentRunCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SetTagsForResource = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("resourceArn") resourceArn: option<arn>
+tags: option<tagList_>,
+resourceArn: arn
 }
   
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "SetTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RemoveAttributesFromFindings = {
   type t;
   type request = {
-@as("attributeKeys") attributeKeys: option<userAttributeKeyList>,
-@as("findingArns") findingArns: option<addRemoveAttributesFindingArnList>
+attributeKeys: userAttributeKeyList,
+findingArns: addRemoveAttributesFindingArnList
 }
   type response = {
-@as("failedItems") failedItems: option<failedItems>
+failedItems: failedItems
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "RemoveAttributesFromFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PreviewAgents = {
   type t;
   type request = {
-@as("maxResults") maxResults: previewAgentsMaxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("previewAgentsArn") previewAgentsArn: option<arn>
+maxResults: option<previewAgentsMaxResults>,
+nextToken: option<paginationToken>,
+previewAgentsArn: arn
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("agentPreviews") agentPreviews: option<agentPreviewList>
+nextToken: option<paginationToken>,
+agentPreviews: agentPreviewList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "PreviewAgentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<arn>
+resourceArn: arn
 }
   type response = {
-@as("tags") tags: option<tagList>
+tags: tagList_
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssessmentTemplates = {
   type t;
   type request = {
-@as("maxResults") maxResults: listMaxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("filter") filter: assessmentTemplateFilter,
-@as("assessmentTargetArns") assessmentTargetArns: listParentArnList
+maxResults: option<listMaxResults>,
+nextToken: option<paginationToken>,
+filter: option<assessmentTemplateFilter>,
+assessmentTargetArns: option<listParentArnList>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("assessmentTemplateArns") assessmentTemplateArns: option<listReturnedArnList>
+nextToken: option<paginationToken>,
+assessmentTemplateArns: listReturnedArnList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "ListAssessmentTemplatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssessmentRuns = {
   type t;
   type request = {
-@as("maxResults") maxResults: listMaxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("filter") filter: assessmentRunFilter,
-@as("assessmentTemplateArns") assessmentTemplateArns: listParentArnList
+maxResults: option<listMaxResults>,
+nextToken: option<paginationToken>,
+filter: option<assessmentRunFilter>,
+assessmentTemplateArns: option<listParentArnList>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("assessmentRunArns") assessmentRunArns: option<listReturnedArnList>
+nextToken: option<paginationToken>,
+assessmentRunArns: listReturnedArnList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "ListAssessmentRunsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetTelemetryMetadata = {
   type t;
   type request = {
-@as("assessmentRunArn") assessmentRunArn: option<arn>
+assessmentRunArn: arn
 }
   type response = {
-@as("telemetryMetadata") telemetryMetadata: option<telemetryMetadataList>
+telemetryMetadata: telemetryMetadataList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "GetTelemetryMetadataCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRulesPackages = {
   type t;
   type request = {
-@as("locale") locale: locale,
-@as("rulesPackageArns") rulesPackageArns: option<batchDescribeArnList>
+locale: option<locale>,
+rulesPackageArns: batchDescribeArnList
 }
   type response = {
-@as("failedItems") failedItems: option<failedItems>,
-@as("rulesPackages") rulesPackages: option<rulesPackageList>
+failedItems: failedItems,
+rulesPackages: rulesPackageList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "DescribeRulesPackagesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAssessmentTargets = {
   type t;
   type request = {
-@as("assessmentTargetArns") assessmentTargetArns: option<batchDescribeArnList>
+assessmentTargetArns: batchDescribeArnList
 }
   type response = {
-@as("failedItems") failedItems: option<failedItems>,
-@as("assessmentTargets") assessmentTargets: option<assessmentTargetList>
+failedItems: failedItems,
+assessmentTargets: assessmentTargetList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "DescribeAssessmentTargetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateResourceGroup = {
   type t;
   type request = {
-@as("resourceGroupTags") resourceGroupTags: option<resourceGroupTags>
+resourceGroupTags: resourceGroupTags
 }
   type response = {
-@as("resourceGroupArn") resourceGroupArn: option<arn>
+resourceGroupArn: arn
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "CreateResourceGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAssessmentTemplate = {
   type t;
   type request = {
-@as("userAttributesForFindings") userAttributesForFindings: userAttributeList,
-@as("rulesPackageArns") rulesPackageArns: option<assessmentTemplateRulesPackageArnList>,
-@as("durationInSeconds") durationInSeconds: option<assessmentRunDuration>,
-@as("assessmentTemplateName") assessmentTemplateName: option<assessmentTemplateName>,
-@as("assessmentTargetArn") assessmentTargetArn: option<arn>
+userAttributesForFindings: option<userAttributeList>,
+rulesPackageArns: assessmentTemplateRulesPackageArnList,
+durationInSeconds: assessmentRunDuration,
+assessmentTemplateName: assessmentTemplateName,
+assessmentTargetArn: arn
 }
   type response = {
-@as("assessmentTemplateArn") assessmentTemplateArn: option<arn>
+assessmentTemplateArn: arn
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "CreateAssessmentTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddAttributesToFindings = {
   type t;
   type request = {
-@as("attributes") attributes: option<userAttributeList>,
-@as("findingArns") findingArns: option<addRemoveAttributesFindingArnList>
+attributes: userAttributeList,
+findingArns: addRemoveAttributesFindingArnList
 }
   type response = {
-@as("failedItems") failedItems: option<failedItems>
+failedItems: failedItems
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "AddAttributesToFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFindings = {
   type t;
   type request = {
-@as("maxResults") maxResults: listMaxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("filter") filter: findingFilter,
-@as("assessmentRunArns") assessmentRunArns: listParentArnList
+maxResults: option<listMaxResults>,
+nextToken: option<paginationToken>,
+filter: option<findingFilter>,
+assessmentRunArns: option<listParentArnList>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("findingArns") findingArns: option<listReturnedArnList>
+nextToken: option<paginationToken>,
+findingArns: listReturnedArnList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "ListFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEventSubscriptions = {
   type t;
   type request = {
-@as("maxResults") maxResults: listEventSubscriptionsMaxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("resourceArn") resourceArn: arn
+maxResults: option<listEventSubscriptionsMaxResults>,
+nextToken: option<paginationToken>,
+resourceArn: option<arn>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("subscriptions") subscriptions: option<subscriptionList>
+nextToken: option<paginationToken>,
+subscriptions: subscriptionList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "ListEventSubscriptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssessmentRunAgents = {
   type t;
   type request = {
-@as("maxResults") maxResults: listMaxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("filter") filter: agentFilter,
-@as("assessmentRunArn") assessmentRunArn: option<arn>
+maxResults: option<listMaxResults>,
+nextToken: option<paginationToken>,
+filter: option<agentFilter>,
+assessmentRunArn: arn
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("assessmentRunAgents") assessmentRunAgents: option<assessmentRunAgentList>
+nextToken: option<paginationToken>,
+assessmentRunAgents: assessmentRunAgentList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "ListAssessmentRunAgentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetExclusionsPreview = {
   type t;
   type request = {
-@as("locale") locale: locale,
-@as("maxResults") maxResults: listMaxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("previewToken") previewToken: option<uUID>,
-@as("assessmentTemplateArn") assessmentTemplateArn: option<arn>
+locale: option<locale>,
+maxResults: option<listMaxResults>,
+nextToken: option<paginationToken>,
+previewToken: uuid,
+assessmentTemplateArn: arn
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("exclusionPreviews") exclusionPreviews: exclusionPreviewList,
-@as("previewStatus") previewStatus: option<previewStatus>
+nextToken: option<paginationToken>,
+exclusionPreviews: option<exclusionPreviewList>,
+previewStatus: previewStatus
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "GetExclusionsPreviewCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeResourceGroups = {
   type t;
   type request = {
-@as("resourceGroupArns") resourceGroupArns: option<batchDescribeArnList>
+resourceGroupArns: batchDescribeArnList
 }
   type response = {
-@as("failedItems") failedItems: option<failedItems>,
-@as("resourceGroups") resourceGroups: option<resourceGroupList>
+failedItems: failedItems,
+resourceGroups: resourceGroupList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "DescribeResourceGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeExclusions = {
   type t;
   type request = {
-@as("locale") locale: locale,
-@as("exclusionArns") exclusionArns: option<batchDescribeExclusionsArnList>
+locale: option<locale>,
+exclusionArns: batchDescribeExclusionsArnList
 }
   type response = {
-@as("failedItems") failedItems: option<failedItems>,
-@as("exclusions") exclusions: option<exclusionMap>
+failedItems: failedItems,
+exclusions: exclusionMap
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "DescribeExclusionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAssessmentTemplates = {
   type t;
   type request = {
-@as("assessmentTemplateArns") assessmentTemplateArns: option<batchDescribeArnList>
+assessmentTemplateArns: batchDescribeArnList
 }
   type response = {
-@as("failedItems") failedItems: option<failedItems>,
-@as("assessmentTemplates") assessmentTemplates: option<assessmentTemplateList>
+failedItems: failedItems,
+assessmentTemplates: assessmentTemplateList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "DescribeAssessmentTemplatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAssessmentRuns = {
   type t;
   type request = {
-@as("assessmentRunArns") assessmentRunArns: option<batchDescribeArnList>
+assessmentRunArns: batchDescribeArnList
 }
   type response = {
-@as("failedItems") failedItems: option<failedItems>,
-@as("assessmentRuns") assessmentRuns: option<assessmentRunList>
+failedItems: failedItems,
+assessmentRuns: assessmentRunList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "DescribeAssessmentRunsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeFindings = {
   type t;
   type request = {
-@as("locale") locale: locale,
-@as("findingArns") findingArns: option<batchDescribeArnList>
+locale: option<locale>,
+findingArns: batchDescribeArnList
 }
   type response = {
-@as("failedItems") failedItems: option<failedItems>,
-@as("findings") findings: option<findingList>
+failedItems: failedItems,
+findings: findingList
 }
   @module("@aws-sdk/client-inspector") @new external new_: (request) => t = "DescribeFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

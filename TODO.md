@@ -11,7 +11,7 @@
   - split from generate.res
   - organise by namespace (smithy.api / aws.api / aws.protocols)
 * Implement exception re-throwing of AWS exceptions or strip out exception generation and create generic handler for AWS exception types
-* Add @obj or @deriving("bastract") functions for creating request types with lots of optional fields
+* Add @obj or @deriving("abstract") functions for creating request types with lots of optional fields
 * Combined request create / send helper in each module
 * Run code through refmt
 * Generate better formatted code / introduce a print context

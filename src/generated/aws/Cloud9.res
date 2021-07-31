@@ -1,235 +1,240 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type long = float
 type userArn = string
-type amazonawsTimestamp = Js.Date.t;
+type timestamp_ = Js.Date.t;
 type tagValue = string
 type tagKey = string
 type subnetId = string
-type amazonawsString = string
-type permissions = [@as("read-only") #read_only | @as("read-write") #read_write | @as("owner") #owner]
-type memberPermissions = [@as("read-only") #read_only | @as("read-write") #read_write]
-type maxResults = int;
-type managedCredentialsStatus = [@as("FAILED_REMOVAL_BY_OWNER") #FAILED_REMOVAL_BY_OWNER | @as("FAILED_REMOVAL_BY_COLLABORATOR") #FAILED_REMOVAL_BY_COLLABORATOR | @as("PENDING_START_REMOVAL_BY_OWNER") #PENDING_START_REMOVAL_BY_OWNER | @as("PENDING_REMOVAL_BY_OWNER") #PENDING_REMOVAL_BY_OWNER | @as("PENDING_START_REMOVAL_BY_COLLABORATOR") #PENDING_START_REMOVAL_BY_COLLABORATOR | @as("PENDING_REMOVAL_BY_COLLABORATOR") #PENDING_REMOVAL_BY_COLLABORATOR | @as("DISABLED_BY_COLLABORATOR") #DISABLED_BY_COLLABORATOR | @as("DISABLED_BY_OWNER") #DISABLED_BY_OWNER | @as("DISABLED_BY_DEFAULT") #DISABLED_BY_DEFAULT | @as("ENABLED_BY_OWNER") #ENABLED_BY_OWNER | @as("ENABLED_ON_CREATE") #ENABLED_ON_CREATE]
-type amazonawsInteger = int;
+type string_ = string
+type permissions = [@as("read-only") #ReadOnly | @as("read-write") #ReadWrite | @as("owner") #Owner]
+type memberPermissions = [@as("read-only") #ReadOnly | @as("read-write") #ReadWrite]
+type maxResults = int
+type managedCredentialsStatus = [@as("FAILED_REMOVAL_BY_OWNER") #FAILEDREMOVALBYOWNER | @as("FAILED_REMOVAL_BY_COLLABORATOR") #FAILEDREMOVALBYCOLLABORATOR | @as("PENDING_START_REMOVAL_BY_OWNER") #PENDINGSTARTREMOVALBYOWNER | @as("PENDING_REMOVAL_BY_OWNER") #PENDINGREMOVALBYOWNER | @as("PENDING_START_REMOVAL_BY_COLLABORATOR") #PENDINGSTARTREMOVALBYCOLLABORATOR | @as("PENDING_REMOVAL_BY_COLLABORATOR") #PENDINGREMOVALBYCOLLABORATOR | @as("DISABLED_BY_COLLABORATOR") #DISABLEDBYCOLLABORATOR | @as("DISABLED_BY_OWNER") #DISABLEDBYOWNER | @as("DISABLED_BY_DEFAULT") #DISABLEDBYDEFAULT | @as("ENABLED_BY_OWNER") #ENABLEDBYOWNER | @as("ENABLED_ON_CREATE") #ENABLEDONCREATE]
+type integer_ = int
 type instanceType = string
 type imageId = string
-type environmentType = [@as("ec2") #ec2 | @as("ssh") #ssh]
-type environmentStatus = [@as("deleting") #deleting | @as("stopped") #stopped | @as("stopping") #stopping | @as("ready") #ready | @as("connecting") #connecting | @as("creating") #creating | @as("error") #error]
+type environmentType = [@as("ec2") #Ec2 | @as("ssh") #Ssh]
+type environmentStatus = [@as("deleting") #Deleting | @as("stopped") #Stopped | @as("stopping") #Stopping | @as("ready") #Ready | @as("connecting") #Connecting | @as("creating") #Creating | @as("error") #Error]
 type environmentName = string
-type environmentLifecycleStatus = [@as("DELETE_FAILED") #DELETE_FAILED | @as("DELETING") #DELETING | @as("CREATE_FAILED") #CREATE_FAILED | @as("CREATED") #CREATED | @as("CREATING") #CREATING]
+type environmentLifecycleStatus = [@as("DELETE_FAILED") #DELETEFAILED | @as("DELETING") #DELETING | @as("CREATE_FAILED") #CREATEFAILED | @as("CREATED") #CREATED | @as("CREATING") #CREATING]
 type environmentId = string
 type environmentDescription = string
 type environmentArn = string
-type connectionType = [@as("CONNECT_SSM") #CONNECT_SSM | @as("CONNECT_SSH") #CONNECT_SSH]
+type connectionType = [@as("CONNECT_SSM") #CONNECTSSM | @as("CONNECT_SSH") #CONNECTSSH]
 type clientRequestToken = string
-type automaticStopTimeMinutes = int;
+type automaticStopTimeMinutes = int
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: option<tagValue>,
-@as("Key") key: option<tagKey>
+@as("Value") value: tagValue,
+@as("Key") key: tagKey
 }
 type permissionsList = array<permissions>
 type environmentMember = {
-@as("lastAccess") lastAccess: amazonawsTimestamp,
-@as("environmentId") environmentId: option<environmentId>,
-@as("userArn") userArn: option<userArn>,
-@as("userId") userId: option<amazonawsString>,
-@as("permissions") permissions: option<permissions>
+lastAccess: option<timestamp_>,
+environmentId: environmentId,
+userArn: userArn,
+userId: string_,
+permissions: permissions
 }
 type environmentLifecycle = {
-@as("failureResource") failureResource: amazonawsString,
-@as("reason") reason: amazonawsString,
-@as("status") status: environmentLifecycleStatus
+failureResource: option<string_>,
+reason: option<string_>,
+status: option<environmentLifecycleStatus>
 }
 type environmentIdList = array<environmentId>
 type boundedEnvironmentIdList = array<environmentId>
-type tagList = array<tag>
+type tagList_ = array<tag>
 type environmentMembersList = array<environmentMember>
 type environment = {
-@as("managedCredentialsStatus") managedCredentialsStatus: managedCredentialsStatus,
-@as("lifecycle") lifecycle: environmentLifecycle,
-@as("ownerArn") ownerArn: option<amazonawsString>,
-@as("arn") arn: option<amazonawsString>,
-@as("connectionType") connectionType: connectionType,
-@as("type") type_: option<environmentType>,
-@as("description") description: environmentDescription,
-@as("name") name: environmentName,
-@as("id") id: environmentId
+managedCredentialsStatus: option<managedCredentialsStatus>,
+lifecycle: option<environmentLifecycle>,
+ownerArn: string_,
+arn: string_,
+connectionType: option<connectionType>,
+@as("type") type_: environmentType,
+description: option<environmentDescription>,
+name: option<environmentName>,
+id: option<environmentId>
 }
 type environmentList = array<environment>
-type clientType;
-@module("@aws-sdk/client-cloud9") @new external createClient: unit => clientType = "Cloud9Client";
+type awsServiceClient;
+@module("@aws-sdk/client-cloud9") @new external createClient: unit => awsServiceClient = "Cloud9Client";
 module UpdateEnvironment = {
   type t;
   type request = {
-@as("description") description: environmentDescription,
-@as("name") name: environmentName,
-@as("environmentId") environmentId: option<environmentId>
+description: option<environmentDescription>,
+name: option<environmentName>,
+environmentId: environmentId
 }
   type response = unit
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "UpdateEnvironmentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEnvironmentStatus = {
   type t;
   type request = {
-@as("environmentId") environmentId: option<environmentId>
+environmentId: environmentId
 }
   type response = {
-@as("message") message: option<amazonawsString>,
-@as("status") status: option<environmentStatus>
+message: string_,
+status: environmentStatus
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "DescribeEnvironmentStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteEnvironmentMembership = {
   type t;
   type request = {
-@as("userArn") userArn: option<userArn>,
-@as("environmentId") environmentId: option<environmentId>
+userArn: userArn,
+environmentId: environmentId
 }
   type response = unit
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "DeleteEnvironmentMembershipCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteEnvironment = {
   type t;
   type request = {
-@as("environmentId") environmentId: option<environmentId>
+environmentId: environmentId
 }
   type response = unit
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "DeleteEnvironmentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateEnvironmentMembership = {
   type t;
   type request = {
-@as("permissions") permissions: option<memberPermissions>,
-@as("userArn") userArn: option<userArn>,
-@as("environmentId") environmentId: option<environmentId>
+permissions: memberPermissions,
+userArn: userArn,
+environmentId: environmentId
 }
   type response = {
-@as("membership") membership: environmentMember
+membership: option<environmentMember>
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "UpdateEnvironmentMembershipCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceARN") resourceARN: option<environmentArn>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceARN") resourceARN: environmentArn
 }
   type response = unit
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEnvironments = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString
+maxResults: option<maxResults>,
+nextToken: option<string_>
 }
   type response = {
-@as("environmentIds") environmentIds: environmentIdList,
-@as("nextToken") nextToken: amazonawsString
+environmentIds: option<environmentIdList>,
+nextToken: option<string_>
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "ListEnvironmentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateEnvironmentMembership = {
   type t;
   type request = {
-@as("permissions") permissions: option<memberPermissions>,
-@as("userArn") userArn: option<userArn>,
-@as("environmentId") environmentId: option<environmentId>
+permissions: memberPermissions,
+userArn: userArn,
+environmentId: environmentId
 }
   type response = {
-@as("membership") membership: option<environmentMember>
+membership: environmentMember
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "CreateEnvironmentMembershipCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tagList>,
-@as("ResourceARN") resourceARN: option<environmentArn>
+@as("Tags") tags: tagList_,
+@as("ResourceARN") resourceARN: environmentArn
 }
   type response = unit
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("ResourceARN") resourceARN: option<environmentArn>
+@as("ResourceARN") resourceARN: environmentArn
 }
   type response = {
-@as("Tags") tags: tagList
+@as("Tags") tags: option<tagList_>
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEnvironmentMemberships = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString,
-@as("permissions") permissions: permissionsList,
-@as("environmentId") environmentId: environmentId,
-@as("userArn") userArn: userArn
+maxResults: option<maxResults>,
+nextToken: option<string_>,
+permissions: option<permissionsList>,
+environmentId: option<environmentId>,
+userArn: option<userArn>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("memberships") memberships: environmentMembersList
+nextToken: option<string_>,
+memberships: option<environmentMembersList>
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "DescribeEnvironmentMembershipsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateEnvironmentEC2 = {
   type t;
   type request = {
-@as("connectionType") connectionType: connectionType,
-@as("tags") tags: tagList,
-@as("ownerArn") ownerArn: userArn,
-@as("automaticStopTimeMinutes") automaticStopTimeMinutes: automaticStopTimeMinutes,
-@as("imageId") imageId: imageId,
-@as("subnetId") subnetId: subnetId,
-@as("instanceType") instanceType: option<instanceType>,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("description") description: environmentDescription,
-@as("name") name: option<environmentName>
+connectionType: option<connectionType>,
+tags: option<tagList_>,
+ownerArn: option<userArn>,
+automaticStopTimeMinutes: option<automaticStopTimeMinutes>,
+imageId: option<imageId>,
+subnetId: option<subnetId>,
+instanceType: instanceType,
+clientRequestToken: option<clientRequestToken>,
+description: option<environmentDescription>,
+name: environmentName
 }
   type response = {
-@as("environmentId") environmentId: environmentId
+environmentId: option<environmentId>
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "CreateEnvironmentEC2Command";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEnvironments = {
   type t;
   type request = {
-@as("environmentIds") environmentIds: option<boundedEnvironmentIdList>
+environmentIds: boundedEnvironmentIdList
 }
   type response = {
-@as("environments") environments: environmentList
+environments: option<environmentList>
 }
   @module("@aws-sdk/client-cloud9") @new external new_: (request) => t = "DescribeEnvironmentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

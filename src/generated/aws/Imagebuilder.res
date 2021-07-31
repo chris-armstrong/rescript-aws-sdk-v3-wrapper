@@ -1,24 +1,31 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type versionNumber = string
 type uri = string
 type timezone = string
 type tagValue = string
 type tagKey = string
 type snsTopicArn = string
-type restrictedInteger = int;
+type restrictedInteger = int
 type resourcePolicyDocument = string
 type resourceName = string
 type platform = [@as("Linux") #Linux | @as("Windows") #Windows]
 type pipelineStatus = [@as("ENABLED") #ENABLED | @as("DISABLED") #DISABLED]
-type pipelineExecutionStartCondition = [@as("EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE") #EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE | @as("EXPRESSION_MATCH_ONLY") #EXPRESSION_MATCH_ONLY]
+type pipelineExecutionStartCondition = [@as("EXPRESSION_MATCH_AND_DEPENDENCY_UPDATES_AVAILABLE") #EXPRESSIONMATCHANDDEPENDENCYUPDATESAVAILABLE | @as("EXPRESSION_MATCH_ONLY") #EXPRESSIONMATCHONLY]
 type paginationToken = string
 type ownership = [@as("Amazon") #Amazon | @as("Shared") #Shared | @as("Self") #Self]
 type osVersion = string
-type nullableBoolean = bool;
+type nullableBoolean = bool
 type nonEmptyString = string
 type licenseConfigurationArn = string
 type launchTemplateId = string
@@ -30,7 +37,7 @@ type infrastructureConfigurationArn = string
 type imageVersionArnOrBuildVersionArn = string
 type imageVersionArn = string
 type imageType = [@as("DOCKER") #DOCKER | @as("AMI") #AMI]
-type imageTestsTimeoutMinutes = int;
+type imageTestsTimeoutMinutes = int
 type imageStatus = [@as("DELETED") #DELETED | @as("DEPRECATED") #DEPRECATED | @as("FAILED") #FAILED | @as("CANCELLED") #CANCELLED | @as("AVAILABLE") #AVAILABLE | @as("INTEGRATING") #INTEGRATING | @as("DISTRIBUTING") #DISTRIBUTING | @as("TESTING") #TESTING | @as("BUILDING") #BUILDING | @as("CREATING") #CREATING | @as("PENDING") #PENDING]
 type imageRecipeArn = string
 type imagePipelineArn = string
@@ -40,11 +47,11 @@ type filterValue = string
 type filterName = string
 type errorMessage = string
 type emptyString = string
-type ebsVolumeType = [@as("st1") #st1 | @as("sc1") #sc1 | @as("gp3") #gp3 | @as("gp2") #gp2 | @as("io2") #io2 | @as("io1") #io1 | @as("standard") #standard]
-type ebsVolumeSizeInteger = int;
-type ebsIopsInteger = int;
+type ebsVolumeType = [@as("st1") #St1 | @as("sc1") #Sc1 | @as("gp3") #Gp3 | @as("gp2") #Gp2 | @as("io2") #Io2 | @as("io1") #Io1 | @as("standard") #Standard]
+type ebsVolumeSizeInteger = int
+type ebsIopsInteger = int
 type dockerFileTemplate = string
-type distributionTimeoutMinutes = int;
+type distributionTimeoutMinutes = int
 type distributionConfigurationArn = string
 type dateTime = string
 type containerType = [@as("DOCKER") #DOCKER]
@@ -57,227 +64,227 @@ type componentFormat = [@as("SHELL") #SHELL]
 type componentData = string
 type componentBuildVersionArn = string
 type clientToken = string
-type amazonawsBoolean = bool;
+type boolean_ = bool
 type arn = string
 type amiNameString = string
 type accountId = string
 type targetContainerRepository = {
-@as("repositoryName") repositoryName: option<nonEmptyString>,
-@as("service") service: option<containerRepositoryService>
+repositoryName: nonEmptyString,
+service: containerRepositoryService
 }
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type stringList = array<nonEmptyString>
 type securityGroupIds = array<nonEmptyString>
 type schedule = {
-@as("pipelineExecutionStartCondition") pipelineExecutionStartCondition: pipelineExecutionStartCondition,
-@as("timezone") timezone: timezone,
-@as("scheduleExpression") scheduleExpression: nonEmptyString
+pipelineExecutionStartCondition: option<pipelineExecutionStartCondition>,
+timezone: option<timezone>,
+scheduleExpression: option<nonEmptyString>
 }
 type s3Logs = {
-@as("s3KeyPrefix") s3KeyPrefix: nonEmptyString,
-@as("s3BucketName") s3BucketName: nonEmptyString
+s3KeyPrefix: option<nonEmptyString>,
+s3BucketName: option<nonEmptyString>
 }
 type resourceTagMap = Js.Dict.t< tagValue>
 type regionList = array<nonEmptyString>
 type osVersionList = array<osVersion>
 type licenseConfigurationArnList = array<licenseConfigurationArn>
 type launchTemplateConfiguration = {
-@as("setDefaultVersion") setDefaultVersion: amazonawsBoolean,
-@as("accountId") accountId: accountId,
-@as("launchTemplateId") launchTemplateId: option<launchTemplateId>
+setDefaultVersion: option<boolean_>,
+accountId: option<accountId>,
+launchTemplateId: launchTemplateId
 }
 type instanceTypeList = array<instanceType>
 type imageVersion = {
-@as("dateCreated") dateCreated: dateTime,
-@as("owner") owner: nonEmptyString,
-@as("osVersion") osVersion: osVersion,
-@as("platform") platform: platform,
-@as("version") version: versionNumber,
-@as("type") type_: imageType,
-@as("name") name: resourceName,
-@as("arn") arn: imageBuilderArn
+dateCreated: option<dateTime>,
+owner: option<nonEmptyString>,
+osVersion: option<osVersion>,
+platform: option<platform>,
+version: option<versionNumber>,
+@as("type") type_: option<imageType>,
+name: option<resourceName>,
+arn: option<imageBuilderArn>
 }
 type imageTestsConfiguration = {
-@as("timeoutMinutes") timeoutMinutes: imageTestsTimeoutMinutes,
-@as("imageTestsEnabled") imageTestsEnabled: nullableBoolean
+timeoutMinutes: option<imageTestsTimeoutMinutes>,
+imageTestsEnabled: option<nullableBoolean>
 }
 type imageState = {
-@as("reason") reason: nonEmptyString,
-@as("status") status: imageStatus
+reason: option<nonEmptyString>,
+status: option<imageStatus>
 }
 type imagePackage = {
-@as("packageVersion") packageVersion: nonEmptyString,
-@as("packageName") packageName: nonEmptyString
+packageVersion: option<nonEmptyString>,
+packageName: option<nonEmptyString>
 }
 type filterValues = array<filterValue>
 type ebsInstanceBlockDeviceSpecification = {
-@as("volumeType") volumeType: ebsVolumeType,
-@as("volumeSize") volumeSize: ebsVolumeSizeInteger,
-@as("snapshotId") snapshotId: nonEmptyString,
-@as("kmsKeyId") kmsKeyId: nonEmptyString,
-@as("iops") iops: ebsIopsInteger,
-@as("deleteOnTermination") deleteOnTermination: nullableBoolean,
-@as("encrypted") encrypted: nullableBoolean
+volumeType: option<ebsVolumeType>,
+volumeSize: option<ebsVolumeSizeInteger>,
+snapshotId: option<nonEmptyString>,
+kmsKeyId: option<nonEmptyString>,
+iops: option<ebsIopsInteger>,
+deleteOnTermination: option<nullableBoolean>,
+encrypted: option<nullableBoolean>
 }
 type componentConfiguration = {
-@as("componentArn") componentArn: option<componentVersionArnOrBuildVersionArn>
+componentArn: componentVersionArnOrBuildVersionArn
 }
 type accountList = array<accountId>
 type logging = {
-@as("s3Logs") s3Logs: s3Logs
+s3Logs: option<s3Logs>
 }
 type launchTemplateConfigurationList = array<launchTemplateConfiguration>
 type launchPermissionConfiguration = {
-@as("userGroups") userGroups: stringList,
-@as("userIds") userIds: accountList
+userGroups: option<stringList>,
+userIds: option<accountList>
 }
 type instanceBlockDeviceMapping = {
-@as("noDevice") noDevice: emptyString,
-@as("virtualName") virtualName: nonEmptyString,
-@as("ebs") ebs: ebsInstanceBlockDeviceSpecification,
-@as("deviceName") deviceName: nonEmptyString
+noDevice: option<emptyString>,
+virtualName: option<nonEmptyString>,
+ebs: option<ebsInstanceBlockDeviceSpecification>,
+deviceName: option<nonEmptyString>
 }
 type infrastructureConfigurationSummary = {
-@as("instanceProfileName") instanceProfileName: instanceProfileNameType,
-@as("instanceTypes") instanceTypes: instanceTypeList,
-@as("tags") tags: tagMap,
-@as("resourceTags") resourceTags: resourceTagMap,
-@as("dateUpdated") dateUpdated: dateTime,
-@as("dateCreated") dateCreated: dateTime,
-@as("description") description: nonEmptyString,
-@as("name") name: resourceName,
-@as("arn") arn: imageBuilderArn
+instanceProfileName: option<instanceProfileNameType>,
+instanceTypes: option<instanceTypeList>,
+tags: option<tagMap>,
+resourceTags: option<resourceTagMap>,
+dateUpdated: option<dateTime>,
+dateCreated: option<dateTime>,
+description: option<nonEmptyString>,
+name: option<resourceName>,
+arn: option<imageBuilderArn>
 }
 type imageVersionList = array<imageVersion>
 type imageRecipeSummary = {
-@as("tags") tags: tagMap,
-@as("dateCreated") dateCreated: dateTime,
-@as("parentImage") parentImage: nonEmptyString,
-@as("owner") owner: nonEmptyString,
-@as("platform") platform: platform,
-@as("name") name: resourceName,
-@as("arn") arn: imageBuilderArn
+tags: option<tagMap>,
+dateCreated: option<dateTime>,
+parentImage: option<nonEmptyString>,
+owner: option<nonEmptyString>,
+platform: option<platform>,
+name: option<resourceName>,
+arn: option<imageBuilderArn>
 }
 type imagePipeline = {
-@as("tags") tags: tagMap,
-@as("dateNextRun") dateNextRun: dateTime,
-@as("dateLastRun") dateLastRun: dateTime,
-@as("dateUpdated") dateUpdated: dateTime,
-@as("dateCreated") dateCreated: dateTime,
-@as("status") status: pipelineStatus,
-@as("schedule") schedule: schedule,
-@as("imageTestsConfiguration") imageTestsConfiguration: imageTestsConfiguration,
-@as("distributionConfigurationArn") distributionConfigurationArn: arn,
-@as("infrastructureConfigurationArn") infrastructureConfigurationArn: arn,
-@as("containerRecipeArn") containerRecipeArn: arn,
-@as("imageRecipeArn") imageRecipeArn: arn,
-@as("enhancedImageMetadataEnabled") enhancedImageMetadataEnabled: nullableBoolean,
-@as("platform") platform: platform,
-@as("description") description: nonEmptyString,
-@as("name") name: resourceName,
-@as("arn") arn: imageBuilderArn
+tags: option<tagMap>,
+dateNextRun: option<dateTime>,
+dateLastRun: option<dateTime>,
+dateUpdated: option<dateTime>,
+dateCreated: option<dateTime>,
+status: option<pipelineStatus>,
+schedule: option<schedule>,
+imageTestsConfiguration: option<imageTestsConfiguration>,
+distributionConfigurationArn: option<arn>,
+infrastructureConfigurationArn: option<arn>,
+containerRecipeArn: option<arn>,
+imageRecipeArn: option<arn>,
+enhancedImageMetadataEnabled: option<nullableBoolean>,
+platform: option<platform>,
+description: option<nonEmptyString>,
+name: option<resourceName>,
+arn: option<imageBuilderArn>
 }
 type imagePackageList = array<imagePackage>
 type filter = {
-@as("values") values: filterValues,
-@as("name") name: filterName
+values: option<filterValues>,
+name: option<filterName>
 }
 type distributionConfigurationSummary = {
-@as("regions") regions: regionList,
-@as("tags") tags: tagMap,
-@as("dateUpdated") dateUpdated: dateTime,
-@as("dateCreated") dateCreated: dateTime,
-@as("description") description: nonEmptyString,
-@as("name") name: resourceName,
-@as("arn") arn: imageBuilderArn
+regions: option<regionList>,
+tags: option<tagMap>,
+dateUpdated: option<dateTime>,
+dateCreated: option<dateTime>,
+description: option<nonEmptyString>,
+name: option<resourceName>,
+arn: option<imageBuilderArn>
 }
 type containerRecipeSummary = {
-@as("tags") tags: tagMap,
-@as("dateCreated") dateCreated: dateTime,
-@as("parentImage") parentImage: nonEmptyString,
-@as("owner") owner: nonEmptyString,
-@as("platform") platform: platform,
-@as("name") name: resourceName,
-@as("containerType") containerType: containerType,
-@as("arn") arn: imageBuilderArn
+tags: option<tagMap>,
+dateCreated: option<dateTime>,
+parentImage: option<nonEmptyString>,
+owner: option<nonEmptyString>,
+platform: option<platform>,
+name: option<resourceName>,
+containerType: option<containerType>,
+arn: option<imageBuilderArn>
 }
 type containerDistributionConfiguration = {
-@as("targetRepository") targetRepository: option<targetContainerRepository>,
-@as("containerTags") containerTags: stringList,
-@as("description") description: nonEmptyString
+targetRepository: targetContainerRepository,
+containerTags: option<stringList>,
+description: option<nonEmptyString>
 }
 type container = {
-@as("imageUris") imageUris: stringList,
-@as("region") region: nonEmptyString
+imageUris: option<stringList>,
+region: option<nonEmptyString>
 }
 type componentVersion = {
-@as("dateCreated") dateCreated: dateTime,
-@as("owner") owner: nonEmptyString,
-@as("type") type_: componentType,
-@as("supportedOsVersions") supportedOsVersions: osVersionList,
-@as("platform") platform: platform,
-@as("description") description: nonEmptyString,
-@as("version") version: versionNumber,
-@as("name") name: resourceName,
-@as("arn") arn: imageBuilderArn
+dateCreated: option<dateTime>,
+owner: option<nonEmptyString>,
+@as("type") type_: option<componentType>,
+supportedOsVersions: option<osVersionList>,
+platform: option<platform>,
+description: option<nonEmptyString>,
+version: option<versionNumber>,
+name: option<resourceName>,
+arn: option<imageBuilderArn>
 }
 type componentSummary = {
-@as("tags") tags: tagMap,
-@as("dateCreated") dateCreated: dateTime,
-@as("changeDescription") changeDescription: nonEmptyString,
-@as("description") description: nonEmptyString,
-@as("owner") owner: nonEmptyString,
-@as("type") type_: componentType,
-@as("supportedOsVersions") supportedOsVersions: osVersionList,
-@as("platform") platform: platform,
-@as("version") version: versionNumber,
-@as("name") name: resourceName,
-@as("arn") arn: imageBuilderArn
+tags: option<tagMap>,
+dateCreated: option<dateTime>,
+changeDescription: option<nonEmptyString>,
+description: option<nonEmptyString>,
+owner: option<nonEmptyString>,
+@as("type") type_: option<componentType>,
+supportedOsVersions: option<osVersionList>,
+platform: option<platform>,
+version: option<versionNumber>,
+name: option<resourceName>,
+arn: option<imageBuilderArn>
 }
 type componentConfigurationList = array<componentConfiguration>
 type component = {
-@as("tags") tags: tagMap,
-@as("dateCreated") dateCreated: dateTime,
-@as("encrypted") encrypted: nullableBoolean,
-@as("kmsKeyId") kmsKeyId: nonEmptyString,
-@as("data") data: componentData,
-@as("owner") owner: nonEmptyString,
-@as("supportedOsVersions") supportedOsVersions: osVersionList,
-@as("platform") platform: platform,
-@as("type") type_: componentType,
-@as("changeDescription") changeDescription: nonEmptyString,
-@as("description") description: nonEmptyString,
-@as("version") version: versionNumber,
-@as("name") name: resourceName,
-@as("arn") arn: imageBuilderArn
+tags: option<tagMap>,
+dateCreated: option<dateTime>,
+encrypted: option<nullableBoolean>,
+kmsKeyId: option<nonEmptyString>,
+data: option<componentData>,
+owner: option<nonEmptyString>,
+supportedOsVersions: option<osVersionList>,
+platform: option<platform>,
+@as("type") type_: option<componentType>,
+changeDescription: option<nonEmptyString>,
+description: option<nonEmptyString>,
+version: option<versionNumber>,
+name: option<resourceName>,
+arn: option<imageBuilderArn>
 }
 type ami = {
-@as("accountId") accountId: nonEmptyString,
-@as("state") state: imageState,
-@as("description") description: nonEmptyString,
-@as("name") name: nonEmptyString,
-@as("image") image: nonEmptyString,
-@as("region") region: nonEmptyString
+accountId: option<nonEmptyString>,
+state: option<imageState>,
+description: option<nonEmptyString>,
+name: option<nonEmptyString>,
+image: option<nonEmptyString>,
+region: option<nonEmptyString>
 }
 type instanceBlockDeviceMappings = array<instanceBlockDeviceMapping>
 type infrastructureConfigurationSummaryList = array<infrastructureConfigurationSummary>
 type infrastructureConfiguration = {
-@as("tags") tags: tagMap,
-@as("resourceTags") resourceTags: resourceTagMap,
-@as("dateUpdated") dateUpdated: dateTime,
-@as("dateCreated") dateCreated: dateTime,
-@as("snsTopicArn") snsTopicArn: nonEmptyString,
-@as("terminateInstanceOnFailure") terminateInstanceOnFailure: nullableBoolean,
-@as("keyPair") keyPair: nonEmptyString,
-@as("logging") logging: logging,
-@as("subnetId") subnetId: nonEmptyString,
-@as("securityGroupIds") securityGroupIds: securityGroupIds,
-@as("instanceProfileName") instanceProfileName: instanceProfileNameType,
-@as("instanceTypes") instanceTypes: instanceTypeList,
-@as("description") description: nonEmptyString,
-@as("name") name: resourceName,
-@as("arn") arn: imageBuilderArn
+tags: option<tagMap>,
+resourceTags: option<resourceTagMap>,
+dateUpdated: option<dateTime>,
+dateCreated: option<dateTime>,
+snsTopicArn: option<nonEmptyString>,
+terminateInstanceOnFailure: option<nullableBoolean>,
+keyPair: option<nonEmptyString>,
+logging: option<logging>,
+subnetId: option<nonEmptyString>,
+securityGroupIds: option<securityGroupIds>,
+instanceProfileName: option<instanceProfileNameType>,
+instanceTypes: option<instanceTypeList>,
+description: option<nonEmptyString>,
+name: option<resourceName>,
+arn: option<imageBuilderArn>
 }
 type imageRecipeSummaryList = array<imageRecipeSummary>
 type imagePipelineList = array<imagePipeline>
@@ -289,900 +296,900 @@ type componentVersionList = array<componentVersion>
 type componentSummaryList = array<componentSummary>
 type amiList = array<ami>
 type amiDistributionConfiguration = {
-@as("launchPermission") launchPermission: launchPermissionConfiguration,
-@as("kmsKeyId") kmsKeyId: nonEmptyString,
-@as("amiTags") amiTags: tagMap,
-@as("targetAccountIds") targetAccountIds: accountList,
-@as("description") description: nonEmptyString,
-@as("name") name: amiNameString
+launchPermission: option<launchPermissionConfiguration>,
+kmsKeyId: option<nonEmptyString>,
+amiTags: option<tagMap>,
+targetAccountIds: option<accountList>,
+description: option<nonEmptyString>,
+name: option<amiNameString>
 }
 type outputResources = {
-@as("containers") containers: containerList,
-@as("amis") amis: amiList
+containers: option<containerList>,
+amis: option<amiList>
 }
 type instanceConfiguration = {
-@as("blockDeviceMappings") blockDeviceMappings: instanceBlockDeviceMappings,
-@as("image") image: nonEmptyString
+blockDeviceMappings: option<instanceBlockDeviceMappings>,
+image: option<nonEmptyString>
 }
 type imageRecipe = {
-@as("workingDirectory") workingDirectory: nonEmptyString,
-@as("tags") tags: tagMap,
-@as("dateCreated") dateCreated: dateTime,
-@as("blockDeviceMappings") blockDeviceMappings: instanceBlockDeviceMappings,
-@as("parentImage") parentImage: nonEmptyString,
-@as("components") components: componentConfigurationList,
-@as("version") version: versionNumber,
-@as("owner") owner: nonEmptyString,
-@as("platform") platform: platform,
-@as("description") description: nonEmptyString,
-@as("name") name: resourceName,
-@as("type") type_: imageType,
-@as("arn") arn: imageBuilderArn
+workingDirectory: option<nonEmptyString>,
+tags: option<tagMap>,
+dateCreated: option<dateTime>,
+blockDeviceMappings: option<instanceBlockDeviceMappings>,
+parentImage: option<nonEmptyString>,
+components: option<componentConfigurationList>,
+version: option<versionNumber>,
+owner: option<nonEmptyString>,
+platform: option<platform>,
+description: option<nonEmptyString>,
+name: option<resourceName>,
+@as("type") type_: option<imageType>,
+arn: option<imageBuilderArn>
 }
 type distribution = {
-@as("launchTemplateConfigurations") launchTemplateConfigurations: launchTemplateConfigurationList,
-@as("licenseConfigurationArns") licenseConfigurationArns: licenseConfigurationArnList,
-@as("containerDistributionConfiguration") containerDistributionConfiguration: containerDistributionConfiguration,
-@as("amiDistributionConfiguration") amiDistributionConfiguration: amiDistributionConfiguration,
-@as("region") region: option<nonEmptyString>
+launchTemplateConfigurations: option<launchTemplateConfigurationList>,
+licenseConfigurationArns: option<licenseConfigurationArnList>,
+containerDistributionConfiguration: option<containerDistributionConfiguration>,
+amiDistributionConfiguration: option<amiDistributionConfiguration>,
+region: nonEmptyString
 }
 type imageSummary = {
-@as("tags") tags: tagMap,
-@as("outputResources") outputResources: outputResources,
-@as("dateCreated") dateCreated: dateTime,
-@as("owner") owner: nonEmptyString,
-@as("state") state: imageState,
-@as("osVersion") osVersion: osVersion,
-@as("platform") platform: platform,
-@as("version") version: versionNumber,
-@as("type") type_: imageType,
-@as("name") name: resourceName,
-@as("arn") arn: imageBuilderArn
+tags: option<tagMap>,
+outputResources: option<outputResources>,
+dateCreated: option<dateTime>,
+owner: option<nonEmptyString>,
+state: option<imageState>,
+osVersion: option<osVersion>,
+platform: option<platform>,
+version: option<versionNumber>,
+@as("type") type_: option<imageType>,
+name: option<resourceName>,
+arn: option<imageBuilderArn>
 }
 type distributionList = array<distribution>
 type containerRecipe = {
-@as("targetRepository") targetRepository: targetContainerRepository,
-@as("workingDirectory") workingDirectory: nonEmptyString,
-@as("tags") tags: tagMap,
-@as("dateCreated") dateCreated: dateTime,
-@as("parentImage") parentImage: nonEmptyString,
-@as("encrypted") encrypted: nullableBoolean,
-@as("kmsKeyId") kmsKeyId: nonEmptyString,
-@as("dockerfileTemplateData") dockerfileTemplateData: dockerFileTemplate,
-@as("instanceConfiguration") instanceConfiguration: instanceConfiguration,
-@as("components") components: componentConfigurationList,
-@as("version") version: versionNumber,
-@as("owner") owner: nonEmptyString,
-@as("platform") platform: platform,
-@as("description") description: nonEmptyString,
-@as("name") name: resourceName,
-@as("containerType") containerType: containerType,
-@as("arn") arn: imageBuilderArn
+targetRepository: option<targetContainerRepository>,
+workingDirectory: option<nonEmptyString>,
+tags: option<tagMap>,
+dateCreated: option<dateTime>,
+parentImage: option<nonEmptyString>,
+encrypted: option<nullableBoolean>,
+kmsKeyId: option<nonEmptyString>,
+dockerfileTemplateData: option<dockerFileTemplate>,
+instanceConfiguration: option<instanceConfiguration>,
+components: option<componentConfigurationList>,
+version: option<versionNumber>,
+owner: option<nonEmptyString>,
+platform: option<platform>,
+description: option<nonEmptyString>,
+name: option<resourceName>,
+containerType: option<containerType>,
+arn: option<imageBuilderArn>
 }
 type imageSummaryList = array<imageSummary>
 type distributionConfiguration = {
-@as("tags") tags: tagMap,
-@as("dateUpdated") dateUpdated: dateTime,
-@as("dateCreated") dateCreated: dateTime,
-@as("timeoutMinutes") timeoutMinutes: option<distributionTimeoutMinutes>,
-@as("distributions") distributions: distributionList,
-@as("description") description: nonEmptyString,
-@as("name") name: resourceName,
-@as("arn") arn: imageBuilderArn
+tags: option<tagMap>,
+dateUpdated: option<dateTime>,
+dateCreated: option<dateTime>,
+timeoutMinutes: distributionTimeoutMinutes,
+distributions: option<distributionList>,
+description: option<nonEmptyString>,
+name: option<resourceName>,
+arn: option<imageBuilderArn>
 }
 type image = {
-@as("tags") tags: tagMap,
-@as("outputResources") outputResources: outputResources,
-@as("dateCreated") dateCreated: dateTime,
-@as("imageTestsConfiguration") imageTestsConfiguration: imageTestsConfiguration,
-@as("distributionConfiguration") distributionConfiguration: distributionConfiguration,
-@as("infrastructureConfiguration") infrastructureConfiguration: infrastructureConfiguration,
-@as("sourcePipelineArn") sourcePipelineArn: arn,
-@as("sourcePipelineName") sourcePipelineName: resourceName,
-@as("containerRecipe") containerRecipe: containerRecipe,
-@as("imageRecipe") imageRecipe: imageRecipe,
-@as("state") state: imageState,
-@as("osVersion") osVersion: osVersion,
-@as("enhancedImageMetadataEnabled") enhancedImageMetadataEnabled: nullableBoolean,
-@as("platform") platform: platform,
-@as("version") version: versionNumber,
-@as("name") name: resourceName,
-@as("type") type_: imageType,
-@as("arn") arn: imageBuilderArn
+tags: option<tagMap>,
+outputResources: option<outputResources>,
+dateCreated: option<dateTime>,
+imageTestsConfiguration: option<imageTestsConfiguration>,
+distributionConfiguration: option<distributionConfiguration>,
+infrastructureConfiguration: option<infrastructureConfiguration>,
+sourcePipelineArn: option<arn>,
+sourcePipelineName: option<resourceName>,
+containerRecipe: option<containerRecipe>,
+imageRecipe: option<imageRecipe>,
+state: option<imageState>,
+osVersion: option<osVersion>,
+enhancedImageMetadataEnabled: option<nullableBoolean>,
+platform: option<platform>,
+version: option<versionNumber>,
+name: option<resourceName>,
+@as("type") type_: option<imageType>,
+arn: option<imageBuilderArn>
 }
-type clientType;
-@module("@aws-sdk/client-imagebuilder") @new external createClient: unit => clientType = "ImagebuilderClient";
+type awsServiceClient;
+@module("@aws-sdk/client-imagebuilder") @new external createClient: unit => awsServiceClient = "ImagebuilderClient";
 module StartImagePipelineExecution = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("imagePipelineArn") imagePipelineArn: option<imagePipelineArn>
+clientToken: clientToken,
+imagePipelineArn: imagePipelineArn
 }
   type response = {
-@as("imageBuildVersionArn") imageBuildVersionArn: imageBuildVersionArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+imageBuildVersionArn: option<imageBuildVersionArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "StartImagePipelineExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutImageRecipePolicy = {
   type t;
   type request = {
-@as("policy") policy: option<resourcePolicyDocument>,
-@as("imageRecipeArn") imageRecipeArn: option<imageRecipeArn>
+policy: resourcePolicyDocument,
+imageRecipeArn: imageRecipeArn
 }
   type response = {
-@as("imageRecipeArn") imageRecipeArn: imageRecipeArn,
-@as("requestId") requestId: nonEmptyString
+imageRecipeArn: option<imageRecipeArn>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "PutImageRecipePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutImagePolicy = {
   type t;
   type request = {
-@as("policy") policy: option<resourcePolicyDocument>,
-@as("imageArn") imageArn: option<imageBuildVersionArn>
+policy: resourcePolicyDocument,
+imageArn: imageBuildVersionArn
 }
   type response = {
-@as("imageArn") imageArn: imageBuildVersionArn,
-@as("requestId") requestId: nonEmptyString
+imageArn: option<imageBuildVersionArn>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "PutImagePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutContainerRecipePolicy = {
   type t;
   type request = {
-@as("policy") policy: option<resourcePolicyDocument>,
-@as("containerRecipeArn") containerRecipeArn: option<containerRecipeArn>
+policy: resourcePolicyDocument,
+containerRecipeArn: containerRecipeArn
 }
   type response = {
-@as("containerRecipeArn") containerRecipeArn: containerRecipeArn,
-@as("requestId") requestId: nonEmptyString
+containerRecipeArn: option<containerRecipeArn>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "PutContainerRecipePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutComponentPolicy = {
   type t;
   type request = {
-@as("policy") policy: option<resourcePolicyDocument>,
-@as("componentArn") componentArn: option<componentBuildVersionArn>
+policy: resourcePolicyDocument,
+componentArn: componentBuildVersionArn
 }
   type response = {
-@as("componentArn") componentArn: componentBuildVersionArn,
-@as("requestId") requestId: nonEmptyString
+componentArn: option<componentBuildVersionArn>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "PutComponentPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetImageRecipePolicy = {
   type t;
   type request = {
-@as("imageRecipeArn") imageRecipeArn: option<imageRecipeArn>
+imageRecipeArn: imageRecipeArn
 }
   type response = {
-@as("policy") policy: resourcePolicyDocument,
-@as("requestId") requestId: nonEmptyString
+policy: option<resourcePolicyDocument>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "GetImageRecipePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetImagePolicy = {
   type t;
   type request = {
-@as("imageArn") imageArn: option<imageBuildVersionArn>
+imageArn: imageBuildVersionArn
 }
   type response = {
-@as("policy") policy: resourcePolicyDocument,
-@as("requestId") requestId: nonEmptyString
+policy: option<resourcePolicyDocument>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "GetImagePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetContainerRecipePolicy = {
   type t;
   type request = {
-@as("containerRecipeArn") containerRecipeArn: option<containerRecipeArn>
+containerRecipeArn: containerRecipeArn
 }
   type response = {
-@as("policy") policy: resourcePolicyDocument,
-@as("requestId") requestId: nonEmptyString
+policy: option<resourcePolicyDocument>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "GetContainerRecipePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetComponentPolicy = {
   type t;
   type request = {
-@as("componentArn") componentArn: option<componentBuildVersionArn>
+componentArn: componentBuildVersionArn
 }
   type response = {
-@as("policy") policy: resourcePolicyDocument,
-@as("requestId") requestId: nonEmptyString
+policy: option<resourcePolicyDocument>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "GetComponentPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteInfrastructureConfiguration = {
   type t;
   type request = {
-@as("infrastructureConfigurationArn") infrastructureConfigurationArn: option<infrastructureConfigurationArn>
+infrastructureConfigurationArn: infrastructureConfigurationArn
 }
   type response = {
-@as("infrastructureConfigurationArn") infrastructureConfigurationArn: infrastructureConfigurationArn,
-@as("requestId") requestId: nonEmptyString
+infrastructureConfigurationArn: option<infrastructureConfigurationArn>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "DeleteInfrastructureConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteImageRecipe = {
   type t;
   type request = {
-@as("imageRecipeArn") imageRecipeArn: option<imageRecipeArn>
+imageRecipeArn: imageRecipeArn
 }
   type response = {
-@as("imageRecipeArn") imageRecipeArn: imageRecipeArn,
-@as("requestId") requestId: nonEmptyString
+imageRecipeArn: option<imageRecipeArn>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "DeleteImageRecipeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteImagePipeline = {
   type t;
   type request = {
-@as("imagePipelineArn") imagePipelineArn: option<imagePipelineArn>
+imagePipelineArn: imagePipelineArn
 }
   type response = {
-@as("imagePipelineArn") imagePipelineArn: imagePipelineArn,
-@as("requestId") requestId: nonEmptyString
+imagePipelineArn: option<imagePipelineArn>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "DeleteImagePipelineCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteImage = {
   type t;
   type request = {
-@as("imageBuildVersionArn") imageBuildVersionArn: option<imageBuildVersionArn>
+imageBuildVersionArn: imageBuildVersionArn
 }
   type response = {
-@as("imageBuildVersionArn") imageBuildVersionArn: imageBuildVersionArn,
-@as("requestId") requestId: nonEmptyString
+imageBuildVersionArn: option<imageBuildVersionArn>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "DeleteImageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDistributionConfiguration = {
   type t;
   type request = {
-@as("distributionConfigurationArn") distributionConfigurationArn: option<distributionConfigurationArn>
+distributionConfigurationArn: distributionConfigurationArn
 }
   type response = {
-@as("distributionConfigurationArn") distributionConfigurationArn: distributionConfigurationArn,
-@as("requestId") requestId: nonEmptyString
+distributionConfigurationArn: option<distributionConfigurationArn>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "DeleteDistributionConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteContainerRecipe = {
   type t;
   type request = {
-@as("containerRecipeArn") containerRecipeArn: option<containerRecipeArn>
+containerRecipeArn: containerRecipeArn
 }
   type response = {
-@as("containerRecipeArn") containerRecipeArn: containerRecipeArn,
-@as("requestId") requestId: nonEmptyString
+containerRecipeArn: option<containerRecipeArn>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "DeleteContainerRecipeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteComponent = {
   type t;
   type request = {
-@as("componentBuildVersionArn") componentBuildVersionArn: option<componentBuildVersionArn>
+componentBuildVersionArn: componentBuildVersionArn
 }
   type response = {
-@as("componentBuildVersionArn") componentBuildVersionArn: componentBuildVersionArn,
-@as("requestId") requestId: nonEmptyString
+componentBuildVersionArn: option<componentBuildVersionArn>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "DeleteComponentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelImageCreation = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("imageBuildVersionArn") imageBuildVersionArn: option<imageBuildVersionArn>
+clientToken: clientToken,
+imageBuildVersionArn: imageBuildVersionArn
 }
   type response = {
-@as("imageBuildVersionArn") imageBuildVersionArn: imageBuildVersionArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+imageBuildVersionArn: option<imageBuildVersionArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "CancelImageCreationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateImagePipeline = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("status") status: pipelineStatus,
-@as("schedule") schedule: schedule,
-@as("enhancedImageMetadataEnabled") enhancedImageMetadataEnabled: nullableBoolean,
-@as("imageTestsConfiguration") imageTestsConfiguration: imageTestsConfiguration,
-@as("distributionConfigurationArn") distributionConfigurationArn: distributionConfigurationArn,
-@as("infrastructureConfigurationArn") infrastructureConfigurationArn: option<infrastructureConfigurationArn>,
-@as("containerRecipeArn") containerRecipeArn: containerRecipeArn,
-@as("imageRecipeArn") imageRecipeArn: imageRecipeArn,
-@as("description") description: nonEmptyString,
-@as("imagePipelineArn") imagePipelineArn: option<imagePipelineArn>
+clientToken: clientToken,
+status: option<pipelineStatus>,
+schedule: option<schedule>,
+enhancedImageMetadataEnabled: option<nullableBoolean>,
+imageTestsConfiguration: option<imageTestsConfiguration>,
+distributionConfigurationArn: option<distributionConfigurationArn>,
+infrastructureConfigurationArn: infrastructureConfigurationArn,
+containerRecipeArn: option<containerRecipeArn>,
+imageRecipeArn: option<imageRecipeArn>,
+description: option<nonEmptyString>,
+imagePipelineArn: imagePipelineArn
 }
   type response = {
-@as("imagePipelineArn") imagePipelineArn: imagePipelineArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+imagePipelineArn: option<imagePipelineArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "UpdateImagePipelineCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<imageBuilderArn>
+tagKeys: tagKeyList,
+resourceArn: imageBuilderArn
 }
   type response = unit
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<imageBuilderArn>
+tags: tagMap,
+resourceArn: imageBuilderArn
 }
   type response = unit
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<imageBuilderArn>
+resourceArn: imageBuilderArn
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ImportComponent = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("tags") tags: tagMap,
-@as("kmsKeyId") kmsKeyId: nonEmptyString,
-@as("uri") uri: uri,
-@as("data") data: nonEmptyString,
-@as("platform") platform: option<platform>,
-@as("format") format: option<componentFormat>,
-@as("type") type_: option<componentType>,
-@as("changeDescription") changeDescription: nonEmptyString,
-@as("description") description: nonEmptyString,
-@as("semanticVersion") semanticVersion: option<versionNumber>,
-@as("name") name: option<resourceName>
+clientToken: clientToken,
+tags: option<tagMap>,
+kmsKeyId: option<nonEmptyString>,
+uri: option<uri>,
+data: option<nonEmptyString>,
+platform: platform,
+format: componentFormat,
+@as("type") type_: componentType,
+changeDescription: option<nonEmptyString>,
+description: option<nonEmptyString>,
+semanticVersion: versionNumber,
+name: resourceName
 }
   type response = {
-@as("componentBuildVersionArn") componentBuildVersionArn: componentBuildVersionArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+componentBuildVersionArn: option<componentBuildVersionArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ImportComponentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateImagePipeline = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("tags") tags: tagMap,
-@as("status") status: pipelineStatus,
-@as("schedule") schedule: schedule,
-@as("enhancedImageMetadataEnabled") enhancedImageMetadataEnabled: nullableBoolean,
-@as("imageTestsConfiguration") imageTestsConfiguration: imageTestsConfiguration,
-@as("distributionConfigurationArn") distributionConfigurationArn: distributionConfigurationArn,
-@as("infrastructureConfigurationArn") infrastructureConfigurationArn: option<infrastructureConfigurationArn>,
-@as("containerRecipeArn") containerRecipeArn: containerRecipeArn,
-@as("imageRecipeArn") imageRecipeArn: imageRecipeArn,
-@as("description") description: nonEmptyString,
-@as("name") name: option<resourceName>
+clientToken: clientToken,
+tags: option<tagMap>,
+status: option<pipelineStatus>,
+schedule: option<schedule>,
+enhancedImageMetadataEnabled: option<nullableBoolean>,
+imageTestsConfiguration: option<imageTestsConfiguration>,
+distributionConfigurationArn: option<distributionConfigurationArn>,
+infrastructureConfigurationArn: infrastructureConfigurationArn,
+containerRecipeArn: option<containerRecipeArn>,
+imageRecipeArn: option<imageRecipeArn>,
+description: option<nonEmptyString>,
+name: resourceName
 }
   type response = {
-@as("imagePipelineArn") imagePipelineArn: imagePipelineArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+imagePipelineArn: option<imagePipelineArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "CreateImagePipelineCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateImage = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("tags") tags: tagMap,
-@as("enhancedImageMetadataEnabled") enhancedImageMetadataEnabled: nullableBoolean,
-@as("imageTestsConfiguration") imageTestsConfiguration: imageTestsConfiguration,
-@as("infrastructureConfigurationArn") infrastructureConfigurationArn: option<infrastructureConfigurationArn>,
-@as("distributionConfigurationArn") distributionConfigurationArn: distributionConfigurationArn,
-@as("containerRecipeArn") containerRecipeArn: containerRecipeArn,
-@as("imageRecipeArn") imageRecipeArn: imageRecipeArn
+clientToken: clientToken,
+tags: option<tagMap>,
+enhancedImageMetadataEnabled: option<nullableBoolean>,
+imageTestsConfiguration: option<imageTestsConfiguration>,
+infrastructureConfigurationArn: infrastructureConfigurationArn,
+distributionConfigurationArn: option<distributionConfigurationArn>,
+containerRecipeArn: option<containerRecipeArn>,
+imageRecipeArn: option<imageRecipeArn>
 }
   type response = {
-@as("imageBuildVersionArn") imageBuildVersionArn: imageBuildVersionArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+imageBuildVersionArn: option<imageBuildVersionArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "CreateImageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateComponent = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("tags") tags: tagMap,
-@as("kmsKeyId") kmsKeyId: nonEmptyString,
-@as("uri") uri: uri,
-@as("data") data: inlineComponentData,
-@as("supportedOsVersions") supportedOsVersions: osVersionList,
-@as("platform") platform: option<platform>,
-@as("changeDescription") changeDescription: nonEmptyString,
-@as("description") description: nonEmptyString,
-@as("semanticVersion") semanticVersion: option<versionNumber>,
-@as("name") name: option<resourceName>
+clientToken: clientToken,
+tags: option<tagMap>,
+kmsKeyId: option<nonEmptyString>,
+uri: option<uri>,
+data: option<inlineComponentData>,
+supportedOsVersions: option<osVersionList>,
+platform: platform,
+changeDescription: option<nonEmptyString>,
+description: option<nonEmptyString>,
+semanticVersion: versionNumber,
+name: resourceName
 }
   type response = {
-@as("componentBuildVersionArn") componentBuildVersionArn: componentBuildVersionArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+componentBuildVersionArn: option<componentBuildVersionArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "CreateComponentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateInfrastructureConfiguration = {
   type t;
   type request = {
-@as("resourceTags") resourceTags: resourceTagMap,
-@as("clientToken") clientToken: option<clientToken>,
-@as("snsTopicArn") snsTopicArn: snsTopicArn,
-@as("terminateInstanceOnFailure") terminateInstanceOnFailure: nullableBoolean,
-@as("keyPair") keyPair: nonEmptyString,
-@as("logging") logging: logging,
-@as("subnetId") subnetId: nonEmptyString,
-@as("securityGroupIds") securityGroupIds: securityGroupIds,
-@as("instanceProfileName") instanceProfileName: option<instanceProfileNameType>,
-@as("instanceTypes") instanceTypes: instanceTypeList,
-@as("description") description: nonEmptyString,
-@as("infrastructureConfigurationArn") infrastructureConfigurationArn: option<infrastructureConfigurationArn>
+resourceTags: option<resourceTagMap>,
+clientToken: clientToken,
+snsTopicArn: option<snsTopicArn>,
+terminateInstanceOnFailure: option<nullableBoolean>,
+keyPair: option<nonEmptyString>,
+logging: option<logging>,
+subnetId: option<nonEmptyString>,
+securityGroupIds: option<securityGroupIds>,
+instanceProfileName: instanceProfileNameType,
+instanceTypes: option<instanceTypeList>,
+description: option<nonEmptyString>,
+infrastructureConfigurationArn: infrastructureConfigurationArn
 }
   type response = {
-@as("infrastructureConfigurationArn") infrastructureConfigurationArn: infrastructureConfigurationArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+infrastructureConfigurationArn: option<infrastructureConfigurationArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "UpdateInfrastructureConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListImagePackages = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: restrictedInteger,
-@as("imageBuildVersionArn") imageBuildVersionArn: option<imageBuildVersionArn>
+nextToken: option<paginationToken>,
+maxResults: option<restrictedInteger>,
+imageBuildVersionArn: imageBuildVersionArn
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("imagePackageList") imagePackageList: imagePackageList,
-@as("requestId") requestId: nonEmptyString
+nextToken: option<paginationToken>,
+imagePackageList: option<imagePackageList>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListImagePackagesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetImagePipeline = {
   type t;
   type request = {
-@as("imagePipelineArn") imagePipelineArn: option<imagePipelineArn>
+imagePipelineArn: imagePipelineArn
 }
   type response = {
-@as("imagePipeline") imagePipeline: imagePipeline,
-@as("requestId") requestId: nonEmptyString
+imagePipeline: option<imagePipeline>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "GetImagePipelineCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetComponent = {
   type t;
   type request = {
-@as("componentBuildVersionArn") componentBuildVersionArn: option<componentVersionArnOrBuildVersionArn>
+componentBuildVersionArn: componentVersionArnOrBuildVersionArn
 }
   type response = {
-@as("component") component: component,
-@as("requestId") requestId: nonEmptyString
+component: option<component>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "GetComponentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateInfrastructureConfiguration = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("tags") tags: tagMap,
-@as("resourceTags") resourceTags: resourceTagMap,
-@as("snsTopicArn") snsTopicArn: snsTopicArn,
-@as("terminateInstanceOnFailure") terminateInstanceOnFailure: nullableBoolean,
-@as("keyPair") keyPair: nonEmptyString,
-@as("logging") logging: logging,
-@as("subnetId") subnetId: nonEmptyString,
-@as("securityGroupIds") securityGroupIds: securityGroupIds,
-@as("instanceProfileName") instanceProfileName: option<instanceProfileNameType>,
-@as("instanceTypes") instanceTypes: instanceTypeList,
-@as("description") description: nonEmptyString,
-@as("name") name: option<resourceName>
+clientToken: clientToken,
+tags: option<tagMap>,
+resourceTags: option<resourceTagMap>,
+snsTopicArn: option<snsTopicArn>,
+terminateInstanceOnFailure: option<nullableBoolean>,
+keyPair: option<nonEmptyString>,
+logging: option<logging>,
+subnetId: option<nonEmptyString>,
+securityGroupIds: option<securityGroupIds>,
+instanceProfileName: instanceProfileNameType,
+instanceTypes: option<instanceTypeList>,
+description: option<nonEmptyString>,
+name: resourceName
 }
   type response = {
-@as("infrastructureConfigurationArn") infrastructureConfigurationArn: infrastructureConfigurationArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+infrastructureConfigurationArn: option<infrastructureConfigurationArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "CreateInfrastructureConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListInfrastructureConfigurations = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: restrictedInteger,
-@as("filters") filters: filterList
+nextToken: option<paginationToken>,
+maxResults: option<restrictedInteger>,
+filters: option<filterList>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("infrastructureConfigurationSummaryList") infrastructureConfigurationSummaryList: infrastructureConfigurationSummaryList,
-@as("requestId") requestId: nonEmptyString
+nextToken: option<paginationToken>,
+infrastructureConfigurationSummaryList: option<infrastructureConfigurationSummaryList>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListInfrastructureConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListImages = {
   type t;
   type request = {
-@as("includeDeprecated") includeDeprecated: nullableBoolean,
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: restrictedInteger,
-@as("byName") byName: amazonawsBoolean,
-@as("filters") filters: filterList,
-@as("owner") owner: ownership
+includeDeprecated: option<nullableBoolean>,
+nextToken: option<paginationToken>,
+maxResults: option<restrictedInteger>,
+byName: option<boolean_>,
+filters: option<filterList>,
+owner: option<ownership>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("imageVersionList") imageVersionList: imageVersionList,
-@as("requestId") requestId: nonEmptyString
+nextToken: option<paginationToken>,
+imageVersionList: option<imageVersionList>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListImagesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListImageRecipes = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: restrictedInteger,
-@as("filters") filters: filterList,
-@as("owner") owner: ownership
+nextToken: option<paginationToken>,
+maxResults: option<restrictedInteger>,
+filters: option<filterList>,
+owner: option<ownership>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("imageRecipeSummaryList") imageRecipeSummaryList: imageRecipeSummaryList,
-@as("requestId") requestId: nonEmptyString
+nextToken: option<paginationToken>,
+imageRecipeSummaryList: option<imageRecipeSummaryList>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListImageRecipesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListImagePipelines = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: restrictedInteger,
-@as("filters") filters: filterList
+nextToken: option<paginationToken>,
+maxResults: option<restrictedInteger>,
+filters: option<filterList>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("imagePipelineList") imagePipelineList: imagePipelineList,
-@as("requestId") requestId: nonEmptyString
+nextToken: option<paginationToken>,
+imagePipelineList: option<imagePipelineList>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListImagePipelinesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDistributionConfigurations = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: restrictedInteger,
-@as("filters") filters: filterList
+nextToken: option<paginationToken>,
+maxResults: option<restrictedInteger>,
+filters: option<filterList>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("distributionConfigurationSummaryList") distributionConfigurationSummaryList: distributionConfigurationSummaryList,
-@as("requestId") requestId: nonEmptyString
+nextToken: option<paginationToken>,
+distributionConfigurationSummaryList: option<distributionConfigurationSummaryList>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListDistributionConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListContainerRecipes = {
   type t;
   type request = {
-@as("nextToken") nextToken: nonEmptyString,
-@as("maxResults") maxResults: restrictedInteger,
-@as("filters") filters: filterList,
-@as("owner") owner: ownership
+nextToken: option<nonEmptyString>,
+maxResults: option<restrictedInteger>,
+filters: option<filterList>,
+owner: option<ownership>
 }
   type response = {
-@as("nextToken") nextToken: nonEmptyString,
-@as("containerRecipeSummaryList") containerRecipeSummaryList: containerRecipeSummaryList,
-@as("requestId") requestId: nonEmptyString
+nextToken: option<nonEmptyString>,
+containerRecipeSummaryList: option<containerRecipeSummaryList>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListContainerRecipesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListComponents = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: restrictedInteger,
-@as("byName") byName: amazonawsBoolean,
-@as("filters") filters: filterList,
-@as("owner") owner: ownership
+nextToken: option<paginationToken>,
+maxResults: option<restrictedInteger>,
+byName: option<boolean_>,
+filters: option<filterList>,
+owner: option<ownership>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("componentVersionList") componentVersionList: componentVersionList,
-@as("requestId") requestId: nonEmptyString
+nextToken: option<paginationToken>,
+componentVersionList: option<componentVersionList>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListComponentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListComponentBuildVersions = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: restrictedInteger,
-@as("componentVersionArn") componentVersionArn: option<componentVersionArn>
+nextToken: option<paginationToken>,
+maxResults: option<restrictedInteger>,
+componentVersionArn: componentVersionArn
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("componentSummaryList") componentSummaryList: componentSummaryList,
-@as("requestId") requestId: nonEmptyString
+nextToken: option<paginationToken>,
+componentSummaryList: option<componentSummaryList>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListComponentBuildVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetInfrastructureConfiguration = {
   type t;
   type request = {
-@as("infrastructureConfigurationArn") infrastructureConfigurationArn: option<infrastructureConfigurationArn>
+infrastructureConfigurationArn: infrastructureConfigurationArn
 }
   type response = {
-@as("infrastructureConfiguration") infrastructureConfiguration: infrastructureConfiguration,
-@as("requestId") requestId: nonEmptyString
+infrastructureConfiguration: option<infrastructureConfiguration>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "GetInfrastructureConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateImageRecipe = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("workingDirectory") workingDirectory: nonEmptyString,
-@as("tags") tags: tagMap,
-@as("blockDeviceMappings") blockDeviceMappings: instanceBlockDeviceMappings,
-@as("parentImage") parentImage: option<nonEmptyString>,
-@as("components") components: option<componentConfigurationList>,
-@as("semanticVersion") semanticVersion: option<versionNumber>,
-@as("description") description: nonEmptyString,
-@as("name") name: option<resourceName>
+clientToken: clientToken,
+workingDirectory: option<nonEmptyString>,
+tags: option<tagMap>,
+blockDeviceMappings: option<instanceBlockDeviceMappings>,
+parentImage: nonEmptyString,
+components: componentConfigurationList,
+semanticVersion: versionNumber,
+description: option<nonEmptyString>,
+name: resourceName
 }
   type response = {
-@as("imageRecipeArn") imageRecipeArn: imageRecipeArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+imageRecipeArn: option<imageRecipeArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "CreateImageRecipeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetImageRecipe = {
   type t;
   type request = {
-@as("imageRecipeArn") imageRecipeArn: option<imageRecipeArn>
+imageRecipeArn: imageRecipeArn
 }
   type response = {
-@as("imageRecipe") imageRecipe: imageRecipe,
-@as("requestId") requestId: nonEmptyString
+imageRecipe: option<imageRecipe>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "GetImageRecipeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateContainerRecipe = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("kmsKeyId") kmsKeyId: nonEmptyString,
-@as("targetRepository") targetRepository: option<targetContainerRepository>,
-@as("workingDirectory") workingDirectory: nonEmptyString,
-@as("tags") tags: tagMap,
-@as("parentImage") parentImage: option<nonEmptyString>,
-@as("imageOsVersionOverride") imageOsVersionOverride: nonEmptyString,
-@as("platformOverride") platformOverride: platform,
-@as("dockerfileTemplateUri") dockerfileTemplateUri: uri,
-@as("dockerfileTemplateData") dockerfileTemplateData: inlineDockerFileTemplate,
-@as("instanceConfiguration") instanceConfiguration: instanceConfiguration,
-@as("components") components: option<componentConfigurationList>,
-@as("semanticVersion") semanticVersion: option<versionNumber>,
-@as("description") description: nonEmptyString,
-@as("name") name: option<resourceName>,
-@as("containerType") containerType: option<containerType>
+clientToken: clientToken,
+kmsKeyId: option<nonEmptyString>,
+targetRepository: targetContainerRepository,
+workingDirectory: option<nonEmptyString>,
+tags: option<tagMap>,
+parentImage: nonEmptyString,
+imageOsVersionOverride: option<nonEmptyString>,
+platformOverride: option<platform>,
+dockerfileTemplateUri: option<uri>,
+dockerfileTemplateData: option<inlineDockerFileTemplate>,
+instanceConfiguration: option<instanceConfiguration>,
+components: componentConfigurationList,
+semanticVersion: versionNumber,
+description: option<nonEmptyString>,
+name: resourceName,
+containerType: containerType
 }
   type response = {
-@as("containerRecipeArn") containerRecipeArn: containerRecipeArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+containerRecipeArn: option<containerRecipeArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "CreateContainerRecipeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDistributionConfiguration = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("distributions") distributions: option<distributionList>,
-@as("description") description: nonEmptyString,
-@as("distributionConfigurationArn") distributionConfigurationArn: option<distributionConfigurationArn>
+clientToken: clientToken,
+distributions: distributionList,
+description: option<nonEmptyString>,
+distributionConfigurationArn: distributionConfigurationArn
 }
   type response = {
-@as("distributionConfigurationArn") distributionConfigurationArn: distributionConfigurationArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+distributionConfigurationArn: option<distributionConfigurationArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "UpdateDistributionConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetContainerRecipe = {
   type t;
   type request = {
-@as("containerRecipeArn") containerRecipeArn: option<containerRecipeArn>
+containerRecipeArn: containerRecipeArn
 }
   type response = {
-@as("containerRecipe") containerRecipe: containerRecipe,
-@as("requestId") requestId: nonEmptyString
+containerRecipe: option<containerRecipe>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "GetContainerRecipeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDistributionConfiguration = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("tags") tags: tagMap,
-@as("distributions") distributions: option<distributionList>,
-@as("description") description: nonEmptyString,
-@as("name") name: option<resourceName>
+clientToken: clientToken,
+tags: option<tagMap>,
+distributions: distributionList,
+description: option<nonEmptyString>,
+name: resourceName
 }
   type response = {
-@as("distributionConfigurationArn") distributionConfigurationArn: distributionConfigurationArn,
-@as("clientToken") clientToken: clientToken,
-@as("requestId") requestId: nonEmptyString
+distributionConfigurationArn: option<distributionConfigurationArn>,
+clientToken: option<clientToken>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "CreateDistributionConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListImagePipelineImages = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: restrictedInteger,
-@as("filters") filters: filterList,
-@as("imagePipelineArn") imagePipelineArn: option<imagePipelineArn>
+nextToken: option<paginationToken>,
+maxResults: option<restrictedInteger>,
+filters: option<filterList>,
+imagePipelineArn: imagePipelineArn
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("imageSummaryList") imageSummaryList: imageSummaryList,
-@as("requestId") requestId: nonEmptyString
+nextToken: option<paginationToken>,
+imageSummaryList: option<imageSummaryList>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListImagePipelineImagesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListImageBuildVersions = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: restrictedInteger,
-@as("filters") filters: filterList,
-@as("imageVersionArn") imageVersionArn: option<imageVersionArn>
+nextToken: option<paginationToken>,
+maxResults: option<restrictedInteger>,
+filters: option<filterList>,
+imageVersionArn: imageVersionArn
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("imageSummaryList") imageSummaryList: imageSummaryList,
-@as("requestId") requestId: nonEmptyString
+nextToken: option<paginationToken>,
+imageSummaryList: option<imageSummaryList>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "ListImageBuildVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDistributionConfiguration = {
   type t;
   type request = {
-@as("distributionConfigurationArn") distributionConfigurationArn: option<distributionConfigurationArn>
+distributionConfigurationArn: distributionConfigurationArn
 }
   type response = {
-@as("distributionConfiguration") distributionConfiguration: distributionConfiguration,
-@as("requestId") requestId: nonEmptyString
+distributionConfiguration: option<distributionConfiguration>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "GetDistributionConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetImage = {
   type t;
   type request = {
-@as("imageBuildVersionArn") imageBuildVersionArn: option<imageVersionArnOrBuildVersionArn>
+imageBuildVersionArn: imageVersionArnOrBuildVersionArn
 }
   type response = {
-@as("image") image: image,
-@as("requestId") requestId: nonEmptyString
+image: option<image>,
+requestId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-imagebuilder") @new external new_: (request) => t = "GetImageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

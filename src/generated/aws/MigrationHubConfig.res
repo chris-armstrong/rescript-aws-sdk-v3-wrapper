@@ -1,68 +1,76 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type token = string
 type targetType = [@as("ACCOUNT") #ACCOUNT]
 type targetId = string
-type retryAfterSeconds = int;
+type retryAfterSeconds = int
 type requestedTime = Js.Date.t;
 type homeRegion = string
 type errorMessage = string
-type dryRun = bool;
-type describeHomeRegionControlsMaxResults = int;
+type dryRun = bool
+type describeHomeRegionControlsMaxResults = int
 type controlId = string
 type target = {
-@as("Id") id: targetId,
-@as("Type") type_: option<targetType>
+@as("Id") id: option<targetId>,
+@as("Type") type_: targetType
 }
 type homeRegionControl = {
-@as("RequestedTime") requestedTime: requestedTime,
-@as("Target") target: target,
-@as("HomeRegion") homeRegion: homeRegion,
-@as("ControlId") controlId: controlId
+@as("RequestedTime") requestedTime: option<requestedTime>,
+@as("Target") target: option<target>,
+@as("HomeRegion") homeRegion: option<homeRegion>,
+@as("ControlId") controlId: option<controlId>
 }
 type homeRegionControls = array<homeRegionControl>
-type clientType;
-@module("@aws-sdk/client-mgh") @new external createClient: unit => clientType = "MigrationHubConfigClient";
+type awsServiceClient;
+@module("@aws-sdk/client-mgh") @new external createClient: unit => awsServiceClient = "MigrationHubConfigClient";
 module GetHomeRegion = {
   type t;
   type request = unit
   type response = {
-@as("HomeRegion") homeRegion: homeRegion
+@as("HomeRegion") homeRegion: option<homeRegion>
 }
   @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "GetHomeRegionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateHomeRegionControl = {
   type t;
   type request = {
-@as("DryRun") dryRun: dryRun,
-@as("Target") target: option<target>,
-@as("HomeRegion") homeRegion: option<homeRegion>
+@as("DryRun") dryRun: option<dryRun>,
+@as("Target") target: target,
+@as("HomeRegion") homeRegion: homeRegion
 }
   type response = {
-@as("HomeRegionControl") homeRegionControl: homeRegionControl
+@as("HomeRegionControl") homeRegionControl: option<homeRegionControl>
 }
   @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "CreateHomeRegionControlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeHomeRegionControls = {
   type t;
   type request = {
-@as("NextToken") nextToken: token,
-@as("MaxResults") maxResults: describeHomeRegionControlsMaxResults,
-@as("Target") target: target,
-@as("HomeRegion") homeRegion: homeRegion,
-@as("ControlId") controlId: controlId
+@as("NextToken") nextToken: option<token>,
+@as("MaxResults") maxResults: option<describeHomeRegionControlsMaxResults>,
+@as("Target") target: option<target>,
+@as("HomeRegion") homeRegion: option<homeRegion>,
+@as("ControlId") controlId: option<controlId>
 }
   type response = {
-@as("NextToken") nextToken: token,
-@as("HomeRegionControls") homeRegionControls: homeRegionControls
+@as("NextToken") nextToken: option<token>,
+@as("HomeRegionControls") homeRegionControls: option<homeRegionControls>
 }
   @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "DescribeHomeRegionControlsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

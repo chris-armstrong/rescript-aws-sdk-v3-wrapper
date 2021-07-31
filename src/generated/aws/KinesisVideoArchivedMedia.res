@@ -1,159 +1,165 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type amazonawsTimestamp = Js.Date.t;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
 type streamName = string
 type resourceARN = string
-type payload = NodeJs.Buffer.t;
+type payload = NodeJs.Buffer.t
 type nextToken = string
-type amazonawsLong = float;
-type listFragmentsMaxResults = float;
-type hLSStreamingSessionURL = string
-type hLSPlaybackMode = [@as("ON_DEMAND") #ON_DEMAND | @as("LIVE_REPLAY") #LIVE_REPLAY | @as("LIVE") #LIVE]
-type hLSMaxResults = float;
-type hLSFragmentSelectorType = [@as("SERVER_TIMESTAMP") #SERVER_TIMESTAMP | @as("PRODUCER_TIMESTAMP") #PRODUCER_TIMESTAMP]
-type hLSDisplayFragmentTimestamp = [@as("NEVER") #NEVER | @as("ALWAYS") #ALWAYS]
-type hLSDiscontinuityMode = [@as("ON_DISCONTINUITY") #ON_DISCONTINUITY | @as("NEVER") #NEVER | @as("ALWAYS") #ALWAYS]
-type fragmentSelectorType = [@as("SERVER_TIMESTAMP") #SERVER_TIMESTAMP | @as("PRODUCER_TIMESTAMP") #PRODUCER_TIMESTAMP]
+type long = float
+type listFragmentsMaxResults = float
+type hlsstreamingSessionURL = string
+type hlsplaybackMode = [@as("ON_DEMAND") #ONDEMAND | @as("LIVE_REPLAY") #LIVEREPLAY | @as("LIVE") #LIVE]
+type hlsmaxResults = float
+type hlsfragmentSelectorType = [@as("SERVER_TIMESTAMP") #SERVERTIMESTAMP | @as("PRODUCER_TIMESTAMP") #PRODUCERTIMESTAMP]
+type hlsdisplayFragmentTimestamp = [@as("NEVER") #NEVER | @as("ALWAYS") #ALWAYS]
+type hlsdiscontinuityMode = [@as("ON_DISCONTINUITY") #ONDISCONTINUITY | @as("NEVER") #NEVER | @as("ALWAYS") #ALWAYS]
+type fragmentSelectorType = [@as("SERVER_TIMESTAMP") #SERVERTIMESTAMP | @as("PRODUCER_TIMESTAMP") #PRODUCERTIMESTAMP]
 type fragmentNumberString = string
-type expires = int;
+type expires = int
 type errorMessage = string
-type dASHStreamingSessionURL = string
-type dASHPlaybackMode = [@as("ON_DEMAND") #ON_DEMAND | @as("LIVE_REPLAY") #LIVE_REPLAY | @as("LIVE") #LIVE]
-type dASHMaxResults = float;
-type dASHFragmentSelectorType = [@as("SERVER_TIMESTAMP") #SERVER_TIMESTAMP | @as("PRODUCER_TIMESTAMP") #PRODUCER_TIMESTAMP]
-type dASHDisplayFragmentTimestamp = [@as("NEVER") #NEVER | @as("ALWAYS") #ALWAYS]
-type dASHDisplayFragmentNumber = [@as("NEVER") #NEVER | @as("ALWAYS") #ALWAYS]
+type dashstreamingSessionURL = string
+type dashplaybackMode = [@as("ON_DEMAND") #ONDEMAND | @as("LIVE_REPLAY") #LIVEREPLAY | @as("LIVE") #LIVE]
+type dashmaxResults = float
+type dashfragmentSelectorType = [@as("SERVER_TIMESTAMP") #SERVERTIMESTAMP | @as("PRODUCER_TIMESTAMP") #PRODUCERTIMESTAMP]
+type dashdisplayFragmentTimestamp = [@as("NEVER") #NEVER | @as("ALWAYS") #ALWAYS]
+type dashdisplayFragmentNumber = [@as("NEVER") #NEVER | @as("ALWAYS") #ALWAYS]
 type contentType = string
-type containerFormat = [@as("MPEG_TS") #MPEG_TS | @as("FRAGMENTED_MP4") #FRAGMENTED_MP4]
-type clipFragmentSelectorType = [@as("SERVER_TIMESTAMP") #SERVER_TIMESTAMP | @as("PRODUCER_TIMESTAMP") #PRODUCER_TIMESTAMP]
+type containerFormat = [@as("MPEG_TS") #MPEGTS | @as("FRAGMENTED_MP4") #FRAGMENTEDMP4]
+type clipFragmentSelectorType = [@as("SERVER_TIMESTAMP") #SERVERTIMESTAMP | @as("PRODUCER_TIMESTAMP") #PRODUCERTIMESTAMP]
 type timestampRange = {
-@as("EndTimestamp") endTimestamp: option<amazonawsTimestamp>,
-@as("StartTimestamp") startTimestamp: option<amazonawsTimestamp>
+@as("EndTimestamp") endTimestamp: timestamp_,
+@as("StartTimestamp") startTimestamp: timestamp_
 }
-type hLSTimestampRange = {
-@as("EndTimestamp") endTimestamp: amazonawsTimestamp,
-@as("StartTimestamp") startTimestamp: amazonawsTimestamp
+type hlstimestampRange = {
+@as("EndTimestamp") endTimestamp: option<timestamp_>,
+@as("StartTimestamp") startTimestamp: option<timestamp_>
 }
 type fragmentNumberList = array<fragmentNumberString>
 type fragment = {
-@as("FragmentLengthInMilliseconds") fragmentLengthInMilliseconds: amazonawsLong,
-@as("ServerTimestamp") serverTimestamp: amazonawsTimestamp,
-@as("ProducerTimestamp") producerTimestamp: amazonawsTimestamp,
-@as("FragmentSizeInBytes") fragmentSizeInBytes: amazonawsLong,
-@as("FragmentNumber") fragmentNumber: fragmentNumberString
+@as("FragmentLengthInMilliseconds") fragmentLengthInMilliseconds: option<long>,
+@as("ServerTimestamp") serverTimestamp: option<timestamp_>,
+@as("ProducerTimestamp") producerTimestamp: option<timestamp_>,
+@as("FragmentSizeInBytes") fragmentSizeInBytes: option<long>,
+@as("FragmentNumber") fragmentNumber: option<fragmentNumberString>
 }
-type dASHTimestampRange = {
-@as("EndTimestamp") endTimestamp: amazonawsTimestamp,
-@as("StartTimestamp") startTimestamp: amazonawsTimestamp
+type dashtimestampRange = {
+@as("EndTimestamp") endTimestamp: option<timestamp_>,
+@as("StartTimestamp") startTimestamp: option<timestamp_>
 }
 type clipTimestampRange = {
-@as("EndTimestamp") endTimestamp: option<amazonawsTimestamp>,
-@as("StartTimestamp") startTimestamp: option<amazonawsTimestamp>
+@as("EndTimestamp") endTimestamp: timestamp_,
+@as("StartTimestamp") startTimestamp: timestamp_
 }
-type hLSFragmentSelector = {
-@as("TimestampRange") timestampRange: hLSTimestampRange,
-@as("FragmentSelectorType") fragmentSelectorType: hLSFragmentSelectorType
+type hlsfragmentSelector = {
+@as("TimestampRange") timestampRange: option<hlstimestampRange>,
+@as("FragmentSelectorType") fragmentSelectorType: option<hlsfragmentSelectorType>
 }
 type fragmentSelector = {
-@as("TimestampRange") timestampRange: option<timestampRange>,
-@as("FragmentSelectorType") fragmentSelectorType: option<fragmentSelectorType>
+@as("TimestampRange") timestampRange: timestampRange,
+@as("FragmentSelectorType") fragmentSelectorType: fragmentSelectorType
 }
 type fragmentList = array<fragment>
-type dASHFragmentSelector = {
-@as("TimestampRange") timestampRange: dASHTimestampRange,
-@as("FragmentSelectorType") fragmentSelectorType: dASHFragmentSelectorType
+type dashfragmentSelector = {
+@as("TimestampRange") timestampRange: option<dashtimestampRange>,
+@as("FragmentSelectorType") fragmentSelectorType: option<dashfragmentSelectorType>
 }
 type clipFragmentSelector = {
-@as("TimestampRange") timestampRange: option<clipTimestampRange>,
-@as("FragmentSelectorType") fragmentSelectorType: option<clipFragmentSelectorType>
+@as("TimestampRange") timestampRange: clipTimestampRange,
+@as("FragmentSelectorType") fragmentSelectorType: clipFragmentSelectorType
 }
-type clientType;
-@module("@aws-sdk/client-kinesisvideo") @new external createClient: unit => clientType = "KinesisVideoArchivedMediaClient";
+type awsServiceClient;
+@module("@aws-sdk/client-kinesisvideo") @new external createClient: unit => awsServiceClient = "KinesisVideoArchivedMediaClient";
 module GetMediaForFragmentList = {
   type t;
   type request = {
-@as("Fragments") fragments: option<fragmentNumberList>,
-@as("StreamARN") streamARN: resourceARN,
-@as("StreamName") streamName: streamName
+@as("Fragments") fragments: fragmentNumberList,
+@as("StreamARN") streamARN: option<resourceARN>,
+@as("StreamName") streamName: option<streamName>
 }
   type response = {
-@as("Payload") payload: payload,
-@as("ContentType") contentType: contentType
+@as("Payload") payload: option<payload>,
+@as("ContentType") contentType: option<contentType>
 }
   @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetMediaForFragmentListCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFragments = {
   type t;
   type request = {
-@as("FragmentSelector") fragmentSelector: fragmentSelector,
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: listFragmentsMaxResults,
-@as("StreamARN") streamARN: resourceARN,
-@as("StreamName") streamName: streamName
+@as("FragmentSelector") fragmentSelector: option<fragmentSelector>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<listFragmentsMaxResults>,
+@as("StreamARN") streamARN: option<resourceARN>,
+@as("StreamName") streamName: option<streamName>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("Fragments") fragments: fragmentList
+@as("NextToken") nextToken: option<nextToken>,
+@as("Fragments") fragments: option<fragmentList>
 }
   @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "ListFragmentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetHLSStreamingSessionURL = {
   type t;
   type request = {
-@as("MaxMediaPlaylistFragmentResults") maxMediaPlaylistFragmentResults: hLSMaxResults,
-@as("Expires") expires: expires,
-@as("DisplayFragmentTimestamp") displayFragmentTimestamp: hLSDisplayFragmentTimestamp,
-@as("DiscontinuityMode") discontinuityMode: hLSDiscontinuityMode,
-@as("ContainerFormat") containerFormat: containerFormat,
-@as("HLSFragmentSelector") hLSFragmentSelector: hLSFragmentSelector,
-@as("PlaybackMode") playbackMode: hLSPlaybackMode,
-@as("StreamARN") streamARN: resourceARN,
-@as("StreamName") streamName: streamName
+@as("MaxMediaPlaylistFragmentResults") maxMediaPlaylistFragmentResults: option<hlsmaxResults>,
+@as("Expires") expires: option<expires>,
+@as("DisplayFragmentTimestamp") displayFragmentTimestamp: option<hlsdisplayFragmentTimestamp>,
+@as("DiscontinuityMode") discontinuityMode: option<hlsdiscontinuityMode>,
+@as("ContainerFormat") containerFormat: option<containerFormat>,
+@as("HLSFragmentSelector") hlsfragmentSelector: option<hlsfragmentSelector>,
+@as("PlaybackMode") playbackMode: option<hlsplaybackMode>,
+@as("StreamARN") streamARN: option<resourceARN>,
+@as("StreamName") streamName: option<streamName>
 }
   type response = {
-@as("HLSStreamingSessionURL") hLSStreamingSessionURL: hLSStreamingSessionURL
+@as("HLSStreamingSessionURL") hlsstreamingSessionURL: option<hlsstreamingSessionURL>
 }
   @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetHLSStreamingSessionURLCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDASHStreamingSessionURL = {
   type t;
   type request = {
-@as("MaxManifestFragmentResults") maxManifestFragmentResults: dASHMaxResults,
-@as("Expires") expires: expires,
-@as("DASHFragmentSelector") dASHFragmentSelector: dASHFragmentSelector,
-@as("DisplayFragmentNumber") displayFragmentNumber: dASHDisplayFragmentNumber,
-@as("DisplayFragmentTimestamp") displayFragmentTimestamp: dASHDisplayFragmentTimestamp,
-@as("PlaybackMode") playbackMode: dASHPlaybackMode,
-@as("StreamARN") streamARN: resourceARN,
-@as("StreamName") streamName: streamName
+@as("MaxManifestFragmentResults") maxManifestFragmentResults: option<dashmaxResults>,
+@as("Expires") expires: option<expires>,
+@as("DASHFragmentSelector") dashfragmentSelector: option<dashfragmentSelector>,
+@as("DisplayFragmentNumber") displayFragmentNumber: option<dashdisplayFragmentNumber>,
+@as("DisplayFragmentTimestamp") displayFragmentTimestamp: option<dashdisplayFragmentTimestamp>,
+@as("PlaybackMode") playbackMode: option<dashplaybackMode>,
+@as("StreamARN") streamARN: option<resourceARN>,
+@as("StreamName") streamName: option<streamName>
 }
   type response = {
-@as("DASHStreamingSessionURL") dASHStreamingSessionURL: dASHStreamingSessionURL
+@as("DASHStreamingSessionURL") dashstreamingSessionURL: option<dashstreamingSessionURL>
 }
   @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetDASHStreamingSessionURLCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetClip = {
   type t;
   type request = {
-@as("ClipFragmentSelector") clipFragmentSelector: option<clipFragmentSelector>,
-@as("StreamARN") streamARN: resourceARN,
-@as("StreamName") streamName: streamName
+@as("ClipFragmentSelector") clipFragmentSelector: clipFragmentSelector,
+@as("StreamARN") streamARN: option<resourceARN>,
+@as("StreamName") streamName: option<streamName>
 }
   type response = {
-@as("Payload") payload: payload,
-@as("ContentType") contentType: contentType
+@as("Payload") payload: option<payload>,
+@as("ContentType") contentType: option<contentType>
 }
   @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetClipCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

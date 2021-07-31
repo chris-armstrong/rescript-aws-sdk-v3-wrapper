@@ -1,40 +1,47 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type long = float
 type volumeType = string
-type volumeSize = int;
-type volumeBurstThroughput = int;
-type volumeBurstIOPS = int;
-type volumeBaselineThroughput = int;
-type volumeBaselineIOPS = int;
+type volumeSize = int
+type volumeBurstThroughput = int
+type volumeBurstIOPS = int
+type volumeBaselineThroughput = int
+type volumeBaselineIOPS = int
 type volumeArn = string
-type amazonawsTimestamp = Js.Date.t;
-type summaryValue = float;
+type timestamp_ = Js.Date.t;
+type summaryValue = float
 type statusReason = string
 type status = [@as("Failed") #Failed | @as("Pending") #Pending | @as("Inactive") #Inactive | @as("Active") #Active]
 type resourceType = [@as("LambdaFunction") #LambdaFunction | @as("EbsVolume") #EbsVolume | @as("AutoScalingGroup") #AutoScalingGroup | @as("Ec2Instance") #Ec2Instance]
 type recommendedInstanceType = string
 type recommendationSourceType = [@as("LambdaFunction") #LambdaFunction | @as("EbsVolume") #EbsVolume | @as("AutoScalingGroup") #AutoScalingGroup | @as("Ec2Instance") #Ec2Instance]
 type recommendationSourceArn = string
-type rank = int;
+type rank = int
 type platformDifference = [@as("VirtualizationType") #VirtualizationType | @as("InstanceStoreAvailability") #InstanceStoreAvailability | @as("StorageInterface") #StorageInterface | @as("NetworkInterface") #NetworkInterface | @as("Hypervisor") #Hypervisor]
-type period = int;
-type performanceRisk = float;
-type numberOfInvocations = float;
+type period = int
+type performanceRisk = float
+type numberOfInvocations = float
 type nextToken = string
-type minSize = int;
-type metricValue = float;
+type minSize = int
+type metricValue = float
 type metricStatistic = [@as("Average") #Average | @as("Maximum") #Maximum]
-type metricName = [@as("NETWORK_PACKETS_OUT_PER_SECOND") #NETWORK_PACKETS_OUT_PER_SECOND | @as("NETWORK_PACKETS_IN_PER_SECOND") #NETWORK_PACKETS_IN_PER_SECOND | @as("NETWORK_OUT_BYTES_PER_SECOND") #NETWORK_OUT_BYTES_PER_SECOND | @as("NETWORK_IN_BYTES_PER_SECOND") #NETWORK_IN_BYTES_PER_SECOND | @as("DISK_WRITE_BYTES_PER_SECOND") #DISK_WRITE_BYTES_PER_SECOND | @as("DISK_READ_BYTES_PER_SECOND") #DISK_READ_BYTES_PER_SECOND | @as("DISK_WRITE_OPS_PER_SECOND") #DISK_WRITE_OPS_PER_SECOND | @as("DISK_READ_OPS_PER_SECOND") #DISK_READ_OPS_PER_SECOND | @as("EBS_WRITE_BYTES_PER_SECOND") #EBS_WRITE_BYTES_PER_SECOND | @as("EBS_READ_BYTES_PER_SECOND") #EBS_READ_BYTES_PER_SECOND | @as("EBS_WRITE_OPS_PER_SECOND") #EBS_WRITE_OPS_PER_SECOND | @as("EBS_READ_OPS_PER_SECOND") #EBS_READ_OPS_PER_SECOND | @as("Memory") #Memory | @as("Cpu") #Cpu]
+type metricName = [@as("NETWORK_PACKETS_OUT_PER_SECOND") #NETWORKPACKETSOUTPERSECOND | @as("NETWORK_PACKETS_IN_PER_SECOND") #NETWORKPACKETSINPERSECOND | @as("NETWORK_OUT_BYTES_PER_SECOND") #NETWORKOUTBYTESPERSECOND | @as("NETWORK_IN_BYTES_PER_SECOND") #NETWORKINBYTESPERSECOND | @as("DISK_WRITE_BYTES_PER_SECOND") #DISKWRITEBYTESPERSECOND | @as("DISK_READ_BYTES_PER_SECOND") #DISKREADBYTESPERSECOND | @as("DISK_WRITE_OPS_PER_SECOND") #DISKWRITEOPSPERSECOND | @as("DISK_READ_OPS_PER_SECOND") #DISKREADOPSPERSECOND | @as("EBS_WRITE_BYTES_PER_SECOND") #EBSWRITEBYTESPERSECOND | @as("EBS_READ_BYTES_PER_SECOND") #EBSREADBYTESPERSECOND | @as("EBS_WRITE_OPS_PER_SECOND") #EBSWRITEOPSPERSECOND | @as("EBS_READ_OPS_PER_SECOND") #EBSREADOPSPERSECOND | @as("Memory") #Memory | @as("Cpu") #Cpu]
 type metadataKey = string
 type message = string
-type memorySize = int;
-type memberAccountsEnrolled = bool;
-type maxSize = int;
-type maxResults = int;
-type lookBackPeriodInDays = float;
+type memorySize = int
+type memberAccountsEnrolled = bool
+type maxSize = int
+type maxResults = int
+type lookBackPeriodInDays = float
 type lastUpdatedTimestamp = Js.Date.t;
 type lastRefreshTimestamp = Js.Date.t;
 type lambdaFunctionRecommendationFindingReasonCode = [@as("Inconclusive") #Inconclusive | @as("InsufficientData") #InsufficientData | @as("MemoryUnderprovisioned") #MemoryUnderprovisioned | @as("MemoryOverprovisioned") #MemoryOverprovisioned]
@@ -51,7 +58,7 @@ type instanceType = string
 type instanceRecommendationFindingReasonCode = [@as("DiskThroughputUnderprovisioned") #DiskThroughputUnderprovisioned | @as("DiskThroughputOverprovisioned") #DiskThroughputOverprovisioned | @as("DiskIOPSUnderprovisioned") #DiskIOPSUnderprovisioned | @as("DiskIOPSOverprovisioned") #DiskIOPSOverprovisioned | @as("NetworkPPSUnderprovisioned") #NetworkPPSUnderprovisioned | @as("NetworkPPSOverprovisioned") #NetworkPPSOverprovisioned | @as("NetworkBandwidthUnderprovisioned") #NetworkBandwidthUnderprovisioned | @as("NetworkBandwidthOverprovisioned") #NetworkBandwidthOverprovisioned | @as("EBSIOPSUnderprovisioned") #EBSIOPSUnderprovisioned | @as("EBSIOPSOverprovisioned") #EBSIOPSOverprovisioned | @as("EBSThroughputUnderprovisioned") #EBSThroughputUnderprovisioned | @as("EBSThroughputOverprovisioned") #EBSThroughputOverprovisioned | @as("MemoryUnderprovisioned") #MemoryUnderprovisioned | @as("MemoryOverprovisioned") #MemoryOverprovisioned | @as("CPUUnderprovisioned") #CPUUnderprovisioned | @as("CPUOverprovisioned") #CPUOverprovisioned]
 type instanceName = string
 type instanceArn = string
-type includeMemberAccounts = bool;
+type includeMemberAccounts = bool
 type identifier = string
 type functionVersion = string
 type functionArn = string
@@ -66,13 +73,13 @@ type exportableLambdaFunctionField = [@as("LastRefreshTimestamp") #LastRefreshTi
 type exportableInstanceField = [@as("LastRefreshTimestamp") #LastRefreshTimestamp | @as("RecommendationsSourcesRecommendationSourceType") #RecommendationsSourcesRecommendationSourceType | @as("RecommendationsSourcesRecommendationSourceArn") #RecommendationsSourcesRecommendationSourceArn | @as("RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice") #RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice | @as("RecommendationOptionsStandardOneYearNoUpfrontReservedPrice") #RecommendationOptionsStandardOneYearNoUpfrontReservedPrice | @as("RecommendationOptionsOnDemandPrice") #RecommendationOptionsOnDemandPrice | @as("RecommendationOptionsNetwork") #RecommendationOptionsNetwork | @as("RecommendationOptionsStorage") #RecommendationOptionsStorage | @as("RecommendationOptionsMemory") #RecommendationOptionsMemory | @as("RecommendationOptionsVcpus") #RecommendationOptionsVcpus | @as("RecommendationOptionsPerformanceRisk") #RecommendationOptionsPerformanceRisk | @as("RecommendationOptionsPlatformDifferences") #RecommendationOptionsPlatformDifferences | @as("RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum") #RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum | @as("RecommendationOptionsProjectedUtilizationMetricsCpuMaximum") #RecommendationOptionsProjectedUtilizationMetricsCpuMaximum | @as("RecommendationOptionsInstanceType") #RecommendationOptionsInstanceType | @as("CurrentNetwork") #CurrentNetwork | @as("CurrentStorage") #CurrentStorage | @as("CurrentMemory") #CurrentMemory | @as("CurrentVCpus") #CurrentVCpus | @as("CurrentStandardThreeYearNoUpfrontReservedPrice") #CurrentStandardThreeYearNoUpfrontReservedPrice | @as("CurrentStandardOneYearNoUpfrontReservedPrice") #CurrentStandardOneYearNoUpfrontReservedPrice | @as("CurrentOnDemandPrice") #CurrentOnDemandPrice | @as("UtilizationMetricsNetworkPacketsOutPerSecondMaximum") #UtilizationMetricsNetworkPacketsOutPerSecondMaximum | @as("UtilizationMetricsNetworkPacketsInPerSecondMaximum") #UtilizationMetricsNetworkPacketsInPerSecondMaximum | @as("UtilizationMetricsNetworkOutBytesPerSecondMaximum") #UtilizationMetricsNetworkOutBytesPerSecondMaximum | @as("UtilizationMetricsNetworkInBytesPerSecondMaximum") #UtilizationMetricsNetworkInBytesPerSecondMaximum | @as("UtilizationMetricsDiskWriteBytesPerSecondMaximum") #UtilizationMetricsDiskWriteBytesPerSecondMaximum | @as("UtilizationMetricsDiskReadBytesPerSecondMaximum") #UtilizationMetricsDiskReadBytesPerSecondMaximum | @as("UtilizationMetricsDiskWriteOpsPerSecondMaximum") #UtilizationMetricsDiskWriteOpsPerSecondMaximum | @as("UtilizationMetricsDiskReadOpsPerSecondMaximum") #UtilizationMetricsDiskReadOpsPerSecondMaximum | @as("UtilizationMetricsEbsWriteBytesPerSecondMaximum") #UtilizationMetricsEbsWriteBytesPerSecondMaximum | @as("UtilizationMetricsEbsReadBytesPerSecondMaximum") #UtilizationMetricsEbsReadBytesPerSecondMaximum | @as("UtilizationMetricsEbsWriteOpsPerSecondMaximum") #UtilizationMetricsEbsWriteOpsPerSecondMaximum | @as("UtilizationMetricsEbsReadOpsPerSecondMaximum") #UtilizationMetricsEbsReadOpsPerSecondMaximum | @as("UtilizationMetricsMemoryMaximum") #UtilizationMetricsMemoryMaximum | @as("UtilizationMetricsCpuMaximum") #UtilizationMetricsCpuMaximum | @as("CurrentInstanceType") #CurrentInstanceType | @as("LookbackPeriodInDays") #LookbackPeriodInDays | @as("FindingReasonCodes") #FindingReasonCodes | @as("Finding") #Finding | @as("InstanceName") #InstanceName | @as("InstanceArn") #InstanceArn | @as("AccountId") #AccountId]
 type exportableAutoScalingGroupField = [@as("LastRefreshTimestamp") #LastRefreshTimestamp | @as("RecommendationOptionsNetwork") #RecommendationOptionsNetwork | @as("RecommendationOptionsStorage") #RecommendationOptionsStorage | @as("RecommendationOptionsMemory") #RecommendationOptionsMemory | @as("RecommendationOptionsVcpus") #RecommendationOptionsVcpus | @as("RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice") #RecommendationOptionsStandardThreeYearNoUpfrontReservedPrice | @as("RecommendationOptionsStandardOneYearNoUpfrontReservedPrice") #RecommendationOptionsStandardOneYearNoUpfrontReservedPrice | @as("RecommendationOptionsOnDemandPrice") #RecommendationOptionsOnDemandPrice | @as("RecommendationOptionsPerformanceRisk") #RecommendationOptionsPerformanceRisk | @as("RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum") #RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum | @as("RecommendationOptionsProjectedUtilizationMetricsCpuMaximum") #RecommendationOptionsProjectedUtilizationMetricsCpuMaximum | @as("RecommendationOptionsConfigurationMaxSize") #RecommendationOptionsConfigurationMaxSize | @as("RecommendationOptionsConfigurationMinSize") #RecommendationOptionsConfigurationMinSize | @as("RecommendationOptionsConfigurationDesiredCapacity") #RecommendationOptionsConfigurationDesiredCapacity | @as("RecommendationOptionsConfigurationInstanceType") #RecommendationOptionsConfigurationInstanceType | @as("CurrentNetwork") #CurrentNetwork | @as("CurrentStorage") #CurrentStorage | @as("CurrentMemory") #CurrentMemory | @as("CurrentVCpus") #CurrentVCpus | @as("CurrentStandardThreeYearNoUpfrontReservedPrice") #CurrentStandardThreeYearNoUpfrontReservedPrice | @as("CurrentStandardOneYearNoUpfrontReservedPrice") #CurrentStandardOneYearNoUpfrontReservedPrice | @as("CurrentOnDemandPrice") #CurrentOnDemandPrice | @as("CurrentConfigurationMaxSize") #CurrentConfigurationMaxSize | @as("CurrentConfigurationMinSize") #CurrentConfigurationMinSize | @as("CurrentConfigurationDesiredCapacity") #CurrentConfigurationDesiredCapacity | @as("CurrentConfigurationInstanceType") #CurrentConfigurationInstanceType | @as("LookbackPeriodInDays") #LookbackPeriodInDays | @as("UtilizationMetricsNetworkPacketsOutPerSecondMaximum") #UtilizationMetricsNetworkPacketsOutPerSecondMaximum | @as("UtilizationMetricsNetworkPacketsInPerSecondMaximum") #UtilizationMetricsNetworkPacketsInPerSecondMaximum | @as("UtilizationMetricsNetworkOutBytesPerSecondMaximum") #UtilizationMetricsNetworkOutBytesPerSecondMaximum | @as("UtilizationMetricsNetworkInBytesPerSecondMaximum") #UtilizationMetricsNetworkInBytesPerSecondMaximum | @as("UtilizationMetricsDiskWriteBytesPerSecondMaximum") #UtilizationMetricsDiskWriteBytesPerSecondMaximum | @as("UtilizationMetricsDiskReadBytesPerSecondMaximum") #UtilizationMetricsDiskReadBytesPerSecondMaximum | @as("UtilizationMetricsDiskWriteOpsPerSecondMaximum") #UtilizationMetricsDiskWriteOpsPerSecondMaximum | @as("UtilizationMetricsDiskReadOpsPerSecondMaximum") #UtilizationMetricsDiskReadOpsPerSecondMaximum | @as("UtilizationMetricsEbsWriteBytesPerSecondMaximum") #UtilizationMetricsEbsWriteBytesPerSecondMaximum | @as("UtilizationMetricsEbsReadBytesPerSecondMaximum") #UtilizationMetricsEbsReadBytesPerSecondMaximum | @as("UtilizationMetricsEbsWriteOpsPerSecondMaximum") #UtilizationMetricsEbsWriteOpsPerSecondMaximum | @as("UtilizationMetricsEbsReadOpsPerSecondMaximum") #UtilizationMetricsEbsReadOpsPerSecondMaximum | @as("UtilizationMetricsMemoryMaximum") #UtilizationMetricsMemoryMaximum | @as("UtilizationMetricsCpuMaximum") #UtilizationMetricsCpuMaximum | @as("Finding") #Finding | @as("AutoScalingGroupName") #AutoScalingGroupName | @as("AutoScalingGroupArn") #AutoScalingGroupArn | @as("AccountId") #AccountId]
 type errorMessage = string
-type eBSMetricName = [@as("VolumeWriteBytesPerSecond") #VolumeWriteBytesPerSecond | @as("VolumeReadBytesPerSecond") #VolumeReadBytesPerSecond | @as("VolumeWriteOpsPerSecond") #VolumeWriteOpsPerSecond | @as("VolumeReadOpsPerSecond") #VolumeReadOpsPerSecond]
-type eBSFinding = [@as("NotOptimized") #NotOptimized | @as("Optimized") #Optimized]
-type eBSFilterName = [@as("Finding") #Finding]
+type ebsmetricName = [@as("VolumeWriteBytesPerSecond") #VolumeWriteBytesPerSecond | @as("VolumeReadBytesPerSecond") #VolumeReadBytesPerSecond | @as("VolumeWriteOpsPerSecond") #VolumeWriteOpsPerSecond | @as("VolumeReadOpsPerSecond") #VolumeReadOpsPerSecond]
+type ebsfinding = [@as("NotOptimized") #NotOptimized | @as("Optimized") #Optimized]
+type ebsfilterName = [@as("Finding") #Finding]
 type destinationKeyPrefix = string
 type destinationKey = string
 type destinationBucket = string
-type desiredCapacity = int;
+type desiredCapacity = int
 type currentInstanceType = string
 type creationTimestamp = Js.Date.t;
 type code = string
@@ -80,57 +87,57 @@ type autoScalingGroupName = string
 type autoScalingGroupArn = string
 type accountId = string
 type volumeConfiguration = {
-@as("volumeBurstThroughput") volumeBurstThroughput: volumeBurstThroughput,
-@as("volumeBaselineThroughput") volumeBaselineThroughput: volumeBaselineThroughput,
-@as("volumeBurstIOPS") volumeBurstIOPS: volumeBurstIOPS,
-@as("volumeBaselineIOPS") volumeBaselineIOPS: volumeBaselineIOPS,
-@as("volumeSize") volumeSize: volumeSize,
-@as("volumeType") volumeType: volumeType
+volumeBurstThroughput: option<volumeBurstThroughput>,
+volumeBaselineThroughput: option<volumeBaselineThroughput>,
+volumeBurstIOPS: option<volumeBurstIOPS>,
+volumeBaselineIOPS: option<volumeBaselineIOPS>,
+volumeSize: option<volumeSize>,
+volumeType: option<volumeType>
 }
 type volumeArns = array<volumeArn>
 type utilizationMetric = {
-@as("value") value: metricValue,
-@as("statistic") statistic: metricStatistic,
-@as("name") name: metricName
+value: option<metricValue>,
+statistic: option<metricStatistic>,
+name: option<metricName>
 }
-type timestamps = array<amazonawsTimestamp>
+type timestamps = array<timestamp_>
 type s3DestinationConfig = {
-@as("keyPrefix") keyPrefix: destinationKeyPrefix,
-@as("bucket") bucket: destinationBucket
+keyPrefix: option<destinationKeyPrefix>,
+bucket: option<destinationBucket>
 }
 type s3Destination = {
-@as("metadataKey") metadataKey: metadataKey,
-@as("key") key: destinationKey,
-@as("bucket") bucket: destinationBucket
+metadataKey: option<metadataKey>,
+key: option<destinationKey>,
+bucket: option<destinationBucket>
 }
 type recommendationSource = {
-@as("recommendationSourceType") recommendationSourceType: recommendationSourceType,
-@as("recommendationSourceArn") recommendationSourceArn: recommendationSourceArn
+recommendationSourceType: option<recommendationSourceType>,
+recommendationSourceArn: option<recommendationSourceArn>
 }
 type reasonCodeSummary = {
-@as("value") value: summaryValue,
-@as("name") name: findingReasonCode
+value: option<summaryValue>,
+name: option<findingReasonCode>
 }
 type platformDifferences = array<platformDifference>
 type metricValues = array<metricValue>
 type lambdaFunctionUtilizationMetric = {
-@as("value") value: metricValue,
-@as("statistic") statistic: lambdaFunctionMetricStatistic,
-@as("name") name: lambdaFunctionMetricName
+value: option<metricValue>,
+statistic: option<lambdaFunctionMetricStatistic>,
+name: option<lambdaFunctionMetricName>
 }
 type lambdaFunctionRecommendationFindingReasonCodes = array<lambdaFunctionRecommendationFindingReasonCode>
 type lambdaFunctionMemoryProjectedMetric = {
-@as("value") value: metricValue,
-@as("statistic") statistic: lambdaFunctionMemoryMetricStatistic,
-@as("name") name: lambdaFunctionMemoryMetricName
+value: option<metricValue>,
+statistic: option<lambdaFunctionMemoryMetricStatistic>,
+name: option<lambdaFunctionMemoryMetricName>
 }
 type jobIds = array<jobId>
 type instanceRecommendationFindingReasonCodes = array<instanceRecommendationFindingReasonCode>
 type instanceArns = array<instanceArn>
 type getRecommendationError = {
-@as("message") message: message,
-@as("code") code: code,
-@as("identifier") identifier: identifier
+message: option<message>,
+code: option<code>,
+identifier: option<identifier>
 }
 type functionArns = array<functionArn>
 type filterValues = array<filterValue>
@@ -138,109 +145,109 @@ type exportableVolumeFields = array<exportableVolumeField>
 type exportableLambdaFunctionFields = array<exportableLambdaFunctionField>
 type exportableInstanceFields = array<exportableInstanceField>
 type exportableAutoScalingGroupFields = array<exportableAutoScalingGroupField>
-type eBSUtilizationMetric = {
-@as("value") value: metricValue,
-@as("statistic") statistic: metricStatistic,
-@as("name") name: eBSMetricName
+type ebsutilizationMetric = {
+value: option<metricValue>,
+statistic: option<metricStatistic>,
+name: option<ebsmetricName>
 }
 type autoScalingGroupConfiguration = {
-@as("instanceType") instanceType: instanceType,
-@as("maxSize") maxSize: maxSize,
-@as("minSize") minSize: minSize,
-@as("desiredCapacity") desiredCapacity: desiredCapacity
+instanceType: option<instanceType>,
+maxSize: option<maxSize>,
+minSize: option<minSize>,
+desiredCapacity: option<desiredCapacity>
 }
 type autoScalingGroupArns = array<autoScalingGroupArn>
 type accountIds = array<accountId>
 type volumeRecommendationOption = {
-@as("rank") rank: rank,
-@as("performanceRisk") performanceRisk: performanceRisk,
-@as("configuration") configuration: volumeConfiguration
+rank: option<rank>,
+performanceRisk: option<performanceRisk>,
+configuration: option<volumeConfiguration>
 }
 type utilizationMetrics = array<utilizationMetric>
 type recommendationSources = array<recommendationSource>
 type reasonCodeSummaries = array<reasonCodeSummary>
 type projectedUtilizationMetrics = array<utilizationMetric>
 type projectedMetric = {
-@as("values") values: metricValues,
-@as("timestamps") timestamps: timestamps,
-@as("name") name: metricName
+values: option<metricValues>,
+timestamps: option<timestamps>,
+name: option<metricName>
 }
 type lambdaFunctionUtilizationMetrics = array<lambdaFunctionUtilizationMetric>
 type lambdaFunctionRecommendationFilter = {
-@as("values") values: filterValues,
-@as("name") name: lambdaFunctionRecommendationFilterName
+values: option<filterValues>,
+name: option<lambdaFunctionRecommendationFilterName>
 }
 type lambdaFunctionMemoryProjectedMetrics = array<lambdaFunctionMemoryProjectedMetric>
 type jobFilter = {
-@as("values") values: filterValues,
-@as("name") name: jobFilterName
+values: option<filterValues>,
+name: option<jobFilterName>
 }
 type getRecommendationErrors = array<getRecommendationError>
 type filter = {
-@as("values") values: filterValues,
-@as("name") name: filterName
+values: option<filterValues>,
+name: option<filterName>
 }
 type exportDestination = {
-@as("s3") s3: s3Destination
+s3: option<s3Destination>
 }
-type eBSUtilizationMetrics = array<eBSUtilizationMetric>
-type eBSFilter = {
-@as("values") values: filterValues,
-@as("name") name: eBSFilterName
+type ebsutilizationMetrics = array<ebsutilizationMetric>
+type ebsfilter = {
+values: option<filterValues>,
+name: option<ebsfilterName>
 }
 type volumeRecommendationOptions = array<volumeRecommendationOption>
 type summary = {
-@as("reasonCodeSummaries") reasonCodeSummaries: reasonCodeSummaries,
-@as("value") value: summaryValue,
-@as("name") name: finding
+reasonCodeSummaries: option<reasonCodeSummaries>,
+value: option<summaryValue>,
+name: option<finding>
 }
 type recommendationExportJob = {
-@as("failureReason") failureReason: failureReason,
-@as("lastUpdatedTimestamp") lastUpdatedTimestamp: lastUpdatedTimestamp,
-@as("creationTimestamp") creationTimestamp: creationTimestamp,
-@as("status") status: jobStatus,
-@as("resourceType") resourceType: resourceType,
-@as("destination") destination: exportDestination,
-@as("jobId") jobId: jobId
+failureReason: option<failureReason>,
+lastUpdatedTimestamp: option<lastUpdatedTimestamp>,
+creationTimestamp: option<creationTimestamp>,
+status: option<jobStatus>,
+resourceType: option<resourceType>,
+destination: option<exportDestination>,
+jobId: option<jobId>
 }
 type projectedMetrics = array<projectedMetric>
 type lambdaFunctionRecommendationFilters = array<lambdaFunctionRecommendationFilter>
 type lambdaFunctionMemoryRecommendationOption = {
-@as("projectedUtilizationMetrics") projectedUtilizationMetrics: lambdaFunctionMemoryProjectedMetrics,
-@as("memorySize") memorySize: memorySize,
-@as("rank") rank: rank
+projectedUtilizationMetrics: option<lambdaFunctionMemoryProjectedMetrics>,
+memorySize: option<memorySize>,
+rank: option<rank>
 }
 type jobFilters = array<jobFilter>
 type instanceRecommendationOption = {
-@as("rank") rank: rank,
-@as("performanceRisk") performanceRisk: performanceRisk,
-@as("platformDifferences") platformDifferences: platformDifferences,
-@as("projectedUtilizationMetrics") projectedUtilizationMetrics: projectedUtilizationMetrics,
-@as("instanceType") instanceType: instanceType
+rank: option<rank>,
+performanceRisk: option<performanceRisk>,
+platformDifferences: option<platformDifferences>,
+projectedUtilizationMetrics: option<projectedUtilizationMetrics>,
+instanceType: option<instanceType>
 }
 type filters = array<filter>
-type eBSFilters = array<eBSFilter>
+type ebsfilters = array<ebsfilter>
 type autoScalingGroupRecommendationOption = {
-@as("rank") rank: rank,
-@as("performanceRisk") performanceRisk: performanceRisk,
-@as("projectedUtilizationMetrics") projectedUtilizationMetrics: projectedUtilizationMetrics,
-@as("configuration") configuration: autoScalingGroupConfiguration
+rank: option<rank>,
+performanceRisk: option<performanceRisk>,
+projectedUtilizationMetrics: option<projectedUtilizationMetrics>,
+configuration: option<autoScalingGroupConfiguration>
 }
 type volumeRecommendation = {
-@as("lastRefreshTimestamp") lastRefreshTimestamp: lastRefreshTimestamp,
-@as("volumeRecommendationOptions") volumeRecommendationOptions: volumeRecommendationOptions,
-@as("lookBackPeriodInDays") lookBackPeriodInDays: lookBackPeriodInDays,
-@as("utilizationMetrics") utilizationMetrics: eBSUtilizationMetrics,
-@as("finding") finding: eBSFinding,
-@as("currentConfiguration") currentConfiguration: volumeConfiguration,
-@as("accountId") accountId: accountId,
-@as("volumeArn") volumeArn: volumeArn
+lastRefreshTimestamp: option<lastRefreshTimestamp>,
+volumeRecommendationOptions: option<volumeRecommendationOptions>,
+lookBackPeriodInDays: option<lookBackPeriodInDays>,
+utilizationMetrics: option<ebsutilizationMetrics>,
+finding: option<ebsfinding>,
+currentConfiguration: option<volumeConfiguration>,
+accountId: option<accountId>,
+volumeArn: option<volumeArn>
 }
 type summaries = array<summary>
 type recommendedOptionProjectedMetric = {
-@as("projectedMetrics") projectedMetrics: projectedMetrics,
-@as("rank") rank: rank,
-@as("recommendedInstanceType") recommendedInstanceType: recommendedInstanceType
+projectedMetrics: option<projectedMetrics>,
+rank: option<rank>,
+recommendedInstanceType: option<recommendedInstanceType>
 }
 type recommendationOptions = array<instanceRecommendationOption>
 type recommendationExportJobs = array<recommendationExportJob>
@@ -249,265 +256,265 @@ type autoScalingGroupRecommendationOptions = array<autoScalingGroupRecommendatio
 type volumeRecommendations = array<volumeRecommendation>
 type recommendedOptionProjectedMetrics = array<recommendedOptionProjectedMetric>
 type recommendationSummary = {
-@as("accountId") accountId: accountId,
-@as("recommendationResourceType") recommendationResourceType: recommendationSourceType,
-@as("summaries") summaries: summaries
+accountId: option<accountId>,
+recommendationResourceType: option<recommendationSourceType>,
+summaries: option<summaries>
 }
 type lambdaFunctionRecommendation = {
-@as("memorySizeRecommendationOptions") memorySizeRecommendationOptions: lambdaFunctionMemoryRecommendationOptions,
-@as("findingReasonCodes") findingReasonCodes: lambdaFunctionRecommendationFindingReasonCodes,
-@as("finding") finding: lambdaFunctionRecommendationFinding,
-@as("lastRefreshTimestamp") lastRefreshTimestamp: lastRefreshTimestamp,
-@as("lookbackPeriodInDays") lookbackPeriodInDays: lookBackPeriodInDays,
-@as("utilizationMetrics") utilizationMetrics: lambdaFunctionUtilizationMetrics,
-@as("numberOfInvocations") numberOfInvocations: numberOfInvocations,
-@as("currentMemorySize") currentMemorySize: memorySize,
-@as("accountId") accountId: accountId,
-@as("functionVersion") functionVersion: functionVersion,
-@as("functionArn") functionArn: functionArn
+memorySizeRecommendationOptions: option<lambdaFunctionMemoryRecommendationOptions>,
+findingReasonCodes: option<lambdaFunctionRecommendationFindingReasonCodes>,
+finding: option<lambdaFunctionRecommendationFinding>,
+lastRefreshTimestamp: option<lastRefreshTimestamp>,
+lookbackPeriodInDays: option<lookBackPeriodInDays>,
+utilizationMetrics: option<lambdaFunctionUtilizationMetrics>,
+numberOfInvocations: option<numberOfInvocations>,
+currentMemorySize: option<memorySize>,
+accountId: option<accountId>,
+functionVersion: option<functionVersion>,
+functionArn: option<functionArn>
 }
 type instanceRecommendation = {
-@as("lastRefreshTimestamp") lastRefreshTimestamp: lastRefreshTimestamp,
-@as("recommendationSources") recommendationSources: recommendationSources,
-@as("recommendationOptions") recommendationOptions: recommendationOptions,
-@as("lookBackPeriodInDays") lookBackPeriodInDays: lookBackPeriodInDays,
-@as("utilizationMetrics") utilizationMetrics: utilizationMetrics,
-@as("findingReasonCodes") findingReasonCodes: instanceRecommendationFindingReasonCodes,
-@as("finding") finding: finding,
-@as("currentInstanceType") currentInstanceType: currentInstanceType,
-@as("instanceName") instanceName: instanceName,
-@as("accountId") accountId: accountId,
-@as("instanceArn") instanceArn: instanceArn
+lastRefreshTimestamp: option<lastRefreshTimestamp>,
+recommendationSources: option<recommendationSources>,
+recommendationOptions: option<recommendationOptions>,
+lookBackPeriodInDays: option<lookBackPeriodInDays>,
+utilizationMetrics: option<utilizationMetrics>,
+findingReasonCodes: option<instanceRecommendationFindingReasonCodes>,
+finding: option<finding>,
+currentInstanceType: option<currentInstanceType>,
+instanceName: option<instanceName>,
+accountId: option<accountId>,
+instanceArn: option<instanceArn>
 }
 type autoScalingGroupRecommendation = {
-@as("lastRefreshTimestamp") lastRefreshTimestamp: lastRefreshTimestamp,
-@as("recommendationOptions") recommendationOptions: autoScalingGroupRecommendationOptions,
-@as("currentConfiguration") currentConfiguration: autoScalingGroupConfiguration,
-@as("lookBackPeriodInDays") lookBackPeriodInDays: lookBackPeriodInDays,
-@as("utilizationMetrics") utilizationMetrics: utilizationMetrics,
-@as("finding") finding: finding,
-@as("autoScalingGroupName") autoScalingGroupName: autoScalingGroupName,
-@as("autoScalingGroupArn") autoScalingGroupArn: autoScalingGroupArn,
-@as("accountId") accountId: accountId
+lastRefreshTimestamp: option<lastRefreshTimestamp>,
+recommendationOptions: option<autoScalingGroupRecommendationOptions>,
+currentConfiguration: option<autoScalingGroupConfiguration>,
+lookBackPeriodInDays: option<lookBackPeriodInDays>,
+utilizationMetrics: option<utilizationMetrics>,
+finding: option<finding>,
+autoScalingGroupName: option<autoScalingGroupName>,
+autoScalingGroupArn: option<autoScalingGroupArn>,
+accountId: option<accountId>
 }
 type recommendationSummaries = array<recommendationSummary>
 type lambdaFunctionRecommendations = array<lambdaFunctionRecommendation>
 type instanceRecommendations = array<instanceRecommendation>
 type autoScalingGroupRecommendations = array<autoScalingGroupRecommendation>
-type clientType;
-@module("@aws-sdk/client-compute-optimizer") @new external createClient: unit => clientType = "ComputeOptimizerClient";
+type awsServiceClient;
+@module("@aws-sdk/client-compute-optimizer") @new external createClient: unit => awsServiceClient = "ComputeOptimizerClient";
 module UpdateEnrollmentStatus = {
   type t;
   type request = {
-@as("includeMemberAccounts") includeMemberAccounts: includeMemberAccounts,
-@as("status") status: option<status>
+includeMemberAccounts: option<includeMemberAccounts>,
+status: status
 }
   type response = {
-@as("statusReason") statusReason: statusReason,
-@as("status") status: status
+statusReason: option<statusReason>,
+status: option<status>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "UpdateEnrollmentStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEnrollmentStatus = {
   type t;
   type request = unit
   type response = {
-@as("memberAccountsEnrolled") memberAccountsEnrolled: memberAccountsEnrolled,
-@as("statusReason") statusReason: statusReason,
-@as("status") status: status
+memberAccountsEnrolled: option<memberAccountsEnrolled>,
+statusReason: option<statusReason>,
+status: option<status>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetEnrollmentStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ExportLambdaFunctionRecommendations = {
   type t;
   type request = {
-@as("includeMemberAccounts") includeMemberAccounts: includeMemberAccounts,
-@as("fileFormat") fileFormat: fileFormat,
-@as("s3DestinationConfig") s3DestinationConfig: option<s3DestinationConfig>,
-@as("fieldsToExport") fieldsToExport: exportableLambdaFunctionFields,
-@as("filters") filters: lambdaFunctionRecommendationFilters,
-@as("accountIds") accountIds: accountIds
+includeMemberAccounts: option<includeMemberAccounts>,
+fileFormat: option<fileFormat>,
+s3DestinationConfig: s3DestinationConfig,
+fieldsToExport: option<exportableLambdaFunctionFields>,
+filters: option<lambdaFunctionRecommendationFilters>,
+accountIds: option<accountIds>
 }
   type response = {
-@as("s3Destination") s3Destination: s3Destination,
-@as("jobId") jobId: jobId
+s3Destination: option<s3Destination>,
+jobId: option<jobId>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "ExportLambdaFunctionRecommendationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ExportEC2InstanceRecommendations = {
   type t;
   type request = {
-@as("includeMemberAccounts") includeMemberAccounts: includeMemberAccounts,
-@as("fileFormat") fileFormat: fileFormat,
-@as("s3DestinationConfig") s3DestinationConfig: option<s3DestinationConfig>,
-@as("fieldsToExport") fieldsToExport: exportableInstanceFields,
-@as("filters") filters: filters,
-@as("accountIds") accountIds: accountIds
+includeMemberAccounts: option<includeMemberAccounts>,
+fileFormat: option<fileFormat>,
+s3DestinationConfig: s3DestinationConfig,
+fieldsToExport: option<exportableInstanceFields>,
+filters: option<filters>,
+accountIds: option<accountIds>
 }
   type response = {
-@as("s3Destination") s3Destination: s3Destination,
-@as("jobId") jobId: jobId
+s3Destination: option<s3Destination>,
+jobId: option<jobId>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "ExportEC2InstanceRecommendationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ExportEBSVolumeRecommendations = {
   type t;
   type request = {
-@as("includeMemberAccounts") includeMemberAccounts: includeMemberAccounts,
-@as("fileFormat") fileFormat: fileFormat,
-@as("s3DestinationConfig") s3DestinationConfig: option<s3DestinationConfig>,
-@as("fieldsToExport") fieldsToExport: exportableVolumeFields,
-@as("filters") filters: eBSFilters,
-@as("accountIds") accountIds: accountIds
+includeMemberAccounts: option<includeMemberAccounts>,
+fileFormat: option<fileFormat>,
+s3DestinationConfig: s3DestinationConfig,
+fieldsToExport: option<exportableVolumeFields>,
+filters: option<ebsfilters>,
+accountIds: option<accountIds>
 }
   type response = {
-@as("s3Destination") s3Destination: s3Destination,
-@as("jobId") jobId: jobId
+s3Destination: option<s3Destination>,
+jobId: option<jobId>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "ExportEBSVolumeRecommendationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ExportAutoScalingGroupRecommendations = {
   type t;
   type request = {
-@as("includeMemberAccounts") includeMemberAccounts: includeMemberAccounts,
-@as("fileFormat") fileFormat: fileFormat,
-@as("s3DestinationConfig") s3DestinationConfig: option<s3DestinationConfig>,
-@as("fieldsToExport") fieldsToExport: exportableAutoScalingGroupFields,
-@as("filters") filters: filters,
-@as("accountIds") accountIds: accountIds
+includeMemberAccounts: option<includeMemberAccounts>,
+fileFormat: option<fileFormat>,
+s3DestinationConfig: s3DestinationConfig,
+fieldsToExport: option<exportableAutoScalingGroupFields>,
+filters: option<filters>,
+accountIds: option<accountIds>
 }
   type response = {
-@as("s3Destination") s3Destination: s3Destination,
-@as("jobId") jobId: jobId
+s3Destination: option<s3Destination>,
+jobId: option<jobId>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "ExportAutoScalingGroupRecommendationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRecommendationExportJobs = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("filters") filters: jobFilters,
-@as("jobIds") jobIds: jobIds
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+filters: option<jobFilters>,
+jobIds: option<jobIds>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("recommendationExportJobs") recommendationExportJobs: recommendationExportJobs
+nextToken: option<nextToken>,
+recommendationExportJobs: option<recommendationExportJobs>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "DescribeRecommendationExportJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEC2RecommendationProjectedMetrics = {
   type t;
   type request = {
-@as("endTime") endTime: option<amazonawsTimestamp>,
-@as("startTime") startTime: option<amazonawsTimestamp>,
-@as("period") period: option<period>,
-@as("stat") stat: option<metricStatistic>,
-@as("instanceArn") instanceArn: option<instanceArn>
+endTime: timestamp_,
+startTime: timestamp_,
+period: period,
+stat: metricStatistic,
+instanceArn: instanceArn
 }
   type response = {
-@as("recommendedOptionProjectedMetrics") recommendedOptionProjectedMetrics: recommendedOptionProjectedMetrics
+recommendedOptionProjectedMetrics: option<recommendedOptionProjectedMetrics>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetEC2RecommendationProjectedMetricsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEBSVolumeRecommendations = {
   type t;
   type request = {
-@as("accountIds") accountIds: accountIds,
-@as("filters") filters: eBSFilters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("volumeArns") volumeArns: volumeArns
+accountIds: option<accountIds>,
+filters: option<ebsfilters>,
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+volumeArns: option<volumeArns>
 }
   type response = {
-@as("errors") errors: getRecommendationErrors,
-@as("volumeRecommendations") volumeRecommendations: volumeRecommendations,
-@as("nextToken") nextToken: nextToken
+errors: option<getRecommendationErrors>,
+volumeRecommendations: option<volumeRecommendations>,
+nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetEBSVolumeRecommendationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetRecommendationSummaries = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("accountIds") accountIds: accountIds
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+accountIds: option<accountIds>
 }
   type response = {
-@as("recommendationSummaries") recommendationSummaries: recommendationSummaries,
-@as("nextToken") nextToken: nextToken
+recommendationSummaries: option<recommendationSummaries>,
+nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetRecommendationSummariesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLambdaFunctionRecommendations = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("filters") filters: lambdaFunctionRecommendationFilters,
-@as("accountIds") accountIds: accountIds,
-@as("functionArns") functionArns: functionArns
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+filters: option<lambdaFunctionRecommendationFilters>,
+accountIds: option<accountIds>,
+functionArns: option<functionArns>
 }
   type response = {
-@as("lambdaFunctionRecommendations") lambdaFunctionRecommendations: lambdaFunctionRecommendations,
-@as("nextToken") nextToken: nextToken
+lambdaFunctionRecommendations: option<lambdaFunctionRecommendations>,
+nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetLambdaFunctionRecommendationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEC2InstanceRecommendations = {
   type t;
   type request = {
-@as("accountIds") accountIds: accountIds,
-@as("filters") filters: filters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("instanceArns") instanceArns: instanceArns
+accountIds: option<accountIds>,
+filters: option<filters>,
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+instanceArns: option<instanceArns>
 }
   type response = {
-@as("errors") errors: getRecommendationErrors,
-@as("instanceRecommendations") instanceRecommendations: instanceRecommendations,
-@as("nextToken") nextToken: nextToken
+errors: option<getRecommendationErrors>,
+instanceRecommendations: option<instanceRecommendations>,
+nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetEC2InstanceRecommendationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAutoScalingGroupRecommendations = {
   type t;
   type request = {
-@as("filters") filters: filters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("autoScalingGroupArns") autoScalingGroupArns: autoScalingGroupArns,
-@as("accountIds") accountIds: accountIds
+filters: option<filters>,
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+autoScalingGroupArns: option<autoScalingGroupArns>,
+accountIds: option<accountIds>
 }
   type response = {
-@as("errors") errors: getRecommendationErrors,
-@as("autoScalingGroupRecommendations") autoScalingGroupRecommendations: autoScalingGroupRecommendations,
-@as("nextToken") nextToken: nextToken
+errors: option<getRecommendationErrors>,
+autoScalingGroupRecommendations: option<autoScalingGroupRecommendations>,
+nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetAutoScalingGroupRecommendationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

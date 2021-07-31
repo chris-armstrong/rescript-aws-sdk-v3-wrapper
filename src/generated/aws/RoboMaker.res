@@ -1,8 +1,14 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type timestamp_ = Js.Date.t;
+type long = float
 type errorMessage = string
 type worldGenerationJobStatus = [@as("Canceled") #Canceled | @as("Canceling") #Canceling | @as("PartialFailed") #PartialFailed | @as("Failed") #Failed | @as("Completed") #Completed | @as("Running") #Running | @as("Pending") #Pending]
 type worldGenerationJobErrorCode = [@as("AllWorldGenerationFailed") #AllWorldGenerationFailed | @as("InvalidInput") #InvalidInput | @as("RequestThrottled") #RequestThrottled | @as("ResourceNotFound") #ResourceNotFound | @as("LimitExceeded") #LimitExceeded | @as("InternalServiceError") #InternalServiceError]
@@ -10,13 +16,13 @@ type worldExportJobStatus = [@as("Canceled") #Canceled | @as("Canceling") #Cance
 type worldExportJobErrorCode = [@as("AccessDenied") #AccessDenied | @as("InvalidInput") #InvalidInput | @as("RequestThrottled") #RequestThrottled | @as("ResourceNotFound") #ResourceNotFound | @as("LimitExceeded") #LimitExceeded | @as("InternalServiceError") #InternalServiceError]
 type versionQualifier = string
 type version = string
-type uploadBehavior = [@as("UPLOAD_ROLLING_AUTO_REMOVE") #UPLOAD_ROLLING_AUTO_REMOVE | @as("UPLOAD_ON_TERMINATE") #UPLOAD_ON_TERMINATE]
+type uploadBehavior = [@as("UPLOAD_ROLLING_AUTO_REMOVE") #UPLOADROLLINGAUTOREMOVE | @as("UPLOAD_ON_TERMINATE") #UPLOADONTERMINATE]
 type unrestrictedCommand = string
 type templateName = string
 type tagValue = string
 type tagKey = string
-type simulationUnit = int;
-type simulationTimeMillis = float;
+type simulationUnit = int
+type simulationTimeMillis = float
 type simulationSoftwareSuiteVersionType = string
 type simulationSoftwareSuiteType = [@as("RosbagPlay") #RosbagPlay | @as("Gazebo") #Gazebo]
 type simulationJobStatus = [@as("Canceled") #Canceled | @as("Terminated") #Terminated | @as("Terminating") #Terminating | @as("RunningFailed") #RunningFailed | @as("Failed") #Failed | @as("Completed") #Completed | @as("Restarting") #Restarting | @as("Running") #Running | @as("Preparing") #Preparing | @as("Pending") #Pending]
@@ -33,216 +39,216 @@ type robotDeploymentStep = [@as("Finished") #Finished | @as("ExecutingPostLaunch
 type revisionId = string
 type renderingEngineVersionType = string
 type renderingEngineType = [@as("OGRE") #OGRE]
-type port = int;
-type percentage = int;
-type percentDone = float;
+type port = int
+type percentage = int
+type percentDone = float
 type path = string
 type paginationToken = string
-type nonSystemPort = int;
+type nonSystemPort = int
 type nonEmptyString = string
 type name = string
-type maxResults = int;
-type maxConcurrency = int;
+type maxResults = int
+type maxConcurrency = int
 type lastUpdatedAt = Js.Date.t;
 type lastStartedAt = Js.Date.t;
 type json = string
-type jobDuration = float;
-type interiorCountPerFloorplan = int;
-type amazonawsInteger = int;
+type jobDuration = float
+type interiorCountPerFloorplan = int
+type integer_ = int
 type id = string
 type iamRole = string
 type genericString = string
-type genericInteger = int;
-type floorplanCount = int;
+type genericInteger = int
+type floorplanCount = int
 type failureBehavior = [@as("Continue") #Continue | @as("Fail") #Fail]
 type failedAt = Js.Date.t;
 type exitBehavior = [@as("RESTART") #RESTART | @as("FAIL") #FAIL]
 type environmentVariableValue = string
 type environmentVariableKey = string
 type deploymentVersion = string
-type deploymentTimeout = float;
+type deploymentTimeout = float
 type deploymentStatus = [@as("Canceled") #Canceled | @as("Succeeded") #Succeeded | @as("Failed") #Failed | @as("InProgress") #InProgress | @as("Preparing") #Preparing | @as("Pending") #Pending]
 type deploymentJobErrorCode = [@as("FleetDeploymentTimeout") #FleetDeploymentTimeout | @as("DeploymentFleetDoesNotExist") #DeploymentFleetDoesNotExist | @as("RobotApplicationDoesNotExist") #RobotApplicationDoesNotExist | @as("InternalServerError") #InternalServerError | @as("BadLambdaAssociated") #BadLambdaAssociated | @as("DownloadConditionFailed") #DownloadConditionFailed | @as("BadPermissionError") #BadPermissionError | @as("PostLaunchFileFailure") #PostLaunchFileFailure | @as("PreLaunchFileFailure") #PreLaunchFileFailure | @as("ExtractingBundleFailure") #ExtractingBundleFailure | @as("LambdaDeleted") #LambdaDeleted | @as("GreengrassGroupVersionDoesNotExist") #GreengrassGroupVersionDoesNotExist | @as("MissingRobotDeploymentResource") #MissingRobotDeploymentResource | @as("MissingRobotApplicationArchitecture") #MissingRobotApplicationArchitecture | @as("MissingRobotArchitecture") #MissingRobotArchitecture | @as("InvalidGreengrassGroup") #InvalidGreengrassGroup | @as("GreengrassDeploymentFailed") #GreengrassDeploymentFailed | @as("RobotAgentConnectionTimeout") #RobotAgentConnectionTimeout | @as("RobotDeploymentNoResponse") #RobotDeploymentNoResponse | @as("RobotDeploymentAborted") #RobotDeploymentAborted | @as("FailureThresholdBreached") #FailureThresholdBreached | @as("EtagMismatch") #EtagMismatch | @as("EnvironmentSetupError") #EnvironmentSetupError | @as("ResourceNotFound") #ResourceNotFound]
 type createdAt = Js.Date.t;
 type command = string
 type clientRequestToken = string
-type boxedBoolean = bool;
-type amazonawsBoolean = bool;
-type batchTimeoutInSeconds = float;
+type boxedBoolean = bool
+type boolean_ = bool
+type batchTimeoutInSeconds = float
 type arn = string
-type architecture = [@as("ARMHF") #ARMHF | @as("ARM64") #ARM64 | @as("X86_64") #X86_64]
+type architecture = [@as("ARMHF") #ARMHF | @as("ARM64") #ARM64 | @as("X86_64") #X8664]
 type worldSummary = {
-@as("template") template: arn,
-@as("generationJob") generationJob: arn,
-@as("createdAt") createdAt: createdAt,
-@as("arn") arn: arn
+template: option<arn>,
+generationJob: option<arn>,
+createdAt: option<createdAt>,
+arn: option<arn>
 }
 type worldFailure = {
-@as("failureCount") failureCount: amazonawsInteger,
-@as("sampleFailureReason") sampleFailureReason: genericString,
-@as("failureCode") failureCode: worldGenerationJobErrorCode
+failureCount: option<integer_>,
+sampleFailureReason: option<genericString>,
+failureCode: option<worldGenerationJobErrorCode>
 }
 type worldCount = {
-@as("interiorCountPerFloorplan") interiorCountPerFloorplan: interiorCountPerFloorplan,
-@as("floorplanCount") floorplanCount: floorplanCount
+interiorCountPerFloorplan: option<interiorCountPerFloorplan>,
+floorplanCount: option<floorplanCount>
 }
 type worldConfig = {
-@as("world") world: arn
+world: option<arn>
 }
 type uploadConfiguration = {
-@as("uploadBehavior") uploadBehavior: option<uploadBehavior>,
-@as("path") path: option<path>,
-@as("name") name: option<name>
+uploadBehavior: uploadBehavior,
+path: path,
+name: name
 }
 type tool = {
-@as("exitBehavior") exitBehavior: exitBehavior,
-@as("streamOutputToCloudWatch") streamOutputToCloudWatch: boxedBoolean,
-@as("command") command: option<unrestrictedCommand>,
-@as("name") name: option<name>,
-@as("streamUI") streamUI: boxedBoolean
+exitBehavior: option<exitBehavior>,
+streamOutputToCloudWatch: option<boxedBoolean>,
+command: unrestrictedCommand,
+name: name,
+streamUI: option<boxedBoolean>
 }
 type templateSummary = {
-@as("name") name: templateName,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("createdAt") createdAt: createdAt,
-@as("arn") arn: arn
+name: option<templateName>,
+lastUpdatedAt: option<lastUpdatedAt>,
+createdAt: option<createdAt>,
+arn: option<arn>
 }
 type templateLocation = {
-@as("s3Key") s3Key: option<s3Key>,
-@as("s3Bucket") s3Bucket: option<s3Bucket>
+s3Key: s3Key,
+s3Bucket: s3Bucket
 }
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type subnets = array<nonEmptyString>
 type sourceConfig = {
-@as("architecture") architecture: architecture,
-@as("s3Key") s3Key: s3Key,
-@as("s3Bucket") s3Bucket: s3Bucket
+architecture: option<architecture>,
+s3Key: option<s3Key>,
+s3Bucket: option<s3Bucket>
 }
 type source = {
-@as("architecture") architecture: architecture,
-@as("etag") etag: s3Etag,
-@as("s3Key") s3Key: s3Key,
-@as("s3Bucket") s3Bucket: s3Bucket
+architecture: option<architecture>,
+etag: option<s3Etag>,
+s3Key: option<s3Key>,
+s3Bucket: option<s3Bucket>
 }
 type simulationSoftwareSuite = {
-@as("version") version: simulationSoftwareSuiteVersionType,
-@as("name") name: simulationSoftwareSuiteType
+version: option<simulationSoftwareSuiteVersionType>,
+name: option<simulationSoftwareSuiteType>
 }
 type simulationJobBatchSummary = {
-@as("createdRequestCount") createdRequestCount: amazonawsInteger,
-@as("pendingRequestCount") pendingRequestCount: amazonawsInteger,
-@as("failedRequestCount") failedRequestCount: amazonawsInteger,
-@as("status") status: simulationJobBatchStatus,
-@as("createdAt") createdAt: createdAt,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("arn") arn: arn
+createdRequestCount: option<integer_>,
+pendingRequestCount: option<integer_>,
+failedRequestCount: option<integer_>,
+status: option<simulationJobBatchStatus>,
+createdAt: option<createdAt>,
+lastUpdatedAt: option<lastUpdatedAt>,
+arn: option<arn>
 }
 type simulationApplicationNames = array<name>
 type securityGroups = array<nonEmptyString>
 type s3Object = {
-@as("etag") etag: s3Etag,
-@as("key") key: option<s3Key>,
-@as("bucket") bucket: option<s3Bucket>
+etag: option<s3Etag>,
+key: s3Key,
+bucket: s3Bucket
 }
 type s3Keys = array<s3Key>
 type s3KeyOutput = {
-@as("etag") etag: s3Etag,
-@as("s3Key") s3Key: s3Key
+etag: option<s3Etag>,
+s3Key: option<s3Key>
 }
 type robotSoftwareSuite = {
-@as("version") version: robotSoftwareSuiteVersionType,
-@as("name") name: robotSoftwareSuiteType
+version: option<robotSoftwareSuiteVersionType>,
+name: option<robotSoftwareSuiteType>
 }
 type robotApplicationNames = array<name>
 type robot = {
-@as("lastDeploymentTime") lastDeploymentTime: createdAt,
-@as("lastDeploymentJob") lastDeploymentJob: arn,
-@as("architecture") architecture: architecture,
-@as("createdAt") createdAt: createdAt,
-@as("greenGrassGroupId") greenGrassGroupId: id,
-@as("status") status: robotStatus,
-@as("fleetArn") fleetArn: arn,
-@as("name") name: name,
-@as("arn") arn: arn
+lastDeploymentTime: option<createdAt>,
+lastDeploymentJob: option<arn>,
+architecture: option<architecture>,
+createdAt: option<createdAt>,
+greenGrassGroupId: option<id>,
+status: option<robotStatus>,
+fleetArn: option<arn>,
+name: option<name>,
+arn: option<arn>
 }
 type renderingEngine = {
-@as("version") version: renderingEngineVersionType,
-@as("name") name: renderingEngineType
+version: option<renderingEngineVersionType>,
+name: option<renderingEngineType>
 }
 type progressDetail = {
-@as("targetResource") targetResource: genericString,
-@as("estimatedTimeRemainingSeconds") estimatedTimeRemainingSeconds: genericInteger,
-@as("percentDone") percentDone: percentDone,
-@as("currentProgress") currentProgress: robotDeploymentStep
+targetResource: option<genericString>,
+estimatedTimeRemainingSeconds: option<genericInteger>,
+percentDone: option<percentDone>,
+currentProgress: option<robotDeploymentStep>
 }
 type portMapping = {
-@as("enableOnPublicIp") enableOnPublicIp: amazonawsBoolean,
-@as("applicationPort") applicationPort: option<nonSystemPort>,
-@as("jobPort") jobPort: option<port>
+enableOnPublicIp: option<boolean_>,
+applicationPort: nonSystemPort,
+jobPort: port
 }
 type outputLocation = {
-@as("s3Prefix") s3Prefix: s3Key,
-@as("s3Bucket") s3Bucket: s3Bucket
+s3Prefix: option<s3Key>,
+s3Bucket: option<s3Bucket>
 }
 type networkInterface = {
-@as("publicIpAddress") publicIpAddress: genericString,
-@as("privateIpAddress") privateIpAddress: genericString,
-@as("networkInterfaceId") networkInterfaceId: genericString
+publicIpAddress: option<genericString>,
+privateIpAddress: option<genericString>,
+networkInterfaceId: option<genericString>
 }
 type loggingConfig = {
-@as("recordAllRosTopics") recordAllRosTopics: option<boxedBoolean>
+recordAllRosTopics: boxedBoolean
 }
 type fleet = {
-@as("lastDeploymentTime") lastDeploymentTime: createdAt,
-@as("lastDeploymentJob") lastDeploymentJob: arn,
-@as("lastDeploymentStatus") lastDeploymentStatus: deploymentStatus,
-@as("createdAt") createdAt: createdAt,
-@as("arn") arn: arn,
-@as("name") name: name
+lastDeploymentTime: option<createdAt>,
+lastDeploymentJob: option<arn>,
+lastDeploymentStatus: option<deploymentStatus>,
+createdAt: option<createdAt>,
+arn: option<arn>,
+name: option<name>
 }
 type filterValues = array<name>
 type environmentVariableMap = Js.Dict.t< environmentVariableValue>
 type dataSourceNames = array<name>
 type computeResponse = {
-@as("simulationUnitLimit") simulationUnitLimit: simulationUnit
+simulationUnitLimit: option<simulationUnit>
 }
 type compute = {
-@as("simulationUnitLimit") simulationUnitLimit: simulationUnit
+simulationUnitLimit: option<simulationUnit>
 }
 type batchPolicy = {
-@as("maxConcurrency") maxConcurrency: maxConcurrency,
-@as("timeoutInSeconds") timeoutInSeconds: batchTimeoutInSeconds
+maxConcurrency: option<maxConcurrency>,
+timeoutInSeconds: option<batchTimeoutInSeconds>
 }
 type arns = array<arn>
 type worldSummaries = array<worldSummary>
 type worldGenerationJobSummary = {
-@as("failedWorldCount") failedWorldCount: amazonawsInteger,
-@as("succeededWorldCount") succeededWorldCount: amazonawsInteger,
-@as("worldCount") worldCount: worldCount,
-@as("status") status: worldGenerationJobStatus,
-@as("createdAt") createdAt: createdAt,
-@as("template") template: arn,
-@as("arn") arn: arn
+failedWorldCount: option<integer_>,
+succeededWorldCount: option<integer_>,
+worldCount: option<worldCount>,
+status: option<worldGenerationJobStatus>,
+createdAt: option<createdAt>,
+template: option<arn>,
+arn: option<arn>
 }
 type worldFailures = array<worldFailure>
 type worldExportJobSummary = {
-@as("worlds") worlds: arns,
-@as("createdAt") createdAt: createdAt,
-@as("status") status: worldExportJobStatus,
-@as("arn") arn: arn
+worlds: option<arns>,
+createdAt: option<createdAt>,
+status: option<worldExportJobStatus>,
+arn: option<arn>
 }
 type worldConfigs = array<worldConfig>
-type vPCConfigResponse = {
-@as("assignPublicIp") assignPublicIp: amazonawsBoolean,
-@as("vpcId") vpcId: genericString,
-@as("securityGroups") securityGroups: securityGroups,
-@as("subnets") subnets: subnets
+type vpcconfigResponse = {
+assignPublicIp: option<boolean_>,
+vpcId: option<genericString>,
+securityGroups: option<securityGroups>,
+subnets: option<subnets>
 }
-type vPCConfig = {
-@as("assignPublicIp") assignPublicIp: amazonawsBoolean,
-@as("securityGroups") securityGroups: securityGroups,
-@as("subnets") subnets: option<subnets>
+type vpcconfig = {
+assignPublicIp: option<boolean_>,
+securityGroups: option<securityGroups>,
+subnets: subnets
 }
 type uploadConfigurations = array<uploadConfiguration>
 type tools = array<tool>
@@ -250,64 +256,64 @@ type templateSummaries = array<templateSummary>
 type sources = array<source>
 type sourceConfigs = array<sourceConfig>
 type simulationJobSummary = {
-@as("dataSourceNames") dataSourceNames: dataSourceNames,
-@as("robotApplicationNames") robotApplicationNames: robotApplicationNames,
-@as("simulationApplicationNames") simulationApplicationNames: simulationApplicationNames,
-@as("status") status: simulationJobStatus,
-@as("name") name: name,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("arn") arn: arn
+dataSourceNames: option<dataSourceNames>,
+robotApplicationNames: option<robotApplicationNames>,
+simulationApplicationNames: option<simulationApplicationNames>,
+status: option<simulationJobStatus>,
+name: option<name>,
+lastUpdatedAt: option<lastUpdatedAt>,
+arn: option<arn>
 }
 type simulationJobBatchSummaries = array<simulationJobBatchSummary>
 type simulationApplicationSummary = {
-@as("simulationSoftwareSuite") simulationSoftwareSuite: simulationSoftwareSuite,
-@as("robotSoftwareSuite") robotSoftwareSuite: robotSoftwareSuite,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("version") version: version,
-@as("arn") arn: arn,
-@as("name") name: name
+simulationSoftwareSuite: option<simulationSoftwareSuite>,
+robotSoftwareSuite: option<robotSoftwareSuite>,
+lastUpdatedAt: option<lastUpdatedAt>,
+version: option<version>,
+arn: option<arn>,
+name: option<name>
 }
 type s3KeyOutputs = array<s3KeyOutput>
 type robots = array<robot>
 type robotDeployment = {
-@as("failureCode") failureCode: deploymentJobErrorCode,
-@as("failureReason") failureReason: genericString,
-@as("progressDetail") progressDetail: progressDetail,
-@as("status") status: robotStatus,
-@as("deploymentFinishTime") deploymentFinishTime: createdAt,
-@as("deploymentStartTime") deploymentStartTime: createdAt,
-@as("arn") arn: arn
+failureCode: option<deploymentJobErrorCode>,
+failureReason: option<genericString>,
+progressDetail: option<progressDetail>,
+status: option<robotStatus>,
+deploymentFinishTime: option<createdAt>,
+deploymentStartTime: option<createdAt>,
+arn: option<arn>
 }
 type robotApplicationSummary = {
-@as("robotSoftwareSuite") robotSoftwareSuite: robotSoftwareSuite,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("version") version: version,
-@as("arn") arn: arn,
-@as("name") name: name
+robotSoftwareSuite: option<robotSoftwareSuite>,
+lastUpdatedAt: option<lastUpdatedAt>,
+version: option<version>,
+arn: option<arn>,
+name: option<name>
 }
 type portMappingList = array<portMapping>
 type fleets = array<fleet>
 type filter = {
-@as("values") values: filterValues,
-@as("name") name: name
+values: option<filterValues>,
+name: option<name>
 }
 type deploymentLaunchConfig = {
-@as("environmentVariables") environmentVariables: environmentVariableMap,
-@as("postLaunchFile") postLaunchFile: path,
-@as("launchFile") launchFile: option<command>,
-@as("preLaunchFile") preLaunchFile: path,
-@as("packageName") packageName: option<command>
+environmentVariables: option<environmentVariableMap>,
+postLaunchFile: option<path>,
+launchFile: command,
+preLaunchFile: option<path>,
+packageName: command
 }
 type deploymentConfig = {
-@as("downloadConditionFile") downloadConditionFile: s3Object,
-@as("robotDeploymentTimeoutInSeconds") robotDeploymentTimeoutInSeconds: deploymentTimeout,
-@as("failureThresholdPercentage") failureThresholdPercentage: percentage,
-@as("concurrentDeploymentPercentage") concurrentDeploymentPercentage: percentage
+downloadConditionFile: option<s3Object>,
+robotDeploymentTimeoutInSeconds: option<deploymentTimeout>,
+failureThresholdPercentage: option<percentage>,
+concurrentDeploymentPercentage: option<percentage>
 }
 type dataSourceConfig = {
-@as("s3Keys") s3Keys: option<s3Keys>,
-@as("s3Bucket") s3Bucket: option<s3Bucket>,
-@as("name") name: option<name>
+s3Keys: s3Keys,
+s3Bucket: s3Bucket,
+name: name
 }
 type worldGenerationJobSummaries = array<worldGenerationJobSummary>
 type worldExportJobSummaries = array<worldExportJobSummary>
@@ -316,1090 +322,1090 @@ type simulationApplicationSummaries = array<simulationApplicationSummary>
 type robotDeploymentSummary = array<robotDeployment>
 type robotApplicationSummaries = array<robotApplicationSummary>
 type portForwardingConfig = {
-@as("portMappings") portMappings: portMappingList
+portMappings: option<portMappingList>
 }
 type filters = array<filter>
 type failureSummary = {
-@as("failures") failures: worldFailures,
-@as("totalFailureCount") totalFailureCount: amazonawsInteger
+failures: option<worldFailures>,
+totalFailureCount: option<integer_>
 }
 type deploymentApplicationConfig = {
-@as("launchConfig") launchConfig: option<deploymentLaunchConfig>,
-@as("applicationVersion") applicationVersion: option<deploymentVersion>,
-@as("application") application: option<arn>
+launchConfig: deploymentLaunchConfig,
+applicationVersion: deploymentVersion,
+application: arn
 }
 type dataSourceConfigs = array<dataSourceConfig>
 type dataSource = {
-@as("s3Keys") s3Keys: s3KeyOutputs,
-@as("s3Bucket") s3Bucket: s3Bucket,
-@as("name") name: name
+s3Keys: option<s3KeyOutputs>,
+s3Bucket: option<s3Bucket>,
+name: option<name>
 }
 type launchConfig = {
-@as("streamUI") streamUI: amazonawsBoolean,
-@as("portForwardingConfig") portForwardingConfig: portForwardingConfig,
-@as("environmentVariables") environmentVariables: environmentVariableMap,
-@as("launchFile") launchFile: option<command>,
-@as("packageName") packageName: option<command>
+streamUI: option<boolean_>,
+portForwardingConfig: option<portForwardingConfig>,
+environmentVariables: option<environmentVariableMap>,
+launchFile: command,
+packageName: command
 }
 type finishedWorldsSummary = {
-@as("failureSummary") failureSummary: failureSummary,
-@as("succeededWorlds") succeededWorlds: arns,
-@as("finishedCount") finishedCount: amazonawsInteger
+failureSummary: option<failureSummary>,
+succeededWorlds: option<arns>,
+finishedCount: option<integer_>
 }
 type deploymentApplicationConfigs = array<deploymentApplicationConfig>
 type dataSources = array<dataSource>
 type simulationApplicationConfig = {
-@as("useDefaultTools") useDefaultTools: boxedBoolean,
-@as("tools") tools: tools,
-@as("useDefaultUploadConfigurations") useDefaultUploadConfigurations: boxedBoolean,
-@as("worldConfigs") worldConfigs: worldConfigs,
-@as("uploadConfigurations") uploadConfigurations: uploadConfigurations,
-@as("launchConfig") launchConfig: option<launchConfig>,
-@as("applicationVersion") applicationVersion: version,
-@as("application") application: option<arn>
+useDefaultTools: option<boxedBoolean>,
+tools: option<tools>,
+useDefaultUploadConfigurations: option<boxedBoolean>,
+worldConfigs: option<worldConfigs>,
+uploadConfigurations: option<uploadConfigurations>,
+launchConfig: launchConfig,
+applicationVersion: option<version>,
+application: arn
 }
 type robotApplicationConfig = {
-@as("useDefaultTools") useDefaultTools: boxedBoolean,
-@as("tools") tools: tools,
-@as("useDefaultUploadConfigurations") useDefaultUploadConfigurations: boxedBoolean,
-@as("uploadConfigurations") uploadConfigurations: uploadConfigurations,
-@as("launchConfig") launchConfig: option<launchConfig>,
-@as("applicationVersion") applicationVersion: version,
-@as("application") application: option<arn>
+useDefaultTools: option<boxedBoolean>,
+tools: option<tools>,
+useDefaultUploadConfigurations: option<boxedBoolean>,
+uploadConfigurations: option<uploadConfigurations>,
+launchConfig: launchConfig,
+applicationVersion: option<version>,
+application: arn
 }
 type deploymentJob = {
-@as("createdAt") createdAt: createdAt,
-@as("failureCode") failureCode: deploymentJobErrorCode,
-@as("failureReason") failureReason: genericString,
-@as("deploymentConfig") deploymentConfig: deploymentConfig,
-@as("deploymentApplicationConfigs") deploymentApplicationConfigs: deploymentApplicationConfigs,
-@as("status") status: deploymentStatus,
-@as("fleet") fleet: arn,
-@as("arn") arn: arn
+createdAt: option<createdAt>,
+failureCode: option<deploymentJobErrorCode>,
+failureReason: option<genericString>,
+deploymentConfig: option<deploymentConfig>,
+deploymentApplicationConfigs: option<deploymentApplicationConfigs>,
+status: option<deploymentStatus>,
+fleet: option<arn>,
+arn: option<arn>
 }
 type simulationApplicationConfigs = array<simulationApplicationConfig>
 type robotApplicationConfigs = array<robotApplicationConfig>
 type deploymentJobs = array<deploymentJob>
 type simulationJobRequest = {
-@as("tags") tags: tagMap,
-@as("compute") compute: compute,
-@as("vpcConfig") vpcConfig: vPCConfig,
-@as("dataSources") dataSources: dataSourceConfigs,
-@as("simulationApplications") simulationApplications: simulationApplicationConfigs,
-@as("robotApplications") robotApplications: robotApplicationConfigs,
-@as("useDefaultApplications") useDefaultApplications: boxedBoolean,
-@as("failureBehavior") failureBehavior: failureBehavior,
-@as("iamRole") iamRole: iamRole,
-@as("maxJobDurationInSeconds") maxJobDurationInSeconds: option<jobDuration>,
-@as("loggingConfig") loggingConfig: loggingConfig,
-@as("outputLocation") outputLocation: outputLocation
+tags: option<tagMap>,
+compute: option<compute>,
+vpcConfig: option<vpcconfig>,
+dataSources: option<dataSourceConfigs>,
+simulationApplications: option<simulationApplicationConfigs>,
+robotApplications: option<robotApplicationConfigs>,
+useDefaultApplications: option<boxedBoolean>,
+failureBehavior: option<failureBehavior>,
+iamRole: option<iamRole>,
+maxJobDurationInSeconds: jobDuration,
+loggingConfig: option<loggingConfig>,
+outputLocation: option<outputLocation>
 }
 type simulationJob = {
-@as("compute") compute: computeResponse,
-@as("networkInterface") networkInterface: networkInterface,
-@as("vpcConfig") vpcConfig: vPCConfigResponse,
-@as("tags") tags: tagMap,
-@as("dataSources") dataSources: dataSources,
-@as("simulationApplications") simulationApplications: simulationApplicationConfigs,
-@as("robotApplications") robotApplications: robotApplicationConfigs,
-@as("iamRole") iamRole: iamRole,
-@as("simulationTimeMillis") simulationTimeMillis: simulationTimeMillis,
-@as("maxJobDurationInSeconds") maxJobDurationInSeconds: jobDuration,
-@as("loggingConfig") loggingConfig: loggingConfig,
-@as("outputLocation") outputLocation: outputLocation,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("failureReason") failureReason: genericString,
-@as("failureCode") failureCode: simulationJobErrorCode,
-@as("failureBehavior") failureBehavior: failureBehavior,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("lastStartedAt") lastStartedAt: lastStartedAt,
-@as("status") status: simulationJobStatus,
-@as("name") name: name,
-@as("arn") arn: arn
+compute: option<computeResponse>,
+networkInterface: option<networkInterface>,
+vpcConfig: option<vpcconfigResponse>,
+tags: option<tagMap>,
+dataSources: option<dataSources>,
+simulationApplications: option<simulationApplicationConfigs>,
+robotApplications: option<robotApplicationConfigs>,
+iamRole: option<iamRole>,
+simulationTimeMillis: option<simulationTimeMillis>,
+maxJobDurationInSeconds: option<jobDuration>,
+loggingConfig: option<loggingConfig>,
+outputLocation: option<outputLocation>,
+clientRequestToken: option<clientRequestToken>,
+failureReason: option<genericString>,
+failureCode: option<simulationJobErrorCode>,
+failureBehavior: option<failureBehavior>,
+lastUpdatedAt: option<lastUpdatedAt>,
+lastStartedAt: option<lastStartedAt>,
+status: option<simulationJobStatus>,
+name: option<name>,
+arn: option<arn>
 }
 type simulationJobs = array<simulationJob>
 type failedCreateSimulationJobRequest = {
-@as("failedAt") failedAt: failedAt,
-@as("failureCode") failureCode: simulationJobErrorCode,
-@as("failureReason") failureReason: genericString,
-@as("request") request: simulationJobRequest
+failedAt: option<failedAt>,
+failureCode: option<simulationJobErrorCode>,
+failureReason: option<genericString>,
+request: option<simulationJobRequest>
 }
 type createSimulationJobRequests = array<simulationJobRequest>
 type failedCreateSimulationJobRequests = array<failedCreateSimulationJobRequest>
-type clientType;
-@module("@aws-sdk/client-robomaker") @new external createClient: unit => clientType = "RoboMakerClient";
+type awsServiceClient;
+@module("@aws-sdk/client-robomaker") @new external createClient: unit => awsServiceClient = "RoboMakerClient";
 module RestartSimulationJob = {
   type t;
   type request = {
-@as("job") job: option<arn>
+job: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "RestartSimulationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterRobot = {
   type t;
   type request = {
-@as("robot") robot: option<arn>,
-@as("fleet") fleet: option<arn>
+robot: arn,
+fleet: arn
 }
   type response = {
-@as("robot") robot: arn,
-@as("fleet") fleet: arn
+robot: option<arn>,
+fleet: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "RegisterRobotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetWorldTemplateBody = {
   type t;
   type request = {
-@as("generationJob") generationJob: arn,
-@as("template") template: arn
+generationJob: option<arn>,
+template: option<arn>
 }
   type response = {
-@as("templateBody") templateBody: json
+templateBody: option<json>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "GetWorldTemplateBodyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterRobot = {
   type t;
   type request = {
-@as("robot") robot: option<arn>,
-@as("fleet") fleet: option<arn>
+robot: arn,
+fleet: arn
 }
   type response = {
-@as("robot") robot: arn,
-@as("fleet") fleet: arn
+robot: option<arn>,
+fleet: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DeregisterRobotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteWorldTemplate = {
   type t;
   type request = {
-@as("template") template: option<arn>
+template: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DeleteWorldTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteSimulationApplication = {
   type t;
   type request = {
-@as("applicationVersion") applicationVersion: version,
-@as("application") application: option<arn>
+applicationVersion: option<version>,
+application: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DeleteSimulationApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteRobotApplication = {
   type t;
   type request = {
-@as("applicationVersion") applicationVersion: version,
-@as("application") application: option<arn>
+applicationVersion: option<version>,
+application: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DeleteRobotApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteRobot = {
   type t;
   type request = {
-@as("robot") robot: option<arn>
+robot: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DeleteRobotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFleet = {
   type t;
   type request = {
-@as("fleet") fleet: option<arn>
+fleet: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DeleteFleetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelWorldGenerationJob = {
   type t;
   type request = {
-@as("job") job: option<arn>
+job: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CancelWorldGenerationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelWorldExportJob = {
   type t;
   type request = {
-@as("job") job: option<arn>
+job: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CancelWorldExportJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelSimulationJobBatch = {
   type t;
   type request = {
-@as("batch") batch: option<arn>
+batch: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CancelSimulationJobBatchCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelSimulationJob = {
   type t;
   type request = {
-@as("job") job: option<arn>
+job: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CancelSimulationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelDeploymentJob = {
   type t;
   type request = {
-@as("job") job: option<arn>
+job: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CancelDeploymentJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateWorldTemplate = {
   type t;
   type request = {
-@as("templateLocation") templateLocation: templateLocation,
-@as("templateBody") templateBody: json,
-@as("name") name: templateName,
-@as("template") template: option<arn>
+templateLocation: option<templateLocation>,
+templateBody: option<json>,
+name: option<templateName>,
+template: arn
 }
   type response = {
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("createdAt") createdAt: createdAt,
-@as("name") name: templateName,
-@as("arn") arn: arn
+lastUpdatedAt: option<lastUpdatedAt>,
+createdAt: option<createdAt>,
+name: option<templateName>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "UpdateWorldTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<arn>
+tagKeys: tagKeyList,
+resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<arn>
+tags: tagMap,
+resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<arn>
+resourceArn: arn
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeWorldTemplate = {
   type t;
   type request = {
-@as("template") template: option<arn>
+template: arn
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("createdAt") createdAt: createdAt,
-@as("name") name: templateName,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("arn") arn: arn
+tags: option<tagMap>,
+lastUpdatedAt: option<lastUpdatedAt>,
+createdAt: option<createdAt>,
+name: option<templateName>,
+clientRequestToken: option<clientRequestToken>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DescribeWorldTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeWorldExportJob = {
   type t;
   type request = {
-@as("job") job: option<arn>
+job: arn
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("iamRole") iamRole: iamRole,
-@as("outputLocation") outputLocation: outputLocation,
-@as("worlds") worlds: arns,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("failureReason") failureReason: genericString,
-@as("failureCode") failureCode: worldExportJobErrorCode,
-@as("createdAt") createdAt: createdAt,
-@as("status") status: worldExportJobStatus,
-@as("arn") arn: arn
+tags: option<tagMap>,
+iamRole: option<iamRole>,
+outputLocation: option<outputLocation>,
+worlds: option<arns>,
+clientRequestToken: option<clientRequestToken>,
+failureReason: option<genericString>,
+failureCode: option<worldExportJobErrorCode>,
+createdAt: option<createdAt>,
+status: option<worldExportJobStatus>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DescribeWorldExportJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeWorld = {
   type t;
   type request = {
-@as("world") world: option<arn>
+world: arn
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("createdAt") createdAt: createdAt,
-@as("template") template: arn,
-@as("generationJob") generationJob: arn,
-@as("arn") arn: arn
+tags: option<tagMap>,
+createdAt: option<createdAt>,
+template: option<arn>,
+generationJob: option<arn>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DescribeWorldCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRobot = {
   type t;
   type request = {
-@as("robot") robot: option<arn>
+robot: arn
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("lastDeploymentTime") lastDeploymentTime: createdAt,
-@as("lastDeploymentJob") lastDeploymentJob: arn,
-@as("architecture") architecture: architecture,
-@as("createdAt") createdAt: createdAt,
-@as("greengrassGroupId") greengrassGroupId: id,
-@as("status") status: robotStatus,
-@as("fleetArn") fleetArn: arn,
-@as("name") name: name,
-@as("arn") arn: arn
+tags: option<tagMap>,
+lastDeploymentTime: option<createdAt>,
+lastDeploymentJob: option<arn>,
+architecture: option<architecture>,
+createdAt: option<createdAt>,
+greengrassGroupId: option<id>,
+status: option<robotStatus>,
+fleetArn: option<arn>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DescribeRobotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateWorldTemplate = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("templateLocation") templateLocation: templateLocation,
-@as("templateBody") templateBody: json,
-@as("name") name: templateName,
-@as("clientRequestToken") clientRequestToken: clientRequestToken
+tags: option<tagMap>,
+templateLocation: option<templateLocation>,
+templateBody: option<json>,
+name: option<templateName>,
+clientRequestToken: option<clientRequestToken>
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("name") name: templateName,
-@as("createdAt") createdAt: createdAt,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("arn") arn: arn
+tags: option<tagMap>,
+name: option<templateName>,
+createdAt: option<createdAt>,
+clientRequestToken: option<clientRequestToken>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CreateWorldTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateWorldGenerationJob = {
   type t;
   type request = {
-@as("worldTags") worldTags: tagMap,
-@as("tags") tags: tagMap,
-@as("worldCount") worldCount: option<worldCount>,
-@as("template") template: option<arn>,
-@as("clientRequestToken") clientRequestToken: clientRequestToken
+worldTags: option<tagMap>,
+tags: option<tagMap>,
+worldCount: worldCount,
+template: arn,
+clientRequestToken: option<clientRequestToken>
 }
   type response = {
-@as("worldTags") worldTags: tagMap,
-@as("tags") tags: tagMap,
-@as("worldCount") worldCount: worldCount,
-@as("template") template: arn,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("failureCode") failureCode: worldGenerationJobErrorCode,
-@as("createdAt") createdAt: createdAt,
-@as("status") status: worldGenerationJobStatus,
-@as("arn") arn: arn
+worldTags: option<tagMap>,
+tags: option<tagMap>,
+worldCount: option<worldCount>,
+template: option<arn>,
+clientRequestToken: option<clientRequestToken>,
+failureCode: option<worldGenerationJobErrorCode>,
+createdAt: option<createdAt>,
+status: option<worldGenerationJobStatus>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CreateWorldGenerationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateWorldExportJob = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("iamRole") iamRole: option<iamRole>,
-@as("outputLocation") outputLocation: option<outputLocation>,
-@as("worlds") worlds: option<arns>,
-@as("clientRequestToken") clientRequestToken: clientRequestToken
+tags: option<tagMap>,
+iamRole: iamRole,
+outputLocation: outputLocation,
+worlds: arns,
+clientRequestToken: option<clientRequestToken>
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("iamRole") iamRole: iamRole,
-@as("outputLocation") outputLocation: outputLocation,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("failureCode") failureCode: worldExportJobErrorCode,
-@as("createdAt") createdAt: createdAt,
-@as("status") status: worldExportJobStatus,
-@as("arn") arn: arn
+tags: option<tagMap>,
+iamRole: option<iamRole>,
+outputLocation: option<outputLocation>,
+clientRequestToken: option<clientRequestToken>,
+failureCode: option<worldExportJobErrorCode>,
+createdAt: option<createdAt>,
+status: option<worldExportJobStatus>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CreateWorldExportJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateRobot = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("greengrassGroupId") greengrassGroupId: option<id>,
-@as("architecture") architecture: option<architecture>,
-@as("name") name: option<name>
+tags: option<tagMap>,
+greengrassGroupId: id,
+architecture: architecture,
+name: name
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("architecture") architecture: architecture,
-@as("greengrassGroupId") greengrassGroupId: id,
-@as("createdAt") createdAt: createdAt,
-@as("name") name: name,
-@as("arn") arn: arn
+tags: option<tagMap>,
+architecture: option<architecture>,
+greengrassGroupId: option<id>,
+createdAt: option<createdAt>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CreateRobotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFleet = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("name") name: option<name>
+tags: option<tagMap>,
+name: name
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("createdAt") createdAt: createdAt,
-@as("name") name: name,
-@as("arn") arn: arn
+tags: option<tagMap>,
+createdAt: option<createdAt>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CreateFleetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchDeleteWorlds = {
   type t;
   type request = {
-@as("worlds") worlds: option<arns>
+worlds: arns
 }
   type response = {
-@as("unprocessedWorlds") unprocessedWorlds: arns
+unprocessedWorlds: option<arns>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "BatchDeleteWorldsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateSimulationApplication = {
   type t;
   type request = {
-@as("currentRevisionId") currentRevisionId: revisionId,
-@as("renderingEngine") renderingEngine: renderingEngine,
-@as("robotSoftwareSuite") robotSoftwareSuite: option<robotSoftwareSuite>,
-@as("simulationSoftwareSuite") simulationSoftwareSuite: option<simulationSoftwareSuite>,
-@as("sources") sources: option<sourceConfigs>,
-@as("application") application: option<arn>
+currentRevisionId: option<revisionId>,
+renderingEngine: option<renderingEngine>,
+robotSoftwareSuite: robotSoftwareSuite,
+simulationSoftwareSuite: simulationSoftwareSuite,
+sources: sourceConfigs,
+application: arn
 }
   type response = {
-@as("revisionId") revisionId: revisionId,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("renderingEngine") renderingEngine: renderingEngine,
-@as("robotSoftwareSuite") robotSoftwareSuite: robotSoftwareSuite,
-@as("simulationSoftwareSuite") simulationSoftwareSuite: simulationSoftwareSuite,
-@as("sources") sources: sources,
-@as("version") version: version,
-@as("name") name: name,
-@as("arn") arn: arn
+revisionId: option<revisionId>,
+lastUpdatedAt: option<lastUpdatedAt>,
+renderingEngine: option<renderingEngine>,
+robotSoftwareSuite: option<robotSoftwareSuite>,
+simulationSoftwareSuite: option<simulationSoftwareSuite>,
+sources: option<sources>,
+version: option<version>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "UpdateSimulationApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateRobotApplication = {
   type t;
   type request = {
-@as("currentRevisionId") currentRevisionId: revisionId,
-@as("robotSoftwareSuite") robotSoftwareSuite: option<robotSoftwareSuite>,
-@as("sources") sources: option<sourceConfigs>,
-@as("application") application: option<arn>
+currentRevisionId: option<revisionId>,
+robotSoftwareSuite: robotSoftwareSuite,
+sources: sourceConfigs,
+application: arn
 }
   type response = {
-@as("revisionId") revisionId: revisionId,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("robotSoftwareSuite") robotSoftwareSuite: robotSoftwareSuite,
-@as("sources") sources: sources,
-@as("version") version: version,
-@as("name") name: name,
-@as("arn") arn: arn
+revisionId: option<revisionId>,
+lastUpdatedAt: option<lastUpdatedAt>,
+robotSoftwareSuite: option<robotSoftwareSuite>,
+sources: option<sources>,
+version: option<version>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "UpdateRobotApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListWorldTemplates = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("templateSummaries") templateSummaries: templateSummaries
+nextToken: option<paginationToken>,
+templateSummaries: option<templateSummaries>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListWorldTemplatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSimulationApplication = {
   type t;
   type request = {
-@as("applicationVersion") applicationVersion: version,
-@as("application") application: option<arn>
+applicationVersion: option<version>,
+application: arn
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("revisionId") revisionId: revisionId,
-@as("renderingEngine") renderingEngine: renderingEngine,
-@as("robotSoftwareSuite") robotSoftwareSuite: robotSoftwareSuite,
-@as("simulationSoftwareSuite") simulationSoftwareSuite: simulationSoftwareSuite,
-@as("sources") sources: sources,
-@as("version") version: version,
-@as("name") name: name,
-@as("arn") arn: arn
+tags: option<tagMap>,
+lastUpdatedAt: option<lastUpdatedAt>,
+revisionId: option<revisionId>,
+renderingEngine: option<renderingEngine>,
+robotSoftwareSuite: option<robotSoftwareSuite>,
+simulationSoftwareSuite: option<simulationSoftwareSuite>,
+sources: option<sources>,
+version: option<version>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DescribeSimulationApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRobotApplication = {
   type t;
   type request = {
-@as("applicationVersion") applicationVersion: version,
-@as("application") application: option<arn>
+applicationVersion: option<version>,
+application: arn
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("revisionId") revisionId: revisionId,
-@as("robotSoftwareSuite") robotSoftwareSuite: robotSoftwareSuite,
-@as("sources") sources: sources,
-@as("version") version: version,
-@as("name") name: name,
-@as("arn") arn: arn
+tags: option<tagMap>,
+lastUpdatedAt: option<lastUpdatedAt>,
+revisionId: option<revisionId>,
+robotSoftwareSuite: option<robotSoftwareSuite>,
+sources: option<sources>,
+version: option<version>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DescribeRobotApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeFleet = {
   type t;
   type request = {
-@as("fleet") fleet: option<arn>
+fleet: arn
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("lastDeploymentTime") lastDeploymentTime: createdAt,
-@as("lastDeploymentJob") lastDeploymentJob: arn,
-@as("lastDeploymentStatus") lastDeploymentStatus: deploymentStatus,
-@as("createdAt") createdAt: createdAt,
-@as("robots") robots: robots,
-@as("arn") arn: arn,
-@as("name") name: name
+tags: option<tagMap>,
+lastDeploymentTime: option<createdAt>,
+lastDeploymentJob: option<arn>,
+lastDeploymentStatus: option<deploymentStatus>,
+createdAt: option<createdAt>,
+robots: option<robots>,
+arn: option<arn>,
+name: option<name>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DescribeFleetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSimulationApplicationVersion = {
   type t;
   type request = {
-@as("currentRevisionId") currentRevisionId: revisionId,
-@as("application") application: option<arn>
+currentRevisionId: option<revisionId>,
+application: arn
 }
   type response = {
-@as("revisionId") revisionId: revisionId,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("renderingEngine") renderingEngine: renderingEngine,
-@as("robotSoftwareSuite") robotSoftwareSuite: robotSoftwareSuite,
-@as("simulationSoftwareSuite") simulationSoftwareSuite: simulationSoftwareSuite,
-@as("sources") sources: sources,
-@as("version") version: version,
-@as("name") name: name,
-@as("arn") arn: arn
+revisionId: option<revisionId>,
+lastUpdatedAt: option<lastUpdatedAt>,
+renderingEngine: option<renderingEngine>,
+robotSoftwareSuite: option<robotSoftwareSuite>,
+simulationSoftwareSuite: option<simulationSoftwareSuite>,
+sources: option<sources>,
+version: option<version>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CreateSimulationApplicationVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSimulationApplication = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("renderingEngine") renderingEngine: renderingEngine,
-@as("robotSoftwareSuite") robotSoftwareSuite: option<robotSoftwareSuite>,
-@as("simulationSoftwareSuite") simulationSoftwareSuite: option<simulationSoftwareSuite>,
-@as("sources") sources: option<sourceConfigs>,
-@as("name") name: option<name>
+tags: option<tagMap>,
+renderingEngine: option<renderingEngine>,
+robotSoftwareSuite: robotSoftwareSuite,
+simulationSoftwareSuite: simulationSoftwareSuite,
+sources: sourceConfigs,
+name: name
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("revisionId") revisionId: revisionId,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("renderingEngine") renderingEngine: renderingEngine,
-@as("robotSoftwareSuite") robotSoftwareSuite: robotSoftwareSuite,
-@as("simulationSoftwareSuite") simulationSoftwareSuite: simulationSoftwareSuite,
-@as("sources") sources: sources,
-@as("version") version: version,
-@as("name") name: name,
-@as("arn") arn: arn
+tags: option<tagMap>,
+revisionId: option<revisionId>,
+lastUpdatedAt: option<lastUpdatedAt>,
+renderingEngine: option<renderingEngine>,
+robotSoftwareSuite: option<robotSoftwareSuite>,
+simulationSoftwareSuite: option<simulationSoftwareSuite>,
+sources: option<sources>,
+version: option<version>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CreateSimulationApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateRobotApplicationVersion = {
   type t;
   type request = {
-@as("currentRevisionId") currentRevisionId: revisionId,
-@as("application") application: option<arn>
+currentRevisionId: option<revisionId>,
+application: arn
 }
   type response = {
-@as("revisionId") revisionId: revisionId,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("robotSoftwareSuite") robotSoftwareSuite: robotSoftwareSuite,
-@as("sources") sources: sources,
-@as("version") version: version,
-@as("name") name: name,
-@as("arn") arn: arn
+revisionId: option<revisionId>,
+lastUpdatedAt: option<lastUpdatedAt>,
+robotSoftwareSuite: option<robotSoftwareSuite>,
+sources: option<sources>,
+version: option<version>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CreateRobotApplicationVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateRobotApplication = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("robotSoftwareSuite") robotSoftwareSuite: option<robotSoftwareSuite>,
-@as("sources") sources: option<sourceConfigs>,
-@as("name") name: option<name>
+tags: option<tagMap>,
+robotSoftwareSuite: robotSoftwareSuite,
+sources: sourceConfigs,
+name: name
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("revisionId") revisionId: revisionId,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("robotSoftwareSuite") robotSoftwareSuite: robotSoftwareSuite,
-@as("sources") sources: sources,
-@as("version") version: version,
-@as("name") name: name,
-@as("arn") arn: arn
+tags: option<tagMap>,
+revisionId: option<revisionId>,
+lastUpdatedAt: option<lastUpdatedAt>,
+robotSoftwareSuite: option<robotSoftwareSuite>,
+sources: option<sources>,
+version: option<version>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CreateRobotApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListWorlds = {
   type t;
   type request = {
-@as("filters") filters: filters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken
+filters: option<filters>,
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("worldSummaries") worldSummaries: worldSummaries
+nextToken: option<paginationToken>,
+worldSummaries: option<worldSummaries>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListWorldsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListWorldGenerationJobs = {
   type t;
   type request = {
-@as("filters") filters: filters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken
+filters: option<filters>,
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("worldGenerationJobSummaries") worldGenerationJobSummaries: option<worldGenerationJobSummaries>
+nextToken: option<paginationToken>,
+worldGenerationJobSummaries: worldGenerationJobSummaries
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListWorldGenerationJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListWorldExportJobs = {
   type t;
   type request = {
-@as("filters") filters: filters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken
+filters: option<filters>,
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("worldExportJobSummaries") worldExportJobSummaries: option<worldExportJobSummaries>
+nextToken: option<paginationToken>,
+worldExportJobSummaries: worldExportJobSummaries
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListWorldExportJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSimulationJobs = {
   type t;
   type request = {
-@as("filters") filters: filters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken
+filters: option<filters>,
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("simulationJobSummaries") simulationJobSummaries: option<simulationJobSummaries>
+nextToken: option<paginationToken>,
+simulationJobSummaries: simulationJobSummaries
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListSimulationJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSimulationJobBatches = {
   type t;
   type request = {
-@as("filters") filters: filters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken
+filters: option<filters>,
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("simulationJobBatchSummaries") simulationJobBatchSummaries: simulationJobBatchSummaries
+nextToken: option<paginationToken>,
+simulationJobBatchSummaries: option<simulationJobBatchSummaries>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListSimulationJobBatchesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSimulationApplications = {
   type t;
   type request = {
-@as("filters") filters: filters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("versionQualifier") versionQualifier: versionQualifier
+filters: option<filters>,
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>,
+versionQualifier: option<versionQualifier>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("simulationApplicationSummaries") simulationApplicationSummaries: simulationApplicationSummaries
+nextToken: option<paginationToken>,
+simulationApplicationSummaries: option<simulationApplicationSummaries>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListSimulationApplicationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRobots = {
   type t;
   type request = {
-@as("filters") filters: filters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken
+filters: option<filters>,
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("robots") robots: robots
+nextToken: option<paginationToken>,
+robots: option<robots>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListRobotsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRobotApplications = {
   type t;
   type request = {
-@as("filters") filters: filters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("versionQualifier") versionQualifier: versionQualifier
+filters: option<filters>,
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>,
+versionQualifier: option<versionQualifier>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("robotApplicationSummaries") robotApplicationSummaries: robotApplicationSummaries
+nextToken: option<paginationToken>,
+robotApplicationSummaries: option<robotApplicationSummaries>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListRobotApplicationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFleets = {
   type t;
   type request = {
-@as("filters") filters: filters,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken
+filters: option<filters>,
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("fleetDetails") fleetDetails: fleets
+nextToken: option<paginationToken>,
+fleetDetails: option<fleets>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListFleetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SyncDeploymentJob = {
   type t;
   type request = {
-@as("fleet") fleet: option<arn>,
-@as("clientRequestToken") clientRequestToken: option<clientRequestToken>
+fleet: arn,
+clientRequestToken: clientRequestToken
 }
   type response = {
-@as("createdAt") createdAt: createdAt,
-@as("failureCode") failureCode: deploymentJobErrorCode,
-@as("failureReason") failureReason: genericString,
-@as("deploymentApplicationConfigs") deploymentApplicationConfigs: deploymentApplicationConfigs,
-@as("deploymentConfig") deploymentConfig: deploymentConfig,
-@as("status") status: deploymentStatus,
-@as("fleet") fleet: arn,
-@as("arn") arn: arn
+createdAt: option<createdAt>,
+failureCode: option<deploymentJobErrorCode>,
+failureReason: option<genericString>,
+deploymentApplicationConfigs: option<deploymentApplicationConfigs>,
+deploymentConfig: option<deploymentConfig>,
+status: option<deploymentStatus>,
+fleet: option<arn>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "SyncDeploymentJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeWorldGenerationJob = {
   type t;
   type request = {
-@as("job") job: option<arn>
+job: arn
 }
   type response = {
-@as("worldTags") worldTags: tagMap,
-@as("tags") tags: tagMap,
-@as("finishedWorldsSummary") finishedWorldsSummary: finishedWorldsSummary,
-@as("worldCount") worldCount: worldCount,
-@as("template") template: arn,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("failureReason") failureReason: genericString,
-@as("failureCode") failureCode: worldGenerationJobErrorCode,
-@as("createdAt") createdAt: createdAt,
-@as("status") status: worldGenerationJobStatus,
-@as("arn") arn: arn
+worldTags: option<tagMap>,
+tags: option<tagMap>,
+finishedWorldsSummary: option<finishedWorldsSummary>,
+worldCount: option<worldCount>,
+template: option<arn>,
+clientRequestToken: option<clientRequestToken>,
+failureReason: option<genericString>,
+failureCode: option<worldGenerationJobErrorCode>,
+createdAt: option<createdAt>,
+status: option<worldGenerationJobStatus>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DescribeWorldGenerationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDeploymentJob = {
   type t;
   type request = {
-@as("job") job: option<arn>
+job: arn
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("robotDeploymentSummary") robotDeploymentSummary: robotDeploymentSummary,
-@as("createdAt") createdAt: createdAt,
-@as("failureCode") failureCode: deploymentJobErrorCode,
-@as("failureReason") failureReason: genericString,
-@as("deploymentApplicationConfigs") deploymentApplicationConfigs: deploymentApplicationConfigs,
-@as("deploymentConfig") deploymentConfig: deploymentConfig,
-@as("status") status: deploymentStatus,
-@as("fleet") fleet: arn,
-@as("arn") arn: arn
+tags: option<tagMap>,
+robotDeploymentSummary: option<robotDeploymentSummary>,
+createdAt: option<createdAt>,
+failureCode: option<deploymentJobErrorCode>,
+failureReason: option<genericString>,
+deploymentApplicationConfigs: option<deploymentApplicationConfigs>,
+deploymentConfig: option<deploymentConfig>,
+status: option<deploymentStatus>,
+fleet: option<arn>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DescribeDeploymentJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDeploymentJob = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("deploymentApplicationConfigs") deploymentApplicationConfigs: option<deploymentApplicationConfigs>,
-@as("fleet") fleet: option<arn>,
-@as("clientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("deploymentConfig") deploymentConfig: deploymentConfig
+tags: option<tagMap>,
+deploymentApplicationConfigs: deploymentApplicationConfigs,
+fleet: arn,
+clientRequestToken: clientRequestToken,
+deploymentConfig: option<deploymentConfig>
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("deploymentConfig") deploymentConfig: deploymentConfig,
-@as("createdAt") createdAt: createdAt,
-@as("failureCode") failureCode: deploymentJobErrorCode,
-@as("failureReason") failureReason: genericString,
-@as("deploymentApplicationConfigs") deploymentApplicationConfigs: deploymentApplicationConfigs,
-@as("status") status: deploymentStatus,
-@as("fleet") fleet: arn,
-@as("arn") arn: arn
+tags: option<tagMap>,
+deploymentConfig: option<deploymentConfig>,
+createdAt: option<createdAt>,
+failureCode: option<deploymentJobErrorCode>,
+failureReason: option<genericString>,
+deploymentApplicationConfigs: option<deploymentApplicationConfigs>,
+status: option<deploymentStatus>,
+fleet: option<arn>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CreateDeploymentJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDeploymentJobs = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("filters") filters: filters
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>,
+filters: option<filters>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("deploymentJobs") deploymentJobs: deploymentJobs
+nextToken: option<paginationToken>,
+deploymentJobs: option<deploymentJobs>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "ListDeploymentJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSimulationJob = {
   type t;
   type request = {
-@as("job") job: option<arn>
+job: arn
 }
   type response = {
-@as("compute") compute: computeResponse,
-@as("networkInterface") networkInterface: networkInterface,
-@as("vpcConfig") vpcConfig: vPCConfigResponse,
-@as("tags") tags: tagMap,
-@as("dataSources") dataSources: dataSources,
-@as("simulationApplications") simulationApplications: simulationApplicationConfigs,
-@as("robotApplications") robotApplications: robotApplicationConfigs,
-@as("iamRole") iamRole: iamRole,
-@as("simulationTimeMillis") simulationTimeMillis: simulationTimeMillis,
-@as("maxJobDurationInSeconds") maxJobDurationInSeconds: jobDuration,
-@as("loggingConfig") loggingConfig: loggingConfig,
-@as("outputLocation") outputLocation: outputLocation,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("failureReason") failureReason: genericString,
-@as("failureCode") failureCode: simulationJobErrorCode,
-@as("failureBehavior") failureBehavior: failureBehavior,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("lastStartedAt") lastStartedAt: lastStartedAt,
-@as("status") status: simulationJobStatus,
-@as("name") name: name,
-@as("arn") arn: arn
+compute: option<computeResponse>,
+networkInterface: option<networkInterface>,
+vpcConfig: option<vpcconfigResponse>,
+tags: option<tagMap>,
+dataSources: option<dataSources>,
+simulationApplications: option<simulationApplicationConfigs>,
+robotApplications: option<robotApplicationConfigs>,
+iamRole: option<iamRole>,
+simulationTimeMillis: option<simulationTimeMillis>,
+maxJobDurationInSeconds: option<jobDuration>,
+loggingConfig: option<loggingConfig>,
+outputLocation: option<outputLocation>,
+clientRequestToken: option<clientRequestToken>,
+failureReason: option<genericString>,
+failureCode: option<simulationJobErrorCode>,
+failureBehavior: option<failureBehavior>,
+lastUpdatedAt: option<lastUpdatedAt>,
+lastStartedAt: option<lastStartedAt>,
+status: option<simulationJobStatus>,
+name: option<name>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DescribeSimulationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSimulationJob = {
   type t;
   type request = {
-@as("compute") compute: compute,
-@as("vpcConfig") vpcConfig: vPCConfig,
-@as("tags") tags: tagMap,
-@as("dataSources") dataSources: dataSourceConfigs,
-@as("simulationApplications") simulationApplications: simulationApplicationConfigs,
-@as("robotApplications") robotApplications: robotApplicationConfigs,
-@as("failureBehavior") failureBehavior: failureBehavior,
-@as("iamRole") iamRole: option<iamRole>,
-@as("maxJobDurationInSeconds") maxJobDurationInSeconds: option<jobDuration>,
-@as("loggingConfig") loggingConfig: loggingConfig,
-@as("outputLocation") outputLocation: outputLocation,
-@as("clientRequestToken") clientRequestToken: clientRequestToken
+compute: option<compute>,
+vpcConfig: option<vpcconfig>,
+tags: option<tagMap>,
+dataSources: option<dataSourceConfigs>,
+simulationApplications: option<simulationApplicationConfigs>,
+robotApplications: option<robotApplicationConfigs>,
+failureBehavior: option<failureBehavior>,
+iamRole: iamRole,
+maxJobDurationInSeconds: jobDuration,
+loggingConfig: option<loggingConfig>,
+outputLocation: option<outputLocation>,
+clientRequestToken: option<clientRequestToken>
 }
   type response = {
-@as("compute") compute: computeResponse,
-@as("vpcConfig") vpcConfig: vPCConfigResponse,
-@as("tags") tags: tagMap,
-@as("dataSources") dataSources: dataSources,
-@as("simulationApplications") simulationApplications: simulationApplicationConfigs,
-@as("robotApplications") robotApplications: robotApplicationConfigs,
-@as("iamRole") iamRole: iamRole,
-@as("simulationTimeMillis") simulationTimeMillis: simulationTimeMillis,
-@as("maxJobDurationInSeconds") maxJobDurationInSeconds: jobDuration,
-@as("loggingConfig") loggingConfig: loggingConfig,
-@as("outputLocation") outputLocation: outputLocation,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("failureCode") failureCode: simulationJobErrorCode,
-@as("failureBehavior") failureBehavior: failureBehavior,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("lastStartedAt") lastStartedAt: lastStartedAt,
-@as("status") status: simulationJobStatus,
-@as("arn") arn: arn
+compute: option<computeResponse>,
+vpcConfig: option<vpcconfigResponse>,
+tags: option<tagMap>,
+dataSources: option<dataSources>,
+simulationApplications: option<simulationApplicationConfigs>,
+robotApplications: option<robotApplicationConfigs>,
+iamRole: option<iamRole>,
+simulationTimeMillis: option<simulationTimeMillis>,
+maxJobDurationInSeconds: option<jobDuration>,
+loggingConfig: option<loggingConfig>,
+outputLocation: option<outputLocation>,
+clientRequestToken: option<clientRequestToken>,
+failureCode: option<simulationJobErrorCode>,
+failureBehavior: option<failureBehavior>,
+lastUpdatedAt: option<lastUpdatedAt>,
+lastStartedAt: option<lastStartedAt>,
+status: option<simulationJobStatus>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "CreateSimulationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchDescribeSimulationJob = {
   type t;
   type request = {
-@as("jobs") jobs: option<arns>
+jobs: arns
 }
   type response = {
-@as("unprocessedJobs") unprocessedJobs: arns,
-@as("jobs") jobs: simulationJobs
+unprocessedJobs: option<arns>,
+jobs: option<simulationJobs>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "BatchDescribeSimulationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartSimulationJobBatch = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("createSimulationJobRequests") createSimulationJobRequests: option<createSimulationJobRequests>,
-@as("batchPolicy") batchPolicy: batchPolicy,
-@as("clientRequestToken") clientRequestToken: clientRequestToken
+tags: option<tagMap>,
+createSimulationJobRequests: createSimulationJobRequests,
+batchPolicy: option<batchPolicy>,
+clientRequestToken: option<clientRequestToken>
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("createdRequests") createdRequests: simulationJobSummaries,
-@as("pendingRequests") pendingRequests: createSimulationJobRequests,
-@as("failedRequests") failedRequests: failedCreateSimulationJobRequests,
-@as("failureReason") failureReason: genericString,
-@as("failureCode") failureCode: simulationJobBatchErrorCode,
-@as("batchPolicy") batchPolicy: batchPolicy,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("createdAt") createdAt: createdAt,
-@as("status") status: simulationJobBatchStatus,
-@as("arn") arn: arn
+tags: option<tagMap>,
+createdRequests: option<simulationJobSummaries>,
+pendingRequests: option<createSimulationJobRequests>,
+failedRequests: option<failedCreateSimulationJobRequests>,
+failureReason: option<genericString>,
+failureCode: option<simulationJobBatchErrorCode>,
+batchPolicy: option<batchPolicy>,
+clientRequestToken: option<clientRequestToken>,
+createdAt: option<createdAt>,
+status: option<simulationJobBatchStatus>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "StartSimulationJobBatchCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSimulationJobBatch = {
   type t;
   type request = {
-@as("batch") batch: option<arn>
+batch: arn
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("createdRequests") createdRequests: simulationJobSummaries,
-@as("pendingRequests") pendingRequests: createSimulationJobRequests,
-@as("failedRequests") failedRequests: failedCreateSimulationJobRequests,
-@as("failureReason") failureReason: genericString,
-@as("failureCode") failureCode: simulationJobBatchErrorCode,
-@as("batchPolicy") batchPolicy: batchPolicy,
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("createdAt") createdAt: createdAt,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("status") status: simulationJobBatchStatus,
-@as("arn") arn: arn
+tags: option<tagMap>,
+createdRequests: option<simulationJobSummaries>,
+pendingRequests: option<createSimulationJobRequests>,
+failedRequests: option<failedCreateSimulationJobRequests>,
+failureReason: option<genericString>,
+failureCode: option<simulationJobBatchErrorCode>,
+batchPolicy: option<batchPolicy>,
+clientRequestToken: option<clientRequestToken>,
+createdAt: option<createdAt>,
+lastUpdatedAt: option<lastUpdatedAt>,
+status: option<simulationJobBatchStatus>,
+arn: option<arn>
 }
   @module("@aws-sdk/client-robomaker") @new external new_: (request) => t = "DescribeSimulationJobBatchCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

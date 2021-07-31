@@ -1,15 +1,20 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type bool = bool;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type long = float
+type bool_ = bool
 type version = string
 type validityType = [@as("YEARS") #YEARS | @as("MONTHS") #MONTHS | @as("DAYS") #DAYS]
-type amazonawsTimestamp = Js.Date.t;
+type timestamp_ = Js.Date.t;
 type tagValue = string
 type tagKey = string
-type amazonawsString = string
+type string_ = string
 type statusReason = string
 type signingStatus = [@as("Succeeded") #Succeeded | @as("Failed") #Failed | @as("InProgress") #InProgress]
 type signingProfileStatus = [@as("Revoked") #Revoked | @as("Canceled") #Canceled | @as("Active") #Active]
@@ -20,14 +25,14 @@ type requestedBy = string
 type profileVersion = string
 type profileName = string
 type prefix = string
-type policySizeBytes = int;
+type policySizeBytes = int
 type platformId = string
 type nextToken = string
-type maxSizeInMB = int;
-type maxResults = int;
+type maxSizeInMB = int
+type maxResults = int
 type key = string
 type jobId = string
-type amazonawsInteger = int;
+type integer_ = int
 type imageFormat = [@as("JSONDetached") #JSONDetached | @as("JSONEmbedded") #JSONEmbedded | @as("JSON") #JSON]
 type hashAlgorithm = [@as("SHA256") #SHA256 | @as("SHA1") #SHA1]
 type errorMessage = string
@@ -44,404 +49,404 @@ type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type statuses = array<signingProfileStatus>
 type signingProfileRevocationRecord = {
-@as("revokedBy") revokedBy: amazonawsString,
-@as("revokedAt") revokedAt: amazonawsTimestamp,
-@as("revocationEffectiveFrom") revocationEffectiveFrom: amazonawsTimestamp
+revokedBy: option<string_>,
+revokedAt: option<timestamp_>,
+revocationEffectiveFrom: option<timestamp_>
 }
 type signingParameters = Js.Dict.t< signingParameterValue>
 type signingMaterial = {
-@as("certificateArn") certificateArn: option<certificateArn>
+certificateArn: certificateArn
 }
 type signingJobRevocationRecord = {
-@as("revokedBy") revokedBy: amazonawsString,
-@as("revokedAt") revokedAt: amazonawsTimestamp,
-@as("reason") reason: amazonawsString
+revokedBy: option<string_>,
+revokedAt: option<timestamp_>,
+reason: option<string_>
 }
 type signingConfigurationOverrides = {
-@as("hashAlgorithm") hashAlgorithm: hashAlgorithm,
-@as("encryptionAlgorithm") encryptionAlgorithm: encryptionAlgorithm
+hashAlgorithm: option<hashAlgorithm>,
+encryptionAlgorithm: option<encryptionAlgorithm>
 }
 type signatureValidityPeriod = {
-@as("type") type_: validityType,
-@as("value") value: amazonawsInteger
+@as("type") type_: option<validityType>,
+value: option<integer_>
 }
 type s3Source = {
-@as("version") version: option<version>,
-@as("key") key: option<key>,
-@as("bucketName") bucketName: option<bucketName>
+version: version,
+key: key,
+bucketName: bucketName
 }
 type s3SignedObject = {
-@as("key") key: key,
-@as("bucketName") bucketName: bucketName
+key: option<key>,
+bucketName: option<bucketName>
 }
 type s3Destination = {
-@as("prefix") prefix: prefix,
-@as("bucketName") bucketName: bucketName
+prefix: option<prefix>,
+bucketName: option<bucketName>
 }
 type permission = {
-@as("profileVersion") profileVersion: profileVersion,
-@as("statementId") statementId: amazonawsString,
-@as("principal") principal: amazonawsString,
-@as("action") action: amazonawsString
+profileVersion: option<profileVersion>,
+statementId: option<string_>,
+principal: option<string_>,
+action: option<string_>
 }
 type imageFormats = array<imageFormat>
 type hashAlgorithms = array<hashAlgorithm>
 type encryptionAlgorithms = array<encryptionAlgorithm>
 type source = {
-@as("s3") s3: s3Source
+s3: option<s3Source>
 }
 type signingProfile = {
-@as("tags") tags: tagMap,
-@as("arn") arn: amazonawsString,
-@as("status") status: signingProfileStatus,
-@as("signingParameters") signingParameters: signingParameters,
-@as("platformDisplayName") platformDisplayName: displayName,
-@as("platformId") platformId: platformId,
-@as("signatureValidityPeriod") signatureValidityPeriod: signatureValidityPeriod,
-@as("signingMaterial") signingMaterial: signingMaterial,
-@as("profileVersionArn") profileVersionArn: arn,
-@as("profileVersion") profileVersion: profileVersion,
-@as("profileName") profileName: profileName
+tags: option<tagMap>,
+arn: option<string_>,
+status: option<signingProfileStatus>,
+signingParameters: option<signingParameters>,
+platformDisplayName: option<displayName>,
+platformId: option<platformId>,
+signatureValidityPeriod: option<signatureValidityPeriod>,
+signingMaterial: option<signingMaterial>,
+profileVersionArn: option<arn>,
+profileVersion: option<profileVersion>,
+profileName: option<profileName>
 }
 type signingPlatformOverrides = {
-@as("signingImageFormat") signingImageFormat: imageFormat,
-@as("signingConfiguration") signingConfiguration: signingConfigurationOverrides
+signingImageFormat: option<imageFormat>,
+signingConfiguration: option<signingConfigurationOverrides>
 }
 type signingImageFormat = {
-@as("defaultFormat") defaultFormat: option<imageFormat>,
-@as("supportedFormats") supportedFormats: option<imageFormats>
+defaultFormat: imageFormat,
+supportedFormats: imageFormats
 }
 type signedObject = {
-@as("s3") s3: s3SignedObject
+s3: option<s3SignedObject>
 }
 type permissions = array<permission>
 type hashAlgorithmOptions = {
-@as("defaultValue") defaultValue: option<hashAlgorithm>,
-@as("allowedValues") allowedValues: option<hashAlgorithms>
+defaultValue: hashAlgorithm,
+allowedValues: hashAlgorithms
 }
 type encryptionAlgorithmOptions = {
-@as("defaultValue") defaultValue: option<encryptionAlgorithm>,
-@as("allowedValues") allowedValues: option<encryptionAlgorithms>
+defaultValue: encryptionAlgorithm,
+allowedValues: encryptionAlgorithms
 }
 type destination = {
-@as("s3") s3: s3Destination
+s3: option<s3Destination>
 }
 type signingProfiles = array<signingProfile>
 type signingJob = {
-@as("jobInvoker") jobInvoker: accountId,
-@as("jobOwner") jobOwner: accountId,
-@as("signatureExpiresAt") signatureExpiresAt: amazonawsTimestamp,
-@as("platformDisplayName") platformDisplayName: displayName,
-@as("platformId") platformId: platformId,
-@as("profileVersion") profileVersion: profileVersion,
-@as("profileName") profileName: profileName,
-@as("isRevoked") isRevoked: bool,
-@as("status") status: signingStatus,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("signingMaterial") signingMaterial: signingMaterial,
-@as("signedObject") signedObject: signedObject,
-@as("source") source: source,
-@as("jobId") jobId: jobId
+jobInvoker: option<accountId>,
+jobOwner: option<accountId>,
+signatureExpiresAt: option<timestamp_>,
+platformDisplayName: option<displayName>,
+platformId: option<platformId>,
+profileVersion: option<profileVersion>,
+profileName: option<profileName>,
+isRevoked: option<bool_>,
+status: option<signingStatus>,
+createdAt: option<timestamp_>,
+signingMaterial: option<signingMaterial>,
+signedObject: option<signedObject>,
+source: option<source>,
+jobId: option<jobId>
 }
 type signingConfiguration = {
-@as("hashAlgorithmOptions") hashAlgorithmOptions: option<hashAlgorithmOptions>,
-@as("encryptionAlgorithmOptions") encryptionAlgorithmOptions: option<encryptionAlgorithmOptions>
+hashAlgorithmOptions: hashAlgorithmOptions,
+encryptionAlgorithmOptions: encryptionAlgorithmOptions
 }
 type signingPlatform = {
-@as("revocationSupported") revocationSupported: bool,
-@as("maxSizeInMB") maxSizeInMB: maxSizeInMB,
-@as("signingImageFormat") signingImageFormat: signingImageFormat,
-@as("signingConfiguration") signingConfiguration: signingConfiguration,
-@as("category") category: category,
-@as("target") target: amazonawsString,
-@as("partner") partner: amazonawsString,
-@as("displayName") displayName: amazonawsString,
-@as("platformId") platformId: amazonawsString
+revocationSupported: option<bool_>,
+maxSizeInMB: option<maxSizeInMB>,
+signingImageFormat: option<signingImageFormat>,
+signingConfiguration: option<signingConfiguration>,
+category: option<category>,
+target: option<string_>,
+partner: option<string_>,
+displayName: option<string_>,
+platformId: option<string_>
 }
 type signingJobs = array<signingJob>
 type signingPlatforms = array<signingPlatform>
-type clientType;
-@module("@aws-sdk/client-signer") @new external createClient: unit => clientType = "SignerClient";
+type awsServiceClient;
+@module("@aws-sdk/client-signer") @new external createClient: unit => awsServiceClient = "SignerClient";
 module RevokeSigningProfile = {
   type t;
   type request = {
-@as("effectiveTime") effectiveTime: option<amazonawsTimestamp>,
-@as("reason") reason: option<revocationReasonString>,
-@as("profileVersion") profileVersion: option<profileVersion>,
-@as("profileName") profileName: option<profileName>
+effectiveTime: timestamp_,
+reason: revocationReasonString,
+profileVersion: profileVersion,
+profileName: profileName
 }
   
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "RevokeSigningProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RevokeSignature = {
   type t;
   type request = {
-@as("reason") reason: option<revocationReasonString>,
-@as("jobOwner") jobOwner: accountId,
-@as("jobId") jobId: option<jobId>
+reason: revocationReasonString,
+jobOwner: option<accountId>,
+jobId: jobId
 }
   
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "RevokeSignatureCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RemoveProfilePermission = {
   type t;
   type request = {
-@as("statementId") statementId: option<amazonawsString>,
-@as("revisionId") revisionId: option<amazonawsString>,
-@as("profileName") profileName: option<profileName>
+statementId: string_,
+revisionId: string_,
+profileName: profileName
 }
   type response = {
-@as("revisionId") revisionId: amazonawsString
+revisionId: option<string_>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "RemoveProfilePermissionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelSigningProfile = {
   type t;
   type request = {
-@as("profileName") profileName: option<profileName>
+profileName: profileName
 }
   
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "CancelSigningProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module AddProfilePermission = {
   type t;
   type request = {
-@as("statementId") statementId: option<amazonawsString>,
-@as("revisionId") revisionId: amazonawsString,
-@as("principal") principal: option<amazonawsString>,
-@as("action") action: option<amazonawsString>,
-@as("profileVersion") profileVersion: profileVersion,
-@as("profileName") profileName: option<profileName>
+statementId: string_,
+revisionId: option<string_>,
+principal: string_,
+action: string_,
+profileVersion: option<profileVersion>,
+profileName: profileName
 }
   type response = {
-@as("revisionId") revisionId: amazonawsString
+revisionId: option<string_>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "AddProfilePermissionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<amazonawsString>
+tagKeys: tagKeyList,
+resourceArn: string_
 }
   type response = unit
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<amazonawsString>
+tags: tagMap,
+resourceArn: string_
 }
   type response = unit
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<amazonawsString>
+resourceArn: string_
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartSigningJob = {
   type t;
   type request = {
-@as("profileOwner") profileOwner: accountId,
-@as("clientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("profileName") profileName: option<profileName>,
-@as("destination") destination: option<destination>,
-@as("source") source: option<source>
+profileOwner: option<accountId>,
+clientRequestToken: clientRequestToken,
+profileName: profileName,
+destination: destination,
+source: source
 }
   type response = {
-@as("jobOwner") jobOwner: accountId,
-@as("jobId") jobId: jobId
+jobOwner: option<accountId>,
+jobId: option<jobId>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "StartSigningJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutSigningProfile = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("signingParameters") signingParameters: signingParameters,
-@as("overrides") overrides: signingPlatformOverrides,
-@as("platformId") platformId: option<platformId>,
-@as("signatureValidityPeriod") signatureValidityPeriod: signatureValidityPeriod,
-@as("signingMaterial") signingMaterial: signingMaterial,
-@as("profileName") profileName: option<profileName>
+tags: option<tagMap>,
+signingParameters: option<signingParameters>,
+overrides: option<signingPlatformOverrides>,
+platformId: platformId,
+signatureValidityPeriod: option<signatureValidityPeriod>,
+signingMaterial: option<signingMaterial>,
+profileName: profileName
 }
   type response = {
-@as("profileVersionArn") profileVersionArn: arn,
-@as("profileVersion") profileVersion: profileVersion,
-@as("arn") arn: amazonawsString
+profileVersionArn: option<arn>,
+profileVersion: option<profileVersion>,
+arn: option<string_>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "PutSigningProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListProfilePermissions = {
   type t;
   type request = {
-@as("nextToken") nextToken: amazonawsString,
-@as("profileName") profileName: option<profileName>
+nextToken: option<string_>,
+profileName: profileName
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("permissions") permissions: permissions,
-@as("policySizeBytes") policySizeBytes: policySizeBytes,
-@as("revisionId") revisionId: amazonawsString
+nextToken: option<string_>,
+permissions: option<permissions>,
+policySizeBytes: option<policySizeBytes>,
+revisionId: option<string_>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "ListProfilePermissionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSigningProfile = {
   type t;
   type request = {
-@as("profileOwner") profileOwner: accountId,
-@as("profileName") profileName: option<profileName>
+profileOwner: option<accountId>,
+profileName: profileName
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("arn") arn: amazonawsString,
-@as("statusReason") statusReason: amazonawsString,
-@as("status") status: signingProfileStatus,
-@as("signingParameters") signingParameters: signingParameters,
-@as("overrides") overrides: signingPlatformOverrides,
-@as("signatureValidityPeriod") signatureValidityPeriod: signatureValidityPeriod,
-@as("platformDisplayName") platformDisplayName: displayName,
-@as("platformId") platformId: platformId,
-@as("signingMaterial") signingMaterial: signingMaterial,
-@as("revocationRecord") revocationRecord: signingProfileRevocationRecord,
-@as("profileVersionArn") profileVersionArn: arn,
-@as("profileVersion") profileVersion: profileVersion,
-@as("profileName") profileName: profileName
+tags: option<tagMap>,
+arn: option<string_>,
+statusReason: option<string_>,
+status: option<signingProfileStatus>,
+signingParameters: option<signingParameters>,
+overrides: option<signingPlatformOverrides>,
+signatureValidityPeriod: option<signatureValidityPeriod>,
+platformDisplayName: option<displayName>,
+platformId: option<platformId>,
+signingMaterial: option<signingMaterial>,
+revocationRecord: option<signingProfileRevocationRecord>,
+profileVersionArn: option<arn>,
+profileVersion: option<profileVersion>,
+profileName: option<profileName>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "GetSigningProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSigningJob = {
   type t;
   type request = {
-@as("jobId") jobId: option<jobId>
+jobId: jobId
 }
   type response = {
-@as("jobInvoker") jobInvoker: accountId,
-@as("jobOwner") jobOwner: accountId,
-@as("signedObject") signedObject: signedObject,
-@as("revocationRecord") revocationRecord: signingJobRevocationRecord,
-@as("statusReason") statusReason: statusReason,
-@as("status") status: signingStatus,
-@as("requestedBy") requestedBy: requestedBy,
-@as("signatureExpiresAt") signatureExpiresAt: amazonawsTimestamp,
-@as("completedAt") completedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("signingParameters") signingParameters: signingParameters,
-@as("overrides") overrides: signingPlatformOverrides,
-@as("profileVersion") profileVersion: profileVersion,
-@as("profileName") profileName: profileName,
-@as("platformDisplayName") platformDisplayName: displayName,
-@as("platformId") platformId: platformId,
-@as("signingMaterial") signingMaterial: signingMaterial,
-@as("source") source: source,
-@as("jobId") jobId: jobId
+jobInvoker: option<accountId>,
+jobOwner: option<accountId>,
+signedObject: option<signedObject>,
+revocationRecord: option<signingJobRevocationRecord>,
+statusReason: option<statusReason>,
+status: option<signingStatus>,
+requestedBy: option<requestedBy>,
+signatureExpiresAt: option<timestamp_>,
+completedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+signingParameters: option<signingParameters>,
+overrides: option<signingPlatformOverrides>,
+profileVersion: option<profileVersion>,
+profileName: option<profileName>,
+platformDisplayName: option<displayName>,
+platformId: option<platformId>,
+signingMaterial: option<signingMaterial>,
+source: option<source>,
+jobId: option<jobId>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "DescribeSigningJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSigningProfiles = {
   type t;
   type request = {
-@as("statuses") statuses: statuses,
-@as("platformId") platformId: platformId,
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("includeCanceled") includeCanceled: bool
+statuses: option<statuses>,
+platformId: option<platformId>,
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+includeCanceled: option<bool_>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("profiles") profiles: signingProfiles
+nextToken: option<nextToken>,
+profiles: option<signingProfiles>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "ListSigningProfilesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSigningPlatform = {
   type t;
   type request = {
-@as("platformId") platformId: option<platformId>
+platformId: platformId
 }
   type response = {
-@as("revocationSupported") revocationSupported: bool,
-@as("maxSizeInMB") maxSizeInMB: maxSizeInMB,
-@as("signingImageFormat") signingImageFormat: signingImageFormat,
-@as("signingConfiguration") signingConfiguration: signingConfiguration,
-@as("category") category: category,
-@as("target") target: amazonawsString,
-@as("partner") partner: amazonawsString,
-@as("displayName") displayName: displayName,
-@as("platformId") platformId: platformId
+revocationSupported: option<bool_>,
+maxSizeInMB: option<maxSizeInMB>,
+signingImageFormat: option<signingImageFormat>,
+signingConfiguration: option<signingConfiguration>,
+category: option<category>,
+target: option<string_>,
+partner: option<string_>,
+displayName: option<displayName>,
+platformId: option<platformId>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "GetSigningPlatformCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSigningJobs = {
   type t;
   type request = {
-@as("jobInvoker") jobInvoker: accountId,
-@as("signatureExpiresAfter") signatureExpiresAfter: amazonawsTimestamp,
-@as("signatureExpiresBefore") signatureExpiresBefore: amazonawsTimestamp,
-@as("isRevoked") isRevoked: bool,
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("requestedBy") requestedBy: requestedBy,
-@as("platformId") platformId: platformId,
-@as("status") status: signingStatus
+jobInvoker: option<accountId>,
+signatureExpiresAfter: option<timestamp_>,
+signatureExpiresBefore: option<timestamp_>,
+isRevoked: option<bool_>,
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+requestedBy: option<requestedBy>,
+platformId: option<platformId>,
+status: option<signingStatus>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("jobs") jobs: signingJobs
+nextToken: option<nextToken>,
+jobs: option<signingJobs>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "ListSigningJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSigningPlatforms = {
   type t;
   type request = {
-@as("nextToken") nextToken: amazonawsString,
-@as("maxResults") maxResults: maxResults,
-@as("target") target: amazonawsString,
-@as("partner") partner: amazonawsString,
-@as("category") category: amazonawsString
+nextToken: option<string_>,
+maxResults: option<maxResults>,
+target: option<string_>,
+partner: option<string_>,
+category: option<string_>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("platforms") platforms: signingPlatforms
+nextToken: option<string_>,
+platforms: option<signingPlatforms>
 }
   @module("@aws-sdk/client-signer") @new external new_: (request) => t = "ListSigningPlatformsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

@@ -1,95 +1,100 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type integer_ = int
+type timestamp_ = Js.Date.t;
 type timeCreated = string
 type submittedBy = string
 type subject = string
-type amazonawsString = string
+type string_ = string
 type status = string
 type severityLevelName = string
 type severityLevelCode = string
 type severityCode = string
 type serviceName = string
 type serviceCode = string
-type result = bool;
+type result = bool
 type nextToken = string
-type maxResults = int;
-type amazonawsLong = float;
+type maxResults = int
+type long = float
 type language = string
 type issueType = string
-type includeResolvedCases = bool;
-type includeCommunications = bool;
+type includeResolvedCases = bool
+type includeCommunications = bool
 type fileName = string
 type expiryTime = string
 type errorMessage = string
-type amazonawsDouble = float;
+type double = float
 type displayId = string
-type data = NodeJs.Buffer.t;
+type data = NodeJs.Buffer.t
 type communicationBody = string
 type ccEmailAddress = string
 type categoryName = string
 type categoryCode = string
 type caseStatus = string
 type caseId = string
-type amazonawsBoolean = bool;
+type boolean_ = bool
 type beforeTime = string
 type attachmentSetId = string
 type attachmentId = string
 type afterTime = string
 type trustedAdvisorResourcesSummary = {
-@as("resourcesSuppressed") resourcesSuppressed: option<amazonawsLong>,
-@as("resourcesIgnored") resourcesIgnored: option<amazonawsLong>,
-@as("resourcesFlagged") resourcesFlagged: option<amazonawsLong>,
-@as("resourcesProcessed") resourcesProcessed: option<amazonawsLong>
+resourcesSuppressed: long,
+resourcesIgnored: long,
+resourcesFlagged: long,
+resourcesProcessed: long
 }
 type trustedAdvisorCostOptimizingSummary = {
-@as("estimatedPercentMonthlySavings") estimatedPercentMonthlySavings: option<amazonawsDouble>,
-@as("estimatedMonthlySavings") estimatedMonthlySavings: option<amazonawsDouble>
+estimatedPercentMonthlySavings: double,
+estimatedMonthlySavings: double
 }
 type trustedAdvisorCheckRefreshStatus = {
-@as("millisUntilNextRefreshable") millisUntilNextRefreshable: option<amazonawsLong>,
-@as("status") status: option<amazonawsString>,
-@as("checkId") checkId: option<amazonawsString>
+millisUntilNextRefreshable: long,
+status: string_,
+checkId: string_
 }
-type stringList = array<amazonawsString>
+type stringList = array<string_>
 type severityLevel = {
-@as("name") name: severityLevelName,
-@as("code") code: severityLevelCode
+name: option<severityLevelName>,
+code: option<severityLevelCode>
 }
 type serviceCodeList = array<serviceCode>
 type ccEmailAddressList = array<ccEmailAddress>
 type category = {
-@as("name") name: categoryName,
-@as("code") code: categoryCode
+name: option<categoryName>,
+code: option<categoryCode>
 }
 type caseIdList = array<caseId>
 type attachmentDetails = {
-@as("fileName") fileName: fileName,
-@as("attachmentId") attachmentId: attachmentId
+fileName: option<fileName>,
+attachmentId: option<attachmentId>
 }
 type attachment = {
-@as("data") data: data,
-@as("fileName") fileName: fileName
+data: option<data>,
+fileName: option<fileName>
 }
 type trustedAdvisorResourceDetail = {
-@as("metadata") metadata: option<stringList>,
-@as("isSuppressed") isSuppressed: amazonawsBoolean,
-@as("resourceId") resourceId: option<amazonawsString>,
-@as("region") region: amazonawsString,
-@as("status") status: option<amazonawsString>
+metadata: stringList,
+isSuppressed: option<boolean_>,
+resourceId: string_,
+region: option<string_>,
+status: string_
 }
 type trustedAdvisorCheckRefreshStatusList = array<trustedAdvisorCheckRefreshStatus>
 type trustedAdvisorCheckDescription = {
-@as("metadata") metadata: option<stringList>,
-@as("category") category: option<amazonawsString>,
-@as("description") description: option<amazonawsString>,
-@as("name") name: option<amazonawsString>,
-@as("id") id: option<amazonawsString>
+metadata: stringList,
+category: string_,
+description: string_,
+name: string_,
+id: string_
 }
 type trustedAdvisorCategorySpecificSummary = {
-@as("costOptimizing") costOptimizing: trustedAdvisorCostOptimizingSummary
+costOptimizing: option<trustedAdvisorCostOptimizingSummary>
 }
 type severityLevelsList = array<severityLevel>
 type categoryList = array<category>
@@ -97,252 +102,252 @@ type attachments = array<attachment>
 type attachmentSet = array<attachmentDetails>
 type trustedAdvisorResourceDetailList = array<trustedAdvisorResourceDetail>
 type trustedAdvisorCheckSummary = {
-@as("categorySpecificSummary") categorySpecificSummary: option<trustedAdvisorCategorySpecificSummary>,
-@as("resourcesSummary") resourcesSummary: option<trustedAdvisorResourcesSummary>,
-@as("hasFlaggedResources") hasFlaggedResources: amazonawsBoolean,
-@as("status") status: option<amazonawsString>,
-@as("timestamp") timestamp: option<amazonawsString>,
-@as("checkId") checkId: option<amazonawsString>
+categorySpecificSummary: trustedAdvisorCategorySpecificSummary,
+resourcesSummary: trustedAdvisorResourcesSummary,
+hasFlaggedResources: option<boolean_>,
+status: string_,
+@as("timestamp") timestamp_: string_,
+checkId: string_
 }
 type trustedAdvisorCheckList = array<trustedAdvisorCheckDescription>
 type service = {
-@as("categories") categories: categoryList,
-@as("name") name: serviceName,
-@as("code") code: serviceCode
+categories: option<categoryList>,
+name: option<serviceName>,
+code: option<serviceCode>
 }
 type communication = {
-@as("attachmentSet") attachmentSet: attachmentSet,
-@as("timeCreated") timeCreated: timeCreated,
-@as("submittedBy") submittedBy: submittedBy,
-@as("body") body: communicationBody,
-@as("caseId") caseId: caseId
+attachmentSet: option<attachmentSet>,
+timeCreated: option<timeCreated>,
+submittedBy: option<submittedBy>,
+body: option<communicationBody>,
+caseId: option<caseId>
 }
 type trustedAdvisorCheckSummaryList = array<trustedAdvisorCheckSummary>
 type trustedAdvisorCheckResult = {
-@as("flaggedResources") flaggedResources: option<trustedAdvisorResourceDetailList>,
-@as("categorySpecificSummary") categorySpecificSummary: option<trustedAdvisorCategorySpecificSummary>,
-@as("resourcesSummary") resourcesSummary: option<trustedAdvisorResourcesSummary>,
-@as("status") status: option<amazonawsString>,
-@as("timestamp") timestamp: option<amazonawsString>,
-@as("checkId") checkId: option<amazonawsString>
+flaggedResources: trustedAdvisorResourceDetailList,
+categorySpecificSummary: trustedAdvisorCategorySpecificSummary,
+resourcesSummary: trustedAdvisorResourcesSummary,
+status: string_,
+@as("timestamp") timestamp_: string_,
+checkId: string_
 }
 type serviceList = array<service>
 type communicationList = array<communication>
 type recentCaseCommunications = {
-@as("nextToken") nextToken: nextToken,
-@as("communications") communications: communicationList
+nextToken: option<nextToken>,
+communications: option<communicationList>
 }
 type caseDetails = {
-@as("language") language: language,
-@as("ccEmailAddresses") ccEmailAddresses: ccEmailAddressList,
-@as("recentCommunications") recentCommunications: recentCaseCommunications,
-@as("timeCreated") timeCreated: timeCreated,
-@as("submittedBy") submittedBy: submittedBy,
-@as("severityCode") severityCode: severityCode,
-@as("categoryCode") categoryCode: categoryCode,
-@as("serviceCode") serviceCode: serviceCode,
-@as("status") status: status,
-@as("subject") subject: subject,
-@as("displayId") displayId: displayId,
-@as("caseId") caseId: caseId
+language: option<language>,
+ccEmailAddresses: option<ccEmailAddressList>,
+recentCommunications: option<recentCaseCommunications>,
+timeCreated: option<timeCreated>,
+submittedBy: option<submittedBy>,
+severityCode: option<severityCode>,
+categoryCode: option<categoryCode>,
+serviceCode: option<serviceCode>,
+status: option<status>,
+subject: option<subject>,
+displayId: option<displayId>,
+caseId: option<caseId>
 }
 type caseList = array<caseDetails>
-type clientType;
-@module("@aws-sdk/client-support") @new external createClient: unit => clientType = "SupportClient";
+type awsServiceClient;
+@module("@aws-sdk/client-support") @new external createClient: unit => awsServiceClient = "SupportClient";
 module ResolveCase = {
   type t;
   type request = {
-@as("caseId") caseId: caseId
+caseId: option<caseId>
 }
   type response = {
-@as("finalCaseStatus") finalCaseStatus: caseStatus,
-@as("initialCaseStatus") initialCaseStatus: caseStatus
+finalCaseStatus: option<caseStatus>,
+initialCaseStatus: option<caseStatus>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "ResolveCaseCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RefreshTrustedAdvisorCheck = {
   type t;
   type request = {
-@as("checkId") checkId: option<amazonawsString>
+checkId: string_
 }
   type response = {
-@as("status") status: option<trustedAdvisorCheckRefreshStatus>
+status: trustedAdvisorCheckRefreshStatus
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "RefreshTrustedAdvisorCheckCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAttachment = {
   type t;
   type request = {
-@as("attachmentId") attachmentId: option<attachmentId>
+attachmentId: attachmentId
 }
   type response = {
-@as("attachment") attachment: attachment
+attachment: option<attachment>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "DescribeAttachmentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCase = {
   type t;
   type request = {
-@as("attachmentSetId") attachmentSetId: attachmentSetId,
-@as("issueType") issueType: issueType,
-@as("language") language: language,
-@as("ccEmailAddresses") ccEmailAddresses: ccEmailAddressList,
-@as("communicationBody") communicationBody: option<communicationBody>,
-@as("categoryCode") categoryCode: categoryCode,
-@as("severityCode") severityCode: severityCode,
-@as("serviceCode") serviceCode: serviceCode,
-@as("subject") subject: option<subject>
+attachmentSetId: option<attachmentSetId>,
+issueType: option<issueType>,
+language: option<language>,
+ccEmailAddresses: option<ccEmailAddressList>,
+communicationBody: communicationBody,
+categoryCode: option<categoryCode>,
+severityCode: option<severityCode>,
+serviceCode: option<serviceCode>,
+subject: subject
 }
   type response = {
-@as("caseId") caseId: caseId
+caseId: option<caseId>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "CreateCaseCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddCommunicationToCase = {
   type t;
   type request = {
-@as("attachmentSetId") attachmentSetId: attachmentSetId,
-@as("ccEmailAddresses") ccEmailAddresses: ccEmailAddressList,
-@as("communicationBody") communicationBody: option<communicationBody>,
-@as("caseId") caseId: caseId
+attachmentSetId: option<attachmentSetId>,
+ccEmailAddresses: option<ccEmailAddressList>,
+communicationBody: communicationBody,
+caseId: option<caseId>
 }
   type response = {
-@as("result") result: result
+result: option<result>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "AddCommunicationToCaseCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTrustedAdvisorCheckRefreshStatuses = {
   type t;
   type request = {
-@as("checkIds") checkIds: option<stringList>
+checkIds: stringList
 }
   type response = {
-@as("statuses") statuses: option<trustedAdvisorCheckRefreshStatusList>
+statuses: trustedAdvisorCheckRefreshStatusList
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "DescribeTrustedAdvisorCheckRefreshStatusesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSeverityLevels = {
   type t;
   type request = {
-@as("language") language: language
+language: option<language>
 }
   type response = {
-@as("severityLevels") severityLevels: severityLevelsList
+severityLevels: option<severityLevelsList>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "DescribeSeverityLevelsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddAttachmentsToSet = {
   type t;
   type request = {
-@as("attachments") attachments: option<attachments>,
-@as("attachmentSetId") attachmentSetId: attachmentSetId
+attachments: attachments,
+attachmentSetId: option<attachmentSetId>
 }
   type response = {
-@as("expiryTime") expiryTime: expiryTime,
-@as("attachmentSetId") attachmentSetId: attachmentSetId
+expiryTime: option<expiryTime>,
+attachmentSetId: option<attachmentSetId>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "AddAttachmentsToSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTrustedAdvisorChecks = {
   type t;
   type request = {
-@as("language") language: option<amazonawsString>
+language: string_
 }
   type response = {
-@as("checks") checks: option<trustedAdvisorCheckList>
+checks: trustedAdvisorCheckList
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "DescribeTrustedAdvisorChecksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTrustedAdvisorCheckSummaries = {
   type t;
   type request = {
-@as("checkIds") checkIds: option<stringList>
+checkIds: stringList
 }
   type response = {
-@as("summaries") summaries: option<trustedAdvisorCheckSummaryList>
+summaries: trustedAdvisorCheckSummaryList
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "DescribeTrustedAdvisorCheckSummariesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTrustedAdvisorCheckResult = {
   type t;
   type request = {
-@as("language") language: amazonawsString,
-@as("checkId") checkId: option<amazonawsString>
+language: option<string_>,
+checkId: string_
 }
   type response = {
-@as("result") result: trustedAdvisorCheckResult
+result: option<trustedAdvisorCheckResult>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "DescribeTrustedAdvisorCheckResultCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeServices = {
   type t;
   type request = {
-@as("language") language: language,
-@as("serviceCodeList") serviceCodeList: serviceCodeList
+language: option<language>,
+serviceCodeList: option<serviceCodeList>
 }
   type response = {
-@as("services") services: serviceList
+services: option<serviceList>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "DescribeServicesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCommunications = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("afterTime") afterTime: afterTime,
-@as("beforeTime") beforeTime: beforeTime,
-@as("caseId") caseId: option<caseId>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+afterTime: option<afterTime>,
+beforeTime: option<beforeTime>,
+caseId: caseId
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("communications") communications: communicationList
+nextToken: option<nextToken>,
+communications: option<communicationList>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "DescribeCommunicationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCases = {
   type t;
   type request = {
-@as("includeCommunications") includeCommunications: includeCommunications,
-@as("language") language: language,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("includeResolvedCases") includeResolvedCases: includeResolvedCases,
-@as("beforeTime") beforeTime: beforeTime,
-@as("afterTime") afterTime: afterTime,
-@as("displayId") displayId: displayId,
-@as("caseIdList") caseIdList: caseIdList
+includeCommunications: option<includeCommunications>,
+language: option<language>,
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+includeResolvedCases: option<includeResolvedCases>,
+beforeTime: option<beforeTime>,
+afterTime: option<afterTime>,
+displayId: option<displayId>,
+caseIdList: option<caseIdList>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("cases") cases: caseList
+nextToken: option<nextToken>,
+cases: option<caseList>
 }
   @module("@aws-sdk/client-support") @new external new_: (request) => t = "DescribeCasesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

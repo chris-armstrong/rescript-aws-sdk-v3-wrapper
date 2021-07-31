@@ -1,292 +1,295 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type usageStatisticType = [@as("TOP_RESOURCES") #TOP_RESOURCES | @as("SUM_BY_RESOURCE") #SUM_BY_RESOURCE | @as("SUM_BY_DATA_SOURCE") #SUM_BY_DATA_SOURCE | @as("SUM_BY_ACCOUNT") #SUM_BY_ACCOUNT]
-type amazonawsTimestamp = Js.Date.t;
-type threatIntelSetStatus = [@as("DELETED") #DELETED | @as("DELETE_PENDING") #DELETE_PENDING | @as("ERROR") #ERROR | @as("DEACTIVATING") #DEACTIVATING | @as("ACTIVE") #ACTIVE | @as("ACTIVATING") #ACTIVATING | @as("INACTIVE") #INACTIVE]
-type threatIntelSetFormat = [@as("FIRE_EYE") #FIRE_EYE | @as("PROOF_POINT") #PROOF_POINT | @as("ALIEN_VAULT") #ALIEN_VAULT | @as("OTX_CSV") #OTX_CSV | @as("STIX") #STIX | @as("TXT") #TXT]
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type usageStatisticType = [@as("TOP_RESOURCES") #TOPRESOURCES | @as("SUM_BY_RESOURCE") #SUMBYRESOURCE | @as("SUM_BY_DATA_SOURCE") #SUMBYDATASOURCE | @as("SUM_BY_ACCOUNT") #SUMBYACCOUNT]
+type timestamp_ = Js.Date.t;
+type threatIntelSetStatus = [@as("DELETED") #DELETED | @as("DELETE_PENDING") #DELETEPENDING | @as("ERROR") #ERROR | @as("DEACTIVATING") #DEACTIVATING | @as("ACTIVE") #ACTIVE | @as("ACTIVATING") #ACTIVATING | @as("INACTIVE") #INACTIVE]
+type threatIntelSetFormat = [@as("FIRE_EYE") #FIREEYE | @as("PROOF_POINT") #PROOFPOINT | @as("ALIEN_VAULT") #ALIENVAULT | @as("OTX_CSV") #OTXCSV | @as("STIX") #STIX | @as("TXT") #TXT]
 type tagValue = string
 type tagKey = string
-type amazonawsString = string
-type publishingStatus = [@as("STOPPED") #STOPPED | @as("UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY") #UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY | @as("PUBLISHING") #PUBLISHING | @as("PENDING_VERIFICATION") #PENDING_VERIFICATION]
+type string_ = string
+type publishingStatus = [@as("STOPPED") #STOPPED | @as("UNABLE_TO_PUBLISH_FIX_DESTINATION_PROPERTY") #UNABLETOPUBLISHFIXDESTINATIONPROPERTY | @as("PUBLISHING") #PUBLISHING | @as("PENDING_VERIFICATION") #PENDINGVERIFICATION]
 type orderBy = [@as("DESC") #DESC | @as("ASC") #ASC]
 type name = string
-type maxResults = int;
-type amazonawsLong = float;
+type maxResults = int
+type long = float
 type location = string
-type ipSetStatus = [@as("DELETED") #DELETED | @as("DELETE_PENDING") #DELETE_PENDING | @as("ERROR") #ERROR | @as("DEACTIVATING") #DEACTIVATING | @as("ACTIVE") #ACTIVE | @as("ACTIVATING") #ACTIVATING | @as("INACTIVE") #INACTIVE]
-type ipSetFormat = [@as("FIRE_EYE") #FIRE_EYE | @as("PROOF_POINT") #PROOF_POINT | @as("ALIEN_VAULT") #ALIEN_VAULT | @as("OTX_CSV") #OTX_CSV | @as("STIX") #STIX | @as("TXT") #TXT]
-type amazonawsInteger = int;
+type ipSetStatus = [@as("DELETED") #DELETED | @as("DELETE_PENDING") #DELETEPENDING | @as("ERROR") #ERROR | @as("DEACTIVATING") #DEACTIVATING | @as("ACTIVE") #ACTIVE | @as("ACTIVATING") #ACTIVATING | @as("INACTIVE") #INACTIVE]
+type ipSetFormat = [@as("FIRE_EYE") #FIREEYE | @as("PROOF_POINT") #PROOFPOINT | @as("ALIEN_VAULT") #ALIENVAULT | @as("OTX_CSV") #OTXCSV | @as("STIX") #STIX | @as("TXT") #TXT]
+type integer_ = int
 type guardDutyArn = string
 type findingType = string
-type findingStatisticType = [@as("COUNT_BY_SEVERITY") #COUNT_BY_SEVERITY]
-type findingPublishingFrequency = [@as("SIX_HOURS") #SIX_HOURS | @as("ONE_HOUR") #ONE_HOUR | @as("FIFTEEN_MINUTES") #FIFTEEN_MINUTES]
+type findingStatisticType = [@as("COUNT_BY_SEVERITY") #COUNTBYSEVERITY]
+type findingPublishingFrequency = [@as("SIX_HOURS") #SIXHOURS | @as("ONE_HOUR") #ONEHOUR | @as("FIFTEEN_MINUTES") #FIFTEENMINUTES]
 type findingId = string
-type filterRank = int;
+type filterRank = int
 type filterName = string
 type filterDescription = string
 type filterAction = [@as("ARCHIVE") #ARCHIVE | @as("NOOP") #NOOP]
-type feedback = [@as("NOT_USEFUL") #NOT_USEFUL | @as("USEFUL") #USEFUL]
+type feedback = [@as("NOT_USEFUL") #NOTUSEFUL | @as("USEFUL") #USEFUL]
 type email = string
-type amazonawsDouble = float;
+type double = float
 type detectorStatus = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type detectorId = string
 type destinationType = [@as("S3") #S3]
 type dataSourceStatus = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
-type dataSource = [@as("S3_LOGS") #S3_LOGS | @as("DNS_LOGS") #DNS_LOGS | @as("CLOUD_TRAIL") #CLOUD_TRAIL | @as("FLOW_LOGS") #FLOW_LOGS]
+type dataSource = [@as("S3_LOGS") #S3LOGS | @as("DNS_LOGS") #DNSLOGS | @as("CLOUD_TRAIL") #CLOUDTRAIL | @as("FLOW_LOGS") #FLOWLOGS]
 type clientToken = string
-type amazonawsBoolean = bool;
-type adminStatus = [@as("DISABLE_IN_PROGRESS") #DISABLE_IN_PROGRESS | @as("ENABLED") #ENABLED]
+type boolean_ = bool
+type adminStatus = [@as("DISABLE_IN_PROGRESS") #DISABLEINPROGRESS | @as("ENABLED") #ENABLED]
 type accountId = string
 type unprocessedAccount = {
-@as("Result") result: option<amazonawsString>,
-@as("AccountId") accountId: option<accountId>
+@as("Result") result: string_,
+@as("AccountId") accountId: accountId
 }
 type total = {
-@as("Unit") unit: amazonawsString,
-@as("Amount") amount: amazonawsString
+@as("Unit") unit_: option<string_>,
+@as("Amount") amount: option<string_>
 }
-type threatNames = array<amazonawsString>
-type threatIntelSetIds = array<amazonawsString>
+type threatNames = array<string_>
+type threatIntelSetIds = array<string_>
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: amazonawsString,
-@as("Key") key: amazonawsString
+@as("Value") value: option<string_>,
+@as("Key") key: option<string_>
 }
 type sortCriteria = {
-@as("OrderBy") orderBy: orderBy,
-@as("AttributeName") attributeName: amazonawsString
+@as("OrderBy") orderBy: option<orderBy>,
+@as("AttributeName") attributeName: option<string_>
 }
 type securityGroup = {
-@as("GroupName") groupName: amazonawsString,
-@as("GroupId") groupId: amazonawsString
+@as("GroupName") groupName: option<string_>,
+@as("GroupId") groupId: option<string_>
 }
 type s3LogsConfigurationResult = {
-@as("Status") status: option<dataSourceStatus>
+@as("Status") status: dataSourceStatus
 }
 type s3LogsConfiguration = {
-@as("Enable") enable: option<amazonawsBoolean>
+@as("Enable") enable: boolean_
 }
-type resourceList = array<amazonawsString>
+type resourceList = array<string_>
 type remotePortDetails = {
-@as("PortName") portName: amazonawsString,
-@as("Port") port: amazonawsInteger
+@as("PortName") portName: option<string_>,
+@as("Port") port: option<integer_>
 }
 type productCode = {
-@as("ProductType") productType: amazonawsString,
-@as("Code") code: amazonawsString
+@as("ProductType") productType: option<string_>,
+@as("Code") code: option<string_>
 }
 type privateIpAddressDetails = {
-@as("PrivateIpAddress") privateIpAddress: amazonawsString,
-@as("PrivateDnsName") privateDnsName: amazonawsString
+@as("PrivateIpAddress") privateIpAddress: option<string_>,
+@as("PrivateDnsName") privateDnsName: option<string_>
 }
 type owner = {
-@as("Id") id: amazonawsString
+@as("Id") id: option<string_>
 }
 type organizationS3LogsConfigurationResult = {
-@as("AutoEnable") autoEnable: option<amazonawsBoolean>
+@as("AutoEnable") autoEnable: boolean_
 }
 type organizationS3LogsConfiguration = {
-@as("AutoEnable") autoEnable: option<amazonawsBoolean>
+@as("AutoEnable") autoEnable: boolean_
 }
 type organization = {
-@as("Org") org: amazonawsString,
-@as("Isp") isp: amazonawsString,
-@as("AsnOrg") asnOrg: amazonawsString,
-@as("Asn") asn: amazonawsString
+@as("Org") org: option<string_>,
+@as("Isp") isp: option<string_>,
+@as("AsnOrg") asnOrg: option<string_>,
+@as("Asn") asn: option<string_>
 }
-type notEquals = array<amazonawsString>
-type neq = array<amazonawsString>
+type notEquals = array<string_>
+type neq = array<string_>
 type member = {
-@as("UpdatedAt") updatedAt: option<amazonawsString>,
-@as("InvitedAt") invitedAt: amazonawsString,
-@as("RelationshipStatus") relationshipStatus: option<amazonawsString>,
-@as("Email") email: option<email>,
-@as("MasterId") masterId: option<amazonawsString>,
-@as("DetectorId") detectorId: detectorId,
-@as("AccountId") accountId: option<accountId>
+@as("UpdatedAt") updatedAt: string_,
+@as("InvitedAt") invitedAt: option<string_>,
+@as("RelationshipStatus") relationshipStatus: string_,
+@as("Email") email: email,
+@as("MasterId") masterId: string_,
+@as("DetectorId") detectorId: option<detectorId>,
+@as("AccountId") accountId: accountId
 }
 type master = {
-@as("InvitedAt") invitedAt: amazonawsString,
-@as("RelationshipStatus") relationshipStatus: amazonawsString,
-@as("InvitationId") invitationId: amazonawsString,
-@as("AccountId") accountId: accountId
+@as("InvitedAt") invitedAt: option<string_>,
+@as("RelationshipStatus") relationshipStatus: option<string_>,
+@as("InvitationId") invitationId: option<string_>,
+@as("AccountId") accountId: option<accountId>
 }
 type localPortDetails = {
-@as("PortName") portName: amazonawsString,
-@as("Port") port: amazonawsInteger
+@as("PortName") portName: option<string_>,
+@as("Port") port: option<integer_>
 }
 type localIpDetails = {
-@as("IpAddressV4") ipAddressV4: amazonawsString
+@as("IpAddressV4") ipAddressV4: option<string_>
 }
-type ipv6Addresses = array<amazonawsString>
-type ipSetIds = array<amazonawsString>
+type ipv6Addresses = array<string_>
+type ipSetIds = array<string_>
 type invitation = {
-@as("InvitedAt") invitedAt: amazonawsString,
-@as("RelationshipStatus") relationshipStatus: amazonawsString,
-@as("InvitationId") invitationId: amazonawsString,
-@as("AccountId") accountId: accountId
+@as("InvitedAt") invitedAt: option<string_>,
+@as("RelationshipStatus") relationshipStatus: option<string_>,
+@as("InvitationId") invitationId: option<string_>,
+@as("AccountId") accountId: option<accountId>
 }
 type iamInstanceProfile = {
-@as("Id") id: amazonawsString,
-@as("Arn") arn: amazonawsString
+@as("Id") id: option<string_>,
+@as("Arn") arn: option<string_>
 }
 type geoLocation = {
-@as("Lon") lon: amazonawsDouble,
-@as("Lat") lat: amazonawsDouble
+@as("Lon") lon: option<double>,
+@as("Lat") lat: option<double>
 }
 type flowLogsConfigurationResult = {
-@as("Status") status: option<dataSourceStatus>
+@as("Status") status: dataSourceStatus
 }
 type findingTypes = array<findingType>
 type findingStatisticTypes = array<findingStatisticType>
 type findingIds = array<findingId>
 type filterNames = array<filterName>
-type equals = array<amazonawsString>
-type eq = array<amazonawsString>
+type equals = array<string_>
+type eq = array<string_>
 type domainDetails = {
-@as("Domain") domain: amazonawsString
+@as("Domain") domain: option<string_>
 }
 type dnsRequestAction = {
-@as("Domain") domain: amazonawsString
+@as("Domain") domain: option<string_>
 }
 type detectorIds = array<detectorId>
 type destinationProperties = {
-@as("KmsKeyArn") kmsKeyArn: amazonawsString,
-@as("DestinationArn") destinationArn: amazonawsString
+@as("KmsKeyArn") kmsKeyArn: option<string_>,
+@as("DestinationArn") destinationArn: option<string_>
 }
 type destination = {
-@as("Status") status: option<publishingStatus>,
-@as("DestinationType") destinationType: option<destinationType>,
-@as("DestinationId") destinationId: option<amazonawsString>
+@as("Status") status: publishingStatus,
+@as("DestinationType") destinationType: destinationType,
+@as("DestinationId") destinationId: string_
 }
 type defaultServerSideEncryption = {
-@as("KmsMasterKeyArn") kmsMasterKeyArn: amazonawsString,
-@as("EncryptionType") encryptionType: amazonawsString
+@as("KmsMasterKeyArn") kmsMasterKeyArn: option<string_>,
+@as("EncryptionType") encryptionType: option<string_>
 }
 type dataSourceList = array<dataSource>
-type dNSLogsConfigurationResult = {
-@as("Status") status: option<dataSourceStatus>
+type dnslogsConfigurationResult = {
+@as("Status") status: dataSourceStatus
 }
 type country = {
-@as("CountryName") countryName: amazonawsString,
-@as("CountryCode") countryCode: amazonawsString
+@as("CountryName") countryName: option<string_>,
+@as("CountryCode") countryCode: option<string_>
 }
-type countBySeverity = Js.Dict.t< amazonawsInteger>
+type countBySeverity = Js.Dict.t< integer_>
 type cloudTrailConfigurationResult = {
-@as("Status") status: option<dataSourceStatus>
+@as("Status") status: dataSourceStatus
 }
 type city = {
-@as("CityName") cityName: amazonawsString
+@as("CityName") cityName: option<string_>
 }
 type bucketPolicy = {
-@as("AllowsPublicWriteAccess") allowsPublicWriteAccess: amazonawsBoolean,
-@as("AllowsPublicReadAccess") allowsPublicReadAccess: amazonawsBoolean
+@as("AllowsPublicWriteAccess") allowsPublicWriteAccess: option<boolean_>,
+@as("AllowsPublicReadAccess") allowsPublicReadAccess: option<boolean_>
 }
 type blockPublicAccess = {
-@as("BlockPublicPolicy") blockPublicPolicy: amazonawsBoolean,
-@as("BlockPublicAcls") blockPublicAcls: amazonawsBoolean,
-@as("RestrictPublicBuckets") restrictPublicBuckets: amazonawsBoolean,
-@as("IgnorePublicAcls") ignorePublicAcls: amazonawsBoolean
+@as("BlockPublicPolicy") blockPublicPolicy: option<boolean_>,
+@as("BlockPublicAcls") blockPublicAcls: option<boolean_>,
+@as("RestrictPublicBuckets") restrictPublicBuckets: option<boolean_>,
+@as("IgnorePublicAcls") ignorePublicAcls: option<boolean_>
 }
 type adminAccount = {
-@as("AdminStatus") adminStatus: adminStatus,
-@as("AdminAccountId") adminAccountId: amazonawsString
+@as("AdminStatus") adminStatus: option<adminStatus>,
+@as("AdminAccountId") adminAccountId: option<string_>
 }
 type accountIds = array<accountId>
 type accountDetail = {
-@as("Email") email: option<email>,
-@as("AccountId") accountId: option<accountId>
+@as("Email") email: email,
+@as("AccountId") accountId: accountId
 }
 type accessKeyDetails = {
-@as("UserType") userType: amazonawsString,
-@as("UserName") userName: amazonawsString,
-@as("PrincipalId") principalId: amazonawsString,
-@as("AccessKeyId") accessKeyId: amazonawsString
+@as("UserType") userType: option<string_>,
+@as("UserName") userName: option<string_>,
+@as("PrincipalId") principalId: option<string_>,
+@as("AccessKeyId") accessKeyId: option<string_>
 }
 type accessControlList = {
-@as("AllowsPublicWriteAccess") allowsPublicWriteAccess: amazonawsBoolean,
-@as("AllowsPublicReadAccess") allowsPublicReadAccess: amazonawsBoolean
+@as("AllowsPublicWriteAccess") allowsPublicWriteAccess: option<boolean_>,
+@as("AllowsPublicReadAccess") allowsPublicReadAccess: option<boolean_>
 }
 type usageResourceResult = {
-@as("Total") total: total,
-@as("Resource") resource: amazonawsString
+@as("Total") total: option<total>,
+@as("Resource") resource: option<string_>
 }
 type usageDataSourceResult = {
-@as("Total") total: total,
-@as("DataSource") dataSource: dataSource
+@as("Total") total: option<total>,
+@as("DataSource") dataSource: option<dataSource>
 }
 type usageCriteria = {
-@as("Resources") resources: resourceList,
-@as("DataSources") dataSources: option<dataSourceList>,
-@as("AccountIds") accountIds: accountIds
+@as("Resources") resources: option<resourceList>,
+@as("DataSources") dataSources: dataSourceList,
+@as("AccountIds") accountIds: option<accountIds>
 }
 type usageAccountResult = {
-@as("Total") total: total,
-@as("AccountId") accountId: accountId
+@as("Total") total: option<total>,
+@as("AccountId") accountId: option<accountId>
 }
 type unprocessedAccounts = array<unprocessedAccount>
 type threatIntelligenceDetail = {
-@as("ThreatNames") threatNames: threatNames,
-@as("ThreatListName") threatListName: amazonawsString
+@as("ThreatNames") threatNames: option<threatNames>,
+@as("ThreatListName") threatListName: option<string_>
 }
 type tags = array<tag>
 type securityGroups = array<securityGroup>
 type remoteIpDetails = {
-@as("Organization") organization: organization,
-@as("IpAddressV4") ipAddressV4: amazonawsString,
-@as("GeoLocation") geoLocation: geoLocation,
-@as("Country") country: country,
-@as("City") city: city
+@as("Organization") organization: option<organization>,
+@as("IpAddressV4") ipAddressV4: option<string_>,
+@as("GeoLocation") geoLocation: option<geoLocation>,
+@as("Country") country: option<country>,
+@as("City") city: option<city>
 }
 type productCodes = array<productCode>
 type privateIpAddresses = array<privateIpAddressDetails>
 type organizationDataSourceConfigurationsResult = {
-@as("S3Logs") s3Logs: option<organizationS3LogsConfigurationResult>
+@as("S3Logs") s3Logs: organizationS3LogsConfigurationResult
 }
 type organizationDataSourceConfigurations = {
-@as("S3Logs") s3Logs: organizationS3LogsConfiguration
+@as("S3Logs") s3Logs: option<organizationS3LogsConfiguration>
 }
 type members = array<member>
 type invitations = array<invitation>
 type findingStatistics = {
-@as("CountBySeverity") countBySeverity: countBySeverity
+@as("CountBySeverity") countBySeverity: option<countBySeverity>
 }
 type destinations = array<destination>
 type dataSourceConfigurationsResult = {
-@as("S3Logs") s3Logs: option<s3LogsConfigurationResult>,
-@as("FlowLogs") flowLogs: option<flowLogsConfigurationResult>,
-@as("DNSLogs") dNSLogs: option<dNSLogsConfigurationResult>,
-@as("CloudTrail") cloudTrail: option<cloudTrailConfigurationResult>
+@as("S3Logs") s3Logs: s3LogsConfigurationResult,
+@as("FlowLogs") flowLogs: flowLogsConfigurationResult,
+@as("DNSLogs") dnslogs: dnslogsConfigurationResult,
+@as("CloudTrail") cloudTrail: cloudTrailConfigurationResult
 }
 type dataSourceConfigurations = {
-@as("S3Logs") s3Logs: s3LogsConfiguration
+@as("S3Logs") s3Logs: option<s3LogsConfiguration>
 }
 type condition = {
-@as("LessThanOrEqual") lessThanOrEqual: amazonawsLong,
-@as("LessThan") lessThan: amazonawsLong,
-@as("GreaterThanOrEqual") greaterThanOrEqual: amazonawsLong,
-@as("GreaterThan") greaterThan: amazonawsLong,
-@as("NotEquals") notEquals: notEquals,
-@as("Equals") equals: equals,
-@as("Lte") lte: amazonawsInteger,
-@as("Lt") lt: amazonawsInteger,
-@as("Gte") gte: amazonawsInteger,
-@as("Gt") gt: amazonawsInteger,
-@as("Neq") neq: neq,
-@as("Eq") eq: eq
+@as("LessThanOrEqual") lessThanOrEqual: option<long>,
+@as("LessThan") lessThan: option<long>,
+@as("GreaterThanOrEqual") greaterThanOrEqual: option<long>,
+@as("GreaterThan") greaterThan: option<long>,
+@as("NotEquals") notEquals: option<notEquals>,
+@as("Equals") equals: option<equals>,
+@as("Lte") lte: option<integer_>,
+@as("Lt") lt: option<integer_>,
+@as("Gte") gte: option<integer_>,
+@as("Gt") gt: option<integer_>,
+@as("Neq") neq: option<neq>,
+@as("Eq") eq: option<eq>
 }
 type bucketLevelPermissions = {
-@as("BlockPublicAccess") blockPublicAccess: blockPublicAccess,
-@as("BucketPolicy") bucketPolicy: bucketPolicy,
-@as("AccessControlList") accessControlList: accessControlList
+@as("BlockPublicAccess") blockPublicAccess: option<blockPublicAccess>,
+@as("BucketPolicy") bucketPolicy: option<bucketPolicy>,
+@as("AccessControlList") accessControlList: option<accessControlList>
 }
 type adminAccounts = array<adminAccount>
 type accountLevelPermissions = {
-@as("BlockPublicAccess") blockPublicAccess: blockPublicAccess
+@as("BlockPublicAccess") blockPublicAccess: option<blockPublicAccess>
 }
 type accountDetails = array<accountDetail>
 type usageResourceResultList = array<usageResourceResult>
@@ -294,932 +297,932 @@ type usageDataSourceResultList = array<usageDataSourceResult>
 type usageAccountResultList = array<usageAccountResult>
 type threatIntelligenceDetails = array<threatIntelligenceDetail>
 type portProbeDetail = {
-@as("RemoteIpDetails") remoteIpDetails: remoteIpDetails,
-@as("LocalIpDetails") localIpDetails: localIpDetails,
-@as("LocalPortDetails") localPortDetails: localPortDetails
+@as("RemoteIpDetails") remoteIpDetails: option<remoteIpDetails>,
+@as("LocalIpDetails") localIpDetails: option<localIpDetails>,
+@as("LocalPortDetails") localPortDetails: option<localPortDetails>
 }
 type permissionConfiguration = {
-@as("AccountLevelPermissions") accountLevelPermissions: accountLevelPermissions,
-@as("BucketLevelPermissions") bucketLevelPermissions: bucketLevelPermissions
+@as("AccountLevelPermissions") accountLevelPermissions: option<accountLevelPermissions>,
+@as("BucketLevelPermissions") bucketLevelPermissions: option<bucketLevelPermissions>
 }
 type networkInterface = {
-@as("VpcId") vpcId: amazonawsString,
-@as("SubnetId") subnetId: amazonawsString,
-@as("SecurityGroups") securityGroups: securityGroups,
-@as("PublicIp") publicIp: amazonawsString,
-@as("PublicDnsName") publicDnsName: amazonawsString,
-@as("PrivateIpAddresses") privateIpAddresses: privateIpAddresses,
-@as("PrivateIpAddress") privateIpAddress: amazonawsString,
-@as("PrivateDnsName") privateDnsName: amazonawsString,
-@as("NetworkInterfaceId") networkInterfaceId: amazonawsString,
-@as("Ipv6Addresses") ipv6Addresses: ipv6Addresses
+@as("VpcId") vpcId: option<string_>,
+@as("SubnetId") subnetId: option<string_>,
+@as("SecurityGroups") securityGroups: option<securityGroups>,
+@as("PublicIp") publicIp: option<string_>,
+@as("PublicDnsName") publicDnsName: option<string_>,
+@as("PrivateIpAddresses") privateIpAddresses: option<privateIpAddresses>,
+@as("PrivateIpAddress") privateIpAddress: option<string_>,
+@as("PrivateDnsName") privateDnsName: option<string_>,
+@as("NetworkInterfaceId") networkInterfaceId: option<string_>,
+@as("Ipv6Addresses") ipv6Addresses: option<ipv6Addresses>
 }
 type networkConnectionAction = {
-@as("RemotePortDetails") remotePortDetails: remotePortDetails,
-@as("RemoteIpDetails") remoteIpDetails: remoteIpDetails,
-@as("LocalIpDetails") localIpDetails: localIpDetails,
-@as("Protocol") protocol: amazonawsString,
-@as("LocalPortDetails") localPortDetails: localPortDetails,
-@as("ConnectionDirection") connectionDirection: amazonawsString,
-@as("Blocked") blocked: amazonawsBoolean
+@as("RemotePortDetails") remotePortDetails: option<remotePortDetails>,
+@as("RemoteIpDetails") remoteIpDetails: option<remoteIpDetails>,
+@as("LocalIpDetails") localIpDetails: option<localIpDetails>,
+@as("Protocol") protocol: option<string_>,
+@as("LocalPortDetails") localPortDetails: option<localPortDetails>,
+@as("ConnectionDirection") connectionDirection: option<string_>,
+@as("Blocked") blocked: option<boolean_>
 }
 type memberDataSourceConfiguration = {
-@as("DataSources") dataSources: option<dataSourceConfigurationsResult>,
-@as("AccountId") accountId: option<accountId>
+@as("DataSources") dataSources: dataSourceConfigurationsResult,
+@as("AccountId") accountId: accountId
 }
 type criterion = Js.Dict.t< condition>
 type awsApiCallAction = {
-@as("ServiceName") serviceName: amazonawsString,
-@as("RemoteIpDetails") remoteIpDetails: remoteIpDetails,
-@as("ErrorCode") errorCode: amazonawsString,
-@as("DomainDetails") domainDetails: domainDetails,
-@as("CallerType") callerType: amazonawsString,
-@as("Api") api: amazonawsString
+@as("ServiceName") serviceName: option<string_>,
+@as("RemoteIpDetails") remoteIpDetails: option<remoteIpDetails>,
+@as("ErrorCode") errorCode: option<string_>,
+@as("DomainDetails") domainDetails: option<domainDetails>,
+@as("CallerType") callerType: option<string_>,
+@as("Api") api: option<string_>
 }
 type usageStatistics = {
-@as("TopResources") topResources: usageResourceResultList,
-@as("SumByResource") sumByResource: usageResourceResultList,
-@as("SumByDataSource") sumByDataSource: usageDataSourceResultList,
-@as("SumByAccount") sumByAccount: usageAccountResultList
+@as("TopResources") topResources: option<usageResourceResultList>,
+@as("SumByResource") sumByResource: option<usageResourceResultList>,
+@as("SumByDataSource") sumByDataSource: option<usageDataSourceResultList>,
+@as("SumByAccount") sumByAccount: option<usageAccountResultList>
 }
 type publicAccess = {
-@as("EffectivePermission") effectivePermission: amazonawsString,
-@as("PermissionConfiguration") permissionConfiguration: permissionConfiguration
+@as("EffectivePermission") effectivePermission: option<string_>,
+@as("PermissionConfiguration") permissionConfiguration: option<permissionConfiguration>
 }
 type portProbeDetails = array<portProbeDetail>
 type networkInterfaces = array<networkInterface>
 type memberDataSourceConfigurations = array<memberDataSourceConfiguration>
 type findingCriteria = {
-@as("Criterion") criterion: criterion
+@as("Criterion") criterion: option<criterion>
 }
 type evidence = {
-@as("ThreatIntelligenceDetails") threatIntelligenceDetails: threatIntelligenceDetails
+@as("ThreatIntelligenceDetails") threatIntelligenceDetails: option<threatIntelligenceDetails>
 }
 type s3BucketDetail = {
-@as("PublicAccess") publicAccess: publicAccess,
-@as("DefaultServerSideEncryption") defaultServerSideEncryption: defaultServerSideEncryption,
-@as("Tags") tags: tags,
-@as("Owner") owner: owner,
-@as("CreatedAt") createdAt: amazonawsTimestamp,
-@as("Type") type_: amazonawsString,
-@as("Name") name: amazonawsString,
-@as("Arn") arn: amazonawsString
+@as("PublicAccess") publicAccess: option<publicAccess>,
+@as("DefaultServerSideEncryption") defaultServerSideEncryption: option<defaultServerSideEncryption>,
+@as("Tags") tags: option<tags>,
+@as("Owner") owner: option<owner>,
+@as("CreatedAt") createdAt: option<timestamp_>,
+@as("Type") type_: option<string_>,
+@as("Name") name: option<string_>,
+@as("Arn") arn: option<string_>
 }
 type portProbeAction = {
-@as("PortProbeDetails") portProbeDetails: portProbeDetails,
-@as("Blocked") blocked: amazonawsBoolean
+@as("PortProbeDetails") portProbeDetails: option<portProbeDetails>,
+@as("Blocked") blocked: option<boolean_>
 }
 type instanceDetails = {
-@as("Tags") tags: tags,
-@as("ProductCodes") productCodes: productCodes,
-@as("Platform") platform: amazonawsString,
-@as("NetworkInterfaces") networkInterfaces: networkInterfaces,
-@as("LaunchTime") launchTime: amazonawsString,
-@as("OutpostArn") outpostArn: amazonawsString,
-@as("InstanceType") instanceType: amazonawsString,
-@as("InstanceState") instanceState: amazonawsString,
-@as("InstanceId") instanceId: amazonawsString,
-@as("ImageId") imageId: amazonawsString,
-@as("ImageDescription") imageDescription: amazonawsString,
-@as("IamInstanceProfile") iamInstanceProfile: iamInstanceProfile,
-@as("AvailabilityZone") availabilityZone: amazonawsString
+@as("Tags") tags: option<tags>,
+@as("ProductCodes") productCodes: option<productCodes>,
+@as("Platform") platform: option<string_>,
+@as("NetworkInterfaces") networkInterfaces: option<networkInterfaces>,
+@as("LaunchTime") launchTime: option<string_>,
+@as("OutpostArn") outpostArn: option<string_>,
+@as("InstanceType") instanceType: option<string_>,
+@as("InstanceState") instanceState: option<string_>,
+@as("InstanceId") instanceId: option<string_>,
+@as("ImageId") imageId: option<string_>,
+@as("ImageDescription") imageDescription: option<string_>,
+@as("IamInstanceProfile") iamInstanceProfile: option<iamInstanceProfile>,
+@as("AvailabilityZone") availabilityZone: option<string_>
 }
 type s3BucketDetails = array<s3BucketDetail>
 type action = {
-@as("PortProbeAction") portProbeAction: portProbeAction,
-@as("NetworkConnectionAction") networkConnectionAction: networkConnectionAction,
-@as("DnsRequestAction") dnsRequestAction: dnsRequestAction,
-@as("AwsApiCallAction") awsApiCallAction: awsApiCallAction,
-@as("ActionType") actionType: amazonawsString
+@as("PortProbeAction") portProbeAction: option<portProbeAction>,
+@as("NetworkConnectionAction") networkConnectionAction: option<networkConnectionAction>,
+@as("DnsRequestAction") dnsRequestAction: option<dnsRequestAction>,
+@as("AwsApiCallAction") awsApiCallAction: option<awsApiCallAction>,
+@as("ActionType") actionType: option<string_>
 }
 type service = {
-@as("UserFeedback") userFeedback: amazonawsString,
-@as("ServiceName") serviceName: amazonawsString,
-@as("ResourceRole") resourceRole: amazonawsString,
-@as("EventLastSeen") eventLastSeen: amazonawsString,
-@as("EventFirstSeen") eventFirstSeen: amazonawsString,
-@as("DetectorId") detectorId: detectorId,
-@as("Count") count: amazonawsInteger,
-@as("Archived") archived: amazonawsBoolean,
-@as("Evidence") evidence: evidence,
-@as("Action") action: action
+@as("UserFeedback") userFeedback: option<string_>,
+@as("ServiceName") serviceName: option<string_>,
+@as("ResourceRole") resourceRole: option<string_>,
+@as("EventLastSeen") eventLastSeen: option<string_>,
+@as("EventFirstSeen") eventFirstSeen: option<string_>,
+@as("DetectorId") detectorId: option<detectorId>,
+@as("Count") count: option<integer_>,
+@as("Archived") archived: option<boolean_>,
+@as("Evidence") evidence: option<evidence>,
+@as("Action") action: option<action>
 }
 type resource = {
-@as("ResourceType") resourceType: amazonawsString,
-@as("InstanceDetails") instanceDetails: instanceDetails,
-@as("S3BucketDetails") s3BucketDetails: s3BucketDetails,
-@as("AccessKeyDetails") accessKeyDetails: accessKeyDetails
+@as("ResourceType") resourceType: option<string_>,
+@as("InstanceDetails") instanceDetails: option<instanceDetails>,
+@as("S3BucketDetails") s3BucketDetails: option<s3BucketDetails>,
+@as("AccessKeyDetails") accessKeyDetails: option<accessKeyDetails>
 }
 type finding = {
-@as("UpdatedAt") updatedAt: option<amazonawsString>,
-@as("Type") type_: option<findingType>,
-@as("Title") title: amazonawsString,
-@as("Severity") severity: option<amazonawsDouble>,
-@as("Service") service: service,
-@as("SchemaVersion") schemaVersion: option<amazonawsString>,
-@as("Resource") resource: option<resource>,
-@as("Region") region: option<amazonawsString>,
-@as("Partition") partition: amazonawsString,
-@as("Id") id: option<amazonawsString>,
-@as("Description") description: amazonawsString,
-@as("CreatedAt") createdAt: option<amazonawsString>,
-@as("Confidence") confidence: amazonawsDouble,
-@as("Arn") arn: option<amazonawsString>,
-@as("AccountId") accountId: option<amazonawsString>
+@as("UpdatedAt") updatedAt: string_,
+@as("Type") type_: findingType,
+@as("Title") title: option<string_>,
+@as("Severity") severity: double,
+@as("Service") service: option<service>,
+@as("SchemaVersion") schemaVersion: string_,
+@as("Resource") resource: resource,
+@as("Region") region: string_,
+@as("Partition") partition: option<string_>,
+@as("Id") id: string_,
+@as("Description") description: option<string_>,
+@as("CreatedAt") createdAt: string_,
+@as("Confidence") confidence: option<double>,
+@as("Arn") arn: string_,
+@as("AccountId") accountId: string_
 }
 type findings = array<finding>
-type clientType;
-@module("@aws-sdk/client-guardduty") @new external createClient: unit => clientType = "GuardDutyClient";
+type awsServiceClient;
+@module("@aws-sdk/client-guardduty") @new external createClient: unit => awsServiceClient = "GuardDutyClient";
 module UpdateThreatIntelSet = {
   type t;
   type request = {
-@as("Activate") activate: amazonawsBoolean,
-@as("Location") location: location,
-@as("Name") name: name,
-@as("ThreatIntelSetId") threatIntelSetId: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("Activate") activate: option<boolean_>,
+@as("Location") location: option<location>,
+@as("Name") name: option<name>,
+@as("ThreatIntelSetId") threatIntelSetId: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateThreatIntelSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateIPSet = {
   type t;
   type request = {
-@as("Activate") activate: amazonawsBoolean,
-@as("Location") location: location,
-@as("Name") name: name,
-@as("IpSetId") ipSetId: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("Activate") activate: option<boolean_>,
+@as("Location") location: option<location>,
+@as("Name") name: option<name>,
+@as("IpSetId") ipSetId: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateIPSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetInvitationsCount = {
   type t;
   type request = unit
   type response = {
-@as("InvitationsCount") invitationsCount: amazonawsInteger
+@as("InvitationsCount") invitationsCount: option<integer_>
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetInvitationsCountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableOrganizationAdminAccount = {
   type t;
   type request = {
-@as("AdminAccountId") adminAccountId: option<amazonawsString>
+@as("AdminAccountId") adminAccountId: string_
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "EnableOrganizationAdminAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateFromMasterAccount = {
   type t;
   type request = {
-@as("DetectorId") detectorId: option<detectorId>
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DisassociateFromMasterAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisableOrganizationAdminAccount = {
   type t;
   type request = {
-@as("AdminAccountId") adminAccountId: option<amazonawsString>
+@as("AdminAccountId") adminAccountId: string_
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DisableOrganizationAdminAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteThreatIntelSet = {
   type t;
   type request = {
-@as("ThreatIntelSetId") threatIntelSetId: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("ThreatIntelSetId") threatIntelSetId: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteThreatIntelSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeletePublishingDestination = {
   type t;
   type request = {
-@as("DestinationId") destinationId: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("DestinationId") destinationId: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeletePublishingDestinationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteIPSet = {
   type t;
   type request = {
-@as("IpSetId") ipSetId: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("IpSetId") ipSetId: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteIPSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFilter = {
   type t;
   type request = {
-@as("FilterName") filterName: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("FilterName") filterName: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteFilterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDetector = {
   type t;
   type request = {
-@as("DetectorId") detectorId: option<detectorId>
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteDetectorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AcceptInvitation = {
   type t;
   type request = {
-@as("InvitationId") invitationId: option<amazonawsString>,
-@as("MasterId") masterId: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("InvitationId") invitationId: string_,
+@as("MasterId") masterId: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "AcceptInvitationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdatePublishingDestination = {
   type t;
   type request = {
-@as("DestinationProperties") destinationProperties: destinationProperties,
-@as("DestinationId") destinationId: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("DestinationProperties") destinationProperties: option<destinationProperties>,
+@as("DestinationId") destinationId: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdatePublishingDestinationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFindingsFeedback = {
   type t;
   type request = {
-@as("Comments") comments: amazonawsString,
-@as("Feedback") feedback: option<feedback>,
-@as("FindingIds") findingIds: option<findingIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("Comments") comments: option<string_>,
+@as("Feedback") feedback: feedback,
+@as("FindingIds") findingIds: findingIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateFindingsFeedbackCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceArn") resourceArn: option<guardDutyArn>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceArn") resourceArn: guardDutyArn
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UnarchiveFindings = {
   type t;
   type request = {
-@as("FindingIds") findingIds: option<findingIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("FindingIds") findingIds: findingIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UnarchiveFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tagMap>,
-@as("ResourceArn") resourceArn: option<guardDutyArn>
+@as("Tags") tags: tagMap,
+@as("ResourceArn") resourceArn: guardDutyArn
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListThreatIntelSets = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults,
-@as("DetectorId") detectorId: option<detectorId>
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("ThreatIntelSetIds") threatIntelSetIds: option<threatIntelSetIds>
+@as("NextToken") nextToken: option<string_>,
+@as("ThreatIntelSetIds") threatIntelSetIds: threatIntelSetIds
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListThreatIntelSetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("ResourceArn") resourceArn: option<guardDutyArn>
+@as("ResourceArn") resourceArn: guardDutyArn
 }
   type response = {
-@as("Tags") tags: tagMap
+@as("Tags") tags: option<tagMap>
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListIPSets = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults,
-@as("DetectorId") detectorId: option<detectorId>
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("IpSetIds") ipSetIds: option<ipSetIds>
+@as("NextToken") nextToken: option<string_>,
+@as("IpSetIds") ipSetIds: ipSetIds
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListIPSetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFilters = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults,
-@as("DetectorId") detectorId: option<detectorId>
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("FilterNames") filterNames: option<filterNames>
+@as("NextToken") nextToken: option<string_>,
+@as("FilterNames") filterNames: filterNames
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListFiltersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDetectors = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("DetectorIds") detectorIds: option<detectorIds>
+@as("NextToken") nextToken: option<string_>,
+@as("DetectorIds") detectorIds: detectorIds
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListDetectorsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetThreatIntelSet = {
   type t;
   type request = {
-@as("ThreatIntelSetId") threatIntelSetId: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("ThreatIntelSetId") threatIntelSetId: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("Tags") tags: tagMap,
-@as("Status") status: option<threatIntelSetStatus>,
-@as("Location") location: option<location>,
-@as("Format") format: option<threatIntelSetFormat>,
-@as("Name") name: option<name>
+@as("Tags") tags: option<tagMap>,
+@as("Status") status: threatIntelSetStatus,
+@as("Location") location: location,
+@as("Format") format: threatIntelSetFormat,
+@as("Name") name: name
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetThreatIntelSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetMasterAccount = {
   type t;
   type request = {
-@as("DetectorId") detectorId: option<detectorId>
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("Master") master: option<master>
+@as("Master") master: master
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetMasterAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetIPSet = {
   type t;
   type request = {
-@as("IpSetId") ipSetId: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("IpSetId") ipSetId: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("Tags") tags: tagMap,
-@as("Status") status: option<ipSetStatus>,
-@as("Location") location: option<location>,
-@as("Format") format: option<ipSetFormat>,
-@as("Name") name: option<name>
+@as("Tags") tags: option<tagMap>,
+@as("Status") status: ipSetStatus,
+@as("Location") location: location,
+@as("Format") format: ipSetFormat,
+@as("Name") name: name
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetIPSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribePublishingDestination = {
   type t;
   type request = {
-@as("DestinationId") destinationId: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("DestinationId") destinationId: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("DestinationProperties") destinationProperties: option<destinationProperties>,
-@as("PublishingFailureStartTimestamp") publishingFailureStartTimestamp: option<amazonawsLong>,
-@as("Status") status: option<publishingStatus>,
-@as("DestinationType") destinationType: option<destinationType>,
-@as("DestinationId") destinationId: option<amazonawsString>
+@as("DestinationProperties") destinationProperties: destinationProperties,
+@as("PublishingFailureStartTimestamp") publishingFailureStartTimestamp: long,
+@as("Status") status: publishingStatus,
+@as("DestinationType") destinationType: destinationType,
+@as("DestinationId") destinationId: string_
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DescribePublishingDestinationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateThreatIntelSet = {
   type t;
   type request = {
-@as("Tags") tags: tagMap,
-@as("ClientToken") clientToken: clientToken,
-@as("Activate") activate: option<amazonawsBoolean>,
-@as("Location") location: option<location>,
-@as("Format") format: option<threatIntelSetFormat>,
-@as("Name") name: option<name>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("Tags") tags: option<tagMap>,
+@as("ClientToken") clientToken: option<clientToken>,
+@as("Activate") activate: boolean_,
+@as("Location") location: location,
+@as("Format") format: threatIntelSetFormat,
+@as("Name") name: name,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("ThreatIntelSetId") threatIntelSetId: option<amazonawsString>
+@as("ThreatIntelSetId") threatIntelSetId: string_
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateThreatIntelSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSampleFindings = {
   type t;
   type request = {
-@as("FindingTypes") findingTypes: findingTypes,
-@as("DetectorId") detectorId: option<detectorId>
+@as("FindingTypes") findingTypes: option<findingTypes>,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateSampleFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreatePublishingDestination = {
   type t;
   type request = {
-@as("ClientToken") clientToken: clientToken,
-@as("DestinationProperties") destinationProperties: option<destinationProperties>,
-@as("DestinationType") destinationType: option<destinationType>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("ClientToken") clientToken: option<clientToken>,
+@as("DestinationProperties") destinationProperties: destinationProperties,
+@as("DestinationType") destinationType: destinationType,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("DestinationId") destinationId: option<amazonawsString>
+@as("DestinationId") destinationId: string_
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreatePublishingDestinationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateIPSet = {
   type t;
   type request = {
-@as("Tags") tags: tagMap,
-@as("ClientToken") clientToken: clientToken,
-@as("Activate") activate: option<amazonawsBoolean>,
-@as("Location") location: option<location>,
-@as("Format") format: option<ipSetFormat>,
-@as("Name") name: option<name>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("Tags") tags: option<tagMap>,
+@as("ClientToken") clientToken: option<clientToken>,
+@as("Activate") activate: boolean_,
+@as("Location") location: location,
+@as("Format") format: ipSetFormat,
+@as("Name") name: name,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("IpSetId") ipSetId: option<amazonawsString>
+@as("IpSetId") ipSetId: string_
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateIPSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ArchiveFindings = {
   type t;
   type request = {
-@as("FindingIds") findingIds: option<findingIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("FindingIds") findingIds: findingIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ArchiveFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateOrganizationConfiguration = {
   type t;
   type request = {
-@as("DataSources") dataSources: organizationDataSourceConfigurations,
-@as("AutoEnable") autoEnable: option<amazonawsBoolean>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("DataSources") dataSources: option<organizationDataSourceConfigurations>,
+@as("AutoEnable") autoEnable: boolean_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateOrganizationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateMemberDetectors = {
   type t;
   type request = {
-@as("DataSources") dataSources: dataSourceConfigurations,
-@as("AccountIds") accountIds: option<accountIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("DataSources") dataSources: option<dataSourceConfigurations>,
+@as("AccountIds") accountIds: accountIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
+@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateMemberDetectorsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDetector = {
   type t;
   type request = {
-@as("DataSources") dataSources: dataSourceConfigurations,
-@as("FindingPublishingFrequency") findingPublishingFrequency: findingPublishingFrequency,
-@as("Enable") enable: amazonawsBoolean,
-@as("DetectorId") detectorId: option<detectorId>
+@as("DataSources") dataSources: option<dataSourceConfigurations>,
+@as("FindingPublishingFrequency") findingPublishingFrequency: option<findingPublishingFrequency>,
+@as("Enable") enable: option<boolean_>,
+@as("DetectorId") detectorId: detectorId
 }
   type response = unit
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateDetectorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StopMonitoringMembers = {
   type t;
   type request = {
-@as("AccountIds") accountIds: option<accountIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("AccountIds") accountIds: accountIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
+@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "StopMonitoringMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartMonitoringMembers = {
   type t;
   type request = {
-@as("AccountIds") accountIds: option<accountIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("AccountIds") accountIds: accountIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
+@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "StartMonitoringMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPublishingDestinations = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults,
-@as("DetectorId") detectorId: option<detectorId>
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Destinations") destinations: option<destinations>
+@as("NextToken") nextToken: option<string_>,
+@as("Destinations") destinations: destinations
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListPublishingDestinationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListOrganizationAdminAccounts = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("AdminAccounts") adminAccounts: adminAccounts
+@as("NextToken") nextToken: option<string_>,
+@as("AdminAccounts") adminAccounts: option<adminAccounts>
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListOrganizationAdminAccountsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListMembers = {
   type t;
   type request = {
-@as("OnlyAssociated") onlyAssociated: amazonawsString,
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults,
-@as("DetectorId") detectorId: option<detectorId>
+@as("OnlyAssociated") onlyAssociated: option<string_>,
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Members") members: members
+@as("NextToken") nextToken: option<string_>,
+@as("Members") members: option<members>
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListInvitations = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Invitations") invitations: invitations
+@as("NextToken") nextToken: option<string_>,
+@as("Invitations") invitations: option<invitations>
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListInvitationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module InviteMembers = {
   type t;
   type request = {
-@as("Message") message: amazonawsString,
-@as("DisableEmailNotification") disableEmailNotification: amazonawsBoolean,
-@as("AccountIds") accountIds: option<accountIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("Message") message: option<string_>,
+@as("DisableEmailNotification") disableEmailNotification: option<boolean_>,
+@as("AccountIds") accountIds: accountIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
+@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "InviteMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetMembers = {
   type t;
   type request = {
-@as("AccountIds") accountIds: option<accountIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("AccountIds") accountIds: accountIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>,
-@as("Members") members: option<members>
+@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts,
+@as("Members") members: members
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDetector = {
   type t;
   type request = {
-@as("DetectorId") detectorId: option<detectorId>
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("Tags") tags: tagMap,
-@as("DataSources") dataSources: dataSourceConfigurationsResult,
-@as("UpdatedAt") updatedAt: amazonawsString,
-@as("Status") status: option<detectorStatus>,
-@as("ServiceRole") serviceRole: option<amazonawsString>,
-@as("FindingPublishingFrequency") findingPublishingFrequency: findingPublishingFrequency,
-@as("CreatedAt") createdAt: amazonawsString
+@as("Tags") tags: option<tagMap>,
+@as("DataSources") dataSources: option<dataSourceConfigurationsResult>,
+@as("UpdatedAt") updatedAt: option<string_>,
+@as("Status") status: detectorStatus,
+@as("ServiceRole") serviceRole: string_,
+@as("FindingPublishingFrequency") findingPublishingFrequency: option<findingPublishingFrequency>,
+@as("CreatedAt") createdAt: option<string_>
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetDetectorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateMembers = {
   type t;
   type request = {
-@as("AccountIds") accountIds: option<accountIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("AccountIds") accountIds: accountIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
+@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DisassociateMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeOrganizationConfiguration = {
   type t;
   type request = {
-@as("DetectorId") detectorId: option<detectorId>
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("DataSources") dataSources: organizationDataSourceConfigurationsResult,
-@as("MemberAccountLimitReached") memberAccountLimitReached: option<amazonawsBoolean>,
-@as("AutoEnable") autoEnable: option<amazonawsBoolean>
+@as("DataSources") dataSources: option<organizationDataSourceConfigurationsResult>,
+@as("MemberAccountLimitReached") memberAccountLimitReached: boolean_,
+@as("AutoEnable") autoEnable: boolean_
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DescribeOrganizationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteMembers = {
   type t;
   type request = {
-@as("AccountIds") accountIds: option<accountIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("AccountIds") accountIds: accountIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
+@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteInvitations = {
   type t;
   type request = {
-@as("AccountIds") accountIds: option<accountIds>
+@as("AccountIds") accountIds: accountIds
 }
   type response = {
-@as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
+@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteInvitationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeclineInvitations = {
   type t;
   type request = {
-@as("AccountIds") accountIds: option<accountIds>
+@as("AccountIds") accountIds: accountIds
 }
   type response = {
-@as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
+@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeclineInvitationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateMembers = {
   type t;
   type request = {
-@as("AccountDetails") accountDetails: option<accountDetails>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("AccountDetails") accountDetails: accountDetails,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
+@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDetector = {
   type t;
   type request = {
-@as("Tags") tags: tagMap,
-@as("DataSources") dataSources: dataSourceConfigurations,
-@as("FindingPublishingFrequency") findingPublishingFrequency: findingPublishingFrequency,
-@as("ClientToken") clientToken: clientToken,
-@as("Enable") enable: option<amazonawsBoolean>
+@as("Tags") tags: option<tagMap>,
+@as("DataSources") dataSources: option<dataSourceConfigurations>,
+@as("FindingPublishingFrequency") findingPublishingFrequency: option<findingPublishingFrequency>,
+@as("ClientToken") clientToken: option<clientToken>,
+@as("Enable") enable: boolean_
 }
   type response = {
-@as("DetectorId") detectorId: detectorId
+@as("DetectorId") detectorId: option<detectorId>
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateDetectorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFilter = {
   type t;
   type request = {
-@as("FindingCriteria") findingCriteria: findingCriteria,
-@as("Rank") rank: filterRank,
-@as("Action") action: filterAction,
-@as("Description") description: filterDescription,
-@as("FilterName") filterName: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("FindingCriteria") findingCriteria: option<findingCriteria>,
+@as("Rank") rank: option<filterRank>,
+@as("Action") action: option<filterAction>,
+@as("Description") description: option<filterDescription>,
+@as("FilterName") filterName: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("Name") name: option<filterName>
+@as("Name") name: filterName
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateFilterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFindings = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults,
-@as("SortCriteria") sortCriteria: sortCriteria,
-@as("FindingCriteria") findingCriteria: findingCriteria,
-@as("DetectorId") detectorId: option<detectorId>
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("SortCriteria") sortCriteria: option<sortCriteria>,
+@as("FindingCriteria") findingCriteria: option<findingCriteria>,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("FindingIds") findingIds: option<findingIds>
+@as("NextToken") nextToken: option<string_>,
+@as("FindingIds") findingIds: findingIds
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetUsageStatistics = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults,
-@as("Unit") unit: amazonawsString,
-@as("UsageCriteria") usageCriteria: option<usageCriteria>,
-@as("UsageStatisticType") usageStatisticType: option<usageStatisticType>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("Unit") unit_: option<string_>,
+@as("UsageCriteria") usageCriteria: usageCriteria,
+@as("UsageStatisticType") usageStatisticType: usageStatisticType,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("UsageStatistics") usageStatistics: usageStatistics
+@as("NextToken") nextToken: option<string_>,
+@as("UsageStatistics") usageStatistics: option<usageStatistics>
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetUsageStatisticsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetMemberDetectors = {
   type t;
   type request = {
-@as("AccountIds") accountIds: option<accountIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("AccountIds") accountIds: accountIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>,
-@as("MemberDataSourceConfigurations") memberDataSourceConfigurations: option<memberDataSourceConfigurations>
+@as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccounts,
+@as("MemberDataSourceConfigurations") memberDataSourceConfigurations: memberDataSourceConfigurations
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetMemberDetectorsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFindingsStatistics = {
   type t;
   type request = {
-@as("FindingCriteria") findingCriteria: findingCriteria,
-@as("FindingStatisticTypes") findingStatisticTypes: option<findingStatisticTypes>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("FindingCriteria") findingCriteria: option<findingCriteria>,
+@as("FindingStatisticTypes") findingStatisticTypes: findingStatisticTypes,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("FindingStatistics") findingStatistics: option<findingStatistics>
+@as("FindingStatistics") findingStatistics: findingStatistics
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetFindingsStatisticsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFilter = {
   type t;
   type request = {
-@as("FilterName") filterName: option<amazonawsString>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("FilterName") filterName: string_,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("Tags") tags: tagMap,
-@as("FindingCriteria") findingCriteria: option<findingCriteria>,
-@as("Rank") rank: filterRank,
-@as("Action") action: option<filterAction>,
-@as("Description") description: filterDescription,
-@as("Name") name: option<filterName>
+@as("Tags") tags: option<tagMap>,
+@as("FindingCriteria") findingCriteria: findingCriteria,
+@as("Rank") rank: option<filterRank>,
+@as("Action") action: filterAction,
+@as("Description") description: option<filterDescription>,
+@as("Name") name: filterName
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetFilterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFilter = {
   type t;
   type request = {
-@as("Tags") tags: tagMap,
-@as("ClientToken") clientToken: clientToken,
-@as("FindingCriteria") findingCriteria: option<findingCriteria>,
-@as("Rank") rank: filterRank,
-@as("Action") action: filterAction,
-@as("Description") description: filterDescription,
-@as("Name") name: option<filterName>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("Tags") tags: option<tagMap>,
+@as("ClientToken") clientToken: option<clientToken>,
+@as("FindingCriteria") findingCriteria: findingCriteria,
+@as("Rank") rank: option<filterRank>,
+@as("Action") action: option<filterAction>,
+@as("Description") description: option<filterDescription>,
+@as("Name") name: filterName,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("Name") name: option<filterName>
+@as("Name") name: filterName
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateFilterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFindings = {
   type t;
   type request = {
-@as("SortCriteria") sortCriteria: sortCriteria,
-@as("FindingIds") findingIds: option<findingIds>,
-@as("DetectorId") detectorId: option<detectorId>
+@as("SortCriteria") sortCriteria: option<sortCriteria>,
+@as("FindingIds") findingIds: findingIds,
+@as("DetectorId") detectorId: detectorId
 }
   type response = {
-@as("Findings") findings: option<findings>
+@as("Findings") findings: findings
 }
   @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

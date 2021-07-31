@@ -1,114 +1,122 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type statusCode = int;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
+type statusCode = int
 type uploadAvailability = [@as("STREAMING") #STREAMING | @as("STANDARD") #STANDARD]
 type timeStamp = Js.Date.t;
 type stringPrimitive = string
 type storageClass = [@as("TEMPORAL") #TEMPORAL]
-type sHA256Hash = string
+type sha256Hash = string
 type rangePattern = string
-type payloadBlob = NodeJs.Buffer.t;
+type payloadBlob = NodeJs.Buffer.t
 type pathNaming = string
 type paginationToken = string
-type nonNegativeLong = float;
+type nonNegativeLong = float
 type listPathNaming = string
-type listLimit = int;
+type listLimit = int
 type itemType = [@as("FOLDER") #FOLDER | @as("OBJECT") #OBJECT]
 type itemName = string
 type errorMessage = string
-type eTag = string
+type etag = string
 type contentType = string
 type contentRangePattern = string
 type item = {
-@as("ContentLength") contentLength: nonNegativeLong,
-@as("ContentType") contentType: contentType,
-@as("LastModified") lastModified: timeStamp,
-@as("ETag") eTag: eTag,
-@as("Type") type_: itemType,
-@as("Name") name: itemName
+@as("ContentLength") contentLength: option<nonNegativeLong>,
+@as("ContentType") contentType: option<contentType>,
+@as("LastModified") lastModified: option<timeStamp>,
+@as("ETag") etag: option<etag>,
+@as("Type") type_: option<itemType>,
+@as("Name") name: option<itemName>
 }
 type itemList = array<item>
-type clientType;
-@module("@aws-sdk/client-mediastore") @new external createClient: unit => clientType = "MediaStoreDataClient";
+type awsServiceClient;
+@module("@aws-sdk/client-mediastore") @new external createClient: unit => awsServiceClient = "MediaStoreDataClient";
 module PutObject = {
   type t;
   type request = {
-@as("UploadAvailability") uploadAvailability: uploadAvailability,
-@as("StorageClass") storageClass: storageClass,
-@as("CacheControl") cacheControl: stringPrimitive,
-@as("ContentType") contentType: contentType,
-@as("Path") path: option<pathNaming>,
-@as("Body") body: option<payloadBlob>
+@as("UploadAvailability") uploadAvailability: option<uploadAvailability>,
+@as("StorageClass") storageClass: option<storageClass>,
+@as("CacheControl") cacheControl: option<stringPrimitive>,
+@as("ContentType") contentType: option<contentType>,
+@as("Path") path: pathNaming,
+@as("Body") body: payloadBlob
 }
   type response = {
-@as("StorageClass") storageClass: storageClass,
-@as("ETag") eTag: eTag,
-@as("ContentSHA256") contentSHA256: sHA256Hash
+@as("StorageClass") storageClass: option<storageClass>,
+@as("ETag") etag: option<etag>,
+@as("ContentSHA256") contentSHA256: option<sha256Hash>
 }
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "PutObjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetObject = {
   type t;
   type request = {
-@as("Range") range: rangePattern,
-@as("Path") path: option<pathNaming>
+@as("Range") range: option<rangePattern>,
+@as("Path") path: pathNaming
 }
   type response = {
-@as("StatusCode") statusCode: option<statusCode>,
-@as("LastModified") lastModified: timeStamp,
-@as("ETag") eTag: eTag,
-@as("ContentType") contentType: contentType,
-@as("ContentLength") contentLength: nonNegativeLong,
-@as("ContentRange") contentRange: contentRangePattern,
-@as("CacheControl") cacheControl: stringPrimitive,
-@as("Body") body: payloadBlob
+@as("StatusCode") statusCode: statusCode,
+@as("LastModified") lastModified: option<timeStamp>,
+@as("ETag") etag: option<etag>,
+@as("ContentType") contentType: option<contentType>,
+@as("ContentLength") contentLength: option<nonNegativeLong>,
+@as("ContentRange") contentRange: option<contentRangePattern>,
+@as("CacheControl") cacheControl: option<stringPrimitive>,
+@as("Body") body: option<payloadBlob>
 }
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "GetObjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeObject = {
   type t;
   type request = {
-@as("Path") path: option<pathNaming>
+@as("Path") path: pathNaming
 }
   type response = {
-@as("LastModified") lastModified: timeStamp,
-@as("CacheControl") cacheControl: stringPrimitive,
-@as("ContentLength") contentLength: nonNegativeLong,
-@as("ContentType") contentType: contentType,
-@as("ETag") eTag: eTag
+@as("LastModified") lastModified: option<timeStamp>,
+@as("CacheControl") cacheControl: option<stringPrimitive>,
+@as("ContentLength") contentLength: option<nonNegativeLong>,
+@as("ContentType") contentType: option<contentType>,
+@as("ETag") etag: option<etag>
 }
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "DescribeObjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteObject = {
   type t;
   type request = {
-@as("Path") path: option<pathNaming>
+@as("Path") path: pathNaming
 }
   type response = unit
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "DeleteObjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListItems = {
   type t;
   type request = {
-@as("NextToken") nextToken: paginationToken,
-@as("MaxResults") maxResults: listLimit,
-@as("Path") path: listPathNaming
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MaxResults") maxResults: option<listLimit>,
+@as("Path") path: option<listPathNaming>
 }
   type response = {
-@as("NextToken") nextToken: paginationToken,
-@as("Items") items: itemList
+@as("NextToken") nextToken: option<paginationToken>,
+@as("Items") items: option<itemList>
 }
   @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "ListItemsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

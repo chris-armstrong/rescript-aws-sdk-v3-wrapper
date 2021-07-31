@@ -1,91 +1,96 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type timestamp_ = Js.Date.t;
+type long = float
 type tagValue = string
 type tagKey = string
-type amazonawsString = string
-type resourceStatus = [@as("PENDING") #PENDING | @as("UNAVAILABLE") #UNAVAILABLE | @as("LIMIT_EXCEEDED") #LIMIT_EXCEEDED | @as("ZONAL_RESOURCE_INACCESSIBLE") #ZONAL_RESOURCE_INACCESSIBLE | @as("AVAILABLE") #AVAILABLE]
+type string_ = string
+type resourceStatus = [@as("PENDING") #PENDING | @as("UNAVAILABLE") #UNAVAILABLE | @as("LIMIT_EXCEEDED") #LIMITEXCEEDED | @as("ZONAL_RESOURCE_INACCESSIBLE") #ZONALRESOURCEINACCESSIBLE | @as("AVAILABLE") #AVAILABLE]
 type resourceShareStatus = [@as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("FAILED") #FAILED | @as("ACTIVE") #ACTIVE | @as("PENDING") #PENDING]
 type resourceShareInvitationStatus = [@as("EXPIRED") #EXPIRED | @as("REJECTED") #REJECTED | @as("ACCEPTED") #ACCEPTED | @as("PENDING") #PENDING]
-type resourceShareFeatureSet = [@as("STANDARD") #STANDARD | @as("PROMOTING_TO_STANDARD") #PROMOTING_TO_STANDARD | @as("CREATED_FROM_POLICY") #CREATED_FROM_POLICY]
+type resourceShareFeatureSet = [@as("STANDARD") #STANDARD | @as("PROMOTING_TO_STANDARD") #PROMOTINGTOSTANDARD | @as("CREATED_FROM_POLICY") #CREATEDFROMPOLICY]
 type resourceShareAssociationType = [@as("RESOURCE") #RESOURCE | @as("PRINCIPAL") #PRINCIPAL]
 type resourceShareAssociationStatus = [@as("DISASSOCIATED") #DISASSOCIATED | @as("DISASSOCIATING") #DISASSOCIATING | @as("FAILED") #FAILED | @as("ASSOCIATED") #ASSOCIATED | @as("ASSOCIATING") #ASSOCIATING]
-type resourceOwner = [@as("OTHER-ACCOUNTS") #OTHER_ACCOUNTS | @as("SELF") #SELF]
+type resourceOwner = [@as("OTHER-ACCOUNTS") #OTHERACCOUNTS | @as("SELF") #SELF]
 type policy = string
-type maxResults = int;
-type amazonawsInteger = int;
+type maxResults = int
+type integer_ = int
 type dateTime = Js.Date.t;
-type amazonawsBoolean = bool;
+type boolean_ = bool
 type tagValueList = array<tagValue>
 type tagKeyList = array<tagKey>
 type tag = {
-@as("value") value: tagValue,
-@as("key") key: tagKey
+value: option<tagValue>,
+key: option<tagKey>
 }
 type serviceNameAndResourceType = {
-@as("serviceName") serviceName: amazonawsString,
-@as("resourceType") resourceType: amazonawsString
+serviceName: option<string_>,
+resourceType: option<string_>
 }
 type resourceSharePermissionSummary = {
-@as("lastUpdatedTime") lastUpdatedTime: dateTime,
-@as("creationTime") creationTime: dateTime,
-@as("status") status: amazonawsString,
-@as("resourceType") resourceType: amazonawsString,
-@as("name") name: amazonawsString,
-@as("defaultVersion") defaultVersion: amazonawsBoolean,
-@as("version") version: amazonawsString,
-@as("arn") arn: amazonawsString
+lastUpdatedTime: option<dateTime>,
+creationTime: option<dateTime>,
+status: option<string_>,
+resourceType: option<string_>,
+name: option<string_>,
+defaultVersion: option<boolean_>,
+version: option<string_>,
+arn: option<string_>
 }
 type resourceSharePermissionDetail = {
-@as("lastUpdatedTime") lastUpdatedTime: dateTime,
-@as("creationTime") creationTime: dateTime,
-@as("permission") permission: amazonawsString,
-@as("resourceType") resourceType: amazonawsString,
-@as("name") name: amazonawsString,
-@as("defaultVersion") defaultVersion: amazonawsBoolean,
-@as("version") version: amazonawsString,
-@as("arn") arn: amazonawsString
+lastUpdatedTime: option<dateTime>,
+creationTime: option<dateTime>,
+permission: option<string_>,
+resourceType: option<string_>,
+name: option<string_>,
+defaultVersion: option<boolean_>,
+version: option<string_>,
+arn: option<string_>
 }
-type resourceShareInvitationArnList = array<amazonawsString>
+type resourceShareInvitationArnList = array<string_>
 type resourceShareAssociation = {
-@as("external") external: amazonawsBoolean,
-@as("lastUpdatedTime") lastUpdatedTime: dateTime,
-@as("creationTime") creationTime: dateTime,
-@as("statusMessage") statusMessage: amazonawsString,
-@as("status") status: resourceShareAssociationStatus,
-@as("associationType") associationType: resourceShareAssociationType,
-@as("associatedEntity") associatedEntity: amazonawsString,
-@as("resourceShareName") resourceShareName: amazonawsString,
-@as("resourceShareArn") resourceShareArn: amazonawsString
+@as("external") external_: option<boolean_>,
+lastUpdatedTime: option<dateTime>,
+creationTime: option<dateTime>,
+statusMessage: option<string_>,
+status: option<resourceShareAssociationStatus>,
+associationType: option<resourceShareAssociationType>,
+associatedEntity: option<string_>,
+resourceShareName: option<string_>,
+resourceShareArn: option<string_>
 }
-type resourceShareArnList = array<amazonawsString>
-type resourceArnList = array<amazonawsString>
+type resourceShareArnList = array<string_>
+type resourceArnList = array<string_>
 type resource = {
-@as("lastUpdatedTime") lastUpdatedTime: dateTime,
-@as("creationTime") creationTime: dateTime,
-@as("statusMessage") statusMessage: amazonawsString,
-@as("status") status: resourceStatus,
-@as("resourceGroupArn") resourceGroupArn: amazonawsString,
-@as("resourceShareArn") resourceShareArn: amazonawsString,
-@as("type") type_: amazonawsString,
-@as("arn") arn: amazonawsString
+lastUpdatedTime: option<dateTime>,
+creationTime: option<dateTime>,
+statusMessage: option<string_>,
+status: option<resourceStatus>,
+resourceGroupArn: option<string_>,
+resourceShareArn: option<string_>,
+@as("type") type_: option<string_>,
+arn: option<string_>
 }
-type principalArnOrIdList = array<amazonawsString>
+type principalArnOrIdList = array<string_>
 type principal = {
-@as("external") external: amazonawsBoolean,
-@as("lastUpdatedTime") lastUpdatedTime: dateTime,
-@as("creationTime") creationTime: dateTime,
-@as("resourceShareArn") resourceShareArn: amazonawsString,
-@as("id") id: amazonawsString
+@as("external") external_: option<boolean_>,
+lastUpdatedTime: option<dateTime>,
+creationTime: option<dateTime>,
+resourceShareArn: option<string_>,
+id: option<string_>
 }
 type policyList = array<policy>
-type permissionArnList = array<amazonawsString>
-type tagList = array<tag>
+type permissionArnList = array<string_>
+type tagList_ = array<tag>
 type tagFilter = {
-@as("tagValues") tagValues: tagValueList,
-@as("tagKey") tagKey: tagKey
+tagValues: option<tagValueList>,
+tagKey: option<tagKey>
 }
 type serviceNameAndResourceTypeList = array<serviceNameAndResourceType>
 type resourceSharePermissionList = array<resourceSharePermissionSummary>
@@ -94,391 +99,391 @@ type resourceList = array<resource>
 type principalList = array<principal>
 type tagFilters = array<tagFilter>
 type resourceShareInvitation = {
-@as("resourceShareAssociations") resourceShareAssociations: resourceShareAssociationList,
-@as("status") status: resourceShareInvitationStatus,
-@as("invitationTimestamp") invitationTimestamp: dateTime,
-@as("receiverAccountId") receiverAccountId: amazonawsString,
-@as("senderAccountId") senderAccountId: amazonawsString,
-@as("resourceShareArn") resourceShareArn: amazonawsString,
-@as("resourceShareName") resourceShareName: amazonawsString,
-@as("resourceShareInvitationArn") resourceShareInvitationArn: amazonawsString
+resourceShareAssociations: option<resourceShareAssociationList>,
+status: option<resourceShareInvitationStatus>,
+invitationTimestamp: option<dateTime>,
+receiverAccountId: option<string_>,
+senderAccountId: option<string_>,
+resourceShareArn: option<string_>,
+resourceShareName: option<string_>,
+resourceShareInvitationArn: option<string_>
 }
 type resourceShare = {
-@as("featureSet") featureSet: resourceShareFeatureSet,
-@as("lastUpdatedTime") lastUpdatedTime: dateTime,
-@as("creationTime") creationTime: dateTime,
-@as("tags") tags: tagList,
-@as("statusMessage") statusMessage: amazonawsString,
-@as("status") status: resourceShareStatus,
-@as("allowExternalPrincipals") allowExternalPrincipals: amazonawsBoolean,
-@as("owningAccountId") owningAccountId: amazonawsString,
-@as("name") name: amazonawsString,
-@as("resourceShareArn") resourceShareArn: amazonawsString
+featureSet: option<resourceShareFeatureSet>,
+lastUpdatedTime: option<dateTime>,
+creationTime: option<dateTime>,
+tags: option<tagList_>,
+statusMessage: option<string_>,
+status: option<resourceShareStatus>,
+allowExternalPrincipals: option<boolean_>,
+owningAccountId: option<string_>,
+name: option<string_>,
+resourceShareArn: option<string_>
 }
 type resourceShareList = array<resourceShare>
 type resourceShareInvitationList = array<resourceShareInvitation>
-type clientType;
-@module("@aws-sdk/client-ram") @new external createClient: unit => clientType = "RAMClient";
+type awsServiceClient;
+@module("@aws-sdk/client-ram") @new external createClient: unit => awsServiceClient = "RAMClient";
 module PromoteResourceShareCreatedFromPolicy = {
   type t;
   type request = {
-@as("resourceShareArn") resourceShareArn: option<amazonawsString>
+resourceShareArn: string_
 }
   type response = {
-@as("returnValue") returnValue: amazonawsBoolean
+returnValue: option<boolean_>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "PromoteResourceShareCreatedFromPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableSharingWithAwsOrganization = {
   type t;
   type request = unit
   type response = {
-@as("returnValue") returnValue: amazonawsBoolean
+returnValue: option<boolean_>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "EnableSharingWithAwsOrganizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateResourceSharePermission = {
   type t;
   type request = {
-@as("clientToken") clientToken: amazonawsString,
-@as("permissionArn") permissionArn: option<amazonawsString>,
-@as("resourceShareArn") resourceShareArn: option<amazonawsString>
+clientToken: option<string_>,
+permissionArn: string_,
+resourceShareArn: string_
 }
   type response = {
-@as("clientToken") clientToken: amazonawsString,
-@as("returnValue") returnValue: amazonawsBoolean
+clientToken: option<string_>,
+returnValue: option<boolean_>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "DisassociateResourceSharePermissionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteResourceShare = {
   type t;
   type request = {
-@as("clientToken") clientToken: amazonawsString,
-@as("resourceShareArn") resourceShareArn: option<amazonawsString>
+clientToken: option<string_>,
+resourceShareArn: string_
 }
   type response = {
-@as("clientToken") clientToken: amazonawsString,
-@as("returnValue") returnValue: amazonawsBoolean
+clientToken: option<string_>,
+returnValue: option<boolean_>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "DeleteResourceShareCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateResourceSharePermission = {
   type t;
   type request = {
-@as("clientToken") clientToken: amazonawsString,
-@as("replace") replace: amazonawsBoolean,
-@as("permissionArn") permissionArn: option<amazonawsString>,
-@as("resourceShareArn") resourceShareArn: option<amazonawsString>
+clientToken: option<string_>,
+replace: option<boolean_>,
+permissionArn: string_,
+resourceShareArn: string_
 }
   type response = {
-@as("clientToken") clientToken: amazonawsString,
-@as("returnValue") returnValue: amazonawsBoolean
+clientToken: option<string_>,
+returnValue: option<boolean_>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "AssociateResourceSharePermissionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceShareArn") resourceShareArn: option<amazonawsString>
+tagKeys: tagKeyList,
+resourceShareArn: string_
 }
   type response = unit
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResourcePolicies = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString,
-@as("principal") principal: amazonawsString,
-@as("resourceArns") resourceArns: option<resourceArnList>
+maxResults: option<maxResults>,
+nextToken: option<string_>,
+principal: option<string_>,
+resourceArns: resourceArnList
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("policies") policies: policyList
+nextToken: option<string_>,
+policies: option<policyList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "GetResourcePoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPermission = {
   type t;
   type request = {
-@as("permissionVersion") permissionVersion: amazonawsInteger,
-@as("permissionArn") permissionArn: option<amazonawsString>
+permissionVersion: option<integer_>,
+permissionArn: string_
 }
   type response = {
-@as("permission") permission: resourceSharePermissionDetail
+permission: option<resourceSharePermissionDetail>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "GetPermissionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagList>,
-@as("resourceShareArn") resourceShareArn: option<amazonawsString>
+tags: tagList_,
+resourceShareArn: string_
 }
   type response = unit
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResources = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString,
-@as("resourceShareArns") resourceShareArns: resourceShareArnList,
-@as("resourceArns") resourceArns: resourceArnList,
-@as("resourceType") resourceType: amazonawsString,
-@as("principal") principal: amazonawsString,
-@as("resourceOwner") resourceOwner: option<resourceOwner>
+maxResults: option<maxResults>,
+nextToken: option<string_>,
+resourceShareArns: option<resourceShareArnList>,
+resourceArns: option<resourceArnList>,
+resourceType: option<string_>,
+principal: option<string_>,
+resourceOwner: resourceOwner
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("resources") resources: resourceList
+nextToken: option<string_>,
+resources: option<resourceList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResourceTypes = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString
+maxResults: option<maxResults>,
+nextToken: option<string_>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("resourceTypes") resourceTypes: serviceNameAndResourceTypeList
+nextToken: option<string_>,
+resourceTypes: option<serviceNameAndResourceTypeList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListResourceTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResourceSharePermissions = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString,
-@as("resourceShareArn") resourceShareArn: option<amazonawsString>
+maxResults: option<maxResults>,
+nextToken: option<string_>,
+resourceShareArn: string_
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("permissions") permissions: resourceSharePermissionList
+nextToken: option<string_>,
+permissions: option<resourceSharePermissionList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListResourceSharePermissionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPrincipals = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString,
-@as("resourceShareArns") resourceShareArns: resourceShareArnList,
-@as("resourceType") resourceType: amazonawsString,
-@as("principals") principals: principalArnOrIdList,
-@as("resourceArn") resourceArn: amazonawsString,
-@as("resourceOwner") resourceOwner: option<resourceOwner>
+maxResults: option<maxResults>,
+nextToken: option<string_>,
+resourceShareArns: option<resourceShareArnList>,
+resourceType: option<string_>,
+principals: option<principalArnOrIdList>,
+resourceArn: option<string_>,
+resourceOwner: resourceOwner
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("principals") principals: principalList
+nextToken: option<string_>,
+principals: option<principalList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListPrincipalsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPermissions = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString,
-@as("resourceType") resourceType: amazonawsString
+maxResults: option<maxResults>,
+nextToken: option<string_>,
+resourceType: option<string_>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("permissions") permissions: resourceSharePermissionList
+nextToken: option<string_>,
+permissions: option<resourceSharePermissionList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListPermissionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPendingInvitationResources = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString,
-@as("resourceShareInvitationArn") resourceShareInvitationArn: option<amazonawsString>
+maxResults: option<maxResults>,
+nextToken: option<string_>,
+resourceShareInvitationArn: string_
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("resources") resources: resourceList
+nextToken: option<string_>,
+resources: option<resourceList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListPendingInvitationResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResourceShareAssociations = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString,
-@as("associationStatus") associationStatus: resourceShareAssociationStatus,
-@as("principal") principal: amazonawsString,
-@as("resourceArn") resourceArn: amazonawsString,
-@as("resourceShareArns") resourceShareArns: resourceShareArnList,
-@as("associationType") associationType: option<resourceShareAssociationType>
+maxResults: option<maxResults>,
+nextToken: option<string_>,
+associationStatus: option<resourceShareAssociationStatus>,
+principal: option<string_>,
+resourceArn: option<string_>,
+resourceShareArns: option<resourceShareArnList>,
+associationType: resourceShareAssociationType
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("resourceShareAssociations") resourceShareAssociations: resourceShareAssociationList
+nextToken: option<string_>,
+resourceShareAssociations: option<resourceShareAssociationList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "GetResourceShareAssociationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateResourceShare = {
   type t;
   type request = {
-@as("clientToken") clientToken: amazonawsString,
-@as("principals") principals: principalArnOrIdList,
-@as("resourceArns") resourceArns: resourceArnList,
-@as("resourceShareArn") resourceShareArn: option<amazonawsString>
+clientToken: option<string_>,
+principals: option<principalArnOrIdList>,
+resourceArns: option<resourceArnList>,
+resourceShareArn: string_
 }
   type response = {
-@as("clientToken") clientToken: amazonawsString,
-@as("resourceShareAssociations") resourceShareAssociations: resourceShareAssociationList
+clientToken: option<string_>,
+resourceShareAssociations: option<resourceShareAssociationList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "DisassociateResourceShareCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateResourceShare = {
   type t;
   type request = {
-@as("clientToken") clientToken: amazonawsString,
-@as("principals") principals: principalArnOrIdList,
-@as("resourceArns") resourceArns: resourceArnList,
-@as("resourceShareArn") resourceShareArn: option<amazonawsString>
+clientToken: option<string_>,
+principals: option<principalArnOrIdList>,
+resourceArns: option<resourceArnList>,
+resourceShareArn: string_
 }
   type response = {
-@as("clientToken") clientToken: amazonawsString,
-@as("resourceShareAssociations") resourceShareAssociations: resourceShareAssociationList
+clientToken: option<string_>,
+resourceShareAssociations: option<resourceShareAssociationList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "AssociateResourceShareCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateResourceShare = {
   type t;
   type request = {
-@as("clientToken") clientToken: amazonawsString,
-@as("allowExternalPrincipals") allowExternalPrincipals: amazonawsBoolean,
-@as("name") name: amazonawsString,
-@as("resourceShareArn") resourceShareArn: option<amazonawsString>
+clientToken: option<string_>,
+allowExternalPrincipals: option<boolean_>,
+name: option<string_>,
+resourceShareArn: string_
 }
   type response = {
-@as("clientToken") clientToken: amazonawsString,
-@as("resourceShare") resourceShare: resourceShare
+clientToken: option<string_>,
+resourceShare: option<resourceShare>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "UpdateResourceShareCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RejectResourceShareInvitation = {
   type t;
   type request = {
-@as("clientToken") clientToken: amazonawsString,
-@as("resourceShareInvitationArn") resourceShareInvitationArn: option<amazonawsString>
+clientToken: option<string_>,
+resourceShareInvitationArn: string_
 }
   type response = {
-@as("clientToken") clientToken: amazonawsString,
-@as("resourceShareInvitation") resourceShareInvitation: resourceShareInvitation
+clientToken: option<string_>,
+resourceShareInvitation: option<resourceShareInvitation>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "RejectResourceShareInvitationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateResourceShare = {
   type t;
   type request = {
-@as("permissionArns") permissionArns: permissionArnList,
-@as("clientToken") clientToken: amazonawsString,
-@as("allowExternalPrincipals") allowExternalPrincipals: amazonawsBoolean,
-@as("tags") tags: tagList,
-@as("principals") principals: principalArnOrIdList,
-@as("resourceArns") resourceArns: resourceArnList,
-@as("name") name: option<amazonawsString>
+permissionArns: option<permissionArnList>,
+clientToken: option<string_>,
+allowExternalPrincipals: option<boolean_>,
+tags: option<tagList_>,
+principals: option<principalArnOrIdList>,
+resourceArns: option<resourceArnList>,
+name: string_
 }
   type response = {
-@as("clientToken") clientToken: amazonawsString,
-@as("resourceShare") resourceShare: resourceShare
+clientToken: option<string_>,
+resourceShare: option<resourceShare>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "CreateResourceShareCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AcceptResourceShareInvitation = {
   type t;
   type request = {
-@as("clientToken") clientToken: amazonawsString,
-@as("resourceShareInvitationArn") resourceShareInvitationArn: option<amazonawsString>
+clientToken: option<string_>,
+resourceShareInvitationArn: string_
 }
   type response = {
-@as("clientToken") clientToken: amazonawsString,
-@as("resourceShareInvitation") resourceShareInvitation: resourceShareInvitation
+clientToken: option<string_>,
+resourceShareInvitation: option<resourceShareInvitation>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "AcceptResourceShareInvitationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResourceShares = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString,
-@as("tagFilters") tagFilters: tagFilters,
-@as("name") name: amazonawsString,
-@as("resourceOwner") resourceOwner: option<resourceOwner>,
-@as("resourceShareStatus") resourceShareStatus: resourceShareStatus,
-@as("resourceShareArns") resourceShareArns: resourceShareArnList
+maxResults: option<maxResults>,
+nextToken: option<string_>,
+tagFilters: option<tagFilters>,
+name: option<string_>,
+resourceOwner: resourceOwner,
+resourceShareStatus: option<resourceShareStatus>,
+resourceShareArns: option<resourceShareArnList>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("resourceShares") resourceShares: resourceShareList
+nextToken: option<string_>,
+resourceShares: option<resourceShareList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "GetResourceSharesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResourceShareInvitations = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: amazonawsString,
-@as("resourceShareArns") resourceShareArns: resourceShareArnList,
-@as("resourceShareInvitationArns") resourceShareInvitationArns: resourceShareInvitationArnList
+maxResults: option<maxResults>,
+nextToken: option<string_>,
+resourceShareArns: option<resourceShareArnList>,
+resourceShareInvitationArns: option<resourceShareInvitationArnList>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("resourceShareInvitations") resourceShareInvitations: resourceShareInvitationList
+nextToken: option<string_>,
+resourceShareInvitations: option<resourceShareInvitationList>
 }
   @module("@aws-sdk/client-ram") @new external new_: (request) => t = "GetResourceShareInvitationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

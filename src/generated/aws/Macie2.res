@@ -1,321 +1,329 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type __timestampIso8601 = Js.Date.t;
 type __string = string
-type __long = float;
-type __integer = int;
-type __double = float;
-type __boolean = bool;
+type __long = float
+type __integer = int
+type __double = float
+type __boolean = bool
 type userIdentityType = [@as("AWSService") #AWSService | @as("AWSAccount") #AWSAccount | @as("Root") #Root | @as("FederatedUser") #FederatedUser | @as("IAMUser") #IAMUser | @as("AssumedRole") #AssumedRole]
-type usageType = [@as("SENSITIVE_DATA_DISCOVERY") #SENSITIVE_DATA_DISCOVERY | @as("DATA_INVENTORY_EVALUATION") #DATA_INVENTORY_EVALUATION]
-type usageStatisticsSortKey = [@as("freeTrialStartDate") #freeTrialStartDate | @as("serviceLimitValue") #serviceLimitValue | @as("total") #total | @as("accountId") #accountId]
-type usageStatisticsFilterKey = [@as("total") #total | @as("freeTrialStartDate") #freeTrialStartDate | @as("serviceLimit") #serviceLimit | @as("accountId") #accountId]
+type usageType = [@as("SENSITIVE_DATA_DISCOVERY") #SENSITIVEDATADISCOVERY | @as("DATA_INVENTORY_EVALUATION") #DATAINVENTORYEVALUATION]
+type usageStatisticsSortKey = [@as("freeTrialStartDate") #FreeTrialStartDate | @as("serviceLimitValue") #ServiceLimitValue | @as("total") #Total | @as("accountId") #AccountId]
+type usageStatisticsFilterKey = [@as("total") #Total | @as("freeTrialStartDate") #FreeTrialStartDate | @as("serviceLimit") #ServiceLimit | @as("accountId") #AccountId]
 type usageStatisticsFilterComparator = [@as("CONTAINS") #CONTAINS | @as("NE") #NE | @as("EQ") #EQ | @as("LTE") #LTE | @as("LT") #LT | @as("GTE") #GTE | @as("GT") #GT]
 type unit_ = [@as("TERABYTES") #TERABYTES]
-type type_ = [@as("aws:kms") #aws_kms | @as("AES256") #AES256 | @as("NONE") #NONE]
-type timeRange = [@as("PAST_30_DAYS") #PAST_30_DAYS | @as("MONTH_TO_DATE") #MONTH_TO_DATE]
-type tagTarget = [@as("S3_OBJECT") #S3_OBJECT]
-type storageClass = [@as("GLACIER") #GLACIER | @as("ONEZONE_IA") #ONEZONE_IA | @as("DEEP_ARCHIVE") #DEEP_ARCHIVE | @as("INTELLIGENT_TIERING") #INTELLIGENT_TIERING | @as("STANDARD_IA") #STANDARD_IA | @as("REDUCED_REDUNDANCY") #REDUCED_REDUNDANCY | @as("STANDARD") #STANDARD]
-type simpleCriterionKeyForJob = [@as("S3_BUCKET_SHARED_ACCESS") #S3_BUCKET_SHARED_ACCESS | @as("S3_BUCKET_EFFECTIVE_PERMISSION") #S3_BUCKET_EFFECTIVE_PERMISSION | @as("S3_BUCKET_NAME") #S3_BUCKET_NAME | @as("ACCOUNT_ID") #ACCOUNT_ID]
-type sharedAccess = [@as("UNKNOWN") #UNKNOWN | @as("NOT_SHARED") #NOT_SHARED | @as("INTERNAL") #INTERNAL | @as("EXTERNAL") #EXTERNAL]
+type type_ = [@as("aws:kms") #AwsKms | @as("AES256") #AES256 | @as("NONE") #NONE]
+type timeRange = [@as("PAST_30_DAYS") #PAST30DAYS | @as("MONTH_TO_DATE") #MONTHTODATE]
+type tagTarget = [@as("S3_OBJECT") #S3OBJECT]
+type storageClass = [@as("GLACIER") #GLACIER | @as("ONEZONE_IA") #ONEZONEIA | @as("DEEP_ARCHIVE") #DEEPARCHIVE | @as("INTELLIGENT_TIERING") #INTELLIGENTTIERING | @as("STANDARD_IA") #STANDARDIA | @as("REDUCED_REDUNDANCY") #REDUCEDREDUNDANCY | @as("STANDARD") #STANDARD]
+type simpleCriterionKeyForJob = [@as("S3_BUCKET_SHARED_ACCESS") #S3BUCKETSHAREDACCESS | @as("S3_BUCKET_EFFECTIVE_PERMISSION") #S3BUCKETEFFECTIVEPERMISSION | @as("S3_BUCKET_NAME") #S3BUCKETNAME | @as("ACCOUNT_ID") #ACCOUNTID]
+type sharedAccess = [@as("UNKNOWN") #UNKNOWN | @as("NOT_SHARED") #NOTSHARED | @as("INTERNAL") #INTERNAL | @as("EXTERNAL") #EXTERNAL]
 type severityDescription = [@as("High") #High | @as("Medium") #Medium | @as("Low") #Low]
-type sensitiveDataItemCategory = [@as("CUSTOM_IDENTIFIER") #CUSTOM_IDENTIFIER | @as("CREDENTIALS") #CREDENTIALS | @as("PERSONAL_INFORMATION") #PERSONAL_INFORMATION | @as("FINANCIAL_INFORMATION") #FINANCIAL_INFORMATION]
-type searchResourcesSortAttributeName = [@as("S3_CLASSIFIABLE_SIZE_IN_BYTES") #S3_CLASSIFIABLE_SIZE_IN_BYTES | @as("S3_CLASSIFIABLE_OBJECT_COUNT") #S3_CLASSIFIABLE_OBJECT_COUNT | @as("RESOURCE_NAME") #RESOURCE_NAME | @as("ACCOUNT_ID") #ACCOUNT_ID]
-type searchResourcesSimpleCriterionKey = [@as("S3_BUCKET_SHARED_ACCESS") #S3_BUCKET_SHARED_ACCESS | @as("S3_BUCKET_EFFECTIVE_PERMISSION") #S3_BUCKET_EFFECTIVE_PERMISSION | @as("S3_BUCKET_NAME") #S3_BUCKET_NAME | @as("ACCOUNT_ID") #ACCOUNT_ID]
+type sensitiveDataItemCategory = [@as("CUSTOM_IDENTIFIER") #CUSTOMIDENTIFIER | @as("CREDENTIALS") #CREDENTIALS | @as("PERSONAL_INFORMATION") #PERSONALINFORMATION | @as("FINANCIAL_INFORMATION") #FINANCIALINFORMATION]
+type searchResourcesSortAttributeName = [@as("S3_CLASSIFIABLE_SIZE_IN_BYTES") #S3CLASSIFIABLESIZEINBYTES | @as("S3_CLASSIFIABLE_OBJECT_COUNT") #S3CLASSIFIABLEOBJECTCOUNT | @as("RESOURCE_NAME") #RESOURCENAME | @as("ACCOUNT_ID") #ACCOUNTID]
+type searchResourcesSimpleCriterionKey = [@as("S3_BUCKET_SHARED_ACCESS") #S3BUCKETSHAREDACCESS | @as("S3_BUCKET_EFFECTIVE_PERMISSION") #S3BUCKETEFFECTIVEPERMISSION | @as("S3_BUCKET_NAME") #S3BUCKETNAME | @as("ACCOUNT_ID") #ACCOUNTID]
 type searchResourcesComparator = [@as("NE") #NE | @as("EQ") #EQ]
-type scopeFilterKey = [@as("OBJECT_KEY") #OBJECT_KEY | @as("TAG") #TAG | @as("OBJECT_SIZE") #OBJECT_SIZE | @as("OBJECT_LAST_MODIFIED_DATE") #OBJECT_LAST_MODIFIED_DATE | @as("OBJECT_EXTENSION") #OBJECT_EXTENSION | @as("BUCKET_CREATION_DATE") #BUCKET_CREATION_DATE]
+type scopeFilterKey = [@as("OBJECT_KEY") #OBJECTKEY | @as("TAG") #TAG | @as("OBJECT_SIZE") #OBJECTSIZE | @as("OBJECT_LAST_MODIFIED_DATE") #OBJECTLASTMODIFIEDDATE | @as("OBJECT_EXTENSION") #OBJECTEXTENSION | @as("BUCKET_CREATION_DATE") #BUCKETCREATIONDATE]
 type relationshipStatus = [@as("AccountSuspended") #AccountSuspended | @as("RegionDisabled") #RegionDisabled | @as("EmailVerificationFailed") #EmailVerificationFailed | @as("EmailVerificationInProgress") #EmailVerificationInProgress | @as("Resigned") #Resigned | @as("Removed") #Removed | @as("Created") #Created | @as("Invited") #Invited | @as("Paused") #Paused | @as("Enabled") #Enabled]
 type orderBy = [@as("DESC") #DESC | @as("ASC") #ASC]
-type maxResults = int;
+type maxResults = int
 type macieStatus = [@as("ENABLED") #ENABLED | @as("PAUSED") #PAUSED]
-type listJobsSortAttributeName = [@as("jobType") #jobType | @as("name") #name | @as("jobStatus") #jobStatus | @as("createdAt") #createdAt]
-type listJobsFilterKey = [@as("name") #name | @as("createdAt") #createdAt | @as("jobStatus") #jobStatus | @as("jobType") #jobType]
+type listJobsSortAttributeName = [@as("jobType") #JobType | @as("name") #Name | @as("jobStatus") #JobStatus | @as("createdAt") #CreatedAt]
+type listJobsFilterKey = [@as("name") #Name | @as("createdAt") #CreatedAt | @as("jobStatus") #JobStatus | @as("jobType") #JobType]
 type lastRunErrorStatusCode = [@as("ERROR") #ERROR | @as("NONE") #NONE]
-type jobType = [@as("SCHEDULED") #SCHEDULED | @as("ONE_TIME") #ONE_TIME]
-type jobStatus = [@as("USER_PAUSED") #USER_PAUSED | @as("IDLE") #IDLE | @as("COMPLETE") #COMPLETE | @as("CANCELLED") #CANCELLED | @as("PAUSED") #PAUSED | @as("RUNNING") #RUNNING]
-type jobComparator = [@as("STARTS_WITH") #STARTS_WITH | @as("CONTAINS") #CONTAINS | @as("NE") #NE | @as("LTE") #LTE | @as("LT") #LT | @as("GTE") #GTE | @as("GT") #GT | @as("EQ") #EQ]
+type jobType = [@as("SCHEDULED") #SCHEDULED | @as("ONE_TIME") #ONETIME]
+type jobStatus = [@as("USER_PAUSED") #USERPAUSED | @as("IDLE") #IDLE | @as("COMPLETE") #COMPLETE | @as("CANCELLED") #CANCELLED | @as("PAUSED") #PAUSED | @as("RUNNING") #RUNNING]
+type jobComparator = [@as("STARTS_WITH") #STARTSWITH | @as("CONTAINS") #CONTAINS | @as("NE") #NE | @as("LTE") #LTE | @as("LT") #LT | @as("GTE") #GTE | @as("GT") #GT | @as("EQ") #EQ]
 type isMonitoredByJob = [@as("UNKNOWN") #UNKNOWN | @as("FALSE") #FALSE | @as("TRUE") #TRUE]
 type isDefinedInJob = [@as("UNKNOWN") #UNKNOWN | @as("FALSE") #FALSE | @as("TRUE") #TRUE]
-type groupBy = [@as("severity.description") #severity_description | @as("classificationDetails.jobId") #classificationDetails_jobId | @as("type") #type | @as("resourcesAffected.s3Bucket.name") #resourcesAffected_s3Bucket_name]
+type groupBy = [@as("severity.description") #SeverityDescription | @as("classificationDetails.jobId") #ClassificationDetailsJobId | @as("type") #Type | @as("resourcesAffected.s3Bucket.name") #ResourcesAffectedS3BucketName]
 type findingsFilterAction = [@as("NOOP") #NOOP | @as("ARCHIVE") #ARCHIVE]
-type findingType = [@as("Policy:IAMUser/S3BlockPublicAccessDisabled") #Policy_IAMUser_S3BlockPublicAccessDisabled | @as("Policy:IAMUser/S3BucketEncryptionDisabled") #Policy_IAMUser_S3BucketEncryptionDisabled | @as("Policy:IAMUser/S3BucketReplicatedExternally") #Policy_IAMUser_S3BucketReplicatedExternally | @as("Policy:IAMUser/S3BucketSharedExternally") #Policy_IAMUser_S3BucketSharedExternally | @as("Policy:IAMUser/S3BucketPublic") #Policy_IAMUser_S3BucketPublic | @as("SensitiveData:S3Object/CustomIdentifier") #SensitiveData_S3Object_CustomIdentifier | @as("SensitiveData:S3Object/Credentials") #SensitiveData_S3Object_Credentials | @as("SensitiveData:S3Object/Personal") #SensitiveData_S3Object_Personal | @as("SensitiveData:S3Object/Financial") #SensitiveData_S3Object_Financial | @as("SensitiveData:S3Object/Multiple") #SensitiveData_S3Object_Multiple]
-type findingStatisticsSortAttributeName = [@as("count") #count | @as("groupKey") #groupKey]
-type findingPublishingFrequency = [@as("SIX_HOURS") #SIX_HOURS | @as("ONE_HOUR") #ONE_HOUR | @as("FIFTEEN_MINUTES") #FIFTEEN_MINUTES]
+type findingType = [@as("Policy:IAMUser/S3BlockPublicAccessDisabled") #PolicyIAMUserS3BlockPublicAccessDisabled | @as("Policy:IAMUser/S3BucketEncryptionDisabled") #PolicyIAMUserS3BucketEncryptionDisabled | @as("Policy:IAMUser/S3BucketReplicatedExternally") #PolicyIAMUserS3BucketReplicatedExternally | @as("Policy:IAMUser/S3BucketSharedExternally") #PolicyIAMUserS3BucketSharedExternally | @as("Policy:IAMUser/S3BucketPublic") #PolicyIAMUserS3BucketPublic | @as("SensitiveData:S3Object/CustomIdentifier") #SensitiveDataS3ObjectCustomIdentifier | @as("SensitiveData:S3Object/Credentials") #SensitiveDataS3ObjectCredentials | @as("SensitiveData:S3Object/Personal") #SensitiveDataS3ObjectPersonal | @as("SensitiveData:S3Object/Financial") #SensitiveDataS3ObjectFinancial | @as("SensitiveData:S3Object/Multiple") #SensitiveDataS3ObjectMultiple]
+type findingStatisticsSortAttributeName = [@as("count") #Count | @as("groupKey") #GroupKey]
+type findingPublishingFrequency = [@as("SIX_HOURS") #SIXHOURS | @as("ONE_HOUR") #ONEHOUR | @as("FIFTEEN_MINUTES") #FIFTEENMINUTES]
 type findingCategory = [@as("POLICY") #POLICY | @as("CLASSIFICATION") #CLASSIFICATION]
-type findingActionType = [@as("AWS_API_CALL") #AWS_API_CALL]
+type findingActionType = [@as("AWS_API_CALL") #AWSAPICALL]
 type errorCode = [@as("InternalError") #InternalError | @as("ClientError") #ClientError]
-type encryptionType = [@as("UNKNOWN") #UNKNOWN | @as("aws:kms") #aws_kms | @as("AES256") #AES256 | @as("NONE") #NONE]
-type effectivePermission = [@as("UNKNOWN") #UNKNOWN | @as("NOT_PUBLIC") #NOT_PUBLIC | @as("PUBLIC") #PUBLIC]
+type encryptionType = [@as("UNKNOWN") #UNKNOWN | @as("aws:kms") #AwsKms | @as("AES256") #AES256 | @as("NONE") #NONE]
+type effectivePermission = [@as("UNKNOWN") #UNKNOWN | @as("NOT_PUBLIC") #NOTPUBLIC | @as("PUBLIC") #PUBLIC]
 type dayOfWeek = [@as("SATURDAY") #SATURDAY | @as("FRIDAY") #FRIDAY | @as("THURSDAY") #THURSDAY | @as("WEDNESDAY") #WEDNESDAY | @as("TUESDAY") #TUESDAY | @as("MONDAY") #MONDAY | @as("SUNDAY") #SUNDAY]
 type dailySchedule = unit
 type currency = [@as("USD") #USD]
 type allowsUnencryptedObjectUploads = [@as("UNKNOWN") #UNKNOWN | @as("FALSE") #FALSE | @as("TRUE") #TRUE]
-type adminStatus = [@as("DISABLING_IN_PROGRESS") #DISABLING_IN_PROGRESS | @as("ENABLED") #ENABLED]
+type adminStatus = [@as("DISABLING_IN_PROGRESS") #DISABLINGINPROGRESS | @as("ENABLED") #ENABLED]
 type __listOf__string = array<__string>
 type __listOfFindingType = array<findingType>
 type weeklySchedule = {
-@as("dayOfWeek") dayOfWeek: dayOfWeek
+dayOfWeek: option<dayOfWeek>
 }
 type userPausedDetails = {
-@as("jobPausedAt") jobPausedAt: __timestampIso8601,
-@as("jobImminentExpirationHealthEventArn") jobImminentExpirationHealthEventArn: __string,
-@as("jobExpiresAt") jobExpiresAt: __timestampIso8601
+jobPausedAt: option<__timestampIso8601>,
+jobImminentExpirationHealthEventArn: option<__string>,
+jobExpiresAt: option<__timestampIso8601>
 }
 type userIdentityRoot = {
-@as("principalId") principalId: __string,
-@as("arn") arn: __string,
-@as("accountId") accountId: __string
+principalId: option<__string>,
+arn: option<__string>,
+accountId: option<__string>
 }
 type usageTotal = {
-@as("type") type_: usageType,
-@as("estimatedCost") estimatedCost: __string,
-@as("currency") currency: currency
+@as("type") type_: option<usageType>,
+estimatedCost: option<__string>,
+currency: option<currency>
 }
 type usageStatisticsSortBy = {
-@as("orderBy") orderBy: orderBy,
-@as("key") key: usageStatisticsSortKey
+orderBy: option<orderBy>,
+key: option<usageStatisticsSortKey>
 }
 type unprocessedAccount = {
-@as("errorMessage") errorMessage: __string,
-@as("errorCode") errorCode: errorCode,
-@as("accountId") accountId: __string
+errorMessage: option<__string>,
+errorCode: option<errorCode>,
+accountId: option<__string>
 }
 type tagValuePair = {
-@as("value") value: __string,
-@as("key") key: __string
+value: option<__string>,
+key: option<__string>
 }
 type tagMap = Js.Dict.t< __string>
 type tagCriterionPairForJob = {
-@as("value") value: __string,
-@as("key") key: __string
+value: option<__string>,
+key: option<__string>
 }
 type statistics = {
-@as("numberOfRuns") numberOfRuns: __double,
-@as("approximateNumberOfObjectsToProcess") approximateNumberOfObjectsToProcess: __double
+numberOfRuns: option<__double>,
+approximateNumberOfObjectsToProcess: option<__double>
 }
 type sortCriteria = {
-@as("orderBy") orderBy: orderBy,
-@as("attributeName") attributeName: __string
+orderBy: option<orderBy>,
+attributeName: option<__string>
 }
 type severity = {
-@as("score") score: __long,
-@as("description") description: severityDescription
+score: option<__long>,
+description: option<severityDescription>
 }
 type sessionIssuer = {
-@as("userName") userName: __string,
-@as("type") type_: __string,
-@as("principalId") principalId: __string,
-@as("arn") arn: __string,
-@as("accountId") accountId: __string
+userName: option<__string>,
+@as("type") type_: option<__string>,
+principalId: option<__string>,
+arn: option<__string>,
+accountId: option<__string>
 }
 type sessionContextAttributes = {
-@as("mfaAuthenticated") mfaAuthenticated: __boolean,
-@as("creationDate") creationDate: __timestampIso8601
+mfaAuthenticated: option<__boolean>,
+creationDate: option<__timestampIso8601>
 }
 type serviceLimit = {
-@as("value") value: __long,
-@as("unit") unit: unit_,
-@as("isServiceLimited") isServiceLimited: __boolean
+value: option<__long>,
+@as("unit") unit_: option<unit_>,
+isServiceLimited: option<__boolean>
 }
 type serverSideEncryption = {
-@as("kmsMasterKeyId") kmsMasterKeyId: __string,
-@as("encryptionType") encryptionType: encryptionType
+kmsMasterKeyId: option<__string>,
+encryptionType: option<encryptionType>
 }
 type securityHubConfiguration = {
-@as("publishPolicyFindings") publishPolicyFindings: option<__boolean>,
-@as("publishClassificationFindings") publishClassificationFindings: option<__boolean>
+publishPolicyFindings: __boolean,
+publishClassificationFindings: __boolean
 }
 type searchResourcesTagCriterionPair = {
-@as("value") value: __string,
-@as("key") key: __string
+value: option<__string>,
+key: option<__string>
 }
 type searchResourcesSortCriteria = {
-@as("orderBy") orderBy: orderBy,
-@as("attributeName") attributeName: searchResourcesSortAttributeName
+orderBy: option<orderBy>,
+attributeName: option<searchResourcesSortAttributeName>
 }
 type s3Destination = {
-@as("kmsKeyArn") kmsKeyArn: option<__string>,
-@as("keyPrefix") keyPrefix: __string,
-@as("bucketName") bucketName: option<__string>
+kmsKeyArn: __string,
+keyPrefix: option<__string>,
+bucketName: __string
 }
 type s3BucketOwner = {
-@as("id") id: __string,
-@as("displayName") displayName: __string
+id: option<__string>,
+displayName: option<__string>
 }
 type record = {
-@as("recordIndex") recordIndex: __long,
-@as("jsonPath") jsonPath: __string
+recordIndex: option<__long>,
+jsonPath: option<__string>
 }
 type range = {
-@as("startColumn") startColumn: __long,
-@as("start") start: __long,
-@as("end") end: __long
+startColumn: option<__long>,
+start: option<__long>,
+end: option<__long>
 }
 type objectLevelStatistics = {
-@as("total") total: __long,
-@as("storageClass") storageClass: __long,
-@as("fileType") fileType: __long
+total: option<__long>,
+storageClass: option<__long>,
+fileType: option<__long>
 }
 type objectCountByEncryptionType = {
-@as("unknown") unknown: __long,
-@as("unencrypted") unencrypted: __long,
-@as("s3Managed") s3Managed: __long,
-@as("kmsManaged") kmsManaged: __long,
-@as("customerManaged") customerManaged: __long
+unknown: option<__long>,
+unencrypted: option<__long>,
+s3Managed: option<__long>,
+kmsManaged: option<__long>,
+customerManaged: option<__long>
 }
 type monthlySchedule = {
-@as("dayOfMonth") dayOfMonth: __integer
+dayOfMonth: option<__integer>
 }
 type listJobsSortCriteria = {
-@as("orderBy") orderBy: orderBy,
-@as("attributeName") attributeName: listJobsSortAttributeName
+orderBy: option<orderBy>,
+attributeName: option<listJobsSortAttributeName>
 }
 type lastRunErrorStatus = {
-@as("code") code: lastRunErrorStatusCode
+code: option<lastRunErrorStatusCode>
 }
 type keyValuePair = {
-@as("value") value: __string,
-@as("key") key: __string
+value: option<__string>,
+key: option<__string>
 }
 type jobDetails = {
-@as("lastJobRunTime") lastJobRunTime: __timestampIso8601,
-@as("lastJobId") lastJobId: __string,
-@as("isMonitoredByJob") isMonitoredByJob: isMonitoredByJob,
-@as("isDefinedInJob") isDefinedInJob: isDefinedInJob
+lastJobRunTime: option<__timestampIso8601>,
+lastJobId: option<__string>,
+isMonitoredByJob: option<isMonitoredByJob>,
+isDefinedInJob: option<isDefinedInJob>
 }
 type ipOwner = {
-@as("org") org: __string,
-@as("isp") isp: __string,
-@as("asnOrg") asnOrg: __string,
-@as("asn") asn: __string
+org: option<__string>,
+isp: option<__string>,
+asnOrg: option<__string>,
+asn: option<__string>
 }
 type ipGeoLocation = {
-@as("lon") lon: __double,
-@as("lat") lat: __double
+lon: option<__double>,
+lat: option<__double>
 }
 type ipCountry = {
-@as("name") name: __string,
-@as("code") code: __string
+name: option<__string>,
+code: option<__string>
 }
 type ipCity = {
-@as("name") name: __string
+name: option<__string>
 }
 type invitation = {
-@as("relationshipStatus") relationshipStatus: relationshipStatus,
-@as("invitedAt") invitedAt: __timestampIso8601,
-@as("invitationId") invitationId: __string,
-@as("accountId") accountId: __string
+relationshipStatus: option<relationshipStatus>,
+invitedAt: option<__timestampIso8601>,
+invitationId: option<__string>,
+accountId: option<__string>
 }
 type iamUser = {
-@as("userName") userName: __string,
-@as("principalId") principalId: __string,
-@as("arn") arn: __string,
-@as("accountId") accountId: __string
+userName: option<__string>,
+principalId: option<__string>,
+arn: option<__string>,
+accountId: option<__string>
 }
 type groupCount = {
-@as("groupKey") groupKey: __string,
-@as("count") count: __long
+groupKey: option<__string>,
+count: option<__long>
 }
 type findingStatisticsSortCriteria = {
-@as("orderBy") orderBy: orderBy,
-@as("attributeName") attributeName: findingStatisticsSortAttributeName
+orderBy: option<orderBy>,
+attributeName: option<findingStatisticsSortAttributeName>
 }
 type domainDetails = {
-@as("domainName") domainName: __string
+domainName: option<__string>
 }
 type customDataIdentifierSummary = {
-@as("name") name: __string,
-@as("id") id: __string,
-@as("description") description: __string,
-@as("createdAt") createdAt: __timestampIso8601,
-@as("arn") arn: __string
+name: option<__string>,
+id: option<__string>,
+description: option<__string>,
+createdAt: option<__timestampIso8601>,
+arn: option<__string>
 }
 type classificationResultStatus = {
-@as("reason") reason: __string,
-@as("code") code: __string
+reason: option<__string>,
+code: option<__string>
 }
 type cell = {
-@as("row") row: __long,
-@as("columnName") columnName: __string,
-@as("column") column: __long,
-@as("cellReference") cellReference: __string
+row: option<__long>,
+columnName: option<__string>,
+column: option<__long>,
+cellReference: option<__string>
 }
 type bucketSortCriteria = {
-@as("orderBy") orderBy: orderBy,
-@as("attributeName") attributeName: __string
+orderBy: option<orderBy>,
+attributeName: option<__string>
 }
 type bucketServerSideEncryption = {
-@as("type") type_: type_,
-@as("kmsMasterKeyId") kmsMasterKeyId: __string
+@as("type") type_: option<type_>,
+kmsMasterKeyId: option<__string>
 }
 type bucketPolicy = {
-@as("allowsPublicWriteAccess") allowsPublicWriteAccess: __boolean,
-@as("allowsPublicReadAccess") allowsPublicReadAccess: __boolean
+allowsPublicWriteAccess: option<__boolean>,
+allowsPublicReadAccess: option<__boolean>
 }
 type bucketCountPolicyAllowsUnencryptedObjectUploads = {
-@as("unknown") unknown: __long,
-@as("deniesUnencryptedObjectUploads") deniesUnencryptedObjectUploads: __long,
-@as("allowsUnencryptedObjectUploads") allowsUnencryptedObjectUploads: __long
+unknown: option<__long>,
+deniesUnencryptedObjectUploads: option<__long>,
+allowsUnencryptedObjectUploads: option<__long>
 }
 type bucketCountBySharedAccessType = {
-@as("unknown") unknown: __long,
-@as("notShared") notShared: __long,
-@as("internal") internal: __long,
-@as("external") external: __long
+unknown: option<__long>,
+notShared: option<__long>,
+internal: option<__long>,
+@as("external") external_: option<__long>
 }
 type bucketCountByEncryptionType = {
-@as("unknown") unknown: __long,
-@as("unencrypted") unencrypted: __long,
-@as("s3Managed") s3Managed: __long,
-@as("kmsManaged") kmsManaged: __long
+unknown: option<__long>,
+unencrypted: option<__long>,
+s3Managed: option<__long>,
+kmsManaged: option<__long>
 }
 type bucketCountByEffectivePermission = {
-@as("unknown") unknown: __long,
-@as("publiclyWritable") publiclyWritable: __long,
-@as("publiclyReadable") publiclyReadable: __long,
-@as("publiclyAccessible") publiclyAccessible: __long
+unknown: option<__long>,
+publiclyWritable: option<__long>,
+publiclyReadable: option<__long>,
+publiclyAccessible: option<__long>
 }
 type blockPublicAccess = {
-@as("restrictPublicBuckets") restrictPublicBuckets: __boolean,
-@as("ignorePublicAcls") ignorePublicAcls: __boolean,
-@as("blockPublicPolicy") blockPublicPolicy: __boolean,
-@as("blockPublicAcls") blockPublicAcls: __boolean
+restrictPublicBuckets: option<__boolean>,
+ignorePublicAcls: option<__boolean>,
+blockPublicPolicy: option<__boolean>,
+blockPublicAcls: option<__boolean>
 }
 type batchGetCustomDataIdentifierSummary = {
-@as("name") name: __string,
-@as("id") id: __string,
-@as("description") description: __string,
-@as("deleted") deleted: __boolean,
-@as("createdAt") createdAt: __timestampIso8601,
-@as("arn") arn: __string
+name: option<__string>,
+id: option<__string>,
+description: option<__string>,
+deleted: option<__boolean>,
+createdAt: option<__timestampIso8601>,
+arn: option<__string>
 }
 type awsService = {
-@as("invokedBy") invokedBy: __string
+invokedBy: option<__string>
 }
 type awsAccount = {
-@as("principalId") principalId: __string,
-@as("accountId") accountId: __string
+principalId: option<__string>,
+accountId: option<__string>
 }
 type apiCallDetails = {
-@as("lastSeen") lastSeen: __timestampIso8601,
-@as("firstSeen") firstSeen: __timestampIso8601,
-@as("apiServiceName") apiServiceName: __string,
-@as("api") api: __string
+lastSeen: option<__timestampIso8601>,
+firstSeen: option<__timestampIso8601>,
+apiServiceName: option<__string>,
+api: option<__string>
 }
 type adminAccount = {
-@as("status") status: adminStatus,
-@as("accountId") accountId: __string
+status: option<adminStatus>,
+accountId: option<__string>
 }
 type accountDetail = {
-@as("email") email: option<__string>,
-@as("accountId") accountId: option<__string>
+email: __string,
+accountId: __string
 }
 type accessControlList = {
-@as("allowsPublicWriteAccess") allowsPublicWriteAccess: __boolean,
-@as("allowsPublicReadAccess") allowsPublicReadAccess: __boolean
+allowsPublicWriteAccess: option<__boolean>,
+allowsPublicReadAccess: option<__boolean>
 }
 type __listOfUsageTotal = array<usageTotal>
 type __listOfUnprocessedAccount = array<unprocessedAccount>
@@ -329,133 +337,133 @@ type __listOfCustomDataIdentifierSummary = array<customDataIdentifierSummary>
 type __listOfBatchGetCustomDataIdentifierSummary = array<batchGetCustomDataIdentifierSummary>
 type __listOfAdminAccount = array<adminAccount>
 type usageStatisticsFilter = {
-@as("values") values: __listOf__string,
-@as("key") key: usageStatisticsFilterKey,
-@as("comparator") comparator: usageStatisticsFilterComparator
+values: option<__listOf__string>,
+key: option<usageStatisticsFilterKey>,
+comparator: option<usageStatisticsFilterComparator>
 }
 type usageByAccount = {
-@as("type") type_: usageType,
-@as("serviceLimit") serviceLimit: serviceLimit,
-@as("estimatedCost") estimatedCost: __string,
-@as("currency") currency: currency
+@as("type") type_: option<usageType>,
+serviceLimit: option<serviceLimit>,
+estimatedCost: option<__string>,
+currency: option<currency>
 }
 type simpleScopeTerm = {
-@as("values") values: __listOf__string,
-@as("key") key: scopeFilterKey,
-@as("comparator") comparator: jobComparator
+values: option<__listOf__string>,
+key: option<scopeFilterKey>,
+comparator: option<jobComparator>
 }
 type simpleCriterionForJob = {
-@as("values") values: __listOf__string,
-@as("key") key: simpleCriterionKeyForJob,
-@as("comparator") comparator: jobComparator
+values: option<__listOf__string>,
+key: option<simpleCriterionKeyForJob>,
+comparator: option<jobComparator>
 }
 type sessionContext = {
-@as("sessionIssuer") sessionIssuer: sessionIssuer,
-@as("attributes") attributes: sessionContextAttributes
+sessionIssuer: option<sessionIssuer>,
+attributes: option<sessionContextAttributes>
 }
 type searchResourcesSimpleCriterion = {
-@as("values") values: __listOf__string,
-@as("key") key: searchResourcesSimpleCriterionKey,
-@as("comparator") comparator: searchResourcesComparator
+values: option<__listOf__string>,
+key: option<searchResourcesSimpleCriterionKey>,
+comparator: option<searchResourcesComparator>
 }
 type s3BucketDefinitionForJob = {
-@as("buckets") buckets: option<__listOf__string>,
-@as("accountId") accountId: option<__string>
+buckets: __listOf__string,
+accountId: __string
 }
 type replicationDetails = {
-@as("replicationAccounts") replicationAccounts: __listOf__string,
-@as("replicatedExternally") replicatedExternally: __boolean,
-@as("replicated") replicated: __boolean
+replicationAccounts: option<__listOf__string>,
+replicatedExternally: option<__boolean>,
+replicated: option<__boolean>
 }
 type records = array<record>
 type ranges = array<range>
 type page = {
-@as("pageNumber") pageNumber: __long,
-@as("offsetRange") offsetRange: range,
-@as("lineRange") lineRange: range
+pageNumber: option<__long>,
+offsetRange: option<range>,
+lineRange: option<range>
 }
 type member = {
-@as("updatedAt") updatedAt: __timestampIso8601,
-@as("tags") tags: tagMap,
-@as("relationshipStatus") relationshipStatus: relationshipStatus,
-@as("masterAccountId") masterAccountId: __string,
-@as("invitedAt") invitedAt: __timestampIso8601,
-@as("email") email: __string,
-@as("arn") arn: __string,
-@as("administratorAccountId") administratorAccountId: __string,
-@as("accountId") accountId: __string
+updatedAt: option<__timestampIso8601>,
+tags: option<tagMap>,
+relationshipStatus: option<relationshipStatus>,
+masterAccountId: option<__string>,
+invitedAt: option<__timestampIso8601>,
+email: option<__string>,
+arn: option<__string>,
+administratorAccountId: option<__string>,
+accountId: option<__string>
 }
 type matchingBucket = {
-@as("unclassifiableObjectSizeInBytes") unclassifiableObjectSizeInBytes: objectLevelStatistics,
-@as("unclassifiableObjectCount") unclassifiableObjectCount: objectLevelStatistics,
-@as("sizeInBytesCompressed") sizeInBytesCompressed: __long,
-@as("sizeInBytes") sizeInBytes: __long,
-@as("objectCountByEncryptionType") objectCountByEncryptionType: objectCountByEncryptionType,
-@as("objectCount") objectCount: __long,
-@as("jobDetails") jobDetails: jobDetails,
-@as("classifiableSizeInBytes") classifiableSizeInBytes: __long,
-@as("classifiableObjectCount") classifiableObjectCount: __long,
-@as("bucketName") bucketName: __string,
-@as("accountId") accountId: __string
+unclassifiableObjectSizeInBytes: option<objectLevelStatistics>,
+unclassifiableObjectCount: option<objectLevelStatistics>,
+sizeInBytesCompressed: option<__long>,
+sizeInBytes: option<__long>,
+objectCountByEncryptionType: option<objectCountByEncryptionType>,
+objectCount: option<__long>,
+jobDetails: option<jobDetails>,
+classifiableSizeInBytes: option<__long>,
+classifiableObjectCount: option<__long>,
+bucketName: option<__string>,
+accountId: option<__string>
 }
 type listJobsFilterTerm = {
-@as("values") values: __listOf__string,
-@as("key") key: listJobsFilterKey,
-@as("comparator") comparator: jobComparator
+values: option<__listOf__string>,
+key: option<listJobsFilterKey>,
+comparator: option<jobComparator>
 }
 type keyValuePairList = array<keyValuePair>
 type jobScheduleFrequency = {
-@as("weeklySchedule") weeklySchedule: weeklySchedule,
-@as("monthlySchedule") monthlySchedule: monthlySchedule,
-@as("dailySchedule") dailySchedule: dailySchedule
+weeklySchedule: option<weeklySchedule>,
+monthlySchedule: option<monthlySchedule>,
+dailySchedule: option<dailySchedule>
 }
 type ipAddressDetails = {
-@as("ipOwner") ipOwner: ipOwner,
-@as("ipGeoLocation") ipGeoLocation: ipGeoLocation,
-@as("ipCountry") ipCountry: ipCountry,
-@as("ipCity") ipCity: ipCity,
-@as("ipAddressV4") ipAddressV4: __string
+ipOwner: option<ipOwner>,
+ipGeoLocation: option<ipGeoLocation>,
+ipCountry: option<ipCountry>,
+ipCity: option<ipCity>,
+ipAddressV4: option<__string>
 }
 type findingsFilterListItem = {
-@as("tags") tags: tagMap,
-@as("name") name: __string,
-@as("id") id: __string,
-@as("arn") arn: __string,
-@as("action") action: findingsFilterAction
+tags: option<tagMap>,
+name: option<__string>,
+id: option<__string>,
+arn: option<__string>,
+action: option<findingsFilterAction>
 }
 type findingAction = {
-@as("apiCallDetails") apiCallDetails: apiCallDetails,
-@as("actionType") actionType: findingActionType
+apiCallDetails: option<apiCallDetails>,
+actionType: option<findingActionType>
 }
 type criterionAdditionalProperties = {
-@as("neq") neq: __listOf__string,
-@as("lte") lte: __long,
-@as("lt") lt: __long,
-@as("gte") gte: __long,
-@as("gt") gt: __long,
-@as("eqExactMatch") eqExactMatch: __listOf__string,
-@as("eq") eq: __listOf__string
+neq: option<__listOf__string>,
+lte: option<__long>,
+lt: option<__long>,
+gte: option<__long>,
+gt: option<__long>,
+eqExactMatch: option<__listOf__string>,
+eq: option<__listOf__string>
 }
 type classificationExportConfiguration = {
-@as("s3Destination") s3Destination: s3Destination
+s3Destination: option<s3Destination>
 }
 type cells = array<cell>
 type bucketLevelPermissions = {
-@as("bucketPolicy") bucketPolicy: bucketPolicy,
-@as("blockPublicAccess") blockPublicAccess: blockPublicAccess,
-@as("accessControlList") accessControlList: accessControlList
+bucketPolicy: option<bucketPolicy>,
+blockPublicAccess: option<blockPublicAccess>,
+accessControlList: option<accessControlList>
 }
 type bucketCriteriaAdditionalProperties = {
-@as("prefix") prefix: __string,
-@as("neq") neq: __listOf__string,
-@as("lte") lte: __long,
-@as("lt") lt: __long,
-@as("gte") gte: __long,
-@as("gt") gt: __long,
-@as("eq") eq: __listOf__string
+prefix: option<__string>,
+neq: option<__listOf__string>,
+lte: option<__long>,
+lt: option<__long>,
+gte: option<__long>,
+gt: option<__long>,
+eq: option<__listOf__string>
 }
 type accountLevelPermissions = {
-@as("blockPublicAccess") blockPublicAccess: blockPublicAccess
+blockPublicAccess: option<blockPublicAccess>
 }
 type __listOfUsageStatisticsFilter = array<usageStatisticsFilter>
 type __listOfUsageByAccount = array<usageByAccount>
@@ -464,350 +472,350 @@ type __listOfMember = array<member>
 type __listOfListJobsFilterTerm = array<listJobsFilterTerm>
 type __listOfFindingsFilterListItem = array<findingsFilterListItem>
 type tagScopeTerm = {
-@as("target") target: tagTarget,
-@as("tagValues") tagValues: __listOfTagValuePair,
-@as("key") key: __string,
-@as("comparator") comparator: jobComparator
+target: option<tagTarget>,
+tagValues: option<__listOfTagValuePair>,
+key: option<__string>,
+comparator: option<jobComparator>
 }
 type tagCriterionForJob = {
-@as("tagValues") tagValues: __listOfTagCriterionPairForJob,
-@as("comparator") comparator: jobComparator
+tagValues: option<__listOfTagCriterionPairForJob>,
+comparator: option<jobComparator>
 }
 type searchResourcesTagCriterion = {
-@as("tagValues") tagValues: __listOfSearchResourcesTagCriterionPair,
-@as("comparator") comparator: searchResourcesComparator
+tagValues: option<__listOfSearchResourcesTagCriterionPair>,
+comparator: option<searchResourcesComparator>
 }
 type s3Object = {
-@as("versionId") versionId: __string,
-@as("tags") tags: keyValuePairList,
-@as("storageClass") storageClass: storageClass,
-@as("size") size: __long,
-@as("serverSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("publicAccess") publicAccess: __boolean,
-@as("path") path: __string,
-@as("lastModified") lastModified: __timestampIso8601,
-@as("key") key: __string,
-@as("extension") extension: __string,
-@as("eTag") eTag: __string,
-@as("bucketArn") bucketArn: __string
+versionId: option<__string>,
+tags: option<keyValuePairList>,
+storageClass: option<storageClass>,
+size: option<__long>,
+serverSideEncryption: option<serverSideEncryption>,
+publicAccess: option<__boolean>,
+path: option<__string>,
+lastModified: option<__timestampIso8601>,
+key: option<__string>,
+extension: option<__string>,
+eTag: option<__string>,
+bucketArn: option<__string>
 }
 type pages = array<page>
 type matchingResource = {
-@as("matchingBucket") matchingBucket: matchingBucket
+matchingBucket: option<matchingBucket>
 }
 type federatedUser = {
-@as("sessionContext") sessionContext: sessionContext,
-@as("principalId") principalId: __string,
-@as("arn") arn: __string,
-@as("accountId") accountId: __string,
-@as("accessKeyId") accessKeyId: __string
+sessionContext: option<sessionContext>,
+principalId: option<__string>,
+arn: option<__string>,
+accountId: option<__string>,
+accessKeyId: option<__string>
 }
 type criterion = Js.Dict.t< criterionAdditionalProperties>
 type bucketPermissionConfiguration = {
-@as("bucketLevelPermissions") bucketLevelPermissions: bucketLevelPermissions,
-@as("accountLevelPermissions") accountLevelPermissions: accountLevelPermissions
+bucketLevelPermissions: option<bucketLevelPermissions>,
+accountLevelPermissions: option<accountLevelPermissions>
 }
 type bucketCriteria = Js.Dict.t< bucketCriteriaAdditionalProperties>
 type assumedRole = {
-@as("sessionContext") sessionContext: sessionContext,
-@as("principalId") principalId: __string,
-@as("arn") arn: __string,
-@as("accountId") accountId: __string,
-@as("accessKeyId") accessKeyId: __string
+sessionContext: option<sessionContext>,
+principalId: option<__string>,
+arn: option<__string>,
+accountId: option<__string>,
+accessKeyId: option<__string>
 }
 type __listOfMatchingResource = array<matchingResource>
 type userIdentity = {
-@as("type") type_: userIdentityType,
-@as("root") root: userIdentityRoot,
-@as("iamUser") iamUser: iamUser,
-@as("federatedUser") federatedUser: federatedUser,
-@as("awsService") awsService: awsService,
-@as("awsAccount") awsAccount: awsAccount,
-@as("assumedRole") assumedRole: assumedRole
+@as("type") type_: option<userIdentityType>,
+root: option<userIdentityRoot>,
+iamUser: option<iamUser>,
+federatedUser: option<federatedUser>,
+awsService: option<awsService>,
+awsAccount: option<awsAccount>,
+assumedRole: option<assumedRole>
 }
 type usageRecord = {
-@as("usage") usage: __listOfUsageByAccount,
-@as("freeTrialStartDate") freeTrialStartDate: __timestampIso8601,
-@as("accountId") accountId: __string
+usage: option<__listOfUsageByAccount>,
+freeTrialStartDate: option<__timestampIso8601>,
+accountId: option<__string>
 }
 type searchResourcesCriteria = {
-@as("tagCriterion") tagCriterion: searchResourcesTagCriterion,
-@as("simpleCriterion") simpleCriterion: searchResourcesSimpleCriterion
+tagCriterion: option<searchResourcesTagCriterion>,
+simpleCriterion: option<searchResourcesSimpleCriterion>
 }
 type occurrences = {
-@as("records") records: records,
-@as("pages") pages: pages,
-@as("offsetRanges") offsetRanges: ranges,
-@as("lineRanges") lineRanges: ranges,
-@as("cells") cells: cells
+records: option<records>,
+pages: option<pages>,
+offsetRanges: option<ranges>,
+lineRanges: option<ranges>,
+cells: option<cells>
 }
 type listJobsFilterCriteria = {
-@as("includes") includes: __listOfListJobsFilterTerm,
-@as("excludes") excludes: __listOfListJobsFilterTerm
+includes: option<__listOfListJobsFilterTerm>,
+excludes: option<__listOfListJobsFilterTerm>
 }
 type jobScopeTerm = {
-@as("tagScopeTerm") tagScopeTerm: tagScopeTerm,
-@as("simpleScopeTerm") simpleScopeTerm: simpleScopeTerm
+tagScopeTerm: option<tagScopeTerm>,
+simpleScopeTerm: option<simpleScopeTerm>
 }
 type findingCriteria = {
-@as("criterion") criterion: criterion
+criterion: option<criterion>
 }
 type criteriaForJob = {
-@as("tagCriterion") tagCriterion: tagCriterionForJob,
-@as("simpleCriterion") simpleCriterion: simpleCriterionForJob
+tagCriterion: option<tagCriterionForJob>,
+simpleCriterion: option<simpleCriterionForJob>
 }
 type bucketPublicAccess = {
-@as("permissionConfiguration") permissionConfiguration: bucketPermissionConfiguration,
-@as("effectivePermission") effectivePermission: effectivePermission
+permissionConfiguration: option<bucketPermissionConfiguration>,
+effectivePermission: option<effectivePermission>
 }
 type __listOfUsageRecord = array<usageRecord>
 type __listOfSearchResourcesCriteria = array<searchResourcesCriteria>
 type __listOfJobScopeTerm = array<jobScopeTerm>
 type __listOfCriteriaForJob = array<criteriaForJob>
 type s3Bucket = {
-@as("tags") tags: keyValuePairList,
-@as("publicAccess") publicAccess: bucketPublicAccess,
-@as("owner") owner: s3BucketOwner,
-@as("name") name: __string,
-@as("defaultServerSideEncryption") defaultServerSideEncryption: serverSideEncryption,
-@as("createdAt") createdAt: __timestampIso8601,
-@as("arn") arn: __string,
-@as("allowsUnencryptedObjectUploads") allowsUnencryptedObjectUploads: allowsUnencryptedObjectUploads
+tags: option<keyValuePairList>,
+publicAccess: option<bucketPublicAccess>,
+owner: option<s3BucketOwner>,
+name: option<__string>,
+defaultServerSideEncryption: option<serverSideEncryption>,
+createdAt: option<__timestampIso8601>,
+arn: option<__string>,
+allowsUnencryptedObjectUploads: option<allowsUnencryptedObjectUploads>
 }
 type findingActor = {
-@as("userIdentity") userIdentity: userIdentity,
-@as("ipAddressDetails") ipAddressDetails: ipAddressDetails,
-@as("domainDetails") domainDetails: domainDetails
+userIdentity: option<userIdentity>,
+ipAddressDetails: option<ipAddressDetails>,
+domainDetails: option<domainDetails>
 }
 type defaultDetection = {
-@as("type") type_: __string,
-@as("occurrences") occurrences: occurrences,
-@as("count") count: __long
+@as("type") type_: option<__string>,
+occurrences: option<occurrences>,
+count: option<__long>
 }
 type customDetection = {
-@as("occurrences") occurrences: occurrences,
-@as("name") name: __string,
-@as("count") count: __long,
-@as("arn") arn: __string
+occurrences: option<occurrences>,
+name: option<__string>,
+count: option<__long>,
+arn: option<__string>
 }
 type bucketMetadata = {
-@as("versioning") versioning: __boolean,
-@as("unclassifiableObjectSizeInBytes") unclassifiableObjectSizeInBytes: objectLevelStatistics,
-@as("unclassifiableObjectCount") unclassifiableObjectCount: objectLevelStatistics,
-@as("tags") tags: __listOfKeyValuePair,
-@as("sizeInBytesCompressed") sizeInBytesCompressed: __long,
-@as("sizeInBytes") sizeInBytes: __long,
-@as("sharedAccess") sharedAccess: sharedAccess,
-@as("serverSideEncryption") serverSideEncryption: bucketServerSideEncryption,
-@as("replicationDetails") replicationDetails: replicationDetails,
-@as("region") region: __string,
-@as("publicAccess") publicAccess: bucketPublicAccess,
-@as("objectCountByEncryptionType") objectCountByEncryptionType: objectCountByEncryptionType,
-@as("objectCount") objectCount: __long,
-@as("lastUpdated") lastUpdated: __timestampIso8601,
-@as("jobDetails") jobDetails: jobDetails,
-@as("classifiableSizeInBytes") classifiableSizeInBytes: __long,
-@as("classifiableObjectCount") classifiableObjectCount: __long,
-@as("bucketName") bucketName: __string,
-@as("bucketCreatedAt") bucketCreatedAt: __timestampIso8601,
-@as("bucketArn") bucketArn: __string,
-@as("allowsUnencryptedObjectUploads") allowsUnencryptedObjectUploads: allowsUnencryptedObjectUploads,
-@as("accountId") accountId: __string
+versioning: option<__boolean>,
+unclassifiableObjectSizeInBytes: option<objectLevelStatistics>,
+unclassifiableObjectCount: option<objectLevelStatistics>,
+tags: option<__listOfKeyValuePair>,
+sizeInBytesCompressed: option<__long>,
+sizeInBytes: option<__long>,
+sharedAccess: option<sharedAccess>,
+serverSideEncryption: option<bucketServerSideEncryption>,
+replicationDetails: option<replicationDetails>,
+region: option<__string>,
+publicAccess: option<bucketPublicAccess>,
+objectCountByEncryptionType: option<objectCountByEncryptionType>,
+objectCount: option<__long>,
+lastUpdated: option<__timestampIso8601>,
+jobDetails: option<jobDetails>,
+classifiableSizeInBytes: option<__long>,
+classifiableObjectCount: option<__long>,
+bucketName: option<__string>,
+bucketCreatedAt: option<__timestampIso8601>,
+bucketArn: option<__string>,
+allowsUnencryptedObjectUploads: option<allowsUnencryptedObjectUploads>,
+accountId: option<__string>
 }
 type __listOfBucketMetadata = array<bucketMetadata>
 type searchResourcesCriteriaBlock = {
-@as("and") and: __listOfSearchResourcesCriteria
+@as("and") and_: option<__listOfSearchResourcesCriteria>
 }
 type resourcesAffected = {
-@as("s3Object") s3Object: s3Object,
-@as("s3Bucket") s3Bucket: s3Bucket
+s3Object: option<s3Object>,
+s3Bucket: option<s3Bucket>
 }
 type policyDetails = {
-@as("actor") actor: findingActor,
-@as("action") action: findingAction
+actor: option<findingActor>,
+action: option<findingAction>
 }
 type jobScopingBlock = {
-@as("and") and: __listOfJobScopeTerm
+@as("and") and_: option<__listOfJobScopeTerm>
 }
 type defaultDetections = array<defaultDetection>
 type customDetections = array<customDetection>
 type criteriaBlockForJob = {
-@as("and") and: __listOfCriteriaForJob
+@as("and") and_: option<__listOfCriteriaForJob>
 }
 type sensitiveDataItem = {
-@as("totalCount") totalCount: __long,
-@as("detections") detections: defaultDetections,
-@as("category") category: sensitiveDataItemCategory
+totalCount: option<__long>,
+detections: option<defaultDetections>,
+category: option<sensitiveDataItemCategory>
 }
 type searchResourcesBucketCriteria = {
-@as("includes") includes: searchResourcesCriteriaBlock,
-@as("excludes") excludes: searchResourcesCriteriaBlock
+includes: option<searchResourcesCriteriaBlock>,
+excludes: option<searchResourcesCriteriaBlock>
 }
 type scoping = {
-@as("includes") includes: jobScopingBlock,
-@as("excludes") excludes: jobScopingBlock
+includes: option<jobScopingBlock>,
+excludes: option<jobScopingBlock>
 }
 type s3BucketCriteriaForJob = {
-@as("includes") includes: criteriaBlockForJob,
-@as("excludes") excludes: criteriaBlockForJob
+includes: option<criteriaBlockForJob>,
+excludes: option<criteriaBlockForJob>
 }
 type customDataIdentifiers = {
-@as("totalCount") totalCount: __long,
-@as("detections") detections: customDetections
+totalCount: option<__long>,
+detections: option<customDetections>
 }
 type sensitiveData = array<sensitiveDataItem>
 type s3JobDefinition = {
-@as("bucketCriteria") bucketCriteria: s3BucketCriteriaForJob,
-@as("scoping") scoping: scoping,
-@as("bucketDefinitions") bucketDefinitions: __listOfS3BucketDefinitionForJob
+bucketCriteria: option<s3BucketCriteriaForJob>,
+scoping: option<scoping>,
+bucketDefinitions: option<__listOfS3BucketDefinitionForJob>
 }
 type jobSummary = {
-@as("bucketCriteria") bucketCriteria: s3BucketCriteriaForJob,
-@as("userPausedDetails") userPausedDetails: userPausedDetails,
-@as("name") name: __string,
-@as("lastRunErrorStatus") lastRunErrorStatus: lastRunErrorStatus,
-@as("jobType") jobType: jobType,
-@as("jobStatus") jobStatus: jobStatus,
-@as("jobId") jobId: __string,
-@as("createdAt") createdAt: __timestampIso8601,
-@as("bucketDefinitions") bucketDefinitions: __listOfS3BucketDefinitionForJob
+bucketCriteria: option<s3BucketCriteriaForJob>,
+userPausedDetails: option<userPausedDetails>,
+name: option<__string>,
+lastRunErrorStatus: option<lastRunErrorStatus>,
+jobType: option<jobType>,
+jobStatus: option<jobStatus>,
+jobId: option<__string>,
+createdAt: option<__timestampIso8601>,
+bucketDefinitions: option<__listOfS3BucketDefinitionForJob>
 }
 type __listOfJobSummary = array<jobSummary>
 type classificationResult = {
-@as("status") status: classificationResultStatus,
-@as("sizeClassified") sizeClassified: __long,
-@as("sensitiveData") sensitiveData: sensitiveData,
-@as("mimeType") mimeType: __string,
-@as("customDataIdentifiers") customDataIdentifiers: customDataIdentifiers,
-@as("additionalOccurrences") additionalOccurrences: __boolean
+status: option<classificationResultStatus>,
+sizeClassified: option<__long>,
+sensitiveData: option<sensitiveData>,
+mimeType: option<__string>,
+customDataIdentifiers: option<customDataIdentifiers>,
+additionalOccurrences: option<__boolean>
 }
 type classificationDetails = {
-@as("result") result: classificationResult,
-@as("jobId") jobId: __string,
-@as("jobArn") jobArn: __string,
-@as("detailedResultsLocation") detailedResultsLocation: __string
+result: option<classificationResult>,
+jobId: option<__string>,
+jobArn: option<__string>,
+detailedResultsLocation: option<__string>
 }
 type finding = {
-@as("updatedAt") updatedAt: __timestampIso8601,
-@as("type") type_: findingType,
-@as("title") title: __string,
-@as("severity") severity: severity,
-@as("schemaVersion") schemaVersion: __string,
-@as("sample") sample: __boolean,
-@as("resourcesAffected") resourcesAffected: resourcesAffected,
-@as("region") region: __string,
-@as("policyDetails") policyDetails: policyDetails,
-@as("partition") partition: __string,
-@as("id") id: __string,
-@as("description") description: __string,
-@as("createdAt") createdAt: __timestampIso8601,
-@as("count") count: __long,
-@as("classificationDetails") classificationDetails: classificationDetails,
-@as("category") category: findingCategory,
-@as("archived") archived: __boolean,
-@as("accountId") accountId: __string
+updatedAt: option<__timestampIso8601>,
+@as("type") type_: option<findingType>,
+title: option<__string>,
+severity: option<severity>,
+schemaVersion: option<__string>,
+sample: option<__boolean>,
+resourcesAffected: option<resourcesAffected>,
+region: option<__string>,
+policyDetails: option<policyDetails>,
+partition: option<__string>,
+id: option<__string>,
+description: option<__string>,
+createdAt: option<__timestampIso8601>,
+count: option<__long>,
+classificationDetails: option<classificationDetails>,
+category: option<findingCategory>,
+archived: option<__boolean>,
+accountId: option<__string>
 }
 type __listOfFinding = array<finding>
-type clientType;
-@module("@aws-sdk/client-macie2") @new external createClient: unit => clientType = "Macie2Client";
+type awsServiceClient;
+@module("@aws-sdk/client-macie2") @new external createClient: unit => awsServiceClient = "Macie2Client";
 module UpdateOrganizationConfiguration = {
   type t;
   type request = {
-@as("autoEnable") autoEnable: option<__boolean>
+autoEnable: __boolean
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UpdateOrganizationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateMemberSession = {
   type t;
   type request = {
-@as("status") status: option<macieStatus>,
-@as("id") id: option<__string>
+status: macieStatus,
+id: __string
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UpdateMemberSessionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateMacieSession = {
   type t;
   type request = {
-@as("status") status: macieStatus,
-@as("findingPublishingFrequency") findingPublishingFrequency: findingPublishingFrequency
+status: option<macieStatus>,
+findingPublishingFrequency: option<findingPublishingFrequency>
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UpdateMacieSessionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateClassificationJob = {
   type t;
   type request = {
-@as("jobStatus") jobStatus: option<jobStatus>,
-@as("jobId") jobId: option<__string>
+jobStatus: jobStatus,
+jobId: __string
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UpdateClassificationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetMacieSession = {
   type t;
   type request = unit
   type response = {
-@as("updatedAt") updatedAt: __timestampIso8601,
-@as("status") status: macieStatus,
-@as("serviceRole") serviceRole: __string,
-@as("findingPublishingFrequency") findingPublishingFrequency: findingPublishingFrequency,
-@as("createdAt") createdAt: __timestampIso8601
+updatedAt: option<__timestampIso8601>,
+status: option<macieStatus>,
+serviceRole: option<__string>,
+findingPublishingFrequency: option<findingPublishingFrequency>,
+createdAt: option<__timestampIso8601>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetMacieSessionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetInvitationsCount = {
   type t;
   type request = unit
   type response = {
-@as("invitationsCount") invitationsCount: __long
+invitationsCount: option<__long>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetInvitationsCountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableOrganizationAdminAccount = {
   type t;
   type request = {
-@as("clientToken") clientToken: __string,
-@as("adminAccountId") adminAccountId: option<__string>
+clientToken: option<__string>,
+adminAccountId: __string
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "EnableOrganizationAdminAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableMacie = {
   type t;
   type request = {
-@as("status") status: macieStatus,
-@as("findingPublishingFrequency") findingPublishingFrequency: findingPublishingFrequency,
-@as("clientToken") clientToken: __string
+status: option<macieStatus>,
+findingPublishingFrequency: option<findingPublishingFrequency>,
+clientToken: option<__string>
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "EnableMacieCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateMember = {
   type t;
   type request = {
-@as("id") id: option<__string>
+id: __string
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DisassociateMemberCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateFromMasterAccount = {
@@ -815,7 +823,7 @@ module DisassociateFromMasterAccount = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DisassociateFromMasterAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateFromAdministratorAccount = {
@@ -823,17 +831,17 @@ module DisassociateFromAdministratorAccount = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DisassociateFromAdministratorAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisableOrganizationAdminAccount = {
   type t;
   type request = {
-@as("adminAccountId") adminAccountId: option<__string>
+adminAccountId: __string
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DisableOrganizationAdminAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisableMacie = {
@@ -841,631 +849,631 @@ module DisableMacie = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DisableMacieCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeOrganizationConfiguration = {
   type t;
   type request = unit
   type response = {
-@as("maxAccountLimitReached") maxAccountLimitReached: __boolean,
-@as("autoEnable") autoEnable: __boolean
+maxAccountLimitReached: option<__boolean>,
+autoEnable: option<__boolean>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DescribeOrganizationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteMember = {
   type t;
   type request = {
-@as("id") id: option<__string>
+id: __string
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DeleteMemberCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFindingsFilter = {
   type t;
   type request = {
-@as("id") id: option<__string>
+id: __string
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DeleteFindingsFilterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteCustomDataIdentifier = {
   type t;
   type request = {
-@as("id") id: option<__string>
+id: __string
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DeleteCustomDataIdentifierCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AcceptInvitation = {
   type t;
   type request = {
-@as("masterAccount") masterAccount: __string,
-@as("invitationId") invitationId: option<__string>,
-@as("administratorAccountId") administratorAccountId: __string
+masterAccount: option<__string>,
+invitationId: __string,
+administratorAccountId: option<__string>
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "AcceptInvitationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<__listOf__string>,
-@as("resourceArn") resourceArn: option<__string>
+tagKeys: __listOf__string,
+resourceArn: __string
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TestCustomDataIdentifier = {
   type t;
   type request = {
-@as("sampleText") sampleText: option<__string>,
-@as("regex") regex: option<__string>,
-@as("maximumMatchDistance") maximumMatchDistance: __integer,
-@as("keywords") keywords: __listOf__string,
-@as("ignoreWords") ignoreWords: __listOf__string
+sampleText: __string,
+regex: __string,
+maximumMatchDistance: option<__integer>,
+keywords: option<__listOf__string>,
+ignoreWords: option<__listOf__string>
 }
   type response = {
-@as("matchCount") matchCount: __integer
+matchCount: option<__integer>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "TestCustomDataIdentifierCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<__string>
+tags: tagMap,
+resourceArn: __string
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutFindingsPublicationConfiguration = {
   type t;
   type request = {
-@as("securityHubConfiguration") securityHubConfiguration: securityHubConfiguration,
-@as("clientToken") clientToken: __string
+securityHubConfiguration: option<securityHubConfiguration>,
+clientToken: option<__string>
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "PutFindingsPublicationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<__string>
+resourceArn: __string
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetMember = {
   type t;
   type request = {
-@as("id") id: option<__string>
+id: __string
 }
   type response = {
-@as("updatedAt") updatedAt: __timestampIso8601,
-@as("tags") tags: tagMap,
-@as("relationshipStatus") relationshipStatus: relationshipStatus,
-@as("masterAccountId") masterAccountId: __string,
-@as("invitedAt") invitedAt: __timestampIso8601,
-@as("email") email: __string,
-@as("arn") arn: __string,
-@as("administratorAccountId") administratorAccountId: __string,
-@as("accountId") accountId: __string
+updatedAt: option<__timestampIso8601>,
+tags: option<tagMap>,
+relationshipStatus: option<relationshipStatus>,
+masterAccountId: option<__string>,
+invitedAt: option<__timestampIso8601>,
+email: option<__string>,
+arn: option<__string>,
+administratorAccountId: option<__string>,
+accountId: option<__string>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetMemberCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetMasterAccount = {
   type t;
   type request = unit
   type response = {
-@as("master") master: invitation
+master: option<invitation>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetMasterAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFindingsPublicationConfiguration = {
   type t;
   type request = unit
   type response = {
-@as("securityHubConfiguration") securityHubConfiguration: securityHubConfiguration
+securityHubConfiguration: option<securityHubConfiguration>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetFindingsPublicationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetCustomDataIdentifier = {
   type t;
   type request = {
-@as("id") id: option<__string>
+id: __string
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("regex") regex: __string,
-@as("name") name: __string,
-@as("maximumMatchDistance") maximumMatchDistance: __integer,
-@as("keywords") keywords: __listOf__string,
-@as("ignoreWords") ignoreWords: __listOf__string,
-@as("id") id: __string,
-@as("description") description: __string,
-@as("deleted") deleted: __boolean,
-@as("createdAt") createdAt: __timestampIso8601,
-@as("arn") arn: __string
+tags: option<tagMap>,
+regex: option<__string>,
+name: option<__string>,
+maximumMatchDistance: option<__integer>,
+keywords: option<__listOf__string>,
+ignoreWords: option<__listOf__string>,
+id: option<__string>,
+description: option<__string>,
+deleted: option<__boolean>,
+createdAt: option<__timestampIso8601>,
+arn: option<__string>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetCustomDataIdentifierCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketStatistics = {
   type t;
   type request = {
-@as("accountId") accountId: __string
+accountId: option<__string>
 }
   type response = {
-@as("unclassifiableObjectSizeInBytes") unclassifiableObjectSizeInBytes: objectLevelStatistics,
-@as("unclassifiableObjectCount") unclassifiableObjectCount: objectLevelStatistics,
-@as("sizeInBytesCompressed") sizeInBytesCompressed: __long,
-@as("sizeInBytes") sizeInBytes: __long,
-@as("objectCount") objectCount: __long,
-@as("lastUpdated") lastUpdated: __timestampIso8601,
-@as("classifiableSizeInBytes") classifiableSizeInBytes: __long,
-@as("classifiableObjectCount") classifiableObjectCount: __long,
-@as("bucketCountBySharedAccessType") bucketCountBySharedAccessType: bucketCountBySharedAccessType,
-@as("bucketCountByObjectEncryptionRequirement") bucketCountByObjectEncryptionRequirement: bucketCountPolicyAllowsUnencryptedObjectUploads,
-@as("bucketCountByEncryptionType") bucketCountByEncryptionType: bucketCountByEncryptionType,
-@as("bucketCountByEffectivePermission") bucketCountByEffectivePermission: bucketCountByEffectivePermission,
-@as("bucketCount") bucketCount: __long
+unclassifiableObjectSizeInBytes: option<objectLevelStatistics>,
+unclassifiableObjectCount: option<objectLevelStatistics>,
+sizeInBytesCompressed: option<__long>,
+sizeInBytes: option<__long>,
+objectCount: option<__long>,
+lastUpdated: option<__timestampIso8601>,
+classifiableSizeInBytes: option<__long>,
+classifiableObjectCount: option<__long>,
+bucketCountBySharedAccessType: option<bucketCountBySharedAccessType>,
+bucketCountByObjectEncryptionRequirement: option<bucketCountPolicyAllowsUnencryptedObjectUploads>,
+bucketCountByEncryptionType: option<bucketCountByEncryptionType>,
+bucketCountByEffectivePermission: option<bucketCountByEffectivePermission>,
+bucketCount: option<__long>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetBucketStatisticsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAdministratorAccount = {
   type t;
   type request = unit
   type response = {
-@as("administrator") administrator: invitation
+administrator: option<invitation>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetAdministratorAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSampleFindings = {
   type t;
   type request = {
-@as("findingTypes") findingTypes: __listOfFindingType
+findingTypes: option<__listOfFindingType>
 }
   type response = unit
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateSampleFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateMember = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("account") account: option<accountDetail>
+tags: option<tagMap>,
+account: accountDetail
 }
   type response = {
-@as("arn") arn: __string
+arn: option<__string>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateMemberCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCustomDataIdentifier = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("regex") regex: __string,
-@as("name") name: __string,
-@as("maximumMatchDistance") maximumMatchDistance: __integer,
-@as("keywords") keywords: __listOf__string,
-@as("ignoreWords") ignoreWords: __listOf__string,
-@as("description") description: __string,
-@as("clientToken") clientToken: __string
+tags: option<tagMap>,
+regex: option<__string>,
+name: option<__string>,
+maximumMatchDistance: option<__integer>,
+keywords: option<__listOf__string>,
+ignoreWords: option<__listOf__string>,
+description: option<__string>,
+clientToken: option<__string>
 }
   type response = {
-@as("customDataIdentifierId") customDataIdentifierId: __string
+customDataIdentifierId: option<__string>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateCustomDataIdentifierCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutClassificationExportConfiguration = {
   type t;
   type request = {
-@as("configuration") configuration: option<classificationExportConfiguration>
+configuration: classificationExportConfiguration
 }
   type response = {
-@as("configuration") configuration: classificationExportConfiguration
+configuration: option<classificationExportConfiguration>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "PutClassificationExportConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListOrganizationAdminAccounts = {
   type t;
   type request = {
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: maxResults
+nextToken: option<__string>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("adminAccounts") adminAccounts: __listOfAdminAccount
+nextToken: option<__string>,
+adminAccounts: option<__listOfAdminAccount>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListOrganizationAdminAccountsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListInvitations = {
   type t;
   type request = {
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: maxResults
+nextToken: option<__string>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("invitations") invitations: __listOfInvitation
+nextToken: option<__string>,
+invitations: option<__listOfInvitation>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListInvitationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCustomDataIdentifiers = {
   type t;
   type request = {
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: __integer
+nextToken: option<__string>,
+maxResults: option<__integer>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("items") items: __listOfCustomDataIdentifierSummary
+nextToken: option<__string>,
+items: option<__listOfCustomDataIdentifierSummary>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListCustomDataIdentifiersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetUsageTotals = {
   type t;
   type request = {
-@as("timeRange") timeRange: __string
+timeRange: option<__string>
 }
   type response = {
-@as("usageTotals") usageTotals: __listOfUsageTotal,
-@as("timeRange") timeRange: timeRange
+usageTotals: option<__listOfUsageTotal>,
+timeRange: option<timeRange>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetUsageTotalsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetClassificationExportConfiguration = {
   type t;
   type request = unit
   type response = {
-@as("configuration") configuration: classificationExportConfiguration
+configuration: option<classificationExportConfiguration>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetClassificationExportConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteInvitations = {
   type t;
   type request = {
-@as("accountIds") accountIds: option<__listOf__string>
+accountIds: __listOf__string
 }
   type response = {
-@as("unprocessedAccounts") unprocessedAccounts: __listOfUnprocessedAccount
+unprocessedAccounts: option<__listOfUnprocessedAccount>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DeleteInvitationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeclineInvitations = {
   type t;
   type request = {
-@as("accountIds") accountIds: option<__listOf__string>
+accountIds: __listOf__string
 }
   type response = {
-@as("unprocessedAccounts") unprocessedAccounts: __listOfUnprocessedAccount
+unprocessedAccounts: option<__listOfUnprocessedAccount>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DeclineInvitationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateInvitations = {
   type t;
   type request = {
-@as("message") message: __string,
-@as("disableEmailNotification") disableEmailNotification: __boolean,
-@as("accountIds") accountIds: option<__listOf__string>
+message: option<__string>,
+disableEmailNotification: option<__boolean>,
+accountIds: __listOf__string
 }
   type response = {
-@as("unprocessedAccounts") unprocessedAccounts: __listOfUnprocessedAccount
+unprocessedAccounts: option<__listOfUnprocessedAccount>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateInvitationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchGetCustomDataIdentifiers = {
   type t;
   type request = {
-@as("ids") ids: __listOf__string
+ids: option<__listOf__string>
 }
   type response = {
-@as("notFoundIdentifierIds") notFoundIdentifierIds: __listOf__string,
-@as("customDataIdentifiers") customDataIdentifiers: __listOfBatchGetCustomDataIdentifierSummary
+notFoundIdentifierIds: option<__listOf__string>,
+customDataIdentifiers: option<__listOfBatchGetCustomDataIdentifierSummary>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "BatchGetCustomDataIdentifiersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListMembers = {
   type t;
   type request = {
-@as("onlyAssociated") onlyAssociated: __string,
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: maxResults
+onlyAssociated: option<__string>,
+nextToken: option<__string>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("members") members: __listOfMember
+nextToken: option<__string>,
+members: option<__listOfMember>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFindingsFilters = {
   type t;
   type request = {
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: maxResults
+nextToken: option<__string>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("findingsFilterListItems") findingsFilterListItems: __listOfFindingsFilterListItem
+nextToken: option<__string>,
+findingsFilterListItems: option<__listOfFindingsFilterListItem>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListFindingsFiltersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFindingsFilter = {
   type t;
   type request = {
-@as("position") position: __integer,
-@as("name") name: __string,
-@as("id") id: option<__string>,
-@as("findingCriteria") findingCriteria: findingCriteria,
-@as("description") description: __string,
-@as("action") action: findingsFilterAction
+position: option<__integer>,
+name: option<__string>,
+id: __string,
+findingCriteria: option<findingCriteria>,
+description: option<__string>,
+action: option<findingsFilterAction>
 }
   type response = {
-@as("id") id: __string,
-@as("arn") arn: __string
+id: option<__string>,
+arn: option<__string>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UpdateFindingsFilterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFindings = {
   type t;
   type request = {
-@as("sortCriteria") sortCriteria: sortCriteria,
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: __integer,
-@as("findingCriteria") findingCriteria: findingCriteria
+sortCriteria: option<sortCriteria>,
+nextToken: option<__string>,
+maxResults: option<__integer>,
+findingCriteria: option<findingCriteria>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("findingIds") findingIds: __listOf__string
+nextToken: option<__string>,
+findingIds: option<__listOf__string>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFindingsFilter = {
   type t;
   type request = {
-@as("id") id: option<__string>
+id: __string
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("position") position: __integer,
-@as("name") name: __string,
-@as("id") id: __string,
-@as("findingCriteria") findingCriteria: findingCriteria,
-@as("description") description: __string,
-@as("arn") arn: __string,
-@as("action") action: findingsFilterAction
+tags: option<tagMap>,
+position: option<__integer>,
+name: option<__string>,
+id: option<__string>,
+findingCriteria: option<findingCriteria>,
+description: option<__string>,
+arn: option<__string>,
+action: option<findingsFilterAction>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetFindingsFilterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFindingStatistics = {
   type t;
   type request = {
-@as("sortCriteria") sortCriteria: findingStatisticsSortCriteria,
-@as("size") size: __integer,
-@as("groupBy") groupBy: option<groupBy>,
-@as("findingCriteria") findingCriteria: findingCriteria
+sortCriteria: option<findingStatisticsSortCriteria>,
+size: option<__integer>,
+groupBy: groupBy,
+findingCriteria: option<findingCriteria>
 }
   type response = {
-@as("countsByGroup") countsByGroup: __listOfGroupCount
+countsByGroup: option<__listOfGroupCount>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetFindingStatisticsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFindingsFilter = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("position") position: __integer,
-@as("name") name: option<__string>,
-@as("findingCriteria") findingCriteria: option<findingCriteria>,
-@as("description") description: __string,
-@as("clientToken") clientToken: __string,
-@as("action") action: option<findingsFilterAction>
+tags: option<tagMap>,
+position: option<__integer>,
+name: __string,
+findingCriteria: findingCriteria,
+description: option<__string>,
+clientToken: option<__string>,
+action: findingsFilterAction
 }
   type response = {
-@as("id") id: __string,
-@as("arn") arn: __string
+id: option<__string>,
+arn: option<__string>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateFindingsFilterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetUsageStatistics = {
   type t;
   type request = {
-@as("timeRange") timeRange: timeRange,
-@as("sortBy") sortBy: usageStatisticsSortBy,
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: __integer,
-@as("filterBy") filterBy: __listOfUsageStatisticsFilter
+timeRange: option<timeRange>,
+sortBy: option<usageStatisticsSortBy>,
+nextToken: option<__string>,
+maxResults: option<__integer>,
+filterBy: option<__listOfUsageStatisticsFilter>
 }
   type response = {
-@as("timeRange") timeRange: timeRange,
-@as("records") records: __listOfUsageRecord,
-@as("nextToken") nextToken: __string
+timeRange: option<timeRange>,
+records: option<__listOfUsageRecord>,
+nextToken: option<__string>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetUsageStatisticsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBuckets = {
   type t;
   type request = {
-@as("sortCriteria") sortCriteria: bucketSortCriteria,
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: __integer,
-@as("criteria") criteria: bucketCriteria
+sortCriteria: option<bucketSortCriteria>,
+nextToken: option<__string>,
+maxResults: option<__integer>,
+criteria: option<bucketCriteria>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("buckets") buckets: __listOfBucketMetadata
+nextToken: option<__string>,
+buckets: option<__listOfBucketMetadata>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DescribeBucketsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SearchResources = {
   type t;
   type request = {
-@as("sortCriteria") sortCriteria: searchResourcesSortCriteria,
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: __integer,
-@as("bucketCriteria") bucketCriteria: searchResourcesBucketCriteria
+sortCriteria: option<searchResourcesSortCriteria>,
+nextToken: option<__string>,
+maxResults: option<__integer>,
+bucketCriteria: option<searchResourcesBucketCriteria>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("matchingResources") matchingResources: __listOfMatchingResource
+nextToken: option<__string>,
+matchingResources: option<__listOfMatchingResource>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "SearchResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeClassificationJob = {
   type t;
   type request = {
-@as("jobId") jobId: option<__string>
+jobId: __string
 }
   type response = {
-@as("userPausedDetails") userPausedDetails: userPausedDetails,
-@as("tags") tags: tagMap,
-@as("statistics") statistics: statistics,
-@as("scheduleFrequency") scheduleFrequency: jobScheduleFrequency,
-@as("samplingPercentage") samplingPercentage: __integer,
-@as("s3JobDefinition") s3JobDefinition: s3JobDefinition,
-@as("name") name: __string,
-@as("lastRunTime") lastRunTime: __timestampIso8601,
-@as("lastRunErrorStatus") lastRunErrorStatus: lastRunErrorStatus,
-@as("jobType") jobType: jobType,
-@as("jobStatus") jobStatus: jobStatus,
-@as("jobId") jobId: __string,
-@as("jobArn") jobArn: __string,
-@as("initialRun") initialRun: __boolean,
-@as("description") description: __string,
-@as("customDataIdentifierIds") customDataIdentifierIds: __listOf__string,
-@as("createdAt") createdAt: __timestampIso8601,
-@as("clientToken") clientToken: __string
+userPausedDetails: option<userPausedDetails>,
+tags: option<tagMap>,
+statistics: option<statistics>,
+scheduleFrequency: option<jobScheduleFrequency>,
+samplingPercentage: option<__integer>,
+s3JobDefinition: option<s3JobDefinition>,
+name: option<__string>,
+lastRunTime: option<__timestampIso8601>,
+lastRunErrorStatus: option<lastRunErrorStatus>,
+jobType: option<jobType>,
+jobStatus: option<jobStatus>,
+jobId: option<__string>,
+jobArn: option<__string>,
+initialRun: option<__boolean>,
+description: option<__string>,
+customDataIdentifierIds: option<__listOf__string>,
+createdAt: option<__timestampIso8601>,
+clientToken: option<__string>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DescribeClassificationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateClassificationJob = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("scheduleFrequency") scheduleFrequency: jobScheduleFrequency,
-@as("samplingPercentage") samplingPercentage: __integer,
-@as("s3JobDefinition") s3JobDefinition: option<s3JobDefinition>,
-@as("name") name: option<__string>,
-@as("jobType") jobType: option<jobType>,
-@as("initialRun") initialRun: __boolean,
-@as("description") description: __string,
-@as("customDataIdentifierIds") customDataIdentifierIds: __listOf__string,
-@as("clientToken") clientToken: option<__string>
+tags: option<tagMap>,
+scheduleFrequency: option<jobScheduleFrequency>,
+samplingPercentage: option<__integer>,
+s3JobDefinition: s3JobDefinition,
+name: __string,
+jobType: jobType,
+initialRun: option<__boolean>,
+description: option<__string>,
+customDataIdentifierIds: option<__listOf__string>,
+clientToken: __string
 }
   type response = {
-@as("jobId") jobId: __string,
-@as("jobArn") jobArn: __string
+jobId: option<__string>,
+jobArn: option<__string>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateClassificationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListClassificationJobs = {
   type t;
   type request = {
-@as("sortCriteria") sortCriteria: listJobsSortCriteria,
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: __integer,
-@as("filterCriteria") filterCriteria: listJobsFilterCriteria
+sortCriteria: option<listJobsSortCriteria>,
+nextToken: option<__string>,
+maxResults: option<__integer>,
+filterCriteria: option<listJobsFilterCriteria>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("items") items: __listOfJobSummary
+nextToken: option<__string>,
+items: option<__listOfJobSummary>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListClassificationJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFindings = {
   type t;
   type request = {
-@as("sortCriteria") sortCriteria: sortCriteria,
-@as("findingIds") findingIds: option<__listOf__string>
+sortCriteria: option<sortCriteria>,
+findingIds: __listOf__string
 }
   type response = {
-@as("findings") findings: __listOfFinding
+findings: option<__listOfFinding>
 }
   @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

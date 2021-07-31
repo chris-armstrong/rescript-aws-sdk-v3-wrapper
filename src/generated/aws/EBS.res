@@ -1,171 +1,178 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type volumeSize = float;
-type validationExceptionReason = [@as("INVALID_VOLUME_SIZE") #INVALID_VOLUME_SIZE | @as("INVALID_PARAMETER_VALUE") #INVALID_PARAMETER_VALUE | @as("INVALID_DEPENDENCY_REQUEST") #INVALID_DEPENDENCY_REQUEST | @as("INVALID_TAG") #INVALID_TAG | @as("INVALID_CONTENT_ENCODING") #INVALID_CONTENT_ENCODING | @as("INVALID_BLOCK") #INVALID_BLOCK | @as("UNRELATED_SNAPSHOTS") #UNRELATED_SNAPSHOTS | @as("INVALID_SNAPSHOT_ID") #INVALID_SNAPSHOT_ID | @as("INVALID_BLOCK_TOKEN") #INVALID_BLOCK_TOKEN | @as("INVALID_PAGE_TOKEN") #INVALID_PAGE_TOKEN | @as("INVALID_CUSTOMER_KEY") #INVALID_CUSTOMER_KEY]
-type timeout = int;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
+type volumeSize = float
+type validationExceptionReason = [@as("INVALID_VOLUME_SIZE") #INVALIDVOLUMESIZE | @as("INVALID_PARAMETER_VALUE") #INVALIDPARAMETERVALUE | @as("INVALID_DEPENDENCY_REQUEST") #INVALIDDEPENDENCYREQUEST | @as("INVALID_TAG") #INVALIDTAG | @as("INVALID_CONTENT_ENCODING") #INVALIDCONTENTENCODING | @as("INVALID_BLOCK") #INVALIDBLOCK | @as("UNRELATED_SNAPSHOTS") #UNRELATEDSNAPSHOTS | @as("INVALID_SNAPSHOT_ID") #INVALIDSNAPSHOTID | @as("INVALID_BLOCK_TOKEN") #INVALIDBLOCKTOKEN | @as("INVALID_PAGE_TOKEN") #INVALIDPAGETOKEN | @as("INVALID_CUSTOMER_KEY") #INVALIDCUSTOMERKEY]
+type timeout = int
 type timeStamp = Js.Date.t;
 type tagValue = string
 type tagKey = string
-type status = [@as("error") #error | @as("pending") #pending | @as("completed") #completed]
+type status = [@as("error") #Error | @as("pending") #Pending | @as("completed") #Completed]
 type snapshotId = string
-type serviceQuotaExceededExceptionReason = [@as("DEPENDENCY_SERVICE_QUOTA_EXCEEDED") #DEPENDENCY_SERVICE_QUOTA_EXCEEDED]
-type resourceNotFoundExceptionReason = [@as("DEPENDENCY_RESOURCE_NOT_FOUND") #DEPENDENCY_RESOURCE_NOT_FOUND | @as("SNAPSHOT_NOT_FOUND") #SNAPSHOT_NOT_FOUND]
-type requestThrottledExceptionReason = [@as("DEPENDENCY_REQUEST_THROTTLED") #DEPENDENCY_REQUEST_THROTTLED | @as("ACCOUNT_THROTTLED") #ACCOUNT_THROTTLED]
-type progress = int;
+type serviceQuotaExceededExceptionReason = [@as("DEPENDENCY_SERVICE_QUOTA_EXCEEDED") #DEPENDENCYSERVICEQUOTAEXCEEDED]
+type resourceNotFoundExceptionReason = [@as("DEPENDENCY_RESOURCE_NOT_FOUND") #DEPENDENCYRESOURCENOTFOUND | @as("SNAPSHOT_NOT_FOUND") #SNAPSHOTNOTFOUND]
+type requestThrottledExceptionReason = [@as("DEPENDENCY_REQUEST_THROTTLED") #DEPENDENCYREQUESTTHROTTLED | @as("ACCOUNT_THROTTLED") #ACCOUNTTHROTTLED]
+type progress = int
 type pageToken = string
 type ownerId = string
-type maxResults = int;
+type maxResults = int
 type kmsKeyArn = string
 type idempotencyToken = string
 type errorMessage = string
 type description = string
-type dataLength = int;
+type dataLength = int
 type checksumAlgorithm = [@as("SHA256") #SHA256]
 type checksumAggregationMethod = [@as("LINEAR") #LINEAR]
 type checksum = string
-type changedBlocksCount = int;
-type amazonawsBoolean = bool;
+type changedBlocksCount = int
+type boolean_ = bool
 type blockToken = string
-type blockSize = int;
-type blockIndex = int;
-type blockData = NodeJs.Buffer.t;
-type accessDeniedExceptionReason = [@as("DEPENDENCY_ACCESS_DENIED") #DEPENDENCY_ACCESS_DENIED | @as("UNAUTHORIZED_ACCOUNT") #UNAUTHORIZED_ACCOUNT]
+type blockSize = int
+type blockIndex = int
+type blockData = NodeJs.Buffer.t
+type accessDeniedExceptionReason = [@as("DEPENDENCY_ACCESS_DENIED") #DEPENDENCYACCESSDENIED | @as("UNAUTHORIZED_ACCOUNT") #UNAUTHORIZEDACCOUNT]
 type tag = {
-@as("Value") value: tagValue,
-@as("Key") key: tagKey
+@as("Value") value: option<tagValue>,
+@as("Key") key: option<tagKey>
 }
 type changedBlock = {
-@as("SecondBlockToken") secondBlockToken: blockToken,
-@as("FirstBlockToken") firstBlockToken: blockToken,
-@as("BlockIndex") blockIndex: blockIndex
+@as("SecondBlockToken") secondBlockToken: option<blockToken>,
+@as("FirstBlockToken") firstBlockToken: option<blockToken>,
+@as("BlockIndex") blockIndex: option<blockIndex>
 }
 type block = {
-@as("BlockToken") blockToken: blockToken,
-@as("BlockIndex") blockIndex: blockIndex
+@as("BlockToken") blockToken: option<blockToken>,
+@as("BlockIndex") blockIndex: option<blockIndex>
 }
 type tags = array<tag>
 type changedBlocks = array<changedBlock>
 type blocks = array<block>
-type clientType;
-@module("@aws-sdk/client-ebs") @new external createClient: unit => clientType = "EBSClient";
+type awsServiceClient;
+@module("@aws-sdk/client-ebs") @new external createClient: unit => awsServiceClient = "EBSClient";
 module PutSnapshotBlock = {
   type t;
   type request = {
-@as("ChecksumAlgorithm") checksumAlgorithm: option<checksumAlgorithm>,
-@as("Checksum") checksum: option<checksum>,
-@as("Progress") progress: progress,
-@as("DataLength") dataLength: option<dataLength>,
-@as("BlockData") blockData: option<blockData>,
-@as("BlockIndex") blockIndex: option<blockIndex>,
-@as("SnapshotId") snapshotId: option<snapshotId>
+@as("ChecksumAlgorithm") checksumAlgorithm: checksumAlgorithm,
+@as("Checksum") checksum: checksum,
+@as("Progress") progress: option<progress>,
+@as("DataLength") dataLength: dataLength,
+@as("BlockData") blockData: blockData,
+@as("BlockIndex") blockIndex: blockIndex,
+@as("SnapshotId") snapshotId: snapshotId
 }
   type response = {
-@as("ChecksumAlgorithm") checksumAlgorithm: checksumAlgorithm,
-@as("Checksum") checksum: checksum
+@as("ChecksumAlgorithm") checksumAlgorithm: option<checksumAlgorithm>,
+@as("Checksum") checksum: option<checksum>
 }
   @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "PutSnapshotBlockCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSnapshotBlock = {
   type t;
   type request = {
-@as("BlockToken") blockToken: option<blockToken>,
-@as("BlockIndex") blockIndex: option<blockIndex>,
-@as("SnapshotId") snapshotId: option<snapshotId>
+@as("BlockToken") blockToken: blockToken,
+@as("BlockIndex") blockIndex: blockIndex,
+@as("SnapshotId") snapshotId: snapshotId
 }
   type response = {
-@as("ChecksumAlgorithm") checksumAlgorithm: checksumAlgorithm,
-@as("Checksum") checksum: checksum,
-@as("BlockData") blockData: blockData,
-@as("DataLength") dataLength: dataLength
+@as("ChecksumAlgorithm") checksumAlgorithm: option<checksumAlgorithm>,
+@as("Checksum") checksum: option<checksum>,
+@as("BlockData") blockData: option<blockData>,
+@as("DataLength") dataLength: option<dataLength>
 }
   @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "GetSnapshotBlockCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CompleteSnapshot = {
   type t;
   type request = {
-@as("ChecksumAggregationMethod") checksumAggregationMethod: checksumAggregationMethod,
-@as("ChecksumAlgorithm") checksumAlgorithm: checksumAlgorithm,
-@as("Checksum") checksum: checksum,
-@as("ChangedBlocksCount") changedBlocksCount: option<changedBlocksCount>,
-@as("SnapshotId") snapshotId: option<snapshotId>
+@as("ChecksumAggregationMethod") checksumAggregationMethod: option<checksumAggregationMethod>,
+@as("ChecksumAlgorithm") checksumAlgorithm: option<checksumAlgorithm>,
+@as("Checksum") checksum: option<checksum>,
+@as("ChangedBlocksCount") changedBlocksCount: changedBlocksCount,
+@as("SnapshotId") snapshotId: snapshotId
 }
   type response = {
-@as("Status") status: status
+@as("Status") status: option<status>
 }
   @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "CompleteSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartSnapshot = {
   type t;
   type request = {
-@as("Timeout") timeout: timeout,
-@as("KmsKeyArn") kmsKeyArn: kmsKeyArn,
-@as("Encrypted") encrypted: amazonawsBoolean,
-@as("ClientToken") clientToken: idempotencyToken,
-@as("Description") description: description,
-@as("Tags") tags: tags,
-@as("ParentSnapshotId") parentSnapshotId: snapshotId,
-@as("VolumeSize") volumeSize: option<volumeSize>
+@as("Timeout") timeout: option<timeout>,
+@as("KmsKeyArn") kmsKeyArn: option<kmsKeyArn>,
+@as("Encrypted") encrypted: option<boolean_>,
+@as("ClientToken") clientToken: option<idempotencyToken>,
+@as("Description") description: option<description>,
+@as("Tags") tags: option<tags>,
+@as("ParentSnapshotId") parentSnapshotId: option<snapshotId>,
+@as("VolumeSize") volumeSize: volumeSize
 }
   type response = {
-@as("KmsKeyArn") kmsKeyArn: kmsKeyArn,
-@as("ParentSnapshotId") parentSnapshotId: snapshotId,
-@as("Tags") tags: tags,
-@as("BlockSize") blockSize: blockSize,
-@as("VolumeSize") volumeSize: volumeSize,
-@as("StartTime") startTime: timeStamp,
-@as("Status") status: status,
-@as("OwnerId") ownerId: ownerId,
-@as("SnapshotId") snapshotId: snapshotId,
-@as("Description") description: description
+@as("KmsKeyArn") kmsKeyArn: option<kmsKeyArn>,
+@as("ParentSnapshotId") parentSnapshotId: option<snapshotId>,
+@as("Tags") tags: option<tags>,
+@as("BlockSize") blockSize: option<blockSize>,
+@as("VolumeSize") volumeSize: option<volumeSize>,
+@as("StartTime") startTime: option<timeStamp>,
+@as("Status") status: option<status>,
+@as("OwnerId") ownerId: option<ownerId>,
+@as("SnapshotId") snapshotId: option<snapshotId>,
+@as("Description") description: option<description>
 }
   @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "StartSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSnapshotBlocks = {
   type t;
   type request = {
-@as("StartingBlockIndex") startingBlockIndex: blockIndex,
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: pageToken,
-@as("SnapshotId") snapshotId: option<snapshotId>
+@as("StartingBlockIndex") startingBlockIndex: option<blockIndex>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<pageToken>,
+@as("SnapshotId") snapshotId: snapshotId
 }
   type response = {
-@as("NextToken") nextToken: pageToken,
-@as("BlockSize") blockSize: blockSize,
-@as("VolumeSize") volumeSize: volumeSize,
-@as("ExpiryTime") expiryTime: timeStamp,
-@as("Blocks") blocks: blocks
+@as("NextToken") nextToken: option<pageToken>,
+@as("BlockSize") blockSize: option<blockSize>,
+@as("VolumeSize") volumeSize: option<volumeSize>,
+@as("ExpiryTime") expiryTime: option<timeStamp>,
+@as("Blocks") blocks: option<blocks>
 }
   @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "ListSnapshotBlocksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListChangedBlocks = {
   type t;
   type request = {
-@as("StartingBlockIndex") startingBlockIndex: blockIndex,
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: pageToken,
-@as("SecondSnapshotId") secondSnapshotId: option<snapshotId>,
-@as("FirstSnapshotId") firstSnapshotId: snapshotId
+@as("StartingBlockIndex") startingBlockIndex: option<blockIndex>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<pageToken>,
+@as("SecondSnapshotId") secondSnapshotId: snapshotId,
+@as("FirstSnapshotId") firstSnapshotId: option<snapshotId>
 }
   type response = {
-@as("NextToken") nextToken: pageToken,
-@as("BlockSize") blockSize: blockSize,
-@as("VolumeSize") volumeSize: volumeSize,
-@as("ExpiryTime") expiryTime: timeStamp,
-@as("ChangedBlocks") changedBlocks: changedBlocks
+@as("NextToken") nextToken: option<pageToken>,
+@as("BlockSize") blockSize: option<blockSize>,
+@as("VolumeSize") volumeSize: option<volumeSize>,
+@as("ExpiryTime") expiryTime: option<timeStamp>,
+@as("ChangedBlocks") changedBlocks: option<changedBlocks>
 }
   @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "ListChangedBlocksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

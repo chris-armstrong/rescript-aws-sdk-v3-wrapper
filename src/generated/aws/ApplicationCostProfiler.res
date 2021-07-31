@@ -1,126 +1,132 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type long = float
 type token = string
-type amazonawsTimestamp = Js.Date.t;
+type timestamp_ = Js.Date.t;
 type s3Prefix = string
 type s3Key = string
-type s3BucketRegion = [@as("af-south-1") #af_south_1 | @as("eu-south-1") #eu_south_1 | @as("me-south-1") #me_south_1 | @as("ap-east-1") #ap_east_1]
+type s3BucketRegion = [@as("af-south-1") #AfSouth1 | @as("eu-south-1") #EuSouth1 | @as("me-south-1") #MeSouth1 | @as("ap-east-1") #ApEast1]
 type s3Bucket = string
 type reportId = string
 type reportFrequency = [@as("ALL") #ALL | @as("DAILY") #DAILY | @as("MONTHLY") #MONTHLY]
 type reportDescription = string
-type amazonawsInteger = int;
+type integer_ = int
 type importId = string
 type format = [@as("PARQUET") #PARQUET | @as("CSV") #CSV]
 type errorMessage = string
 type sourceS3Location = {
-@as("region") region: s3BucketRegion,
-@as("key") key: option<s3Key>,
-@as("bucket") bucket: option<s3Bucket>
+region: option<s3BucketRegion>,
+key: s3Key,
+bucket: s3Bucket
 }
 type s3Location = {
-@as("prefix") prefix: option<s3Prefix>,
-@as("bucket") bucket: option<s3Bucket>
+prefix: s3Prefix,
+bucket: s3Bucket
 }
 type reportDefinition = {
-@as("lastUpdatedAt") lastUpdatedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("destinationS3Location") destinationS3Location: s3Location,
-@as("format") format: format,
-@as("reportFrequency") reportFrequency: reportFrequency,
-@as("reportDescription") reportDescription: reportDescription,
-@as("reportId") reportId: reportId
+lastUpdatedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+destinationS3Location: option<s3Location>,
+format: option<format>,
+reportFrequency: option<reportFrequency>,
+reportDescription: option<reportDescription>,
+reportId: option<reportId>
 }
 type reportDefinitionList = array<reportDefinition>
-type clientType;
-@module("@aws-sdk/client-application-cost-profiler") @new external createClient: unit => clientType = "ApplicationCostProfilerClient";
+type awsServiceClient;
+@module("@aws-sdk/client-application-cost-profiler") @new external createClient: unit => awsServiceClient = "ApplicationCostProfilerClient";
 module DeleteReportDefinition = {
   type t;
   type request = {
-@as("reportId") reportId: option<reportId>
+reportId: reportId
 }
   type response = {
-@as("reportId") reportId: reportId
+reportId: option<reportId>
 }
   @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "DeleteReportDefinitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateReportDefinition = {
   type t;
   type request = {
-@as("destinationS3Location") destinationS3Location: option<s3Location>,
-@as("format") format: option<format>,
-@as("reportFrequency") reportFrequency: option<reportFrequency>,
-@as("reportDescription") reportDescription: option<reportDescription>,
-@as("reportId") reportId: option<reportId>
+destinationS3Location: s3Location,
+format: format,
+reportFrequency: reportFrequency,
+reportDescription: reportDescription,
+reportId: reportId
 }
   type response = {
-@as("reportId") reportId: reportId
+reportId: option<reportId>
 }
   @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "UpdateReportDefinitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutReportDefinition = {
   type t;
   type request = {
-@as("destinationS3Location") destinationS3Location: option<s3Location>,
-@as("format") format: option<format>,
-@as("reportFrequency") reportFrequency: option<reportFrequency>,
-@as("reportDescription") reportDescription: option<reportDescription>,
-@as("reportId") reportId: option<reportId>
+destinationS3Location: s3Location,
+format: format,
+reportFrequency: reportFrequency,
+reportDescription: reportDescription,
+reportId: reportId
 }
   type response = {
-@as("reportId") reportId: reportId
+reportId: option<reportId>
 }
   @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "PutReportDefinitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ImportApplicationUsage = {
   type t;
   type request = {
-@as("sourceS3Location") sourceS3Location: option<sourceS3Location>
+sourceS3Location: sourceS3Location
 }
   type response = {
-@as("importId") importId: option<importId>
+importId: importId
 }
   @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "ImportApplicationUsageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetReportDefinition = {
   type t;
   type request = {
-@as("reportId") reportId: option<reportId>
+reportId: reportId
 }
   type response = {
-@as("lastUpdated") lastUpdated: option<amazonawsTimestamp>,
-@as("createdAt") createdAt: option<amazonawsTimestamp>,
-@as("destinationS3Location") destinationS3Location: option<s3Location>,
-@as("format") format: option<format>,
-@as("reportFrequency") reportFrequency: option<reportFrequency>,
-@as("reportDescription") reportDescription: option<reportDescription>,
-@as("reportId") reportId: option<reportId>
+lastUpdated: timestamp_,
+createdAt: timestamp_,
+destinationS3Location: s3Location,
+format: format,
+reportFrequency: reportFrequency,
+reportDescription: reportDescription,
+reportId: reportId
 }
   @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "GetReportDefinitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListReportDefinitions = {
   type t;
   type request = {
-@as("maxResults") maxResults: amazonawsInteger,
-@as("nextToken") nextToken: token
+maxResults: option<integer_>,
+nextToken: option<token>
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("reportDefinitions") reportDefinitions: reportDefinitionList
+nextToken: option<token>,
+reportDefinitions: option<reportDefinitionList>
 }
   @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "ListReportDefinitionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

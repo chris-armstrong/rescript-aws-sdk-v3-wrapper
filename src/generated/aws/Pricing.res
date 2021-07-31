@@ -1,79 +1,86 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type errorMessage = string
 type synthesizedJsonPriceListItemJSON = string
-type amazonawsString = string
-type filterType = [@as("TERM_MATCH") #TERM_MATCH]
-type boxedInteger = int;
+type string_ = string
+type filterType = [@as("TERM_MATCH") #TERMMATCH]
+type boxedInteger = int
 type priceList = array<synthesizedJsonPriceListItemJSON>
 type filter = {
-@as("Value") value: option<amazonawsString>,
-@as("Field") field: option<amazonawsString>,
-@as("Type") type_: option<filterType>
+@as("Value") value: string_,
+@as("Field") field: string_,
+@as("Type") type_: filterType
 }
 type attributeValue = {
-@as("Value") value: amazonawsString
+@as("Value") value: option<string_>
 }
-type attributeNameList = array<amazonawsString>
+type attributeNameList = array<string_>
 type service = {
-@as("AttributeNames") attributeNames: attributeNameList,
-@as("ServiceCode") serviceCode: amazonawsString
+@as("AttributeNames") attributeNames: option<attributeNameList>,
+@as("ServiceCode") serviceCode: option<string_>
 }
 type filters = array<filter>
 type attributeValueList = array<attributeValue>
 type serviceList = array<service>
-type clientType;
-@module("@aws-sdk/client-pricing") @new external createClient: unit => clientType = "PricingClient";
+type awsServiceClient;
+@module("@aws-sdk/client-pricing") @new external createClient: unit => awsServiceClient = "PricingClient";
 module GetProducts = {
   type t;
   type request = {
-@as("MaxResults") maxResults: boxedInteger,
-@as("NextToken") nextToken: amazonawsString,
-@as("FormatVersion") formatVersion: amazonawsString,
-@as("Filters") filters: filters,
-@as("ServiceCode") serviceCode: amazonawsString
+@as("MaxResults") maxResults: option<boxedInteger>,
+@as("NextToken") nextToken: option<string_>,
+@as("FormatVersion") formatVersion: option<string_>,
+@as("Filters") filters: option<filters>,
+@as("ServiceCode") serviceCode: option<string_>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("PriceList") priceList: priceList,
-@as("FormatVersion") formatVersion: amazonawsString
+@as("NextToken") nextToken: option<string_>,
+@as("PriceList") priceList: option<priceList>,
+@as("FormatVersion") formatVersion: option<string_>
 }
   @module("@aws-sdk/client-pricing") @new external new_: (request) => t = "GetProductsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAttributeValues = {
   type t;
   type request = {
-@as("MaxResults") maxResults: boxedInteger,
-@as("NextToken") nextToken: amazonawsString,
-@as("AttributeName") attributeName: option<amazonawsString>,
-@as("ServiceCode") serviceCode: option<amazonawsString>
+@as("MaxResults") maxResults: option<boxedInteger>,
+@as("NextToken") nextToken: option<string_>,
+@as("AttributeName") attributeName: string_,
+@as("ServiceCode") serviceCode: string_
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("AttributeValues") attributeValues: attributeValueList
+@as("NextToken") nextToken: option<string_>,
+@as("AttributeValues") attributeValues: option<attributeValueList>
 }
   @module("@aws-sdk/client-pricing") @new external new_: (request) => t = "GetAttributeValuesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeServices = {
   type t;
   type request = {
-@as("MaxResults") maxResults: boxedInteger,
-@as("NextToken") nextToken: amazonawsString,
-@as("FormatVersion") formatVersion: amazonawsString,
-@as("ServiceCode") serviceCode: amazonawsString
+@as("MaxResults") maxResults: option<boxedInteger>,
+@as("NextToken") nextToken: option<string_>,
+@as("FormatVersion") formatVersion: option<string_>,
+@as("ServiceCode") serviceCode: option<string_>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("FormatVersion") formatVersion: amazonawsString,
-@as("Services") services: serviceList
+@as("NextToken") nextToken: option<string_>,
+@as("FormatVersion") formatVersion: option<string_>,
+@as("Services") services: option<serviceList>
 }
   @module("@aws-sdk/client-pricing") @new external new_: (request) => t = "DescribeServicesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

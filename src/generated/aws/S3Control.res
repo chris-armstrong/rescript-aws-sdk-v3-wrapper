@@ -1,53 +1,60 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type vpcId = string
-type transitionStorageClass = [@as("DEEP_ARCHIVE") #DEEP_ARCHIVE | @as("INTELLIGENT_TIERING") #INTELLIGENT_TIERING | @as("ONEZONE_IA") #ONEZONE_IA | @as("STANDARD_IA") #STANDARD_IA | @as("GLACIER") #GLACIER]
+type transitionStorageClass = [@as("DEEP_ARCHIVE") #DEEPARCHIVE | @as("INTELLIGENT_TIERING") #INTELLIGENTTIERING | @as("ONEZONE_IA") #ONEZONEIA | @as("STANDARD_IA") #STANDARDIA | @as("GLACIER") #GLACIER]
 type timeStamp = Js.Date.t;
 type tagValueString = string
 type tagKeyString = string
 type suspendedDate = Js.Date.t;
 type suspendedCause = string
 type stringForNextToken = string
-type storageLensPrefixLevelMaxDepth = int;
+type storageLensPrefixLevelMaxDepth = int
 type storageLensPrefixLevelDelimiter = string
 type storageLensArn = string
-type setting = bool;
-type sSES3 = unit
-type sSEKMSKeyId = string
-type s3StorageClass = [@as("DEEP_ARCHIVE") #DEEP_ARCHIVE | @as("INTELLIGENT_TIERING") #INTELLIGENT_TIERING | @as("GLACIER") #GLACIER | @as("ONEZONE_IA") #ONEZONE_IA | @as("STANDARD_IA") #STANDARD_IA | @as("STANDARD") #STANDARD]
+type setting = bool
+type sses3 = unit
+type ssekmskeyId = string
+type s3StorageClass = [@as("DEEP_ARCHIVE") #DEEPARCHIVE | @as("INTELLIGENT_TIERING") #INTELLIGENTTIERING | @as("GLACIER") #GLACIER | @as("ONEZONE_IA") #ONEZONEIA | @as("STANDARD_IA") #STANDARDIA | @as("STANDARD") #STANDARD]
 type s3SSEAlgorithm = [@as("KMS") #KMS | @as("AES256") #AES256]
 type s3RegionalBucketArn = string
-type s3Permission = [@as("WRITE_ACP") #WRITE_ACP | @as("READ_ACP") #READ_ACP | @as("WRITE") #WRITE | @as("READ") #READ | @as("FULL_CONTROL") #FULL_CONTROL]
+type s3Permission = [@as("WRITE_ACP") #WRITEACP | @as("READ_ACP") #READACP | @as("WRITE") #WRITE | @as("READ") #READ | @as("FULL_CONTROL") #FULLCONTROL]
 type s3ObjectVersionId = string
 type s3ObjectLockRetentionMode = [@as("GOVERNANCE") #GOVERNANCE | @as("COMPLIANCE") #COMPLIANCE]
 type s3ObjectLockMode = [@as("GOVERNANCE") #GOVERNANCE | @as("COMPLIANCE") #COMPLIANCE]
 type s3ObjectLockLegalHoldStatus = [@as("ON") #ON | @as("OFF") #OFF]
 type s3MetadataDirective = [@as("REPLACE") #REPLACE | @as("COPY") #COPY]
 type s3KeyArnString = string
-type s3GranteeTypeIdentifier = [@as("uri") #uri | @as("emailAddress") #emailAddress | @as("id") #id]
+type s3GranteeTypeIdentifier = [@as("uri") #Uri | @as("emailAddress") #EmailAddress | @as("id") #Id]
 type s3GlacierJobTier = [@as("STANDARD") #STANDARD | @as("BULK") #BULK]
-type s3ExpirationInDays = int;
+type s3ExpirationInDays = int
 type s3DeleteObjectTaggingOperation = unit
-type s3ContentLength = float;
-type s3CannedAccessControlList = [@as("bucket-owner-full-control") #bucket_owner_full_control | @as("bucket-owner-read") #bucket_owner_read | @as("authenticated-read") #authenticated_read | @as("aws-exec-read") #aws_exec_read | @as("public-read-write") #public_read_write | @as("public-read") #public_read | @as("private") #private]
+type s3ContentLength = float
+type s3CannedAccessControlList = [@as("bucket-owner-full-control") #BucketOwnerFullControl | @as("bucket-owner-read") #BucketOwnerRead | @as("authenticated-read") #AuthenticatedRead | @as("aws-exec-read") #AwsExecRead | @as("public-read-write") #PublicReadWrite | @as("public-read") #PublicRead | @as("private") #Private]
 type s3BucketArnString = string
 type s3AccessPointArn = string
 type s3AWSRegion = string
 type requestedJobStatus = [@as("Ready") #Ready | @as("Cancelled") #Cancelled]
 type reportPrefixString = string
-type publicAccessBlockEnabled = bool;
+type publicAccessBlockEnabled = bool
 type prefix = string
 type policy = string
-type outputSchemaVersion = [@as("V_1") #V_1]
+type outputSchemaVersion = [@as("V_1") #V1]
 type operationName = [@as("S3PutObjectRetention") #S3PutObjectRetention | @as("S3PutObjectLegalHold") #S3PutObjectLegalHold | @as("S3InitiateRestoreObject") #S3InitiateRestoreObject | @as("S3DeleteObjectTagging") #S3DeleteObjectTagging | @as("S3PutObjectTagging") #S3PutObjectTagging | @as("S3PutObjectAcl") #S3PutObjectAcl | @as("S3PutObjectCopy") #S3PutObjectCopy | @as("LambdaInvoke") #LambdaInvoke]
-type objectLockEnabledForBucket = bool;
+type objectLockEnabledForBucket = bool
 type objectLambdaTransformationConfigurationAction = [@as("GetObject") #GetObject]
 type objectLambdaSupportingAccessPointArn = string
 type objectLambdaPolicy = string
-type objectLambdaAllowedFeature = [@as("GetObject-PartNumber") #GetObject_PartNumber | @as("GetObject-Range") #GetObject_Range]
+type objectLambdaAllowedFeature = [@as("GetObject-PartNumber") #GetObjectPartNumber | @as("GetObject-Range") #GetObjectRange]
 type objectLambdaAccessPointName = string
 type objectLambdaAccessPointArn = string
 type nonEmptyMaxLength64String = string
@@ -56,31 +63,31 @@ type nonEmptyMaxLength2048String = string
 type nonEmptyMaxLength1024String = string
 type noSuchPublicAccessBlockConfigurationMessage = string
 type networkOrigin = [@as("VPC") #VPC | @as("Internet") #Internet]
-type minStorageBytesPercentage = float;
-type maxResults = int;
+type minStorageBytesPercentage = float
+type maxResults = int
 type maxLength1024String = string
 type location = string
 type kmsKeyArnString = string
-type jobTotalNumberOfTasks = float;
+type jobTotalNumberOfTasks = float
 type jobTerminationDate = Js.Date.t;
 type jobStatusUpdateReason = string
 type jobStatus = [@as("Suspended") #Suspended | @as("Ready") #Ready | @as("Preparing") #Preparing | @as("Pausing") #Pausing | @as("Paused") #Paused | @as("New") #New | @as("Failing") #Failing | @as("Failed") #Failed | @as("Completing") #Completing | @as("Complete") #Complete | @as("Cancelling") #Cancelling | @as("Cancelled") #Cancelled | @as("Active") #Active]
 type jobReportScope = [@as("FailedTasksOnly") #FailedTasksOnly | @as("AllTasks") #AllTasks]
-type jobReportFormat = [@as("Report_CSV_20180820") #Report_CSV_20180820]
-type jobPriority = int;
-type jobNumberOfTasksSucceeded = float;
-type jobNumberOfTasksFailed = float;
-type jobManifestFormat = [@as("S3InventoryReport_CSV_20161130") #S3InventoryReport_CSV_20161130 | @as("S3BatchOperations_CSV_20180820") #S3BatchOperations_CSV_20180820]
+type jobReportFormat = [@as("Report_CSV_20180820") #ReportCSV20180820]
+type jobPriority = int
+type jobNumberOfTasksSucceeded = float
+type jobNumberOfTasksFailed = float
+type jobManifestFormat = [@as("S3InventoryReport_CSV_20161130") #S3InventoryReportCSV20161130 | @as("S3BatchOperations_CSV_20180820") #S3BatchOperationsCSV20180820]
 type jobManifestFieldName = [@as("VersionId") #VersionId | @as("Key") #Key | @as("Bucket") #Bucket | @as("Ignore") #Ignore]
 type jobId = string
 type jobFailureReason = string
 type jobFailureCode = string
 type jobCreationTime = Js.Date.t;
 type jobArn = string
-type isPublic = bool;
-type isEnabled = bool;
-type iD = string
-type iAMRoleArn = string
+type isPublic = bool
+type isEnabled = bool
+type id = string
+type iamroleArn = string
 type grantWriteACP = string
 type grantWrite = string
 type grantReadACP = string
@@ -88,1010 +95,1010 @@ type grantRead = string
 type grantFullControl = string
 type functionArnString = string
 type format = [@as("Parquet") #Parquet | @as("CSV") #CSV]
-type expiredObjectDeleteMarker = bool;
+type expiredObjectDeleteMarker = bool
 type expirationStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
 type exceptionMessage = string
-type daysAfterInitiation = int;
-type days = int;
+type daysAfterInitiation = int
+type days = int
 type date = Js.Date.t;
 type creationDate = Js.Date.t;
 type continuationToken = string
-type confirmationRequired = bool;
-type confirmRemoveSelfBucketAccess = bool;
+type confirmationRequired = bool
+type confirmRemoveSelfBucketAccess = bool
 type configId = string
 type bucketName = string
-type bucketLocationConstraint = [@as("eu-central-1") #eu_central_1 | @as("cn-north-1") #cn_north_1 | @as("sa-east-1") #sa_east_1 | @as("ap-northeast-1") #ap_northeast_1 | @as("ap-southeast-2") #ap_southeast_2 | @as("ap-southeast-1") #ap_southeast_1 | @as("ap-south-1") #ap_south_1 | @as("us-west-2") #us_west_2 | @as("us-west-1") #us_west_1 | @as("eu-west-1") #eu_west_1 | @as("EU") #EU]
-type bucketCannedACL = [@as("authenticated-read") #authenticated_read | @as("public-read-write") #public_read_write | @as("public-read") #public_read | @as("private") #private]
-type amazonawsBoolean = bool;
+type bucketLocationConstraint = [@as("eu-central-1") #EuCentral1 | @as("cn-north-1") #CnNorth1 | @as("sa-east-1") #SaEast1 | @as("ap-northeast-1") #ApNortheast1 | @as("ap-southeast-2") #ApSoutheast2 | @as("ap-southeast-1") #ApSoutheast1 | @as("ap-south-1") #ApSouth1 | @as("us-west-2") #UsWest2 | @as("us-west-1") #UsWest1 | @as("eu-west-1") #EuWest1 | @as("EU") #EU]
+type bucketCannedACL = [@as("authenticated-read") #AuthenticatedRead | @as("public-read-write") #PublicReadWrite | @as("public-read") #PublicRead | @as("private") #Private]
+type boolean_ = bool
 type awsOrgArn = string
 type awsLambdaTransformationPayload = string
 type accountId = string
 type accessPointName = string
 type vpcConfiguration = {
-@as("VpcId") vpcId: option<vpcId>
+@as("VpcId") vpcId: vpcId
 }
 type transition = {
-@as("StorageClass") storageClass: transitionStorageClass,
-@as("Days") days: days,
-@as("Date") date: date
+@as("StorageClass") storageClass: option<transitionStorageClass>,
+@as("Days") days: option<days>,
+@as("Date") date: option<date>
 }
 type storageLensTag = {
-@as("Value") value: option<tagValueString>,
-@as("Key") key: option<tagKeyString>
+@as("Value") value: tagValueString,
+@as("Key") key: tagKeyString
 }
 type storageLensAwsOrg = {
-@as("Arn") arn: option<awsOrgArn>
+@as("Arn") arn: awsOrgArn
 }
 type selectionCriteria = {
-@as("MinStorageBytesPercentage") minStorageBytesPercentage: minStorageBytesPercentage,
-@as("MaxDepth") maxDepth: storageLensPrefixLevelMaxDepth,
-@as("Delimiter") delimiter: storageLensPrefixLevelDelimiter
+@as("MinStorageBytesPercentage") minStorageBytesPercentage: option<minStorageBytesPercentage>,
+@as("MaxDepth") maxDepth: option<storageLensPrefixLevelMaxDepth>,
+@as("Delimiter") delimiter: option<storageLensPrefixLevelDelimiter>
 }
-type sSEKMS = {
-@as("KeyId") keyId: option<sSEKMSKeyId>
+type ssekms = {
+@as("KeyId") keyId: ssekmskeyId
 }
 type s3UserMetadata = Js.Dict.t< maxLength1024String>
 type s3Tag = {
-@as("Value") value: option<tagValueString>,
-@as("Key") key: option<tagKeyString>
+@as("Value") value: tagValueString,
+@as("Key") key: tagKeyString
 }
 type s3Retention = {
-@as("Mode") mode: s3ObjectLockRetentionMode,
-@as("RetainUntilDate") retainUntilDate: timeStamp
+@as("Mode") mode: option<s3ObjectLockRetentionMode>,
+@as("RetainUntilDate") retainUntilDate: option<timeStamp>
 }
 type s3ObjectOwner = {
-@as("DisplayName") displayName: nonEmptyMaxLength1024String,
-@as("ID") iD: nonEmptyMaxLength1024String
+@as("DisplayName") displayName: option<nonEmptyMaxLength1024String>,
+@as("ID") id: option<nonEmptyMaxLength1024String>
 }
 type s3ObjectLockLegalHold = {
-@as("Status") status: option<s3ObjectLockLegalHoldStatus>
+@as("Status") status: s3ObjectLockLegalHoldStatus
 }
 type s3InitiateRestoreObjectOperation = {
-@as("GlacierJobTier") glacierJobTier: s3GlacierJobTier,
-@as("ExpirationInDays") expirationInDays: s3ExpirationInDays
+@as("GlacierJobTier") glacierJobTier: option<s3GlacierJobTier>,
+@as("ExpirationInDays") expirationInDays: option<s3ExpirationInDays>
 }
 type s3Grantee = {
-@as("DisplayName") displayName: nonEmptyMaxLength1024String,
-@as("Identifier") identifier: nonEmptyMaxLength1024String,
-@as("TypeIdentifier") typeIdentifier: s3GranteeTypeIdentifier
+@as("DisplayName") displayName: option<nonEmptyMaxLength1024String>,
+@as("Identifier") identifier: option<nonEmptyMaxLength1024String>,
+@as("TypeIdentifier") typeIdentifier: option<s3GranteeTypeIdentifier>
 }
 type regions = array<s3AWSRegion>
 type regionalBucket = {
-@as("OutpostId") outpostId: nonEmptyMaxLength64String,
-@as("CreationDate") creationDate: option<creationDate>,
-@as("PublicAccessBlockEnabled") publicAccessBlockEnabled: option<publicAccessBlockEnabled>,
-@as("BucketArn") bucketArn: s3RegionalBucketArn,
-@as("Bucket") bucket: option<bucketName>
+@as("OutpostId") outpostId: option<nonEmptyMaxLength64String>,
+@as("CreationDate") creationDate: creationDate,
+@as("PublicAccessBlockEnabled") publicAccessBlockEnabled: publicAccessBlockEnabled,
+@as("BucketArn") bucketArn: option<s3RegionalBucketArn>,
+@as("Bucket") bucket: bucketName
 }
 type publicAccessBlockConfiguration = {
-@as("RestrictPublicBuckets") restrictPublicBuckets: setting,
-@as("BlockPublicPolicy") blockPublicPolicy: setting,
-@as("IgnorePublicAcls") ignorePublicAcls: setting,
-@as("BlockPublicAcls") blockPublicAcls: setting
+@as("RestrictPublicBuckets") restrictPublicBuckets: option<setting>,
+@as("BlockPublicPolicy") blockPublicPolicy: option<setting>,
+@as("IgnorePublicAcls") ignorePublicAcls: option<setting>,
+@as("BlockPublicAcls") blockPublicAcls: option<setting>
 }
 type policyStatus = {
-@as("IsPublic") isPublic: isPublic
+@as("IsPublic") isPublic: option<isPublic>
 }
 type objectLambdaTransformationConfigurationActionsList = array<objectLambdaTransformationConfigurationAction>
 type objectLambdaAllowedFeaturesList = array<objectLambdaAllowedFeature>
 type objectLambdaAccessPoint = {
-@as("ObjectLambdaAccessPointArn") objectLambdaAccessPointArn: objectLambdaAccessPointArn,
-@as("Name") name: option<objectLambdaAccessPointName>
+@as("ObjectLambdaAccessPointArn") objectLambdaAccessPointArn: option<objectLambdaAccessPointArn>,
+@as("Name") name: objectLambdaAccessPointName
 }
 type noncurrentVersionTransition = {
-@as("StorageClass") storageClass: transitionStorageClass,
-@as("NoncurrentDays") noncurrentDays: days
+@as("StorageClass") storageClass: option<transitionStorageClass>,
+@as("NoncurrentDays") noncurrentDays: option<days>
 }
 type noncurrentVersionExpiration = {
-@as("NoncurrentDays") noncurrentDays: days
+@as("NoncurrentDays") noncurrentDays: option<days>
 }
 type listStorageLensConfigurationEntry = {
-@as("IsEnabled") isEnabled: isEnabled,
-@as("HomeRegion") homeRegion: option<s3AWSRegion>,
-@as("StorageLensArn") storageLensArn: option<storageLensArn>,
-@as("Id") id: option<configId>
+@as("IsEnabled") isEnabled: option<isEnabled>,
+@as("HomeRegion") homeRegion: s3AWSRegion,
+@as("StorageLensArn") storageLensArn: storageLensArn,
+@as("Id") id: configId
 }
 type lifecycleExpiration = {
-@as("ExpiredObjectDeleteMarker") expiredObjectDeleteMarker: expiredObjectDeleteMarker,
-@as("Days") days: days,
-@as("Date") date: date
+@as("ExpiredObjectDeleteMarker") expiredObjectDeleteMarker: option<expiredObjectDeleteMarker>,
+@as("Days") days: option<days>,
+@as("Date") date: option<date>
 }
 type lambdaInvokeOperation = {
-@as("FunctionArn") functionArn: functionArnString
+@as("FunctionArn") functionArn: option<functionArnString>
 }
 type jobStatusList = array<jobStatus>
 type jobReport = {
-@as("ReportScope") reportScope: jobReportScope,
-@as("Prefix") prefix: reportPrefixString,
-@as("Enabled") enabled: option<amazonawsBoolean>,
-@as("Format") format: jobReportFormat,
-@as("Bucket") bucket: s3BucketArnString
+@as("ReportScope") reportScope: option<jobReportScope>,
+@as("Prefix") prefix: option<reportPrefixString>,
+@as("Enabled") enabled: boolean_,
+@as("Format") format: option<jobReportFormat>,
+@as("Bucket") bucket: option<s3BucketArnString>
 }
 type jobProgressSummary = {
-@as("NumberOfTasksFailed") numberOfTasksFailed: jobNumberOfTasksFailed,
-@as("NumberOfTasksSucceeded") numberOfTasksSucceeded: jobNumberOfTasksSucceeded,
-@as("TotalNumberOfTasks") totalNumberOfTasks: jobTotalNumberOfTasks
+@as("NumberOfTasksFailed") numberOfTasksFailed: option<jobNumberOfTasksFailed>,
+@as("NumberOfTasksSucceeded") numberOfTasksSucceeded: option<jobNumberOfTasksSucceeded>,
+@as("TotalNumberOfTasks") totalNumberOfTasks: option<jobTotalNumberOfTasks>
 }
 type jobManifestLocation = {
-@as("ETag") eTag: option<nonEmptyMaxLength1024String>,
-@as("ObjectVersionId") objectVersionId: s3ObjectVersionId,
-@as("ObjectArn") objectArn: option<s3KeyArnString>
+@as("ETag") etag: nonEmptyMaxLength1024String,
+@as("ObjectVersionId") objectVersionId: option<s3ObjectVersionId>,
+@as("ObjectArn") objectArn: s3KeyArnString
 }
 type jobManifestFieldList = array<jobManifestFieldName>
 type jobFailure = {
-@as("FailureReason") failureReason: jobFailureReason,
-@as("FailureCode") failureCode: jobFailureCode
+@as("FailureReason") failureReason: option<jobFailureReason>,
+@as("FailureCode") failureCode: option<jobFailureCode>
 }
 type createBucketConfiguration = {
-@as("LocationConstraint") locationConstraint: bucketLocationConstraint
+@as("LocationConstraint") locationConstraint: option<bucketLocationConstraint>
 }
 type buckets = array<s3BucketArnString>
 type awsLambdaTransformation = {
-@as("FunctionPayload") functionPayload: awsLambdaTransformationPayload,
-@as("FunctionArn") functionArn: option<functionArnString>
+@as("FunctionPayload") functionPayload: option<awsLambdaTransformationPayload>,
+@as("FunctionArn") functionArn: functionArnString
 }
 type activityMetrics = {
-@as("IsEnabled") isEnabled: isEnabled
+@as("IsEnabled") isEnabled: option<isEnabled>
 }
 type abortIncompleteMultipartUpload = {
-@as("DaysAfterInitiation") daysAfterInitiation: daysAfterInitiation
+@as("DaysAfterInitiation") daysAfterInitiation: option<daysAfterInitiation>
 }
 type transitionList = array<transition>
 type storageLensTags = array<storageLensTag>
 type storageLensDataExportEncryption = {
-@as("SSEKMS") sSEKMS: sSEKMS,
-@as("SSES3") sSES3: sSES3
+@as("SSEKMS") ssekms: option<ssekms>,
+@as("SSES3") sses3: option<sses3>
 }
 type storageLensConfigurationList = array<listStorageLensConfigurationEntry>
 type s3TagSet = array<s3Tag>
 type s3SetObjectRetentionOperation = {
-@as("Retention") retention: option<s3Retention>,
-@as("BypassGovernanceRetention") bypassGovernanceRetention: amazonawsBoolean
+@as("Retention") retention: s3Retention,
+@as("BypassGovernanceRetention") bypassGovernanceRetention: option<boolean_>
 }
 type s3SetObjectLegalHoldOperation = {
-@as("LegalHold") legalHold: option<s3ObjectLockLegalHold>
+@as("LegalHold") legalHold: s3ObjectLockLegalHold
 }
 type s3ObjectMetadata = {
-@as("SSEAlgorithm") sSEAlgorithm: s3SSEAlgorithm,
-@as("RequesterCharged") requesterCharged: amazonawsBoolean,
-@as("HttpExpiresDate") httpExpiresDate: timeStamp,
-@as("ContentType") contentType: nonEmptyMaxLength1024String,
-@as("ContentMD5") contentMD5: nonEmptyMaxLength1024String,
-@as("ContentLength") contentLength: s3ContentLength,
-@as("UserMetadata") userMetadata: s3UserMetadata,
-@as("ContentLanguage") contentLanguage: nonEmptyMaxLength1024String,
-@as("ContentEncoding") contentEncoding: nonEmptyMaxLength1024String,
-@as("ContentDisposition") contentDisposition: nonEmptyMaxLength1024String,
-@as("CacheControl") cacheControl: nonEmptyMaxLength1024String
+@as("SSEAlgorithm") ssealgorithm: option<s3SSEAlgorithm>,
+@as("RequesterCharged") requesterCharged: option<boolean_>,
+@as("HttpExpiresDate") httpExpiresDate: option<timeStamp>,
+@as("ContentType") contentType: option<nonEmptyMaxLength1024String>,
+@as("ContentMD5") contentMD5: option<nonEmptyMaxLength1024String>,
+@as("ContentLength") contentLength: option<s3ContentLength>,
+@as("UserMetadata") userMetadata: option<s3UserMetadata>,
+@as("ContentLanguage") contentLanguage: option<nonEmptyMaxLength1024String>,
+@as("ContentEncoding") contentEncoding: option<nonEmptyMaxLength1024String>,
+@as("ContentDisposition") contentDisposition: option<nonEmptyMaxLength1024String>,
+@as("CacheControl") cacheControl: option<nonEmptyMaxLength1024String>
 }
 type s3Grant = {
-@as("Permission") permission: s3Permission,
-@as("Grantee") grantee: s3Grantee
+@as("Permission") permission: option<s3Permission>,
+@as("Grantee") grantee: option<s3Grantee>
 }
 type regionalBucketList = array<regionalBucket>
 type prefixLevelStorageMetrics = {
-@as("SelectionCriteria") selectionCriteria: selectionCriteria,
-@as("IsEnabled") isEnabled: isEnabled
+@as("SelectionCriteria") selectionCriteria: option<selectionCriteria>,
+@as("IsEnabled") isEnabled: option<isEnabled>
 }
 type objectLambdaContentTransformation = AwsLambda(awsLambdaTransformation);
 type objectLambdaAccessPointList = array<objectLambdaAccessPoint>
 type noncurrentVersionTransitionList = array<noncurrentVersionTransition>
 type jobManifestSpec = {
-@as("Fields") fields: jobManifestFieldList,
-@as("Format") format: option<jobManifestFormat>
+@as("Fields") fields: option<jobManifestFieldList>,
+@as("Format") format: jobManifestFormat
 }
 type jobListDescriptor = {
-@as("ProgressSummary") progressSummary: jobProgressSummary,
-@as("TerminationDate") terminationDate: jobTerminationDate,
-@as("CreationTime") creationTime: jobCreationTime,
-@as("Status") status: jobStatus,
-@as("Priority") priority: jobPriority,
-@as("Operation") operation: operationName,
-@as("Description") description: nonEmptyMaxLength256String,
-@as("JobId") jobId: jobId
+@as("ProgressSummary") progressSummary: option<jobProgressSummary>,
+@as("TerminationDate") terminationDate: option<jobTerminationDate>,
+@as("CreationTime") creationTime: option<jobCreationTime>,
+@as("Status") status: option<jobStatus>,
+@as("Priority") priority: option<jobPriority>,
+@as("Operation") operation: option<operationName>,
+@as("Description") description: option<nonEmptyMaxLength256String>,
+@as("JobId") jobId: option<jobId>
 }
 type jobFailureList = array<jobFailure>
-type include = {
-@as("Regions") regions: regions,
-@as("Buckets") buckets: buckets
+type include_ = {
+@as("Regions") regions: option<regions>,
+@as("Buckets") buckets: option<buckets>
 }
 type exclude = {
-@as("Regions") regions: regions,
-@as("Buckets") buckets: buckets
+@as("Regions") regions: option<regions>,
+@as("Buckets") buckets: option<buckets>
 }
 type accessPoint = {
-@as("AccessPointArn") accessPointArn: s3AccessPointArn,
-@as("Bucket") bucket: option<bucketName>,
-@as("VpcConfiguration") vpcConfiguration: vpcConfiguration,
-@as("NetworkOrigin") networkOrigin: option<networkOrigin>,
-@as("Name") name: option<accessPointName>
+@as("AccessPointArn") accessPointArn: option<s3AccessPointArn>,
+@as("Bucket") bucket: bucketName,
+@as("VpcConfiguration") vpcConfiguration: option<vpcConfiguration>,
+@as("NetworkOrigin") networkOrigin: networkOrigin,
+@as("Name") name: accessPointName
 }
 type tagging = {
-@as("TagSet") tagSet: option<s3TagSet>
+@as("TagSet") tagSet: s3TagSet
 }
 type s3SetObjectTaggingOperation = {
-@as("TagSet") tagSet: s3TagSet
+@as("TagSet") tagSet: option<s3TagSet>
 }
 type s3GrantList = array<s3Grant>
 type s3BucketDestination = {
-@as("Encryption") encryption: storageLensDataExportEncryption,
-@as("Prefix") prefix: prefix,
-@as("Arn") arn: option<s3BucketArnString>,
-@as("AccountId") accountId: option<accountId>,
-@as("OutputSchemaVersion") outputSchemaVersion: option<outputSchemaVersion>,
-@as("Format") format: option<format>
+@as("Encryption") encryption: option<storageLensDataExportEncryption>,
+@as("Prefix") prefix: option<prefix>,
+@as("Arn") arn: s3BucketArnString,
+@as("AccountId") accountId: accountId,
+@as("OutputSchemaVersion") outputSchemaVersion: outputSchemaVersion,
+@as("Format") format: format
 }
 type prefixLevel = {
-@as("StorageMetrics") storageMetrics: option<prefixLevelStorageMetrics>
+@as("StorageMetrics") storageMetrics: prefixLevelStorageMetrics
 }
 type objectLambdaTransformationConfiguration = {
-@as("ContentTransformation") contentTransformation: option<objectLambdaContentTransformation>,
-@as("Actions") actions: option<objectLambdaTransformationConfigurationActionsList>
+@as("ContentTransformation") contentTransformation: objectLambdaContentTransformation,
+@as("Actions") actions: objectLambdaTransformationConfigurationActionsList
 }
 type lifecycleRuleAndOperator = {
-@as("Tags") tags: s3TagSet,
-@as("Prefix") prefix: prefix
+@as("Tags") tags: option<s3TagSet>,
+@as("Prefix") prefix: option<prefix>
 }
 type jobManifest = {
-@as("Location") location: option<jobManifestLocation>,
-@as("Spec") spec: option<jobManifestSpec>
+@as("Location") location: jobManifestLocation,
+@as("Spec") spec: jobManifestSpec
 }
 type jobListDescriptorList = array<jobListDescriptor>
 type accessPointList = array<accessPoint>
 type storageLensDataExport = {
-@as("S3BucketDestination") s3BucketDestination: option<s3BucketDestination>
+@as("S3BucketDestination") s3BucketDestination: s3BucketDestination
 }
 type s3CopyObjectOperation = {
-@as("BucketKeyEnabled") bucketKeyEnabled: amazonawsBoolean,
-@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: timeStamp,
-@as("ObjectLockMode") objectLockMode: s3ObjectLockMode,
-@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: s3ObjectLockLegalHoldStatus,
-@as("TargetKeyPrefix") targetKeyPrefix: nonEmptyMaxLength1024String,
-@as("SSEAwsKmsKeyId") sSEAwsKmsKeyId: kmsKeyArnString,
-@as("UnModifiedSinceConstraint") unModifiedSinceConstraint: timeStamp,
-@as("StorageClass") storageClass: s3StorageClass,
-@as("RequesterPays") requesterPays: amazonawsBoolean,
-@as("RedirectLocation") redirectLocation: nonEmptyMaxLength2048String,
-@as("NewObjectTagging") newObjectTagging: s3TagSet,
-@as("NewObjectMetadata") newObjectMetadata: s3ObjectMetadata,
-@as("ModifiedSinceConstraint") modifiedSinceConstraint: timeStamp,
-@as("MetadataDirective") metadataDirective: s3MetadataDirective,
-@as("AccessControlGrants") accessControlGrants: s3GrantList,
-@as("CannedAccessControlList") cannedAccessControlList: s3CannedAccessControlList,
-@as("TargetResource") targetResource: s3BucketArnString
+@as("BucketKeyEnabled") bucketKeyEnabled: option<boolean_>,
+@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: option<timeStamp>,
+@as("ObjectLockMode") objectLockMode: option<s3ObjectLockMode>,
+@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: option<s3ObjectLockLegalHoldStatus>,
+@as("TargetKeyPrefix") targetKeyPrefix: option<nonEmptyMaxLength1024String>,
+@as("SSEAwsKmsKeyId") sseawsKmsKeyId: option<kmsKeyArnString>,
+@as("UnModifiedSinceConstraint") unModifiedSinceConstraint: option<timeStamp>,
+@as("StorageClass") storageClass: option<s3StorageClass>,
+@as("RequesterPays") requesterPays: option<boolean_>,
+@as("RedirectLocation") redirectLocation: option<nonEmptyMaxLength2048String>,
+@as("NewObjectTagging") newObjectTagging: option<s3TagSet>,
+@as("NewObjectMetadata") newObjectMetadata: option<s3ObjectMetadata>,
+@as("ModifiedSinceConstraint") modifiedSinceConstraint: option<timeStamp>,
+@as("MetadataDirective") metadataDirective: option<s3MetadataDirective>,
+@as("AccessControlGrants") accessControlGrants: option<s3GrantList>,
+@as("CannedAccessControlList") cannedAccessControlList: option<s3CannedAccessControlList>,
+@as("TargetResource") targetResource: option<s3BucketArnString>
 }
 type s3AccessControlList = {
-@as("Grants") grants: s3GrantList,
-@as("Owner") owner: option<s3ObjectOwner>
+@as("Grants") grants: option<s3GrantList>,
+@as("Owner") owner: s3ObjectOwner
 }
 type objectLambdaTransformationConfigurationsList = array<objectLambdaTransformationConfiguration>
 type lifecycleRuleFilter = {
-@as("And") and: lifecycleRuleAndOperator,
-@as("Tag") tag: s3Tag,
-@as("Prefix") prefix: prefix
+@as("And") and_: option<lifecycleRuleAndOperator>,
+@as("Tag") tag: option<s3Tag>,
+@as("Prefix") prefix: option<prefix>
 }
 type bucketLevel = {
-@as("PrefixLevel") prefixLevel: prefixLevel,
-@as("ActivityMetrics") activityMetrics: activityMetrics
+@as("PrefixLevel") prefixLevel: option<prefixLevel>,
+@as("ActivityMetrics") activityMetrics: option<activityMetrics>
 }
 type s3AccessControlPolicy = {
-@as("CannedAccessControlList") cannedAccessControlList: s3CannedAccessControlList,
-@as("AccessControlList") accessControlList: s3AccessControlList
+@as("CannedAccessControlList") cannedAccessControlList: option<s3CannedAccessControlList>,
+@as("AccessControlList") accessControlList: option<s3AccessControlList>
 }
 type objectLambdaConfiguration = {
-@as("TransformationConfigurations") transformationConfigurations: option<objectLambdaTransformationConfigurationsList>,
-@as("AllowedFeatures") allowedFeatures: objectLambdaAllowedFeaturesList,
-@as("CloudWatchMetricsEnabled") cloudWatchMetricsEnabled: amazonawsBoolean,
-@as("SupportingAccessPoint") supportingAccessPoint: option<objectLambdaSupportingAccessPointArn>
+@as("TransformationConfigurations") transformationConfigurations: objectLambdaTransformationConfigurationsList,
+@as("AllowedFeatures") allowedFeatures: option<objectLambdaAllowedFeaturesList>,
+@as("CloudWatchMetricsEnabled") cloudWatchMetricsEnabled: option<boolean_>,
+@as("SupportingAccessPoint") supportingAccessPoint: objectLambdaSupportingAccessPointArn
 }
 type lifecycleRule = {
-@as("AbortIncompleteMultipartUpload") abortIncompleteMultipartUpload: abortIncompleteMultipartUpload,
-@as("NoncurrentVersionExpiration") noncurrentVersionExpiration: noncurrentVersionExpiration,
-@as("NoncurrentVersionTransitions") noncurrentVersionTransitions: noncurrentVersionTransitionList,
-@as("Transitions") transitions: transitionList,
-@as("Status") status: option<expirationStatus>,
-@as("Filter") filter: lifecycleRuleFilter,
-@as("ID") iD: iD,
-@as("Expiration") expiration: lifecycleExpiration
+@as("AbortIncompleteMultipartUpload") abortIncompleteMultipartUpload: option<abortIncompleteMultipartUpload>,
+@as("NoncurrentVersionExpiration") noncurrentVersionExpiration: option<noncurrentVersionExpiration>,
+@as("NoncurrentVersionTransitions") noncurrentVersionTransitions: option<noncurrentVersionTransitionList>,
+@as("Transitions") transitions: option<transitionList>,
+@as("Status") status: expirationStatus,
+@as("Filter") filter: option<lifecycleRuleFilter>,
+@as("ID") id: option<id>,
+@as("Expiration") expiration: option<lifecycleExpiration>
 }
 type accountLevel = {
-@as("BucketLevel") bucketLevel: option<bucketLevel>,
-@as("ActivityMetrics") activityMetrics: activityMetrics
+@as("BucketLevel") bucketLevel: bucketLevel,
+@as("ActivityMetrics") activityMetrics: option<activityMetrics>
 }
 type storageLensConfiguration = {
-@as("StorageLensArn") storageLensArn: storageLensArn,
-@as("AwsOrg") awsOrg: storageLensAwsOrg,
-@as("IsEnabled") isEnabled: option<isEnabled>,
-@as("DataExport") dataExport: storageLensDataExport,
-@as("Exclude") exclude: exclude,
-@as("Include") include: include,
-@as("AccountLevel") accountLevel: option<accountLevel>,
-@as("Id") id: option<configId>
+@as("StorageLensArn") storageLensArn: option<storageLensArn>,
+@as("AwsOrg") awsOrg: option<storageLensAwsOrg>,
+@as("IsEnabled") isEnabled: isEnabled,
+@as("DataExport") dataExport: option<storageLensDataExport>,
+@as("Exclude") exclude: option<exclude>,
+@as("Include") include_: option<include_>,
+@as("AccountLevel") accountLevel: accountLevel,
+@as("Id") id: configId
 }
 type s3SetObjectAclOperation = {
-@as("AccessControlPolicy") accessControlPolicy: s3AccessControlPolicy
+@as("AccessControlPolicy") accessControlPolicy: option<s3AccessControlPolicy>
 }
 type lifecycleRules = array<lifecycleRule>
 type lifecycleConfiguration = {
-@as("Rules") rules: lifecycleRules
+@as("Rules") rules: option<lifecycleRules>
 }
 type jobOperation = {
-@as("S3PutObjectRetention") s3PutObjectRetention: s3SetObjectRetentionOperation,
-@as("S3PutObjectLegalHold") s3PutObjectLegalHold: s3SetObjectLegalHoldOperation,
-@as("S3InitiateRestoreObject") s3InitiateRestoreObject: s3InitiateRestoreObjectOperation,
-@as("S3DeleteObjectTagging") s3DeleteObjectTagging: s3DeleteObjectTaggingOperation,
-@as("S3PutObjectTagging") s3PutObjectTagging: s3SetObjectTaggingOperation,
-@as("S3PutObjectAcl") s3PutObjectAcl: s3SetObjectAclOperation,
-@as("S3PutObjectCopy") s3PutObjectCopy: s3CopyObjectOperation,
-@as("LambdaInvoke") lambdaInvoke: lambdaInvokeOperation
+@as("S3PutObjectRetention") s3PutObjectRetention: option<s3SetObjectRetentionOperation>,
+@as("S3PutObjectLegalHold") s3PutObjectLegalHold: option<s3SetObjectLegalHoldOperation>,
+@as("S3InitiateRestoreObject") s3InitiateRestoreObject: option<s3InitiateRestoreObjectOperation>,
+@as("S3DeleteObjectTagging") s3DeleteObjectTagging: option<s3DeleteObjectTaggingOperation>,
+@as("S3PutObjectTagging") s3PutObjectTagging: option<s3SetObjectTaggingOperation>,
+@as("S3PutObjectAcl") s3PutObjectAcl: option<s3SetObjectAclOperation>,
+@as("S3PutObjectCopy") s3PutObjectCopy: option<s3CopyObjectOperation>,
+@as("LambdaInvoke") lambdaInvoke: option<lambdaInvokeOperation>
 }
 type jobDescriptor = {
-@as("SuspendedCause") suspendedCause: suspendedCause,
-@as("SuspendedDate") suspendedDate: suspendedDate,
-@as("RoleArn") roleArn: iAMRoleArn,
-@as("TerminationDate") terminationDate: jobTerminationDate,
-@as("CreationTime") creationTime: jobCreationTime,
-@as("Report") report: jobReport,
-@as("FailureReasons") failureReasons: jobFailureList,
-@as("StatusUpdateReason") statusUpdateReason: jobStatusUpdateReason,
-@as("ProgressSummary") progressSummary: jobProgressSummary,
-@as("Priority") priority: jobPriority,
-@as("Operation") operation: jobOperation,
-@as("Manifest") manifest: jobManifest,
-@as("Status") status: jobStatus,
-@as("JobArn") jobArn: jobArn,
-@as("Description") description: nonEmptyMaxLength256String,
-@as("ConfirmationRequired") confirmationRequired: confirmationRequired,
-@as("JobId") jobId: jobId
+@as("SuspendedCause") suspendedCause: option<suspendedCause>,
+@as("SuspendedDate") suspendedDate: option<suspendedDate>,
+@as("RoleArn") roleArn: option<iamroleArn>,
+@as("TerminationDate") terminationDate: option<jobTerminationDate>,
+@as("CreationTime") creationTime: option<jobCreationTime>,
+@as("Report") report: option<jobReport>,
+@as("FailureReasons") failureReasons: option<jobFailureList>,
+@as("StatusUpdateReason") statusUpdateReason: option<jobStatusUpdateReason>,
+@as("ProgressSummary") progressSummary: option<jobProgressSummary>,
+@as("Priority") priority: option<jobPriority>,
+@as("Operation") operation: option<jobOperation>,
+@as("Manifest") manifest: option<jobManifest>,
+@as("Status") status: option<jobStatus>,
+@as("JobArn") jobArn: option<jobArn>,
+@as("Description") description: option<nonEmptyMaxLength256String>,
+@as("ConfirmationRequired") confirmationRequired: option<confirmationRequired>,
+@as("JobId") jobId: option<jobId>
 }
-type clientType;
-@module("@aws-sdk/client-s3") @new external createClient: unit => clientType = "S3ControlClient";
+type awsServiceClient;
+@module("@aws-sdk/client-s3") @new external createClient: unit => awsServiceClient = "S3ControlClient";
 module UpdateJobStatus = {
   type t;
   type request = {
-@as("StatusUpdateReason") statusUpdateReason: jobStatusUpdateReason,
-@as("RequestedJobStatus") requestedJobStatus: option<requestedJobStatus>,
-@as("JobId") jobId: option<jobId>,
-@as("AccountId") accountId: option<accountId>
+@as("StatusUpdateReason") statusUpdateReason: option<jobStatusUpdateReason>,
+@as("RequestedJobStatus") requestedJobStatus: requestedJobStatus,
+@as("JobId") jobId: jobId,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("StatusUpdateReason") statusUpdateReason: jobStatusUpdateReason,
-@as("Status") status: jobStatus,
-@as("JobId") jobId: jobId
+@as("StatusUpdateReason") statusUpdateReason: option<jobStatusUpdateReason>,
+@as("Status") status: option<jobStatus>,
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "UpdateJobStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateJobPriority = {
   type t;
   type request = {
-@as("Priority") priority: option<jobPriority>,
-@as("JobId") jobId: option<jobId>,
-@as("AccountId") accountId: option<accountId>
+@as("Priority") priority: jobPriority,
+@as("JobId") jobId: jobId,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("Priority") priority: option<jobPriority>,
-@as("JobId") jobId: option<jobId>
+@as("Priority") priority: jobPriority,
+@as("JobId") jobId: jobId
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "UpdateJobPriorityCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutBucketPolicy = {
   type t;
   type request = {
-@as("Policy") policy: option<policy>,
-@as("ConfirmRemoveSelfBucketAccess") confirmRemoveSelfBucketAccess: confirmRemoveSelfBucketAccess,
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: option<accountId>
+@as("Policy") policy: policy,
+@as("ConfirmRemoveSelfBucketAccess") confirmRemoveSelfBucketAccess: option<confirmRemoveSelfBucketAccess>,
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutAccessPointPolicyForObjectLambda = {
   type t;
   type request = {
-@as("Policy") policy: option<objectLambdaPolicy>,
-@as("Name") name: option<objectLambdaAccessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Policy") policy: objectLambdaPolicy,
+@as("Name") name: objectLambdaAccessPointName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutAccessPointPolicyForObjectLambdaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutAccessPointPolicy = {
   type t;
   type request = {
-@as("Policy") policy: option<policy>,
-@as("Name") name: option<accessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Policy") policy: policy,
+@as("Name") name: accessPointName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutAccessPointPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetBucketPolicy = {
   type t;
   type request = {
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: option<accountId>
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("Policy") policy: policy
+@as("Policy") policy: option<policy>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucket = {
   type t;
   type request = {
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: option<accountId>
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("CreationDate") creationDate: creationDate,
-@as("PublicAccessBlockEnabled") publicAccessBlockEnabled: publicAccessBlockEnabled,
-@as("Bucket") bucket: bucketName
+@as("CreationDate") creationDate: option<creationDate>,
+@as("PublicAccessBlockEnabled") publicAccessBlockEnabled: option<publicAccessBlockEnabled>,
+@as("Bucket") bucket: option<bucketName>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAccessPointPolicyForObjectLambda = {
   type t;
   type request = {
-@as("Name") name: option<objectLambdaAccessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Name") name: objectLambdaAccessPointName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("Policy") policy: objectLambdaPolicy
+@as("Policy") policy: option<objectLambdaPolicy>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointPolicyForObjectLambdaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAccessPointPolicy = {
   type t;
   type request = {
-@as("Name") name: option<accessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Name") name: accessPointName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("Policy") policy: policy
+@as("Policy") policy: option<policy>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteStorageLensConfigurationTagging = {
   type t;
   type request = {
-@as("AccountId") accountId: option<accountId>,
-@as("ConfigId") configId: option<configId>
+@as("AccountId") accountId: accountId,
+@as("ConfigId") configId: configId
 }
   type response = unit
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteStorageLensConfigurationTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteStorageLensConfiguration = {
   type t;
   type request = {
-@as("AccountId") accountId: option<accountId>,
-@as("ConfigId") configId: option<configId>
+@as("AccountId") accountId: accountId,
+@as("ConfigId") configId: configId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteStorageLensConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeletePublicAccessBlock = {
   type t;
   type request = {
-@as("AccountId") accountId: option<accountId>
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeletePublicAccessBlockCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteJobTagging = {
   type t;
   type request = {
-@as("JobId") jobId: option<jobId>,
-@as("AccountId") accountId: option<accountId>
+@as("JobId") jobId: jobId,
+@as("AccountId") accountId: accountId
 }
   type response = unit
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteJobTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteBucketTagging = {
   type t;
   type request = {
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: option<accountId>
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketPolicy = {
   type t;
   type request = {
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: option<accountId>
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketLifecycleConfiguration = {
   type t;
   type request = {
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: option<accountId>
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketLifecycleConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucket = {
   type t;
   type request = {
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: option<accountId>
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteAccessPointPolicyForObjectLambda = {
   type t;
   type request = {
-@as("Name") name: option<objectLambdaAccessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Name") name: objectLambdaAccessPointName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteAccessPointPolicyForObjectLambdaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteAccessPointPolicy = {
   type t;
   type request = {
-@as("Name") name: option<accessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Name") name: accessPointName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteAccessPointPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteAccessPointForObjectLambda = {
   type t;
   type request = {
-@as("Name") name: option<objectLambdaAccessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Name") name: objectLambdaAccessPointName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteAccessPointForObjectLambdaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteAccessPoint = {
   type t;
   type request = {
-@as("Name") name: option<accessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Name") name: accessPointName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteAccessPointCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutPublicAccessBlock = {
   type t;
   type request = {
-@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: option<publicAccessBlockConfiguration>,
-@as("AccountId") accountId: option<accountId>
+@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: publicAccessBlockConfiguration,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutPublicAccessBlockCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetPublicAccessBlock = {
   type t;
   type request = {
-@as("AccountId") accountId: option<accountId>
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: publicAccessBlockConfiguration
+@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: option<publicAccessBlockConfiguration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetPublicAccessBlockCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAccessPointPolicyStatusForObjectLambda = {
   type t;
   type request = {
-@as("Name") name: option<objectLambdaAccessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Name") name: objectLambdaAccessPointName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("PolicyStatus") policyStatus: policyStatus
+@as("PolicyStatus") policyStatus: option<policyStatus>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointPolicyStatusForObjectLambdaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAccessPointPolicyStatus = {
   type t;
   type request = {
-@as("Name") name: option<accessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Name") name: accessPointName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("PolicyStatus") policyStatus: policyStatus
+@as("PolicyStatus") policyStatus: option<policyStatus>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointPolicyStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAccessPointForObjectLambda = {
   type t;
   type request = {
-@as("Name") name: option<objectLambdaAccessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Name") name: objectLambdaAccessPointName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("CreationDate") creationDate: creationDate,
-@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: publicAccessBlockConfiguration,
-@as("Name") name: objectLambdaAccessPointName
+@as("CreationDate") creationDate: option<creationDate>,
+@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: option<publicAccessBlockConfiguration>,
+@as("Name") name: option<objectLambdaAccessPointName>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointForObjectLambdaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAccessPoint = {
   type t;
   type request = {
-@as("Name") name: option<accessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Name") name: accessPointName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("CreationDate") creationDate: creationDate,
-@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: publicAccessBlockConfiguration,
-@as("VpcConfiguration") vpcConfiguration: vpcConfiguration,
-@as("NetworkOrigin") networkOrigin: networkOrigin,
-@as("Bucket") bucket: bucketName,
-@as("Name") name: accessPointName
+@as("CreationDate") creationDate: option<creationDate>,
+@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: option<publicAccessBlockConfiguration>,
+@as("VpcConfiguration") vpcConfiguration: option<vpcConfiguration>,
+@as("NetworkOrigin") networkOrigin: option<networkOrigin>,
+@as("Bucket") bucket: option<bucketName>,
+@as("Name") name: option<accessPointName>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBucket = {
   type t;
   type request = {
-@as("CreateBucketConfiguration") createBucketConfiguration: createBucketConfiguration,
-@as("OutpostId") outpostId: nonEmptyMaxLength64String,
-@as("ObjectLockEnabledForBucket") objectLockEnabledForBucket: objectLockEnabledForBucket,
-@as("GrantWriteACP") grantWriteACP: grantWriteACP,
-@as("GrantWrite") grantWrite: grantWrite,
-@as("GrantReadACP") grantReadACP: grantReadACP,
-@as("GrantRead") grantRead: grantRead,
-@as("GrantFullControl") grantFullControl: grantFullControl,
-@as("Bucket") bucket: option<bucketName>,
-@as("ACL") aCL: bucketCannedACL
+@as("CreateBucketConfiguration") createBucketConfiguration: option<createBucketConfiguration>,
+@as("OutpostId") outpostId: option<nonEmptyMaxLength64String>,
+@as("ObjectLockEnabledForBucket") objectLockEnabledForBucket: option<objectLockEnabledForBucket>,
+@as("GrantWriteACP") grantWriteACP: option<grantWriteACP>,
+@as("GrantWrite") grantWrite: option<grantWrite>,
+@as("GrantReadACP") grantReadACP: option<grantReadACP>,
+@as("GrantRead") grantRead: option<grantRead>,
+@as("GrantFullControl") grantFullControl: option<grantFullControl>,
+@as("Bucket") bucket: bucketName,
+@as("ACL") acl: option<bucketCannedACL>
 }
   type response = {
-@as("BucketArn") bucketArn: s3RegionalBucketArn,
-@as("Location") location: location
+@as("BucketArn") bucketArn: option<s3RegionalBucketArn>,
+@as("Location") location: option<location>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateBucketCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAccessPoint = {
   type t;
   type request = {
-@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: publicAccessBlockConfiguration,
-@as("VpcConfiguration") vpcConfiguration: vpcConfiguration,
-@as("Bucket") bucket: option<bucketName>,
-@as("Name") name: option<accessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: option<publicAccessBlockConfiguration>,
+@as("VpcConfiguration") vpcConfiguration: option<vpcConfiguration>,
+@as("Bucket") bucket: bucketName,
+@as("Name") name: accessPointName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("AccessPointArn") accessPointArn: s3AccessPointArn
+@as("AccessPointArn") accessPointArn: option<s3AccessPointArn>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateAccessPointCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutStorageLensConfigurationTagging = {
   type t;
   type request = {
-@as("Tags") tags: option<storageLensTags>,
-@as("AccountId") accountId: option<accountId>,
-@as("ConfigId") configId: option<configId>
+@as("Tags") tags: storageLensTags,
+@as("AccountId") accountId: accountId,
+@as("ConfigId") configId: configId
 }
   type response = unit
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutStorageLensConfigurationTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutJobTagging = {
   type t;
   type request = {
-@as("Tags") tags: option<s3TagSet>,
-@as("JobId") jobId: option<jobId>,
-@as("AccountId") accountId: option<accountId>
+@as("Tags") tags: s3TagSet,
+@as("JobId") jobId: jobId,
+@as("AccountId") accountId: accountId
 }
   type response = unit
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutJobTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStorageLensConfigurations = {
   type t;
   type request = {
-@as("NextToken") nextToken: continuationToken,
-@as("AccountId") accountId: option<accountId>
+@as("NextToken") nextToken: option<continuationToken>,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("StorageLensConfigurationList") storageLensConfigurationList: storageLensConfigurationList,
-@as("NextToken") nextToken: continuationToken
+@as("StorageLensConfigurationList") storageLensConfigurationList: option<storageLensConfigurationList>,
+@as("NextToken") nextToken: option<continuationToken>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListStorageLensConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRegionalBuckets = {
   type t;
   type request = {
-@as("OutpostId") outpostId: nonEmptyMaxLength64String,
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: nonEmptyMaxLength1024String,
-@as("AccountId") accountId: option<accountId>
+@as("OutpostId") outpostId: option<nonEmptyMaxLength64String>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<nonEmptyMaxLength1024String>,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("NextToken") nextToken: nonEmptyMaxLength1024String,
-@as("RegionalBucketList") regionalBucketList: regionalBucketList
+@as("NextToken") nextToken: option<nonEmptyMaxLength1024String>,
+@as("RegionalBucketList") regionalBucketList: option<regionalBucketList>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListRegionalBucketsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAccessPointsForObjectLambda = {
   type t;
   type request = {
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: nonEmptyMaxLength1024String,
-@as("AccountId") accountId: option<accountId>
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<nonEmptyMaxLength1024String>,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("NextToken") nextToken: nonEmptyMaxLength1024String,
-@as("ObjectLambdaAccessPointList") objectLambdaAccessPointList: objectLambdaAccessPointList
+@as("NextToken") nextToken: option<nonEmptyMaxLength1024String>,
+@as("ObjectLambdaAccessPointList") objectLambdaAccessPointList: option<objectLambdaAccessPointList>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListAccessPointsForObjectLambdaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetStorageLensConfigurationTagging = {
   type t;
   type request = {
-@as("AccountId") accountId: option<accountId>,
-@as("ConfigId") configId: option<configId>
+@as("AccountId") accountId: accountId,
+@as("ConfigId") configId: configId
 }
   type response = {
-@as("Tags") tags: storageLensTags
+@as("Tags") tags: option<storageLensTags>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetStorageLensConfigurationTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetJobTagging = {
   type t;
   type request = {
-@as("JobId") jobId: option<jobId>,
-@as("AccountId") accountId: option<accountId>
+@as("JobId") jobId: jobId,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("Tags") tags: s3TagSet
+@as("Tags") tags: option<s3TagSet>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetJobTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketTagging = {
   type t;
   type request = {
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: option<accountId>
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("TagSet") tagSet: option<s3TagSet>
+@as("TagSet") tagSet: s3TagSet
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutBucketTagging = {
   type t;
   type request = {
-@as("Tagging") tagging: option<tagging>,
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: option<accountId>
+@as("Tagging") tagging: tagging,
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListJobs = {
   type t;
   type request = {
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: stringForNextToken,
-@as("JobStatuses") jobStatuses: jobStatusList,
-@as("AccountId") accountId: option<accountId>
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<stringForNextToken>,
+@as("JobStatuses") jobStatuses: option<jobStatusList>,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("Jobs") jobs: jobListDescriptorList,
-@as("NextToken") nextToken: stringForNextToken
+@as("Jobs") jobs: option<jobListDescriptorList>,
+@as("NextToken") nextToken: option<stringForNextToken>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAccessPoints = {
   type t;
   type request = {
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: nonEmptyMaxLength1024String,
-@as("Bucket") bucket: bucketName,
-@as("AccountId") accountId: option<accountId>
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<nonEmptyMaxLength1024String>,
+@as("Bucket") bucket: option<bucketName>,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("NextToken") nextToken: nonEmptyMaxLength1024String,
-@as("AccessPointList") accessPointList: accessPointList
+@as("NextToken") nextToken: option<nonEmptyMaxLength1024String>,
+@as("AccessPointList") accessPointList: option<accessPointList>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListAccessPointsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutAccessPointConfigurationForObjectLambda = {
   type t;
   type request = {
-@as("Configuration") configuration: option<objectLambdaConfiguration>,
-@as("Name") name: option<objectLambdaAccessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Configuration") configuration: objectLambdaConfiguration,
+@as("Name") name: objectLambdaAccessPointName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutAccessPointConfigurationForObjectLambdaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetAccessPointConfigurationForObjectLambda = {
   type t;
   type request = {
-@as("Name") name: option<objectLambdaAccessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Name") name: objectLambdaAccessPointName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("Configuration") configuration: objectLambdaConfiguration
+@as("Configuration") configuration: option<objectLambdaConfiguration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointConfigurationForObjectLambdaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAccessPointForObjectLambda = {
   type t;
   type request = {
-@as("Configuration") configuration: option<objectLambdaConfiguration>,
-@as("Name") name: option<objectLambdaAccessPointName>,
-@as("AccountId") accountId: option<accountId>
+@as("Configuration") configuration: objectLambdaConfiguration,
+@as("Name") name: objectLambdaAccessPointName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("ObjectLambdaAccessPointArn") objectLambdaAccessPointArn: objectLambdaAccessPointArn
+@as("ObjectLambdaAccessPointArn") objectLambdaAccessPointArn: option<objectLambdaAccessPointArn>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateAccessPointForObjectLambdaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutStorageLensConfiguration = {
   type t;
   type request = {
-@as("Tags") tags: storageLensTags,
-@as("StorageLensConfiguration") storageLensConfiguration: option<storageLensConfiguration>,
-@as("AccountId") accountId: option<accountId>,
-@as("ConfigId") configId: option<configId>
+@as("Tags") tags: option<storageLensTags>,
+@as("StorageLensConfiguration") storageLensConfiguration: storageLensConfiguration,
+@as("AccountId") accountId: accountId,
+@as("ConfigId") configId: configId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutStorageLensConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetStorageLensConfiguration = {
   type t;
   type request = {
-@as("AccountId") accountId: option<accountId>,
-@as("ConfigId") configId: option<configId>
+@as("AccountId") accountId: accountId,
+@as("ConfigId") configId: configId
 }
   type response = {
-@as("StorageLensConfiguration") storageLensConfiguration: storageLensConfiguration
+@as("StorageLensConfiguration") storageLensConfiguration: option<storageLensConfiguration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetStorageLensConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketLifecycleConfiguration = {
   type t;
   type request = {
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: option<accountId>
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("Rules") rules: lifecycleRules
+@as("Rules") rules: option<lifecycleRules>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketLifecycleConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutBucketLifecycleConfiguration = {
   type t;
   type request = {
-@as("LifecycleConfiguration") lifecycleConfiguration: lifecycleConfiguration,
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: option<accountId>
+@as("LifecycleConfiguration") lifecycleConfiguration: option<lifecycleConfiguration>,
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: accountId
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketLifecycleConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateJob = {
   type t;
   type request = {
-@as("Tags") tags: s3TagSet,
-@as("RoleArn") roleArn: option<iAMRoleArn>,
-@as("Priority") priority: option<jobPriority>,
-@as("Description") description: nonEmptyMaxLength256String,
-@as("Manifest") manifest: option<jobManifest>,
-@as("ClientRequestToken") clientRequestToken: option<nonEmptyMaxLength64String>,
-@as("Report") report: option<jobReport>,
-@as("Operation") operation: option<jobOperation>,
-@as("ConfirmationRequired") confirmationRequired: confirmationRequired,
-@as("AccountId") accountId: option<accountId>
+@as("Tags") tags: option<s3TagSet>,
+@as("RoleArn") roleArn: iamroleArn,
+@as("Priority") priority: jobPriority,
+@as("Description") description: option<nonEmptyMaxLength256String>,
+@as("Manifest") manifest: jobManifest,
+@as("ClientRequestToken") clientRequestToken: nonEmptyMaxLength64String,
+@as("Report") report: jobReport,
+@as("Operation") operation: jobOperation,
+@as("ConfirmationRequired") confirmationRequired: option<confirmationRequired>,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeJob = {
   type t;
   type request = {
-@as("JobId") jobId: option<jobId>,
-@as("AccountId") accountId: option<accountId>
+@as("JobId") jobId: jobId,
+@as("AccountId") accountId: accountId
 }
   type response = {
-@as("Job") job: jobDescriptor
+@as("Job") job: option<jobDescriptor>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DescribeJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

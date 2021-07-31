@@ -1,13 +1,19 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type amazonawsTimestamp = Js.Date.t;
-type amazonawsString = string
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type long = float
+type timestamp_ = Js.Date.t;
+type string_ = string
 type sortOrder = [@as("Descending") #Descending | @as("Ascending") #Ascending]
 type nextToken = string
-type maxResults = int;
+type maxResults = int
 type inputContent = string
 type humanLoopStatus = [@as("Stopping") #Stopping | @as("Stopped") #Stopped | @as("Completed") #Completed | @as("Failed") #Failed | @as("InProgress") #InProgress]
 type humanLoopName = string
@@ -16,93 +22,93 @@ type flowDefinitionArn = string
 type failureReason = string
 type contentClassifier = [@as("FreeOfAdultContent") #FreeOfAdultContent | @as("FreeOfPersonallyIdentifiableInformation") #FreeOfPersonallyIdentifiableInformation]
 type humanLoopSummary = {
-@as("FlowDefinitionArn") flowDefinitionArn: flowDefinitionArn,
-@as("FailureReason") failureReason: failureReason,
-@as("CreationTime") creationTime: amazonawsTimestamp,
-@as("HumanLoopStatus") humanLoopStatus: humanLoopStatus,
-@as("HumanLoopName") humanLoopName: humanLoopName
+@as("FlowDefinitionArn") flowDefinitionArn: option<flowDefinitionArn>,
+@as("FailureReason") failureReason: option<failureReason>,
+@as("CreationTime") creationTime: option<timestamp_>,
+@as("HumanLoopStatus") humanLoopStatus: option<humanLoopStatus>,
+@as("HumanLoopName") humanLoopName: option<humanLoopName>
 }
 type humanLoopOutput = {
-@as("OutputS3Uri") outputS3Uri: option<amazonawsString>
+@as("OutputS3Uri") outputS3Uri: string_
 }
 type humanLoopInput = {
-@as("InputContent") inputContent: option<inputContent>
+@as("InputContent") inputContent: inputContent
 }
 type contentClassifiers = array<contentClassifier>
 type humanLoopSummaries = array<humanLoopSummary>
 type humanLoopDataAttributes = {
-@as("ContentClassifiers") contentClassifiers: option<contentClassifiers>
+@as("ContentClassifiers") contentClassifiers: contentClassifiers
 }
-type clientType;
-@module("@aws-sdk/client-sagemaker") @new external createClient: unit => clientType = "SageMakerA2IRuntimeClient";
+type awsServiceClient;
+@module("@aws-sdk/client-sagemaker") @new external createClient: unit => awsServiceClient = "SageMakerA2IRuntimeClient";
 module StopHumanLoop = {
   type t;
   type request = {
-@as("HumanLoopName") humanLoopName: option<humanLoopName>
+@as("HumanLoopName") humanLoopName: humanLoopName
 }
   type response = unit
   @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "StopHumanLoopCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteHumanLoop = {
   type t;
   type request = {
-@as("HumanLoopName") humanLoopName: option<humanLoopName>
+@as("HumanLoopName") humanLoopName: humanLoopName
 }
   type response = unit
   @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "DeleteHumanLoopCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeHumanLoop = {
   type t;
   type request = {
-@as("HumanLoopName") humanLoopName: option<humanLoopName>
+@as("HumanLoopName") humanLoopName: humanLoopName
 }
   type response = {
-@as("HumanLoopOutput") humanLoopOutput: humanLoopOutput,
-@as("FlowDefinitionArn") flowDefinitionArn: option<flowDefinitionArn>,
-@as("HumanLoopArn") humanLoopArn: option<humanLoopArn>,
-@as("HumanLoopName") humanLoopName: option<humanLoopName>,
-@as("HumanLoopStatus") humanLoopStatus: option<humanLoopStatus>,
-@as("FailureCode") failureCode: amazonawsString,
-@as("FailureReason") failureReason: amazonawsString,
-@as("CreationTime") creationTime: option<amazonawsTimestamp>
+@as("HumanLoopOutput") humanLoopOutput: option<humanLoopOutput>,
+@as("FlowDefinitionArn") flowDefinitionArn: flowDefinitionArn,
+@as("HumanLoopArn") humanLoopArn: humanLoopArn,
+@as("HumanLoopName") humanLoopName: humanLoopName,
+@as("HumanLoopStatus") humanLoopStatus: humanLoopStatus,
+@as("FailureCode") failureCode: option<string_>,
+@as("FailureReason") failureReason: option<string_>,
+@as("CreationTime") creationTime: timestamp_
 }
   @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "DescribeHumanLoopCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartHumanLoop = {
   type t;
   type request = {
-@as("DataAttributes") dataAttributes: humanLoopDataAttributes,
-@as("HumanLoopInput") humanLoopInput: option<humanLoopInput>,
-@as("FlowDefinitionArn") flowDefinitionArn: option<flowDefinitionArn>,
-@as("HumanLoopName") humanLoopName: option<humanLoopName>
+@as("DataAttributes") dataAttributes: option<humanLoopDataAttributes>,
+@as("HumanLoopInput") humanLoopInput: humanLoopInput,
+@as("FlowDefinitionArn") flowDefinitionArn: flowDefinitionArn,
+@as("HumanLoopName") humanLoopName: humanLoopName
 }
   type response = {
-@as("HumanLoopArn") humanLoopArn: humanLoopArn
+@as("HumanLoopArn") humanLoopArn: option<humanLoopArn>
 }
   @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "StartHumanLoopCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListHumanLoops = {
   type t;
   type request = {
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: nextToken,
-@as("SortOrder") sortOrder: sortOrder,
-@as("FlowDefinitionArn") flowDefinitionArn: option<flowDefinitionArn>,
-@as("CreationTimeBefore") creationTimeBefore: amazonawsTimestamp,
-@as("CreationTimeAfter") creationTimeAfter: amazonawsTimestamp
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("SortOrder") sortOrder: option<sortOrder>,
+@as("FlowDefinitionArn") flowDefinitionArn: flowDefinitionArn,
+@as("CreationTimeBefore") creationTimeBefore: option<timestamp_>,
+@as("CreationTimeAfter") creationTimeAfter: option<timestamp_>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("HumanLoopSummaries") humanLoopSummaries: option<humanLoopSummaries>
+@as("NextToken") nextToken: option<nextToken>,
+@as("HumanLoopSummaries") humanLoopSummaries: humanLoopSummaries
 }
   @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "ListHumanLoopsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

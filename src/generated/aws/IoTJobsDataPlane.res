@@ -1,116 +1,124 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type errorMessage = string
-type versionNumber = float;
+type versionNumber = float
 type thingName = string
-type stepTimeoutInMinutes = float;
-type startedAt = float;
-type queuedAt = float;
-type lastUpdatedAt = float;
+type stepTimeoutInMinutes = float
+type startedAt = float
+type queuedAt = float
+type lastUpdatedAt = float
 type jobId = string
-type jobExecutionStatus = [@as("CANCELED") #CANCELED | @as("REMOVED") #REMOVED | @as("REJECTED") #REJECTED | @as("TIMED_OUT") #TIMED_OUT | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #IN_PROGRESS | @as("QUEUED") #QUEUED]
+type jobExecutionStatus = [@as("CANCELED") #CANCELED | @as("REMOVED") #REMOVED | @as("REJECTED") #REJECTED | @as("TIMED_OUT") #TIMEDOUT | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #INPROGRESS | @as("QUEUED") #QUEUED]
 type jobDocument = string
-type includeJobDocument = bool;
-type includeExecutionState = bool;
-type expectedVersion = float;
-type executionNumber = float;
+type includeJobDocument = bool
+type includeExecutionState = bool
+type expectedVersion = float
+type executionNumber = float
 type detailsValue = string
 type detailsKey = string
 type describeJobExecutionJobId = string
-type binaryBlob = NodeJs.Buffer.t;
-type approximateSecondsBeforeTimedOut = float;
+type binaryBlob = NodeJs.Buffer.t
+type approximateSecondsBeforeTimedOut = float
 type jobExecutionSummary = {
-@as("executionNumber") executionNumber: executionNumber,
-@as("versionNumber") versionNumber: versionNumber,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("startedAt") startedAt: startedAt,
-@as("queuedAt") queuedAt: queuedAt,
-@as("jobId") jobId: jobId
+executionNumber: option<executionNumber>,
+versionNumber: option<versionNumber>,
+lastUpdatedAt: option<lastUpdatedAt>,
+startedAt: option<startedAt>,
+queuedAt: option<queuedAt>,
+jobId: option<jobId>
 }
 type detailsMap = Js.Dict.t< detailsValue>
 type jobExecutionSummaryList = array<jobExecutionSummary>
 type jobExecutionState = {
-@as("versionNumber") versionNumber: versionNumber,
-@as("statusDetails") statusDetails: detailsMap,
-@as("status") status: jobExecutionStatus
+versionNumber: option<versionNumber>,
+statusDetails: option<detailsMap>,
+status: option<jobExecutionStatus>
 }
 type jobExecution = {
-@as("jobDocument") jobDocument: jobDocument,
-@as("executionNumber") executionNumber: executionNumber,
-@as("versionNumber") versionNumber: versionNumber,
-@as("approximateSecondsBeforeTimedOut") approximateSecondsBeforeTimedOut: approximateSecondsBeforeTimedOut,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAt,
-@as("startedAt") startedAt: startedAt,
-@as("queuedAt") queuedAt: queuedAt,
-@as("statusDetails") statusDetails: detailsMap,
-@as("status") status: jobExecutionStatus,
-@as("thingName") thingName: thingName,
-@as("jobId") jobId: jobId
+jobDocument: option<jobDocument>,
+executionNumber: option<executionNumber>,
+versionNumber: option<versionNumber>,
+approximateSecondsBeforeTimedOut: option<approximateSecondsBeforeTimedOut>,
+lastUpdatedAt: option<lastUpdatedAt>,
+startedAt: option<startedAt>,
+queuedAt: option<queuedAt>,
+statusDetails: option<detailsMap>,
+status: option<jobExecutionStatus>,
+thingName: option<thingName>,
+jobId: option<jobId>
 }
-type clientType;
-@module("@aws-sdk/client-iot-jobs-data") @new external createClient: unit => clientType = "IoTJobsDataPlaneClient";
+type awsServiceClient;
+@module("@aws-sdk/client-iot-jobs-data") @new external createClient: unit => awsServiceClient = "IoTJobsDataPlaneClient";
 module UpdateJobExecution = {
   type t;
   type request = {
-@as("executionNumber") executionNumber: executionNumber,
-@as("includeJobDocument") includeJobDocument: includeJobDocument,
-@as("includeJobExecutionState") includeJobExecutionState: includeExecutionState,
-@as("expectedVersion") expectedVersion: expectedVersion,
-@as("stepTimeoutInMinutes") stepTimeoutInMinutes: stepTimeoutInMinutes,
-@as("statusDetails") statusDetails: detailsMap,
-@as("status") status: option<jobExecutionStatus>,
-@as("thingName") thingName: option<thingName>,
-@as("jobId") jobId: option<jobId>
+executionNumber: option<executionNumber>,
+includeJobDocument: option<includeJobDocument>,
+includeJobExecutionState: option<includeExecutionState>,
+expectedVersion: option<expectedVersion>,
+stepTimeoutInMinutes: option<stepTimeoutInMinutes>,
+statusDetails: option<detailsMap>,
+status: jobExecutionStatus,
+thingName: thingName,
+jobId: jobId
 }
   type response = {
-@as("jobDocument") jobDocument: jobDocument,
-@as("executionState") executionState: jobExecutionState
+jobDocument: option<jobDocument>,
+executionState: option<jobExecutionState>
 }
   @module("@aws-sdk/client-iot-jobs-data") @new external new_: (request) => t = "UpdateJobExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartNextPendingJobExecution = {
   type t;
   type request = {
-@as("stepTimeoutInMinutes") stepTimeoutInMinutes: stepTimeoutInMinutes,
-@as("statusDetails") statusDetails: detailsMap,
-@as("thingName") thingName: option<thingName>
+stepTimeoutInMinutes: option<stepTimeoutInMinutes>,
+statusDetails: option<detailsMap>,
+thingName: thingName
 }
   type response = {
-@as("execution") execution: jobExecution
+execution: option<jobExecution>
 }
   @module("@aws-sdk/client-iot-jobs-data") @new external new_: (request) => t = "StartNextPendingJobExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPendingJobExecutions = {
   type t;
   type request = {
-@as("thingName") thingName: option<thingName>
+thingName: thingName
 }
   type response = {
-@as("queuedJobs") queuedJobs: jobExecutionSummaryList,
-@as("inProgressJobs") inProgressJobs: jobExecutionSummaryList
+queuedJobs: option<jobExecutionSummaryList>,
+inProgressJobs: option<jobExecutionSummaryList>
 }
   @module("@aws-sdk/client-iot-jobs-data") @new external new_: (request) => t = "GetPendingJobExecutionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeJobExecution = {
   type t;
   type request = {
-@as("executionNumber") executionNumber: executionNumber,
-@as("includeJobDocument") includeJobDocument: includeJobDocument,
-@as("thingName") thingName: option<thingName>,
-@as("jobId") jobId: option<describeJobExecutionJobId>
+executionNumber: option<executionNumber>,
+includeJobDocument: option<includeJobDocument>,
+thingName: thingName,
+jobId: describeJobExecutionJobId
 }
   type response = {
-@as("execution") execution: jobExecution
+execution: option<jobExecution>
 }
   @module("@aws-sdk/client-iot-jobs-data") @new external new_: (request) => t = "DescribeJobExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

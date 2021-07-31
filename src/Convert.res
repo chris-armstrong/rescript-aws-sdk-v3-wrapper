@@ -128,7 +128,7 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
           )
           // let recursiveCodeSnippets = generateRecursiveTypeBlock(packagingName, Array.map(recursiveShapes, (s):Shape.t => { name: s.name, descriptor: s.descriptor}))
           Ok({
-            code: Array.concat(codeSnippets, operationSnippets)->Array.joinWith("\n", x => x),
+            code: Array.concatMany([[generateResponseMetadata()], codeSnippets, operationSnippets])->Array.joinWith("\n", x => x),
             moduleName: moduleName,
           })
         }

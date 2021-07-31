@@ -1,48 +1,56 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type __timestampIso8601 = Js.Date.t;
 type __string = string
-type data = NodeJs.Buffer.t;
+type data = NodeJs.Buffer.t
 type identity = {
-@as("UserAgent") userAgent: option<__string>,
-@as("SourceIp") sourceIp: option<__string>
+@as("UserAgent") userAgent: __string,
+@as("SourceIp") sourceIp: __string
 }
-type clientType;
-@module("@aws-sdk/client-apigateway") @new external createClient: unit => clientType = "ApiGatewayManagementApiClient";
+type awsServiceClient;
+@module("@aws-sdk/client-apigateway") @new external createClient: unit => awsServiceClient = "ApiGatewayManagementApiClient";
 module PostToConnection = {
   type t;
   type request = {
-@as("ConnectionId") connectionId: option<__string>,
-@as("Data") data: option<data>
+@as("ConnectionId") connectionId: __string,
+@as("Data") data: data
 }
   
   @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "PostToConnectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteConnection = {
   type t;
   type request = {
-@as("ConnectionId") connectionId: option<__string>
+@as("ConnectionId") connectionId: __string
 }
   
   @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteConnectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetConnection = {
   type t;
   type request = {
-@as("ConnectionId") connectionId: option<__string>
+@as("ConnectionId") connectionId: __string
 }
   type response = {
-@as("LastActiveAt") lastActiveAt: __timestampIso8601,
-@as("Identity") identity: identity,
-@as("ConnectedAt") connectedAt: __timestampIso8601
+@as("LastActiveAt") lastActiveAt: option<__timestampIso8601>,
+@as("Identity") identity: option<identity>,
+@as("ConnectedAt") connectedAt: option<__timestampIso8601>
 }
   @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetConnectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

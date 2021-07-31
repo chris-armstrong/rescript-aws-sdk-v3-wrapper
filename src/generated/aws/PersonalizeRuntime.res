@@ -1,12 +1,20 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type userID = string
-type score = float;
+type score = float
 type recommendationID = string
-type numResults = int;
+type numResults = int
 type itemID = string
 type filterAttributeValue = string
 type filterAttributeName = string
@@ -15,48 +23,48 @@ type attributeValue = string
 type attributeName = string
 type arn = string
 type predictedItem = {
-@as("score") score: score,
-@as("itemId") itemId: itemID
+score: option<score>,
+itemId: option<itemID>
 }
 type inputList = array<itemID>
 type filterValues = Js.Dict.t< filterAttributeValue>
 type context = Js.Dict.t< attributeValue>
 type itemList = array<predictedItem>
-type clientType;
-@module("@aws-sdk/client-personalize") @new external createClient: unit => clientType = "PersonalizeRuntimeClient";
+type awsServiceClient;
+@module("@aws-sdk/client-personalize") @new external createClient: unit => awsServiceClient = "PersonalizeRuntimeClient";
 module GetRecommendations = {
   type t;
   type request = {
-@as("filterValues") filterValues: filterValues,
-@as("filterArn") filterArn: arn,
-@as("context") context: context,
-@as("numResults") numResults: numResults,
-@as("userId") userId: userID,
-@as("itemId") itemId: itemID,
-@as("campaignArn") campaignArn: option<arn>
+filterValues: option<filterValues>,
+filterArn: option<arn>,
+context: option<context>,
+numResults: option<numResults>,
+userId: option<userID>,
+itemId: option<itemID>,
+campaignArn: arn
 }
   type response = {
-@as("recommendationId") recommendationId: recommendationID,
-@as("itemList") itemList: itemList
+recommendationId: option<recommendationID>,
+itemList: option<itemList>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "GetRecommendationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPersonalizedRanking = {
   type t;
   type request = {
-@as("filterValues") filterValues: filterValues,
-@as("filterArn") filterArn: arn,
-@as("context") context: context,
-@as("userId") userId: option<userID>,
-@as("inputList") inputList: option<inputList>,
-@as("campaignArn") campaignArn: option<arn>
+filterValues: option<filterValues>,
+filterArn: option<arn>,
+context: option<context>,
+userId: userID,
+inputList: inputList,
+campaignArn: arn
 }
   type response = {
-@as("recommendationId") recommendationId: recommendationID,
-@as("personalizedRanking") personalizedRanking: itemList
+recommendationId: option<recommendationID>,
+personalizedRanking: option<itemList>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "GetPersonalizedRankingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

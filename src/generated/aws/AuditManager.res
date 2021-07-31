@@ -1,39 +1,43 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type long = float
 type organizationId = string
-type validationExceptionReason = [@as("other") #other | @as("fieldValidationFailed") #fieldValidationFailed | @as("cannotParse") #cannotParse | @as("unknownOperation") #unknownOperation]
+type validationExceptionReason = [@as("other") #Other | @as("fieldValidationFailed") #FieldValidationFailed | @as("cannotParse") #CannotParse | @as("unknownOperation") #UnknownOperation]
 type username = string
 type urlLink = string
-type uUID = string
+type uuid = string
 type troubleshootingText = string
 type token = string
 type timestampUUID = string
-type amazonawsTimestamp = Js.Date.t;
+type timestamp_ = Js.Date.t;
 type testingInformation = string
 type tagValue = string
 type tagKey = string
-type amazonawsString = string
-type sourceType = [@as("MANUAL") #MANUAL | @as("AWS_API_Call") #AWS_API_Call | @as("AWS_Security_Hub") #AWS_Security_Hub | @as("AWS_Config") #AWS_Config | @as("AWS_Cloudtrail") #AWS_Cloudtrail]
-type sourceSetUpOption = [@as("Procedural_Controls_Mapping") #Procedural_Controls_Mapping | @as("System_Controls_Mapping") #System_Controls_Mapping]
+type string_ = string
+type sourceType = [@as("MANUAL") #MANUAL | @as("AWS_API_Call") #AWSAPICall | @as("AWS_Security_Hub") #AWSSecurityHub | @as("AWS_Config") #AWSConfig | @as("AWS_Cloudtrail") #AWSCloudtrail]
+type sourceSetUpOption = [@as("Procedural_Controls_Mapping") #ProceduralControlsMapping | @as("System_Controls_Mapping") #SystemControlsMapping]
 type sourceName = string
 type sourceFrequency = [@as("MONTHLY") #MONTHLY | @as("WEEKLY") #WEEKLY | @as("DAILY") #DAILY]
 type sourceDescription = string
 type snsArn = string
-type settingAttribute = [@as("DEFAULT_PROCESS_OWNERS") #DEFAULT_PROCESS_OWNERS | @as("DEFAULT_ASSESSMENT_REPORTS_DESTINATION") #DEFAULT_ASSESSMENT_REPORTS_DESTINATION | @as("SNS_TOPIC") #SNS_TOPIC | @as("IS_AWS_ORG_ENABLED") #IS_AWS_ORG_ENABLED | @as("ALL") #ALL]
-type sNSTopic = string
+type settingAttribute = [@as("DEFAULT_PROCESS_OWNERS") #DEFAULTPROCESSOWNERS | @as("DEFAULT_ASSESSMENT_REPORTS_DESTINATION") #DEFAULTASSESSMENTREPORTSDESTINATION | @as("SNS_TOPIC") #SNSTOPIC | @as("IS_AWS_ORG_ENABLED") #ISAWSORGENABLED | @as("ALL") #ALL]
+type snstopic = string
 type s3Url = string
-type roleType = [@as("RESOURCE_OWNER") #RESOURCE_OWNER | @as("PROCESS_OWNER") #PROCESS_OWNER]
-type objectTypeEnum = [@as("ASSESSMENT_REPORT") #ASSESSMENT_REPORT | @as("DELEGATION") #DELEGATION | @as("CONTROL") #CONTROL | @as("CONTROL_SET") #CONTROL_SET | @as("ASSESSMENT") #ASSESSMENT]
+type roleType = [@as("RESOURCE_OWNER") #RESOURCEOWNER | @as("PROCESS_OWNER") #PROCESSOWNER]
+type objectTypeEnum = [@as("ASSESSMENT_REPORT") #ASSESSMENTREPORT | @as("DELEGATION") #DELEGATION | @as("CONTROL") #CONTROL | @as("CONTROL_SET") #CONTROLSET | @as("ASSESSMENT") #ASSESSMENT]
 type nonEmptyString = string
-type maxResults = int;
+type maxResults = int
 type lastUpdatedBy = string
 type kmsKey = string
 type keywordValue = string
-type keywordInputType = [@as("SELECT_FROM_LIST") #SELECT_FROM_LIST]
-type amazonawsInteger = int;
+type keywordInputType = [@as("SELECT_FROM_LIST") #SELECTFROMLIST]
+type integer_ = int
 type iamArn = string
 type hyperlinkName = string
 type genericArn = string
@@ -47,15 +51,15 @@ type eventName = string
 type errorMessage = string
 type errorCode = string
 type emailAddress = string
-type delegationStatus = [@as("COMPLETE") #COMPLETE | @as("UNDER_REVIEW") #UNDER_REVIEW | @as("IN_PROGRESS") #IN_PROGRESS]
+type delegationStatus = [@as("COMPLETE") #COMPLETE | @as("UNDER_REVIEW") #UNDERREVIEW | @as("IN_PROGRESS") #INPROGRESS]
 type delegationComment = string
 type createdBy = string
-type controlsCount = int;
+type controlsCount = int
 type controlType = [@as("Custom") #Custom | @as("Standard") #Standard]
-type controlStatus = [@as("INACTIVE") #INACTIVE | @as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDER_REVIEW]
+type controlStatus = [@as("INACTIVE") #INACTIVE | @as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDERREVIEW]
 type controlSources = string
-type controlSetsCount = int;
-type controlSetStatus = [@as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDER_REVIEW | @as("ACTIVE") #ACTIVE]
+type controlSetsCount = int
+type controlSetStatus = [@as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDERREVIEW | @as("ACTIVE") #ACTIVE]
 type controlSetName = string
 type controlSetId = string
 type controlResponse = [@as("IGNORE") #IGNORE | @as("DEFER") #DEFER | @as("AUTOMATE") #AUTOMATE | @as("MANUAL") #MANUAL]
@@ -63,10 +67,10 @@ type controlName = string
 type controlDescription = string
 type controlCommentBody = string
 type complianceType = string
-type amazonawsBoolean = bool;
+type boolean_ = bool
 type auditManagerArn = string
 type assessmentStatus = [@as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
-type assessmentReportStatus = [@as("FAILED") #FAILED | @as("IN_PROGRESS") #IN_PROGRESS | @as("COMPLETE") #COMPLETE]
+type assessmentReportStatus = [@as("FAILED") #FAILED | @as("IN_PROGRESS") #INPROGRESS | @as("COMPLETE") #COMPLETE]
 type assessmentReportName = string
 type assessmentReportDestinationType = [@as("S3") #S3]
 type assessmentReportDescription = string
@@ -76,190 +80,190 @@ type assessmentEvidenceFolderName = string
 type assessmentDescription = string
 type actionPlanTitle = string
 type actionPlanInstructions = string
-type actionEnum = [@as("IMPORT_EVIDENCE") #IMPORT_EVIDENCE | @as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDER_REVIEW | @as("DELETE") #DELETE | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE | @as("UPDATE_METADATA") #UPDATE_METADATA | @as("CREATE") #CREATE]
-type accountStatus = [@as("PENDING_ACTIVATION") #PENDING_ACTIVATION | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
+type actionEnum = [@as("IMPORT_EVIDENCE") #IMPORTEVIDENCE | @as("REVIEWED") #REVIEWED | @as("UNDER_REVIEW") #UNDERREVIEW | @as("DELETE") #DELETE | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE | @as("UPDATE_METADATA") #UPDATEMETADATA | @as("CREATE") #CREATE]
+type accountStatus = [@as("PENDING_ACTIVATION") #PENDINGACTIVATION | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
 type accountName = string
 type accountId = string
-type aWSServiceName = string
+type awsserviceName = string
 type validationExceptionField = {
-@as("message") message: option<amazonawsString>,
-@as("name") name: option<amazonawsString>
+message: string_,
+name: string_
 }
 type validationErrors = array<nonEmptyString>
-type uRL = {
-@as("link") link: urlLink,
-@as("hyperlinkName") hyperlinkName: hyperlinkName
+type url = {
+link: option<urlLink>,
+hyperlinkName: option<hyperlinkName>
 }
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type sourceKeyword = {
-@as("keywordValue") keywordValue: keywordValue,
-@as("keywordInputType") keywordInputType: keywordInputType
+keywordValue: option<keywordValue>,
+keywordInputType: option<keywordInputType>
 }
 type serviceMetadata = {
-@as("category") category: nonEmptyString,
-@as("description") description: nonEmptyString,
-@as("displayName") displayName: nonEmptyString,
-@as("name") name: aWSServiceName
+category: option<nonEmptyString>,
+description: option<nonEmptyString>,
+displayName: option<nonEmptyString>,
+name: option<awsserviceName>
 }
 type role = {
-@as("roleArn") roleArn: iamArn,
-@as("roleType") roleType: roleType
+roleArn: option<iamArn>,
+roleType: option<roleType>
 }
 type resource = {
-@as("value") value: amazonawsString,
-@as("arn") arn: genericArn
+value: option<string_>,
+arn: option<genericArn>
 }
 type notification = {
-@as("source") source: nonEmptyString,
-@as("eventTime") eventTime: amazonawsTimestamp,
-@as("description") description: nonEmptyString,
-@as("controlSetName") controlSetName: nonEmptyString,
-@as("controlSetId") controlSetId: controlSetId,
-@as("assessmentName") assessmentName: assessmentName,
-@as("assessmentId") assessmentId: uUID,
-@as("id") id: timestampUUID
+source: option<nonEmptyString>,
+eventTime: option<timestamp_>,
+description: option<nonEmptyString>,
+controlSetName: option<nonEmptyString>,
+controlSetId: option<controlSetId>,
+assessmentName: option<assessmentName>,
+assessmentId: option<uuid>,
+id: option<timestampUUID>
 }
 type manualEvidence = {
-@as("s3ResourcePath") s3ResourcePath: s3Url
+s3ResourcePath: option<s3Url>
 }
 type keywords = array<keywordValue>
 type frameworkMetadata = {
-@as("complianceType") complianceType: complianceType,
-@as("logo") logo: filename,
-@as("description") description: assessmentFrameworkDescription,
-@as("name") name: assessmentName
+complianceType: option<complianceType>,
+logo: option<filename>,
+description: option<assessmentFrameworkDescription>,
+name: option<assessmentName>
 }
 type evidenceSources = array<nonEmptyString>
-type evidenceIds = array<uUID>
+type evidenceIds = array<uuid>
 type evidenceAttributes = Js.Dict.t< evidenceAttributeValue>
 type delegationMetadata = {
-@as("controlSetName") controlSetName: nonEmptyString,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("roleArn") roleArn: iamArn,
-@as("status") status: delegationStatus,
-@as("assessmentId") assessmentId: uUID,
-@as("assessmentName") assessmentName: assessmentName,
-@as("id") id: uUID
+controlSetName: option<nonEmptyString>,
+creationTime: option<timestamp_>,
+roleArn: option<iamArn>,
+status: option<delegationStatus>,
+assessmentId: option<uuid>,
+assessmentName: option<assessmentName>,
+id: option<uuid>
 }
-type delegationIds = array<uUID>
+type delegationIds = array<uuid>
 type delegation = {
-@as("createdBy") createdBy: createdBy,
-@as("comment") comment: delegationComment,
-@as("controlSetId") controlSetId: controlSetId,
-@as("lastUpdated") lastUpdated: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("roleType") roleType: roleType,
-@as("roleArn") roleArn: iamArn,
-@as("status") status: delegationStatus,
-@as("assessmentId") assessmentId: uUID,
-@as("assessmentName") assessmentName: assessmentName,
-@as("id") id: uUID
+createdBy: option<createdBy>,
+comment: option<delegationComment>,
+controlSetId: option<controlSetId>,
+lastUpdated: option<timestamp_>,
+creationTime: option<timestamp_>,
+roleType: option<roleType>,
+roleArn: option<iamArn>,
+status: option<delegationStatus>,
+assessmentId: option<uuid>,
+assessmentName: option<assessmentName>,
+id: option<uuid>
 }
 type createDelegationRequest = {
-@as("roleType") roleType: roleType,
-@as("roleArn") roleArn: iamArn,
-@as("controlSetId") controlSetId: controlSetId,
-@as("comment") comment: delegationComment
+roleType: option<roleType>,
+roleArn: option<iamArn>,
+controlSetId: option<controlSetId>,
+comment: option<delegationComment>
 }
 type createAssessmentFrameworkControl = {
-@as("id") id: uUID
+id: option<uuid>
 }
 type controlMetadata = {
-@as("lastUpdatedAt") lastUpdatedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("controlSources") controlSources: controlSources,
-@as("name") name: controlName,
-@as("id") id: uUID,
-@as("arn") arn: auditManagerArn
+lastUpdatedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+controlSources: option<controlSources>,
+name: option<controlName>,
+id: option<uuid>,
+arn: option<auditManagerArn>
 }
 type controlComment = {
-@as("postedDate") postedDate: amazonawsTimestamp,
-@as("commentBody") commentBody: controlCommentBody,
-@as("authorName") authorName: username
+postedDate: option<timestamp_>,
+commentBody: option<controlCommentBody>,
+authorName: option<username>
 }
 type changeLog = {
-@as("createdBy") createdBy: iamArn,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("action") action: actionEnum,
-@as("objectName") objectName: nonEmptyString,
-@as("objectType") objectType: objectTypeEnum
+createdBy: option<iamArn>,
+createdAt: option<timestamp_>,
+action: option<actionEnum>,
+objectName: option<nonEmptyString>,
+objectType: option<objectTypeEnum>
 }
 type batchDeleteDelegationByAssessmentError = {
-@as("errorMessage") errorMessage: errorMessage,
-@as("errorCode") errorCode: errorCode,
-@as("delegationId") delegationId: uUID
+errorMessage: option<errorMessage>,
+errorCode: option<errorCode>,
+delegationId: option<uuid>
 }
 type assessmentReportsDestination = {
-@as("destination") destination: s3Url,
-@as("destinationType") destinationType: assessmentReportDestinationType
+destination: option<s3Url>,
+destinationType: option<assessmentReportDestinationType>
 }
 type assessmentReportMetadata = {
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("status") status: assessmentReportStatus,
-@as("author") author: username,
-@as("assessmentName") assessmentName: assessmentName,
-@as("assessmentId") assessmentId: uUID,
-@as("description") description: assessmentReportDescription,
-@as("name") name: assessmentReportName,
-@as("id") id: uUID
+creationTime: option<timestamp_>,
+status: option<assessmentReportStatus>,
+author: option<username>,
+assessmentName: option<assessmentName>,
+assessmentId: option<uuid>,
+description: option<assessmentReportDescription>,
+name: option<assessmentReportName>,
+id: option<uuid>
 }
 type assessmentReportEvidenceError = {
-@as("errorMessage") errorMessage: errorMessage,
-@as("errorCode") errorCode: errorCode,
-@as("evidenceId") evidenceId: uUID
+errorMessage: option<errorMessage>,
+errorCode: option<errorCode>,
+evidenceId: option<uuid>
 }
 type assessmentReport = {
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("status") status: assessmentReportStatus,
-@as("author") author: username,
-@as("assessmentName") assessmentName: assessmentName,
-@as("assessmentId") assessmentId: uUID,
-@as("awsAccountId") awsAccountId: accountId,
-@as("description") description: assessmentReportDescription,
-@as("name") name: assessmentReportName,
-@as("id") id: uUID
+creationTime: option<timestamp_>,
+status: option<assessmentReportStatus>,
+author: option<username>,
+assessmentName: option<assessmentName>,
+assessmentId: option<uuid>,
+awsAccountId: option<accountId>,
+description: option<assessmentReportDescription>,
+name: option<assessmentReportName>,
+id: option<uuid>
 }
 type assessmentFrameworkMetadata = {
-@as("lastUpdatedAt") lastUpdatedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("controlSetsCount") controlSetsCount: controlSetsCount,
-@as("controlsCount") controlsCount: controlsCount,
-@as("complianceType") complianceType: complianceType,
-@as("logo") logo: filename,
-@as("description") description: frameworkDescription,
-@as("name") name: frameworkName,
-@as("type") type_: frameworkType,
-@as("id") id: uUID,
-@as("arn") arn: auditManagerArn
+lastUpdatedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+controlSetsCount: option<controlSetsCount>,
+controlsCount: option<controlsCount>,
+complianceType: option<complianceType>,
+logo: option<filename>,
+description: option<frameworkDescription>,
+name: option<frameworkName>,
+@as("type") type_: option<frameworkType>,
+id: option<uuid>,
+arn: option<auditManagerArn>
 }
 type assessmentEvidenceFolder = {
-@as("evidenceAwsServiceSourceCount") evidenceAwsServiceSourceCount: amazonawsInteger,
-@as("evidenceByTypeUserActivityCount") evidenceByTypeUserActivityCount: amazonawsInteger,
-@as("evidenceByTypeComplianceCheckIssuesCount") evidenceByTypeComplianceCheckIssuesCount: amazonawsInteger,
-@as("evidenceByTypeComplianceCheckCount") evidenceByTypeComplianceCheckCount: amazonawsInteger,
-@as("evidenceByTypeManualCount") evidenceByTypeManualCount: amazonawsInteger,
-@as("evidenceByTypeConfigurationDataCount") evidenceByTypeConfigurationDataCount: amazonawsInteger,
-@as("evidenceResourcesIncludedCount") evidenceResourcesIncludedCount: amazonawsInteger,
-@as("controlName") controlName: controlName,
-@as("assessmentReportSelectionCount") assessmentReportSelectionCount: amazonawsInteger,
-@as("totalEvidence") totalEvidence: amazonawsInteger,
-@as("author") author: amazonawsString,
-@as("dataSource") dataSource: amazonawsString,
-@as("id") id: uUID,
-@as("controlId") controlId: uUID,
-@as("controlSetId") controlSetId: controlSetId,
-@as("assessmentId") assessmentId: uUID,
-@as("date") date: amazonawsTimestamp,
-@as("name") name: assessmentEvidenceFolderName
+evidenceAwsServiceSourceCount: option<integer_>,
+evidenceByTypeUserActivityCount: option<integer_>,
+evidenceByTypeComplianceCheckIssuesCount: option<integer_>,
+evidenceByTypeComplianceCheckCount: option<integer_>,
+evidenceByTypeManualCount: option<integer_>,
+evidenceByTypeConfigurationDataCount: option<integer_>,
+evidenceResourcesIncludedCount: option<integer_>,
+controlName: option<controlName>,
+assessmentReportSelectionCount: option<integer_>,
+totalEvidence: option<integer_>,
+author: option<string_>,
+dataSource: option<string_>,
+id: option<uuid>,
+controlId: option<uuid>,
+controlSetId: option<controlSetId>,
+assessmentId: option<uuid>,
+date: option<timestamp_>,
+name: option<assessmentEvidenceFolderName>
 }
-type aWSService = {
-@as("serviceName") serviceName: aWSServiceName
+type awsservice = {
+serviceName: option<awsserviceName>
 }
-type aWSAccount = {
-@as("name") name: accountName,
-@as("emailAddress") emailAddress: emailAddress,
-@as("id") id: accountId
+type awsaccount = {
+name: option<accountName>,
+emailAddress: option<emailAddress>,
+id: option<accountId>
 }
 type validationExceptionFieldList = array<validationExceptionField>
 type serviceMetadataList = array<serviceMetadata>
@@ -272,882 +276,882 @@ type delegations = array<delegation>
 type delegationMetadataList = array<delegationMetadata>
 type createDelegationRequests = array<createDelegationRequest>
 type createControlMappingSource = {
-@as("troubleshootingText") troubleshootingText: troubleshootingText,
-@as("sourceFrequency") sourceFrequency: sourceFrequency,
-@as("sourceKeyword") sourceKeyword: sourceKeyword,
-@as("sourceType") sourceType: sourceType,
-@as("sourceSetUpOption") sourceSetUpOption: sourceSetUpOption,
-@as("sourceDescription") sourceDescription: sourceDescription,
-@as("sourceName") sourceName: sourceName
+troubleshootingText: option<troubleshootingText>,
+sourceFrequency: option<sourceFrequency>,
+sourceKeyword: option<sourceKeyword>,
+sourceType: option<sourceType>,
+sourceSetUpOption: option<sourceSetUpOption>,
+sourceDescription: option<sourceDescription>,
+sourceName: option<sourceName>
 }
 type createAssessmentFrameworkControls = array<createAssessmentFrameworkControl>
 type controlMetadataList = array<controlMetadata>
 type controlMappingSource = {
-@as("troubleshootingText") troubleshootingText: troubleshootingText,
-@as("sourceFrequency") sourceFrequency: sourceFrequency,
-@as("sourceKeyword") sourceKeyword: sourceKeyword,
-@as("sourceType") sourceType: sourceType,
-@as("sourceSetUpOption") sourceSetUpOption: sourceSetUpOption,
-@as("sourceDescription") sourceDescription: sourceDescription,
-@as("sourceName") sourceName: sourceName,
-@as("sourceId") sourceId: uUID
+troubleshootingText: option<troubleshootingText>,
+sourceFrequency: option<sourceFrequency>,
+sourceKeyword: option<sourceKeyword>,
+sourceType: option<sourceType>,
+sourceSetUpOption: option<sourceSetUpOption>,
+sourceDescription: option<sourceDescription>,
+sourceName: option<sourceName>,
+sourceId: option<uuid>
 }
 type controlComments = array<controlComment>
 type changeLogs = array<changeLog>
 type batchImportEvidenceToAssessmentControlError = {
-@as("errorMessage") errorMessage: errorMessage,
-@as("errorCode") errorCode: errorCode,
-@as("manualEvidence") manualEvidence: manualEvidence
+errorMessage: option<errorMessage>,
+errorCode: option<errorCode>,
+manualEvidence: option<manualEvidence>
 }
 type batchDeleteDelegationByAssessmentErrors = array<batchDeleteDelegationByAssessmentError>
 type batchCreateDelegationByAssessmentError = {
-@as("errorMessage") errorMessage: errorMessage,
-@as("errorCode") errorCode: errorCode,
-@as("createDelegationRequest") createDelegationRequest: createDelegationRequest
+errorMessage: option<errorMessage>,
+errorCode: option<errorCode>,
+createDelegationRequest: option<createDelegationRequest>
 }
 type assessmentReportsMetadata = array<assessmentReportMetadata>
 type assessmentReportEvidenceErrors = array<assessmentReportEvidenceError>
 type assessmentEvidenceFolders = array<assessmentEvidenceFolder>
-type aWSServices = array<aWSService>
-type aWSAccounts = array<aWSAccount>
+type awsservices = array<awsservice>
+type awsaccounts = array<awsaccount>
 type updateAssessmentFrameworkControlSet = {
-@as("controls") controls: createAssessmentFrameworkControls,
-@as("name") name: option<controlSetName>,
-@as("id") id: controlSetName
+controls: option<createAssessmentFrameworkControls>,
+name: controlSetName,
+id: option<controlSetName>
 }
 type settings = {
-@as("kmsKey") kmsKey: kmsKey,
-@as("defaultProcessOwners") defaultProcessOwners: roles,
-@as("defaultAssessmentReportsDestination") defaultAssessmentReportsDestination: assessmentReportsDestination,
-@as("snsTopic") snsTopic: sNSTopic,
-@as("isAwsOrgEnabled") isAwsOrgEnabled: amazonawsBoolean
+kmsKey: option<kmsKey>,
+defaultProcessOwners: option<roles>,
+defaultAssessmentReportsDestination: option<assessmentReportsDestination>,
+snsTopic: option<snstopic>,
+isAwsOrgEnabled: option<boolean_>
 }
 type scope = {
-@as("awsServices") awsServices: aWSServices,
-@as("awsAccounts") awsAccounts: aWSAccounts
+awsServices: option<awsservices>,
+awsAccounts: option<awsaccounts>
 }
 type evidence = {
-@as("assessmentReportSelection") assessmentReportSelection: amazonawsString,
-@as("id") id: uUID,
-@as("evidenceFolderId") evidenceFolderId: uUID,
-@as("awsAccountId") awsAccountId: accountId,
-@as("awsOrganization") awsOrganization: amazonawsString,
-@as("complianceCheck") complianceCheck: amazonawsString,
-@as("iamId") iamId: iamArn,
-@as("attributes") attributes: evidenceAttributes,
-@as("resourcesIncluded") resourcesIncluded: resources,
-@as("evidenceByType") evidenceByType: amazonawsString,
-@as("eventName") eventName: eventName,
-@as("eventSource") eventSource: aWSServiceName,
-@as("time") time: amazonawsTimestamp,
-@as("evidenceAwsAccountId") evidenceAwsAccountId: accountId,
-@as("dataSource") dataSource: amazonawsString
+assessmentReportSelection: option<string_>,
+id: option<uuid>,
+evidenceFolderId: option<uuid>,
+awsAccountId: option<accountId>,
+awsOrganization: option<string_>,
+complianceCheck: option<string_>,
+iamId: option<iamArn>,
+attributes: option<evidenceAttributes>,
+resourcesIncluded: option<resources>,
+evidenceByType: option<string_>,
+eventName: option<eventName>,
+eventSource: option<awsserviceName>,
+time: option<timestamp_>,
+evidenceAwsAccountId: option<accountId>,
+dataSource: option<string_>
 }
 type createControlMappingSources = array<createControlMappingSource>
 type createAssessmentFrameworkControlSet = {
-@as("controls") controls: createAssessmentFrameworkControls,
-@as("name") name: option<controlSetName>
+controls: option<createAssessmentFrameworkControls>,
+name: controlSetName
 }
 type controlMappingSources = array<controlMappingSource>
 type batchImportEvidenceToAssessmentControlErrors = array<batchImportEvidenceToAssessmentControlError>
 type batchCreateDelegationByAssessmentErrors = array<batchCreateDelegationByAssessmentError>
 type assessmentMetadataItem = {
-@as("lastUpdated") lastUpdated: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("delegations") delegations: delegations,
-@as("roles") roles: roles,
-@as("status") status: assessmentStatus,
-@as("complianceType") complianceType: complianceType,
-@as("id") id: uUID,
-@as("name") name: assessmentName
+lastUpdated: option<timestamp_>,
+creationTime: option<timestamp_>,
+delegations: option<delegations>,
+roles: option<roles>,
+status: option<assessmentStatus>,
+complianceType: option<complianceType>,
+id: option<uuid>,
+name: option<assessmentName>
 }
 type assessmentControl = {
-@as("assessmentReportEvidenceCount") assessmentReportEvidenceCount: amazonawsInteger,
-@as("evidenceCount") evidenceCount: amazonawsInteger,
-@as("evidenceSources") evidenceSources: evidenceSources,
-@as("comments") comments: controlComments,
-@as("response") response: controlResponse,
-@as("status") status: controlStatus,
-@as("description") description: controlDescription,
-@as("name") name: controlName,
-@as("id") id: uUID
+assessmentReportEvidenceCount: option<integer_>,
+evidenceCount: option<integer_>,
+evidenceSources: option<evidenceSources>,
+comments: option<controlComments>,
+response: option<controlResponse>,
+status: option<controlStatus>,
+description: option<controlDescription>,
+name: option<controlName>,
+id: option<uuid>
 }
 type updateAssessmentFrameworkControlSets = array<updateAssessmentFrameworkControlSet>
 type listAssessmentMetadata = array<assessmentMetadataItem>
 type evidenceList = array<evidence>
 type createAssessmentFrameworkControlSets = array<createAssessmentFrameworkControlSet>
 type control = {
-@as("tags") tags: tagMap,
-@as("lastUpdatedBy") lastUpdatedBy: lastUpdatedBy,
-@as("createdBy") createdBy: createdBy,
-@as("lastUpdatedAt") lastUpdatedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("controlMappingSources") controlMappingSources: controlMappingSources,
-@as("controlSources") controlSources: controlSources,
-@as("actionPlanInstructions") actionPlanInstructions: actionPlanInstructions,
-@as("actionPlanTitle") actionPlanTitle: actionPlanTitle,
-@as("testingInformation") testingInformation: testingInformation,
-@as("description") description: controlDescription,
-@as("name") name: controlName,
-@as("type") type_: controlType,
-@as("id") id: uUID,
-@as("arn") arn: auditManagerArn
+tags: option<tagMap>,
+lastUpdatedBy: option<lastUpdatedBy>,
+createdBy: option<createdBy>,
+lastUpdatedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+controlMappingSources: option<controlMappingSources>,
+controlSources: option<controlSources>,
+actionPlanInstructions: option<actionPlanInstructions>,
+actionPlanTitle: option<actionPlanTitle>,
+testingInformation: option<testingInformation>,
+description: option<controlDescription>,
+name: option<controlName>,
+@as("type") type_: option<controlType>,
+id: option<uuid>,
+arn: option<auditManagerArn>
 }
 type assessmentMetadata = {
-@as("lastUpdated") lastUpdated: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("delegations") delegations: delegations,
-@as("roles") roles: roles,
-@as("scope") scope: scope,
-@as("assessmentReportsDestination") assessmentReportsDestination: assessmentReportsDestination,
-@as("status") status: assessmentStatus,
-@as("complianceType") complianceType: complianceType,
-@as("description") description: assessmentDescription,
-@as("id") id: uUID,
-@as("name") name: assessmentName
+lastUpdated: option<timestamp_>,
+creationTime: option<timestamp_>,
+delegations: option<delegations>,
+roles: option<roles>,
+scope: option<scope>,
+assessmentReportsDestination: option<assessmentReportsDestination>,
+status: option<assessmentStatus>,
+complianceType: option<complianceType>,
+description: option<assessmentDescription>,
+id: option<uuid>,
+name: option<assessmentName>
 }
 type assessmentControls = array<assessmentControl>
 type controls = array<control>
 type assessmentControlSet = {
-@as("manualEvidenceCount") manualEvidenceCount: amazonawsInteger,
-@as("systemEvidenceCount") systemEvidenceCount: amazonawsInteger,
-@as("delegations") delegations: delegations,
-@as("controls") controls: assessmentControls,
-@as("roles") roles: roles,
-@as("status") status: controlSetStatus,
-@as("description") description: nonEmptyString,
-@as("id") id: controlSetId
+manualEvidenceCount: option<integer_>,
+systemEvidenceCount: option<integer_>,
+delegations: option<delegations>,
+controls: option<assessmentControls>,
+roles: option<roles>,
+status: option<controlSetStatus>,
+description: option<nonEmptyString>,
+id: option<controlSetId>
 }
 type controlSet = {
-@as("controls") controls: controls,
-@as("name") name: controlSetName,
-@as("id") id: uUID
+controls: option<controls>,
+name: option<controlSetName>,
+id: option<uuid>
 }
 type assessmentControlSets = array<assessmentControlSet>
 type controlSets = array<controlSet>
 type assessmentFramework = {
-@as("controlSets") controlSets: assessmentControlSets,
-@as("metadata") metadata: frameworkMetadata,
-@as("arn") arn: auditManagerArn,
-@as("id") id: uUID
+controlSets: option<assessmentControlSets>,
+metadata: option<frameworkMetadata>,
+arn: option<auditManagerArn>,
+id: option<uuid>
 }
 type framework = {
-@as("tags") tags: tagMap,
-@as("lastUpdatedBy") lastUpdatedBy: lastUpdatedBy,
-@as("createdBy") createdBy: createdBy,
-@as("lastUpdatedAt") lastUpdatedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("controlSets") controlSets: controlSets,
-@as("controlSources") controlSources: controlSources,
-@as("logo") logo: filename,
-@as("description") description: frameworkDescription,
-@as("complianceType") complianceType: complianceType,
-@as("type") type_: frameworkType,
-@as("name") name: frameworkName,
-@as("id") id: uUID,
-@as("arn") arn: auditManagerArn
+tags: option<tagMap>,
+lastUpdatedBy: option<lastUpdatedBy>,
+createdBy: option<createdBy>,
+lastUpdatedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+controlSets: option<controlSets>,
+controlSources: option<controlSources>,
+logo: option<filename>,
+description: option<frameworkDescription>,
+complianceType: option<complianceType>,
+@as("type") type_: option<frameworkType>,
+name: option<frameworkName>,
+id: option<uuid>,
+arn: option<auditManagerArn>
 }
 type assessment = {
-@as("tags") tags: tagMap,
-@as("framework") framework: assessmentFramework,
-@as("metadata") metadata: assessmentMetadata,
-@as("awsAccount") awsAccount: aWSAccount,
-@as("arn") arn: auditManagerArn
+tags: option<tagMap>,
+framework: option<assessmentFramework>,
+metadata: option<assessmentMetadata>,
+awsAccount: option<awsaccount>,
+arn: option<auditManagerArn>
 }
-type clientType;
-@module("@aws-sdk/client-auditmanager") @new external createClient: unit => clientType = "AuditManagerClient";
+type awsServiceClient;
+@module("@aws-sdk/client-auditmanager") @new external createClient: unit => awsServiceClient = "AuditManagerClient";
 module GetAccountStatus = {
   type t;
   type request = unit
   type response = {
-@as("status") status: accountStatus
+status: option<accountStatus>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetAccountStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ValidateAssessmentReportIntegrity = {
   type t;
   type request = {
-@as("s3RelativePath") s3RelativePath: option<s3Url>
+s3RelativePath: s3Url
 }
   type response = {
-@as("validationErrors") validationErrors: validationErrors,
-@as("signatureKeyId") signatureKeyId: amazonawsString,
-@as("signatureDateTime") signatureDateTime: amazonawsString,
-@as("signatureAlgorithm") signatureAlgorithm: amazonawsString,
-@as("signatureValid") signatureValid: amazonawsBoolean
+validationErrors: option<validationErrors>,
+signatureKeyId: option<string_>,
+signatureDateTime: option<string_>,
+signatureAlgorithm: option<string_>,
+signatureValid: option<boolean_>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ValidateAssessmentReportIntegrityCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<auditManagerArn>
+tagKeys: tagKeyList,
+resourceArn: auditManagerArn
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<auditManagerArn>
+tags: tagMap,
+resourceArn: auditManagerArn
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterOrganizationAdminAccount = {
   type t;
   type request = {
-@as("adminAccountId") adminAccountId: option<accountId>
+adminAccountId: accountId
 }
   type response = {
-@as("organizationId") organizationId: organizationId,
-@as("adminAccountId") adminAccountId: accountId
+organizationId: option<organizationId>,
+adminAccountId: option<accountId>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "RegisterOrganizationAdminAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterAccount = {
   type t;
   type request = {
-@as("delegatedAdminAccount") delegatedAdminAccount: accountId,
-@as("kmsKey") kmsKey: kmsKey
+delegatedAdminAccount: option<accountId>,
+kmsKey: option<kmsKey>
 }
   type response = {
-@as("status") status: accountStatus
+status: option<accountStatus>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "RegisterAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<auditManagerArn>
+resourceArn: auditManagerArn
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListNotifications = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: token
+maxResults: option<maxResults>,
+nextToken: option<token>
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("notifications") notifications: notifications
+nextToken: option<token>,
+notifications: option<notifications>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListNotificationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListKeywordsForDataSource = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: token,
-@as("source") source: option<sourceType>
+maxResults: option<maxResults>,
+nextToken: option<token>,
+source: sourceType
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("keywords") keywords: keywords
+nextToken: option<token>,
+keywords: option<keywords>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListKeywordsForDataSourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListControls = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: token,
-@as("controlType") controlType: option<controlType>
+maxResults: option<maxResults>,
+nextToken: option<token>,
+controlType: controlType
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("controlMetadataList") controlMetadataList: controlMetadataList
+nextToken: option<token>,
+controlMetadataList: option<controlMetadataList>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListControlsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssessmentReports = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: token
+maxResults: option<maxResults>,
+nextToken: option<token>
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("assessmentReports") assessmentReports: assessmentReportsMetadata
+nextToken: option<token>,
+assessmentReports: option<assessmentReportsMetadata>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListAssessmentReportsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssessmentFrameworks = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: token,
-@as("frameworkType") frameworkType: option<frameworkType>
+maxResults: option<maxResults>,
+nextToken: option<token>,
+frameworkType: frameworkType
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("frameworkMetadataList") frameworkMetadataList: frameworkMetadataList
+nextToken: option<token>,
+frameworkMetadataList: option<frameworkMetadataList>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListAssessmentFrameworksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetServicesInScope = {
   type t;
   type request = unit
   type response = {
-@as("serviceMetadata") serviceMetadata: serviceMetadataList
+serviceMetadata: option<serviceMetadataList>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetServicesInScopeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetOrganizationAdminAccount = {
   type t;
   type request = unit
   type response = {
-@as("organizationId") organizationId: organizationId,
-@as("adminAccountId") adminAccountId: accountId
+organizationId: option<organizationId>,
+adminAccountId: option<accountId>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetOrganizationAdminAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEvidenceFoldersByAssessmentControl = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: token,
-@as("controlId") controlId: option<uUID>,
-@as("controlSetId") controlSetId: option<controlSetId>,
-@as("assessmentId") assessmentId: option<uUID>
+maxResults: option<maxResults>,
+nextToken: option<token>,
+controlId: uuid,
+controlSetId: controlSetId,
+assessmentId: uuid
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("evidenceFolders") evidenceFolders: assessmentEvidenceFolders
+nextToken: option<token>,
+evidenceFolders: option<assessmentEvidenceFolders>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetEvidenceFoldersByAssessmentControlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEvidenceFoldersByAssessment = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: token,
-@as("assessmentId") assessmentId: option<uUID>
+maxResults: option<maxResults>,
+nextToken: option<token>,
+assessmentId: uuid
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("evidenceFolders") evidenceFolders: assessmentEvidenceFolders
+nextToken: option<token>,
+evidenceFolders: option<assessmentEvidenceFolders>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetEvidenceFoldersByAssessmentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEvidenceFolder = {
   type t;
   type request = {
-@as("evidenceFolderId") evidenceFolderId: option<uUID>,
-@as("controlSetId") controlSetId: option<controlSetId>,
-@as("assessmentId") assessmentId: option<uUID>
+evidenceFolderId: uuid,
+controlSetId: controlSetId,
+assessmentId: uuid
 }
   type response = {
-@as("evidenceFolder") evidenceFolder: assessmentEvidenceFolder
+evidenceFolder: option<assessmentEvidenceFolder>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetEvidenceFolderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDelegations = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: token
+maxResults: option<maxResults>,
+nextToken: option<token>
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("delegations") delegations: delegationMetadataList
+nextToken: option<token>,
+delegations: option<delegationMetadataList>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetDelegationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetChangeLogs = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: token,
-@as("controlId") controlId: uUID,
-@as("controlSetId") controlSetId: controlSetId,
-@as("assessmentId") assessmentId: option<uUID>
+maxResults: option<maxResults>,
+nextToken: option<token>,
+controlId: option<uuid>,
+controlSetId: option<controlSetId>,
+assessmentId: uuid
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("changeLogs") changeLogs: changeLogs
+nextToken: option<token>,
+changeLogs: option<changeLogs>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetChangeLogsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAssessmentReportUrl = {
   type t;
   type request = {
-@as("assessmentId") assessmentId: option<uUID>,
-@as("assessmentReportId") assessmentReportId: option<uUID>
+assessmentId: uuid,
+assessmentReportId: uuid
 }
   type response = {
-@as("preSignedUrl") preSignedUrl: uRL
+preSignedUrl: option<url>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetAssessmentReportUrlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateAssessmentReportEvidenceFolder = {
   type t;
   type request = {
-@as("evidenceFolderId") evidenceFolderId: option<uUID>,
-@as("assessmentId") assessmentId: option<uUID>
+evidenceFolderId: uuid,
+assessmentId: uuid
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "DisassociateAssessmentReportEvidenceFolderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterOrganizationAdminAccount = {
   type t;
   type request = {
-@as("adminAccountId") adminAccountId: accountId
+adminAccountId: option<accountId>
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "DeregisterOrganizationAdminAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterAccount = {
   type t;
   type request = unit
   type response = {
-@as("status") status: accountStatus
+status: option<accountStatus>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "DeregisterAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteControl = {
   type t;
   type request = {
-@as("controlId") controlId: option<uUID>
+controlId: uuid
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "DeleteControlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAssessmentReport = {
   type t;
   type request = {
-@as("assessmentReportId") assessmentReportId: option<uUID>,
-@as("assessmentId") assessmentId: option<uUID>
+assessmentReportId: uuid,
+assessmentId: uuid
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "DeleteAssessmentReportCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAssessmentFramework = {
   type t;
   type request = {
-@as("frameworkId") frameworkId: option<uUID>
+frameworkId: uuid
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "DeleteAssessmentFrameworkCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAssessment = {
   type t;
   type request = {
-@as("assessmentId") assessmentId: option<uUID>
+assessmentId: uuid
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "DeleteAssessmentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAssessmentReport = {
   type t;
   type request = {
-@as("assessmentId") assessmentId: option<uUID>,
-@as("description") description: assessmentReportDescription,
-@as("name") name: option<assessmentReportName>
+assessmentId: uuid,
+description: option<assessmentReportDescription>,
+name: assessmentReportName
 }
   type response = {
-@as("assessmentReport") assessmentReport: assessmentReport
+assessmentReport: option<assessmentReport>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "CreateAssessmentReportCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchDisassociateAssessmentReportEvidence = {
   type t;
   type request = {
-@as("evidenceIds") evidenceIds: option<evidenceIds>,
-@as("evidenceFolderId") evidenceFolderId: option<uUID>,
-@as("assessmentId") assessmentId: option<uUID>
+evidenceIds: evidenceIds,
+evidenceFolderId: uuid,
+assessmentId: uuid
 }
   type response = {
-@as("errors") errors: assessmentReportEvidenceErrors,
-@as("evidenceIds") evidenceIds: evidenceIds
+errors: option<assessmentReportEvidenceErrors>,
+evidenceIds: option<evidenceIds>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "BatchDisassociateAssessmentReportEvidenceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchDeleteDelegationByAssessment = {
   type t;
   type request = {
-@as("assessmentId") assessmentId: option<uUID>,
-@as("delegationIds") delegationIds: option<delegationIds>
+assessmentId: uuid,
+delegationIds: delegationIds
 }
   type response = {
-@as("errors") errors: batchDeleteDelegationByAssessmentErrors
+errors: option<batchDeleteDelegationByAssessmentErrors>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "BatchDeleteDelegationByAssessmentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchAssociateAssessmentReportEvidence = {
   type t;
   type request = {
-@as("evidenceIds") evidenceIds: option<evidenceIds>,
-@as("evidenceFolderId") evidenceFolderId: option<uUID>,
-@as("assessmentId") assessmentId: option<uUID>
+evidenceIds: evidenceIds,
+evidenceFolderId: uuid,
+assessmentId: uuid
 }
   type response = {
-@as("errors") errors: assessmentReportEvidenceErrors,
-@as("evidenceIds") evidenceIds: evidenceIds
+errors: option<assessmentReportEvidenceErrors>,
+evidenceIds: option<evidenceIds>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "BatchAssociateAssessmentReportEvidenceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateAssessmentReportEvidenceFolder = {
   type t;
   type request = {
-@as("evidenceFolderId") evidenceFolderId: option<uUID>,
-@as("assessmentId") assessmentId: option<uUID>
+evidenceFolderId: uuid,
+assessmentId: uuid
 }
   type response = unit
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "AssociateAssessmentReportEvidenceFolderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateSettings = {
   type t;
   type request = {
-@as("kmsKey") kmsKey: kmsKey,
-@as("defaultProcessOwners") defaultProcessOwners: roles,
-@as("defaultAssessmentReportsDestination") defaultAssessmentReportsDestination: assessmentReportsDestination,
-@as("snsTopic") snsTopic: snsArn
+kmsKey: option<kmsKey>,
+defaultProcessOwners: option<roles>,
+defaultAssessmentReportsDestination: option<assessmentReportsDestination>,
+snsTopic: option<snsArn>
 }
   type response = {
-@as("settings") settings: settings
+settings: option<settings>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "UpdateSettingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAssessmentControl = {
   type t;
   type request = {
-@as("commentBody") commentBody: controlCommentBody,
-@as("controlStatus") controlStatus: controlStatus,
-@as("controlId") controlId: option<uUID>,
-@as("controlSetId") controlSetId: option<controlSetId>,
-@as("assessmentId") assessmentId: option<uUID>
+commentBody: option<controlCommentBody>,
+controlStatus: option<controlStatus>,
+controlId: uuid,
+controlSetId: controlSetId,
+assessmentId: uuid
 }
   type response = {
-@as("control") control: assessmentControl
+control: option<assessmentControl>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "UpdateAssessmentControlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSettings = {
   type t;
   type request = {
-@as("attribute") attribute: option<settingAttribute>
+attribute: settingAttribute
 }
   type response = {
-@as("settings") settings: settings
+settings: option<settings>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetSettingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEvidence = {
   type t;
   type request = {
-@as("evidenceId") evidenceId: option<uUID>,
-@as("evidenceFolderId") evidenceFolderId: option<uUID>,
-@as("controlSetId") controlSetId: option<controlSetId>,
-@as("assessmentId") assessmentId: option<uUID>
+evidenceId: uuid,
+evidenceFolderId: uuid,
+controlSetId: controlSetId,
+assessmentId: uuid
 }
   type response = {
-@as("evidence") evidence: evidence
+evidence: option<evidence>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetEvidenceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchImportEvidenceToAssessmentControl = {
   type t;
   type request = {
-@as("manualEvidence") manualEvidence: option<manualEvidenceList>,
-@as("controlId") controlId: option<uUID>,
-@as("controlSetId") controlSetId: option<controlSetId>,
-@as("assessmentId") assessmentId: option<uUID>
+manualEvidence: manualEvidenceList,
+controlId: uuid,
+controlSetId: controlSetId,
+assessmentId: uuid
 }
   type response = {
-@as("errors") errors: batchImportEvidenceToAssessmentControlErrors
+errors: option<batchImportEvidenceToAssessmentControlErrors>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "BatchImportEvidenceToAssessmentControlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchCreateDelegationByAssessment = {
   type t;
   type request = {
-@as("assessmentId") assessmentId: option<uUID>,
-@as("createDelegationRequests") createDelegationRequests: option<createDelegationRequests>
+assessmentId: uuid,
+createDelegationRequests: createDelegationRequests
 }
   type response = {
-@as("errors") errors: batchCreateDelegationByAssessmentErrors,
-@as("delegations") delegations: delegations
+errors: option<batchCreateDelegationByAssessmentErrors>,
+delegations: option<delegations>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "BatchCreateDelegationByAssessmentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateControl = {
   type t;
   type request = {
-@as("controlMappingSources") controlMappingSources: option<controlMappingSources>,
-@as("actionPlanInstructions") actionPlanInstructions: actionPlanInstructions,
-@as("actionPlanTitle") actionPlanTitle: actionPlanTitle,
-@as("testingInformation") testingInformation: testingInformation,
-@as("description") description: controlDescription,
-@as("name") name: option<controlName>,
-@as("controlId") controlId: option<uUID>
+controlMappingSources: controlMappingSources,
+actionPlanInstructions: option<actionPlanInstructions>,
+actionPlanTitle: option<actionPlanTitle>,
+testingInformation: option<testingInformation>,
+description: option<controlDescription>,
+name: controlName,
+controlId: uuid
 }
   type response = {
-@as("control") control: control
+control: option<control>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "UpdateControlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssessments = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: token
+maxResults: option<maxResults>,
+nextToken: option<token>
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("assessmentMetadata") assessmentMetadata: listAssessmentMetadata
+nextToken: option<token>,
+assessmentMetadata: option<listAssessmentMetadata>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "ListAssessmentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEvidenceByEvidenceFolder = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: token,
-@as("evidenceFolderId") evidenceFolderId: option<uUID>,
-@as("controlSetId") controlSetId: option<controlSetId>,
-@as("assessmentId") assessmentId: option<uUID>
+maxResults: option<maxResults>,
+nextToken: option<token>,
+evidenceFolderId: uuid,
+controlSetId: controlSetId,
+assessmentId: uuid
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("evidence") evidence: evidenceList
+nextToken: option<token>,
+evidence: option<evidenceList>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetEvidenceByEvidenceFolderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetControl = {
   type t;
   type request = {
-@as("controlId") controlId: option<uUID>
+controlId: uuid
 }
   type response = {
-@as("control") control: control
+control: option<control>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetControlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateControl = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("controlMappingSources") controlMappingSources: option<createControlMappingSources>,
-@as("actionPlanInstructions") actionPlanInstructions: actionPlanInstructions,
-@as("actionPlanTitle") actionPlanTitle: actionPlanTitle,
-@as("testingInformation") testingInformation: testingInformation,
-@as("description") description: controlDescription,
-@as("name") name: option<controlName>
+tags: option<tagMap>,
+controlMappingSources: createControlMappingSources,
+actionPlanInstructions: option<actionPlanInstructions>,
+actionPlanTitle: option<actionPlanTitle>,
+testingInformation: option<testingInformation>,
+description: option<controlDescription>,
+name: controlName
 }
   type response = {
-@as("control") control: control
+control: option<control>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "CreateControlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAssessmentControlSetStatus = {
   type t;
   type request = {
-@as("comment") comment: option<delegationComment>,
-@as("status") status: option<controlSetStatus>,
-@as("controlSetId") controlSetId: option<amazonawsString>,
-@as("assessmentId") assessmentId: option<uUID>
+comment: delegationComment,
+status: controlSetStatus,
+controlSetId: string_,
+assessmentId: uuid
 }
   type response = {
-@as("controlSet") controlSet: assessmentControlSet
+controlSet: option<assessmentControlSet>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "UpdateAssessmentControlSetStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAssessmentStatus = {
   type t;
   type request = {
-@as("status") status: option<assessmentStatus>,
-@as("assessmentId") assessmentId: option<uUID>
+status: assessmentStatus,
+assessmentId: uuid
 }
   type response = {
-@as("assessment") assessment: assessment
+assessment: option<assessment>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "UpdateAssessmentStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAssessmentFramework = {
   type t;
   type request = {
-@as("controlSets") controlSets: option<updateAssessmentFrameworkControlSets>,
-@as("complianceType") complianceType: complianceType,
-@as("description") description: frameworkDescription,
-@as("name") name: option<frameworkName>,
-@as("frameworkId") frameworkId: option<uUID>
+controlSets: updateAssessmentFrameworkControlSets,
+complianceType: option<complianceType>,
+description: option<frameworkDescription>,
+name: frameworkName,
+frameworkId: uuid
 }
   type response = {
-@as("framework") framework: framework
+framework: option<framework>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "UpdateAssessmentFrameworkCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAssessment = {
   type t;
   type request = {
-@as("roles") roles: roles,
-@as("assessmentReportsDestination") assessmentReportsDestination: assessmentReportsDestination,
-@as("scope") scope: option<scope>,
-@as("assessmentDescription") assessmentDescription: assessmentDescription,
-@as("assessmentName") assessmentName: assessmentName,
-@as("assessmentId") assessmentId: option<uUID>
+roles: option<roles>,
+assessmentReportsDestination: option<assessmentReportsDestination>,
+scope: scope,
+assessmentDescription: option<assessmentDescription>,
+assessmentName: option<assessmentName>,
+assessmentId: uuid
 }
   type response = {
-@as("assessment") assessment: assessment
+assessment: option<assessment>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "UpdateAssessmentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAssessmentFramework = {
   type t;
   type request = {
-@as("frameworkId") frameworkId: option<uUID>
+frameworkId: uuid
 }
   type response = {
-@as("framework") framework: framework
+framework: option<framework>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetAssessmentFrameworkCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAssessment = {
   type t;
   type request = {
-@as("assessmentId") assessmentId: option<uUID>
+assessmentId: uuid
 }
   type response = {
-@as("userRole") userRole: role,
-@as("assessment") assessment: assessment
+userRole: option<role>,
+assessment: option<assessment>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "GetAssessmentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAssessmentFramework = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("controlSets") controlSets: option<createAssessmentFrameworkControlSets>,
-@as("complianceType") complianceType: complianceType,
-@as("description") description: frameworkDescription,
-@as("name") name: option<frameworkName>
+tags: option<tagMap>,
+controlSets: createAssessmentFrameworkControlSets,
+complianceType: option<complianceType>,
+description: option<frameworkDescription>,
+name: frameworkName
 }
   type response = {
-@as("framework") framework: framework
+framework: option<framework>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "CreateAssessmentFrameworkCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAssessment = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("frameworkId") frameworkId: option<uUID>,
-@as("roles") roles: option<roles>,
-@as("scope") scope: option<scope>,
-@as("assessmentReportsDestination") assessmentReportsDestination: option<assessmentReportsDestination>,
-@as("description") description: assessmentDescription,
-@as("name") name: option<assessmentName>
+tags: option<tagMap>,
+frameworkId: uuid,
+roles: roles,
+scope: scope,
+assessmentReportsDestination: assessmentReportsDestination,
+description: option<assessmentDescription>,
+name: assessmentName
 }
   type response = {
-@as("assessment") assessment: assessment
+assessment: option<assessment>
 }
   @module("@aws-sdk/client-auditmanager") @new external new_: (request) => t = "CreateAssessmentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

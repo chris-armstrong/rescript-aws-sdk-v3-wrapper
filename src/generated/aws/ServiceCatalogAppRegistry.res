@@ -1,26 +1,32 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type amazonawsTimestamp = Js.Date.t;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type long = float
+type timestamp_ = Js.Date.t;
 type tagValue = string
 type tagKey = string
-type syncAction = [@as("NO_ACTION") #NO_ACTION | @as("START_SYNC") #START_SYNC]
-type amazonawsString = string
+type syncAction = [@as("NO_ACTION") #NOACTION | @as("START_SYNC") #STARTSYNC]
+type string_ = string
 type stackArn = string
-type resourceType = [@as("CFN_STACK") #CFN_STACK]
+type resourceType = [@as("CFN_STACK") #CFNSTACK]
 type resourceSpecifier = string
 type nextToken = string
 type name = string
-type maxResults = int;
+type maxResults = int
 type description = string
 type clientToken = string
 type attributes = string
 type attributeGroupSpecifier = string
 type attributeGroupId = string
 type attributeGroupArn = string
-type associationCount = int;
+type associationCount = int
 type arn = string
 type applicationSpecifier = string
 type applicationId = string
@@ -28,332 +34,332 @@ type applicationArn = string
 type tags = Js.Dict.t< tagValue>
 type tagKeys = array<tagKey>
 type resourceInfo = {
-@as("arn") arn: stackArn,
-@as("name") name: resourceSpecifier
+arn: option<stackArn>,
+name: option<resourceSpecifier>
 }
 type attributeGroupSummary = {
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("description") description: description,
-@as("name") name: name,
-@as("arn") arn: attributeGroupArn,
-@as("id") id: attributeGroupId
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+description: option<description>,
+name: option<name>,
+arn: option<attributeGroupArn>,
+id: option<attributeGroupId>
 }
 type attributeGroupIds = array<attributeGroupId>
 type applicationSummary = {
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("description") description: description,
-@as("name") name: name,
-@as("arn") arn: applicationArn,
-@as("id") id: applicationId
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+description: option<description>,
+name: option<name>,
+arn: option<applicationArn>,
+id: option<applicationId>
 }
 type resources = array<resourceInfo>
 type attributeGroupSummaries = array<attributeGroupSummary>
 type attributeGroup = {
-@as("tags") tags: tags,
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("description") description: description,
-@as("name") name: name,
-@as("arn") arn: attributeGroupArn,
-@as("id") id: attributeGroupId
+tags: option<tags>,
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+description: option<description>,
+name: option<name>,
+arn: option<attributeGroupArn>,
+id: option<attributeGroupId>
 }
 type applicationSummaries = array<applicationSummary>
 type application = {
-@as("tags") tags: tags,
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("description") description: description,
-@as("name") name: name,
-@as("arn") arn: applicationArn,
-@as("id") id: applicationId
+tags: option<tags>,
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+description: option<description>,
+name: option<name>,
+arn: option<applicationArn>,
+id: option<applicationId>
 }
-type clientType;
-@module("@aws-sdk/client-servicecatalog") @new external createClient: unit => clientType = "ServiceCatalogAppRegistryClient";
+type awsServiceClient;
+@module("@aws-sdk/client-servicecatalog") @new external createClient: unit => awsServiceClient = "ServiceCatalogAppRegistryClient";
 module SyncResource = {
   type t;
   type request = {
-@as("resource") resource: option<resourceSpecifier>,
-@as("resourceType") resourceType: option<resourceType>
+resource: resourceSpecifier,
+resourceType: resourceType
 }
   type response = {
-@as("actionTaken") actionTaken: syncAction,
-@as("resourceArn") resourceArn: arn,
-@as("applicationArn") applicationArn: applicationArn
+actionTaken: option<syncAction>,
+resourceArn: option<arn>,
+applicationArn: option<applicationArn>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "SyncResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateResource = {
   type t;
   type request = {
-@as("resource") resource: option<resourceSpecifier>,
-@as("resourceType") resourceType: option<resourceType>,
-@as("application") application: option<applicationSpecifier>
+resource: resourceSpecifier,
+resourceType: resourceType,
+application: applicationSpecifier
 }
   type response = {
-@as("resourceArn") resourceArn: arn,
-@as("applicationArn") applicationArn: applicationArn
+resourceArn: option<arn>,
+applicationArn: option<applicationArn>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DisassociateResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateAttributeGroup = {
   type t;
   type request = {
-@as("attributeGroup") attributeGroup: option<attributeGroupSpecifier>,
-@as("application") application: option<applicationSpecifier>
+attributeGroup: attributeGroupSpecifier,
+application: applicationSpecifier
 }
   type response = {
-@as("attributeGroupArn") attributeGroupArn: attributeGroupArn,
-@as("applicationArn") applicationArn: applicationArn
+attributeGroupArn: option<attributeGroupArn>,
+applicationArn: option<applicationArn>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DisassociateAttributeGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateResource = {
   type t;
   type request = {
-@as("resource") resource: option<resourceSpecifier>,
-@as("resourceType") resourceType: option<resourceType>,
-@as("application") application: option<applicationSpecifier>
+resource: resourceSpecifier,
+resourceType: resourceType,
+application: applicationSpecifier
 }
   type response = {
-@as("resourceArn") resourceArn: arn,
-@as("applicationArn") applicationArn: applicationArn
+resourceArn: option<arn>,
+applicationArn: option<applicationArn>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "AssociateResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateAttributeGroup = {
   type t;
   type request = {
-@as("attributeGroup") attributeGroup: option<attributeGroupSpecifier>,
-@as("application") application: option<applicationSpecifier>
+attributeGroup: attributeGroupSpecifier,
+application: applicationSpecifier
 }
   type response = {
-@as("attributeGroupArn") attributeGroupArn: attributeGroupArn,
-@as("applicationArn") applicationArn: applicationArn
+attributeGroupArn: option<attributeGroupArn>,
+applicationArn: option<applicationArn>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "AssociateAttributeGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeys>,
-@as("resourceArn") resourceArn: option<arn>
+tagKeys: tagKeys,
+resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tags>,
-@as("resourceArn") resourceArn: option<arn>
+tags: tags,
+resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<arn>
+resourceArn: arn
 }
   type response = {
-@as("tags") tags: tags
+tags: option<tags>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssociatedAttributeGroups = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("application") application: option<applicationSpecifier>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+application: applicationSpecifier
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("attributeGroups") attributeGroups: attributeGroupIds
+nextToken: option<nextToken>,
+attributeGroups: option<attributeGroupIds>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListAssociatedAttributeGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAttributeGroup = {
   type t;
   type request = {
-@as("attributeGroup") attributeGroup: option<attributeGroupSpecifier>
+attributeGroup: attributeGroupSpecifier
 }
   type response = {
-@as("tags") tags: tags,
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("attributes") attributes: attributes,
-@as("description") description: description,
-@as("name") name: name,
-@as("arn") arn: attributeGroupArn,
-@as("id") id: attributeGroupId
+tags: option<tags>,
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+attributes: option<attributes>,
+description: option<description>,
+name: option<name>,
+arn: option<attributeGroupArn>,
+id: option<attributeGroupId>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "GetAttributeGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetApplication = {
   type t;
   type request = {
-@as("application") application: option<applicationSpecifier>
+application: applicationSpecifier
 }
   type response = {
-@as("tags") tags: tags,
-@as("associatedResourceCount") associatedResourceCount: associationCount,
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("description") description: description,
-@as("name") name: name,
-@as("arn") arn: applicationArn,
-@as("id") id: applicationId
+tags: option<tags>,
+associatedResourceCount: option<associationCount>,
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+description: option<description>,
+name: option<name>,
+arn: option<applicationArn>,
+id: option<applicationId>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "GetApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAttributeGroup = {
   type t;
   type request = {
-@as("attributeGroup") attributeGroup: option<attributeGroupSpecifier>
+attributeGroup: attributeGroupSpecifier
 }
   type response = {
-@as("attributeGroup") attributeGroup: attributeGroupSummary
+attributeGroup: option<attributeGroupSummary>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeleteAttributeGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApplication = {
   type t;
   type request = {
-@as("application") application: option<applicationSpecifier>
+application: applicationSpecifier
 }
   type response = {
-@as("application") application: applicationSummary
+application: option<applicationSummary>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeleteApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAttributeGroup = {
   type t;
   type request = {
-@as("attributes") attributes: attributes,
-@as("description") description: description,
-@as("name") name: name,
-@as("attributeGroup") attributeGroup: option<attributeGroupSpecifier>
+attributes: option<attributes>,
+description: option<description>,
+name: option<name>,
+attributeGroup: attributeGroupSpecifier
 }
   type response = {
-@as("attributeGroup") attributeGroup: attributeGroup
+attributeGroup: option<attributeGroup>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdateAttributeGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateApplication = {
   type t;
   type request = {
-@as("description") description: description,
-@as("name") name: name,
-@as("application") application: option<applicationSpecifier>
+description: option<description>,
+name: option<name>,
+application: applicationSpecifier
 }
   type response = {
-@as("application") application: application
+application: option<application>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdateApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAttributeGroups = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("attributeGroups") attributeGroups: attributeGroupSummaries
+nextToken: option<nextToken>,
+attributeGroups: option<attributeGroupSummaries>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListAttributeGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAssociatedResources = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("application") application: option<applicationSpecifier>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+application: applicationSpecifier
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("resources") resources: resources
+nextToken: option<nextToken>,
+resources: option<resources>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListAssociatedResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListApplications = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("applications") applications: applicationSummaries
+nextToken: option<nextToken>,
+applications: option<applicationSummaries>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListApplicationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAttributeGroup = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("tags") tags: tags,
-@as("attributes") attributes: option<attributes>,
-@as("description") description: description,
-@as("name") name: option<name>
+clientToken: clientToken,
+tags: option<tags>,
+attributes: attributes,
+description: option<description>,
+name: name
 }
   type response = {
-@as("attributeGroup") attributeGroup: attributeGroup
+attributeGroup: option<attributeGroup>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreateAttributeGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApplication = {
   type t;
   type request = {
-@as("clientToken") clientToken: option<clientToken>,
-@as("tags") tags: tags,
-@as("description") description: description,
-@as("name") name: option<name>
+clientToken: clientToken,
+tags: option<tags>,
+description: option<description>,
+name: name
 }
   type response = {
-@as("application") application: application
+application: option<application>
 }
   @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreateApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

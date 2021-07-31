@@ -1,8 +1,13 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type integer_ = int
+type long = float
 type taintValue = string
 type taintKey = string
 type requiredClaimsValue = string
@@ -10,187 +15,187 @@ type requiredClaimsKey = string
 type labelValue = string
 type labelKey = string
 type configStatus = [@as("ACTIVE") #ACTIVE | @as("DELETING") #DELETING | @as("CREATING") #CREATING]
-type zeroCapacity = int;
+type zeroCapacity = int
 type updateType = [@as("AddonUpdate") #AddonUpdate | @as("AssociateEncryptionConfig") #AssociateEncryptionConfig | @as("DisassociateIdentityProviderConfig") #DisassociateIdentityProviderConfig | @as("AssociateIdentityProviderConfig") #AssociateIdentityProviderConfig | @as("ConfigUpdate") #ConfigUpdate | @as("LoggingUpdate") #LoggingUpdate | @as("EndpointAccessUpdate") #EndpointAccessUpdate | @as("VersionUpdate") #VersionUpdate]
 type updateStatus = [@as("Successful") #Successful | @as("Cancelled") #Cancelled | @as("Failed") #Failed | @as("InProgress") #InProgress]
 type updateParamType = [@as("ResolveConflicts") #ResolveConflicts | @as("ServiceAccountRoleArn") #ServiceAccountRoleArn | @as("AddonVersion") #AddonVersion | @as("EncryptionConfig") #EncryptionConfig | @as("IdentityProviderConfig") #IdentityProviderConfig | @as("LaunchTemplateVersion") #LaunchTemplateVersion | @as("LaunchTemplateName") #LaunchTemplateName | @as("PublicAccessCidrs") #PublicAccessCidrs | @as("ReleaseVersion") #ReleaseVersion | @as("MinSize") #MinSize | @as("MaxSize") #MaxSize | @as("TaintsToRemove") #TaintsToRemove | @as("TaintsToAdd") #TaintsToAdd | @as("LabelsToRemove") #LabelsToRemove | @as("LabelsToAdd") #LabelsToAdd | @as("DesiredSize") #DesiredSize | @as("ClusterLogging") #ClusterLogging | @as("EndpointPublicAccess") #EndpointPublicAccess | @as("EndpointPrivateAccess") #EndpointPrivateAccess | @as("PlatformVersion") #PlatformVersion | @as("Version") #Version]
-type amazonawsTimestamp = Js.Date.t;
-type taintEffect = [@as("PREFER_NO_SCHEDULE") #PREFER_NO_SCHEDULE | @as("NO_EXECUTE") #NO_EXECUTE | @as("NO_SCHEDULE") #NO_SCHEDULE]
+type timestamp_ = Js.Date.t;
+type taintEffect = [@as("PREFER_NO_SCHEDULE") #PREFERNOSCHEDULE | @as("NO_EXECUTE") #NOEXECUTE | @as("NO_SCHEDULE") #NOSCHEDULE]
 type tagValue = string
 type tagKey = string
-type amazonawsString = string
+type string_ = string
 type roleArn = string
 type resolveConflicts = [@as("NONE") #NONE | @as("OVERWRITE") #OVERWRITE]
-type nodegroupStatus = [@as("DEGRADED") #DEGRADED | @as("DELETE_FAILED") #DELETE_FAILED | @as("CREATE_FAILED") #CREATE_FAILED | @as("DELETING") #DELETING | @as("UPDATING") #UPDATING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
+type nodegroupStatus = [@as("DEGRADED") #DEGRADED | @as("DELETE_FAILED") #DELETEFAILED | @as("CREATE_FAILED") #CREATEFAILED | @as("DELETING") #DELETING | @as("UPDATING") #UPDATING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
 type nodegroupIssueCode = [@as("ClusterUnreachable") #ClusterUnreachable | @as("InternalFailure") #InternalFailure | @as("AccessDenied") #AccessDenied | @as("InsufficientFreeAddresses") #InsufficientFreeAddresses | @as("InstanceLimitExceeded") #InstanceLimitExceeded | @as("AsgInstanceLaunchFailures") #AsgInstanceLaunchFailures | @as("NodeCreationFailure") #NodeCreationFailure | @as("IamNodeRoleNotFound") #IamNodeRoleNotFound | @as("IamLimitExceeded") #IamLimitExceeded | @as("IamInstanceProfileNotFound") #IamInstanceProfileNotFound | @as("Ec2SubnetInvalidConfiguration") #Ec2SubnetInvalidConfiguration | @as("Ec2SubnetNotFound") #Ec2SubnetNotFound | @as("Ec2LaunchTemplateVersionMismatch") #Ec2LaunchTemplateVersionMismatch | @as("Ec2LaunchTemplateNotFound") #Ec2LaunchTemplateNotFound | @as("Ec2SecurityGroupDeletionFailure") #Ec2SecurityGroupDeletionFailure | @as("Ec2SecurityGroupNotFound") #Ec2SecurityGroupNotFound | @as("AutoScalingGroupInvalidConfiguration") #AutoScalingGroupInvalidConfiguration | @as("AutoScalingGroupNotFound") #AutoScalingGroupNotFound]
-type logType = [@as("scheduler") #scheduler | @as("controllerManager") #controllerManager | @as("authenticator") #authenticator | @as("audit") #audit | @as("api") #api]
-type listUpdatesRequestMaxResults = int;
-type listNodegroupsRequestMaxResults = int;
-type listIdentityProviderConfigsRequestMaxResults = int;
-type listClustersRequestMaxResults = int;
-type listAddonsRequestMaxResults = int;
-type fargateProfilesRequestMaxResults = int;
-type fargateProfileStatus = [@as("DELETE_FAILED") #DELETE_FAILED | @as("CREATE_FAILED") #CREATE_FAILED | @as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
+type logType = [@as("scheduler") #Scheduler | @as("controllerManager") #ControllerManager | @as("authenticator") #Authenticator | @as("audit") #Audit | @as("api") #Api]
+type listUpdatesRequestMaxResults = int
+type listNodegroupsRequestMaxResults = int
+type listIdentityProviderConfigsRequestMaxResults = int
+type listClustersRequestMaxResults = int
+type listAddonsRequestMaxResults = int
+type fargateProfilesRequestMaxResults = int
+type fargateProfileStatus = [@as("DELETE_FAILED") #DELETEFAILED | @as("CREATE_FAILED") #CREATEFAILED | @as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
 type errorCode = [@as("AdmissionRequestDenied") #AdmissionRequestDenied | @as("ConfigurationConflict") #ConfigurationConflict | @as("InsufficientNumberOfReplicas") #InsufficientNumberOfReplicas | @as("ClusterUnreachable") #ClusterUnreachable | @as("InsufficientFreeAddresses") #InsufficientFreeAddresses | @as("PodEvictionFailure") #PodEvictionFailure | @as("NodeCreationFailure") #NodeCreationFailure | @as("Unknown") #Unknown | @as("VpcIdNotFound") #VpcIdNotFound | @as("OperationNotPermitted") #OperationNotPermitted | @as("AccessDenied") #AccessDenied | @as("IpNotAvailable") #IpNotAvailable | @as("EniLimitReached") #EniLimitReached | @as("SecurityGroupNotFound") #SecurityGroupNotFound | @as("SubnetNotFound") #SubnetNotFound]
-type describeAddonVersionsRequestMaxResults = int;
+type describeAddonVersionsRequestMaxResults = int
 type clusterStatus = [@as("UPDATING") #UPDATING | @as("FAILED") #FAILED | @as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
 type clusterName = string
-type capacityTypes = [@as("SPOT") #SPOT | @as("ON_DEMAND") #ON_DEMAND]
-type capacity = int;
-type boxedInteger = int;
-type boxedBoolean = bool;
-type amazonawsBoolean = bool;
-type addonStatus = [@as("DEGRADED") #DEGRADED | @as("DELETE_FAILED") #DELETE_FAILED | @as("DELETING") #DELETING | @as("UPDATING") #UPDATING | @as("CREATE_FAILED") #CREATE_FAILED | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
+type capacityTypes = [@as("SPOT") #SPOT | @as("ON_DEMAND") #ONDEMAND]
+type capacity = int
+type boxedInteger = int
+type boxedBoolean = bool
+type boolean_ = bool
+type addonStatus = [@as("DEGRADED") #DEGRADED | @as("DELETE_FAILED") #DELETEFAILED | @as("DELETING") #DELETING | @as("UPDATING") #UPDATING | @as("CREATE_FAILED") #CREATEFAILED | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
 type addonIssueCode = [@as("AdmissionRequestDenied") #AdmissionRequestDenied | @as("ConfigurationConflict") #ConfigurationConflict | @as("InsufficientNumberOfReplicas") #InsufficientNumberOfReplicas | @as("ClusterUnreachable") #ClusterUnreachable | @as("InternalFailure") #InternalFailure | @as("AccessDenied") #AccessDenied]
-type aMITypes = [@as("CUSTOM") #CUSTOM | @as("AL2_ARM_64") #AL2_ARM_64 | @as("AL2_x86_64_GPU") #AL2_x86_64_GPU | @as("AL2_x86_64") #AL2_x86_64]
+type amitypes = [@as("CUSTOM") #CUSTOM | @as("AL2_ARM_64") #AL2ARM64 | @as("AL2_x86_64_GPU") #AL2X8664GPU | @as("AL2_x86_64") #AL2X8664]
 type requiredClaimsMap = Js.Dict.t< requiredClaimsValue>
 type labelsMap = Js.Dict.t< labelValue>
-type labelsKeyList = array<amazonawsString>
+type labelsKeyList = array<string_>
 type updateParam = {
-@as("value") value: amazonawsString,
-@as("type") type_: updateParamType
+value: option<string_>,
+@as("type") type_: option<updateParamType>
 }
 type taint = {
-@as("effect") effect: taintEffect,
-@as("value") value: taintValue,
-@as("key") key: taintKey
+effect: option<taintEffect>,
+value: option<taintValue>,
+key: option<taintKey>
 }
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
-type stringList = array<amazonawsString>
+type stringList = array<string_>
 type provider = {
-@as("keyArn") keyArn: amazonawsString
+keyArn: option<string_>
 }
-type oIDC = {
-@as("issuer") issuer: amazonawsString
+type oidc = {
+issuer: option<string_>
 }
 type nodegroupScalingConfig = {
-@as("desiredSize") desiredSize: zeroCapacity,
-@as("maxSize") maxSize: capacity,
-@as("minSize") minSize: zeroCapacity
+desiredSize: option<zeroCapacity>,
+maxSize: option<capacity>,
+minSize: option<zeroCapacity>
 }
 type logTypes = array<logType>
 type launchTemplateSpecification = {
-@as("id") id: amazonawsString,
-@as("version") version: amazonawsString,
-@as("name") name: amazonawsString
+id: option<string_>,
+version: option<string_>,
+name: option<string_>
 }
 type kubernetesNetworkConfigResponse = {
-@as("serviceIpv4Cidr") serviceIpv4Cidr: amazonawsString
+serviceIpv4Cidr: option<string_>
 }
 type kubernetesNetworkConfigRequest = {
-@as("serviceIpv4Cidr") serviceIpv4Cidr: amazonawsString
+serviceIpv4Cidr: option<string_>
 }
 type identityProviderConfig = {
-@as("name") name: option<amazonawsString>,
-@as("type") type_: option<amazonawsString>
+name: string_,
+@as("type") type_: string_
 }
-type fargateProfileLabel = Js.Dict.t< amazonawsString>
+type fargateProfileLabel = Js.Dict.t< string_>
 type certificate = {
-@as("data") data: amazonawsString
+data: option<string_>
 }
 type autoScalingGroup = {
-@as("name") name: amazonawsString
+name: option<string_>
 }
 type taintsList = array<taint>
 type vpcConfigResponse = {
-@as("publicAccessCidrs") publicAccessCidrs: stringList,
-@as("endpointPrivateAccess") endpointPrivateAccess: amazonawsBoolean,
-@as("endpointPublicAccess") endpointPublicAccess: amazonawsBoolean,
-@as("vpcId") vpcId: amazonawsString,
-@as("clusterSecurityGroupId") clusterSecurityGroupId: amazonawsString,
-@as("securityGroupIds") securityGroupIds: stringList,
-@as("subnetIds") subnetIds: stringList
+publicAccessCidrs: option<stringList>,
+endpointPrivateAccess: option<boolean_>,
+endpointPublicAccess: option<boolean_>,
+vpcId: option<string_>,
+clusterSecurityGroupId: option<string_>,
+securityGroupIds: option<stringList>,
+subnetIds: option<stringList>
 }
 type vpcConfigRequest = {
-@as("publicAccessCidrs") publicAccessCidrs: stringList,
-@as("endpointPrivateAccess") endpointPrivateAccess: boxedBoolean,
-@as("endpointPublicAccess") endpointPublicAccess: boxedBoolean,
-@as("securityGroupIds") securityGroupIds: stringList,
-@as("subnetIds") subnetIds: stringList
+publicAccessCidrs: option<stringList>,
+endpointPrivateAccess: option<boxedBoolean>,
+endpointPublicAccess: option<boxedBoolean>,
+securityGroupIds: option<stringList>,
+subnetIds: option<stringList>
 }
 type updateParams = array<updateParam>
 type updateLabelsPayload = {
-@as("removeLabels") removeLabels: labelsKeyList,
-@as("addOrUpdateLabels") addOrUpdateLabels: labelsMap
+removeLabels: option<labelsKeyList>,
+addOrUpdateLabels: option<labelsMap>
 }
 type remoteAccessConfig = {
-@as("sourceSecurityGroups") sourceSecurityGroups: stringList,
-@as("ec2SshKey") ec2SshKey: amazonawsString
+sourceSecurityGroups: option<stringList>,
+ec2SshKey: option<string_>
 }
 type oidcIdentityProviderConfigRequest = {
-@as("requiredClaims") requiredClaims: requiredClaimsMap,
-@as("groupsPrefix") groupsPrefix: amazonawsString,
-@as("groupsClaim") groupsClaim: amazonawsString,
-@as("usernamePrefix") usernamePrefix: amazonawsString,
-@as("usernameClaim") usernameClaim: amazonawsString,
-@as("clientId") clientId: option<amazonawsString>,
-@as("issuerUrl") issuerUrl: option<amazonawsString>,
-@as("identityProviderConfigName") identityProviderConfigName: option<amazonawsString>
+requiredClaims: option<requiredClaimsMap>,
+groupsPrefix: option<string_>,
+groupsClaim: option<string_>,
+usernamePrefix: option<string_>,
+usernameClaim: option<string_>,
+clientId: string_,
+issuerUrl: string_,
+identityProviderConfigName: string_
 }
 type oidcIdentityProviderConfig = {
-@as("status") status: configStatus,
-@as("tags") tags: tagMap,
-@as("requiredClaims") requiredClaims: requiredClaimsMap,
-@as("groupsPrefix") groupsPrefix: amazonawsString,
-@as("groupsClaim") groupsClaim: amazonawsString,
-@as("usernamePrefix") usernamePrefix: amazonawsString,
-@as("usernameClaim") usernameClaim: amazonawsString,
-@as("clientId") clientId: amazonawsString,
-@as("issuerUrl") issuerUrl: amazonawsString,
-@as("clusterName") clusterName: amazonawsString,
-@as("identityProviderConfigArn") identityProviderConfigArn: amazonawsString,
-@as("identityProviderConfigName") identityProviderConfigName: amazonawsString
+status: option<configStatus>,
+tags: option<tagMap>,
+requiredClaims: option<requiredClaimsMap>,
+groupsPrefix: option<string_>,
+groupsClaim: option<string_>,
+usernamePrefix: option<string_>,
+usernameClaim: option<string_>,
+clientId: option<string_>,
+issuerUrl: option<string_>,
+clusterName: option<string_>,
+identityProviderConfigArn: option<string_>,
+identityProviderConfigName: option<string_>
 }
 type logSetup = {
-@as("enabled") enabled: boxedBoolean,
-@as("types") types: logTypes
+enabled: option<boxedBoolean>,
+types: option<logTypes>
 }
 type issue = {
-@as("resourceIds") resourceIds: stringList,
-@as("message") message: amazonawsString,
-@as("code") code: nodegroupIssueCode
+resourceIds: option<stringList>,
+message: option<string_>,
+code: option<nodegroupIssueCode>
 }
 type identityProviderConfigs = array<identityProviderConfig>
 type identity = {
-@as("oidc") oidc: oIDC
+oidc: option<oidc>
 }
 type fargateProfileSelector = {
-@as("labels") labels: fargateProfileLabel,
-@as("namespace") namespace: amazonawsString
+labels: option<fargateProfileLabel>,
+namespace: option<string_>
 }
 type errorDetail = {
-@as("resourceIds") resourceIds: stringList,
-@as("errorMessage") errorMessage: amazonawsString,
-@as("errorCode") errorCode: errorCode
+resourceIds: option<stringList>,
+errorMessage: option<string_>,
+errorCode: option<errorCode>
 }
 type encryptionConfig = {
-@as("provider") provider: provider,
-@as("resources") resources: stringList
+provider: option<provider>,
+resources: option<stringList>
 }
 type compatibility = {
-@as("defaultVersion") defaultVersion: amazonawsBoolean,
-@as("platformVersions") platformVersions: stringList,
-@as("clusterVersion") clusterVersion: amazonawsString
+defaultVersion: option<boolean_>,
+platformVersions: option<stringList>,
+clusterVersion: option<string_>
 }
 type autoScalingGroupList = array<autoScalingGroup>
 type addonIssue = {
-@as("resourceIds") resourceIds: stringList,
-@as("message") message: amazonawsString,
-@as("code") code: addonIssueCode
+resourceIds: option<stringList>,
+message: option<string_>,
+code: option<addonIssueCode>
 }
 type updateTaintsPayload = {
-@as("removeTaints") removeTaints: taintsList,
-@as("addOrUpdateTaints") addOrUpdateTaints: taintsList
+removeTaints: option<taintsList>,
+addOrUpdateTaints: option<taintsList>
 }
 type nodegroupResources = {
-@as("remoteAccessSecurityGroup") remoteAccessSecurityGroup: amazonawsString,
-@as("autoScalingGroups") autoScalingGroups: autoScalingGroupList
+remoteAccessSecurityGroup: option<string_>,
+autoScalingGroups: option<autoScalingGroupList>
 }
 type logSetups = array<logSetup>
 type issueList = array<issue>
 type identityProviderConfigResponse = {
-@as("oidc") oidc: oidcIdentityProviderConfig
+oidc: option<oidcIdentityProviderConfig>
 }
 type fargateProfileSelectors = array<fargateProfileSelector>
 type errorDetails = array<errorDetail>
@@ -198,577 +203,577 @@ type encryptionConfigList = array<encryptionConfig>
 type compatibilities = array<compatibility>
 type addonIssueList = array<addonIssue>
 type update = {
-@as("errors") errors: errorDetails,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("params") params: updateParams,
-@as("type") type_: updateType,
-@as("status") status: updateStatus,
-@as("id") id: amazonawsString
+errors: option<errorDetails>,
+createdAt: option<timestamp_>,
+params: option<updateParams>,
+@as("type") type_: option<updateType>,
+status: option<updateStatus>,
+id: option<string_>
 }
 type nodegroupHealth = {
-@as("issues") issues: issueList
+issues: option<issueList>
 }
 type logging = {
-@as("clusterLogging") clusterLogging: logSetups
+clusterLogging: option<logSetups>
 }
 type fargateProfile = {
-@as("tags") tags: tagMap,
-@as("status") status: fargateProfileStatus,
-@as("selectors") selectors: fargateProfileSelectors,
-@as("subnets") subnets: stringList,
-@as("podExecutionRoleArn") podExecutionRoleArn: amazonawsString,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("clusterName") clusterName: amazonawsString,
-@as("fargateProfileArn") fargateProfileArn: amazonawsString,
-@as("fargateProfileName") fargateProfileName: amazonawsString
+tags: option<tagMap>,
+status: option<fargateProfileStatus>,
+selectors: option<fargateProfileSelectors>,
+subnets: option<stringList>,
+podExecutionRoleArn: option<string_>,
+createdAt: option<timestamp_>,
+clusterName: option<string_>,
+fargateProfileArn: option<string_>,
+fargateProfileName: option<string_>
 }
 type addonVersionInfo = {
-@as("compatibilities") compatibilities: compatibilities,
-@as("architecture") architecture: stringList,
-@as("addonVersion") addonVersion: amazonawsString
+compatibilities: option<compatibilities>,
+architecture: option<stringList>,
+addonVersion: option<string_>
 }
 type addonHealth = {
-@as("issues") issues: addonIssueList
+issues: option<addonIssueList>
 }
 type nodegroup = {
-@as("tags") tags: tagMap,
-@as("launchTemplate") launchTemplate: launchTemplateSpecification,
-@as("health") health: nodegroupHealth,
-@as("diskSize") diskSize: boxedInteger,
-@as("resources") resources: nodegroupResources,
-@as("taints") taints: taintsList,
-@as("labels") labels: labelsMap,
-@as("nodeRole") nodeRole: amazonawsString,
-@as("amiType") amiType: aMITypes,
-@as("remoteAccess") remoteAccess: remoteAccessConfig,
-@as("subnets") subnets: stringList,
-@as("instanceTypes") instanceTypes: stringList,
-@as("scalingConfig") scalingConfig: nodegroupScalingConfig,
-@as("capacityType") capacityType: capacityTypes,
-@as("status") status: nodegroupStatus,
-@as("modifiedAt") modifiedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("releaseVersion") releaseVersion: amazonawsString,
-@as("version") version: amazonawsString,
-@as("clusterName") clusterName: amazonawsString,
-@as("nodegroupArn") nodegroupArn: amazonawsString,
-@as("nodegroupName") nodegroupName: amazonawsString
+tags: option<tagMap>,
+launchTemplate: option<launchTemplateSpecification>,
+health: option<nodegroupHealth>,
+diskSize: option<boxedInteger>,
+resources: option<nodegroupResources>,
+taints: option<taintsList>,
+labels: option<labelsMap>,
+nodeRole: option<string_>,
+amiType: option<amitypes>,
+remoteAccess: option<remoteAccessConfig>,
+subnets: option<stringList>,
+instanceTypes: option<stringList>,
+scalingConfig: option<nodegroupScalingConfig>,
+capacityType: option<capacityTypes>,
+status: option<nodegroupStatus>,
+modifiedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+releaseVersion: option<string_>,
+version: option<string_>,
+clusterName: option<string_>,
+nodegroupArn: option<string_>,
+nodegroupName: option<string_>
 }
 type cluster = {
-@as("encryptionConfig") encryptionConfig: encryptionConfigList,
-@as("tags") tags: tagMap,
-@as("platformVersion") platformVersion: amazonawsString,
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("certificateAuthority") certificateAuthority: certificate,
-@as("status") status: clusterStatus,
-@as("identity") identity: identity,
-@as("logging") logging: logging,
-@as("kubernetesNetworkConfig") kubernetesNetworkConfig: kubernetesNetworkConfigResponse,
-@as("resourcesVpcConfig") resourcesVpcConfig: vpcConfigResponse,
-@as("roleArn") roleArn: amazonawsString,
-@as("endpoint") endpoint: amazonawsString,
-@as("version") version: amazonawsString,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("arn") arn: amazonawsString,
-@as("name") name: amazonawsString
+encryptionConfig: option<encryptionConfigList>,
+tags: option<tagMap>,
+platformVersion: option<string_>,
+clientRequestToken: option<string_>,
+certificateAuthority: option<certificate>,
+status: option<clusterStatus>,
+identity: option<identity>,
+logging: option<logging>,
+kubernetesNetworkConfig: option<kubernetesNetworkConfigResponse>,
+resourcesVpcConfig: option<vpcConfigResponse>,
+roleArn: option<string_>,
+endpoint: option<string_>,
+version: option<string_>,
+createdAt: option<timestamp_>,
+arn: option<string_>,
+name: option<string_>
 }
 type addonVersionInfoList = array<addonVersionInfo>
 type addon = {
-@as("tags") tags: tagMap,
-@as("serviceAccountRoleArn") serviceAccountRoleArn: amazonawsString,
-@as("modifiedAt") modifiedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("addonArn") addonArn: amazonawsString,
-@as("health") health: addonHealth,
-@as("addonVersion") addonVersion: amazonawsString,
-@as("status") status: addonStatus,
-@as("clusterName") clusterName: clusterName,
-@as("addonName") addonName: amazonawsString
+tags: option<tagMap>,
+serviceAccountRoleArn: option<string_>,
+modifiedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+addonArn: option<string_>,
+health: option<addonHealth>,
+addonVersion: option<string_>,
+status: option<addonStatus>,
+clusterName: option<clusterName>,
+addonName: option<string_>
 }
 type addonInfo = {
-@as("addonVersions") addonVersions: addonVersionInfoList,
-@as("type") type_: amazonawsString,
-@as("addonName") addonName: amazonawsString
+addonVersions: option<addonVersionInfoList>,
+@as("type") type_: option<string_>,
+addonName: option<string_>
 }
 type addons = array<addonInfo>
-type clientType;
-@module("@aws-sdk/client-eks") @new external createClient: unit => clientType = "EKSClient";
+type awsServiceClient;
+@module("@aws-sdk/client-eks") @new external createClient: unit => awsServiceClient = "EKSClient";
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<amazonawsString>
+tagKeys: tagKeyList,
+resourceArn: string_
 }
   type response = unit
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<amazonawsString>
+tags: tagMap,
+resourceArn: string_
 }
   type response = unit
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListUpdates = {
   type t;
   type request = {
-@as("maxResults") maxResults: listUpdatesRequestMaxResults,
-@as("nextToken") nextToken: amazonawsString,
-@as("addonName") addonName: amazonawsString,
-@as("nodegroupName") nodegroupName: amazonawsString,
-@as("name") name: option<amazonawsString>
+maxResults: option<listUpdatesRequestMaxResults>,
+nextToken: option<string_>,
+addonName: option<string_>,
+nodegroupName: option<string_>,
+name: string_
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("updateIds") updateIds: stringList
+nextToken: option<string_>,
+updateIds: option<stringList>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListUpdatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<amazonawsString>
+resourceArn: string_
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListNodegroups = {
   type t;
   type request = {
-@as("nextToken") nextToken: amazonawsString,
-@as("maxResults") maxResults: listNodegroupsRequestMaxResults,
-@as("clusterName") clusterName: option<amazonawsString>
+nextToken: option<string_>,
+maxResults: option<listNodegroupsRequestMaxResults>,
+clusterName: string_
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("nodegroups") nodegroups: stringList
+nextToken: option<string_>,
+nodegroups: option<stringList>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListNodegroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFargateProfiles = {
   type t;
   type request = {
-@as("nextToken") nextToken: amazonawsString,
-@as("maxResults") maxResults: fargateProfilesRequestMaxResults,
-@as("clusterName") clusterName: option<amazonawsString>
+nextToken: option<string_>,
+maxResults: option<fargateProfilesRequestMaxResults>,
+clusterName: string_
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("fargateProfileNames") fargateProfileNames: stringList
+nextToken: option<string_>,
+fargateProfileNames: option<stringList>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListFargateProfilesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListClusters = {
   type t;
   type request = {
-@as("nextToken") nextToken: amazonawsString,
-@as("maxResults") maxResults: listClustersRequestMaxResults
+nextToken: option<string_>,
+maxResults: option<listClustersRequestMaxResults>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("clusters") clusters: stringList
+nextToken: option<string_>,
+clusters: option<stringList>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListClustersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAddons = {
   type t;
   type request = {
-@as("nextToken") nextToken: amazonawsString,
-@as("maxResults") maxResults: listAddonsRequestMaxResults,
-@as("clusterName") clusterName: option<clusterName>
+nextToken: option<string_>,
+maxResults: option<listAddonsRequestMaxResults>,
+clusterName: clusterName
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("addons") addons: stringList
+nextToken: option<string_>,
+addons: option<stringList>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListAddonsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListIdentityProviderConfigs = {
   type t;
   type request = {
-@as("nextToken") nextToken: amazonawsString,
-@as("maxResults") maxResults: listIdentityProviderConfigsRequestMaxResults,
-@as("clusterName") clusterName: option<amazonawsString>
+nextToken: option<string_>,
+maxResults: option<listIdentityProviderConfigsRequestMaxResults>,
+clusterName: string_
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("identityProviderConfigs") identityProviderConfigs: identityProviderConfigs
+nextToken: option<string_>,
+identityProviderConfigs: option<identityProviderConfigs>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListIdentityProviderConfigsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeIdentityProviderConfig = {
   type t;
   type request = {
-@as("identityProviderConfig") identityProviderConfig: option<identityProviderConfig>,
-@as("clusterName") clusterName: option<amazonawsString>
+identityProviderConfig: identityProviderConfig,
+clusterName: string_
 }
   type response = {
-@as("identityProviderConfig") identityProviderConfig: identityProviderConfigResponse
+identityProviderConfig: option<identityProviderConfigResponse>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeIdentityProviderConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateNodegroupVersion = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("force") force: amazonawsBoolean,
-@as("launchTemplate") launchTemplate: launchTemplateSpecification,
-@as("releaseVersion") releaseVersion: amazonawsString,
-@as("version") version: amazonawsString,
-@as("nodegroupName") nodegroupName: option<amazonawsString>,
-@as("clusterName") clusterName: option<amazonawsString>
+clientRequestToken: option<string_>,
+force: option<boolean_>,
+launchTemplate: option<launchTemplateSpecification>,
+releaseVersion: option<string_>,
+version: option<string_>,
+nodegroupName: string_,
+clusterName: string_
 }
   type response = {
-@as("update") update: update
+update: option<update>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UpdateNodegroupVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateNodegroupConfig = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("scalingConfig") scalingConfig: nodegroupScalingConfig,
-@as("taints") taints: updateTaintsPayload,
-@as("labels") labels: updateLabelsPayload,
-@as("nodegroupName") nodegroupName: option<amazonawsString>,
-@as("clusterName") clusterName: option<amazonawsString>
+clientRequestToken: option<string_>,
+scalingConfig: option<nodegroupScalingConfig>,
+taints: option<updateTaintsPayload>,
+labels: option<updateLabelsPayload>,
+nodegroupName: string_,
+clusterName: string_
 }
   type response = {
-@as("update") update: update
+update: option<update>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UpdateNodegroupConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateClusterVersion = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("version") version: option<amazonawsString>,
-@as("name") name: option<amazonawsString>
+clientRequestToken: option<string_>,
+version: string_,
+name: string_
 }
   type response = {
-@as("update") update: update
+update: option<update>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UpdateClusterVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateClusterConfig = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("logging") logging: logging,
-@as("resourcesVpcConfig") resourcesVpcConfig: vpcConfigRequest,
-@as("name") name: option<amazonawsString>
+clientRequestToken: option<string_>,
+logging: option<logging>,
+resourcesVpcConfig: option<vpcConfigRequest>,
+name: string_
 }
   type response = {
-@as("update") update: update
+update: option<update>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UpdateClusterConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAddon = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("resolveConflicts") resolveConflicts: resolveConflicts,
-@as("serviceAccountRoleArn") serviceAccountRoleArn: roleArn,
-@as("addonVersion") addonVersion: amazonawsString,
-@as("addonName") addonName: option<amazonawsString>,
-@as("clusterName") clusterName: option<clusterName>
+clientRequestToken: option<string_>,
+resolveConflicts: option<resolveConflicts>,
+serviceAccountRoleArn: option<roleArn>,
+addonVersion: option<string_>,
+addonName: string_,
+clusterName: clusterName
 }
   type response = {
-@as("update") update: update
+update: option<update>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UpdateAddonCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateIdentityProviderConfig = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("identityProviderConfig") identityProviderConfig: option<identityProviderConfig>,
-@as("clusterName") clusterName: option<amazonawsString>
+clientRequestToken: option<string_>,
+identityProviderConfig: identityProviderConfig,
+clusterName: string_
 }
   type response = {
-@as("update") update: update
+update: option<update>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DisassociateIdentityProviderConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeUpdate = {
   type t;
   type request = {
-@as("addonName") addonName: amazonawsString,
-@as("nodegroupName") nodegroupName: amazonawsString,
-@as("updateId") updateId: option<amazonawsString>,
-@as("name") name: option<amazonawsString>
+addonName: option<string_>,
+nodegroupName: option<string_>,
+updateId: string_,
+name: string_
 }
   type response = {
-@as("update") update: update
+update: option<update>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeUpdateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeFargateProfile = {
   type t;
   type request = {
-@as("fargateProfileName") fargateProfileName: option<amazonawsString>,
-@as("clusterName") clusterName: option<amazonawsString>
+fargateProfileName: string_,
+clusterName: string_
 }
   type response = {
-@as("fargateProfile") fargateProfile: fargateProfile
+fargateProfile: option<fargateProfile>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeFargateProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFargateProfile = {
   type t;
   type request = {
-@as("fargateProfileName") fargateProfileName: option<amazonawsString>,
-@as("clusterName") clusterName: option<amazonawsString>
+fargateProfileName: string_,
+clusterName: string_
 }
   type response = {
-@as("fargateProfile") fargateProfile: fargateProfile
+fargateProfile: option<fargateProfile>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DeleteFargateProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFargateProfile = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("selectors") selectors: fargateProfileSelectors,
-@as("subnets") subnets: stringList,
-@as("podExecutionRoleArn") podExecutionRoleArn: option<amazonawsString>,
-@as("clusterName") clusterName: option<amazonawsString>,
-@as("fargateProfileName") fargateProfileName: option<amazonawsString>
+tags: option<tagMap>,
+clientRequestToken: option<string_>,
+selectors: option<fargateProfileSelectors>,
+subnets: option<stringList>,
+podExecutionRoleArn: string_,
+clusterName: string_,
+fargateProfileName: string_
 }
   type response = {
-@as("fargateProfile") fargateProfile: fargateProfile
+fargateProfile: option<fargateProfile>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "CreateFargateProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateIdentityProviderConfig = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("tags") tags: tagMap,
-@as("oidc") oidc: option<oidcIdentityProviderConfigRequest>,
-@as("clusterName") clusterName: option<amazonawsString>
+clientRequestToken: option<string_>,
+tags: option<tagMap>,
+oidc: oidcIdentityProviderConfigRequest,
+clusterName: string_
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("update") update: update
+tags: option<tagMap>,
+update: option<update>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "AssociateIdentityProviderConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateEncryptionConfig = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("encryptionConfig") encryptionConfig: option<encryptionConfigList>,
-@as("clusterName") clusterName: option<amazonawsString>
+clientRequestToken: option<string_>,
+encryptionConfig: encryptionConfigList,
+clusterName: string_
 }
   type response = {
-@as("update") update: update
+update: option<update>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "AssociateEncryptionConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeNodegroup = {
   type t;
   type request = {
-@as("nodegroupName") nodegroupName: option<amazonawsString>,
-@as("clusterName") clusterName: option<amazonawsString>
+nodegroupName: string_,
+clusterName: string_
 }
   type response = {
-@as("nodegroup") nodegroup: nodegroup
+nodegroup: option<nodegroup>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeNodegroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCluster = {
   type t;
   type request = {
-@as("name") name: option<amazonawsString>
+name: string_
 }
   type response = {
-@as("cluster") cluster: cluster
+cluster: option<cluster>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAddon = {
   type t;
   type request = {
-@as("addonName") addonName: option<amazonawsString>,
-@as("clusterName") clusterName: option<clusterName>
+addonName: string_,
+clusterName: clusterName
 }
   type response = {
-@as("addon") addon: addon
+addon: option<addon>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeAddonCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteNodegroup = {
   type t;
   type request = {
-@as("nodegroupName") nodegroupName: option<amazonawsString>,
-@as("clusterName") clusterName: option<amazonawsString>
+nodegroupName: string_,
+clusterName: string_
 }
   type response = {
-@as("nodegroup") nodegroup: nodegroup
+nodegroup: option<nodegroup>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DeleteNodegroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteCluster = {
   type t;
   type request = {
-@as("name") name: option<amazonawsString>
+name: string_
 }
   type response = {
-@as("cluster") cluster: cluster
+cluster: option<cluster>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DeleteClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAddon = {
   type t;
   type request = {
-@as("addonName") addonName: option<amazonawsString>,
-@as("clusterName") clusterName: option<clusterName>
+addonName: string_,
+clusterName: clusterName
 }
   type response = {
-@as("addon") addon: addon
+addon: option<addon>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DeleteAddonCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateNodegroup = {
   type t;
   type request = {
-@as("releaseVersion") releaseVersion: amazonawsString,
-@as("version") version: amazonawsString,
-@as("capacityType") capacityType: capacityTypes,
-@as("launchTemplate") launchTemplate: launchTemplateSpecification,
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("tags") tags: tagMap,
-@as("taints") taints: taintsList,
-@as("labels") labels: labelsMap,
-@as("nodeRole") nodeRole: option<amazonawsString>,
-@as("remoteAccess") remoteAccess: remoteAccessConfig,
-@as("amiType") amiType: aMITypes,
-@as("instanceTypes") instanceTypes: stringList,
-@as("subnets") subnets: option<stringList>,
-@as("diskSize") diskSize: boxedInteger,
-@as("scalingConfig") scalingConfig: nodegroupScalingConfig,
-@as("nodegroupName") nodegroupName: option<amazonawsString>,
-@as("clusterName") clusterName: option<amazonawsString>
+releaseVersion: option<string_>,
+version: option<string_>,
+capacityType: option<capacityTypes>,
+launchTemplate: option<launchTemplateSpecification>,
+clientRequestToken: option<string_>,
+tags: option<tagMap>,
+taints: option<taintsList>,
+labels: option<labelsMap>,
+nodeRole: string_,
+remoteAccess: option<remoteAccessConfig>,
+amiType: option<amitypes>,
+instanceTypes: option<stringList>,
+subnets: stringList,
+diskSize: option<boxedInteger>,
+scalingConfig: option<nodegroupScalingConfig>,
+nodegroupName: string_,
+clusterName: string_
 }
   type response = {
-@as("nodegroup") nodegroup: nodegroup
+nodegroup: option<nodegroup>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "CreateNodegroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCluster = {
   type t;
   type request = {
-@as("encryptionConfig") encryptionConfig: encryptionConfigList,
-@as("tags") tags: tagMap,
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("logging") logging: logging,
-@as("kubernetesNetworkConfig") kubernetesNetworkConfig: kubernetesNetworkConfigRequest,
-@as("resourcesVpcConfig") resourcesVpcConfig: option<vpcConfigRequest>,
-@as("roleArn") roleArn: option<amazonawsString>,
-@as("version") version: amazonawsString,
-@as("name") name: option<clusterName>
+encryptionConfig: option<encryptionConfigList>,
+tags: option<tagMap>,
+clientRequestToken: option<string_>,
+logging: option<logging>,
+kubernetesNetworkConfig: option<kubernetesNetworkConfigRequest>,
+resourcesVpcConfig: vpcConfigRequest,
+roleArn: string_,
+version: option<string_>,
+name: clusterName
 }
   type response = {
-@as("cluster") cluster: cluster
+cluster: option<cluster>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "CreateClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAddon = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("clientRequestToken") clientRequestToken: amazonawsString,
-@as("resolveConflicts") resolveConflicts: resolveConflicts,
-@as("serviceAccountRoleArn") serviceAccountRoleArn: roleArn,
-@as("addonVersion") addonVersion: amazonawsString,
-@as("addonName") addonName: option<amazonawsString>,
-@as("clusterName") clusterName: option<clusterName>
+tags: option<tagMap>,
+clientRequestToken: option<string_>,
+resolveConflicts: option<resolveConflicts>,
+serviceAccountRoleArn: option<roleArn>,
+addonVersion: option<string_>,
+addonName: string_,
+clusterName: clusterName
 }
   type response = {
-@as("addon") addon: addon
+addon: option<addon>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "CreateAddonCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAddonVersions = {
   type t;
   type request = {
-@as("addonName") addonName: amazonawsString,
-@as("nextToken") nextToken: amazonawsString,
-@as("maxResults") maxResults: describeAddonVersionsRequestMaxResults,
-@as("kubernetesVersion") kubernetesVersion: amazonawsString
+addonName: option<string_>,
+nextToken: option<string_>,
+maxResults: option<describeAddonVersionsRequestMaxResults>,
+kubernetesVersion: option<string_>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("addons") addons: addons
+nextToken: option<string_>,
+addons: option<addons>
 }
   @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeAddonVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

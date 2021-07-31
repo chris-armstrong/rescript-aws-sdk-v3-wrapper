@@ -1,21 +1,28 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type zipFileContent = NodeJs.Buffer.t;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type long = float
+type zipFileContent = NodeJs.Buffer.t
 type vpcId = string
-type urlType = [@as("ZEPPELIN_UI_URL") #ZEPPELIN_UI_URL | @as("FLINK_DASHBOARD_URL") #FLINK_DASHBOARD_URL]
-type amazonawsTimestamp = Js.Date.t;
+type urlType = [@as("ZEPPELIN_UI_URL") #ZEPPELINUIURL | @as("FLINK_DASHBOARD_URL") #FLINKDASHBOARDURL]
+type timestamp_ = Js.Date.t;
 type textContent = string
 type tagValue = string
 type tagKey = string
 type subnetId = string
 type snapshotStatus = [@as("FAILED") #FAILED | @as("DELETING") #DELETING | @as("READY") #READY | @as("CREATING") #CREATING]
 type snapshotName = string
-type sessionExpirationDurationInSeconds = float;
+type sessionExpirationDurationInSeconds = float
 type securityGroupId = string
-type runtimeEnvironment = [@as("ZEPPELIN-FLINK-1_0") #ZEPPELIN_FLINK_1_0 | @as("FLINK-1_11") #FLINK_1_11 | @as("FLINK-1_8") #FLINK_1_8 | @as("FLINK-1_6") #FLINK_1_6 | @as("SQL-1_0") #SQL_1_0]
+type runtimeEnvironment = [@as("ZEPPELIN-FLINK-1_0") #ZEPPELINFLINK10 | @as("FLINK-1_11") #FLINK111 | @as("FLINK-1_8") #FLINK18 | @as("FLINK-1_6") #FLINK16 | @as("SQL-1_0") #SQL10]
 type roleARN = string
 type resourceARN = string
 type recordRowPath = string
@@ -31,24 +38,24 @@ type propertyValue = string
 type propertyKey = string
 type processedInputRecord = string
 type parsedInputRecordField = string
-type parallelismPerKPU = int;
-type parallelism = int;
+type parallelismPerKPU = int
+type parallelism = int
 type objectVersion = string
 type nextToken = string
-type minPauseBetweenCheckpoints = float;
+type minPauseBetweenCheckpoints = float
 type metricsLevel = [@as("PARALLELISM") #PARALLELISM | @as("OPERATOR") #OPERATOR | @as("TASK") #TASK | @as("APPLICATION") #APPLICATION]
 type mavenVersion = string
 type mavenGroupId = string
 type mavenArtifactId = string
 type logStreamARN = string
 type logLevel = [@as("DEBUG") #DEBUG | @as("ERROR") #ERROR | @as("WARN") #WARN | @as("INFO") #INFO]
-type listSnapshotsInputLimit = int;
-type listApplicationsInputLimit = int;
-type listApplicationVersionsInputLimit = int;
+type listSnapshotsInputLimit = int
+type listApplicationsInputLimit = int
+type listApplicationVersionsInputLimit = int
 type kinesisAnalyticsARN = string
 type jobPlanDescription = string
-type inputStartingPosition = [@as("LAST_STOPPED_POINT") #LAST_STOPPED_POINT | @as("TRIM_HORIZON") #TRIM_HORIZON | @as("NOW") #NOW]
-type inputParallelismCount = int;
+type inputStartingPosition = [@as("LAST_STOPPED_POINT") #LASTSTOPPEDPOINT | @as("TRIM_HORIZON") #TRIMHORIZON | @as("NOW") #NOW]
+type inputParallelismCount = int
 type inAppTableName = string
 type inAppStreamName = string
 type id = string
@@ -57,424 +64,424 @@ type errorMessage = string
 type databaseARN = string
 type configurationType = [@as("CUSTOM") #CUSTOM | @as("DEFAULT") #DEFAULT]
 type conditionalToken = string
-type codeSize = float;
+type codeSize = float
 type codeMD5 = string
 type codeContentType = [@as("ZIPFILE") #ZIPFILE | @as("PLAINTEXT") #PLAINTEXT]
-type checkpointInterval = float;
+type checkpointInterval = float
 type bucketARN = string
-type booleanObject = bool;
+type booleanObject = bool
 type basePath = string
 type authorizedUrl = string
-type artifactType = [@as("DEPENDENCY_JAR") #DEPENDENCY_JAR | @as("UDF") #UDF]
-type applicationVersionId = float;
-type applicationStatus = [@as("ROLLED_BACK") #ROLLED_BACK | @as("ROLLING_BACK") #ROLLING_BACK | @as("MAINTENANCE") #MAINTENANCE | @as("FORCE_STOPPING") #FORCE_STOPPING | @as("AUTOSCALING") #AUTOSCALING | @as("UPDATING") #UPDATING | @as("RUNNING") #RUNNING | @as("READY") #READY | @as("STOPPING") #STOPPING | @as("STARTING") #STARTING | @as("DELETING") #DELETING]
-type applicationRestoreType = [@as("RESTORE_FROM_CUSTOM_SNAPSHOT") #RESTORE_FROM_CUSTOM_SNAPSHOT | @as("RESTORE_FROM_LATEST_SNAPSHOT") #RESTORE_FROM_LATEST_SNAPSHOT | @as("SKIP_RESTORE_FROM_SNAPSHOT") #SKIP_RESTORE_FROM_SNAPSHOT]
+type artifactType = [@as("DEPENDENCY_JAR") #DEPENDENCYJAR | @as("UDF") #UDF]
+type applicationVersionId = float
+type applicationStatus = [@as("ROLLED_BACK") #ROLLEDBACK | @as("ROLLING_BACK") #ROLLINGBACK | @as("MAINTENANCE") #MAINTENANCE | @as("FORCE_STOPPING") #FORCESTOPPING | @as("AUTOSCALING") #AUTOSCALING | @as("UPDATING") #UPDATING | @as("RUNNING") #RUNNING | @as("READY") #READY | @as("STOPPING") #STOPPING | @as("STARTING") #STARTING | @as("DELETING") #DELETING]
+type applicationRestoreType = [@as("RESTORE_FROM_CUSTOM_SNAPSHOT") #RESTOREFROMCUSTOMSNAPSHOT | @as("RESTORE_FROM_LATEST_SNAPSHOT") #RESTOREFROMLATESTSNAPSHOT | @as("SKIP_RESTORE_FROM_SNAPSHOT") #SKIPRESTOREFROMSNAPSHOT]
 type applicationName = string
 type applicationMode = [@as("INTERACTIVE") #INTERACTIVE | @as("STREAMING") #STREAMING]
 type applicationMaintenanceWindowStartTime = string
 type applicationMaintenanceWindowEndTime = string
 type applicationDescription = string
 type zeppelinMonitoringConfigurationUpdate = {
-@as("LogLevelUpdate") logLevelUpdate: option<logLevel>
+@as("LogLevelUpdate") logLevelUpdate: logLevel
 }
 type zeppelinMonitoringConfigurationDescription = {
-@as("LogLevel") logLevel: logLevel
+@as("LogLevel") logLevel: option<logLevel>
 }
 type zeppelinMonitoringConfiguration = {
-@as("LogLevel") logLevel: option<logLevel>
+@as("LogLevel") logLevel: logLevel
 }
 type tagKeys = array<tagKey>
 type tag = {
-@as("Value") value: tagValue,
-@as("Key") key: option<tagKey>
+@as("Value") value: option<tagValue>,
+@as("Key") key: tagKey
 }
 type subnetIds = array<subnetId>
 type snapshotDetails = {
-@as("SnapshotCreationTimestamp") snapshotCreationTimestamp: amazonawsTimestamp,
-@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
-@as("SnapshotStatus") snapshotStatus: option<snapshotStatus>,
-@as("SnapshotName") snapshotName: option<snapshotName>
+@as("SnapshotCreationTimestamp") snapshotCreationTimestamp: option<timestamp_>,
+@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
+@as("SnapshotStatus") snapshotStatus: snapshotStatus,
+@as("SnapshotName") snapshotName: snapshotName
 }
 type securityGroupIds = array<securityGroupId>
 type s3ReferenceDataSourceUpdate = {
-@as("FileKeyUpdate") fileKeyUpdate: fileKey,
-@as("BucketARNUpdate") bucketARNUpdate: bucketARN
+@as("FileKeyUpdate") fileKeyUpdate: option<fileKey>,
+@as("BucketARNUpdate") bucketARNUpdate: option<bucketARN>
 }
 type s3ReferenceDataSourceDescription = {
-@as("ReferenceRoleARN") referenceRoleARN: roleARN,
-@as("FileKey") fileKey: option<fileKey>,
-@as("BucketARN") bucketARN: option<bucketARN>
-}
-type s3ReferenceDataSource = {
+@as("ReferenceRoleARN") referenceRoleARN: option<roleARN>,
 @as("FileKey") fileKey: fileKey,
 @as("BucketARN") bucketARN: bucketARN
 }
-type s3ContentLocationUpdate = {
-@as("ObjectVersionUpdate") objectVersionUpdate: objectVersion,
-@as("FileKeyUpdate") fileKeyUpdate: fileKey,
-@as("BucketARNUpdate") bucketARNUpdate: bucketARN
-}
-type s3ContentLocation = {
-@as("ObjectVersion") objectVersion: objectVersion,
+type s3ReferenceDataSource = {
 @as("FileKey") fileKey: option<fileKey>,
 @as("BucketARN") bucketARN: option<bucketARN>
 }
-type s3ContentBaseLocationUpdate = {
-@as("BasePathUpdate") basePathUpdate: basePath,
+type s3ContentLocationUpdate = {
+@as("ObjectVersionUpdate") objectVersionUpdate: option<objectVersion>,
+@as("FileKeyUpdate") fileKeyUpdate: option<fileKey>,
 @as("BucketARNUpdate") bucketARNUpdate: option<bucketARN>
 }
+type s3ContentLocation = {
+@as("ObjectVersion") objectVersion: option<objectVersion>,
+@as("FileKey") fileKey: fileKey,
+@as("BucketARN") bucketARN: bucketARN
+}
+type s3ContentBaseLocationUpdate = {
+@as("BasePathUpdate") basePathUpdate: option<basePath>,
+@as("BucketARNUpdate") bucketARNUpdate: bucketARN
+}
 type s3ContentBaseLocationDescription = {
-@as("BasePath") basePath: basePath,
-@as("BucketARN") bucketARN: option<bucketARN>
+@as("BasePath") basePath: option<basePath>,
+@as("BucketARN") bucketARN: bucketARN
 }
 type s3ContentBaseLocation = {
-@as("BasePath") basePath: basePath,
-@as("BucketARN") bucketARN: option<bucketARN>
+@as("BasePath") basePath: option<basePath>,
+@as("BucketARN") bucketARN: bucketARN
 }
 type s3Configuration = {
-@as("FileKey") fileKey: option<fileKey>,
-@as("BucketARN") bucketARN: option<bucketARN>
+@as("FileKey") fileKey: fileKey,
+@as("BucketARN") bucketARN: bucketARN
 }
 type s3ApplicationCodeLocationDescription = {
-@as("ObjectVersion") objectVersion: objectVersion,
-@as("FileKey") fileKey: option<fileKey>,
-@as("BucketARN") bucketARN: option<bucketARN>
+@as("ObjectVersion") objectVersion: option<objectVersion>,
+@as("FileKey") fileKey: fileKey,
+@as("BucketARN") bucketARN: bucketARN
 }
 type recordColumn = {
-@as("SqlType") sqlType: option<recordColumnSqlType>,
-@as("Mapping") mapping: recordColumnMapping,
-@as("Name") name: option<recordColumnName>
+@as("SqlType") sqlType: recordColumnSqlType,
+@as("Mapping") mapping: option<recordColumnMapping>,
+@as("Name") name: recordColumnName
 }
 type rawInputRecords = array<rawInputRecord>
 type propertyMap = Js.Dict.t< propertyValue>
 type processedInputRecords = array<processedInputRecord>
 type parsedInputRecord = array<parsedInputRecordField>
 type parallelismConfigurationUpdate = {
-@as("AutoScalingEnabledUpdate") autoScalingEnabledUpdate: booleanObject,
-@as("ParallelismPerKPUUpdate") parallelismPerKPUUpdate: parallelismPerKPU,
-@as("ParallelismUpdate") parallelismUpdate: parallelism,
-@as("ConfigurationTypeUpdate") configurationTypeUpdate: configurationType
+@as("AutoScalingEnabledUpdate") autoScalingEnabledUpdate: option<booleanObject>,
+@as("ParallelismPerKPUUpdate") parallelismPerKPUUpdate: option<parallelismPerKPU>,
+@as("ParallelismUpdate") parallelismUpdate: option<parallelism>,
+@as("ConfigurationTypeUpdate") configurationTypeUpdate: option<configurationType>
 }
 type parallelismConfigurationDescription = {
-@as("AutoScalingEnabled") autoScalingEnabled: booleanObject,
-@as("CurrentParallelism") currentParallelism: parallelism,
-@as("ParallelismPerKPU") parallelismPerKPU: parallelismPerKPU,
-@as("Parallelism") parallelism: parallelism,
-@as("ConfigurationType") configurationType: configurationType
+@as("AutoScalingEnabled") autoScalingEnabled: option<booleanObject>,
+@as("CurrentParallelism") currentParallelism: option<parallelism>,
+@as("ParallelismPerKPU") parallelismPerKPU: option<parallelismPerKPU>,
+@as("Parallelism") parallelism: option<parallelism>,
+@as("ConfigurationType") configurationType: option<configurationType>
 }
 type parallelismConfiguration = {
-@as("AutoScalingEnabled") autoScalingEnabled: booleanObject,
-@as("ParallelismPerKPU") parallelismPerKPU: parallelismPerKPU,
-@as("Parallelism") parallelism: parallelism,
-@as("ConfigurationType") configurationType: option<configurationType>
-}
-type monitoringConfigurationUpdate = {
-@as("LogLevelUpdate") logLevelUpdate: logLevel,
-@as("MetricsLevelUpdate") metricsLevelUpdate: metricsLevel,
-@as("ConfigurationTypeUpdate") configurationTypeUpdate: configurationType
-}
-type monitoringConfigurationDescription = {
-@as("LogLevel") logLevel: logLevel,
-@as("MetricsLevel") metricsLevel: metricsLevel,
+@as("AutoScalingEnabled") autoScalingEnabled: option<booleanObject>,
+@as("ParallelismPerKPU") parallelismPerKPU: option<parallelismPerKPU>,
+@as("Parallelism") parallelism: option<parallelism>,
 @as("ConfigurationType") configurationType: configurationType
 }
-type monitoringConfiguration = {
-@as("LogLevel") logLevel: logLevel,
-@as("MetricsLevel") metricsLevel: metricsLevel,
+type monitoringConfigurationUpdate = {
+@as("LogLevelUpdate") logLevelUpdate: option<logLevel>,
+@as("MetricsLevelUpdate") metricsLevelUpdate: option<metricsLevel>,
+@as("ConfigurationTypeUpdate") configurationTypeUpdate: option<configurationType>
+}
+type monitoringConfigurationDescription = {
+@as("LogLevel") logLevel: option<logLevel>,
+@as("MetricsLevel") metricsLevel: option<metricsLevel>,
 @as("ConfigurationType") configurationType: option<configurationType>
 }
+type monitoringConfiguration = {
+@as("LogLevel") logLevel: option<logLevel>,
+@as("MetricsLevel") metricsLevel: option<metricsLevel>,
+@as("ConfigurationType") configurationType: configurationType
+}
 type mavenReference = {
-@as("Version") version: option<mavenVersion>,
-@as("ArtifactId") artifactId: option<mavenArtifactId>,
-@as("GroupId") groupId: option<mavenGroupId>
+@as("Version") version: mavenVersion,
+@as("ArtifactId") artifactId: mavenArtifactId,
+@as("GroupId") groupId: mavenGroupId
 }
 type lambdaOutputUpdate = {
-@as("ResourceARNUpdate") resourceARNUpdate: option<resourceARN>
+@as("ResourceARNUpdate") resourceARNUpdate: resourceARN
 }
 type lambdaOutputDescription = {
-@as("RoleARN") roleARN: roleARN,
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("RoleARN") roleARN: option<roleARN>,
+@as("ResourceARN") resourceARN: resourceARN
 }
 type lambdaOutput = {
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("ResourceARN") resourceARN: resourceARN
 }
 type kinesisStreamsOutputUpdate = {
-@as("ResourceARNUpdate") resourceARNUpdate: option<resourceARN>
+@as("ResourceARNUpdate") resourceARNUpdate: resourceARN
 }
 type kinesisStreamsOutputDescription = {
-@as("RoleARN") roleARN: roleARN,
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("RoleARN") roleARN: option<roleARN>,
+@as("ResourceARN") resourceARN: resourceARN
 }
 type kinesisStreamsOutput = {
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("ResourceARN") resourceARN: resourceARN
 }
 type kinesisStreamsInputUpdate = {
-@as("ResourceARNUpdate") resourceARNUpdate: option<resourceARN>
+@as("ResourceARNUpdate") resourceARNUpdate: resourceARN
 }
 type kinesisStreamsInputDescription = {
-@as("RoleARN") roleARN: roleARN,
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("RoleARN") roleARN: option<roleARN>,
+@as("ResourceARN") resourceARN: resourceARN
 }
 type kinesisStreamsInput = {
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("ResourceARN") resourceARN: resourceARN
 }
 type kinesisFirehoseOutputUpdate = {
-@as("ResourceARNUpdate") resourceARNUpdate: option<resourceARN>
+@as("ResourceARNUpdate") resourceARNUpdate: resourceARN
 }
 type kinesisFirehoseOutputDescription = {
-@as("RoleARN") roleARN: roleARN,
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("RoleARN") roleARN: option<roleARN>,
+@as("ResourceARN") resourceARN: resourceARN
 }
 type kinesisFirehoseOutput = {
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("ResourceARN") resourceARN: resourceARN
 }
 type kinesisFirehoseInputUpdate = {
-@as("ResourceARNUpdate") resourceARNUpdate: option<resourceARN>
+@as("ResourceARNUpdate") resourceARNUpdate: resourceARN
 }
 type kinesisFirehoseInputDescription = {
-@as("RoleARN") roleARN: roleARN,
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("RoleARN") roleARN: option<roleARN>,
+@as("ResourceARN") resourceARN: resourceARN
 }
 type kinesisFirehoseInput = {
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("ResourceARN") resourceARN: resourceARN
 }
-type jSONMappingParameters = {
-@as("RecordRowPath") recordRowPath: option<recordRowPath>
+type jsonmappingParameters = {
+@as("RecordRowPath") recordRowPath: recordRowPath
 }
 type inputStartingPositionConfiguration = {
-@as("InputStartingPosition") inputStartingPosition: inputStartingPosition
+@as("InputStartingPosition") inputStartingPosition: option<inputStartingPosition>
 }
 type inputParallelismUpdate = {
-@as("CountUpdate") countUpdate: option<inputParallelismCount>
+@as("CountUpdate") countUpdate: inputParallelismCount
 }
 type inputParallelism = {
-@as("Count") count: inputParallelismCount
+@as("Count") count: option<inputParallelismCount>
 }
 type inputLambdaProcessorUpdate = {
-@as("ResourceARNUpdate") resourceARNUpdate: option<resourceARN>
+@as("ResourceARNUpdate") resourceARNUpdate: resourceARN
 }
 type inputLambdaProcessorDescription = {
-@as("RoleARN") roleARN: roleARN,
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("RoleARN") roleARN: option<roleARN>,
+@as("ResourceARN") resourceARN: resourceARN
 }
 type inputLambdaProcessor = {
-@as("ResourceARN") resourceARN: option<resourceARN>
+@as("ResourceARN") resourceARN: resourceARN
 }
 type inAppStreamNames = array<inAppStreamName>
 type glueDataCatalogConfigurationUpdate = {
-@as("DatabaseARNUpdate") databaseARNUpdate: databaseARN
+@as("DatabaseARNUpdate") databaseARNUpdate: option<databaseARN>
 }
 type glueDataCatalogConfigurationDescription = {
-@as("DatabaseARN") databaseARN: option<databaseARN>
+@as("DatabaseARN") databaseARN: databaseARN
 }
 type glueDataCatalogConfiguration = {
-@as("DatabaseARN") databaseARN: option<databaseARN>
+@as("DatabaseARN") databaseARN: databaseARN
 }
 type flinkRunConfiguration = {
-@as("AllowNonRestoredState") allowNonRestoredState: booleanObject
+@as("AllowNonRestoredState") allowNonRestoredState: option<booleanObject>
 }
 type destinationSchema = {
-@as("RecordFormatType") recordFormatType: option<recordFormatType>
+@as("RecordFormatType") recordFormatType: recordFormatType
 }
 type cloudWatchLoggingOptionUpdate = {
-@as("LogStreamARNUpdate") logStreamARNUpdate: logStreamARN,
-@as("CloudWatchLoggingOptionId") cloudWatchLoggingOptionId: option<id>
-}
-type cloudWatchLoggingOptionDescription = {
-@as("RoleARN") roleARN: roleARN,
-@as("LogStreamARN") logStreamARN: option<logStreamARN>,
+@as("LogStreamARNUpdate") logStreamARNUpdate: option<logStreamARN>,
 @as("CloudWatchLoggingOptionId") cloudWatchLoggingOptionId: id
 }
+type cloudWatchLoggingOptionDescription = {
+@as("RoleARN") roleARN: option<roleARN>,
+@as("LogStreamARN") logStreamARN: logStreamARN,
+@as("CloudWatchLoggingOptionId") cloudWatchLoggingOptionId: option<id>
+}
 type cloudWatchLoggingOption = {
-@as("LogStreamARN") logStreamARN: option<logStreamARN>
+@as("LogStreamARN") logStreamARN: logStreamARN
 }
 type checkpointConfigurationUpdate = {
-@as("MinPauseBetweenCheckpointsUpdate") minPauseBetweenCheckpointsUpdate: minPauseBetweenCheckpoints,
-@as("CheckpointIntervalUpdate") checkpointIntervalUpdate: checkpointInterval,
-@as("CheckpointingEnabledUpdate") checkpointingEnabledUpdate: booleanObject,
-@as("ConfigurationTypeUpdate") configurationTypeUpdate: configurationType
+@as("MinPauseBetweenCheckpointsUpdate") minPauseBetweenCheckpointsUpdate: option<minPauseBetweenCheckpoints>,
+@as("CheckpointIntervalUpdate") checkpointIntervalUpdate: option<checkpointInterval>,
+@as("CheckpointingEnabledUpdate") checkpointingEnabledUpdate: option<booleanObject>,
+@as("ConfigurationTypeUpdate") configurationTypeUpdate: option<configurationType>
 }
 type checkpointConfigurationDescription = {
-@as("MinPauseBetweenCheckpoints") minPauseBetweenCheckpoints: minPauseBetweenCheckpoints,
-@as("CheckpointInterval") checkpointInterval: checkpointInterval,
-@as("CheckpointingEnabled") checkpointingEnabled: booleanObject,
-@as("ConfigurationType") configurationType: configurationType
-}
-type checkpointConfiguration = {
-@as("MinPauseBetweenCheckpoints") minPauseBetweenCheckpoints: minPauseBetweenCheckpoints,
-@as("CheckpointInterval") checkpointInterval: checkpointInterval,
-@as("CheckpointingEnabled") checkpointingEnabled: booleanObject,
+@as("MinPauseBetweenCheckpoints") minPauseBetweenCheckpoints: option<minPauseBetweenCheckpoints>,
+@as("CheckpointInterval") checkpointInterval: option<checkpointInterval>,
+@as("CheckpointingEnabled") checkpointingEnabled: option<booleanObject>,
 @as("ConfigurationType") configurationType: option<configurationType>
 }
-type cSVMappingParameters = {
-@as("RecordColumnDelimiter") recordColumnDelimiter: option<recordColumnDelimiter>,
-@as("RecordRowDelimiter") recordRowDelimiter: option<recordRowDelimiter>
+type checkpointConfiguration = {
+@as("MinPauseBetweenCheckpoints") minPauseBetweenCheckpoints: option<minPauseBetweenCheckpoints>,
+@as("CheckpointInterval") checkpointInterval: option<checkpointInterval>,
+@as("CheckpointingEnabled") checkpointingEnabled: option<booleanObject>,
+@as("ConfigurationType") configurationType: configurationType
+}
+type csvmappingParameters = {
+@as("RecordColumnDelimiter") recordColumnDelimiter: recordColumnDelimiter,
+@as("RecordRowDelimiter") recordRowDelimiter: recordRowDelimiter
 }
 type applicationVersionSummary = {
-@as("ApplicationStatus") applicationStatus: option<applicationStatus>,
-@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>
+@as("ApplicationStatus") applicationStatus: applicationStatus,
+@as("ApplicationVersionId") applicationVersionId: applicationVersionId
 }
 type applicationSummary = {
-@as("ApplicationMode") applicationMode: applicationMode,
-@as("RuntimeEnvironment") runtimeEnvironment: option<runtimeEnvironment>,
-@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
-@as("ApplicationStatus") applicationStatus: option<applicationStatus>,
-@as("ApplicationARN") applicationARN: option<resourceARN>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("ApplicationMode") applicationMode: option<applicationMode>,
+@as("RuntimeEnvironment") runtimeEnvironment: runtimeEnvironment,
+@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
+@as("ApplicationStatus") applicationStatus: applicationStatus,
+@as("ApplicationARN") applicationARN: resourceARN,
+@as("ApplicationName") applicationName: applicationName
 }
 type applicationSnapshotConfigurationUpdate = {
-@as("SnapshotsEnabledUpdate") snapshotsEnabledUpdate: option<booleanObject>
+@as("SnapshotsEnabledUpdate") snapshotsEnabledUpdate: booleanObject
 }
 type applicationSnapshotConfigurationDescription = {
-@as("SnapshotsEnabled") snapshotsEnabled: option<booleanObject>
+@as("SnapshotsEnabled") snapshotsEnabled: booleanObject
 }
 type applicationSnapshotConfiguration = {
-@as("SnapshotsEnabled") snapshotsEnabled: option<booleanObject>
+@as("SnapshotsEnabled") snapshotsEnabled: booleanObject
 }
 type applicationRestoreConfiguration = {
-@as("SnapshotName") snapshotName: snapshotName,
-@as("ApplicationRestoreType") applicationRestoreType: option<applicationRestoreType>
+@as("SnapshotName") snapshotName: option<snapshotName>,
+@as("ApplicationRestoreType") applicationRestoreType: applicationRestoreType
 }
 type applicationMaintenanceConfigurationUpdate = {
-@as("ApplicationMaintenanceWindowStartTimeUpdate") applicationMaintenanceWindowStartTimeUpdate: option<applicationMaintenanceWindowStartTime>
+@as("ApplicationMaintenanceWindowStartTimeUpdate") applicationMaintenanceWindowStartTimeUpdate: applicationMaintenanceWindowStartTime
 }
 type applicationMaintenanceConfigurationDescription = {
-@as("ApplicationMaintenanceWindowEndTime") applicationMaintenanceWindowEndTime: option<applicationMaintenanceWindowEndTime>,
-@as("ApplicationMaintenanceWindowStartTime") applicationMaintenanceWindowStartTime: option<applicationMaintenanceWindowStartTime>
+@as("ApplicationMaintenanceWindowEndTime") applicationMaintenanceWindowEndTime: applicationMaintenanceWindowEndTime,
+@as("ApplicationMaintenanceWindowStartTime") applicationMaintenanceWindowStartTime: applicationMaintenanceWindowStartTime
 }
 type vpcConfigurationUpdate = {
-@as("SecurityGroupIdUpdates") securityGroupIdUpdates: securityGroupIds,
-@as("SubnetIdUpdates") subnetIdUpdates: subnetIds,
-@as("VpcConfigurationId") vpcConfigurationId: option<id>
+@as("SecurityGroupIdUpdates") securityGroupIdUpdates: option<securityGroupIds>,
+@as("SubnetIdUpdates") subnetIdUpdates: option<subnetIds>,
+@as("VpcConfigurationId") vpcConfigurationId: id
 }
 type vpcConfigurationDescription = {
-@as("SecurityGroupIds") securityGroupIds: option<securityGroupIds>,
-@as("SubnetIds") subnetIds: option<subnetIds>,
-@as("VpcId") vpcId: option<vpcId>,
-@as("VpcConfigurationId") vpcConfigurationId: option<id>
+@as("SecurityGroupIds") securityGroupIds: securityGroupIds,
+@as("SubnetIds") subnetIds: subnetIds,
+@as("VpcId") vpcId: vpcId,
+@as("VpcConfigurationId") vpcConfigurationId: id
 }
 type vpcConfiguration = {
-@as("SecurityGroupIds") securityGroupIds: option<securityGroupIds>,
-@as("SubnetIds") subnetIds: option<subnetIds>
+@as("SecurityGroupIds") securityGroupIds: securityGroupIds,
+@as("SubnetIds") subnetIds: subnetIds
 }
 type tags = array<tag>
 type sqlRunConfiguration = {
-@as("InputStartingPositionConfiguration") inputStartingPositionConfiguration: option<inputStartingPositionConfiguration>,
-@as("InputId") inputId: option<id>
+@as("InputStartingPositionConfiguration") inputStartingPositionConfiguration: inputStartingPositionConfiguration,
+@as("InputId") inputId: id
 }
 type snapshotSummaries = array<snapshotDetails>
 type runConfigurationUpdate = {
-@as("ApplicationRestoreConfiguration") applicationRestoreConfiguration: applicationRestoreConfiguration,
-@as("FlinkRunConfiguration") flinkRunConfiguration: flinkRunConfiguration
+@as("ApplicationRestoreConfiguration") applicationRestoreConfiguration: option<applicationRestoreConfiguration>,
+@as("FlinkRunConfiguration") flinkRunConfiguration: option<flinkRunConfiguration>
 }
 type runConfigurationDescription = {
-@as("FlinkRunConfigurationDescription") flinkRunConfigurationDescription: flinkRunConfiguration,
-@as("ApplicationRestoreConfigurationDescription") applicationRestoreConfigurationDescription: applicationRestoreConfiguration
+@as("FlinkRunConfigurationDescription") flinkRunConfigurationDescription: option<flinkRunConfiguration>,
+@as("ApplicationRestoreConfigurationDescription") applicationRestoreConfigurationDescription: option<applicationRestoreConfiguration>
 }
 type recordColumns = array<recordColumn>
 type propertyGroup = {
-@as("PropertyMap") propertyMap: option<propertyMap>,
-@as("PropertyGroupId") propertyGroupId: option<id>
+@as("PropertyMap") propertyMap: propertyMap,
+@as("PropertyGroupId") propertyGroupId: id
 }
 type parsedInputRecords = array<parsedInputRecord>
 type outputUpdate = {
-@as("DestinationSchemaUpdate") destinationSchemaUpdate: destinationSchema,
-@as("LambdaOutputUpdate") lambdaOutputUpdate: lambdaOutputUpdate,
-@as("KinesisFirehoseOutputUpdate") kinesisFirehoseOutputUpdate: kinesisFirehoseOutputUpdate,
-@as("KinesisStreamsOutputUpdate") kinesisStreamsOutputUpdate: kinesisStreamsOutputUpdate,
-@as("NameUpdate") nameUpdate: inAppStreamName,
-@as("OutputId") outputId: option<id>
-}
-type outputDescription = {
-@as("DestinationSchema") destinationSchema: destinationSchema,
-@as("LambdaOutputDescription") lambdaOutputDescription: lambdaOutputDescription,
-@as("KinesisFirehoseOutputDescription") kinesisFirehoseOutputDescription: kinesisFirehoseOutputDescription,
-@as("KinesisStreamsOutputDescription") kinesisStreamsOutputDescription: kinesisStreamsOutputDescription,
-@as("Name") name: inAppStreamName,
+@as("DestinationSchemaUpdate") destinationSchemaUpdate: option<destinationSchema>,
+@as("LambdaOutputUpdate") lambdaOutputUpdate: option<lambdaOutputUpdate>,
+@as("KinesisFirehoseOutputUpdate") kinesisFirehoseOutputUpdate: option<kinesisFirehoseOutputUpdate>,
+@as("KinesisStreamsOutputUpdate") kinesisStreamsOutputUpdate: option<kinesisStreamsOutputUpdate>,
+@as("NameUpdate") nameUpdate: option<inAppStreamName>,
 @as("OutputId") outputId: id
 }
-type output = {
+type outputDescription = {
 @as("DestinationSchema") destinationSchema: option<destinationSchema>,
-@as("LambdaOutput") lambdaOutput: lambdaOutput,
-@as("KinesisFirehoseOutput") kinesisFirehoseOutput: kinesisFirehoseOutput,
-@as("KinesisStreamsOutput") kinesisStreamsOutput: kinesisStreamsOutput,
-@as("Name") name: option<inAppStreamName>
+@as("LambdaOutputDescription") lambdaOutputDescription: option<lambdaOutputDescription>,
+@as("KinesisFirehoseOutputDescription") kinesisFirehoseOutputDescription: option<kinesisFirehoseOutputDescription>,
+@as("KinesisStreamsOutputDescription") kinesisStreamsOutputDescription: option<kinesisStreamsOutputDescription>,
+@as("Name") name: option<inAppStreamName>,
+@as("OutputId") outputId: option<id>
+}
+type output = {
+@as("DestinationSchema") destinationSchema: destinationSchema,
+@as("LambdaOutput") lambdaOutput: option<lambdaOutput>,
+@as("KinesisFirehoseOutput") kinesisFirehoseOutput: option<kinesisFirehoseOutput>,
+@as("KinesisStreamsOutput") kinesisStreamsOutput: option<kinesisStreamsOutput>,
+@as("Name") name: inAppStreamName
 }
 type mappingParameters = {
-@as("CSVMappingParameters") cSVMappingParameters: cSVMappingParameters,
-@as("JSONMappingParameters") jSONMappingParameters: jSONMappingParameters
+@as("CSVMappingParameters") csvmappingParameters: option<csvmappingParameters>,
+@as("JSONMappingParameters") jsonmappingParameters: option<jsonmappingParameters>
 }
 type inputProcessingConfigurationUpdate = {
-@as("InputLambdaProcessorUpdate") inputLambdaProcessorUpdate: option<inputLambdaProcessorUpdate>
+@as("InputLambdaProcessorUpdate") inputLambdaProcessorUpdate: inputLambdaProcessorUpdate
 }
 type inputProcessingConfigurationDescription = {
-@as("InputLambdaProcessorDescription") inputLambdaProcessorDescription: inputLambdaProcessorDescription
+@as("InputLambdaProcessorDescription") inputLambdaProcessorDescription: option<inputLambdaProcessorDescription>
 }
 type inputProcessingConfiguration = {
-@as("InputLambdaProcessor") inputLambdaProcessor: option<inputLambdaProcessor>
+@as("InputLambdaProcessor") inputLambdaProcessor: inputLambdaProcessor
 }
 type flinkApplicationConfigurationUpdate = {
-@as("ParallelismConfigurationUpdate") parallelismConfigurationUpdate: parallelismConfigurationUpdate,
-@as("MonitoringConfigurationUpdate") monitoringConfigurationUpdate: monitoringConfigurationUpdate,
-@as("CheckpointConfigurationUpdate") checkpointConfigurationUpdate: checkpointConfigurationUpdate
+@as("ParallelismConfigurationUpdate") parallelismConfigurationUpdate: option<parallelismConfigurationUpdate>,
+@as("MonitoringConfigurationUpdate") monitoringConfigurationUpdate: option<monitoringConfigurationUpdate>,
+@as("CheckpointConfigurationUpdate") checkpointConfigurationUpdate: option<checkpointConfigurationUpdate>
 }
 type flinkApplicationConfigurationDescription = {
-@as("JobPlanDescription") jobPlanDescription: jobPlanDescription,
-@as("ParallelismConfigurationDescription") parallelismConfigurationDescription: parallelismConfigurationDescription,
-@as("MonitoringConfigurationDescription") monitoringConfigurationDescription: monitoringConfigurationDescription,
-@as("CheckpointConfigurationDescription") checkpointConfigurationDescription: checkpointConfigurationDescription
+@as("JobPlanDescription") jobPlanDescription: option<jobPlanDescription>,
+@as("ParallelismConfigurationDescription") parallelismConfigurationDescription: option<parallelismConfigurationDescription>,
+@as("MonitoringConfigurationDescription") monitoringConfigurationDescription: option<monitoringConfigurationDescription>,
+@as("CheckpointConfigurationDescription") checkpointConfigurationDescription: option<checkpointConfigurationDescription>
 }
 type flinkApplicationConfiguration = {
-@as("ParallelismConfiguration") parallelismConfiguration: parallelismConfiguration,
-@as("MonitoringConfiguration") monitoringConfiguration: monitoringConfiguration,
-@as("CheckpointConfiguration") checkpointConfiguration: checkpointConfiguration
+@as("ParallelismConfiguration") parallelismConfiguration: option<parallelismConfiguration>,
+@as("MonitoringConfiguration") monitoringConfiguration: option<monitoringConfiguration>,
+@as("CheckpointConfiguration") checkpointConfiguration: option<checkpointConfiguration>
 }
 type deployAsApplicationConfigurationUpdate = {
-@as("S3ContentLocationUpdate") s3ContentLocationUpdate: option<s3ContentBaseLocationUpdate>
+@as("S3ContentLocationUpdate") s3ContentLocationUpdate: s3ContentBaseLocationUpdate
 }
 type deployAsApplicationConfigurationDescription = {
-@as("S3ContentLocationDescription") s3ContentLocationDescription: option<s3ContentBaseLocationDescription>
+@as("S3ContentLocationDescription") s3ContentLocationDescription: s3ContentBaseLocationDescription
 }
 type deployAsApplicationConfiguration = {
-@as("S3ContentLocation") s3ContentLocation: option<s3ContentBaseLocation>
+@as("S3ContentLocation") s3ContentLocation: s3ContentBaseLocation
 }
 type customArtifactConfigurationDescription = {
-@as("MavenReferenceDescription") mavenReferenceDescription: mavenReference,
-@as("S3ContentLocationDescription") s3ContentLocationDescription: s3ContentLocation,
-@as("ArtifactType") artifactType: artifactType
-}
-type customArtifactConfiguration = {
-@as("MavenReference") mavenReference: mavenReference,
-@as("S3ContentLocation") s3ContentLocation: s3ContentLocation,
+@as("MavenReferenceDescription") mavenReferenceDescription: option<mavenReference>,
+@as("S3ContentLocationDescription") s3ContentLocationDescription: option<s3ContentLocation>,
 @as("ArtifactType") artifactType: option<artifactType>
 }
+type customArtifactConfiguration = {
+@as("MavenReference") mavenReference: option<mavenReference>,
+@as("S3ContentLocation") s3ContentLocation: option<s3ContentLocation>,
+@as("ArtifactType") artifactType: artifactType
+}
 type codeContentUpdate = {
-@as("S3ContentLocationUpdate") s3ContentLocationUpdate: s3ContentLocationUpdate,
-@as("ZipFileContentUpdate") zipFileContentUpdate: zipFileContent,
-@as("TextContentUpdate") textContentUpdate: textContent
+@as("S3ContentLocationUpdate") s3ContentLocationUpdate: option<s3ContentLocationUpdate>,
+@as("ZipFileContentUpdate") zipFileContentUpdate: option<zipFileContent>,
+@as("TextContentUpdate") textContentUpdate: option<textContent>
 }
 type codeContentDescription = {
-@as("S3ApplicationCodeLocationDescription") s3ApplicationCodeLocationDescription: s3ApplicationCodeLocationDescription,
-@as("CodeSize") codeSize: codeSize,
-@as("CodeMD5") codeMD5: codeMD5,
-@as("TextContent") textContent: textContent
+@as("S3ApplicationCodeLocationDescription") s3ApplicationCodeLocationDescription: option<s3ApplicationCodeLocationDescription>,
+@as("CodeSize") codeSize: option<codeSize>,
+@as("CodeMD5") codeMD5: option<codeMD5>,
+@as("TextContent") textContent: option<textContent>
 }
 type codeContent = {
-@as("S3ContentLocation") s3ContentLocation: s3ContentLocation,
-@as("ZipFileContent") zipFileContent: zipFileContent,
-@as("TextContent") textContent: textContent
+@as("S3ContentLocation") s3ContentLocation: option<s3ContentLocation>,
+@as("ZipFileContent") zipFileContent: option<zipFileContent>,
+@as("TextContent") textContent: option<textContent>
 }
 type cloudWatchLoggingOptions = array<cloudWatchLoggingOption>
 type cloudWatchLoggingOptionUpdates = array<cloudWatchLoggingOptionUpdate>
 type cloudWatchLoggingOptionDescriptions = array<cloudWatchLoggingOptionDescription>
 type catalogConfigurationUpdate = {
-@as("GlueDataCatalogConfigurationUpdate") glueDataCatalogConfigurationUpdate: option<glueDataCatalogConfigurationUpdate>
+@as("GlueDataCatalogConfigurationUpdate") glueDataCatalogConfigurationUpdate: glueDataCatalogConfigurationUpdate
 }
 type catalogConfigurationDescription = {
-@as("GlueDataCatalogConfigurationDescription") glueDataCatalogConfigurationDescription: option<glueDataCatalogConfigurationDescription>
+@as("GlueDataCatalogConfigurationDescription") glueDataCatalogConfigurationDescription: glueDataCatalogConfigurationDescription
 }
 type catalogConfiguration = {
-@as("GlueDataCatalogConfiguration") glueDataCatalogConfiguration: option<glueDataCatalogConfiguration>
+@as("GlueDataCatalogConfiguration") glueDataCatalogConfiguration: glueDataCatalogConfiguration
 }
 type applicationVersionSummaries = array<applicationVersionSummary>
 type applicationSummaries = array<applicationSummary>
@@ -483,8 +490,8 @@ type vpcConfigurationUpdates = array<vpcConfigurationUpdate>
 type vpcConfigurationDescriptions = array<vpcConfigurationDescription>
 type sqlRunConfigurations = array<sqlRunConfiguration>
 type recordFormat = {
-@as("MappingParameters") mappingParameters: mappingParameters,
-@as("RecordFormatType") recordFormatType: option<recordFormatType>
+@as("MappingParameters") mappingParameters: option<mappingParameters>,
+@as("RecordFormatType") recordFormatType: recordFormatType
 }
 type propertyGroups = array<propertyGroup>
 type outputs = array<output>
@@ -493,103 +500,103 @@ type outputDescriptions = array<outputDescription>
 type customArtifactsConfigurationList = array<customArtifactConfiguration>
 type customArtifactsConfigurationDescriptionList = array<customArtifactConfigurationDescription>
 type applicationCodeConfigurationUpdate = {
-@as("CodeContentUpdate") codeContentUpdate: codeContentUpdate,
-@as("CodeContentTypeUpdate") codeContentTypeUpdate: codeContentType
+@as("CodeContentUpdate") codeContentUpdate: option<codeContentUpdate>,
+@as("CodeContentTypeUpdate") codeContentTypeUpdate: option<codeContentType>
 }
 type applicationCodeConfigurationDescription = {
-@as("CodeContentDescription") codeContentDescription: codeContentDescription,
-@as("CodeContentType") codeContentType: option<codeContentType>
+@as("CodeContentDescription") codeContentDescription: option<codeContentDescription>,
+@as("CodeContentType") codeContentType: codeContentType
 }
 type applicationCodeConfiguration = {
-@as("CodeContentType") codeContentType: option<codeContentType>,
-@as("CodeContent") codeContent: codeContent
+@as("CodeContentType") codeContentType: codeContentType,
+@as("CodeContent") codeContent: option<codeContent>
 }
 type zeppelinApplicationConfigurationUpdate = {
-@as("CustomArtifactsConfigurationUpdate") customArtifactsConfigurationUpdate: customArtifactsConfigurationList,
-@as("DeployAsApplicationConfigurationUpdate") deployAsApplicationConfigurationUpdate: deployAsApplicationConfigurationUpdate,
-@as("CatalogConfigurationUpdate") catalogConfigurationUpdate: catalogConfigurationUpdate,
-@as("MonitoringConfigurationUpdate") monitoringConfigurationUpdate: zeppelinMonitoringConfigurationUpdate
+@as("CustomArtifactsConfigurationUpdate") customArtifactsConfigurationUpdate: option<customArtifactsConfigurationList>,
+@as("DeployAsApplicationConfigurationUpdate") deployAsApplicationConfigurationUpdate: option<deployAsApplicationConfigurationUpdate>,
+@as("CatalogConfigurationUpdate") catalogConfigurationUpdate: option<catalogConfigurationUpdate>,
+@as("MonitoringConfigurationUpdate") monitoringConfigurationUpdate: option<zeppelinMonitoringConfigurationUpdate>
 }
 type zeppelinApplicationConfigurationDescription = {
-@as("CustomArtifactsConfigurationDescription") customArtifactsConfigurationDescription: customArtifactsConfigurationDescriptionList,
-@as("DeployAsApplicationConfigurationDescription") deployAsApplicationConfigurationDescription: deployAsApplicationConfigurationDescription,
-@as("CatalogConfigurationDescription") catalogConfigurationDescription: catalogConfigurationDescription,
-@as("MonitoringConfigurationDescription") monitoringConfigurationDescription: option<zeppelinMonitoringConfigurationDescription>
+@as("CustomArtifactsConfigurationDescription") customArtifactsConfigurationDescription: option<customArtifactsConfigurationDescriptionList>,
+@as("DeployAsApplicationConfigurationDescription") deployAsApplicationConfigurationDescription: option<deployAsApplicationConfigurationDescription>,
+@as("CatalogConfigurationDescription") catalogConfigurationDescription: option<catalogConfigurationDescription>,
+@as("MonitoringConfigurationDescription") monitoringConfigurationDescription: zeppelinMonitoringConfigurationDescription
 }
 type zeppelinApplicationConfiguration = {
-@as("CustomArtifactsConfiguration") customArtifactsConfiguration: customArtifactsConfigurationList,
-@as("DeployAsApplicationConfiguration") deployAsApplicationConfiguration: deployAsApplicationConfiguration,
-@as("CatalogConfiguration") catalogConfiguration: catalogConfiguration,
-@as("MonitoringConfiguration") monitoringConfiguration: zeppelinMonitoringConfiguration
+@as("CustomArtifactsConfiguration") customArtifactsConfiguration: option<customArtifactsConfigurationList>,
+@as("DeployAsApplicationConfiguration") deployAsApplicationConfiguration: option<deployAsApplicationConfiguration>,
+@as("CatalogConfiguration") catalogConfiguration: option<catalogConfiguration>,
+@as("MonitoringConfiguration") monitoringConfiguration: option<zeppelinMonitoringConfiguration>
 }
 type sourceSchema = {
-@as("RecordColumns") recordColumns: option<recordColumns>,
-@as("RecordEncoding") recordEncoding: recordEncoding,
-@as("RecordFormat") recordFormat: option<recordFormat>
+@as("RecordColumns") recordColumns: recordColumns,
+@as("RecordEncoding") recordEncoding: option<recordEncoding>,
+@as("RecordFormat") recordFormat: recordFormat
 }
 type runConfiguration = {
-@as("ApplicationRestoreConfiguration") applicationRestoreConfiguration: applicationRestoreConfiguration,
-@as("SqlRunConfigurations") sqlRunConfigurations: sqlRunConfigurations,
-@as("FlinkRunConfiguration") flinkRunConfiguration: flinkRunConfiguration
+@as("ApplicationRestoreConfiguration") applicationRestoreConfiguration: option<applicationRestoreConfiguration>,
+@as("SqlRunConfigurations") sqlRunConfigurations: option<sqlRunConfigurations>,
+@as("FlinkRunConfiguration") flinkRunConfiguration: option<flinkRunConfiguration>
 }
 type inputSchemaUpdate = {
-@as("RecordColumnUpdates") recordColumnUpdates: recordColumns,
-@as("RecordEncodingUpdate") recordEncodingUpdate: recordEncoding,
-@as("RecordFormatUpdate") recordFormatUpdate: recordFormat
+@as("RecordColumnUpdates") recordColumnUpdates: option<recordColumns>,
+@as("RecordEncodingUpdate") recordEncodingUpdate: option<recordEncoding>,
+@as("RecordFormatUpdate") recordFormatUpdate: option<recordFormat>
 }
 type environmentPropertyUpdates = {
-@as("PropertyGroups") propertyGroups: option<propertyGroups>
+@as("PropertyGroups") propertyGroups: propertyGroups
 }
 type environmentPropertyDescriptions = {
-@as("PropertyGroupDescriptions") propertyGroupDescriptions: propertyGroups
+@as("PropertyGroupDescriptions") propertyGroupDescriptions: option<propertyGroups>
 }
 type environmentProperties = {
-@as("PropertyGroups") propertyGroups: option<propertyGroups>
+@as("PropertyGroups") propertyGroups: propertyGroups
 }
 type referenceDataSourceUpdate = {
-@as("ReferenceSchemaUpdate") referenceSchemaUpdate: sourceSchema,
-@as("S3ReferenceDataSourceUpdate") s3ReferenceDataSourceUpdate: s3ReferenceDataSourceUpdate,
-@as("TableNameUpdate") tableNameUpdate: inAppTableName,
-@as("ReferenceId") referenceId: option<id>
+@as("ReferenceSchemaUpdate") referenceSchemaUpdate: option<sourceSchema>,
+@as("S3ReferenceDataSourceUpdate") s3ReferenceDataSourceUpdate: option<s3ReferenceDataSourceUpdate>,
+@as("TableNameUpdate") tableNameUpdate: option<inAppTableName>,
+@as("ReferenceId") referenceId: id
 }
 type referenceDataSourceDescription = {
-@as("ReferenceSchema") referenceSchema: sourceSchema,
-@as("S3ReferenceDataSourceDescription") s3ReferenceDataSourceDescription: option<s3ReferenceDataSourceDescription>,
-@as("TableName") tableName: option<inAppTableName>,
-@as("ReferenceId") referenceId: option<id>
+@as("ReferenceSchema") referenceSchema: option<sourceSchema>,
+@as("S3ReferenceDataSourceDescription") s3ReferenceDataSourceDescription: s3ReferenceDataSourceDescription,
+@as("TableName") tableName: inAppTableName,
+@as("ReferenceId") referenceId: id
 }
 type referenceDataSource = {
-@as("ReferenceSchema") referenceSchema: option<sourceSchema>,
-@as("S3ReferenceDataSource") s3ReferenceDataSource: s3ReferenceDataSource,
-@as("TableName") tableName: option<inAppTableName>
+@as("ReferenceSchema") referenceSchema: sourceSchema,
+@as("S3ReferenceDataSource") s3ReferenceDataSource: option<s3ReferenceDataSource>,
+@as("TableName") tableName: inAppTableName
 }
 type inputUpdate = {
-@as("InputParallelismUpdate") inputParallelismUpdate: inputParallelismUpdate,
-@as("InputSchemaUpdate") inputSchemaUpdate: inputSchemaUpdate,
-@as("KinesisFirehoseInputUpdate") kinesisFirehoseInputUpdate: kinesisFirehoseInputUpdate,
-@as("KinesisStreamsInputUpdate") kinesisStreamsInputUpdate: kinesisStreamsInputUpdate,
-@as("InputProcessingConfigurationUpdate") inputProcessingConfigurationUpdate: inputProcessingConfigurationUpdate,
-@as("NamePrefixUpdate") namePrefixUpdate: inAppStreamName,
-@as("InputId") inputId: option<id>
-}
-type inputDescription = {
-@as("InputStartingPositionConfiguration") inputStartingPositionConfiguration: inputStartingPositionConfiguration,
-@as("InputParallelism") inputParallelism: inputParallelism,
-@as("InputSchema") inputSchema: sourceSchema,
-@as("KinesisFirehoseInputDescription") kinesisFirehoseInputDescription: kinesisFirehoseInputDescription,
-@as("KinesisStreamsInputDescription") kinesisStreamsInputDescription: kinesisStreamsInputDescription,
-@as("InputProcessingConfigurationDescription") inputProcessingConfigurationDescription: inputProcessingConfigurationDescription,
-@as("InAppStreamNames") inAppStreamNames: inAppStreamNames,
-@as("NamePrefix") namePrefix: inAppStreamName,
+@as("InputParallelismUpdate") inputParallelismUpdate: option<inputParallelismUpdate>,
+@as("InputSchemaUpdate") inputSchemaUpdate: option<inputSchemaUpdate>,
+@as("KinesisFirehoseInputUpdate") kinesisFirehoseInputUpdate: option<kinesisFirehoseInputUpdate>,
+@as("KinesisStreamsInputUpdate") kinesisStreamsInputUpdate: option<kinesisStreamsInputUpdate>,
+@as("InputProcessingConfigurationUpdate") inputProcessingConfigurationUpdate: option<inputProcessingConfigurationUpdate>,
+@as("NamePrefixUpdate") namePrefixUpdate: option<inAppStreamName>,
 @as("InputId") inputId: id
 }
-type input = {
+type inputDescription = {
+@as("InputStartingPositionConfiguration") inputStartingPositionConfiguration: option<inputStartingPositionConfiguration>,
+@as("InputParallelism") inputParallelism: option<inputParallelism>,
 @as("InputSchema") inputSchema: option<sourceSchema>,
-@as("InputParallelism") inputParallelism: inputParallelism,
-@as("KinesisFirehoseInput") kinesisFirehoseInput: kinesisFirehoseInput,
-@as("KinesisStreamsInput") kinesisStreamsInput: kinesisStreamsInput,
-@as("InputProcessingConfiguration") inputProcessingConfiguration: inputProcessingConfiguration,
-@as("NamePrefix") namePrefix: option<inAppStreamName>
+@as("KinesisFirehoseInputDescription") kinesisFirehoseInputDescription: option<kinesisFirehoseInputDescription>,
+@as("KinesisStreamsInputDescription") kinesisStreamsInputDescription: option<kinesisStreamsInputDescription>,
+@as("InputProcessingConfigurationDescription") inputProcessingConfigurationDescription: option<inputProcessingConfigurationDescription>,
+@as("InAppStreamNames") inAppStreamNames: option<inAppStreamNames>,
+@as("NamePrefix") namePrefix: option<inAppStreamName>,
+@as("InputId") inputId: option<id>
+}
+type input = {
+@as("InputSchema") inputSchema: sourceSchema,
+@as("InputParallelism") inputParallelism: option<inputParallelism>,
+@as("KinesisFirehoseInput") kinesisFirehoseInput: option<kinesisFirehoseInput>,
+@as("KinesisStreamsInput") kinesisStreamsInput: option<kinesisStreamsInput>,
+@as("InputProcessingConfiguration") inputProcessingConfiguration: option<inputProcessingConfiguration>,
+@as("NamePrefix") namePrefix: inAppStreamName
 }
 type referenceDataSources = array<referenceDataSource>
 type referenceDataSourceUpdates = array<referenceDataSourceUpdate>
@@ -598,513 +605,513 @@ type inputs = array<input>
 type inputUpdates = array<inputUpdate>
 type inputDescriptions = array<inputDescription>
 type sqlApplicationConfigurationUpdate = {
-@as("ReferenceDataSourceUpdates") referenceDataSourceUpdates: referenceDataSourceUpdates,
-@as("OutputUpdates") outputUpdates: outputUpdates,
-@as("InputUpdates") inputUpdates: inputUpdates
+@as("ReferenceDataSourceUpdates") referenceDataSourceUpdates: option<referenceDataSourceUpdates>,
+@as("OutputUpdates") outputUpdates: option<outputUpdates>,
+@as("InputUpdates") inputUpdates: option<inputUpdates>
 }
 type sqlApplicationConfigurationDescription = {
-@as("ReferenceDataSourceDescriptions") referenceDataSourceDescriptions: referenceDataSourceDescriptions,
-@as("OutputDescriptions") outputDescriptions: outputDescriptions,
-@as("InputDescriptions") inputDescriptions: inputDescriptions
+@as("ReferenceDataSourceDescriptions") referenceDataSourceDescriptions: option<referenceDataSourceDescriptions>,
+@as("OutputDescriptions") outputDescriptions: option<outputDescriptions>,
+@as("InputDescriptions") inputDescriptions: option<inputDescriptions>
 }
 type sqlApplicationConfiguration = {
-@as("ReferenceDataSources") referenceDataSources: referenceDataSources,
-@as("Outputs") outputs: outputs,
-@as("Inputs") inputs: inputs
+@as("ReferenceDataSources") referenceDataSources: option<referenceDataSources>,
+@as("Outputs") outputs: option<outputs>,
+@as("Inputs") inputs: option<inputs>
 }
 type applicationConfigurationUpdate = {
-@as("ZeppelinApplicationConfigurationUpdate") zeppelinApplicationConfigurationUpdate: zeppelinApplicationConfigurationUpdate,
-@as("VpcConfigurationUpdates") vpcConfigurationUpdates: vpcConfigurationUpdates,
-@as("ApplicationSnapshotConfigurationUpdate") applicationSnapshotConfigurationUpdate: applicationSnapshotConfigurationUpdate,
-@as("EnvironmentPropertyUpdates") environmentPropertyUpdates: environmentPropertyUpdates,
-@as("FlinkApplicationConfigurationUpdate") flinkApplicationConfigurationUpdate: flinkApplicationConfigurationUpdate,
-@as("ApplicationCodeConfigurationUpdate") applicationCodeConfigurationUpdate: applicationCodeConfigurationUpdate,
-@as("SqlApplicationConfigurationUpdate") sqlApplicationConfigurationUpdate: sqlApplicationConfigurationUpdate
+@as("ZeppelinApplicationConfigurationUpdate") zeppelinApplicationConfigurationUpdate: option<zeppelinApplicationConfigurationUpdate>,
+@as("VpcConfigurationUpdates") vpcConfigurationUpdates: option<vpcConfigurationUpdates>,
+@as("ApplicationSnapshotConfigurationUpdate") applicationSnapshotConfigurationUpdate: option<applicationSnapshotConfigurationUpdate>,
+@as("EnvironmentPropertyUpdates") environmentPropertyUpdates: option<environmentPropertyUpdates>,
+@as("FlinkApplicationConfigurationUpdate") flinkApplicationConfigurationUpdate: option<flinkApplicationConfigurationUpdate>,
+@as("ApplicationCodeConfigurationUpdate") applicationCodeConfigurationUpdate: option<applicationCodeConfigurationUpdate>,
+@as("SqlApplicationConfigurationUpdate") sqlApplicationConfigurationUpdate: option<sqlApplicationConfigurationUpdate>
 }
 type applicationConfigurationDescription = {
-@as("ZeppelinApplicationConfigurationDescription") zeppelinApplicationConfigurationDescription: zeppelinApplicationConfigurationDescription,
-@as("VpcConfigurationDescriptions") vpcConfigurationDescriptions: vpcConfigurationDescriptions,
-@as("ApplicationSnapshotConfigurationDescription") applicationSnapshotConfigurationDescription: applicationSnapshotConfigurationDescription,
-@as("EnvironmentPropertyDescriptions") environmentPropertyDescriptions: environmentPropertyDescriptions,
-@as("FlinkApplicationConfigurationDescription") flinkApplicationConfigurationDescription: flinkApplicationConfigurationDescription,
-@as("RunConfigurationDescription") runConfigurationDescription: runConfigurationDescription,
-@as("ApplicationCodeConfigurationDescription") applicationCodeConfigurationDescription: applicationCodeConfigurationDescription,
-@as("SqlApplicationConfigurationDescription") sqlApplicationConfigurationDescription: sqlApplicationConfigurationDescription
+@as("ZeppelinApplicationConfigurationDescription") zeppelinApplicationConfigurationDescription: option<zeppelinApplicationConfigurationDescription>,
+@as("VpcConfigurationDescriptions") vpcConfigurationDescriptions: option<vpcConfigurationDescriptions>,
+@as("ApplicationSnapshotConfigurationDescription") applicationSnapshotConfigurationDescription: option<applicationSnapshotConfigurationDescription>,
+@as("EnvironmentPropertyDescriptions") environmentPropertyDescriptions: option<environmentPropertyDescriptions>,
+@as("FlinkApplicationConfigurationDescription") flinkApplicationConfigurationDescription: option<flinkApplicationConfigurationDescription>,
+@as("RunConfigurationDescription") runConfigurationDescription: option<runConfigurationDescription>,
+@as("ApplicationCodeConfigurationDescription") applicationCodeConfigurationDescription: option<applicationCodeConfigurationDescription>,
+@as("SqlApplicationConfigurationDescription") sqlApplicationConfigurationDescription: option<sqlApplicationConfigurationDescription>
 }
 type applicationConfiguration = {
-@as("ZeppelinApplicationConfiguration") zeppelinApplicationConfiguration: zeppelinApplicationConfiguration,
-@as("VpcConfigurations") vpcConfigurations: vpcConfigurations,
-@as("ApplicationSnapshotConfiguration") applicationSnapshotConfiguration: applicationSnapshotConfiguration,
-@as("ApplicationCodeConfiguration") applicationCodeConfiguration: applicationCodeConfiguration,
-@as("EnvironmentProperties") environmentProperties: environmentProperties,
-@as("FlinkApplicationConfiguration") flinkApplicationConfiguration: flinkApplicationConfiguration,
-@as("SqlApplicationConfiguration") sqlApplicationConfiguration: sqlApplicationConfiguration
+@as("ZeppelinApplicationConfiguration") zeppelinApplicationConfiguration: option<zeppelinApplicationConfiguration>,
+@as("VpcConfigurations") vpcConfigurations: option<vpcConfigurations>,
+@as("ApplicationSnapshotConfiguration") applicationSnapshotConfiguration: option<applicationSnapshotConfiguration>,
+@as("ApplicationCodeConfiguration") applicationCodeConfiguration: option<applicationCodeConfiguration>,
+@as("EnvironmentProperties") environmentProperties: option<environmentProperties>,
+@as("FlinkApplicationConfiguration") flinkApplicationConfiguration: option<flinkApplicationConfiguration>,
+@as("SqlApplicationConfiguration") sqlApplicationConfiguration: option<sqlApplicationConfiguration>
 }
 type applicationDetail = {
-@as("ApplicationMode") applicationMode: applicationMode,
-@as("ApplicationVersionRolledBackTo") applicationVersionRolledBackTo: applicationVersionId,
-@as("ConditionalToken") conditionalToken: conditionalToken,
-@as("ApplicationVersionRolledBackFrom") applicationVersionRolledBackFrom: applicationVersionId,
-@as("ApplicationVersionUpdatedFrom") applicationVersionUpdatedFrom: applicationVersionId,
-@as("ApplicationMaintenanceConfigurationDescription") applicationMaintenanceConfigurationDescription: applicationMaintenanceConfigurationDescription,
-@as("CloudWatchLoggingOptionDescriptions") cloudWatchLoggingOptionDescriptions: cloudWatchLoggingOptionDescriptions,
-@as("ApplicationConfigurationDescription") applicationConfigurationDescription: applicationConfigurationDescription,
-@as("LastUpdateTimestamp") lastUpdateTimestamp: amazonawsTimestamp,
-@as("CreateTimestamp") createTimestamp: amazonawsTimestamp,
-@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
-@as("ApplicationStatus") applicationStatus: option<applicationStatus>,
-@as("ServiceExecutionRole") serviceExecutionRole: roleARN,
-@as("RuntimeEnvironment") runtimeEnvironment: option<runtimeEnvironment>,
-@as("ApplicationName") applicationName: option<applicationName>,
-@as("ApplicationDescription") applicationDescription: applicationDescription,
-@as("ApplicationARN") applicationARN: option<resourceARN>
+@as("ApplicationMode") applicationMode: option<applicationMode>,
+@as("ApplicationVersionRolledBackTo") applicationVersionRolledBackTo: option<applicationVersionId>,
+@as("ConditionalToken") conditionalToken: option<conditionalToken>,
+@as("ApplicationVersionRolledBackFrom") applicationVersionRolledBackFrom: option<applicationVersionId>,
+@as("ApplicationVersionUpdatedFrom") applicationVersionUpdatedFrom: option<applicationVersionId>,
+@as("ApplicationMaintenanceConfigurationDescription") applicationMaintenanceConfigurationDescription: option<applicationMaintenanceConfigurationDescription>,
+@as("CloudWatchLoggingOptionDescriptions") cloudWatchLoggingOptionDescriptions: option<cloudWatchLoggingOptionDescriptions>,
+@as("ApplicationConfigurationDescription") applicationConfigurationDescription: option<applicationConfigurationDescription>,
+@as("LastUpdateTimestamp") lastUpdateTimestamp: option<timestamp_>,
+@as("CreateTimestamp") createTimestamp: option<timestamp_>,
+@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
+@as("ApplicationStatus") applicationStatus: applicationStatus,
+@as("ServiceExecutionRole") serviceExecutionRole: option<roleARN>,
+@as("RuntimeEnvironment") runtimeEnvironment: runtimeEnvironment,
+@as("ApplicationName") applicationName: applicationName,
+@as("ApplicationDescription") applicationDescription: option<applicationDescription>,
+@as("ApplicationARN") applicationARN: resourceARN
 }
-type clientType;
-@module("@aws-sdk/client-kinesisanalytics") @new external createClient: unit => clientType = "KinesisAnalyticsV2Client";
+type awsServiceClient;
+@module("@aws-sdk/client-kinesisanalytics") @new external createClient: unit => awsServiceClient = "KinesisAnalyticsV2Client";
 module StopApplication = {
   type t;
   type request = {
-@as("Force") force: booleanObject,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("Force") force: option<booleanObject>,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "StopApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApplicationVpcConfiguration = {
   type t;
   type request = {
-@as("ConditionalToken") conditionalToken: conditionalToken,
-@as("VpcConfigurationId") vpcConfigurationId: option<id>,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("ConditionalToken") conditionalToken: option<conditionalToken>,
+@as("VpcConfigurationId") vpcConfigurationId: id,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationVpcConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApplicationSnapshot = {
   type t;
   type request = {
-@as("SnapshotCreationTimestamp") snapshotCreationTimestamp: option<amazonawsTimestamp>,
-@as("SnapshotName") snapshotName: option<snapshotName>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("SnapshotCreationTimestamp") snapshotCreationTimestamp: timestamp_,
+@as("SnapshotName") snapshotName: snapshotName,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApplicationReferenceDataSource = {
   type t;
   type request = {
-@as("ReferenceId") referenceId: option<id>,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("ReferenceId") referenceId: id,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationReferenceDataSourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApplicationOutput = {
   type t;
   type request = {
-@as("OutputId") outputId: option<id>,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("OutputId") outputId: id,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationOutputCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApplicationInputProcessingConfiguration = {
   type t;
   type request = {
-@as("InputId") inputId: option<id>,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("InputId") inputId: id,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationInputProcessingConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApplication = {
   type t;
   type request = {
-@as("CreateTimestamp") createTimestamp: option<amazonawsTimestamp>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("CreateTimestamp") createTimestamp: timestamp_,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApplicationSnapshot = {
   type t;
   type request = {
-@as("SnapshotName") snapshotName: option<snapshotName>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("SnapshotName") snapshotName: snapshotName,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "CreateApplicationSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApplicationPresignedUrl = {
   type t;
   type request = {
-@as("SessionExpirationDurationInSeconds") sessionExpirationDurationInSeconds: sessionExpirationDurationInSeconds,
-@as("UrlType") urlType: option<urlType>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("SessionExpirationDurationInSeconds") sessionExpirationDurationInSeconds: option<sessionExpirationDurationInSeconds>,
+@as("UrlType") urlType: urlType,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("AuthorizedUrl") authorizedUrl: authorizedUrl
+@as("AuthorizedUrl") authorizedUrl: option<authorizedUrl>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "CreateApplicationPresignedUrlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateApplicationMaintenanceConfiguration = {
   type t;
   type request = {
-@as("ApplicationMaintenanceConfigurationUpdate") applicationMaintenanceConfigurationUpdate: option<applicationMaintenanceConfigurationUpdate>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("ApplicationMaintenanceConfigurationUpdate") applicationMaintenanceConfigurationUpdate: applicationMaintenanceConfigurationUpdate,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("ApplicationMaintenanceConfigurationDescription") applicationMaintenanceConfigurationDescription: applicationMaintenanceConfigurationDescription,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("ApplicationMaintenanceConfigurationDescription") applicationMaintenanceConfigurationDescription: option<applicationMaintenanceConfigurationDescription>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "UpdateApplicationMaintenanceConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeys>,
-@as("ResourceARN") resourceARN: option<kinesisAnalyticsARN>
+@as("TagKeys") tagKeys: tagKeys,
+@as("ResourceARN") resourceARN: kinesisAnalyticsARN
 }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeApplicationSnapshot = {
   type t;
   type request = {
-@as("SnapshotName") snapshotName: option<snapshotName>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("SnapshotName") snapshotName: snapshotName,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("SnapshotDetails") snapshotDetails: option<snapshotDetails>
+@as("SnapshotDetails") snapshotDetails: snapshotDetails
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DescribeApplicationSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tags>,
-@as("ResourceARN") resourceARN: option<kinesisAnalyticsARN>
+@as("Tags") tags: tags,
+@as("ResourceARN") resourceARN: kinesisAnalyticsARN
 }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("ResourceARN") resourceARN: option<kinesisAnalyticsARN>
+@as("ResourceARN") resourceARN: kinesisAnalyticsARN
 }
   type response = {
-@as("Tags") tags: tags
+@as("Tags") tags: option<tags>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListApplications = {
   type t;
   type request = {
-@as("NextToken") nextToken: applicationName,
-@as("Limit") limit: listApplicationsInputLimit
+@as("NextToken") nextToken: option<applicationName>,
+@as("Limit") limit: option<listApplicationsInputLimit>
 }
   type response = {
-@as("NextToken") nextToken: applicationName,
-@as("ApplicationSummaries") applicationSummaries: option<applicationSummaries>
+@as("NextToken") nextToken: option<applicationName>,
+@as("ApplicationSummaries") applicationSummaries: applicationSummaries
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "ListApplicationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListApplicationVersions = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: listApplicationVersionsInputLimit,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<listApplicationVersionsInputLimit>,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("ApplicationVersionSummaries") applicationVersionSummaries: applicationVersionSummaries
+@as("NextToken") nextToken: option<nextToken>,
+@as("ApplicationVersionSummaries") applicationVersionSummaries: option<applicationVersionSummaries>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "ListApplicationVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListApplicationSnapshots = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: listSnapshotsInputLimit,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<listSnapshotsInputLimit>,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("SnapshotSummaries") snapshotSummaries: snapshotSummaries
+@as("NextToken") nextToken: option<nextToken>,
+@as("SnapshotSummaries") snapshotSummaries: option<snapshotSummaries>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "ListApplicationSnapshotsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApplicationCloudWatchLoggingOption = {
   type t;
   type request = {
-@as("ConditionalToken") conditionalToken: conditionalToken,
-@as("CloudWatchLoggingOptionId") cloudWatchLoggingOptionId: option<id>,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("ConditionalToken") conditionalToken: option<conditionalToken>,
+@as("CloudWatchLoggingOptionId") cloudWatchLoggingOptionId: id,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("CloudWatchLoggingOptionDescriptions") cloudWatchLoggingOptionDescriptions: cloudWatchLoggingOptionDescriptions,
-@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("CloudWatchLoggingOptionDescriptions") cloudWatchLoggingOptionDescriptions: option<cloudWatchLoggingOptionDescriptions>,
+@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationCloudWatchLoggingOptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddApplicationVpcConfiguration = {
   type t;
   type request = {
-@as("ConditionalToken") conditionalToken: conditionalToken,
-@as("VpcConfiguration") vpcConfiguration: option<vpcConfiguration>,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("ConditionalToken") conditionalToken: option<conditionalToken>,
+@as("VpcConfiguration") vpcConfiguration: vpcConfiguration,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("VpcConfigurationDescription") vpcConfigurationDescription: vpcConfigurationDescription,
-@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("VpcConfigurationDescription") vpcConfigurationDescription: option<vpcConfigurationDescription>,
+@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationVpcConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddApplicationInputProcessingConfiguration = {
   type t;
   type request = {
-@as("InputProcessingConfiguration") inputProcessingConfiguration: option<inputProcessingConfiguration>,
-@as("InputId") inputId: option<id>,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("InputProcessingConfiguration") inputProcessingConfiguration: inputProcessingConfiguration,
+@as("InputId") inputId: id,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("InputProcessingConfigurationDescription") inputProcessingConfigurationDescription: inputProcessingConfigurationDescription,
-@as("InputId") inputId: id,
-@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("InputProcessingConfigurationDescription") inputProcessingConfigurationDescription: option<inputProcessingConfigurationDescription>,
+@as("InputId") inputId: option<id>,
+@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationInputProcessingConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddApplicationCloudWatchLoggingOption = {
   type t;
   type request = {
-@as("ConditionalToken") conditionalToken: conditionalToken,
-@as("CloudWatchLoggingOption") cloudWatchLoggingOption: option<cloudWatchLoggingOption>,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("ConditionalToken") conditionalToken: option<conditionalToken>,
+@as("CloudWatchLoggingOption") cloudWatchLoggingOption: cloudWatchLoggingOption,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("CloudWatchLoggingOptionDescriptions") cloudWatchLoggingOptionDescriptions: cloudWatchLoggingOptionDescriptions,
-@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("CloudWatchLoggingOptionDescriptions") cloudWatchLoggingOptionDescriptions: option<cloudWatchLoggingOptionDescriptions>,
+@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationCloudWatchLoggingOptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddApplicationOutput = {
   type t;
   type request = {
-@as("Output") output: option<output>,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("Output") output: output,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("OutputDescriptions") outputDescriptions: outputDescriptions,
-@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("OutputDescriptions") outputDescriptions: option<outputDescriptions>,
+@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationOutputCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartApplication = {
   type t;
   type request = {
-@as("RunConfiguration") runConfiguration: runConfiguration,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("RunConfiguration") runConfiguration: option<runConfiguration>,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = unit
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "StartApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DiscoverInputSchema = {
   type t;
   type request = {
-@as("InputProcessingConfiguration") inputProcessingConfiguration: inputProcessingConfiguration,
-@as("S3Configuration") s3Configuration: s3Configuration,
-@as("InputStartingPositionConfiguration") inputStartingPositionConfiguration: inputStartingPositionConfiguration,
-@as("ServiceExecutionRole") serviceExecutionRole: option<roleARN>,
-@as("ResourceARN") resourceARN: resourceARN
+@as("InputProcessingConfiguration") inputProcessingConfiguration: option<inputProcessingConfiguration>,
+@as("S3Configuration") s3Configuration: option<s3Configuration>,
+@as("InputStartingPositionConfiguration") inputStartingPositionConfiguration: option<inputStartingPositionConfiguration>,
+@as("ServiceExecutionRole") serviceExecutionRole: roleARN,
+@as("ResourceARN") resourceARN: option<resourceARN>
 }
   type response = {
-@as("RawInputRecords") rawInputRecords: rawInputRecords,
-@as("ProcessedInputRecords") processedInputRecords: processedInputRecords,
-@as("ParsedInputRecords") parsedInputRecords: parsedInputRecords,
-@as("InputSchema") inputSchema: sourceSchema
+@as("RawInputRecords") rawInputRecords: option<rawInputRecords>,
+@as("ProcessedInputRecords") processedInputRecords: option<processedInputRecords>,
+@as("ParsedInputRecords") parsedInputRecords: option<parsedInputRecords>,
+@as("InputSchema") inputSchema: option<sourceSchema>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DiscoverInputSchemaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddApplicationReferenceDataSource = {
   type t;
   type request = {
-@as("ReferenceDataSource") referenceDataSource: option<referenceDataSource>,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("ReferenceDataSource") referenceDataSource: referenceDataSource,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("ReferenceDataSourceDescriptions") referenceDataSourceDescriptions: referenceDataSourceDescriptions,
-@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("ReferenceDataSourceDescriptions") referenceDataSourceDescriptions: option<referenceDataSourceDescriptions>,
+@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationReferenceDataSourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddApplicationInput = {
   type t;
   type request = {
-@as("Input") input: option<input>,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("Input") input: input,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("InputDescriptions") inputDescriptions: inputDescriptions,
-@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
-@as("ApplicationARN") applicationARN: resourceARN
+@as("InputDescriptions") inputDescriptions: option<inputDescriptions>,
+@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
+@as("ApplicationARN") applicationARN: option<resourceARN>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationInputCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateApplication = {
   type t;
   type request = {
-@as("ConditionalToken") conditionalToken: conditionalToken,
-@as("CloudWatchLoggingOptionUpdates") cloudWatchLoggingOptionUpdates: cloudWatchLoggingOptionUpdates,
-@as("RunConfigurationUpdate") runConfigurationUpdate: runConfigurationUpdate,
-@as("ServiceExecutionRoleUpdate") serviceExecutionRoleUpdate: roleARN,
-@as("ApplicationConfigurationUpdate") applicationConfigurationUpdate: applicationConfigurationUpdate,
-@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("ConditionalToken") conditionalToken: option<conditionalToken>,
+@as("CloudWatchLoggingOptionUpdates") cloudWatchLoggingOptionUpdates: option<cloudWatchLoggingOptionUpdates>,
+@as("RunConfigurationUpdate") runConfigurationUpdate: option<runConfigurationUpdate>,
+@as("ServiceExecutionRoleUpdate") serviceExecutionRoleUpdate: option<roleARN>,
+@as("ApplicationConfigurationUpdate") applicationConfigurationUpdate: option<applicationConfigurationUpdate>,
+@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("ApplicationDetail") applicationDetail: option<applicationDetail>
+@as("ApplicationDetail") applicationDetail: applicationDetail
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "UpdateApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RollbackApplication = {
   type t;
   type request = {
-@as("CurrentApplicationVersionId") currentApplicationVersionId: option<applicationVersionId>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("CurrentApplicationVersionId") currentApplicationVersionId: applicationVersionId,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("ApplicationDetail") applicationDetail: option<applicationDetail>
+@as("ApplicationDetail") applicationDetail: applicationDetail
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "RollbackApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeApplicationVersion = {
   type t;
   type request = {
-@as("ApplicationVersionId") applicationVersionId: option<applicationVersionId>,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("ApplicationVersionId") applicationVersionId: applicationVersionId,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("ApplicationVersionDetail") applicationVersionDetail: applicationDetail
+@as("ApplicationVersionDetail") applicationVersionDetail: option<applicationDetail>
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DescribeApplicationVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeApplication = {
   type t;
   type request = {
-@as("IncludeAdditionalDetails") includeAdditionalDetails: booleanObject,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("IncludeAdditionalDetails") includeAdditionalDetails: option<booleanObject>,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("ApplicationDetail") applicationDetail: option<applicationDetail>
+@as("ApplicationDetail") applicationDetail: applicationDetail
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DescribeApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApplication = {
   type t;
   type request = {
-@as("ApplicationMode") applicationMode: applicationMode,
-@as("Tags") tags: tags,
-@as("CloudWatchLoggingOptions") cloudWatchLoggingOptions: cloudWatchLoggingOptions,
-@as("ApplicationConfiguration") applicationConfiguration: applicationConfiguration,
-@as("ServiceExecutionRole") serviceExecutionRole: option<roleARN>,
-@as("RuntimeEnvironment") runtimeEnvironment: option<runtimeEnvironment>,
-@as("ApplicationDescription") applicationDescription: applicationDescription,
-@as("ApplicationName") applicationName: option<applicationName>
+@as("ApplicationMode") applicationMode: option<applicationMode>,
+@as("Tags") tags: option<tags>,
+@as("CloudWatchLoggingOptions") cloudWatchLoggingOptions: option<cloudWatchLoggingOptions>,
+@as("ApplicationConfiguration") applicationConfiguration: option<applicationConfiguration>,
+@as("ServiceExecutionRole") serviceExecutionRole: roleARN,
+@as("RuntimeEnvironment") runtimeEnvironment: runtimeEnvironment,
+@as("ApplicationDescription") applicationDescription: option<applicationDescription>,
+@as("ApplicationName") applicationName: applicationName
 }
   type response = {
-@as("ApplicationDetail") applicationDetail: option<applicationDetail>
+@as("ApplicationDetail") applicationDetail: applicationDetail
 }
   @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "CreateApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

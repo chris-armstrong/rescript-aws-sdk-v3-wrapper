@@ -1,174 +1,181 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type long = float
 type variableValue = string
 type variableName = string
-type triggerType = [@as("SNOOZE_TIMEOUT") #SNOOZE_TIMEOUT]
-type amazonawsTimestamp = Js.Date.t;
+type triggerType = [@as("SNOOZE_TIMEOUT") #SNOOZETIMEOUT]
+type timestamp_ = Js.Date.t;
 type timerName = string
 type thresholdValue = string
 type stateName = string
-type snoozeDuration = int;
-type severity = int;
-type seconds = int;
+type snoozeDuration = int
+type severity = int
+type seconds = int
 type requestId = string
-type payload = NodeJs.Buffer.t;
+type payload = NodeJs.Buffer.t
 type note = string
 type nextToken = string
 type messageId = string
-type maxResults = int;
+type maxResults = int
 type keyValue = string
 type inputPropertyValue = string
-type eventType = [@as("STATE_CHANGE") #STATE_CHANGE]
+type eventType = [@as("STATE_CHANGE") #STATECHANGE]
 type errorMessage = string
 type errorCode = [@as("ThrottlingException") #ThrottlingException | @as("ServiceUnavailableException") #ServiceUnavailableException | @as("InternalFailureException") #InternalFailureException | @as("InvalidRequestException") #InvalidRequestException | @as("ResourceNotFoundException") #ResourceNotFoundException]
-type epochMilliTimestamp = float;
+type epochMilliTimestamp = float
 type ephemeralInputName = string
 type detectorModelVersion = string
 type detectorModelName = string
 type customerActionName = [@as("RESET") #RESET | @as("ACKNOWLEDGE") #ACKNOWLEDGE | @as("DISABLE") #DISABLE | @as("ENABLE") #ENABLE | @as("SNOOZE") #SNOOZE]
-type comparisonOperator = [@as("NOT_EQUAL") #NOT_EQUAL | @as("EQUAL") #EQUAL | @as("LESS_OR_EQUAL") #LESS_OR_EQUAL | @as("LESS") #LESS | @as("GREATER_OR_EQUAL") #GREATER_OR_EQUAL | @as("GREATER") #GREATER]
-type alarmStateName = [@as("LATCHED") #LATCHED | @as("SNOOZE_DISABLED") #SNOOZE_DISABLED | @as("ACKNOWLEDGED") #ACKNOWLEDGED | @as("ACTIVE") #ACTIVE | @as("NORMAL") #NORMAL | @as("DISABLED") #DISABLED]
+type comparisonOperator = [@as("NOT_EQUAL") #NOTEQUAL | @as("EQUAL") #EQUAL | @as("LESS_OR_EQUAL") #LESSOREQUAL | @as("LESS") #LESS | @as("GREATER_OR_EQUAL") #GREATEROREQUAL | @as("GREATER") #GREATER]
+type alarmStateName = [@as("LATCHED") #LATCHED | @as("SNOOZE_DISABLED") #SNOOZEDISABLED | @as("ACKNOWLEDGED") #ACKNOWLEDGED | @as("ACTIVE") #ACTIVE | @as("NORMAL") #NORMAL | @as("DISABLED") #DISABLED]
 type alarmModelVersion = string
 type alarmModelName = string
 type variableDefinition = {
-@as("value") value: option<variableValue>,
-@as("name") name: option<variableName>
+value: variableValue,
+name: variableName
 }
 type variable = {
-@as("value") value: option<variableValue>,
-@as("name") name: option<variableName>
+value: variableValue,
+name: variableName
 }
 type timestampValue = {
-@as("timeInMillis") timeInMillis: epochMilliTimestamp
+timeInMillis: option<epochMilliTimestamp>
 }
 type timerDefinition = {
-@as("seconds") seconds: option<seconds>,
-@as("name") name: option<timerName>
+seconds: seconds,
+name: timerName
 }
 type timer = {
-@as("timestamp") timestamp: option<amazonawsTimestamp>,
-@as("name") name: option<timerName>
+@as("timestamp") timestamp_: timestamp_,
+name: timerName
 }
 type stateChangeConfiguration = {
-@as("triggerType") triggerType: triggerType
+triggerType: option<triggerType>
 }
 type snoozeAlarmActionRequest = {
-@as("snoozeDuration") snoozeDuration: option<snoozeDuration>,
-@as("note") note: note,
-@as("keyValue") keyValue: keyValue,
-@as("alarmModelName") alarmModelName: option<alarmModelName>,
-@as("requestId") requestId: option<requestId>
+snoozeDuration: snoozeDuration,
+note: option<note>,
+keyValue: option<keyValue>,
+alarmModelName: alarmModelName,
+requestId: requestId
 }
 type snoozeActionConfiguration = {
-@as("note") note: note,
-@as("snoozeDuration") snoozeDuration: snoozeDuration
+note: option<note>,
+snoozeDuration: option<snoozeDuration>
 }
 type simpleRuleEvaluation = {
-@as("thresholdValue") thresholdValue: thresholdValue,
-@as("operator") operator: comparisonOperator,
-@as("inputPropertyValue") inputPropertyValue: inputPropertyValue
+thresholdValue: option<thresholdValue>,
+operator: option<comparisonOperator>,
+inputPropertyValue: option<inputPropertyValue>
 }
 type resetAlarmActionRequest = {
-@as("note") note: note,
-@as("keyValue") keyValue: keyValue,
-@as("alarmModelName") alarmModelName: option<alarmModelName>,
-@as("requestId") requestId: option<requestId>
+note: option<note>,
+keyValue: option<keyValue>,
+alarmModelName: alarmModelName,
+requestId: requestId
 }
 type resetActionConfiguration = {
-@as("note") note: note
+note: option<note>
 }
 type enableAlarmActionRequest = {
-@as("note") note: note,
-@as("keyValue") keyValue: keyValue,
-@as("alarmModelName") alarmModelName: option<alarmModelName>,
-@as("requestId") requestId: option<requestId>
+note: option<note>,
+keyValue: option<keyValue>,
+alarmModelName: alarmModelName,
+requestId: requestId
 }
 type enableActionConfiguration = {
-@as("note") note: note
+note: option<note>
 }
 type disableAlarmActionRequest = {
-@as("note") note: note,
-@as("keyValue") keyValue: keyValue,
-@as("alarmModelName") alarmModelName: option<alarmModelName>,
-@as("requestId") requestId: option<requestId>
+note: option<note>,
+keyValue: option<keyValue>,
+alarmModelName: alarmModelName,
+requestId: requestId
 }
 type disableActionConfiguration = {
-@as("note") note: note
+note: option<note>
 }
 type detectorStateSummary = {
-@as("stateName") stateName: stateName
+stateName: option<stateName>
 }
 type batchUpdateDetectorErrorEntry = {
-@as("errorMessage") errorMessage: errorMessage,
-@as("errorCode") errorCode: errorCode,
-@as("messageId") messageId: messageId
+errorMessage: option<errorMessage>,
+errorCode: option<errorCode>,
+messageId: option<messageId>
 }
 type batchPutMessageErrorEntry = {
-@as("errorMessage") errorMessage: errorMessage,
-@as("errorCode") errorCode: errorCode,
-@as("messageId") messageId: messageId
+errorMessage: option<errorMessage>,
+errorCode: option<errorCode>,
+messageId: option<messageId>
 }
 type batchAlarmActionErrorEntry = {
-@as("errorMessage") errorMessage: errorMessage,
-@as("errorCode") errorCode: errorCode,
-@as("requestId") requestId: requestId
+errorMessage: option<errorMessage>,
+errorCode: option<errorCode>,
+requestId: option<requestId>
 }
 type alarmSummary = {
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("stateName") stateName: alarmStateName,
-@as("keyValue") keyValue: keyValue,
-@as("alarmModelVersion") alarmModelVersion: alarmModelVersion,
-@as("alarmModelName") alarmModelName: alarmModelName
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+stateName: option<alarmStateName>,
+keyValue: option<keyValue>,
+alarmModelVersion: option<alarmModelVersion>,
+alarmModelName: option<alarmModelName>
 }
 type acknowledgeAlarmActionRequest = {
-@as("note") note: note,
-@as("keyValue") keyValue: keyValue,
-@as("alarmModelName") alarmModelName: option<alarmModelName>,
-@as("requestId") requestId: option<requestId>
+note: option<note>,
+keyValue: option<keyValue>,
+alarmModelName: alarmModelName,
+requestId: requestId
 }
 type acknowledgeActionConfiguration = {
-@as("note") note: note
+note: option<note>
 }
 type variables = array<variable>
 type variableDefinitions = array<variableDefinition>
 type timers = array<timer>
 type timerDefinitions = array<timerDefinition>
 type systemEvent = {
-@as("stateChangeConfiguration") stateChangeConfiguration: stateChangeConfiguration,
-@as("eventType") eventType: eventType
+stateChangeConfiguration: option<stateChangeConfiguration>,
+eventType: option<eventType>
 }
 type snoozeAlarmActionRequests = array<snoozeAlarmActionRequest>
 type ruleEvaluation = {
-@as("simpleRuleEvaluation") simpleRuleEvaluation: simpleRuleEvaluation
+simpleRuleEvaluation: option<simpleRuleEvaluation>
 }
 type resetAlarmActionRequests = array<resetAlarmActionRequest>
 type message = {
-@as("timestamp") timestamp: timestampValue,
-@as("payload") payload: option<payload>,
-@as("inputName") inputName: option<ephemeralInputName>,
-@as("messageId") messageId: option<messageId>
+@as("timestamp") timestamp_: option<timestampValue>,
+payload: payload,
+inputName: ephemeralInputName,
+messageId: messageId
 }
 type enableAlarmActionRequests = array<enableAlarmActionRequest>
 type disableAlarmActionRequests = array<disableAlarmActionRequest>
 type detectorSummary = {
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("state") state: detectorStateSummary,
-@as("detectorModelVersion") detectorModelVersion: detectorModelVersion,
-@as("keyValue") keyValue: keyValue,
-@as("detectorModelName") detectorModelName: detectorModelName
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+state: option<detectorStateSummary>,
+detectorModelVersion: option<detectorModelVersion>,
+keyValue: option<keyValue>,
+detectorModelName: option<detectorModelName>
 }
 type customerAction = {
-@as("resetActionConfiguration") resetActionConfiguration: resetActionConfiguration,
-@as("acknowledgeActionConfiguration") acknowledgeActionConfiguration: acknowledgeActionConfiguration,
-@as("disableActionConfiguration") disableActionConfiguration: disableActionConfiguration,
-@as("enableActionConfiguration") enableActionConfiguration: enableActionConfiguration,
-@as("snoozeActionConfiguration") snoozeActionConfiguration: snoozeActionConfiguration,
-@as("actionName") actionName: customerActionName
+resetActionConfiguration: option<resetActionConfiguration>,
+acknowledgeActionConfiguration: option<acknowledgeActionConfiguration>,
+disableActionConfiguration: option<disableActionConfiguration>,
+enableActionConfiguration: option<enableActionConfiguration>,
+snoozeActionConfiguration: option<snoozeActionConfiguration>,
+actionName: option<customerActionName>
 }
 type batchUpdateDetectorErrorEntries = array<batchUpdateDetectorErrorEntry>
 type batchPutMessageErrorEntries = array<batchPutMessageErrorEntry>
@@ -178,184 +185,184 @@ type acknowledgeAlarmActionRequests = array<acknowledgeAlarmActionRequest>
 type messages = array<message>
 type detectorSummaries = array<detectorSummary>
 type detectorStateDefinition = {
-@as("timers") timers: option<timerDefinitions>,
-@as("variables") variables: option<variableDefinitions>,
-@as("stateName") stateName: option<stateName>
+timers: timerDefinitions,
+variables: variableDefinitions,
+stateName: stateName
 }
 type detectorState = {
-@as("timers") timers: option<timers>,
-@as("variables") variables: option<variables>,
-@as("stateName") stateName: option<stateName>
+timers: timers,
+variables: variables,
+stateName: stateName
 }
 type alarmState = {
-@as("systemEvent") systemEvent: systemEvent,
-@as("customerAction") customerAction: customerAction,
-@as("ruleEvaluation") ruleEvaluation: ruleEvaluation,
-@as("stateName") stateName: alarmStateName
+systemEvent: option<systemEvent>,
+customerAction: option<customerAction>,
+ruleEvaluation: option<ruleEvaluation>,
+stateName: option<alarmStateName>
 }
 type updateDetectorRequest = {
-@as("state") state: option<detectorStateDefinition>,
-@as("keyValue") keyValue: keyValue,
-@as("detectorModelName") detectorModelName: option<detectorModelName>,
-@as("messageId") messageId: option<messageId>
+state: detectorStateDefinition,
+keyValue: option<keyValue>,
+detectorModelName: detectorModelName,
+messageId: messageId
 }
 type detector = {
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("state") state: detectorState,
-@as("detectorModelVersion") detectorModelVersion: detectorModelVersion,
-@as("keyValue") keyValue: keyValue,
-@as("detectorModelName") detectorModelName: detectorModelName
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+state: option<detectorState>,
+detectorModelVersion: option<detectorModelVersion>,
+keyValue: option<keyValue>,
+detectorModelName: option<detectorModelName>
 }
 type alarm = {
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("severity") severity: severity,
-@as("alarmState") alarmState: alarmState,
-@as("keyValue") keyValue: keyValue,
-@as("alarmModelVersion") alarmModelVersion: alarmModelVersion,
-@as("alarmModelName") alarmModelName: alarmModelName
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+severity: option<severity>,
+alarmState: option<alarmState>,
+keyValue: option<keyValue>,
+alarmModelVersion: option<alarmModelVersion>,
+alarmModelName: option<alarmModelName>
 }
 type updateDetectorRequests = array<updateDetectorRequest>
-type clientType;
-@module("@aws-sdk/client-ioteventsdata") @new external createClient: unit => clientType = "IoTEventsDataClient";
+type awsServiceClient;
+@module("@aws-sdk/client-ioteventsdata") @new external createClient: unit => awsServiceClient = "IoTEventsDataClient";
 module ListAlarms = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("alarmModelName") alarmModelName: option<alarmModelName>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+alarmModelName: alarmModelName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("alarmSummaries") alarmSummaries: alarmSummaries
+nextToken: option<nextToken>,
+alarmSummaries: option<alarmSummaries>
 }
   @module("@aws-sdk/client-ioteventsdata") @new external new_: (request) => t = "ListAlarmsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchSnoozeAlarm = {
   type t;
   type request = {
-@as("snoozeActionRequests") snoozeActionRequests: option<snoozeAlarmActionRequests>
+snoozeActionRequests: snoozeAlarmActionRequests
 }
   type response = {
-@as("errorEntries") errorEntries: batchAlarmActionErrorEntries
+errorEntries: option<batchAlarmActionErrorEntries>
 }
   @module("@aws-sdk/client-ioteventsdata") @new external new_: (request) => t = "BatchSnoozeAlarmCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchResetAlarm = {
   type t;
   type request = {
-@as("resetActionRequests") resetActionRequests: option<resetAlarmActionRequests>
+resetActionRequests: resetAlarmActionRequests
 }
   type response = {
-@as("errorEntries") errorEntries: batchAlarmActionErrorEntries
+errorEntries: option<batchAlarmActionErrorEntries>
 }
   @module("@aws-sdk/client-ioteventsdata") @new external new_: (request) => t = "BatchResetAlarmCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchEnableAlarm = {
   type t;
   type request = {
-@as("enableActionRequests") enableActionRequests: option<enableAlarmActionRequests>
+enableActionRequests: enableAlarmActionRequests
 }
   type response = {
-@as("errorEntries") errorEntries: batchAlarmActionErrorEntries
+errorEntries: option<batchAlarmActionErrorEntries>
 }
   @module("@aws-sdk/client-ioteventsdata") @new external new_: (request) => t = "BatchEnableAlarmCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchDisableAlarm = {
   type t;
   type request = {
-@as("disableActionRequests") disableActionRequests: option<disableAlarmActionRequests>
+disableActionRequests: disableAlarmActionRequests
 }
   type response = {
-@as("errorEntries") errorEntries: batchAlarmActionErrorEntries
+errorEntries: option<batchAlarmActionErrorEntries>
 }
   @module("@aws-sdk/client-ioteventsdata") @new external new_: (request) => t = "BatchDisableAlarmCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchAcknowledgeAlarm = {
   type t;
   type request = {
-@as("acknowledgeActionRequests") acknowledgeActionRequests: option<acknowledgeAlarmActionRequests>
+acknowledgeActionRequests: acknowledgeAlarmActionRequests
 }
   type response = {
-@as("errorEntries") errorEntries: batchAlarmActionErrorEntries
+errorEntries: option<batchAlarmActionErrorEntries>
 }
   @module("@aws-sdk/client-ioteventsdata") @new external new_: (request) => t = "BatchAcknowledgeAlarmCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDetectors = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("stateName") stateName: stateName,
-@as("detectorModelName") detectorModelName: option<detectorModelName>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+stateName: option<stateName>,
+detectorModelName: detectorModelName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("detectorSummaries") detectorSummaries: detectorSummaries
+nextToken: option<nextToken>,
+detectorSummaries: option<detectorSummaries>
 }
   @module("@aws-sdk/client-ioteventsdata") @new external new_: (request) => t = "ListDetectorsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchPutMessage = {
   type t;
   type request = {
-@as("messages") messages: option<messages>
+messages: messages
 }
   type response = {
-@as("BatchPutMessageErrorEntries") batchPutMessageErrorEntries: batchPutMessageErrorEntries
+@as("BatchPutMessageErrorEntries") batchPutMessageErrorEntries: option<batchPutMessageErrorEntries>
 }
   @module("@aws-sdk/client-ioteventsdata") @new external new_: (request) => t = "BatchPutMessageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDetector = {
   type t;
   type request = {
-@as("keyValue") keyValue: keyValue,
-@as("detectorModelName") detectorModelName: option<detectorModelName>
+keyValue: option<keyValue>,
+detectorModelName: detectorModelName
 }
   type response = {
-@as("detector") detector: detector
+detector: option<detector>
 }
   @module("@aws-sdk/client-ioteventsdata") @new external new_: (request) => t = "DescribeDetectorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAlarm = {
   type t;
   type request = {
-@as("keyValue") keyValue: keyValue,
-@as("alarmModelName") alarmModelName: option<alarmModelName>
+keyValue: option<keyValue>,
+alarmModelName: alarmModelName
 }
   type response = {
-@as("alarm") alarm: alarm
+alarm: option<alarm>
 }
   @module("@aws-sdk/client-ioteventsdata") @new external new_: (request) => t = "DescribeAlarmCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchUpdateDetector = {
   type t;
   type request = {
-@as("detectors") detectors: option<updateDetectorRequests>
+detectors: updateDetectorRequests
 }
   type response = {
-@as("batchUpdateDetectorErrorEntries") batchUpdateDetectorErrorEntries: batchUpdateDetectorErrorEntries
+batchUpdateDetectorErrorEntries: option<batchUpdateDetectorErrorEntries>
 }
   @module("@aws-sdk/client-ioteventsdata") @new external new_: (request) => t = "BatchUpdateDetectorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

@@ -1,60 +1,66 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type validationExceptionReason = [@as("OTHER") #OTHER | @as("FIELD_VALIDATION_FAILED") #FIELD_VALIDATION_FAILED | @as("CANNOT_PARSE") #CANNOT_PARSE | @as("UNKNOWN_OPERATION") #UNKNOWN_OPERATION]
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type long = float
+type validationExceptionReason = [@as("OTHER") #OTHER | @as("FIELD_VALIDATION_FAILED") #FIELDVALIDATIONFAILED | @as("CANNOT_PARSE") #CANNOTPARSE | @as("UNKNOWN_OPERATION") #UNKNOWNOPERATION]
 type topicString = string
-type amazonawsTimestamp = Js.Date.t;
+type timestamp_ = Js.Date.t;
 type thingGroupARN = string
 type targetARN = string
 type tagValue = string
 type tagKey = string
-type amazonawsString = string
-type retryAfterSeconds = int;
+type string_ = string
+type retryAfterSeconds = int
 type recipeOutputFormat = [@as("YAML") #YAML | @as("JSON") #JSON]
-type recipeBlob = NodeJs.Buffer.t;
+type recipeBlob = NodeJs.Buffer.t
 type reason = string
 type publisherString = string
-type optionalInteger = int;
-type optionalBoolean = bool;
+type optionalInteger = int
+type optionalBoolean = bool
 type nullableString = string
 type nonEmptyString = string
 type nextTokenString = string
 type lifecycleStateDetails = string
 type lambdaIsolationMode = [@as("NoContainer") #NoContainer | @as("GreengrassContainer") #GreengrassContainer]
-type lambdaInputPayloadEncodingType = [@as("binary") #binary | @as("json") #json]
+type lambdaInputPayloadEncodingType = [@as("binary") #Binary | @as("json") #Json]
 type lambdaFunctionARNWithVersionNumber = string
-type lambdaFilesystemPermission = [@as("rw") #rw | @as("ro") #ro]
+type lambdaFilesystemPermission = [@as("rw") #Rw | @as("ro") #Ro]
 type lambdaExecArg = string
-type lambdaEventSourceType = [@as("IOT_CORE") #IOT_CORE | @as("PUB_SUB") #PUB_SUB]
-type isRoot = bool;
-type isLatestForTarget = bool;
-type ioTJobRolloutIncrementFactor = float;
-type ioTJobRolloutBaseRatePerMinute = int;
-type ioTJobNumberOfThings = int;
-type ioTJobMinimumNumberOfExecutedThings = int;
-type ioTJobMaxExecutionsPerMin = int;
-type ioTJobInProgressTimeoutInMinutes = float;
+type lambdaEventSourceType = [@as("IOT_CORE") #IOTCORE | @as("PUB_SUB") #PUBSUB]
+type isRoot = bool
+type isLatestForTarget = bool
+type ioTJobRolloutIncrementFactor = float
+type ioTJobRolloutBaseRatePerMinute = int
+type ioTJobNumberOfThings = int
+type ioTJobMinimumNumberOfExecutedThings = int
+type ioTJobMaxExecutionsPerMin = int
+type ioTJobInProgressTimeoutInMinutes = float
 type ioTJobId = string
-type ioTJobExecutionFailureType = [@as("ALL") #ALL | @as("TIMED_OUT") #TIMED_OUT | @as("REJECTED") #REJECTED | @as("FAILED") #FAILED]
-type ioTJobAbortThresholdPercentage = float;
+type ioTJobExecutionFailureType = [@as("ALL") #ALL | @as("TIMED_OUT") #TIMEDOUT | @as("REJECTED") #REJECTED | @as("FAILED") #FAILED]
+type ioTJobAbortThresholdPercentage = float
 type ioTJobAbortAction = [@as("CANCEL") #CANCEL]
 type ioTJobARN = string
 type installedComponentLifecycleState = [@as("FINISHED") #FINISHED | @as("BROKEN") #BROKEN | @as("ERRORED") #ERRORED | @as("STOPPING") #STOPPING | @as("RUNNING") #RUNNING | @as("STARTING") #STARTING | @as("INSTALLED") #INSTALLED | @as("NEW") #NEW]
 type genericV2ARN = string
-type gGCVersion = string
+type ggcversion = string
 type fileSystemPath = string
-type effectiveDeploymentExecutionStatus = [@as("REJECTED") #REJECTED | @as("CANCELED") #CANCELED | @as("TIMED_OUT") #TIMED_OUT | @as("COMPLETED") #COMPLETED | @as("FAILED") #FAILED | @as("QUEUED") #QUEUED | @as("IN_PROGRESS") #IN_PROGRESS]
+type effectiveDeploymentExecutionStatus = [@as("REJECTED") #REJECTED | @as("CANCELED") #CANCELED | @as("TIMED_OUT") #TIMEDOUT | @as("COMPLETED") #COMPLETED | @as("FAILED") #FAILED | @as("QUEUED") #QUEUED | @as("IN_PROGRESS") #INPROGRESS]
 type descriptionString = string
 type description = string
 type deploymentStatus = [@as("INACTIVE") #INACTIVE | @as("FAILED") #FAILED | @as("CANCELED") #CANCELED | @as("COMPLETED") #COMPLETED | @as("ACTIVE") #ACTIVE]
 type deploymentName = string
 type deploymentID = string
-type deploymentHistoryFilter = [@as("LATEST_ONLY") #LATEST_ONLY | @as("ALL") #ALL]
-type deploymentFailureHandlingPolicy = [@as("DO_NOTHING") #DO_NOTHING | @as("ROLLBACK") #ROLLBACK]
-type deploymentComponentUpdatePolicyAction = [@as("SKIP_NOTIFY_COMPONENTS") #SKIP_NOTIFY_COMPONENTS | @as("NOTIFY_COMPONENTS") #NOTIFY_COMPONENTS]
-type defaultMaxResults = int;
+type deploymentHistoryFilter = [@as("LATEST_ONLY") #LATESTONLY | @as("ALL") #ALL]
+type deploymentFailureHandlingPolicy = [@as("DO_NOTHING") #DONOTHING | @as("ROLLBACK") #ROLLBACK]
+type deploymentComponentUpdatePolicyAction = [@as("SKIP_NOTIFY_COMPONENTS") #SKIPNOTIFYCOMPONENTS | @as("NOTIFY_COMPONENTS") #NOTIFYCOMPONENTS]
+type defaultMaxResults = int
 type coreDeviceThingName = string
 type coreDeviceStatus = [@as("UNHEALTHY") #UNHEALTHY | @as("HEALTHY") #HEALTHY]
 type coreDevicePlatformString = string
@@ -69,101 +75,101 @@ type componentConfigurationPath = string
 type componentARN = string
 type cloudComponentState = [@as("DEPRECATED") #DEPRECATED | @as("FAILED") #FAILED | @as("DEPLOYABLE") #DEPLOYABLE | @as("INITIATED") #INITIATED | @as("REQUESTED") #REQUESTED]
 type validationExceptionField = {
-@as("message") message: option<amazonawsString>,
-@as("name") name: option<amazonawsString>
+message: string_,
+name: string_
 }
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type stringMap = Js.Dict.t< nonEmptyString>
 type resolvedComponentVersion = {
-@as("recipe") recipe: recipeBlob,
-@as("componentVersion") componentVersion: componentVersionString,
-@as("componentName") componentName: componentNameString,
-@as("arn") arn: componentVersionARN
+recipe: option<recipeBlob>,
+componentVersion: option<componentVersionString>,
+componentName: option<componentNameString>,
+arn: option<componentVersionARN>
 }
 type platformAttributesMap = Js.Dict.t< nonEmptyString>
 type lambdaVolumeMount = {
-@as("addGroupOwner") addGroupOwner: optionalBoolean,
-@as("permission") permission: lambdaFilesystemPermission,
-@as("destinationPath") destinationPath: option<fileSystemPath>,
-@as("sourcePath") sourcePath: option<fileSystemPath>
+addGroupOwner: option<optionalBoolean>,
+permission: option<lambdaFilesystemPermission>,
+destinationPath: fileSystemPath,
+sourcePath: fileSystemPath
 }
 type lambdaExecArgsList = array<lambdaExecArg>
 type lambdaEventSource = {
-@as("type") type_: option<lambdaEventSourceType>,
-@as("topic") topic: option<topicString>
+@as("type") type_: lambdaEventSourceType,
+topic: topicString
 }
-type lambdaEnvironmentVariables = Js.Dict.t< amazonawsString>
+type lambdaEnvironmentVariables = Js.Dict.t< string_>
 type lambdaDeviceMount = {
-@as("addGroupOwner") addGroupOwner: optionalBoolean,
-@as("permission") permission: lambdaFilesystemPermission,
-@as("path") path: option<fileSystemPath>
+addGroupOwner: option<optionalBoolean>,
+permission: option<lambdaFilesystemPermission>,
+path: fileSystemPath
 }
 type ioTJobTimeoutConfig = {
-@as("inProgressTimeoutInMinutes") inProgressTimeoutInMinutes: ioTJobInProgressTimeoutInMinutes
+inProgressTimeoutInMinutes: option<ioTJobInProgressTimeoutInMinutes>
 }
 type ioTJobRateIncreaseCriteria = {
-@as("numberOfSucceededThings") numberOfSucceededThings: ioTJobNumberOfThings,
-@as("numberOfNotifiedThings") numberOfNotifiedThings: ioTJobNumberOfThings
+numberOfSucceededThings: option<ioTJobNumberOfThings>,
+numberOfNotifiedThings: option<ioTJobNumberOfThings>
 }
 type ioTJobAbortCriteria = {
-@as("minNumberOfExecutedThings") minNumberOfExecutedThings: option<ioTJobMinimumNumberOfExecutedThings>,
-@as("thresholdPercentage") thresholdPercentage: option<ioTJobAbortThresholdPercentage>,
-@as("action") action: option<ioTJobAbortAction>,
-@as("failureType") failureType: option<ioTJobExecutionFailureType>
+minNumberOfExecutedThings: ioTJobMinimumNumberOfExecutedThings,
+thresholdPercentage: ioTJobAbortThresholdPercentage,
+action: ioTJobAbortAction,
+failureType: ioTJobExecutionFailureType
 }
 type installedComponent = {
-@as("isRoot") isRoot: isRoot,
-@as("lifecycleStateDetails") lifecycleStateDetails: lifecycleStateDetails,
-@as("lifecycleState") lifecycleState: installedComponentLifecycleState,
-@as("componentVersion") componentVersion: componentVersionString,
-@as("componentName") componentName: componentNameString
+isRoot: option<isRoot>,
+lifecycleStateDetails: option<lifecycleStateDetails>,
+lifecycleState: option<installedComponentLifecycleState>,
+componentVersion: option<componentVersionString>,
+componentName: option<componentNameString>
 }
 type effectiveDeployment = {
-@as("modifiedTimestamp") modifiedTimestamp: option<amazonawsTimestamp>,
-@as("creationTimestamp") creationTimestamp: option<amazonawsTimestamp>,
-@as("reason") reason: reason,
-@as("coreDeviceExecutionStatus") coreDeviceExecutionStatus: option<effectiveDeploymentExecutionStatus>,
-@as("targetArn") targetArn: option<targetARN>,
-@as("description") description: description,
-@as("iotJobArn") iotJobArn: ioTJobARN,
-@as("iotJobId") iotJobId: ioTJobId,
-@as("deploymentName") deploymentName: option<deploymentName>,
-@as("deploymentId") deploymentId: option<deploymentID>
+modifiedTimestamp: timestamp_,
+creationTimestamp: timestamp_,
+reason: option<reason>,
+coreDeviceExecutionStatus: effectiveDeploymentExecutionStatus,
+targetArn: targetARN,
+description: option<description>,
+iotJobArn: option<ioTJobARN>,
+iotJobId: option<ioTJobId>,
+deploymentName: deploymentName,
+deploymentId: deploymentID
 }
 type deploymentConfigurationValidationPolicy = {
-@as("timeoutInSeconds") timeoutInSeconds: optionalInteger
+timeoutInSeconds: option<optionalInteger>
 }
 type deploymentComponentUpdatePolicy = {
-@as("action") action: deploymentComponentUpdatePolicyAction,
-@as("timeoutInSeconds") timeoutInSeconds: optionalInteger
+action: option<deploymentComponentUpdatePolicyAction>,
+timeoutInSeconds: option<optionalInteger>
 }
 type deployment = {
-@as("isLatestForTarget") isLatestForTarget: isLatestForTarget,
-@as("deploymentStatus") deploymentStatus: deploymentStatus,
-@as("creationTimestamp") creationTimestamp: amazonawsTimestamp,
-@as("deploymentName") deploymentName: nonEmptyString,
-@as("deploymentId") deploymentId: nonEmptyString,
-@as("revisionId") revisionId: nonEmptyString,
-@as("targetArn") targetArn: targetARN
+isLatestForTarget: option<isLatestForTarget>,
+deploymentStatus: option<deploymentStatus>,
+creationTimestamp: option<timestamp_>,
+deploymentName: option<nonEmptyString>,
+deploymentId: option<nonEmptyString>,
+revisionId: option<nonEmptyString>,
+targetArn: option<targetARN>
 }
 type coreDevice = {
-@as("lastStatusUpdateTimestamp") lastStatusUpdateTimestamp: amazonawsTimestamp,
-@as("status") status: coreDeviceStatus,
-@as("coreDeviceThingName") coreDeviceThingName: coreDeviceThingName
+lastStatusUpdateTimestamp: option<timestamp_>,
+status: option<coreDeviceStatus>,
+coreDeviceThingName: option<coreDeviceThingName>
 }
 type componentVersionRequirementMap = Js.Dict.t< nonEmptyString>
 type componentVersionListItem = {
-@as("arn") arn: nonEmptyString,
-@as("componentVersion") componentVersion: componentVersionString,
-@as("componentName") componentName: componentNameString
+arn: option<nonEmptyString>,
+componentVersion: option<componentVersionString>,
+componentName: option<componentNameString>
 }
 type componentRunWith = {
-@as("posixUser") posixUser: nonEmptyString
+posixUser: option<nonEmptyString>
 }
 type componentDependencyRequirement = {
-@as("dependencyType") dependencyType: componentDependencyType,
-@as("versionRequirement") versionRequirement: nonEmptyString
+dependencyType: option<componentDependencyType>,
+versionRequirement: option<nonEmptyString>
 }
 type componentConfigurationPathList = array<componentConfigurationPath>
 type validationExceptionFieldList = array<validationExceptionField>
@@ -172,401 +178,401 @@ type lambdaVolumeList = array<lambdaVolumeMount>
 type lambdaEventSourceList = array<lambdaEventSource>
 type lambdaDeviceList = array<lambdaDeviceMount>
 type ioTJobExponentialRolloutRate = {
-@as("rateIncreaseCriteria") rateIncreaseCriteria: option<ioTJobRateIncreaseCriteria>,
-@as("incrementFactor") incrementFactor: option<ioTJobRolloutIncrementFactor>,
-@as("baseRatePerMinute") baseRatePerMinute: option<ioTJobRolloutBaseRatePerMinute>
+rateIncreaseCriteria: ioTJobRateIncreaseCriteria,
+incrementFactor: ioTJobRolloutIncrementFactor,
+baseRatePerMinute: ioTJobRolloutBaseRatePerMinute
 }
 type ioTJobAbortCriteriaList = array<ioTJobAbortCriteria>
 type installedComponentList = array<installedComponent>
 type effectiveDeploymentsList = array<effectiveDeployment>
 type deploymentPolicies = {
-@as("configurationValidationPolicy") configurationValidationPolicy: deploymentConfigurationValidationPolicy,
-@as("componentUpdatePolicy") componentUpdatePolicy: deploymentComponentUpdatePolicy,
-@as("failureHandlingPolicy") failureHandlingPolicy: deploymentFailureHandlingPolicy
+configurationValidationPolicy: option<deploymentConfigurationValidationPolicy>,
+componentUpdatePolicy: option<deploymentComponentUpdatePolicy>,
+failureHandlingPolicy: option<deploymentFailureHandlingPolicy>
 }
 type deploymentList = array<deployment>
 type coreDevicesList = array<coreDevice>
 type componentVersionList = array<componentVersionListItem>
 type componentPlatform = {
-@as("attributes") attributes: platformAttributesMap,
-@as("name") name: nonEmptyString
+attributes: option<platformAttributesMap>,
+name: option<nonEmptyString>
 }
 type componentDependencyMap = Js.Dict.t< componentDependencyRequirement>
 type componentConfigurationUpdate = {
-@as("reset") reset: componentConfigurationPathList,
-@as("merge") merge: componentConfigurationString
+reset: option<componentConfigurationPathList>,
+merge: option<componentConfigurationString>
 }
 type componentCandidate = {
-@as("versionRequirements") versionRequirements: componentVersionRequirementMap,
-@as("componentVersion") componentVersion: componentVersionString,
-@as("componentName") componentName: componentNameString
+versionRequirements: option<componentVersionRequirementMap>,
+componentVersion: option<componentVersionString>,
+componentName: option<componentNameString>
 }
 type cloudComponentStatus = {
-@as("errors") errors: stringMap,
-@as("message") message: nonEmptyString,
-@as("componentState") componentState: cloudComponentState
+errors: option<stringMap>,
+message: option<nonEmptyString>,
+componentState: option<cloudComponentState>
 }
 type lambdaContainerParams = {
-@as("devices") devices: lambdaDeviceList,
-@as("volumes") volumes: lambdaVolumeList,
-@as("mountROSysfs") mountROSysfs: optionalBoolean,
-@as("memorySizeInKB") memorySizeInKB: optionalInteger
+devices: option<lambdaDeviceList>,
+volumes: option<lambdaVolumeList>,
+mountROSysfs: option<optionalBoolean>,
+memorySizeInKB: option<optionalInteger>
 }
 type ioTJobExecutionsRolloutConfig = {
-@as("maximumPerMinute") maximumPerMinute: ioTJobMaxExecutionsPerMin,
-@as("exponentialRate") exponentialRate: ioTJobExponentialRolloutRate
+maximumPerMinute: option<ioTJobMaxExecutionsPerMin>,
+exponentialRate: option<ioTJobExponentialRolloutRate>
 }
 type ioTJobAbortConfig = {
-@as("criteriaList") criteriaList: option<ioTJobAbortCriteriaList>
+criteriaList: ioTJobAbortCriteriaList
 }
 type componentPlatformList = array<componentPlatform>
 type componentDeploymentSpecification = {
-@as("runWith") runWith: componentRunWith,
-@as("configurationUpdate") configurationUpdate: componentConfigurationUpdate,
-@as("componentVersion") componentVersion: componentVersionString
+runWith: option<componentRunWith>,
+configurationUpdate: option<componentConfigurationUpdate>,
+componentVersion: option<componentVersionString>
 }
 type componentCandidateList = array<componentCandidate>
 type lambdaLinuxProcessParams = {
-@as("containerParams") containerParams: lambdaContainerParams,
-@as("isolationMode") isolationMode: lambdaIsolationMode
+containerParams: option<lambdaContainerParams>,
+isolationMode: option<lambdaIsolationMode>
 }
 type deploymentIoTJobConfiguration = {
-@as("timeoutConfig") timeoutConfig: ioTJobTimeoutConfig,
-@as("abortConfig") abortConfig: ioTJobAbortConfig,
-@as("jobExecutionsRolloutConfig") jobExecutionsRolloutConfig: ioTJobExecutionsRolloutConfig
+timeoutConfig: option<ioTJobTimeoutConfig>,
+abortConfig: option<ioTJobAbortConfig>,
+jobExecutionsRolloutConfig: option<ioTJobExecutionsRolloutConfig>
 }
 type componentLatestVersion = {
-@as("platforms") platforms: componentPlatformList,
-@as("publisher") publisher: nonEmptyString,
-@as("description") description: nonEmptyString,
-@as("creationTimestamp") creationTimestamp: amazonawsTimestamp,
-@as("componentVersion") componentVersion: componentVersionString,
-@as("arn") arn: componentVersionARN
+platforms: option<componentPlatformList>,
+publisher: option<nonEmptyString>,
+description: option<nonEmptyString>,
+creationTimestamp: option<timestamp_>,
+componentVersion: option<componentVersionString>,
+arn: option<componentVersionARN>
 }
 type componentDeploymentSpecifications = Js.Dict.t< componentDeploymentSpecification>
 type lambdaExecutionParameters = {
-@as("linuxProcessParams") linuxProcessParams: lambdaLinuxProcessParams,
-@as("environmentVariables") environmentVariables: lambdaEnvironmentVariables,
-@as("execArgs") execArgs: lambdaExecArgsList,
-@as("inputPayloadEncodingType") inputPayloadEncodingType: lambdaInputPayloadEncodingType,
-@as("pinned") pinned: optionalBoolean,
-@as("statusTimeoutInSeconds") statusTimeoutInSeconds: optionalInteger,
-@as("timeoutInSeconds") timeoutInSeconds: optionalInteger,
-@as("maxIdleTimeInSeconds") maxIdleTimeInSeconds: optionalInteger,
-@as("maxInstancesCount") maxInstancesCount: optionalInteger,
-@as("maxQueueSize") maxQueueSize: optionalInteger,
-@as("eventSources") eventSources: lambdaEventSourceList
+linuxProcessParams: option<lambdaLinuxProcessParams>,
+environmentVariables: option<lambdaEnvironmentVariables>,
+execArgs: option<lambdaExecArgsList>,
+inputPayloadEncodingType: option<lambdaInputPayloadEncodingType>,
+pinned: option<optionalBoolean>,
+statusTimeoutInSeconds: option<optionalInteger>,
+timeoutInSeconds: option<optionalInteger>,
+maxIdleTimeInSeconds: option<optionalInteger>,
+maxInstancesCount: option<optionalInteger>,
+maxQueueSize: option<optionalInteger>,
+eventSources: option<lambdaEventSourceList>
 }
 type component = {
-@as("latestVersion") latestVersion: componentLatestVersion,
-@as("componentName") componentName: componentNameString,
-@as("arn") arn: componentARN
+latestVersion: option<componentLatestVersion>,
+componentName: option<componentNameString>,
+arn: option<componentARN>
 }
 type lambdaFunctionRecipeSource = {
-@as("componentLambdaParameters") componentLambdaParameters: lambdaExecutionParameters,
-@as("componentDependencies") componentDependencies: componentDependencyMap,
-@as("componentPlatforms") componentPlatforms: componentPlatformList,
-@as("componentVersion") componentVersion: componentVersionString,
-@as("componentName") componentName: componentNameString,
-@as("lambdaArn") lambdaArn: option<lambdaFunctionARNWithVersionNumber>
+componentLambdaParameters: option<lambdaExecutionParameters>,
+componentDependencies: option<componentDependencyMap>,
+componentPlatforms: option<componentPlatformList>,
+componentVersion: option<componentVersionString>,
+componentName: option<componentNameString>,
+lambdaArn: lambdaFunctionARNWithVersionNumber
 }
 type componentList = array<component>
-type clientType;
-@module("@aws-sdk/client-greengrass") @new external createClient: unit => clientType = "GreengrassV2Client";
+type awsServiceClient;
+@module("@aws-sdk/client-greengrass") @new external createClient: unit => awsServiceClient = "GreengrassV2Client";
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<genericV2ARN>
+tagKeys: tagKeyList,
+resourceArn: genericV2ARN
 }
   type response = unit
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<genericV2ARN>
+tags: tagMap,
+resourceArn: genericV2ARN
 }
   type response = unit
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<genericV2ARN>
+resourceArn: genericV2ARN
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListInstalledComponents = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextTokenString,
-@as("maxResults") maxResults: defaultMaxResults,
-@as("coreDeviceThingName") coreDeviceThingName: option<coreDeviceThingName>
+nextToken: option<nextTokenString>,
+maxResults: option<defaultMaxResults>,
+coreDeviceThingName: coreDeviceThingName
 }
   type response = {
-@as("nextToken") nextToken: nextTokenString,
-@as("installedComponents") installedComponents: installedComponentList
+nextToken: option<nextTokenString>,
+installedComponents: option<installedComponentList>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListInstalledComponentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEffectiveDeployments = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextTokenString,
-@as("maxResults") maxResults: defaultMaxResults,
-@as("coreDeviceThingName") coreDeviceThingName: option<coreDeviceThingName>
+nextToken: option<nextTokenString>,
+maxResults: option<defaultMaxResults>,
+coreDeviceThingName: coreDeviceThingName
 }
   type response = {
-@as("nextToken") nextToken: nextTokenString,
-@as("effectiveDeployments") effectiveDeployments: effectiveDeploymentsList
+nextToken: option<nextTokenString>,
+effectiveDeployments: option<effectiveDeploymentsList>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListEffectiveDeploymentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDeployments = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextTokenString,
-@as("maxResults") maxResults: defaultMaxResults,
-@as("historyFilter") historyFilter: deploymentHistoryFilter,
-@as("targetArn") targetArn: targetARN
+nextToken: option<nextTokenString>,
+maxResults: option<defaultMaxResults>,
+historyFilter: option<deploymentHistoryFilter>,
+targetArn: option<targetARN>
 }
   type response = {
-@as("nextToken") nextToken: nextTokenString,
-@as("deployments") deployments: deploymentList
+nextToken: option<nextTokenString>,
+deployments: option<deploymentList>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListDeploymentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCoreDevices = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextTokenString,
-@as("maxResults") maxResults: defaultMaxResults,
-@as("status") status: coreDeviceStatus,
-@as("thingGroupArn") thingGroupArn: thingGroupARN
+nextToken: option<nextTokenString>,
+maxResults: option<defaultMaxResults>,
+status: option<coreDeviceStatus>,
+thingGroupArn: option<thingGroupARN>
 }
   type response = {
-@as("nextToken") nextToken: nextTokenString,
-@as("coreDevices") coreDevices: coreDevicesList
+nextToken: option<nextTokenString>,
+coreDevices: option<coreDevicesList>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListCoreDevicesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListComponentVersions = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextTokenString,
-@as("maxResults") maxResults: defaultMaxResults,
-@as("arn") arn: option<componentARN>
+nextToken: option<nextTokenString>,
+maxResults: option<defaultMaxResults>,
+arn: componentARN
 }
   type response = {
-@as("nextToken") nextToken: nextTokenString,
-@as("componentVersions") componentVersions: componentVersionList
+nextToken: option<nextTokenString>,
+componentVersions: option<componentVersionList>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListComponentVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetCoreDevice = {
   type t;
   type request = {
-@as("coreDeviceThingName") coreDeviceThingName: option<coreDeviceThingName>
+coreDeviceThingName: coreDeviceThingName
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("lastStatusUpdateTimestamp") lastStatusUpdateTimestamp: amazonawsTimestamp,
-@as("status") status: coreDeviceStatus,
-@as("architecture") architecture: coreDeviceArchitectureString,
-@as("platform") platform: coreDevicePlatformString,
-@as("coreVersion") coreVersion: gGCVersion,
-@as("coreDeviceThingName") coreDeviceThingName: coreDeviceThingName
+tags: option<tagMap>,
+lastStatusUpdateTimestamp: option<timestamp_>,
+status: option<coreDeviceStatus>,
+architecture: option<coreDeviceArchitectureString>,
+platform: option<coreDevicePlatformString>,
+coreVersion: option<ggcversion>,
+coreDeviceThingName: option<coreDeviceThingName>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetCoreDeviceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetComponentVersionArtifact = {
   type t;
   type request = {
-@as("artifactName") artifactName: option<nonEmptyString>,
-@as("arn") arn: option<componentVersionARN>
+artifactName: nonEmptyString,
+arn: componentVersionARN
 }
   type response = {
-@as("preSignedUrl") preSignedUrl: option<nonEmptyString>
+preSignedUrl: nonEmptyString
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetComponentVersionArtifactCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetComponent = {
   type t;
   type request = {
-@as("arn") arn: option<componentVersionARN>,
-@as("recipeOutputFormat") recipeOutputFormat: recipeOutputFormat
+arn: componentVersionARN,
+recipeOutputFormat: option<recipeOutputFormat>
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("recipe") recipe: option<recipeBlob>,
-@as("recipeOutputFormat") recipeOutputFormat: option<recipeOutputFormat>
+tags: option<tagMap>,
+recipe: recipeBlob,
+recipeOutputFormat: recipeOutputFormat
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetComponentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteCoreDevice = {
   type t;
   type request = {
-@as("coreDeviceThingName") coreDeviceThingName: option<coreDeviceThingName>
+coreDeviceThingName: coreDeviceThingName
 }
   
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteCoreDeviceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteComponent = {
   type t;
   type request = {
-@as("arn") arn: option<componentVersionARN>
+arn: componentVersionARN
 }
   
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteComponentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CancelDeployment = {
   type t;
   type request = {
-@as("deploymentId") deploymentId: option<nonEmptyString>
+deploymentId: nonEmptyString
 }
   type response = {
-@as("message") message: nonEmptyString
+message: option<nonEmptyString>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CancelDeploymentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ResolveComponentCandidates = {
   type t;
   type request = {
-@as("componentCandidates") componentCandidates: option<componentCandidateList>,
-@as("platform") platform: option<componentPlatform>
+componentCandidates: componentCandidateList,
+platform: componentPlatform
 }
   type response = {
-@as("resolvedComponentVersions") resolvedComponentVersions: resolvedComponentVersionsList
+resolvedComponentVersions: option<resolvedComponentVersionsList>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ResolveComponentCandidatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeComponent = {
   type t;
   type request = {
-@as("arn") arn: option<componentVersionARN>
+arn: componentVersionARN
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("platforms") platforms: componentPlatformList,
-@as("status") status: cloudComponentStatus,
-@as("description") description: descriptionString,
-@as("publisher") publisher: publisherString,
-@as("creationTimestamp") creationTimestamp: amazonawsTimestamp,
-@as("componentVersion") componentVersion: componentVersionString,
-@as("componentName") componentName: componentNameString,
-@as("arn") arn: componentVersionARN
+tags: option<tagMap>,
+platforms: option<componentPlatformList>,
+status: option<cloudComponentStatus>,
+description: option<descriptionString>,
+publisher: option<publisherString>,
+creationTimestamp: option<timestamp_>,
+componentVersion: option<componentVersionString>,
+componentName: option<componentNameString>,
+arn: option<componentVersionARN>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DescribeComponentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDeployment = {
   type t;
   type request = {
-@as("deploymentId") deploymentId: option<nonEmptyString>
+deploymentId: nonEmptyString
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("isLatestForTarget") isLatestForTarget: isLatestForTarget,
-@as("creationTimestamp") creationTimestamp: amazonawsTimestamp,
-@as("iotJobConfiguration") iotJobConfiguration: deploymentIoTJobConfiguration,
-@as("deploymentPolicies") deploymentPolicies: deploymentPolicies,
-@as("components") components: componentDeploymentSpecifications,
-@as("iotJobArn") iotJobArn: ioTJobARN,
-@as("iotJobId") iotJobId: nullableString,
-@as("deploymentStatus") deploymentStatus: deploymentStatus,
-@as("deploymentName") deploymentName: nullableString,
-@as("deploymentId") deploymentId: nonEmptyString,
-@as("revisionId") revisionId: nonEmptyString,
-@as("targetArn") targetArn: targetARN
+tags: option<tagMap>,
+isLatestForTarget: option<isLatestForTarget>,
+creationTimestamp: option<timestamp_>,
+iotJobConfiguration: option<deploymentIoTJobConfiguration>,
+deploymentPolicies: option<deploymentPolicies>,
+components: option<componentDeploymentSpecifications>,
+iotJobArn: option<ioTJobARN>,
+iotJobId: option<nullableString>,
+deploymentStatus: option<deploymentStatus>,
+deploymentName: option<nullableString>,
+deploymentId: option<nonEmptyString>,
+revisionId: option<nonEmptyString>,
+targetArn: option<targetARN>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetDeploymentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDeployment = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("deploymentPolicies") deploymentPolicies: deploymentPolicies,
-@as("iotJobConfiguration") iotJobConfiguration: deploymentIoTJobConfiguration,
-@as("components") components: componentDeploymentSpecifications,
-@as("deploymentName") deploymentName: nonEmptyString,
-@as("targetArn") targetArn: option<targetARN>
+tags: option<tagMap>,
+deploymentPolicies: option<deploymentPolicies>,
+iotJobConfiguration: option<deploymentIoTJobConfiguration>,
+components: option<componentDeploymentSpecifications>,
+deploymentName: option<nonEmptyString>,
+targetArn: targetARN
 }
   type response = {
-@as("iotJobArn") iotJobArn: ioTJobARN,
-@as("iotJobId") iotJobId: nonEmptyString,
-@as("deploymentId") deploymentId: nonEmptyString
+iotJobArn: option<ioTJobARN>,
+iotJobId: option<nonEmptyString>,
+deploymentId: option<nonEmptyString>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateDeploymentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListComponents = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextTokenString,
-@as("maxResults") maxResults: defaultMaxResults,
-@as("scope") scope: componentVisibilityScope
+nextToken: option<nextTokenString>,
+maxResults: option<defaultMaxResults>,
+scope: option<componentVisibilityScope>
 }
   type response = {
-@as("nextToken") nextToken: nextTokenString,
-@as("components") components: componentList
+nextToken: option<nextTokenString>,
+components: option<componentList>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListComponentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateComponentVersion = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("lambdaFunction") lambdaFunction: lambdaFunctionRecipeSource,
-@as("inlineRecipe") inlineRecipe: recipeBlob
+tags: option<tagMap>,
+lambdaFunction: option<lambdaFunctionRecipeSource>,
+inlineRecipe: option<recipeBlob>
 }
   type response = {
-@as("status") status: option<cloudComponentStatus>,
-@as("creationTimestamp") creationTimestamp: option<amazonawsTimestamp>,
-@as("componentVersion") componentVersion: option<componentVersionString>,
-@as("componentName") componentName: option<componentNameString>,
-@as("arn") arn: componentVersionARN
+status: cloudComponentStatus,
+creationTimestamp: timestamp_,
+componentVersion: componentVersionString,
+componentName: componentNameString,
+arn: option<componentVersionARN>
 }
   @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateComponentVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

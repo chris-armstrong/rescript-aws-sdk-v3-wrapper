@@ -1,8 +1,16 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type targetResourceType = string
 type tagValue = string
 type tagKey = string
@@ -12,9 +20,9 @@ type roleArn = string
 type resourceType = string
 type resourceArn = string
 type nextToken = string
-type listExperimentsMaxResults = int;
-type listExperimentTemplatesMaxResults = int;
-type listActionsMaxResults = int;
+type listExperimentsMaxResults = int
+type listExperimentTemplatesMaxResults = int
+type listActionsMaxResults = int
 type lastUpdateTime = Js.Date.t;
 type experimentTemplateTargetSelectionMode = string
 type experimentTemplateTargetName = string
@@ -33,13 +41,13 @@ type experimentTargetName = string
 type experimentTargetFilterValue = string
 type experimentTargetFilterPath = string
 type experimentStatusReason = string
-type experimentStatus = [@as("failed") #failed | @as("stopped") #stopped | @as("stopping") #stopping | @as("completed") #completed | @as("running") #running | @as("initiating") #initiating | @as("pending") #pending]
+type experimentStatus = [@as("failed") #Failed | @as("stopped") #Stopped | @as("stopping") #Stopping | @as("completed") #Completed | @as("running") #Running | @as("initiating") #Initiating | @as("pending") #Pending]
 type experimentStartTime = Js.Date.t;
 type experimentId = string
 type experimentEndTime = Js.Date.t;
 type experimentActionTargetName = string
 type experimentActionStatusReason = string
-type experimentActionStatus = [@as("failed") #failed | @as("stopped") #stopped | @as("stopping") #stopping | @as("cancelled") #cancelled | @as("completed") #completed | @as("running") #running | @as("initiating") #initiating | @as("pending") #pending]
+type experimentActionStatus = [@as("failed") #Failed | @as("stopped") #Stopped | @as("stopping") #Stopping | @as("cancelled") #Cancelled | @as("completed") #Completed | @as("running") #Running | @as("initiating") #Initiating | @as("pending") #Pending]
 type experimentActionStartAfter = string
 type experimentActionParameterName = string
 type experimentActionParameter = string
@@ -49,111 +57,111 @@ type exceptionMessage = string
 type creationTime = Js.Date.t;
 type clientToken = string
 type actionTargetName = string
-type actionParameterRequired = bool;
+type actionParameterRequired = bool
 type actionParameterName = string
 type actionParameterDescription = string
 type actionId = string
 type actionDescription = string
 type updateExperimentTemplateStopConditionInput = {
-@as("value") value: stopConditionValue,
-@as("source") source: option<stopConditionSource>
+value: option<stopConditionValue>,
+source: stopConditionSource
 }
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type resourceArnList = array<resourceArn>
 type experimentTemplateTargetFilterValues = array<experimentTemplateTargetFilterValue>
 type experimentTemplateStopCondition = {
-@as("value") value: stopConditionValue,
-@as("source") source: stopConditionSource
+value: option<stopConditionValue>,
+source: option<stopConditionSource>
 }
 type experimentTemplateActionTargetMap = Js.Dict.t< experimentTemplateTargetName>
 type experimentTemplateActionStartAfterList = array<experimentTemplateActionStartAfter>
 type experimentTemplateActionParameterMap = Js.Dict.t< experimentTemplateActionParameter>
 type experimentTargetFilterValues = array<experimentTargetFilterValue>
 type experimentStopCondition = {
-@as("value") value: stopConditionValue,
-@as("source") source: stopConditionSource
+value: option<stopConditionValue>,
+source: option<stopConditionSource>
 }
 type experimentState = {
-@as("reason") reason: experimentStatusReason,
-@as("status") status: experimentStatus
+reason: option<experimentStatusReason>,
+status: option<experimentStatus>
 }
 type experimentActionTargetMap = Js.Dict.t< experimentTargetName>
 type experimentActionState = {
-@as("reason") reason: experimentActionStatusReason,
-@as("status") status: experimentActionStatus
+reason: option<experimentActionStatusReason>,
+status: option<experimentActionStatus>
 }
 type experimentActionStartAfterList = array<experimentActionStartAfter>
 type experimentActionParameterMap = Js.Dict.t< experimentActionParameter>
 type createExperimentTemplateStopConditionInput = {
-@as("value") value: stopConditionValue,
-@as("source") source: option<stopConditionSource>
+value: option<stopConditionValue>,
+source: stopConditionSource
 }
 type actionTarget = {
-@as("resourceType") resourceType: targetResourceType
+resourceType: option<targetResourceType>
 }
 type actionParameter = {
-@as("required") required: actionParameterRequired,
-@as("description") description: actionParameterDescription
+required: option<actionParameterRequired>,
+description: option<actionParameterDescription>
 }
 type updateExperimentTemplateStopConditionInputList = array<updateExperimentTemplateStopConditionInput>
 type updateExperimentTemplateActionInputItem = {
-@as("startAfter") startAfter: experimentTemplateActionStartAfterList,
-@as("targets") targets: experimentTemplateActionTargetMap,
-@as("parameters") parameters: experimentTemplateActionParameterMap,
-@as("description") description: experimentTemplateActionDescription,
-@as("actionId") actionId: actionId
+startAfter: option<experimentTemplateActionStartAfterList>,
+targets: option<experimentTemplateActionTargetMap>,
+parameters: option<experimentTemplateActionParameterMap>,
+description: option<experimentTemplateActionDescription>,
+actionId: option<actionId>
 }
 type experimentTemplateTargetInputFilter = {
-@as("values") values: option<experimentTemplateTargetFilterValues>,
-@as("path") path: option<experimentTemplateTargetFilterPath>
+values: experimentTemplateTargetFilterValues,
+path: experimentTemplateTargetFilterPath
 }
 type experimentTemplateTargetFilter = {
-@as("values") values: experimentTemplateTargetFilterValues,
-@as("path") path: experimentTemplateTargetFilterPath
+values: option<experimentTemplateTargetFilterValues>,
+path: option<experimentTemplateTargetFilterPath>
 }
 type experimentTemplateSummary = {
-@as("tags") tags: tagMap,
-@as("lastUpdateTime") lastUpdateTime: lastUpdateTime,
-@as("creationTime") creationTime: creationTime,
-@as("description") description: experimentTemplateDescription,
-@as("id") id: experimentTemplateId
+tags: option<tagMap>,
+lastUpdateTime: option<lastUpdateTime>,
+creationTime: option<creationTime>,
+description: option<experimentTemplateDescription>,
+id: option<experimentTemplateId>
 }
 type experimentTemplateStopConditionList = array<experimentTemplateStopCondition>
 type experimentTemplateAction = {
-@as("startAfter") startAfter: experimentTemplateActionStartAfterList,
-@as("targets") targets: experimentTemplateActionTargetMap,
-@as("parameters") parameters: experimentTemplateActionParameterMap,
-@as("description") description: experimentTemplateActionDescription,
-@as("actionId") actionId: actionId
+startAfter: option<experimentTemplateActionStartAfterList>,
+targets: option<experimentTemplateActionTargetMap>,
+parameters: option<experimentTemplateActionParameterMap>,
+description: option<experimentTemplateActionDescription>,
+actionId: option<actionId>
 }
 type experimentTargetFilter = {
-@as("values") values: experimentTargetFilterValues,
-@as("path") path: experimentTargetFilterPath
+values: option<experimentTargetFilterValues>,
+path: option<experimentTargetFilterPath>
 }
 type experimentSummary = {
-@as("tags") tags: tagMap,
-@as("creationTime") creationTime: creationTime,
-@as("state") state: experimentState,
-@as("experimentTemplateId") experimentTemplateId: experimentTemplateId,
-@as("id") id: experimentId
+tags: option<tagMap>,
+creationTime: option<creationTime>,
+state: option<experimentState>,
+experimentTemplateId: option<experimentTemplateId>,
+id: option<experimentId>
 }
 type experimentStopConditionList = array<experimentStopCondition>
 type experimentAction = {
-@as("state") state: experimentActionState,
-@as("startAfter") startAfter: experimentActionStartAfterList,
-@as("targets") targets: experimentActionTargetMap,
-@as("parameters") parameters: experimentActionParameterMap,
-@as("description") description: experimentActionDescription,
-@as("actionId") actionId: actionId
+state: option<experimentActionState>,
+startAfter: option<experimentActionStartAfterList>,
+targets: option<experimentActionTargetMap>,
+parameters: option<experimentActionParameterMap>,
+description: option<experimentActionDescription>,
+actionId: option<actionId>
 }
 type createExperimentTemplateStopConditionInputList = array<createExperimentTemplateStopConditionInput>
 type createExperimentTemplateActionInput = {
-@as("startAfter") startAfter: experimentTemplateActionStartAfterList,
-@as("targets") targets: experimentTemplateActionTargetMap,
-@as("parameters") parameters: experimentTemplateActionParameterMap,
-@as("description") description: experimentTemplateActionDescription,
-@as("actionId") actionId: option<actionId>
+startAfter: option<experimentTemplateActionStartAfterList>,
+targets: option<experimentTemplateActionTargetMap>,
+parameters: option<experimentTemplateActionParameterMap>,
+description: option<experimentTemplateActionDescription>,
+actionId: actionId
 }
 type actionTargetMap = Js.Dict.t< actionTarget>
 type actionParameterMap = Js.Dict.t< actionParameter>
@@ -167,45 +175,45 @@ type experimentSummaryList = array<experimentSummary>
 type experimentActionMap = Js.Dict.t< experimentAction>
 type createExperimentTemplateActionInputMap = Js.Dict.t< createExperimentTemplateActionInput>
 type actionSummary = {
-@as("tags") tags: tagMap,
-@as("targets") targets: actionTargetMap,
-@as("description") description: actionDescription,
-@as("id") id: actionId
+tags: option<tagMap>,
+targets: option<actionTargetMap>,
+description: option<actionDescription>,
+id: option<actionId>
 }
 type action = {
-@as("tags") tags: tagMap,
-@as("targets") targets: actionTargetMap,
-@as("parameters") parameters: actionParameterMap,
-@as("description") description: actionDescription,
-@as("id") id: actionId
+tags: option<tagMap>,
+targets: option<actionTargetMap>,
+parameters: option<actionParameterMap>,
+description: option<actionDescription>,
+id: option<actionId>
 }
 type updateExperimentTemplateTargetInput = {
-@as("selectionMode") selectionMode: option<experimentTemplateTargetSelectionMode>,
-@as("filters") filters: experimentTemplateTargetFilterInputList,
-@as("resourceTags") resourceTags: tagMap,
-@as("resourceArns") resourceArns: resourceArnList,
-@as("resourceType") resourceType: option<resourceType>
+selectionMode: experimentTemplateTargetSelectionMode,
+filters: option<experimentTemplateTargetFilterInputList>,
+resourceTags: option<tagMap>,
+resourceArns: option<resourceArnList>,
+resourceType: resourceType
 }
 type experimentTemplateTarget = {
-@as("selectionMode") selectionMode: experimentTemplateTargetSelectionMode,
-@as("filters") filters: experimentTemplateTargetFilterList,
-@as("resourceTags") resourceTags: tagMap,
-@as("resourceArns") resourceArns: resourceArnList,
-@as("resourceType") resourceType: resourceType
+selectionMode: option<experimentTemplateTargetSelectionMode>,
+filters: option<experimentTemplateTargetFilterList>,
+resourceTags: option<tagMap>,
+resourceArns: option<resourceArnList>,
+resourceType: option<resourceType>
 }
 type experimentTarget = {
-@as("selectionMode") selectionMode: experimentTargetSelectionMode,
-@as("filters") filters: experimentTargetFilterList,
-@as("resourceTags") resourceTags: tagMap,
-@as("resourceArns") resourceArns: resourceArnList,
-@as("resourceType") resourceType: resourceType
+selectionMode: option<experimentTargetSelectionMode>,
+filters: option<experimentTargetFilterList>,
+resourceTags: option<tagMap>,
+resourceArns: option<resourceArnList>,
+resourceType: option<resourceType>
 }
 type createExperimentTemplateTargetInput = {
-@as("selectionMode") selectionMode: option<experimentTemplateTargetSelectionMode>,
-@as("filters") filters: experimentTemplateTargetFilterInputList,
-@as("resourceTags") resourceTags: tagMap,
-@as("resourceArns") resourceArns: resourceArnList,
-@as("resourceType") resourceType: option<resourceType>
+selectionMode: experimentTemplateTargetSelectionMode,
+filters: option<experimentTemplateTargetFilterInputList>,
+resourceTags: option<tagMap>,
+resourceArns: option<resourceArnList>,
+resourceType: resourceType
 }
 type actionSummaryList = array<actionSummary>
 type updateExperimentTemplateTargetInputMap = Js.Dict.t< updateExperimentTemplateTargetInput>
@@ -213,212 +221,212 @@ type experimentTemplateTargetMap = Js.Dict.t< experimentTemplateTarget>
 type experimentTargetMap = Js.Dict.t< experimentTarget>
 type createExperimentTemplateTargetInputMap = Js.Dict.t< createExperimentTemplateTargetInput>
 type experimentTemplate = {
-@as("tags") tags: tagMap,
-@as("roleArn") roleArn: roleArn,
-@as("lastUpdateTime") lastUpdateTime: lastUpdateTime,
-@as("creationTime") creationTime: creationTime,
-@as("stopConditions") stopConditions: experimentTemplateStopConditionList,
-@as("actions") actions: experimentTemplateActionMap,
-@as("targets") targets: experimentTemplateTargetMap,
-@as("description") description: experimentTemplateDescription,
-@as("id") id: experimentTemplateId
+tags: option<tagMap>,
+roleArn: option<roleArn>,
+lastUpdateTime: option<lastUpdateTime>,
+creationTime: option<creationTime>,
+stopConditions: option<experimentTemplateStopConditionList>,
+actions: option<experimentTemplateActionMap>,
+targets: option<experimentTemplateTargetMap>,
+description: option<experimentTemplateDescription>,
+id: option<experimentTemplateId>
 }
 type experiment = {
-@as("tags") tags: tagMap,
-@as("endTime") endTime: experimentEndTime,
-@as("startTime") startTime: experimentStartTime,
-@as("creationTime") creationTime: creationTime,
-@as("stopConditions") stopConditions: experimentStopConditionList,
-@as("actions") actions: experimentActionMap,
-@as("targets") targets: experimentTargetMap,
-@as("state") state: experimentState,
-@as("roleArn") roleArn: roleArn,
-@as("experimentTemplateId") experimentTemplateId: experimentTemplateId,
-@as("id") id: experimentId
+tags: option<tagMap>,
+endTime: option<experimentEndTime>,
+startTime: option<experimentStartTime>,
+creationTime: option<creationTime>,
+stopConditions: option<experimentStopConditionList>,
+actions: option<experimentActionMap>,
+targets: option<experimentTargetMap>,
+state: option<experimentState>,
+roleArn: option<roleArn>,
+experimentTemplateId: option<experimentTemplateId>,
+id: option<experimentId>
 }
-type clientType;
-@module("@aws-sdk/client-fis") @new external createClient: unit => clientType = "FisClient";
+type awsServiceClient;
+@module("@aws-sdk/client-fis") @new external createClient: unit => awsServiceClient = "FisClient";
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: tagKeyList,
-@as("resourceArn") resourceArn: option<resourceArn>
+tagKeys: option<tagKeyList>,
+resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<resourceArn>
+tags: tagMap,
+resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<resourceArn>
+resourceArn: resourceArn
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListExperiments = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: listExperimentsMaxResults
+nextToken: option<nextToken>,
+maxResults: option<listExperimentsMaxResults>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("experiments") experiments: experimentSummaryList
+nextToken: option<nextToken>,
+experiments: option<experimentSummaryList>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "ListExperimentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListExperimentTemplates = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: listExperimentTemplatesMaxResults
+nextToken: option<nextToken>,
+maxResults: option<listExperimentTemplatesMaxResults>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("experimentTemplates") experimentTemplates: experimentTemplateSummaryList
+nextToken: option<nextToken>,
+experimentTemplates: option<experimentTemplateSummaryList>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "ListExperimentTemplatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAction = {
   type t;
   type request = {
-@as("id") id: option<actionId>
+id: actionId
 }
   type response = {
-@as("action") action: action
+action: option<action>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "GetActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListActions = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: listActionsMaxResults
+nextToken: option<nextToken>,
+maxResults: option<listActionsMaxResults>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("actions") actions: actionSummaryList
+nextToken: option<nextToken>,
+actions: option<actionSummaryList>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "ListActionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateExperimentTemplate = {
   type t;
   type request = {
-@as("roleArn") roleArn: roleArn,
-@as("actions") actions: updateExperimentTemplateActionInputMap,
-@as("targets") targets: updateExperimentTemplateTargetInputMap,
-@as("stopConditions") stopConditions: updateExperimentTemplateStopConditionInputList,
-@as("description") description: experimentTemplateDescription,
-@as("id") id: option<experimentTemplateId>
+roleArn: option<roleArn>,
+actions: option<updateExperimentTemplateActionInputMap>,
+targets: option<updateExperimentTemplateTargetInputMap>,
+stopConditions: option<updateExperimentTemplateStopConditionInputList>,
+description: option<experimentTemplateDescription>,
+id: experimentTemplateId
 }
   type response = {
-@as("experimentTemplate") experimentTemplate: experimentTemplate
+experimentTemplate: option<experimentTemplate>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "UpdateExperimentTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StopExperiment = {
   type t;
   type request = {
-@as("id") id: option<experimentId>
+id: experimentId
 }
   type response = {
-@as("experiment") experiment: experiment
+experiment: option<experiment>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "StopExperimentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartExperiment = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("experimentTemplateId") experimentTemplateId: option<experimentTemplateId>,
-@as("clientToken") clientToken: option<clientToken>
+tags: option<tagMap>,
+experimentTemplateId: experimentTemplateId,
+clientToken: clientToken
 }
   type response = {
-@as("experiment") experiment: experiment
+experiment: option<experiment>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "StartExperimentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetExperimentTemplate = {
   type t;
   type request = {
-@as("id") id: option<experimentTemplateId>
+id: experimentTemplateId
 }
   type response = {
-@as("experimentTemplate") experimentTemplate: experimentTemplate
+experimentTemplate: option<experimentTemplate>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "GetExperimentTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetExperiment = {
   type t;
   type request = {
-@as("id") id: option<experimentId>
+id: experimentId
 }
   type response = {
-@as("experiment") experiment: experiment
+experiment: option<experiment>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "GetExperimentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteExperimentTemplate = {
   type t;
   type request = {
-@as("id") id: option<experimentTemplateId>
+id: experimentTemplateId
 }
   type response = {
-@as("experimentTemplate") experimentTemplate: experimentTemplate
+experimentTemplate: option<experimentTemplate>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "DeleteExperimentTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateExperimentTemplate = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("roleArn") roleArn: option<roleArn>,
-@as("actions") actions: option<createExperimentTemplateActionInputMap>,
-@as("targets") targets: createExperimentTemplateTargetInputMap,
-@as("stopConditions") stopConditions: option<createExperimentTemplateStopConditionInputList>,
-@as("description") description: option<experimentTemplateDescription>,
-@as("clientToken") clientToken: option<clientToken>
+tags: option<tagMap>,
+roleArn: roleArn,
+actions: createExperimentTemplateActionInputMap,
+targets: option<createExperimentTemplateTargetInputMap>,
+stopConditions: createExperimentTemplateStopConditionInputList,
+description: experimentTemplateDescription,
+clientToken: clientToken
 }
   type response = {
-@as("experimentTemplate") experimentTemplate: experimentTemplate
+experimentTemplate: option<experimentTemplate>
 }
   @module("@aws-sdk/client-fis") @new external new_: (request) => t = "CreateExperimentTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

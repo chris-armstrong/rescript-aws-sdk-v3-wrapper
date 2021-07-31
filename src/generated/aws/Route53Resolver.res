@@ -1,18 +1,24 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type validation = [@as("DISABLE") #DISABLE | @as("ENABLE") #ENABLE]
-type unsigned = int;
+type unsigned = int
 type tagValue = string
 type tagKey = string
 type subnetId = string
-type amazonawsString = string
+type string_ = string
 type statusMessage = string
 type sortOrder = [@as("DESCENDING") #DESCENDING | @as("ASCENDING") #ASCENDING]
 type sortByKey = string
-type shareStatus = [@as("SHARED_BY_ME") #SHARED_BY_ME | @as("SHARED_WITH_ME") #SHARED_WITH_ME | @as("NOT_SHARED") #NOT_SHARED]
+type shareStatus = [@as("SHARED_BY_ME") #SHAREDBYME | @as("SHARED_WITH_ME") #SHAREDWITHME | @as("NOT_SHARED") #NOTSHARED]
 type servicePrinciple = string
 type ruleTypeOption = [@as("RECURSIVE") #RECURSIVE | @as("SYSTEM") #SYSTEM | @as("FORWARD") #FORWARD]
 type rfc3339TimeString = string
@@ -23,22 +29,22 @@ type resolverRuleAssociationStatus = [@as("OVERRIDDEN") #OVERRIDDEN | @as("FAILE
 type resolverQueryLogConfigStatus = [@as("FAILED") #FAILED | @as("DELETING") #DELETING | @as("CREATED") #CREATED | @as("CREATING") #CREATING]
 type resolverQueryLogConfigPolicy = string
 type resolverQueryLogConfigName = string
-type resolverQueryLogConfigAssociationStatus = [@as("FAILED") #FAILED | @as("DELETING") #DELETING | @as("ACTION_NEEDED") #ACTION_NEEDED | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
+type resolverQueryLogConfigAssociationStatus = [@as("FAILED") #FAILED | @as("DELETING") #DELETING | @as("ACTION_NEEDED") #ACTIONNEEDED | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
 type resolverQueryLogConfigAssociationErrorMessage = string
-type resolverQueryLogConfigAssociationError = [@as("INTERNAL_SERVICE_ERROR") #INTERNAL_SERVICE_ERROR | @as("ACCESS_DENIED") #ACCESS_DENIED | @as("DESTINATION_NOT_FOUND") #DESTINATION_NOT_FOUND | @as("NONE") #NONE]
-type resolverEndpointStatus = [@as("DELETING") #DELETING | @as("ACTION_NEEDED") #ACTION_NEEDED | @as("AUTO_RECOVERING") #AUTO_RECOVERING | @as("UPDATING") #UPDATING | @as("OPERATIONAL") #OPERATIONAL | @as("CREATING") #CREATING]
+type resolverQueryLogConfigAssociationError = [@as("INTERNAL_SERVICE_ERROR") #INTERNALSERVICEERROR | @as("ACCESS_DENIED") #ACCESSDENIED | @as("DESTINATION_NOT_FOUND") #DESTINATIONNOTFOUND | @as("NONE") #NONE]
+type resolverEndpointStatus = [@as("DELETING") #DELETING | @as("ACTION_NEEDED") #ACTIONNEEDED | @as("AUTO_RECOVERING") #AUTORECOVERING | @as("UPDATING") #UPDATING | @as("OPERATIONAL") #OPERATIONAL | @as("CREATING") #CREATING]
 type resolverEndpointDirection = [@as("OUTBOUND") #OUTBOUND | @as("INBOUND") #INBOUND]
 type resolverDNSSECValidationStatus = [@as("DISABLED") #DISABLED | @as("DISABLING") #DISABLING | @as("ENABLED") #ENABLED | @as("ENABLING") #ENABLING]
-type priority = int;
-type port = int;
+type priority = int
+type port = int
 type nextToken = string
 type name = string
 type mutationProtectionStatus = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
-type maxResults = int;
-type listFirewallConfigsMaxResult = int;
-type listDomainMaxResults = int;
-type ipAddressStatus = [@as("DELETE_FAILED_FAS_EXPIRED") #DELETE_FAILED_FAS_EXPIRED | @as("DELETING") #DELETING | @as("FAILED_RESOURCE_GONE") #FAILED_RESOURCE_GONE | @as("DETACHING") #DETACHING | @as("REMAP_ATTACHING") #REMAP_ATTACHING | @as("REMAP_DETACHING") #REMAP_DETACHING | @as("ATTACHED") #ATTACHED | @as("ATTACHING") #ATTACHING | @as("FAILED_CREATION") #FAILED_CREATION | @as("CREATING") #CREATING]
-type ipAddressCount = int;
+type maxResults = int
+type listFirewallConfigsMaxResult = int
+type listDomainMaxResults = int
+type ipAddressStatus = [@as("DELETE_FAILED_FAS_EXPIRED") #DELETEFAILEDFASEXPIRED | @as("DELETING") #DELETING | @as("FAILED_RESOURCE_GONE") #FAILEDRESOURCEGONE | @as("DETACHING") #DETACHING | @as("REMAP_ATTACHING") #REMAPATTACHING | @as("REMAP_DETACHING") #REMAPDETACHING | @as("ATTACHED") #ATTACHED | @as("ATTACHING") #ATTACHING | @as("FAILED_CREATION") #FAILEDCREATION | @as("CREATING") #CREATING]
+type ipAddressCount = int
 type ip = string
 type firewallRuleGroupStatus = [@as("UPDATING") #UPDATING | @as("DELETING") #DELETING | @as("COMPLETE") #COMPLETE]
 type firewallRuleGroupPolicy = string
@@ -46,7 +52,7 @@ type firewallRuleGroupAssociationStatus = [@as("UPDATING") #UPDATING | @as("DELE
 type firewallFailOpenStatus = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type firewallDomainUpdateOperation = [@as("REPLACE") #REPLACE | @as("REMOVE") #REMOVE | @as("ADD") #ADD]
 type firewallDomainName = string
-type firewallDomainListStatus = [@as("UPDATING") #UPDATING | @as("DELETING") #DELETING | @as("IMPORTING") #IMPORTING | @as("COMPLETE_IMPORT_FAILED") #COMPLETE_IMPORT_FAILED | @as("COMPLETE") #COMPLETE]
+type firewallDomainListStatus = [@as("UPDATING") #UPDATING | @as("DELETING") #DELETING | @as("IMPORTING") #IMPORTING | @as("COMPLETE_IMPORT_FAILED") #COMPLETEIMPORTFAILED | @as("COMPLETE") #COMPLETE]
 type firewallDomainImportOperation = [@as("REPLACE") #REPLACE]
 type filterValue = string
 type filterName = string
@@ -55,173 +61,173 @@ type domainName = string
 type domainListFileUrl = string
 type destinationArn = string
 type creatorRequestId = string
-type count = int;
-type amazonawsBoolean = bool;
+type count = int
+type boolean_ = bool
 type blockResponse = [@as("OVERRIDE") #OVERRIDE | @as("NXDOMAIN") #NXDOMAIN | @as("NODATA") #NODATA]
-type blockOverrideTtl = int;
+type blockOverrideTtl = int
 type blockOverrideDomain = string
 type blockOverrideDnsType = [@as("CNAME") #CNAME]
 type arn = string
 type action = [@as("ALERT") #ALERT | @as("BLOCK") #BLOCK | @as("ALLOW") #ALLOW]
 type accountId = string
 type targetAddress = {
-@as("Port") port: port,
-@as("Ip") ip: option<ip>
+@as("Port") port: option<port>,
+@as("Ip") ip: ip
 }
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: option<tagValue>,
-@as("Key") key: option<tagKey>
+@as("Value") value: tagValue,
+@as("Key") key: tagKey
 }
 type securityGroupIds = array<resourceId>
 type resolverRuleAssociation = {
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Status") status: resolverRuleAssociationStatus,
-@as("VPCId") vPCId: resourceId,
-@as("Name") name: name,
-@as("ResolverRuleId") resolverRuleId: resourceId,
-@as("Id") id: resourceId
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Status") status: option<resolverRuleAssociationStatus>,
+@as("VPCId") vpcid: option<resourceId>,
+@as("Name") name: option<name>,
+@as("ResolverRuleId") resolverRuleId: option<resourceId>,
+@as("Id") id: option<resourceId>
 }
 type resolverQueryLogConfigAssociation = {
-@as("CreationTime") creationTime: rfc3339TimeString,
-@as("ErrorMessage") errorMessage: resolverQueryLogConfigAssociationErrorMessage,
-@as("Error") error: resolverQueryLogConfigAssociationError,
-@as("Status") status: resolverQueryLogConfigAssociationStatus,
-@as("ResourceId") resourceId: resourceId,
-@as("ResolverQueryLogConfigId") resolverQueryLogConfigId: resourceId,
-@as("Id") id: resourceId
+@as("CreationTime") creationTime: option<rfc3339TimeString>,
+@as("ErrorMessage") errorMessage: option<resolverQueryLogConfigAssociationErrorMessage>,
+@as("Error") error: option<resolverQueryLogConfigAssociationError>,
+@as("Status") status: option<resolverQueryLogConfigAssociationStatus>,
+@as("ResourceId") resourceId: option<resourceId>,
+@as("ResolverQueryLogConfigId") resolverQueryLogConfigId: option<resourceId>,
+@as("Id") id: option<resourceId>
 }
 type resolverQueryLogConfig = {
-@as("CreationTime") creationTime: rfc3339TimeString,
-@as("CreatorRequestId") creatorRequestId: creatorRequestId,
-@as("DestinationArn") destinationArn: destinationArn,
-@as("Name") name: resolverQueryLogConfigName,
-@as("Arn") arn: arn,
-@as("AssociationCount") associationCount: count,
-@as("ShareStatus") shareStatus: shareStatus,
-@as("Status") status: resolverQueryLogConfigStatus,
-@as("OwnerId") ownerId: accountId,
-@as("Id") id: resourceId
+@as("CreationTime") creationTime: option<rfc3339TimeString>,
+@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>,
+@as("DestinationArn") destinationArn: option<destinationArn>,
+@as("Name") name: option<resolverQueryLogConfigName>,
+@as("Arn") arn: option<arn>,
+@as("AssociationCount") associationCount: option<count>,
+@as("ShareStatus") shareStatus: option<shareStatus>,
+@as("Status") status: option<resolverQueryLogConfigStatus>,
+@as("OwnerId") ownerId: option<accountId>,
+@as("Id") id: option<resourceId>
 }
 type resolverDnssecConfig = {
-@as("ValidationStatus") validationStatus: resolverDNSSECValidationStatus,
-@as("ResourceId") resourceId: resourceId,
-@as("OwnerId") ownerId: accountId,
-@as("Id") id: resourceId
+@as("ValidationStatus") validationStatus: option<resolverDNSSECValidationStatus>,
+@as("ResourceId") resourceId: option<resourceId>,
+@as("OwnerId") ownerId: option<accountId>,
+@as("Id") id: option<resourceId>
 }
 type ipAddressUpdate = {
-@as("Ip") ip: ip,
-@as("SubnetId") subnetId: subnetId,
-@as("IpId") ipId: resourceId
+@as("Ip") ip: option<ip>,
+@as("SubnetId") subnetId: option<subnetId>,
+@as("IpId") ipId: option<resourceId>
 }
 type ipAddressResponse = {
-@as("ModificationTime") modificationTime: rfc3339TimeString,
-@as("CreationTime") creationTime: rfc3339TimeString,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Status") status: ipAddressStatus,
-@as("Ip") ip: ip,
-@as("SubnetId") subnetId: subnetId,
-@as("IpId") ipId: resourceId
+@as("ModificationTime") modificationTime: option<rfc3339TimeString>,
+@as("CreationTime") creationTime: option<rfc3339TimeString>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Status") status: option<ipAddressStatus>,
+@as("Ip") ip: option<ip>,
+@as("SubnetId") subnetId: option<subnetId>,
+@as("IpId") ipId: option<resourceId>
 }
 type ipAddressRequest = {
-@as("Ip") ip: ip,
-@as("SubnetId") subnetId: option<subnetId>
+@as("Ip") ip: option<ip>,
+@as("SubnetId") subnetId: subnetId
 }
 type firewallRuleGroupMetadata = {
-@as("ShareStatus") shareStatus: shareStatus,
-@as("CreatorRequestId") creatorRequestId: creatorRequestId,
-@as("OwnerId") ownerId: accountId,
-@as("Name") name: name,
-@as("Arn") arn: arn,
-@as("Id") id: resourceId
+@as("ShareStatus") shareStatus: option<shareStatus>,
+@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>,
+@as("OwnerId") ownerId: option<accountId>,
+@as("Name") name: option<name>,
+@as("Arn") arn: option<arn>,
+@as("Id") id: option<resourceId>
 }
 type firewallRuleGroupAssociation = {
-@as("ModificationTime") modificationTime: rfc3339TimeString,
-@as("CreationTime") creationTime: rfc3339TimeString,
-@as("CreatorRequestId") creatorRequestId: creatorRequestId,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Status") status: firewallRuleGroupAssociationStatus,
-@as("ManagedOwnerName") managedOwnerName: servicePrinciple,
-@as("MutationProtection") mutationProtection: mutationProtectionStatus,
-@as("Priority") priority: priority,
-@as("Name") name: name,
-@as("VpcId") vpcId: resourceId,
-@as("FirewallRuleGroupId") firewallRuleGroupId: resourceId,
-@as("Arn") arn: arn,
-@as("Id") id: resourceId
+@as("ModificationTime") modificationTime: option<rfc3339TimeString>,
+@as("CreationTime") creationTime: option<rfc3339TimeString>,
+@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Status") status: option<firewallRuleGroupAssociationStatus>,
+@as("ManagedOwnerName") managedOwnerName: option<servicePrinciple>,
+@as("MutationProtection") mutationProtection: option<mutationProtectionStatus>,
+@as("Priority") priority: option<priority>,
+@as("Name") name: option<name>,
+@as("VpcId") vpcId: option<resourceId>,
+@as("FirewallRuleGroupId") firewallRuleGroupId: option<resourceId>,
+@as("Arn") arn: option<arn>,
+@as("Id") id: option<resourceId>
 }
 type firewallRuleGroup = {
-@as("ModificationTime") modificationTime: rfc3339TimeString,
-@as("CreationTime") creationTime: rfc3339TimeString,
-@as("ShareStatus") shareStatus: shareStatus,
-@as("CreatorRequestId") creatorRequestId: creatorRequestId,
-@as("OwnerId") ownerId: accountId,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Status") status: firewallRuleGroupStatus,
-@as("RuleCount") ruleCount: unsigned,
-@as("Name") name: name,
-@as("Arn") arn: arn,
-@as("Id") id: resourceId
+@as("ModificationTime") modificationTime: option<rfc3339TimeString>,
+@as("CreationTime") creationTime: option<rfc3339TimeString>,
+@as("ShareStatus") shareStatus: option<shareStatus>,
+@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>,
+@as("OwnerId") ownerId: option<accountId>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Status") status: option<firewallRuleGroupStatus>,
+@as("RuleCount") ruleCount: option<unsigned>,
+@as("Name") name: option<name>,
+@as("Arn") arn: option<arn>,
+@as("Id") id: option<resourceId>
 }
 type firewallRule = {
-@as("ModificationTime") modificationTime: rfc3339TimeString,
-@as("CreationTime") creationTime: rfc3339TimeString,
-@as("CreatorRequestId") creatorRequestId: creatorRequestId,
-@as("BlockOverrideTtl") blockOverrideTtl: unsigned,
-@as("BlockOverrideDnsType") blockOverrideDnsType: blockOverrideDnsType,
-@as("BlockOverrideDomain") blockOverrideDomain: blockOverrideDomain,
-@as("BlockResponse") blockResponse: blockResponse,
-@as("Action") action: action,
-@as("Priority") priority: priority,
-@as("Name") name: name,
-@as("FirewallDomainListId") firewallDomainListId: resourceId,
-@as("FirewallRuleGroupId") firewallRuleGroupId: resourceId
+@as("ModificationTime") modificationTime: option<rfc3339TimeString>,
+@as("CreationTime") creationTime: option<rfc3339TimeString>,
+@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>,
+@as("BlockOverrideTtl") blockOverrideTtl: option<unsigned>,
+@as("BlockOverrideDnsType") blockOverrideDnsType: option<blockOverrideDnsType>,
+@as("BlockOverrideDomain") blockOverrideDomain: option<blockOverrideDomain>,
+@as("BlockResponse") blockResponse: option<blockResponse>,
+@as("Action") action: option<action>,
+@as("Priority") priority: option<priority>,
+@as("Name") name: option<name>,
+@as("FirewallDomainListId") firewallDomainListId: option<resourceId>,
+@as("FirewallRuleGroupId") firewallRuleGroupId: option<resourceId>
 }
 type firewallDomains = array<firewallDomainName>
 type firewallDomainListMetadata = {
-@as("ManagedOwnerName") managedOwnerName: servicePrinciple,
-@as("CreatorRequestId") creatorRequestId: creatorRequestId,
-@as("Name") name: name,
-@as("Arn") arn: arn,
-@as("Id") id: resourceId
+@as("ManagedOwnerName") managedOwnerName: option<servicePrinciple>,
+@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>,
+@as("Name") name: option<name>,
+@as("Arn") arn: option<arn>,
+@as("Id") id: option<resourceId>
 }
 type firewallDomainList = {
-@as("ModificationTime") modificationTime: rfc3339TimeString,
-@as("CreationTime") creationTime: rfc3339TimeString,
-@as("CreatorRequestId") creatorRequestId: creatorRequestId,
-@as("ManagedOwnerName") managedOwnerName: servicePrinciple,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Status") status: firewallDomainListStatus,
-@as("DomainCount") domainCount: unsigned,
-@as("Name") name: name,
-@as("Arn") arn: arn,
-@as("Id") id: resourceId
+@as("ModificationTime") modificationTime: option<rfc3339TimeString>,
+@as("CreationTime") creationTime: option<rfc3339TimeString>,
+@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>,
+@as("ManagedOwnerName") managedOwnerName: option<servicePrinciple>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Status") status: option<firewallDomainListStatus>,
+@as("DomainCount") domainCount: option<unsigned>,
+@as("Name") name: option<name>,
+@as("Arn") arn: option<arn>,
+@as("Id") id: option<resourceId>
 }
 type firewallConfig = {
-@as("FirewallFailOpen") firewallFailOpen: firewallFailOpenStatus,
-@as("OwnerId") ownerId: accountId,
-@as("ResourceId") resourceId: resourceId,
-@as("Id") id: resourceId
+@as("FirewallFailOpen") firewallFailOpen: option<firewallFailOpenStatus>,
+@as("OwnerId") ownerId: option<accountId>,
+@as("ResourceId") resourceId: option<resourceId>,
+@as("Id") id: option<resourceId>
 }
 type filterValues = array<filterValue>
 type targetList = array<targetAddress>
-type tagList = array<tag>
+type tagList_ = array<tag>
 type resolverRuleAssociations = array<resolverRuleAssociation>
 type resolverQueryLogConfigList = array<resolverQueryLogConfig>
 type resolverQueryLogConfigAssociationList = array<resolverQueryLogConfigAssociation>
 type resolverEndpoint = {
-@as("ModificationTime") modificationTime: rfc3339TimeString,
-@as("CreationTime") creationTime: rfc3339TimeString,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Status") status: resolverEndpointStatus,
-@as("HostVPCId") hostVPCId: resourceId,
-@as("IpAddressCount") ipAddressCount: ipAddressCount,
-@as("Direction") direction: resolverEndpointDirection,
-@as("SecurityGroupIds") securityGroupIds: securityGroupIds,
-@as("Name") name: name,
-@as("Arn") arn: arn,
-@as("CreatorRequestId") creatorRequestId: creatorRequestId,
-@as("Id") id: resourceId
+@as("ModificationTime") modificationTime: option<rfc3339TimeString>,
+@as("CreationTime") creationTime: option<rfc3339TimeString>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Status") status: option<resolverEndpointStatus>,
+@as("HostVPCId") hostVPCId: option<resourceId>,
+@as("IpAddressCount") ipAddressCount: option<ipAddressCount>,
+@as("Direction") direction: option<resolverEndpointDirection>,
+@as("SecurityGroupIds") securityGroupIds: option<securityGroupIds>,
+@as("Name") name: option<name>,
+@as("Arn") arn: option<arn>,
+@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>,
+@as("Id") id: option<resourceId>
 }
 type resolverDnssecConfigList = array<resolverDnssecConfig>
 type ipAddressesResponse = array<ipAddressResponse>
@@ -232,874 +238,874 @@ type firewallRuleGroupAssociations = array<firewallRuleGroupAssociation>
 type firewallDomainListMetadataList = array<firewallDomainListMetadata>
 type firewallConfigList = array<firewallConfig>
 type filter = {
-@as("Values") values: filterValues,
-@as("Name") name: filterName
+@as("Values") values: option<filterValues>,
+@as("Name") name: option<filterName>
 }
 type resolverRuleConfig = {
-@as("ResolverEndpointId") resolverEndpointId: resourceId,
-@as("TargetIps") targetIps: targetList,
-@as("Name") name: name
+@as("ResolverEndpointId") resolverEndpointId: option<resourceId>,
+@as("TargetIps") targetIps: option<targetList>,
+@as("Name") name: option<name>
 }
 type resolverRule = {
-@as("ModificationTime") modificationTime: rfc3339TimeString,
-@as("CreationTime") creationTime: rfc3339TimeString,
-@as("ShareStatus") shareStatus: shareStatus,
-@as("OwnerId") ownerId: accountId,
-@as("ResolverEndpointId") resolverEndpointId: resourceId,
-@as("TargetIps") targetIps: targetList,
-@as("Name") name: name,
-@as("RuleType") ruleType: ruleTypeOption,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Status") status: resolverRuleStatus,
-@as("DomainName") domainName: domainName,
-@as("Arn") arn: arn,
-@as("CreatorRequestId") creatorRequestId: creatorRequestId,
-@as("Id") id: resourceId
+@as("ModificationTime") modificationTime: option<rfc3339TimeString>,
+@as("CreationTime") creationTime: option<rfc3339TimeString>,
+@as("ShareStatus") shareStatus: option<shareStatus>,
+@as("OwnerId") ownerId: option<accountId>,
+@as("ResolverEndpointId") resolverEndpointId: option<resourceId>,
+@as("TargetIps") targetIps: option<targetList>,
+@as("Name") name: option<name>,
+@as("RuleType") ruleType: option<ruleTypeOption>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Status") status: option<resolverRuleStatus>,
+@as("DomainName") domainName: option<domainName>,
+@as("Arn") arn: option<arn>,
+@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>,
+@as("Id") id: option<resourceId>
 }
 type resolverEndpoints = array<resolverEndpoint>
 type filters = array<filter>
 type resolverRules = array<resolverRule>
-type clientType;
-@module("@aws-sdk/client-route53resolver") @new external createClient: unit => clientType = "Route53ResolverClient";
+type awsServiceClient;
+@module("@aws-sdk/client-route53resolver") @new external createClient: unit => awsServiceClient = "Route53ResolverClient";
 module PutResolverRulePolicy = {
   type t;
   type request = {
-@as("ResolverRulePolicy") resolverRulePolicy: option<resolverRulePolicy>,
-@as("Arn") arn: option<arn>
+@as("ResolverRulePolicy") resolverRulePolicy: resolverRulePolicy,
+@as("Arn") arn: arn
 }
   type response = {
-@as("ReturnValue") returnValue: amazonawsBoolean
+@as("ReturnValue") returnValue: option<boolean_>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "PutResolverRulePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutResolverQueryLogConfigPolicy = {
   type t;
   type request = {
-@as("ResolverQueryLogConfigPolicy") resolverQueryLogConfigPolicy: option<resolverQueryLogConfigPolicy>,
-@as("Arn") arn: option<arn>
+@as("ResolverQueryLogConfigPolicy") resolverQueryLogConfigPolicy: resolverQueryLogConfigPolicy,
+@as("Arn") arn: arn
 }
   type response = {
-@as("ReturnValue") returnValue: amazonawsBoolean
+@as("ReturnValue") returnValue: option<boolean_>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "PutResolverQueryLogConfigPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutFirewallRuleGroupPolicy = {
   type t;
   type request = {
-@as("FirewallRuleGroupPolicy") firewallRuleGroupPolicy: option<firewallRuleGroupPolicy>,
-@as("Arn") arn: option<arn>
+@as("FirewallRuleGroupPolicy") firewallRuleGroupPolicy: firewallRuleGroupPolicy,
+@as("Arn") arn: arn
 }
   type response = {
-@as("ReturnValue") returnValue: amazonawsBoolean
+@as("ReturnValue") returnValue: option<boolean_>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "PutFirewallRuleGroupPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ImportFirewallDomains = {
   type t;
   type request = {
-@as("DomainFileUrl") domainFileUrl: option<domainListFileUrl>,
-@as("Operation") operation: option<firewallDomainImportOperation>,
-@as("FirewallDomainListId") firewallDomainListId: option<resourceId>
+@as("DomainFileUrl") domainFileUrl: domainListFileUrl,
+@as("Operation") operation: firewallDomainImportOperation,
+@as("FirewallDomainListId") firewallDomainListId: resourceId
 }
   type response = {
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Status") status: firewallDomainListStatus,
-@as("Name") name: name,
-@as("Id") id: resourceId
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Status") status: option<firewallDomainListStatus>,
+@as("Name") name: option<name>,
+@as("Id") id: option<resourceId>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ImportFirewallDomainsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResolverRulePolicy = {
   type t;
   type request = {
-@as("Arn") arn: option<arn>
+@as("Arn") arn: arn
 }
   type response = {
-@as("ResolverRulePolicy") resolverRulePolicy: resolverRulePolicy
+@as("ResolverRulePolicy") resolverRulePolicy: option<resolverRulePolicy>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverRulePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResolverQueryLogConfigPolicy = {
   type t;
   type request = {
-@as("Arn") arn: option<arn>
+@as("Arn") arn: arn
 }
   type response = {
-@as("ResolverQueryLogConfigPolicy") resolverQueryLogConfigPolicy: resolverQueryLogConfigPolicy
+@as("ResolverQueryLogConfigPolicy") resolverQueryLogConfigPolicy: option<resolverQueryLogConfigPolicy>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverQueryLogConfigPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFirewallRuleGroupPolicy = {
   type t;
   type request = {
-@as("Arn") arn: option<arn>
+@as("Arn") arn: arn
 }
   type response = {
-@as("FirewallRuleGroupPolicy") firewallRuleGroupPolicy: firewallRuleGroupPolicy
+@as("FirewallRuleGroupPolicy") firewallRuleGroupPolicy: option<firewallRuleGroupPolicy>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetFirewallRuleGroupPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateResolverDnssecConfig = {
   type t;
   type request = {
-@as("Validation") validation: option<validation>,
-@as("ResourceId") resourceId: option<resourceId>
+@as("Validation") validation: validation,
+@as("ResourceId") resourceId: resourceId
 }
   type response = {
-@as("ResolverDNSSECConfig") resolverDNSSECConfig: resolverDnssecConfig
+@as("ResolverDNSSECConfig") resolverDNSSECConfig: option<resolverDnssecConfig>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateResolverDnssecConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFirewallRuleGroupAssociation = {
   type t;
   type request = {
-@as("Name") name: name,
-@as("MutationProtection") mutationProtection: mutationProtectionStatus,
-@as("Priority") priority: priority,
-@as("FirewallRuleGroupAssociationId") firewallRuleGroupAssociationId: option<resourceId>
+@as("Name") name: option<name>,
+@as("MutationProtection") mutationProtection: option<mutationProtectionStatus>,
+@as("Priority") priority: option<priority>,
+@as("FirewallRuleGroupAssociationId") firewallRuleGroupAssociationId: resourceId
 }
   type response = {
-@as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: firewallRuleGroupAssociation
+@as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: option<firewallRuleGroupAssociation>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateFirewallRuleGroupAssociationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFirewallRule = {
   type t;
   type request = {
-@as("Name") name: name,
-@as("BlockOverrideTtl") blockOverrideTtl: blockOverrideTtl,
-@as("BlockOverrideDnsType") blockOverrideDnsType: blockOverrideDnsType,
-@as("BlockOverrideDomain") blockOverrideDomain: blockOverrideDomain,
-@as("BlockResponse") blockResponse: blockResponse,
-@as("Action") action: action,
-@as("Priority") priority: priority,
-@as("FirewallDomainListId") firewallDomainListId: option<resourceId>,
-@as("FirewallRuleGroupId") firewallRuleGroupId: option<resourceId>
+@as("Name") name: option<name>,
+@as("BlockOverrideTtl") blockOverrideTtl: option<blockOverrideTtl>,
+@as("BlockOverrideDnsType") blockOverrideDnsType: option<blockOverrideDnsType>,
+@as("BlockOverrideDomain") blockOverrideDomain: option<blockOverrideDomain>,
+@as("BlockResponse") blockResponse: option<blockResponse>,
+@as("Action") action: option<action>,
+@as("Priority") priority: option<priority>,
+@as("FirewallDomainListId") firewallDomainListId: resourceId,
+@as("FirewallRuleGroupId") firewallRuleGroupId: resourceId
 }
   type response = {
-@as("FirewallRule") firewallRule: firewallRule
+@as("FirewallRule") firewallRule: option<firewallRule>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateFirewallRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFirewallDomains = {
   type t;
   type request = {
-@as("Domains") domains: option<firewallDomains>,
-@as("Operation") operation: option<firewallDomainUpdateOperation>,
-@as("FirewallDomainListId") firewallDomainListId: option<resourceId>
+@as("Domains") domains: firewallDomains,
+@as("Operation") operation: firewallDomainUpdateOperation,
+@as("FirewallDomainListId") firewallDomainListId: resourceId
 }
   type response = {
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Status") status: firewallDomainListStatus,
-@as("Name") name: name,
-@as("Id") id: resourceId
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Status") status: option<firewallDomainListStatus>,
+@as("Name") name: option<name>,
+@as("Id") id: option<resourceId>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateFirewallDomainsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFirewallConfig = {
   type t;
   type request = {
-@as("FirewallFailOpen") firewallFailOpen: option<firewallFailOpenStatus>,
-@as("ResourceId") resourceId: option<resourceId>
+@as("FirewallFailOpen") firewallFailOpen: firewallFailOpenStatus,
+@as("ResourceId") resourceId: resourceId
 }
   type response = {
-@as("FirewallConfig") firewallConfig: firewallConfig
+@as("FirewallConfig") firewallConfig: option<firewallConfig>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateFirewallConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceArn") resourceArn: option<arn>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceArn") resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFirewallDomains = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: listDomainMaxResults,
-@as("FirewallDomainListId") firewallDomainListId: option<resourceId>
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<listDomainMaxResults>,
+@as("FirewallDomainListId") firewallDomainListId: resourceId
 }
   type response = {
-@as("Domains") domains: firewallDomains,
-@as("NextToken") nextToken: nextToken
+@as("Domains") domains: option<firewallDomains>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallDomainsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResolverRuleAssociation = {
   type t;
   type request = {
-@as("ResolverRuleAssociationId") resolverRuleAssociationId: option<resourceId>
+@as("ResolverRuleAssociationId") resolverRuleAssociationId: resourceId
 }
   type response = {
-@as("ResolverRuleAssociation") resolverRuleAssociation: resolverRuleAssociation
+@as("ResolverRuleAssociation") resolverRuleAssociation: option<resolverRuleAssociation>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverRuleAssociationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResolverQueryLogConfigAssociation = {
   type t;
   type request = {
-@as("ResolverQueryLogConfigAssociationId") resolverQueryLogConfigAssociationId: option<resourceId>
+@as("ResolverQueryLogConfigAssociationId") resolverQueryLogConfigAssociationId: resourceId
 }
   type response = {
-@as("ResolverQueryLogConfigAssociation") resolverQueryLogConfigAssociation: resolverQueryLogConfigAssociation
+@as("ResolverQueryLogConfigAssociation") resolverQueryLogConfigAssociation: option<resolverQueryLogConfigAssociation>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverQueryLogConfigAssociationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResolverQueryLogConfig = {
   type t;
   type request = {
-@as("ResolverQueryLogConfigId") resolverQueryLogConfigId: option<resourceId>
+@as("ResolverQueryLogConfigId") resolverQueryLogConfigId: resourceId
 }
   type response = {
-@as("ResolverQueryLogConfig") resolverQueryLogConfig: resolverQueryLogConfig
+@as("ResolverQueryLogConfig") resolverQueryLogConfig: option<resolverQueryLogConfig>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverQueryLogConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResolverDnssecConfig = {
   type t;
   type request = {
-@as("ResourceId") resourceId: option<resourceId>
+@as("ResourceId") resourceId: resourceId
 }
   type response = {
-@as("ResolverDNSSECConfig") resolverDNSSECConfig: resolverDnssecConfig
+@as("ResolverDNSSECConfig") resolverDNSSECConfig: option<resolverDnssecConfig>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverDnssecConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFirewallRuleGroupAssociation = {
   type t;
   type request = {
-@as("FirewallRuleGroupAssociationId") firewallRuleGroupAssociationId: option<resourceId>
+@as("FirewallRuleGroupAssociationId") firewallRuleGroupAssociationId: resourceId
 }
   type response = {
-@as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: firewallRuleGroupAssociation
+@as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: option<firewallRuleGroupAssociation>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetFirewallRuleGroupAssociationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFirewallRuleGroup = {
   type t;
   type request = {
-@as("FirewallRuleGroupId") firewallRuleGroupId: option<resourceId>
+@as("FirewallRuleGroupId") firewallRuleGroupId: resourceId
 }
   type response = {
-@as("FirewallRuleGroup") firewallRuleGroup: firewallRuleGroup
+@as("FirewallRuleGroup") firewallRuleGroup: option<firewallRuleGroup>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetFirewallRuleGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFirewallDomainList = {
   type t;
   type request = {
-@as("FirewallDomainListId") firewallDomainListId: option<resourceId>
+@as("FirewallDomainListId") firewallDomainListId: resourceId
 }
   type response = {
-@as("FirewallDomainList") firewallDomainList: firewallDomainList
+@as("FirewallDomainList") firewallDomainList: option<firewallDomainList>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetFirewallDomainListCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFirewallConfig = {
   type t;
   type request = {
-@as("ResourceId") resourceId: option<resourceId>
+@as("ResourceId") resourceId: resourceId
 }
   type response = {
-@as("FirewallConfig") firewallConfig: firewallConfig
+@as("FirewallConfig") firewallConfig: option<firewallConfig>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetFirewallConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateResolverRule = {
   type t;
   type request = {
-@as("ResolverRuleId") resolverRuleId: option<resourceId>,
-@as("VPCId") vPCId: option<resourceId>
+@as("ResolverRuleId") resolverRuleId: resourceId,
+@as("VPCId") vpcid: resourceId
 }
   type response = {
-@as("ResolverRuleAssociation") resolverRuleAssociation: resolverRuleAssociation
+@as("ResolverRuleAssociation") resolverRuleAssociation: option<resolverRuleAssociation>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DisassociateResolverRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateResolverQueryLogConfig = {
   type t;
   type request = {
-@as("ResourceId") resourceId: option<resourceId>,
-@as("ResolverQueryLogConfigId") resolverQueryLogConfigId: option<resourceId>
+@as("ResourceId") resourceId: resourceId,
+@as("ResolverQueryLogConfigId") resolverQueryLogConfigId: resourceId
 }
   type response = {
-@as("ResolverQueryLogConfigAssociation") resolverQueryLogConfigAssociation: resolverQueryLogConfigAssociation
+@as("ResolverQueryLogConfigAssociation") resolverQueryLogConfigAssociation: option<resolverQueryLogConfigAssociation>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DisassociateResolverQueryLogConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateFirewallRuleGroup = {
   type t;
   type request = {
-@as("FirewallRuleGroupAssociationId") firewallRuleGroupAssociationId: option<resourceId>
+@as("FirewallRuleGroupAssociationId") firewallRuleGroupAssociationId: resourceId
 }
   type response = {
-@as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: firewallRuleGroupAssociation
+@as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: option<firewallRuleGroupAssociation>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DisassociateFirewallRuleGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteResolverQueryLogConfig = {
   type t;
   type request = {
-@as("ResolverQueryLogConfigId") resolverQueryLogConfigId: option<resourceId>
+@as("ResolverQueryLogConfigId") resolverQueryLogConfigId: resourceId
 }
   type response = {
-@as("ResolverQueryLogConfig") resolverQueryLogConfig: resolverQueryLogConfig
+@as("ResolverQueryLogConfig") resolverQueryLogConfig: option<resolverQueryLogConfig>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteResolverQueryLogConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFirewallRuleGroup = {
   type t;
   type request = {
-@as("FirewallRuleGroupId") firewallRuleGroupId: option<resourceId>
+@as("FirewallRuleGroupId") firewallRuleGroupId: resourceId
 }
   type response = {
-@as("FirewallRuleGroup") firewallRuleGroup: firewallRuleGroup
+@as("FirewallRuleGroup") firewallRuleGroup: option<firewallRuleGroup>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteFirewallRuleGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFirewallRule = {
   type t;
   type request = {
-@as("FirewallDomainListId") firewallDomainListId: option<resourceId>,
-@as("FirewallRuleGroupId") firewallRuleGroupId: option<resourceId>
+@as("FirewallDomainListId") firewallDomainListId: resourceId,
+@as("FirewallRuleGroupId") firewallRuleGroupId: resourceId
 }
   type response = {
-@as("FirewallRule") firewallRule: firewallRule
+@as("FirewallRule") firewallRule: option<firewallRule>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteFirewallRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFirewallDomainList = {
   type t;
   type request = {
-@as("FirewallDomainListId") firewallDomainListId: option<resourceId>
+@as("FirewallDomainListId") firewallDomainListId: resourceId
 }
   type response = {
-@as("FirewallDomainList") firewallDomainList: firewallDomainList
+@as("FirewallDomainList") firewallDomainList: option<firewallDomainList>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteFirewallDomainListCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFirewallRule = {
   type t;
   type request = {
-@as("Name") name: option<name>,
-@as("BlockOverrideTtl") blockOverrideTtl: blockOverrideTtl,
-@as("BlockOverrideDnsType") blockOverrideDnsType: blockOverrideDnsType,
-@as("BlockOverrideDomain") blockOverrideDomain: blockOverrideDomain,
-@as("BlockResponse") blockResponse: blockResponse,
-@as("Action") action: option<action>,
-@as("Priority") priority: option<priority>,
-@as("FirewallDomainListId") firewallDomainListId: option<resourceId>,
-@as("FirewallRuleGroupId") firewallRuleGroupId: option<resourceId>,
-@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>
+@as("Name") name: name,
+@as("BlockOverrideTtl") blockOverrideTtl: option<blockOverrideTtl>,
+@as("BlockOverrideDnsType") blockOverrideDnsType: option<blockOverrideDnsType>,
+@as("BlockOverrideDomain") blockOverrideDomain: option<blockOverrideDomain>,
+@as("BlockResponse") blockResponse: option<blockResponse>,
+@as("Action") action: action,
+@as("Priority") priority: priority,
+@as("FirewallDomainListId") firewallDomainListId: resourceId,
+@as("FirewallRuleGroupId") firewallRuleGroupId: resourceId,
+@as("CreatorRequestId") creatorRequestId: creatorRequestId
 }
   type response = {
-@as("FirewallRule") firewallRule: firewallRule
+@as("FirewallRule") firewallRule: option<firewallRule>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateFirewallRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateResolverRule = {
   type t;
   type request = {
-@as("VPCId") vPCId: option<resourceId>,
-@as("Name") name: name,
-@as("ResolverRuleId") resolverRuleId: option<resourceId>
+@as("VPCId") vpcid: resourceId,
+@as("Name") name: option<name>,
+@as("ResolverRuleId") resolverRuleId: resourceId
 }
   type response = {
-@as("ResolverRuleAssociation") resolverRuleAssociation: resolverRuleAssociation
+@as("ResolverRuleAssociation") resolverRuleAssociation: option<resolverRuleAssociation>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "AssociateResolverRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateResolverQueryLogConfig = {
   type t;
   type request = {
-@as("ResourceId") resourceId: option<resourceId>,
-@as("ResolverQueryLogConfigId") resolverQueryLogConfigId: option<resourceId>
+@as("ResourceId") resourceId: resourceId,
+@as("ResolverQueryLogConfigId") resolverQueryLogConfigId: resourceId
 }
   type response = {
-@as("ResolverQueryLogConfigAssociation") resolverQueryLogConfigAssociation: resolverQueryLogConfigAssociation
+@as("ResolverQueryLogConfigAssociation") resolverQueryLogConfigAssociation: option<resolverQueryLogConfigAssociation>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "AssociateResolverQueryLogConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateResolverEndpoint = {
   type t;
   type request = {
-@as("Name") name: name,
-@as("ResolverEndpointId") resolverEndpointId: option<resourceId>
+@as("Name") name: option<name>,
+@as("ResolverEndpointId") resolverEndpointId: resourceId
 }
   type response = {
-@as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
+@as("ResolverEndpoint") resolverEndpoint: option<resolverEndpoint>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateResolverEndpointCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tagList>,
-@as("ResourceArn") resourceArn: option<arn>
+@as("Tags") tags: tagList_,
+@as("ResourceArn") resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults,
-@as("ResourceArn") resourceArn: option<arn>
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("ResourceArn") resourceArn: arn
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("Tags") tags: tagList
+@as("NextToken") nextToken: option<nextToken>,
+@as("Tags") tags: option<tagList_>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResolverEndpointIpAddresses = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults,
-@as("ResolverEndpointId") resolverEndpointId: option<resourceId>
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("ResolverEndpointId") resolverEndpointId: resourceId
 }
   type response = {
-@as("IpAddresses") ipAddresses: ipAddressesResponse,
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: nextToken
+@as("IpAddresses") ipAddresses: option<ipAddressesResponse>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverEndpointIpAddressesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFirewallRules = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults,
-@as("Action") action: action,
-@as("Priority") priority: priority,
-@as("FirewallRuleGroupId") firewallRuleGroupId: option<resourceId>
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("Action") action: option<action>,
+@as("Priority") priority: option<priority>,
+@as("FirewallRuleGroupId") firewallRuleGroupId: resourceId
 }
   type response = {
-@as("FirewallRules") firewallRules: firewallRules,
-@as("NextToken") nextToken: nextToken
+@as("FirewallRules") firewallRules: option<firewallRules>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallRulesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFirewallRuleGroups = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("FirewallRuleGroups") firewallRuleGroups: firewallRuleGroupMetadataList,
-@as("NextToken") nextToken: nextToken
+@as("FirewallRuleGroups") firewallRuleGroups: option<firewallRuleGroupMetadataList>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallRuleGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFirewallRuleGroupAssociations = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults,
-@as("Status") status: firewallRuleGroupAssociationStatus,
-@as("Priority") priority: priority,
-@as("VpcId") vpcId: resourceId,
-@as("FirewallRuleGroupId") firewallRuleGroupId: resourceId
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("Status") status: option<firewallRuleGroupAssociationStatus>,
+@as("Priority") priority: option<priority>,
+@as("VpcId") vpcId: option<resourceId>,
+@as("FirewallRuleGroupId") firewallRuleGroupId: option<resourceId>
 }
   type response = {
-@as("FirewallRuleGroupAssociations") firewallRuleGroupAssociations: firewallRuleGroupAssociations,
-@as("NextToken") nextToken: nextToken
+@as("FirewallRuleGroupAssociations") firewallRuleGroupAssociations: option<firewallRuleGroupAssociations>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallRuleGroupAssociationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFirewallDomainLists = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("FirewallDomainLists") firewallDomainLists: firewallDomainListMetadataList,
-@as("NextToken") nextToken: nextToken
+@as("FirewallDomainLists") firewallDomainLists: option<firewallDomainListMetadataList>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallDomainListsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFirewallConfigs = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: listFirewallConfigsMaxResult
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<listFirewallConfigsMaxResult>
 }
   type response = {
-@as("FirewallConfigs") firewallConfigs: firewallConfigList,
-@as("NextToken") nextToken: nextToken
+@as("FirewallConfigs") firewallConfigs: option<firewallConfigList>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallConfigsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResolverEndpoint = {
   type t;
   type request = {
-@as("ResolverEndpointId") resolverEndpointId: option<resourceId>
+@as("ResolverEndpointId") resolverEndpointId: resourceId
 }
   type response = {
-@as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
+@as("ResolverEndpoint") resolverEndpoint: option<resolverEndpoint>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverEndpointCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateResolverEndpointIpAddress = {
   type t;
   type request = {
-@as("IpAddress") ipAddress: option<ipAddressUpdate>,
-@as("ResolverEndpointId") resolverEndpointId: option<resourceId>
+@as("IpAddress") ipAddress: ipAddressUpdate,
+@as("ResolverEndpointId") resolverEndpointId: resourceId
 }
   type response = {
-@as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
+@as("ResolverEndpoint") resolverEndpoint: option<resolverEndpoint>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DisassociateResolverEndpointIpAddressCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteResolverEndpoint = {
   type t;
   type request = {
-@as("ResolverEndpointId") resolverEndpointId: option<resourceId>
+@as("ResolverEndpointId") resolverEndpointId: resourceId
 }
   type response = {
-@as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
+@as("ResolverEndpoint") resolverEndpoint: option<resolverEndpoint>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteResolverEndpointCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateResolverQueryLogConfig = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>,
-@as("DestinationArn") destinationArn: option<destinationArn>,
-@as("Name") name: option<resolverQueryLogConfigName>
+@as("Tags") tags: option<tagList_>,
+@as("CreatorRequestId") creatorRequestId: creatorRequestId,
+@as("DestinationArn") destinationArn: destinationArn,
+@as("Name") name: resolverQueryLogConfigName
 }
   type response = {
-@as("ResolverQueryLogConfig") resolverQueryLogConfig: resolverQueryLogConfig
+@as("ResolverQueryLogConfig") resolverQueryLogConfig: option<resolverQueryLogConfig>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateResolverQueryLogConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateResolverEndpoint = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("IpAddresses") ipAddresses: option<ipAddressesRequest>,
-@as("Direction") direction: option<resolverEndpointDirection>,
-@as("SecurityGroupIds") securityGroupIds: option<securityGroupIds>,
-@as("Name") name: name,
-@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>
+@as("Tags") tags: option<tagList_>,
+@as("IpAddresses") ipAddresses: ipAddressesRequest,
+@as("Direction") direction: resolverEndpointDirection,
+@as("SecurityGroupIds") securityGroupIds: securityGroupIds,
+@as("Name") name: option<name>,
+@as("CreatorRequestId") creatorRequestId: creatorRequestId
 }
   type response = {
-@as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
+@as("ResolverEndpoint") resolverEndpoint: option<resolverEndpoint>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateResolverEndpointCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFirewallRuleGroup = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("Name") name: option<name>,
-@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>
+@as("Tags") tags: option<tagList_>,
+@as("Name") name: name,
+@as("CreatorRequestId") creatorRequestId: creatorRequestId
 }
   type response = {
-@as("FirewallRuleGroup") firewallRuleGroup: firewallRuleGroup
+@as("FirewallRuleGroup") firewallRuleGroup: option<firewallRuleGroup>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateFirewallRuleGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFirewallDomainList = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("Name") name: option<name>,
-@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>
+@as("Tags") tags: option<tagList_>,
+@as("Name") name: name,
+@as("CreatorRequestId") creatorRequestId: creatorRequestId
 }
   type response = {
-@as("FirewallDomainList") firewallDomainList: firewallDomainList
+@as("FirewallDomainList") firewallDomainList: option<firewallDomainList>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateFirewallDomainListCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateResolverEndpointIpAddress = {
   type t;
   type request = {
-@as("IpAddress") ipAddress: option<ipAddressUpdate>,
-@as("ResolverEndpointId") resolverEndpointId: option<resourceId>
+@as("IpAddress") ipAddress: ipAddressUpdate,
+@as("ResolverEndpointId") resolverEndpointId: resourceId
 }
   type response = {
-@as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
+@as("ResolverEndpoint") resolverEndpoint: option<resolverEndpoint>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "AssociateResolverEndpointIpAddressCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateFirewallRuleGroup = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("MutationProtection") mutationProtection: mutationProtectionStatus,
-@as("Name") name: option<name>,
-@as("Priority") priority: option<priority>,
-@as("VpcId") vpcId: option<resourceId>,
-@as("FirewallRuleGroupId") firewallRuleGroupId: option<resourceId>,
-@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>
+@as("Tags") tags: option<tagList_>,
+@as("MutationProtection") mutationProtection: option<mutationProtectionStatus>,
+@as("Name") name: name,
+@as("Priority") priority: priority,
+@as("VpcId") vpcId: resourceId,
+@as("FirewallRuleGroupId") firewallRuleGroupId: resourceId,
+@as("CreatorRequestId") creatorRequestId: creatorRequestId
 }
   type response = {
-@as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: firewallRuleGroupAssociation
+@as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: option<firewallRuleGroupAssociation>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "AssociateFirewallRuleGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateResolverRule = {
   type t;
   type request = {
-@as("Config") config: option<resolverRuleConfig>,
-@as("ResolverRuleId") resolverRuleId: option<resourceId>
+@as("Config") config: resolverRuleConfig,
+@as("ResolverRuleId") resolverRuleId: resourceId
 }
   type response = {
-@as("ResolverRule") resolverRule: resolverRule
+@as("ResolverRule") resolverRule: option<resolverRule>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateResolverRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResolverRuleAssociations = {
   type t;
   type request = {
-@as("Filters") filters: filters,
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults
+@as("Filters") filters: option<filters>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("ResolverRuleAssociations") resolverRuleAssociations: resolverRuleAssociations,
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: nextToken
+@as("ResolverRuleAssociations") resolverRuleAssociations: option<resolverRuleAssociations>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverRuleAssociationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResolverQueryLogConfigs = {
   type t;
   type request = {
-@as("SortOrder") sortOrder: sortOrder,
-@as("SortBy") sortBy: sortByKey,
-@as("Filters") filters: filters,
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults
+@as("SortOrder") sortOrder: option<sortOrder>,
+@as("SortBy") sortBy: option<sortByKey>,
+@as("Filters") filters: option<filters>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("ResolverQueryLogConfigs") resolverQueryLogConfigs: resolverQueryLogConfigList,
-@as("TotalFilteredCount") totalFilteredCount: count,
-@as("TotalCount") totalCount: count,
-@as("NextToken") nextToken: nextToken
+@as("ResolverQueryLogConfigs") resolverQueryLogConfigs: option<resolverQueryLogConfigList>,
+@as("TotalFilteredCount") totalFilteredCount: option<count>,
+@as("TotalCount") totalCount: option<count>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverQueryLogConfigsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResolverQueryLogConfigAssociations = {
   type t;
   type request = {
-@as("SortOrder") sortOrder: sortOrder,
-@as("SortBy") sortBy: sortByKey,
-@as("Filters") filters: filters,
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults
+@as("SortOrder") sortOrder: option<sortOrder>,
+@as("SortBy") sortBy: option<sortByKey>,
+@as("Filters") filters: option<filters>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("ResolverQueryLogConfigAssociations") resolverQueryLogConfigAssociations: resolverQueryLogConfigAssociationList,
-@as("TotalFilteredCount") totalFilteredCount: count,
-@as("TotalCount") totalCount: count,
-@as("NextToken") nextToken: nextToken
+@as("ResolverQueryLogConfigAssociations") resolverQueryLogConfigAssociations: option<resolverQueryLogConfigAssociationList>,
+@as("TotalFilteredCount") totalFilteredCount: option<count>,
+@as("TotalCount") totalCount: option<count>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverQueryLogConfigAssociationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResolverEndpoints = {
   type t;
   type request = {
-@as("Filters") filters: filters,
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults
+@as("Filters") filters: option<filters>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("ResolverEndpoints") resolverEndpoints: resolverEndpoints,
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: nextToken
+@as("ResolverEndpoints") resolverEndpoints: option<resolverEndpoints>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverEndpointsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResolverDnssecConfigs = {
   type t;
   type request = {
-@as("Filters") filters: filters,
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults
+@as("Filters") filters: option<filters>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("ResolverDnssecConfigs") resolverDnssecConfigs: resolverDnssecConfigList,
-@as("NextToken") nextToken: nextToken
+@as("ResolverDnssecConfigs") resolverDnssecConfigs: option<resolverDnssecConfigList>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverDnssecConfigsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResolverRule = {
   type t;
   type request = {
-@as("ResolverRuleId") resolverRuleId: option<resourceId>
+@as("ResolverRuleId") resolverRuleId: resourceId
 }
   type response = {
-@as("ResolverRule") resolverRule: resolverRule
+@as("ResolverRule") resolverRule: option<resolverRule>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteResolverRule = {
   type t;
   type request = {
-@as("ResolverRuleId") resolverRuleId: option<resourceId>
+@as("ResolverRuleId") resolverRuleId: resourceId
 }
   type response = {
-@as("ResolverRule") resolverRule: resolverRule
+@as("ResolverRule") resolverRule: option<resolverRule>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteResolverRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateResolverRule = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("ResolverEndpointId") resolverEndpointId: resourceId,
-@as("TargetIps") targetIps: targetList,
-@as("DomainName") domainName: option<domainName>,
-@as("RuleType") ruleType: option<ruleTypeOption>,
-@as("Name") name: name,
-@as("CreatorRequestId") creatorRequestId: option<creatorRequestId>
+@as("Tags") tags: option<tagList_>,
+@as("ResolverEndpointId") resolverEndpointId: option<resourceId>,
+@as("TargetIps") targetIps: option<targetList>,
+@as("DomainName") domainName: domainName,
+@as("RuleType") ruleType: ruleTypeOption,
+@as("Name") name: option<name>,
+@as("CreatorRequestId") creatorRequestId: creatorRequestId
 }
   type response = {
-@as("ResolverRule") resolverRule: resolverRule
+@as("ResolverRule") resolverRule: option<resolverRule>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateResolverRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResolverRules = {
   type t;
   type request = {
-@as("Filters") filters: filters,
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults
+@as("Filters") filters: option<filters>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("ResolverRules") resolverRules: resolverRules,
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: nextToken
+@as("ResolverRules") resolverRules: option<resolverRules>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverRulesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

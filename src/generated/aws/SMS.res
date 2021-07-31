@@ -1,393 +1,400 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type long = float
 type vmPath = string
 type vmName = string
-type vmManagerType = [@as("HYPERV-MANAGER") #HYPERV_MANAGER | @as("SCVMM") #SCVMM | @as("VSPHERE") #VSPHERE]
+type vmManagerType = [@as("HYPERV-MANAGER") #HYPERVMANAGER | @as("SCVMM") #SCVMM | @as("VSPHERE") #VSPHERE]
 type vmManagerName = string
 type vmManagerId = string
 type vmId = string
 type validationStatusMessage = string
-type validationStatus = [@as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #IN_PROGRESS | @as("PENDING") #PENDING | @as("READY_FOR_VALIDATION") #READY_FOR_VALIDATION]
+type validationStatus = [@as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #INPROGRESS | @as("PENDING") #PENDING | @as("READY_FOR_VALIDATION") #READYFORVALIDATION]
 type validationId = string
-type vPC = string
-type totalServers = int;
-type totalServerGroups = int;
-type amazonawsTimestamp = Js.Date.t;
+type vpc = string
+type totalServers = int
+type totalServerGroups = int
+type timestamp_ = Js.Date.t;
 type tagValue = string
 type tagKey = string
 type subnet = string
 type stackName = string
 type stackId = string
 type serverValidationStrategy = [@as("USERDATA") #USERDATA]
-type serverType = [@as("VIRTUAL_MACHINE") #VIRTUAL_MACHINE]
+type serverType = [@as("VIRTUAL_MACHINE") #VIRTUALMACHINE]
 type serverId = string
 type serverGroupName = string
 type serverGroupId = string
-type serverCatalogStatus = [@as("EXPIRED") #EXPIRED | @as("DELETED") #DELETED | @as("AVAILABLE") #AVAILABLE | @as("IMPORTING") #IMPORTING | @as("NOT_IMPORTED") #NOT_IMPORTED]
+type serverCatalogStatus = [@as("EXPIRED") #EXPIRED | @as("DELETED") #DELETED | @as("AVAILABLE") #AVAILABLE | @as("IMPORTING") #IMPORTING | @as("NOT_IMPORTED") #NOTIMPORTED]
 type securityGroup = string
-type scriptType = [@as("POWERSHELL_SCRIPT") #POWERSHELL_SCRIPT | @as("SHELL_SCRIPT") #SHELL_SCRIPT]
+type scriptType = [@as("POWERSHELL_SCRIPT") #POWERSHELLSCRIPT | @as("SHELL_SCRIPT") #SHELLSCRIPT]
 type s3KeyName = string
 type s3BucketName = string
-type runOnce = bool;
+type runOnce = bool
 type roleName = string
-type replicationRunType = [@as("AUTOMATIC") #AUTOMATIC | @as("ON_DEMAND") #ON_DEMAND]
+type replicationRunType = [@as("AUTOMATIC") #AUTOMATIC | @as("ON_DEMAND") #ONDEMAND]
 type replicationRunStatusMessage = string
 type replicationRunState = [@as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("COMPLETED") #COMPLETED | @as("FAILED") #FAILED | @as("ACTIVE") #ACTIVE | @as("MISSED") #MISSED | @as("PENDING") #PENDING]
 type replicationRunStageProgress = string
 type replicationRunStage = string
 type replicationRunId = string
-type replicationJobTerminated = bool;
+type replicationJobTerminated = bool
 type replicationJobStatusMessage = string
-type replicationJobState = [@as("FAILING") #FAILING | @as("PAUSED_ON_FAILURE") #PAUSED_ON_FAILURE | @as("COMPLETED") #COMPLETED | @as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("FAILED") #FAILED | @as("ACTIVE") #ACTIVE | @as("PENDING") #PENDING]
+type replicationJobState = [@as("FAILING") #FAILING | @as("PAUSED_ON_FAILURE") #PAUSEDONFAILURE | @as("COMPLETED") #COMPLETED | @as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("FAILED") #FAILED | @as("ACTIVE") #ACTIVE | @as("PENDING") #PENDING]
 type replicationJobId = string
 type outputFormat = [@as("YAML") #YAML | @as("JSON") #JSON]
-type numberOfRecentAmisToKeep = int;
+type numberOfRecentAmisToKeep = int
 type nonEmptyStringWithMaxLen255 = string
 type nextToken = string
-type maxResults = int;
+type maxResults = int
 type macAddress = string
 type logicalId = string
 type licenseType = [@as("BYOL") #BYOL | @as("AWS") #AWS]
-type launchOrder = int;
+type launchOrder = int
 type kmsKeyId = string
 type ipAddress = string
 type instanceType = string
 type instanceId = string
 type importedAppId = string
-type frequency = int;
-type forceTerminateApp = bool;
-type forceStopAppReplication = bool;
-type executionTimeoutSeconds = int;
+type frequency = int
+type forceTerminateApp = bool
+type forceStopAppReplication = bool
+type executionTimeoutSeconds = int
 type errorMessage = string
-type encrypted = bool;
-type eC2KeyName = string
+type encrypted = bool
+type ec2KeyName = string
 type description = string
 type connectorVersion = string
 type connectorStatus = [@as("UNHEALTHY") #UNHEALTHY | @as("HEALTHY") #HEALTHY]
 type connectorId = string
-type connectorCapability = [@as("SMS_OPTIMIZED") #SMS_OPTIMIZED | @as("SNAPSHOT_BATCHING") #SNAPSHOT_BATCHING | @as("HYPERV-MANAGER") #HYPERV_MANAGER | @as("SCVMM") #SCVMM | @as("VSPHERE") #VSPHERE]
+type connectorCapability = [@as("SMS_OPTIMIZED") #SMSOPTIMIZED | @as("SNAPSHOT_BATCHING") #SNAPSHOTBATCHING | @as("HYPERV-MANAGER") #HYPERVMANAGER | @as("SCVMM") #SCVMM | @as("VSPHERE") #VSPHERE]
 type command = string
 type clientToken = string
 type bucketName = string
-type autoLaunch = bool;
-type associatePublicIpAddress = bool;
+type autoLaunch = bool
+type associatePublicIpAddress = bool
 type appValidationStrategy = [@as("SSM") #SSM]
 type appStatusMessage = string
-type appStatus = [@as("DELETE_FAILED") #DELETE_FAILED | @as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("UPDATING") #UPDATING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
+type appStatus = [@as("DELETE_FAILED") #DELETEFAILED | @as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("UPDATING") #UPDATING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
 type appReplicationStatusMessage = string
-type appReplicationStatus = [@as("REPLICATION_STOPPED") #REPLICATION_STOPPED | @as("REPLICATION_STOP_FAILED") #REPLICATION_STOP_FAILED | @as("REPLICATION_STOPPING") #REPLICATION_STOPPING | @as("REPLICATION_FAILED") #REPLICATION_FAILED | @as("DELTA_REPLICATION_FAILED") #DELTA_REPLICATION_FAILED | @as("DELTA_REPLICATED") #DELTA_REPLICATED | @as("DELTA_REPLICATION_IN_PROGRESS") #DELTA_REPLICATION_IN_PROGRESS | @as("PARTIALLY_REPLICATED") #PARTIALLY_REPLICATED | @as("REPLICATED") #REPLICATED | @as("REPLICATION_IN_PROGRESS") #REPLICATION_IN_PROGRESS | @as("REPLICATION_PENDING") #REPLICATION_PENDING | @as("VALIDATION_IN_PROGRESS") #VALIDATION_IN_PROGRESS | @as("READY_FOR_REPLICATION") #READY_FOR_REPLICATION | @as("CONFIGURATION_INVALID") #CONFIGURATION_INVALID | @as("CONFIGURATION_IN_PROGRESS") #CONFIGURATION_IN_PROGRESS | @as("READY_FOR_CONFIGURATION") #READY_FOR_CONFIGURATION]
-type appReplicationConfigurationStatus = [@as("CONFIGURED") #CONFIGURED | @as("NOT_CONFIGURED") #NOT_CONFIGURED]
+type appReplicationStatus = [@as("REPLICATION_STOPPED") #REPLICATIONSTOPPED | @as("REPLICATION_STOP_FAILED") #REPLICATIONSTOPFAILED | @as("REPLICATION_STOPPING") #REPLICATIONSTOPPING | @as("REPLICATION_FAILED") #REPLICATIONFAILED | @as("DELTA_REPLICATION_FAILED") #DELTAREPLICATIONFAILED | @as("DELTA_REPLICATED") #DELTAREPLICATED | @as("DELTA_REPLICATION_IN_PROGRESS") #DELTAREPLICATIONINPROGRESS | @as("PARTIALLY_REPLICATED") #PARTIALLYREPLICATED | @as("REPLICATED") #REPLICATED | @as("REPLICATION_IN_PROGRESS") #REPLICATIONINPROGRESS | @as("REPLICATION_PENDING") #REPLICATIONPENDING | @as("VALIDATION_IN_PROGRESS") #VALIDATIONINPROGRESS | @as("READY_FOR_REPLICATION") #READYFORREPLICATION | @as("CONFIGURATION_INVALID") #CONFIGURATIONINVALID | @as("CONFIGURATION_IN_PROGRESS") #CONFIGURATIONINPROGRESS | @as("READY_FOR_CONFIGURATION") #READYFORCONFIGURATION]
+type appReplicationConfigurationStatus = [@as("CONFIGURED") #CONFIGURED | @as("NOT_CONFIGURED") #NOTCONFIGURED]
 type appName = string
 type appLaunchStatusMessage = string
-type appLaunchStatus = [@as("TERMINATED") #TERMINATED | @as("TERMINATE_FAILED") #TERMINATE_FAILED | @as("TERMINATE_IN_PROGRESS") #TERMINATE_IN_PROGRESS | @as("LAUNCH_FAILED") #LAUNCH_FAILED | @as("DELTA_LAUNCH_FAILED") #DELTA_LAUNCH_FAILED | @as("DELTA_LAUNCH_IN_PROGRESS") #DELTA_LAUNCH_IN_PROGRESS | @as("PARTIALLY_LAUNCHED") #PARTIALLY_LAUNCHED | @as("LAUNCHED") #LAUNCHED | @as("LAUNCH_IN_PROGRESS") #LAUNCH_IN_PROGRESS | @as("LAUNCH_PENDING") #LAUNCH_PENDING | @as("VALIDATION_IN_PROGRESS") #VALIDATION_IN_PROGRESS | @as("READY_FOR_LAUNCH") #READY_FOR_LAUNCH | @as("CONFIGURATION_INVALID") #CONFIGURATION_INVALID | @as("CONFIGURATION_IN_PROGRESS") #CONFIGURATION_IN_PROGRESS | @as("READY_FOR_CONFIGURATION") #READY_FOR_CONFIGURATION]
-type appLaunchConfigurationStatus = [@as("CONFIGURED") #CONFIGURED | @as("NOT_CONFIGURED") #NOT_CONFIGURED]
+type appLaunchStatus = [@as("TERMINATED") #TERMINATED | @as("TERMINATE_FAILED") #TERMINATEFAILED | @as("TERMINATE_IN_PROGRESS") #TERMINATEINPROGRESS | @as("LAUNCH_FAILED") #LAUNCHFAILED | @as("DELTA_LAUNCH_FAILED") #DELTALAUNCHFAILED | @as("DELTA_LAUNCH_IN_PROGRESS") #DELTALAUNCHINPROGRESS | @as("PARTIALLY_LAUNCHED") #PARTIALLYLAUNCHED | @as("LAUNCHED") #LAUNCHED | @as("LAUNCH_IN_PROGRESS") #LAUNCHINPROGRESS | @as("LAUNCH_PENDING") #LAUNCHPENDING | @as("VALIDATION_IN_PROGRESS") #VALIDATIONINPROGRESS | @as("READY_FOR_LAUNCH") #READYFORLAUNCH | @as("CONFIGURATION_INVALID") #CONFIGURATIONINVALID | @as("CONFIGURATION_IN_PROGRESS") #CONFIGURATIONINPROGRESS | @as("READY_FOR_CONFIGURATION") #READYFORCONFIGURATION]
+type appLaunchConfigurationStatus = [@as("CONFIGURED") #CONFIGURED | @as("NOT_CONFIGURED") #NOTCONFIGURED]
 type appIdWithValidation = string
 type appId = string
 type appDescription = string
 type amiId = string
 type vmServerAddress = {
-@as("vmId") vmId: vmId,
-@as("vmManagerId") vmManagerId: vmManagerId
+vmId: option<vmId>,
+vmManagerId: option<vmManagerId>
 }
 type tag = {
-@as("value") value: tagValue,
-@as("key") key: tagKey
+value: option<tagValue>,
+key: option<tagKey>
 }
 type serverReplicationParameters = {
-@as("kmsKeyId") kmsKeyId: kmsKeyId,
-@as("encrypted") encrypted: encrypted,
-@as("numberOfRecentAmisToKeep") numberOfRecentAmisToKeep: numberOfRecentAmisToKeep,
-@as("licenseType") licenseType: licenseType,
-@as("runOnce") runOnce: runOnce,
-@as("frequency") frequency: frequency,
-@as("seedTime") seedTime: amazonawsTimestamp
+kmsKeyId: option<kmsKeyId>,
+encrypted: option<encrypted>,
+numberOfRecentAmisToKeep: option<numberOfRecentAmisToKeep>,
+licenseType: option<licenseType>,
+runOnce: option<runOnce>,
+frequency: option<frequency>,
+seedTime: option<timestamp_>
 }
 type s3Location = {
-@as("key") key: s3KeyName,
-@as("bucket") bucket: s3BucketName
+key: option<s3KeyName>,
+bucket: option<s3BucketName>
 }
 type replicationRunStageDetails = {
-@as("stageProgress") stageProgress: replicationRunStageProgress,
-@as("stage") stage: replicationRunStage
+stageProgress: option<replicationRunStageProgress>,
+stage: option<replicationRunStage>
 }
 type notificationContext = {
-@as("statusMessage") statusMessage: validationStatusMessage,
-@as("status") status: validationStatus,
-@as("validationId") validationId: validationId
+statusMessage: option<validationStatusMessage>,
+status: option<validationStatus>,
+validationId: option<validationId>
 }
 type launchDetails = {
-@as("stackId") stackId: stackId,
-@as("stackName") stackName: stackName,
-@as("latestLaunchTime") latestLaunchTime: amazonawsTimestamp
+stackId: option<stackId>,
+stackName: option<stackName>,
+latestLaunchTime: option<timestamp_>
 }
 type connectorCapabilityList = array<connectorCapability>
 type appIds = array<appId>
 type vmServerAddressList = array<vmServerAddress>
 type vmServer = {
-@as("vmPath") vmPath: vmPath,
-@as("vmManagerType") vmManagerType: vmManagerType,
-@as("vmManagerName") vmManagerName: vmManagerName,
-@as("vmName") vmName: vmName,
-@as("vmServerAddress") vmServerAddress: vmServerAddress
+vmPath: option<vmPath>,
+vmManagerType: option<vmManagerType>,
+vmManagerName: option<vmManagerName>,
+vmName: option<vmName>,
+vmServerAddress: option<vmServerAddress>
 }
 type userData = {
-@as("s3Location") s3Location: s3Location
+s3Location: option<s3Location>
 }
 type tags = array<tag>
 type source = {
-@as("s3Location") s3Location: s3Location
+s3Location: option<s3Location>
 }
-type sSMOutput = {
-@as("s3Location") s3Location: s3Location
+type ssmoutput = {
+s3Location: option<s3Location>
 }
 type replicationRun = {
-@as("kmsKeyId") kmsKeyId: kmsKeyId,
-@as("encrypted") encrypted: encrypted,
-@as("description") description: description,
-@as("completedTime") completedTime: amazonawsTimestamp,
-@as("scheduledStartTime") scheduledStartTime: amazonawsTimestamp,
-@as("amiId") amiId: amiId,
-@as("statusMessage") statusMessage: replicationRunStatusMessage,
-@as("stageDetails") stageDetails: replicationRunStageDetails,
-@as("type") type_: replicationRunType,
-@as("state") state: replicationRunState,
-@as("replicationRunId") replicationRunId: replicationRunId
+kmsKeyId: option<kmsKeyId>,
+encrypted: option<encrypted>,
+description: option<description>,
+completedTime: option<timestamp_>,
+scheduledStartTime: option<timestamp_>,
+amiId: option<amiId>,
+statusMessage: option<replicationRunStatusMessage>,
+stageDetails: option<replicationRunStageDetails>,
+@as("type") type_: option<replicationRunType>,
+state: option<replicationRunState>,
+replicationRunId: option<replicationRunId>
 }
 type connector = {
-@as("associatedOn") associatedOn: amazonawsTimestamp,
-@as("macAddress") macAddress: macAddress,
-@as("ipAddress") ipAddress: ipAddress,
-@as("vmManagerId") vmManagerId: vmManagerId,
-@as("vmManagerType") vmManagerType: vmManagerType,
-@as("vmManagerName") vmManagerName: vmManagerName,
-@as("capabilityList") capabilityList: connectorCapabilityList,
-@as("status") status: connectorStatus,
-@as("version") version: connectorVersion,
-@as("connectorId") connectorId: connectorId
+associatedOn: option<timestamp_>,
+macAddress: option<macAddress>,
+ipAddress: option<ipAddress>,
+vmManagerId: option<vmManagerId>,
+vmManagerType: option<vmManagerType>,
+vmManagerName: option<vmManagerName>,
+capabilityList: option<connectorCapabilityList>,
+status: option<connectorStatus>,
+version: option<connectorVersion>,
+connectorId: option<connectorId>
 }
 type appSummary = {
-@as("totalServers") totalServers: totalServers,
-@as("totalServerGroups") totalServerGroups: totalServerGroups,
-@as("roleName") roleName: roleName,
-@as("lastModified") lastModified: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("launchDetails") launchDetails: launchDetails,
-@as("launchStatusMessage") launchStatusMessage: appLaunchStatusMessage,
-@as("launchStatus") launchStatus: appLaunchStatus,
-@as("launchConfigurationStatus") launchConfigurationStatus: appLaunchConfigurationStatus,
-@as("latestReplicationTime") latestReplicationTime: amazonawsTimestamp,
-@as("replicationStatusMessage") replicationStatusMessage: appReplicationStatusMessage,
-@as("replicationStatus") replicationStatus: appReplicationStatus,
-@as("replicationConfigurationStatus") replicationConfigurationStatus: appReplicationConfigurationStatus,
-@as("statusMessage") statusMessage: appStatusMessage,
-@as("status") status: appStatus,
-@as("description") description: appDescription,
-@as("name") name: appName,
-@as("importedAppId") importedAppId: importedAppId,
-@as("appId") appId: appId
+totalServers: option<totalServers>,
+totalServerGroups: option<totalServerGroups>,
+roleName: option<roleName>,
+lastModified: option<timestamp_>,
+creationTime: option<timestamp_>,
+launchDetails: option<launchDetails>,
+launchStatusMessage: option<appLaunchStatusMessage>,
+launchStatus: option<appLaunchStatus>,
+launchConfigurationStatus: option<appLaunchConfigurationStatus>,
+latestReplicationTime: option<timestamp_>,
+replicationStatusMessage: option<appReplicationStatusMessage>,
+replicationStatus: option<appReplicationStatus>,
+replicationConfigurationStatus: option<appReplicationConfigurationStatus>,
+statusMessage: option<appStatusMessage>,
+status: option<appStatus>,
+description: option<appDescription>,
+name: option<appName>,
+importedAppId: option<importedAppId>,
+appId: option<appId>
 }
 type userDataValidationParameters = {
-@as("scriptType") scriptType: scriptType,
-@as("source") source: source
+scriptType: option<scriptType>,
+source: option<source>
 }
 type server = {
-@as("replicationJobTerminated") replicationJobTerminated: replicationJobTerminated,
-@as("replicationJobId") replicationJobId: replicationJobId,
-@as("vmServer") vmServer: vmServer,
-@as("serverType") serverType: serverType,
-@as("serverId") serverId: serverId
+replicationJobTerminated: option<replicationJobTerminated>,
+replicationJobId: option<replicationJobId>,
+vmServer: option<vmServer>,
+serverType: option<serverType>,
+serverId: option<serverId>
 }
-type sSMValidationParameters = {
-@as("outputS3BucketName") outputS3BucketName: bucketName,
-@as("executionTimeoutSeconds") executionTimeoutSeconds: executionTimeoutSeconds,
-@as("command") command: command,
-@as("scriptType") scriptType: scriptType,
-@as("instanceId") instanceId: instanceId,
-@as("source") source: source
+type ssmvalidationParameters = {
+outputS3BucketName: option<bucketName>,
+executionTimeoutSeconds: option<executionTimeoutSeconds>,
+command: option<command>,
+scriptType: option<scriptType>,
+instanceId: option<instanceId>,
+source: option<source>
 }
 type replicationRunList = array<replicationRun>
 type connectorList = array<connector>
 type apps = array<appSummary>
 type appValidationOutput = {
-@as("ssmOutput") ssmOutput: sSMOutput
+ssmOutput: option<ssmoutput>
 }
 type serverValidationOutput = {
-@as("server") server: server
+server: option<server>
 }
 type serverValidationConfiguration = {
-@as("userDataValidationParameters") userDataValidationParameters: userDataValidationParameters,
-@as("serverValidationStrategy") serverValidationStrategy: serverValidationStrategy,
-@as("name") name: nonEmptyStringWithMaxLen255,
-@as("validationId") validationId: validationId,
-@as("server") server: server
+userDataValidationParameters: option<userDataValidationParameters>,
+serverValidationStrategy: option<serverValidationStrategy>,
+name: option<nonEmptyStringWithMaxLen255>,
+validationId: option<validationId>,
+server: option<server>
 }
 type serverReplicationConfiguration = {
-@as("serverReplicationParameters") serverReplicationParameters: serverReplicationParameters,
-@as("server") server: server
+serverReplicationParameters: option<serverReplicationParameters>,
+server: option<server>
 }
 type serverList = array<server>
 type serverLaunchConfiguration = {
-@as("configureScriptType") configureScriptType: scriptType,
-@as("configureScript") configureScript: s3Location,
-@as("iamInstanceProfileName") iamInstanceProfileName: roleName,
-@as("associatePublicIpAddress") associatePublicIpAddress: associatePublicIpAddress,
-@as("instanceType") instanceType: instanceType,
-@as("userData") userData: userData,
-@as("ec2KeyName") ec2KeyName: eC2KeyName,
-@as("securityGroup") securityGroup: securityGroup,
-@as("subnet") subnet: subnet,
-@as("vpc") vpc: vPC,
-@as("logicalId") logicalId: logicalId,
-@as("server") server: server
+configureScriptType: option<scriptType>,
+configureScript: option<s3Location>,
+iamInstanceProfileName: option<roleName>,
+associatePublicIpAddress: option<associatePublicIpAddress>,
+instanceType: option<instanceType>,
+userData: option<userData>,
+ec2KeyName: option<ec2KeyName>,
+securityGroup: option<securityGroup>,
+subnet: option<subnet>,
+vpc: option<vpc>,
+logicalId: option<logicalId>,
+server: option<server>
 }
 type replicationJob = {
-@as("replicationRunList") replicationRunList: replicationRunList,
-@as("kmsKeyId") kmsKeyId: kmsKeyId,
-@as("encrypted") encrypted: encrypted,
-@as("numberOfRecentAmisToKeep") numberOfRecentAmisToKeep: numberOfRecentAmisToKeep,
-@as("description") description: description,
-@as("statusMessage") statusMessage: replicationJobStatusMessage,
-@as("state") state: replicationJobState,
-@as("latestAmiId") latestAmiId: amiId,
-@as("roleName") roleName: roleName,
-@as("licenseType") licenseType: licenseType,
-@as("nextReplicationRunStartTime") nextReplicationRunStartTime: amazonawsTimestamp,
-@as("runOnce") runOnce: runOnce,
-@as("frequency") frequency: frequency,
-@as("seedReplicationTime") seedReplicationTime: amazonawsTimestamp,
-@as("vmServer") vmServer: vmServer,
-@as("serverType") serverType: serverType,
-@as("serverId") serverId: serverId,
-@as("replicationJobId") replicationJobId: replicationJobId
+replicationRunList: option<replicationRunList>,
+kmsKeyId: option<kmsKeyId>,
+encrypted: option<encrypted>,
+numberOfRecentAmisToKeep: option<numberOfRecentAmisToKeep>,
+description: option<description>,
+statusMessage: option<replicationJobStatusMessage>,
+state: option<replicationJobState>,
+latestAmiId: option<amiId>,
+roleName: option<roleName>,
+licenseType: option<licenseType>,
+nextReplicationRunStartTime: option<timestamp_>,
+runOnce: option<runOnce>,
+frequency: option<frequency>,
+seedReplicationTime: option<timestamp_>,
+vmServer: option<vmServer>,
+serverType: option<serverType>,
+serverId: option<serverId>,
+replicationJobId: option<replicationJobId>
 }
 type appValidationConfiguration = {
-@as("ssmValidationParameters") ssmValidationParameters: sSMValidationParameters,
-@as("appValidationStrategy") appValidationStrategy: appValidationStrategy,
-@as("name") name: nonEmptyStringWithMaxLen255,
-@as("validationId") validationId: validationId
+ssmValidationParameters: option<ssmvalidationParameters>,
+appValidationStrategy: option<appValidationStrategy>,
+name: option<nonEmptyStringWithMaxLen255>,
+validationId: option<validationId>
 }
 type validationOutput = {
-@as("serverValidationOutput") serverValidationOutput: serverValidationOutput,
-@as("appValidationOutput") appValidationOutput: appValidationOutput,
-@as("latestValidationTime") latestValidationTime: amazonawsTimestamp,
-@as("statusMessage") statusMessage: validationStatusMessage,
-@as("status") status: validationStatus,
-@as("name") name: nonEmptyStringWithMaxLen255,
-@as("validationId") validationId: validationId
+serverValidationOutput: option<serverValidationOutput>,
+appValidationOutput: option<appValidationOutput>,
+latestValidationTime: option<timestamp_>,
+statusMessage: option<validationStatusMessage>,
+status: option<validationStatus>,
+name: option<nonEmptyStringWithMaxLen255>,
+validationId: option<validationId>
 }
 type serverValidationConfigurations = array<serverValidationConfiguration>
 type serverReplicationConfigurations = array<serverReplicationConfiguration>
 type serverLaunchConfigurations = array<serverLaunchConfiguration>
 type serverGroup = {
-@as("serverList") serverList: serverList,
-@as("name") name: serverGroupName,
-@as("serverGroupId") serverGroupId: serverGroupId
+serverList: option<serverList>,
+name: option<serverGroupName>,
+serverGroupId: option<serverGroupId>
 }
 type replicationJobList = array<replicationJob>
 type appValidationConfigurations = array<appValidationConfiguration>
 type validationOutputList = array<validationOutput>
 type serverGroups = array<serverGroup>
 type serverGroupValidationConfiguration = {
-@as("serverValidationConfigurations") serverValidationConfigurations: serverValidationConfigurations,
-@as("serverGroupId") serverGroupId: serverGroupId
+serverValidationConfigurations: option<serverValidationConfigurations>,
+serverGroupId: option<serverGroupId>
 }
 type serverGroupReplicationConfiguration = {
-@as("serverReplicationConfigurations") serverReplicationConfigurations: serverReplicationConfigurations,
-@as("serverGroupId") serverGroupId: serverGroupId
+serverReplicationConfigurations: option<serverReplicationConfigurations>,
+serverGroupId: option<serverGroupId>
 }
 type serverGroupLaunchConfiguration = {
-@as("serverLaunchConfigurations") serverLaunchConfigurations: serverLaunchConfigurations,
-@as("launchOrder") launchOrder: launchOrder,
-@as("serverGroupId") serverGroupId: serverGroupId
+serverLaunchConfigurations: option<serverLaunchConfigurations>,
+launchOrder: option<launchOrder>,
+serverGroupId: option<serverGroupId>
 }
 type serverGroupValidationConfigurations = array<serverGroupValidationConfiguration>
 type serverGroupReplicationConfigurations = array<serverGroupReplicationConfiguration>
 type serverGroupLaunchConfigurations = array<serverGroupLaunchConfiguration>
-type clientType;
-@module("@aws-sdk/client-sms") @new external createClient: unit => clientType = "SMSClient";
+type awsServiceClient;
+@module("@aws-sdk/client-sms") @new external createClient: unit => awsServiceClient = "SMSClient";
 module UpdateReplicationJob = {
   type t;
   type request = {
-@as("kmsKeyId") kmsKeyId: kmsKeyId,
-@as("encrypted") encrypted: encrypted,
-@as("numberOfRecentAmisToKeep") numberOfRecentAmisToKeep: numberOfRecentAmisToKeep,
-@as("description") description: description,
-@as("roleName") roleName: roleName,
-@as("licenseType") licenseType: licenseType,
-@as("nextReplicationRunStartTime") nextReplicationRunStartTime: amazonawsTimestamp,
-@as("frequency") frequency: frequency,
-@as("replicationJobId") replicationJobId: option<replicationJobId>
+kmsKeyId: option<kmsKeyId>,
+encrypted: option<encrypted>,
+numberOfRecentAmisToKeep: option<numberOfRecentAmisToKeep>,
+description: option<description>,
+roleName: option<roleName>,
+licenseType: option<licenseType>,
+nextReplicationRunStartTime: option<timestamp_>,
+frequency: option<frequency>,
+replicationJobId: replicationJobId
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "UpdateReplicationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TerminateApp = {
   type t;
   type request = {
-@as("appId") appId: appId
+appId: option<appId>
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "TerminateAppCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StopAppReplication = {
   type t;
   type request = {
-@as("appId") appId: appId
+appId: option<appId>
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "StopAppReplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartOnDemandReplicationRun = {
   type t;
   type request = {
-@as("description") description: description,
-@as("replicationJobId") replicationJobId: option<replicationJobId>
+description: option<description>,
+replicationJobId: replicationJobId
 }
   type response = {
-@as("replicationRunId") replicationRunId: replicationRunId
+replicationRunId: option<replicationRunId>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "StartOnDemandReplicationRunCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartOnDemandAppReplication = {
   type t;
   type request = {
-@as("description") description: description,
-@as("appId") appId: option<appId>
+description: option<description>,
+appId: appId
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "StartOnDemandAppReplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartAppReplication = {
   type t;
   type request = {
-@as("appId") appId: appId
+appId: option<appId>
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "StartAppReplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module LaunchApp = {
   type t;
   type request = {
-@as("appId") appId: appId
+appId: option<appId>
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "LaunchAppCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ImportServerCatalog = {
@@ -395,27 +402,27 @@ module ImportServerCatalog = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "ImportServerCatalogCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ImportAppCatalog = {
   type t;
   type request = {
-@as("roleName") roleName: roleName
+roleName: option<roleName>
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "ImportAppCatalogCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateConnector = {
   type t;
   type request = {
-@as("connectorId") connectorId: option<connectorId>
+connectorId: connectorId
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "DisassociateConnectorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteServerCatalog = {
@@ -423,332 +430,332 @@ module DeleteServerCatalog = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "DeleteServerCatalogCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteReplicationJob = {
   type t;
   type request = {
-@as("replicationJobId") replicationJobId: option<replicationJobId>
+replicationJobId: replicationJobId
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "DeleteReplicationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAppValidationConfiguration = {
   type t;
   type request = {
-@as("appId") appId: option<appIdWithValidation>
+appId: appIdWithValidation
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "DeleteAppValidationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAppReplicationConfiguration = {
   type t;
   type request = {
-@as("appId") appId: appId
+appId: option<appId>
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "DeleteAppReplicationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAppLaunchConfiguration = {
   type t;
   type request = {
-@as("appId") appId: appId
+appId: option<appId>
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "DeleteAppLaunchConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApp = {
   type t;
   type request = {
-@as("forceTerminateApp") forceTerminateApp: forceTerminateApp,
-@as("forceStopAppReplication") forceStopAppReplication: forceStopAppReplication,
-@as("appId") appId: appId
+forceTerminateApp: option<forceTerminateApp>,
+forceStopAppReplication: option<forceStopAppReplication>,
+appId: option<appId>
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "DeleteAppCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateReplicationJob = {
   type t;
   type request = {
-@as("kmsKeyId") kmsKeyId: kmsKeyId,
-@as("encrypted") encrypted: encrypted,
-@as("numberOfRecentAmisToKeep") numberOfRecentAmisToKeep: numberOfRecentAmisToKeep,
-@as("description") description: description,
-@as("roleName") roleName: roleName,
-@as("licenseType") licenseType: licenseType,
-@as("runOnce") runOnce: runOnce,
-@as("frequency") frequency: frequency,
-@as("seedReplicationTime") seedReplicationTime: option<amazonawsTimestamp>,
-@as("serverId") serverId: option<serverId>
+kmsKeyId: option<kmsKeyId>,
+encrypted: option<encrypted>,
+numberOfRecentAmisToKeep: option<numberOfRecentAmisToKeep>,
+description: option<description>,
+roleName: option<roleName>,
+licenseType: option<licenseType>,
+runOnce: option<runOnce>,
+frequency: option<frequency>,
+seedReplicationTime: timestamp_,
+serverId: serverId
 }
   type response = {
-@as("replicationJobId") replicationJobId: replicationJobId
+replicationJobId: option<replicationJobId>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "CreateReplicationJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module NotifyAppValidationOutput = {
   type t;
   type request = {
-@as("notificationContext") notificationContext: notificationContext,
-@as("appId") appId: option<appIdWithValidation>
+notificationContext: option<notificationContext>,
+appId: appIdWithValidation
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "NotifyAppValidationOutputCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GenerateTemplate = {
   type t;
   type request = {
-@as("templateFormat") templateFormat: outputFormat,
-@as("appId") appId: appId
+templateFormat: option<outputFormat>,
+appId: option<appId>
 }
   type response = {
-@as("s3Location") s3Location: s3Location
+s3Location: option<s3Location>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "GenerateTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GenerateChangeSet = {
   type t;
   type request = {
-@as("changesetFormat") changesetFormat: outputFormat,
-@as("appId") appId: appId
+changesetFormat: option<outputFormat>,
+appId: option<appId>
 }
   type response = {
-@as("s3Location") s3Location: s3Location
+s3Location: option<s3Location>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "GenerateChangeSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListApps = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("appIds") appIds: appIds
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+appIds: option<appIds>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("apps") apps: apps
+nextToken: option<nextToken>,
+apps: option<apps>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "ListAppsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetConnectors = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("connectorList") connectorList: connectorList
+nextToken: option<nextToken>,
+connectorList: option<connectorList>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "GetConnectorsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetServers = {
   type t;
   type request = {
-@as("vmServerAddressList") vmServerAddressList: vmServerAddressList,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+vmServerAddressList: option<vmServerAddressList>,
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("serverList") serverList: serverList,
-@as("serverCatalogStatus") serverCatalogStatus: serverCatalogStatus,
-@as("lastModifiedOn") lastModifiedOn: amazonawsTimestamp
+nextToken: option<nextToken>,
+serverList: option<serverList>,
+serverCatalogStatus: option<serverCatalogStatus>,
+lastModifiedOn: option<timestamp_>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "GetServersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetReplicationRuns = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("replicationJobId") replicationJobId: option<replicationJobId>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+replicationJobId: replicationJobId
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("replicationRunList") replicationRunList: replicationRunList,
-@as("replicationJob") replicationJob: replicationJob
+nextToken: option<nextToken>,
+replicationRunList: option<replicationRunList>,
+replicationJob: option<replicationJob>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "GetReplicationRunsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetReplicationJobs = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("replicationJobId") replicationJobId: replicationJobId
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+replicationJobId: option<replicationJobId>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("replicationJobList") replicationJobList: replicationJobList
+nextToken: option<nextToken>,
+replicationJobList: option<replicationJobList>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "GetReplicationJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateApp = {
   type t;
   type request = {
-@as("tags") tags: tags,
-@as("serverGroups") serverGroups: serverGroups,
-@as("roleName") roleName: roleName,
-@as("description") description: appDescription,
-@as("name") name: appName,
-@as("appId") appId: appId
+tags: option<tags>,
+serverGroups: option<serverGroups>,
+roleName: option<roleName>,
+description: option<appDescription>,
+name: option<appName>,
+appId: option<appId>
 }
   type response = {
-@as("tags") tags: tags,
-@as("serverGroups") serverGroups: serverGroups,
-@as("appSummary") appSummary: appSummary
+tags: option<tags>,
+serverGroups: option<serverGroups>,
+appSummary: option<appSummary>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "UpdateAppCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAppValidationOutput = {
   type t;
   type request = {
-@as("appId") appId: option<appIdWithValidation>
+appId: appIdWithValidation
 }
   type response = {
-@as("validationOutputList") validationOutputList: validationOutputList
+validationOutputList: option<validationOutputList>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "GetAppValidationOutputCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetApp = {
   type t;
   type request = {
-@as("appId") appId: appId
+appId: option<appId>
 }
   type response = {
-@as("tags") tags: tags,
-@as("serverGroups") serverGroups: serverGroups,
-@as("appSummary") appSummary: appSummary
+tags: option<tags>,
+serverGroups: option<serverGroups>,
+appSummary: option<appSummary>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "GetAppCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApp = {
   type t;
   type request = {
-@as("tags") tags: tags,
-@as("serverGroups") serverGroups: serverGroups,
-@as("clientToken") clientToken: clientToken,
-@as("roleName") roleName: roleName,
-@as("description") description: appDescription,
-@as("name") name: appName
+tags: option<tags>,
+serverGroups: option<serverGroups>,
+clientToken: option<clientToken>,
+roleName: option<roleName>,
+description: option<appDescription>,
+name: option<appName>
 }
   type response = {
-@as("tags") tags: tags,
-@as("serverGroups") serverGroups: serverGroups,
-@as("appSummary") appSummary: appSummary
+tags: option<tags>,
+serverGroups: option<serverGroups>,
+appSummary: option<appSummary>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "CreateAppCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutAppValidationConfiguration = {
   type t;
   type request = {
-@as("serverGroupValidationConfigurations") serverGroupValidationConfigurations: serverGroupValidationConfigurations,
-@as("appValidationConfigurations") appValidationConfigurations: appValidationConfigurations,
-@as("appId") appId: option<appIdWithValidation>
+serverGroupValidationConfigurations: option<serverGroupValidationConfigurations>,
+appValidationConfigurations: option<appValidationConfigurations>,
+appId: appIdWithValidation
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "PutAppValidationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutAppReplicationConfiguration = {
   type t;
   type request = {
-@as("serverGroupReplicationConfigurations") serverGroupReplicationConfigurations: serverGroupReplicationConfigurations,
-@as("appId") appId: appId
+serverGroupReplicationConfigurations: option<serverGroupReplicationConfigurations>,
+appId: option<appId>
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "PutAppReplicationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutAppLaunchConfiguration = {
   type t;
   type request = {
-@as("serverGroupLaunchConfigurations") serverGroupLaunchConfigurations: serverGroupLaunchConfigurations,
-@as("autoLaunch") autoLaunch: autoLaunch,
-@as("roleName") roleName: roleName,
-@as("appId") appId: appId
+serverGroupLaunchConfigurations: option<serverGroupLaunchConfigurations>,
+autoLaunch: option<autoLaunch>,
+roleName: option<roleName>,
+appId: option<appId>
 }
   type response = unit
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "PutAppLaunchConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAppValidationConfiguration = {
   type t;
   type request = {
-@as("appId") appId: option<appIdWithValidation>
+appId: appIdWithValidation
 }
   type response = {
-@as("serverGroupValidationConfigurations") serverGroupValidationConfigurations: serverGroupValidationConfigurations,
-@as("appValidationConfigurations") appValidationConfigurations: appValidationConfigurations
+serverGroupValidationConfigurations: option<serverGroupValidationConfigurations>,
+appValidationConfigurations: option<appValidationConfigurations>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "GetAppValidationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAppReplicationConfiguration = {
   type t;
   type request = {
-@as("appId") appId: appId
+appId: option<appId>
 }
   type response = {
-@as("serverGroupReplicationConfigurations") serverGroupReplicationConfigurations: serverGroupReplicationConfigurations
+serverGroupReplicationConfigurations: option<serverGroupReplicationConfigurations>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "GetAppReplicationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAppLaunchConfiguration = {
   type t;
   type request = {
-@as("appId") appId: appId
+appId: option<appId>
 }
   type response = {
-@as("serverGroupLaunchConfigurations") serverGroupLaunchConfigurations: serverGroupLaunchConfigurations,
-@as("autoLaunch") autoLaunch: autoLaunch,
-@as("roleName") roleName: roleName,
-@as("appId") appId: appId
+serverGroupLaunchConfigurations: option<serverGroupLaunchConfigurations>,
+autoLaunch: option<autoLaunch>,
+roleName: option<roleName>,
+appId: option<appId>
 }
   @module("@aws-sdk/client-sms") @new external new_: (request) => t = "GetAppLaunchConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

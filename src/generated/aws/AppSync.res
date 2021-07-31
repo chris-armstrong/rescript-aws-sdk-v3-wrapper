@@ -1,796 +1,801 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type integer_ = int
+type timestamp_ = Js.Date.t;
 type typeDefinitionFormat = [@as("JSON") #JSON | @as("SDL") #SDL]
 type tagValue = string
 type tagKey = string
-type amazonawsString = string
-type schemaStatus = [@as("NOT_APPLICABLE") #NOT_APPLICABLE | @as("SUCCESS") #SUCCESS | @as("FAILED") #FAILED | @as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE | @as("PROCESSING") #PROCESSING]
+type string_ = string
+type schemaStatus = [@as("NOT_APPLICABLE") #NOTAPPLICABLE | @as("SUCCESS") #SUCCESS | @as("FAILED") #FAILED | @as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE | @as("PROCESSING") #PROCESSING]
 type resourceName = string
 type resourceArn = string
 type resolverKind = [@as("PIPELINE") #PIPELINE | @as("UNIT") #UNIT]
-type relationalDatabaseSourceType = [@as("RDS_HTTP_ENDPOINT") #RDS_HTTP_ENDPOINT]
+type relationalDatabaseSourceType = [@as("RDS_HTTP_ENDPOINT") #RDSHTTPENDPOINT]
 type paginationToken = string
 type outputType = [@as("JSON") #JSON | @as("SDL") #SDL]
-type maxResults = int;
+type maxResults = int
 type mappingTemplate = string
-type amazonawsLong = float;
+type long = float
 type fieldLogLevel = [@as("ALL") #ALL | @as("ERROR") #ERROR | @as("NONE") #NONE]
 type errorMessage = string
 type defaultAction = [@as("DENY") #DENY | @as("ALLOW") #ALLOW]
-type dataSourceType = [@as("RELATIONAL_DATABASE") #RELATIONAL_DATABASE | @as("HTTP") #HTTP | @as("NONE") #NONE | @as("AMAZON_ELASTICSEARCH") #AMAZON_ELASTICSEARCH | @as("AMAZON_DYNAMODB") #AMAZON_DYNAMODB | @as("AWS_LAMBDA") #AWS_LAMBDA]
-type conflictHandlerType = [@as("NONE") #NONE | @as("AUTOMERGE") #AUTOMERGE | @as("LAMBDA") #LAMBDA | @as("OPTIMISTIC_CONCURRENCY") #OPTIMISTIC_CONCURRENCY]
+type dataSourceType = [@as("RELATIONAL_DATABASE") #RELATIONALDATABASE | @as("HTTP") #HTTP | @as("NONE") #NONE | @as("AMAZON_ELASTICSEARCH") #AMAZONELASTICSEARCH | @as("AMAZON_DYNAMODB") #AMAZONDYNAMODB | @as("AWS_LAMBDA") #AWSLAMBDA]
+type conflictHandlerType = [@as("NONE") #NONE | @as("AUTOMERGE") #AUTOMERGE | @as("LAMBDA") #LAMBDA | @as("OPTIMISTIC_CONCURRENCY") #OPTIMISTICCONCURRENCY]
 type conflictDetectionType = [@as("NONE") #NONE | @as("VERSION") #VERSION]
-type booleanValue = bool;
-type amazonawsBoolean = bool;
-type blob = NodeJs.Buffer.t;
-type authorizationType = [@as("AWS_IAM") #AWS_IAM]
-type authenticationType = [@as("OPENID_CONNECT") #OPENID_CONNECT | @as("AMAZON_COGNITO_USER_POOLS") #AMAZON_COGNITO_USER_POOLS | @as("AWS_IAM") #AWS_IAM | @as("API_KEY") #API_KEY]
-type apiCachingBehavior = [@as("PER_RESOLVER_CACHING") #PER_RESOLVER_CACHING | @as("FULL_REQUEST_CACHING") #FULL_REQUEST_CACHING]
-type apiCacheType = [@as("LARGE_12X") #LARGE_12X | @as("LARGE_8X") #LARGE_8X | @as("LARGE_4X") #LARGE_4X | @as("LARGE_2X") #LARGE_2X | @as("XLARGE") #XLARGE | @as("LARGE") #LARGE | @as("MEDIUM") #MEDIUM | @as("SMALL") #SMALL | @as("R4_8XLARGE") #R4_8XLARGE | @as("R4_4XLARGE") #R4_4XLARGE | @as("R4_2XLARGE") #R4_2XLARGE | @as("R4_XLARGE") #R4_XLARGE | @as("R4_LARGE") #R4_LARGE | @as("T2_MEDIUM") #T2_MEDIUM | @as("T2_SMALL") #T2_SMALL]
+type booleanValue = bool
+type boolean_ = bool
+type blob = NodeJs.Buffer.t
+type authorizationType = [@as("AWS_IAM") #AWSIAM]
+type authenticationType = [@as("OPENID_CONNECT") #OPENIDCONNECT | @as("AMAZON_COGNITO_USER_POOLS") #AMAZONCOGNITOUSERPOOLS | @as("AWS_IAM") #AWSIAM | @as("API_KEY") #APIKEY]
+type apiCachingBehavior = [@as("PER_RESOLVER_CACHING") #PERRESOLVERCACHING | @as("FULL_REQUEST_CACHING") #FULLREQUESTCACHING]
+type apiCacheType = [@as("LARGE_12X") #LARGE12X | @as("LARGE_8X") #LARGE8X | @as("LARGE_4X") #LARGE4X | @as("LARGE_2X") #LARGE2X | @as("XLARGE") #XLARGE | @as("LARGE") #LARGE | @as("MEDIUM") #MEDIUM | @as("SMALL") #SMALL | @as("R4_8XLARGE") #R48XLARGE | @as("R4_4XLARGE") #R44XLARGE | @as("R4_2XLARGE") #R42XLARGE | @as("R4_XLARGE") #R4XLARGE | @as("R4_LARGE") #R4LARGE | @as("T2_MEDIUM") #T2MEDIUM | @as("T2_SMALL") #T2SMALL]
 type apiCacheStatus = [@as("FAILED") #FAILED | @as("MODIFYING") #MODIFYING | @as("DELETING") #DELETING | @as("CREATING") #CREATING | @as("AVAILABLE") #AVAILABLE]
 type userPoolConfig = {
-@as("appIdClientRegex") appIdClientRegex: amazonawsString,
-@as("defaultAction") defaultAction: option<defaultAction>,
-@as("awsRegion") awsRegion: option<amazonawsString>,
-@as("userPoolId") userPoolId: option<amazonawsString>
+appIdClientRegex: option<string_>,
+defaultAction: defaultAction,
+awsRegion: string_,
+userPoolId: string_
 }
 type type_ = {
-@as("format") format: typeDefinitionFormat,
-@as("definition") definition: amazonawsString,
-@as("arn") arn: amazonawsString,
-@as("description") description: amazonawsString,
-@as("name") name: resourceName
+format: option<typeDefinitionFormat>,
+definition: option<string_>,
+arn: option<string_>,
+description: option<string_>,
+name: option<resourceName>
 }
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type rdsHttpEndpointConfig = {
-@as("awsSecretStoreArn") awsSecretStoreArn: amazonawsString,
-@as("schema") schema: amazonawsString,
-@as("databaseName") databaseName: amazonawsString,
-@as("dbClusterIdentifier") dbClusterIdentifier: amazonawsString,
-@as("awsRegion") awsRegion: amazonawsString
+awsSecretStoreArn: option<string_>,
+schema: option<string_>,
+databaseName: option<string_>,
+dbClusterIdentifier: option<string_>,
+awsRegion: option<string_>
 }
 type openIDConnectConfig = {
-@as("authTTL") authTTL: amazonawsLong,
-@as("iatTTL") iatTTL: amazonawsLong,
-@as("clientId") clientId: amazonawsString,
-@as("issuer") issuer: option<amazonawsString>
+authTTL: option<long>,
+iatTTL: option<long>,
+clientId: option<string_>,
+issuer: string_
 }
-type mapOfStringToString = Js.Dict.t< amazonawsString>
+type mapOfStringToString = Js.Dict.t< string_>
 type logConfig = {
-@as("excludeVerboseContent") excludeVerboseContent: amazonawsBoolean,
-@as("cloudWatchLogsRoleArn") cloudWatchLogsRoleArn: option<amazonawsString>,
-@as("fieldLogLevel") fieldLogLevel: option<fieldLogLevel>
+excludeVerboseContent: option<boolean_>,
+cloudWatchLogsRoleArn: string_,
+fieldLogLevel: fieldLogLevel
 }
 type lambdaDataSourceConfig = {
-@as("lambdaFunctionArn") lambdaFunctionArn: option<amazonawsString>
+lambdaFunctionArn: string_
 }
 type lambdaConflictHandlerConfig = {
-@as("lambdaConflictHandlerArn") lambdaConflictHandlerArn: amazonawsString
+lambdaConflictHandlerArn: option<string_>
 }
-type functionsIds = array<amazonawsString>
+type functionsIds = array<string_>
 type elasticsearchDataSourceConfig = {
-@as("awsRegion") awsRegion: option<amazonawsString>,
-@as("endpoint") endpoint: option<amazonawsString>
+awsRegion: string_,
+endpoint: string_
 }
 type deltaSyncConfig = {
-@as("deltaSyncTableTTL") deltaSyncTableTTL: amazonawsLong,
-@as("deltaSyncTableName") deltaSyncTableName: amazonawsString,
-@as("baseTableTTL") baseTableTTL: amazonawsLong
+deltaSyncTableTTL: option<long>,
+deltaSyncTableName: option<string_>,
+baseTableTTL: option<long>
 }
 type cognitoUserPoolConfig = {
-@as("appIdClientRegex") appIdClientRegex: amazonawsString,
-@as("awsRegion") awsRegion: option<amazonawsString>,
-@as("userPoolId") userPoolId: option<amazonawsString>
+appIdClientRegex: option<string_>,
+awsRegion: string_,
+userPoolId: string_
 }
-type cachingKeys = array<amazonawsString>
+type cachingKeys = array<string_>
 type awsIamConfig = {
-@as("signingServiceName") signingServiceName: amazonawsString,
-@as("signingRegion") signingRegion: amazonawsString
+signingServiceName: option<string_>,
+signingRegion: option<string_>
 }
 type apiKey = {
-@as("deletes") deletes: amazonawsLong,
-@as("expires") expires: amazonawsLong,
-@as("description") description: amazonawsString,
-@as("id") id: amazonawsString
+deletes: option<long>,
+expires: option<long>,
+description: option<string_>,
+id: option<string_>
 }
 type apiCache = {
-@as("status") status: apiCacheStatus,
-@as("type") type_: apiCacheType,
-@as("atRestEncryptionEnabled") atRestEncryptionEnabled: amazonawsBoolean,
-@as("transitEncryptionEnabled") transitEncryptionEnabled: amazonawsBoolean,
-@as("apiCachingBehavior") apiCachingBehavior: apiCachingBehavior,
-@as("ttl") ttl: amazonawsLong
+status: option<apiCacheStatus>,
+@as("type") type_: option<apiCacheType>,
+atRestEncryptionEnabled: option<boolean_>,
+transitEncryptionEnabled: option<boolean_>,
+apiCachingBehavior: option<apiCachingBehavior>,
+ttl: option<long>
 }
 type typeList = array<type_>
 type syncConfig = {
-@as("lambdaConflictHandlerConfig") lambdaConflictHandlerConfig: lambdaConflictHandlerConfig,
-@as("conflictDetection") conflictDetection: conflictDetectionType,
-@as("conflictHandler") conflictHandler: conflictHandlerType
+lambdaConflictHandlerConfig: option<lambdaConflictHandlerConfig>,
+conflictDetection: option<conflictDetectionType>,
+conflictHandler: option<conflictHandlerType>
 }
 type relationalDatabaseDataSourceConfig = {
-@as("rdsHttpEndpointConfig") rdsHttpEndpointConfig: rdsHttpEndpointConfig,
-@as("relationalDatabaseSourceType") relationalDatabaseSourceType: relationalDatabaseSourceType
+rdsHttpEndpointConfig: option<rdsHttpEndpointConfig>,
+relationalDatabaseSourceType: option<relationalDatabaseSourceType>
 }
 type pipelineConfig = {
-@as("functions") functions: functionsIds
+functions: option<functionsIds>
 }
 type dynamodbDataSourceConfig = {
-@as("versioned") versioned: amazonawsBoolean,
-@as("deltaSyncConfig") deltaSyncConfig: deltaSyncConfig,
-@as("useCallerCredentials") useCallerCredentials: amazonawsBoolean,
-@as("awsRegion") awsRegion: option<amazonawsString>,
-@as("tableName") tableName: option<amazonawsString>
+versioned: option<boolean_>,
+deltaSyncConfig: option<deltaSyncConfig>,
+useCallerCredentials: option<boolean_>,
+awsRegion: string_,
+tableName: string_
 }
 type cachingConfig = {
-@as("cachingKeys") cachingKeys: cachingKeys,
-@as("ttl") ttl: amazonawsLong
+cachingKeys: option<cachingKeys>,
+ttl: option<long>
 }
 type authorizationConfig = {
-@as("awsIamConfig") awsIamConfig: awsIamConfig,
-@as("authorizationType") authorizationType: option<authorizationType>
+awsIamConfig: option<awsIamConfig>,
+authorizationType: authorizationType
 }
 type apiKeys = array<apiKey>
 type additionalAuthenticationProvider = {
-@as("userPoolConfig") userPoolConfig: cognitoUserPoolConfig,
-@as("openIDConnectConfig") openIDConnectConfig: openIDConnectConfig,
-@as("authenticationType") authenticationType: authenticationType
+userPoolConfig: option<cognitoUserPoolConfig>,
+openIDConnectConfig: option<openIDConnectConfig>,
+authenticationType: option<authenticationType>
 }
 type resolver = {
-@as("cachingConfig") cachingConfig: cachingConfig,
-@as("syncConfig") syncConfig: syncConfig,
-@as("pipelineConfig") pipelineConfig: pipelineConfig,
-@as("kind") kind: resolverKind,
-@as("responseMappingTemplate") responseMappingTemplate: mappingTemplate,
-@as("requestMappingTemplate") requestMappingTemplate: mappingTemplate,
-@as("resolverArn") resolverArn: amazonawsString,
-@as("dataSourceName") dataSourceName: resourceName,
-@as("fieldName") fieldName: resourceName,
-@as("typeName") typeName: resourceName
+cachingConfig: option<cachingConfig>,
+syncConfig: option<syncConfig>,
+pipelineConfig: option<pipelineConfig>,
+kind: option<resolverKind>,
+responseMappingTemplate: option<mappingTemplate>,
+requestMappingTemplate: option<mappingTemplate>,
+resolverArn: option<string_>,
+dataSourceName: option<resourceName>,
+fieldName: option<resourceName>,
+typeName: option<resourceName>
 }
 type httpDataSourceConfig = {
-@as("authorizationConfig") authorizationConfig: authorizationConfig,
-@as("endpoint") endpoint: amazonawsString
+authorizationConfig: option<authorizationConfig>,
+endpoint: option<string_>
 }
 type functionConfiguration = {
-@as("syncConfig") syncConfig: syncConfig,
-@as("functionVersion") functionVersion: amazonawsString,
-@as("responseMappingTemplate") responseMappingTemplate: mappingTemplate,
-@as("requestMappingTemplate") requestMappingTemplate: mappingTemplate,
-@as("dataSourceName") dataSourceName: resourceName,
-@as("description") description: amazonawsString,
-@as("name") name: resourceName,
-@as("functionArn") functionArn: amazonawsString,
-@as("functionId") functionId: amazonawsString
+syncConfig: option<syncConfig>,
+functionVersion: option<string_>,
+responseMappingTemplate: option<mappingTemplate>,
+requestMappingTemplate: option<mappingTemplate>,
+dataSourceName: option<resourceName>,
+description: option<string_>,
+name: option<resourceName>,
+functionArn: option<string_>,
+functionId: option<string_>
 }
 type additionalAuthenticationProviders = array<additionalAuthenticationProvider>
 type resolvers = array<resolver>
 type graphqlApi = {
-@as("wafWebAclArn") wafWebAclArn: amazonawsString,
-@as("xrayEnabled") xrayEnabled: amazonawsBoolean,
-@as("additionalAuthenticationProviders") additionalAuthenticationProviders: additionalAuthenticationProviders,
-@as("tags") tags: tagMap,
-@as("uris") uris: mapOfStringToString,
-@as("arn") arn: amazonawsString,
-@as("openIDConnectConfig") openIDConnectConfig: openIDConnectConfig,
-@as("userPoolConfig") userPoolConfig: userPoolConfig,
-@as("logConfig") logConfig: logConfig,
-@as("authenticationType") authenticationType: authenticationType,
-@as("apiId") apiId: amazonawsString,
-@as("name") name: resourceName
+wafWebAclArn: option<string_>,
+xrayEnabled: option<boolean_>,
+additionalAuthenticationProviders: option<additionalAuthenticationProviders>,
+tags: option<tagMap>,
+uris: option<mapOfStringToString>,
+arn: option<string_>,
+openIDConnectConfig: option<openIDConnectConfig>,
+userPoolConfig: option<userPoolConfig>,
+logConfig: option<logConfig>,
+authenticationType: option<authenticationType>,
+apiId: option<string_>,
+name: option<resourceName>
 }
 type functions = array<functionConfiguration>
 type dataSource = {
-@as("relationalDatabaseConfig") relationalDatabaseConfig: relationalDatabaseDataSourceConfig,
-@as("httpConfig") httpConfig: httpDataSourceConfig,
-@as("elasticsearchConfig") elasticsearchConfig: elasticsearchDataSourceConfig,
-@as("lambdaConfig") lambdaConfig: lambdaDataSourceConfig,
-@as("dynamodbConfig") dynamodbConfig: dynamodbDataSourceConfig,
-@as("serviceRoleArn") serviceRoleArn: amazonawsString,
-@as("type") type_: dataSourceType,
-@as("description") description: amazonawsString,
-@as("name") name: resourceName,
-@as("dataSourceArn") dataSourceArn: amazonawsString
+relationalDatabaseConfig: option<relationalDatabaseDataSourceConfig>,
+httpConfig: option<httpDataSourceConfig>,
+elasticsearchConfig: option<elasticsearchDataSourceConfig>,
+lambdaConfig: option<lambdaDataSourceConfig>,
+dynamodbConfig: option<dynamodbDataSourceConfig>,
+serviceRoleArn: option<string_>,
+@as("type") type_: option<dataSourceType>,
+description: option<string_>,
+name: option<resourceName>,
+dataSourceArn: option<string_>
 }
 type graphqlApis = array<graphqlApi>
 type dataSources = array<dataSource>
-type clientType;
-@module("@aws-sdk/client-appsync") @new external createClient: unit => clientType = "AppSyncClient";
+type awsServiceClient;
+@module("@aws-sdk/client-appsync") @new external createClient: unit => awsServiceClient = "AppSyncClient";
 module StartSchemaCreation = {
   type t;
   type request = {
-@as("definition") definition: option<blob>,
-@as("apiId") apiId: option<amazonawsString>
+definition: blob,
+apiId: string_
 }
   type response = {
-@as("status") status: schemaStatus
+status: option<schemaStatus>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "StartSchemaCreationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSchemaCreationStatus = {
   type t;
   type request = {
-@as("apiId") apiId: option<amazonawsString>
+apiId: string_
 }
   type response = {
-@as("details") details: amazonawsString,
-@as("status") status: schemaStatus
+details: option<string_>,
+status: option<schemaStatus>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "GetSchemaCreationStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetIntrospectionSchema = {
   type t;
   type request = {
-@as("includeDirectives") includeDirectives: booleanValue,
-@as("format") format: option<outputType>,
-@as("apiId") apiId: option<amazonawsString>
+includeDirectives: option<booleanValue>,
+format: outputType,
+apiId: string_
 }
   type response = {
-@as("schema") schema: blob
+schema: option<blob>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "GetIntrospectionSchemaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module FlushApiCache = {
   type t;
   type request = {
-@as("apiId") apiId: option<amazonawsString>
+apiId: string_
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "FlushApiCacheCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteType = {
   type t;
   type request = {
-@as("typeName") typeName: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+typeName: resourceName,
+apiId: string_
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "DeleteTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteResolver = {
   type t;
   type request = {
-@as("fieldName") fieldName: option<resourceName>,
-@as("typeName") typeName: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+fieldName: resourceName,
+typeName: resourceName,
+apiId: string_
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "DeleteResolverCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteGraphqlApi = {
   type t;
   type request = {
-@as("apiId") apiId: option<amazonawsString>
+apiId: string_
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "DeleteGraphqlApiCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFunction = {
   type t;
   type request = {
-@as("functionId") functionId: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+functionId: resourceName,
+apiId: string_
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "DeleteFunctionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDataSource = {
   type t;
   type request = {
-@as("name") name: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+name: resourceName,
+apiId: string_
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "DeleteDataSourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApiKey = {
   type t;
   type request = {
-@as("id") id: option<amazonawsString>,
-@as("apiId") apiId: option<amazonawsString>
+id: string_,
+apiId: string_
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "DeleteApiKeyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteApiCache = {
   type t;
   type request = {
-@as("apiId") apiId: option<amazonawsString>
+apiId: string_
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "DeleteApiCacheCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateType = {
   type t;
   type request = {
-@as("format") format: option<typeDefinitionFormat>,
-@as("definition") definition: amazonawsString,
-@as("typeName") typeName: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+format: typeDefinitionFormat,
+definition: option<string_>,
+typeName: resourceName,
+apiId: string_
 }
   type response = {
-@as("type") type_: type_
+@as("type") type_: option<type_>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "UpdateTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateApiKey = {
   type t;
   type request = {
-@as("expires") expires: amazonawsLong,
-@as("description") description: amazonawsString,
-@as("id") id: option<amazonawsString>,
-@as("apiId") apiId: option<amazonawsString>
+expires: option<long>,
+description: option<string_>,
+id: string_,
+apiId: string_
 }
   type response = {
-@as("apiKey") apiKey: apiKey
+apiKey: option<apiKey>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "UpdateApiKeyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateApiCache = {
   type t;
   type request = {
-@as("type") type_: option<apiCacheType>,
-@as("apiCachingBehavior") apiCachingBehavior: option<apiCachingBehavior>,
-@as("ttl") ttl: option<amazonawsLong>,
-@as("apiId") apiId: option<amazonawsString>
+@as("type") type_: apiCacheType,
+apiCachingBehavior: apiCachingBehavior,
+ttl: long,
+apiId: string_
 }
   type response = {
-@as("apiCache") apiCache: apiCache
+apiCache: option<apiCache>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "UpdateApiCacheCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<resourceArn>
+tagKeys: tagKeyList,
+resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<resourceArn>
+tags: tagMap,
+resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<resourceArn>
+resourceArn: resourceArn
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetType = {
   type t;
   type request = {
-@as("format") format: option<typeDefinitionFormat>,
-@as("typeName") typeName: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+format: typeDefinitionFormat,
+typeName: resourceName,
+apiId: string_
 }
   type response = {
-@as("type") type_: type_
+@as("type") type_: option<type_>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "GetTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetApiCache = {
   type t;
   type request = {
-@as("apiId") apiId: option<amazonawsString>
+apiId: string_
 }
   type response = {
-@as("apiCache") apiCache: apiCache
+apiCache: option<apiCache>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "GetApiCacheCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateType = {
   type t;
   type request = {
-@as("format") format: option<typeDefinitionFormat>,
-@as("definition") definition: option<amazonawsString>,
-@as("apiId") apiId: option<amazonawsString>
+format: typeDefinitionFormat,
+definition: string_,
+apiId: string_
 }
   type response = {
-@as("type") type_: type_
+@as("type") type_: option<type_>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "CreateTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApiKey = {
   type t;
   type request = {
-@as("expires") expires: amazonawsLong,
-@as("description") description: amazonawsString,
-@as("apiId") apiId: option<amazonawsString>
+expires: option<long>,
+description: option<string_>,
+apiId: string_
 }
   type response = {
-@as("apiKey") apiKey: apiKey
+apiKey: option<apiKey>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "CreateApiKeyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApiCache = {
   type t;
   type request = {
-@as("type") type_: option<apiCacheType>,
-@as("apiCachingBehavior") apiCachingBehavior: option<apiCachingBehavior>,
-@as("atRestEncryptionEnabled") atRestEncryptionEnabled: amazonawsBoolean,
-@as("transitEncryptionEnabled") transitEncryptionEnabled: amazonawsBoolean,
-@as("ttl") ttl: option<amazonawsLong>,
-@as("apiId") apiId: option<amazonawsString>
+@as("type") type_: apiCacheType,
+apiCachingBehavior: apiCachingBehavior,
+atRestEncryptionEnabled: option<boolean_>,
+transitEncryptionEnabled: option<boolean_>,
+ttl: long,
+apiId: string_
 }
   type response = {
-@as("apiCache") apiCache: apiCache
+apiCache: option<apiCache>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "CreateApiCacheCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTypes = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("format") format: option<typeDefinitionFormat>,
-@as("apiId") apiId: option<amazonawsString>
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>,
+format: typeDefinitionFormat,
+apiId: string_
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("types") types: typeList
+nextToken: option<paginationToken>,
+types: option<typeList>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "ListTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListApiKeys = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("apiId") apiId: option<amazonawsString>
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>,
+apiId: string_
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("apiKeys") apiKeys: apiKeys
+nextToken: option<paginationToken>,
+apiKeys: option<apiKeys>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "ListApiKeysCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateResolver = {
   type t;
   type request = {
-@as("cachingConfig") cachingConfig: cachingConfig,
-@as("syncConfig") syncConfig: syncConfig,
-@as("pipelineConfig") pipelineConfig: pipelineConfig,
-@as("kind") kind: resolverKind,
-@as("responseMappingTemplate") responseMappingTemplate: mappingTemplate,
-@as("requestMappingTemplate") requestMappingTemplate: mappingTemplate,
-@as("dataSourceName") dataSourceName: resourceName,
-@as("fieldName") fieldName: option<resourceName>,
-@as("typeName") typeName: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+cachingConfig: option<cachingConfig>,
+syncConfig: option<syncConfig>,
+pipelineConfig: option<pipelineConfig>,
+kind: option<resolverKind>,
+responseMappingTemplate: option<mappingTemplate>,
+requestMappingTemplate: option<mappingTemplate>,
+dataSourceName: option<resourceName>,
+fieldName: resourceName,
+typeName: resourceName,
+apiId: string_
 }
   type response = {
-@as("resolver") resolver: resolver
+resolver: option<resolver>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "UpdateResolverCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFunction = {
   type t;
   type request = {
-@as("syncConfig") syncConfig: syncConfig,
-@as("functionVersion") functionVersion: option<amazonawsString>,
-@as("responseMappingTemplate") responseMappingTemplate: mappingTemplate,
-@as("requestMappingTemplate") requestMappingTemplate: mappingTemplate,
-@as("dataSourceName") dataSourceName: option<resourceName>,
-@as("functionId") functionId: option<resourceName>,
-@as("description") description: amazonawsString,
-@as("name") name: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+syncConfig: option<syncConfig>,
+functionVersion: string_,
+responseMappingTemplate: option<mappingTemplate>,
+requestMappingTemplate: option<mappingTemplate>,
+dataSourceName: resourceName,
+functionId: resourceName,
+description: option<string_>,
+name: resourceName,
+apiId: string_
 }
   type response = {
-@as("functionConfiguration") functionConfiguration: functionConfiguration
+functionConfiguration: option<functionConfiguration>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "UpdateFunctionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResolver = {
   type t;
   type request = {
-@as("fieldName") fieldName: option<resourceName>,
-@as("typeName") typeName: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+fieldName: resourceName,
+typeName: resourceName,
+apiId: string_
 }
   type response = {
-@as("resolver") resolver: resolver
+resolver: option<resolver>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "GetResolverCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFunction = {
   type t;
   type request = {
-@as("functionId") functionId: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+functionId: resourceName,
+apiId: string_
 }
   type response = {
-@as("functionConfiguration") functionConfiguration: functionConfiguration
+functionConfiguration: option<functionConfiguration>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "GetFunctionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateResolver = {
   type t;
   type request = {
-@as("cachingConfig") cachingConfig: cachingConfig,
-@as("syncConfig") syncConfig: syncConfig,
-@as("pipelineConfig") pipelineConfig: pipelineConfig,
-@as("kind") kind: resolverKind,
-@as("responseMappingTemplate") responseMappingTemplate: mappingTemplate,
-@as("requestMappingTemplate") requestMappingTemplate: mappingTemplate,
-@as("dataSourceName") dataSourceName: resourceName,
-@as("fieldName") fieldName: option<resourceName>,
-@as("typeName") typeName: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+cachingConfig: option<cachingConfig>,
+syncConfig: option<syncConfig>,
+pipelineConfig: option<pipelineConfig>,
+kind: option<resolverKind>,
+responseMappingTemplate: option<mappingTemplate>,
+requestMappingTemplate: option<mappingTemplate>,
+dataSourceName: option<resourceName>,
+fieldName: resourceName,
+typeName: resourceName,
+apiId: string_
 }
   type response = {
-@as("resolver") resolver: resolver
+resolver: option<resolver>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "CreateResolverCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFunction = {
   type t;
   type request = {
-@as("syncConfig") syncConfig: syncConfig,
-@as("functionVersion") functionVersion: option<amazonawsString>,
-@as("responseMappingTemplate") responseMappingTemplate: mappingTemplate,
-@as("requestMappingTemplate") requestMappingTemplate: mappingTemplate,
-@as("dataSourceName") dataSourceName: option<resourceName>,
-@as("description") description: amazonawsString,
-@as("name") name: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+syncConfig: option<syncConfig>,
+functionVersion: string_,
+responseMappingTemplate: option<mappingTemplate>,
+requestMappingTemplate: option<mappingTemplate>,
+dataSourceName: resourceName,
+description: option<string_>,
+name: resourceName,
+apiId: string_
 }
   type response = {
-@as("functionConfiguration") functionConfiguration: functionConfiguration
+functionConfiguration: option<functionConfiguration>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "CreateFunctionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateGraphqlApi = {
   type t;
   type request = {
-@as("xrayEnabled") xrayEnabled: amazonawsBoolean,
-@as("additionalAuthenticationProviders") additionalAuthenticationProviders: additionalAuthenticationProviders,
-@as("openIDConnectConfig") openIDConnectConfig: openIDConnectConfig,
-@as("userPoolConfig") userPoolConfig: userPoolConfig,
-@as("authenticationType") authenticationType: authenticationType,
-@as("logConfig") logConfig: logConfig,
-@as("name") name: option<amazonawsString>,
-@as("apiId") apiId: option<amazonawsString>
+xrayEnabled: option<boolean_>,
+additionalAuthenticationProviders: option<additionalAuthenticationProviders>,
+openIDConnectConfig: option<openIDConnectConfig>,
+userPoolConfig: option<userPoolConfig>,
+authenticationType: option<authenticationType>,
+logConfig: option<logConfig>,
+name: string_,
+apiId: string_
 }
   type response = {
-@as("graphqlApi") graphqlApi: graphqlApi
+graphqlApi: option<graphqlApi>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "UpdateGraphqlApiCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDataSource = {
   type t;
   type request = {
-@as("relationalDatabaseConfig") relationalDatabaseConfig: relationalDatabaseDataSourceConfig,
-@as("httpConfig") httpConfig: httpDataSourceConfig,
-@as("elasticsearchConfig") elasticsearchConfig: elasticsearchDataSourceConfig,
-@as("lambdaConfig") lambdaConfig: lambdaDataSourceConfig,
-@as("dynamodbConfig") dynamodbConfig: dynamodbDataSourceConfig,
-@as("serviceRoleArn") serviceRoleArn: amazonawsString,
-@as("type") type_: option<dataSourceType>,
-@as("description") description: amazonawsString,
-@as("name") name: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+relationalDatabaseConfig: option<relationalDatabaseDataSourceConfig>,
+httpConfig: option<httpDataSourceConfig>,
+elasticsearchConfig: option<elasticsearchDataSourceConfig>,
+lambdaConfig: option<lambdaDataSourceConfig>,
+dynamodbConfig: option<dynamodbDataSourceConfig>,
+serviceRoleArn: option<string_>,
+@as("type") type_: dataSourceType,
+description: option<string_>,
+name: resourceName,
+apiId: string_
 }
   type response = {
-@as("dataSource") dataSource: dataSource
+dataSource: option<dataSource>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "UpdateDataSourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResolversByFunction = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("functionId") functionId: option<amazonawsString>,
-@as("apiId") apiId: option<amazonawsString>
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>,
+functionId: string_,
+apiId: string_
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("resolvers") resolvers: resolvers
+nextToken: option<paginationToken>,
+resolvers: option<resolvers>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "ListResolversByFunctionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResolvers = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("typeName") typeName: option<amazonawsString>,
-@as("apiId") apiId: option<amazonawsString>
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>,
+typeName: string_,
+apiId: string_
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("resolvers") resolvers: resolvers
+nextToken: option<paginationToken>,
+resolvers: option<resolvers>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "ListResolversCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFunctions = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("apiId") apiId: option<amazonawsString>
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>,
+apiId: string_
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("functions") functions: functions
+nextToken: option<paginationToken>,
+functions: option<functions>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "ListFunctionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetGraphqlApi = {
   type t;
   type request = {
-@as("apiId") apiId: option<amazonawsString>
+apiId: string_
 }
   type response = {
-@as("graphqlApi") graphqlApi: graphqlApi
+graphqlApi: option<graphqlApi>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "GetGraphqlApiCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDataSource = {
   type t;
   type request = {
-@as("name") name: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+name: resourceName,
+apiId: string_
 }
   type response = {
-@as("dataSource") dataSource: dataSource
+dataSource: option<dataSource>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "GetDataSourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateGraphqlApi = {
   type t;
   type request = {
-@as("xrayEnabled") xrayEnabled: amazonawsBoolean,
-@as("additionalAuthenticationProviders") additionalAuthenticationProviders: additionalAuthenticationProviders,
-@as("tags") tags: tagMap,
-@as("openIDConnectConfig") openIDConnectConfig: openIDConnectConfig,
-@as("userPoolConfig") userPoolConfig: userPoolConfig,
-@as("authenticationType") authenticationType: option<authenticationType>,
-@as("logConfig") logConfig: logConfig,
-@as("name") name: option<amazonawsString>
+xrayEnabled: option<boolean_>,
+additionalAuthenticationProviders: option<additionalAuthenticationProviders>,
+tags: option<tagMap>,
+openIDConnectConfig: option<openIDConnectConfig>,
+userPoolConfig: option<userPoolConfig>,
+authenticationType: authenticationType,
+logConfig: option<logConfig>,
+name: string_
 }
   type response = {
-@as("graphqlApi") graphqlApi: graphqlApi
+graphqlApi: option<graphqlApi>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "CreateGraphqlApiCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDataSource = {
   type t;
   type request = {
-@as("relationalDatabaseConfig") relationalDatabaseConfig: relationalDatabaseDataSourceConfig,
-@as("httpConfig") httpConfig: httpDataSourceConfig,
-@as("elasticsearchConfig") elasticsearchConfig: elasticsearchDataSourceConfig,
-@as("lambdaConfig") lambdaConfig: lambdaDataSourceConfig,
-@as("dynamodbConfig") dynamodbConfig: dynamodbDataSourceConfig,
-@as("serviceRoleArn") serviceRoleArn: amazonawsString,
-@as("type") type_: option<dataSourceType>,
-@as("description") description: amazonawsString,
-@as("name") name: option<resourceName>,
-@as("apiId") apiId: option<amazonawsString>
+relationalDatabaseConfig: option<relationalDatabaseDataSourceConfig>,
+httpConfig: option<httpDataSourceConfig>,
+elasticsearchConfig: option<elasticsearchDataSourceConfig>,
+lambdaConfig: option<lambdaDataSourceConfig>,
+dynamodbConfig: option<dynamodbDataSourceConfig>,
+serviceRoleArn: option<string_>,
+@as("type") type_: dataSourceType,
+description: option<string_>,
+name: resourceName,
+apiId: string_
 }
   type response = {
-@as("dataSource") dataSource: dataSource
+dataSource: option<dataSource>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "CreateDataSourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListGraphqlApis = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("graphqlApis") graphqlApis: graphqlApis
+nextToken: option<paginationToken>,
+graphqlApis: option<graphqlApis>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "ListGraphqlApisCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDataSources = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("apiId") apiId: option<amazonawsString>
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>,
+apiId: string_
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("dataSources") dataSources: dataSources
+nextToken: option<paginationToken>,
+dataSources: option<dataSources>
 }
   @module("@aws-sdk/client-appsync") @new external new_: (request) => t = "ListDataSourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

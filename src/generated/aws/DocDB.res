@@ -1,947 +1,952 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type tStamp = Js.Date.t;
-type amazonawsString = string
-type sourceType = [@as("db-cluster-snapshot") #db_cluster_snapshot | @as("db-cluster") #db_cluster | @as("db-snapshot") #db_snapshot | @as("db-security-group") #db_security_group | @as("db-parameter-group") #db_parameter_group | @as("db-instance") #db_instance]
-type integerOptional = int;
-type amazonawsInteger = int;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type timestamp_ = Js.Date.t;
+type long = float
+type tstamp = Js.Date.t;
+type string_ = string
+type sourceType = [@as("db-cluster-snapshot") #DbClusterSnapshot | @as("db-cluster") #DbCluster | @as("db-snapshot") #DbSnapshot | @as("db-security-group") #DbSecurityGroup | @as("db-parameter-group") #DbParameterGroup | @as("db-instance") #DbInstance]
+type integerOptional = int
+type integer_ = int
 type exceptionMessage = string
-type booleanOptional = bool;
-type amazonawsBoolean = bool;
-type applyMethod = [@as("pending-reboot") #pending_reboot | @as("immediate") #immediate]
+type booleanOptional = bool
+type boolean_ = bool
+type applyMethod = [@as("pending-reboot") #PendingReboot | @as("immediate") #Immediate]
 type vpcSecurityGroupMembership = {
-@as("Status") status: amazonawsString,
-@as("VpcSecurityGroupId") vpcSecurityGroupId: amazonawsString
+@as("Status") status: option<string_>,
+@as("VpcSecurityGroupId") vpcSecurityGroupId: option<string_>
 }
-type vpcSecurityGroupIdList = array<amazonawsString>
+type vpcSecurityGroupIdList = array<string_>
 type upgradeTarget = {
-@as("IsMajorVersionUpgrade") isMajorVersionUpgrade: amazonawsBoolean,
-@as("AutoUpgrade") autoUpgrade: amazonawsBoolean,
-@as("Description") description: amazonawsString,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("Engine") engine: amazonawsString
+@as("IsMajorVersionUpgrade") isMajorVersionUpgrade: option<boolean_>,
+@as("AutoUpgrade") autoUpgrade: option<boolean_>,
+@as("Description") description: option<string_>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("Engine") engine: option<string_>
 }
 type tag = {
-@as("Value") value: amazonawsString,
-@as("Key") key: amazonawsString
+@as("Value") value: option<string_>,
+@as("Key") key: option<string_>
 }
-type subnetIdentifierList = array<amazonawsString>
+type subnetIdentifierList = array<string_>
 type pendingMaintenanceAction = {
-@as("Description") description: amazonawsString,
-@as("CurrentApplyDate") currentApplyDate: tStamp,
-@as("OptInStatus") optInStatus: amazonawsString,
-@as("ForcedApplyDate") forcedApplyDate: tStamp,
-@as("AutoAppliedAfterDate") autoAppliedAfterDate: tStamp,
-@as("Action") action: amazonawsString
+@as("Description") description: option<string_>,
+@as("CurrentApplyDate") currentApplyDate: option<tstamp>,
+@as("OptInStatus") optInStatus: option<string_>,
+@as("ForcedApplyDate") forcedApplyDate: option<tstamp>,
+@as("AutoAppliedAfterDate") autoAppliedAfterDate: option<tstamp>,
+@as("Action") action: option<string_>
 }
 type parameter = {
-@as("ApplyMethod") applyMethod: applyMethod,
-@as("MinimumEngineVersion") minimumEngineVersion: amazonawsString,
-@as("IsModifiable") isModifiable: amazonawsBoolean,
-@as("AllowedValues") allowedValues: amazonawsString,
-@as("DataType") dataType: amazonawsString,
-@as("ApplyType") applyType: amazonawsString,
-@as("Source") source: amazonawsString,
-@as("Description") description: amazonawsString,
-@as("ParameterValue") parameterValue: amazonawsString,
-@as("ParameterName") parameterName: amazonawsString
+@as("ApplyMethod") applyMethod: option<applyMethod>,
+@as("MinimumEngineVersion") minimumEngineVersion: option<string_>,
+@as("IsModifiable") isModifiable: option<boolean_>,
+@as("AllowedValues") allowedValues: option<string_>,
+@as("DataType") dataType: option<string_>,
+@as("ApplyType") applyType: option<string_>,
+@as("Source") source: option<string_>,
+@as("Description") description: option<string_>,
+@as("ParameterValue") parameterValue: option<string_>,
+@as("ParameterName") parameterName: option<string_>
 }
-type logTypeList = array<amazonawsString>
-type keyList = array<amazonawsString>
-type filterValueList = array<amazonawsString>
-type eventCategoriesList = array<amazonawsString>
+type logTypeList = array<string_>
+type keyList = array<string_>
+type filterValueList = array<string_>
+type eventCategoriesList = array<string_>
 type endpoint = {
-@as("HostedZoneId") hostedZoneId: amazonawsString,
-@as("Port") port: amazonawsInteger,
-@as("Address") address: amazonawsString
+@as("HostedZoneId") hostedZoneId: option<string_>,
+@as("Port") port: option<integer_>,
+@as("Address") address: option<string_>
 }
-type dBInstanceStatusInfo = {
-@as("Message") message: amazonawsString,
-@as("Status") status: amazonawsString,
-@as("Normal") normal: amazonawsBoolean,
-@as("StatusType") statusType: amazonawsString
+type dbinstanceStatusInfo = {
+@as("Message") message: option<string_>,
+@as("Status") status: option<string_>,
+@as("Normal") normal: option<boolean_>,
+@as("StatusType") statusType: option<string_>
 }
-type dBClusterRole = {
-@as("Status") status: amazonawsString,
-@as("RoleArn") roleArn: amazonawsString
+type dbclusterRole = {
+@as("Status") status: option<string_>,
+@as("RoleArn") roleArn: option<string_>
 }
-type dBClusterParameterGroup = {
-@as("DBClusterParameterGroupArn") dBClusterParameterGroupArn: amazonawsString,
-@as("Description") description: amazonawsString,
-@as("DBParameterGroupFamily") dBParameterGroupFamily: amazonawsString,
-@as("DBClusterParameterGroupName") dBClusterParameterGroupName: amazonawsString
+type dbclusterParameterGroup = {
+@as("DBClusterParameterGroupArn") dbclusterParameterGroupArn: option<string_>,
+@as("Description") description: option<string_>,
+@as("DBParameterGroupFamily") dbparameterGroupFamily: option<string_>,
+@as("DBClusterParameterGroupName") dbclusterParameterGroupName: option<string_>
 }
-type dBClusterMember = {
-@as("PromotionTier") promotionTier: integerOptional,
-@as("DBClusterParameterGroupStatus") dBClusterParameterGroupStatus: amazonawsString,
-@as("IsClusterWriter") isClusterWriter: amazonawsBoolean,
-@as("DBInstanceIdentifier") dBInstanceIdentifier: amazonawsString
+type dbclusterMember = {
+@as("PromotionTier") promotionTier: option<integerOptional>,
+@as("DBClusterParameterGroupStatus") dbclusterParameterGroupStatus: option<string_>,
+@as("IsClusterWriter") isClusterWriter: option<boolean_>,
+@as("DBInstanceIdentifier") dbinstanceIdentifier: option<string_>
 }
 type certificate = {
-@as("CertificateArn") certificateArn: amazonawsString,
-@as("ValidTill") validTill: tStamp,
-@as("ValidFrom") validFrom: tStamp,
-@as("Thumbprint") thumbprint: amazonawsString,
-@as("CertificateType") certificateType: amazonawsString,
-@as("CertificateIdentifier") certificateIdentifier: amazonawsString
+@as("CertificateArn") certificateArn: option<string_>,
+@as("ValidTill") validTill: option<tstamp>,
+@as("ValidFrom") validFrom: option<tstamp>,
+@as("Thumbprint") thumbprint: option<string_>,
+@as("CertificateType") certificateType: option<string_>,
+@as("CertificateIdentifier") certificateIdentifier: option<string_>
 }
-type availabilityZones = array<amazonawsString>
+type availabilityZones = array<string_>
 type availabilityZone = {
-@as("Name") name: amazonawsString
+@as("Name") name: option<string_>
 }
-type attributeValueList = array<amazonawsString>
+type attributeValueList = array<string_>
 type vpcSecurityGroupMembershipList = array<vpcSecurityGroupMembership>
 type validUpgradeTargetList = array<upgradeTarget>
-type tagList = array<tag>
+type tagList_ = array<tag>
 type subnet = {
-@as("SubnetStatus") subnetStatus: amazonawsString,
-@as("SubnetAvailabilityZone") subnetAvailabilityZone: availabilityZone,
-@as("SubnetIdentifier") subnetIdentifier: amazonawsString
+@as("SubnetStatus") subnetStatus: option<string_>,
+@as("SubnetAvailabilityZone") subnetAvailabilityZone: option<availabilityZone>,
+@as("SubnetIdentifier") subnetIdentifier: option<string_>
 }
 type pendingMaintenanceActionDetails = array<pendingMaintenanceAction>
 type pendingCloudwatchLogsExports = {
-@as("LogTypesToDisable") logTypesToDisable: logTypeList,
-@as("LogTypesToEnable") logTypesToEnable: logTypeList
+@as("LogTypesToDisable") logTypesToDisable: option<logTypeList>,
+@as("LogTypesToEnable") logTypesToEnable: option<logTypeList>
 }
 type parametersList = array<parameter>
 type filter = {
-@as("Values") values: option<filterValueList>,
-@as("Name") name: option<amazonawsString>
+@as("Values") values: filterValueList,
+@as("Name") name: string_
 }
 type eventCategoriesMap = {
-@as("EventCategories") eventCategories: eventCategoriesList,
-@as("SourceType") sourceType: amazonawsString
+@as("EventCategories") eventCategories: option<eventCategoriesList>,
+@as("SourceType") sourceType: option<string_>
 }
 type event = {
-@as("SourceArn") sourceArn: amazonawsString,
-@as("Date") date: tStamp,
-@as("EventCategories") eventCategories: eventCategoriesList,
-@as("Message") message: amazonawsString,
-@as("SourceType") sourceType: sourceType,
-@as("SourceIdentifier") sourceIdentifier: amazonawsString
+@as("SourceArn") sourceArn: option<string_>,
+@as("Date") date: option<tstamp>,
+@as("EventCategories") eventCategories: option<eventCategoriesList>,
+@as("Message") message: option<string_>,
+@as("SourceType") sourceType: option<sourceType>,
+@as("SourceIdentifier") sourceIdentifier: option<string_>
 }
-type dBInstanceStatusInfoList = array<dBInstanceStatusInfo>
-type dBClusterSnapshotAttribute = {
-@as("AttributeValues") attributeValues: attributeValueList,
-@as("AttributeName") attributeName: amazonawsString
+type dbinstanceStatusInfoList = array<dbinstanceStatusInfo>
+type dbclusterSnapshotAttribute = {
+@as("AttributeValues") attributeValues: option<attributeValueList>,
+@as("AttributeName") attributeName: option<string_>
 }
-type dBClusterSnapshot = {
-@as("SourceDBClusterSnapshotArn") sourceDBClusterSnapshotArn: amazonawsString,
-@as("DBClusterSnapshotArn") dBClusterSnapshotArn: amazonawsString,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("StorageEncrypted") storageEncrypted: amazonawsBoolean,
-@as("PercentProgress") percentProgress: amazonawsInteger,
-@as("SnapshotType") snapshotType: amazonawsString,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("MasterUsername") masterUsername: amazonawsString,
-@as("ClusterCreateTime") clusterCreateTime: tStamp,
-@as("VpcId") vpcId: amazonawsString,
-@as("Port") port: amazonawsInteger,
-@as("Status") status: amazonawsString,
-@as("Engine") engine: amazonawsString,
-@as("SnapshotCreateTime") snapshotCreateTime: tStamp,
-@as("DBClusterIdentifier") dBClusterIdentifier: amazonawsString,
-@as("DBClusterSnapshotIdentifier") dBClusterSnapshotIdentifier: amazonawsString,
-@as("AvailabilityZones") availabilityZones: availabilityZones
+type dbclusterSnapshot = {
+@as("SourceDBClusterSnapshotArn") sourceDBClusterSnapshotArn: option<string_>,
+@as("DBClusterSnapshotArn") dbclusterSnapshotArn: option<string_>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("StorageEncrypted") storageEncrypted: option<boolean_>,
+@as("PercentProgress") percentProgress: option<integer_>,
+@as("SnapshotType") snapshotType: option<string_>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("MasterUsername") masterUsername: option<string_>,
+@as("ClusterCreateTime") clusterCreateTime: option<tstamp>,
+@as("VpcId") vpcId: option<string_>,
+@as("Port") port: option<integer_>,
+@as("Status") status: option<string_>,
+@as("Engine") engine: option<string_>,
+@as("SnapshotCreateTime") snapshotCreateTime: option<tstamp>,
+@as("DBClusterIdentifier") dbclusterIdentifier: option<string_>,
+@as("DBClusterSnapshotIdentifier") dbclusterSnapshotIdentifier: option<string_>,
+@as("AvailabilityZones") availabilityZones: option<availabilityZones>
 }
-type dBClusterRoles = array<dBClusterRole>
-type dBClusterParameterGroupList = array<dBClusterParameterGroup>
-type dBClusterMemberList = array<dBClusterMember>
+type dbclusterRoles = array<dbclusterRole>
+type dbclusterParameterGroupList = array<dbclusterParameterGroup>
+type dbclusterMemberList = array<dbclusterMember>
 type cloudwatchLogsExportConfiguration = {
-@as("DisableLogTypes") disableLogTypes: logTypeList,
-@as("EnableLogTypes") enableLogTypes: logTypeList
+@as("DisableLogTypes") disableLogTypes: option<logTypeList>,
+@as("EnableLogTypes") enableLogTypes: option<logTypeList>
 }
 type certificateList = array<certificate>
 type availabilityZoneList = array<availabilityZone>
 type subnetList = array<subnet>
 type resourcePendingMaintenanceActions = {
-@as("PendingMaintenanceActionDetails") pendingMaintenanceActionDetails: pendingMaintenanceActionDetails,
-@as("ResourceIdentifier") resourceIdentifier: amazonawsString
+@as("PendingMaintenanceActionDetails") pendingMaintenanceActionDetails: option<pendingMaintenanceActionDetails>,
+@as("ResourceIdentifier") resourceIdentifier: option<string_>
 }
 type pendingModifiedValues = {
-@as("PendingCloudwatchLogsExports") pendingCloudwatchLogsExports: pendingCloudwatchLogsExports,
-@as("DBSubnetGroupName") dBSubnetGroupName: amazonawsString,
-@as("CACertificateIdentifier") cACertificateIdentifier: amazonawsString,
-@as("StorageType") storageType: amazonawsString,
-@as("DBInstanceIdentifier") dBInstanceIdentifier: amazonawsString,
-@as("Iops") iops: integerOptional,
-@as("LicenseModel") licenseModel: amazonawsString,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("MultiAZ") multiAZ: booleanOptional,
-@as("BackupRetentionPeriod") backupRetentionPeriod: integerOptional,
-@as("Port") port: integerOptional,
-@as("MasterUserPassword") masterUserPassword: amazonawsString,
-@as("AllocatedStorage") allocatedStorage: integerOptional,
-@as("DBInstanceClass") dBInstanceClass: amazonawsString
+@as("PendingCloudwatchLogsExports") pendingCloudwatchLogsExports: option<pendingCloudwatchLogsExports>,
+@as("DBSubnetGroupName") dbsubnetGroupName: option<string_>,
+@as("CACertificateIdentifier") cacertificateIdentifier: option<string_>,
+@as("StorageType") storageType: option<string_>,
+@as("DBInstanceIdentifier") dbinstanceIdentifier: option<string_>,
+@as("Iops") iops: option<integerOptional>,
+@as("LicenseModel") licenseModel: option<string_>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("MultiAZ") multiAZ: option<booleanOptional>,
+@as("BackupRetentionPeriod") backupRetentionPeriod: option<integerOptional>,
+@as("Port") port: option<integerOptional>,
+@as("MasterUserPassword") masterUserPassword: option<string_>,
+@as("AllocatedStorage") allocatedStorage: option<integerOptional>,
+@as("DBInstanceClass") dbinstanceClass: option<string_>
 }
 type orderableDBInstanceOption = {
-@as("Vpc") vpc: amazonawsBoolean,
-@as("AvailabilityZones") availabilityZones: availabilityZoneList,
-@as("LicenseModel") licenseModel: amazonawsString,
-@as("DBInstanceClass") dBInstanceClass: amazonawsString,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("Engine") engine: amazonawsString
+@as("Vpc") vpc: option<boolean_>,
+@as("AvailabilityZones") availabilityZones: option<availabilityZoneList>,
+@as("LicenseModel") licenseModel: option<string_>,
+@as("DBInstanceClass") dbinstanceClass: option<string_>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("Engine") engine: option<string_>
 }
 type filterList = array<filter>
 type eventList = array<event>
 type eventCategoriesMapList = array<eventCategoriesMap>
 type engineDefaults = {
-@as("Parameters") parameters: parametersList,
-@as("Marker") marker: amazonawsString,
-@as("DBParameterGroupFamily") dBParameterGroupFamily: amazonawsString
+@as("Parameters") parameters: option<parametersList>,
+@as("Marker") marker: option<string_>,
+@as("DBParameterGroupFamily") dbparameterGroupFamily: option<string_>
 }
-type dBEngineVersion = {
-@as("SupportsLogExportsToCloudwatchLogs") supportsLogExportsToCloudwatchLogs: amazonawsBoolean,
-@as("ExportableLogTypes") exportableLogTypes: logTypeList,
-@as("ValidUpgradeTarget") validUpgradeTarget: validUpgradeTargetList,
-@as("DBEngineVersionDescription") dBEngineVersionDescription: amazonawsString,
-@as("DBEngineDescription") dBEngineDescription: amazonawsString,
-@as("DBParameterGroupFamily") dBParameterGroupFamily: amazonawsString,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("Engine") engine: amazonawsString
+type dbengineVersion = {
+@as("SupportsLogExportsToCloudwatchLogs") supportsLogExportsToCloudwatchLogs: option<boolean_>,
+@as("ExportableLogTypes") exportableLogTypes: option<logTypeList>,
+@as("ValidUpgradeTarget") validUpgradeTarget: option<validUpgradeTargetList>,
+@as("DBEngineVersionDescription") dbengineVersionDescription: option<string_>,
+@as("DBEngineDescription") dbengineDescription: option<string_>,
+@as("DBParameterGroupFamily") dbparameterGroupFamily: option<string_>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("Engine") engine: option<string_>
 }
-type dBClusterSnapshotList = array<dBClusterSnapshot>
-type dBClusterSnapshotAttributeList = array<dBClusterSnapshotAttribute>
-type dBCluster = {
-@as("DeletionProtection") deletionProtection: amazonawsBoolean,
-@as("EnabledCloudwatchLogsExports") enabledCloudwatchLogsExports: logTypeList,
-@as("ClusterCreateTime") clusterCreateTime: tStamp,
-@as("AssociatedRoles") associatedRoles: dBClusterRoles,
-@as("DBClusterArn") dBClusterArn: amazonawsString,
-@as("DbClusterResourceId") dbClusterResourceId: amazonawsString,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("StorageEncrypted") storageEncrypted: amazonawsBoolean,
-@as("HostedZoneId") hostedZoneId: amazonawsString,
-@as("VpcSecurityGroups") vpcSecurityGroups: vpcSecurityGroupMembershipList,
-@as("DBClusterMembers") dBClusterMembers: dBClusterMemberList,
-@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: amazonawsString,
-@as("PreferredBackupWindow") preferredBackupWindow: amazonawsString,
-@as("MasterUsername") masterUsername: amazonawsString,
-@as("Port") port: integerOptional,
-@as("LatestRestorableTime") latestRestorableTime: tStamp,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("Engine") engine: amazonawsString,
-@as("MultiAZ") multiAZ: amazonawsBoolean,
-@as("ReaderEndpoint") readerEndpoint: amazonawsString,
-@as("Endpoint") endpoint: amazonawsString,
-@as("EarliestRestorableTime") earliestRestorableTime: tStamp,
-@as("PercentProgress") percentProgress: amazonawsString,
-@as("Status") status: amazonawsString,
-@as("DBSubnetGroup") dBSubnetGroup: amazonawsString,
-@as("DBClusterParameterGroup") dBClusterParameterGroup: amazonawsString,
-@as("DBClusterIdentifier") dBClusterIdentifier: amazonawsString,
-@as("BackupRetentionPeriod") backupRetentionPeriod: integerOptional,
-@as("AvailabilityZones") availabilityZones: availabilityZones
+type dbclusterSnapshotList = array<dbclusterSnapshot>
+type dbclusterSnapshotAttributeList = array<dbclusterSnapshotAttribute>
+type dbcluster = {
+@as("DeletionProtection") deletionProtection: option<boolean_>,
+@as("EnabledCloudwatchLogsExports") enabledCloudwatchLogsExports: option<logTypeList>,
+@as("ClusterCreateTime") clusterCreateTime: option<tstamp>,
+@as("AssociatedRoles") associatedRoles: option<dbclusterRoles>,
+@as("DBClusterArn") dbclusterArn: option<string_>,
+@as("DbClusterResourceId") dbClusterResourceId: option<string_>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("StorageEncrypted") storageEncrypted: option<boolean_>,
+@as("HostedZoneId") hostedZoneId: option<string_>,
+@as("VpcSecurityGroups") vpcSecurityGroups: option<vpcSecurityGroupMembershipList>,
+@as("DBClusterMembers") dbclusterMembers: option<dbclusterMemberList>,
+@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: option<string_>,
+@as("PreferredBackupWindow") preferredBackupWindow: option<string_>,
+@as("MasterUsername") masterUsername: option<string_>,
+@as("Port") port: option<integerOptional>,
+@as("LatestRestorableTime") latestRestorableTime: option<tstamp>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("Engine") engine: option<string_>,
+@as("MultiAZ") multiAZ: option<boolean_>,
+@as("ReaderEndpoint") readerEndpoint: option<string_>,
+@as("Endpoint") endpoint: option<string_>,
+@as("EarliestRestorableTime") earliestRestorableTime: option<tstamp>,
+@as("PercentProgress") percentProgress: option<string_>,
+@as("Status") status: option<string_>,
+@as("DBSubnetGroup") dbsubnetGroup: option<string_>,
+@as("DBClusterParameterGroup") dbclusterParameterGroup: option<string_>,
+@as("DBClusterIdentifier") dbclusterIdentifier: option<string_>,
+@as("BackupRetentionPeriod") backupRetentionPeriod: option<integerOptional>,
+@as("AvailabilityZones") availabilityZones: option<availabilityZones>
 }
 type pendingMaintenanceActions = array<resourcePendingMaintenanceActions>
 type orderableDBInstanceOptionsList = array<orderableDBInstanceOption>
-type dBSubnetGroup = {
-@as("DBSubnetGroupArn") dBSubnetGroupArn: amazonawsString,
-@as("Subnets") subnets: subnetList,
-@as("SubnetGroupStatus") subnetGroupStatus: amazonawsString,
-@as("VpcId") vpcId: amazonawsString,
-@as("DBSubnetGroupDescription") dBSubnetGroupDescription: amazonawsString,
-@as("DBSubnetGroupName") dBSubnetGroupName: amazonawsString
+type dbsubnetGroup = {
+@as("DBSubnetGroupArn") dbsubnetGroupArn: option<string_>,
+@as("Subnets") subnets: option<subnetList>,
+@as("SubnetGroupStatus") subnetGroupStatus: option<string_>,
+@as("VpcId") vpcId: option<string_>,
+@as("DBSubnetGroupDescription") dbsubnetGroupDescription: option<string_>,
+@as("DBSubnetGroupName") dbsubnetGroupName: option<string_>
 }
-type dBEngineVersionList = array<dBEngineVersion>
-type dBClusterSnapshotAttributesResult = {
-@as("DBClusterSnapshotAttributes") dBClusterSnapshotAttributes: dBClusterSnapshotAttributeList,
-@as("DBClusterSnapshotIdentifier") dBClusterSnapshotIdentifier: amazonawsString
+type dbengineVersionList = array<dbengineVersion>
+type dbclusterSnapshotAttributesResult = {
+@as("DBClusterSnapshotAttributes") dbclusterSnapshotAttributes: option<dbclusterSnapshotAttributeList>,
+@as("DBClusterSnapshotIdentifier") dbclusterSnapshotIdentifier: option<string_>
 }
-type dBClusterList = array<dBCluster>
-type dBSubnetGroups = array<dBSubnetGroup>
-type dBInstance = {
-@as("EnabledCloudwatchLogsExports") enabledCloudwatchLogsExports: logTypeList,
-@as("DBInstanceArn") dBInstanceArn: amazonawsString,
-@as("PromotionTier") promotionTier: integerOptional,
-@as("CACertificateIdentifier") cACertificateIdentifier: amazonawsString,
-@as("DbiResourceId") dbiResourceId: amazonawsString,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("StorageEncrypted") storageEncrypted: amazonawsBoolean,
-@as("DBClusterIdentifier") dBClusterIdentifier: amazonawsString,
-@as("StatusInfos") statusInfos: dBInstanceStatusInfoList,
-@as("PubliclyAccessible") publiclyAccessible: amazonawsBoolean,
-@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: amazonawsBoolean,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("LatestRestorableTime") latestRestorableTime: tStamp,
-@as("PendingModifiedValues") pendingModifiedValues: pendingModifiedValues,
-@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: amazonawsString,
-@as("DBSubnetGroup") dBSubnetGroup: dBSubnetGroup,
-@as("AvailabilityZone") availabilityZone: amazonawsString,
-@as("VpcSecurityGroups") vpcSecurityGroups: vpcSecurityGroupMembershipList,
-@as("BackupRetentionPeriod") backupRetentionPeriod: amazonawsInteger,
-@as("PreferredBackupWindow") preferredBackupWindow: amazonawsString,
-@as("InstanceCreateTime") instanceCreateTime: tStamp,
-@as("Endpoint") endpoint: endpoint,
-@as("DBInstanceStatus") dBInstanceStatus: amazonawsString,
-@as("Engine") engine: amazonawsString,
-@as("DBInstanceClass") dBInstanceClass: amazonawsString,
-@as("DBInstanceIdentifier") dBInstanceIdentifier: amazonawsString
+type dbclusterList = array<dbcluster>
+type dbsubnetGroups = array<dbsubnetGroup>
+type dbinstance = {
+@as("EnabledCloudwatchLogsExports") enabledCloudwatchLogsExports: option<logTypeList>,
+@as("DBInstanceArn") dbinstanceArn: option<string_>,
+@as("PromotionTier") promotionTier: option<integerOptional>,
+@as("CACertificateIdentifier") cacertificateIdentifier: option<string_>,
+@as("DbiResourceId") dbiResourceId: option<string_>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("StorageEncrypted") storageEncrypted: option<boolean_>,
+@as("DBClusterIdentifier") dbclusterIdentifier: option<string_>,
+@as("StatusInfos") statusInfos: option<dbinstanceStatusInfoList>,
+@as("PubliclyAccessible") publiclyAccessible: option<boolean_>,
+@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: option<boolean_>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("LatestRestorableTime") latestRestorableTime: option<tstamp>,
+@as("PendingModifiedValues") pendingModifiedValues: option<pendingModifiedValues>,
+@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: option<string_>,
+@as("DBSubnetGroup") dbsubnetGroup: option<dbsubnetGroup>,
+@as("AvailabilityZone") availabilityZone: option<string_>,
+@as("VpcSecurityGroups") vpcSecurityGroups: option<vpcSecurityGroupMembershipList>,
+@as("BackupRetentionPeriod") backupRetentionPeriod: option<integer_>,
+@as("PreferredBackupWindow") preferredBackupWindow: option<string_>,
+@as("InstanceCreateTime") instanceCreateTime: option<tstamp>,
+@as("Endpoint") endpoint: option<endpoint>,
+@as("DBInstanceStatus") dbinstanceStatus: option<string_>,
+@as("Engine") engine: option<string_>,
+@as("DBInstanceClass") dbinstanceClass: option<string_>,
+@as("DBInstanceIdentifier") dbinstanceIdentifier: option<string_>
 }
-type dBInstanceList = array<dBInstance>
-type clientType;
-@module("@aws-sdk/client-rds") @new external createClient: unit => clientType = "DocDBClient";
+type dbinstanceList = array<dbinstance>
+type awsServiceClient;
+@module("@aws-sdk/client-rds") @new external createClient: unit => awsServiceClient = "DocDBClient";
 module DeleteDBSubnetGroup = {
   type t;
   type request = {
-@as("DBSubnetGroupName") dBSubnetGroupName: option<amazonawsString>
+@as("DBSubnetGroupName") dbsubnetGroupName: string_
 }
   
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DeleteDBSubnetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteDBClusterParameterGroup = {
   type t;
   type request = {
-@as("DBClusterParameterGroupName") dBClusterParameterGroupName: option<amazonawsString>
+@as("DBClusterParameterGroupName") dbclusterParameterGroupName: string_
 }
   
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DeleteDBClusterParameterGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RemoveTagsFromResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<keyList>,
-@as("ResourceName") resourceName: option<amazonawsString>
+@as("TagKeys") tagKeys: keyList,
+@as("ResourceName") resourceName: string_
 }
   
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "RemoveTagsFromResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module ResetDBClusterParameterGroup = {
   type t;
   type request = {
-@as("Parameters") parameters: parametersList,
-@as("ResetAllParameters") resetAllParameters: amazonawsBoolean,
-@as("DBClusterParameterGroupName") dBClusterParameterGroupName: option<amazonawsString>
+@as("Parameters") parameters: option<parametersList>,
+@as("ResetAllParameters") resetAllParameters: option<boolean_>,
+@as("DBClusterParameterGroupName") dbclusterParameterGroupName: string_
 }
   type response = {
-@as("DBClusterParameterGroupName") dBClusterParameterGroupName: amazonawsString
+@as("DBClusterParameterGroupName") dbclusterParameterGroupName: option<string_>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "ResetDBClusterParameterGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyDBClusterParameterGroup = {
   type t;
   type request = {
-@as("Parameters") parameters: option<parametersList>,
-@as("DBClusterParameterGroupName") dBClusterParameterGroupName: option<amazonawsString>
+@as("Parameters") parameters: parametersList,
+@as("DBClusterParameterGroupName") dbclusterParameterGroupName: string_
 }
   type response = {
-@as("DBClusterParameterGroupName") dBClusterParameterGroupName: amazonawsString
+@as("DBClusterParameterGroupName") dbclusterParameterGroupName: option<string_>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "ModifyDBClusterParameterGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDBClusterSnapshot = {
   type t;
   type request = {
-@as("DBClusterSnapshotIdentifier") dBClusterSnapshotIdentifier: option<amazonawsString>
+@as("DBClusterSnapshotIdentifier") dbclusterSnapshotIdentifier: string_
 }
   type response = {
-@as("DBClusterSnapshot") dBClusterSnapshot: dBClusterSnapshot
+@as("DBClusterSnapshot") dbclusterSnapshot: option<dbclusterSnapshot>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DeleteDBClusterSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDBClusterSnapshot = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("DBClusterIdentifier") dBClusterIdentifier: option<amazonawsString>,
-@as("DBClusterSnapshotIdentifier") dBClusterSnapshotIdentifier: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("DBClusterIdentifier") dbclusterIdentifier: string_,
+@as("DBClusterSnapshotIdentifier") dbclusterSnapshotIdentifier: string_
 }
   type response = {
-@as("DBClusterSnapshot") dBClusterSnapshot: dBClusterSnapshot
+@as("DBClusterSnapshot") dbclusterSnapshot: option<dbclusterSnapshot>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "CreateDBClusterSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDBClusterParameterGroup = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("Description") description: option<amazonawsString>,
-@as("DBParameterGroupFamily") dBParameterGroupFamily: option<amazonawsString>,
-@as("DBClusterParameterGroupName") dBClusterParameterGroupName: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("Description") description: string_,
+@as("DBParameterGroupFamily") dbparameterGroupFamily: string_,
+@as("DBClusterParameterGroupName") dbclusterParameterGroupName: string_
 }
   type response = {
-@as("DBClusterParameterGroup") dBClusterParameterGroup: dBClusterParameterGroup
+@as("DBClusterParameterGroup") dbclusterParameterGroup: option<dbclusterParameterGroup>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "CreateDBClusterParameterGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CopyDBClusterSnapshot = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("CopyTags") copyTags: booleanOptional,
-@as("PreSignedUrl") preSignedUrl: amazonawsString,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("TargetDBClusterSnapshotIdentifier") targetDBClusterSnapshotIdentifier: option<amazonawsString>,
-@as("SourceDBClusterSnapshotIdentifier") sourceDBClusterSnapshotIdentifier: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("CopyTags") copyTags: option<booleanOptional>,
+@as("PreSignedUrl") preSignedUrl: option<string_>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("TargetDBClusterSnapshotIdentifier") targetDBClusterSnapshotIdentifier: string_,
+@as("SourceDBClusterSnapshotIdentifier") sourceDBClusterSnapshotIdentifier: string_
 }
   type response = {
-@as("DBClusterSnapshot") dBClusterSnapshot: dBClusterSnapshot
+@as("DBClusterSnapshot") dbclusterSnapshot: option<dbclusterSnapshot>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "CopyDBClusterSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CopyDBClusterParameterGroup = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("TargetDBClusterParameterGroupDescription") targetDBClusterParameterGroupDescription: option<amazonawsString>,
-@as("TargetDBClusterParameterGroupIdentifier") targetDBClusterParameterGroupIdentifier: option<amazonawsString>,
-@as("SourceDBClusterParameterGroupIdentifier") sourceDBClusterParameterGroupIdentifier: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("TargetDBClusterParameterGroupDescription") targetDBClusterParameterGroupDescription: string_,
+@as("TargetDBClusterParameterGroupIdentifier") targetDBClusterParameterGroupIdentifier: string_,
+@as("SourceDBClusterParameterGroupIdentifier") sourceDBClusterParameterGroupIdentifier: string_
 }
   type response = {
-@as("DBClusterParameterGroup") dBClusterParameterGroup: dBClusterParameterGroup
+@as("DBClusterParameterGroup") dbclusterParameterGroup: option<dbclusterParameterGroup>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "CopyDBClusterParameterGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddTagsToResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tagList>,
-@as("ResourceName") resourceName: option<amazonawsString>
+@as("Tags") tags: tagList_,
+@as("ResourceName") resourceName: string_
 }
   
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "AddTagsToResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module StopDBCluster = {
   type t;
   type request = {
-@as("DBClusterIdentifier") dBClusterIdentifier: option<amazonawsString>
+@as("DBClusterIdentifier") dbclusterIdentifier: string_
 }
   type response = {
-@as("DBCluster") dBCluster: dBCluster
+@as("DBCluster") dbcluster: option<dbcluster>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "StopDBClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartDBCluster = {
   type t;
   type request = {
-@as("DBClusterIdentifier") dBClusterIdentifier: option<amazonawsString>
+@as("DBClusterIdentifier") dbclusterIdentifier: string_
 }
   type response = {
-@as("DBCluster") dBCluster: dBCluster
+@as("DBCluster") dbcluster: option<dbcluster>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "StartDBClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RestoreDBClusterToPointInTime = {
   type t;
   type request = {
-@as("DeletionProtection") deletionProtection: booleanOptional,
-@as("EnableCloudwatchLogsExports") enableCloudwatchLogsExports: logTypeList,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("Tags") tags: tagList,
-@as("VpcSecurityGroupIds") vpcSecurityGroupIds: vpcSecurityGroupIdList,
-@as("DBSubnetGroupName") dBSubnetGroupName: amazonawsString,
-@as("Port") port: integerOptional,
-@as("UseLatestRestorableTime") useLatestRestorableTime: amazonawsBoolean,
-@as("RestoreToTime") restoreToTime: tStamp,
-@as("SourceDBClusterIdentifier") sourceDBClusterIdentifier: option<amazonawsString>,
-@as("DBClusterIdentifier") dBClusterIdentifier: option<amazonawsString>
+@as("DeletionProtection") deletionProtection: option<booleanOptional>,
+@as("EnableCloudwatchLogsExports") enableCloudwatchLogsExports: option<logTypeList>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("Tags") tags: option<tagList_>,
+@as("VpcSecurityGroupIds") vpcSecurityGroupIds: option<vpcSecurityGroupIdList>,
+@as("DBSubnetGroupName") dbsubnetGroupName: option<string_>,
+@as("Port") port: option<integerOptional>,
+@as("UseLatestRestorableTime") useLatestRestorableTime: option<boolean_>,
+@as("RestoreToTime") restoreToTime: option<tstamp>,
+@as("SourceDBClusterIdentifier") sourceDBClusterIdentifier: string_,
+@as("DBClusterIdentifier") dbclusterIdentifier: string_
 }
   type response = {
-@as("DBCluster") dBCluster: dBCluster
+@as("DBCluster") dbcluster: option<dbcluster>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "RestoreDBClusterToPointInTimeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RestoreDBClusterFromSnapshot = {
   type t;
   type request = {
-@as("DeletionProtection") deletionProtection: booleanOptional,
-@as("EnableCloudwatchLogsExports") enableCloudwatchLogsExports: logTypeList,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("Tags") tags: tagList,
-@as("VpcSecurityGroupIds") vpcSecurityGroupIds: vpcSecurityGroupIdList,
-@as("DBSubnetGroupName") dBSubnetGroupName: amazonawsString,
-@as("Port") port: integerOptional,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("Engine") engine: option<amazonawsString>,
-@as("SnapshotIdentifier") snapshotIdentifier: option<amazonawsString>,
-@as("DBClusterIdentifier") dBClusterIdentifier: option<amazonawsString>,
-@as("AvailabilityZones") availabilityZones: availabilityZones
+@as("DeletionProtection") deletionProtection: option<booleanOptional>,
+@as("EnableCloudwatchLogsExports") enableCloudwatchLogsExports: option<logTypeList>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("Tags") tags: option<tagList_>,
+@as("VpcSecurityGroupIds") vpcSecurityGroupIds: option<vpcSecurityGroupIdList>,
+@as("DBSubnetGroupName") dbsubnetGroupName: option<string_>,
+@as("Port") port: option<integerOptional>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("Engine") engine: string_,
+@as("SnapshotIdentifier") snapshotIdentifier: string_,
+@as("DBClusterIdentifier") dbclusterIdentifier: string_,
+@as("AvailabilityZones") availabilityZones: option<availabilityZones>
 }
   type response = {
-@as("DBCluster") dBCluster: dBCluster
+@as("DBCluster") dbcluster: option<dbcluster>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "RestoreDBClusterFromSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyDBCluster = {
   type t;
   type request = {
-@as("DeletionProtection") deletionProtection: booleanOptional,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("CloudwatchLogsExportConfiguration") cloudwatchLogsExportConfiguration: cloudwatchLogsExportConfiguration,
-@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: amazonawsString,
-@as("PreferredBackupWindow") preferredBackupWindow: amazonawsString,
-@as("MasterUserPassword") masterUserPassword: amazonawsString,
-@as("Port") port: integerOptional,
-@as("VpcSecurityGroupIds") vpcSecurityGroupIds: vpcSecurityGroupIdList,
-@as("DBClusterParameterGroupName") dBClusterParameterGroupName: amazonawsString,
-@as("BackupRetentionPeriod") backupRetentionPeriod: integerOptional,
-@as("ApplyImmediately") applyImmediately: amazonawsBoolean,
-@as("NewDBClusterIdentifier") newDBClusterIdentifier: amazonawsString,
-@as("DBClusterIdentifier") dBClusterIdentifier: option<amazonawsString>
+@as("DeletionProtection") deletionProtection: option<booleanOptional>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("CloudwatchLogsExportConfiguration") cloudwatchLogsExportConfiguration: option<cloudwatchLogsExportConfiguration>,
+@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: option<string_>,
+@as("PreferredBackupWindow") preferredBackupWindow: option<string_>,
+@as("MasterUserPassword") masterUserPassword: option<string_>,
+@as("Port") port: option<integerOptional>,
+@as("VpcSecurityGroupIds") vpcSecurityGroupIds: option<vpcSecurityGroupIdList>,
+@as("DBClusterParameterGroupName") dbclusterParameterGroupName: option<string_>,
+@as("BackupRetentionPeriod") backupRetentionPeriod: option<integerOptional>,
+@as("ApplyImmediately") applyImmediately: option<boolean_>,
+@as("NewDBClusterIdentifier") newDBClusterIdentifier: option<string_>,
+@as("DBClusterIdentifier") dbclusterIdentifier: string_
 }
   type response = {
-@as("DBCluster") dBCluster: dBCluster
+@as("DBCluster") dbcluster: option<dbcluster>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "ModifyDBClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("Filters") filters: filterList,
-@as("ResourceName") resourceName: option<amazonawsString>
+@as("Filters") filters: option<filterList>,
+@as("ResourceName") resourceName: string_
 }
   type response = {
-@as("TagList") tagList: tagList
+@as("TagList") tagList_: option<tagList_>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module FailoverDBCluster = {
   type t;
   type request = {
-@as("TargetDBInstanceIdentifier") targetDBInstanceIdentifier: amazonawsString,
-@as("DBClusterIdentifier") dBClusterIdentifier: amazonawsString
+@as("TargetDBInstanceIdentifier") targetDBInstanceIdentifier: option<string_>,
+@as("DBClusterIdentifier") dbclusterIdentifier: option<string_>
 }
   type response = {
-@as("DBCluster") dBCluster: dBCluster
+@as("DBCluster") dbcluster: option<dbcluster>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "FailoverDBClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEvents = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Filters") filters: filterList,
-@as("EventCategories") eventCategories: eventCategoriesList,
-@as("Duration") duration: integerOptional,
-@as("EndTime") endTime: tStamp,
-@as("StartTime") startTime: tStamp,
-@as("SourceType") sourceType: sourceType,
-@as("SourceIdentifier") sourceIdentifier: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Filters") filters: option<filterList>,
+@as("EventCategories") eventCategories: option<eventCategoriesList>,
+@as("Duration") duration: option<integerOptional>,
+@as("EndTime") endTime: option<tstamp>,
+@as("StartTime") startTime: option<tstamp>,
+@as("SourceType") sourceType: option<sourceType>,
+@as("SourceIdentifier") sourceIdentifier: option<string_>
 }
   type response = {
-@as("Events") events: eventList,
-@as("Marker") marker: amazonawsString
+@as("Events") events: option<eventList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeEventsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEventCategories = {
   type t;
   type request = {
-@as("Filters") filters: filterList,
-@as("SourceType") sourceType: amazonawsString
+@as("Filters") filters: option<filterList>,
+@as("SourceType") sourceType: option<string_>
 }
   type response = {
-@as("EventCategoriesMapList") eventCategoriesMapList: eventCategoriesMapList
+@as("EventCategoriesMapList") eventCategoriesMapList: option<eventCategoriesMapList>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeEventCategoriesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEngineDefaultClusterParameters = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Filters") filters: filterList,
-@as("DBParameterGroupFamily") dBParameterGroupFamily: option<amazonawsString>
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Filters") filters: option<filterList>,
+@as("DBParameterGroupFamily") dbparameterGroupFamily: string_
 }
   type response = {
-@as("EngineDefaults") engineDefaults: engineDefaults
+@as("EngineDefaults") engineDefaults: option<engineDefaults>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeEngineDefaultClusterParametersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDBClusterSnapshots = {
   type t;
   type request = {
-@as("IncludePublic") includePublic: amazonawsBoolean,
-@as("IncludeShared") includeShared: amazonawsBoolean,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Filters") filters: filterList,
-@as("SnapshotType") snapshotType: amazonawsString,
-@as("DBClusterSnapshotIdentifier") dBClusterSnapshotIdentifier: amazonawsString,
-@as("DBClusterIdentifier") dBClusterIdentifier: amazonawsString
+@as("IncludePublic") includePublic: option<boolean_>,
+@as("IncludeShared") includeShared: option<boolean_>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Filters") filters: option<filterList>,
+@as("SnapshotType") snapshotType: option<string_>,
+@as("DBClusterSnapshotIdentifier") dbclusterSnapshotIdentifier: option<string_>,
+@as("DBClusterIdentifier") dbclusterIdentifier: option<string_>
 }
   type response = {
-@as("DBClusterSnapshots") dBClusterSnapshots: dBClusterSnapshotList,
-@as("Marker") marker: amazonawsString
+@as("DBClusterSnapshots") dbclusterSnapshots: option<dbclusterSnapshotList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeDBClusterSnapshotsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDBClusterParameters = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Filters") filters: filterList,
-@as("Source") source: amazonawsString,
-@as("DBClusterParameterGroupName") dBClusterParameterGroupName: option<amazonawsString>
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Filters") filters: option<filterList>,
+@as("Source") source: option<string_>,
+@as("DBClusterParameterGroupName") dbclusterParameterGroupName: string_
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("Parameters") parameters: parametersList
+@as("Marker") marker: option<string_>,
+@as("Parameters") parameters: option<parametersList>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeDBClusterParametersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDBClusterParameterGroups = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Filters") filters: filterList,
-@as("DBClusterParameterGroupName") dBClusterParameterGroupName: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Filters") filters: option<filterList>,
+@as("DBClusterParameterGroupName") dbclusterParameterGroupName: option<string_>
 }
   type response = {
-@as("DBClusterParameterGroups") dBClusterParameterGroups: dBClusterParameterGroupList,
-@as("Marker") marker: amazonawsString
+@as("DBClusterParameterGroups") dbclusterParameterGroups: option<dbclusterParameterGroupList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeDBClusterParameterGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCertificates = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Filters") filters: filterList,
-@as("CertificateIdentifier") certificateIdentifier: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Filters") filters: option<filterList>,
+@as("CertificateIdentifier") certificateIdentifier: option<string_>
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("Certificates") certificates: certificateList
+@as("Marker") marker: option<string_>,
+@as("Certificates") certificates: option<certificateList>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeCertificatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDBCluster = {
   type t;
   type request = {
-@as("FinalDBSnapshotIdentifier") finalDBSnapshotIdentifier: amazonawsString,
-@as("SkipFinalSnapshot") skipFinalSnapshot: amazonawsBoolean,
-@as("DBClusterIdentifier") dBClusterIdentifier: option<amazonawsString>
+@as("FinalDBSnapshotIdentifier") finalDBSnapshotIdentifier: option<string_>,
+@as("SkipFinalSnapshot") skipFinalSnapshot: option<boolean_>,
+@as("DBClusterIdentifier") dbclusterIdentifier: string_
 }
   type response = {
-@as("DBCluster") dBCluster: dBCluster
+@as("DBCluster") dbcluster: option<dbcluster>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DeleteDBClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDBCluster = {
   type t;
   type request = {
-@as("DeletionProtection") deletionProtection: booleanOptional,
-@as("EnableCloudwatchLogsExports") enableCloudwatchLogsExports: logTypeList,
-@as("PreSignedUrl") preSignedUrl: amazonawsString,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("StorageEncrypted") storageEncrypted: booleanOptional,
-@as("Tags") tags: tagList,
-@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: amazonawsString,
-@as("PreferredBackupWindow") preferredBackupWindow: amazonawsString,
-@as("MasterUserPassword") masterUserPassword: option<amazonawsString>,
-@as("MasterUsername") masterUsername: option<amazonawsString>,
-@as("Port") port: integerOptional,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("Engine") engine: option<amazonawsString>,
-@as("DBSubnetGroupName") dBSubnetGroupName: amazonawsString,
-@as("VpcSecurityGroupIds") vpcSecurityGroupIds: vpcSecurityGroupIdList,
-@as("DBClusterParameterGroupName") dBClusterParameterGroupName: amazonawsString,
-@as("DBClusterIdentifier") dBClusterIdentifier: option<amazonawsString>,
-@as("BackupRetentionPeriod") backupRetentionPeriod: integerOptional,
-@as("AvailabilityZones") availabilityZones: availabilityZones
+@as("DeletionProtection") deletionProtection: option<booleanOptional>,
+@as("EnableCloudwatchLogsExports") enableCloudwatchLogsExports: option<logTypeList>,
+@as("PreSignedUrl") preSignedUrl: option<string_>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("StorageEncrypted") storageEncrypted: option<booleanOptional>,
+@as("Tags") tags: option<tagList_>,
+@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: option<string_>,
+@as("PreferredBackupWindow") preferredBackupWindow: option<string_>,
+@as("MasterUserPassword") masterUserPassword: string_,
+@as("MasterUsername") masterUsername: string_,
+@as("Port") port: option<integerOptional>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("Engine") engine: string_,
+@as("DBSubnetGroupName") dbsubnetGroupName: option<string_>,
+@as("VpcSecurityGroupIds") vpcSecurityGroupIds: option<vpcSecurityGroupIdList>,
+@as("DBClusterParameterGroupName") dbclusterParameterGroupName: option<string_>,
+@as("DBClusterIdentifier") dbclusterIdentifier: string_,
+@as("BackupRetentionPeriod") backupRetentionPeriod: option<integerOptional>,
+@as("AvailabilityZones") availabilityZones: option<availabilityZones>
 }
   type response = {
-@as("DBCluster") dBCluster: dBCluster
+@as("DBCluster") dbcluster: option<dbcluster>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "CreateDBClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ApplyPendingMaintenanceAction = {
   type t;
   type request = {
-@as("OptInType") optInType: option<amazonawsString>,
-@as("ApplyAction") applyAction: option<amazonawsString>,
-@as("ResourceIdentifier") resourceIdentifier: option<amazonawsString>
+@as("OptInType") optInType: string_,
+@as("ApplyAction") applyAction: string_,
+@as("ResourceIdentifier") resourceIdentifier: string_
 }
   type response = {
-@as("ResourcePendingMaintenanceActions") resourcePendingMaintenanceActions: resourcePendingMaintenanceActions
+@as("ResourcePendingMaintenanceActions") resourcePendingMaintenanceActions: option<resourcePendingMaintenanceActions>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "ApplyPendingMaintenanceActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyDBSubnetGroup = {
   type t;
   type request = {
-@as("SubnetIds") subnetIds: option<subnetIdentifierList>,
-@as("DBSubnetGroupDescription") dBSubnetGroupDescription: amazonawsString,
-@as("DBSubnetGroupName") dBSubnetGroupName: option<amazonawsString>
+@as("SubnetIds") subnetIds: subnetIdentifierList,
+@as("DBSubnetGroupDescription") dbsubnetGroupDescription: option<string_>,
+@as("DBSubnetGroupName") dbsubnetGroupName: string_
 }
   type response = {
-@as("DBSubnetGroup") dBSubnetGroup: dBSubnetGroup
+@as("DBSubnetGroup") dbsubnetGroup: option<dbsubnetGroup>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "ModifyDBSubnetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyDBClusterSnapshotAttribute = {
   type t;
   type request = {
-@as("ValuesToRemove") valuesToRemove: attributeValueList,
-@as("ValuesToAdd") valuesToAdd: attributeValueList,
-@as("AttributeName") attributeName: option<amazonawsString>,
-@as("DBClusterSnapshotIdentifier") dBClusterSnapshotIdentifier: option<amazonawsString>
+@as("ValuesToRemove") valuesToRemove: option<attributeValueList>,
+@as("ValuesToAdd") valuesToAdd: option<attributeValueList>,
+@as("AttributeName") attributeName: string_,
+@as("DBClusterSnapshotIdentifier") dbclusterSnapshotIdentifier: string_
 }
   type response = {
-@as("DBClusterSnapshotAttributesResult") dBClusterSnapshotAttributesResult: dBClusterSnapshotAttributesResult
+@as("DBClusterSnapshotAttributesResult") dbclusterSnapshotAttributesResult: option<dbclusterSnapshotAttributesResult>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "ModifyDBClusterSnapshotAttributeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribePendingMaintenanceActions = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Marker") marker: amazonawsString,
-@as("Filters") filters: filterList,
-@as("ResourceIdentifier") resourceIdentifier: amazonawsString
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Marker") marker: option<string_>,
+@as("Filters") filters: option<filterList>,
+@as("ResourceIdentifier") resourceIdentifier: option<string_>
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("PendingMaintenanceActions") pendingMaintenanceActions: pendingMaintenanceActions
+@as("Marker") marker: option<string_>,
+@as("PendingMaintenanceActions") pendingMaintenanceActions: option<pendingMaintenanceActions>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribePendingMaintenanceActionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeOrderableDBInstanceOptions = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Filters") filters: filterList,
-@as("Vpc") vpc: booleanOptional,
-@as("LicenseModel") licenseModel: amazonawsString,
-@as("DBInstanceClass") dBInstanceClass: amazonawsString,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("Engine") engine: option<amazonawsString>
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Filters") filters: option<filterList>,
+@as("Vpc") vpc: option<booleanOptional>,
+@as("LicenseModel") licenseModel: option<string_>,
+@as("DBInstanceClass") dbinstanceClass: option<string_>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("Engine") engine: string_
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("OrderableDBInstanceOptions") orderableDBInstanceOptions: orderableDBInstanceOptionsList
+@as("Marker") marker: option<string_>,
+@as("OrderableDBInstanceOptions") orderableDBInstanceOptions: option<orderableDBInstanceOptionsList>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeOrderableDBInstanceOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDBEngineVersions = {
   type t;
   type request = {
-@as("ListSupportedTimezones") listSupportedTimezones: booleanOptional,
-@as("ListSupportedCharacterSets") listSupportedCharacterSets: booleanOptional,
-@as("DefaultOnly") defaultOnly: amazonawsBoolean,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Filters") filters: filterList,
-@as("DBParameterGroupFamily") dBParameterGroupFamily: amazonawsString,
-@as("EngineVersion") engineVersion: amazonawsString,
-@as("Engine") engine: amazonawsString
+@as("ListSupportedTimezones") listSupportedTimezones: option<booleanOptional>,
+@as("ListSupportedCharacterSets") listSupportedCharacterSets: option<booleanOptional>,
+@as("DefaultOnly") defaultOnly: option<boolean_>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Filters") filters: option<filterList>,
+@as("DBParameterGroupFamily") dbparameterGroupFamily: option<string_>,
+@as("EngineVersion") engineVersion: option<string_>,
+@as("Engine") engine: option<string_>
 }
   type response = {
-@as("DBEngineVersions") dBEngineVersions: dBEngineVersionList,
-@as("Marker") marker: amazonawsString
+@as("DBEngineVersions") dbengineVersions: option<dbengineVersionList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeDBEngineVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDBClusters = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Filters") filters: filterList,
-@as("DBClusterIdentifier") dBClusterIdentifier: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Filters") filters: option<filterList>,
+@as("DBClusterIdentifier") dbclusterIdentifier: option<string_>
 }
   type response = {
-@as("DBClusters") dBClusters: dBClusterList,
-@as("Marker") marker: amazonawsString
+@as("DBClusters") dbclusters: option<dbclusterList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeDBClustersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDBClusterSnapshotAttributes = {
   type t;
   type request = {
-@as("DBClusterSnapshotIdentifier") dBClusterSnapshotIdentifier: option<amazonawsString>
+@as("DBClusterSnapshotIdentifier") dbclusterSnapshotIdentifier: string_
 }
   type response = {
-@as("DBClusterSnapshotAttributesResult") dBClusterSnapshotAttributesResult: dBClusterSnapshotAttributesResult
+@as("DBClusterSnapshotAttributesResult") dbclusterSnapshotAttributesResult: option<dbclusterSnapshotAttributesResult>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeDBClusterSnapshotAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDBSubnetGroup = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("SubnetIds") subnetIds: option<subnetIdentifierList>,
-@as("DBSubnetGroupDescription") dBSubnetGroupDescription: option<amazonawsString>,
-@as("DBSubnetGroupName") dBSubnetGroupName: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("SubnetIds") subnetIds: subnetIdentifierList,
+@as("DBSubnetGroupDescription") dbsubnetGroupDescription: string_,
+@as("DBSubnetGroupName") dbsubnetGroupName: string_
 }
   type response = {
-@as("DBSubnetGroup") dBSubnetGroup: dBSubnetGroup
+@as("DBSubnetGroup") dbsubnetGroup: option<dbsubnetGroup>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "CreateDBSubnetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RebootDBInstance = {
   type t;
   type request = {
-@as("ForceFailover") forceFailover: booleanOptional,
-@as("DBInstanceIdentifier") dBInstanceIdentifier: option<amazonawsString>
+@as("ForceFailover") forceFailover: option<booleanOptional>,
+@as("DBInstanceIdentifier") dbinstanceIdentifier: string_
 }
   type response = {
-@as("DBInstance") dBInstance: dBInstance
+@as("DBInstance") dbinstance: option<dbinstance>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "RebootDBInstanceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyDBInstance = {
   type t;
   type request = {
-@as("PromotionTier") promotionTier: integerOptional,
-@as("CACertificateIdentifier") cACertificateIdentifier: amazonawsString,
-@as("NewDBInstanceIdentifier") newDBInstanceIdentifier: amazonawsString,
-@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: booleanOptional,
-@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: amazonawsString,
-@as("ApplyImmediately") applyImmediately: amazonawsBoolean,
-@as("DBInstanceClass") dBInstanceClass: amazonawsString,
-@as("DBInstanceIdentifier") dBInstanceIdentifier: option<amazonawsString>
+@as("PromotionTier") promotionTier: option<integerOptional>,
+@as("CACertificateIdentifier") cacertificateIdentifier: option<string_>,
+@as("NewDBInstanceIdentifier") newDBInstanceIdentifier: option<string_>,
+@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: option<booleanOptional>,
+@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: option<string_>,
+@as("ApplyImmediately") applyImmediately: option<boolean_>,
+@as("DBInstanceClass") dbinstanceClass: option<string_>,
+@as("DBInstanceIdentifier") dbinstanceIdentifier: string_
 }
   type response = {
-@as("DBInstance") dBInstance: dBInstance
+@as("DBInstance") dbinstance: option<dbinstance>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "ModifyDBInstanceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDBSubnetGroups = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Filters") filters: filterList,
-@as("DBSubnetGroupName") dBSubnetGroupName: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Filters") filters: option<filterList>,
+@as("DBSubnetGroupName") dbsubnetGroupName: option<string_>
 }
   type response = {
-@as("DBSubnetGroups") dBSubnetGroups: dBSubnetGroups,
-@as("Marker") marker: amazonawsString
+@as("DBSubnetGroups") dbsubnetGroups: option<dbsubnetGroups>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeDBSubnetGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDBInstance = {
   type t;
   type request = {
-@as("DBInstanceIdentifier") dBInstanceIdentifier: option<amazonawsString>
+@as("DBInstanceIdentifier") dbinstanceIdentifier: string_
 }
   type response = {
-@as("DBInstance") dBInstance: dBInstance
+@as("DBInstance") dbinstance: option<dbinstance>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DeleteDBInstanceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDBInstance = {
   type t;
   type request = {
-@as("PromotionTier") promotionTier: integerOptional,
-@as("DBClusterIdentifier") dBClusterIdentifier: option<amazonawsString>,
-@as("Tags") tags: tagList,
-@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: booleanOptional,
-@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: amazonawsString,
-@as("AvailabilityZone") availabilityZone: amazonawsString,
-@as("Engine") engine: option<amazonawsString>,
-@as("DBInstanceClass") dBInstanceClass: option<amazonawsString>,
-@as("DBInstanceIdentifier") dBInstanceIdentifier: option<amazonawsString>
+@as("PromotionTier") promotionTier: option<integerOptional>,
+@as("DBClusterIdentifier") dbclusterIdentifier: string_,
+@as("Tags") tags: option<tagList_>,
+@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: option<booleanOptional>,
+@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: option<string_>,
+@as("AvailabilityZone") availabilityZone: option<string_>,
+@as("Engine") engine: string_,
+@as("DBInstanceClass") dbinstanceClass: string_,
+@as("DBInstanceIdentifier") dbinstanceIdentifier: string_
 }
   type response = {
-@as("DBInstance") dBInstance: dBInstance
+@as("DBInstance") dbinstance: option<dbinstance>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "CreateDBInstanceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDBInstances = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Filters") filters: filterList,
-@as("DBInstanceIdentifier") dBInstanceIdentifier: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Filters") filters: option<filterList>,
+@as("DBInstanceIdentifier") dbinstanceIdentifier: option<string_>
 }
   type response = {
-@as("DBInstances") dBInstances: dBInstanceList,
-@as("Marker") marker: amazonawsString
+@as("DBInstances") dbinstances: option<dbinstanceList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-rds") @new external new_: (request) => t = "DescribeDBInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

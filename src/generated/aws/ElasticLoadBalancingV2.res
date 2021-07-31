@@ -1,17 +1,24 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type zoneName = string
 type vpcId = string
-type targetTypeEnum = [@as("lambda") #lambda | @as("ip") #ip | @as("instance") #instance]
+type targetTypeEnum = [@as("lambda") #Lambda | @as("ip") #Ip | @as("instance") #Instance]
 type targetId = string
-type targetHealthStateEnum = [@as("unavailable") #unavailable | @as("draining") #draining | @as("unused") #unused | @as("unhealthy") #unhealthy | @as("healthy") #healthy | @as("initial") #initial]
-type targetHealthReasonEnum = [@as("Elb.InternalError") #Elb_InternalError | @as("Target.HealthCheckDisabled") #Target_HealthCheckDisabled | @as("Target.IpUnusable") #Target_IpUnusable | @as("Target.InvalidState") #Target_InvalidState | @as("Target.DeregistrationInProgress") #Target_DeregistrationInProgress | @as("Target.NotInUse") #Target_NotInUse | @as("Target.NotRegistered") #Target_NotRegistered | @as("Target.FailedHealthChecks") #Target_FailedHealthChecks | @as("Target.Timeout") #Target_Timeout | @as("Target.ResponseCodeMismatch") #Target_ResponseCodeMismatch | @as("Elb.InitialHealthChecking") #Elb_InitialHealthChecking | @as("Elb.RegistrationInProgress") #Elb_RegistrationInProgress]
-type targetGroupWeight = int;
-type targetGroupStickinessEnabled = bool;
-type targetGroupStickinessDurationSeconds = int;
+type targetHealthStateEnum = [@as("unavailable") #Unavailable | @as("draining") #Draining | @as("unused") #Unused | @as("unhealthy") #Unhealthy | @as("healthy") #Healthy | @as("initial") #Initial]
+type targetHealthReasonEnum = [@as("Elb.InternalError") #ElbInternalError | @as("Target.HealthCheckDisabled") #TargetHealthCheckDisabled | @as("Target.IpUnusable") #TargetIpUnusable | @as("Target.InvalidState") #TargetInvalidState | @as("Target.DeregistrationInProgress") #TargetDeregistrationInProgress | @as("Target.NotInUse") #TargetNotInUse | @as("Target.NotRegistered") #TargetNotRegistered | @as("Target.FailedHealthChecks") #TargetFailedHealthChecks | @as("Target.Timeout") #TargetTimeout | @as("Target.ResponseCodeMismatch") #TargetResponseCodeMismatch | @as("Elb.InitialHealthChecking") #ElbInitialHealthChecking | @as("Elb.RegistrationInProgress") #ElbRegistrationInProgress]
+type targetGroupWeight = int
+type targetGroupStickinessEnabled = bool
+type targetGroupStickinessDurationSeconds = int
 type targetGroupName = string
 type targetGroupAttributeValue = string
 type targetGroupAttributeKey = string
@@ -20,72 +27,72 @@ type tagValue = string
 type tagKey = string
 type subnetId = string
 type stringValue = string
-type amazonawsString = string
+type string_ = string
 type stateReason = string
 type sslProtocol = string
 type sslPolicyName = string
 type securityGroupId = string
-type rulePriority = int;
+type rulePriority = int
 type ruleArn = string
 type resourceArn = string
-type redirectActionStatusCodeEnum = [@as("HTTP_302") #HTTP_302 | @as("HTTP_301") #HTTP_301]
+type redirectActionStatusCodeEnum = [@as("HTTP_302") #HTTP302 | @as("HTTP_301") #HTTP301]
 type redirectActionQuery = string
 type redirectActionProtocol = string
 type redirectActionPort = string
 type redirectActionPath = string
 type redirectActionHost = string
 type protocolVersion = string
-type protocolEnum = [@as("GENEVE") #GENEVE | @as("TCP_UDP") #TCP_UDP | @as("UDP") #UDP | @as("TLS") #TLS | @as("TCP") #TCP | @as("HTTPS") #HTTPS | @as("HTTP") #HTTP]
+type protocolEnum = [@as("GENEVE") #GENEVE | @as("TCP_UDP") #TCPUDP | @as("UDP") #UDP | @as("TLS") #TLS | @as("TCP") #TCP | @as("HTTPS") #HTTPS | @as("HTTP") #HTTP]
 type privateIPv4Address = string
-type port = int;
+type port = int
 type path = string
-type pageSize = int;
+type pageSize = int
 type outpostId = string
 type name = string
 type max = string
 type marker = string
-type loadBalancerTypeEnum = [@as("gateway") #gateway | @as("network") #network | @as("application") #application]
-type loadBalancerStateEnum = [@as("failed") #failed | @as("active_impaired") #active_impaired | @as("provisioning") #provisioning | @as("active") #active]
-type loadBalancerSchemeEnum = [@as("internal") #internal | @as("internet-facing") #internet_facing]
+type loadBalancerTypeEnum = [@as("gateway") #Gateway | @as("network") #Network | @as("application") #Application]
+type loadBalancerStateEnum = [@as("failed") #Failed | @as("active_impaired") #ActiveImpaired | @as("provisioning") #Provisioning | @as("active") #Active]
+type loadBalancerSchemeEnum = [@as("internal") #Internal | @as("internet-facing") #InternetFacing]
 type loadBalancerName = string
 type loadBalancerAttributeValue = string
 type loadBalancerAttributeKey = string
 type loadBalancerArn = string
 type listenerArn = string
-type isDefault = bool;
-type ipAddressType = [@as("dualstack") #dualstack | @as("ipv4") #ipv4]
+type isDefault = bool
+type ipAddressType = [@as("dualstack") #Dualstack | @as("ipv4") #Ipv4]
 type ipAddress = string
-type iPv6Address = string
+type ipv6Address = string
 type httpHeaderConditionName = string
 type httpCode = string
-type healthCheckTimeoutSeconds = int;
-type healthCheckThresholdCount = int;
+type healthCheckTimeoutSeconds = int
+type healthCheckThresholdCount = int
 type healthCheckPort = string
-type healthCheckIntervalSeconds = int;
-type healthCheckEnabled = bool;
+type healthCheckIntervalSeconds = int
+type healthCheckEnabled = bool
 type grpcCode = string
 type fixedResponseActionStatusCode = string
 type fixedResponseActionMessage = string
 type fixedResponseActionContentType = string
 type errorDescription = string
 type description = string
-type default = bool;
-type dNSName = string
+type default = bool
+type dnsname = string
 type customerOwnedIpv4Pool = string
 type createdTime = Js.Date.t;
 type conditionFieldName = string
-type cipherPriority = int;
+type cipherPriority = int
 type cipherName = string
 type certificateArn = string
 type canonicalHostedZoneId = string
 type authenticateOidcActionUserInfoEndpoint = string
-type authenticateOidcActionUseExistingClientSecret = bool;
+type authenticateOidcActionUseExistingClientSecret = bool
 type authenticateOidcActionTokenEndpoint = string
-type authenticateOidcActionSessionTimeout = float;
+type authenticateOidcActionSessionTimeout = float
 type authenticateOidcActionSessionCookieName = string
 type authenticateOidcActionScope = string
 type authenticateOidcActionIssuer = string
-type authenticateOidcActionConditionalBehaviorEnum = [@as("authenticate") #authenticate | @as("allow") #allow | @as("deny") #deny]
+type authenticateOidcActionConditionalBehaviorEnum = [@as("authenticate") #Authenticate | @as("allow") #Allow | @as("deny") #Deny]
 type authenticateOidcActionClientSecret = string
 type authenticateOidcActionClientId = string
 type authenticateOidcActionAuthorizationEndpoint = string
@@ -94,754 +101,754 @@ type authenticateOidcActionAuthenticationRequestParamName = string
 type authenticateCognitoActionUserPoolDomain = string
 type authenticateCognitoActionUserPoolClientId = string
 type authenticateCognitoActionUserPoolArn = string
-type authenticateCognitoActionSessionTimeout = float;
+type authenticateCognitoActionSessionTimeout = float
 type authenticateCognitoActionSessionCookieName = string
 type authenticateCognitoActionScope = string
-type authenticateCognitoActionConditionalBehaviorEnum = [@as("authenticate") #authenticate | @as("allow") #allow | @as("deny") #deny]
+type authenticateCognitoActionConditionalBehaviorEnum = [@as("authenticate") #Authenticate | @as("allow") #Allow | @as("deny") #Deny]
 type authenticateCognitoActionAuthenticationRequestParamValue = string
 type authenticateCognitoActionAuthenticationRequestParamName = string
 type alpnPolicyValue = string
 type allocationId = string
-type actionTypeEnum = [@as("fixed-response") #fixed_response | @as("redirect") #redirect | @as("authenticate-cognito") #authenticate_cognito | @as("authenticate-oidc") #authenticate_oidc | @as("forward") #forward]
-type actionOrder = int;
+type actionTypeEnum = [@as("fixed-response") #FixedResponse | @as("redirect") #Redirect | @as("authenticate-cognito") #AuthenticateCognito | @as("authenticate-oidc") #AuthenticateOidc | @as("forward") #Forward]
+type actionOrder = int
 type targetHealth = {
-@as("Description") description: description,
-@as("Reason") reason: targetHealthReasonEnum,
-@as("State") state: targetHealthStateEnum
+@as("Description") description: option<description>,
+@as("Reason") reason: option<targetHealthReasonEnum>,
+@as("State") state: option<targetHealthStateEnum>
 }
 type targetGroupTuple = {
-@as("Weight") weight: targetGroupWeight,
-@as("TargetGroupArn") targetGroupArn: targetGroupArn
+@as("Weight") weight: option<targetGroupWeight>,
+@as("TargetGroupArn") targetGroupArn: option<targetGroupArn>
 }
 type targetGroupStickinessConfig = {
-@as("DurationSeconds") durationSeconds: targetGroupStickinessDurationSeconds,
-@as("Enabled") enabled: targetGroupStickinessEnabled
+@as("DurationSeconds") durationSeconds: option<targetGroupStickinessDurationSeconds>,
+@as("Enabled") enabled: option<targetGroupStickinessEnabled>
 }
 type targetGroupNames = array<targetGroupName>
 type targetGroupAttribute = {
-@as("Value") value: targetGroupAttributeValue,
-@as("Key") key: targetGroupAttributeKey
+@as("Value") value: option<targetGroupAttributeValue>,
+@as("Key") key: option<targetGroupAttributeKey>
 }
 type targetGroupArns = array<targetGroupArn>
 type targetDescription = {
-@as("AvailabilityZone") availabilityZone: zoneName,
-@as("Port") port: port,
-@as("Id") id: option<targetId>
+@as("AvailabilityZone") availabilityZone: option<zoneName>,
+@as("Port") port: option<port>,
+@as("Id") id: targetId
 }
 type tagKeys = array<tagKey>
 type tag = {
-@as("Value") value: tagValue,
-@as("Key") key: option<tagKey>
+@as("Value") value: option<tagValue>,
+@as("Key") key: tagKey
 }
 type subnets = array<subnetId>
 type subnetMapping = {
-@as("IPv6Address") iPv6Address: iPv6Address,
-@as("PrivateIPv4Address") privateIPv4Address: privateIPv4Address,
-@as("AllocationId") allocationId: allocationId,
-@as("SubnetId") subnetId: subnetId
+@as("IPv6Address") ipv6Address: option<ipv6Address>,
+@as("PrivateIPv4Address") privateIPv4Address: option<privateIPv4Address>,
+@as("AllocationId") allocationId: option<allocationId>,
+@as("SubnetId") subnetId: option<subnetId>
 }
 type sslProtocols = array<sslProtocol>
 type sslPolicyNames = array<sslPolicyName>
 type securityGroups = array<securityGroupId>
 type rulePriorityPair = {
-@as("Priority") priority: rulePriority,
-@as("RuleArn") ruleArn: ruleArn
+@as("Priority") priority: option<rulePriority>,
+@as("RuleArn") ruleArn: option<ruleArn>
 }
 type ruleArns = array<ruleArn>
 type resourceArns = array<resourceArn>
 type redirectActionConfig = {
-@as("StatusCode") statusCode: option<redirectActionStatusCodeEnum>,
-@as("Query") query: redirectActionQuery,
-@as("Path") path: redirectActionPath,
-@as("Host") host: redirectActionHost,
-@as("Port") port: redirectActionPort,
-@as("Protocol") protocol: redirectActionProtocol
+@as("StatusCode") statusCode: redirectActionStatusCodeEnum,
+@as("Query") query: option<redirectActionQuery>,
+@as("Path") path: option<redirectActionPath>,
+@as("Host") host: option<redirectActionHost>,
+@as("Port") port: option<redirectActionPort>,
+@as("Protocol") protocol: option<redirectActionProtocol>
 }
 type queryStringKeyValuePair = {
-@as("Value") value: stringValue,
-@as("Key") key: stringValue
+@as("Value") value: option<stringValue>,
+@as("Key") key: option<stringValue>
 }
 type matcher = {
-@as("GrpcCode") grpcCode: grpcCode,
-@as("HttpCode") httpCode: httpCode
+@as("GrpcCode") grpcCode: option<grpcCode>,
+@as("HttpCode") httpCode: option<httpCode>
 }
 type loadBalancerState = {
-@as("Reason") reason: stateReason,
-@as("Code") code: loadBalancerStateEnum
+@as("Reason") reason: option<stateReason>,
+@as("Code") code: option<loadBalancerStateEnum>
 }
 type loadBalancerNames = array<loadBalancerName>
 type loadBalancerAttribute = {
-@as("Value") value: loadBalancerAttributeValue,
-@as("Key") key: loadBalancerAttributeKey
+@as("Value") value: option<loadBalancerAttributeValue>,
+@as("Key") key: option<loadBalancerAttributeKey>
 }
 type loadBalancerArns = array<loadBalancerArn>
 type loadBalancerAddress = {
-@as("IPv6Address") iPv6Address: iPv6Address,
-@as("PrivateIPv4Address") privateIPv4Address: privateIPv4Address,
-@as("AllocationId") allocationId: allocationId,
-@as("IpAddress") ipAddress: ipAddress
+@as("IPv6Address") ipv6Address: option<ipv6Address>,
+@as("PrivateIPv4Address") privateIPv4Address: option<privateIPv4Address>,
+@as("AllocationId") allocationId: option<allocationId>,
+@as("IpAddress") ipAddress: option<ipAddress>
 }
 type listenerArns = array<listenerArn>
 type listOfString = array<stringValue>
 type limit = {
-@as("Max") max: max,
-@as("Name") name: name
+@as("Max") max: option<max>,
+@as("Name") name: option<name>
 }
 type fixedResponseActionConfig = {
-@as("ContentType") contentType: fixedResponseActionContentType,
-@as("StatusCode") statusCode: option<fixedResponseActionStatusCode>,
-@as("MessageBody") messageBody: fixedResponseActionMessage
+@as("ContentType") contentType: option<fixedResponseActionContentType>,
+@as("StatusCode") statusCode: fixedResponseActionStatusCode,
+@as("MessageBody") messageBody: option<fixedResponseActionMessage>
 }
 type cipher = {
-@as("Priority") priority: cipherPriority,
-@as("Name") name: cipherName
+@as("Priority") priority: option<cipherPriority>,
+@as("Name") name: option<cipherName>
 }
 type certificate = {
-@as("IsDefault") isDefault: default,
-@as("CertificateArn") certificateArn: certificateArn
+@as("IsDefault") isDefault: option<default>,
+@as("CertificateArn") certificateArn: option<certificateArn>
 }
 type authenticateOidcActionAuthenticationRequestExtraParams = Js.Dict.t< authenticateOidcActionAuthenticationRequestParamValue>
 type authenticateCognitoActionAuthenticationRequestExtraParams = Js.Dict.t< authenticateCognitoActionAuthenticationRequestParamValue>
 type alpnPolicyName = array<alpnPolicyValue>
 type targetHealthDescription = {
-@as("TargetHealth") targetHealth: targetHealth,
-@as("HealthCheckPort") healthCheckPort: healthCheckPort,
-@as("Target") target: targetDescription
+@as("TargetHealth") targetHealth: option<targetHealth>,
+@as("HealthCheckPort") healthCheckPort: option<healthCheckPort>,
+@as("Target") target: option<targetDescription>
 }
 type targetGroupList = array<targetGroupTuple>
 type targetGroupAttributes = array<targetGroupAttribute>
 type targetGroup = {
-@as("ProtocolVersion") protocolVersion: protocolVersion,
-@as("TargetType") targetType: targetTypeEnum,
-@as("LoadBalancerArns") loadBalancerArns: loadBalancerArns,
-@as("Matcher") matcher: matcher,
-@as("HealthCheckPath") healthCheckPath: path,
-@as("UnhealthyThresholdCount") unhealthyThresholdCount: healthCheckThresholdCount,
-@as("HealthyThresholdCount") healthyThresholdCount: healthCheckThresholdCount,
-@as("HealthCheckTimeoutSeconds") healthCheckTimeoutSeconds: healthCheckTimeoutSeconds,
-@as("HealthCheckIntervalSeconds") healthCheckIntervalSeconds: healthCheckIntervalSeconds,
-@as("HealthCheckEnabled") healthCheckEnabled: healthCheckEnabled,
-@as("HealthCheckPort") healthCheckPort: healthCheckPort,
-@as("HealthCheckProtocol") healthCheckProtocol: protocolEnum,
-@as("VpcId") vpcId: vpcId,
-@as("Port") port: port,
-@as("Protocol") protocol: protocolEnum,
-@as("TargetGroupName") targetGroupName: targetGroupName,
-@as("TargetGroupArn") targetGroupArn: targetGroupArn
+@as("ProtocolVersion") protocolVersion: option<protocolVersion>,
+@as("TargetType") targetType: option<targetTypeEnum>,
+@as("LoadBalancerArns") loadBalancerArns: option<loadBalancerArns>,
+@as("Matcher") matcher: option<matcher>,
+@as("HealthCheckPath") healthCheckPath: option<path>,
+@as("UnhealthyThresholdCount") unhealthyThresholdCount: option<healthCheckThresholdCount>,
+@as("HealthyThresholdCount") healthyThresholdCount: option<healthCheckThresholdCount>,
+@as("HealthCheckTimeoutSeconds") healthCheckTimeoutSeconds: option<healthCheckTimeoutSeconds>,
+@as("HealthCheckIntervalSeconds") healthCheckIntervalSeconds: option<healthCheckIntervalSeconds>,
+@as("HealthCheckEnabled") healthCheckEnabled: option<healthCheckEnabled>,
+@as("HealthCheckPort") healthCheckPort: option<healthCheckPort>,
+@as("HealthCheckProtocol") healthCheckProtocol: option<protocolEnum>,
+@as("VpcId") vpcId: option<vpcId>,
+@as("Port") port: option<port>,
+@as("Protocol") protocol: option<protocolEnum>,
+@as("TargetGroupName") targetGroupName: option<targetGroupName>,
+@as("TargetGroupArn") targetGroupArn: option<targetGroupArn>
 }
 type targetDescriptions = array<targetDescription>
-type tagList = array<tag>
+type tagList_ = array<tag>
 type subnetMappings = array<subnetMapping>
 type sourceIpConditionConfig = {
-@as("Values") values: listOfString
+@as("Values") values: option<listOfString>
 }
 type rulePriorityList = array<rulePriorityPair>
 type queryStringKeyValuePairList = array<queryStringKeyValuePair>
 type pathPatternConditionConfig = {
-@as("Values") values: listOfString
+@as("Values") values: option<listOfString>
 }
 type loadBalancerAttributes = array<loadBalancerAttribute>
 type loadBalancerAddresses = array<loadBalancerAddress>
 type limits = array<limit>
 type httpRequestMethodConditionConfig = {
-@as("Values") values: listOfString
+@as("Values") values: option<listOfString>
 }
 type httpHeaderConditionConfig = {
-@as("Values") values: listOfString,
-@as("HttpHeaderName") httpHeaderName: httpHeaderConditionName
+@as("Values") values: option<listOfString>,
+@as("HttpHeaderName") httpHeaderName: option<httpHeaderConditionName>
 }
 type hostHeaderConditionConfig = {
-@as("Values") values: listOfString
+@as("Values") values: option<listOfString>
 }
 type ciphers = array<cipher>
 type certificateList = array<certificate>
 type authenticateOidcActionConfig = {
-@as("UseExistingClientSecret") useExistingClientSecret: authenticateOidcActionUseExistingClientSecret,
-@as("OnUnauthenticatedRequest") onUnauthenticatedRequest: authenticateOidcActionConditionalBehaviorEnum,
-@as("AuthenticationRequestExtraParams") authenticationRequestExtraParams: authenticateOidcActionAuthenticationRequestExtraParams,
-@as("SessionTimeout") sessionTimeout: authenticateOidcActionSessionTimeout,
-@as("Scope") scope: authenticateOidcActionScope,
-@as("SessionCookieName") sessionCookieName: authenticateOidcActionSessionCookieName,
-@as("ClientSecret") clientSecret: authenticateOidcActionClientSecret,
-@as("ClientId") clientId: option<authenticateOidcActionClientId>,
-@as("UserInfoEndpoint") userInfoEndpoint: option<authenticateOidcActionUserInfoEndpoint>,
-@as("TokenEndpoint") tokenEndpoint: option<authenticateOidcActionTokenEndpoint>,
-@as("AuthorizationEndpoint") authorizationEndpoint: option<authenticateOidcActionAuthorizationEndpoint>,
-@as("Issuer") issuer: option<authenticateOidcActionIssuer>
+@as("UseExistingClientSecret") useExistingClientSecret: option<authenticateOidcActionUseExistingClientSecret>,
+@as("OnUnauthenticatedRequest") onUnauthenticatedRequest: option<authenticateOidcActionConditionalBehaviorEnum>,
+@as("AuthenticationRequestExtraParams") authenticationRequestExtraParams: option<authenticateOidcActionAuthenticationRequestExtraParams>,
+@as("SessionTimeout") sessionTimeout: option<authenticateOidcActionSessionTimeout>,
+@as("Scope") scope: option<authenticateOidcActionScope>,
+@as("SessionCookieName") sessionCookieName: option<authenticateOidcActionSessionCookieName>,
+@as("ClientSecret") clientSecret: option<authenticateOidcActionClientSecret>,
+@as("ClientId") clientId: authenticateOidcActionClientId,
+@as("UserInfoEndpoint") userInfoEndpoint: authenticateOidcActionUserInfoEndpoint,
+@as("TokenEndpoint") tokenEndpoint: authenticateOidcActionTokenEndpoint,
+@as("AuthorizationEndpoint") authorizationEndpoint: authenticateOidcActionAuthorizationEndpoint,
+@as("Issuer") issuer: authenticateOidcActionIssuer
 }
 type authenticateCognitoActionConfig = {
-@as("OnUnauthenticatedRequest") onUnauthenticatedRequest: authenticateCognitoActionConditionalBehaviorEnum,
-@as("AuthenticationRequestExtraParams") authenticationRequestExtraParams: authenticateCognitoActionAuthenticationRequestExtraParams,
-@as("SessionTimeout") sessionTimeout: authenticateCognitoActionSessionTimeout,
-@as("Scope") scope: authenticateCognitoActionScope,
-@as("SessionCookieName") sessionCookieName: authenticateCognitoActionSessionCookieName,
-@as("UserPoolDomain") userPoolDomain: option<authenticateCognitoActionUserPoolDomain>,
-@as("UserPoolClientId") userPoolClientId: option<authenticateCognitoActionUserPoolClientId>,
-@as("UserPoolArn") userPoolArn: option<authenticateCognitoActionUserPoolArn>
+@as("OnUnauthenticatedRequest") onUnauthenticatedRequest: option<authenticateCognitoActionConditionalBehaviorEnum>,
+@as("AuthenticationRequestExtraParams") authenticationRequestExtraParams: option<authenticateCognitoActionAuthenticationRequestExtraParams>,
+@as("SessionTimeout") sessionTimeout: option<authenticateCognitoActionSessionTimeout>,
+@as("Scope") scope: option<authenticateCognitoActionScope>,
+@as("SessionCookieName") sessionCookieName: option<authenticateCognitoActionSessionCookieName>,
+@as("UserPoolDomain") userPoolDomain: authenticateCognitoActionUserPoolDomain,
+@as("UserPoolClientId") userPoolClientId: authenticateCognitoActionUserPoolClientId,
+@as("UserPoolArn") userPoolArn: authenticateCognitoActionUserPoolArn
 }
 type targetHealthDescriptions = array<targetHealthDescription>
 type targetGroups = array<targetGroup>
 type tagDescription = {
-@as("Tags") tags: tagList,
-@as("ResourceArn") resourceArn: resourceArn
+@as("Tags") tags: option<tagList_>,
+@as("ResourceArn") resourceArn: option<resourceArn>
 }
 type sslPolicy = {
-@as("Name") name: sslPolicyName,
-@as("Ciphers") ciphers: ciphers,
-@as("SslProtocols") sslProtocols: sslProtocols
+@as("Name") name: option<sslPolicyName>,
+@as("Ciphers") ciphers: option<ciphers>,
+@as("SslProtocols") sslProtocols: option<sslProtocols>
 }
 type queryStringConditionConfig = {
-@as("Values") values: queryStringKeyValuePairList
+@as("Values") values: option<queryStringKeyValuePairList>
 }
 type forwardActionConfig = {
-@as("TargetGroupStickinessConfig") targetGroupStickinessConfig: targetGroupStickinessConfig,
-@as("TargetGroups") targetGroups: targetGroupList
+@as("TargetGroupStickinessConfig") targetGroupStickinessConfig: option<targetGroupStickinessConfig>,
+@as("TargetGroups") targetGroups: option<targetGroupList>
 }
 type availabilityZone = {
-@as("LoadBalancerAddresses") loadBalancerAddresses: loadBalancerAddresses,
-@as("OutpostId") outpostId: outpostId,
-@as("SubnetId") subnetId: subnetId,
-@as("ZoneName") zoneName: zoneName
+@as("LoadBalancerAddresses") loadBalancerAddresses: option<loadBalancerAddresses>,
+@as("OutpostId") outpostId: option<outpostId>,
+@as("SubnetId") subnetId: option<subnetId>,
+@as("ZoneName") zoneName: option<zoneName>
 }
 type tagDescriptions = array<tagDescription>
 type sslPolicies = array<sslPolicy>
 type ruleCondition = {
-@as("SourceIpConfig") sourceIpConfig: sourceIpConditionConfig,
-@as("HttpRequestMethodConfig") httpRequestMethodConfig: httpRequestMethodConditionConfig,
-@as("QueryStringConfig") queryStringConfig: queryStringConditionConfig,
-@as("HttpHeaderConfig") httpHeaderConfig: httpHeaderConditionConfig,
-@as("PathPatternConfig") pathPatternConfig: pathPatternConditionConfig,
-@as("HostHeaderConfig") hostHeaderConfig: hostHeaderConditionConfig,
-@as("Values") values: listOfString,
-@as("Field") field: conditionFieldName
+@as("SourceIpConfig") sourceIpConfig: option<sourceIpConditionConfig>,
+@as("HttpRequestMethodConfig") httpRequestMethodConfig: option<httpRequestMethodConditionConfig>,
+@as("QueryStringConfig") queryStringConfig: option<queryStringConditionConfig>,
+@as("HttpHeaderConfig") httpHeaderConfig: option<httpHeaderConditionConfig>,
+@as("PathPatternConfig") pathPatternConfig: option<pathPatternConditionConfig>,
+@as("HostHeaderConfig") hostHeaderConfig: option<hostHeaderConditionConfig>,
+@as("Values") values: option<listOfString>,
+@as("Field") field: option<conditionFieldName>
 }
 type availabilityZones = array<availabilityZone>
 type action = {
-@as("ForwardConfig") forwardConfig: forwardActionConfig,
-@as("FixedResponseConfig") fixedResponseConfig: fixedResponseActionConfig,
-@as("RedirectConfig") redirectConfig: redirectActionConfig,
-@as("Order") order: actionOrder,
-@as("AuthenticateCognitoConfig") authenticateCognitoConfig: authenticateCognitoActionConfig,
-@as("AuthenticateOidcConfig") authenticateOidcConfig: authenticateOidcActionConfig,
-@as("TargetGroupArn") targetGroupArn: targetGroupArn,
-@as("Type") type_: option<actionTypeEnum>
+@as("ForwardConfig") forwardConfig: option<forwardActionConfig>,
+@as("FixedResponseConfig") fixedResponseConfig: option<fixedResponseActionConfig>,
+@as("RedirectConfig") redirectConfig: option<redirectActionConfig>,
+@as("Order") order: option<actionOrder>,
+@as("AuthenticateCognitoConfig") authenticateCognitoConfig: option<authenticateCognitoActionConfig>,
+@as("AuthenticateOidcConfig") authenticateOidcConfig: option<authenticateOidcActionConfig>,
+@as("TargetGroupArn") targetGroupArn: option<targetGroupArn>,
+@as("Type") type_: actionTypeEnum
 }
 type ruleConditionList = array<ruleCondition>
 type loadBalancer = {
-@as("CustomerOwnedIpv4Pool") customerOwnedIpv4Pool: customerOwnedIpv4Pool,
-@as("IpAddressType") ipAddressType: ipAddressType,
-@as("SecurityGroups") securityGroups: securityGroups,
-@as("AvailabilityZones") availabilityZones: availabilityZones,
-@as("Type") type_: loadBalancerTypeEnum,
-@as("State") state: loadBalancerState,
-@as("VpcId") vpcId: vpcId,
-@as("Scheme") scheme: loadBalancerSchemeEnum,
-@as("LoadBalancerName") loadBalancerName: loadBalancerName,
-@as("CreatedTime") createdTime: createdTime,
-@as("CanonicalHostedZoneId") canonicalHostedZoneId: canonicalHostedZoneId,
-@as("DNSName") dNSName: dNSName,
-@as("LoadBalancerArn") loadBalancerArn: loadBalancerArn
+@as("CustomerOwnedIpv4Pool") customerOwnedIpv4Pool: option<customerOwnedIpv4Pool>,
+@as("IpAddressType") ipAddressType: option<ipAddressType>,
+@as("SecurityGroups") securityGroups: option<securityGroups>,
+@as("AvailabilityZones") availabilityZones: option<availabilityZones>,
+@as("Type") type_: option<loadBalancerTypeEnum>,
+@as("State") state: option<loadBalancerState>,
+@as("VpcId") vpcId: option<vpcId>,
+@as("Scheme") scheme: option<loadBalancerSchemeEnum>,
+@as("LoadBalancerName") loadBalancerName: option<loadBalancerName>,
+@as("CreatedTime") createdTime: option<createdTime>,
+@as("CanonicalHostedZoneId") canonicalHostedZoneId: option<canonicalHostedZoneId>,
+@as("DNSName") dnsname: option<dnsname>,
+@as("LoadBalancerArn") loadBalancerArn: option<loadBalancerArn>
 }
 type actions = array<action>
 type rule = {
-@as("IsDefault") isDefault: isDefault,
-@as("Actions") actions: actions,
-@as("Conditions") conditions: ruleConditionList,
-@as("Priority") priority: amazonawsString,
-@as("RuleArn") ruleArn: ruleArn
+@as("IsDefault") isDefault: option<isDefault>,
+@as("Actions") actions: option<actions>,
+@as("Conditions") conditions: option<ruleConditionList>,
+@as("Priority") priority: option<string_>,
+@as("RuleArn") ruleArn: option<ruleArn>
 }
 type loadBalancers = array<loadBalancer>
 type listener = {
-@as("AlpnPolicy") alpnPolicy: alpnPolicyName,
-@as("DefaultActions") defaultActions: actions,
-@as("SslPolicy") sslPolicy: sslPolicyName,
-@as("Certificates") certificates: certificateList,
-@as("Protocol") protocol: protocolEnum,
-@as("Port") port: port,
-@as("LoadBalancerArn") loadBalancerArn: loadBalancerArn,
-@as("ListenerArn") listenerArn: listenerArn
+@as("AlpnPolicy") alpnPolicy: option<alpnPolicyName>,
+@as("DefaultActions") defaultActions: option<actions>,
+@as("SslPolicy") sslPolicy: option<sslPolicyName>,
+@as("Certificates") certificates: option<certificateList>,
+@as("Protocol") protocol: option<protocolEnum>,
+@as("Port") port: option<port>,
+@as("LoadBalancerArn") loadBalancerArn: option<loadBalancerArn>,
+@as("ListenerArn") listenerArn: option<listenerArn>
 }
 type rules = array<rule>
 type listeners = array<listener>
-type clientType;
-@module("@aws-sdk/client-elasticloadbalancing") @new external createClient: unit => clientType = "ElasticLoadBalancingV2Client";
+type awsServiceClient;
+@module("@aws-sdk/client-elasticloadbalancing") @new external createClient: unit => awsServiceClient = "ElasticLoadBalancingV2Client";
 module SetIpAddressType = {
   type t;
   type request = {
-@as("IpAddressType") ipAddressType: option<ipAddressType>,
-@as("LoadBalancerArn") loadBalancerArn: option<loadBalancerArn>
+@as("IpAddressType") ipAddressType: ipAddressType,
+@as("LoadBalancerArn") loadBalancerArn: loadBalancerArn
 }
   type response = {
-@as("IpAddressType") ipAddressType: ipAddressType
+@as("IpAddressType") ipAddressType: option<ipAddressType>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "SetIpAddressTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteTargetGroup = {
   type t;
   type request = {
-@as("TargetGroupArn") targetGroupArn: option<targetGroupArn>
+@as("TargetGroupArn") targetGroupArn: targetGroupArn
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DeleteTargetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteRule = {
   type t;
   type request = {
-@as("RuleArn") ruleArn: option<ruleArn>
+@as("RuleArn") ruleArn: ruleArn
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DeleteRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteLoadBalancer = {
   type t;
   type request = {
-@as("LoadBalancerArn") loadBalancerArn: option<loadBalancerArn>
+@as("LoadBalancerArn") loadBalancerArn: loadBalancerArn
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DeleteLoadBalancerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteListener = {
   type t;
   type request = {
-@as("ListenerArn") listenerArn: option<listenerArn>
+@as("ListenerArn") listenerArn: listenerArn
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DeleteListenerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SetSecurityGroups = {
   type t;
   type request = {
-@as("SecurityGroups") securityGroups: option<securityGroups>,
-@as("LoadBalancerArn") loadBalancerArn: option<loadBalancerArn>
+@as("SecurityGroups") securityGroups: securityGroups,
+@as("LoadBalancerArn") loadBalancerArn: loadBalancerArn
 }
   type response = {
-@as("SecurityGroupIds") securityGroupIds: securityGroups
+@as("SecurityGroupIds") securityGroupIds: option<securityGroups>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "SetSecurityGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RemoveTags = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeys>,
-@as("ResourceArns") resourceArns: option<resourceArns>
+@as("TagKeys") tagKeys: tagKeys,
+@as("ResourceArns") resourceArns: resourceArns
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "RemoveTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RemoveListenerCertificates = {
   type t;
   type request = {
-@as("Certificates") certificates: option<certificateList>,
-@as("ListenerArn") listenerArn: option<listenerArn>
+@as("Certificates") certificates: certificateList,
+@as("ListenerArn") listenerArn: listenerArn
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "RemoveListenerCertificatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterTargets = {
   type t;
   type request = {
-@as("Targets") targets: option<targetDescriptions>,
-@as("TargetGroupArn") targetGroupArn: option<targetGroupArn>
+@as("Targets") targets: targetDescriptions,
+@as("TargetGroupArn") targetGroupArn: targetGroupArn
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "RegisterTargetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyTargetGroupAttributes = {
   type t;
   type request = {
-@as("Attributes") attributes: option<targetGroupAttributes>,
-@as("TargetGroupArn") targetGroupArn: option<targetGroupArn>
+@as("Attributes") attributes: targetGroupAttributes,
+@as("TargetGroupArn") targetGroupArn: targetGroupArn
 }
   type response = {
-@as("Attributes") attributes: targetGroupAttributes
+@as("Attributes") attributes: option<targetGroupAttributes>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "ModifyTargetGroupAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyLoadBalancerAttributes = {
   type t;
   type request = {
-@as("Attributes") attributes: option<loadBalancerAttributes>,
-@as("LoadBalancerArn") loadBalancerArn: option<loadBalancerArn>
+@as("Attributes") attributes: loadBalancerAttributes,
+@as("LoadBalancerArn") loadBalancerArn: loadBalancerArn
 }
   type response = {
-@as("Attributes") attributes: loadBalancerAttributes
+@as("Attributes") attributes: option<loadBalancerAttributes>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "ModifyLoadBalancerAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTargetGroupAttributes = {
   type t;
   type request = {
-@as("TargetGroupArn") targetGroupArn: option<targetGroupArn>
+@as("TargetGroupArn") targetGroupArn: targetGroupArn
 }
   type response = {
-@as("Attributes") attributes: targetGroupAttributes
+@as("Attributes") attributes: option<targetGroupAttributes>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeTargetGroupAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLoadBalancerAttributes = {
   type t;
   type request = {
-@as("LoadBalancerArn") loadBalancerArn: option<loadBalancerArn>
+@as("LoadBalancerArn") loadBalancerArn: loadBalancerArn
 }
   type response = {
-@as("Attributes") attributes: loadBalancerAttributes
+@as("Attributes") attributes: option<loadBalancerAttributes>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeLoadBalancerAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeListenerCertificates = {
   type t;
   type request = {
-@as("PageSize") pageSize: pageSize,
-@as("Marker") marker: marker,
-@as("ListenerArn") listenerArn: option<listenerArn>
+@as("PageSize") pageSize: option<pageSize>,
+@as("Marker") marker: option<marker>,
+@as("ListenerArn") listenerArn: listenerArn
 }
   type response = {
-@as("NextMarker") nextMarker: marker,
-@as("Certificates") certificates: certificateList
+@as("NextMarker") nextMarker: option<marker>,
+@as("Certificates") certificates: option<certificateList>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeListenerCertificatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAccountLimits = {
   type t;
   type request = {
-@as("PageSize") pageSize: pageSize,
-@as("Marker") marker: marker
+@as("PageSize") pageSize: option<pageSize>,
+@as("Marker") marker: option<marker>
 }
   type response = {
-@as("NextMarker") nextMarker: marker,
-@as("Limits") limits: limits
+@as("NextMarker") nextMarker: option<marker>,
+@as("Limits") limits: option<limits>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeAccountLimitsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterTargets = {
   type t;
   type request = {
-@as("Targets") targets: option<targetDescriptions>,
-@as("TargetGroupArn") targetGroupArn: option<targetGroupArn>
+@as("Targets") targets: targetDescriptions,
+@as("TargetGroupArn") targetGroupArn: targetGroupArn
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DeregisterTargetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddTags = {
   type t;
   type request = {
-@as("Tags") tags: option<tagList>,
-@as("ResourceArns") resourceArns: option<resourceArns>
+@as("Tags") tags: tagList_,
+@as("ResourceArns") resourceArns: resourceArns
 }
   type response = unit
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "AddTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddListenerCertificates = {
   type t;
   type request = {
-@as("Certificates") certificates: option<certificateList>,
-@as("ListenerArn") listenerArn: option<listenerArn>
+@as("Certificates") certificates: certificateList,
+@as("ListenerArn") listenerArn: listenerArn
 }
   type response = {
-@as("Certificates") certificates: certificateList
+@as("Certificates") certificates: option<certificateList>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "AddListenerCertificatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyTargetGroup = {
   type t;
   type request = {
-@as("Matcher") matcher: matcher,
-@as("UnhealthyThresholdCount") unhealthyThresholdCount: healthCheckThresholdCount,
-@as("HealthyThresholdCount") healthyThresholdCount: healthCheckThresholdCount,
-@as("HealthCheckTimeoutSeconds") healthCheckTimeoutSeconds: healthCheckTimeoutSeconds,
-@as("HealthCheckIntervalSeconds") healthCheckIntervalSeconds: healthCheckIntervalSeconds,
-@as("HealthCheckEnabled") healthCheckEnabled: healthCheckEnabled,
-@as("HealthCheckPath") healthCheckPath: path,
-@as("HealthCheckPort") healthCheckPort: healthCheckPort,
-@as("HealthCheckProtocol") healthCheckProtocol: protocolEnum,
-@as("TargetGroupArn") targetGroupArn: option<targetGroupArn>
+@as("Matcher") matcher: option<matcher>,
+@as("UnhealthyThresholdCount") unhealthyThresholdCount: option<healthCheckThresholdCount>,
+@as("HealthyThresholdCount") healthyThresholdCount: option<healthCheckThresholdCount>,
+@as("HealthCheckTimeoutSeconds") healthCheckTimeoutSeconds: option<healthCheckTimeoutSeconds>,
+@as("HealthCheckIntervalSeconds") healthCheckIntervalSeconds: option<healthCheckIntervalSeconds>,
+@as("HealthCheckEnabled") healthCheckEnabled: option<healthCheckEnabled>,
+@as("HealthCheckPath") healthCheckPath: option<path>,
+@as("HealthCheckPort") healthCheckPort: option<healthCheckPort>,
+@as("HealthCheckProtocol") healthCheckProtocol: option<protocolEnum>,
+@as("TargetGroupArn") targetGroupArn: targetGroupArn
 }
   type response = {
-@as("TargetGroups") targetGroups: targetGroups
+@as("TargetGroups") targetGroups: option<targetGroups>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "ModifyTargetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTargetHealth = {
   type t;
   type request = {
-@as("Targets") targets: targetDescriptions,
-@as("TargetGroupArn") targetGroupArn: option<targetGroupArn>
+@as("Targets") targets: option<targetDescriptions>,
+@as("TargetGroupArn") targetGroupArn: targetGroupArn
 }
   type response = {
-@as("TargetHealthDescriptions") targetHealthDescriptions: targetHealthDescriptions
+@as("TargetHealthDescriptions") targetHealthDescriptions: option<targetHealthDescriptions>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeTargetHealthCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTargetGroups = {
   type t;
   type request = {
-@as("PageSize") pageSize: pageSize,
-@as("Marker") marker: marker,
-@as("Names") names: targetGroupNames,
-@as("TargetGroupArns") targetGroupArns: targetGroupArns,
-@as("LoadBalancerArn") loadBalancerArn: loadBalancerArn
+@as("PageSize") pageSize: option<pageSize>,
+@as("Marker") marker: option<marker>,
+@as("Names") names: option<targetGroupNames>,
+@as("TargetGroupArns") targetGroupArns: option<targetGroupArns>,
+@as("LoadBalancerArn") loadBalancerArn: option<loadBalancerArn>
 }
   type response = {
-@as("NextMarker") nextMarker: marker,
-@as("TargetGroups") targetGroups: targetGroups
+@as("NextMarker") nextMarker: option<marker>,
+@as("TargetGroups") targetGroups: option<targetGroups>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeTargetGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateTargetGroup = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("TargetType") targetType: targetTypeEnum,
-@as("Matcher") matcher: matcher,
-@as("UnhealthyThresholdCount") unhealthyThresholdCount: healthCheckThresholdCount,
-@as("HealthyThresholdCount") healthyThresholdCount: healthCheckThresholdCount,
-@as("HealthCheckTimeoutSeconds") healthCheckTimeoutSeconds: healthCheckTimeoutSeconds,
-@as("HealthCheckIntervalSeconds") healthCheckIntervalSeconds: healthCheckIntervalSeconds,
-@as("HealthCheckPath") healthCheckPath: path,
-@as("HealthCheckEnabled") healthCheckEnabled: healthCheckEnabled,
-@as("HealthCheckPort") healthCheckPort: healthCheckPort,
-@as("HealthCheckProtocol") healthCheckProtocol: protocolEnum,
-@as("VpcId") vpcId: vpcId,
-@as("Port") port: port,
-@as("ProtocolVersion") protocolVersion: protocolVersion,
-@as("Protocol") protocol: protocolEnum,
-@as("Name") name: option<targetGroupName>
+@as("Tags") tags: option<tagList_>,
+@as("TargetType") targetType: option<targetTypeEnum>,
+@as("Matcher") matcher: option<matcher>,
+@as("UnhealthyThresholdCount") unhealthyThresholdCount: option<healthCheckThresholdCount>,
+@as("HealthyThresholdCount") healthyThresholdCount: option<healthCheckThresholdCount>,
+@as("HealthCheckTimeoutSeconds") healthCheckTimeoutSeconds: option<healthCheckTimeoutSeconds>,
+@as("HealthCheckIntervalSeconds") healthCheckIntervalSeconds: option<healthCheckIntervalSeconds>,
+@as("HealthCheckPath") healthCheckPath: option<path>,
+@as("HealthCheckEnabled") healthCheckEnabled: option<healthCheckEnabled>,
+@as("HealthCheckPort") healthCheckPort: option<healthCheckPort>,
+@as("HealthCheckProtocol") healthCheckProtocol: option<protocolEnum>,
+@as("VpcId") vpcId: option<vpcId>,
+@as("Port") port: option<port>,
+@as("ProtocolVersion") protocolVersion: option<protocolVersion>,
+@as("Protocol") protocol: option<protocolEnum>,
+@as("Name") name: targetGroupName
 }
   type response = {
-@as("TargetGroups") targetGroups: targetGroups
+@as("TargetGroups") targetGroups: option<targetGroups>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "CreateTargetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SetSubnets = {
   type t;
   type request = {
-@as("IpAddressType") ipAddressType: ipAddressType,
-@as("SubnetMappings") subnetMappings: subnetMappings,
-@as("Subnets") subnets: subnets,
-@as("LoadBalancerArn") loadBalancerArn: option<loadBalancerArn>
+@as("IpAddressType") ipAddressType: option<ipAddressType>,
+@as("SubnetMappings") subnetMappings: option<subnetMappings>,
+@as("Subnets") subnets: option<subnets>,
+@as("LoadBalancerArn") loadBalancerArn: loadBalancerArn
 }
   type response = {
-@as("IpAddressType") ipAddressType: ipAddressType,
-@as("AvailabilityZones") availabilityZones: availabilityZones
+@as("IpAddressType") ipAddressType: option<ipAddressType>,
+@as("AvailabilityZones") availabilityZones: option<availabilityZones>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "SetSubnetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTags = {
   type t;
   type request = {
-@as("ResourceArns") resourceArns: option<resourceArns>
+@as("ResourceArns") resourceArns: resourceArns
 }
   type response = {
-@as("TagDescriptions") tagDescriptions: tagDescriptions
+@as("TagDescriptions") tagDescriptions: option<tagDescriptions>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSSLPolicies = {
   type t;
   type request = {
-@as("PageSize") pageSize: pageSize,
-@as("Marker") marker: marker,
-@as("Names") names: sslPolicyNames
+@as("PageSize") pageSize: option<pageSize>,
+@as("Marker") marker: option<marker>,
+@as("Names") names: option<sslPolicyNames>
 }
   type response = {
-@as("NextMarker") nextMarker: marker,
-@as("SslPolicies") sslPolicies: sslPolicies
+@as("NextMarker") nextMarker: option<marker>,
+@as("SslPolicies") sslPolicies: option<sslPolicies>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeSSLPoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLoadBalancers = {
   type t;
   type request = {
-@as("PageSize") pageSize: pageSize,
-@as("Marker") marker: marker,
-@as("Names") names: loadBalancerNames,
-@as("LoadBalancerArns") loadBalancerArns: loadBalancerArns
+@as("PageSize") pageSize: option<pageSize>,
+@as("Marker") marker: option<marker>,
+@as("Names") names: option<loadBalancerNames>,
+@as("LoadBalancerArns") loadBalancerArns: option<loadBalancerArns>
 }
   type response = {
-@as("NextMarker") nextMarker: marker,
-@as("LoadBalancers") loadBalancers: loadBalancers
+@as("NextMarker") nextMarker: option<marker>,
+@as("LoadBalancers") loadBalancers: option<loadBalancers>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeLoadBalancersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateLoadBalancer = {
   type t;
   type request = {
-@as("CustomerOwnedIpv4Pool") customerOwnedIpv4Pool: customerOwnedIpv4Pool,
-@as("IpAddressType") ipAddressType: ipAddressType,
-@as("Type") type_: loadBalancerTypeEnum,
-@as("Tags") tags: tagList,
-@as("Scheme") scheme: loadBalancerSchemeEnum,
-@as("SecurityGroups") securityGroups: securityGroups,
-@as("SubnetMappings") subnetMappings: subnetMappings,
-@as("Subnets") subnets: subnets,
-@as("Name") name: option<loadBalancerName>
+@as("CustomerOwnedIpv4Pool") customerOwnedIpv4Pool: option<customerOwnedIpv4Pool>,
+@as("IpAddressType") ipAddressType: option<ipAddressType>,
+@as("Type") type_: option<loadBalancerTypeEnum>,
+@as("Tags") tags: option<tagList_>,
+@as("Scheme") scheme: option<loadBalancerSchemeEnum>,
+@as("SecurityGroups") securityGroups: option<securityGroups>,
+@as("SubnetMappings") subnetMappings: option<subnetMappings>,
+@as("Subnets") subnets: option<subnets>,
+@as("Name") name: loadBalancerName
 }
   type response = {
-@as("LoadBalancers") loadBalancers: loadBalancers
+@as("LoadBalancers") loadBalancers: option<loadBalancers>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "CreateLoadBalancerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SetRulePriorities = {
   type t;
   type request = {
-@as("RulePriorities") rulePriorities: option<rulePriorityList>
+@as("RulePriorities") rulePriorities: rulePriorityList
 }
   type response = {
-@as("Rules") rules: rules
+@as("Rules") rules: option<rules>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "SetRulePrioritiesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyRule = {
   type t;
   type request = {
-@as("Actions") actions: actions,
-@as("Conditions") conditions: ruleConditionList,
-@as("RuleArn") ruleArn: option<ruleArn>
+@as("Actions") actions: option<actions>,
+@as("Conditions") conditions: option<ruleConditionList>,
+@as("RuleArn") ruleArn: ruleArn
 }
   type response = {
-@as("Rules") rules: rules
+@as("Rules") rules: option<rules>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "ModifyRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyListener = {
   type t;
   type request = {
-@as("AlpnPolicy") alpnPolicy: alpnPolicyName,
-@as("DefaultActions") defaultActions: actions,
-@as("Certificates") certificates: certificateList,
-@as("SslPolicy") sslPolicy: sslPolicyName,
-@as("Protocol") protocol: protocolEnum,
-@as("Port") port: port,
-@as("ListenerArn") listenerArn: option<listenerArn>
+@as("AlpnPolicy") alpnPolicy: option<alpnPolicyName>,
+@as("DefaultActions") defaultActions: option<actions>,
+@as("Certificates") certificates: option<certificateList>,
+@as("SslPolicy") sslPolicy: option<sslPolicyName>,
+@as("Protocol") protocol: option<protocolEnum>,
+@as("Port") port: option<port>,
+@as("ListenerArn") listenerArn: listenerArn
 }
   type response = {
-@as("Listeners") listeners: listeners
+@as("Listeners") listeners: option<listeners>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "ModifyListenerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRules = {
   type t;
   type request = {
-@as("PageSize") pageSize: pageSize,
-@as("Marker") marker: marker,
-@as("RuleArns") ruleArns: ruleArns,
-@as("ListenerArn") listenerArn: listenerArn
+@as("PageSize") pageSize: option<pageSize>,
+@as("Marker") marker: option<marker>,
+@as("RuleArns") ruleArns: option<ruleArns>,
+@as("ListenerArn") listenerArn: option<listenerArn>
 }
   type response = {
-@as("NextMarker") nextMarker: marker,
-@as("Rules") rules: rules
+@as("NextMarker") nextMarker: option<marker>,
+@as("Rules") rules: option<rules>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeRulesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeListeners = {
   type t;
   type request = {
-@as("PageSize") pageSize: pageSize,
-@as("Marker") marker: marker,
-@as("ListenerArns") listenerArns: listenerArns,
-@as("LoadBalancerArn") loadBalancerArn: loadBalancerArn
+@as("PageSize") pageSize: option<pageSize>,
+@as("Marker") marker: option<marker>,
+@as("ListenerArns") listenerArns: option<listenerArns>,
+@as("LoadBalancerArn") loadBalancerArn: option<loadBalancerArn>
 }
   type response = {
-@as("NextMarker") nextMarker: marker,
-@as("Listeners") listeners: listeners
+@as("NextMarker") nextMarker: option<marker>,
+@as("Listeners") listeners: option<listeners>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "DescribeListenersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateRule = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("Actions") actions: option<actions>,
-@as("Priority") priority: option<rulePriority>,
-@as("Conditions") conditions: option<ruleConditionList>,
-@as("ListenerArn") listenerArn: option<listenerArn>
+@as("Tags") tags: option<tagList_>,
+@as("Actions") actions: actions,
+@as("Priority") priority: rulePriority,
+@as("Conditions") conditions: ruleConditionList,
+@as("ListenerArn") listenerArn: listenerArn
 }
   type response = {
-@as("Rules") rules: rules
+@as("Rules") rules: option<rules>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "CreateRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateListener = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("AlpnPolicy") alpnPolicy: alpnPolicyName,
-@as("DefaultActions") defaultActions: option<actions>,
-@as("Certificates") certificates: certificateList,
-@as("SslPolicy") sslPolicy: sslPolicyName,
-@as("Port") port: port,
-@as("Protocol") protocol: protocolEnum,
-@as("LoadBalancerArn") loadBalancerArn: option<loadBalancerArn>
+@as("Tags") tags: option<tagList_>,
+@as("AlpnPolicy") alpnPolicy: option<alpnPolicyName>,
+@as("DefaultActions") defaultActions: actions,
+@as("Certificates") certificates: option<certificateList>,
+@as("SslPolicy") sslPolicy: option<sslPolicyName>,
+@as("Port") port: option<port>,
+@as("Protocol") protocol: option<protocolEnum>,
+@as("LoadBalancerArn") loadBalancerArn: loadBalancerArn
 }
   type response = {
-@as("Listeners") listeners: listeners
+@as("Listeners") listeners: option<listeners>
 }
   @module("@aws-sdk/client-elasticloadbalancing") @new external new_: (request) => t = "CreateListenerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

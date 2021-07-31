@@ -1,27 +1,35 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type tagValue = string
 type tagKey = string
 type resourceType = string
 type resourceStatusValue = [@as("PENDING") #PENDING]
 type resourceFilterValue = string
-type resourceFilterName = [@as("resource-type") #resource_type]
+type resourceFilterName = [@as("resource-type") #ResourceType]
 type resourceArn = string
-type queryType = [@as("CLOUDFORMATION_STACK_1_0") #CLOUDFORMATION_STACK_1_0 | @as("TAG_FILTERS_1_0") #TAG_FILTERS_1_0]
+type queryType = [@as("CLOUDFORMATION_STACK_1_0") #CLOUDFORMATIONSTACK10 | @as("TAG_FILTERS_1_0") #TAGFILTERS10]
 type queryErrorMessage = string
-type queryErrorCode = [@as("CLOUDFORMATION_STACK_NOT_EXISTING") #CLOUDFORMATION_STACK_NOT_EXISTING | @as("CLOUDFORMATION_STACK_INACTIVE") #CLOUDFORMATION_STACK_INACTIVE]
+type queryErrorCode = [@as("CLOUDFORMATION_STACK_NOT_EXISTING") #CLOUDFORMATIONSTACKNOTEXISTING | @as("CLOUDFORMATION_STACK_INACTIVE") #CLOUDFORMATIONSTACKINACTIVE]
 type query = string
 type nextToken = string
-type maxResults = int;
+type maxResults = int
 type groupString = string
 type groupName = string
 type groupFilterValue = string
-type groupFilterName = [@as("configuration-type") #configuration_type | @as("resource-type") #resource_type]
+type groupFilterName = [@as("configuration-type") #ConfigurationType | @as("resource-type") #ResourceType]
 type groupConfigurationType = string
-type groupConfigurationStatus = [@as("UPDATE_FAILED") #UPDATE_FAILED | @as("UPDATE_COMPLETE") #UPDATE_COMPLETE | @as("UPDATING") #UPDATING]
+type groupConfigurationStatus = [@as("UPDATE_FAILED") #UPDATEFAILED | @as("UPDATE_COMPLETE") #UPDATECOMPLETE | @as("UPDATING") #UPDATING]
 type groupConfigurationParameterValue = string
 type groupConfigurationParameterName = string
 type groupConfigurationFailureReason = string
@@ -32,65 +40,65 @@ type description = string
 type tags = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type resourceStatus = {
-@as("Name") name: resourceStatusValue
+@as("Name") name: option<resourceStatusValue>
 }
 type resourceQuery = {
-@as("Query") query: option<query>,
-@as("Type") type_: option<queryType>
+@as("Query") query: query,
+@as("Type") type_: queryType
 }
 type resourceIdentifier = {
-@as("ResourceType") resourceType: resourceType,
-@as("ResourceArn") resourceArn: resourceArn
+@as("ResourceType") resourceType: option<resourceType>,
+@as("ResourceArn") resourceArn: option<resourceArn>
 }
 type resourceFilterValues = array<resourceFilterValue>
 type resourceArnList = array<resourceArn>
 type queryError = {
-@as("Message") message: queryErrorMessage,
-@as("ErrorCode") errorCode: queryErrorCode
+@as("Message") message: option<queryErrorMessage>,
+@as("ErrorCode") errorCode: option<queryErrorCode>
 }
 type pendingResource = {
-@as("ResourceArn") resourceArn: resourceArn
+@as("ResourceArn") resourceArn: option<resourceArn>
 }
 type groupIdentifier = {
-@as("GroupArn") groupArn: groupArn,
-@as("GroupName") groupName: groupName
+@as("GroupArn") groupArn: option<groupArn>,
+@as("GroupName") groupName: option<groupName>
 }
 type groupFilterValues = array<groupFilterValue>
 type groupConfigurationParameterValueList = array<groupConfigurationParameterValue>
 type group = {
-@as("Description") description: description,
-@as("Name") name: option<groupName>,
-@as("GroupArn") groupArn: option<groupArn>
+@as("Description") description: option<description>,
+@as("Name") name: groupName,
+@as("GroupArn") groupArn: groupArn
 }
 type failedResource = {
-@as("ErrorCode") errorCode: errorCode,
-@as("ErrorMessage") errorMessage: errorMessage,
-@as("ResourceArn") resourceArn: resourceArn
+@as("ErrorCode") errorCode: option<errorCode>,
+@as("ErrorMessage") errorMessage: option<errorMessage>,
+@as("ResourceArn") resourceArn: option<resourceArn>
 }
 type resourceIdentifierList = array<resourceIdentifier>
 type resourceFilter = {
-@as("Values") values: option<resourceFilterValues>,
-@as("Name") name: option<resourceFilterName>
+@as("Values") values: resourceFilterValues,
+@as("Name") name: resourceFilterName
 }
 type queryErrorList = array<queryError>
 type pendingResourceList = array<pendingResource>
 type listGroupResourcesItem = {
-@as("Status") status: resourceStatus,
-@as("Identifier") identifier: resourceIdentifier
+@as("Status") status: option<resourceStatus>,
+@as("Identifier") identifier: option<resourceIdentifier>
 }
 type groupQuery = {
-@as("ResourceQuery") resourceQuery: option<resourceQuery>,
-@as("GroupName") groupName: option<groupName>
+@as("ResourceQuery") resourceQuery: resourceQuery,
+@as("GroupName") groupName: groupName
 }
 type groupList = array<group>
 type groupIdentifierList = array<groupIdentifier>
 type groupFilter = {
-@as("Values") values: option<groupFilterValues>,
-@as("Name") name: option<groupFilterName>
+@as("Values") values: groupFilterValues,
+@as("Name") name: groupFilterName
 }
 type groupConfigurationParameter = {
-@as("Values") values: groupConfigurationParameterValueList,
-@as("Name") name: option<groupConfigurationParameterName>
+@as("Values") values: option<groupConfigurationParameterValueList>,
+@as("Name") name: groupConfigurationParameterName
 }
 type failedResourceList = array<failedResource>
 type resourceFilterList = array<resourceFilter>
@@ -98,245 +106,245 @@ type listGroupResourcesItemList = array<listGroupResourcesItem>
 type groupParameterList = array<groupConfigurationParameter>
 type groupFilterList = array<groupFilter>
 type groupConfigurationItem = {
-@as("Parameters") parameters: groupParameterList,
-@as("Type") type_: option<groupConfigurationType>
+@as("Parameters") parameters: option<groupParameterList>,
+@as("Type") type_: groupConfigurationType
 }
 type groupConfigurationList = array<groupConfigurationItem>
 type groupConfiguration = {
-@as("FailureReason") failureReason: groupConfigurationFailureReason,
-@as("Status") status: groupConfigurationStatus,
-@as("ProposedConfiguration") proposedConfiguration: groupConfigurationList,
-@as("Configuration") configuration: groupConfigurationList
+@as("FailureReason") failureReason: option<groupConfigurationFailureReason>,
+@as("Status") status: option<groupConfigurationStatus>,
+@as("ProposedConfiguration") proposedConfiguration: option<groupConfigurationList>,
+@as("Configuration") configuration: option<groupConfigurationList>
 }
-type clientType;
-@module("@aws-sdk/client-resource-groups") @new external createClient: unit => clientType = "ResourceGroupsClient";
+type awsServiceClient;
+@module("@aws-sdk/client-resource-groups") @new external createClient: unit => awsServiceClient = "ResourceGroupsClient";
 module UpdateGroup = {
   type t;
   type request = {
-@as("Description") description: description,
-@as("Group") group: groupString,
-@as("GroupName") groupName: groupName
+@as("Description") description: option<description>,
+@as("Group") group: option<groupString>,
+@as("GroupName") groupName: option<groupName>
 }
   type response = {
-@as("Group") group: group
+@as("Group") group: option<group>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "UpdateGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module Untag = {
   type t;
   type request = {
-@as("Keys") keys: option<tagKeyList>,
-@as("Arn") arn: option<groupArn>
-}
-  type response = {
 @as("Keys") keys: tagKeyList,
 @as("Arn") arn: groupArn
 }
+  type response = {
+@as("Keys") keys: option<tagKeyList>,
+@as("Arn") arn: option<groupArn>
+}
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "UntagCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module Tag = {
   type t;
   type request = {
-@as("Tags") tags: option<tags>,
-@as("Arn") arn: option<groupArn>
-}
-  type response = {
 @as("Tags") tags: tags,
 @as("Arn") arn: groupArn
 }
+  type response = {
+@as("Tags") tags: option<tags>,
+@as("Arn") arn: option<groupArn>
+}
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "TagCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetTags = {
   type t;
   type request = {
-@as("Arn") arn: option<groupArn>
-}
-  type response = {
-@as("Tags") tags: tags,
 @as("Arn") arn: groupArn
 }
+  type response = {
+@as("Tags") tags: option<tags>,
+@as("Arn") arn: option<groupArn>
+}
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "GetTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetGroup = {
   type t;
   type request = {
-@as("Group") group: groupString,
-@as("GroupName") groupName: groupName
+@as("Group") group: option<groupString>,
+@as("GroupName") groupName: option<groupName>
 }
   type response = {
-@as("Group") group: group
+@as("Group") group: option<group>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "GetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteGroup = {
   type t;
   type request = {
-@as("Group") group: groupString,
-@as("GroupName") groupName: groupName
+@as("Group") group: option<groupString>,
+@as("GroupName") groupName: option<groupName>
 }
   type response = {
-@as("Group") group: group
+@as("Group") group: option<group>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "DeleteGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateGroupQuery = {
   type t;
   type request = {
-@as("ResourceQuery") resourceQuery: option<resourceQuery>,
-@as("Group") group: groupString,
-@as("GroupName") groupName: groupName
+@as("ResourceQuery") resourceQuery: resourceQuery,
+@as("Group") group: option<groupString>,
+@as("GroupName") groupName: option<groupName>
 }
   type response = {
-@as("GroupQuery") groupQuery: groupQuery
+@as("GroupQuery") groupQuery: option<groupQuery>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "UpdateGroupQueryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UngroupResources = {
   type t;
   type request = {
-@as("ResourceArns") resourceArns: option<resourceArnList>,
-@as("Group") group: option<groupString>
+@as("ResourceArns") resourceArns: resourceArnList,
+@as("Group") group: groupString
 }
   type response = {
-@as("Pending") pending: pendingResourceList,
-@as("Failed") failed: failedResourceList,
-@as("Succeeded") succeeded: resourceArnList
+@as("Pending") pending: option<pendingResourceList>,
+@as("Failed") failed: option<failedResourceList>,
+@as("Succeeded") succeeded: option<resourceArnList>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "UngroupResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SearchResources = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults,
-@as("ResourceQuery") resourceQuery: option<resourceQuery>
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("ResourceQuery") resourceQuery: resourceQuery
 }
   type response = {
-@as("QueryErrors") queryErrors: queryErrorList,
-@as("NextToken") nextToken: nextToken,
-@as("ResourceIdentifiers") resourceIdentifiers: resourceIdentifierList
+@as("QueryErrors") queryErrors: option<queryErrorList>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("ResourceIdentifiers") resourceIdentifiers: option<resourceIdentifierList>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "SearchResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GroupResources = {
   type t;
   type request = {
-@as("ResourceArns") resourceArns: option<resourceArnList>,
-@as("Group") group: option<groupString>
+@as("ResourceArns") resourceArns: resourceArnList,
+@as("Group") group: groupString
 }
   type response = {
-@as("Pending") pending: pendingResourceList,
-@as("Failed") failed: failedResourceList,
-@as("Succeeded") succeeded: resourceArnList
+@as("Pending") pending: option<pendingResourceList>,
+@as("Failed") failed: option<failedResourceList>,
+@as("Succeeded") succeeded: option<resourceArnList>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "GroupResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetGroupQuery = {
   type t;
   type request = {
-@as("Group") group: groupString,
-@as("GroupName") groupName: groupName
+@as("Group") group: option<groupString>,
+@as("GroupName") groupName: option<groupName>
 }
   type response = {
-@as("GroupQuery") groupQuery: groupQuery
+@as("GroupQuery") groupQuery: option<groupQuery>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "GetGroupQueryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListGroups = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults,
-@as("Filters") filters: groupFilterList
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("Filters") filters: option<groupFilterList>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("Groups") groups: groupList,
-@as("GroupIdentifiers") groupIdentifiers: groupIdentifierList
+@as("NextToken") nextToken: option<nextToken>,
+@as("Groups") groups: option<groupList>,
+@as("GroupIdentifiers") groupIdentifiers: option<groupIdentifierList>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "ListGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListGroupResources = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: maxResults,
-@as("Filters") filters: resourceFilterList,
-@as("Group") group: groupString,
-@as("GroupName") groupName: groupName
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("Filters") filters: option<resourceFilterList>,
+@as("Group") group: option<groupString>,
+@as("GroupName") groupName: option<groupName>
 }
   type response = {
-@as("QueryErrors") queryErrors: queryErrorList,
-@as("NextToken") nextToken: nextToken,
-@as("ResourceIdentifiers") resourceIdentifiers: resourceIdentifierList,
-@as("Resources") resources: listGroupResourcesItemList
+@as("QueryErrors") queryErrors: option<queryErrorList>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("ResourceIdentifiers") resourceIdentifiers: option<resourceIdentifierList>,
+@as("Resources") resources: option<listGroupResourcesItemList>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "ListGroupResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutGroupConfiguration = {
   type t;
   type request = {
-@as("Configuration") configuration: groupConfigurationList,
-@as("Group") group: groupString
+@as("Configuration") configuration: option<groupConfigurationList>,
+@as("Group") group: option<groupString>
 }
   type response = unit
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "PutGroupConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetGroupConfiguration = {
   type t;
   type request = {
-@as("Group") group: groupString
+@as("Group") group: option<groupString>
 }
   type response = {
-@as("GroupConfiguration") groupConfiguration: groupConfiguration
+@as("GroupConfiguration") groupConfiguration: option<groupConfiguration>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "GetGroupConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateGroup = {
   type t;
   type request = {
-@as("Configuration") configuration: groupConfigurationList,
-@as("Tags") tags: tags,
-@as("ResourceQuery") resourceQuery: resourceQuery,
-@as("Description") description: description,
-@as("Name") name: option<groupName>
+@as("Configuration") configuration: option<groupConfigurationList>,
+@as("Tags") tags: option<tags>,
+@as("ResourceQuery") resourceQuery: option<resourceQuery>,
+@as("Description") description: option<description>,
+@as("Name") name: groupName
 }
   type response = {
-@as("GroupConfiguration") groupConfiguration: groupConfiguration,
-@as("Tags") tags: tags,
-@as("ResourceQuery") resourceQuery: resourceQuery,
-@as("Group") group: group
+@as("GroupConfiguration") groupConfiguration: option<groupConfiguration>,
+@as("Tags") tags: option<tags>,
+@as("ResourceQuery") resourceQuery: option<resourceQuery>,
+@as("Group") group: option<group>
 }
   @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "CreateGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

@@ -1,47 +1,54 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type uUID = string
-type termDurationInSeconds = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
+type uuid = string
+type termDurationInSeconds = float
 type tagValue = string
 type tagKey = string
-type amazonawsString = string
-type savingsPlansFilterName = [@as("end") #end | @as("start") #start | @as("payment-option") #payment_option | @as("savings-plan-type") #savings_plan_type | @as("term") #term | @as("upfront") #upfront | @as("commitment") #commitment | @as("ec2-instance-family") #ec2_instance_family | @as("region") #region]
-type savingsPlansDuration = float;
+type string_ = string
+type savingsPlansFilterName = [@as("end") #End | @as("start") #Start | @as("payment-option") #PaymentOption | @as("savings-plan-type") #SavingsPlanType | @as("term") #Term | @as("upfront") #Upfront | @as("commitment") #Commitment | @as("ec2-instance-family") #Ec2InstanceFamily | @as("region") #Region]
+type savingsPlansDuration = float
 type savingsPlanUsageType = string
 type savingsPlanType = [@as("SageMaker") #SageMaker | @as("EC2Instance") #EC2Instance | @as("Compute") #Compute]
-type savingsPlanState = [@as("queued-deleted") #queued_deleted | @as("queued") #queued | @as("retired") #retired | @as("active") #active | @as("payment-failed") #payment_failed | @as("payment-pending") #payment_pending]
+type savingsPlanState = [@as("queued-deleted") #QueuedDeleted | @as("queued") #Queued | @as("retired") #Retired | @as("active") #Active | @as("payment-failed") #PaymentFailed | @as("payment-pending") #PaymentPending]
 type savingsPlanServiceCode = string
 type savingsPlanRateUsageType = string
-type savingsPlanRateUnit = [@as("Request") #Request | @as("Lambda-GB-Second") #Lambda_GB_Second | @as("Hrs") #Hrs]
+type savingsPlanRateUnit = [@as("Request") #Request | @as("Lambda-GB-Second") #LambdaGBSecond | @as("Hrs") #Hrs]
 type savingsPlanRateServiceCode = [@as("AmazonSageMaker") #AmazonSageMaker | @as("AWSLambda") #AWSLambda | @as("AmazonEKS") #AmazonEKS | @as("AmazonECS") #AmazonECS | @as("AmazonEC2") #AmazonEC2]
-type savingsPlanRatePropertyKey = [@as("tenancy") #tenancy | @as("productDescription") #productDescription | @as("instanceFamily") #instanceFamily | @as("instanceType") #instanceType | @as("region") #region]
+type savingsPlanRatePropertyKey = [@as("tenancy") #Tenancy | @as("productDescription") #ProductDescription | @as("instanceFamily") #InstanceFamily | @as("instanceType") #InstanceType | @as("region") #Region]
 type savingsPlanRatePricePerUnit = string
 type savingsPlanRateOperation = string
-type savingsPlanRateFilterName = [@as("operation") #operation | @as("usageType") #usageType | @as("serviceCode") #serviceCode | @as("productType") #productType | @as("tenancy") #tenancy | @as("productDescription") #productDescription | @as("instanceType") #instanceType | @as("region") #region]
-type savingsPlanRateFilterAttribute = [@as("productId") #productId | @as("tenancy") #tenancy | @as("productDescription") #productDescription | @as("instanceType") #instanceType | @as("instanceFamily") #instanceFamily | @as("region") #region]
+type savingsPlanRateFilterName = [@as("operation") #Operation | @as("usageType") #UsageType | @as("serviceCode") #ServiceCode | @as("productType") #ProductType | @as("tenancy") #Tenancy | @as("productDescription") #ProductDescription | @as("instanceType") #InstanceType | @as("region") #Region]
+type savingsPlanRateFilterAttribute = [@as("productId") #ProductId | @as("tenancy") #Tenancy | @as("productDescription") #ProductDescription | @as("instanceType") #InstanceType | @as("instanceFamily") #InstanceFamily | @as("region") #Region]
 type savingsPlanProductType = [@as("SageMaker") #SageMaker | @as("Lambda") #Lambda | @as("Fargate") #Fargate | @as("EC2") #EC2]
-type savingsPlanPaymentOption = [@as("No Upfront") #No Upfront | @as("Partial Upfront") #Partial Upfront | @as("All Upfront") #All Upfront]
+type savingsPlanPaymentOption = [@as("No Upfront") #NoUpfront | @as("Partial Upfront") #PartialUpfront | @as("All Upfront") #AllUpfront]
 type savingsPlanOperation = string
-type savingsPlanOfferingPropertyKey = [@as("instanceFamily") #instanceFamily | @as("region") #region]
+type savingsPlanOfferingPropertyKey = [@as("instanceFamily") #InstanceFamily | @as("region") #Region]
 type savingsPlanOfferingId = string
-type savingsPlanOfferingFilterAttribute = [@as("instanceFamily") #instanceFamily | @as("region") #region]
+type savingsPlanOfferingFilterAttribute = [@as("instanceFamily") #InstanceFamily | @as("region") #Region]
 type savingsPlanId = string
 type savingsPlanDescription = string
 type savingsPlanArn = string
 type region = string
 type paginationToken = string
-type pageSize = int;
-type maxResults = int;
+type pageSize = int
+type maxResults = int
 type jsonSafeFilterValueString = string
-type eC2InstanceFamily = string
+type ec2InstanceFamily = string
 type dateTime = Js.Date.t;
 type currencyCode = [@as("USD") #USD | @as("CNY") #CNY]
 type clientToken = string
 type amount = string
-type uUIDs = array<uUID>
+type uuids = array<uuid>
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type savingsPlanUsageTypeList = array<savingsPlanUsageType>
@@ -51,257 +58,257 @@ type savingsPlanServiceCodeList = array<savingsPlanServiceCode>
 type savingsPlanRateUsageTypeList = array<savingsPlanRateUsageType>
 type savingsPlanRateServiceCodeList = array<savingsPlanRateServiceCode>
 type savingsPlanRateProperty = {
-@as("value") value: jsonSafeFilterValueString,
-@as("name") name: savingsPlanRatePropertyKey
+value: option<jsonSafeFilterValueString>,
+name: option<savingsPlanRatePropertyKey>
 }
 type savingsPlanRateOperationList = array<savingsPlanRateOperation>
 type savingsPlanProductTypeList = array<savingsPlanProductType>
 type savingsPlanPaymentOptionList = array<savingsPlanPaymentOption>
 type savingsPlanOperationList = array<savingsPlanOperation>
 type savingsPlanOfferingRateProperty = {
-@as("value") value: jsonSafeFilterValueString,
-@as("name") name: jsonSafeFilterValueString
+value: option<jsonSafeFilterValueString>,
+name: option<jsonSafeFilterValueString>
 }
 type savingsPlanOfferingProperty = {
-@as("value") value: jsonSafeFilterValueString,
-@as("name") name: savingsPlanOfferingPropertyKey
+value: option<jsonSafeFilterValueString>,
+name: option<savingsPlanOfferingPropertyKey>
 }
 type savingsPlanIdList = array<savingsPlanId>
 type savingsPlanDescriptionsList = array<savingsPlanDescription>
 type savingsPlanArnList = array<savingsPlanArn>
 type parentSavingsPlanOffering = {
-@as("planDescription") planDescription: savingsPlanDescription,
-@as("currency") currency: currencyCode,
-@as("durationSeconds") durationSeconds: savingsPlansDuration,
-@as("planType") planType: savingsPlanType,
-@as("paymentOption") paymentOption: savingsPlanPaymentOption,
-@as("offeringId") offeringId: uUID
+planDescription: option<savingsPlanDescription>,
+currency: option<currencyCode>,
+durationSeconds: option<savingsPlansDuration>,
+planType: option<savingsPlanType>,
+paymentOption: option<savingsPlanPaymentOption>,
+offeringId: option<uuid>
 }
-type listOfStrings = array<amazonawsString>
+type listOfStrings = array<string_>
 type filterValuesList = array<jsonSafeFilterValueString>
 type durationsList = array<savingsPlansDuration>
 type currencyList = array<currencyCode>
 type savingsPlanRatePropertyList = array<savingsPlanRateProperty>
 type savingsPlanRateFilter = {
-@as("values") values: listOfStrings,
-@as("name") name: savingsPlanRateFilterName
+values: option<listOfStrings>,
+name: option<savingsPlanRateFilterName>
 }
 type savingsPlanOfferingRatePropertyList = array<savingsPlanOfferingRateProperty>
 type savingsPlanOfferingRateFilterElement = {
-@as("values") values: filterValuesList,
-@as("name") name: savingsPlanRateFilterAttribute
+values: option<filterValuesList>,
+name: option<savingsPlanRateFilterAttribute>
 }
 type savingsPlanOfferingPropertyList = array<savingsPlanOfferingProperty>
 type savingsPlanOfferingFilterElement = {
-@as("values") values: filterValuesList,
-@as("name") name: savingsPlanOfferingFilterAttribute
+values: option<filterValuesList>,
+name: option<savingsPlanOfferingFilterAttribute>
 }
 type savingsPlanFilter = {
-@as("values") values: listOfStrings,
-@as("name") name: savingsPlansFilterName
+values: option<listOfStrings>,
+name: option<savingsPlansFilterName>
 }
 type savingsPlan = {
-@as("tags") tags: tagMap,
-@as("termDurationInSeconds") termDurationInSeconds: termDurationInSeconds,
-@as("recurringPaymentAmount") recurringPaymentAmount: amount,
-@as("upfrontPaymentAmount") upfrontPaymentAmount: amount,
-@as("commitment") commitment: amount,
-@as("currency") currency: currencyCode,
-@as("productTypes") productTypes: savingsPlanProductTypeList,
-@as("paymentOption") paymentOption: savingsPlanPaymentOption,
-@as("savingsPlanType") savingsPlanType: savingsPlanType,
-@as("ec2InstanceFamily") ec2InstanceFamily: eC2InstanceFamily,
-@as("region") region: region,
-@as("state") state: savingsPlanState,
-@as("end") end: amazonawsString,
-@as("start") start: amazonawsString,
-@as("description") description: amazonawsString,
-@as("savingsPlanArn") savingsPlanArn: savingsPlanArn,
-@as("savingsPlanId") savingsPlanId: savingsPlanId,
-@as("offeringId") offeringId: savingsPlanOfferingId
+tags: option<tagMap>,
+termDurationInSeconds: option<termDurationInSeconds>,
+recurringPaymentAmount: option<amount>,
+upfrontPaymentAmount: option<amount>,
+commitment: option<amount>,
+currency: option<currencyCode>,
+productTypes: option<savingsPlanProductTypeList>,
+paymentOption: option<savingsPlanPaymentOption>,
+savingsPlanType: option<savingsPlanType>,
+ec2InstanceFamily: option<ec2InstanceFamily>,
+region: option<region>,
+state: option<savingsPlanState>,
+end: option<string_>,
+start: option<string_>,
+description: option<string_>,
+savingsPlanArn: option<savingsPlanArn>,
+savingsPlanId: option<savingsPlanId>,
+offeringId: option<savingsPlanOfferingId>
 }
 type savingsPlanRateFilterList = array<savingsPlanRateFilter>
 type savingsPlanRate = {
-@as("properties") properties: savingsPlanRatePropertyList,
-@as("operation") operation: savingsPlanRateOperation,
-@as("usageType") usageType: savingsPlanRateUsageType,
-@as("serviceCode") serviceCode: savingsPlanRateServiceCode,
-@as("productType") productType: savingsPlanProductType,
-@as("unit") unit: savingsPlanRateUnit,
-@as("currency") currency: currencyCode,
-@as("rate") rate: amount
+properties: option<savingsPlanRatePropertyList>,
+operation: option<savingsPlanRateOperation>,
+usageType: option<savingsPlanRateUsageType>,
+serviceCode: option<savingsPlanRateServiceCode>,
+productType: option<savingsPlanProductType>,
+@as("unit") unit_: option<savingsPlanRateUnit>,
+currency: option<currencyCode>,
+rate: option<amount>
 }
 type savingsPlanOfferingRateFiltersList = array<savingsPlanOfferingRateFilterElement>
 type savingsPlanOfferingRate = {
-@as("properties") properties: savingsPlanOfferingRatePropertyList,
-@as("operation") operation: savingsPlanRateOperation,
-@as("usageType") usageType: savingsPlanRateUsageType,
-@as("serviceCode") serviceCode: savingsPlanRateServiceCode,
-@as("productType") productType: savingsPlanProductType,
-@as("unit") unit: savingsPlanRateUnit,
-@as("rate") rate: savingsPlanRatePricePerUnit,
-@as("savingsPlanOffering") savingsPlanOffering: parentSavingsPlanOffering
+properties: option<savingsPlanOfferingRatePropertyList>,
+operation: option<savingsPlanRateOperation>,
+usageType: option<savingsPlanRateUsageType>,
+serviceCode: option<savingsPlanRateServiceCode>,
+productType: option<savingsPlanProductType>,
+@as("unit") unit_: option<savingsPlanRateUnit>,
+rate: option<savingsPlanRatePricePerUnit>,
+savingsPlanOffering: option<parentSavingsPlanOffering>
 }
 type savingsPlanOfferingFiltersList = array<savingsPlanOfferingFilterElement>
 type savingsPlanOffering = {
-@as("properties") properties: savingsPlanOfferingPropertyList,
-@as("operation") operation: savingsPlanOperation,
-@as("usageType") usageType: savingsPlanUsageType,
-@as("serviceCode") serviceCode: savingsPlanServiceCode,
-@as("currency") currency: currencyCode,
-@as("durationSeconds") durationSeconds: savingsPlansDuration,
-@as("paymentOption") paymentOption: savingsPlanPaymentOption,
-@as("description") description: savingsPlanDescription,
-@as("planType") planType: savingsPlanType,
-@as("productTypes") productTypes: savingsPlanProductTypeList,
-@as("offeringId") offeringId: uUID
+properties: option<savingsPlanOfferingPropertyList>,
+operation: option<savingsPlanOperation>,
+usageType: option<savingsPlanUsageType>,
+serviceCode: option<savingsPlanServiceCode>,
+currency: option<currencyCode>,
+durationSeconds: option<savingsPlansDuration>,
+paymentOption: option<savingsPlanPaymentOption>,
+description: option<savingsPlanDescription>,
+planType: option<savingsPlanType>,
+productTypes: option<savingsPlanProductTypeList>,
+offeringId: option<uuid>
 }
 type savingsPlanList = array<savingsPlan>
 type savingsPlanFilterList = array<savingsPlanFilter>
 type savingsPlanRateList = array<savingsPlanRate>
 type savingsPlanOfferingsList = array<savingsPlanOffering>
 type savingsPlanOfferingRatesList = array<savingsPlanOfferingRate>
-type clientType;
-@module("@aws-sdk/client-savingsplans") @new external createClient: unit => clientType = "SavingsplansClient";
+type awsServiceClient;
+@module("@aws-sdk/client-savingsplans") @new external createClient: unit => awsServiceClient = "SavingsplansClient";
 module DeleteQueuedSavingsPlan = {
   type t;
   type request = {
-@as("savingsPlanId") savingsPlanId: option<savingsPlanId>
+savingsPlanId: savingsPlanId
 }
   type response = unit
   @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "DeleteQueuedSavingsPlanCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<savingsPlanArn>
+tagKeys: tagKeyList,
+resourceArn: savingsPlanArn
 }
   type response = unit
   @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<savingsPlanArn>
+tags: tagMap,
+resourceArn: savingsPlanArn
 }
   type response = unit
   @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<savingsPlanArn>
+resourceArn: savingsPlanArn
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSavingsPlan = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("clientToken") clientToken: clientToken,
-@as("purchaseTime") purchaseTime: dateTime,
-@as("upfrontPaymentAmount") upfrontPaymentAmount: amount,
-@as("commitment") commitment: option<amount>,
-@as("savingsPlanOfferingId") savingsPlanOfferingId: option<savingsPlanOfferingId>
+tags: option<tagMap>,
+clientToken: option<clientToken>,
+purchaseTime: option<dateTime>,
+upfrontPaymentAmount: option<amount>,
+commitment: amount,
+savingsPlanOfferingId: savingsPlanOfferingId
 }
   type response = {
-@as("savingsPlanId") savingsPlanId: savingsPlanId
+savingsPlanId: option<savingsPlanId>
 }
   @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "CreateSavingsPlanCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSavingsPlans = {
   type t;
   type request = {
-@as("filters") filters: savingsPlanFilterList,
-@as("states") states: savingsPlanStateList,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("savingsPlanIds") savingsPlanIds: savingsPlanIdList,
-@as("savingsPlanArns") savingsPlanArns: savingsPlanArnList
+filters: option<savingsPlanFilterList>,
+states: option<savingsPlanStateList>,
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>,
+savingsPlanIds: option<savingsPlanIdList>,
+savingsPlanArns: option<savingsPlanArnList>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("savingsPlans") savingsPlans: savingsPlanList
+nextToken: option<paginationToken>,
+savingsPlans: option<savingsPlanList>
 }
   @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "DescribeSavingsPlansCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSavingsPlansOfferings = {
   type t;
   type request = {
-@as("maxResults") maxResults: pageSize,
-@as("nextToken") nextToken: paginationToken,
-@as("filters") filters: savingsPlanOfferingFiltersList,
-@as("operations") operations: savingsPlanOperationList,
-@as("usageTypes") usageTypes: savingsPlanUsageTypeList,
-@as("serviceCodes") serviceCodes: savingsPlanServiceCodeList,
-@as("descriptions") descriptions: savingsPlanDescriptionsList,
-@as("currencies") currencies: currencyList,
-@as("durations") durations: durationsList,
-@as("planTypes") planTypes: savingsPlanTypeList,
-@as("productType") productType: savingsPlanProductType,
-@as("paymentOptions") paymentOptions: savingsPlanPaymentOptionList,
-@as("offeringIds") offeringIds: uUIDs
+maxResults: option<pageSize>,
+nextToken: option<paginationToken>,
+filters: option<savingsPlanOfferingFiltersList>,
+operations: option<savingsPlanOperationList>,
+usageTypes: option<savingsPlanUsageTypeList>,
+serviceCodes: option<savingsPlanServiceCodeList>,
+descriptions: option<savingsPlanDescriptionsList>,
+currencies: option<currencyList>,
+durations: option<durationsList>,
+planTypes: option<savingsPlanTypeList>,
+productType: option<savingsPlanProductType>,
+paymentOptions: option<savingsPlanPaymentOptionList>,
+offeringIds: option<uuids>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("searchResults") searchResults: savingsPlanOfferingsList
+nextToken: option<paginationToken>,
+searchResults: option<savingsPlanOfferingsList>
 }
   @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "DescribeSavingsPlansOfferingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSavingsPlansOfferingRates = {
   type t;
   type request = {
-@as("maxResults") maxResults: pageSize,
-@as("nextToken") nextToken: paginationToken,
-@as("filters") filters: savingsPlanOfferingRateFiltersList,
-@as("operations") operations: savingsPlanRateOperationList,
-@as("usageTypes") usageTypes: savingsPlanRateUsageTypeList,
-@as("serviceCodes") serviceCodes: savingsPlanRateServiceCodeList,
-@as("products") products: savingsPlanProductTypeList,
-@as("savingsPlanTypes") savingsPlanTypes: savingsPlanTypeList,
-@as("savingsPlanPaymentOptions") savingsPlanPaymentOptions: savingsPlanPaymentOptionList,
-@as("savingsPlanOfferingIds") savingsPlanOfferingIds: uUIDs
+maxResults: option<pageSize>,
+nextToken: option<paginationToken>,
+filters: option<savingsPlanOfferingRateFiltersList>,
+operations: option<savingsPlanRateOperationList>,
+usageTypes: option<savingsPlanRateUsageTypeList>,
+serviceCodes: option<savingsPlanRateServiceCodeList>,
+products: option<savingsPlanProductTypeList>,
+savingsPlanTypes: option<savingsPlanTypeList>,
+savingsPlanPaymentOptions: option<savingsPlanPaymentOptionList>,
+savingsPlanOfferingIds: option<uuids>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("searchResults") searchResults: savingsPlanOfferingRatesList
+nextToken: option<paginationToken>,
+searchResults: option<savingsPlanOfferingRatesList>
 }
   @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "DescribeSavingsPlansOfferingRatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSavingsPlanRates = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: paginationToken,
-@as("filters") filters: savingsPlanRateFilterList,
-@as("savingsPlanId") savingsPlanId: option<savingsPlanId>
+maxResults: option<maxResults>,
+nextToken: option<paginationToken>,
+filters: option<savingsPlanRateFilterList>,
+savingsPlanId: savingsPlanId
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("searchResults") searchResults: savingsPlanRateList,
-@as("savingsPlanId") savingsPlanId: savingsPlanId
+nextToken: option<paginationToken>,
+searchResults: option<savingsPlanRateList>,
+savingsPlanId: option<savingsPlanId>
 }
   @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "DescribeSavingsPlanRatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

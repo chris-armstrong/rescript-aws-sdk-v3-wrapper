@@ -1,50 +1,55 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type usePrefixAttributeValue = bool;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type integer_ = int
+type long = float
+type usePrefixAttributeValue = bool
 type stringValue = string
 type resourceId = string
-type waitingForDataCollectionChecksCount = int;
+type waitingForDataCollectionChecksCount = int
 type vpcId = string
 type violationId = string
-type violationEventType = [@as("alarm-invalidated") #alarm_invalidated | @as("alarm-cleared") #alarm_cleared | @as("in-alarm") #in_alarm]
-type versionNumber = float;
-type version = float;
-type variance = float;
+type violationEventType = [@as("alarm-invalidated") #AlarmInvalidated | @as("alarm-cleared") #AlarmCleared | @as("in-alarm") #InAlarm]
+type versionNumber = float
+type version = float
+type variance = float
 type value = string
-type valid = bool;
-type useBase64 = bool;
+type valid = bool
+type useBase64 = bool
 type url = string
-type unsignedLong = float;
-type undoDeprecate = bool;
-type totalResourcesCount = float;
-type totalFindingsCount = float;
-type totalChecksCount = int;
-type topicRuleMaxResults = int;
-type topicRuleDestinationStatus = [@as("DELETING") #DELETING | @as("ERROR") #ERROR | @as("DISABLED") #DISABLED | @as("IN_PROGRESS") #IN_PROGRESS | @as("ENABLED") #ENABLED]
-type topicRuleDestinationMaxResults = int;
+type unsignedLong = float
+type undoDeprecate = bool
+type totalResourcesCount = float
+type totalFindingsCount = float
+type totalChecksCount = int
+type topicRuleMaxResults = int
+type topicRuleDestinationStatus = [@as("DELETING") #DELETING | @as("ERROR") #ERROR | @as("DISABLED") #DISABLED | @as("IN_PROGRESS") #INPROGRESS | @as("ENABLED") #ENABLED]
+type topicRuleDestinationMaxResults = int
 type topicPattern = string
 type topic = string
 type tokenSignature = string
 type tokenKeyName = string
 type token = string
-type tinyMaxResults = int;
+type tinyMaxResults = int
 type timestreamTimestampValue = string
 type timestreamTimestampUnit = string
 type timestreamTableName = string
 type timestreamDimensionValue = string
 type timestreamDimensionName = string
 type timestreamDatabaseName = string
-type amazonawsTimestamp = Js.Date.t;
-type timedOutThings = int;
+type timestamp_ = Js.Date.t;
+type timedOutThings = int
 type thingTypeName = string
 type thingTypeId = string
 type thingTypeDescription = string
 type thingTypeArn = string
 type thingName = string
-type thingIndexingMode = [@as("REGISTRY_AND_SHADOW") #REGISTRY_AND_SHADOW | @as("REGISTRY") #REGISTRY | @as("OFF") #OFF]
+type thingIndexingMode = [@as("REGISTRY_AND_SHADOW") #REGISTRYANDSHADOW | @as("REGISTRY") #REGISTRY | @as("OFF") #OFF]
 type thingId = string
 type thingGroupName = string
 type thingGroupIndexingMode = [@as("ON") #ON | @as("OFF") #OFF]
@@ -53,7 +58,7 @@ type thingGroupDescription = string
 type thingGroupArn = string
 type thingConnectivityIndexingMode = [@as("STATUS") #STATUS | @as("OFF") #OFF]
 type thingArn = string
-type templateVersionId = int;
+type templateVersionId = int
 type templateName = string
 type templateDescription = string
 type templateBody = string
@@ -65,37 +70,37 @@ type target = string
 type tagValue = string
 type tagKey = string
 type tableName = string
-type suppressedNonCompliantResourcesCount = float;
-type suppressIndefinitely = bool;
-type suppressAlerts = bool;
-type sumOfSquares = float;
-type sum = float;
-type succeededThings = int;
-type succeededFindingsCount = float;
+type suppressedNonCompliantResourcesCount = float
+type suppressIndefinitely = bool
+type suppressAlerts = bool
+type sumOfSquares = float
+type sum = float
+type succeededThings = int
+type succeededFindingsCount = float
 type subnetId = string
-type amazonawsString = string
-type streamVersion = int;
+type string_ = string
+type streamVersion = int
 type streamName = string
 type streamId = string
 type streamDescription = string
 type streamArn = string
-type stdDeviation = float;
+type stdDeviation = float
 type status = [@as("Cancelling") #Cancelling | @as("Cancelled") #Cancelled | @as("Failed") #Failed | @as("Completed") #Completed | @as("InProgress") #InProgress]
 type stateValue = string
 type stateReason = string
 type stateMachineName = string
 type snsTopicArn = string
-type skyfallMaxResults = int;
-type skippedFindingsCount = float;
+type skyfallMaxResults = int
+type skippedFindingsCount = float
 type signingRegion = string
 type signingProfileName = string
 type signingJobId = string
 type signatureAlgorithm = string
-type signature = NodeJs.Buffer.t;
-type setAsDefault = bool;
-type setAsActiveFlag = bool;
-type setAsActive = bool;
-type serviceType = [@as("JOBS") #JOBS | @as("CREDENTIAL_PROVIDER") #CREDENTIAL_PROVIDER | @as("DATA") #DATA]
+type signature = NodeJs.Buffer.t
+type setAsDefault = bool
+type setAsActiveFlag = bool
+type setAsActive = bool
+type serviceType = [@as("JOBS") #JOBS | @as("CREDENTIAL_PROVIDER") #CREDENTIALPROVIDER | @as("DATA") #DATA]
 type serviceName = string
 type serverName = string
 type serverCertificateStatusDetail = string
@@ -105,51 +110,51 @@ type securityProfileName = string
 type securityProfileDescription = string
 type securityProfileArn = string
 type securityGroupId = string
-type seconds = int;
+type seconds = int
 type scheduledAuditName = string
 type scheduledAuditArn = string
 type salesforceToken = string
 type salesforceEndpoint = string
-type sQL = string
+type sql = string
 type s3Version = string
 type s3Key = string
 type s3FileUrl = string
 type s3Bucket = string
 type ruleName = string
 type ruleArn = string
-type rolloutRatePerMinute = int;
+type rolloutRatePerMinute = int
 type roleArn = string
 type roleAliasArn = string
 type roleAlias = string
-type resourceType = [@as("IAM_ROLE") #IAM_ROLE | @as("ROLE_ALIAS") #ROLE_ALIAS | @as("ACCOUNT_SETTINGS") #ACCOUNT_SETTINGS | @as("CLIENT_ID") #CLIENT_ID | @as("COGNITO_IDENTITY_POOL") #COGNITO_IDENTITY_POOL | @as("IOT_POLICY") #IOT_POLICY | @as("CA_CERTIFICATE") #CA_CERTIFICATE | @as("DEVICE_CERTIFICATE") #DEVICE_CERTIFICATE]
+type resourceType = [@as("IAM_ROLE") #IAMROLE | @as("ROLE_ALIAS") #ROLEALIAS | @as("ACCOUNT_SETTINGS") #ACCOUNTSETTINGS | @as("CLIENT_ID") #CLIENTID | @as("COGNITO_IDENTITY_POOL") #COGNITOIDENTITYPOOL | @as("IOT_POLICY") #IOTPOLICY | @as("CA_CERTIFICATE") #CACERTIFICATE | @as("DEVICE_CERTIFICATE") #DEVICECERTIFICATE]
 type resourceLogicalId = string
 type resourceArn = string
 type resource = string
 type reservedDomainConfigurationName = string
 type reportType = [@as("RESULTS") #RESULTS | @as("ERRORS") #ERRORS]
-type removedThings = int;
-type removeThingType = bool;
-type removeHook = bool;
-type removeAutoRegistration = bool;
-type removeAuthorizerConfig = bool;
-type rejectedThings = int;
+type removedThings = int
+type removeThingType = bool
+type removeHook = bool
+type removeAutoRegistration = bool
+type removeAuthorizerConfig = bool
+type rejectedThings = int
 type registryS3KeyName = string
 type registryS3BucketName = string
-type registryMaxResults = int;
+type registryMaxResults = int
 type registrationCode = string
-type recursiveWithoutDefault = bool;
-type recursive = bool;
+type recursiveWithoutDefault = bool
+type recursive = bool
 type reasonForNonComplianceCode = string
 type reasonForNonCompliance = string
 type reasonCode = string
 type rangeKeyValue = string
 type rangeKeyField = string
-type queuedThings = int;
+type queuedThings = int
 type queueUrl = string
 type queryVersion = string
 type queryString = string
-type queryMaxResults = int;
-type qos = int;
+type queryMaxResults = int
+type qos = int
 type publicKey = string
 type protocol = [@as("HTTP") #HTTP | @as("MQTT") #MQTT]
 type processingTargetName = string
@@ -157,96 +162,96 @@ type privateKey = string
 type principalId = string
 type principalArn = string
 type principal = string
-type primitiveBoolean = bool;
+type primitiveBoolean = bool
 type prefix = string
-type port = int;
+type port = int
 type policyVersionId = string
-type policyTemplateName = [@as("BLANK_POLICY") #BLANK_POLICY]
+type policyTemplateName = [@as("BLANK_POLICY") #BLANKPOLICY]
 type policyTarget = string
 type policyName = string
 type policyDocument = string
 type policyArn = string
 type platform = string
-type percentage = int;
-type percentValue = float;
-type percent = float;
+type percentage = int
+type percentValue = float
+type percent = float
 type payloadVersion = string
 type payloadField = string
 type partitionKey = string
 type parameter = string
-type pageSize = int;
-type overrideDynamicGroups = bool;
-type optionalVersion = float;
-type oTAUpdateStatus = [@as("CREATE_FAILED") #CREATE_FAILED | @as("CREATE_COMPLETE") #CREATE_COMPLETE | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS | @as("CREATE_PENDING") #CREATE_PENDING]
-type oTAUpdateId = string
-type oTAUpdateFileVersion = string
-type oTAUpdateErrorMessage = string
-type oTAUpdateDescription = string
-type oTAUpdateArn = string
-type numberOfThings = int;
-type number = float;
-type nullableBoolean = bool;
-type nonCompliantResourcesCount = float;
-type nonCompliantChecksCount = int;
+type pageSize = int
+type overrideDynamicGroups = bool
+type optionalVersion = float
+type otaupdateStatus = [@as("CREATE_FAILED") #CREATEFAILED | @as("CREATE_COMPLETE") #CREATECOMPLETE | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS | @as("CREATE_PENDING") #CREATEPENDING]
+type otaupdateId = string
+type otaupdateFileVersion = string
+type otaupdateErrorMessage = string
+type otaupdateDescription = string
+type otaupdateArn = string
+type numberOfThings = int
+type number = float
+type nullableBoolean = bool
+type nonCompliantResourcesCount = float
+type nonCompliantChecksCount = int
 type nextToken = string
 type namespaceId = string
 type mqttUsername = string
-type mqttPassword = NodeJs.Buffer.t;
+type mqttPassword = NodeJs.Buffer.t
 type mqttClientId = string
-type modelStatus = [@as("EXPIRED") #EXPIRED | @as("ACTIVE") #ACTIVE | @as("PENDING_BUILD") #PENDING_BUILD]
+type modelStatus = [@as("EXPIRED") #EXPIRED | @as("ACTIVE") #ACTIVE | @as("PENDING_BUILD") #PENDINGBUILD]
 type mitigationActionsTaskId = string
-type mitigationActionType = [@as("PUBLISH_FINDING_TO_SNS") #PUBLISH_FINDING_TO_SNS | @as("ENABLE_IOT_LOGGING") #ENABLE_IOT_LOGGING | @as("REPLACE_DEFAULT_POLICY_VERSION") #REPLACE_DEFAULT_POLICY_VERSION | @as("ADD_THINGS_TO_THING_GROUP") #ADD_THINGS_TO_THING_GROUP | @as("UPDATE_CA_CERTIFICATE") #UPDATE_CA_CERTIFICATE | @as("UPDATE_DEVICE_CERTIFICATE") #UPDATE_DEVICE_CERTIFICATE]
+type mitigationActionType = [@as("PUBLISH_FINDING_TO_SNS") #PUBLISHFINDINGTOSNS | @as("ENABLE_IOT_LOGGING") #ENABLEIOTLOGGING | @as("REPLACE_DEFAULT_POLICY_VERSION") #REPLACEDEFAULTPOLICYVERSION | @as("ADD_THINGS_TO_THING_GROUP") #ADDTHINGSTOTHINGGROUP | @as("UPDATE_CA_CERTIFICATE") #UPDATECACERTIFICATE | @as("UPDATE_DEVICE_CERTIFICATE") #UPDATEDEVICECERTIFICATE]
 type mitigationActionName = string
 type mitigationActionId = string
 type mitigationActionArn = string
 type missingContextValue = string
-type minimumNumberOfExecutedThings = int;
-type minimum = float;
+type minimumNumberOfExecutedThings = int
+type minimum = float
 type metricName = string
 type messageId = string
 type messageFormat = [@as("JSON") #JSON | @as("RAW") #RAW]
 type message = string
-type maximumPerMinute = int;
-type maximum = float;
-type maxResults = int;
-type maxJobExecutionsPerMin = int;
+type maximumPerMinute = int
+type maximum = float
+type maxResults = int
+type maxJobExecutionsPerMin = int
 type marker = string
-type logTargetType = [@as("THING_GROUP") #THING_GROUP | @as("DEFAULT") #DEFAULT]
+type logTargetType = [@as("THING_GROUP") #THINGGROUP | @as("DEFAULT") #DEFAULT]
 type logTargetName = string
 type logLevel = [@as("DISABLED") #DISABLED | @as("WARN") #WARN | @as("ERROR") #ERROR | @as("INFO") #INFO | @as("DEBUG") #DEBUG]
 type logGroupName = string
-type listSuppressedFindings = bool;
-type listSuppressedAlerts = bool;
+type listSuppressedFindings = bool
+type listSuppressedAlerts = bool
 type lastUpdatedAtDate = Js.Date.t;
 type lastModifiedDate = Js.Date.t;
-type laserMaxResults = int;
+type laserMaxResults = int
 type keyValue = string
 type keyName = string
 type key = string
 type jsonDocument = string
 type jobTemplateId = string
 type jobTemplateArn = string
-type jobStatus = [@as("DELETION_IN_PROGRESS") #DELETION_IN_PROGRESS | @as("COMPLETED") #COMPLETED | @as("CANCELED") #CANCELED | @as("IN_PROGRESS") #IN_PROGRESS]
+type jobStatus = [@as("DELETION_IN_PROGRESS") #DELETIONINPROGRESS | @as("COMPLETED") #COMPLETED | @as("CANCELED") #CANCELED | @as("IN_PROGRESS") #INPROGRESS]
 type jobId = string
-type jobExecutionStatus = [@as("CANCELED") #CANCELED | @as("REMOVED") #REMOVED | @as("REJECTED") #REJECTED | @as("TIMED_OUT") #TIMED_OUT | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #IN_PROGRESS | @as("QUEUED") #QUEUED]
-type jobExecutionFailureType = [@as("ALL") #ALL | @as("TIMED_OUT") #TIMED_OUT | @as("REJECTED") #REJECTED | @as("FAILED") #FAILED]
+type jobExecutionStatus = [@as("CANCELED") #CANCELED | @as("REMOVED") #REMOVED | @as("REJECTED") #REJECTED | @as("TIMED_OUT") #TIMEDOUT | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #INPROGRESS | @as("QUEUED") #QUEUED]
+type jobExecutionFailureType = [@as("ALL") #ALL | @as("TIMED_OUT") #TIMEDOUT | @as("REJECTED") #REJECTED | @as("FAILED") #FAILED]
 type jobDocumentSource = string
 type jobDocument = string
 type jobDescription = string
 type jobArn = string
-type isSuppressed = bool;
-type isDisabled = bool;
-type isDefaultVersion = bool;
-type isAuthenticated = bool;
+type isSuppressed = bool
+type isDisabled = bool
+type isDefaultVersion = bool
+type isAuthenticated = bool
 type inputName = string
 type inlineDocument = string
 type indexStatus = [@as("REBUILDING") #REBUILDING | @as("BUILDING") #BUILDING | @as("ACTIVE") #ACTIVE]
 type indexSchema = string
 type indexName = string
-type incrementFactor = float;
-type inProgressTimeoutInMinutes = float;
-type inProgressThings = int;
-type inProgressChecksCount = int;
+type incrementFactor = float
+type inProgressTimeoutInMinutes = float
+type inProgressThings = int
+type inProgressChecksCount = int
 type httpQueryString = string
 type httpHeaderValue = string
 type httpHeaderName = string
@@ -255,37 +260,37 @@ type headerKey = string
 type hashKeyValue = string
 type hashKeyField = string
 type hashAlgorithm = string
-type genericLongValue = float;
+type genericLongValue = float
 type generationId = string
 type functionArn = string
-type forced = bool;
-type forceFlag = bool;
-type forceDeleteAWSJob = bool;
-type forceDelete = bool;
-type flag = bool;
+type forced = bool
+type forceFlag = bool
+type forceDeleteAWSJob = bool
+type forceDelete = bool
+type flag = bool
 type firehoseSeparator = string
 type findingId = string
-type fileType = int;
+type fileType = int
 type fileName = string
-type fileId = int;
+type fileId = int
 type fieldType = [@as("Boolean") #Boolean | @as("String") #String | @as("Number") #Number]
 type fieldName = string
-type failedThings = int;
-type failedFindingsCount = float;
-type failedChecksCount = int;
-type expiresInSeconds = float;
-type expiresInSec = float;
-type expectedVersion = float;
-type executionNumber = float;
+type failedThings = int
+type failedFindingsCount = float
+type failedChecksCount = int
+type expiresInSeconds = float
+type expiresInSec = float
+type expectedVersion = float
+type executionNumber = float
 type executionNamePrefix = string
-type eventType = [@as("CA_CERTIFICATE") #CA_CERTIFICATE | @as("CERTIFICATE") #CERTIFICATE | @as("POLICY") #POLICY | @as("JOB_EXECUTION") #JOB_EXECUTION | @as("JOB") #JOB | @as("THING_TYPE_ASSOCIATION") #THING_TYPE_ASSOCIATION | @as("THING_GROUP_HIERARCHY") #THING_GROUP_HIERARCHY | @as("THING_GROUP_MEMBERSHIP") #THING_GROUP_MEMBERSHIP | @as("THING_TYPE") #THING_TYPE | @as("THING_GROUP") #THING_GROUP | @as("THING") #THING]
+type eventType = [@as("CA_CERTIFICATE") #CACERTIFICATE | @as("CERTIFICATE") #CERTIFICATE | @as("POLICY") #POLICY | @as("JOB_EXECUTION") #JOBEXECUTION | @as("JOB") #JOB | @as("THING_TYPE_ASSOCIATION") #THINGTYPEASSOCIATION | @as("THING_GROUP_HIERARCHY") #THINGGROUPHIERARCHY | @as("THING_GROUP_MEMBERSHIP") #THINGGROUPMEMBERSHIP | @as("THING_TYPE") #THINGTYPE | @as("THING_GROUP") #THINGGROUP | @as("THING") #THING]
 type evaluationStatistic = string
 type errorMessage2 = string
 type errorMessage = string
 type errorCode = string
 type endpointType = string
 type endpointAddress = string
-type enabled = bool;
+type enabled = bool
 type elasticsearchType = string
 type elasticsearchIndex = string
 type elasticsearchId = string
@@ -293,115 +298,115 @@ type elasticsearchEndpoint = string
 type dynamoOperation = string
 type dynamoKeyType = [@as("NUMBER") #NUMBER | @as("STRING") #STRING]
 type dynamicGroupStatus = [@as("REBUILDING") #REBUILDING | @as("BUILDING") #BUILDING | @as("ACTIVE") #ACTIVE]
-type durationSeconds = int;
-type domainType = [@as("CUSTOMER_MANAGED") #CUSTOMER_MANAGED | @as("AWS_MANAGED") #AWS_MANAGED | @as("ENDPOINT") #ENDPOINT]
+type durationSeconds = int
+type domainType = [@as("CUSTOMER_MANAGED") #CUSTOMERMANAGED | @as("AWS_MANAGED") #AWSMANAGED | @as("ENDPOINT") #ENDPOINT]
 type domainName = string
 type domainConfigurationStatus = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type domainConfigurationName = string
 type domainConfigurationArn = string
-type disableAllLogs = bool;
-type dimensionValueOperator = [@as("NOT_IN") #NOT_IN | @as("IN") #IN]
-type dimensionType = [@as("TOPIC_FILTER") #TOPIC_FILTER]
+type disableAllLogs = bool
+type dimensionValueOperator = [@as("NOT_IN") #NOTIN | @as("IN") #IN]
+type dimensionType = [@as("TOPIC_FILTER") #TOPICFILTER]
 type dimensionStringValue = string
 type dimensionName = string
 type dimensionArn = string
 type deviceDefenderThingName = string
 type deviceCertificateUpdateAction = [@as("DEACTIVATE") #DEACTIVATE]
-type detectMitigationActionsTaskStatus = [@as("CANCELED") #CANCELED | @as("FAILED") #FAILED | @as("SUCCESSFUL") #SUCCESSFUL | @as("IN_PROGRESS") #IN_PROGRESS]
-type detectMitigationActionExecutionStatus = [@as("SKIPPED") #SKIPPED | @as("FAILED") #FAILED | @as("SUCCESSFUL") #SUCCESSFUL | @as("IN_PROGRESS") #IN_PROGRESS]
+type detectMitigationActionsTaskStatus = [@as("CANCELED") #CANCELED | @as("FAILED") #FAILED | @as("SUCCESSFUL") #SUCCESSFUL | @as("IN_PROGRESS") #INPROGRESS]
+type detectMitigationActionExecutionStatus = [@as("SKIPPED") #SKIPPED | @as("FAILED") #FAILED | @as("SUCCESSFUL") #SUCCESSFUL | @as("IN_PROGRESS") #INPROGRESS]
 type detectMitigationActionExecutionErrorCode = string
 type detailsValue = string
 type detailsKey = string
 type description = string
 type deprecationDate = Js.Date.t;
 type deliveryStreamName = string
-type deleteStream_ = bool;
-type deleteScheduledAudits = bool;
-type deleteBehaviors = bool;
-type deleteAlertTargets = bool;
-type deleteAdditionalMetricsToRetain = bool;
+type deleteStream_ = bool
+type deleteScheduledAudits = bool
+type deleteBehaviors = bool
+type deleteAlertTargets = bool
+type deleteAdditionalMetricsToRetain = bool
 type dayOfWeek = [@as("SAT") #SAT | @as("FRI") #FRI | @as("THU") #THU | @as("WED") #WED | @as("TUE") #TUE | @as("MON") #MON | @as("SUN") #SUN]
 type dayOfMonth = string
 type dateType = Js.Date.t;
-type dataCollectionPercentage = float;
-type customerVersion = int;
-type customMetricType = [@as("number") #number | @as("number-list") #number_list | @as("ip-address-list") #ip_address_list | @as("string-list") #string_list]
+type dataCollectionPercentage = float
+type customerVersion = int
+type customMetricType = [@as("number") #Number | @as("number-list") #NumberList | @as("ip-address-list") #IpAddressList | @as("string-list") #StringList]
 type customMetricDisplayName = string
 type customMetricArn = string
-type credentialDurationSeconds = int;
+type credentialDurationSeconds = int
 type creationDate = Js.Date.t;
 type createdAtDate = Js.Date.t;
-type count = int;
-type consecutiveDatapointsToClear = int;
-type consecutiveDatapointsToAlarm = int;
-type connectivityTimestamp = float;
+type count = int
+type consecutiveDatapointsToClear = int
+type consecutiveDatapointsToAlarm = int
+type connectivityTimestamp = float
 type confirmationToken = string
 type confidenceLevel = [@as("HIGH") #HIGH | @as("MEDIUM") #MEDIUM | @as("LOW") #LOW]
-type compliantChecksCount = int;
-type comparisonOperator = [@as("not-in-set") #not_in_set | @as("in-set") #in_set | @as("not-in-port-set") #not_in_port_set | @as("in-port-set") #in_port_set | @as("not-in-cidr-set") #not_in_cidr_set | @as("in-cidr-set") #in_cidr_set | @as("greater-than-equals") #greater_than_equals | @as("greater-than") #greater_than | @as("less-than-equals") #less_than_equals | @as("less-than") #less_than]
+type compliantChecksCount = int
+type comparisonOperator = [@as("not-in-set") #NotInSet | @as("in-set") #InSet | @as("not-in-port-set") #NotInPortSet | @as("in-port-set") #InPortSet | @as("not-in-cidr-set") #NotInCidrSet | @as("in-cidr-set") #InCidrSet | @as("greater-than-equals") #GreaterThanEquals | @as("greater-than") #GreaterThan | @as("less-than-equals") #LessThanEquals | @as("less-than") #LessThan]
 type comment = string
 type cognitoIdentityPoolId = string
 type code = string
 type clientRequestToken = string
 type clientId = string
 type cidr = string
-type checkCompliant = bool;
+type checkCompliant = bool
 type channelName = string
-type certificateStatus = [@as("PENDING_ACTIVATION") #PENDING_ACTIVATION | @as("REGISTER_INACTIVE") #REGISTER_INACTIVE | @as("PENDING_TRANSFER") #PENDING_TRANSFER | @as("REVOKED") #REVOKED | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
+type certificateStatus = [@as("PENDING_ACTIVATION") #PENDINGACTIVATION | @as("REGISTER_INACTIVE") #REGISTERINACTIVE | @as("PENDING_TRANSFER") #PENDINGTRANSFER | @as("REVOKED") #REVOKED | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
 type certificateSigningRequest = string
 type certificatePem = string
 type certificatePathOnDevice = string
 type certificateName = string
-type certificateMode = [@as("SNI_ONLY") #SNI_ONLY | @as("DEFAULT") #DEFAULT]
+type certificateMode = [@as("SNI_ONLY") #SNIONLY | @as("DEFAULT") #DEFAULT]
 type certificateId = string
 type certificateArn = string
-type cannedAccessControlList = [@as("log-delivery-write") #log_delivery_write | @as("bucket-owner-full-control") #bucket_owner_full_control | @as("bucket-owner-read") #bucket_owner_read | @as("authenticated-read") #authenticated_read | @as("aws-exec-read") #aws_exec_read | @as("public-read-write") #public_read_write | @as("public-read") #public_read | @as("private") #private]
-type canceledThings = int;
-type canceledFindingsCount = float;
-type canceledChecksCount = int;
-type cACertificateUpdateAction = [@as("DEACTIVATE") #DEACTIVATE]
-type cACertificateStatus = [@as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
+type cannedAccessControlList = [@as("log-delivery-write") #LogDeliveryWrite | @as("bucket-owner-full-control") #BucketOwnerFullControl | @as("bucket-owner-read") #BucketOwnerRead | @as("authenticated-read") #AuthenticatedRead | @as("aws-exec-read") #AwsExecRead | @as("public-read-write") #PublicReadWrite | @as("public-read") #PublicRead | @as("private") #Private]
+type canceledThings = int
+type canceledFindingsCount = float
+type canceledChecksCount = int
+type cacertificateUpdateAction = [@as("DEACTIVATE") #DEACTIVATE]
+type cacertificateStatus = [@as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
 type bucketName = string
-type booleanKey = bool;
-type amazonawsBoolean = bool;
+type booleanKey = bool
+type boolean_ = bool
 type billingGroupName = string
 type billingGroupId = string
 type billingGroupDescription = string
 type billingGroupArn = string
 type behaviorName = string
 type behaviorMetric = string
-type behaviorCriteriaType = [@as("MACHINE_LEARNING") #MACHINE_LEARNING | @as("STATISTICAL") #STATISTICAL | @as("STATIC") #STATIC]
-type batchMode = bool;
-type awsJobTimeoutInProgressTimeoutInMinutes = float;
-type awsJobRolloutRatePerMinute = int;
-type awsJobRolloutIncrementFactor = float;
-type awsJobRateIncreaseCriteriaNumberOfThings = int;
-type awsJobAbortCriteriaMinimumNumberOfExecutedThings = int;
-type awsJobAbortCriteriaFailureType = [@as("ALL") #ALL | @as("TIMED_OUT") #TIMED_OUT | @as("REJECTED") #REJECTED | @as("FAILED") #FAILED]
-type awsJobAbortCriteriaAbortThresholdPercentage = float;
+type behaviorCriteriaType = [@as("MACHINE_LEARNING") #MACHINELEARNING | @as("STATISTICAL") #STATISTICAL | @as("STATIC") #STATIC]
+type batchMode = bool
+type awsJobTimeoutInProgressTimeoutInMinutes = float
+type awsJobRolloutRatePerMinute = int
+type awsJobRolloutIncrementFactor = float
+type awsJobRateIncreaseCriteriaNumberOfThings = int
+type awsJobAbortCriteriaMinimumNumberOfExecutedThings = int
+type awsJobAbortCriteriaFailureType = [@as("ALL") #ALL | @as("TIMED_OUT") #TIMEDOUT | @as("REJECTED") #REJECTED | @as("FAILED") #FAILED]
+type awsJobAbortCriteriaAbortThresholdPercentage = float
 type awsJobAbortCriteriaAbortAction = [@as("CANCEL") #CANCEL]
 type awsIotSqlVersion = string
 type awsIotJobId = string
 type awsIotJobArn = string
 type awsArn = string
 type awsAccountId = string
-type average = float;
+type average = float
 type autoRegistrationStatus = [@as("DISABLE") #DISABLE | @as("ENABLE") #ENABLE]
 type authorizerStatus = [@as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
 type authorizerName = string
 type authorizerFunctionArn = string
 type authorizerArn = string
-type authDecision = [@as("IMPLICIT_DENY") #IMPLICIT_DENY | @as("EXPLICIT_DENY") #EXPLICIT_DENY | @as("ALLOWED") #ALLOWED]
-type auditTaskType = [@as("SCHEDULED_AUDIT_TASK") #SCHEDULED_AUDIT_TASK | @as("ON_DEMAND_AUDIT_TASK") #ON_DEMAND_AUDIT_TASK]
-type auditTaskStatus = [@as("CANCELED") #CANCELED | @as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("IN_PROGRESS") #IN_PROGRESS]
+type authDecision = [@as("IMPLICIT_DENY") #IMPLICITDENY | @as("EXPLICIT_DENY") #EXPLICITDENY | @as("ALLOWED") #ALLOWED]
+type auditTaskType = [@as("SCHEDULED_AUDIT_TASK") #SCHEDULEDAUDITTASK | @as("ON_DEMAND_AUDIT_TASK") #ONDEMANDAUDITTASK]
+type auditTaskStatus = [@as("CANCELED") #CANCELED | @as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("IN_PROGRESS") #INPROGRESS]
 type auditTaskId = string
 type auditNotificationType = [@as("SNS") #SNS]
-type auditMitigationActionsTaskStatus = [@as("CANCELED") #CANCELED | @as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("IN_PROGRESS") #IN_PROGRESS]
-type auditMitigationActionsExecutionStatus = [@as("PENDING") #PENDING | @as("SKIPPED") #SKIPPED | @as("CANCELED") #CANCELED | @as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("IN_PROGRESS") #IN_PROGRESS]
+type auditMitigationActionsTaskStatus = [@as("CANCELED") #CANCELED | @as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("IN_PROGRESS") #INPROGRESS]
+type auditMitigationActionsExecutionStatus = [@as("PENDING") #PENDING | @as("SKIPPED") #SKIPPED | @as("CANCELED") #CANCELED | @as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("IN_PROGRESS") #INPROGRESS]
 type auditFrequency = [@as("MONTHLY") #MONTHLY | @as("BIWEEKLY") #BIWEEKLY | @as("WEEKLY") #WEEKLY | @as("DAILY") #DAILY]
 type auditFindingSeverity = [@as("LOW") #LOW | @as("MEDIUM") #MEDIUM | @as("HIGH") #HIGH | @as("CRITICAL") #CRITICAL]
 type auditDescription = string
-type auditCheckRunStatus = [@as("FAILED") #FAILED | @as("COMPLETED_NON_COMPLIANT") #COMPLETED_NON_COMPLIANT | @as("COMPLETED_COMPLIANT") #COMPLETED_COMPLIANT | @as("CANCELED") #CANCELED | @as("WAITING_FOR_DATA_COLLECTION") #WAITING_FOR_DATA_COLLECTION | @as("IN_PROGRESS") #IN_PROGRESS]
+type auditCheckRunStatus = [@as("FAILED") #FAILED | @as("COMPLETED_NON_COMPLIANT") #COMPLETEDNONCOMPLIANT | @as("COMPLETED_COMPLIANT") #COMPLETEDCOMPLIANT | @as("CANCELED") #CANCELED | @as("WAITING_FOR_DATA_COLLECTION") #WAITINGFORDATACOLLECTION | @as("IN_PROGRESS") #INPROGRESS]
 type auditCheckName = string
 type attributeValue = string
 type attributeName = string
@@ -417,90 +422,90 @@ type assetPropertyDoubleValue = string
 type assetPropertyBooleanValue = string
 type assetPropertyAlias = string
 type assetId = string
-type ascendingOrder = bool;
-type approximateSecondsBeforeTimedOut = float;
-type allowAutoRegistration = bool;
-type allowAuthorizerOverride = bool;
+type ascendingOrder = bool
+type approximateSecondsBeforeTimedOut = float
+type allowAutoRegistration = bool
+type allowAuthorizerOverride = bool
 type alertTargetType = [@as("SNS") #SNS]
 type alertTargetArn = string
 type alarmName = string
 type aggregationField = string
 type actionType = [@as("CONNECT") #CONNECT | @as("RECEIVE") #RECEIVE | @as("SUBSCRIBE") #SUBSCRIBE | @as("PUBLISH") #PUBLISH]
 type acmCertificateArn = string
-type abortThresholdPercentage = float;
+type abortThresholdPercentage = float
 type abortAction = [@as("CANCEL") #CANCEL]
 type violationEventOccurrenceRange = {
-@as("endTime") endTime: option<amazonawsTimestamp>,
-@as("startTime") startTime: option<amazonawsTimestamp>
+endTime: timestamp_,
+startTime: timestamp_
 }
 type violationEventAdditionalInfo = {
-@as("confidenceLevel") confidenceLevel: confidenceLevel
+confidenceLevel: option<confidenceLevel>
 }
 type validationError = {
-@as("errorMessage") errorMessage: errorMessage
+errorMessage: option<errorMessage>
 }
 type updateDeviceCertificateParams = {
-@as("action") action: option<deviceCertificateUpdateAction>
+action: deviceCertificateUpdateAction
 }
 type updateCACertificateParams = {
-@as("action") action: option<cACertificateUpdateAction>
+action: cacertificateUpdateAction
 }
 type transferData = {
-@as("rejectDate") rejectDate: dateType,
-@as("acceptDate") acceptDate: dateType,
-@as("transferDate") transferDate: dateType,
-@as("rejectReason") rejectReason: message,
-@as("transferMessage") transferMessage: message
+rejectDate: option<dateType>,
+acceptDate: option<dateType>,
+transferDate: option<dateType>,
+rejectReason: option<message>,
+transferMessage: option<message>
 }
 type topicRuleListItem = {
-@as("ruleDisabled") ruleDisabled: isDisabled,
-@as("createdAt") createdAt: createdAtDate,
-@as("topicPattern") topicPattern: topicPattern,
-@as("ruleName") ruleName: ruleName,
-@as("ruleArn") ruleArn: ruleArn
+ruleDisabled: option<isDisabled>,
+createdAt: option<createdAtDate>,
+topicPattern: option<topicPattern>,
+ruleName: option<ruleName>,
+ruleArn: option<ruleArn>
 }
 type tlsContext = {
-@as("serverName") serverName: serverName
+serverName: option<serverName>
 }
 type timestreamTimestamp = {
-@as("unit") unit: option<timestreamTimestampUnit>,
-@as("value") value: option<timestreamTimestampValue>
+@as("unit") unit_: timestreamTimestampUnit,
+value: timestreamTimestampValue
 }
 type timestreamDimension = {
-@as("value") value: option<timestreamDimensionValue>,
-@as("name") name: option<timestreamDimensionName>
+value: timestreamDimensionValue,
+name: timestreamDimensionName
 }
 type timeoutConfig = {
-@as("inProgressTimeoutInMinutes") inProgressTimeoutInMinutes: inProgressTimeoutInMinutes
+inProgressTimeoutInMinutes: option<inProgressTimeoutInMinutes>
 }
 type thingTypeMetadata = {
-@as("creationDate") creationDate: creationDate,
-@as("deprecationDate") deprecationDate: deprecationDate,
-@as("deprecated") deprecated: amazonawsBoolean
+creationDate: option<creationDate>,
+deprecationDate: option<deprecationDate>,
+deprecated: option<boolean_>
 }
 type thingNameList = array<thingName>
 type thingGroupNames = array<thingGroupName>
 type thingGroupNameList = array<thingGroupName>
 type thingGroupList = array<thingGroupName>
 type thingConnectivity = {
-@as("timestamp") timestamp: connectivityTimestamp,
-@as("connected") connected: amazonawsBoolean
+@as("timestamp") timestamp_: option<connectivityTimestamp>,
+connected: option<boolean_>
 }
 type taskStatisticsForAuditCheck = {
-@as("canceledFindingsCount") canceledFindingsCount: canceledFindingsCount,
-@as("skippedFindingsCount") skippedFindingsCount: skippedFindingsCount,
-@as("succeededFindingsCount") succeededFindingsCount: succeededFindingsCount,
-@as("failedFindingsCount") failedFindingsCount: failedFindingsCount,
-@as("totalFindingsCount") totalFindingsCount: totalFindingsCount
+canceledFindingsCount: option<canceledFindingsCount>,
+skippedFindingsCount: option<skippedFindingsCount>,
+succeededFindingsCount: option<succeededFindingsCount>,
+failedFindingsCount: option<failedFindingsCount>,
+totalFindingsCount: option<totalFindingsCount>
 }
 type taskStatistics = {
-@as("canceledChecks") canceledChecks: canceledChecksCount,
-@as("failedChecks") failedChecks: failedChecksCount,
-@as("nonCompliantChecks") nonCompliantChecks: nonCompliantChecksCount,
-@as("compliantChecks") compliantChecks: compliantChecksCount,
-@as("waitingForDataCollectionChecks") waitingForDataCollectionChecks: waitingForDataCollectionChecksCount,
-@as("inProgressChecks") inProgressChecks: inProgressChecksCount,
-@as("totalChecks") totalChecks: totalChecksCount
+canceledChecks: option<canceledChecksCount>,
+failedChecks: option<failedChecksCount>,
+nonCompliantChecks: option<nonCompliantChecksCount>,
+compliantChecks: option<compliantChecksCount>,
+waitingForDataCollectionChecks: option<waitingForDataCollectionChecksCount>,
+inProgressChecks: option<inProgressChecksCount>,
+totalChecks: option<totalChecksCount>
 }
 type taskIdList = array<taskId>
 type targets = array<target>
@@ -508,576 +513,576 @@ type targetViolationIdsForDetectMitigationActions = array<violationId>
 type targetAuditCheckNames = array<auditCheckName>
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: tagValue,
-@as("Key") key: option<tagKey>
+@as("Value") value: option<tagValue>,
+@as("Key") key: tagKey
 }
 type subnetIdList = array<subnetId>
-type stringMap = Js.Dict.t< amazonawsString>
+type stringMap = Js.Dict.t< string_>
 type stringList = array<stringValue>
 type streamSummary = {
-@as("description") description: streamDescription,
-@as("streamVersion") streamVersion: streamVersion,
-@as("streamArn") streamArn: streamArn,
-@as("streamId") streamId: streamId
+description: option<streamDescription>,
+streamVersion: option<streamVersion>,
+streamArn: option<streamArn>,
+streamId: option<streamId>
 }
 type stream = {
-@as("fileId") fileId: fileId,
-@as("streamId") streamId: streamId
+fileId: option<fileId>,
+streamId: option<streamId>
 }
 type stepFunctionsAction = {
-@as("roleArn") roleArn: option<awsArn>,
-@as("stateMachineName") stateMachineName: option<stateMachineName>,
-@as("executionNamePrefix") executionNamePrefix: executionNamePrefix
+roleArn: awsArn,
+stateMachineName: stateMachineName,
+executionNamePrefix: option<executionNamePrefix>
 }
 type statistics = {
-@as("stdDeviation") stdDeviation: stdDeviation,
-@as("variance") variance: variance,
-@as("sumOfSquares") sumOfSquares: sumOfSquares,
-@as("maximum") maximum: maximum,
-@as("minimum") minimum: minimum,
-@as("sum") sum: sum,
-@as("average") average: average,
-@as("count") count: count
+stdDeviation: option<stdDeviation>,
+variance: option<variance>,
+sumOfSquares: option<sumOfSquares>,
+maximum: option<maximum>,
+minimum: option<minimum>,
+sum: option<sum>,
+average: option<average>,
+count: option<count>
 }
 type statisticalThreshold = {
-@as("statistic") statistic: evaluationStatistic
+statistic: option<evaluationStatistic>
 }
 type sqsAction = {
-@as("useBase64") useBase64: useBase64,
-@as("queueUrl") queueUrl: option<queueUrl>,
-@as("roleArn") roleArn: option<awsArn>
+useBase64: option<useBase64>,
+queueUrl: queueUrl,
+roleArn: awsArn
 }
 type snsAction = {
-@as("messageFormat") messageFormat: messageFormat,
-@as("roleArn") roleArn: option<awsArn>,
-@as("targetArn") targetArn: option<awsArn>
+messageFormat: option<messageFormat>,
+roleArn: awsArn,
+targetArn: awsArn
 }
 type signingProfileParameter = {
-@as("certificatePathOnDevice") certificatePathOnDevice: certificatePathOnDevice,
-@as("platform") platform: platform,
-@as("certificateArn") certificateArn: certificateArn
+certificatePathOnDevice: option<certificatePathOnDevice>,
+platform: option<platform>,
+certificateArn: option<certificateArn>
 }
 type sigV4Authorization = {
-@as("roleArn") roleArn: option<awsArn>,
-@as("serviceName") serviceName: option<serviceName>,
-@as("signingRegion") signingRegion: option<signingRegion>
+roleArn: awsArn,
+serviceName: serviceName,
+signingRegion: signingRegion
 }
 type serverCertificateSummary = {
-@as("serverCertificateStatusDetail") serverCertificateStatusDetail: serverCertificateStatusDetail,
-@as("serverCertificateStatus") serverCertificateStatus: serverCertificateStatus,
-@as("serverCertificateArn") serverCertificateArn: acmCertificateArn
+serverCertificateStatusDetail: option<serverCertificateStatusDetail>,
+serverCertificateStatus: option<serverCertificateStatus>,
+serverCertificateArn: option<acmCertificateArn>
 }
 type serverCertificateArns = array<acmCertificateArn>
 type securityProfileTarget = {
-@as("arn") arn: option<securityProfileTargetArn>
+arn: securityProfileTargetArn
 }
 type securityProfileIdentifier = {
-@as("arn") arn: option<securityProfileArn>,
-@as("name") name: option<securityProfileName>
+arn: securityProfileArn,
+name: securityProfileName
 }
 type securityGroupList = array<securityGroupId>
 type searchableAttributes = array<attributeName>
 type scheduledAuditMetadata = {
-@as("dayOfWeek") dayOfWeek: dayOfWeek,
-@as("dayOfMonth") dayOfMonth: dayOfMonth,
-@as("frequency") frequency: auditFrequency,
-@as("scheduledAuditArn") scheduledAuditArn: scheduledAuditArn,
-@as("scheduledAuditName") scheduledAuditName: scheduledAuditName
+dayOfWeek: option<dayOfWeek>,
+dayOfMonth: option<dayOfMonth>,
+frequency: option<auditFrequency>,
+scheduledAuditArn: option<scheduledAuditArn>,
+scheduledAuditName: option<scheduledAuditName>
 }
 type salesforceAction = {
-@as("url") url: option<salesforceEndpoint>,
-@as("token") token: option<salesforceToken>
+url: salesforceEndpoint,
+token: salesforceToken
 }
 type s3Location = {
-@as("version") version: s3Version,
-@as("key") key: s3Key,
-@as("bucket") bucket: s3Bucket
+version: option<s3Version>,
+key: option<s3Key>,
+bucket: option<s3Bucket>
 }
 type s3FileUrlList = array<s3FileUrl>
 type s3Destination = {
-@as("prefix") prefix: prefix,
-@as("bucket") bucket: s3Bucket
+prefix: option<prefix>,
+bucket: option<s3Bucket>
 }
 type s3Action = {
-@as("cannedAcl") cannedAcl: cannedAccessControlList,
-@as("key") key: option<key>,
-@as("bucketName") bucketName: option<bucketName>,
-@as("roleArn") roleArn: option<awsArn>
+cannedAcl: option<cannedAccessControlList>,
+key: key,
+bucketName: bucketName,
+roleArn: awsArn
 }
 type roleAliases = array<roleAlias>
 type roleAliasDescription = {
-@as("lastModifiedDate") lastModifiedDate: dateType,
-@as("creationDate") creationDate: dateType,
-@as("credentialDurationSeconds") credentialDurationSeconds: credentialDurationSeconds,
-@as("owner") owner: awsAccountId,
-@as("roleArn") roleArn: roleArn,
-@as("roleAliasArn") roleAliasArn: roleAliasArn,
-@as("roleAlias") roleAlias: roleAlias
+lastModifiedDate: option<dateType>,
+creationDate: option<dateType>,
+credentialDurationSeconds: option<credentialDurationSeconds>,
+owner: option<awsAccountId>,
+roleArn: option<roleArn>,
+roleAliasArn: option<roleAliasArn>,
+roleAlias: option<roleAlias>
 }
 type resources = array<resource>
 type resourceArns = Js.Dict.t< resourceArn>
 type republishAction = {
-@as("qos") qos: qos,
-@as("topic") topic: option<topicPattern>,
-@as("roleArn") roleArn: option<awsArn>
+qos: option<qos>,
+topic: topicPattern,
+roleArn: awsArn
 }
 type replaceDefaultPolicyVersionParams = {
-@as("templateName") templateName: option<policyTemplateName>
+templateName: policyTemplateName
 }
 type registrationConfig = {
-@as("roleArn") roleArn: roleArn,
-@as("templateBody") templateBody: templateBody
+roleArn: option<roleArn>,
+templateBody: option<templateBody>
 }
 type reasonForNonComplianceCodes = array<reasonForNonComplianceCode>
 type rateIncreaseCriteria = {
-@as("numberOfSucceededThings") numberOfSucceededThings: numberOfThings,
-@as("numberOfNotifiedThings") numberOfNotifiedThings: numberOfThings
+numberOfSucceededThings: option<numberOfThings>,
+numberOfNotifiedThings: option<numberOfThings>
 }
 type putItemInput = {
-@as("tableName") tableName: option<tableName>
+tableName: tableName
 }
 type publishFindingToSnsParams = {
-@as("topicArn") topicArn: option<snsTopicArn>
+topicArn: snsTopicArn
 }
 type publicKeyMap = Js.Dict.t< keyValue>
 type provisioningTemplateVersionSummary = {
-@as("isDefaultVersion") isDefaultVersion: isDefaultVersion,
-@as("creationDate") creationDate: dateType,
-@as("versionId") versionId: templateVersionId
+isDefaultVersion: option<isDefaultVersion>,
+creationDate: option<dateType>,
+versionId: option<templateVersionId>
 }
 type provisioningTemplateSummary = {
-@as("enabled") enabled: enabled,
-@as("lastModifiedDate") lastModifiedDate: dateType,
-@as("creationDate") creationDate: dateType,
-@as("description") description: templateDescription,
-@as("templateName") templateName: templateName,
-@as("templateArn") templateArn: templateArn
+enabled: option<enabled>,
+lastModifiedDate: option<dateType>,
+creationDate: option<dateType>,
+description: option<templateDescription>,
+templateName: option<templateName>,
+templateArn: option<templateArn>
 }
 type provisioningHook = {
-@as("targetArn") targetArn: option<targetArn>,
-@as("payloadVersion") payloadVersion: payloadVersion
+targetArn: targetArn,
+payloadVersion: option<payloadVersion>
 }
 type protocols = array<protocol>
 type processingTargetNameList = array<processingTargetName>
 type principals = array<principalArn>
 type presignedUrlConfig = {
-@as("expiresInSec") expiresInSec: expiresInSec,
-@as("roleArn") roleArn: roleArn
+expiresInSec: option<expiresInSec>,
+roleArn: option<roleArn>
 }
 type ports = array<port>
 type policyVersionIdentifier = {
-@as("policyVersionId") policyVersionId: policyVersionId,
-@as("policyName") policyName: policyName
+policyVersionId: option<policyVersionId>,
+policyName: option<policyName>
 }
 type policyVersion = {
-@as("createDate") createDate: dateType,
-@as("isDefaultVersion") isDefaultVersion: isDefaultVersion,
-@as("versionId") versionId: policyVersionId
+createDate: option<dateType>,
+isDefaultVersion: option<isDefaultVersion>,
+versionId: option<policyVersionId>
 }
 type policyTargets = array<policyTarget>
 type policyNames = array<policyName>
 type policyDocuments = array<policyDocument>
 type policy = {
-@as("policyArn") policyArn: policyArn,
-@as("policyName") policyName: policyName
+policyArn: option<policyArn>,
+policyName: option<policyName>
 }
 type percentPair = {
-@as("value") value: percentValue,
-@as("percent") percent: percent
+value: option<percentValue>,
+percent: option<percent>
 }
 type percentList = array<percent>
 type parameters = Js.Dict.t< value>
 type outgoingCertificate = {
-@as("creationDate") creationDate: dateType,
-@as("transferMessage") transferMessage: message,
-@as("transferDate") transferDate: dateType,
-@as("transferredTo") transferredTo: awsAccountId,
-@as("certificateId") certificateId: certificateId,
-@as("certificateArn") certificateArn: certificateArn
+creationDate: option<dateType>,
+transferMessage: option<message>,
+transferDate: option<dateType>,
+transferredTo: option<awsAccountId>,
+certificateId: option<certificateId>,
+certificateArn: option<certificateArn>
 }
-type oTAUpdateSummary = {
-@as("creationDate") creationDate: dateType,
-@as("otaUpdateArn") otaUpdateArn: oTAUpdateArn,
-@as("otaUpdateId") otaUpdateId: oTAUpdateId
+type otaupdateSummary = {
+creationDate: option<dateType>,
+otaUpdateArn: option<otaupdateArn>,
+otaUpdateId: option<otaupdateId>
 }
 type numberList = array<number>
 type mqttContext = {
-@as("clientId") clientId: mqttClientId,
-@as("password") password: mqttPassword,
-@as("username") username: mqttUsername
+clientId: option<mqttClientId>,
+password: option<mqttPassword>,
+username: option<mqttUsername>
 }
 type mitigationActionNameList = array<mitigationActionName>
 type mitigationActionIdentifier = {
-@as("creationDate") creationDate: amazonawsTimestamp,
-@as("actionArn") actionArn: mitigationActionArn,
-@as("actionName") actionName: mitigationActionName
+creationDate: option<timestamp_>,
+actionArn: option<mitigationActionArn>,
+actionName: option<mitigationActionName>
 }
 type missingContextValues = array<missingContextValue>
 type metricNames = array<metricName>
 type metricDimension = {
-@as("operator") operator: dimensionValueOperator,
-@as("dimensionName") dimensionName: option<dimensionName>
+operator: option<dimensionValueOperator>,
+dimensionName: dimensionName
 }
 type machineLearningDetectionConfig = {
-@as("confidenceLevel") confidenceLevel: option<confidenceLevel>
+confidenceLevel: confidenceLevel
 }
 type loggingOptionsPayload = {
-@as("logLevel") logLevel: logLevel,
-@as("roleArn") roleArn: option<awsArn>
+logLevel: option<logLevel>,
+roleArn: awsArn
 }
 type logTarget = {
-@as("targetName") targetName: logTargetName,
-@as("targetType") targetType: option<logTargetType>
+targetName: option<logTargetName>,
+targetType: logTargetType
 }
 type lambdaAction = {
-@as("functionArn") functionArn: option<functionArn>
+functionArn: functionArn
 }
 type kinesisAction = {
-@as("partitionKey") partitionKey: partitionKey,
-@as("streamName") streamName: option<streamName>,
-@as("roleArn") roleArn: option<awsArn>
+partitionKey: option<partitionKey>,
+streamName: streamName,
+roleArn: awsArn
 }
 type keyPair = {
-@as("PrivateKey") privateKey: privateKey,
-@as("PublicKey") publicKey: publicKey
+@as("PrivateKey") privateKey: option<privateKey>,
+@as("PublicKey") publicKey: option<publicKey>
 }
 type jobTemplateSummary = {
-@as("createdAt") createdAt: dateType,
-@as("description") description: jobDescription,
-@as("jobTemplateId") jobTemplateId: jobTemplateId,
-@as("jobTemplateArn") jobTemplateArn: jobTemplateArn
+createdAt: option<dateType>,
+description: option<jobDescription>,
+jobTemplateId: option<jobTemplateId>,
+jobTemplateArn: option<jobTemplateArn>
 }
 type jobTargets = array<targetArn>
 type jobSummary = {
-@as("completedAt") completedAt: dateType,
-@as("lastUpdatedAt") lastUpdatedAt: dateType,
-@as("createdAt") createdAt: dateType,
-@as("status") status: jobStatus,
-@as("targetSelection") targetSelection: targetSelection,
-@as("thingGroupId") thingGroupId: thingGroupId,
-@as("jobId") jobId: jobId,
-@as("jobArn") jobArn: jobArn
+completedAt: option<dateType>,
+lastUpdatedAt: option<dateType>,
+createdAt: option<dateType>,
+status: option<jobStatus>,
+targetSelection: option<targetSelection>,
+thingGroupId: option<thingGroupId>,
+jobId: option<jobId>,
+jobArn: option<jobArn>
 }
 type jobExecutionSummary = {
-@as("executionNumber") executionNumber: executionNumber,
-@as("lastUpdatedAt") lastUpdatedAt: dateType,
-@as("startedAt") startedAt: dateType,
-@as("queuedAt") queuedAt: dateType,
-@as("status") status: jobExecutionStatus
+executionNumber: option<executionNumber>,
+lastUpdatedAt: option<dateType>,
+startedAt: option<dateType>,
+queuedAt: option<dateType>,
+status: option<jobExecutionStatus>
 }
 type iotEventsAction = {
-@as("roleArn") roleArn: option<awsArn>,
-@as("batchMode") batchMode: batchMode,
-@as("messageId") messageId: messageId,
-@as("inputName") inputName: option<inputName>
+roleArn: awsArn,
+batchMode: option<batchMode>,
+messageId: option<messageId>,
+inputName: inputName
 }
 type iotAnalyticsAction = {
-@as("roleArn") roleArn: awsArn,
-@as("batchMode") batchMode: batchMode,
-@as("channelName") channelName: channelName,
-@as("channelArn") channelArn: awsArn
+roleArn: option<awsArn>,
+batchMode: option<batchMode>,
+channelName: option<channelName>,
+channelArn: option<awsArn>
 }
 type indexNamesList = array<indexName>
 type httpUrlDestinationSummary = {
-@as("confirmationUrl") confirmationUrl: url
+confirmationUrl: option<url>
 }
 type httpUrlDestinationProperties = {
-@as("confirmationUrl") confirmationUrl: url
+confirmationUrl: option<url>
 }
 type httpUrlDestinationConfiguration = {
-@as("confirmationUrl") confirmationUrl: option<url>
+confirmationUrl: url
 }
 type httpHeaders = Js.Dict.t< httpHeaderValue>
 type httpActionHeader = {
-@as("value") value: option<headerValue>,
-@as("key") key: option<headerKey>
+value: headerValue,
+key: headerKey
 }
 type groupNameAndArn = {
-@as("groupArn") groupArn: thingGroupArn,
-@as("groupName") groupName: thingGroupName
+groupArn: option<thingGroupArn>,
+groupName: option<thingGroupName>
 }
 type firehoseAction = {
-@as("batchMode") batchMode: batchMode,
-@as("separator") separator: firehoseSeparator,
-@as("deliveryStreamName") deliveryStreamName: option<deliveryStreamName>,
-@as("roleArn") roleArn: option<awsArn>
+batchMode: option<batchMode>,
+separator: option<firehoseSeparator>,
+deliveryStreamName: deliveryStreamName,
+roleArn: awsArn
 }
 type findingIds = array<findingId>
 type field = {
-@as("type") type_: fieldType,
-@as("name") name: fieldName
+@as("type") type_: option<fieldType>,
+name: option<fieldName>
 }
 type errorInfo = {
-@as("message") message: oTAUpdateErrorMessage,
-@as("code") code: code
+message: option<otaupdateErrorMessage>,
+code: option<code>
 }
 type enableIoTLoggingParams = {
-@as("logLevel") logLevel: option<logLevel>,
-@as("roleArnForLogging") roleArnForLogging: option<roleArn>
+logLevel: logLevel,
+roleArnForLogging: roleArn
 }
 type elasticsearchAction = {
-@as("id") id: option<elasticsearchId>,
-@as("type") type_: option<elasticsearchType>,
-@as("index") index: option<elasticsearchIndex>,
-@as("endpoint") endpoint: option<elasticsearchEndpoint>,
-@as("roleArn") roleArn: option<awsArn>
+id: elasticsearchId,
+@as("type") type_: elasticsearchType,
+index: elasticsearchIndex,
+endpoint: elasticsearchEndpoint,
+roleArn: awsArn
 }
 type effectivePolicy = {
-@as("policyDocument") policyDocument: policyDocument,
-@as("policyArn") policyArn: policyArn,
-@as("policyName") policyName: policyName
+policyDocument: option<policyDocument>,
+policyArn: option<policyArn>,
+policyName: option<policyName>
 }
 type dynamoDBAction = {
-@as("payloadField") payloadField: payloadField,
-@as("rangeKeyType") rangeKeyType: dynamoKeyType,
-@as("rangeKeyValue") rangeKeyValue: rangeKeyValue,
-@as("rangeKeyField") rangeKeyField: rangeKeyField,
-@as("hashKeyType") hashKeyType: dynamoKeyType,
-@as("hashKeyValue") hashKeyValue: option<hashKeyValue>,
-@as("hashKeyField") hashKeyField: option<hashKeyField>,
-@as("operation") operation: dynamoOperation,
-@as("roleArn") roleArn: option<awsArn>,
-@as("tableName") tableName: option<tableName>
+payloadField: option<payloadField>,
+rangeKeyType: option<dynamoKeyType>,
+rangeKeyValue: option<rangeKeyValue>,
+rangeKeyField: option<rangeKeyField>,
+hashKeyType: option<dynamoKeyType>,
+hashKeyValue: hashKeyValue,
+hashKeyField: hashKeyField,
+operation: option<dynamoOperation>,
+roleArn: awsArn,
+tableName: tableName
 }
 type domainConfigurationSummary = {
-@as("serviceType") serviceType: serviceType,
-@as("domainConfigurationArn") domainConfigurationArn: domainConfigurationArn,
-@as("domainConfigurationName") domainConfigurationName: reservedDomainConfigurationName
+serviceType: option<serviceType>,
+domainConfigurationArn: option<domainConfigurationArn>,
+domainConfigurationName: option<reservedDomainConfigurationName>
 }
 type dimensionStringValues = array<dimensionStringValue>
 type dimensionNames = array<dimensionName>
 type detectMitigationActionsToExecuteList = array<mitigationActionName>
 type detectMitigationActionsTaskStatistics = {
-@as("actionsFailed") actionsFailed: genericLongValue,
-@as("actionsSkipped") actionsSkipped: genericLongValue,
-@as("actionsExecuted") actionsExecuted: genericLongValue
+actionsFailed: option<genericLongValue>,
+actionsSkipped: option<genericLongValue>,
+actionsExecuted: option<genericLongValue>
 }
 type detectMitigationActionExecution = {
-@as("message") message: errorMessage,
-@as("errorCode") errorCode: detectMitigationActionExecutionErrorCode,
-@as("status") status: detectMitigationActionExecutionStatus,
-@as("executionEndDate") executionEndDate: amazonawsTimestamp,
-@as("executionStartDate") executionStartDate: amazonawsTimestamp,
-@as("thingName") thingName: deviceDefenderThingName,
-@as("actionName") actionName: mitigationActionName,
-@as("violationId") violationId: violationId,
-@as("taskId") taskId: mitigationActionsTaskId
+message: option<errorMessage>,
+errorCode: option<detectMitigationActionExecutionErrorCode>,
+status: option<detectMitigationActionExecutionStatus>,
+executionEndDate: option<timestamp_>,
+executionStartDate: option<timestamp_>,
+thingName: option<deviceDefenderThingName>,
+actionName: option<mitigationActionName>,
+violationId: option<violationId>,
+taskId: option<mitigationActionsTaskId>
 }
 type detailsMap = Js.Dict.t< detailsValue>
 type configuration = {
-@as("Enabled") enabled: enabled
+@as("Enabled") enabled: option<enabled>
 }
 type codeSigningSignature = {
-@as("inlineDocument") inlineDocument: signature
+inlineDocument: option<signature>
 }
 type codeSigningCertificateChain = {
-@as("inlineDocument") inlineDocument: inlineDocument,
-@as("certificateName") certificateName: certificateName
+inlineDocument: option<inlineDocument>,
+certificateName: option<certificateName>
 }
 type cloudwatchMetricAction = {
-@as("metricTimestamp") metricTimestamp: amazonawsString,
-@as("metricUnit") metricUnit: option<amazonawsString>,
-@as("metricValue") metricValue: option<amazonawsString>,
-@as("metricName") metricName: option<amazonawsString>,
-@as("metricNamespace") metricNamespace: option<amazonawsString>,
-@as("roleArn") roleArn: option<awsArn>
+metricTimestamp: option<string_>,
+metricUnit: string_,
+metricValue: string_,
+metricName: string_,
+metricNamespace: string_,
+roleArn: awsArn
 }
 type cloudwatchLogsAction = {
-@as("logGroupName") logGroupName: option<logGroupName>,
-@as("roleArn") roleArn: option<awsArn>
+logGroupName: logGroupName,
+roleArn: awsArn
 }
 type cloudwatchAlarmAction = {
-@as("stateValue") stateValue: option<stateValue>,
-@as("stateReason") stateReason: option<stateReason>,
-@as("alarmName") alarmName: option<alarmName>,
-@as("roleArn") roleArn: option<awsArn>
+stateValue: stateValue,
+stateReason: stateReason,
+alarmName: alarmName,
+roleArn: awsArn
 }
-type clientProperties = Js.Dict.t< amazonawsString>
+type clientProperties = Js.Dict.t< string_>
 type cidrs = array<cidr>
 type certificateValidity = {
-@as("notAfter") notAfter: dateType,
-@as("notBefore") notBefore: dateType
+notAfter: option<dateType>,
+notBefore: option<dateType>
 }
 type certificate = {
-@as("creationDate") creationDate: dateType,
-@as("certificateMode") certificateMode: certificateMode,
-@as("status") status: certificateStatus,
-@as("certificateId") certificateId: certificateId,
-@as("certificateArn") certificateArn: certificateArn
+creationDate: option<dateType>,
+certificateMode: option<certificateMode>,
+status: option<certificateStatus>,
+certificateId: option<certificateId>,
+certificateArn: option<certificateArn>
 }
-type cACertificate = {
-@as("creationDate") creationDate: dateType,
-@as("status") status: cACertificateStatus,
-@as("certificateId") certificateId: certificateId,
-@as("certificateArn") certificateArn: certificateArn
+type cacertificate = {
+creationDate: option<dateType>,
+status: option<cacertificateStatus>,
+certificateId: option<certificateId>,
+certificateArn: option<certificateArn>
 }
 type billingGroupProperties = {
-@as("billingGroupDescription") billingGroupDescription: billingGroupDescription
+billingGroupDescription: option<billingGroupDescription>
 }
 type billingGroupMetadata = {
-@as("creationDate") creationDate: creationDate
+creationDate: option<creationDate>
 }
 type behaviorModelTrainingSummary = {
-@as("lastModelRefreshDate") lastModelRefreshDate: amazonawsTimestamp,
-@as("datapointsCollectionPercentage") datapointsCollectionPercentage: dataCollectionPercentage,
-@as("modelStatus") modelStatus: modelStatus,
-@as("trainingDataCollectionStartDate") trainingDataCollectionStartDate: amazonawsTimestamp,
-@as("behaviorName") behaviorName: behaviorName,
-@as("securityProfileName") securityProfileName: securityProfileName
+lastModelRefreshDate: option<timestamp_>,
+datapointsCollectionPercentage: option<dataCollectionPercentage>,
+modelStatus: option<modelStatus>,
+trainingDataCollectionStartDate: option<timestamp_>,
+behaviorName: option<behaviorName>,
+securityProfileName: option<securityProfileName>
 }
 type awsJobTimeoutConfig = {
-@as("inProgressTimeoutInMinutes") inProgressTimeoutInMinutes: awsJobTimeoutInProgressTimeoutInMinutes
+inProgressTimeoutInMinutes: option<awsJobTimeoutInProgressTimeoutInMinutes>
 }
 type awsJobRateIncreaseCriteria = {
-@as("numberOfSucceededThings") numberOfSucceededThings: awsJobRateIncreaseCriteriaNumberOfThings,
-@as("numberOfNotifiedThings") numberOfNotifiedThings: awsJobRateIncreaseCriteriaNumberOfThings
+numberOfSucceededThings: option<awsJobRateIncreaseCriteriaNumberOfThings>,
+numberOfNotifiedThings: option<awsJobRateIncreaseCriteriaNumberOfThings>
 }
 type awsJobPresignedUrlConfig = {
-@as("expiresInSec") expiresInSec: expiresInSeconds
+expiresInSec: option<expiresInSeconds>
 }
 type awsJobAbortCriteria = {
-@as("minNumberOfExecutedThings") minNumberOfExecutedThings: option<awsJobAbortCriteriaMinimumNumberOfExecutedThings>,
-@as("thresholdPercentage") thresholdPercentage: option<awsJobAbortCriteriaAbortThresholdPercentage>,
-@as("action") action: option<awsJobAbortCriteriaAbortAction>,
-@as("failureType") failureType: option<awsJobAbortCriteriaFailureType>
+minNumberOfExecutedThings: awsJobAbortCriteriaMinimumNumberOfExecutedThings,
+thresholdPercentage: awsJobAbortCriteriaAbortThresholdPercentage,
+action: awsJobAbortCriteriaAbortAction,
+failureType: awsJobAbortCriteriaFailureType
 }
 type authorizerSummary = {
-@as("authorizerArn") authorizerArn: authorizerArn,
-@as("authorizerName") authorizerName: authorizerName
+authorizerArn: option<authorizerArn>,
+authorizerName: option<authorizerName>
 }
 type authorizerConfig = {
-@as("allowAuthorizerOverride") allowAuthorizerOverride: allowAuthorizerOverride,
-@as("defaultAuthorizerName") defaultAuthorizerName: authorizerName
+allowAuthorizerOverride: option<allowAuthorizerOverride>,
+defaultAuthorizerName: option<authorizerName>
 }
 type auditTaskMetadata = {
-@as("taskType") taskType: auditTaskType,
-@as("taskStatus") taskStatus: auditTaskStatus,
-@as("taskId") taskId: auditTaskId
+taskType: option<auditTaskType>,
+taskStatus: option<auditTaskStatus>,
+taskId: option<auditTaskId>
 }
 type auditNotificationTarget = {
-@as("enabled") enabled: enabled,
-@as("roleArn") roleArn: roleArn,
-@as("targetArn") targetArn: targetArn
+enabled: option<enabled>,
+roleArn: option<roleArn>,
+targetArn: option<targetArn>
 }
 type auditMitigationActionsTaskMetadata = {
-@as("taskStatus") taskStatus: auditMitigationActionsTaskStatus,
-@as("startTime") startTime: amazonawsTimestamp,
-@as("taskId") taskId: mitigationActionsTaskId
+taskStatus: option<auditMitigationActionsTaskStatus>,
+startTime: option<timestamp_>,
+taskId: option<mitigationActionsTaskId>
 }
 type auditMitigationActionExecutionMetadata = {
-@as("message") message: errorMessage,
-@as("errorCode") errorCode: errorCode,
-@as("endTime") endTime: amazonawsTimestamp,
-@as("startTime") startTime: amazonawsTimestamp,
-@as("status") status: auditMitigationActionsExecutionStatus,
-@as("actionId") actionId: mitigationActionId,
-@as("actionName") actionName: mitigationActionName,
-@as("findingId") findingId: findingId,
-@as("taskId") taskId: mitigationActionsTaskId
+message: option<errorMessage>,
+errorCode: option<errorCode>,
+endTime: option<timestamp_>,
+startTime: option<timestamp_>,
+status: option<auditMitigationActionsExecutionStatus>,
+actionId: option<mitigationActionId>,
+actionName: option<mitigationActionName>,
+findingId: option<findingId>,
+taskId: option<mitigationActionsTaskId>
 }
 type auditCheckDetails = {
-@as("message") message: errorMessage,
-@as("errorCode") errorCode: errorCode,
-@as("suppressedNonCompliantResourcesCount") suppressedNonCompliantResourcesCount: suppressedNonCompliantResourcesCount,
-@as("nonCompliantResourcesCount") nonCompliantResourcesCount: nonCompliantResourcesCount,
-@as("totalResourcesCount") totalResourcesCount: totalResourcesCount,
-@as("checkCompliant") checkCompliant: checkCompliant,
-@as("checkRunStatus") checkRunStatus: auditCheckRunStatus
+message: option<errorMessage>,
+errorCode: option<errorCode>,
+suppressedNonCompliantResourcesCount: option<suppressedNonCompliantResourcesCount>,
+nonCompliantResourcesCount: option<nonCompliantResourcesCount>,
+totalResourcesCount: option<totalResourcesCount>,
+checkCompliant: option<checkCompliant>,
+checkRunStatus: option<auditCheckRunStatus>
 }
 type auditCheckConfiguration = {
-@as("enabled") enabled: enabled
+enabled: option<enabled>
 }
 type attributesMap = Js.Dict.t< value>
 type attributes = Js.Dict.t< attributeValue>
 type assetPropertyVariant = BooleanValue(assetPropertyBooleanValue) | DoubleValue(assetPropertyDoubleValue) | IntegerValue(assetPropertyIntegerValue) | StringValue(assetPropertyStringValue);
 type assetPropertyTimestamp = {
-@as("offsetInNanos") offsetInNanos: assetPropertyOffsetInNanos,
-@as("timeInSeconds") timeInSeconds: option<assetPropertyTimeInSeconds>
+offsetInNanos: option<assetPropertyOffsetInNanos>,
+timeInSeconds: assetPropertyTimeInSeconds
 }
 type alertTarget = {
-@as("roleArn") roleArn: option<roleArn>,
-@as("alertTargetArn") alertTargetArn: option<alertTargetArn>
+roleArn: roleArn,
+alertTargetArn: alertTargetArn
 }
 type additionalParameterMap = Js.Dict.t< value>
 type additionalMetricsToRetainList = array<behaviorMetric>
 type abortCriteria = {
-@as("minNumberOfExecutedThings") minNumberOfExecutedThings: option<minimumNumberOfExecutedThings>,
-@as("thresholdPercentage") thresholdPercentage: option<abortThresholdPercentage>,
-@as("action") action: option<abortAction>,
-@as("failureType") failureType: option<jobExecutionFailureType>
+minNumberOfExecutedThings: minimumNumberOfExecutedThings,
+thresholdPercentage: abortThresholdPercentage,
+action: abortAction,
+failureType: jobExecutionFailureType
 }
 type vpcDestinationSummary = {
-@as("roleArn") roleArn: awsArn,
-@as("vpcId") vpcId: vpcId,
-@as("securityGroups") securityGroups: securityGroupList,
-@as("subnetIds") subnetIds: subnetIdList
+roleArn: option<awsArn>,
+vpcId: option<vpcId>,
+securityGroups: option<securityGroupList>,
+subnetIds: option<subnetIdList>
 }
 type vpcDestinationProperties = {
-@as("roleArn") roleArn: awsArn,
-@as("vpcId") vpcId: vpcId,
-@as("securityGroups") securityGroups: securityGroupList,
-@as("subnetIds") subnetIds: subnetIdList
+roleArn: option<awsArn>,
+vpcId: option<vpcId>,
+securityGroups: option<securityGroupList>,
+subnetIds: option<subnetIdList>
 }
 type vpcDestinationConfiguration = {
-@as("roleArn") roleArn: option<awsArn>,
-@as("vpcId") vpcId: option<vpcId>,
-@as("securityGroups") securityGroups: securityGroupList,
-@as("subnetIds") subnetIds: option<subnetIdList>
+roleArn: awsArn,
+vpcId: vpcId,
+securityGroups: option<securityGroupList>,
+subnetIds: subnetIdList
 }
 type validationErrors = array<validationError>
 type topicRuleList = array<topicRuleListItem>
 type timestreamDimensionList = array<timestreamDimension>
 type thingTypeProperties = {
-@as("searchableAttributes") searchableAttributes: searchableAttributes,
-@as("thingTypeDescription") thingTypeDescription: thingTypeDescription
+searchableAttributes: option<searchableAttributes>,
+thingTypeDescription: option<thingTypeDescription>
 }
 type thingGroupNameAndArnList = array<groupNameAndArn>
 type thingGroupDocument = {
-@as("parentGroupNames") parentGroupNames: thingGroupNameList,
-@as("attributes") attributes: attributes,
-@as("thingGroupDescription") thingGroupDescription: thingGroupDescription,
-@as("thingGroupId") thingGroupId: thingGroupId,
-@as("thingGroupName") thingGroupName: thingGroupName
+parentGroupNames: option<thingGroupNameList>,
+attributes: option<attributes>,
+thingGroupDescription: option<thingGroupDescription>,
+thingGroupId: option<thingGroupId>,
+thingGroupName: option<thingGroupName>
 }
 type thingDocument = {
-@as("connectivity") connectivity: thingConnectivity,
-@as("shadow") shadow: jsonDocument,
-@as("attributes") attributes: attributes,
-@as("thingGroupNames") thingGroupNames: thingGroupNameList,
-@as("thingTypeName") thingTypeName: thingTypeName,
-@as("thingId") thingId: thingId,
-@as("thingName") thingName: thingName
+connectivity: option<thingConnectivity>,
+shadow: option<jsonDocument>,
+attributes: option<attributes>,
+thingGroupNames: option<thingGroupNameList>,
+thingTypeName: option<thingTypeName>,
+thingId: option<thingId>,
+thingName: option<thingName>
 }
 type thingAttribute = {
-@as("version") version: version,
-@as("attributes") attributes: attributes,
-@as("thingArn") thingArn: thingArn,
-@as("thingTypeName") thingTypeName: thingTypeName,
-@as("thingName") thingName: thingName
+version: option<version>,
+attributes: option<attributes>,
+thingArn: option<thingArn>,
+thingTypeName: option<thingTypeName>,
+thingName: option<thingName>
 }
-type tagList = array<tag>
+type tagList_ = array<tag>
 type streamsSummary = array<streamSummary>
 type streamFile = {
-@as("s3Location") s3Location: s3Location,
-@as("fileId") fileId: fileId
+s3Location: option<s3Location>,
+fileId: option<fileId>
 }
 type serverCertificates = array<serverCertificateSummary>
 type securityProfileTargets = array<securityProfileTarget>
 type securityProfileTargetMapping = {
-@as("target") target: securityProfileTarget,
-@as("securityProfileIdentifier") securityProfileIdentifier: securityProfileIdentifier
+target: option<securityProfileTarget>,
+securityProfileIdentifier: option<securityProfileIdentifier>
 }
 type securityProfileIdentifiers = array<securityProfileIdentifier>
 type scheduledAuditMetadataList = array<scheduledAuditMetadata>
 type resourceIdentifier = {
-@as("roleAliasArn") roleAliasArn: roleAliasArn,
-@as("iamRoleArn") iamRoleArn: roleArn,
-@as("account") account: awsAccountId,
-@as("policyVersionIdentifier") policyVersionIdentifier: policyVersionIdentifier,
-@as("clientId") clientId: clientId,
-@as("cognitoIdentityPoolId") cognitoIdentityPoolId: cognitoIdentityPoolId,
-@as("caCertificateId") caCertificateId: certificateId,
-@as("deviceCertificateId") deviceCertificateId: certificateId
+roleAliasArn: option<roleAliasArn>,
+iamRoleArn: option<roleArn>,
+account: option<awsAccountId>,
+policyVersionIdentifier: option<policyVersionIdentifier>,
+clientId: option<clientId>,
+cognitoIdentityPoolId: option<cognitoIdentityPoolId>,
+caCertificateId: option<certificateId>,
+deviceCertificateId: option<certificateId>
 }
 type provisioningTemplateVersionListing = array<provisioningTemplateVersionSummary>
 type provisioningTemplateListing = array<provisioningTemplateSummary>
@@ -1085,149 +1090,149 @@ type policyVersions = array<policyVersion>
 type policies = array<policy>
 type percentiles = array<percentPair>
 type outgoingCertificates = array<outgoingCertificate>
-type oTAUpdatesSummary = array<oTAUpdateSummary>
+type otaupdatesSummary = array<otaupdateSummary>
 type mitigationActionIdentifierList = array<mitigationActionIdentifier>
 type metricValue = {
-@as("strings") strings: stringList,
-@as("numbers") numbers: numberList,
-@as("number") number: number,
-@as("ports") ports: ports,
-@as("cidrs") cidrs: cidrs,
-@as("count") count: unsignedLong
+strings: option<stringList>,
+numbers: option<numberList>,
+number: option<number>,
+ports: option<ports>,
+cidrs: option<cidrs>,
+count: option<unsignedLong>
 }
 type metricToRetain = {
-@as("metricDimension") metricDimension: metricDimension,
-@as("metric") metric: option<behaviorMetric>
+metricDimension: option<metricDimension>,
+metric: behaviorMetric
 }
 type logTargetConfiguration = {
-@as("logLevel") logLevel: logLevel,
-@as("logTarget") logTarget: logTarget
+logLevel: option<logLevel>,
+logTarget: option<logTarget>
 }
 type kafkaAction = {
-@as("clientProperties") clientProperties: option<clientProperties>,
-@as("partition") partition: amazonawsString,
-@as("key") key: amazonawsString,
-@as("topic") topic: option<amazonawsString>,
-@as("destinationArn") destinationArn: option<awsArn>
+clientProperties: clientProperties,
+partition: option<string_>,
+key: option<string_>,
+topic: string_,
+destinationArn: awsArn
 }
 type jobTemplateSummaryList = array<jobTemplateSummary>
 type jobSummaryList = array<jobSummary>
 type jobProcessDetails = {
-@as("numberOfTimedOutThings") numberOfTimedOutThings: timedOutThings,
-@as("numberOfRemovedThings") numberOfRemovedThings: removedThings,
-@as("numberOfInProgressThings") numberOfInProgressThings: inProgressThings,
-@as("numberOfQueuedThings") numberOfQueuedThings: queuedThings,
-@as("numberOfRejectedThings") numberOfRejectedThings: rejectedThings,
-@as("numberOfFailedThings") numberOfFailedThings: failedThings,
-@as("numberOfSucceededThings") numberOfSucceededThings: succeededThings,
-@as("numberOfCanceledThings") numberOfCanceledThings: canceledThings,
-@as("processingTargets") processingTargets: processingTargetNameList
+numberOfTimedOutThings: option<timedOutThings>,
+numberOfRemovedThings: option<removedThings>,
+numberOfInProgressThings: option<inProgressThings>,
+numberOfQueuedThings: option<queuedThings>,
+numberOfRejectedThings: option<rejectedThings>,
+numberOfFailedThings: option<failedThings>,
+numberOfSucceededThings: option<succeededThings>,
+numberOfCanceledThings: option<canceledThings>,
+processingTargets: option<processingTargetNameList>
 }
 type jobExecutionSummaryForThing = {
-@as("jobExecutionSummary") jobExecutionSummary: jobExecutionSummary,
-@as("jobId") jobId: jobId
+jobExecutionSummary: option<jobExecutionSummary>,
+jobId: option<jobId>
 }
 type jobExecutionSummaryForJob = {
-@as("jobExecutionSummary") jobExecutionSummary: jobExecutionSummary,
-@as("thingArn") thingArn: thingArn
+jobExecutionSummary: option<jobExecutionSummary>,
+thingArn: option<thingArn>
 }
 type jobExecutionStatusDetails = {
-@as("detailsMap") detailsMap: detailsMap
+detailsMap: option<detailsMap>
 }
 type httpContext = {
-@as("queryString") queryString: httpQueryString,
-@as("headers") headers: httpHeaders
+queryString: option<httpQueryString>,
+headers: option<httpHeaders>
 }
 type httpAuthorization = {
-@as("sigv4") sigv4: sigV4Authorization
+sigv4: option<sigV4Authorization>
 }
 type headerList = array<httpActionHeader>
 type fileLocation = {
-@as("s3Location") s3Location: s3Location,
-@as("stream") stream: stream
+s3Location: option<s3Location>,
+stream: option<stream>
 }
 type fields = array<field>
 type exponentialRolloutRate = {
-@as("rateIncreaseCriteria") rateIncreaseCriteria: option<rateIncreaseCriteria>,
-@as("incrementFactor") incrementFactor: option<incrementFactor>,
-@as("baseRatePerMinute") baseRatePerMinute: option<rolloutRatePerMinute>
+rateIncreaseCriteria: rateIncreaseCriteria,
+incrementFactor: incrementFactor,
+baseRatePerMinute: rolloutRatePerMinute
 }
 type eventConfigurations = Js.Dict.t< configuration>
 type effectivePolicies = array<effectivePolicy>
 type dynamoDBv2Action = {
-@as("putItem") putItem: option<putItemInput>,
-@as("roleArn") roleArn: option<awsArn>
+putItem: putItemInput,
+roleArn: awsArn
 }
 type domainConfigurations = array<domainConfigurationSummary>
 type detectMitigationActionsTaskTarget = {
-@as("behaviorName") behaviorName: behaviorName,
-@as("securityProfileName") securityProfileName: securityProfileName,
-@as("violationIds") violationIds: targetViolationIdsForDetectMitigationActions
+behaviorName: option<behaviorName>,
+securityProfileName: option<securityProfileName>,
+violationIds: option<targetViolationIdsForDetectMitigationActions>
 }
 type detectMitigationActionExecutionList = array<detectMitigationActionExecution>
 type destination = {
-@as("s3Destination") s3Destination: s3Destination
+s3Destination: option<s3Destination>
 }
 type customCodeSigning = {
-@as("signatureAlgorithm") signatureAlgorithm: signatureAlgorithm,
-@as("hashAlgorithm") hashAlgorithm: hashAlgorithm,
-@as("certificateChain") certificateChain: codeSigningCertificateChain,
-@as("signature") signature: codeSigningSignature
+signatureAlgorithm: option<signatureAlgorithm>,
+hashAlgorithm: option<hashAlgorithm>,
+certificateChain: option<codeSigningCertificateChain>,
+signature: option<codeSigningSignature>
 }
 type certificates = array<certificate>
 type certificateDescription = {
-@as("certificateMode") certificateMode: certificateMode,
-@as("validity") validity: certificateValidity,
-@as("generationId") generationId: generationId,
-@as("transferData") transferData: transferData,
-@as("customerVersion") customerVersion: customerVersion,
-@as("lastModifiedDate") lastModifiedDate: dateType,
-@as("creationDate") creationDate: dateType,
-@as("previousOwnedBy") previousOwnedBy: awsAccountId,
-@as("ownedBy") ownedBy: awsAccountId,
-@as("certificatePem") certificatePem: certificatePem,
-@as("status") status: certificateStatus,
-@as("caCertificateId") caCertificateId: certificateId,
-@as("certificateId") certificateId: certificateId,
-@as("certificateArn") certificateArn: certificateArn
+certificateMode: option<certificateMode>,
+validity: option<certificateValidity>,
+generationId: option<generationId>,
+transferData: option<transferData>,
+customerVersion: option<customerVersion>,
+lastModifiedDate: option<dateType>,
+creationDate: option<dateType>,
+previousOwnedBy: option<awsAccountId>,
+ownedBy: option<awsAccountId>,
+certificatePem: option<certificatePem>,
+status: option<certificateStatus>,
+caCertificateId: option<certificateId>,
+certificateId: option<certificateId>,
+certificateArn: option<certificateArn>
 }
-type cACertificates = array<cACertificate>
-type cACertificateDescription = {
-@as("validity") validity: certificateValidity,
-@as("generationId") generationId: generationId,
-@as("customerVersion") customerVersion: customerVersion,
-@as("lastModifiedDate") lastModifiedDate: dateType,
-@as("autoRegistrationStatus") autoRegistrationStatus: autoRegistrationStatus,
-@as("creationDate") creationDate: dateType,
-@as("ownedBy") ownedBy: awsAccountId,
-@as("certificatePem") certificatePem: certificatePem,
-@as("status") status: cACertificateStatus,
-@as("certificateId") certificateId: certificateId,
-@as("certificateArn") certificateArn: certificateArn
+type cacertificates = array<cacertificate>
+type cacertificateDescription = {
+validity: option<certificateValidity>,
+generationId: option<generationId>,
+customerVersion: option<customerVersion>,
+lastModifiedDate: option<dateType>,
+autoRegistrationStatus: option<autoRegistrationStatus>,
+creationDate: option<dateType>,
+ownedBy: option<awsAccountId>,
+certificatePem: option<certificatePem>,
+status: option<cacertificateStatus>,
+certificateId: option<certificateId>,
+certificateArn: option<certificateArn>
 }
 type billingGroupNameAndArnList = array<groupNameAndArn>
 type behaviorModelTrainingSummaries = array<behaviorModelTrainingSummary>
 type awsJobExponentialRolloutRate = {
-@as("rateIncreaseCriteria") rateIncreaseCriteria: option<awsJobRateIncreaseCriteria>,
-@as("incrementFactor") incrementFactor: option<awsJobRolloutIncrementFactor>,
-@as("baseRatePerMinute") baseRatePerMinute: option<awsJobRolloutRatePerMinute>
+rateIncreaseCriteria: awsJobRateIncreaseCriteria,
+incrementFactor: awsJobRolloutIncrementFactor,
+baseRatePerMinute: awsJobRolloutRatePerMinute
 }
 type awsJobAbortCriteriaList = array<awsJobAbortCriteria>
 type authorizers = array<authorizerSummary>
 type authorizerDescription = {
-@as("signingDisabled") signingDisabled: booleanKey,
-@as("lastModifiedDate") lastModifiedDate: dateType,
-@as("creationDate") creationDate: dateType,
-@as("status") status: authorizerStatus,
-@as("tokenSigningPublicKeys") tokenSigningPublicKeys: publicKeyMap,
-@as("tokenKeyName") tokenKeyName: tokenKeyName,
-@as("authorizerFunctionArn") authorizerFunctionArn: authorizerFunctionArn,
-@as("authorizerArn") authorizerArn: authorizerArn,
-@as("authorizerName") authorizerName: authorizerName
+signingDisabled: option<booleanKey>,
+lastModifiedDate: option<dateType>,
+creationDate: option<dateType>,
+status: option<authorizerStatus>,
+tokenSigningPublicKeys: option<publicKeyMap>,
+tokenKeyName: option<tokenKeyName>,
+authorizerFunctionArn: option<authorizerFunctionArn>,
+authorizerArn: option<authorizerArn>,
+authorizerName: option<authorizerName>
 }
 type authInfo = {
-@as("resources") resources: option<resources>,
-@as("actionType") actionType: actionType
+resources: resources,
+actionType: option<actionType>
 }
 type auditTaskMetadataList = array<auditTaskMetadata>
 type auditNotificationTargetConfigurations = Js.Dict.t< auditNotificationTarget>
@@ -1239,925 +1244,925 @@ type auditCheckToReasonCodeFilter = Js.Dict.t< reasonForNonComplianceCodes>
 type auditCheckToActionsMapping = Js.Dict.t< mitigationActionNameList>
 type auditCheckConfigurations = Js.Dict.t< auditCheckConfiguration>
 type attributePayload = {
-@as("merge") merge: flag,
-@as("attributes") attributes: attributes
+merge: option<flag>,
+attributes: option<attributes>
 }
 type assetPropertyValue = {
-@as("quality") quality: assetPropertyQuality,
-@as("timestamp") timestamp: option<assetPropertyTimestamp>,
-@as("value") value: option<assetPropertyVariant>
+quality: option<assetPropertyQuality>,
+@as("timestamp") timestamp_: assetPropertyTimestamp,
+value: assetPropertyVariant
 }
 type alertTargets = Js.Dict.t< alertTarget>
 type addThingsToThingGroupParams = {
-@as("overrideDynamicGroups") overrideDynamicGroups: overrideDynamicGroups,
-@as("thingGroupNames") thingGroupNames: option<thingGroupNames>
+overrideDynamicGroups: option<overrideDynamicGroups>,
+thingGroupNames: thingGroupNames
 }
 type abortCriteriaList = array<abortCriteria>
 type topicRuleDestinationSummary = {
-@as("vpcDestinationSummary") vpcDestinationSummary: vpcDestinationSummary,
-@as("httpUrlSummary") httpUrlSummary: httpUrlDestinationSummary,
-@as("statusReason") statusReason: amazonawsString,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAtDate,
-@as("createdAt") createdAt: createdAtDate,
-@as("status") status: topicRuleDestinationStatus,
-@as("arn") arn: awsArn
+vpcDestinationSummary: option<vpcDestinationSummary>,
+httpUrlSummary: option<httpUrlDestinationSummary>,
+statusReason: option<string_>,
+lastUpdatedAt: option<lastUpdatedAtDate>,
+createdAt: option<createdAtDate>,
+status: option<topicRuleDestinationStatus>,
+arn: option<awsArn>
 }
 type topicRuleDestinationConfiguration = {
-@as("vpcConfiguration") vpcConfiguration: vpcDestinationConfiguration,
-@as("httpUrlConfiguration") httpUrlConfiguration: httpUrlDestinationConfiguration
+vpcConfiguration: option<vpcDestinationConfiguration>,
+httpUrlConfiguration: option<httpUrlDestinationConfiguration>
 }
 type topicRuleDestination = {
-@as("vpcProperties") vpcProperties: vpcDestinationProperties,
-@as("httpUrlProperties") httpUrlProperties: httpUrlDestinationProperties,
-@as("statusReason") statusReason: amazonawsString,
-@as("lastUpdatedAt") lastUpdatedAt: lastUpdatedAtDate,
-@as("createdAt") createdAt: createdAtDate,
-@as("status") status: topicRuleDestinationStatus,
-@as("arn") arn: awsArn
+vpcProperties: option<vpcDestinationProperties>,
+httpUrlProperties: option<httpUrlDestinationProperties>,
+statusReason: option<string_>,
+lastUpdatedAt: option<lastUpdatedAtDate>,
+createdAt: option<createdAtDate>,
+status: option<topicRuleDestinationStatus>,
+arn: option<awsArn>
 }
 type timestreamAction = {
-@as("timestamp") timestamp: timestreamTimestamp,
-@as("dimensions") dimensions: option<timestreamDimensionList>,
-@as("tableName") tableName: option<timestreamTableName>,
-@as("databaseName") databaseName: option<timestreamDatabaseName>,
-@as("roleArn") roleArn: option<awsArn>
+@as("timestamp") timestamp_: option<timestreamTimestamp>,
+dimensions: timestreamDimensionList,
+tableName: timestreamTableName,
+databaseName: timestreamDatabaseName,
+roleArn: awsArn
 }
 type thingTypeDefinition = {
-@as("thingTypeMetadata") thingTypeMetadata: thingTypeMetadata,
-@as("thingTypeProperties") thingTypeProperties: thingTypeProperties,
-@as("thingTypeArn") thingTypeArn: thingTypeArn,
-@as("thingTypeName") thingTypeName: thingTypeName
+thingTypeMetadata: option<thingTypeMetadata>,
+thingTypeProperties: option<thingTypeProperties>,
+thingTypeArn: option<thingTypeArn>,
+thingTypeName: option<thingTypeName>
 }
 type thingIndexingConfiguration = {
-@as("customFields") customFields: fields,
-@as("managedFields") managedFields: fields,
-@as("thingConnectivityIndexingMode") thingConnectivityIndexingMode: thingConnectivityIndexingMode,
-@as("thingIndexingMode") thingIndexingMode: option<thingIndexingMode>
+customFields: option<fields>,
+managedFields: option<fields>,
+thingConnectivityIndexingMode: option<thingConnectivityIndexingMode>,
+thingIndexingMode: thingIndexingMode
 }
 type thingGroupProperties = {
-@as("attributePayload") attributePayload: attributePayload,
-@as("thingGroupDescription") thingGroupDescription: thingGroupDescription
+attributePayload: option<attributePayload>,
+thingGroupDescription: option<thingGroupDescription>
 }
 type thingGroupMetadata = {
-@as("creationDate") creationDate: creationDate,
-@as("rootToParentThingGroups") rootToParentThingGroups: thingGroupNameAndArnList,
-@as("parentGroupName") parentGroupName: thingGroupName
+creationDate: option<creationDate>,
+rootToParentThingGroups: option<thingGroupNameAndArnList>,
+parentGroupName: option<thingGroupName>
 }
 type thingGroupIndexingConfiguration = {
-@as("customFields") customFields: fields,
-@as("managedFields") managedFields: fields,
-@as("thingGroupIndexingMode") thingGroupIndexingMode: option<thingGroupIndexingMode>
+customFields: option<fields>,
+managedFields: option<fields>,
+thingGroupIndexingMode: thingGroupIndexingMode
 }
 type thingGroupDocumentList = array<thingGroupDocument>
 type thingDocumentList = array<thingDocument>
 type thingAttributeList = array<thingAttribute>
 type streamFiles = array<streamFile>
 type startSigningJobParameter = {
-@as("destination") destination: destination,
-@as("signingProfileName") signingProfileName: signingProfileName,
-@as("signingProfileParameter") signingProfileParameter: signingProfileParameter
+destination: option<destination>,
+signingProfileName: option<signingProfileName>,
+signingProfileParameter: option<signingProfileParameter>
 }
 type securityProfileTargetMappings = array<securityProfileTargetMapping>
 type relatedResource = {
-@as("additionalInfo") additionalInfo: stringMap,
-@as("resourceIdentifier") resourceIdentifier: resourceIdentifier,
-@as("resourceType") resourceType: resourceType
+additionalInfo: option<stringMap>,
+resourceIdentifier: option<resourceIdentifier>,
+resourceType: option<resourceType>
 }
 type nonCompliantResource = {
-@as("additionalInfo") additionalInfo: stringMap,
-@as("resourceIdentifier") resourceIdentifier: resourceIdentifier,
-@as("resourceType") resourceType: resourceType
+additionalInfo: option<stringMap>,
+resourceIdentifier: option<resourceIdentifier>,
+resourceType: option<resourceType>
 }
 type mitigationActionParams = {
-@as("publishFindingToSnsParams") publishFindingToSnsParams: publishFindingToSnsParams,
-@as("enableIoTLoggingParams") enableIoTLoggingParams: enableIoTLoggingParams,
-@as("replaceDefaultPolicyVersionParams") replaceDefaultPolicyVersionParams: replaceDefaultPolicyVersionParams,
-@as("addThingsToThingGroupParams") addThingsToThingGroupParams: addThingsToThingGroupParams,
-@as("updateCACertificateParams") updateCACertificateParams: updateCACertificateParams,
-@as("updateDeviceCertificateParams") updateDeviceCertificateParams: updateDeviceCertificateParams
+publishFindingToSnsParams: option<publishFindingToSnsParams>,
+enableIoTLoggingParams: option<enableIoTLoggingParams>,
+replaceDefaultPolicyVersionParams: option<replaceDefaultPolicyVersionParams>,
+addThingsToThingGroupParams: option<addThingsToThingGroupParams>,
+updateCACertificateParams: option<updateCACertificateParams>,
+updateDeviceCertificateParams: option<updateDeviceCertificateParams>
 }
 type logTargetConfigurations = array<logTargetConfiguration>
 type jobExecutionsRolloutConfig = {
-@as("exponentialRate") exponentialRate: exponentialRolloutRate,
-@as("maximumPerMinute") maximumPerMinute: maxJobExecutionsPerMin
+exponentialRate: option<exponentialRolloutRate>,
+maximumPerMinute: option<maxJobExecutionsPerMin>
 }
 type jobExecutionSummaryForThingList = array<jobExecutionSummaryForThing>
 type jobExecutionSummaryForJobList = array<jobExecutionSummaryForJob>
 type jobExecution = {
-@as("approximateSecondsBeforeTimedOut") approximateSecondsBeforeTimedOut: approximateSecondsBeforeTimedOut,
-@as("versionNumber") versionNumber: versionNumber,
-@as("executionNumber") executionNumber: executionNumber,
-@as("lastUpdatedAt") lastUpdatedAt: dateType,
-@as("startedAt") startedAt: dateType,
-@as("queuedAt") queuedAt: dateType,
-@as("thingArn") thingArn: thingArn,
-@as("statusDetails") statusDetails: jobExecutionStatusDetails,
-@as("forceCanceled") forceCanceled: forced,
-@as("status") status: jobExecutionStatus,
-@as("jobId") jobId: jobId
+approximateSecondsBeforeTimedOut: option<approximateSecondsBeforeTimedOut>,
+versionNumber: option<versionNumber>,
+executionNumber: option<executionNumber>,
+lastUpdatedAt: option<dateType>,
+startedAt: option<dateType>,
+queuedAt: option<dateType>,
+thingArn: option<thingArn>,
+statusDetails: option<jobExecutionStatusDetails>,
+forceCanceled: option<forced>,
+status: option<jobExecutionStatus>,
+jobId: option<jobId>
 }
 type implicitDeny = {
-@as("policies") policies: policies
+policies: option<policies>
 }
 type httpAction = {
-@as("auth") auth: httpAuthorization,
-@as("headers") headers: headerList,
-@as("confirmationUrl") confirmationUrl: url,
-@as("url") url: option<url>
+auth: option<httpAuthorization>,
+headers: option<headerList>,
+confirmationUrl: option<url>,
+url: url
 }
 type explicitDeny = {
-@as("policies") policies: policies
+policies: option<policies>
 }
 type behaviorCriteria = {
-@as("mlDetectionConfig") mlDetectionConfig: machineLearningDetectionConfig,
-@as("statisticalThreshold") statisticalThreshold: statisticalThreshold,
-@as("consecutiveDatapointsToClear") consecutiveDatapointsToClear: consecutiveDatapointsToClear,
-@as("consecutiveDatapointsToAlarm") consecutiveDatapointsToAlarm: consecutiveDatapointsToAlarm,
-@as("durationSeconds") durationSeconds: durationSeconds,
-@as("value") value: metricValue,
-@as("comparisonOperator") comparisonOperator: comparisonOperator
+mlDetectionConfig: option<machineLearningDetectionConfig>,
+statisticalThreshold: option<statisticalThreshold>,
+consecutiveDatapointsToClear: option<consecutiveDatapointsToClear>,
+consecutiveDatapointsToAlarm: option<consecutiveDatapointsToAlarm>,
+durationSeconds: option<durationSeconds>,
+value: option<metricValue>,
+comparisonOperator: option<comparisonOperator>
 }
 type awsJobExecutionsRolloutConfig = {
-@as("exponentialRate") exponentialRate: awsJobExponentialRolloutRate,
-@as("maximumPerMinute") maximumPerMinute: maximumPerMinute
+exponentialRate: option<awsJobExponentialRolloutRate>,
+maximumPerMinute: option<maximumPerMinute>
 }
 type awsJobAbortConfig = {
-@as("abortCriteriaList") abortCriteriaList: option<awsJobAbortCriteriaList>
+abortCriteriaList: awsJobAbortCriteriaList
 }
 type authInfos = array<authInfo>
 type auditSuppression = {
-@as("description") description: auditDescription,
-@as("suppressIndefinitely") suppressIndefinitely: suppressIndefinitely,
-@as("expirationDate") expirationDate: amazonawsTimestamp,
-@as("resourceIdentifier") resourceIdentifier: option<resourceIdentifier>,
-@as("checkName") checkName: option<auditCheckName>
+description: option<auditDescription>,
+suppressIndefinitely: option<suppressIndefinitely>,
+expirationDate: option<timestamp_>,
+resourceIdentifier: resourceIdentifier,
+checkName: auditCheckName
 }
 type auditMitigationActionsTaskTarget = {
-@as("auditCheckToReasonCodeFilter") auditCheckToReasonCodeFilter: auditCheckToReasonCodeFilter,
-@as("findingIds") findingIds: findingIds,
-@as("auditTaskId") auditTaskId: auditTaskId
+auditCheckToReasonCodeFilter: option<auditCheckToReasonCodeFilter>,
+findingIds: option<findingIds>,
+auditTaskId: option<auditTaskId>
 }
 type assetPropertyValueList = array<assetPropertyValue>
 type allowed = {
-@as("policies") policies: policies
+policies: option<policies>
 }
 type additionalMetricsToRetainV2List = array<metricToRetain>
 type abortConfig = {
-@as("criteriaList") criteriaList: option<abortCriteriaList>
+criteriaList: abortCriteriaList
 }
 type topicRuleDestinationSummaries = array<topicRuleDestinationSummary>
 type thingTypeList = array<thingTypeDefinition>
 type streamInfo = {
-@as("roleArn") roleArn: roleArn,
-@as("lastUpdatedAt") lastUpdatedAt: dateType,
-@as("createdAt") createdAt: dateType,
-@as("files") files: streamFiles,
-@as("description") description: streamDescription,
-@as("streamVersion") streamVersion: streamVersion,
-@as("streamArn") streamArn: streamArn,
-@as("streamId") streamId: streamId
+roleArn: option<roleArn>,
+lastUpdatedAt: option<dateType>,
+createdAt: option<dateType>,
+files: option<streamFiles>,
+description: option<streamDescription>,
+streamVersion: option<streamVersion>,
+streamArn: option<streamArn>,
+streamId: option<streamId>
 }
 type relatedResources = array<relatedResource>
 type putAssetPropertyValueEntry = {
-@as("propertyValues") propertyValues: option<assetPropertyValueList>,
-@as("propertyAlias") propertyAlias: assetPropertyAlias,
-@as("propertyId") propertyId: assetPropertyId,
-@as("assetId") assetId: assetId,
-@as("entryId") entryId: assetPropertyEntryId
+propertyValues: assetPropertyValueList,
+propertyAlias: option<assetPropertyAlias>,
+propertyId: option<assetPropertyId>,
+assetId: option<assetId>,
+entryId: option<assetPropertyEntryId>
 }
 type mitigationAction = {
-@as("actionParams") actionParams: mitigationActionParams,
-@as("roleArn") roleArn: roleArn,
-@as("id") id: mitigationActionId,
-@as("name") name: mitigationActionName
+actionParams: option<mitigationActionParams>,
+roleArn: option<roleArn>,
+id: option<mitigationActionId>,
+name: option<mitigationActionName>
 }
 type job = {
-@as("jobTemplateArn") jobTemplateArn: jobTemplateArn,
-@as("namespaceId") namespaceId: namespaceId,
-@as("timeoutConfig") timeoutConfig: timeoutConfig,
-@as("jobProcessDetails") jobProcessDetails: jobProcessDetails,
-@as("completedAt") completedAt: dateType,
-@as("lastUpdatedAt") lastUpdatedAt: dateType,
-@as("createdAt") createdAt: dateType,
-@as("abortConfig") abortConfig: abortConfig,
-@as("jobExecutionsRolloutConfig") jobExecutionsRolloutConfig: jobExecutionsRolloutConfig,
-@as("presignedUrlConfig") presignedUrlConfig: presignedUrlConfig,
-@as("description") description: jobDescription,
-@as("targets") targets: jobTargets,
-@as("comment") comment: comment,
-@as("reasonCode") reasonCode: reasonCode,
-@as("forceCanceled") forceCanceled: forced,
-@as("status") status: jobStatus,
-@as("targetSelection") targetSelection: targetSelection,
-@as("jobId") jobId: jobId,
-@as("jobArn") jobArn: jobArn
+jobTemplateArn: option<jobTemplateArn>,
+namespaceId: option<namespaceId>,
+timeoutConfig: option<timeoutConfig>,
+jobProcessDetails: option<jobProcessDetails>,
+completedAt: option<dateType>,
+lastUpdatedAt: option<dateType>,
+createdAt: option<dateType>,
+abortConfig: option<abortConfig>,
+jobExecutionsRolloutConfig: option<jobExecutionsRolloutConfig>,
+presignedUrlConfig: option<presignedUrlConfig>,
+description: option<jobDescription>,
+targets: option<jobTargets>,
+comment: option<comment>,
+reasonCode: option<reasonCode>,
+forceCanceled: option<forced>,
+status: option<jobStatus>,
+targetSelection: option<targetSelection>,
+jobId: option<jobId>,
+jobArn: option<jobArn>
 }
 type denied = {
-@as("explicitDeny") explicitDeny: explicitDeny,
-@as("implicitDeny") implicitDeny: implicitDeny
+explicitDeny: option<explicitDeny>,
+implicitDeny: option<implicitDeny>
 }
 type codeSigning = {
-@as("customCodeSigning") customCodeSigning: customCodeSigning,
-@as("startSigningJobParameter") startSigningJobParameter: startSigningJobParameter,
-@as("awsSignerJobId") awsSignerJobId: signingJobId
+customCodeSigning: option<customCodeSigning>,
+startSigningJobParameter: option<startSigningJobParameter>,
+awsSignerJobId: option<signingJobId>
 }
 type behavior = {
-@as("suppressAlerts") suppressAlerts: suppressAlerts,
-@as("criteria") criteria: behaviorCriteria,
-@as("metricDimension") metricDimension: metricDimension,
-@as("metric") metric: behaviorMetric,
-@as("name") name: option<behaviorName>
+suppressAlerts: option<suppressAlerts>,
+criteria: option<behaviorCriteria>,
+metricDimension: option<metricDimension>,
+metric: option<behaviorMetric>,
+name: behaviorName
 }
 type auditSuppressionList = array<auditSuppression>
 type violationEvent = {
-@as("violationEventTime") violationEventTime: amazonawsTimestamp,
-@as("violationEventType") violationEventType: violationEventType,
-@as("violationEventAdditionalInfo") violationEventAdditionalInfo: violationEventAdditionalInfo,
-@as("metricValue") metricValue: metricValue,
-@as("behavior") behavior: behavior,
-@as("securityProfileName") securityProfileName: securityProfileName,
-@as("thingName") thingName: deviceDefenderThingName,
-@as("violationId") violationId: violationId
+violationEventTime: option<timestamp_>,
+violationEventType: option<violationEventType>,
+violationEventAdditionalInfo: option<violationEventAdditionalInfo>,
+metricValue: option<metricValue>,
+behavior: option<behavior>,
+securityProfileName: option<securityProfileName>,
+thingName: option<deviceDefenderThingName>,
+violationId: option<violationId>
 }
 type putAssetPropertyValueEntryList = array<putAssetPropertyValueEntry>
-type oTAUpdateFile = {
-@as("attributes") attributes: attributesMap,
-@as("codeSigning") codeSigning: codeSigning,
-@as("fileLocation") fileLocation: fileLocation,
-@as("fileVersion") fileVersion: oTAUpdateFileVersion,
-@as("fileType") fileType: fileType,
-@as("fileName") fileName: fileName
+type otaupdateFile = {
+attributes: option<attributesMap>,
+codeSigning: option<codeSigning>,
+fileLocation: option<fileLocation>,
+fileVersion: option<otaupdateFileVersion>,
+fileType: option<fileType>,
+fileName: option<fileName>
 }
 type mitigationActionList = array<mitigationAction>
 type behaviors = array<behavior>
 type authResult = {
-@as("missingContextValues") missingContextValues: missingContextValues,
-@as("authDecision") authDecision: authDecision,
-@as("denied") denied: denied,
-@as("allowed") allowed: allowed,
-@as("authInfo") authInfo: authInfo
+missingContextValues: option<missingContextValues>,
+authDecision: option<authDecision>,
+denied: option<denied>,
+allowed: option<allowed>,
+authInfo: option<authInfo>
 }
 type auditFinding = {
-@as("isSuppressed") isSuppressed: isSuppressed,
-@as("reasonForNonComplianceCode") reasonForNonComplianceCode: reasonForNonComplianceCode,
-@as("reasonForNonCompliance") reasonForNonCompliance: reasonForNonCompliance,
-@as("relatedResources") relatedResources: relatedResources,
-@as("nonCompliantResource") nonCompliantResource: nonCompliantResource,
-@as("severity") severity: auditFindingSeverity,
-@as("findingTime") findingTime: amazonawsTimestamp,
-@as("taskStartTime") taskStartTime: amazonawsTimestamp,
-@as("checkName") checkName: auditCheckName,
-@as("taskId") taskId: auditTaskId,
-@as("findingId") findingId: findingId
+isSuppressed: option<isSuppressed>,
+reasonForNonComplianceCode: option<reasonForNonComplianceCode>,
+reasonForNonCompliance: option<reasonForNonCompliance>,
+relatedResources: option<relatedResources>,
+nonCompliantResource: option<nonCompliantResource>,
+severity: option<auditFindingSeverity>,
+findingTime: option<timestamp_>,
+taskStartTime: option<timestamp_>,
+checkName: option<auditCheckName>,
+taskId: option<auditTaskId>,
+findingId: option<findingId>
 }
 type activeViolation = {
-@as("violationStartTime") violationStartTime: amazonawsTimestamp,
-@as("lastViolationTime") lastViolationTime: amazonawsTimestamp,
-@as("violationEventAdditionalInfo") violationEventAdditionalInfo: violationEventAdditionalInfo,
-@as("lastViolationValue") lastViolationValue: metricValue,
-@as("behavior") behavior: behavior,
-@as("securityProfileName") securityProfileName: securityProfileName,
-@as("thingName") thingName: deviceDefenderThingName,
-@as("violationId") violationId: violationId
+violationStartTime: option<timestamp_>,
+lastViolationTime: option<timestamp_>,
+violationEventAdditionalInfo: option<violationEventAdditionalInfo>,
+lastViolationValue: option<metricValue>,
+behavior: option<behavior>,
+securityProfileName: option<securityProfileName>,
+thingName: option<deviceDefenderThingName>,
+violationId: option<violationId>
 }
 type violationEvents = array<violationEvent>
-type oTAUpdateFiles = array<oTAUpdateFile>
+type otaupdateFiles = array<otaupdateFile>
 type iotSiteWiseAction = {
-@as("roleArn") roleArn: option<awsArn>,
-@as("putAssetPropertyValueEntries") putAssetPropertyValueEntries: option<putAssetPropertyValueEntryList>
+roleArn: awsArn,
+putAssetPropertyValueEntries: putAssetPropertyValueEntryList
 }
 type detectMitigationActionsTaskSummary = {
-@as("taskStatistics") taskStatistics: detectMitigationActionsTaskStatistics,
-@as("actionsDefinition") actionsDefinition: mitigationActionList,
-@as("suppressedAlertsIncluded") suppressedAlertsIncluded: primitiveBoolean,
-@as("onlyActiveViolationsIncluded") onlyActiveViolationsIncluded: primitiveBoolean,
-@as("violationEventOccurrenceRange") violationEventOccurrenceRange: violationEventOccurrenceRange,
-@as("target") target: detectMitigationActionsTaskTarget,
-@as("taskEndTime") taskEndTime: amazonawsTimestamp,
-@as("taskStartTime") taskStartTime: amazonawsTimestamp,
-@as("taskStatus") taskStatus: detectMitigationActionsTaskStatus,
-@as("taskId") taskId: mitigationActionsTaskId
+taskStatistics: option<detectMitigationActionsTaskStatistics>,
+actionsDefinition: option<mitigationActionList>,
+suppressedAlertsIncluded: option<primitiveBoolean>,
+onlyActiveViolationsIncluded: option<primitiveBoolean>,
+violationEventOccurrenceRange: option<violationEventOccurrenceRange>,
+target: option<detectMitigationActionsTaskTarget>,
+taskEndTime: option<timestamp_>,
+taskStartTime: option<timestamp_>,
+taskStatus: option<detectMitigationActionsTaskStatus>,
+taskId: option<mitigationActionsTaskId>
 }
 type authResults = array<authResult>
 type auditFindings = array<auditFinding>
 type activeViolations = array<activeViolation>
-type oTAUpdateInfo = {
-@as("additionalParameters") additionalParameters: additionalParameterMap,
-@as("errorInfo") errorInfo: errorInfo,
-@as("awsIotJobArn") awsIotJobArn: awsIotJobArn,
-@as("awsIotJobId") awsIotJobId: awsIotJobId,
-@as("otaUpdateStatus") otaUpdateStatus: oTAUpdateStatus,
-@as("otaUpdateFiles") otaUpdateFiles: oTAUpdateFiles,
-@as("targetSelection") targetSelection: targetSelection,
-@as("awsJobPresignedUrlConfig") awsJobPresignedUrlConfig: awsJobPresignedUrlConfig,
-@as("awsJobExecutionsRolloutConfig") awsJobExecutionsRolloutConfig: awsJobExecutionsRolloutConfig,
-@as("protocols") protocols: protocols,
-@as("targets") targets: targets,
-@as("description") description: oTAUpdateDescription,
-@as("lastModifiedDate") lastModifiedDate: dateType,
-@as("creationDate") creationDate: dateType,
-@as("otaUpdateArn") otaUpdateArn: oTAUpdateArn,
-@as("otaUpdateId") otaUpdateId: oTAUpdateId
+type otaupdateInfo = {
+additionalParameters: option<additionalParameterMap>,
+errorInfo: option<errorInfo>,
+awsIotJobArn: option<awsIotJobArn>,
+awsIotJobId: option<awsIotJobId>,
+otaUpdateStatus: option<otaupdateStatus>,
+otaUpdateFiles: option<otaupdateFiles>,
+targetSelection: option<targetSelection>,
+awsJobPresignedUrlConfig: option<awsJobPresignedUrlConfig>,
+awsJobExecutionsRolloutConfig: option<awsJobExecutionsRolloutConfig>,
+protocols: option<protocols>,
+targets: option<targets>,
+description: option<otaupdateDescription>,
+lastModifiedDate: option<dateType>,
+creationDate: option<dateType>,
+otaUpdateArn: option<otaupdateArn>,
+otaUpdateId: option<otaupdateId>
 }
 type detectMitigationActionsTaskSummaryList = array<detectMitigationActionsTaskSummary>
 type action = {
-@as("kafka") kafka: kafkaAction,
-@as("http") http: httpAction,
-@as("timestream") timestream: timestreamAction,
-@as("stepFunctions") stepFunctions: stepFunctionsAction,
-@as("iotSiteWise") iotSiteWise: iotSiteWiseAction,
-@as("iotEvents") iotEvents: iotEventsAction,
-@as("iotAnalytics") iotAnalytics: iotAnalyticsAction,
-@as("salesforce") salesforce: salesforceAction,
-@as("elasticsearch") elasticsearch: elasticsearchAction,
-@as("cloudwatchLogs") cloudwatchLogs: cloudwatchLogsAction,
-@as("cloudwatchAlarm") cloudwatchAlarm: cloudwatchAlarmAction,
-@as("cloudwatchMetric") cloudwatchMetric: cloudwatchMetricAction,
-@as("firehose") firehose: firehoseAction,
-@as("s3") s3: s3Action,
-@as("republish") republish: republishAction,
-@as("kinesis") kinesis: kinesisAction,
-@as("sqs") sqs: sqsAction,
-@as("sns") sns: snsAction,
-@as("lambda") lambda: lambdaAction,
-@as("dynamoDBv2") dynamoDBv2: dynamoDBv2Action,
-@as("dynamoDB") dynamoDB: dynamoDBAction
+kafka: option<kafkaAction>,
+http: option<httpAction>,
+timestream: option<timestreamAction>,
+stepFunctions: option<stepFunctionsAction>,
+iotSiteWise: option<iotSiteWiseAction>,
+iotEvents: option<iotEventsAction>,
+iotAnalytics: option<iotAnalyticsAction>,
+salesforce: option<salesforceAction>,
+elasticsearch: option<elasticsearchAction>,
+cloudwatchLogs: option<cloudwatchLogsAction>,
+cloudwatchAlarm: option<cloudwatchAlarmAction>,
+cloudwatchMetric: option<cloudwatchMetricAction>,
+firehose: option<firehoseAction>,
+s3: option<s3Action>,
+republish: option<republishAction>,
+kinesis: option<kinesisAction>,
+sqs: option<sqsAction>,
+sns: option<snsAction>,
+lambda: option<lambdaAction>,
+dynamoDBv2: option<dynamoDBv2Action>,
+dynamoDB: option<dynamoDBAction>
 }
 type actionList = array<action>
 type topicRulePayload = {
-@as("errorAction") errorAction: action,
-@as("awsIotSqlVersion") awsIotSqlVersion: awsIotSqlVersion,
-@as("ruleDisabled") ruleDisabled: isDisabled,
-@as("actions") actions: option<actionList>,
-@as("description") description: description,
-@as("sql") sql: option<sQL>
+errorAction: option<action>,
+awsIotSqlVersion: option<awsIotSqlVersion>,
+ruleDisabled: option<isDisabled>,
+actions: actionList,
+description: option<description>,
+sql: sql
 }
 type topicRule = {
-@as("errorAction") errorAction: action,
-@as("awsIotSqlVersion") awsIotSqlVersion: awsIotSqlVersion,
-@as("ruleDisabled") ruleDisabled: isDisabled,
-@as("actions") actions: actionList,
-@as("createdAt") createdAt: createdAtDate,
-@as("description") description: description,
-@as("sql") sql: sQL,
-@as("ruleName") ruleName: ruleName
+errorAction: option<action>,
+awsIotSqlVersion: option<awsIotSqlVersion>,
+ruleDisabled: option<isDisabled>,
+actions: option<actionList>,
+createdAt: option<createdAtDate>,
+description: option<description>,
+sql: option<sql>,
+ruleName: option<ruleName>
 }
-type clientType;
-@module("@aws-sdk/client-iot") @new external createClient: unit => clientType = "IoTClient";
+type awsServiceClient;
+@module("@aws-sdk/client-iot") @new external createClient: unit => awsServiceClient = "IoTClient";
 module UpdateTopicRuleDestination = {
   type t;
   type request = {
-@as("status") status: option<topicRuleDestinationStatus>,
-@as("arn") arn: option<awsArn>
+status: topicRuleDestinationStatus,
+arn: awsArn
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateTopicRuleDestinationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateRoleAlias = {
   type t;
   type request = {
-@as("credentialDurationSeconds") credentialDurationSeconds: credentialDurationSeconds,
-@as("roleArn") roleArn: roleArn,
-@as("roleAlias") roleAlias: option<roleAlias>
+credentialDurationSeconds: option<credentialDurationSeconds>,
+roleArn: option<roleArn>,
+roleAlias: roleAlias
 }
   type response = {
-@as("roleAliasArn") roleAliasArn: roleAliasArn,
-@as("roleAlias") roleAlias: roleAlias
+roleAliasArn: option<roleAliasArn>,
+roleAlias: option<roleAlias>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateRoleAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateCustomMetric = {
   type t;
   type request = {
-@as("displayName") displayName: option<customMetricDisplayName>,
-@as("metricName") metricName: option<metricName>
+displayName: customMetricDisplayName,
+metricName: metricName
 }
   type response = {
-@as("lastModifiedDate") lastModifiedDate: amazonawsTimestamp,
-@as("creationDate") creationDate: amazonawsTimestamp,
-@as("displayName") displayName: customMetricDisplayName,
-@as("metricType") metricType: customMetricType,
-@as("metricArn") metricArn: customMetricArn,
-@as("metricName") metricName: metricName
+lastModifiedDate: option<timestamp_>,
+creationDate: option<timestamp_>,
+displayName: option<customMetricDisplayName>,
+metricType: option<customMetricType>,
+metricArn: option<customMetricArn>,
+metricName: option<metricName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateCustomMetricCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateCertificate = {
   type t;
   type request = {
-@as("newStatus") newStatus: option<certificateStatus>,
-@as("certificateId") certificateId: option<certificateId>
+newStatus: certificateStatus,
+certificateId: certificateId
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateCertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module TransferCertificate = {
   type t;
   type request = {
-@as("transferMessage") transferMessage: message,
-@as("targetAwsAccount") targetAwsAccount: option<awsAccountId>,
-@as("certificateId") certificateId: option<certificateId>
+transferMessage: option<message>,
+targetAwsAccount: awsAccountId,
+certificateId: certificateId
 }
   type response = {
-@as("transferredCertificateArn") transferredCertificateArn: certificateArn
+transferredCertificateArn: option<certificateArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "TransferCertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StopThingRegistrationTask = {
   type t;
   type request = {
-@as("taskId") taskId: option<taskId>
+taskId: taskId
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "StopThingRegistrationTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartThingRegistrationTask = {
   type t;
   type request = {
-@as("roleArn") roleArn: option<roleArn>,
-@as("inputFileKey") inputFileKey: option<registryS3KeyName>,
-@as("inputFileBucket") inputFileBucket: option<registryS3BucketName>,
-@as("templateBody") templateBody: option<templateBody>
+roleArn: roleArn,
+inputFileKey: registryS3KeyName,
+inputFileBucket: registryS3BucketName,
+templateBody: templateBody
 }
   type response = {
-@as("taskId") taskId: taskId
+taskId: option<taskId>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "StartThingRegistrationTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SetV2LoggingOptions = {
   type t;
   type request = {
-@as("disableAllLogs") disableAllLogs: disableAllLogs,
-@as("defaultLogLevel") defaultLogLevel: logLevel,
-@as("roleArn") roleArn: awsArn
+disableAllLogs: option<disableAllLogs>,
+defaultLogLevel: option<logLevel>,
+roleArn: option<awsArn>
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "SetV2LoggingOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module SetDefaultPolicyVersion = {
   type t;
   type request = {
-@as("policyVersionId") policyVersionId: option<policyVersionId>,
-@as("policyName") policyName: option<policyName>
+policyVersionId: policyVersionId,
+policyName: policyName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "SetDefaultPolicyVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module SetDefaultAuthorizer = {
   type t;
   type request = {
-@as("authorizerName") authorizerName: option<authorizerName>
+authorizerName: authorizerName
 }
   type response = {
-@as("authorizerArn") authorizerArn: authorizerArn,
-@as("authorizerName") authorizerName: authorizerName
+authorizerArn: option<authorizerArn>,
+authorizerName: option<authorizerName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "SetDefaultAuthorizerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RemoveThingFromThingGroup = {
   type t;
   type request = {
-@as("thingArn") thingArn: thingArn,
-@as("thingName") thingName: thingName,
-@as("thingGroupArn") thingGroupArn: thingGroupArn,
-@as("thingGroupName") thingGroupName: thingGroupName
+thingArn: option<thingArn>,
+thingName: option<thingName>,
+thingGroupArn: option<thingGroupArn>,
+thingGroupName: option<thingGroupName>
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "RemoveThingFromThingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RemoveThingFromBillingGroup = {
   type t;
   type request = {
-@as("thingArn") thingArn: thingArn,
-@as("thingName") thingName: thingName,
-@as("billingGroupArn") billingGroupArn: billingGroupArn,
-@as("billingGroupName") billingGroupName: billingGroupName
+thingArn: option<thingArn>,
+thingName: option<thingName>,
+billingGroupArn: option<billingGroupArn>,
+billingGroupName: option<billingGroupName>
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "RemoveThingFromBillingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RejectCertificateTransfer = {
   type t;
   type request = {
-@as("rejectReason") rejectReason: message,
-@as("certificateId") certificateId: option<certificateId>
+rejectReason: option<message>,
+certificateId: certificateId
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "RejectCertificateTransferCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RegisterCertificateWithoutCA = {
   type t;
   type request = {
-@as("status") status: certificateStatus,
-@as("certificatePem") certificatePem: option<certificatePem>
+status: option<certificateStatus>,
+certificatePem: certificatePem
 }
   type response = {
-@as("certificateId") certificateId: certificateId,
-@as("certificateArn") certificateArn: certificateArn
+certificateId: option<certificateId>,
+certificateArn: option<certificateArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "RegisterCertificateWithoutCACommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterCertificate = {
   type t;
   type request = {
-@as("status") status: certificateStatus,
-@as("setAsActive") setAsActive: setAsActiveFlag,
-@as("caCertificatePem") caCertificatePem: certificatePem,
-@as("certificatePem") certificatePem: option<certificatePem>
+status: option<certificateStatus>,
+setAsActive: option<setAsActiveFlag>,
+caCertificatePem: option<certificatePem>,
+certificatePem: certificatePem
 }
   type response = {
-@as("certificateId") certificateId: certificateId,
-@as("certificateArn") certificateArn: certificateArn
+certificateId: option<certificateId>,
+certificateArn: option<certificateArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "RegisterCertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetV2LoggingOptions = {
   type t;
   type request = unit
   type response = {
-@as("disableAllLogs") disableAllLogs: disableAllLogs,
-@as("defaultLogLevel") defaultLogLevel: logLevel,
-@as("roleArn") roleArn: awsArn
+disableAllLogs: option<disableAllLogs>,
+defaultLogLevel: option<logLevel>,
+roleArn: option<awsArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetV2LoggingOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetRegistrationCode = {
   type t;
   type request = unit
   type response = {
-@as("registrationCode") registrationCode: registrationCode
+registrationCode: option<registrationCode>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetRegistrationCodeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPolicyVersion = {
   type t;
   type request = {
-@as("policyVersionId") policyVersionId: option<policyVersionId>,
-@as("policyName") policyName: option<policyName>
+policyVersionId: policyVersionId,
+policyName: policyName
 }
   type response = {
-@as("generationId") generationId: generationId,
-@as("lastModifiedDate") lastModifiedDate: dateType,
-@as("creationDate") creationDate: dateType,
-@as("isDefaultVersion") isDefaultVersion: isDefaultVersion,
-@as("policyVersionId") policyVersionId: policyVersionId,
-@as("policyDocument") policyDocument: policyDocument,
-@as("policyName") policyName: policyName,
-@as("policyArn") policyArn: policyArn
+generationId: option<generationId>,
+lastModifiedDate: option<dateType>,
+creationDate: option<dateType>,
+isDefaultVersion: option<isDefaultVersion>,
+policyVersionId: option<policyVersionId>,
+policyDocument: option<policyDocument>,
+policyName: option<policyName>,
+policyArn: option<policyArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetPolicyVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPolicy = {
   type t;
   type request = {
-@as("policyName") policyName: option<policyName>
+policyName: policyName
 }
   type response = {
-@as("generationId") generationId: generationId,
-@as("lastModifiedDate") lastModifiedDate: dateType,
-@as("creationDate") creationDate: dateType,
-@as("defaultVersionId") defaultVersionId: policyVersionId,
-@as("policyDocument") policyDocument: policyDocument,
-@as("policyArn") policyArn: policyArn,
-@as("policyName") policyName: policyName
+generationId: option<generationId>,
+lastModifiedDate: option<dateType>,
+creationDate: option<dateType>,
+defaultVersionId: option<policyVersionId>,
+policyDocument: option<policyDocument>,
+policyArn: option<policyArn>,
+policyName: option<policyName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLoggingOptions = {
   type t;
   type request = unit
   type response = {
-@as("logLevel") logLevel: logLevel,
-@as("roleArn") roleArn: awsArn
+logLevel: option<logLevel>,
+roleArn: option<awsArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetLoggingOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetJobDocument = {
   type t;
   type request = {
-@as("jobId") jobId: option<jobId>
+jobId: jobId
 }
   type response = {
-@as("document") document: jobDocument
+document: option<jobDocument>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetJobDocumentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetCardinality = {
   type t;
   type request = {
-@as("queryVersion") queryVersion: queryVersion,
-@as("aggregationField") aggregationField: aggregationField,
-@as("queryString") queryString: option<queryString>,
-@as("indexName") indexName: indexName
+queryVersion: option<queryVersion>,
+aggregationField: option<aggregationField>,
+queryString: queryString,
+indexName: option<indexName>
 }
   type response = {
-@as("cardinality") cardinality: count
+cardinality: option<count>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetCardinalityCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableTopicRule = {
   type t;
   type request = {
-@as("ruleName") ruleName: option<ruleName>
+ruleName: ruleName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "EnableTopicRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DisableTopicRule = {
   type t;
   type request = {
-@as("ruleName") ruleName: option<ruleName>
+ruleName: ruleName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DisableTopicRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DetachThingPrincipal = {
   type t;
   type request = {
-@as("principal") principal: option<principal>,
-@as("thingName") thingName: option<thingName>
+principal: principal,
+thingName: thingName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DetachThingPrincipalCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DetachSecurityProfile = {
   type t;
   type request = {
-@as("securityProfileTargetArn") securityProfileTargetArn: option<securityProfileTargetArn>,
-@as("securityProfileName") securityProfileName: option<securityProfileName>
+securityProfileTargetArn: securityProfileTargetArn,
+securityProfileName: securityProfileName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DetachSecurityProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DetachPrincipalPolicy = {
   type t;
   type request = {
-@as("principal") principal: option<principal>,
-@as("policyName") policyName: option<policyName>
+principal: principal,
+policyName: policyName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DetachPrincipalPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DetachPolicy = {
   type t;
   type request = {
-@as("target") target: option<policyTarget>,
-@as("policyName") policyName: option<policyName>
+target: policyTarget,
+policyName: policyName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DetachPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DescribeThingRegistrationTask = {
   type t;
   type request = {
-@as("taskId") taskId: option<taskId>
+taskId: taskId
 }
   type response = {
-@as("percentageProgress") percentageProgress: percentage,
-@as("failureCount") failureCount: count,
-@as("successCount") successCount: count,
-@as("message") message: errorMessage,
-@as("status") status: status,
-@as("roleArn") roleArn: roleArn,
-@as("inputFileKey") inputFileKey: registryS3KeyName,
-@as("inputFileBucket") inputFileBucket: registryS3BucketName,
-@as("templateBody") templateBody: templateBody,
-@as("lastModifiedDate") lastModifiedDate: lastModifiedDate,
-@as("creationDate") creationDate: creationDate,
-@as("taskId") taskId: taskId
+percentageProgress: option<percentage>,
+failureCount: option<count>,
+successCount: option<count>,
+message: option<errorMessage>,
+status: option<status>,
+roleArn: option<roleArn>,
+inputFileKey: option<registryS3KeyName>,
+inputFileBucket: option<registryS3BucketName>,
+templateBody: option<templateBody>,
+lastModifiedDate: option<lastModifiedDate>,
+creationDate: option<creationDate>,
+taskId: option<taskId>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeThingRegistrationTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeProvisioningTemplateVersion = {
   type t;
   type request = {
-@as("versionId") versionId: option<templateVersionId>,
-@as("templateName") templateName: option<templateName>
+versionId: templateVersionId,
+templateName: templateName
 }
   type response = {
-@as("isDefaultVersion") isDefaultVersion: isDefaultVersion,
-@as("templateBody") templateBody: templateBody,
-@as("creationDate") creationDate: dateType,
-@as("versionId") versionId: templateVersionId
+isDefaultVersion: option<isDefaultVersion>,
+templateBody: option<templateBody>,
+creationDate: option<dateType>,
+versionId: option<templateVersionId>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeProvisioningTemplateVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeIndex = {
   type t;
   type request = {
-@as("indexName") indexName: option<indexName>
+indexName: indexName
 }
   type response = {
-@as("schema") schema: indexSchema,
-@as("indexStatus") indexStatus: indexStatus,
-@as("indexName") indexName: indexName
+schema: option<indexSchema>,
+indexStatus: option<indexStatus>,
+indexName: option<indexName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeIndexCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEndpoint = {
   type t;
   type request = {
-@as("endpointType") endpointType: endpointType
+endpointType: option<endpointType>
 }
   type response = {
-@as("endpointAddress") endpointAddress: endpointAddress
+endpointAddress: option<endpointAddress>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeEndpointCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCustomMetric = {
   type t;
   type request = {
-@as("metricName") metricName: option<metricName>
+metricName: metricName
 }
   type response = {
-@as("lastModifiedDate") lastModifiedDate: amazonawsTimestamp,
-@as("creationDate") creationDate: amazonawsTimestamp,
-@as("displayName") displayName: customMetricDisplayName,
-@as("metricType") metricType: customMetricType,
-@as("metricArn") metricArn: customMetricArn,
-@as("metricName") metricName: metricName
+lastModifiedDate: option<timestamp_>,
+creationDate: option<timestamp_>,
+displayName: option<customMetricDisplayName>,
+metricType: option<customMetricType>,
+metricArn: option<customMetricArn>,
+metricName: option<metricName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeCustomMetricCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeprecateThingType = {
   type t;
   type request = {
-@as("undoDeprecate") undoDeprecate: undoDeprecate,
-@as("thingTypeName") thingTypeName: option<thingTypeName>
+undoDeprecate: option<undoDeprecate>,
+thingTypeName: thingTypeName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeprecateThingTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteV2LoggingLevel = {
   type t;
   type request = {
-@as("targetName") targetName: option<logTargetName>,
-@as("targetType") targetType: option<logTargetType>
+targetName: logTargetName,
+targetType: logTargetType
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteV2LoggingLevelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteTopicRuleDestination = {
   type t;
   type request = {
-@as("arn") arn: option<awsArn>
+arn: awsArn
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteTopicRuleDestinationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteTopicRule = {
   type t;
   type request = {
-@as("ruleName") ruleName: option<ruleName>
+ruleName: ruleName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteTopicRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteThingType = {
   type t;
   type request = {
-@as("thingTypeName") thingTypeName: option<thingTypeName>
+thingTypeName: thingTypeName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteThingTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteThingGroup = {
   type t;
   type request = {
-@as("expectedVersion") expectedVersion: optionalVersion,
-@as("thingGroupName") thingGroupName: option<thingGroupName>
+expectedVersion: option<optionalVersion>,
+thingGroupName: thingGroupName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteThingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteThing = {
   type t;
   type request = {
-@as("expectedVersion") expectedVersion: optionalVersion,
-@as("thingName") thingName: option<thingName>
+expectedVersion: option<optionalVersion>,
+thingName: thingName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteThingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteStream = {
   type t;
   type request = {
-@as("streamId") streamId: option<streamId>
+streamId: streamId
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteSecurityProfile = {
   type t;
   type request = {
-@as("expectedVersion") expectedVersion: optionalVersion,
-@as("securityProfileName") securityProfileName: option<securityProfileName>
+expectedVersion: option<optionalVersion>,
+securityProfileName: securityProfileName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteSecurityProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteScheduledAudit = {
   type t;
   type request = {
-@as("scheduledAuditName") scheduledAuditName: option<scheduledAuditName>
+scheduledAuditName: scheduledAuditName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteScheduledAuditCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteRoleAlias = {
   type t;
   type request = {
-@as("roleAlias") roleAlias: option<roleAlias>
+roleAlias: roleAlias
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteRoleAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteRegistrationCode = {
@@ -2165,259 +2170,259 @@ module DeleteRegistrationCode = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteRegistrationCodeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteProvisioningTemplateVersion = {
   type t;
   type request = {
-@as("versionId") versionId: option<templateVersionId>,
-@as("templateName") templateName: option<templateName>
+versionId: templateVersionId,
+templateName: templateName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteProvisioningTemplateVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteProvisioningTemplate = {
   type t;
   type request = {
-@as("templateName") templateName: option<templateName>
+templateName: templateName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteProvisioningTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeletePolicyVersion = {
   type t;
   type request = {
-@as("policyVersionId") policyVersionId: option<policyVersionId>,
-@as("policyName") policyName: option<policyName>
+policyVersionId: policyVersionId,
+policyName: policyName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeletePolicyVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeletePolicy = {
   type t;
   type request = {
-@as("policyName") policyName: option<policyName>
+policyName: policyName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeletePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteOTAUpdate = {
   type t;
   type request = {
-@as("forceDeleteAWSJob") forceDeleteAWSJob: forceDeleteAWSJob,
-@as("deleteStream") deleteStream: deleteStream_,
-@as("otaUpdateId") otaUpdateId: option<oTAUpdateId>
+forceDeleteAWSJob: option<forceDeleteAWSJob>,
+deleteStream: option<deleteStream_>,
+otaUpdateId: otaupdateId
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteOTAUpdateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteMitigationAction = {
   type t;
   type request = {
-@as("actionName") actionName: option<mitigationActionName>
+actionName: mitigationActionName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteMitigationActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteJobTemplate = {
   type t;
   type request = {
-@as("jobTemplateId") jobTemplateId: option<jobTemplateId>
+jobTemplateId: jobTemplateId
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteJobTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteJobExecution = {
   type t;
   type request = {
-@as("namespaceId") namespaceId: namespaceId,
-@as("force") force: forceFlag,
-@as("executionNumber") executionNumber: option<executionNumber>,
-@as("thingName") thingName: option<thingName>,
-@as("jobId") jobId: option<jobId>
+namespaceId: option<namespaceId>,
+force: option<forceFlag>,
+executionNumber: executionNumber,
+thingName: thingName,
+jobId: jobId
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteJobExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteJob = {
   type t;
   type request = {
-@as("namespaceId") namespaceId: namespaceId,
-@as("force") force: forceFlag,
-@as("jobId") jobId: option<jobId>
+namespaceId: option<namespaceId>,
+force: option<forceFlag>,
+jobId: jobId
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteDynamicThingGroup = {
   type t;
   type request = {
-@as("expectedVersion") expectedVersion: optionalVersion,
-@as("thingGroupName") thingGroupName: option<thingGroupName>
+expectedVersion: option<optionalVersion>,
+thingGroupName: thingGroupName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteDynamicThingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDomainConfiguration = {
   type t;
   type request = {
-@as("domainConfigurationName") domainConfigurationName: option<domainConfigurationName>
+domainConfigurationName: domainConfigurationName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteDomainConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDimension = {
   type t;
   type request = {
-@as("name") name: option<dimensionName>
+name: dimensionName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteDimensionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteCustomMetric = {
   type t;
   type request = {
-@as("metricName") metricName: option<metricName>
+metricName: metricName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteCustomMetricCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteCertificate = {
   type t;
   type request = {
-@as("forceDelete") forceDelete: forceDelete,
-@as("certificateId") certificateId: option<certificateId>
+forceDelete: option<forceDelete>,
+certificateId: certificateId
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteCertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteCACertificate = {
   type t;
   type request = {
-@as("certificateId") certificateId: option<certificateId>
+certificateId: certificateId
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteCACertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteBillingGroup = {
   type t;
   type request = {
-@as("expectedVersion") expectedVersion: optionalVersion,
-@as("billingGroupName") billingGroupName: option<billingGroupName>
+expectedVersion: option<optionalVersion>,
+billingGroupName: billingGroupName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteBillingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAuthorizer = {
   type t;
   type request = {
-@as("authorizerName") authorizerName: option<authorizerName>
+authorizerName: authorizerName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteAuthorizerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAccountAuditConfiguration = {
   type t;
   type request = {
-@as("deleteScheduledAudits") deleteScheduledAudits: deleteScheduledAudits
+deleteScheduledAudits: option<deleteScheduledAudits>
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteAccountAuditConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateProvisioningTemplateVersion = {
   type t;
   type request = {
-@as("setAsDefault") setAsDefault: setAsDefault,
-@as("templateBody") templateBody: option<templateBody>,
-@as("templateName") templateName: option<templateName>
+setAsDefault: option<setAsDefault>,
+templateBody: templateBody,
+templateName: templateName
 }
   type response = {
-@as("isDefaultVersion") isDefaultVersion: isDefaultVersion,
-@as("versionId") versionId: templateVersionId,
-@as("templateName") templateName: templateName,
-@as("templateArn") templateArn: templateArn
+isDefaultVersion: option<isDefaultVersion>,
+versionId: option<templateVersionId>,
+templateName: option<templateName>,
+templateArn: option<templateArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateProvisioningTemplateVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreatePolicyVersion = {
   type t;
   type request = {
-@as("setAsDefault") setAsDefault: setAsDefault,
-@as("policyDocument") policyDocument: option<policyDocument>,
-@as("policyName") policyName: option<policyName>
+setAsDefault: option<setAsDefault>,
+policyDocument: policyDocument,
+policyName: policyName
 }
   type response = {
-@as("isDefaultVersion") isDefaultVersion: isDefaultVersion,
-@as("policyVersionId") policyVersionId: policyVersionId,
-@as("policyDocument") policyDocument: policyDocument,
-@as("policyArn") policyArn: policyArn
+isDefaultVersion: option<isDefaultVersion>,
+policyVersionId: option<policyVersionId>,
+policyDocument: option<policyDocument>,
+policyArn: option<policyArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreatePolicyVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCertificateFromCsr = {
   type t;
   type request = {
-@as("setAsActive") setAsActive: setAsActive,
-@as("certificateSigningRequest") certificateSigningRequest: option<certificateSigningRequest>
+setAsActive: option<setAsActive>,
+certificateSigningRequest: certificateSigningRequest
 }
   type response = {
-@as("certificatePem") certificatePem: certificatePem,
-@as("certificateId") certificateId: certificateId,
-@as("certificateArn") certificateArn: certificateArn
+certificatePem: option<certificatePem>,
+certificateId: option<certificateId>,
+certificateArn: option<certificateArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateCertificateFromCsrCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ConfirmTopicRuleDestination = {
   type t;
   type request = {
-@as("confirmationToken") confirmationToken: option<confirmationToken>
+confirmationToken: confirmationToken
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ConfirmTopicRuleDestinationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ClearDefaultAuthorizer = {
@@ -2425,2461 +2430,2461 @@ module ClearDefaultAuthorizer = {
   type request = unit
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ClearDefaultAuthorizerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelJob = {
   type t;
   type request = {
-@as("force") force: forceFlag,
-@as("comment") comment: comment,
-@as("reasonCode") reasonCode: reasonCode,
-@as("jobId") jobId: option<jobId>
+force: option<forceFlag>,
+comment: option<comment>,
+reasonCode: option<reasonCode>,
+jobId: jobId
 }
   type response = {
-@as("description") description: jobDescription,
-@as("jobId") jobId: jobId,
-@as("jobArn") jobArn: jobArn
+description: option<jobDescription>,
+jobId: option<jobId>,
+jobArn: option<jobArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CancelJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelDetectMitigationActionsTask = {
   type t;
   type request = {
-@as("taskId") taskId: option<mitigationActionsTaskId>
+taskId: mitigationActionsTaskId
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CancelDetectMitigationActionsTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelCertificateTransfer = {
   type t;
   type request = {
-@as("certificateId") certificateId: option<certificateId>
+certificateId: certificateId
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CancelCertificateTransferCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CancelAuditTask = {
   type t;
   type request = {
-@as("taskId") taskId: option<auditTaskId>
+taskId: auditTaskId
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CancelAuditTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelAuditMitigationActionsTask = {
   type t;
   type request = {
-@as("taskId") taskId: option<mitigationActionsTaskId>
+taskId: mitigationActionsTaskId
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CancelAuditMitigationActionsTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AttachThingPrincipal = {
   type t;
   type request = {
-@as("principal") principal: option<principal>,
-@as("thingName") thingName: option<thingName>
+principal: principal,
+thingName: thingName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "AttachThingPrincipalCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AttachSecurityProfile = {
   type t;
   type request = {
-@as("securityProfileTargetArn") securityProfileTargetArn: option<securityProfileTargetArn>,
-@as("securityProfileName") securityProfileName: option<securityProfileName>
+securityProfileTargetArn: securityProfileTargetArn,
+securityProfileName: securityProfileName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "AttachSecurityProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AttachPrincipalPolicy = {
   type t;
   type request = {
-@as("principal") principal: option<principal>,
-@as("policyName") policyName: option<policyName>
+principal: principal,
+policyName: policyName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "AttachPrincipalPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module AttachPolicy = {
   type t;
   type request = {
-@as("target") target: option<policyTarget>,
-@as("policyName") policyName: option<policyName>
+target: policyTarget,
+policyName: policyName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "AttachPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module AddThingToThingGroup = {
   type t;
   type request = {
-@as("overrideDynamicGroups") overrideDynamicGroups: overrideDynamicGroups,
-@as("thingArn") thingArn: thingArn,
-@as("thingName") thingName: thingName,
-@as("thingGroupArn") thingGroupArn: thingGroupArn,
-@as("thingGroupName") thingGroupName: thingGroupName
+overrideDynamicGroups: option<overrideDynamicGroups>,
+thingArn: option<thingArn>,
+thingName: option<thingName>,
+thingGroupArn: option<thingGroupArn>,
+thingGroupName: option<thingGroupName>
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "AddThingToThingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddThingToBillingGroup = {
   type t;
   type request = {
-@as("thingArn") thingArn: thingArn,
-@as("thingName") thingName: thingName,
-@as("billingGroupArn") billingGroupArn: billingGroupArn,
-@as("billingGroupName") billingGroupName: billingGroupName
+thingArn: option<thingArn>,
+thingName: option<thingName>,
+billingGroupArn: option<billingGroupArn>,
+billingGroupName: option<billingGroupName>
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "AddThingToBillingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AcceptCertificateTransfer = {
   type t;
   type request = {
-@as("setAsActive") setAsActive: setAsActive,
-@as("certificateId") certificateId: option<certificateId>
+setAsActive: option<setAsActive>,
+certificateId: certificateId
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "AcceptCertificateTransferCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module UpdateThingGroupsForThing = {
   type t;
   type request = {
-@as("overrideDynamicGroups") overrideDynamicGroups: overrideDynamicGroups,
-@as("thingGroupsToRemove") thingGroupsToRemove: thingGroupList,
-@as("thingGroupsToAdd") thingGroupsToAdd: thingGroupList,
-@as("thingName") thingName: thingName
+overrideDynamicGroups: option<overrideDynamicGroups>,
+thingGroupsToRemove: option<thingGroupList>,
+thingGroupsToAdd: option<thingGroupList>,
+thingName: option<thingName>
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateThingGroupsForThingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateScheduledAudit = {
   type t;
   type request = {
-@as("scheduledAuditName") scheduledAuditName: option<scheduledAuditName>,
-@as("targetCheckNames") targetCheckNames: targetAuditCheckNames,
-@as("dayOfWeek") dayOfWeek: dayOfWeek,
-@as("dayOfMonth") dayOfMonth: dayOfMonth,
-@as("frequency") frequency: auditFrequency
+scheduledAuditName: scheduledAuditName,
+targetCheckNames: option<targetAuditCheckNames>,
+dayOfWeek: option<dayOfWeek>,
+dayOfMonth: option<dayOfMonth>,
+frequency: option<auditFrequency>
 }
   type response = {
-@as("scheduledAuditArn") scheduledAuditArn: scheduledAuditArn
+scheduledAuditArn: option<scheduledAuditArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateScheduledAuditCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateProvisioningTemplate = {
   type t;
   type request = {
-@as("removePreProvisioningHook") removePreProvisioningHook: removeHook,
-@as("preProvisioningHook") preProvisioningHook: provisioningHook,
-@as("provisioningRoleArn") provisioningRoleArn: roleArn,
-@as("defaultVersionId") defaultVersionId: templateVersionId,
-@as("enabled") enabled: enabled,
-@as("description") description: templateDescription,
-@as("templateName") templateName: option<templateName>
+removePreProvisioningHook: option<removeHook>,
+preProvisioningHook: option<provisioningHook>,
+provisioningRoleArn: option<roleArn>,
+defaultVersionId: option<templateVersionId>,
+enabled: option<enabled>,
+description: option<templateDescription>,
+templateName: templateName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateProvisioningTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDomainConfiguration = {
   type t;
   type request = {
-@as("removeAuthorizerConfig") removeAuthorizerConfig: removeAuthorizerConfig,
-@as("domainConfigurationStatus") domainConfigurationStatus: domainConfigurationStatus,
-@as("authorizerConfig") authorizerConfig: authorizerConfig,
-@as("domainConfigurationName") domainConfigurationName: option<reservedDomainConfigurationName>
+removeAuthorizerConfig: option<removeAuthorizerConfig>,
+domainConfigurationStatus: option<domainConfigurationStatus>,
+authorizerConfig: option<authorizerConfig>,
+domainConfigurationName: reservedDomainConfigurationName
 }
   type response = {
-@as("domainConfigurationArn") domainConfigurationArn: domainConfigurationArn,
-@as("domainConfigurationName") domainConfigurationName: reservedDomainConfigurationName
+domainConfigurationArn: option<domainConfigurationArn>,
+domainConfigurationName: option<reservedDomainConfigurationName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateDomainConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDimension = {
   type t;
   type request = {
-@as("stringValues") stringValues: option<dimensionStringValues>,
-@as("name") name: option<dimensionName>
+stringValues: dimensionStringValues,
+name: dimensionName
 }
   type response = {
-@as("lastModifiedDate") lastModifiedDate: amazonawsTimestamp,
-@as("creationDate") creationDate: amazonawsTimestamp,
-@as("stringValues") stringValues: dimensionStringValues,
-@as("type") type_: dimensionType,
-@as("arn") arn: dimensionArn,
-@as("name") name: dimensionName
+lastModifiedDate: option<timestamp_>,
+creationDate: option<timestamp_>,
+stringValues: option<dimensionStringValues>,
+@as("type") type_: option<dimensionType>,
+arn: option<dimensionArn>,
+name: option<dimensionName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateDimensionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateCACertificate = {
   type t;
   type request = {
-@as("removeAutoRegistration") removeAutoRegistration: removeAutoRegistration,
-@as("registrationConfig") registrationConfig: registrationConfig,
-@as("newAutoRegistrationStatus") newAutoRegistrationStatus: autoRegistrationStatus,
-@as("newStatus") newStatus: cACertificateStatus,
-@as("certificateId") certificateId: option<certificateId>
+removeAutoRegistration: option<removeAutoRegistration>,
+registrationConfig: option<registrationConfig>,
+newAutoRegistrationStatus: option<autoRegistrationStatus>,
+newStatus: option<cacertificateStatus>,
+certificateId: certificateId
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateCACertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module UpdateBillingGroup = {
   type t;
   type request = {
-@as("expectedVersion") expectedVersion: optionalVersion,
-@as("billingGroupProperties") billingGroupProperties: option<billingGroupProperties>,
-@as("billingGroupName") billingGroupName: option<billingGroupName>
+expectedVersion: option<optionalVersion>,
+billingGroupProperties: billingGroupProperties,
+billingGroupName: billingGroupName
 }
   type response = {
-@as("version") version: version
+version: option<version>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateBillingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAuthorizer = {
   type t;
   type request = {
-@as("status") status: authorizerStatus,
-@as("tokenSigningPublicKeys") tokenSigningPublicKeys: publicKeyMap,
-@as("tokenKeyName") tokenKeyName: tokenKeyName,
-@as("authorizerFunctionArn") authorizerFunctionArn: authorizerFunctionArn,
-@as("authorizerName") authorizerName: option<authorizerName>
+status: option<authorizerStatus>,
+tokenSigningPublicKeys: option<publicKeyMap>,
+tokenKeyName: option<tokenKeyName>,
+authorizerFunctionArn: option<authorizerFunctionArn>,
+authorizerName: authorizerName
 }
   type response = {
-@as("authorizerArn") authorizerArn: authorizerArn,
-@as("authorizerName") authorizerName: authorizerName
+authorizerArn: option<authorizerArn>,
+authorizerName: option<authorizerName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateAuthorizerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<resourceArn>
+tagKeys: tagKeyList,
+resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartOnDemandAuditTask = {
   type t;
   type request = {
-@as("targetCheckNames") targetCheckNames: option<targetAuditCheckNames>
+targetCheckNames: targetAuditCheckNames
 }
   type response = {
-@as("taskId") taskId: auditTaskId
+taskId: option<auditTaskId>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "StartOnDemandAuditTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SetV2LoggingLevel = {
   type t;
   type request = {
-@as("logLevel") logLevel: option<logLevel>,
-@as("logTarget") logTarget: option<logTarget>
+logLevel: logLevel,
+logTarget: logTarget
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "SetV2LoggingLevelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module SetLoggingOptions = {
   type t;
   type request = {
-@as("loggingOptionsPayload") loggingOptionsPayload: option<loggingOptionsPayload>
+loggingOptionsPayload: loggingOptionsPayload
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "SetLoggingOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RegisterThing = {
   type t;
   type request = {
-@as("parameters") parameters: parameters,
-@as("templateBody") templateBody: option<templateBody>
+parameters: option<parameters>,
+templateBody: templateBody
 }
   type response = {
-@as("resourceArns") resourceArns: resourceArns,
-@as("certificatePem") certificatePem: certificatePem
+resourceArns: option<resourceArns>,
+certificatePem: option<certificatePem>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "RegisterThingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListThingsInThingGroup = {
   type t;
   type request = {
-@as("maxResults") maxResults: registryMaxResults,
-@as("nextToken") nextToken: nextToken,
-@as("recursive") recursive: recursive,
-@as("thingGroupName") thingGroupName: option<thingGroupName>
+maxResults: option<registryMaxResults>,
+nextToken: option<nextToken>,
+recursive: option<recursive>,
+thingGroupName: thingGroupName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("things") things: thingNameList
+nextToken: option<nextToken>,
+things: option<thingNameList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListThingsInThingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListThingsInBillingGroup = {
   type t;
   type request = {
-@as("maxResults") maxResults: registryMaxResults,
-@as("nextToken") nextToken: nextToken,
-@as("billingGroupName") billingGroupName: option<billingGroupName>
+maxResults: option<registryMaxResults>,
+nextToken: option<nextToken>,
+billingGroupName: billingGroupName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("things") things: thingNameList
+nextToken: option<nextToken>,
+things: option<thingNameList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListThingsInBillingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListThingRegistrationTasks = {
   type t;
   type request = {
-@as("status") status: status,
-@as("maxResults") maxResults: registryMaxResults,
-@as("nextToken") nextToken: nextToken
+status: option<status>,
+maxResults: option<registryMaxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("taskIds") taskIds: taskIdList
+nextToken: option<nextToken>,
+taskIds: option<taskIdList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListThingRegistrationTasksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListThingRegistrationTaskReports = {
   type t;
   type request = {
-@as("maxResults") maxResults: registryMaxResults,
-@as("nextToken") nextToken: nextToken,
-@as("reportType") reportType: option<reportType>,
-@as("taskId") taskId: option<taskId>
+maxResults: option<registryMaxResults>,
+nextToken: option<nextToken>,
+reportType: reportType,
+taskId: taskId
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("reportType") reportType: reportType,
-@as("resourceLinks") resourceLinks: s3FileUrlList
+nextToken: option<nextToken>,
+reportType: option<reportType>,
+resourceLinks: option<s3FileUrlList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListThingRegistrationTaskReportsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListThingPrincipals = {
   type t;
   type request = {
-@as("thingName") thingName: option<thingName>,
-@as("maxResults") maxResults: registryMaxResults,
-@as("nextToken") nextToken: nextToken
+thingName: thingName,
+maxResults: option<registryMaxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("principals") principals: principals
+nextToken: option<nextToken>,
+principals: option<principals>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListThingPrincipalsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTargetsForPolicy = {
   type t;
   type request = {
-@as("pageSize") pageSize: pageSize,
-@as("marker") marker: marker,
-@as("policyName") policyName: option<policyName>
+pageSize: option<pageSize>,
+marker: option<marker>,
+policyName: policyName
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("targets") targets: policyTargets
+nextMarker: option<marker>,
+targets: option<policyTargets>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListTargetsForPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRoleAliases = {
   type t;
   type request = {
-@as("ascendingOrder") ascendingOrder: ascendingOrder,
-@as("marker") marker: marker,
-@as("pageSize") pageSize: pageSize
+ascendingOrder: option<ascendingOrder>,
+marker: option<marker>,
+pageSize: option<pageSize>
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("roleAliases") roleAliases: roleAliases
+nextMarker: option<marker>,
+roleAliases: option<roleAliases>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListRoleAliasesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPrincipalThings = {
   type t;
   type request = {
-@as("principal") principal: option<principal>,
-@as("maxResults") maxResults: registryMaxResults,
-@as("nextToken") nextToken: nextToken
+principal: principal,
+maxResults: option<registryMaxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("things") things: thingNameList
+nextToken: option<nextToken>,
+things: option<thingNameList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListPrincipalThingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPolicyPrincipals = {
   type t;
   type request = {
-@as("ascendingOrder") ascendingOrder: ascendingOrder,
-@as("pageSize") pageSize: pageSize,
-@as("marker") marker: marker,
-@as("policyName") policyName: option<policyName>
+ascendingOrder: option<ascendingOrder>,
+pageSize: option<pageSize>,
+marker: option<marker>,
+policyName: policyName
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("principals") principals: principals
+nextMarker: option<marker>,
+principals: option<principals>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListPolicyPrincipalsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListIndices = {
   type t;
   type request = {
-@as("maxResults") maxResults: queryMaxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<queryMaxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("indexNames") indexNames: indexNamesList
+nextToken: option<nextToken>,
+indexNames: option<indexNamesList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListIndicesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDimensions = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("dimensionNames") dimensionNames: dimensionNames
+nextToken: option<nextToken>,
+dimensionNames: option<dimensionNames>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListDimensionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCustomMetrics = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("metricNames") metricNames: metricNames
+nextToken: option<nextToken>,
+metricNames: option<metricNames>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListCustomMetricsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetStatistics = {
   type t;
   type request = {
-@as("queryVersion") queryVersion: queryVersion,
-@as("aggregationField") aggregationField: aggregationField,
-@as("queryString") queryString: option<queryString>,
-@as("indexName") indexName: indexName
+queryVersion: option<queryVersion>,
+aggregationField: option<aggregationField>,
+queryString: queryString,
+indexName: option<indexName>
 }
   type response = {
-@as("statistics") statistics: statistics
+statistics: option<statistics>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetStatisticsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeThing = {
   type t;
   type request = {
-@as("thingName") thingName: option<thingName>
+thingName: thingName
 }
   type response = {
-@as("billingGroupName") billingGroupName: billingGroupName,
-@as("version") version: version,
-@as("attributes") attributes: attributes,
-@as("thingTypeName") thingTypeName: thingTypeName,
-@as("thingArn") thingArn: thingArn,
-@as("thingId") thingId: thingId,
-@as("thingName") thingName: thingName,
-@as("defaultClientId") defaultClientId: clientId
+billingGroupName: option<billingGroupName>,
+version: option<version>,
+attributes: option<attributes>,
+thingTypeName: option<thingTypeName>,
+thingArn: option<thingArn>,
+thingId: option<thingId>,
+thingName: option<thingName>,
+defaultClientId: option<clientId>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeThingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScheduledAudit = {
   type t;
   type request = {
-@as("scheduledAuditName") scheduledAuditName: option<scheduledAuditName>
+scheduledAuditName: scheduledAuditName
 }
   type response = {
-@as("scheduledAuditArn") scheduledAuditArn: scheduledAuditArn,
-@as("scheduledAuditName") scheduledAuditName: scheduledAuditName,
-@as("targetCheckNames") targetCheckNames: targetAuditCheckNames,
-@as("dayOfWeek") dayOfWeek: dayOfWeek,
-@as("dayOfMonth") dayOfMonth: dayOfMonth,
-@as("frequency") frequency: auditFrequency
+scheduledAuditArn: option<scheduledAuditArn>,
+scheduledAuditName: option<scheduledAuditName>,
+targetCheckNames: option<targetAuditCheckNames>,
+dayOfWeek: option<dayOfWeek>,
+dayOfMonth: option<dayOfMonth>,
+frequency: option<auditFrequency>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeScheduledAuditCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRoleAlias = {
   type t;
   type request = {
-@as("roleAlias") roleAlias: option<roleAlias>
+roleAlias: roleAlias
 }
   type response = {
-@as("roleAliasDescription") roleAliasDescription: roleAliasDescription
+roleAliasDescription: option<roleAliasDescription>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeRoleAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeProvisioningTemplate = {
   type t;
   type request = {
-@as("templateName") templateName: option<templateName>
+templateName: templateName
 }
   type response = {
-@as("preProvisioningHook") preProvisioningHook: provisioningHook,
-@as("provisioningRoleArn") provisioningRoleArn: roleArn,
-@as("enabled") enabled: enabled,
-@as("templateBody") templateBody: templateBody,
-@as("defaultVersionId") defaultVersionId: templateVersionId,
-@as("lastModifiedDate") lastModifiedDate: dateType,
-@as("creationDate") creationDate: dateType,
-@as("description") description: templateDescription,
-@as("templateName") templateName: templateName,
-@as("templateArn") templateArn: templateArn
+preProvisioningHook: option<provisioningHook>,
+provisioningRoleArn: option<roleArn>,
+enabled: option<enabled>,
+templateBody: option<templateBody>,
+defaultVersionId: option<templateVersionId>,
+lastModifiedDate: option<dateType>,
+creationDate: option<dateType>,
+description: option<templateDescription>,
+templateName: option<templateName>,
+templateArn: option<templateArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeProvisioningTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDimension = {
   type t;
   type request = {
-@as("name") name: option<dimensionName>
+name: dimensionName
 }
   type response = {
-@as("lastModifiedDate") lastModifiedDate: amazonawsTimestamp,
-@as("creationDate") creationDate: amazonawsTimestamp,
-@as("stringValues") stringValues: dimensionStringValues,
-@as("type") type_: dimensionType,
-@as("arn") arn: dimensionArn,
-@as("name") name: dimensionName
+lastModifiedDate: option<timestamp_>,
+creationDate: option<timestamp_>,
+stringValues: option<dimensionStringValues>,
+@as("type") type_: option<dimensionType>,
+arn: option<dimensionArn>,
+name: option<dimensionName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeDimensionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBillingGroup = {
   type t;
   type request = {
-@as("billingGroupName") billingGroupName: option<billingGroupName>
+billingGroupName: billingGroupName
 }
   type response = {
-@as("billingGroupMetadata") billingGroupMetadata: billingGroupMetadata,
-@as("billingGroupProperties") billingGroupProperties: billingGroupProperties,
-@as("version") version: version,
-@as("billingGroupArn") billingGroupArn: billingGroupArn,
-@as("billingGroupId") billingGroupId: billingGroupId,
-@as("billingGroupName") billingGroupName: billingGroupName
+billingGroupMetadata: option<billingGroupMetadata>,
+billingGroupProperties: option<billingGroupProperties>,
+version: option<version>,
+billingGroupArn: option<billingGroupArn>,
+billingGroupId: option<billingGroupId>,
+billingGroupName: option<billingGroupName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeBillingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateProvisioningClaim = {
   type t;
   type request = {
-@as("templateName") templateName: option<templateName>
+templateName: templateName
 }
   type response = {
-@as("expiration") expiration: dateType,
-@as("keyPair") keyPair: keyPair,
-@as("certificatePem") certificatePem: certificatePem,
-@as("certificateId") certificateId: certificateId
+expiration: option<dateType>,
+keyPair: option<keyPair>,
+certificatePem: option<certificatePem>,
+certificateId: option<certificateId>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateProvisioningClaimCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateKeysAndCertificate = {
   type t;
   type request = {
-@as("setAsActive") setAsActive: setAsActive
+setAsActive: option<setAsActive>
 }
   type response = {
-@as("keyPair") keyPair: keyPair,
-@as("certificatePem") certificatePem: certificatePem,
-@as("certificateId") certificateId: certificateId,
-@as("certificateArn") certificateArn: certificateArn
+keyPair: option<keyPair>,
+certificatePem: option<certificatePem>,
+certificateId: option<certificateId>,
+certificateArn: option<certificateArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateKeysAndCertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelJobExecution = {
   type t;
   type request = {
-@as("statusDetails") statusDetails: detailsMap,
-@as("expectedVersion") expectedVersion: expectedVersion,
-@as("force") force: forceFlag,
-@as("thingName") thingName: option<thingName>,
-@as("jobId") jobId: option<jobId>
+statusDetails: option<detailsMap>,
+expectedVersion: option<expectedVersion>,
+force: option<forceFlag>,
+thingName: thingName,
+jobId: jobId
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CancelJobExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module AssociateTargetsWithJob = {
   type t;
   type request = {
-@as("namespaceId") namespaceId: namespaceId,
-@as("comment") comment: comment,
-@as("jobId") jobId: option<jobId>,
-@as("targets") targets: option<jobTargets>
+namespaceId: option<namespaceId>,
+comment: option<comment>,
+jobId: jobId,
+targets: jobTargets
 }
   type response = {
-@as("description") description: jobDescription,
-@as("jobId") jobId: jobId,
-@as("jobArn") jobArn: jobArn
+description: option<jobDescription>,
+jobId: option<jobId>,
+jobArn: option<jobArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "AssociateTargetsWithJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateThing = {
   type t;
   type request = {
-@as("removeThingType") removeThingType: removeThingType,
-@as("expectedVersion") expectedVersion: optionalVersion,
-@as("attributePayload") attributePayload: attributePayload,
-@as("thingTypeName") thingTypeName: thingTypeName,
-@as("thingName") thingName: option<thingName>
+removeThingType: option<removeThingType>,
+expectedVersion: option<optionalVersion>,
+attributePayload: option<attributePayload>,
+thingTypeName: option<thingTypeName>,
+thingName: thingName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateThingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateEventConfigurations = {
   type t;
   type request = {
-@as("eventConfigurations") eventConfigurations: eventConfigurations
+eventConfigurations: option<eventConfigurations>
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateEventConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAuditSuppression = {
   type t;
   type request = {
-@as("description") description: auditDescription,
-@as("suppressIndefinitely") suppressIndefinitely: suppressIndefinitely,
-@as("expirationDate") expirationDate: amazonawsTimestamp,
-@as("resourceIdentifier") resourceIdentifier: option<resourceIdentifier>,
-@as("checkName") checkName: option<auditCheckName>
+description: option<auditDescription>,
+suppressIndefinitely: option<suppressIndefinitely>,
+expirationDate: option<timestamp_>,
+resourceIdentifier: resourceIdentifier,
+checkName: auditCheckName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateAuditSuppressionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAccountAuditConfiguration = {
   type t;
   type request = {
-@as("auditCheckConfigurations") auditCheckConfigurations: auditCheckConfigurations,
-@as("auditNotificationTargetConfigurations") auditNotificationTargetConfigurations: auditNotificationTargetConfigurations,
-@as("roleArn") roleArn: roleArn
+auditCheckConfigurations: option<auditCheckConfigurations>,
+auditNotificationTargetConfigurations: option<auditNotificationTargetConfigurations>,
+roleArn: option<roleArn>
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateAccountAuditConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TestInvokeAuthorizer = {
   type t;
   type request = {
-@as("tlsContext") tlsContext: tlsContext,
-@as("mqttContext") mqttContext: mqttContext,
-@as("httpContext") httpContext: httpContext,
-@as("tokenSignature") tokenSignature: tokenSignature,
-@as("token") token: token,
-@as("authorizerName") authorizerName: option<authorizerName>
+tlsContext: option<tlsContext>,
+mqttContext: option<mqttContext>,
+httpContext: option<httpContext>,
+tokenSignature: option<tokenSignature>,
+token: option<token>,
+authorizerName: authorizerName
 }
   type response = {
-@as("disconnectAfterInSeconds") disconnectAfterInSeconds: seconds,
-@as("refreshAfterInSeconds") refreshAfterInSeconds: seconds,
-@as("policyDocuments") policyDocuments: policyDocuments,
-@as("principalId") principalId: principalId,
-@as("isAuthenticated") isAuthenticated: isAuthenticated
+disconnectAfterInSeconds: option<seconds>,
+refreshAfterInSeconds: option<seconds>,
+policyDocuments: option<policyDocuments>,
+principalId: option<principalId>,
+isAuthenticated: option<isAuthenticated>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "TestInvokeAuthorizerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagList>,
-@as("resourceArn") resourceArn: option<resourceArn>
+tags: tagList_,
+resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartDetectMitigationActionsTask = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("includeSuppressedAlerts") includeSuppressedAlerts: nullableBoolean,
-@as("includeOnlyActiveViolations") includeOnlyActiveViolations: nullableBoolean,
-@as("violationEventOccurrenceRange") violationEventOccurrenceRange: violationEventOccurrenceRange,
-@as("actions") actions: option<detectMitigationActionsToExecuteList>,
-@as("target") target: option<detectMitigationActionsTaskTarget>,
-@as("taskId") taskId: option<mitigationActionsTaskId>
+clientRequestToken: clientRequestToken,
+includeSuppressedAlerts: option<nullableBoolean>,
+includeOnlyActiveViolations: option<nullableBoolean>,
+violationEventOccurrenceRange: option<violationEventOccurrenceRange>,
+actions: detectMitigationActionsToExecuteList,
+target: detectMitigationActionsTaskTarget,
+taskId: mitigationActionsTaskId
 }
   type response = {
-@as("taskId") taskId: mitigationActionsTaskId
+taskId: option<mitigationActionsTaskId>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "StartDetectMitigationActionsTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterCACertificate = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("registrationConfig") registrationConfig: registrationConfig,
-@as("allowAutoRegistration") allowAutoRegistration: allowAutoRegistration,
-@as("setAsActive") setAsActive: setAsActive,
-@as("verificationCertificate") verificationCertificate: option<certificatePem>,
-@as("caCertificate") caCertificate: option<certificatePem>
+tags: option<tagList_>,
+registrationConfig: option<registrationConfig>,
+allowAutoRegistration: option<allowAutoRegistration>,
+setAsActive: option<setAsActive>,
+verificationCertificate: certificatePem,
+caCertificate: certificatePem
 }
   type response = {
-@as("certificateId") certificateId: certificateId,
-@as("certificateArn") certificateArn: certificateArn
+certificateId: option<certificateId>,
+certificateArn: option<certificateArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "RegisterCACertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTopicRules = {
   type t;
   type request = {
-@as("ruleDisabled") ruleDisabled: isDisabled,
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: topicRuleMaxResults,
-@as("topic") topic: topic
+ruleDisabled: option<isDisabled>,
+nextToken: option<nextToken>,
+maxResults: option<topicRuleMaxResults>,
+topic: option<topic>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("rules") rules: topicRuleList
+nextToken: option<nextToken>,
+rules: option<topicRuleList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListTopicRulesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListThingGroupsForThing = {
   type t;
   type request = {
-@as("maxResults") maxResults: registryMaxResults,
-@as("nextToken") nextToken: nextToken,
-@as("thingName") thingName: option<thingName>
+maxResults: option<registryMaxResults>,
+nextToken: option<nextToken>,
+thingName: thingName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("thingGroups") thingGroups: thingGroupNameAndArnList
+nextToken: option<nextToken>,
+thingGroups: option<thingGroupNameAndArnList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListThingGroupsForThingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListThingGroups = {
   type t;
   type request = {
-@as("recursive") recursive: recursiveWithoutDefault,
-@as("namePrefixFilter") namePrefixFilter: thingGroupName,
-@as("parentGroup") parentGroup: thingGroupName,
-@as("maxResults") maxResults: registryMaxResults,
-@as("nextToken") nextToken: nextToken
+recursive: option<recursiveWithoutDefault>,
+namePrefixFilter: option<thingGroupName>,
+parentGroup: option<thingGroupName>,
+maxResults: option<registryMaxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("thingGroups") thingGroups: thingGroupNameAndArnList
+nextToken: option<nextToken>,
+thingGroups: option<thingGroupNameAndArnList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListThingGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTargetsForSecurityProfile = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("securityProfileName") securityProfileName: option<securityProfileName>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+securityProfileName: securityProfileName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("securityProfileTargets") securityProfileTargets: securityProfileTargets
+nextToken: option<nextToken>,
+securityProfileTargets: option<securityProfileTargets>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListTargetsForSecurityProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("resourceArn") resourceArn: option<resourceArn>
+nextToken: option<nextToken>,
+resourceArn: resourceArn
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("tags") tags: tagList
+nextToken: option<nextToken>,
+tags: option<tagList_>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStreams = {
   type t;
   type request = {
-@as("ascendingOrder") ascendingOrder: ascendingOrder,
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults
+ascendingOrder: option<ascendingOrder>,
+nextToken: option<nextToken>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("streams") streams: streamsSummary
+nextToken: option<nextToken>,
+streams: option<streamsSummary>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListStreamsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSecurityProfiles = {
   type t;
   type request = {
-@as("metricName") metricName: metricName,
-@as("dimensionName") dimensionName: dimensionName,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+metricName: option<metricName>,
+dimensionName: option<dimensionName>,
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("securityProfileIdentifiers") securityProfileIdentifiers: securityProfileIdentifiers
+nextToken: option<nextToken>,
+securityProfileIdentifiers: option<securityProfileIdentifiers>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListSecurityProfilesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListScheduledAudits = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("scheduledAudits") scheduledAudits: scheduledAuditMetadataList
+nextToken: option<nextToken>,
+scheduledAudits: option<scheduledAuditMetadataList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListScheduledAuditsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListProvisioningTemplates = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults
+nextToken: option<nextToken>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("templates") templates: provisioningTemplateListing
+nextToken: option<nextToken>,
+templates: option<provisioningTemplateListing>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListProvisioningTemplatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListProvisioningTemplateVersions = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("templateName") templateName: option<templateName>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+templateName: templateName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("versions") versions: provisioningTemplateVersionListing
+nextToken: option<nextToken>,
+versions: option<provisioningTemplateVersionListing>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListProvisioningTemplateVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPrincipalPolicies = {
   type t;
   type request = {
-@as("ascendingOrder") ascendingOrder: ascendingOrder,
-@as("pageSize") pageSize: pageSize,
-@as("marker") marker: marker,
-@as("principal") principal: option<principal>
+ascendingOrder: option<ascendingOrder>,
+pageSize: option<pageSize>,
+marker: option<marker>,
+principal: principal
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("policies") policies: policies
+nextMarker: option<marker>,
+policies: option<policies>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListPrincipalPoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPolicyVersions = {
   type t;
   type request = {
-@as("policyName") policyName: option<policyName>
+policyName: policyName
 }
   type response = {
-@as("policyVersions") policyVersions: policyVersions
+policyVersions: option<policyVersions>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListPolicyVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPolicies = {
   type t;
   type request = {
-@as("ascendingOrder") ascendingOrder: ascendingOrder,
-@as("pageSize") pageSize: pageSize,
-@as("marker") marker: marker
+ascendingOrder: option<ascendingOrder>,
+pageSize: option<pageSize>,
+marker: option<marker>
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("policies") policies: policies
+nextMarker: option<marker>,
+policies: option<policies>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListPoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListOutgoingCertificates = {
   type t;
   type request = {
-@as("ascendingOrder") ascendingOrder: ascendingOrder,
-@as("marker") marker: marker,
-@as("pageSize") pageSize: pageSize
+ascendingOrder: option<ascendingOrder>,
+marker: option<marker>,
+pageSize: option<pageSize>
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("outgoingCertificates") outgoingCertificates: outgoingCertificates
+nextMarker: option<marker>,
+outgoingCertificates: option<outgoingCertificates>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListOutgoingCertificatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListOTAUpdates = {
   type t;
   type request = {
-@as("otaUpdateStatus") otaUpdateStatus: oTAUpdateStatus,
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults
+otaUpdateStatus: option<otaupdateStatus>,
+nextToken: option<nextToken>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("otaUpdates") otaUpdates: oTAUpdatesSummary
+nextToken: option<nextToken>,
+otaUpdates: option<otaupdatesSummary>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListOTAUpdatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListMitigationActions = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("actionType") actionType: mitigationActionType
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+actionType: option<mitigationActionType>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("actionIdentifiers") actionIdentifiers: mitigationActionIdentifierList
+nextToken: option<nextToken>,
+actionIdentifiers: option<mitigationActionIdentifierList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListMitigationActionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListJobs = {
   type t;
   type request = {
-@as("namespaceId") namespaceId: namespaceId,
-@as("thingGroupId") thingGroupId: thingGroupId,
-@as("thingGroupName") thingGroupName: thingGroupName,
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: laserMaxResults,
-@as("targetSelection") targetSelection: targetSelection,
-@as("status") status: jobStatus
+namespaceId: option<namespaceId>,
+thingGroupId: option<thingGroupId>,
+thingGroupName: option<thingGroupName>,
+nextToken: option<nextToken>,
+maxResults: option<laserMaxResults>,
+targetSelection: option<targetSelection>,
+status: option<jobStatus>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("jobs") jobs: jobSummaryList
+nextToken: option<nextToken>,
+jobs: option<jobSummaryList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListJobTemplates = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: laserMaxResults
+nextToken: option<nextToken>,
+maxResults: option<laserMaxResults>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("jobTemplates") jobTemplates: jobTemplateSummaryList
+nextToken: option<nextToken>,
+jobTemplates: option<jobTemplateSummaryList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListJobTemplatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDomainConfigurations = {
   type t;
   type request = {
-@as("serviceType") serviceType: serviceType,
-@as("pageSize") pageSize: pageSize,
-@as("marker") marker: marker
+serviceType: option<serviceType>,
+pageSize: option<pageSize>,
+marker: option<marker>
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("domainConfigurations") domainConfigurations: domainConfigurations
+nextMarker: option<marker>,
+domainConfigurations: option<domainConfigurations>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListDomainConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDetectMitigationActionsExecutions = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("endTime") endTime: amazonawsTimestamp,
-@as("startTime") startTime: amazonawsTimestamp,
-@as("thingName") thingName: deviceDefenderThingName,
-@as("violationId") violationId: violationId,
-@as("taskId") taskId: mitigationActionsTaskId
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+endTime: option<timestamp_>,
+startTime: option<timestamp_>,
+thingName: option<deviceDefenderThingName>,
+violationId: option<violationId>,
+taskId: option<mitigationActionsTaskId>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("actionsExecutions") actionsExecutions: detectMitigationActionExecutionList
+nextToken: option<nextToken>,
+actionsExecutions: option<detectMitigationActionExecutionList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListDetectMitigationActionsExecutionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCertificatesByCA = {
   type t;
   type request = {
-@as("ascendingOrder") ascendingOrder: ascendingOrder,
-@as("marker") marker: marker,
-@as("pageSize") pageSize: pageSize,
-@as("caCertificateId") caCertificateId: option<certificateId>
+ascendingOrder: option<ascendingOrder>,
+marker: option<marker>,
+pageSize: option<pageSize>,
+caCertificateId: certificateId
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("certificates") certificates: certificates
+nextMarker: option<marker>,
+certificates: option<certificates>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListCertificatesByCACommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCertificates = {
   type t;
   type request = {
-@as("ascendingOrder") ascendingOrder: ascendingOrder,
-@as("marker") marker: marker,
-@as("pageSize") pageSize: pageSize
+ascendingOrder: option<ascendingOrder>,
+marker: option<marker>,
+pageSize: option<pageSize>
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("certificates") certificates: certificates
+nextMarker: option<marker>,
+certificates: option<certificates>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListCertificatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCACertificates = {
   type t;
   type request = {
-@as("ascendingOrder") ascendingOrder: ascendingOrder,
-@as("marker") marker: marker,
-@as("pageSize") pageSize: pageSize
+ascendingOrder: option<ascendingOrder>,
+marker: option<marker>,
+pageSize: option<pageSize>
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("certificates") certificates: cACertificates
+nextMarker: option<marker>,
+certificates: option<cacertificates>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListCACertificatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBillingGroups = {
   type t;
   type request = {
-@as("namePrefixFilter") namePrefixFilter: billingGroupName,
-@as("maxResults") maxResults: registryMaxResults,
-@as("nextToken") nextToken: nextToken
+namePrefixFilter: option<billingGroupName>,
+maxResults: option<registryMaxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("billingGroups") billingGroups: billingGroupNameAndArnList
+nextToken: option<nextToken>,
+billingGroups: option<billingGroupNameAndArnList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListBillingGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAuthorizers = {
   type t;
   type request = {
-@as("status") status: authorizerStatus,
-@as("ascendingOrder") ascendingOrder: ascendingOrder,
-@as("marker") marker: marker,
-@as("pageSize") pageSize: pageSize
+status: option<authorizerStatus>,
+ascendingOrder: option<ascendingOrder>,
+marker: option<marker>,
+pageSize: option<pageSize>
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("authorizers") authorizers: authorizers
+nextMarker: option<marker>,
+authorizers: option<authorizers>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListAuthorizersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAuditTasks = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("taskStatus") taskStatus: auditTaskStatus,
-@as("taskType") taskType: auditTaskType,
-@as("endTime") endTime: option<amazonawsTimestamp>,
-@as("startTime") startTime: option<amazonawsTimestamp>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+taskStatus: option<auditTaskStatus>,
+taskType: option<auditTaskType>,
+endTime: timestamp_,
+startTime: timestamp_
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("tasks") tasks: auditTaskMetadataList
+nextToken: option<nextToken>,
+tasks: option<auditTaskMetadataList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListAuditTasksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAuditMitigationActionsTasks = {
   type t;
   type request = {
-@as("endTime") endTime: option<amazonawsTimestamp>,
-@as("startTime") startTime: option<amazonawsTimestamp>,
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("taskStatus") taskStatus: auditMitigationActionsTaskStatus,
-@as("findingId") findingId: findingId,
-@as("auditTaskId") auditTaskId: auditTaskId
+endTime: timestamp_,
+startTime: timestamp_,
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+taskStatus: option<auditMitigationActionsTaskStatus>,
+findingId: option<findingId>,
+auditTaskId: option<auditTaskId>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("tasks") tasks: auditMitigationActionsTaskMetadataList
+nextToken: option<nextToken>,
+tasks: option<auditMitigationActionsTaskMetadataList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListAuditMitigationActionsTasksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAuditMitigationActionsExecutions = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("findingId") findingId: option<findingId>,
-@as("actionStatus") actionStatus: auditMitigationActionsExecutionStatus,
-@as("taskId") taskId: option<mitigationActionsTaskId>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+findingId: findingId,
+actionStatus: option<auditMitigationActionsExecutionStatus>,
+taskId: mitigationActionsTaskId
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("actionsExecutions") actionsExecutions: auditMitigationActionExecutionMetadataList
+nextToken: option<nextToken>,
+actionsExecutions: option<auditMitigationActionExecutionMetadataList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListAuditMitigationActionsExecutionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAttachedPolicies = {
   type t;
   type request = {
-@as("pageSize") pageSize: pageSize,
-@as("marker") marker: marker,
-@as("recursive") recursive: recursive,
-@as("target") target: option<policyTarget>
+pageSize: option<pageSize>,
+marker: option<marker>,
+recursive: option<recursive>,
+target: policyTarget
 }
   type response = {
-@as("nextMarker") nextMarker: marker,
-@as("policies") policies: policies
+nextMarker: option<marker>,
+policies: option<policies>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListAttachedPoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPercentiles = {
   type t;
   type request = {
-@as("percents") percents: percentList,
-@as("queryVersion") queryVersion: queryVersion,
-@as("aggregationField") aggregationField: aggregationField,
-@as("queryString") queryString: option<queryString>,
-@as("indexName") indexName: indexName
+percents: option<percentList>,
+queryVersion: option<queryVersion>,
+aggregationField: option<aggregationField>,
+queryString: queryString,
+indexName: option<indexName>
 }
   type response = {
-@as("percentiles") percentiles: percentiles
+percentiles: option<percentiles>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetPercentilesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEffectivePolicies = {
   type t;
   type request = {
-@as("thingName") thingName: thingName,
-@as("cognitoIdentityPoolId") cognitoIdentityPoolId: cognitoIdentityPoolId,
-@as("principal") principal: principal
+thingName: option<thingName>,
+cognitoIdentityPoolId: option<cognitoIdentityPoolId>,
+principal: option<principal>
 }
   type response = {
-@as("effectivePolicies") effectivePolicies: effectivePolicies
+effectivePolicies: option<effectivePolicies>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetEffectivePoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBehaviorModelTrainingSummaries = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: tinyMaxResults,
-@as("securityProfileName") securityProfileName: securityProfileName
+nextToken: option<nextToken>,
+maxResults: option<tinyMaxResults>,
+securityProfileName: option<securityProfileName>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("summaries") summaries: behaviorModelTrainingSummaries
+nextToken: option<nextToken>,
+summaries: option<behaviorModelTrainingSummaries>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetBehaviorModelTrainingSummariesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeThingType = {
   type t;
   type request = {
-@as("thingTypeName") thingTypeName: option<thingTypeName>
+thingTypeName: thingTypeName
 }
   type response = {
-@as("thingTypeMetadata") thingTypeMetadata: thingTypeMetadata,
-@as("thingTypeProperties") thingTypeProperties: thingTypeProperties,
-@as("thingTypeArn") thingTypeArn: thingTypeArn,
-@as("thingTypeId") thingTypeId: thingTypeId,
-@as("thingTypeName") thingTypeName: thingTypeName
+thingTypeMetadata: option<thingTypeMetadata>,
+thingTypeProperties: option<thingTypeProperties>,
+thingTypeArn: option<thingTypeArn>,
+thingTypeId: option<thingTypeId>,
+thingTypeName: option<thingTypeName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeThingTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEventConfigurations = {
   type t;
   type request = unit
   type response = {
-@as("lastModifiedDate") lastModifiedDate: lastModifiedDate,
-@as("creationDate") creationDate: creationDate,
-@as("eventConfigurations") eventConfigurations: eventConfigurations
+lastModifiedDate: option<lastModifiedDate>,
+creationDate: option<creationDate>,
+eventConfigurations: option<eventConfigurations>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeEventConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDomainConfiguration = {
   type t;
   type request = {
-@as("domainConfigurationName") domainConfigurationName: option<reservedDomainConfigurationName>
+domainConfigurationName: reservedDomainConfigurationName
 }
   type response = {
-@as("lastStatusChangeDate") lastStatusChangeDate: dateType,
-@as("domainType") domainType: domainType,
-@as("serviceType") serviceType: serviceType,
-@as("domainConfigurationStatus") domainConfigurationStatus: domainConfigurationStatus,
-@as("authorizerConfig") authorizerConfig: authorizerConfig,
-@as("serverCertificates") serverCertificates: serverCertificates,
-@as("domainName") domainName: domainName,
-@as("domainConfigurationArn") domainConfigurationArn: domainConfigurationArn,
-@as("domainConfigurationName") domainConfigurationName: reservedDomainConfigurationName
+lastStatusChangeDate: option<dateType>,
+domainType: option<domainType>,
+serviceType: option<serviceType>,
+domainConfigurationStatus: option<domainConfigurationStatus>,
+authorizerConfig: option<authorizerConfig>,
+serverCertificates: option<serverCertificates>,
+domainName: option<domainName>,
+domainConfigurationArn: option<domainConfigurationArn>,
+domainConfigurationName: option<reservedDomainConfigurationName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeDomainConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDefaultAuthorizer = {
   type t;
   type request = unit
   type response = {
-@as("authorizerDescription") authorizerDescription: authorizerDescription
+authorizerDescription: option<authorizerDescription>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeDefaultAuthorizerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCertificate = {
   type t;
   type request = {
-@as("certificateId") certificateId: option<certificateId>
+certificateId: certificateId
 }
   type response = {
-@as("certificateDescription") certificateDescription: certificateDescription
+certificateDescription: option<certificateDescription>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeCertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCACertificate = {
   type t;
   type request = {
-@as("certificateId") certificateId: option<certificateId>
+certificateId: certificateId
 }
   type response = {
-@as("registrationConfig") registrationConfig: registrationConfig,
-@as("certificateDescription") certificateDescription: cACertificateDescription
+registrationConfig: option<registrationConfig>,
+certificateDescription: option<cacertificateDescription>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeCACertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAuthorizer = {
   type t;
   type request = {
-@as("authorizerName") authorizerName: option<authorizerName>
+authorizerName: authorizerName
 }
   type response = {
-@as("authorizerDescription") authorizerDescription: authorizerDescription
+authorizerDescription: option<authorizerDescription>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeAuthorizerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAuditTask = {
   type t;
   type request = {
-@as("taskId") taskId: option<auditTaskId>
+taskId: auditTaskId
 }
   type response = {
-@as("auditDetails") auditDetails: auditDetails,
-@as("scheduledAuditName") scheduledAuditName: scheduledAuditName,
-@as("taskStatistics") taskStatistics: taskStatistics,
-@as("taskStartTime") taskStartTime: amazonawsTimestamp,
-@as("taskType") taskType: auditTaskType,
-@as("taskStatus") taskStatus: auditTaskStatus
+auditDetails: option<auditDetails>,
+scheduledAuditName: option<scheduledAuditName>,
+taskStatistics: option<taskStatistics>,
+taskStartTime: option<timestamp_>,
+taskType: option<auditTaskType>,
+taskStatus: option<auditTaskStatus>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeAuditTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAuditSuppression = {
   type t;
   type request = {
-@as("resourceIdentifier") resourceIdentifier: option<resourceIdentifier>,
-@as("checkName") checkName: option<auditCheckName>
+resourceIdentifier: resourceIdentifier,
+checkName: auditCheckName
 }
   type response = {
-@as("description") description: auditDescription,
-@as("suppressIndefinitely") suppressIndefinitely: suppressIndefinitely,
-@as("expirationDate") expirationDate: amazonawsTimestamp,
-@as("resourceIdentifier") resourceIdentifier: resourceIdentifier,
-@as("checkName") checkName: auditCheckName
+description: option<auditDescription>,
+suppressIndefinitely: option<suppressIndefinitely>,
+expirationDate: option<timestamp_>,
+resourceIdentifier: option<resourceIdentifier>,
+checkName: option<auditCheckName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeAuditSuppressionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAccountAuditConfiguration = {
   type t;
   type request = unit
   type response = {
-@as("auditCheckConfigurations") auditCheckConfigurations: auditCheckConfigurations,
-@as("auditNotificationTargetConfigurations") auditNotificationTargetConfigurations: auditNotificationTargetConfigurations,
-@as("roleArn") roleArn: roleArn
+auditCheckConfigurations: option<auditCheckConfigurations>,
+auditNotificationTargetConfigurations: option<auditNotificationTargetConfigurations>,
+roleArn: option<roleArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeAccountAuditConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAuditSuppression = {
   type t;
   type request = {
-@as("resourceIdentifier") resourceIdentifier: option<resourceIdentifier>,
-@as("checkName") checkName: option<auditCheckName>
+resourceIdentifier: resourceIdentifier,
+checkName: auditCheckName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DeleteAuditSuppressionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateThingType = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("thingTypeProperties") thingTypeProperties: thingTypeProperties,
-@as("thingTypeName") thingTypeName: option<thingTypeName>
+tags: option<tagList_>,
+thingTypeProperties: option<thingTypeProperties>,
+thingTypeName: thingTypeName
 }
   type response = {
-@as("thingTypeId") thingTypeId: thingTypeId,
-@as("thingTypeArn") thingTypeArn: thingTypeArn,
-@as("thingTypeName") thingTypeName: thingTypeName
+thingTypeId: option<thingTypeId>,
+thingTypeArn: option<thingTypeArn>,
+thingTypeName: option<thingTypeName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateThingTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateThing = {
   type t;
   type request = {
-@as("billingGroupName") billingGroupName: billingGroupName,
-@as("attributePayload") attributePayload: attributePayload,
-@as("thingTypeName") thingTypeName: thingTypeName,
-@as("thingName") thingName: option<thingName>
+billingGroupName: option<billingGroupName>,
+attributePayload: option<attributePayload>,
+thingTypeName: option<thingTypeName>,
+thingName: thingName
 }
   type response = {
-@as("thingId") thingId: thingId,
-@as("thingArn") thingArn: thingArn,
-@as("thingName") thingName: thingName
+thingId: option<thingId>,
+thingArn: option<thingArn>,
+thingName: option<thingName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateThingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateScheduledAudit = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("scheduledAuditName") scheduledAuditName: option<scheduledAuditName>,
-@as("targetCheckNames") targetCheckNames: option<targetAuditCheckNames>,
-@as("dayOfWeek") dayOfWeek: dayOfWeek,
-@as("dayOfMonth") dayOfMonth: dayOfMonth,
-@as("frequency") frequency: option<auditFrequency>
+tags: option<tagList_>,
+scheduledAuditName: scheduledAuditName,
+targetCheckNames: targetAuditCheckNames,
+dayOfWeek: option<dayOfWeek>,
+dayOfMonth: option<dayOfMonth>,
+frequency: auditFrequency
 }
   type response = {
-@as("scheduledAuditArn") scheduledAuditArn: scheduledAuditArn
+scheduledAuditArn: option<scheduledAuditArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateScheduledAuditCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateRoleAlias = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("credentialDurationSeconds") credentialDurationSeconds: credentialDurationSeconds,
-@as("roleArn") roleArn: option<roleArn>,
-@as("roleAlias") roleAlias: option<roleAlias>
+tags: option<tagList_>,
+credentialDurationSeconds: option<credentialDurationSeconds>,
+roleArn: roleArn,
+roleAlias: roleAlias
 }
   type response = {
-@as("roleAliasArn") roleAliasArn: roleAliasArn,
-@as("roleAlias") roleAlias: roleAlias
+roleAliasArn: option<roleAliasArn>,
+roleAlias: option<roleAlias>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateRoleAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateProvisioningTemplate = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("preProvisioningHook") preProvisioningHook: provisioningHook,
-@as("provisioningRoleArn") provisioningRoleArn: option<roleArn>,
-@as("enabled") enabled: enabled,
-@as("templateBody") templateBody: option<templateBody>,
-@as("description") description: templateDescription,
-@as("templateName") templateName: option<templateName>
+tags: option<tagList_>,
+preProvisioningHook: option<provisioningHook>,
+provisioningRoleArn: roleArn,
+enabled: option<enabled>,
+templateBody: templateBody,
+description: option<templateDescription>,
+templateName: templateName
 }
   type response = {
-@as("defaultVersionId") defaultVersionId: templateVersionId,
-@as("templateName") templateName: templateName,
-@as("templateArn") templateArn: templateArn
+defaultVersionId: option<templateVersionId>,
+templateName: option<templateName>,
+templateArn: option<templateArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateProvisioningTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreatePolicy = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("policyDocument") policyDocument: option<policyDocument>,
-@as("policyName") policyName: option<policyName>
+tags: option<tagList_>,
+policyDocument: policyDocument,
+policyName: policyName
 }
   type response = {
-@as("policyVersionId") policyVersionId: policyVersionId,
-@as("policyDocument") policyDocument: policyDocument,
-@as("policyArn") policyArn: policyArn,
-@as("policyName") policyName: policyName
+policyVersionId: option<policyVersionId>,
+policyDocument: option<policyDocument>,
+policyArn: option<policyArn>,
+policyName: option<policyName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreatePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDomainConfiguration = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("serviceType") serviceType: serviceType,
-@as("authorizerConfig") authorizerConfig: authorizerConfig,
-@as("validationCertificateArn") validationCertificateArn: acmCertificateArn,
-@as("serverCertificateArns") serverCertificateArns: serverCertificateArns,
-@as("domainName") domainName: domainName,
-@as("domainConfigurationName") domainConfigurationName: option<domainConfigurationName>
+tags: option<tagList_>,
+serviceType: option<serviceType>,
+authorizerConfig: option<authorizerConfig>,
+validationCertificateArn: option<acmCertificateArn>,
+serverCertificateArns: option<serverCertificateArns>,
+domainName: option<domainName>,
+domainConfigurationName: domainConfigurationName
 }
   type response = {
-@as("domainConfigurationArn") domainConfigurationArn: domainConfigurationArn,
-@as("domainConfigurationName") domainConfigurationName: domainConfigurationName
+domainConfigurationArn: option<domainConfigurationArn>,
+domainConfigurationName: option<domainConfigurationName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateDomainConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDimension = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("tags") tags: tagList,
-@as("stringValues") stringValues: option<dimensionStringValues>,
-@as("type") type_: option<dimensionType>,
-@as("name") name: option<dimensionName>
+clientRequestToken: clientRequestToken,
+tags: option<tagList_>,
+stringValues: dimensionStringValues,
+@as("type") type_: dimensionType,
+name: dimensionName
 }
   type response = {
-@as("arn") arn: dimensionArn,
-@as("name") name: dimensionName
+arn: option<dimensionArn>,
+name: option<dimensionName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateDimensionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCustomMetric = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("tags") tags: tagList,
-@as("metricType") metricType: option<customMetricType>,
-@as("displayName") displayName: customMetricDisplayName,
-@as("metricName") metricName: option<metricName>
+clientRequestToken: clientRequestToken,
+tags: option<tagList_>,
+metricType: customMetricType,
+displayName: option<customMetricDisplayName>,
+metricName: metricName
 }
   type response = {
-@as("metricArn") metricArn: customMetricArn,
-@as("metricName") metricName: metricName
+metricArn: option<customMetricArn>,
+metricName: option<metricName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateCustomMetricCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBillingGroup = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("billingGroupProperties") billingGroupProperties: billingGroupProperties,
-@as("billingGroupName") billingGroupName: option<billingGroupName>
+tags: option<tagList_>,
+billingGroupProperties: option<billingGroupProperties>,
+billingGroupName: billingGroupName
 }
   type response = {
-@as("billingGroupId") billingGroupId: billingGroupId,
-@as("billingGroupArn") billingGroupArn: billingGroupArn,
-@as("billingGroupName") billingGroupName: billingGroupName
+billingGroupId: option<billingGroupId>,
+billingGroupArn: option<billingGroupArn>,
+billingGroupName: option<billingGroupName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateBillingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAuthorizer = {
   type t;
   type request = {
-@as("signingDisabled") signingDisabled: booleanKey,
-@as("tags") tags: tagList,
-@as("status") status: authorizerStatus,
-@as("tokenSigningPublicKeys") tokenSigningPublicKeys: publicKeyMap,
-@as("tokenKeyName") tokenKeyName: tokenKeyName,
-@as("authorizerFunctionArn") authorizerFunctionArn: option<authorizerFunctionArn>,
-@as("authorizerName") authorizerName: option<authorizerName>
+signingDisabled: option<booleanKey>,
+tags: option<tagList_>,
+status: option<authorizerStatus>,
+tokenSigningPublicKeys: option<publicKeyMap>,
+tokenKeyName: option<tokenKeyName>,
+authorizerFunctionArn: authorizerFunctionArn,
+authorizerName: authorizerName
 }
   type response = {
-@as("authorizerArn") authorizerArn: authorizerArn,
-@as("authorizerName") authorizerName: authorizerName
+authorizerArn: option<authorizerArn>,
+authorizerName: option<authorizerName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateAuthorizerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAuditSuppression = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("description") description: auditDescription,
-@as("suppressIndefinitely") suppressIndefinitely: suppressIndefinitely,
-@as("expirationDate") expirationDate: amazonawsTimestamp,
-@as("resourceIdentifier") resourceIdentifier: option<resourceIdentifier>,
-@as("checkName") checkName: option<auditCheckName>
+clientRequestToken: clientRequestToken,
+description: option<auditDescription>,
+suppressIndefinitely: option<suppressIndefinitely>,
+expirationDate: option<timestamp_>,
+resourceIdentifier: resourceIdentifier,
+checkName: auditCheckName
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateAuditSuppressionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateThingGroup = {
   type t;
   type request = {
-@as("expectedVersion") expectedVersion: optionalVersion,
-@as("thingGroupProperties") thingGroupProperties: option<thingGroupProperties>,
-@as("thingGroupName") thingGroupName: option<thingGroupName>
+expectedVersion: option<optionalVersion>,
+thingGroupProperties: thingGroupProperties,
+thingGroupName: thingGroupName
 }
   type response = {
-@as("version") version: version
+version: option<version>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateThingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateStream = {
   type t;
   type request = {
-@as("roleArn") roleArn: roleArn,
-@as("files") files: streamFiles,
-@as("description") description: streamDescription,
-@as("streamId") streamId: option<streamId>
+roleArn: option<roleArn>,
+files: option<streamFiles>,
+description: option<streamDescription>,
+streamId: streamId
 }
   type response = {
-@as("streamVersion") streamVersion: streamVersion,
-@as("description") description: streamDescription,
-@as("streamArn") streamArn: streamArn,
-@as("streamId") streamId: streamId
+streamVersion: option<streamVersion>,
+description: option<streamDescription>,
+streamArn: option<streamArn>,
+streamId: option<streamId>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateMitigationAction = {
   type t;
   type request = {
-@as("actionParams") actionParams: mitigationActionParams,
-@as("roleArn") roleArn: roleArn,
-@as("actionName") actionName: option<mitigationActionName>
+actionParams: option<mitigationActionParams>,
+roleArn: option<roleArn>,
+actionName: mitigationActionName
 }
   type response = {
-@as("actionId") actionId: mitigationActionId,
-@as("actionArn") actionArn: mitigationActionArn
+actionId: option<mitigationActionId>,
+actionArn: option<mitigationActionArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateMitigationActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateJob = {
   type t;
   type request = {
-@as("namespaceId") namespaceId: namespaceId,
-@as("timeoutConfig") timeoutConfig: timeoutConfig,
-@as("abortConfig") abortConfig: abortConfig,
-@as("jobExecutionsRolloutConfig") jobExecutionsRolloutConfig: jobExecutionsRolloutConfig,
-@as("presignedUrlConfig") presignedUrlConfig: presignedUrlConfig,
-@as("description") description: jobDescription,
-@as("jobId") jobId: option<jobId>
+namespaceId: option<namespaceId>,
+timeoutConfig: option<timeoutConfig>,
+abortConfig: option<abortConfig>,
+jobExecutionsRolloutConfig: option<jobExecutionsRolloutConfig>,
+presignedUrlConfig: option<presignedUrlConfig>,
+description: option<jobDescription>,
+jobId: jobId
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module UpdateIndexingConfiguration = {
   type t;
   type request = {
-@as("thingGroupIndexingConfiguration") thingGroupIndexingConfiguration: thingGroupIndexingConfiguration,
-@as("thingIndexingConfiguration") thingIndexingConfiguration: thingIndexingConfiguration
+thingGroupIndexingConfiguration: option<thingGroupIndexingConfiguration>,
+thingIndexingConfiguration: option<thingIndexingConfiguration>
 }
   type response = unit
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateIndexingConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDynamicThingGroup = {
   type t;
   type request = {
-@as("queryVersion") queryVersion: queryVersion,
-@as("queryString") queryString: queryString,
-@as("indexName") indexName: indexName,
-@as("expectedVersion") expectedVersion: optionalVersion,
-@as("thingGroupProperties") thingGroupProperties: option<thingGroupProperties>,
-@as("thingGroupName") thingGroupName: option<thingGroupName>
+queryVersion: option<queryVersion>,
+queryString: option<queryString>,
+indexName: option<indexName>,
+expectedVersion: option<optionalVersion>,
+thingGroupProperties: thingGroupProperties,
+thingGroupName: thingGroupName
 }
   type response = {
-@as("version") version: version
+version: option<version>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateDynamicThingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartAuditMitigationActionsTask = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("auditCheckToActionsMapping") auditCheckToActionsMapping: option<auditCheckToActionsMapping>,
-@as("target") target: option<auditMitigationActionsTaskTarget>,
-@as("taskId") taskId: option<mitigationActionsTaskId>
+clientRequestToken: clientRequestToken,
+auditCheckToActionsMapping: auditCheckToActionsMapping,
+target: auditMitigationActionsTaskTarget,
+taskId: mitigationActionsTaskId
 }
   type response = {
-@as("taskId") taskId: mitigationActionsTaskId
+taskId: option<mitigationActionsTaskId>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "StartAuditMitigationActionsTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SearchIndex = {
   type t;
   type request = {
-@as("queryVersion") queryVersion: queryVersion,
-@as("maxResults") maxResults: queryMaxResults,
-@as("nextToken") nextToken: nextToken,
-@as("queryString") queryString: option<queryString>,
-@as("indexName") indexName: indexName
+queryVersion: option<queryVersion>,
+maxResults: option<queryMaxResults>,
+nextToken: option<nextToken>,
+queryString: queryString,
+indexName: option<indexName>
 }
   type response = {
-@as("thingGroups") thingGroups: thingGroupDocumentList,
-@as("things") things: thingDocumentList,
-@as("nextToken") nextToken: nextToken
+thingGroups: option<thingGroupDocumentList>,
+things: option<thingDocumentList>,
+nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "SearchIndexCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListV2LoggingLevels = {
   type t;
   type request = {
-@as("maxResults") maxResults: skyfallMaxResults,
-@as("nextToken") nextToken: nextToken,
-@as("targetType") targetType: logTargetType
+maxResults: option<skyfallMaxResults>,
+nextToken: option<nextToken>,
+targetType: option<logTargetType>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("logTargetConfigurations") logTargetConfigurations: logTargetConfigurations
+nextToken: option<nextToken>,
+logTargetConfigurations: option<logTargetConfigurations>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListV2LoggingLevelsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListThings = {
   type t;
   type request = {
-@as("usePrefixAttributeValue") usePrefixAttributeValue: usePrefixAttributeValue,
-@as("thingTypeName") thingTypeName: thingTypeName,
-@as("attributeValue") attributeValue: attributeValue,
-@as("attributeName") attributeName: attributeName,
-@as("maxResults") maxResults: registryMaxResults,
-@as("nextToken") nextToken: nextToken
+usePrefixAttributeValue: option<usePrefixAttributeValue>,
+thingTypeName: option<thingTypeName>,
+attributeValue: option<attributeValue>,
+attributeName: option<attributeName>,
+maxResults: option<registryMaxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("things") things: thingAttributeList
+nextToken: option<nextToken>,
+things: option<thingAttributeList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListThingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSecurityProfilesForTarget = {
   type t;
   type request = {
-@as("securityProfileTargetArn") securityProfileTargetArn: option<securityProfileTargetArn>,
-@as("recursive") recursive: recursive,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+securityProfileTargetArn: securityProfileTargetArn,
+recursive: option<recursive>,
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("securityProfileTargetMappings") securityProfileTargetMappings: securityProfileTargetMappings
+nextToken: option<nextToken>,
+securityProfileTargetMappings: option<securityProfileTargetMappings>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListSecurityProfilesForTargetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListJobExecutionsForThing = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: laserMaxResults,
-@as("namespaceId") namespaceId: namespaceId,
-@as("status") status: jobExecutionStatus,
-@as("thingName") thingName: option<thingName>
+nextToken: option<nextToken>,
+maxResults: option<laserMaxResults>,
+namespaceId: option<namespaceId>,
+status: option<jobExecutionStatus>,
+thingName: thingName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("executionSummaries") executionSummaries: jobExecutionSummaryForThingList
+nextToken: option<nextToken>,
+executionSummaries: option<jobExecutionSummaryForThingList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListJobExecutionsForThingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListJobExecutionsForJob = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: laserMaxResults,
-@as("status") status: jobExecutionStatus,
-@as("jobId") jobId: option<jobId>
+nextToken: option<nextToken>,
+maxResults: option<laserMaxResults>,
+status: option<jobExecutionStatus>,
+jobId: jobId
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("executionSummaries") executionSummaries: jobExecutionSummaryForJobList
+nextToken: option<nextToken>,
+executionSummaries: option<jobExecutionSummaryForJobList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListJobExecutionsForJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetTopicRuleDestination = {
   type t;
   type request = {
-@as("arn") arn: option<awsArn>
+arn: awsArn
 }
   type response = {
-@as("topicRuleDestination") topicRuleDestination: topicRuleDestination
+topicRuleDestination: option<topicRuleDestination>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetTopicRuleDestinationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetIndexingConfiguration = {
   type t;
   type request = unit
   type response = {
-@as("thingGroupIndexingConfiguration") thingGroupIndexingConfiguration: thingGroupIndexingConfiguration,
-@as("thingIndexingConfiguration") thingIndexingConfiguration: thingIndexingConfiguration
+thingGroupIndexingConfiguration: option<thingGroupIndexingConfiguration>,
+thingIndexingConfiguration: option<thingIndexingConfiguration>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetIndexingConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeThingGroup = {
   type t;
   type request = {
-@as("thingGroupName") thingGroupName: option<thingGroupName>
+thingGroupName: thingGroupName
 }
   type response = {
-@as("status") status: dynamicGroupStatus,
-@as("queryVersion") queryVersion: queryVersion,
-@as("queryString") queryString: queryString,
-@as("indexName") indexName: indexName,
-@as("thingGroupMetadata") thingGroupMetadata: thingGroupMetadata,
-@as("thingGroupProperties") thingGroupProperties: thingGroupProperties,
-@as("version") version: version,
-@as("thingGroupArn") thingGroupArn: thingGroupArn,
-@as("thingGroupId") thingGroupId: thingGroupId,
-@as("thingGroupName") thingGroupName: thingGroupName
+status: option<dynamicGroupStatus>,
+queryVersion: option<queryVersion>,
+queryString: option<queryString>,
+indexName: option<indexName>,
+thingGroupMetadata: option<thingGroupMetadata>,
+thingGroupProperties: option<thingGroupProperties>,
+version: option<version>,
+thingGroupArn: option<thingGroupArn>,
+thingGroupId: option<thingGroupId>,
+thingGroupName: option<thingGroupName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeThingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeMitigationAction = {
   type t;
   type request = {
-@as("actionName") actionName: option<mitigationActionName>
+actionName: mitigationActionName
 }
   type response = {
-@as("lastModifiedDate") lastModifiedDate: amazonawsTimestamp,
-@as("creationDate") creationDate: amazonawsTimestamp,
-@as("actionParams") actionParams: mitigationActionParams,
-@as("roleArn") roleArn: roleArn,
-@as("actionId") actionId: mitigationActionId,
-@as("actionArn") actionArn: mitigationActionArn,
-@as("actionType") actionType: mitigationActionType,
-@as("actionName") actionName: mitigationActionName
+lastModifiedDate: option<timestamp_>,
+creationDate: option<timestamp_>,
+actionParams: option<mitigationActionParams>,
+roleArn: option<roleArn>,
+actionId: option<mitigationActionId>,
+actionArn: option<mitigationActionArn>,
+actionType: option<mitigationActionType>,
+actionName: option<mitigationActionName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeMitigationActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeJobTemplate = {
   type t;
   type request = {
-@as("jobTemplateId") jobTemplateId: option<jobTemplateId>
+jobTemplateId: jobTemplateId
 }
   type response = {
-@as("timeoutConfig") timeoutConfig: timeoutConfig,
-@as("abortConfig") abortConfig: abortConfig,
-@as("jobExecutionsRolloutConfig") jobExecutionsRolloutConfig: jobExecutionsRolloutConfig,
-@as("presignedUrlConfig") presignedUrlConfig: presignedUrlConfig,
-@as("createdAt") createdAt: dateType,
-@as("document") document: jobDocument,
-@as("documentSource") documentSource: jobDocumentSource,
-@as("description") description: jobDescription,
-@as("jobTemplateId") jobTemplateId: jobTemplateId,
-@as("jobTemplateArn") jobTemplateArn: jobTemplateArn
+timeoutConfig: option<timeoutConfig>,
+abortConfig: option<abortConfig>,
+jobExecutionsRolloutConfig: option<jobExecutionsRolloutConfig>,
+presignedUrlConfig: option<presignedUrlConfig>,
+createdAt: option<dateType>,
+document: option<jobDocument>,
+documentSource: option<jobDocumentSource>,
+description: option<jobDescription>,
+jobTemplateId: option<jobTemplateId>,
+jobTemplateArn: option<jobTemplateArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeJobTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeJobExecution = {
   type t;
   type request = {
-@as("executionNumber") executionNumber: executionNumber,
-@as("thingName") thingName: option<thingName>,
-@as("jobId") jobId: option<jobId>
+executionNumber: option<executionNumber>,
+thingName: thingName,
+jobId: jobId
 }
   type response = {
-@as("execution") execution: jobExecution
+execution: option<jobExecution>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeJobExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateTopicRuleDestination = {
   type t;
   type request = {
-@as("destinationConfiguration") destinationConfiguration: option<topicRuleDestinationConfiguration>
+destinationConfiguration: topicRuleDestinationConfiguration
 }
   type response = {
-@as("topicRuleDestination") topicRuleDestination: topicRuleDestination
+topicRuleDestination: option<topicRuleDestination>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateTopicRuleDestinationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateThingGroup = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("thingGroupProperties") thingGroupProperties: thingGroupProperties,
-@as("parentGroupName") parentGroupName: thingGroupName,
-@as("thingGroupName") thingGroupName: option<thingGroupName>
+tags: option<tagList_>,
+thingGroupProperties: option<thingGroupProperties>,
+parentGroupName: option<thingGroupName>,
+thingGroupName: thingGroupName
 }
   type response = {
-@as("thingGroupId") thingGroupId: thingGroupId,
-@as("thingGroupArn") thingGroupArn: thingGroupArn,
-@as("thingGroupName") thingGroupName: thingGroupName
+thingGroupId: option<thingGroupId>,
+thingGroupArn: option<thingGroupArn>,
+thingGroupName: option<thingGroupName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateThingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateStream = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("roleArn") roleArn: option<roleArn>,
-@as("files") files: option<streamFiles>,
-@as("description") description: streamDescription,
-@as("streamId") streamId: option<streamId>
+tags: option<tagList_>,
+roleArn: roleArn,
+files: streamFiles,
+description: option<streamDescription>,
+streamId: streamId
 }
   type response = {
-@as("streamVersion") streamVersion: streamVersion,
-@as("description") description: streamDescription,
-@as("streamArn") streamArn: streamArn,
-@as("streamId") streamId: streamId
+streamVersion: option<streamVersion>,
+description: option<streamDescription>,
+streamArn: option<streamArn>,
+streamId: option<streamId>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateMitigationAction = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("actionParams") actionParams: option<mitigationActionParams>,
-@as("roleArn") roleArn: option<roleArn>,
-@as("actionName") actionName: option<mitigationActionName>
+tags: option<tagList_>,
+actionParams: mitigationActionParams,
+roleArn: roleArn,
+actionName: mitigationActionName
 }
   type response = {
-@as("actionId") actionId: mitigationActionId,
-@as("actionArn") actionArn: mitigationActionArn
+actionId: option<mitigationActionId>,
+actionArn: option<mitigationActionArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateMitigationActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateJobTemplate = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("timeoutConfig") timeoutConfig: timeoutConfig,
-@as("abortConfig") abortConfig: abortConfig,
-@as("jobExecutionsRolloutConfig") jobExecutionsRolloutConfig: jobExecutionsRolloutConfig,
-@as("presignedUrlConfig") presignedUrlConfig: presignedUrlConfig,
-@as("description") description: option<jobDescription>,
-@as("document") document: jobDocument,
-@as("documentSource") documentSource: jobDocumentSource,
-@as("jobArn") jobArn: jobArn,
-@as("jobTemplateId") jobTemplateId: option<jobTemplateId>
+tags: option<tagList_>,
+timeoutConfig: option<timeoutConfig>,
+abortConfig: option<abortConfig>,
+jobExecutionsRolloutConfig: option<jobExecutionsRolloutConfig>,
+presignedUrlConfig: option<presignedUrlConfig>,
+description: jobDescription,
+document: option<jobDocument>,
+documentSource: option<jobDocumentSource>,
+jobArn: option<jobArn>,
+jobTemplateId: jobTemplateId
 }
   type response = {
-@as("jobTemplateId") jobTemplateId: jobTemplateId,
-@as("jobTemplateArn") jobTemplateArn: jobTemplateArn
+jobTemplateId: option<jobTemplateId>,
+jobTemplateArn: option<jobTemplateArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateJobTemplateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateJob = {
   type t;
   type request = {
-@as("jobTemplateArn") jobTemplateArn: jobTemplateArn,
-@as("namespaceId") namespaceId: namespaceId,
-@as("tags") tags: tagList,
-@as("timeoutConfig") timeoutConfig: timeoutConfig,
-@as("abortConfig") abortConfig: abortConfig,
-@as("jobExecutionsRolloutConfig") jobExecutionsRolloutConfig: jobExecutionsRolloutConfig,
-@as("targetSelection") targetSelection: targetSelection,
-@as("presignedUrlConfig") presignedUrlConfig: presignedUrlConfig,
-@as("description") description: jobDescription,
-@as("document") document: jobDocument,
-@as("documentSource") documentSource: jobDocumentSource,
-@as("targets") targets: option<jobTargets>,
-@as("jobId") jobId: option<jobId>
+jobTemplateArn: option<jobTemplateArn>,
+namespaceId: option<namespaceId>,
+tags: option<tagList_>,
+timeoutConfig: option<timeoutConfig>,
+abortConfig: option<abortConfig>,
+jobExecutionsRolloutConfig: option<jobExecutionsRolloutConfig>,
+targetSelection: option<targetSelection>,
+presignedUrlConfig: option<presignedUrlConfig>,
+description: option<jobDescription>,
+document: option<jobDocument>,
+documentSource: option<jobDocumentSource>,
+targets: jobTargets,
+jobId: jobId
 }
   type response = {
-@as("description") description: jobDescription,
-@as("jobId") jobId: jobId,
-@as("jobArn") jobArn: jobArn
+description: option<jobDescription>,
+jobId: option<jobId>,
+jobArn: option<jobArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDynamicThingGroup = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("queryVersion") queryVersion: queryVersion,
-@as("queryString") queryString: option<queryString>,
-@as("indexName") indexName: indexName,
-@as("thingGroupProperties") thingGroupProperties: thingGroupProperties,
-@as("thingGroupName") thingGroupName: option<thingGroupName>
+tags: option<tagList_>,
+queryVersion: option<queryVersion>,
+queryString: queryString,
+indexName: option<indexName>,
+thingGroupProperties: option<thingGroupProperties>,
+thingGroupName: thingGroupName
 }
   type response = {
-@as("queryVersion") queryVersion: queryVersion,
-@as("queryString") queryString: queryString,
-@as("indexName") indexName: indexName,
-@as("thingGroupId") thingGroupId: thingGroupId,
-@as("thingGroupArn") thingGroupArn: thingGroupArn,
-@as("thingGroupName") thingGroupName: thingGroupName
+queryVersion: option<queryVersion>,
+queryString: option<queryString>,
+indexName: option<indexName>,
+thingGroupId: option<thingGroupId>,
+thingGroupArn: option<thingGroupArn>,
+thingGroupName: option<thingGroupName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateDynamicThingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTopicRuleDestinations = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: topicRuleDestinationMaxResults
+nextToken: option<nextToken>,
+maxResults: option<topicRuleDestinationMaxResults>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("destinationSummaries") destinationSummaries: topicRuleDestinationSummaries
+nextToken: option<nextToken>,
+destinationSummaries: option<topicRuleDestinationSummaries>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListTopicRuleDestinationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListThingTypes = {
   type t;
   type request = {
-@as("thingTypeName") thingTypeName: thingTypeName,
-@as("maxResults") maxResults: registryMaxResults,
-@as("nextToken") nextToken: nextToken
+thingTypeName: option<thingTypeName>,
+maxResults: option<registryMaxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("thingTypes") thingTypes: thingTypeList
+nextToken: option<nextToken>,
+thingTypes: option<thingTypeList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListThingTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAuditSuppressions = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("ascendingOrder") ascendingOrder: ascendingOrder,
-@as("resourceIdentifier") resourceIdentifier: resourceIdentifier,
-@as("checkName") checkName: auditCheckName
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+ascendingOrder: option<ascendingOrder>,
+resourceIdentifier: option<resourceIdentifier>,
+checkName: option<auditCheckName>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("suppressions") suppressions: auditSuppressionList
+nextToken: option<nextToken>,
+suppressions: option<auditSuppressionList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListAuditSuppressionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeStream = {
   type t;
   type request = {
-@as("streamId") streamId: option<streamId>
+streamId: streamId
 }
   type response = {
-@as("streamInfo") streamInfo: streamInfo
+streamInfo: option<streamInfo>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeJob = {
   type t;
   type request = {
-@as("jobId") jobId: option<jobId>
+jobId: jobId
 }
   type response = {
-@as("job") job: job,
-@as("documentSource") documentSource: jobDocumentSource
+job: option<job>,
+documentSource: option<jobDocumentSource>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ValidateSecurityProfileBehaviors = {
   type t;
   type request = {
-@as("behaviors") behaviors: option<behaviors>
+behaviors: behaviors
 }
   type response = {
-@as("validationErrors") validationErrors: validationErrors,
-@as("valid") valid: valid
+validationErrors: option<validationErrors>,
+valid: option<valid>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ValidateSecurityProfileBehaviorsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateSecurityProfile = {
   type t;
   type request = {
-@as("expectedVersion") expectedVersion: optionalVersion,
-@as("deleteAdditionalMetricsToRetain") deleteAdditionalMetricsToRetain: deleteAdditionalMetricsToRetain,
-@as("deleteAlertTargets") deleteAlertTargets: deleteAlertTargets,
-@as("deleteBehaviors") deleteBehaviors: deleteBehaviors,
-@as("additionalMetricsToRetainV2") additionalMetricsToRetainV2: additionalMetricsToRetainV2List,
-@as("additionalMetricsToRetain") additionalMetricsToRetain: additionalMetricsToRetainList,
-@as("alertTargets") alertTargets: alertTargets,
-@as("behaviors") behaviors: behaviors,
-@as("securityProfileDescription") securityProfileDescription: securityProfileDescription,
-@as("securityProfileName") securityProfileName: option<securityProfileName>
+expectedVersion: option<optionalVersion>,
+deleteAdditionalMetricsToRetain: option<deleteAdditionalMetricsToRetain>,
+deleteAlertTargets: option<deleteAlertTargets>,
+deleteBehaviors: option<deleteBehaviors>,
+additionalMetricsToRetainV2: option<additionalMetricsToRetainV2List>,
+additionalMetricsToRetain: option<additionalMetricsToRetainList>,
+alertTargets: option<alertTargets>,
+behaviors: option<behaviors>,
+securityProfileDescription: option<securityProfileDescription>,
+securityProfileName: securityProfileName
 }
   type response = {
-@as("lastModifiedDate") lastModifiedDate: amazonawsTimestamp,
-@as("creationDate") creationDate: amazonawsTimestamp,
-@as("version") version: version,
-@as("additionalMetricsToRetainV2") additionalMetricsToRetainV2: additionalMetricsToRetainV2List,
-@as("additionalMetricsToRetain") additionalMetricsToRetain: additionalMetricsToRetainList,
-@as("alertTargets") alertTargets: alertTargets,
-@as("behaviors") behaviors: behaviors,
-@as("securityProfileDescription") securityProfileDescription: securityProfileDescription,
-@as("securityProfileArn") securityProfileArn: securityProfileArn,
-@as("securityProfileName") securityProfileName: securityProfileName
+lastModifiedDate: option<timestamp_>,
+creationDate: option<timestamp_>,
+version: option<version>,
+additionalMetricsToRetainV2: option<additionalMetricsToRetainV2List>,
+additionalMetricsToRetain: option<additionalMetricsToRetainList>,
+alertTargets: option<alertTargets>,
+behaviors: option<behaviors>,
+securityProfileDescription: option<securityProfileDescription>,
+securityProfileArn: option<securityProfileArn>,
+securityProfileName: option<securityProfileName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "UpdateSecurityProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSecurityProfile = {
   type t;
   type request = {
-@as("securityProfileName") securityProfileName: option<securityProfileName>
+securityProfileName: securityProfileName
 }
   type response = {
-@as("lastModifiedDate") lastModifiedDate: amazonawsTimestamp,
-@as("creationDate") creationDate: amazonawsTimestamp,
-@as("version") version: version,
-@as("additionalMetricsToRetainV2") additionalMetricsToRetainV2: additionalMetricsToRetainV2List,
-@as("additionalMetricsToRetain") additionalMetricsToRetain: additionalMetricsToRetainList,
-@as("alertTargets") alertTargets: alertTargets,
-@as("behaviors") behaviors: behaviors,
-@as("securityProfileDescription") securityProfileDescription: securityProfileDescription,
-@as("securityProfileArn") securityProfileArn: securityProfileArn,
-@as("securityProfileName") securityProfileName: securityProfileName
+lastModifiedDate: option<timestamp_>,
+creationDate: option<timestamp_>,
+version: option<version>,
+additionalMetricsToRetainV2: option<additionalMetricsToRetainV2List>,
+additionalMetricsToRetain: option<additionalMetricsToRetainList>,
+alertTargets: option<alertTargets>,
+behaviors: option<behaviors>,
+securityProfileDescription: option<securityProfileDescription>,
+securityProfileArn: option<securityProfileArn>,
+securityProfileName: option<securityProfileName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeSecurityProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAuditMitigationActionsTask = {
   type t;
   type request = {
-@as("taskId") taskId: option<mitigationActionsTaskId>
+taskId: mitigationActionsTaskId
 }
   type response = {
-@as("actionsDefinition") actionsDefinition: mitigationActionList,
-@as("auditCheckToActionsMapping") auditCheckToActionsMapping: auditCheckToActionsMapping,
-@as("target") target: auditMitigationActionsTaskTarget,
-@as("taskStatistics") taskStatistics: auditMitigationActionsTaskStatistics,
-@as("endTime") endTime: amazonawsTimestamp,
-@as("startTime") startTime: amazonawsTimestamp,
-@as("taskStatus") taskStatus: auditMitigationActionsTaskStatus
+actionsDefinition: option<mitigationActionList>,
+auditCheckToActionsMapping: option<auditCheckToActionsMapping>,
+target: option<auditMitigationActionsTaskTarget>,
+taskStatistics: option<auditMitigationActionsTaskStatistics>,
+endTime: option<timestamp_>,
+startTime: option<timestamp_>,
+taskStatus: option<auditMitigationActionsTaskStatus>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeAuditMitigationActionsTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAuditFinding = {
   type t;
   type request = {
-@as("findingId") findingId: option<findingId>
+findingId: findingId
 }
   type response = {
-@as("finding") finding: auditFinding
+finding: option<auditFinding>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeAuditFindingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSecurityProfile = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("additionalMetricsToRetainV2") additionalMetricsToRetainV2: additionalMetricsToRetainV2List,
-@as("additionalMetricsToRetain") additionalMetricsToRetain: additionalMetricsToRetainList,
-@as("alertTargets") alertTargets: alertTargets,
-@as("behaviors") behaviors: behaviors,
-@as("securityProfileDescription") securityProfileDescription: securityProfileDescription,
-@as("securityProfileName") securityProfileName: option<securityProfileName>
+tags: option<tagList_>,
+additionalMetricsToRetainV2: option<additionalMetricsToRetainV2List>,
+additionalMetricsToRetain: option<additionalMetricsToRetainList>,
+alertTargets: option<alertTargets>,
+behaviors: option<behaviors>,
+securityProfileDescription: option<securityProfileDescription>,
+securityProfileName: securityProfileName
 }
   type response = {
-@as("securityProfileArn") securityProfileArn: securityProfileArn,
-@as("securityProfileName") securityProfileName: securityProfileName
+securityProfileArn: option<securityProfileArn>,
+securityProfileName: option<securityProfileName>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateSecurityProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TestAuthorization = {
   type t;
   type request = {
-@as("policyNamesToSkip") policyNamesToSkip: policyNames,
-@as("policyNamesToAdd") policyNamesToAdd: policyNames,
-@as("clientId") clientId: clientId,
-@as("authInfos") authInfos: option<authInfos>,
-@as("cognitoIdentityPoolId") cognitoIdentityPoolId: cognitoIdentityPoolId,
-@as("principal") principal: principal
+policyNamesToSkip: option<policyNames>,
+policyNamesToAdd: option<policyNames>,
+clientId: option<clientId>,
+authInfos: authInfos,
+cognitoIdentityPoolId: option<cognitoIdentityPoolId>,
+principal: option<principal>
 }
   type response = {
-@as("authResults") authResults: authResults
+authResults: option<authResults>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "TestAuthorizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListViolationEvents = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("listSuppressedAlerts") listSuppressedAlerts: listSuppressedAlerts,
-@as("behaviorCriteriaType") behaviorCriteriaType: behaviorCriteriaType,
-@as("securityProfileName") securityProfileName: securityProfileName,
-@as("thingName") thingName: deviceDefenderThingName,
-@as("endTime") endTime: option<amazonawsTimestamp>,
-@as("startTime") startTime: option<amazonawsTimestamp>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+listSuppressedAlerts: option<listSuppressedAlerts>,
+behaviorCriteriaType: option<behaviorCriteriaType>,
+securityProfileName: option<securityProfileName>,
+thingName: option<deviceDefenderThingName>,
+endTime: timestamp_,
+startTime: timestamp_
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("violationEvents") violationEvents: violationEvents
+nextToken: option<nextToken>,
+violationEvents: option<violationEvents>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListViolationEventsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAuditFindings = {
   type t;
   type request = {
-@as("listSuppressedFindings") listSuppressedFindings: listSuppressedFindings,
-@as("endTime") endTime: amazonawsTimestamp,
-@as("startTime") startTime: amazonawsTimestamp,
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("resourceIdentifier") resourceIdentifier: resourceIdentifier,
-@as("checkName") checkName: auditCheckName,
-@as("taskId") taskId: auditTaskId
+listSuppressedFindings: option<listSuppressedFindings>,
+endTime: option<timestamp_>,
+startTime: option<timestamp_>,
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+resourceIdentifier: option<resourceIdentifier>,
+checkName: option<auditCheckName>,
+taskId: option<auditTaskId>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("findings") findings: auditFindings
+nextToken: option<nextToken>,
+findings: option<auditFindings>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListAuditFindingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListActiveViolations = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("listSuppressedAlerts") listSuppressedAlerts: listSuppressedAlerts,
-@as("behaviorCriteriaType") behaviorCriteriaType: behaviorCriteriaType,
-@as("securityProfileName") securityProfileName: securityProfileName,
-@as("thingName") thingName: deviceDefenderThingName
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+listSuppressedAlerts: option<listSuppressedAlerts>,
+behaviorCriteriaType: option<behaviorCriteriaType>,
+securityProfileName: option<securityProfileName>,
+thingName: option<deviceDefenderThingName>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("activeViolations") activeViolations: activeViolations
+nextToken: option<nextToken>,
+activeViolations: option<activeViolations>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListActiveViolationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDetectMitigationActionsTask = {
   type t;
   type request = {
-@as("taskId") taskId: option<mitigationActionsTaskId>
+taskId: mitigationActionsTaskId
 }
   type response = {
-@as("taskSummary") taskSummary: detectMitigationActionsTaskSummary
+taskSummary: option<detectMitigationActionsTaskSummary>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "DescribeDetectMitigationActionsTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateOTAUpdate = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("additionalParameters") additionalParameters: additionalParameterMap,
-@as("roleArn") roleArn: option<roleArn>,
-@as("files") files: option<oTAUpdateFiles>,
-@as("awsJobTimeoutConfig") awsJobTimeoutConfig: awsJobTimeoutConfig,
-@as("awsJobAbortConfig") awsJobAbortConfig: awsJobAbortConfig,
-@as("awsJobPresignedUrlConfig") awsJobPresignedUrlConfig: awsJobPresignedUrlConfig,
-@as("awsJobExecutionsRolloutConfig") awsJobExecutionsRolloutConfig: awsJobExecutionsRolloutConfig,
-@as("targetSelection") targetSelection: targetSelection,
-@as("protocols") protocols: protocols,
-@as("targets") targets: option<targets>,
-@as("description") description: oTAUpdateDescription,
-@as("otaUpdateId") otaUpdateId: option<oTAUpdateId>
+tags: option<tagList_>,
+additionalParameters: option<additionalParameterMap>,
+roleArn: roleArn,
+files: otaupdateFiles,
+awsJobTimeoutConfig: option<awsJobTimeoutConfig>,
+awsJobAbortConfig: option<awsJobAbortConfig>,
+awsJobPresignedUrlConfig: option<awsJobPresignedUrlConfig>,
+awsJobExecutionsRolloutConfig: option<awsJobExecutionsRolloutConfig>,
+targetSelection: option<targetSelection>,
+protocols: option<protocols>,
+targets: targets,
+description: option<otaupdateDescription>,
+otaUpdateId: otaupdateId
 }
   type response = {
-@as("otaUpdateStatus") otaUpdateStatus: oTAUpdateStatus,
-@as("awsIotJobArn") awsIotJobArn: awsIotJobArn,
-@as("otaUpdateArn") otaUpdateArn: oTAUpdateArn,
-@as("awsIotJobId") awsIotJobId: awsIotJobId,
-@as("otaUpdateId") otaUpdateId: oTAUpdateId
+otaUpdateStatus: option<otaupdateStatus>,
+awsIotJobArn: option<awsIotJobArn>,
+otaUpdateArn: option<otaupdateArn>,
+awsIotJobId: option<awsIotJobId>,
+otaUpdateId: option<otaupdateId>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateOTAUpdateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDetectMitigationActionsTasks = {
   type t;
   type request = {
-@as("endTime") endTime: option<amazonawsTimestamp>,
-@as("startTime") startTime: option<amazonawsTimestamp>,
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults
+endTime: timestamp_,
+startTime: timestamp_,
+nextToken: option<nextToken>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("tasks") tasks: detectMitigationActionsTaskSummaryList
+nextToken: option<nextToken>,
+tasks: option<detectMitigationActionsTaskSummaryList>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ListDetectMitigationActionsTasksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetOTAUpdate = {
   type t;
   type request = {
-@as("otaUpdateId") otaUpdateId: option<oTAUpdateId>
+otaUpdateId: otaupdateId
 }
   type response = {
-@as("otaUpdateInfo") otaUpdateInfo: oTAUpdateInfo
+otaUpdateInfo: option<otaupdateInfo>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetOTAUpdateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ReplaceTopicRule = {
   type t;
   type request = {
-@as("topicRulePayload") topicRulePayload: option<topicRulePayload>,
-@as("ruleName") ruleName: option<ruleName>
+topicRulePayload: topicRulePayload,
+ruleName: ruleName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "ReplaceTopicRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetTopicRule = {
   type t;
   type request = {
-@as("ruleName") ruleName: option<ruleName>
+ruleName: ruleName
 }
   type response = {
-@as("rule") rule: topicRule,
-@as("ruleArn") ruleArn: ruleArn
+rule: option<topicRule>,
+ruleArn: option<ruleArn>
 }
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "GetTopicRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateTopicRule = {
   type t;
   type request = {
-@as("tags") tags: amazonawsString,
-@as("topicRulePayload") topicRulePayload: option<topicRulePayload>,
-@as("ruleName") ruleName: option<ruleName>
+tags: option<string_>,
+topicRulePayload: topicRulePayload,
+ruleName: ruleName
 }
   
   @module("@aws-sdk/client-iot") @new external new_: (request) => t = "CreateTopicRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }

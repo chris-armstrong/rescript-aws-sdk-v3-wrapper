@@ -1,228 +1,235 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type uInteger = int;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
+type uinteger = int
 type textType = [@as("PRINTED") #PRINTED | @as("HANDWRITING") #HANDWRITING]
 type synthesizedJsonHumanLoopActivationConditionsEvaluationResults = string
-type amazonawsString = string
+type string_ = string
 type statusMessage = string
-type selectionStatus = [@as("NOT_SELECTED") #NOT_SELECTED | @as("SELECTED") #SELECTED]
-type sNSTopicArn = string
+type selectionStatus = [@as("NOT_SELECTED") #NOTSELECTED | @as("SELECTED") #SELECTED]
+type snstopicArn = string
 type s3ObjectVersion = string
 type s3ObjectName = string
 type s3Bucket = string
 type roleArn = string
-type relationshipType = [@as("COMPLEX_FEATURES") #COMPLEX_FEATURES | @as("CHILD") #CHILD | @as("VALUE") #VALUE]
-type percent = float;
+type relationshipType = [@as("COMPLEX_FEATURES") #COMPLEXFEATURES | @as("CHILD") #CHILD | @as("VALUE") #VALUE]
+type percent = float
 type paginationToken = string
 type nonEmptyString = string
-type maxResults = int;
-type kMSKeyId = string
+type maxResults = int
+type kmskeyId = string
 type jobTag = string
-type jobStatus = [@as("PARTIAL_SUCCESS") #PARTIAL_SUCCESS | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #IN_PROGRESS]
+type jobStatus = [@as("PARTIAL_SUCCESS") #PARTIALSUCCESS | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #INPROGRESS]
 type jobId = string
-type imageBlob = NodeJs.Buffer.t;
+type imageBlob = NodeJs.Buffer.t
 type humanLoopName = string
 type humanLoopArn = string
 type humanLoopActivationReason = string
 type flowDefinitionArn = string
-type amazonawsFloat = float;
+type float_ = float
 type featureType = [@as("FORMS") #FORMS | @as("TABLES") #TABLES]
 type errorCode = string
 type entityType = [@as("VALUE") #VALUE | @as("KEY") #KEY]
 type contentClassifier = [@as("FreeOfAdultContent") #FreeOfAdultContent | @as("FreeOfPersonallyIdentifiableInformation") #FreeOfPersonallyIdentifiableInformation]
 type clientRequestToken = string
-type blockType = [@as("SELECTION_ELEMENT") #SELECTION_ELEMENT | @as("CELL") #CELL | @as("TABLE") #TABLE | @as("WORD") #WORD | @as("LINE") #LINE | @as("PAGE") #PAGE | @as("KEY_VALUE_SET") #KEY_VALUE_SET]
+type blockType = [@as("SELECTION_ELEMENT") #SELECTIONELEMENT | @as("CELL") #CELL | @as("TABLE") #TABLE | @as("WORD") #WORD | @as("LINE") #LINE | @as("PAGE") #PAGE | @as("KEY_VALUE_SET") #KEYVALUESET]
 type s3Object = {
-@as("Version") version: s3ObjectVersion,
-@as("Name") name: s3ObjectName,
-@as("Bucket") bucket: s3Bucket
+@as("Version") version: option<s3ObjectVersion>,
+@as("Name") name: option<s3ObjectName>,
+@as("Bucket") bucket: option<s3Bucket>
 }
 type point = {
-@as("Y") y: amazonawsFloat,
-@as("X") x: amazonawsFloat
+@as("Y") y: option<float_>,
+@as("X") x: option<float_>
 }
-type pages = array<uInteger>
+type pages = array<uinteger>
 type outputConfig = {
-@as("S3Prefix") s3Prefix: s3ObjectName,
-@as("S3Bucket") s3Bucket: option<s3Bucket>
+@as("S3Prefix") s3Prefix: option<s3ObjectName>,
+@as("S3Bucket") s3Bucket: s3Bucket
 }
 type notificationChannel = {
-@as("RoleArn") roleArn: option<roleArn>,
-@as("SNSTopicArn") sNSTopicArn: option<sNSTopicArn>
+@as("RoleArn") roleArn: roleArn,
+@as("SNSTopicArn") snstopicArn: snstopicArn
 }
 type idList = array<nonEmptyString>
 type humanLoopActivationReasons = array<humanLoopActivationReason>
 type featureTypes = array<featureType>
 type entityTypes = array<entityType>
 type documentMetadata = {
-@as("Pages") pages: uInteger
+@as("Pages") pages: option<uinteger>
 }
 type contentClassifiers = array<contentClassifier>
 type boundingBox = {
-@as("Top") top: amazonawsFloat,
-@as("Left") left: amazonawsFloat,
-@as("Height") height: amazonawsFloat,
-@as("Width") width: amazonawsFloat
+@as("Top") top: option<float_>,
+@as("Left") left: option<float_>,
+@as("Height") height: option<float_>,
+@as("Width") width: option<float_>
 }
 type warning = {
-@as("Pages") pages: pages,
-@as("ErrorCode") errorCode: errorCode
+@as("Pages") pages: option<pages>,
+@as("ErrorCode") errorCode: option<errorCode>
 }
 type relationship = {
-@as("Ids") ids: idList,
-@as("Type") type_: relationshipType
+@as("Ids") ids: option<idList>,
+@as("Type") type_: option<relationshipType>
 }
 type polygon = array<point>
 type humanLoopDataAttributes = {
-@as("ContentClassifiers") contentClassifiers: contentClassifiers
+@as("ContentClassifiers") contentClassifiers: option<contentClassifiers>
 }
 type humanLoopActivationOutput = {
-@as("HumanLoopActivationConditionsEvaluationResults") humanLoopActivationConditionsEvaluationResults: synthesizedJsonHumanLoopActivationConditionsEvaluationResults,
-@as("HumanLoopActivationReasons") humanLoopActivationReasons: humanLoopActivationReasons,
-@as("HumanLoopArn") humanLoopArn: humanLoopArn
+@as("HumanLoopActivationConditionsEvaluationResults") humanLoopActivationConditionsEvaluationResults: option<synthesizedJsonHumanLoopActivationConditionsEvaluationResults>,
+@as("HumanLoopActivationReasons") humanLoopActivationReasons: option<humanLoopActivationReasons>,
+@as("HumanLoopArn") humanLoopArn: option<humanLoopArn>
 }
 type documentLocation = {
-@as("S3Object") s3Object: s3Object
+@as("S3Object") s3Object: option<s3Object>
 }
 type document = {
-@as("S3Object") s3Object: s3Object,
-@as("Bytes") bytes: imageBlob
+@as("S3Object") s3Object: option<s3Object>,
+@as("Bytes") bytes: option<imageBlob>
 }
 type warnings = array<warning>
 type relationshipList = array<relationship>
 type humanLoopConfig = {
-@as("DataAttributes") dataAttributes: humanLoopDataAttributes,
-@as("FlowDefinitionArn") flowDefinitionArn: option<flowDefinitionArn>,
-@as("HumanLoopName") humanLoopName: option<humanLoopName>
+@as("DataAttributes") dataAttributes: option<humanLoopDataAttributes>,
+@as("FlowDefinitionArn") flowDefinitionArn: flowDefinitionArn,
+@as("HumanLoopName") humanLoopName: humanLoopName
 }
 type geometry = {
-@as("Polygon") polygon: polygon,
-@as("BoundingBox") boundingBox: boundingBox
+@as("Polygon") polygon: option<polygon>,
+@as("BoundingBox") boundingBox: option<boundingBox>
 }
 type block = {
-@as("Page") page: uInteger,
-@as("SelectionStatus") selectionStatus: selectionStatus,
-@as("EntityTypes") entityTypes: entityTypes,
-@as("Relationships") relationships: relationshipList,
-@as("Id") id: nonEmptyString,
-@as("Geometry") geometry: geometry,
-@as("ColumnSpan") columnSpan: uInteger,
-@as("RowSpan") rowSpan: uInteger,
-@as("ColumnIndex") columnIndex: uInteger,
-@as("RowIndex") rowIndex: uInteger,
-@as("TextType") textType: textType,
-@as("Text") text: amazonawsString,
-@as("Confidence") confidence: percent,
-@as("BlockType") blockType: blockType
+@as("Page") page: option<uinteger>,
+@as("SelectionStatus") selectionStatus: option<selectionStatus>,
+@as("EntityTypes") entityTypes: option<entityTypes>,
+@as("Relationships") relationships: option<relationshipList>,
+@as("Id") id: option<nonEmptyString>,
+@as("Geometry") geometry: option<geometry>,
+@as("ColumnSpan") columnSpan: option<uinteger>,
+@as("RowSpan") rowSpan: option<uinteger>,
+@as("ColumnIndex") columnIndex: option<uinteger>,
+@as("RowIndex") rowIndex: option<uinteger>,
+@as("TextType") textType: option<textType>,
+@as("Text") text: option<string_>,
+@as("Confidence") confidence: option<percent>,
+@as("BlockType") blockType: option<blockType>
 }
 type blockList = array<block>
-type clientType;
-@module("@aws-sdk/client-textract") @new external createClient: unit => clientType = "TextractClient";
+type awsServiceClient;
+@module("@aws-sdk/client-textract") @new external createClient: unit => awsServiceClient = "TextractClient";
 module StartDocumentTextDetection = {
   type t;
   type request = {
-@as("KMSKeyId") kMSKeyId: kMSKeyId,
-@as("OutputConfig") outputConfig: outputConfig,
-@as("NotificationChannel") notificationChannel: notificationChannel,
-@as("JobTag") jobTag: jobTag,
-@as("ClientRequestToken") clientRequestToken: clientRequestToken,
-@as("DocumentLocation") documentLocation: option<documentLocation>
+@as("KMSKeyId") kmskeyId: option<kmskeyId>,
+@as("OutputConfig") outputConfig: option<outputConfig>,
+@as("NotificationChannel") notificationChannel: option<notificationChannel>,
+@as("JobTag") jobTag: option<jobTag>,
+@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+@as("DocumentLocation") documentLocation: documentLocation
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-textract") @new external new_: (request) => t = "StartDocumentTextDetectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartDocumentAnalysis = {
   type t;
   type request = {
-@as("KMSKeyId") kMSKeyId: kMSKeyId,
-@as("OutputConfig") outputConfig: outputConfig,
-@as("NotificationChannel") notificationChannel: notificationChannel,
-@as("JobTag") jobTag: jobTag,
-@as("ClientRequestToken") clientRequestToken: clientRequestToken,
-@as("FeatureTypes") featureTypes: option<featureTypes>,
-@as("DocumentLocation") documentLocation: option<documentLocation>
+@as("KMSKeyId") kmskeyId: option<kmskeyId>,
+@as("OutputConfig") outputConfig: option<outputConfig>,
+@as("NotificationChannel") notificationChannel: option<notificationChannel>,
+@as("JobTag") jobTag: option<jobTag>,
+@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+@as("FeatureTypes") featureTypes: featureTypes,
+@as("DocumentLocation") documentLocation: documentLocation
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-textract") @new external new_: (request) => t = "StartDocumentAnalysisCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDocumentTextDetection = {
   type t;
   type request = {
-@as("NextToken") nextToken: paginationToken,
-@as("MaxResults") maxResults: maxResults,
-@as("JobId") jobId: option<jobId>
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("DetectDocumentTextModelVersion") detectDocumentTextModelVersion: amazonawsString,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Warnings") warnings: warnings,
-@as("Blocks") blocks: blockList,
-@as("NextToken") nextToken: paginationToken,
-@as("JobStatus") jobStatus: jobStatus,
-@as("DocumentMetadata") documentMetadata: documentMetadata
+@as("DetectDocumentTextModelVersion") detectDocumentTextModelVersion: option<string_>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Warnings") warnings: option<warnings>,
+@as("Blocks") blocks: option<blockList>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("JobStatus") jobStatus: option<jobStatus>,
+@as("DocumentMetadata") documentMetadata: option<documentMetadata>
 }
   @module("@aws-sdk/client-textract") @new external new_: (request) => t = "GetDocumentTextDetectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDocumentAnalysis = {
   type t;
   type request = {
-@as("NextToken") nextToken: paginationToken,
-@as("MaxResults") maxResults: maxResults,
-@as("JobId") jobId: option<jobId>
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("AnalyzeDocumentModelVersion") analyzeDocumentModelVersion: amazonawsString,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Warnings") warnings: warnings,
-@as("Blocks") blocks: blockList,
-@as("NextToken") nextToken: paginationToken,
-@as("JobStatus") jobStatus: jobStatus,
-@as("DocumentMetadata") documentMetadata: documentMetadata
+@as("AnalyzeDocumentModelVersion") analyzeDocumentModelVersion: option<string_>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Warnings") warnings: option<warnings>,
+@as("Blocks") blocks: option<blockList>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("JobStatus") jobStatus: option<jobStatus>,
+@as("DocumentMetadata") documentMetadata: option<documentMetadata>
 }
   @module("@aws-sdk/client-textract") @new external new_: (request) => t = "GetDocumentAnalysisCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DetectDocumentText = {
   type t;
   type request = {
-@as("Document") document: option<document>
+@as("Document") document: document
 }
   type response = {
-@as("DetectDocumentTextModelVersion") detectDocumentTextModelVersion: amazonawsString,
-@as("Blocks") blocks: blockList,
-@as("DocumentMetadata") documentMetadata: documentMetadata
+@as("DetectDocumentTextModelVersion") detectDocumentTextModelVersion: option<string_>,
+@as("Blocks") blocks: option<blockList>,
+@as("DocumentMetadata") documentMetadata: option<documentMetadata>
 }
   @module("@aws-sdk/client-textract") @new external new_: (request) => t = "DetectDocumentTextCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AnalyzeDocument = {
   type t;
   type request = {
-@as("HumanLoopConfig") humanLoopConfig: humanLoopConfig,
-@as("FeatureTypes") featureTypes: option<featureTypes>,
-@as("Document") document: option<document>
+@as("HumanLoopConfig") humanLoopConfig: option<humanLoopConfig>,
+@as("FeatureTypes") featureTypes: featureTypes,
+@as("Document") document: document
 }
   type response = {
-@as("AnalyzeDocumentModelVersion") analyzeDocumentModelVersion: amazonawsString,
-@as("HumanLoopActivationOutput") humanLoopActivationOutput: humanLoopActivationOutput,
-@as("Blocks") blocks: blockList,
-@as("DocumentMetadata") documentMetadata: documentMetadata
+@as("AnalyzeDocumentModelVersion") analyzeDocumentModelVersion: option<string_>,
+@as("HumanLoopActivationOutput") humanLoopActivationOutput: option<humanLoopActivationOutput>,
+@as("Blocks") blocks: option<blockList>,
+@as("DocumentMetadata") documentMetadata: option<documentMetadata>
 }
   @module("@aws-sdk/client-textract") @new external new_: (request) => t = "AnalyzeDocumentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

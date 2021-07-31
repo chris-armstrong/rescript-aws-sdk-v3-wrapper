@@ -1,36 +1,43 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type amazonawsTimestamp = Js.Date.t;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type long = float
+type timestamp_ = Js.Date.t;
 type streamName = string
-type startSelectorType = [@as("CONTINUATION_TOKEN") #CONTINUATION_TOKEN | @as("EARLIEST") #EARLIEST | @as("NOW") #NOW | @as("PRODUCER_TIMESTAMP") #PRODUCER_TIMESTAMP | @as("SERVER_TIMESTAMP") #SERVER_TIMESTAMP | @as("FRAGMENT_NUMBER") #FRAGMENT_NUMBER]
+type startSelectorType = [@as("CONTINUATION_TOKEN") #CONTINUATIONTOKEN | @as("EARLIEST") #EARLIEST | @as("NOW") #NOW | @as("PRODUCER_TIMESTAMP") #PRODUCERTIMESTAMP | @as("SERVER_TIMESTAMP") #SERVERTIMESTAMP | @as("FRAGMENT_NUMBER") #FRAGMENTNUMBER]
 type resourceARN = string
-type payload = NodeJs.Buffer.t;
+type payload = NodeJs.Buffer.t
 type fragmentNumberString = string
 type errorMessage = string
 type continuationToken = string
 type contentType = string
 type startSelector = {
-@as("ContinuationToken") continuationToken: continuationToken,
-@as("StartTimestamp") startTimestamp: amazonawsTimestamp,
-@as("AfterFragmentNumber") afterFragmentNumber: fragmentNumberString,
-@as("StartSelectorType") startSelectorType: option<startSelectorType>
+@as("ContinuationToken") continuationToken: option<continuationToken>,
+@as("StartTimestamp") startTimestamp: option<timestamp_>,
+@as("AfterFragmentNumber") afterFragmentNumber: option<fragmentNumberString>,
+@as("StartSelectorType") startSelectorType: startSelectorType
 }
-type clientType;
-@module("@aws-sdk/client-kinesisvideo") @new external createClient: unit => clientType = "KinesisVideoMediaClient";
+type awsServiceClient;
+@module("@aws-sdk/client-kinesisvideo") @new external createClient: unit => awsServiceClient = "KinesisVideoMediaClient";
 module GetMedia = {
   type t;
   type request = {
-@as("StartSelector") startSelector: option<startSelector>,
-@as("StreamARN") streamARN: resourceARN,
-@as("StreamName") streamName: streamName
+@as("StartSelector") startSelector: startSelector,
+@as("StreamARN") streamARN: option<resourceARN>,
+@as("StreamName") streamName: option<streamName>
 }
   type response = {
-@as("Payload") payload: payload,
-@as("ContentType") contentType: contentType
+@as("Payload") payload: option<payload>,
+@as("ContentType") contentType: option<contentType>
 }
   @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetMediaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

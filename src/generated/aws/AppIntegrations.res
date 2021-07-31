@@ -1,9 +1,17 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type uUID = string
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
+type uuid = string
 type tagValue = string
 type tagKey = string
 type source = string
@@ -11,7 +19,7 @@ type nonBlankString = string
 type nextToken = string
 type name = string
 type message = string
-type maxResults = int;
+type maxResults = int
 type idempotencyToken = string
 type eventBridgeRuleName = string
 type eventBridgeBus = string
@@ -21,143 +29,143 @@ type arn = string
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type eventFilter = {
-@as("Source") source: option<source>
+@as("Source") source: source
 }
 type clientAssociationMetadata = Js.Dict.t< nonBlankString>
 type eventIntegrationAssociation = {
-@as("ClientAssociationMetadata") clientAssociationMetadata: clientAssociationMetadata,
-@as("EventBridgeRuleName") eventBridgeRuleName: eventBridgeRuleName,
-@as("ClientId") clientId: clientId,
-@as("EventIntegrationName") eventIntegrationName: name,
-@as("EventIntegrationAssociationId") eventIntegrationAssociationId: uUID,
-@as("EventIntegrationAssociationArn") eventIntegrationAssociationArn: arn
+@as("ClientAssociationMetadata") clientAssociationMetadata: option<clientAssociationMetadata>,
+@as("EventBridgeRuleName") eventBridgeRuleName: option<eventBridgeRuleName>,
+@as("ClientId") clientId: option<clientId>,
+@as("EventIntegrationName") eventIntegrationName: option<name>,
+@as("EventIntegrationAssociationId") eventIntegrationAssociationId: option<uuid>,
+@as("EventIntegrationAssociationArn") eventIntegrationAssociationArn: option<arn>
 }
 type eventIntegration = {
-@as("Tags") tags: tagMap,
-@as("EventBridgeBus") eventBridgeBus: eventBridgeBus,
-@as("EventFilter") eventFilter: eventFilter,
-@as("Description") description: description,
-@as("Name") name: name,
-@as("EventIntegrationArn") eventIntegrationArn: arn
+@as("Tags") tags: option<tagMap>,
+@as("EventBridgeBus") eventBridgeBus: option<eventBridgeBus>,
+@as("EventFilter") eventFilter: option<eventFilter>,
+@as("Description") description: option<description>,
+@as("Name") name: option<name>,
+@as("EventIntegrationArn") eventIntegrationArn: option<arn>
 }
 type eventIntegrationsList = array<eventIntegration>
 type eventIntegrationAssociationsList = array<eventIntegrationAssociation>
-type clientType;
-@module("@aws-sdk/client-app-integrations") @new external createClient: unit => clientType = "AppIntegrationsClient";
+type awsServiceClient;
+@module("@aws-sdk/client-app-integrations") @new external createClient: unit => awsServiceClient = "AppIntegrationsClient";
 module UpdateEventIntegration = {
   type t;
   type request = {
-@as("Description") description: description,
-@as("Name") name: option<name>
+@as("Description") description: option<description>,
+@as("Name") name: name
 }
   type response = unit
   @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "UpdateEventIntegrationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteEventIntegration = {
   type t;
   type request = {
-@as("Name") name: option<name>
+@as("Name") name: name
 }
   type response = unit
   @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "DeleteEventIntegrationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<arn>
+tagKeys: tagKeyList,
+resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<arn>
+tags: tagMap,
+resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<arn>
+resourceArn: arn
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEventIntegration = {
   type t;
   type request = {
-@as("Name") name: option<name>
-}
-  type response = {
-@as("Tags") tags: tagMap,
-@as("EventFilter") eventFilter: eventFilter,
-@as("EventBridgeBus") eventBridgeBus: eventBridgeBus,
-@as("EventIntegrationArn") eventIntegrationArn: arn,
-@as("Description") description: description,
 @as("Name") name: name
 }
+  type response = {
+@as("Tags") tags: option<tagMap>,
+@as("EventFilter") eventFilter: option<eventFilter>,
+@as("EventBridgeBus") eventBridgeBus: option<eventBridgeBus>,
+@as("EventIntegrationArn") eventIntegrationArn: option<arn>,
+@as("Description") description: option<description>,
+@as("Name") name: option<name>
+}
   @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "GetEventIntegrationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateEventIntegration = {
   type t;
   type request = {
-@as("Tags") tags: tagMap,
-@as("ClientToken") clientToken: idempotencyToken,
-@as("EventBridgeBus") eventBridgeBus: option<eventBridgeBus>,
-@as("EventFilter") eventFilter: option<eventFilter>,
-@as("Description") description: description,
-@as("Name") name: option<name>
+@as("Tags") tags: option<tagMap>,
+@as("ClientToken") clientToken: option<idempotencyToken>,
+@as("EventBridgeBus") eventBridgeBus: eventBridgeBus,
+@as("EventFilter") eventFilter: eventFilter,
+@as("Description") description: option<description>,
+@as("Name") name: name
 }
   type response = {
-@as("EventIntegrationArn") eventIntegrationArn: arn
+@as("EventIntegrationArn") eventIntegrationArn: option<arn>
 }
   @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "CreateEventIntegrationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEventIntegrations = {
   type t;
   type request = {
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: nextToken
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<nextToken>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("EventIntegrations") eventIntegrations: eventIntegrationsList
+@as("NextToken") nextToken: option<nextToken>,
+@as("EventIntegrations") eventIntegrations: option<eventIntegrationsList>
 }
   @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "ListEventIntegrationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEventIntegrationAssociations = {
   type t;
   type request = {
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: nextToken,
-@as("EventIntegrationName") eventIntegrationName: option<name>
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("EventIntegrationName") eventIntegrationName: name
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("EventIntegrationAssociations") eventIntegrationAssociations: eventIntegrationAssociationsList
+@as("NextToken") nextToken: option<nextToken>,
+@as("EventIntegrationAssociations") eventIntegrationAssociations: option<eventIntegrationAssociationsList>
 }
   @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "ListEventIntegrationAssociationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

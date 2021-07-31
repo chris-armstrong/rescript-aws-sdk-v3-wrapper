@@ -1,32 +1,40 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type workbookCursor = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
+type workbookCursor = float
 type variableName = string
 type upsertAction = [@as("APPENDED") #APPENDED | @as("UPDATED") #UPDATED]
 type timestampInMillis = Js.Date.t;
 type tableName = string
-type tableDataImportJobStatus = [@as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("IN_PROGRESS") #IN_PROGRESS | @as("SUBMITTED") #SUBMITTED]
+type tableDataImportJobStatus = [@as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED | @as("IN_PROGRESS") #INPROGRESS | @as("SUBMITTED") #SUBMITTED]
 type tableDataImportJobMessage = string
 type tableColumnName = string
-type sourceDataColumnIndex = int;
+type sourceDataColumnIndex = int
 type secureURL = string
 type rowId = string
 type resourceId = string
 type rawValue = string
 type paginationToken = string
 type name = string
-type maxResults = int;
+type maxResults = int
 type jobId = string
-type importSourceDataFormat = [@as("DELIMITED_TEXT") #DELIMITED_TEXT]
-type importDataCharacterEncoding = [@as("UTF-16") #UTF_16 | @as("UTF-16LE") #UTF_16LE | @as("UTF-16BE") #UTF_16BE | @as("ISO-8859-1") #ISO_8859_1 | @as("US-ASCII") #US_ASCII | @as("UTF-8") #UTF_8]
-type ignoreEmptyRows = bool;
-type hasHeaderRow = bool;
+type importSourceDataFormat = [@as("DELIMITED_TEXT") #DELIMITEDTEXT]
+type importDataCharacterEncoding = [@as("UTF-16") #UTF16 | @as("UTF-16LE") #UTF16LE | @as("UTF-16BE") #UTF16BE | @as("ISO-8859-1") #ISO88591 | @as("US-ASCII") #USASCII | @as("UTF-8") #UTF8]
+type ignoreEmptyRows = bool
+type hasHeaderRow = bool
 type formula = string
 type formattedValue = string
-type format = [@as("ROWLINK") #ROWLINK | @as("CONTACT") #CONTACT | @as("ACCOUNTING") #ACCOUNTING | @as("TEXT") #TEXT | @as("PERCENTAGE") #PERCENTAGE | @as("DATE_TIME") #DATE_TIME | @as("TIME") #TIME | @as("DATE") #DATE | @as("CURRENCY") #CURRENCY | @as("NUMBER") #NUMBER | @as("AUTO") #AUTO]
+type format = [@as("ROWLINK") #ROWLINK | @as("CONTACT") #CONTACT | @as("ACCOUNTING") #ACCOUNTING | @as("TEXT") #TEXT | @as("PERCENTAGE") #PERCENTAGE | @as("DATE_TIME") #DATETIME | @as("TIME") #TIME | @as("DATE") #DATE | @as("CURRENCY") #CURRENCY | @as("NUMBER") #NUMBER | @as("AUTO") #AUTO]
 type fact = string
 type errorMessage = string
 type email = string
@@ -36,73 +44,73 @@ type batchItemId = string
 type batchErrorMessage = string
 type awsUserArn = string
 type variableValue = {
-@as("rawValue") rawValue: option<rawValue>
+rawValue: rawValue
 }
 type tableColumn = {
-@as("format") format: format,
-@as("tableColumnName") tableColumnName: tableColumnName,
-@as("tableColumnId") tableColumnId: resourceId
+format: option<format>,
+tableColumnName: option<tableColumnName>,
+tableColumnId: option<resourceId>
 }
 type table = {
-@as("tableName") tableName: tableName,
-@as("tableId") tableId: resourceId
+tableName: option<tableName>,
+tableId: option<resourceId>
 }
 type sourceDataColumnProperties = {
-@as("columnIndex") columnIndex: sourceDataColumnIndex
+columnIndex: option<sourceDataColumnIndex>
 }
 type rowIdList = array<rowId>
 type resourceIds = array<resourceId>
 type importJobSubmitter = {
-@as("userArn") userArn: awsUserArn,
-@as("email") email: email
+userArn: option<awsUserArn>,
+email: option<email>
 }
 type importDataSourceConfig = {
-@as("dataSourceUrl") dataSourceUrl: secureURL
+dataSourceUrl: option<secureURL>
 }
 type filter = {
-@as("contextRowId") contextRowId: rowId,
-@as("formula") formula: option<formula>
+contextRowId: option<rowId>,
+formula: formula
 }
 type failedBatchItem = {
-@as("errorMessage") errorMessage: option<batchErrorMessage>,
-@as("id") id: option<batchItemId>
+errorMessage: batchErrorMessage,
+id: batchItemId
 }
 type delimitedTextImportOptions = {
-@as("dataCharacterEncoding") dataCharacterEncoding: importDataCharacterEncoding,
-@as("ignoreEmptyRows") ignoreEmptyRows: ignoreEmptyRows,
-@as("hasHeaderRow") hasHeaderRow: hasHeaderRow,
-@as("delimiter") delimiter: option<delimitedTextDelimiter>
+dataCharacterEncoding: option<importDataCharacterEncoding>,
+ignoreEmptyRows: option<ignoreEmptyRows>,
+hasHeaderRow: option<hasHeaderRow>,
+delimiter: delimitedTextDelimiter
 }
 type dataItem = {
-@as("formattedValue") formattedValue: formattedValue,
-@as("rawValue") rawValue: rawValue,
-@as("overrideFormat") overrideFormat: format
+formattedValue: option<formattedValue>,
+rawValue: option<rawValue>,
+overrideFormat: option<format>
 }
 type createdRowsMap = Js.Dict.t< rowId>
 type columnMetadata = {
-@as("format") format: option<format>,
-@as("name") name: option<name>
+format: format,
+name: name
 }
 type cellInput = {
-@as("fact") fact: fact
+fact: option<fact>
 }
 type cell = {
-@as("formattedValue") formattedValue: formattedValue,
-@as("rawValue") rawValue: rawValue,
-@as("format") format: format,
-@as("formula") formula: formula
+formattedValue: option<formattedValue>,
+rawValue: option<rawValue>,
+format: option<format>,
+formula: option<formula>
 }
 type variableValueMap = Js.Dict.t< variableValue>
 type upsertRowsResult = {
-@as("upsertAction") upsertAction: option<upsertAction>,
-@as("rowIds") rowIds: option<rowIdList>
+upsertAction: upsertAction,
+rowIds: rowIdList
 }
 type tables = array<table>
 type tableColumns = array<tableColumn>
 type rowDataInput = Js.Dict.t< cellInput>
 type resultHeader = array<columnMetadata>
 type importDataSource = {
-@as("dataSourceConfig") dataSourceConfig: option<importDataSourceConfig>
+dataSourceConfig: importDataSourceConfig
 }
 type importColumnMap = Js.Dict.t< sourceDataColumnProperties>
 type failedBatchItems = array<failedBatchItem>
@@ -110,255 +118,255 @@ type dataItems = array<dataItem>
 type cells = array<cell>
 type upsertRowsResultMap = Js.Dict.t< upsertRowsResult>
 type upsertRowData = {
-@as("cellsToUpdate") cellsToUpdate: option<rowDataInput>,
-@as("filter") filter: option<filter>,
-@as("batchItemId") batchItemId: option<batchItemId>
+cellsToUpdate: rowDataInput,
+filter: filter,
+batchItemId: batchItemId
 }
 type updateRowData = {
-@as("cellsToUpdate") cellsToUpdate: option<rowDataInput>,
-@as("rowId") rowId: option<rowId>
+cellsToUpdate: rowDataInput,
+rowId: rowId
 }
 type tableRow = {
-@as("cells") cells: option<cells>,
-@as("rowId") rowId: option<rowId>
+cells: cells,
+rowId: rowId
 }
 type resultRow = {
-@as("dataItems") dataItems: option<dataItems>,
-@as("rowId") rowId: rowId
+dataItems: dataItems,
+rowId: option<rowId>
 }
 type destinationOptions = {
-@as("columnMap") columnMap: importColumnMap
+columnMap: option<importColumnMap>
 }
 type createRowData = {
-@as("cellsToCreate") cellsToCreate: option<rowDataInput>,
-@as("batchItemId") batchItemId: option<batchItemId>
+cellsToCreate: rowDataInput,
+batchItemId: batchItemId
 }
 type upsertRowDataList = array<upsertRowData>
 type updateRowDataList = array<updateRowData>
 type tableRows = array<tableRow>
 type resultRows = array<resultRow>
 type importOptions = {
-@as("delimitedTextOptions") delimitedTextOptions: delimitedTextImportOptions,
-@as("destinationOptions") destinationOptions: destinationOptions
+delimitedTextOptions: option<delimitedTextImportOptions>,
+destinationOptions: option<destinationOptions>
 }
 type createRowDataList = array<createRowData>
 type tableDataImportJobMetadata = {
-@as("dataSource") dataSource: option<importDataSource>,
-@as("importOptions") importOptions: option<importOptions>,
-@as("submitTime") submitTime: option<timestampInMillis>,
-@as("submitter") submitter: option<importJobSubmitter>
+dataSource: importDataSource,
+importOptions: importOptions,
+submitTime: timestampInMillis,
+submitter: importJobSubmitter
 }
 type resultSet = {
-@as("rows") rows: option<resultRows>,
-@as("headers") headers: option<resultHeader>
+rows: resultRows,
+headers: resultHeader
 }
 type resultSetMap = Js.Dict.t< resultSet>
-type clientType;
-@module("@aws-sdk/client-honeycode") @new external createClient: unit => clientType = "HoneycodeClient";
+type awsServiceClient;
+@module("@aws-sdk/client-honeycode") @new external createClient: unit => awsServiceClient = "HoneycodeClient";
 module ListTables = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: maxResults,
-@as("workbookId") workbookId: option<resourceId>
+nextToken: option<paginationToken>,
+maxResults: option<maxResults>,
+workbookId: resourceId
 }
   type response = {
-@as("workbookCursor") workbookCursor: workbookCursor,
-@as("nextToken") nextToken: paginationToken,
-@as("tables") tables: option<tables>
+workbookCursor: option<workbookCursor>,
+nextToken: option<paginationToken>,
+tables: tables
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "ListTablesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTableColumns = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("tableId") tableId: option<resourceId>,
-@as("workbookId") workbookId: option<resourceId>
+nextToken: option<paginationToken>,
+tableId: resourceId,
+workbookId: resourceId
 }
   type response = {
-@as("workbookCursor") workbookCursor: workbookCursor,
-@as("nextToken") nextToken: paginationToken,
-@as("tableColumns") tableColumns: option<tableColumns>
+workbookCursor: option<workbookCursor>,
+nextToken: option<paginationToken>,
+tableColumns: tableColumns
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "ListTableColumnsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module InvokeScreenAutomation = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("rowId") rowId: rowId,
-@as("variables") variables: variableValueMap,
-@as("screenAutomationId") screenAutomationId: option<resourceId>,
-@as("screenId") screenId: option<resourceId>,
-@as("appId") appId: option<resourceId>,
-@as("workbookId") workbookId: option<resourceId>
+clientRequestToken: option<clientRequestToken>,
+rowId: option<rowId>,
+variables: option<variableValueMap>,
+screenAutomationId: resourceId,
+screenId: resourceId,
+appId: resourceId,
+workbookId: resourceId
 }
   type response = {
-@as("workbookCursor") workbookCursor: option<workbookCursor>
+workbookCursor: workbookCursor
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "InvokeScreenAutomationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchDeleteTableRows = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("rowIds") rowIds: option<rowIdList>,
-@as("tableId") tableId: option<resourceId>,
-@as("workbookId") workbookId: option<resourceId>
+clientRequestToken: option<clientRequestToken>,
+rowIds: rowIdList,
+tableId: resourceId,
+workbookId: resourceId
 }
   type response = {
-@as("failedBatchItems") failedBatchItems: failedBatchItems,
-@as("workbookCursor") workbookCursor: option<workbookCursor>
+failedBatchItems: option<failedBatchItems>,
+workbookCursor: workbookCursor
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "BatchDeleteTableRowsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartTableDataImportJob = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: option<clientRequestToken>,
-@as("importOptions") importOptions: option<importOptions>,
-@as("destinationTableId") destinationTableId: option<resourceId>,
-@as("dataFormat") dataFormat: option<importSourceDataFormat>,
-@as("dataSource") dataSource: option<importDataSource>,
-@as("workbookId") workbookId: option<resourceId>
+clientRequestToken: clientRequestToken,
+importOptions: importOptions,
+destinationTableId: resourceId,
+dataFormat: importSourceDataFormat,
+dataSource: importDataSource,
+workbookId: resourceId
 }
   type response = {
-@as("jobStatus") jobStatus: option<tableDataImportJobStatus>,
-@as("jobId") jobId: option<jobId>
+jobStatus: tableDataImportJobStatus,
+jobId: jobId
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "StartTableDataImportJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module QueryTableRows = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: maxResults,
-@as("filterFormula") filterFormula: option<filter>,
-@as("tableId") tableId: option<resourceId>,
-@as("workbookId") workbookId: option<resourceId>
+nextToken: option<paginationToken>,
+maxResults: option<maxResults>,
+filterFormula: filter,
+tableId: resourceId,
+workbookId: resourceId
 }
   type response = {
-@as("workbookCursor") workbookCursor: option<workbookCursor>,
-@as("nextToken") nextToken: paginationToken,
-@as("rows") rows: option<tableRows>,
-@as("columnIds") columnIds: option<resourceIds>
+workbookCursor: workbookCursor,
+nextToken: option<paginationToken>,
+rows: tableRows,
+columnIds: resourceIds
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "QueryTableRowsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTableRows = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: maxResults,
-@as("rowIds") rowIds: rowIdList,
-@as("tableId") tableId: option<resourceId>,
-@as("workbookId") workbookId: option<resourceId>
+nextToken: option<paginationToken>,
+maxResults: option<maxResults>,
+rowIds: option<rowIdList>,
+tableId: resourceId,
+workbookId: resourceId
 }
   type response = {
-@as("workbookCursor") workbookCursor: option<workbookCursor>,
-@as("nextToken") nextToken: paginationToken,
-@as("rowIdsNotFound") rowIdsNotFound: rowIdList,
-@as("rows") rows: option<tableRows>,
-@as("columnIds") columnIds: option<resourceIds>
+workbookCursor: workbookCursor,
+nextToken: option<paginationToken>,
+rowIdsNotFound: option<rowIdList>,
+rows: tableRows,
+columnIds: resourceIds
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "ListTableRowsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchUpsertTableRows = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("rowsToUpsert") rowsToUpsert: option<upsertRowDataList>,
-@as("tableId") tableId: option<resourceId>,
-@as("workbookId") workbookId: option<resourceId>
+clientRequestToken: option<clientRequestToken>,
+rowsToUpsert: upsertRowDataList,
+tableId: resourceId,
+workbookId: resourceId
 }
   type response = {
-@as("failedBatchItems") failedBatchItems: failedBatchItems,
-@as("workbookCursor") workbookCursor: option<workbookCursor>,
-@as("rows") rows: option<upsertRowsResultMap>
+failedBatchItems: option<failedBatchItems>,
+workbookCursor: workbookCursor,
+rows: upsertRowsResultMap
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "BatchUpsertTableRowsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchUpdateTableRows = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("rowsToUpdate") rowsToUpdate: option<updateRowDataList>,
-@as("tableId") tableId: option<resourceId>,
-@as("workbookId") workbookId: option<resourceId>
+clientRequestToken: option<clientRequestToken>,
+rowsToUpdate: updateRowDataList,
+tableId: resourceId,
+workbookId: resourceId
 }
   type response = {
-@as("failedBatchItems") failedBatchItems: failedBatchItems,
-@as("workbookCursor") workbookCursor: option<workbookCursor>
+failedBatchItems: option<failedBatchItems>,
+workbookCursor: workbookCursor
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "BatchUpdateTableRowsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchCreateTableRows = {
   type t;
   type request = {
-@as("clientRequestToken") clientRequestToken: clientRequestToken,
-@as("rowsToCreate") rowsToCreate: option<createRowDataList>,
-@as("tableId") tableId: option<resourceId>,
-@as("workbookId") workbookId: option<resourceId>
+clientRequestToken: option<clientRequestToken>,
+rowsToCreate: createRowDataList,
+tableId: resourceId,
+workbookId: resourceId
 }
   type response = {
-@as("failedBatchItems") failedBatchItems: failedBatchItems,
-@as("createdRows") createdRows: option<createdRowsMap>,
-@as("workbookCursor") workbookCursor: option<workbookCursor>
+failedBatchItems: option<failedBatchItems>,
+createdRows: createdRowsMap,
+workbookCursor: workbookCursor
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "BatchCreateTableRowsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTableDataImportJob = {
   type t;
   type request = {
-@as("jobId") jobId: option<jobId>,
-@as("tableId") tableId: option<resourceId>,
-@as("workbookId") workbookId: option<resourceId>
+jobId: jobId,
+tableId: resourceId,
+workbookId: resourceId
 }
   type response = {
-@as("jobMetadata") jobMetadata: option<tableDataImportJobMetadata>,
-@as("message") message: option<tableDataImportJobMessage>,
-@as("jobStatus") jobStatus: option<tableDataImportJobStatus>
+jobMetadata: tableDataImportJobMetadata,
+message: tableDataImportJobMessage,
+jobStatus: tableDataImportJobStatus
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "DescribeTableDataImportJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetScreenData = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: maxResults,
-@as("variables") variables: variableValueMap,
-@as("screenId") screenId: option<resourceId>,
-@as("appId") appId: option<resourceId>,
-@as("workbookId") workbookId: option<resourceId>
+nextToken: option<paginationToken>,
+maxResults: option<maxResults>,
+variables: option<variableValueMap>,
+screenId: resourceId,
+appId: resourceId,
+workbookId: resourceId
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("workbookCursor") workbookCursor: option<workbookCursor>,
-@as("results") results: option<resultSetMap>
+nextToken: option<paginationToken>,
+workbookCursor: workbookCursor,
+results: resultSetMap
 }
   @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "GetScreenDataCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

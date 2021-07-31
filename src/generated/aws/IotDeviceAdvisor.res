@@ -1,281 +1,288 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type long = float
 type warnings = string
-type uUID = string
+type uuid = string
 type token = string
-type amazonawsTimestamp = Js.Date.t;
+type timestamp_ = Js.Date.t;
 type testCaseDefinitionName = string
-type suiteRunStatus = [@as("ERROR") #ERROR | @as("PASS_WITH_WARNINGS") #PASS_WITH_WARNINGS | @as("STOPPED") #STOPPED | @as("STOPPING") #STOPPING | @as("RUNNING") #RUNNING | @as("PENDING") #PENDING | @as("CANCELED") #CANCELED | @as("FAIL") #FAIL | @as("PASS") #PASS]
-type suiteRunResultCount = int;
+type suiteRunStatus = [@as("ERROR") #ERROR | @as("PASS_WITH_WARNINGS") #PASSWITHWARNINGS | @as("STOPPED") #STOPPED | @as("STOPPING") #STOPPING | @as("RUNNING") #RUNNING | @as("PENDING") #PENDING | @as("CANCELED") #CANCELED | @as("FAIL") #FAIL | @as("PASS") #PASS]
+type suiteRunResultCount = int
 type suiteDefinitionVersion = string
 type suiteDefinitionName = string
 type string256 = string
 type string128 = string
-type status = [@as("ERROR") #ERROR | @as("PASS_WITH_WARNINGS") #PASS_WITH_WARNINGS | @as("STOPPED") #STOPPED | @as("STOPPING") #STOPPING | @as("RUNNING") #RUNNING | @as("PENDING") #PENDING | @as("CANCELED") #CANCELED | @as("FAIL") #FAIL | @as("PASS") #PASS]
+type status = [@as("ERROR") #ERROR | @as("PASS_WITH_WARNINGS") #PASSWITHWARNINGS | @as("STOPPED") #STOPPED | @as("STOPPING") #STOPPING | @as("RUNNING") #RUNNING | @as("PENDING") #PENDING | @as("CANCELED") #CANCELED | @as("FAIL") #FAIL | @as("PASS") #PASS]
 type rootGroup = string
 type qualificationReportDownloadUrl = string
 type message = string
-type maxResults = int;
+type maxResults = int
 type logUrl = string
-type intendedForQualificationBoolean = bool;
+type intendedForQualificationBoolean = bool
 type groupName = string
 type failure = string
 type errorReason = string
 type amazonResourceName = string
 type testCaseRun = {
-@as("failure") failure: failure,
-@as("warnings") warnings: warnings,
-@as("logUrl") logUrl: logUrl,
-@as("endTime") endTime: amazonawsTimestamp,
-@as("startTime") startTime: amazonawsTimestamp,
-@as("status") status: status,
-@as("testCaseDefinitionName") testCaseDefinitionName: testCaseDefinitionName,
-@as("testCaseDefinitionId") testCaseDefinitionId: uUID,
-@as("testCaseRunId") testCaseRunId: uUID
+failure: option<failure>,
+warnings: option<warnings>,
+logUrl: option<logUrl>,
+endTime: option<timestamp_>,
+startTime: option<timestamp_>,
+status: option<status>,
+testCaseDefinitionName: option<testCaseDefinitionName>,
+testCaseDefinitionId: option<uuid>,
+testCaseRunId: option<uuid>
 }
 type tagMap = Js.Dict.t< string256>
 type tagKeyList = array<string128>
 type suiteRunInformation = {
-@as("failed") failed: suiteRunResultCount,
-@as("passed") passed: suiteRunResultCount,
-@as("status") status: suiteRunStatus,
-@as("endAt") endAt: amazonawsTimestamp,
-@as("startedAt") startedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("suiteRunId") suiteRunId: uUID,
-@as("suiteDefinitionName") suiteDefinitionName: suiteDefinitionName,
-@as("suiteDefinitionVersion") suiteDefinitionVersion: suiteDefinitionVersion,
-@as("suiteDefinitionId") suiteDefinitionId: uUID
+failed: option<suiteRunResultCount>,
+passed: option<suiteRunResultCount>,
+status: option<suiteRunStatus>,
+endAt: option<timestamp_>,
+startedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+suiteRunId: option<uuid>,
+suiteDefinitionName: option<suiteDefinitionName>,
+suiteDefinitionVersion: option<suiteDefinitionVersion>,
+suiteDefinitionId: option<uuid>
 }
-type selectedTestList = array<uUID>
+type selectedTestList = array<uuid>
 type deviceUnderTest = {
-@as("certificateArn") certificateArn: amazonResourceName,
-@as("thingArn") thingArn: amazonResourceName
+certificateArn: option<amazonResourceName>,
+thingArn: option<amazonResourceName>
 }
 type testCaseRuns = array<testCaseRun>
 type suiteRunsList = array<suiteRunInformation>
 type suiteRunConfiguration = {
-@as("selectedTestList") selectedTestList: selectedTestList,
-@as("primaryDevice") primaryDevice: deviceUnderTest
+selectedTestList: option<selectedTestList>,
+primaryDevice: option<deviceUnderTest>
 }
 type deviceUnderTestList = array<deviceUnderTest>
 type suiteDefinitionInformation = {
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("intendedForQualification") intendedForQualification: intendedForQualificationBoolean,
-@as("defaultDevices") defaultDevices: deviceUnderTestList,
-@as("suiteDefinitionName") suiteDefinitionName: suiteDefinitionName,
-@as("suiteDefinitionId") suiteDefinitionId: uUID
+createdAt: option<timestamp_>,
+intendedForQualification: option<intendedForQualificationBoolean>,
+defaultDevices: option<deviceUnderTestList>,
+suiteDefinitionName: option<suiteDefinitionName>,
+suiteDefinitionId: option<uuid>
 }
 type suiteDefinitionConfiguration = {
-@as("devicePermissionRoleArn") devicePermissionRoleArn: amazonResourceName,
-@as("rootGroup") rootGroup: rootGroup,
-@as("intendedForQualification") intendedForQualification: intendedForQualificationBoolean,
-@as("devices") devices: deviceUnderTestList,
-@as("suiteDefinitionName") suiteDefinitionName: suiteDefinitionName
+devicePermissionRoleArn: option<amazonResourceName>,
+rootGroup: option<rootGroup>,
+intendedForQualification: option<intendedForQualificationBoolean>,
+devices: option<deviceUnderTestList>,
+suiteDefinitionName: option<suiteDefinitionName>
 }
 type groupResult = {
-@as("tests") tests: testCaseRuns,
-@as("groupName") groupName: groupName,
-@as("groupId") groupId: uUID
+tests: option<testCaseRuns>,
+groupName: option<groupName>,
+groupId: option<uuid>
 }
 type suiteDefinitionInformationList = array<suiteDefinitionInformation>
 type groupResultList = array<groupResult>
 type testResult = {
-@as("groups") groups: groupResultList
+groups: option<groupResultList>
 }
-type clientType;
-@module("@aws-sdk/client-iotdeviceadvisor") @new external createClient: unit => clientType = "IotDeviceAdvisorClient";
+type awsServiceClient;
+@module("@aws-sdk/client-iotdeviceadvisor") @new external createClient: unit => awsServiceClient = "IotDeviceAdvisorClient";
 module StopSuiteRun = {
   type t;
   type request = {
-@as("suiteRunId") suiteRunId: option<uUID>,
-@as("suiteDefinitionId") suiteDefinitionId: option<uUID>
+suiteRunId: uuid,
+suiteDefinitionId: uuid
 }
   type response = unit
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "StopSuiteRunCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSuiteRunReport = {
   type t;
   type request = {
-@as("suiteRunId") suiteRunId: option<uUID>,
-@as("suiteDefinitionId") suiteDefinitionId: option<uUID>
+suiteRunId: uuid,
+suiteDefinitionId: uuid
 }
   type response = {
-@as("qualificationReportDownloadUrl") qualificationReportDownloadUrl: qualificationReportDownloadUrl
+qualificationReportDownloadUrl: option<qualificationReportDownloadUrl>
 }
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "GetSuiteRunReportCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteSuiteDefinition = {
   type t;
   type request = {
-@as("suiteDefinitionId") suiteDefinitionId: option<uUID>
+suiteDefinitionId: uuid
 }
   type response = unit
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "DeleteSuiteDefinitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<amazonResourceName>
+tagKeys: tagKeyList,
+resourceArn: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<amazonResourceName>
+tags: tagMap,
+resourceArn: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<amazonResourceName>
+resourceArn: amazonResourceName
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartSuiteRun = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("suiteRunConfiguration") suiteRunConfiguration: suiteRunConfiguration,
-@as("suiteDefinitionVersion") suiteDefinitionVersion: suiteDefinitionVersion,
-@as("suiteDefinitionId") suiteDefinitionId: option<uUID>
+tags: option<tagMap>,
+suiteRunConfiguration: option<suiteRunConfiguration>,
+suiteDefinitionVersion: option<suiteDefinitionVersion>,
+suiteDefinitionId: uuid
 }
   type response = {
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("suiteRunArn") suiteRunArn: amazonResourceName,
-@as("suiteRunId") suiteRunId: uUID
+createdAt: option<timestamp_>,
+suiteRunArn: option<amazonResourceName>,
+suiteRunId: option<uuid>
 }
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "StartSuiteRunCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSuiteRuns = {
   type t;
   type request = {
-@as("nextToken") nextToken: token,
-@as("maxResults") maxResults: maxResults,
-@as("suiteDefinitionVersion") suiteDefinitionVersion: suiteDefinitionVersion,
-@as("suiteDefinitionId") suiteDefinitionId: uUID
+nextToken: option<token>,
+maxResults: option<maxResults>,
+suiteDefinitionVersion: option<suiteDefinitionVersion>,
+suiteDefinitionId: option<uuid>
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("suiteRunsList") suiteRunsList: suiteRunsList
+nextToken: option<token>,
+suiteRunsList: option<suiteRunsList>
 }
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "ListSuiteRunsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateSuiteDefinition = {
   type t;
   type request = {
-@as("suiteDefinitionConfiguration") suiteDefinitionConfiguration: suiteDefinitionConfiguration,
-@as("suiteDefinitionId") suiteDefinitionId: option<uUID>
+suiteDefinitionConfiguration: option<suiteDefinitionConfiguration>,
+suiteDefinitionId: uuid
 }
   type response = {
-@as("lastUpdatedAt") lastUpdatedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("suiteDefinitionVersion") suiteDefinitionVersion: suiteDefinitionVersion,
-@as("suiteDefinitionName") suiteDefinitionName: suiteDefinitionName,
-@as("suiteDefinitionArn") suiteDefinitionArn: amazonResourceName,
-@as("suiteDefinitionId") suiteDefinitionId: uUID
+lastUpdatedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+suiteDefinitionVersion: option<suiteDefinitionVersion>,
+suiteDefinitionName: option<suiteDefinitionName>,
+suiteDefinitionArn: option<amazonResourceName>,
+suiteDefinitionId: option<uuid>
 }
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "UpdateSuiteDefinitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSuiteDefinition = {
   type t;
   type request = {
-@as("suiteDefinitionVersion") suiteDefinitionVersion: suiteDefinitionVersion,
-@as("suiteDefinitionId") suiteDefinitionId: option<uUID>
+suiteDefinitionVersion: option<suiteDefinitionVersion>,
+suiteDefinitionId: uuid
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("lastModifiedAt") lastModifiedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("suiteDefinitionConfiguration") suiteDefinitionConfiguration: suiteDefinitionConfiguration,
-@as("latestVersion") latestVersion: suiteDefinitionVersion,
-@as("suiteDefinitionVersion") suiteDefinitionVersion: suiteDefinitionVersion,
-@as("suiteDefinitionArn") suiteDefinitionArn: amazonResourceName,
-@as("suiteDefinitionId") suiteDefinitionId: uUID
+tags: option<tagMap>,
+lastModifiedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+suiteDefinitionConfiguration: option<suiteDefinitionConfiguration>,
+latestVersion: option<suiteDefinitionVersion>,
+suiteDefinitionVersion: option<suiteDefinitionVersion>,
+suiteDefinitionArn: option<amazonResourceName>,
+suiteDefinitionId: option<uuid>
 }
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "GetSuiteDefinitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSuiteDefinition = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("suiteDefinitionConfiguration") suiteDefinitionConfiguration: suiteDefinitionConfiguration
+tags: option<tagMap>,
+suiteDefinitionConfiguration: option<suiteDefinitionConfiguration>
 }
   type response = {
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("suiteDefinitionName") suiteDefinitionName: suiteDefinitionName,
-@as("suiteDefinitionArn") suiteDefinitionArn: amazonResourceName,
-@as("suiteDefinitionId") suiteDefinitionId: uUID
+createdAt: option<timestamp_>,
+suiteDefinitionName: option<suiteDefinitionName>,
+suiteDefinitionArn: option<amazonResourceName>,
+suiteDefinitionId: option<uuid>
 }
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "CreateSuiteDefinitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSuiteDefinitions = {
   type t;
   type request = {
-@as("nextToken") nextToken: token,
-@as("maxResults") maxResults: maxResults
+nextToken: option<token>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: token,
-@as("suiteDefinitionInformationList") suiteDefinitionInformationList: suiteDefinitionInformationList
+nextToken: option<token>,
+suiteDefinitionInformationList: option<suiteDefinitionInformationList>
 }
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "ListSuiteDefinitionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSuiteRun = {
   type t;
   type request = {
-@as("suiteRunId") suiteRunId: option<uUID>,
-@as("suiteDefinitionId") suiteDefinitionId: option<uUID>
+suiteRunId: uuid,
+suiteDefinitionId: uuid
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("errorReason") errorReason: errorReason,
-@as("status") status: suiteRunStatus,
-@as("endTime") endTime: amazonawsTimestamp,
-@as("startTime") startTime: amazonawsTimestamp,
-@as("testResult") testResult: testResult,
-@as("suiteRunConfiguration") suiteRunConfiguration: suiteRunConfiguration,
-@as("suiteRunArn") suiteRunArn: amazonResourceName,
-@as("suiteRunId") suiteRunId: uUID,
-@as("suiteDefinitionVersion") suiteDefinitionVersion: suiteDefinitionVersion,
-@as("suiteDefinitionId") suiteDefinitionId: uUID
+tags: option<tagMap>,
+errorReason: option<errorReason>,
+status: option<suiteRunStatus>,
+endTime: option<timestamp_>,
+startTime: option<timestamp_>,
+testResult: option<testResult>,
+suiteRunConfiguration: option<suiteRunConfiguration>,
+suiteRunArn: option<amazonResourceName>,
+suiteRunId: option<uuid>,
+suiteDefinitionVersion: option<suiteDefinitionVersion>,
+suiteDefinitionId: option<uuid>
 }
   @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "GetSuiteRunCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

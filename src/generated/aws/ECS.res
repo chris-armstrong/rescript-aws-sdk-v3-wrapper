@@ -1,295 +1,298 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type ulimitName = [@as("stack") #stack | @as("sigpending") #sigpending | @as("rttime") #rttime | @as("rtprio") #rtprio | @as("rss") #rss | @as("nproc") #nproc | @as("nofile") #nofile | @as("nice") #nice | @as("msgqueue") #msgqueue | @as("memlock") #memlock | @as("locks") #locks | @as("fsize") #fsize | @as("data") #data | @as("cpu") #cpu | @as("core") #core]
-type transportProtocol = [@as("udp") #udp | @as("tcp") #tcp]
-type amazonawsTimestamp = Js.Date.t;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type ulimitName = [@as("stack") #Stack | @as("sigpending") #Sigpending | @as("rttime") #Rttime | @as("rtprio") #Rtprio | @as("rss") #Rss | @as("nproc") #Nproc | @as("nofile") #Nofile | @as("nice") #Nice | @as("msgqueue") #Msgqueue | @as("memlock") #Memlock | @as("locks") #Locks | @as("fsize") #Fsize | @as("data") #Data | @as("cpu") #Cpu | @as("core") #Core]
+type transportProtocol = [@as("udp") #Udp | @as("tcp") #Tcp]
+type timestamp_ = Js.Date.t;
 type taskStopCode = [@as("UserInitiated") #UserInitiated | @as("EssentialContainerExited") #EssentialContainerExited | @as("TaskFailedToStart") #TaskFailedToStart]
 type taskSetField = [@as("TAGS") #TAGS]
 type taskField = [@as("TAGS") #TAGS]
 type taskDefinitionStatus = [@as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
-type taskDefinitionPlacementConstraintType = [@as("memberOf") #memberOf]
+type taskDefinitionPlacementConstraintType = [@as("memberOf") #MemberOf]
 type taskDefinitionField = [@as("TAGS") #TAGS]
 type taskDefinitionFamilyStatus = [@as("ALL") #ALL | @as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
-type targetType = [@as("container-instance") #container_instance]
+type targetType = [@as("container-instance") #ContainerInstance]
 type tagValue = string
 type tagKey = string
-type amazonawsString = string
-type stabilityStatus = [@as("STABILIZING") #STABILIZING | @as("STEADY_STATE") #STEADY_STATE]
+type string_ = string
+type stabilityStatus = [@as("STABILIZING") #STABILIZING | @as("STEADY_STATE") #STEADYSTATE]
 type sortOrder = [@as("DESC") #DESC | @as("ASC") #ASC]
-type settingName = [@as("containerInsights") #containerInsights | @as("awsvpcTrunking") #awsvpcTrunking | @as("containerInstanceLongArnFormat") #containerInstanceLongArnFormat | @as("taskLongArnFormat") #taskLongArnFormat | @as("serviceLongArnFormat") #serviceLongArnFormat]
+type settingName = [@as("containerInsights") #ContainerInsights | @as("awsvpcTrunking") #AwsvpcTrunking | @as("containerInstanceLongArnFormat") #ContainerInstanceLongArnFormat | @as("taskLongArnFormat") #TaskLongArnFormat | @as("serviceLongArnFormat") #ServiceLongArnFormat]
 type serviceField = [@as("TAGS") #TAGS]
 type sensitiveString = string
-type scope = [@as("shared") #shared | @as("task") #task]
+type scope = [@as("shared") #Shared | @as("task") #Task]
 type schedulingStrategy = [@as("DAEMON") #DAEMON | @as("REPLICA") #REPLICA]
 type scaleUnit = [@as("PERCENT") #PERCENT]
 type resourceType = [@as("InferenceAccelerator") #InferenceAccelerator | @as("GPU") #GPU]
 type proxyConfigurationType = [@as("APPMESH") #APPMESH]
-type propagateTags = [@as("SERVICE") #SERVICE | @as("TASK_DEFINITION") #TASK_DEFINITION]
+type propagateTags = [@as("SERVICE") #SERVICE | @as("TASK_DEFINITION") #TASKDEFINITION]
 type platformDeviceType = [@as("GPU") #GPU]
-type placementStrategyType = [@as("binpack") #binpack | @as("spread") #spread | @as("random") #random]
-type placementConstraintType = [@as("memberOf") #memberOf | @as("distinctInstance") #distinctInstance]
-type pidMode = [@as("task") #task | @as("host") #host]
-type networkMode = [@as("none") #none | @as("awsvpc") #awsvpc | @as("host") #host | @as("bridge") #bridge]
+type placementStrategyType = [@as("binpack") #Binpack | @as("spread") #Spread | @as("random") #Random]
+type placementConstraintType = [@as("memberOf") #MemberOf | @as("distinctInstance") #DistinctInstance]
+type pidMode = [@as("task") #Task | @as("host") #Host]
+type networkMode = [@as("none") #None | @as("awsvpc") #Awsvpc | @as("host") #Host | @as("bridge") #Bridge]
 type managedTerminationProtection = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
-type managedScalingTargetCapacity = int;
-type managedScalingStepSize = int;
+type managedScalingTargetCapacity = int
+type managedScalingStepSize = int
 type managedScalingStatus = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
-type managedScalingInstanceWarmupPeriod = int;
+type managedScalingInstanceWarmupPeriod = int
 type managedAgentName = [@as("ExecuteCommandAgent") #ExecuteCommandAgent]
-type amazonawsLong = float;
-type logDriver = [@as("awsfirelens") #awsfirelens | @as("splunk") #splunk | @as("awslogs") #awslogs | @as("fluentd") #fluentd | @as("gelf") #gelf | @as("journald") #journald | @as("syslog") #syslog | @as("json-file") #json_file]
+type long = float
+type logDriver = [@as("awsfirelens") #Awsfirelens | @as("splunk") #Splunk | @as("awslogs") #Awslogs | @as("fluentd") #Fluentd | @as("gelf") #Gelf | @as("journald") #Journald | @as("syslog") #Syslog | @as("json-file") #JsonFile]
 type launchType = [@as("EXTERNAL") #EXTERNAL | @as("FARGATE") #FARGATE | @as("EC2") #EC2]
-type ipcMode = [@as("none") #none | @as("task") #task | @as("host") #host]
-type amazonawsInteger = int;
+type ipcMode = [@as("none") #None | @as("task") #Task | @as("host") #Host]
+type integer_ = int
 type healthStatus = [@as("UNKNOWN") #UNKNOWN | @as("UNHEALTHY") #UNHEALTHY | @as("HEALTHY") #HEALTHY]
-type firelensConfigurationType = [@as("fluentbit") #fluentbit | @as("fluentd") #fluentd]
+type firelensConfigurationType = [@as("fluentbit") #Fluentbit | @as("fluentd") #Fluentd]
 type executeCommandLogging = [@as("OVERRIDE") #OVERRIDE | @as("DEFAULT") #DEFAULT | @as("NONE") #NONE]
-type environmentFileType = [@as("s3") #s3]
-type eFSTransitEncryption = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
-type eFSAuthorizationConfigIAM = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
-type amazonawsDouble = float;
-type deviceCgroupPermission = [@as("mknod") #mknod | @as("write") #write | @as("read") #read]
+type environmentFileType = [@as("s3") #S3]
+type efstransitEncryption = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
+type efsauthorizationConfigIAM = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
+type double = float
+type deviceCgroupPermission = [@as("mknod") #Mknod | @as("write") #Write | @as("read") #Read]
 type desiredStatus = [@as("STOPPED") #STOPPED | @as("PENDING") #PENDING | @as("RUNNING") #RUNNING]
-type deploymentRolloutState = [@as("IN_PROGRESS") #IN_PROGRESS | @as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED]
-type deploymentControllerType = [@as("EXTERNAL") #EXTERNAL | @as("CODE_DEPLOY") #CODE_DEPLOY | @as("ECS") #ECS]
-type containerInstanceStatus = [@as("REGISTRATION_FAILED") #REGISTRATION_FAILED | @as("DEREGISTERING") #DEREGISTERING | @as("REGISTERING") #REGISTERING | @as("DRAINING") #DRAINING | @as("ACTIVE") #ACTIVE]
+type deploymentRolloutState = [@as("IN_PROGRESS") #INPROGRESS | @as("FAILED") #FAILED | @as("COMPLETED") #COMPLETED]
+type deploymentControllerType = [@as("EXTERNAL") #EXTERNAL | @as("CODE_DEPLOY") #CODEDEPLOY | @as("ECS") #ECS]
+type containerInstanceStatus = [@as("REGISTRATION_FAILED") #REGISTRATIONFAILED | @as("DEREGISTERING") #DEREGISTERING | @as("REGISTERING") #REGISTERING | @as("DRAINING") #DRAINING | @as("ACTIVE") #ACTIVE]
 type containerInstanceField = [@as("TAGS") #TAGS]
 type containerCondition = [@as("HEALTHY") #HEALTHY | @as("SUCCESS") #SUCCESS | @as("COMPLETE") #COMPLETE | @as("START") #START]
 type connectivity = [@as("DISCONNECTED") #DISCONNECTED | @as("CONNECTED") #CONNECTED]
 type compatibility = [@as("EXTERNAL") #EXTERNAL | @as("FARGATE") #FARGATE | @as("EC2") #EC2]
-type clusterSettingName = [@as("containerInsights") #containerInsights]
+type clusterSettingName = [@as("containerInsights") #ContainerInsights]
 type clusterField = [@as("TAGS") #TAGS | @as("STATISTICS") #STATISTICS | @as("SETTINGS") #SETTINGS | @as("CONFIGURATIONS") #CONFIGURATIONS | @as("ATTACHMENTS") #ATTACHMENTS]
-type capacityProviderUpdateStatus = [@as("UPDATE_FAILED") #UPDATE_FAILED | @as("UPDATE_COMPLETE") #UPDATE_COMPLETE | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS | @as("DELETE_FAILED") #DELETE_FAILED | @as("DELETE_COMPLETE") #DELETE_COMPLETE | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS]
-type capacityProviderStrategyItemWeight = int;
-type capacityProviderStrategyItemBase = int;
+type capacityProviderUpdateStatus = [@as("UPDATE_FAILED") #UPDATEFAILED | @as("UPDATE_COMPLETE") #UPDATECOMPLETE | @as("UPDATE_IN_PROGRESS") #UPDATEINPROGRESS | @as("DELETE_FAILED") #DELETEFAILED | @as("DELETE_COMPLETE") #DELETECOMPLETE | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS]
+type capacityProviderStrategyItemWeight = int
+type capacityProviderStrategyItemBase = int
 type capacityProviderStatus = [@as("INACTIVE") #INACTIVE | @as("ACTIVE") #ACTIVE]
 type capacityProviderField = [@as("TAGS") #TAGS]
-type boxedInteger = int;
-type boxedBoolean = bool;
-type amazonawsBoolean = bool;
+type boxedInteger = int
+type boxedBoolean = bool
+type boolean_ = bool
 type assignPublicIp = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type agentUpdateStatus = [@as("FAILED") #FAILED | @as("UPDATED") #UPDATED | @as("UPDATING") #UPDATING | @as("STAGED") #STAGED | @as("STAGING") #STAGING | @as("PENDING") #PENDING]
 type volumeFrom = {
-@as("readOnly") readOnly: boxedBoolean,
-@as("sourceContainer") sourceContainer: amazonawsString
+readOnly: option<boxedBoolean>,
+sourceContainer: option<string_>
 }
 type versionInfo = {
-@as("dockerVersion") dockerVersion: amazonawsString,
-@as("agentHash") agentHash: amazonawsString,
-@as("agentVersion") agentVersion: amazonawsString
+dockerVersion: option<string_>,
+agentHash: option<string_>,
+agentVersion: option<string_>
 }
 type ulimit = {
-@as("hardLimit") hardLimit: option<amazonawsInteger>,
-@as("softLimit") softLimit: option<amazonawsInteger>,
-@as("name") name: option<ulimitName>
+hardLimit: integer_,
+softLimit: integer_,
+name: ulimitName
 }
 type taskSetFieldList = array<taskSetField>
 type taskFieldList = array<taskField>
 type taskDefinitionPlacementConstraint = {
-@as("expression") expression: amazonawsString,
-@as("type") type_: taskDefinitionPlacementConstraintType
+expression: option<string_>,
+@as("type") type_: option<taskDefinitionPlacementConstraintType>
 }
 type taskDefinitionFieldList = array<taskDefinitionField>
 type tagKeys = array<tagKey>
 type tag = {
-@as("value") value: tagValue,
-@as("key") key: tagKey
+value: option<tagValue>,
+key: option<tagKey>
 }
 type systemControl = {
-@as("value") value: amazonawsString,
-@as("namespace") namespace: amazonawsString
+value: option<string_>,
+namespace: option<string_>
 }
-type stringMap = Js.Dict.t< amazonawsString>
-type stringList = array<amazonawsString>
+type stringMap = Js.Dict.t< string_>
+type stringList = array<string_>
 type setting = {
-@as("principalArn") principalArn: amazonawsString,
-@as("value") value: amazonawsString,
-@as("name") name: settingName
+principalArn: option<string_>,
+value: option<string_>,
+name: option<settingName>
 }
 type session = {
-@as("tokenValue") tokenValue: sensitiveString,
-@as("streamUrl") streamUrl: amazonawsString,
-@as("sessionId") sessionId: amazonawsString
+tokenValue: option<sensitiveString>,
+streamUrl: option<string_>,
+sessionId: option<string_>
 }
 type serviceRegistry = {
-@as("containerPort") containerPort: boxedInteger,
-@as("containerName") containerName: amazonawsString,
-@as("port") port: boxedInteger,
-@as("registryArn") registryArn: amazonawsString
+containerPort: option<boxedInteger>,
+containerName: option<string_>,
+port: option<boxedInteger>,
+registryArn: option<string_>
 }
 type serviceFieldList = array<serviceField>
 type serviceEvent = {
-@as("message") message: amazonawsString,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("id") id: amazonawsString
+message: option<string_>,
+createdAt: option<timestamp_>,
+id: option<string_>
 }
 type secret = {
-@as("valueFrom") valueFrom: option<amazonawsString>,
-@as("name") name: option<amazonawsString>
+valueFrom: string_,
+name: string_
 }
 type scale = {
-@as("unit") unit: scaleUnit,
-@as("value") value: amazonawsDouble
+@as("unit") unit_: option<scaleUnit>,
+value: option<double>
 }
 type resourceRequirement = {
-@as("type") type_: option<resourceType>,
-@as("value") value: option<amazonawsString>
+@as("type") type_: resourceType,
+value: string_
 }
 type repositoryCredentials = {
-@as("credentialsParameter") credentialsParameter: option<amazonawsString>
+credentialsParameter: string_
 }
 type portMapping = {
-@as("protocol") protocol: transportProtocol,
-@as("hostPort") hostPort: boxedInteger,
-@as("containerPort") containerPort: boxedInteger
+protocol: option<transportProtocol>,
+hostPort: option<boxedInteger>,
+containerPort: option<boxedInteger>
 }
 type platformDevice = {
-@as("type") type_: option<platformDeviceType>,
-@as("id") id: option<amazonawsString>
+@as("type") type_: platformDeviceType,
+id: string_
 }
 type placementStrategy = {
-@as("field") field: amazonawsString,
-@as("type") type_: placementStrategyType
+field: option<string_>,
+@as("type") type_: option<placementStrategyType>
 }
 type placementConstraint = {
-@as("expression") expression: amazonawsString,
-@as("type") type_: placementConstraintType
+expression: option<string_>,
+@as("type") type_: option<placementConstraintType>
 }
 type networkInterface = {
-@as("ipv6Address") ipv6Address: amazonawsString,
-@as("privateIpv4Address") privateIpv4Address: amazonawsString,
-@as("attachmentId") attachmentId: amazonawsString
+ipv6Address: option<string_>,
+privateIpv4Address: option<string_>,
+attachmentId: option<string_>
 }
 type networkBinding = {
-@as("protocol") protocol: transportProtocol,
-@as("hostPort") hostPort: boxedInteger,
-@as("containerPort") containerPort: boxedInteger,
-@as("bindIP") bindIP: amazonawsString
+protocol: option<transportProtocol>,
+hostPort: option<boxedInteger>,
+containerPort: option<boxedInteger>,
+bindIP: option<string_>
 }
 type mountPoint = {
-@as("readOnly") readOnly: boxedBoolean,
-@as("containerPath") containerPath: amazonawsString,
-@as("sourceVolume") sourceVolume: amazonawsString
+readOnly: option<boxedBoolean>,
+containerPath: option<string_>,
+sourceVolume: option<string_>
 }
 type managedScaling = {
-@as("instanceWarmupPeriod") instanceWarmupPeriod: managedScalingInstanceWarmupPeriod,
-@as("maximumScalingStepSize") maximumScalingStepSize: managedScalingStepSize,
-@as("minimumScalingStepSize") minimumScalingStepSize: managedScalingStepSize,
-@as("targetCapacity") targetCapacity: managedScalingTargetCapacity,
-@as("status") status: managedScalingStatus
+instanceWarmupPeriod: option<managedScalingInstanceWarmupPeriod>,
+maximumScalingStepSize: option<managedScalingStepSize>,
+minimumScalingStepSize: option<managedScalingStepSize>,
+targetCapacity: option<managedScalingTargetCapacity>,
+status: option<managedScalingStatus>
 }
 type managedAgentStateChange = {
-@as("reason") reason: amazonawsString,
-@as("status") status: option<amazonawsString>,
-@as("managedAgentName") managedAgentName: option<managedAgentName>,
-@as("containerName") containerName: option<amazonawsString>
+reason: option<string_>,
+status: string_,
+managedAgentName: managedAgentName,
+containerName: string_
 }
 type managedAgent = {
-@as("lastStatus") lastStatus: amazonawsString,
-@as("reason") reason: amazonawsString,
-@as("name") name: managedAgentName,
-@as("lastStartedAt") lastStartedAt: amazonawsTimestamp
+lastStatus: option<string_>,
+reason: option<string_>,
+name: option<managedAgentName>,
+lastStartedAt: option<timestamp_>
 }
-type logConfigurationOptionsMap = Js.Dict.t< amazonawsString>
+type logConfigurationOptionsMap = Js.Dict.t< string_>
 type loadBalancer = {
-@as("containerPort") containerPort: boxedInteger,
-@as("containerName") containerName: amazonawsString,
-@as("loadBalancerName") loadBalancerName: amazonawsString,
-@as("targetGroupArn") targetGroupArn: amazonawsString
+containerPort: option<boxedInteger>,
+containerName: option<string_>,
+loadBalancerName: option<string_>,
+targetGroupArn: option<string_>
 }
 type keyValuePair = {
-@as("value") value: amazonawsString,
-@as("name") name: amazonawsString
+value: option<string_>,
+name: option<string_>
 }
 type inferenceAcceleratorOverride = {
-@as("deviceType") deviceType: amazonawsString,
-@as("deviceName") deviceName: amazonawsString
+deviceType: option<string_>,
+deviceName: option<string_>
 }
 type inferenceAccelerator = {
-@as("deviceType") deviceType: option<amazonawsString>,
-@as("deviceName") deviceName: option<amazonawsString>
+deviceType: string_,
+deviceName: string_
 }
 type hostVolumeProperties = {
-@as("sourcePath") sourcePath: amazonawsString
+sourcePath: option<string_>
 }
 type hostEntry = {
-@as("ipAddress") ipAddress: option<amazonawsString>,
-@as("hostname") hostname: option<amazonawsString>
+ipAddress: string_,
+hostname: string_
 }
-type gpuIds = array<amazonawsString>
-type firelensConfigurationOptionsMap = Js.Dict.t< amazonawsString>
+type gpuIds = array<string_>
+type firelensConfigurationOptionsMap = Js.Dict.t< string_>
 type failure = {
-@as("detail") detail: amazonawsString,
-@as("reason") reason: amazonawsString,
-@as("arn") arn: amazonawsString
+detail: option<string_>,
+reason: option<string_>,
+arn: option<string_>
 }
-type fSxWindowsFileServerAuthorizationConfig = {
-@as("domain") domain: option<amazonawsString>,
-@as("credentialsParameter") credentialsParameter: option<amazonawsString>
+type fsxWindowsFileServerAuthorizationConfig = {
+domain: string_,
+credentialsParameter: string_
 }
 type executeCommandLogConfiguration = {
-@as("s3KeyPrefix") s3KeyPrefix: amazonawsString,
-@as("s3EncryptionEnabled") s3EncryptionEnabled: amazonawsBoolean,
-@as("s3BucketName") s3BucketName: amazonawsString,
-@as("cloudWatchEncryptionEnabled") cloudWatchEncryptionEnabled: amazonawsBoolean,
-@as("cloudWatchLogGroupName") cloudWatchLogGroupName: amazonawsString
+s3KeyPrefix: option<string_>,
+s3EncryptionEnabled: option<boolean_>,
+s3BucketName: option<string_>,
+cloudWatchEncryptionEnabled: option<boolean_>,
+cloudWatchLogGroupName: option<string_>
 }
 type ephemeralStorage = {
-@as("sizeInGiB") sizeInGiB: option<amazonawsInteger>
+sizeInGiB: integer_
 }
 type environmentFile = {
-@as("type") type_: option<environmentFileType>,
-@as("value") value: option<amazonawsString>
+@as("type") type_: environmentFileType,
+value: string_
 }
-type eFSAuthorizationConfig = {
-@as("iam") iam: eFSAuthorizationConfigIAM,
-@as("accessPointId") accessPointId: amazonawsString
+type efsauthorizationConfig = {
+iam: option<efsauthorizationConfigIAM>,
+accessPointId: option<string_>
 }
-type dockerLabelsMap = Js.Dict.t< amazonawsString>
+type dockerLabelsMap = Js.Dict.t< string_>
 type deviceCgroupPermissions = array<deviceCgroupPermission>
 type deploymentController = {
-@as("type") type_: option<deploymentControllerType>
+@as("type") type_: deploymentControllerType
 }
 type deploymentCircuitBreaker = {
-@as("rollback") rollback: option<amazonawsBoolean>,
-@as("enable") enable: option<amazonawsBoolean>
+rollback: boolean_,
+enable: boolean_
 }
 type containerInstanceFieldList = array<containerInstanceField>
 type containerDependency = {
-@as("condition") condition: option<containerCondition>,
-@as("containerName") containerName: option<amazonawsString>
+condition: containerCondition,
+containerName: string_
 }
 type compatibilityList = array<compatibility>
 type clusterSetting = {
-@as("value") value: amazonawsString,
-@as("name") name: clusterSettingName
+value: option<string_>,
+name: option<clusterSettingName>
 }
 type clusterFieldList = array<clusterField>
 type capacityProviderStrategyItem = {
-@as("base") base: capacityProviderStrategyItemBase,
-@as("weight") weight: capacityProviderStrategyItemWeight,
-@as("capacityProvider") capacityProvider: option<amazonawsString>
+base: option<capacityProviderStrategyItemBase>,
+weight: option<capacityProviderStrategyItemWeight>,
+capacityProvider: string_
 }
 type capacityProviderFieldList = array<capacityProviderField>
 type attribute = {
-@as("targetId") targetId: amazonawsString,
-@as("targetType") targetType: targetType,
-@as("value") value: amazonawsString,
-@as("name") name: option<amazonawsString>
+targetId: option<string_>,
+targetType: option<targetType>,
+value: option<string_>,
+name: string_
 }
 type attachmentStateChange = {
-@as("status") status: option<amazonawsString>,
-@as("attachmentArn") attachmentArn: option<amazonawsString>
+status: string_,
+attachmentArn: string_
 }
 type volumeFromList = array<volumeFrom>
 type ulimitList = array<ulimit>
 type tmpfs = {
-@as("mountOptions") mountOptions: stringList,
-@as("size") size: option<amazonawsInteger>,
-@as("containerPath") containerPath: option<amazonawsString>
+mountOptions: option<stringList>,
+size: integer_,
+containerPath: string_
 }
 type taskDefinitionPlacementConstraints = array<taskDefinitionPlacementConstraint>
 type tags = array<tag>
@@ -301,12 +304,12 @@ type serviceEvents = array<serviceEvent>
 type secretList = array<secret>
 type resourceRequirements = array<resourceRequirement>
 type resource = {
-@as("stringSetValue") stringSetValue: stringList,
-@as("integerValue") integerValue: amazonawsInteger,
-@as("longValue") longValue: amazonawsLong,
-@as("doubleValue") doubleValue: amazonawsDouble,
-@as("type") type_: amazonawsString,
-@as("name") name: amazonawsString
+stringSetValue: option<stringList>,
+integerValue: option<integer_>,
+longValue: option<long>,
+doubleValue: option<double>,
+@as("type") type_: option<string_>,
+name: option<string_>
 }
 type requiresAttributes = array<attribute>
 type proxyConfigurationProperties = array<keyValuePair>
@@ -321,210 +324,210 @@ type managedAgents = array<managedAgent>
 type managedAgentStateChanges = array<managedAgentStateChange>
 type loadBalancers = array<loadBalancer>
 type kernelCapabilities = {
-@as("drop") drop: stringList,
-@as("add") add: stringList
+drop: option<stringList>,
+add: option<stringList>
 }
 type inferenceAccelerators = array<inferenceAccelerator>
 type inferenceAcceleratorOverrides = array<inferenceAcceleratorOverride>
 type hostEntryList = array<hostEntry>
 type healthCheck = {
-@as("startPeriod") startPeriod: boxedInteger,
-@as("retries") retries: boxedInteger,
-@as("timeout") timeout: boxedInteger,
-@as("interval") interval: boxedInteger,
-@as("command") command: option<stringList>
+startPeriod: option<boxedInteger>,
+retries: option<boxedInteger>,
+timeout: option<boxedInteger>,
+interval: option<boxedInteger>,
+command: stringList
 }
 type firelensConfiguration = {
-@as("options") options: firelensConfigurationOptionsMap,
-@as("type") type_: option<firelensConfigurationType>
+options: option<firelensConfigurationOptionsMap>,
+@as("type") type_: firelensConfigurationType
 }
 type failures = array<failure>
-type fSxWindowsFileServerVolumeConfiguration = {
-@as("authorizationConfig") authorizationConfig: option<fSxWindowsFileServerAuthorizationConfig>,
-@as("rootDirectory") rootDirectory: option<amazonawsString>,
-@as("fileSystemId") fileSystemId: option<amazonawsString>
+type fsxWindowsFileServerVolumeConfiguration = {
+authorizationConfig: fsxWindowsFileServerAuthorizationConfig,
+rootDirectory: string_,
+fileSystemId: string_
 }
 type executeCommandConfiguration = {
-@as("logConfiguration") logConfiguration: executeCommandLogConfiguration,
-@as("logging") logging: executeCommandLogging,
-@as("kmsKeyId") kmsKeyId: amazonawsString
+logConfiguration: option<executeCommandLogConfiguration>,
+logging: option<executeCommandLogging>,
+kmsKeyId: option<string_>
 }
 type environmentVariables = array<keyValuePair>
 type environmentFiles = array<environmentFile>
-type eFSVolumeConfiguration = {
-@as("authorizationConfig") authorizationConfig: eFSAuthorizationConfig,
-@as("transitEncryptionPort") transitEncryptionPort: boxedInteger,
-@as("transitEncryption") transitEncryption: eFSTransitEncryption,
-@as("rootDirectory") rootDirectory: amazonawsString,
-@as("fileSystemId") fileSystemId: option<amazonawsString>
+type efsvolumeConfiguration = {
+authorizationConfig: option<efsauthorizationConfig>,
+transitEncryptionPort: option<boxedInteger>,
+transitEncryption: option<efstransitEncryption>,
+rootDirectory: option<string_>,
+fileSystemId: string_
 }
 type dockerVolumeConfiguration = {
-@as("labels") labels: stringMap,
-@as("driverOpts") driverOpts: stringMap,
-@as("driver") driver: amazonawsString,
-@as("autoprovision") autoprovision: boxedBoolean,
-@as("scope") scope: scope
+labels: option<stringMap>,
+driverOpts: option<stringMap>,
+driver: option<string_>,
+autoprovision: option<boxedBoolean>,
+scope: option<scope>
 }
 type device = {
-@as("permissions") permissions: deviceCgroupPermissions,
-@as("containerPath") containerPath: amazonawsString,
-@as("hostPath") hostPath: option<amazonawsString>
+permissions: option<deviceCgroupPermissions>,
+containerPath: option<string_>,
+hostPath: string_
 }
 type deploymentConfiguration = {
-@as("minimumHealthyPercent") minimumHealthyPercent: boxedInteger,
-@as("maximumPercent") maximumPercent: boxedInteger,
-@as("deploymentCircuitBreaker") deploymentCircuitBreaker: deploymentCircuitBreaker
+minimumHealthyPercent: option<boxedInteger>,
+maximumPercent: option<boxedInteger>,
+deploymentCircuitBreaker: option<deploymentCircuitBreaker>
 }
 type containerDependencies = array<containerDependency>
 type clusterSettings = array<clusterSetting>
 type capacityProviderStrategy = array<capacityProviderStrategyItem>
 type awsVpcConfiguration = {
-@as("assignPublicIp") assignPublicIp: assignPublicIp,
-@as("securityGroups") securityGroups: stringList,
-@as("subnets") subnets: option<stringList>
+assignPublicIp: option<assignPublicIp>,
+securityGroups: option<stringList>,
+subnets: stringList
 }
 type autoScalingGroupProviderUpdate = {
-@as("managedTerminationProtection") managedTerminationProtection: managedTerminationProtection,
-@as("managedScaling") managedScaling: managedScaling
+managedTerminationProtection: option<managedTerminationProtection>,
+managedScaling: option<managedScaling>
 }
 type autoScalingGroupProvider = {
-@as("managedTerminationProtection") managedTerminationProtection: managedTerminationProtection,
-@as("managedScaling") managedScaling: managedScaling,
-@as("autoScalingGroupArn") autoScalingGroupArn: option<amazonawsString>
+managedTerminationProtection: option<managedTerminationProtection>,
+managedScaling: option<managedScaling>,
+autoScalingGroupArn: string_
 }
 type attributes = array<attribute>
 type attachmentStateChanges = array<attachmentStateChange>
 type attachmentDetails = array<keyValuePair>
 type volume = {
-@as("fsxWindowsFileServerVolumeConfiguration") fsxWindowsFileServerVolumeConfiguration: fSxWindowsFileServerVolumeConfiguration,
-@as("efsVolumeConfiguration") efsVolumeConfiguration: eFSVolumeConfiguration,
-@as("dockerVolumeConfiguration") dockerVolumeConfiguration: dockerVolumeConfiguration,
-@as("host") host: hostVolumeProperties,
-@as("name") name: amazonawsString
+fsxWindowsFileServerVolumeConfiguration: option<fsxWindowsFileServerVolumeConfiguration>,
+efsVolumeConfiguration: option<efsvolumeConfiguration>,
+dockerVolumeConfiguration: option<dockerVolumeConfiguration>,
+host: option<hostVolumeProperties>,
+name: option<string_>
 }
 type tmpfsList = array<tmpfs>
 type resources = array<resource>
 type proxyConfiguration = {
-@as("properties") properties: proxyConfigurationProperties,
-@as("containerName") containerName: option<amazonawsString>,
-@as("type") type_: proxyConfigurationType
+properties: option<proxyConfigurationProperties>,
+containerName: string_,
+@as("type") type_: option<proxyConfigurationType>
 }
 type networkConfiguration = {
-@as("awsvpcConfiguration") awsvpcConfiguration: awsVpcConfiguration
+awsvpcConfiguration: option<awsVpcConfiguration>
 }
 type logConfiguration = {
-@as("secretOptions") secretOptions: secretList,
-@as("options") options: logConfigurationOptionsMap,
-@as("logDriver") logDriver: option<logDriver>
+secretOptions: option<secretList>,
+options: option<logConfigurationOptionsMap>,
+logDriver: logDriver
 }
 type devicesList = array<device>
 type containerStateChange = {
-@as("status") status: amazonawsString,
-@as("reason") reason: amazonawsString,
-@as("networkBindings") networkBindings: networkBindings,
-@as("exitCode") exitCode: boxedInteger,
-@as("runtimeId") runtimeId: amazonawsString,
-@as("imageDigest") imageDigest: amazonawsString,
-@as("containerName") containerName: amazonawsString
+status: option<string_>,
+reason: option<string_>,
+networkBindings: option<networkBindings>,
+exitCode: option<boxedInteger>,
+runtimeId: option<string_>,
+imageDigest: option<string_>,
+containerName: option<string_>
 }
 type containerOverride = {
-@as("resourceRequirements") resourceRequirements: resourceRequirements,
-@as("memoryReservation") memoryReservation: boxedInteger,
-@as("memory") memory: boxedInteger,
-@as("cpu") cpu: boxedInteger,
-@as("environmentFiles") environmentFiles: environmentFiles,
-@as("environment") environment: environmentVariables,
-@as("command") command: stringList,
-@as("name") name: amazonawsString
+resourceRequirements: option<resourceRequirements>,
+memoryReservation: option<boxedInteger>,
+memory: option<boxedInteger>,
+cpu: option<boxedInteger>,
+environmentFiles: option<environmentFiles>,
+environment: option<environmentVariables>,
+command: option<stringList>,
+name: option<string_>
 }
 type container = {
-@as("gpuIds") gpuIds: gpuIds,
-@as("memoryReservation") memoryReservation: amazonawsString,
-@as("memory") memory: amazonawsString,
-@as("cpu") cpu: amazonawsString,
-@as("managedAgents") managedAgents: managedAgents,
-@as("healthStatus") healthStatus: healthStatus,
-@as("networkInterfaces") networkInterfaces: networkInterfaces,
-@as("networkBindings") networkBindings: networkBindings,
-@as("reason") reason: amazonawsString,
-@as("exitCode") exitCode: boxedInteger,
-@as("lastStatus") lastStatus: amazonawsString,
-@as("runtimeId") runtimeId: amazonawsString,
-@as("imageDigest") imageDigest: amazonawsString,
-@as("image") image: amazonawsString,
-@as("name") name: amazonawsString,
-@as("taskArn") taskArn: amazonawsString,
-@as("containerArn") containerArn: amazonawsString
+gpuIds: option<gpuIds>,
+memoryReservation: option<string_>,
+memory: option<string_>,
+cpu: option<string_>,
+managedAgents: option<managedAgents>,
+healthStatus: option<healthStatus>,
+networkInterfaces: option<networkInterfaces>,
+networkBindings: option<networkBindings>,
+reason: option<string_>,
+exitCode: option<boxedInteger>,
+lastStatus: option<string_>,
+runtimeId: option<string_>,
+imageDigest: option<string_>,
+image: option<string_>,
+name: option<string_>,
+taskArn: option<string_>,
+containerArn: option<string_>
 }
 type clusterConfiguration = {
-@as("executeCommandConfiguration") executeCommandConfiguration: executeCommandConfiguration
+executeCommandConfiguration: option<executeCommandConfiguration>
 }
 type capacityProvider = {
-@as("tags") tags: tags,
-@as("updateStatusReason") updateStatusReason: amazonawsString,
-@as("updateStatus") updateStatus: capacityProviderUpdateStatus,
-@as("autoScalingGroupProvider") autoScalingGroupProvider: autoScalingGroupProvider,
-@as("status") status: capacityProviderStatus,
-@as("name") name: amazonawsString,
-@as("capacityProviderArn") capacityProviderArn: amazonawsString
+tags: option<tags>,
+updateStatusReason: option<string_>,
+updateStatus: option<capacityProviderUpdateStatus>,
+autoScalingGroupProvider: option<autoScalingGroupProvider>,
+status: option<capacityProviderStatus>,
+name: option<string_>,
+capacityProviderArn: option<string_>
 }
 type attachment = {
-@as("details") details: attachmentDetails,
-@as("status") status: amazonawsString,
-@as("type") type_: amazonawsString,
-@as("id") id: amazonawsString
+details: option<attachmentDetails>,
+status: option<string_>,
+@as("type") type_: option<string_>,
+id: option<string_>
 }
 type volumeList = array<volume>
 type taskSet = {
-@as("tags") tags: tags,
-@as("stabilityStatusAt") stabilityStatusAt: amazonawsTimestamp,
-@as("stabilityStatus") stabilityStatus: stabilityStatus,
-@as("scale") scale: scale,
-@as("serviceRegistries") serviceRegistries: serviceRegistries,
-@as("loadBalancers") loadBalancers: loadBalancers,
-@as("networkConfiguration") networkConfiguration: networkConfiguration,
-@as("platformVersion") platformVersion: amazonawsString,
-@as("capacityProviderStrategy") capacityProviderStrategy: capacityProviderStrategy,
-@as("launchType") launchType: launchType,
-@as("updatedAt") updatedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("runningCount") runningCount: amazonawsInteger,
-@as("pendingCount") pendingCount: amazonawsInteger,
-@as("computedDesiredCount") computedDesiredCount: amazonawsInteger,
-@as("taskDefinition") taskDefinition: amazonawsString,
-@as("status") status: amazonawsString,
-@as("externalId") externalId: amazonawsString,
-@as("startedBy") startedBy: amazonawsString,
-@as("clusterArn") clusterArn: amazonawsString,
-@as("serviceArn") serviceArn: amazonawsString,
-@as("taskSetArn") taskSetArn: amazonawsString,
-@as("id") id: amazonawsString
+tags: option<tags>,
+stabilityStatusAt: option<timestamp_>,
+stabilityStatus: option<stabilityStatus>,
+scale: option<scale>,
+serviceRegistries: option<serviceRegistries>,
+loadBalancers: option<loadBalancers>,
+networkConfiguration: option<networkConfiguration>,
+platformVersion: option<string_>,
+capacityProviderStrategy: option<capacityProviderStrategy>,
+launchType: option<launchType>,
+updatedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+runningCount: option<integer_>,
+pendingCount: option<integer_>,
+computedDesiredCount: option<integer_>,
+taskDefinition: option<string_>,
+status: option<string_>,
+externalId: option<string_>,
+startedBy: option<string_>,
+clusterArn: option<string_>,
+serviceArn: option<string_>,
+taskSetArn: option<string_>,
+id: option<string_>
 }
 type linuxParameters = {
-@as("swappiness") swappiness: boxedInteger,
-@as("maxSwap") maxSwap: boxedInteger,
-@as("tmpfs") tmpfs: tmpfsList,
-@as("sharedMemorySize") sharedMemorySize: boxedInteger,
-@as("initProcessEnabled") initProcessEnabled: boxedBoolean,
-@as("devices") devices: devicesList,
-@as("capabilities") capabilities: kernelCapabilities
+swappiness: option<boxedInteger>,
+maxSwap: option<boxedInteger>,
+tmpfs: option<tmpfsList>,
+sharedMemorySize: option<boxedInteger>,
+initProcessEnabled: option<boxedBoolean>,
+devices: option<devicesList>,
+capabilities: option<kernelCapabilities>
 }
 type deployment = {
-@as("rolloutStateReason") rolloutStateReason: amazonawsString,
-@as("rolloutState") rolloutState: deploymentRolloutState,
-@as("networkConfiguration") networkConfiguration: networkConfiguration,
-@as("platformVersion") platformVersion: amazonawsString,
-@as("launchType") launchType: launchType,
-@as("capacityProviderStrategy") capacityProviderStrategy: capacityProviderStrategy,
-@as("updatedAt") updatedAt: amazonawsTimestamp,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("failedTasks") failedTasks: amazonawsInteger,
-@as("runningCount") runningCount: amazonawsInteger,
-@as("pendingCount") pendingCount: amazonawsInteger,
-@as("desiredCount") desiredCount: amazonawsInteger,
-@as("taskDefinition") taskDefinition: amazonawsString,
-@as("status") status: amazonawsString,
-@as("id") id: amazonawsString
+rolloutStateReason: option<string_>,
+rolloutState: option<deploymentRolloutState>,
+networkConfiguration: option<networkConfiguration>,
+platformVersion: option<string_>,
+launchType: option<launchType>,
+capacityProviderStrategy: option<capacityProviderStrategy>,
+updatedAt: option<timestamp_>,
+createdAt: option<timestamp_>,
+failedTasks: option<integer_>,
+runningCount: option<integer_>,
+pendingCount: option<integer_>,
+desiredCount: option<integer_>,
+taskDefinition: option<string_>,
+status: option<string_>,
+id: option<string_>
 }
 type containers = array<container>
 type containerStateChanges = array<containerStateChange>
@@ -533,1038 +536,1038 @@ type capacityProviders = array<capacityProvider>
 type attachments = array<attachment>
 type taskSets = array<taskSet>
 type taskOverride = {
-@as("ephemeralStorage") ephemeralStorage: ephemeralStorage,
-@as("taskRoleArn") taskRoleArn: amazonawsString,
-@as("memory") memory: amazonawsString,
-@as("executionRoleArn") executionRoleArn: amazonawsString,
-@as("inferenceAcceleratorOverrides") inferenceAcceleratorOverrides: inferenceAcceleratorOverrides,
-@as("cpu") cpu: amazonawsString,
-@as("containerOverrides") containerOverrides: containerOverrides
+ephemeralStorage: option<ephemeralStorage>,
+taskRoleArn: option<string_>,
+memory: option<string_>,
+executionRoleArn: option<string_>,
+inferenceAcceleratorOverrides: option<inferenceAcceleratorOverrides>,
+cpu: option<string_>,
+containerOverrides: option<containerOverrides>
 }
 type deployments = array<deployment>
 type containerInstance = {
-@as("tags") tags: tags,
-@as("attachments") attachments: attachments,
-@as("registeredAt") registeredAt: amazonawsTimestamp,
-@as("attributes") attributes: attributes,
-@as("agentUpdateStatus") agentUpdateStatus: agentUpdateStatus,
-@as("pendingTasksCount") pendingTasksCount: amazonawsInteger,
-@as("runningTasksCount") runningTasksCount: amazonawsInteger,
-@as("agentConnected") agentConnected: amazonawsBoolean,
-@as("statusReason") statusReason: amazonawsString,
-@as("status") status: amazonawsString,
-@as("registeredResources") registeredResources: resources,
-@as("remainingResources") remainingResources: resources,
-@as("versionInfo") versionInfo: versionInfo,
-@as("version") version: amazonawsLong,
-@as("capacityProviderName") capacityProviderName: amazonawsString,
-@as("ec2InstanceId") ec2InstanceId: amazonawsString,
-@as("containerInstanceArn") containerInstanceArn: amazonawsString
+tags: option<tags>,
+attachments: option<attachments>,
+registeredAt: option<timestamp_>,
+attributes: option<attributes>,
+agentUpdateStatus: option<agentUpdateStatus>,
+pendingTasksCount: option<integer_>,
+runningTasksCount: option<integer_>,
+agentConnected: option<boolean_>,
+statusReason: option<string_>,
+status: option<string_>,
+registeredResources: option<resources>,
+remainingResources: option<resources>,
+versionInfo: option<versionInfo>,
+version: option<long>,
+capacityProviderName: option<string_>,
+ec2InstanceId: option<string_>,
+containerInstanceArn: option<string_>
 }
 type containerDefinition = {
-@as("firelensConfiguration") firelensConfiguration: firelensConfiguration,
-@as("resourceRequirements") resourceRequirements: resourceRequirements,
-@as("systemControls") systemControls: systemControls,
-@as("healthCheck") healthCheck: healthCheck,
-@as("logConfiguration") logConfiguration: logConfiguration,
-@as("ulimits") ulimits: ulimitList,
-@as("dockerLabels") dockerLabels: dockerLabelsMap,
-@as("pseudoTerminal") pseudoTerminal: boxedBoolean,
-@as("interactive") interactive: boxedBoolean,
-@as("dockerSecurityOptions") dockerSecurityOptions: stringList,
-@as("extraHosts") extraHosts: hostEntryList,
-@as("dnsSearchDomains") dnsSearchDomains: stringList,
-@as("dnsServers") dnsServers: stringList,
-@as("readonlyRootFilesystem") readonlyRootFilesystem: boxedBoolean,
-@as("privileged") privileged: boxedBoolean,
-@as("disableNetworking") disableNetworking: boxedBoolean,
-@as("workingDirectory") workingDirectory: amazonawsString,
-@as("user") user: amazonawsString,
-@as("hostname") hostname: amazonawsString,
-@as("stopTimeout") stopTimeout: boxedInteger,
-@as("startTimeout") startTimeout: boxedInteger,
-@as("dependsOn") dependsOn: containerDependencies,
-@as("secrets") secrets: secretList,
-@as("linuxParameters") linuxParameters: linuxParameters,
-@as("volumesFrom") volumesFrom: volumeFromList,
-@as("mountPoints") mountPoints: mountPointList,
-@as("environmentFiles") environmentFiles: environmentFiles,
-@as("environment") environment: environmentVariables,
-@as("command") command: stringList,
-@as("entryPoint") entryPoint: stringList,
-@as("essential") essential: boxedBoolean,
-@as("portMappings") portMappings: portMappingList,
-@as("links") links: stringList,
-@as("memoryReservation") memoryReservation: boxedInteger,
-@as("memory") memory: boxedInteger,
-@as("cpu") cpu: amazonawsInteger,
-@as("repositoryCredentials") repositoryCredentials: repositoryCredentials,
-@as("image") image: amazonawsString,
-@as("name") name: amazonawsString
+firelensConfiguration: option<firelensConfiguration>,
+resourceRequirements: option<resourceRequirements>,
+systemControls: option<systemControls>,
+healthCheck: option<healthCheck>,
+logConfiguration: option<logConfiguration>,
+ulimits: option<ulimitList>,
+dockerLabels: option<dockerLabelsMap>,
+pseudoTerminal: option<boxedBoolean>,
+interactive: option<boxedBoolean>,
+dockerSecurityOptions: option<stringList>,
+extraHosts: option<hostEntryList>,
+dnsSearchDomains: option<stringList>,
+dnsServers: option<stringList>,
+readonlyRootFilesystem: option<boxedBoolean>,
+privileged: option<boxedBoolean>,
+disableNetworking: option<boxedBoolean>,
+workingDirectory: option<string_>,
+user: option<string_>,
+hostname: option<string_>,
+stopTimeout: option<boxedInteger>,
+startTimeout: option<boxedInteger>,
+dependsOn: option<containerDependencies>,
+secrets: option<secretList>,
+linuxParameters: option<linuxParameters>,
+volumesFrom: option<volumeFromList>,
+mountPoints: option<mountPointList>,
+environmentFiles: option<environmentFiles>,
+environment: option<environmentVariables>,
+command: option<stringList>,
+entryPoint: option<stringList>,
+essential: option<boxedBoolean>,
+portMappings: option<portMappingList>,
+links: option<stringList>,
+memoryReservation: option<boxedInteger>,
+memory: option<boxedInteger>,
+cpu: option<integer_>,
+repositoryCredentials: option<repositoryCredentials>,
+image: option<string_>,
+name: option<string_>
 }
 type cluster = {
-@as("attachmentsStatus") attachmentsStatus: amazonawsString,
-@as("attachments") attachments: attachments,
-@as("defaultCapacityProviderStrategy") defaultCapacityProviderStrategy: capacityProviderStrategy,
-@as("capacityProviders") capacityProviders: stringList,
-@as("settings") settings: clusterSettings,
-@as("tags") tags: tags,
-@as("statistics") statistics: statistics,
-@as("activeServicesCount") activeServicesCount: amazonawsInteger,
-@as("pendingTasksCount") pendingTasksCount: amazonawsInteger,
-@as("runningTasksCount") runningTasksCount: amazonawsInteger,
-@as("registeredContainerInstancesCount") registeredContainerInstancesCount: amazonawsInteger,
-@as("status") status: amazonawsString,
-@as("configuration") configuration: clusterConfiguration,
-@as("clusterName") clusterName: amazonawsString,
-@as("clusterArn") clusterArn: amazonawsString
+attachmentsStatus: option<string_>,
+attachments: option<attachments>,
+defaultCapacityProviderStrategy: option<capacityProviderStrategy>,
+capacityProviders: option<stringList>,
+settings: option<clusterSettings>,
+tags: option<tags>,
+statistics: option<statistics>,
+activeServicesCount: option<integer_>,
+pendingTasksCount: option<integer_>,
+runningTasksCount: option<integer_>,
+registeredContainerInstancesCount: option<integer_>,
+status: option<string_>,
+configuration: option<clusterConfiguration>,
+clusterName: option<string_>,
+clusterArn: option<string_>
 }
 type task = {
-@as("ephemeralStorage") ephemeralStorage: ephemeralStorage,
-@as("version") version: amazonawsLong,
-@as("taskDefinitionArn") taskDefinitionArn: amazonawsString,
-@as("taskArn") taskArn: amazonawsString,
-@as("tags") tags: tags,
-@as("stoppingAt") stoppingAt: amazonawsTimestamp,
-@as("stoppedReason") stoppedReason: amazonawsString,
-@as("stoppedAt") stoppedAt: amazonawsTimestamp,
-@as("stopCode") stopCode: taskStopCode,
-@as("startedBy") startedBy: amazonawsString,
-@as("startedAt") startedAt: amazonawsTimestamp,
-@as("pullStoppedAt") pullStoppedAt: amazonawsTimestamp,
-@as("pullStartedAt") pullStartedAt: amazonawsTimestamp,
-@as("platformVersion") platformVersion: amazonawsString,
-@as("overrides") overrides: taskOverride,
-@as("memory") memory: amazonawsString,
-@as("launchType") launchType: launchType,
-@as("lastStatus") lastStatus: amazonawsString,
-@as("inferenceAccelerators") inferenceAccelerators: inferenceAccelerators,
-@as("healthStatus") healthStatus: healthStatus,
-@as("group") group: amazonawsString,
-@as("executionStoppedAt") executionStoppedAt: amazonawsTimestamp,
-@as("enableExecuteCommand") enableExecuteCommand: amazonawsBoolean,
-@as("desiredStatus") desiredStatus: amazonawsString,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("cpu") cpu: amazonawsString,
-@as("containers") containers: containers,
-@as("containerInstanceArn") containerInstanceArn: amazonawsString,
-@as("connectivityAt") connectivityAt: amazonawsTimestamp,
-@as("connectivity") connectivity: connectivity,
-@as("clusterArn") clusterArn: amazonawsString,
-@as("capacityProviderName") capacityProviderName: amazonawsString,
-@as("availabilityZone") availabilityZone: amazonawsString,
-@as("attributes") attributes: attributes,
-@as("attachments") attachments: attachments
+ephemeralStorage: option<ephemeralStorage>,
+version: option<long>,
+taskDefinitionArn: option<string_>,
+taskArn: option<string_>,
+tags: option<tags>,
+stoppingAt: option<timestamp_>,
+stoppedReason: option<string_>,
+stoppedAt: option<timestamp_>,
+stopCode: option<taskStopCode>,
+startedBy: option<string_>,
+startedAt: option<timestamp_>,
+pullStoppedAt: option<timestamp_>,
+pullStartedAt: option<timestamp_>,
+platformVersion: option<string_>,
+overrides: option<taskOverride>,
+memory: option<string_>,
+launchType: option<launchType>,
+lastStatus: option<string_>,
+inferenceAccelerators: option<inferenceAccelerators>,
+healthStatus: option<healthStatus>,
+group: option<string_>,
+executionStoppedAt: option<timestamp_>,
+enableExecuteCommand: option<boolean_>,
+desiredStatus: option<string_>,
+createdAt: option<timestamp_>,
+cpu: option<string_>,
+containers: option<containers>,
+containerInstanceArn: option<string_>,
+connectivityAt: option<timestamp_>,
+connectivity: option<connectivity>,
+clusterArn: option<string_>,
+capacityProviderName: option<string_>,
+availabilityZone: option<string_>,
+attributes: option<attributes>,
+attachments: option<attachments>
 }
 type service = {
-@as("enableExecuteCommand") enableExecuteCommand: amazonawsBoolean,
-@as("propagateTags") propagateTags: propagateTags,
-@as("enableECSManagedTags") enableECSManagedTags: amazonawsBoolean,
-@as("createdBy") createdBy: amazonawsString,
-@as("tags") tags: tags,
-@as("deploymentController") deploymentController: deploymentController,
-@as("schedulingStrategy") schedulingStrategy: schedulingStrategy,
-@as("healthCheckGracePeriodSeconds") healthCheckGracePeriodSeconds: boxedInteger,
-@as("networkConfiguration") networkConfiguration: networkConfiguration,
-@as("placementStrategy") placementStrategy: placementStrategies,
-@as("placementConstraints") placementConstraints: placementConstraints,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("events") events: serviceEvents,
-@as("roleArn") roleArn: amazonawsString,
-@as("deployments") deployments: deployments,
-@as("taskSets") taskSets: taskSets,
-@as("deploymentConfiguration") deploymentConfiguration: deploymentConfiguration,
-@as("taskDefinition") taskDefinition: amazonawsString,
-@as("platformVersion") platformVersion: amazonawsString,
-@as("capacityProviderStrategy") capacityProviderStrategy: capacityProviderStrategy,
-@as("launchType") launchType: launchType,
-@as("pendingCount") pendingCount: amazonawsInteger,
-@as("runningCount") runningCount: amazonawsInteger,
-@as("desiredCount") desiredCount: amazonawsInteger,
-@as("status") status: amazonawsString,
-@as("serviceRegistries") serviceRegistries: serviceRegistries,
-@as("loadBalancers") loadBalancers: loadBalancers,
-@as("clusterArn") clusterArn: amazonawsString,
-@as("serviceName") serviceName: amazonawsString,
-@as("serviceArn") serviceArn: amazonawsString
+enableExecuteCommand: option<boolean_>,
+propagateTags: option<propagateTags>,
+enableECSManagedTags: option<boolean_>,
+createdBy: option<string_>,
+tags: option<tags>,
+deploymentController: option<deploymentController>,
+schedulingStrategy: option<schedulingStrategy>,
+healthCheckGracePeriodSeconds: option<boxedInteger>,
+networkConfiguration: option<networkConfiguration>,
+placementStrategy: option<placementStrategies>,
+placementConstraints: option<placementConstraints>,
+createdAt: option<timestamp_>,
+events: option<serviceEvents>,
+roleArn: option<string_>,
+deployments: option<deployments>,
+taskSets: option<taskSets>,
+deploymentConfiguration: option<deploymentConfiguration>,
+taskDefinition: option<string_>,
+platformVersion: option<string_>,
+capacityProviderStrategy: option<capacityProviderStrategy>,
+launchType: option<launchType>,
+pendingCount: option<integer_>,
+runningCount: option<integer_>,
+desiredCount: option<integer_>,
+status: option<string_>,
+serviceRegistries: option<serviceRegistries>,
+loadBalancers: option<loadBalancers>,
+clusterArn: option<string_>,
+serviceName: option<string_>,
+serviceArn: option<string_>
 }
 type containerInstances = array<containerInstance>
 type containerDefinitions = array<containerDefinition>
 type clusters = array<cluster>
 type tasks = array<task>
 type taskDefinition = {
-@as("ephemeralStorage") ephemeralStorage: ephemeralStorage,
-@as("registeredBy") registeredBy: amazonawsString,
-@as("deregisteredAt") deregisteredAt: amazonawsTimestamp,
-@as("registeredAt") registeredAt: amazonawsTimestamp,
-@as("proxyConfiguration") proxyConfiguration: proxyConfiguration,
-@as("ipcMode") ipcMode: ipcMode,
-@as("pidMode") pidMode: pidMode,
-@as("inferenceAccelerators") inferenceAccelerators: inferenceAccelerators,
-@as("memory") memory: amazonawsString,
-@as("cpu") cpu: amazonawsString,
-@as("requiresCompatibilities") requiresCompatibilities: compatibilityList,
-@as("compatibilities") compatibilities: compatibilityList,
-@as("placementConstraints") placementConstraints: taskDefinitionPlacementConstraints,
-@as("requiresAttributes") requiresAttributes: requiresAttributes,
-@as("status") status: taskDefinitionStatus,
-@as("volumes") volumes: volumeList,
-@as("revision") revision: amazonawsInteger,
-@as("networkMode") networkMode: networkMode,
-@as("executionRoleArn") executionRoleArn: amazonawsString,
-@as("taskRoleArn") taskRoleArn: amazonawsString,
-@as("family") family: amazonawsString,
-@as("containerDefinitions") containerDefinitions: containerDefinitions,
-@as("taskDefinitionArn") taskDefinitionArn: amazonawsString
+ephemeralStorage: option<ephemeralStorage>,
+registeredBy: option<string_>,
+deregisteredAt: option<timestamp_>,
+registeredAt: option<timestamp_>,
+proxyConfiguration: option<proxyConfiguration>,
+ipcMode: option<ipcMode>,
+pidMode: option<pidMode>,
+inferenceAccelerators: option<inferenceAccelerators>,
+memory: option<string_>,
+cpu: option<string_>,
+requiresCompatibilities: option<compatibilityList>,
+compatibilities: option<compatibilityList>,
+placementConstraints: option<taskDefinitionPlacementConstraints>,
+requiresAttributes: option<requiresAttributes>,
+status: option<taskDefinitionStatus>,
+volumes: option<volumeList>,
+revision: option<integer_>,
+networkMode: option<networkMode>,
+executionRoleArn: option<string_>,
+taskRoleArn: option<string_>,
+family: option<string_>,
+containerDefinitions: option<containerDefinitions>,
+taskDefinitionArn: option<string_>
 }
 type services = array<service>
-type clientType;
-@module("@aws-sdk/client-ecs") @new external createClient: unit => clientType = "ECSClient";
+type awsServiceClient;
+@module("@aws-sdk/client-ecs") @new external createClient: unit => awsServiceClient = "ECSClient";
 module DiscoverPollEndpoint = {
   type t;
   type request = {
-@as("cluster") cluster: amazonawsString,
-@as("containerInstance") containerInstance: amazonawsString
+cluster: option<string_>,
+containerInstance: option<string_>
 }
   type response = {
-@as("telemetryEndpoint") telemetryEndpoint: amazonawsString,
-@as("endpoint") endpoint: amazonawsString
+telemetryEndpoint: option<string_>,
+endpoint: option<string_>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DiscoverPollEndpointCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeys>,
-@as("resourceArn") resourceArn: option<amazonawsString>
+tagKeys: tagKeys,
+resourceArn: string_
 }
   type response = unit
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutAccountSettingDefault = {
   type t;
   type request = {
-@as("value") value: option<amazonawsString>,
-@as("name") name: option<settingName>
+value: string_,
+name: settingName
 }
   type response = {
-@as("setting") setting: setting
+setting: option<setting>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "PutAccountSettingDefaultCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutAccountSetting = {
   type t;
   type request = {
-@as("principalArn") principalArn: amazonawsString,
-@as("value") value: option<amazonawsString>,
-@as("name") name: option<settingName>
+principalArn: option<string_>,
+value: string_,
+name: settingName
 }
   type response = {
-@as("setting") setting: setting
+setting: option<setting>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "PutAccountSettingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTasks = {
   type t;
   type request = {
-@as("launchType") launchType: launchType,
-@as("desiredStatus") desiredStatus: desiredStatus,
-@as("serviceName") serviceName: amazonawsString,
-@as("startedBy") startedBy: amazonawsString,
-@as("maxResults") maxResults: boxedInteger,
-@as("nextToken") nextToken: amazonawsString,
-@as("family") family: amazonawsString,
-@as("containerInstance") containerInstance: amazonawsString,
-@as("cluster") cluster: amazonawsString
+launchType: option<launchType>,
+desiredStatus: option<desiredStatus>,
+serviceName: option<string_>,
+startedBy: option<string_>,
+maxResults: option<boxedInteger>,
+nextToken: option<string_>,
+family: option<string_>,
+containerInstance: option<string_>,
+cluster: option<string_>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("taskArns") taskArns: stringList
+nextToken: option<string_>,
+taskArns: option<stringList>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "ListTasksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTaskDefinitions = {
   type t;
   type request = {
-@as("maxResults") maxResults: boxedInteger,
-@as("nextToken") nextToken: amazonawsString,
-@as("sort") sort: sortOrder,
-@as("status") status: taskDefinitionStatus,
-@as("familyPrefix") familyPrefix: amazonawsString
+maxResults: option<boxedInteger>,
+nextToken: option<string_>,
+sort: option<sortOrder>,
+status: option<taskDefinitionStatus>,
+familyPrefix: option<string_>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("taskDefinitionArns") taskDefinitionArns: stringList
+nextToken: option<string_>,
+taskDefinitionArns: option<stringList>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "ListTaskDefinitionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTaskDefinitionFamilies = {
   type t;
   type request = {
-@as("maxResults") maxResults: boxedInteger,
-@as("nextToken") nextToken: amazonawsString,
-@as("status") status: taskDefinitionFamilyStatus,
-@as("familyPrefix") familyPrefix: amazonawsString
+maxResults: option<boxedInteger>,
+nextToken: option<string_>,
+status: option<taskDefinitionFamilyStatus>,
+familyPrefix: option<string_>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("families") families: stringList
+nextToken: option<string_>,
+families: option<stringList>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "ListTaskDefinitionFamiliesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListServices = {
   type t;
   type request = {
-@as("schedulingStrategy") schedulingStrategy: schedulingStrategy,
-@as("launchType") launchType: launchType,
-@as("maxResults") maxResults: boxedInteger,
-@as("nextToken") nextToken: amazonawsString,
-@as("cluster") cluster: amazonawsString
+schedulingStrategy: option<schedulingStrategy>,
+launchType: option<launchType>,
+maxResults: option<boxedInteger>,
+nextToken: option<string_>,
+cluster: option<string_>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("serviceArns") serviceArns: stringList
+nextToken: option<string_>,
+serviceArns: option<stringList>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "ListServicesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListContainerInstances = {
   type t;
   type request = {
-@as("status") status: containerInstanceStatus,
-@as("maxResults") maxResults: boxedInteger,
-@as("nextToken") nextToken: amazonawsString,
-@as("filter") filter: amazonawsString,
-@as("cluster") cluster: amazonawsString
+status: option<containerInstanceStatus>,
+maxResults: option<boxedInteger>,
+nextToken: option<string_>,
+filter: option<string_>,
+cluster: option<string_>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("containerInstanceArns") containerInstanceArns: stringList
+nextToken: option<string_>,
+containerInstanceArns: option<stringList>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "ListContainerInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListClusters = {
   type t;
   type request = {
-@as("maxResults") maxResults: boxedInteger,
-@as("nextToken") nextToken: amazonawsString
+maxResults: option<boxedInteger>,
+nextToken: option<string_>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("clusterArns") clusterArns: stringList
+nextToken: option<string_>,
+clusterArns: option<stringList>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "ListClustersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ExecuteCommand = {
   type t;
   type request = {
-@as("task") task: option<amazonawsString>,
-@as("interactive") interactive: option<amazonawsBoolean>,
-@as("command") command: option<amazonawsString>,
-@as("container") container: amazonawsString,
-@as("cluster") cluster: amazonawsString
+task: string_,
+interactive: boolean_,
+command: string_,
+container: option<string_>,
+cluster: option<string_>
 }
   type response = {
-@as("taskArn") taskArn: amazonawsString,
-@as("session") session: session,
-@as("interactive") interactive: amazonawsBoolean,
-@as("containerName") containerName: amazonawsString,
-@as("containerArn") containerArn: amazonawsString,
-@as("clusterArn") clusterArn: amazonawsString
+taskArn: option<string_>,
+session: option<session>,
+interactive: option<boolean_>,
+containerName: option<string_>,
+containerArn: option<string_>,
+clusterArn: option<string_>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "ExecuteCommandCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAccountSetting = {
   type t;
   type request = {
-@as("principalArn") principalArn: amazonawsString,
-@as("name") name: option<settingName>
+principalArn: option<string_>,
+name: settingName
 }
   type response = {
-@as("setting") setting: setting
+setting: option<setting>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DeleteAccountSettingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tags>,
-@as("resourceArn") resourceArn: option<amazonawsString>
+tags: tags,
+resourceArn: string_
 }
   type response = unit
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SubmitContainerStateChange = {
   type t;
   type request = {
-@as("networkBindings") networkBindings: networkBindings,
-@as("reason") reason: amazonawsString,
-@as("exitCode") exitCode: boxedInteger,
-@as("status") status: amazonawsString,
-@as("runtimeId") runtimeId: amazonawsString,
-@as("containerName") containerName: amazonawsString,
-@as("task") task: amazonawsString,
-@as("cluster") cluster: amazonawsString
+networkBindings: option<networkBindings>,
+reason: option<string_>,
+exitCode: option<boxedInteger>,
+status: option<string_>,
+runtimeId: option<string_>,
+containerName: option<string_>,
+task: option<string_>,
+cluster: option<string_>
 }
   type response = {
-@as("acknowledgment") acknowledgment: amazonawsString
+acknowledgment: option<string_>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "SubmitContainerStateChangeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SubmitAttachmentStateChanges = {
   type t;
   type request = {
-@as("attachments") attachments: option<attachmentStateChanges>,
-@as("cluster") cluster: amazonawsString
+attachments: attachmentStateChanges,
+cluster: option<string_>
 }
   type response = {
-@as("acknowledgment") acknowledgment: amazonawsString
+acknowledgment: option<string_>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "SubmitAttachmentStateChangesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutAttributes = {
   type t;
   type request = {
-@as("attributes") attributes: option<attributes>,
-@as("cluster") cluster: amazonawsString
+attributes: attributes,
+cluster: option<string_>
 }
   type response = {
-@as("attributes") attributes: attributes
+attributes: option<attributes>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "PutAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<amazonawsString>
+resourceArn: string_
 }
   type response = {
-@as("tags") tags: tags
+tags: option<tags>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAttributes = {
   type t;
   type request = {
-@as("maxResults") maxResults: boxedInteger,
-@as("nextToken") nextToken: amazonawsString,
-@as("attributeValue") attributeValue: amazonawsString,
-@as("attributeName") attributeName: amazonawsString,
-@as("targetType") targetType: option<targetType>,
-@as("cluster") cluster: amazonawsString
+maxResults: option<boxedInteger>,
+nextToken: option<string_>,
+attributeValue: option<string_>,
+attributeName: option<string_>,
+targetType: targetType,
+cluster: option<string_>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("attributes") attributes: attributes
+nextToken: option<string_>,
+attributes: option<attributes>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "ListAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAccountSettings = {
   type t;
   type request = {
-@as("maxResults") maxResults: amazonawsInteger,
-@as("nextToken") nextToken: amazonawsString,
-@as("effectiveSettings") effectiveSettings: amazonawsBoolean,
-@as("principalArn") principalArn: amazonawsString,
-@as("value") value: amazonawsString,
-@as("name") name: settingName
+maxResults: option<integer_>,
+nextToken: option<string_>,
+effectiveSettings: option<boolean_>,
+principalArn: option<string_>,
+value: option<string_>,
+name: option<settingName>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("settings") settings: settings
+nextToken: option<string_>,
+settings: option<settings>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "ListAccountSettingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAttributes = {
   type t;
   type request = {
-@as("attributes") attributes: option<attributes>,
-@as("cluster") cluster: amazonawsString
+attributes: attributes,
+cluster: option<string_>
 }
   type response = {
-@as("attributes") attributes: attributes
+attributes: option<attributes>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DeleteAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateCapacityProvider = {
   type t;
   type request = {
-@as("autoScalingGroupProvider") autoScalingGroupProvider: option<autoScalingGroupProviderUpdate>,
-@as("name") name: option<amazonawsString>
+autoScalingGroupProvider: autoScalingGroupProviderUpdate,
+name: string_
 }
   type response = {
-@as("capacityProvider") capacityProvider: capacityProvider
+capacityProvider: option<capacityProvider>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "UpdateCapacityProviderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteCapacityProvider = {
   type t;
   type request = {
-@as("capacityProvider") capacityProvider: option<amazonawsString>
+capacityProvider: string_
 }
   type response = {
-@as("capacityProvider") capacityProvider: capacityProvider
+capacityProvider: option<capacityProvider>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DeleteCapacityProviderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCapacityProvider = {
   type t;
   type request = {
-@as("tags") tags: tags,
-@as("autoScalingGroupProvider") autoScalingGroupProvider: option<autoScalingGroupProvider>,
-@as("name") name: option<amazonawsString>
+tags: option<tags>,
+autoScalingGroupProvider: autoScalingGroupProvider,
+name: string_
 }
   type response = {
-@as("capacityProvider") capacityProvider: capacityProvider
+capacityProvider: option<capacityProvider>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "CreateCapacityProviderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateTaskSet = {
   type t;
   type request = {
-@as("scale") scale: option<scale>,
-@as("taskSet") taskSet: option<amazonawsString>,
-@as("service") service: option<amazonawsString>,
-@as("cluster") cluster: option<amazonawsString>
+scale: scale,
+taskSet: string_,
+service: string_,
+cluster: string_
 }
   type response = {
-@as("taskSet") taskSet: taskSet
+taskSet: option<taskSet>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "UpdateTaskSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateServicePrimaryTaskSet = {
   type t;
   type request = {
-@as("primaryTaskSet") primaryTaskSet: option<amazonawsString>,
-@as("service") service: option<amazonawsString>,
-@as("cluster") cluster: option<amazonawsString>
+primaryTaskSet: string_,
+service: string_,
+cluster: string_
 }
   type response = {
-@as("taskSet") taskSet: taskSet
+taskSet: option<taskSet>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "UpdateServicePrimaryTaskSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SubmitTaskStateChange = {
   type t;
   type request = {
-@as("executionStoppedAt") executionStoppedAt: amazonawsTimestamp,
-@as("pullStoppedAt") pullStoppedAt: amazonawsTimestamp,
-@as("pullStartedAt") pullStartedAt: amazonawsTimestamp,
-@as("managedAgents") managedAgents: managedAgentStateChanges,
-@as("attachments") attachments: attachmentStateChanges,
-@as("containers") containers: containerStateChanges,
-@as("reason") reason: amazonawsString,
-@as("status") status: amazonawsString,
-@as("task") task: amazonawsString,
-@as("cluster") cluster: amazonawsString
+executionStoppedAt: option<timestamp_>,
+pullStoppedAt: option<timestamp_>,
+pullStartedAt: option<timestamp_>,
+managedAgents: option<managedAgentStateChanges>,
+attachments: option<attachmentStateChanges>,
+containers: option<containerStateChanges>,
+reason: option<string_>,
+status: option<string_>,
+task: option<string_>,
+cluster: option<string_>
 }
   type response = {
-@as("acknowledgment") acknowledgment: amazonawsString
+acknowledgment: option<string_>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "SubmitTaskStateChangeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCapacityProviders = {
   type t;
   type request = {
-@as("nextToken") nextToken: amazonawsString,
-@as("maxResults") maxResults: boxedInteger,
-@as("include") include: capacityProviderFieldList,
-@as("capacityProviders") capacityProviders: stringList
+nextToken: option<string_>,
+maxResults: option<boxedInteger>,
+@as("include") include_: option<capacityProviderFieldList>,
+capacityProviders: option<stringList>
 }
   type response = {
-@as("nextToken") nextToken: amazonawsString,
-@as("failures") failures: failures,
-@as("capacityProviders") capacityProviders: capacityProviders
+nextToken: option<string_>,
+failures: option<failures>,
+capacityProviders: option<capacityProviders>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DescribeCapacityProvidersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteTaskSet = {
   type t;
   type request = {
-@as("force") force: boxedBoolean,
-@as("taskSet") taskSet: option<amazonawsString>,
-@as("service") service: option<amazonawsString>,
-@as("cluster") cluster: option<amazonawsString>
+force: option<boxedBoolean>,
+taskSet: string_,
+service: string_,
+cluster: string_
 }
   type response = {
-@as("taskSet") taskSet: taskSet
+taskSet: option<taskSet>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DeleteTaskSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateTaskSet = {
   type t;
   type request = {
-@as("tags") tags: tags,
-@as("clientToken") clientToken: amazonawsString,
-@as("scale") scale: scale,
-@as("platformVersion") platformVersion: amazonawsString,
-@as("capacityProviderStrategy") capacityProviderStrategy: capacityProviderStrategy,
-@as("launchType") launchType: launchType,
-@as("serviceRegistries") serviceRegistries: serviceRegistries,
-@as("loadBalancers") loadBalancers: loadBalancers,
-@as("networkConfiguration") networkConfiguration: networkConfiguration,
-@as("taskDefinition") taskDefinition: option<amazonawsString>,
-@as("externalId") externalId: amazonawsString,
-@as("cluster") cluster: option<amazonawsString>,
-@as("service") service: option<amazonawsString>
+tags: option<tags>,
+clientToken: option<string_>,
+scale: option<scale>,
+platformVersion: option<string_>,
+capacityProviderStrategy: option<capacityProviderStrategy>,
+launchType: option<launchType>,
+serviceRegistries: option<serviceRegistries>,
+loadBalancers: option<loadBalancers>,
+networkConfiguration: option<networkConfiguration>,
+taskDefinition: string_,
+externalId: option<string_>,
+cluster: string_,
+service: string_
 }
   type response = {
-@as("taskSet") taskSet: taskSet
+taskSet: option<taskSet>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "CreateTaskSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateContainerAgent = {
   type t;
   type request = {
-@as("containerInstance") containerInstance: option<amazonawsString>,
-@as("cluster") cluster: amazonawsString
+containerInstance: string_,
+cluster: option<string_>
 }
   type response = {
-@as("containerInstance") containerInstance: containerInstance
+containerInstance: option<containerInstance>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "UpdateContainerAgentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateClusterSettings = {
   type t;
   type request = {
-@as("settings") settings: option<clusterSettings>,
-@as("cluster") cluster: option<amazonawsString>
+settings: clusterSettings,
+cluster: string_
 }
   type response = {
-@as("cluster") cluster: cluster
+cluster: option<cluster>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "UpdateClusterSettingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateCluster = {
   type t;
   type request = {
-@as("configuration") configuration: clusterConfiguration,
-@as("settings") settings: clusterSettings,
-@as("cluster") cluster: option<amazonawsString>
+configuration: option<clusterConfiguration>,
+settings: option<clusterSettings>,
+cluster: string_
 }
   type response = {
-@as("cluster") cluster: cluster
+cluster: option<cluster>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "UpdateClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterContainerInstance = {
   type t;
   type request = {
-@as("tags") tags: tags,
-@as("platformDevices") platformDevices: platformDevices,
-@as("attributes") attributes: attributes,
-@as("containerInstanceArn") containerInstanceArn: amazonawsString,
-@as("versionInfo") versionInfo: versionInfo,
-@as("totalResources") totalResources: resources,
-@as("instanceIdentityDocumentSignature") instanceIdentityDocumentSignature: amazonawsString,
-@as("instanceIdentityDocument") instanceIdentityDocument: amazonawsString,
-@as("cluster") cluster: amazonawsString
+tags: option<tags>,
+platformDevices: option<platformDevices>,
+attributes: option<attributes>,
+containerInstanceArn: option<string_>,
+versionInfo: option<versionInfo>,
+totalResources: option<resources>,
+instanceIdentityDocumentSignature: option<string_>,
+instanceIdentityDocument: option<string_>,
+cluster: option<string_>
 }
   type response = {
-@as("containerInstance") containerInstance: containerInstance
+containerInstance: option<containerInstance>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "RegisterContainerInstanceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutClusterCapacityProviders = {
   type t;
   type request = {
-@as("defaultCapacityProviderStrategy") defaultCapacityProviderStrategy: option<capacityProviderStrategy>,
-@as("capacityProviders") capacityProviders: option<stringList>,
-@as("cluster") cluster: option<amazonawsString>
+defaultCapacityProviderStrategy: capacityProviderStrategy,
+capacityProviders: stringList,
+cluster: string_
 }
   type response = {
-@as("cluster") cluster: cluster
+cluster: option<cluster>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "PutClusterCapacityProvidersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTaskSets = {
   type t;
   type request = {
-@as("include") include: taskSetFieldList,
-@as("taskSets") taskSets: stringList,
-@as("service") service: option<amazonawsString>,
-@as("cluster") cluster: option<amazonawsString>
+@as("include") include_: option<taskSetFieldList>,
+taskSets: option<stringList>,
+service: string_,
+cluster: string_
 }
   type response = {
-@as("failures") failures: failures,
-@as("taskSets") taskSets: taskSets
+failures: option<failures>,
+taskSets: option<taskSets>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DescribeTaskSetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterContainerInstance = {
   type t;
   type request = {
-@as("force") force: boxedBoolean,
-@as("containerInstance") containerInstance: option<amazonawsString>,
-@as("cluster") cluster: amazonawsString
+force: option<boxedBoolean>,
+containerInstance: string_,
+cluster: option<string_>
 }
   type response = {
-@as("containerInstance") containerInstance: containerInstance
+containerInstance: option<containerInstance>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DeregisterContainerInstanceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteCluster = {
   type t;
   type request = {
-@as("cluster") cluster: option<amazonawsString>
+cluster: string_
 }
   type response = {
-@as("cluster") cluster: cluster
+cluster: option<cluster>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DeleteClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCluster = {
   type t;
   type request = {
-@as("defaultCapacityProviderStrategy") defaultCapacityProviderStrategy: capacityProviderStrategy,
-@as("capacityProviders") capacityProviders: stringList,
-@as("configuration") configuration: clusterConfiguration,
-@as("settings") settings: clusterSettings,
-@as("tags") tags: tags,
-@as("clusterName") clusterName: amazonawsString
+defaultCapacityProviderStrategy: option<capacityProviderStrategy>,
+capacityProviders: option<stringList>,
+configuration: option<clusterConfiguration>,
+settings: option<clusterSettings>,
+tags: option<tags>,
+clusterName: option<string_>
 }
   type response = {
-@as("cluster") cluster: cluster
+cluster: option<cluster>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "CreateClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateService = {
   type t;
   type request = {
-@as("enableExecuteCommand") enableExecuteCommand: boxedBoolean,
-@as("healthCheckGracePeriodSeconds") healthCheckGracePeriodSeconds: boxedInteger,
-@as("forceNewDeployment") forceNewDeployment: amazonawsBoolean,
-@as("platformVersion") platformVersion: amazonawsString,
-@as("placementStrategy") placementStrategy: placementStrategies,
-@as("placementConstraints") placementConstraints: placementConstraints,
-@as("networkConfiguration") networkConfiguration: networkConfiguration,
-@as("deploymentConfiguration") deploymentConfiguration: deploymentConfiguration,
-@as("capacityProviderStrategy") capacityProviderStrategy: capacityProviderStrategy,
-@as("taskDefinition") taskDefinition: amazonawsString,
-@as("desiredCount") desiredCount: boxedInteger,
-@as("service") service: option<amazonawsString>,
-@as("cluster") cluster: amazonawsString
+enableExecuteCommand: option<boxedBoolean>,
+healthCheckGracePeriodSeconds: option<boxedInteger>,
+forceNewDeployment: option<boolean_>,
+platformVersion: option<string_>,
+placementStrategy: option<placementStrategies>,
+placementConstraints: option<placementConstraints>,
+networkConfiguration: option<networkConfiguration>,
+deploymentConfiguration: option<deploymentConfiguration>,
+capacityProviderStrategy: option<capacityProviderStrategy>,
+taskDefinition: option<string_>,
+desiredCount: option<boxedInteger>,
+service: string_,
+cluster: option<string_>
 }
   type response = {
-@as("service") service: service
+service: option<service>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "UpdateServiceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateContainerInstancesState = {
   type t;
   type request = {
-@as("status") status: option<containerInstanceStatus>,
-@as("containerInstances") containerInstances: option<stringList>,
-@as("cluster") cluster: amazonawsString
+status: containerInstanceStatus,
+containerInstances: stringList,
+cluster: option<string_>
 }
   type response = {
-@as("failures") failures: failures,
-@as("containerInstances") containerInstances: containerInstances
+failures: option<failures>,
+containerInstances: option<containerInstances>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "UpdateContainerInstancesStateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StopTask = {
   type t;
   type request = {
-@as("reason") reason: amazonawsString,
-@as("task") task: option<amazonawsString>,
-@as("cluster") cluster: amazonawsString
+reason: option<string_>,
+task: string_,
+cluster: option<string_>
 }
   type response = {
-@as("task") task: task
+task: option<task>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "StopTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeContainerInstances = {
   type t;
   type request = {
-@as("include") include: containerInstanceFieldList,
-@as("containerInstances") containerInstances: option<stringList>,
-@as("cluster") cluster: amazonawsString
+@as("include") include_: option<containerInstanceFieldList>,
+containerInstances: stringList,
+cluster: option<string_>
 }
   type response = {
-@as("failures") failures: failures,
-@as("containerInstances") containerInstances: containerInstances
+failures: option<failures>,
+containerInstances: option<containerInstances>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DescribeContainerInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeClusters = {
   type t;
   type request = {
-@as("include") include: clusterFieldList,
-@as("clusters") clusters: stringList
+@as("include") include_: option<clusterFieldList>,
+clusters: option<stringList>
 }
   type response = {
-@as("failures") failures: failures,
-@as("clusters") clusters: clusters
+failures: option<failures>,
+clusters: option<clusters>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DescribeClustersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteService = {
   type t;
   type request = {
-@as("force") force: boxedBoolean,
-@as("service") service: option<amazonawsString>,
-@as("cluster") cluster: amazonawsString
+force: option<boxedBoolean>,
+service: string_,
+cluster: option<string_>
 }
   type response = {
-@as("service") service: service
+service: option<service>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DeleteServiceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateService = {
   type t;
   type request = {
-@as("enableExecuteCommand") enableExecuteCommand: amazonawsBoolean,
-@as("propagateTags") propagateTags: propagateTags,
-@as("enableECSManagedTags") enableECSManagedTags: amazonawsBoolean,
-@as("tags") tags: tags,
-@as("deploymentController") deploymentController: deploymentController,
-@as("schedulingStrategy") schedulingStrategy: schedulingStrategy,
-@as("healthCheckGracePeriodSeconds") healthCheckGracePeriodSeconds: boxedInteger,
-@as("networkConfiguration") networkConfiguration: networkConfiguration,
-@as("placementStrategy") placementStrategy: placementStrategies,
-@as("placementConstraints") placementConstraints: placementConstraints,
-@as("deploymentConfiguration") deploymentConfiguration: deploymentConfiguration,
-@as("role") role: amazonawsString,
-@as("platformVersion") platformVersion: amazonawsString,
-@as("capacityProviderStrategy") capacityProviderStrategy: capacityProviderStrategy,
-@as("launchType") launchType: launchType,
-@as("clientToken") clientToken: amazonawsString,
-@as("desiredCount") desiredCount: boxedInteger,
-@as("serviceRegistries") serviceRegistries: serviceRegistries,
-@as("loadBalancers") loadBalancers: loadBalancers,
-@as("taskDefinition") taskDefinition: amazonawsString,
-@as("serviceName") serviceName: option<amazonawsString>,
-@as("cluster") cluster: amazonawsString
+enableExecuteCommand: option<boolean_>,
+propagateTags: option<propagateTags>,
+enableECSManagedTags: option<boolean_>,
+tags: option<tags>,
+deploymentController: option<deploymentController>,
+schedulingStrategy: option<schedulingStrategy>,
+healthCheckGracePeriodSeconds: option<boxedInteger>,
+networkConfiguration: option<networkConfiguration>,
+placementStrategy: option<placementStrategies>,
+placementConstraints: option<placementConstraints>,
+deploymentConfiguration: option<deploymentConfiguration>,
+role: option<string_>,
+platformVersion: option<string_>,
+capacityProviderStrategy: option<capacityProviderStrategy>,
+launchType: option<launchType>,
+clientToken: option<string_>,
+desiredCount: option<boxedInteger>,
+serviceRegistries: option<serviceRegistries>,
+loadBalancers: option<loadBalancers>,
+taskDefinition: option<string_>,
+serviceName: string_,
+cluster: option<string_>
 }
   type response = {
-@as("service") service: service
+service: option<service>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "CreateServiceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartTask = {
   type t;
   type request = {
-@as("taskDefinition") taskDefinition: option<amazonawsString>,
-@as("tags") tags: tags,
-@as("startedBy") startedBy: amazonawsString,
-@as("referenceId") referenceId: amazonawsString,
-@as("propagateTags") propagateTags: propagateTags,
-@as("overrides") overrides: taskOverride,
-@as("networkConfiguration") networkConfiguration: networkConfiguration,
-@as("group") group: amazonawsString,
-@as("enableExecuteCommand") enableExecuteCommand: amazonawsBoolean,
-@as("enableECSManagedTags") enableECSManagedTags: amazonawsBoolean,
-@as("containerInstances") containerInstances: option<stringList>,
-@as("cluster") cluster: amazonawsString
+taskDefinition: string_,
+tags: option<tags>,
+startedBy: option<string_>,
+referenceId: option<string_>,
+propagateTags: option<propagateTags>,
+overrides: option<taskOverride>,
+networkConfiguration: option<networkConfiguration>,
+group: option<string_>,
+enableExecuteCommand: option<boolean_>,
+enableECSManagedTags: option<boolean_>,
+containerInstances: stringList,
+cluster: option<string_>
 }
   type response = {
-@as("failures") failures: failures,
-@as("tasks") tasks: tasks
+failures: option<failures>,
+tasks: option<tasks>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "StartTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RunTask = {
   type t;
   type request = {
-@as("taskDefinition") taskDefinition: option<amazonawsString>,
-@as("tags") tags: tags,
-@as("startedBy") startedBy: amazonawsString,
-@as("referenceId") referenceId: amazonawsString,
-@as("propagateTags") propagateTags: propagateTags,
-@as("platformVersion") platformVersion: amazonawsString,
-@as("placementStrategy") placementStrategy: placementStrategies,
-@as("placementConstraints") placementConstraints: placementConstraints,
-@as("overrides") overrides: taskOverride,
-@as("networkConfiguration") networkConfiguration: networkConfiguration,
-@as("launchType") launchType: launchType,
-@as("group") group: amazonawsString,
-@as("enableExecuteCommand") enableExecuteCommand: amazonawsBoolean,
-@as("enableECSManagedTags") enableECSManagedTags: amazonawsBoolean,
-@as("count") count: boxedInteger,
-@as("cluster") cluster: amazonawsString,
-@as("capacityProviderStrategy") capacityProviderStrategy: capacityProviderStrategy
+taskDefinition: string_,
+tags: option<tags>,
+startedBy: option<string_>,
+referenceId: option<string_>,
+propagateTags: option<propagateTags>,
+platformVersion: option<string_>,
+placementStrategy: option<placementStrategies>,
+placementConstraints: option<placementConstraints>,
+overrides: option<taskOverride>,
+networkConfiguration: option<networkConfiguration>,
+launchType: option<launchType>,
+group: option<string_>,
+enableExecuteCommand: option<boolean_>,
+enableECSManagedTags: option<boolean_>,
+count: option<boxedInteger>,
+cluster: option<string_>,
+capacityProviderStrategy: option<capacityProviderStrategy>
 }
   type response = {
-@as("failures") failures: failures,
-@as("tasks") tasks: tasks
+failures: option<failures>,
+tasks: option<tasks>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "RunTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterTaskDefinition = {
   type t;
   type request = {
-@as("ephemeralStorage") ephemeralStorage: ephemeralStorage,
-@as("inferenceAccelerators") inferenceAccelerators: inferenceAccelerators,
-@as("proxyConfiguration") proxyConfiguration: proxyConfiguration,
-@as("ipcMode") ipcMode: ipcMode,
-@as("pidMode") pidMode: pidMode,
-@as("tags") tags: tags,
-@as("memory") memory: amazonawsString,
-@as("cpu") cpu: amazonawsString,
-@as("requiresCompatibilities") requiresCompatibilities: compatibilityList,
-@as("placementConstraints") placementConstraints: taskDefinitionPlacementConstraints,
-@as("volumes") volumes: volumeList,
-@as("containerDefinitions") containerDefinitions: option<containerDefinitions>,
-@as("networkMode") networkMode: networkMode,
-@as("executionRoleArn") executionRoleArn: amazonawsString,
-@as("taskRoleArn") taskRoleArn: amazonawsString,
-@as("family") family: option<amazonawsString>
+ephemeralStorage: option<ephemeralStorage>,
+inferenceAccelerators: option<inferenceAccelerators>,
+proxyConfiguration: option<proxyConfiguration>,
+ipcMode: option<ipcMode>,
+pidMode: option<pidMode>,
+tags: option<tags>,
+memory: option<string_>,
+cpu: option<string_>,
+requiresCompatibilities: option<compatibilityList>,
+placementConstraints: option<taskDefinitionPlacementConstraints>,
+volumes: option<volumeList>,
+containerDefinitions: containerDefinitions,
+networkMode: option<networkMode>,
+executionRoleArn: option<string_>,
+taskRoleArn: option<string_>,
+family: string_
 }
   type response = {
-@as("tags") tags: tags,
-@as("taskDefinition") taskDefinition: taskDefinition
+tags: option<tags>,
+taskDefinition: option<taskDefinition>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "RegisterTaskDefinitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTasks = {
   type t;
   type request = {
-@as("include") include: taskFieldList,
-@as("tasks") tasks: option<stringList>,
-@as("cluster") cluster: amazonawsString
+@as("include") include_: option<taskFieldList>,
+tasks: stringList,
+cluster: option<string_>
 }
   type response = {
-@as("failures") failures: failures,
-@as("tasks") tasks: tasks
+failures: option<failures>,
+tasks: option<tasks>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DescribeTasksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTaskDefinition = {
   type t;
   type request = {
-@as("include") include: taskDefinitionFieldList,
-@as("taskDefinition") taskDefinition: option<amazonawsString>
+@as("include") include_: option<taskDefinitionFieldList>,
+taskDefinition: string_
 }
   type response = {
-@as("tags") tags: tags,
-@as("taskDefinition") taskDefinition: taskDefinition
+tags: option<tags>,
+taskDefinition: option<taskDefinition>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DescribeTaskDefinitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeServices = {
   type t;
   type request = {
-@as("include") include: serviceFieldList,
-@as("services") services: option<stringList>,
-@as("cluster") cluster: amazonawsString
+@as("include") include_: option<serviceFieldList>,
+services: stringList,
+cluster: option<string_>
 }
   type response = {
-@as("failures") failures: failures,
-@as("services") services: services
+failures: option<failures>,
+services: option<services>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DescribeServicesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterTaskDefinition = {
   type t;
   type request = {
-@as("taskDefinition") taskDefinition: option<amazonawsString>
+taskDefinition: string_
 }
   type response = {
-@as("taskDefinition") taskDefinition: taskDefinition
+taskDefinition: option<taskDefinition>
 }
   @module("@aws-sdk/client-ecs") @new external new_: (request) => t = "DeregisterTaskDefinitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

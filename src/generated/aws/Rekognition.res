@@ -1,28 +1,33 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type videoJobStatus = [@as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #IN_PROGRESS]
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type integer_ = int
+type long = float
+type videoJobStatus = [@as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #INPROGRESS]
 type versionName = string
 type url = string
-type uLong = float;
-type uInteger = int;
-type amazonawsTimestamp = float;
+type ulong = float
+type uinteger = int
+type timestamp_ = float
 type timecode = string
 type textTypes = [@as("WORD") #WORD | @as("LINE") #LINE]
 type technicalCueType = [@as("BlackFrames") #BlackFrames | @as("EndCredits") #EndCredits | @as("ColorBars") #ColorBars]
 type tagValue = string
 type tagKey = string
 type synthesizedJsonHumanLoopActivationConditionsEvaluationResults = string
-type amazonawsString = string
+type string_ = string
 type streamProcessorStatus = [@as("STOPPING") #STOPPING | @as("FAILED") #FAILED | @as("RUNNING") #RUNNING | @as("STARTING") #STARTING | @as("STOPPED") #STOPPED]
 type streamProcessorName = string
 type streamProcessorArn = string
 type statusMessage = string
-type segmentType = [@as("SHOT") #SHOT | @as("TECHNICAL_CUE") #TECHNICAL_CUE]
-type segmentConfidence = float;
-type sNSTopicArn = string
+type segmentType = [@as("SHOT") #SHOT | @as("TECHNICAL_CUE") #TECHNICALCUE]
+type segmentConfidence = float
+type snstopicArn = string
 type s3ObjectVersion = string
 type s3ObjectName = string
 type s3KeyPrefix = string
@@ -30,262 +35,262 @@ type s3Bucket = string
 type roleArn = string
 type resourceArn = string
 type rekognitionUniqueId = string
-type reason = [@as("LOW_FACE_QUALITY") #LOW_FACE_QUALITY | @as("SMALL_BOUNDING_BOX") #SMALL_BOUNDING_BOX | @as("LOW_CONFIDENCE") #LOW_CONFIDENCE | @as("LOW_SHARPNESS") #LOW_SHARPNESS | @as("LOW_BRIGHTNESS") #LOW_BRIGHTNESS | @as("EXTREME_POSE") #EXTREME_POSE | @as("EXCEEDS_MAX_FACES") #EXCEEDS_MAX_FACES]
+type reason = [@as("LOW_FACE_QUALITY") #LOWFACEQUALITY | @as("SMALL_BOUNDING_BOX") #SMALLBOUNDINGBOX | @as("LOW_CONFIDENCE") #LOWCONFIDENCE | @as("LOW_SHARPNESS") #LOWSHARPNESS | @as("LOW_BRIGHTNESS") #LOWBRIGHTNESS | @as("EXTREME_POSE") #EXTREMEPOSE | @as("EXCEEDS_MAX_FACES") #EXCEEDSMAXFACES]
 type qualityFilter = [@as("HIGH") #HIGH | @as("MEDIUM") #MEDIUM | @as("LOW") #LOW | @as("AUTO") #AUTO | @as("NONE") #NONE]
-type protectiveEquipmentType = [@as("HEAD_COVER") #HEAD_COVER | @as("HAND_COVER") #HAND_COVER | @as("FACE_COVER") #FACE_COVER]
-type projectsPageSize = int;
-type projectVersionsPageSize = int;
-type projectVersionStatus = [@as("DELETING") #DELETING | @as("STOPPED") #STOPPED | @as("STOPPING") #STOPPING | @as("FAILED") #FAILED | @as("RUNNING") #RUNNING | @as("STARTING") #STARTING | @as("TRAINING_FAILED") #TRAINING_FAILED | @as("TRAINING_COMPLETED") #TRAINING_COMPLETED | @as("TRAINING_IN_PROGRESS") #TRAINING_IN_PROGRESS]
+type protectiveEquipmentType = [@as("HEAD_COVER") #HEADCOVER | @as("HAND_COVER") #HANDCOVER | @as("FACE_COVER") #FACECOVER]
+type projectsPageSize = int
+type projectVersionsPageSize = int
+type projectVersionStatus = [@as("DELETING") #DELETING | @as("STOPPED") #STOPPED | @as("STOPPING") #STOPPING | @as("FAILED") #FAILED | @as("RUNNING") #RUNNING | @as("STARTING") #STARTING | @as("TRAINING_FAILED") #TRAININGFAILED | @as("TRAINING_COMPLETED") #TRAININGCOMPLETED | @as("TRAINING_IN_PROGRESS") #TRAININGINPROGRESS]
 type projectVersionArn = string
 type projectStatus = [@as("DELETING") #DELETING | @as("CREATED") #CREATED | @as("CREATING") #CREATING]
 type projectName = string
 type projectArn = string
 type personTrackingSortBy = [@as("TIMESTAMP") #TIMESTAMP | @as("INDEX") #INDEX]
-type personIndex = float;
-type percent = float;
+type personIndex = float
+type percent = float
 type paginationToken = string
-type pageSize = int;
-type orientationCorrection = [@as("ROTATE_270") #ROTATE_270 | @as("ROTATE_180") #ROTATE_180 | @as("ROTATE_90") #ROTATE_90 | @as("ROTATE_0") #ROTATE_0]
-type maxResults = int;
-type maxFacesToIndex = int;
-type maxFaces = int;
-type landmarkType = [@as("upperJawlineRight") #upperJawlineRight | @as("midJawlineRight") #midJawlineRight | @as("chinBottom") #chinBottom | @as("midJawlineLeft") #midJawlineLeft | @as("upperJawlineLeft") #upperJawlineLeft | @as("rightPupil") #rightPupil | @as("leftPupil") #leftPupil | @as("mouthDown") #mouthDown | @as("mouthUp") #mouthUp | @as("noseRight") #noseRight | @as("noseLeft") #noseLeft | @as("rightEyeDown") #rightEyeDown | @as("rightEyeUp") #rightEyeUp | @as("rightEyeRight") #rightEyeRight | @as("rightEyeLeft") #rightEyeLeft | @as("leftEyeDown") #leftEyeDown | @as("leftEyeUp") #leftEyeUp | @as("leftEyeRight") #leftEyeRight | @as("leftEyeLeft") #leftEyeLeft | @as("rightEyeBrowUp") #rightEyeBrowUp | @as("rightEyeBrowRight") #rightEyeBrowRight | @as("rightEyeBrowLeft") #rightEyeBrowLeft | @as("leftEyeBrowUp") #leftEyeBrowUp | @as("leftEyeBrowRight") #leftEyeBrowRight | @as("leftEyeBrowLeft") #leftEyeBrowLeft | @as("mouthRight") #mouthRight | @as("mouthLeft") #mouthLeft | @as("nose") #nose | @as("eyeRight") #eyeRight | @as("eyeLeft") #eyeLeft]
+type pageSize = int
+type orientationCorrection = [@as("ROTATE_270") #ROTATE270 | @as("ROTATE_180") #ROTATE180 | @as("ROTATE_90") #ROTATE90 | @as("ROTATE_0") #ROTATE0]
+type maxResults = int
+type maxFacesToIndex = int
+type maxFaces = int
+type landmarkType = [@as("upperJawlineRight") #UpperJawlineRight | @as("midJawlineRight") #MidJawlineRight | @as("chinBottom") #ChinBottom | @as("midJawlineLeft") #MidJawlineLeft | @as("upperJawlineLeft") #UpperJawlineLeft | @as("rightPupil") #RightPupil | @as("leftPupil") #LeftPupil | @as("mouthDown") #MouthDown | @as("mouthUp") #MouthUp | @as("noseRight") #NoseRight | @as("noseLeft") #NoseLeft | @as("rightEyeDown") #RightEyeDown | @as("rightEyeUp") #RightEyeUp | @as("rightEyeRight") #RightEyeRight | @as("rightEyeLeft") #RightEyeLeft | @as("leftEyeDown") #LeftEyeDown | @as("leftEyeUp") #LeftEyeUp | @as("leftEyeRight") #LeftEyeRight | @as("leftEyeLeft") #LeftEyeLeft | @as("rightEyeBrowUp") #RightEyeBrowUp | @as("rightEyeBrowRight") #RightEyeBrowRight | @as("rightEyeBrowLeft") #RightEyeBrowLeft | @as("leftEyeBrowUp") #LeftEyeBrowUp | @as("leftEyeBrowRight") #LeftEyeBrowRight | @as("leftEyeBrowLeft") #LeftEyeBrowLeft | @as("mouthRight") #MouthRight | @as("mouthLeft") #MouthLeft | @as("nose") #Nose | @as("eyeRight") #EyeRight | @as("eyeLeft") #EyeLeft]
 type labelDetectionSortBy = [@as("TIMESTAMP") #TIMESTAMP | @as("NAME") #NAME]
 type kmsKeyId = string
 type kinesisVideoArn = string
 type kinesisDataArn = string
 type jobTag = string
 type jobId = string
-type inferenceUnits = int;
+type inferenceUnits = int
 type imageId = string
-type imageBlob = NodeJs.Buffer.t;
+type imageBlob = NodeJs.Buffer.t
 type humanLoopName = string
 type humanLoopArn = string
 type humanLoopActivationReason = string
 type genderType = [@as("Female") #Female | @as("Male") #Male]
 type flowDefinitionArn = string
-type amazonawsFloat = float;
+type float_ = float
 type faceSearchSortBy = [@as("TIMESTAMP") #TIMESTAMP | @as("INDEX") #INDEX]
 type faceId = string
 type faceAttributes = [@as("ALL") #ALL | @as("DEFAULT") #DEFAULT]
 type externalImageId = string
 type extendedPaginationToken = string
 type emotionName = [@as("FEAR") #FEAR | @as("UNKNOWN") #UNKNOWN | @as("CALM") #CALM | @as("SURPRISED") #SURPRISED | @as("DISGUSTED") #DISGUSTED | @as("CONFUSED") #CONFUSED | @as("ANGRY") #ANGRY | @as("SAD") #SAD | @as("HAPPY") #HAPPY]
-type degree = float;
+type degree = float
 type dateTime = Js.Date.t;
 type contentModerationSortBy = [@as("TIMESTAMP") #TIMESTAMP | @as("NAME") #NAME]
 type contentClassifier = [@as("FreeOfAdultContent") #FreeOfAdultContent | @as("FreeOfPersonallyIdentifiableInformation") #FreeOfPersonallyIdentifiableInformation]
 type collectionId = string
 type clientRequestToken = string
 type celebrityRecognitionSortBy = [@as("TIMESTAMP") #TIMESTAMP | @as("ID") #ID]
-type boundingBoxWidth = float;
-type boundingBoxHeight = float;
-type amazonawsBoolean = bool;
-type bodyPart = [@as("RIGHT_HAND") #RIGHT_HAND | @as("LEFT_HAND") #LEFT_HAND | @as("HEAD") #HEAD | @as("FACE") #FACE]
+type boundingBoxWidth = float
+type boundingBoxHeight = float
+type boolean_ = bool
+type bodyPart = [@as("RIGHT_HAND") #RIGHTHAND | @as("LEFT_HAND") #LEFTHAND | @as("HEAD") #HEAD | @as("FACE") #FACE]
 type attribute = [@as("ALL") #ALL | @as("DEFAULT") #DEFAULT]
 type videoMetadata = {
-@as("FrameWidth") frameWidth: uLong,
-@as("FrameHeight") frameHeight: uLong,
-@as("FrameRate") frameRate: amazonawsFloat,
-@as("Format") format: amazonawsString,
-@as("DurationMillis") durationMillis: uLong,
-@as("Codec") codec: amazonawsString
+@as("FrameWidth") frameWidth: option<ulong>,
+@as("FrameHeight") frameHeight: option<ulong>,
+@as("FrameRate") frameRate: option<float_>,
+@as("Format") format: option<string_>,
+@as("DurationMillis") durationMillis: option<ulong>,
+@as("Codec") codec: option<string_>
 }
 type versionNames = array<versionName>
 type urls = array<url>
 type technicalCueSegment = {
-@as("Confidence") confidence: segmentConfidence,
-@as("Type") type_: technicalCueType
+@as("Confidence") confidence: option<segmentConfidence>,
+@as("Type") type_: option<technicalCueType>
 }
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type sunglasses = {
-@as("Confidence") confidence: percent,
-@as("Value") value: amazonawsBoolean
+@as("Confidence") confidence: option<percent>,
+@as("Value") value: option<boolean_>
 }
 type streamProcessor = {
-@as("Status") status: streamProcessorStatus,
-@as("Name") name: streamProcessorName
+@as("Status") status: option<streamProcessorStatus>,
+@as("Name") name: option<streamProcessorName>
 }
 type startTechnicalCueDetectionFilter = {
-@as("MinSegmentConfidence") minSegmentConfidence: segmentConfidence
+@as("MinSegmentConfidence") minSegmentConfidence: option<segmentConfidence>
 }
 type startShotDetectionFilter = {
-@as("MinSegmentConfidence") minSegmentConfidence: segmentConfidence
+@as("MinSegmentConfidence") minSegmentConfidence: option<segmentConfidence>
 }
 type smile = {
-@as("Confidence") confidence: percent,
-@as("Value") value: amazonawsBoolean
+@as("Confidence") confidence: option<percent>,
+@as("Value") value: option<boolean_>
 }
 type shotSegment = {
-@as("Confidence") confidence: segmentConfidence,
-@as("Index") index: uLong
+@as("Confidence") confidence: option<segmentConfidence>,
+@as("Index") index: option<ulong>
 }
 type segmentTypes = array<segmentType>
 type segmentTypeInfo = {
-@as("ModelVersion") modelVersion: amazonawsString,
-@as("Type") type_: segmentType
+@as("ModelVersion") modelVersion: option<string_>,
+@as("Type") type_: option<segmentType>
 }
 type s3Object = {
-@as("Version") version: s3ObjectVersion,
-@as("Name") name: s3ObjectName,
-@as("Bucket") bucket: s3Bucket
+@as("Version") version: option<s3ObjectVersion>,
+@as("Name") name: option<s3ObjectName>,
+@as("Bucket") bucket: option<s3Bucket>
 }
 type reasons = array<reason>
 type protectiveEquipmentTypes = array<protectiveEquipmentType>
-type protectiveEquipmentPersonIds = array<uInteger>
+type protectiveEquipmentPersonIds = array<uinteger>
 type projectDescription = {
-@as("Status") status: projectStatus,
-@as("CreationTimestamp") creationTimestamp: dateTime,
-@as("ProjectArn") projectArn: projectArn
+@as("Status") status: option<projectStatus>,
+@as("CreationTimestamp") creationTimestamp: option<dateTime>,
+@as("ProjectArn") projectArn: option<projectArn>
 }
 type pose = {
-@as("Pitch") pitch: degree,
-@as("Yaw") yaw: degree,
-@as("Roll") roll: degree
+@as("Pitch") pitch: option<degree>,
+@as("Yaw") yaw: option<degree>,
+@as("Roll") roll: option<degree>
 }
 type point = {
-@as("Y") y: amazonawsFloat,
-@as("X") x: amazonawsFloat
+@as("Y") y: option<float_>,
+@as("X") x: option<float_>
 }
 type parent = {
-@as("Name") name: amazonawsString
+@as("Name") name: option<string_>
 }
 type outputConfig = {
-@as("S3KeyPrefix") s3KeyPrefix: s3KeyPrefix,
-@as("S3Bucket") s3Bucket: s3Bucket
+@as("S3KeyPrefix") s3KeyPrefix: option<s3KeyPrefix>,
+@as("S3Bucket") s3Bucket: option<s3Bucket>
 }
 type notificationChannel = {
-@as("RoleArn") roleArn: option<roleArn>,
-@as("SNSTopicArn") sNSTopicArn: option<sNSTopicArn>
+@as("RoleArn") roleArn: roleArn,
+@as("SNSTopicArn") snstopicArn: snstopicArn
 }
 type mustache = {
-@as("Confidence") confidence: percent,
-@as("Value") value: amazonawsBoolean
+@as("Confidence") confidence: option<percent>,
+@as("Value") value: option<boolean_>
 }
 type mouthOpen = {
-@as("Confidence") confidence: percent,
-@as("Value") value: amazonawsBoolean
+@as("Confidence") confidence: option<percent>,
+@as("Value") value: option<boolean_>
 }
 type moderationLabel = {
-@as("ParentName") parentName: amazonawsString,
-@as("Name") name: amazonawsString,
-@as("Confidence") confidence: percent
+@as("ParentName") parentName: option<string_>,
+@as("Name") name: option<string_>,
+@as("Confidence") confidence: option<percent>
 }
 type landmark = {
-@as("Y") y: amazonawsFloat,
-@as("X") x: amazonawsFloat,
-@as("Type") type_: landmarkType
+@as("Y") y: option<float_>,
+@as("X") x: option<float_>,
+@as("Type") type_: option<landmarkType>
 }
 type kinesisVideoStream = {
-@as("Arn") arn: kinesisVideoArn
+@as("Arn") arn: option<kinesisVideoArn>
 }
 type kinesisDataStream = {
-@as("Arn") arn: kinesisDataArn
+@as("Arn") arn: option<kinesisDataArn>
 }
 type imageQuality = {
-@as("Sharpness") sharpness: amazonawsFloat,
-@as("Brightness") brightness: amazonawsFloat
+@as("Sharpness") sharpness: option<float_>,
+@as("Brightness") brightness: option<float_>
 }
 type humanLoopActivationReasons = array<humanLoopActivationReason>
 type gender = {
-@as("Confidence") confidence: percent,
-@as("Value") value: genderType
+@as("Confidence") confidence: option<percent>,
+@as("Value") value: option<genderType>
 }
 type faceSearchSettings = {
-@as("FaceMatchThreshold") faceMatchThreshold: percent,
-@as("CollectionId") collectionId: collectionId
+@as("FaceMatchThreshold") faceMatchThreshold: option<percent>,
+@as("CollectionId") collectionId: option<collectionId>
 }
-type faceModelVersionList = array<amazonawsString>
+type faceModelVersionList = array<string_>
 type faceIdList = array<faceId>
 type eyeglasses = {
-@as("Confidence") confidence: percent,
-@as("Value") value: amazonawsBoolean
+@as("Confidence") confidence: option<percent>,
+@as("Value") value: option<boolean_>
 }
 type eyeOpen = {
-@as("Confidence") confidence: percent,
-@as("Value") value: amazonawsBoolean
+@as("Confidence") confidence: option<percent>,
+@as("Value") value: option<boolean_>
 }
 type emotion = {
-@as("Confidence") confidence: percent,
-@as("Type") type_: emotionName
+@as("Confidence") confidence: option<percent>,
+@as("Type") type_: option<emotionName>
 }
 type detectionFilter = {
-@as("MinBoundingBoxWidth") minBoundingBoxWidth: boundingBoxWidth,
-@as("MinBoundingBoxHeight") minBoundingBoxHeight: boundingBoxHeight,
-@as("MinConfidence") minConfidence: percent
+@as("MinBoundingBoxWidth") minBoundingBoxWidth: option<boundingBoxWidth>,
+@as("MinBoundingBoxHeight") minBoundingBoxHeight: option<boundingBoxHeight>,
+@as("MinConfidence") minConfidence: option<percent>
 }
 type coversBodyPart = {
-@as("Value") value: amazonawsBoolean,
-@as("Confidence") confidence: percent
+@as("Value") value: option<boolean_>,
+@as("Confidence") confidence: option<percent>
 }
 type contentClassifiers = array<contentClassifier>
 type collectionIdList = array<collectionId>
 type boundingBox = {
-@as("Top") top: amazonawsFloat,
-@as("Left") left: amazonawsFloat,
-@as("Height") height: amazonawsFloat,
-@as("Width") width: amazonawsFloat
+@as("Top") top: option<float_>,
+@as("Left") left: option<float_>,
+@as("Height") height: option<float_>,
+@as("Width") width: option<float_>
 }
 type beard = {
-@as("Confidence") confidence: percent,
-@as("Value") value: amazonawsBoolean
+@as("Confidence") confidence: option<percent>,
+@as("Value") value: option<boolean_>
 }
 type audioMetadata = {
-@as("NumberOfChannels") numberOfChannels: uLong,
-@as("SampleRate") sampleRate: uLong,
-@as("DurationMillis") durationMillis: uLong,
-@as("Codec") codec: amazonawsString
+@as("NumberOfChannels") numberOfChannels: option<ulong>,
+@as("SampleRate") sampleRate: option<ulong>,
+@as("DurationMillis") durationMillis: option<ulong>,
+@as("Codec") codec: option<string_>
 }
 type attributes = array<attribute>
 type ageRange = {
-@as("High") high: uInteger,
-@as("Low") low: uInteger
+@as("High") high: option<uinteger>,
+@as("Low") low: option<uinteger>
 }
 type videoMetadataList = array<videoMetadata>
 type video = {
-@as("S3Object") s3Object: s3Object
+@as("S3Object") s3Object: option<s3Object>
 }
 type summary = {
-@as("S3Object") s3Object: s3Object
+@as("S3Object") s3Object: option<s3Object>
 }
 type streamProcessorSettings = {
-@as("FaceSearch") faceSearch: faceSearchSettings
+@as("FaceSearch") faceSearch: option<faceSearchSettings>
 }
 type streamProcessorOutput = {
-@as("KinesisDataStream") kinesisDataStream: kinesisDataStream
+@as("KinesisDataStream") kinesisDataStream: option<kinesisDataStream>
 }
 type streamProcessorList = array<streamProcessor>
 type streamProcessorInput = {
-@as("KinesisVideoStream") kinesisVideoStream: kinesisVideoStream
+@as("KinesisVideoStream") kinesisVideoStream: option<kinesisVideoStream>
 }
 type startSegmentDetectionFilters = {
-@as("ShotFilter") shotFilter: startShotDetectionFilter,
-@as("TechnicalCueFilter") technicalCueFilter: startTechnicalCueDetectionFilter
+@as("ShotFilter") shotFilter: option<startShotDetectionFilter>,
+@as("TechnicalCueFilter") technicalCueFilter: option<startTechnicalCueDetectionFilter>
 }
 type segmentTypesInfo = array<segmentTypeInfo>
 type segmentDetection = {
-@as("ShotSegment") shotSegment: shotSegment,
-@as("TechnicalCueSegment") technicalCueSegment: technicalCueSegment,
-@as("DurationSMPTE") durationSMPTE: timecode,
-@as("EndTimecodeSMPTE") endTimecodeSMPTE: timecode,
-@as("StartTimecodeSMPTE") startTimecodeSMPTE: timecode,
-@as("DurationMillis") durationMillis: uLong,
-@as("EndTimestampMillis") endTimestampMillis: amazonawsTimestamp,
-@as("StartTimestampMillis") startTimestampMillis: amazonawsTimestamp,
-@as("Type") type_: segmentType
+@as("ShotSegment") shotSegment: option<shotSegment>,
+@as("TechnicalCueSegment") technicalCueSegment: option<technicalCueSegment>,
+@as("DurationSMPTE") durationSMPTE: option<timecode>,
+@as("EndTimecodeSMPTE") endTimecodeSMPTE: option<timecode>,
+@as("StartTimecodeSMPTE") startTimecodeSMPTE: option<timecode>,
+@as("DurationMillis") durationMillis: option<ulong>,
+@as("EndTimestampMillis") endTimestampMillis: option<timestamp_>,
+@as("StartTimestampMillis") startTimestampMillis: option<timestamp_>,
+@as("Type") type_: option<segmentType>
 }
 type regionOfInterest = {
-@as("BoundingBox") boundingBox: boundingBox
+@as("BoundingBox") boundingBox: option<boundingBox>
 }
 type protectiveEquipmentSummary = {
-@as("PersonsIndeterminate") personsIndeterminate: protectiveEquipmentPersonIds,
-@as("PersonsWithoutRequiredEquipment") personsWithoutRequiredEquipment: protectiveEquipmentPersonIds,
-@as("PersonsWithRequiredEquipment") personsWithRequiredEquipment: protectiveEquipmentPersonIds
+@as("PersonsIndeterminate") personsIndeterminate: option<protectiveEquipmentPersonIds>,
+@as("PersonsWithoutRequiredEquipment") personsWithoutRequiredEquipment: option<protectiveEquipmentPersonIds>,
+@as("PersonsWithRequiredEquipment") personsWithRequiredEquipment: option<protectiveEquipmentPersonIds>
 }
 type protectiveEquipmentSummarizationAttributes = {
-@as("RequiredEquipmentTypes") requiredEquipmentTypes: option<protectiveEquipmentTypes>,
-@as("MinConfidence") minConfidence: option<percent>
+@as("RequiredEquipmentTypes") requiredEquipmentTypes: protectiveEquipmentTypes,
+@as("MinConfidence") minConfidence: percent
 }
 type projectDescriptions = array<projectDescription>
 type polygon = array<point>
@@ -293,226 +298,226 @@ type parents = array<parent>
 type moderationLabels = array<moderationLabel>
 type landmarks = array<landmark>
 type instance = {
-@as("Confidence") confidence: percent,
-@as("BoundingBox") boundingBox: boundingBox
+@as("Confidence") confidence: option<percent>,
+@as("BoundingBox") boundingBox: option<boundingBox>
 }
 type image = {
-@as("S3Object") s3Object: s3Object,
-@as("Bytes") bytes: imageBlob
+@as("S3Object") s3Object: option<s3Object>,
+@as("Bytes") bytes: option<imageBlob>
 }
 type humanLoopDataAttributes = {
-@as("ContentClassifiers") contentClassifiers: contentClassifiers
+@as("ContentClassifiers") contentClassifiers: option<contentClassifiers>
 }
 type humanLoopActivationOutput = {
-@as("HumanLoopActivationConditionsEvaluationResults") humanLoopActivationConditionsEvaluationResults: synthesizedJsonHumanLoopActivationConditionsEvaluationResults,
-@as("HumanLoopActivationReasons") humanLoopActivationReasons: humanLoopActivationReasons,
-@as("HumanLoopArn") humanLoopArn: humanLoopArn
+@as("HumanLoopActivationConditionsEvaluationResults") humanLoopActivationConditionsEvaluationResults: option<synthesizedJsonHumanLoopActivationConditionsEvaluationResults>,
+@as("HumanLoopActivationReasons") humanLoopActivationReasons: option<humanLoopActivationReasons>,
+@as("HumanLoopArn") humanLoopArn: option<humanLoopArn>
 }
 type groundTruthManifest = {
-@as("S3Object") s3Object: s3Object
+@as("S3Object") s3Object: option<s3Object>
 }
 type face = {
-@as("Confidence") confidence: percent,
-@as("ExternalImageId") externalImageId: externalImageId,
-@as("ImageId") imageId: imageId,
-@as("BoundingBox") boundingBox: boundingBox,
-@as("FaceId") faceId: faceId
+@as("Confidence") confidence: option<percent>,
+@as("ExternalImageId") externalImageId: option<externalImageId>,
+@as("ImageId") imageId: option<imageId>,
+@as("BoundingBox") boundingBox: option<boundingBox>,
+@as("FaceId") faceId: option<faceId>
 }
 type equipmentDetection = {
-@as("CoversBodyPart") coversBodyPart: coversBodyPart,
-@as("Type") type_: protectiveEquipmentType,
-@as("Confidence") confidence: percent,
-@as("BoundingBox") boundingBox: boundingBox
+@as("CoversBodyPart") coversBodyPart: option<coversBodyPart>,
+@as("Type") type_: option<protectiveEquipmentType>,
+@as("Confidence") confidence: option<percent>,
+@as("BoundingBox") boundingBox: option<boundingBox>
 }
 type emotions = array<emotion>
 type contentModerationDetection = {
-@as("ModerationLabel") moderationLabel: moderationLabel,
-@as("Timestamp") timestamp: amazonawsTimestamp
+@as("ModerationLabel") moderationLabel: option<moderationLabel>,
+@as("Timestamp") timestamp_: option<timestamp_>
 }
 type comparedSourceImageFace = {
-@as("Confidence") confidence: percent,
-@as("BoundingBox") boundingBox: boundingBox
+@as("Confidence") confidence: option<percent>,
+@as("BoundingBox") boundingBox: option<boundingBox>
 }
 type audioMetadataList = array<audioMetadata>
 type segmentDetections = array<segmentDetection>
 type regionsOfInterest = array<regionOfInterest>
 type instances = array<instance>
 type humanLoopConfig = {
-@as("DataAttributes") dataAttributes: humanLoopDataAttributes,
-@as("FlowDefinitionArn") flowDefinitionArn: option<flowDefinitionArn>,
-@as("HumanLoopName") humanLoopName: option<humanLoopName>
+@as("DataAttributes") dataAttributes: option<humanLoopDataAttributes>,
+@as("FlowDefinitionArn") flowDefinitionArn: flowDefinitionArn,
+@as("HumanLoopName") humanLoopName: humanLoopName
 }
 type geometry = {
-@as("Polygon") polygon: polygon,
-@as("BoundingBox") boundingBox: boundingBox
+@as("Polygon") polygon: option<polygon>,
+@as("BoundingBox") boundingBox: option<boundingBox>
 }
 type faceMatch = {
-@as("Face") face: face,
-@as("Similarity") similarity: percent
+@as("Face") face: option<face>,
+@as("Similarity") similarity: option<percent>
 }
 type faceList = array<face>
 type faceDetail = {
-@as("Confidence") confidence: percent,
-@as("Quality") quality: imageQuality,
-@as("Pose") pose: pose,
-@as("Landmarks") landmarks: landmarks,
-@as("Emotions") emotions: emotions,
-@as("MouthOpen") mouthOpen: mouthOpen,
-@as("EyesOpen") eyesOpen: eyeOpen,
-@as("Mustache") mustache: mustache,
-@as("Beard") beard: beard,
-@as("Gender") gender: gender,
-@as("Sunglasses") sunglasses: sunglasses,
-@as("Eyeglasses") eyeglasses: eyeglasses,
-@as("Smile") smile: smile,
-@as("AgeRange") ageRange: ageRange,
-@as("BoundingBox") boundingBox: boundingBox
+@as("Confidence") confidence: option<percent>,
+@as("Quality") quality: option<imageQuality>,
+@as("Pose") pose: option<pose>,
+@as("Landmarks") landmarks: option<landmarks>,
+@as("Emotions") emotions: option<emotions>,
+@as("MouthOpen") mouthOpen: option<mouthOpen>,
+@as("EyesOpen") eyesOpen: option<eyeOpen>,
+@as("Mustache") mustache: option<mustache>,
+@as("Beard") beard: option<beard>,
+@as("Gender") gender: option<gender>,
+@as("Sunglasses") sunglasses: option<sunglasses>,
+@as("Eyeglasses") eyeglasses: option<eyeglasses>,
+@as("Smile") smile: option<smile>,
+@as("AgeRange") ageRange: option<ageRange>,
+@as("BoundingBox") boundingBox: option<boundingBox>
 }
 type evaluationResult = {
-@as("Summary") summary: summary,
-@as("F1Score") f1Score: amazonawsFloat
+@as("Summary") summary: option<summary>,
+@as("F1Score") f1Score: option<float_>
 }
 type equipmentDetections = array<equipmentDetection>
 type contentModerationDetections = array<contentModerationDetection>
 type comparedFace = {
-@as("Quality") quality: imageQuality,
-@as("Pose") pose: pose,
-@as("Landmarks") landmarks: landmarks,
-@as("Confidence") confidence: percent,
-@as("BoundingBox") boundingBox: boundingBox
+@as("Quality") quality: option<imageQuality>,
+@as("Pose") pose: option<pose>,
+@as("Landmarks") landmarks: option<landmarks>,
+@as("Confidence") confidence: option<percent>,
+@as("BoundingBox") boundingBox: option<boundingBox>
 }
 type asset = {
-@as("GroundTruthManifest") groundTruthManifest: groundTruthManifest
+@as("GroundTruthManifest") groundTruthManifest: option<groundTruthManifest>
 }
 type unindexedFace = {
-@as("FaceDetail") faceDetail: faceDetail,
-@as("Reasons") reasons: reasons
+@as("FaceDetail") faceDetail: option<faceDetail>,
+@as("Reasons") reasons: option<reasons>
 }
 type textDetection = {
-@as("Geometry") geometry: geometry,
-@as("Confidence") confidence: percent,
-@as("ParentId") parentId: uInteger,
-@as("Id") id: uInteger,
-@as("Type") type_: textTypes,
-@as("DetectedText") detectedText: amazonawsString
+@as("Geometry") geometry: option<geometry>,
+@as("Confidence") confidence: option<percent>,
+@as("ParentId") parentId: option<uinteger>,
+@as("Id") id: option<uinteger>,
+@as("Type") type_: option<textTypes>,
+@as("DetectedText") detectedText: option<string_>
 }
 type startTextDetectionFilters = {
-@as("RegionsOfInterest") regionsOfInterest: regionsOfInterest,
-@as("WordFilter") wordFilter: detectionFilter
+@as("RegionsOfInterest") regionsOfInterest: option<regionsOfInterest>,
+@as("WordFilter") wordFilter: option<detectionFilter>
 }
 type protectiveEquipmentBodyPart = {
-@as("EquipmentDetections") equipmentDetections: equipmentDetections,
-@as("Confidence") confidence: percent,
-@as("Name") name: bodyPart
+@as("EquipmentDetections") equipmentDetections: option<equipmentDetections>,
+@as("Confidence") confidence: option<percent>,
+@as("Name") name: option<bodyPart>
 }
 type personDetail = {
-@as("Face") face: faceDetail,
-@as("BoundingBox") boundingBox: boundingBox,
-@as("Index") index: personIndex
+@as("Face") face: option<faceDetail>,
+@as("BoundingBox") boundingBox: option<boundingBox>,
+@as("Index") index: option<personIndex>
 }
 type label = {
-@as("Parents") parents: parents,
-@as("Instances") instances: instances,
-@as("Confidence") confidence: percent,
-@as("Name") name: amazonawsString
+@as("Parents") parents: option<parents>,
+@as("Instances") instances: option<instances>,
+@as("Confidence") confidence: option<percent>,
+@as("Name") name: option<string_>
 }
 type faceRecord = {
-@as("FaceDetail") faceDetail: faceDetail,
-@as("Face") face: face
+@as("FaceDetail") faceDetail: option<faceDetail>,
+@as("Face") face: option<face>
 }
 type faceMatchList = array<faceMatch>
 type faceDetection = {
-@as("Face") face: faceDetail,
-@as("Timestamp") timestamp: amazonawsTimestamp
+@as("Face") face: option<faceDetail>,
+@as("Timestamp") timestamp_: option<timestamp_>
 }
 type faceDetailList = array<faceDetail>
 type detectTextFilters = {
-@as("RegionsOfInterest") regionsOfInterest: regionsOfInterest,
-@as("WordFilter") wordFilter: detectionFilter
+@as("RegionsOfInterest") regionsOfInterest: option<regionsOfInterest>,
+@as("WordFilter") wordFilter: option<detectionFilter>
 }
 type customLabel = {
-@as("Geometry") geometry: geometry,
-@as("Confidence") confidence: percent,
-@as("Name") name: amazonawsString
+@as("Geometry") geometry: option<geometry>,
+@as("Confidence") confidence: option<percent>,
+@as("Name") name: option<string_>
 }
 type comparedFaceList = array<comparedFace>
 type compareFacesUnmatchList = array<comparedFace>
 type compareFacesMatch = {
-@as("Face") face: comparedFace,
-@as("Similarity") similarity: percent
+@as("Face") face: option<comparedFace>,
+@as("Similarity") similarity: option<percent>
 }
 type celebrityDetail = {
-@as("Face") face: faceDetail,
-@as("BoundingBox") boundingBox: boundingBox,
-@as("Confidence") confidence: percent,
-@as("Id") id: rekognitionUniqueId,
-@as("Name") name: amazonawsString,
-@as("Urls") urls: urls
+@as("Face") face: option<faceDetail>,
+@as("BoundingBox") boundingBox: option<boundingBox>,
+@as("Confidence") confidence: option<percent>,
+@as("Id") id: option<rekognitionUniqueId>,
+@as("Name") name: option<string_>,
+@as("Urls") urls: option<urls>
 }
 type celebrity = {
-@as("MatchConfidence") matchConfidence: percent,
-@as("Face") face: comparedFace,
-@as("Id") id: rekognitionUniqueId,
-@as("Name") name: amazonawsString,
-@as("Urls") urls: urls
+@as("MatchConfidence") matchConfidence: option<percent>,
+@as("Face") face: option<comparedFace>,
+@as("Id") id: option<rekognitionUniqueId>,
+@as("Name") name: option<string_>,
+@as("Urls") urls: option<urls>
 }
 type assets = array<asset>
 type validationData = {
-@as("Assets") assets: assets
+@as("Assets") assets: option<assets>
 }
 type unindexedFaces = array<unindexedFace>
 type trainingData = {
-@as("Assets") assets: assets
+@as("Assets") assets: option<assets>
 }
 type textDetectionResult = {
-@as("TextDetection") textDetection: textDetection,
-@as("Timestamp") timestamp: amazonawsTimestamp
+@as("TextDetection") textDetection: option<textDetection>,
+@as("Timestamp") timestamp_: option<timestamp_>
 }
 type textDetectionList = array<textDetection>
 type testingData = {
-@as("AutoCreate") autoCreate: amazonawsBoolean,
-@as("Assets") assets: assets
+@as("AutoCreate") autoCreate: option<boolean_>,
+@as("Assets") assets: option<assets>
 }
 type personMatch = {
-@as("FaceMatches") faceMatches: faceMatchList,
-@as("Person") person: personDetail,
-@as("Timestamp") timestamp: amazonawsTimestamp
+@as("FaceMatches") faceMatches: option<faceMatchList>,
+@as("Person") person: option<personDetail>,
+@as("Timestamp") timestamp_: option<timestamp_>
 }
 type personDetection = {
-@as("Person") person: personDetail,
-@as("Timestamp") timestamp: amazonawsTimestamp
+@as("Person") person: option<personDetail>,
+@as("Timestamp") timestamp_: option<timestamp_>
 }
 type labels = array<label>
 type labelDetection = {
-@as("Label") label: label,
-@as("Timestamp") timestamp: amazonawsTimestamp
+@as("Label") label: option<label>,
+@as("Timestamp") timestamp_: option<timestamp_>
 }
 type faceRecordList = array<faceRecord>
 type faceDetections = array<faceDetection>
 type customLabels = array<customLabel>
 type compareFacesMatchList = array<compareFacesMatch>
 type celebrityRecognition = {
-@as("Celebrity") celebrity: celebrityDetail,
-@as("Timestamp") timestamp: amazonawsTimestamp
+@as("Celebrity") celebrity: option<celebrityDetail>,
+@as("Timestamp") timestamp_: option<timestamp_>
 }
 type celebrityList = array<celebrity>
 type bodyParts = array<protectiveEquipmentBodyPart>
 type trainingDataResult = {
-@as("Validation") validation: validationData,
-@as("Output") output: trainingData,
-@as("Input") input: trainingData
+@as("Validation") validation: option<validationData>,
+@as("Output") output: option<trainingData>,
+@as("Input") input: option<trainingData>
 }
 type textDetectionResults = array<textDetectionResult>
 type testingDataResult = {
-@as("Validation") validation: validationData,
-@as("Output") output: testingData,
-@as("Input") input: testingData
+@as("Validation") validation: option<validationData>,
+@as("Output") output: option<testingData>,
+@as("Input") input: option<testingData>
 }
 type protectiveEquipmentPerson = {
-@as("Id") id: uInteger,
-@as("Confidence") confidence: percent,
-@as("BoundingBox") boundingBox: boundingBox,
-@as("BodyParts") bodyParts: bodyParts
+@as("Id") id: option<uinteger>,
+@as("Confidence") confidence: option<percent>,
+@as("BoundingBox") boundingBox: option<boundingBox>,
+@as("BodyParts") bodyParts: option<bodyParts>
 }
 type personMatches = array<personMatch>
 type personDetections = array<personDetection>
@@ -520,804 +525,804 @@ type labelDetections = array<labelDetection>
 type celebrityRecognitions = array<celebrityRecognition>
 type protectiveEquipmentPersons = array<protectiveEquipmentPerson>
 type projectVersionDescription = {
-@as("KmsKeyId") kmsKeyId: kmsKeyId,
-@as("ManifestSummary") manifestSummary: groundTruthManifest,
-@as("EvaluationResult") evaluationResult: evaluationResult,
-@as("TestingDataResult") testingDataResult: testingDataResult,
-@as("TrainingDataResult") trainingDataResult: trainingDataResult,
-@as("OutputConfig") outputConfig: outputConfig,
-@as("TrainingEndTimestamp") trainingEndTimestamp: dateTime,
-@as("BillableTrainingTimeInSeconds") billableTrainingTimeInSeconds: uLong,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("Status") status: projectVersionStatus,
-@as("MinInferenceUnits") minInferenceUnits: inferenceUnits,
-@as("CreationTimestamp") creationTimestamp: dateTime,
-@as("ProjectVersionArn") projectVersionArn: projectVersionArn
+@as("KmsKeyId") kmsKeyId: option<kmsKeyId>,
+@as("ManifestSummary") manifestSummary: option<groundTruthManifest>,
+@as("EvaluationResult") evaluationResult: option<evaluationResult>,
+@as("TestingDataResult") testingDataResult: option<testingDataResult>,
+@as("TrainingDataResult") trainingDataResult: option<trainingDataResult>,
+@as("OutputConfig") outputConfig: option<outputConfig>,
+@as("TrainingEndTimestamp") trainingEndTimestamp: option<dateTime>,
+@as("BillableTrainingTimeInSeconds") billableTrainingTimeInSeconds: option<ulong>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("Status") status: option<projectVersionStatus>,
+@as("MinInferenceUnits") minInferenceUnits: option<inferenceUnits>,
+@as("CreationTimestamp") creationTimestamp: option<dateTime>,
+@as("ProjectVersionArn") projectVersionArn: option<projectVersionArn>
 }
 type projectVersionDescriptions = array<projectVersionDescription>
-type clientType;
-@module("@aws-sdk/client-rekognition") @new external createClient: unit => clientType = "RekognitionClient";
+type awsServiceClient;
+@module("@aws-sdk/client-rekognition") @new external createClient: unit => awsServiceClient = "RekognitionClient";
 module StopStreamProcessor = {
   type t;
   type request = {
-@as("Name") name: option<streamProcessorName>
+@as("Name") name: streamProcessorName
 }
   type response = unit
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StopStreamProcessorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StopProjectVersion = {
   type t;
   type request = {
-@as("ProjectVersionArn") projectVersionArn: option<projectVersionArn>
+@as("ProjectVersionArn") projectVersionArn: projectVersionArn
 }
   type response = {
-@as("Status") status: projectVersionStatus
+@as("Status") status: option<projectVersionStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StopProjectVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartStreamProcessor = {
   type t;
   type request = {
-@as("Name") name: option<streamProcessorName>
+@as("Name") name: streamProcessorName
 }
   type response = unit
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartStreamProcessorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartProjectVersion = {
   type t;
   type request = {
-@as("MinInferenceUnits") minInferenceUnits: option<inferenceUnits>,
-@as("ProjectVersionArn") projectVersionArn: option<projectVersionArn>
+@as("MinInferenceUnits") minInferenceUnits: inferenceUnits,
+@as("ProjectVersionArn") projectVersionArn: projectVersionArn
 }
   type response = {
-@as("Status") status: projectVersionStatus
+@as("Status") status: option<projectVersionStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartProjectVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCollection = {
   type t;
   type request = {
-@as("CollectionId") collectionId: option<collectionId>
+@as("CollectionId") collectionId: collectionId
 }
   type response = {
-@as("CreationTimestamp") creationTimestamp: dateTime,
-@as("CollectionARN") collectionARN: amazonawsString,
-@as("FaceModelVersion") faceModelVersion: amazonawsString,
-@as("FaceCount") faceCount: uLong
+@as("CreationTimestamp") creationTimestamp: option<dateTime>,
+@as("CollectionARN") collectionARN: option<string_>,
+@as("FaceModelVersion") faceModelVersion: option<string_>,
+@as("FaceCount") faceCount: option<ulong>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DescribeCollectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteStreamProcessor = {
   type t;
   type request = {
-@as("Name") name: option<streamProcessorName>
+@as("Name") name: streamProcessorName
 }
   type response = unit
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DeleteStreamProcessorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteProjectVersion = {
   type t;
   type request = {
-@as("ProjectVersionArn") projectVersionArn: option<projectVersionArn>
+@as("ProjectVersionArn") projectVersionArn: projectVersionArn
 }
   type response = {
-@as("Status") status: projectVersionStatus
+@as("Status") status: option<projectVersionStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DeleteProjectVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteProject = {
   type t;
   type request = {
-@as("ProjectArn") projectArn: option<projectArn>
+@as("ProjectArn") projectArn: projectArn
 }
   type response = {
-@as("Status") status: projectStatus
+@as("Status") status: option<projectStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DeleteProjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteCollection = {
   type t;
   type request = {
-@as("CollectionId") collectionId: option<collectionId>
+@as("CollectionId") collectionId: collectionId
 }
   type response = {
-@as("StatusCode") statusCode: uInteger
+@as("StatusCode") statusCode: option<uinteger>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DeleteCollectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateProject = {
   type t;
   type request = {
-@as("ProjectName") projectName: option<projectName>
+@as("ProjectName") projectName: projectName
 }
   type response = {
-@as("ProjectArn") projectArn: projectArn
+@as("ProjectArn") projectArn: option<projectArn>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "CreateProjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceArn") resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tagMap>,
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("Tags") tags: tagMap,
+@as("ResourceArn") resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("ResourceArn") resourceArn: resourceArn
 }
   type response = {
-@as("Tags") tags: tagMap
+@as("Tags") tags: option<tagMap>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCollections = {
   type t;
   type request = {
-@as("MaxResults") maxResults: pageSize,
-@as("NextToken") nextToken: paginationToken
+@as("MaxResults") maxResults: option<pageSize>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("FaceModelVersions") faceModelVersions: faceModelVersionList,
-@as("NextToken") nextToken: paginationToken,
-@as("CollectionIds") collectionIds: collectionIdList
+@as("FaceModelVersions") faceModelVersions: option<faceModelVersionList>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("CollectionIds") collectionIds: option<collectionIdList>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "ListCollectionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetCelebrityInfo = {
   type t;
   type request = {
-@as("Id") id: option<rekognitionUniqueId>
+@as("Id") id: rekognitionUniqueId
 }
   type response = {
-@as("Name") name: amazonawsString,
-@as("Urls") urls: urls
+@as("Name") name: option<string_>,
+@as("Urls") urls: option<urls>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetCelebrityInfoCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFaces = {
   type t;
   type request = {
-@as("FaceIds") faceIds: option<faceIdList>,
-@as("CollectionId") collectionId: option<collectionId>
+@as("FaceIds") faceIds: faceIdList,
+@as("CollectionId") collectionId: collectionId
 }
   type response = {
-@as("DeletedFaces") deletedFaces: faceIdList
+@as("DeletedFaces") deletedFaces: option<faceIdList>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DeleteFacesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCollection = {
   type t;
   type request = {
-@as("Tags") tags: tagMap,
-@as("CollectionId") collectionId: option<collectionId>
+@as("Tags") tags: option<tagMap>,
+@as("CollectionId") collectionId: collectionId
 }
   type response = {
-@as("FaceModelVersion") faceModelVersion: amazonawsString,
-@as("CollectionArn") collectionArn: amazonawsString,
-@as("StatusCode") statusCode: uInteger
+@as("FaceModelVersion") faceModelVersion: option<string_>,
+@as("CollectionArn") collectionArn: option<string_>,
+@as("StatusCode") statusCode: option<uinteger>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "CreateCollectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartSegmentDetection = {
   type t;
   type request = {
-@as("SegmentTypes") segmentTypes: option<segmentTypes>,
-@as("Filters") filters: startSegmentDetectionFilters,
-@as("JobTag") jobTag: jobTag,
-@as("NotificationChannel") notificationChannel: notificationChannel,
-@as("ClientRequestToken") clientRequestToken: clientRequestToken,
-@as("Video") video: option<video>
+@as("SegmentTypes") segmentTypes: segmentTypes,
+@as("Filters") filters: option<startSegmentDetectionFilters>,
+@as("JobTag") jobTag: option<jobTag>,
+@as("NotificationChannel") notificationChannel: option<notificationChannel>,
+@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+@as("Video") video: video
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartSegmentDetectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartPersonTracking = {
   type t;
   type request = {
-@as("JobTag") jobTag: jobTag,
-@as("NotificationChannel") notificationChannel: notificationChannel,
-@as("ClientRequestToken") clientRequestToken: clientRequestToken,
-@as("Video") video: option<video>
+@as("JobTag") jobTag: option<jobTag>,
+@as("NotificationChannel") notificationChannel: option<notificationChannel>,
+@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+@as("Video") video: video
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartPersonTrackingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartLabelDetection = {
   type t;
   type request = {
-@as("JobTag") jobTag: jobTag,
-@as("NotificationChannel") notificationChannel: notificationChannel,
-@as("MinConfidence") minConfidence: percent,
-@as("ClientRequestToken") clientRequestToken: clientRequestToken,
-@as("Video") video: option<video>
+@as("JobTag") jobTag: option<jobTag>,
+@as("NotificationChannel") notificationChannel: option<notificationChannel>,
+@as("MinConfidence") minConfidence: option<percent>,
+@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+@as("Video") video: video
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartLabelDetectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartFaceSearch = {
   type t;
   type request = {
-@as("JobTag") jobTag: jobTag,
-@as("NotificationChannel") notificationChannel: notificationChannel,
-@as("CollectionId") collectionId: option<collectionId>,
-@as("FaceMatchThreshold") faceMatchThreshold: percent,
-@as("ClientRequestToken") clientRequestToken: clientRequestToken,
-@as("Video") video: option<video>
+@as("JobTag") jobTag: option<jobTag>,
+@as("NotificationChannel") notificationChannel: option<notificationChannel>,
+@as("CollectionId") collectionId: collectionId,
+@as("FaceMatchThreshold") faceMatchThreshold: option<percent>,
+@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+@as("Video") video: video
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartFaceSearchCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartFaceDetection = {
   type t;
   type request = {
-@as("JobTag") jobTag: jobTag,
-@as("FaceAttributes") faceAttributes: faceAttributes,
-@as("NotificationChannel") notificationChannel: notificationChannel,
-@as("ClientRequestToken") clientRequestToken: clientRequestToken,
-@as("Video") video: option<video>
+@as("JobTag") jobTag: option<jobTag>,
+@as("FaceAttributes") faceAttributes: option<faceAttributes>,
+@as("NotificationChannel") notificationChannel: option<notificationChannel>,
+@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+@as("Video") video: video
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartFaceDetectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartContentModeration = {
   type t;
   type request = {
-@as("JobTag") jobTag: jobTag,
-@as("NotificationChannel") notificationChannel: notificationChannel,
-@as("ClientRequestToken") clientRequestToken: clientRequestToken,
-@as("MinConfidence") minConfidence: percent,
-@as("Video") video: option<video>
+@as("JobTag") jobTag: option<jobTag>,
+@as("NotificationChannel") notificationChannel: option<notificationChannel>,
+@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+@as("MinConfidence") minConfidence: option<percent>,
+@as("Video") video: video
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartContentModerationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartCelebrityRecognition = {
   type t;
   type request = {
-@as("JobTag") jobTag: jobTag,
-@as("NotificationChannel") notificationChannel: notificationChannel,
-@as("ClientRequestToken") clientRequestToken: clientRequestToken,
-@as("Video") video: option<video>
+@as("JobTag") jobTag: option<jobTag>,
+@as("NotificationChannel") notificationChannel: option<notificationChannel>,
+@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+@as("Video") video: video
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartCelebrityRecognitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStreamProcessors = {
   type t;
   type request = {
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: paginationToken
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("StreamProcessors") streamProcessors: streamProcessorList,
-@as("NextToken") nextToken: paginationToken
+@as("StreamProcessors") streamProcessors: option<streamProcessorList>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "ListStreamProcessorsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeStreamProcessor = {
   type t;
   type request = {
-@as("Name") name: option<streamProcessorName>
-}
-  type response = {
-@as("Settings") settings: streamProcessorSettings,
-@as("RoleArn") roleArn: roleArn,
-@as("Output") output: streamProcessorOutput,
-@as("Input") input: streamProcessorInput,
-@as("LastUpdateTimestamp") lastUpdateTimestamp: dateTime,
-@as("CreationTimestamp") creationTimestamp: dateTime,
-@as("StatusMessage") statusMessage: amazonawsString,
-@as("Status") status: streamProcessorStatus,
-@as("StreamProcessorArn") streamProcessorArn: streamProcessorArn,
 @as("Name") name: streamProcessorName
 }
+  type response = {
+@as("Settings") settings: option<streamProcessorSettings>,
+@as("RoleArn") roleArn: option<roleArn>,
+@as("Output") output: option<streamProcessorOutput>,
+@as("Input") input: option<streamProcessorInput>,
+@as("LastUpdateTimestamp") lastUpdateTimestamp: option<dateTime>,
+@as("CreationTimestamp") creationTimestamp: option<dateTime>,
+@as("StatusMessage") statusMessage: option<string_>,
+@as("Status") status: option<streamProcessorStatus>,
+@as("StreamProcessorArn") streamProcessorArn: option<streamProcessorArn>,
+@as("Name") name: option<streamProcessorName>
+}
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DescribeStreamProcessorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeProjects = {
   type t;
   type request = {
-@as("MaxResults") maxResults: projectsPageSize,
-@as("NextToken") nextToken: extendedPaginationToken
+@as("MaxResults") maxResults: option<projectsPageSize>,
+@as("NextToken") nextToken: option<extendedPaginationToken>
 }
   type response = {
-@as("NextToken") nextToken: extendedPaginationToken,
-@as("ProjectDescriptions") projectDescriptions: projectDescriptions
+@as("NextToken") nextToken: option<extendedPaginationToken>,
+@as("ProjectDescriptions") projectDescriptions: option<projectDescriptions>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DescribeProjectsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateStreamProcessor = {
   type t;
   type request = {
-@as("Tags") tags: tagMap,
-@as("RoleArn") roleArn: option<roleArn>,
-@as("Settings") settings: option<streamProcessorSettings>,
-@as("Name") name: option<streamProcessorName>,
-@as("Output") output: option<streamProcessorOutput>,
-@as("Input") input: option<streamProcessorInput>
+@as("Tags") tags: option<tagMap>,
+@as("RoleArn") roleArn: roleArn,
+@as("Settings") settings: streamProcessorSettings,
+@as("Name") name: streamProcessorName,
+@as("Output") output: streamProcessorOutput,
+@as("Input") input: streamProcessorInput
 }
   type response = {
-@as("StreamProcessorArn") streamProcessorArn: streamProcessorArn
+@as("StreamProcessorArn") streamProcessorArn: option<streamProcessorArn>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "CreateStreamProcessorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFaces = {
   type t;
   type request = {
-@as("MaxResults") maxResults: pageSize,
-@as("NextToken") nextToken: paginationToken,
-@as("CollectionId") collectionId: option<collectionId>
+@as("MaxResults") maxResults: option<pageSize>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("CollectionId") collectionId: collectionId
 }
   type response = {
-@as("FaceModelVersion") faceModelVersion: amazonawsString,
-@as("NextToken") nextToken: amazonawsString,
-@as("Faces") faces: faceList
+@as("FaceModelVersion") faceModelVersion: option<string_>,
+@as("NextToken") nextToken: option<string_>,
+@as("Faces") faces: option<faceList>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "ListFacesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSegmentDetection = {
   type t;
   type request = {
-@as("NextToken") nextToken: paginationToken,
-@as("MaxResults") maxResults: maxResults,
-@as("JobId") jobId: option<jobId>
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("SelectedSegmentTypes") selectedSegmentTypes: segmentTypesInfo,
-@as("Segments") segments: segmentDetections,
-@as("NextToken") nextToken: paginationToken,
-@as("AudioMetadata") audioMetadata: audioMetadataList,
-@as("VideoMetadata") videoMetadata: videoMetadataList,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("JobStatus") jobStatus: videoJobStatus
+@as("SelectedSegmentTypes") selectedSegmentTypes: option<segmentTypesInfo>,
+@as("Segments") segments: option<segmentDetections>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("AudioMetadata") audioMetadata: option<audioMetadataList>,
+@as("VideoMetadata") videoMetadata: option<videoMetadataList>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("JobStatus") jobStatus: option<videoJobStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetSegmentDetectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetContentModeration = {
   type t;
   type request = {
-@as("SortBy") sortBy: contentModerationSortBy,
-@as("NextToken") nextToken: paginationToken,
-@as("MaxResults") maxResults: maxResults,
-@as("JobId") jobId: option<jobId>
+@as("SortBy") sortBy: option<contentModerationSortBy>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("ModerationModelVersion") moderationModelVersion: amazonawsString,
-@as("NextToken") nextToken: paginationToken,
-@as("ModerationLabels") moderationLabels: contentModerationDetections,
-@as("VideoMetadata") videoMetadata: videoMetadata,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("JobStatus") jobStatus: videoJobStatus
+@as("ModerationModelVersion") moderationModelVersion: option<string_>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("ModerationLabels") moderationLabels: option<contentModerationDetections>,
+@as("VideoMetadata") videoMetadata: option<videoMetadata>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("JobStatus") jobStatus: option<videoJobStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetContentModerationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DetectModerationLabels = {
   type t;
   type request = {
-@as("HumanLoopConfig") humanLoopConfig: humanLoopConfig,
-@as("MinConfidence") minConfidence: percent,
-@as("Image") image: option<image>
+@as("HumanLoopConfig") humanLoopConfig: option<humanLoopConfig>,
+@as("MinConfidence") minConfidence: option<percent>,
+@as("Image") image: image
 }
   type response = {
-@as("HumanLoopActivationOutput") humanLoopActivationOutput: humanLoopActivationOutput,
-@as("ModerationModelVersion") moderationModelVersion: amazonawsString,
-@as("ModerationLabels") moderationLabels: moderationLabels
+@as("HumanLoopActivationOutput") humanLoopActivationOutput: option<humanLoopActivationOutput>,
+@as("ModerationModelVersion") moderationModelVersion: option<string_>,
+@as("ModerationLabels") moderationLabels: option<moderationLabels>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectModerationLabelsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartTextDetection = {
   type t;
   type request = {
-@as("Filters") filters: startTextDetectionFilters,
-@as("JobTag") jobTag: jobTag,
-@as("NotificationChannel") notificationChannel: notificationChannel,
-@as("ClientRequestToken") clientRequestToken: clientRequestToken,
-@as("Video") video: option<video>
+@as("Filters") filters: option<startTextDetectionFilters>,
+@as("JobTag") jobTag: option<jobTag>,
+@as("NotificationChannel") notificationChannel: option<notificationChannel>,
+@as("ClientRequestToken") clientRequestToken: option<clientRequestToken>,
+@as("Video") video: video
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartTextDetectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SearchFacesByImage = {
   type t;
   type request = {
-@as("QualityFilter") qualityFilter: qualityFilter,
-@as("FaceMatchThreshold") faceMatchThreshold: percent,
-@as("MaxFaces") maxFaces: maxFaces,
-@as("Image") image: option<image>,
-@as("CollectionId") collectionId: option<collectionId>
+@as("QualityFilter") qualityFilter: option<qualityFilter>,
+@as("FaceMatchThreshold") faceMatchThreshold: option<percent>,
+@as("MaxFaces") maxFaces: option<maxFaces>,
+@as("Image") image: image,
+@as("CollectionId") collectionId: collectionId
 }
   type response = {
-@as("FaceModelVersion") faceModelVersion: amazonawsString,
-@as("FaceMatches") faceMatches: faceMatchList,
-@as("SearchedFaceConfidence") searchedFaceConfidence: percent,
-@as("SearchedFaceBoundingBox") searchedFaceBoundingBox: boundingBox
+@as("FaceModelVersion") faceModelVersion: option<string_>,
+@as("FaceMatches") faceMatches: option<faceMatchList>,
+@as("SearchedFaceConfidence") searchedFaceConfidence: option<percent>,
+@as("SearchedFaceBoundingBox") searchedFaceBoundingBox: option<boundingBox>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "SearchFacesByImageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SearchFaces = {
   type t;
   type request = {
-@as("FaceMatchThreshold") faceMatchThreshold: percent,
-@as("MaxFaces") maxFaces: maxFaces,
-@as("FaceId") faceId: option<faceId>,
-@as("CollectionId") collectionId: option<collectionId>
+@as("FaceMatchThreshold") faceMatchThreshold: option<percent>,
+@as("MaxFaces") maxFaces: option<maxFaces>,
+@as("FaceId") faceId: faceId,
+@as("CollectionId") collectionId: collectionId
 }
   type response = {
-@as("FaceModelVersion") faceModelVersion: amazonawsString,
-@as("FaceMatches") faceMatches: faceMatchList,
-@as("SearchedFaceId") searchedFaceId: faceId
+@as("FaceModelVersion") faceModelVersion: option<string_>,
+@as("FaceMatches") faceMatches: option<faceMatchList>,
+@as("SearchedFaceId") searchedFaceId: option<faceId>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "SearchFacesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DetectFaces = {
   type t;
   type request = {
-@as("Attributes") attributes: attributes,
-@as("Image") image: option<image>
+@as("Attributes") attributes: option<attributes>,
+@as("Image") image: image
 }
   type response = {
-@as("OrientationCorrection") orientationCorrection: orientationCorrection,
-@as("FaceDetails") faceDetails: faceDetailList
+@as("OrientationCorrection") orientationCorrection: option<orientationCorrection>,
+@as("FaceDetails") faceDetails: option<faceDetailList>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectFacesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RecognizeCelebrities = {
   type t;
   type request = {
-@as("Image") image: option<image>
+@as("Image") image: image
 }
   type response = {
-@as("OrientationCorrection") orientationCorrection: orientationCorrection,
-@as("UnrecognizedFaces") unrecognizedFaces: comparedFaceList,
-@as("CelebrityFaces") celebrityFaces: celebrityList
+@as("OrientationCorrection") orientationCorrection: option<orientationCorrection>,
+@as("UnrecognizedFaces") unrecognizedFaces: option<comparedFaceList>,
+@as("CelebrityFaces") celebrityFaces: option<celebrityList>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "RecognizeCelebritiesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module IndexFaces = {
   type t;
   type request = {
-@as("QualityFilter") qualityFilter: qualityFilter,
-@as("MaxFaces") maxFaces: maxFacesToIndex,
-@as("DetectionAttributes") detectionAttributes: attributes,
-@as("ExternalImageId") externalImageId: externalImageId,
-@as("Image") image: option<image>,
-@as("CollectionId") collectionId: option<collectionId>
+@as("QualityFilter") qualityFilter: option<qualityFilter>,
+@as("MaxFaces") maxFaces: option<maxFacesToIndex>,
+@as("DetectionAttributes") detectionAttributes: option<attributes>,
+@as("ExternalImageId") externalImageId: option<externalImageId>,
+@as("Image") image: image,
+@as("CollectionId") collectionId: collectionId
 }
   type response = {
-@as("UnindexedFaces") unindexedFaces: unindexedFaces,
-@as("FaceModelVersion") faceModelVersion: amazonawsString,
-@as("OrientationCorrection") orientationCorrection: orientationCorrection,
-@as("FaceRecords") faceRecords: faceRecordList
+@as("UnindexedFaces") unindexedFaces: option<unindexedFaces>,
+@as("FaceModelVersion") faceModelVersion: option<string_>,
+@as("OrientationCorrection") orientationCorrection: option<orientationCorrection>,
+@as("FaceRecords") faceRecords: option<faceRecordList>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "IndexFacesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFaceDetection = {
   type t;
   type request = {
-@as("NextToken") nextToken: paginationToken,
-@as("MaxResults") maxResults: maxResults,
-@as("JobId") jobId: option<jobId>
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("Faces") faces: faceDetections,
-@as("NextToken") nextToken: paginationToken,
-@as("VideoMetadata") videoMetadata: videoMetadata,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("JobStatus") jobStatus: videoJobStatus
+@as("Faces") faces: option<faceDetections>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("VideoMetadata") videoMetadata: option<videoMetadata>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("JobStatus") jobStatus: option<videoJobStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetFaceDetectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DetectText = {
   type t;
   type request = {
-@as("Filters") filters: detectTextFilters,
-@as("Image") image: option<image>
+@as("Filters") filters: option<detectTextFilters>,
+@as("Image") image: image
 }
   type response = {
-@as("TextModelVersion") textModelVersion: amazonawsString,
-@as("TextDetections") textDetections: textDetectionList
+@as("TextModelVersion") textModelVersion: option<string_>,
+@as("TextDetections") textDetections: option<textDetectionList>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectTextCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DetectLabels = {
   type t;
   type request = {
-@as("MinConfidence") minConfidence: percent,
-@as("MaxLabels") maxLabels: uInteger,
-@as("Image") image: option<image>
+@as("MinConfidence") minConfidence: option<percent>,
+@as("MaxLabels") maxLabels: option<uinteger>,
+@as("Image") image: image
 }
   type response = {
-@as("LabelModelVersion") labelModelVersion: amazonawsString,
-@as("OrientationCorrection") orientationCorrection: orientationCorrection,
-@as("Labels") labels: labels
+@as("LabelModelVersion") labelModelVersion: option<string_>,
+@as("OrientationCorrection") orientationCorrection: option<orientationCorrection>,
+@as("Labels") labels: option<labels>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectLabelsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DetectCustomLabels = {
   type t;
   type request = {
-@as("MinConfidence") minConfidence: percent,
-@as("MaxResults") maxResults: uInteger,
-@as("Image") image: option<image>,
-@as("ProjectVersionArn") projectVersionArn: option<projectVersionArn>
+@as("MinConfidence") minConfidence: option<percent>,
+@as("MaxResults") maxResults: option<uinteger>,
+@as("Image") image: image,
+@as("ProjectVersionArn") projectVersionArn: projectVersionArn
 }
   type response = {
-@as("CustomLabels") customLabels: customLabels
+@as("CustomLabels") customLabels: option<customLabels>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectCustomLabelsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateProjectVersion = {
   type t;
   type request = {
-@as("KmsKeyId") kmsKeyId: kmsKeyId,
-@as("Tags") tags: tagMap,
-@as("TestingData") testingData: option<testingData>,
-@as("TrainingData") trainingData: option<trainingData>,
-@as("OutputConfig") outputConfig: option<outputConfig>,
-@as("VersionName") versionName: option<versionName>,
-@as("ProjectArn") projectArn: option<projectArn>
+@as("KmsKeyId") kmsKeyId: option<kmsKeyId>,
+@as("Tags") tags: option<tagMap>,
+@as("TestingData") testingData: testingData,
+@as("TrainingData") trainingData: trainingData,
+@as("OutputConfig") outputConfig: outputConfig,
+@as("VersionName") versionName: versionName,
+@as("ProjectArn") projectArn: projectArn
 }
   type response = {
-@as("ProjectVersionArn") projectVersionArn: projectVersionArn
+@as("ProjectVersionArn") projectVersionArn: option<projectVersionArn>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "CreateProjectVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CompareFaces = {
   type t;
   type request = {
-@as("QualityFilter") qualityFilter: qualityFilter,
-@as("SimilarityThreshold") similarityThreshold: percent,
-@as("TargetImage") targetImage: option<image>,
-@as("SourceImage") sourceImage: option<image>
+@as("QualityFilter") qualityFilter: option<qualityFilter>,
+@as("SimilarityThreshold") similarityThreshold: option<percent>,
+@as("TargetImage") targetImage: image,
+@as("SourceImage") sourceImage: image
 }
   type response = {
-@as("TargetImageOrientationCorrection") targetImageOrientationCorrection: orientationCorrection,
-@as("SourceImageOrientationCorrection") sourceImageOrientationCorrection: orientationCorrection,
-@as("UnmatchedFaces") unmatchedFaces: compareFacesUnmatchList,
-@as("FaceMatches") faceMatches: compareFacesMatchList,
-@as("SourceImageFace") sourceImageFace: comparedSourceImageFace
+@as("TargetImageOrientationCorrection") targetImageOrientationCorrection: option<orientationCorrection>,
+@as("SourceImageOrientationCorrection") sourceImageOrientationCorrection: option<orientationCorrection>,
+@as("UnmatchedFaces") unmatchedFaces: option<compareFacesUnmatchList>,
+@as("FaceMatches") faceMatches: option<compareFacesMatchList>,
+@as("SourceImageFace") sourceImageFace: option<comparedSourceImageFace>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "CompareFacesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetTextDetection = {
   type t;
   type request = {
-@as("NextToken") nextToken: paginationToken,
-@as("MaxResults") maxResults: maxResults,
-@as("JobId") jobId: option<jobId>
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("TextModelVersion") textModelVersion: amazonawsString,
-@as("NextToken") nextToken: paginationToken,
-@as("TextDetections") textDetections: textDetectionResults,
-@as("VideoMetadata") videoMetadata: videoMetadata,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("JobStatus") jobStatus: videoJobStatus
+@as("TextModelVersion") textModelVersion: option<string_>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("TextDetections") textDetections: option<textDetectionResults>,
+@as("VideoMetadata") videoMetadata: option<videoMetadata>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("JobStatus") jobStatus: option<videoJobStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetTextDetectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPersonTracking = {
   type t;
   type request = {
-@as("SortBy") sortBy: personTrackingSortBy,
-@as("NextToken") nextToken: paginationToken,
-@as("MaxResults") maxResults: maxResults,
-@as("JobId") jobId: option<jobId>
+@as("SortBy") sortBy: option<personTrackingSortBy>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("Persons") persons: personDetections,
-@as("NextToken") nextToken: paginationToken,
-@as("VideoMetadata") videoMetadata: videoMetadata,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("JobStatus") jobStatus: videoJobStatus
+@as("Persons") persons: option<personDetections>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("VideoMetadata") videoMetadata: option<videoMetadata>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("JobStatus") jobStatus: option<videoJobStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetPersonTrackingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLabelDetection = {
   type t;
   type request = {
-@as("SortBy") sortBy: labelDetectionSortBy,
-@as("NextToken") nextToken: paginationToken,
-@as("MaxResults") maxResults: maxResults,
-@as("JobId") jobId: option<jobId>
+@as("SortBy") sortBy: option<labelDetectionSortBy>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("LabelModelVersion") labelModelVersion: amazonawsString,
-@as("Labels") labels: labelDetections,
-@as("NextToken") nextToken: paginationToken,
-@as("VideoMetadata") videoMetadata: videoMetadata,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("JobStatus") jobStatus: videoJobStatus
+@as("LabelModelVersion") labelModelVersion: option<string_>,
+@as("Labels") labels: option<labelDetections>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("VideoMetadata") videoMetadata: option<videoMetadata>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("JobStatus") jobStatus: option<videoJobStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetLabelDetectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFaceSearch = {
   type t;
   type request = {
-@as("SortBy") sortBy: faceSearchSortBy,
-@as("NextToken") nextToken: paginationToken,
-@as("MaxResults") maxResults: maxResults,
-@as("JobId") jobId: option<jobId>
+@as("SortBy") sortBy: option<faceSearchSortBy>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("Persons") persons: personMatches,
-@as("VideoMetadata") videoMetadata: videoMetadata,
-@as("NextToken") nextToken: paginationToken,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("JobStatus") jobStatus: videoJobStatus
+@as("Persons") persons: option<personMatches>,
+@as("VideoMetadata") videoMetadata: option<videoMetadata>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("JobStatus") jobStatus: option<videoJobStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetFaceSearchCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetCelebrityRecognition = {
   type t;
   type request = {
-@as("SortBy") sortBy: celebrityRecognitionSortBy,
-@as("NextToken") nextToken: paginationToken,
-@as("MaxResults") maxResults: maxResults,
-@as("JobId") jobId: option<jobId>
+@as("SortBy") sortBy: option<celebrityRecognitionSortBy>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("Celebrities") celebrities: celebrityRecognitions,
-@as("NextToken") nextToken: paginationToken,
-@as("VideoMetadata") videoMetadata: videoMetadata,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("JobStatus") jobStatus: videoJobStatus
+@as("Celebrities") celebrities: option<celebrityRecognitions>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("VideoMetadata") videoMetadata: option<videoMetadata>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("JobStatus") jobStatus: option<videoJobStatus>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetCelebrityRecognitionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DetectProtectiveEquipment = {
   type t;
   type request = {
-@as("SummarizationAttributes") summarizationAttributes: protectiveEquipmentSummarizationAttributes,
-@as("Image") image: option<image>
+@as("SummarizationAttributes") summarizationAttributes: option<protectiveEquipmentSummarizationAttributes>,
+@as("Image") image: image
 }
   type response = {
-@as("Summary") summary: protectiveEquipmentSummary,
-@as("Persons") persons: protectiveEquipmentPersons,
-@as("ProtectiveEquipmentModelVersion") protectiveEquipmentModelVersion: amazonawsString
+@as("Summary") summary: option<protectiveEquipmentSummary>,
+@as("Persons") persons: option<protectiveEquipmentPersons>,
+@as("ProtectiveEquipmentModelVersion") protectiveEquipmentModelVersion: option<string_>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectProtectiveEquipmentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeProjectVersions = {
   type t;
   type request = {
-@as("MaxResults") maxResults: projectVersionsPageSize,
-@as("NextToken") nextToken: extendedPaginationToken,
-@as("VersionNames") versionNames: versionNames,
-@as("ProjectArn") projectArn: option<projectArn>
+@as("MaxResults") maxResults: option<projectVersionsPageSize>,
+@as("NextToken") nextToken: option<extendedPaginationToken>,
+@as("VersionNames") versionNames: option<versionNames>,
+@as("ProjectArn") projectArn: projectArn
 }
   type response = {
-@as("NextToken") nextToken: extendedPaginationToken,
-@as("ProjectVersionDescriptions") projectVersionDescriptions: projectVersionDescriptions
+@as("NextToken") nextToken: option<extendedPaginationToken>,
+@as("ProjectVersionDescriptions") projectVersionDescriptions: option<projectVersionDescriptions>
 }
   @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DescribeProjectVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

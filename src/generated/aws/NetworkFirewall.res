@@ -1,16 +1,23 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type vpcId = string
 type variableDefinition = string
 type updateToken = string
-type targetType = [@as("HTTP_HOST") #HTTP_HOST | @as("TLS_SNI") #TLS_SNI]
-type tagsPaginationMaxResults = int;
+type targetType = [@as("HTTP_HOST") #HTTPHOST | @as("TLS_SNI") #TLSSNI]
+type tagsPaginationMaxResults = int
 type tagValue = string
 type tagKey = string
-type tCPFlag = [@as("CWR") #CWR | @as("ECE") #ECE | @as("URG") #URG | @as("ACK") #ACK | @as("PSH") #PSH | @as("RST") #RST | @as("SYN") #SYN | @as("FIN") #FIN]
+type tcpflag = [@as("CWR") #CWR | @as("ECE") #ECE | @as("URG") #URG | @as("ACK") #ACK | @as("PSH") #PSH | @as("RST") #RST | @as("SYN") #SYN | @as("FIN") #FIN]
 type statefulRuleProtocol = [@as("DHCP") #DHCP | @as("NTP") #NTP | @as("TFTP") #TFTP | @as("IKEV2") #IKEV2 | @as("KRB5") #KRB5 | @as("MSN") #MSN | @as("IMAP") #IMAP | @as("SMTP") #SMTP | @as("SSH") #SSH | @as("DCERPC") #DCERPC | @as("DNS") #DNS | @as("SMB") #SMB | @as("TLS") #TLS | @as("FTP") #FTP | @as("HTTP") #HTTP | @as("ICMP") #ICMP | @as("UDP") #UDP | @as("TCP") #TCP | @as("IP") #IP]
 type statefulRuleDirection = [@as("ANY") #ANY | @as("FORWARD") #FORWARD]
 type statefulAction = [@as("ALERT") #ALERT | @as("DROP") #DROP | @as("PASS") #PASS]
@@ -19,19 +26,19 @@ type setting = string
 type rulesString = string
 type ruleVariableName = string
 type ruleGroupType = [@as("STATEFUL") #STATEFUL | @as("STATELESS") #STATELESS]
-type ruleCapacity = int;
+type ruleCapacity = int
 type resourceStatus = [@as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE]
 type resourceName = string
 type resourceId = string
 type resourceArn = string
-type protocolNumber = int;
-type priority = int;
-type portRangeBound = int;
+type protocolNumber = int
+type priority = int
+type portRangeBound = int
 type port = string
 type policyString = string
-type perObjectSyncStatus = [@as("IN_SYNC") #IN_SYNC | @as("PENDING") #PENDING]
+type perObjectSyncStatus = [@as("IN_SYNC") #INSYNC | @as("PENDING") #PENDING]
 type paginationToken = string
-type paginationMaxResults = int;
+type paginationMaxResults = int
 type logType = [@as("FLOW") #FLOW | @as("ALERT") #ALERT]
 type logDestinationType = [@as("KinesisDataFirehose") #KinesisDataFirehose | @as("CloudWatchLogs") #CloudWatchLogs | @as("S3") #S3]
 type keyword = string
@@ -44,9 +51,9 @@ type endpointId = string
 type dimensionValue = string
 type destination = string
 type description = string
-type configurationSyncState = [@as("IN_SYNC") #IN_SYNC | @as("PENDING") #PENDING]
+type configurationSyncState = [@as("IN_SYNC") #INSYNC | @as("PENDING") #PENDING]
 type collectionMember_String = string
-type amazonawsBoolean = bool;
+type boolean_ = bool
 type azSubnet = string
 type availabilityZone = string
 type attachmentStatus = [@as("READY") #READY | @as("SCALING") #SCALING | @as("DELETING") #DELETING | @as("CREATING") #CREATING]
@@ -57,658 +64,658 @@ type variableDefinitionList = array<variableDefinition>
 type targetTypes = array<targetType>
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: option<tagValue>,
-@as("Key") key: option<tagKey>
+@as("Value") value: tagValue,
+@as("Key") key: tagKey
 }
 type subnetMapping = {
-@as("SubnetId") subnetId: option<collectionMember_String>
+@as("SubnetId") subnetId: collectionMember_String
 }
 type statelessRuleGroupReference = {
-@as("Priority") priority: option<priority>,
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("Priority") priority: priority,
+@as("ResourceArn") resourceArn: resourceArn
 }
 type statelessActions = array<collectionMember_String>
 type statefulRuleGroupReference = {
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("ResourceArn") resourceArn: resourceArn
 }
 type settings = array<setting>
 type ruleTargets = array<collectionMember_String>
 type ruleGroupMetadata = {
-@as("Arn") arn: resourceArn,
-@as("Name") name: resourceName
+@as("Arn") arn: option<resourceArn>,
+@as("Name") name: option<resourceName>
 }
 type protocolNumbers = array<protocolNumber>
 type portRange = {
-@as("ToPort") toPort: option<portRangeBound>,
-@as("FromPort") fromPort: option<portRangeBound>
+@as("ToPort") toPort: portRangeBound,
+@as("FromPort") fromPort: portRangeBound
 }
 type perObjectStatus = {
-@as("UpdateToken") updateToken: updateToken,
-@as("SyncStatus") syncStatus: perObjectSyncStatus
+@as("UpdateToken") updateToken: option<updateToken>,
+@as("SyncStatus") syncStatus: option<perObjectSyncStatus>
 }
 type logDestinationMap = Js.Dict.t< hashMapValue>
 type header = {
-@as("DestinationPort") destinationPort: option<port>,
-@as("Destination") destination: option<destination>,
-@as("Direction") direction: option<statefulRuleDirection>,
-@as("SourcePort") sourcePort: option<port>,
-@as("Source") source: option<source>,
-@as("Protocol") protocol: option<statefulRuleProtocol>
+@as("DestinationPort") destinationPort: port,
+@as("Destination") destination: destination,
+@as("Direction") direction: statefulRuleDirection,
+@as("SourcePort") sourcePort: port,
+@as("Source") source: source,
+@as("Protocol") protocol: statefulRuleProtocol
 }
-type flags = array<tCPFlag>
+type flags = array<tcpflag>
 type firewallPolicyMetadata = {
-@as("Arn") arn: resourceArn,
-@as("Name") name: resourceName
+@as("Arn") arn: option<resourceArn>,
+@as("Name") name: option<resourceName>
 }
 type firewallMetadata = {
-@as("FirewallArn") firewallArn: resourceArn,
-@as("FirewallName") firewallName: resourceName
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("FirewallName") firewallName: option<resourceName>
 }
 type dimension = {
-@as("Value") value: option<dimensionValue>
+@as("Value") value: dimensionValue
 }
 type azSubnets = array<azSubnet>
 type attachment = {
-@as("Status") status: attachmentStatus,
-@as("EndpointId") endpointId: endpointId,
-@as("SubnetId") subnetId: azSubnet
+@as("Status") status: option<attachmentStatus>,
+@as("EndpointId") endpointId: option<endpointId>,
+@as("SubnetId") subnetId: option<azSubnet>
 }
 type address = {
-@as("AddressDefinition") addressDefinition: option<addressDefinition>
+@as("AddressDefinition") addressDefinition: addressDefinition
 }
-type tagList = array<tag>
-type tCPFlagField = {
-@as("Masks") masks: flags,
-@as("Flags") flags: option<flags>
+type tagList_ = array<tag>
+type tcpflagField = {
+@as("Masks") masks: option<flags>,
+@as("Flags") flags: flags
 }
 type syncStateConfig = Js.Dict.t< perObjectStatus>
 type subnetMappings = array<subnetMapping>
 type statelessRuleGroupReferences = array<statelessRuleGroupReference>
 type statefulRuleGroupReferences = array<statefulRuleGroupReference>
 type rulesSourceList = {
-@as("GeneratedRulesType") generatedRulesType: option<generatedRulesType>,
-@as("TargetTypes") targetTypes: option<targetTypes>,
-@as("Targets") targets: option<ruleTargets>
+@as("GeneratedRulesType") generatedRulesType: generatedRulesType,
+@as("TargetTypes") targetTypes: targetTypes,
+@as("Targets") targets: ruleTargets
 }
 type ruleOption = {
-@as("Settings") settings: settings,
-@as("Keyword") keyword: option<keyword>
+@as("Settings") settings: option<settings>,
+@as("Keyword") keyword: keyword
 }
 type ruleGroups = array<ruleGroupMetadata>
 type portSet = {
-@as("Definition") definition: variableDefinitionList
+@as("Definition") definition: option<variableDefinitionList>
 }
 type portRanges = array<portRange>
 type logDestinationConfig = {
-@as("LogDestination") logDestination: option<logDestinationMap>,
-@as("LogDestinationType") logDestinationType: option<logDestinationType>,
-@as("LogType") logType: option<logType>
+@as("LogDestination") logDestination: logDestinationMap,
+@as("LogDestinationType") logDestinationType: logDestinationType,
+@as("LogType") logType: logType
 }
-type iPSet = {
-@as("Definition") definition: option<variableDefinitionList>
+type ipset = {
+@as("Definition") definition: variableDefinitionList
 }
 type firewalls = array<firewallMetadata>
 type firewallPolicies = array<firewallPolicyMetadata>
 type dimensions = array<dimension>
 type addresses = array<address>
-type tCPFlags = array<tCPFlagField>
+type tcpflags = array<tcpflagField>
 type syncState = {
-@as("Config") config: syncStateConfig,
-@as("Attachment") attachment: attachment
+@as("Config") config: option<syncStateConfig>,
+@as("Attachment") attachment: option<attachment>
 }
 type ruleOptions = array<ruleOption>
 type ruleGroupResponse = {
-@as("Tags") tags: tagList,
-@as("RuleGroupStatus") ruleGroupStatus: resourceStatus,
-@as("Capacity") capacity: ruleCapacity,
-@as("Type") type_: ruleGroupType,
-@as("Description") description: description,
-@as("RuleGroupId") ruleGroupId: option<resourceId>,
-@as("RuleGroupName") ruleGroupName: option<resourceName>,
-@as("RuleGroupArn") ruleGroupArn: option<resourceArn>
+@as("Tags") tags: option<tagList_>,
+@as("RuleGroupStatus") ruleGroupStatus: option<resourceStatus>,
+@as("Capacity") capacity: option<ruleCapacity>,
+@as("Type") type_: option<ruleGroupType>,
+@as("Description") description: option<description>,
+@as("RuleGroupId") ruleGroupId: resourceId,
+@as("RuleGroupName") ruleGroupName: resourceName,
+@as("RuleGroupArn") ruleGroupArn: resourceArn
 }
 type publishMetricAction = {
-@as("Dimensions") dimensions: option<dimensions>
+@as("Dimensions") dimensions: dimensions
 }
 type portSets = Js.Dict.t< portSet>
 type logDestinationConfigs = array<logDestinationConfig>
-type iPSets = Js.Dict.t< iPSet>
+type ipsets = Js.Dict.t< ipset>
 type firewallPolicyResponse = {
-@as("Tags") tags: tagList,
-@as("FirewallPolicyStatus") firewallPolicyStatus: resourceStatus,
-@as("Description") description: description,
-@as("FirewallPolicyId") firewallPolicyId: option<resourceId>,
-@as("FirewallPolicyArn") firewallPolicyArn: option<resourceArn>,
-@as("FirewallPolicyName") firewallPolicyName: option<resourceName>
+@as("Tags") tags: option<tagList_>,
+@as("FirewallPolicyStatus") firewallPolicyStatus: option<resourceStatus>,
+@as("Description") description: option<description>,
+@as("FirewallPolicyId") firewallPolicyId: resourceId,
+@as("FirewallPolicyArn") firewallPolicyArn: resourceArn,
+@as("FirewallPolicyName") firewallPolicyName: resourceName
 }
 type firewall = {
-@as("Tags") tags: tagList,
-@as("FirewallId") firewallId: option<resourceId>,
-@as("Description") description: description,
-@as("FirewallPolicyChangeProtection") firewallPolicyChangeProtection: amazonawsBoolean,
-@as("SubnetChangeProtection") subnetChangeProtection: amazonawsBoolean,
-@as("DeleteProtection") deleteProtection: amazonawsBoolean,
-@as("SubnetMappings") subnetMappings: option<subnetMappings>,
-@as("VpcId") vpcId: option<vpcId>,
-@as("FirewallPolicyArn") firewallPolicyArn: option<resourceArn>,
-@as("FirewallArn") firewallArn: resourceArn,
-@as("FirewallName") firewallName: resourceName
+@as("Tags") tags: option<tagList_>,
+@as("FirewallId") firewallId: resourceId,
+@as("Description") description: option<description>,
+@as("FirewallPolicyChangeProtection") firewallPolicyChangeProtection: option<boolean_>,
+@as("SubnetChangeProtection") subnetChangeProtection: option<boolean_>,
+@as("DeleteProtection") deleteProtection: option<boolean_>,
+@as("SubnetMappings") subnetMappings: subnetMappings,
+@as("VpcId") vpcId: vpcId,
+@as("FirewallPolicyArn") firewallPolicyArn: resourceArn,
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("FirewallName") firewallName: option<resourceName>
 }
 type syncStates = Js.Dict.t< syncState>
 type statefulRule = {
-@as("RuleOptions") ruleOptions: option<ruleOptions>,
-@as("Header") header: option<header>,
-@as("Action") action: option<statefulAction>
+@as("RuleOptions") ruleOptions: ruleOptions,
+@as("Header") header: header,
+@as("Action") action: statefulAction
 }
 type ruleVariables = {
-@as("PortSets") portSets: portSets,
-@as("IPSets") iPSets: iPSets
+@as("PortSets") portSets: option<portSets>,
+@as("IPSets") ipsets: option<ipsets>
 }
 type matchAttributes = {
-@as("TCPFlags") tCPFlags: tCPFlags,
-@as("Protocols") protocols: protocolNumbers,
-@as("DestinationPorts") destinationPorts: portRanges,
-@as("SourcePorts") sourcePorts: portRanges,
-@as("Destinations") destinations: addresses,
-@as("Sources") sources: addresses
+@as("TCPFlags") tcpflags: option<tcpflags>,
+@as("Protocols") protocols: option<protocolNumbers>,
+@as("DestinationPorts") destinationPorts: option<portRanges>,
+@as("SourcePorts") sourcePorts: option<portRanges>,
+@as("Destinations") destinations: option<addresses>,
+@as("Sources") sources: option<addresses>
 }
 type loggingConfiguration = {
-@as("LogDestinationConfigs") logDestinationConfigs: option<logDestinationConfigs>
+@as("LogDestinationConfigs") logDestinationConfigs: logDestinationConfigs
 }
 type actionDefinition = {
-@as("PublishMetricAction") publishMetricAction: publishMetricAction
+@as("PublishMetricAction") publishMetricAction: option<publishMetricAction>
 }
 type statefulRules = array<statefulRule>
 type ruleDefinition = {
-@as("Actions") actions: option<statelessActions>,
-@as("MatchAttributes") matchAttributes: option<matchAttributes>
+@as("Actions") actions: statelessActions,
+@as("MatchAttributes") matchAttributes: matchAttributes
 }
 type firewallStatus = {
-@as("SyncStates") syncStates: syncStates,
-@as("ConfigurationSyncStateSummary") configurationSyncStateSummary: option<configurationSyncState>,
-@as("Status") status: option<firewallStatusValue>
+@as("SyncStates") syncStates: option<syncStates>,
+@as("ConfigurationSyncStateSummary") configurationSyncStateSummary: configurationSyncState,
+@as("Status") status: firewallStatusValue
 }
 type customAction = {
-@as("ActionDefinition") actionDefinition: option<actionDefinition>,
-@as("ActionName") actionName: option<actionName>
+@as("ActionDefinition") actionDefinition: actionDefinition,
+@as("ActionName") actionName: actionName
 }
 type statelessRule = {
-@as("Priority") priority: option<priority>,
-@as("RuleDefinition") ruleDefinition: option<ruleDefinition>
+@as("Priority") priority: priority,
+@as("RuleDefinition") ruleDefinition: ruleDefinition
 }
 type customActions = array<customAction>
 type statelessRules = array<statelessRule>
 type firewallPolicy = {
-@as("StatefulRuleGroupReferences") statefulRuleGroupReferences: statefulRuleGroupReferences,
-@as("StatelessCustomActions") statelessCustomActions: customActions,
-@as("StatelessFragmentDefaultActions") statelessFragmentDefaultActions: option<statelessActions>,
-@as("StatelessDefaultActions") statelessDefaultActions: option<statelessActions>,
-@as("StatelessRuleGroupReferences") statelessRuleGroupReferences: statelessRuleGroupReferences
+@as("StatefulRuleGroupReferences") statefulRuleGroupReferences: option<statefulRuleGroupReferences>,
+@as("StatelessCustomActions") statelessCustomActions: option<customActions>,
+@as("StatelessFragmentDefaultActions") statelessFragmentDefaultActions: statelessActions,
+@as("StatelessDefaultActions") statelessDefaultActions: statelessActions,
+@as("StatelessRuleGroupReferences") statelessRuleGroupReferences: option<statelessRuleGroupReferences>
 }
 type statelessRulesAndCustomActions = {
-@as("CustomActions") customActions: customActions,
-@as("StatelessRules") statelessRules: option<statelessRules>
+@as("CustomActions") customActions: option<customActions>,
+@as("StatelessRules") statelessRules: statelessRules
 }
 type rulesSource = {
-@as("StatelessRulesAndCustomActions") statelessRulesAndCustomActions: statelessRulesAndCustomActions,
-@as("StatefulRules") statefulRules: statefulRules,
-@as("RulesSourceList") rulesSourceList: rulesSourceList,
-@as("RulesString") rulesString: rulesString
+@as("StatelessRulesAndCustomActions") statelessRulesAndCustomActions: option<statelessRulesAndCustomActions>,
+@as("StatefulRules") statefulRules: option<statefulRules>,
+@as("RulesSourceList") rulesSourceList: option<rulesSourceList>,
+@as("RulesString") rulesString: option<rulesString>
 }
 type ruleGroup = {
-@as("RulesSource") rulesSource: option<rulesSource>,
-@as("RuleVariables") ruleVariables: ruleVariables
+@as("RulesSource") rulesSource: rulesSource,
+@as("RuleVariables") ruleVariables: option<ruleVariables>
 }
-type clientType;
-@module("@aws-sdk/client-network-firewall") @new external createClient: unit => clientType = "NetworkFirewallClient";
+type awsServiceClient;
+@module("@aws-sdk/client-network-firewall") @new external createClient: unit => awsServiceClient = "NetworkFirewallClient";
 module UpdateSubnetChangeProtection = {
   type t;
   type request = {
-@as("SubnetChangeProtection") subnetChangeProtection: option<amazonawsBoolean>,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn,
-@as("UpdateToken") updateToken: updateToken
+@as("SubnetChangeProtection") subnetChangeProtection: boolean_,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("UpdateToken") updateToken: option<updateToken>
 }
   type response = {
-@as("SubnetChangeProtection") subnetChangeProtection: amazonawsBoolean,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn,
-@as("UpdateToken") updateToken: updateToken
+@as("SubnetChangeProtection") subnetChangeProtection: option<boolean_>,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("UpdateToken") updateToken: option<updateToken>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "UpdateSubnetChangeProtectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFirewallPolicyChangeProtection = {
   type t;
   type request = {
-@as("FirewallPolicyChangeProtection") firewallPolicyChangeProtection: option<amazonawsBoolean>,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn,
-@as("UpdateToken") updateToken: updateToken
+@as("FirewallPolicyChangeProtection") firewallPolicyChangeProtection: boolean_,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("UpdateToken") updateToken: option<updateToken>
 }
   type response = {
-@as("FirewallPolicyChangeProtection") firewallPolicyChangeProtection: amazonawsBoolean,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn,
-@as("UpdateToken") updateToken: updateToken
+@as("FirewallPolicyChangeProtection") firewallPolicyChangeProtection: option<boolean_>,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("UpdateToken") updateToken: option<updateToken>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "UpdateFirewallPolicyChangeProtectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFirewallDescription = {
   type t;
   type request = {
-@as("Description") description: description,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn,
-@as("UpdateToken") updateToken: updateToken
+@as("Description") description: option<description>,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("UpdateToken") updateToken: option<updateToken>
 }
   type response = {
-@as("UpdateToken") updateToken: updateToken,
-@as("Description") description: description,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn
+@as("UpdateToken") updateToken: option<updateToken>,
+@as("Description") description: option<description>,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "UpdateFirewallDescriptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFirewallDeleteProtection = {
   type t;
   type request = {
-@as("DeleteProtection") deleteProtection: option<amazonawsBoolean>,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn,
-@as("UpdateToken") updateToken: updateToken
+@as("DeleteProtection") deleteProtection: boolean_,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("UpdateToken") updateToken: option<updateToken>
 }
   type response = {
-@as("UpdateToken") updateToken: updateToken,
-@as("DeleteProtection") deleteProtection: amazonawsBoolean,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn
+@as("UpdateToken") updateToken: option<updateToken>,
+@as("DeleteProtection") deleteProtection: option<boolean_>,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "UpdateFirewallDeleteProtectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutResourcePolicy = {
   type t;
   type request = {
-@as("Policy") policy: option<policyString>,
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("Policy") policy: policyString,
+@as("ResourceArn") resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "PutResourcePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeResourcePolicy = {
   type t;
   type request = {
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("ResourceArn") resourceArn: resourceArn
 }
   type response = {
-@as("Policy") policy: policyString
+@as("Policy") policy: option<policyString>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "DescribeResourcePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteResourcePolicy = {
   type t;
   type request = {
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("ResourceArn") resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "DeleteResourcePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateFirewallPolicy = {
   type t;
   type request = {
-@as("FirewallPolicyArn") firewallPolicyArn: option<resourceArn>,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn,
-@as("UpdateToken") updateToken: updateToken
+@as("FirewallPolicyArn") firewallPolicyArn: resourceArn,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("UpdateToken") updateToken: option<updateToken>
 }
   type response = {
-@as("UpdateToken") updateToken: updateToken,
-@as("FirewallPolicyArn") firewallPolicyArn: resourceArn,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn
+@as("UpdateToken") updateToken: option<updateToken>,
+@as("FirewallPolicyArn") firewallPolicyArn: option<resourceArn>,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "AssociateFirewallPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceArn") resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tagList>,
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("Tags") tags: tagList_,
+@as("ResourceArn") resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("ResourceArn") resourceArn: option<resourceArn>,
-@as("MaxResults") maxResults: tagsPaginationMaxResults,
-@as("NextToken") nextToken: paginationToken
+@as("ResourceArn") resourceArn: resourceArn,
+@as("MaxResults") maxResults: option<tagsPaginationMaxResults>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("Tags") tags: tagList,
-@as("NextToken") nextToken: paginationToken
+@as("Tags") tags: option<tagList_>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRuleGroups = {
   type t;
   type request = {
-@as("MaxResults") maxResults: paginationMaxResults,
-@as("NextToken") nextToken: paginationToken
+@as("MaxResults") maxResults: option<paginationMaxResults>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("RuleGroups") ruleGroups: ruleGroups,
-@as("NextToken") nextToken: paginationToken
+@as("RuleGroups") ruleGroups: option<ruleGroups>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "ListRuleGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFirewalls = {
   type t;
   type request = {
-@as("MaxResults") maxResults: paginationMaxResults,
-@as("VpcIds") vpcIds: vpcIds,
-@as("NextToken") nextToken: paginationToken
+@as("MaxResults") maxResults: option<paginationMaxResults>,
+@as("VpcIds") vpcIds: option<vpcIds>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("Firewalls") firewalls: firewalls,
-@as("NextToken") nextToken: paginationToken
+@as("Firewalls") firewalls: option<firewalls>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "ListFirewallsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFirewallPolicies = {
   type t;
   type request = {
-@as("MaxResults") maxResults: paginationMaxResults,
-@as("NextToken") nextToken: paginationToken
+@as("MaxResults") maxResults: option<paginationMaxResults>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("FirewallPolicies") firewallPolicies: firewallPolicies,
-@as("NextToken") nextToken: paginationToken
+@as("FirewallPolicies") firewallPolicies: option<firewallPolicies>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "ListFirewallPoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateSubnets = {
   type t;
   type request = {
-@as("SubnetIds") subnetIds: option<azSubnets>,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn,
-@as("UpdateToken") updateToken: updateToken
+@as("SubnetIds") subnetIds: azSubnets,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("UpdateToken") updateToken: option<updateToken>
 }
   type response = {
-@as("UpdateToken") updateToken: updateToken,
-@as("SubnetMappings") subnetMappings: subnetMappings,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn
+@as("UpdateToken") updateToken: option<updateToken>,
+@as("SubnetMappings") subnetMappings: option<subnetMappings>,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "DisassociateSubnetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateSubnets = {
   type t;
   type request = {
-@as("SubnetMappings") subnetMappings: option<subnetMappings>,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn,
-@as("UpdateToken") updateToken: updateToken
+@as("SubnetMappings") subnetMappings: subnetMappings,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("UpdateToken") updateToken: option<updateToken>
 }
   type response = {
-@as("UpdateToken") updateToken: updateToken,
-@as("SubnetMappings") subnetMappings: subnetMappings,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn
+@as("UpdateToken") updateToken: option<updateToken>,
+@as("SubnetMappings") subnetMappings: option<subnetMappings>,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "AssociateSubnetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteRuleGroup = {
   type t;
   type request = {
-@as("Type") type_: ruleGroupType,
-@as("RuleGroupArn") ruleGroupArn: resourceArn,
-@as("RuleGroupName") ruleGroupName: resourceName
+@as("Type") type_: option<ruleGroupType>,
+@as("RuleGroupArn") ruleGroupArn: option<resourceArn>,
+@as("RuleGroupName") ruleGroupName: option<resourceName>
 }
   type response = {
-@as("RuleGroupResponse") ruleGroupResponse: option<ruleGroupResponse>
+@as("RuleGroupResponse") ruleGroupResponse: ruleGroupResponse
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "DeleteRuleGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFirewallPolicy = {
   type t;
   type request = {
-@as("FirewallPolicyArn") firewallPolicyArn: resourceArn,
-@as("FirewallPolicyName") firewallPolicyName: resourceName
+@as("FirewallPolicyArn") firewallPolicyArn: option<resourceArn>,
+@as("FirewallPolicyName") firewallPolicyName: option<resourceName>
 }
   type response = {
-@as("FirewallPolicyResponse") firewallPolicyResponse: option<firewallPolicyResponse>
+@as("FirewallPolicyResponse") firewallPolicyResponse: firewallPolicyResponse
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "DeleteFirewallPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateLoggingConfiguration = {
   type t;
   type request = {
-@as("LoggingConfiguration") loggingConfiguration: loggingConfiguration,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn
+@as("LoggingConfiguration") loggingConfiguration: option<loggingConfiguration>,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>
 }
   type response = {
-@as("LoggingConfiguration") loggingConfiguration: loggingConfiguration,
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn
+@as("LoggingConfiguration") loggingConfiguration: option<loggingConfiguration>,
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "UpdateLoggingConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLoggingConfiguration = {
   type t;
   type request = {
-@as("FirewallName") firewallName: resourceName,
-@as("FirewallArn") firewallArn: resourceArn
+@as("FirewallName") firewallName: option<resourceName>,
+@as("FirewallArn") firewallArn: option<resourceArn>
 }
   type response = {
-@as("LoggingConfiguration") loggingConfiguration: loggingConfiguration,
-@as("FirewallArn") firewallArn: resourceArn
+@as("LoggingConfiguration") loggingConfiguration: option<loggingConfiguration>,
+@as("FirewallArn") firewallArn: option<resourceArn>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "DescribeLoggingConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeFirewall = {
   type t;
   type request = {
-@as("FirewallArn") firewallArn: resourceArn,
-@as("FirewallName") firewallName: resourceName
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("FirewallName") firewallName: option<resourceName>
 }
   type response = {
-@as("FirewallStatus") firewallStatus: firewallStatus,
-@as("Firewall") firewall: firewall,
-@as("UpdateToken") updateToken: updateToken
+@as("FirewallStatus") firewallStatus: option<firewallStatus>,
+@as("Firewall") firewall: option<firewall>,
+@as("UpdateToken") updateToken: option<updateToken>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "DescribeFirewallCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteFirewall = {
   type t;
   type request = {
-@as("FirewallArn") firewallArn: resourceArn,
-@as("FirewallName") firewallName: resourceName
+@as("FirewallArn") firewallArn: option<resourceArn>,
+@as("FirewallName") firewallName: option<resourceName>
 }
   type response = {
-@as("FirewallStatus") firewallStatus: firewallStatus,
-@as("Firewall") firewall: firewall
+@as("FirewallStatus") firewallStatus: option<firewallStatus>,
+@as("Firewall") firewall: option<firewall>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "DeleteFirewallCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFirewall = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("Description") description: description,
-@as("FirewallPolicyChangeProtection") firewallPolicyChangeProtection: amazonawsBoolean,
-@as("SubnetChangeProtection") subnetChangeProtection: amazonawsBoolean,
-@as("DeleteProtection") deleteProtection: amazonawsBoolean,
-@as("SubnetMappings") subnetMappings: option<subnetMappings>,
-@as("VpcId") vpcId: option<vpcId>,
-@as("FirewallPolicyArn") firewallPolicyArn: option<resourceArn>,
-@as("FirewallName") firewallName: option<resourceName>
+@as("Tags") tags: option<tagList_>,
+@as("Description") description: option<description>,
+@as("FirewallPolicyChangeProtection") firewallPolicyChangeProtection: option<boolean_>,
+@as("SubnetChangeProtection") subnetChangeProtection: option<boolean_>,
+@as("DeleteProtection") deleteProtection: option<boolean_>,
+@as("SubnetMappings") subnetMappings: subnetMappings,
+@as("VpcId") vpcId: vpcId,
+@as("FirewallPolicyArn") firewallPolicyArn: resourceArn,
+@as("FirewallName") firewallName: resourceName
 }
   type response = {
-@as("FirewallStatus") firewallStatus: firewallStatus,
-@as("Firewall") firewall: firewall
+@as("FirewallStatus") firewallStatus: option<firewallStatus>,
+@as("Firewall") firewall: option<firewall>
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "CreateFirewallCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFirewallPolicy = {
   type t;
   type request = {
-@as("DryRun") dryRun: amazonawsBoolean,
-@as("Description") description: description,
-@as("FirewallPolicy") firewallPolicy: option<firewallPolicy>,
-@as("FirewallPolicyName") firewallPolicyName: resourceName,
-@as("FirewallPolicyArn") firewallPolicyArn: resourceArn,
-@as("UpdateToken") updateToken: option<updateToken>
+@as("DryRun") dryRun: option<boolean_>,
+@as("Description") description: option<description>,
+@as("FirewallPolicy") firewallPolicy: firewallPolicy,
+@as("FirewallPolicyName") firewallPolicyName: option<resourceName>,
+@as("FirewallPolicyArn") firewallPolicyArn: option<resourceArn>,
+@as("UpdateToken") updateToken: updateToken
 }
   type response = {
-@as("FirewallPolicyResponse") firewallPolicyResponse: option<firewallPolicyResponse>,
-@as("UpdateToken") updateToken: option<updateToken>
+@as("FirewallPolicyResponse") firewallPolicyResponse: firewallPolicyResponse,
+@as("UpdateToken") updateToken: updateToken
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "UpdateFirewallPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeFirewallPolicy = {
   type t;
   type request = {
-@as("FirewallPolicyArn") firewallPolicyArn: resourceArn,
-@as("FirewallPolicyName") firewallPolicyName: resourceName
+@as("FirewallPolicyArn") firewallPolicyArn: option<resourceArn>,
+@as("FirewallPolicyName") firewallPolicyName: option<resourceName>
 }
   type response = {
-@as("FirewallPolicy") firewallPolicy: firewallPolicy,
-@as("FirewallPolicyResponse") firewallPolicyResponse: option<firewallPolicyResponse>,
-@as("UpdateToken") updateToken: option<updateToken>
+@as("FirewallPolicy") firewallPolicy: option<firewallPolicy>,
+@as("FirewallPolicyResponse") firewallPolicyResponse: firewallPolicyResponse,
+@as("UpdateToken") updateToken: updateToken
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "DescribeFirewallPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFirewallPolicy = {
   type t;
   type request = {
-@as("DryRun") dryRun: amazonawsBoolean,
-@as("Tags") tags: tagList,
-@as("Description") description: description,
-@as("FirewallPolicy") firewallPolicy: option<firewallPolicy>,
-@as("FirewallPolicyName") firewallPolicyName: option<resourceName>
+@as("DryRun") dryRun: option<boolean_>,
+@as("Tags") tags: option<tagList_>,
+@as("Description") description: option<description>,
+@as("FirewallPolicy") firewallPolicy: firewallPolicy,
+@as("FirewallPolicyName") firewallPolicyName: resourceName
 }
   type response = {
-@as("FirewallPolicyResponse") firewallPolicyResponse: option<firewallPolicyResponse>,
-@as("UpdateToken") updateToken: option<updateToken>
+@as("FirewallPolicyResponse") firewallPolicyResponse: firewallPolicyResponse,
+@as("UpdateToken") updateToken: updateToken
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "CreateFirewallPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateRuleGroup = {
   type t;
   type request = {
-@as("DryRun") dryRun: amazonawsBoolean,
-@as("Description") description: description,
-@as("Type") type_: ruleGroupType,
-@as("Rules") rules: rulesString,
-@as("RuleGroup") ruleGroup: ruleGroup,
-@as("RuleGroupName") ruleGroupName: resourceName,
-@as("RuleGroupArn") ruleGroupArn: resourceArn,
-@as("UpdateToken") updateToken: option<updateToken>
+@as("DryRun") dryRun: option<boolean_>,
+@as("Description") description: option<description>,
+@as("Type") type_: option<ruleGroupType>,
+@as("Rules") rules: option<rulesString>,
+@as("RuleGroup") ruleGroup: option<ruleGroup>,
+@as("RuleGroupName") ruleGroupName: option<resourceName>,
+@as("RuleGroupArn") ruleGroupArn: option<resourceArn>,
+@as("UpdateToken") updateToken: updateToken
 }
   type response = {
-@as("RuleGroupResponse") ruleGroupResponse: option<ruleGroupResponse>,
-@as("UpdateToken") updateToken: option<updateToken>
+@as("RuleGroupResponse") ruleGroupResponse: ruleGroupResponse,
+@as("UpdateToken") updateToken: updateToken
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "UpdateRuleGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRuleGroup = {
   type t;
   type request = {
-@as("Type") type_: ruleGroupType,
-@as("RuleGroupArn") ruleGroupArn: resourceArn,
-@as("RuleGroupName") ruleGroupName: resourceName
+@as("Type") type_: option<ruleGroupType>,
+@as("RuleGroupArn") ruleGroupArn: option<resourceArn>,
+@as("RuleGroupName") ruleGroupName: option<resourceName>
 }
   type response = {
-@as("RuleGroupResponse") ruleGroupResponse: option<ruleGroupResponse>,
-@as("RuleGroup") ruleGroup: ruleGroup,
-@as("UpdateToken") updateToken: option<updateToken>
+@as("RuleGroupResponse") ruleGroupResponse: ruleGroupResponse,
+@as("RuleGroup") ruleGroup: option<ruleGroup>,
+@as("UpdateToken") updateToken: updateToken
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "DescribeRuleGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateRuleGroup = {
   type t;
   type request = {
-@as("DryRun") dryRun: amazonawsBoolean,
-@as("Tags") tags: tagList,
-@as("Capacity") capacity: option<ruleCapacity>,
-@as("Description") description: description,
-@as("Type") type_: option<ruleGroupType>,
-@as("Rules") rules: rulesString,
-@as("RuleGroup") ruleGroup: ruleGroup,
-@as("RuleGroupName") ruleGroupName: option<resourceName>
+@as("DryRun") dryRun: option<boolean_>,
+@as("Tags") tags: option<tagList_>,
+@as("Capacity") capacity: ruleCapacity,
+@as("Description") description: option<description>,
+@as("Type") type_: ruleGroupType,
+@as("Rules") rules: option<rulesString>,
+@as("RuleGroup") ruleGroup: option<ruleGroup>,
+@as("RuleGroupName") ruleGroupName: resourceName
 }
   type response = {
-@as("RuleGroupResponse") ruleGroupResponse: option<ruleGroupResponse>,
-@as("UpdateToken") updateToken: option<updateToken>
+@as("RuleGroupResponse") ruleGroupResponse: ruleGroupResponse,
+@as("UpdateToken") updateToken: updateToken
 }
   @module("@aws-sdk/client-network-firewall") @new external new_: (request) => t = "CreateRuleGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

@@ -1,140 +1,148 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type s3OneTimeClassificationType = [@as("NONE") #NONE | @as("FULL") #FULL]
 type s3ContinuousClassificationType = [@as("FULL") #FULL]
 type resourceType = string
 type prefix = string
 type nextToken = string
-type maxResults = int;
+type maxResults = int
 type fieldName = string
 type exceptionMessage = string
 type errorCode = string
 type bucketName = string
-type aWSAccountId = string
+type awsaccountId = string
 type s3Resource = {
-@as("prefix") prefix: prefix,
-@as("bucketName") bucketName: option<bucketName>
+prefix: option<prefix>,
+bucketName: bucketName
 }
 type memberAccount = {
-@as("accountId") accountId: aWSAccountId
+accountId: option<awsaccountId>
 }
 type classificationTypeUpdate = {
-@as("continuous") continuous: s3ContinuousClassificationType,
-@as("oneTime") oneTime: s3OneTimeClassificationType
+continuous: option<s3ContinuousClassificationType>,
+oneTime: option<s3OneTimeClassificationType>
 }
 type classificationType = {
-@as("continuous") continuous: option<s3ContinuousClassificationType>,
-@as("oneTime") oneTime: option<s3OneTimeClassificationType>
+continuous: s3ContinuousClassificationType,
+oneTime: s3OneTimeClassificationType
 }
 type s3Resources = array<s3Resource>
 type s3ResourceClassificationUpdate = {
-@as("classificationTypeUpdate") classificationTypeUpdate: option<classificationTypeUpdate>,
-@as("prefix") prefix: prefix,
-@as("bucketName") bucketName: option<bucketName>
+classificationTypeUpdate: classificationTypeUpdate,
+prefix: option<prefix>,
+bucketName: bucketName
 }
 type s3ResourceClassification = {
-@as("classificationType") classificationType: option<classificationType>,
-@as("prefix") prefix: prefix,
-@as("bucketName") bucketName: option<bucketName>
+classificationType: classificationType,
+prefix: option<prefix>,
+bucketName: bucketName
 }
 type memberAccounts = array<memberAccount>
 type failedS3Resource = {
-@as("errorMessage") errorMessage: exceptionMessage,
-@as("errorCode") errorCode: errorCode,
-@as("failedItem") failedItem: s3Resource
+errorMessage: option<exceptionMessage>,
+errorCode: option<errorCode>,
+failedItem: option<s3Resource>
 }
 type s3ResourcesClassificationUpdate = array<s3ResourceClassificationUpdate>
 type s3ResourcesClassification = array<s3ResourceClassification>
 type failedS3Resources = array<failedS3Resource>
-type clientType;
-@module("@aws-sdk/client-macie") @new external createClient: unit => clientType = "MacieClient";
+type awsServiceClient;
+@module("@aws-sdk/client-macie") @new external createClient: unit => awsServiceClient = "MacieClient";
 module DisassociateMemberAccount = {
   type t;
   type request = {
-@as("memberAccountId") memberAccountId: option<aWSAccountId>
+memberAccountId: awsaccountId
 }
   
   @module("@aws-sdk/client-macie") @new external new_: (request) => t = "DisassociateMemberAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module AssociateMemberAccount = {
   type t;
   type request = {
-@as("memberAccountId") memberAccountId: option<aWSAccountId>
+memberAccountId: awsaccountId
 }
   
   @module("@aws-sdk/client-macie") @new external new_: (request) => t = "AssociateMemberAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListMemberAccounts = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("memberAccounts") memberAccounts: memberAccounts
+nextToken: option<nextToken>,
+memberAccounts: option<memberAccounts>
 }
   @module("@aws-sdk/client-macie") @new external new_: (request) => t = "ListMemberAccountsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateS3Resources = {
   type t;
   type request = {
-@as("s3ResourcesUpdate") s3ResourcesUpdate: option<s3ResourcesClassificationUpdate>,
-@as("memberAccountId") memberAccountId: aWSAccountId
+s3ResourcesUpdate: s3ResourcesClassificationUpdate,
+memberAccountId: option<awsaccountId>
 }
   type response = {
-@as("failedS3Resources") failedS3Resources: failedS3Resources
+failedS3Resources: option<failedS3Resources>
 }
   @module("@aws-sdk/client-macie") @new external new_: (request) => t = "UpdateS3ResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListS3Resources = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("memberAccountId") memberAccountId: aWSAccountId
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+memberAccountId: option<awsaccountId>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("s3Resources") s3Resources: s3ResourcesClassification
+nextToken: option<nextToken>,
+s3Resources: option<s3ResourcesClassification>
 }
   @module("@aws-sdk/client-macie") @new external new_: (request) => t = "ListS3ResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateS3Resources = {
   type t;
   type request = {
-@as("associatedS3Resources") associatedS3Resources: option<s3Resources>,
-@as("memberAccountId") memberAccountId: aWSAccountId
+associatedS3Resources: s3Resources,
+memberAccountId: option<awsaccountId>
 }
   type response = {
-@as("failedS3Resources") failedS3Resources: failedS3Resources
+failedS3Resources: option<failedS3Resources>
 }
   @module("@aws-sdk/client-macie") @new external new_: (request) => t = "DisassociateS3ResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateS3Resources = {
   type t;
   type request = {
-@as("s3Resources") s3Resources: option<s3ResourcesClassification>,
-@as("memberAccountId") memberAccountId: aWSAccountId
+s3Resources: s3ResourcesClassification,
+memberAccountId: option<awsaccountId>
 }
   type response = {
-@as("failedS3Resources") failedS3Resources: failedS3Resources
+failedS3Resources: option<failedS3Resources>
 }
   @module("@aws-sdk/client-macie") @new external new_: (request) => t = "AssociateS3ResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

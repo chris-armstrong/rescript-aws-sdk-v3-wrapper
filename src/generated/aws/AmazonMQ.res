@@ -1,75 +1,83 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type __timestampIso8601 = Js.Date.t;
 type __string = string
-type __integerMin5Max100 = int;
-type __integer = int;
-type __boolean = bool;
-type sanitizationWarningReason = [@as("INVALID_ATTRIBUTE_VALUE_REMOVED") #INVALID_ATTRIBUTE_VALUE_REMOVED | @as("DISALLOWED_ATTRIBUTE_REMOVED") #DISALLOWED_ATTRIBUTE_REMOVED | @as("DISALLOWED_ELEMENT_REMOVED") #DISALLOWED_ELEMENT_REMOVED]
-type maxResults = int;
+type __integerMin5Max100 = int
+type __integer = int
+type __boolean = bool
+type sanitizationWarningReason = [@as("INVALID_ATTRIBUTE_VALUE_REMOVED") #INVALIDATTRIBUTEVALUEREMOVED | @as("DISALLOWED_ATTRIBUTE_REMOVED") #DISALLOWEDATTRIBUTEREMOVED | @as("DISALLOWED_ELEMENT_REMOVED") #DISALLOWEDELEMENTREMOVED]
+type maxResults = int
 type engineType = [@as("RABBITMQ") #RABBITMQ | @as("ACTIVEMQ") #ACTIVEMQ]
-type deploymentMode = [@as("CLUSTER_MULTI_AZ") #CLUSTER_MULTI_AZ | @as("ACTIVE_STANDBY_MULTI_AZ") #ACTIVE_STANDBY_MULTI_AZ | @as("SINGLE_INSTANCE") #SINGLE_INSTANCE]
+type deploymentMode = [@as("CLUSTER_MULTI_AZ") #CLUSTERMULTIAZ | @as("ACTIVE_STANDBY_MULTI_AZ") #ACTIVESTANDBYMULTIAZ | @as("SINGLE_INSTANCE") #SINGLEINSTANCE]
 type dayOfWeek = [@as("SUNDAY") #SUNDAY | @as("SATURDAY") #SATURDAY | @as("FRIDAY") #FRIDAY | @as("THURSDAY") #THURSDAY | @as("WEDNESDAY") #WEDNESDAY | @as("TUESDAY") #TUESDAY | @as("MONDAY") #MONDAY]
 type changeType = [@as("DELETE") #DELETE | @as("UPDATE") #UPDATE | @as("CREATE") #CREATE]
 type brokerStorageType = [@as("EFS") #EFS | @as("EBS") #EBS]
-type brokerState = [@as("REBOOT_IN_PROGRESS") #REBOOT_IN_PROGRESS | @as("RUNNING") #RUNNING | @as("DELETION_IN_PROGRESS") #DELETION_IN_PROGRESS | @as("CREATION_FAILED") #CREATION_FAILED | @as("CREATION_IN_PROGRESS") #CREATION_IN_PROGRESS]
+type brokerState = [@as("REBOOT_IN_PROGRESS") #REBOOTINPROGRESS | @as("RUNNING") #RUNNING | @as("DELETION_IN_PROGRESS") #DELETIONINPROGRESS | @as("CREATION_FAILED") #CREATIONFAILED | @as("CREATION_IN_PROGRESS") #CREATIONINPROGRESS]
 type authenticationStrategy = [@as("LDAP") #LDAP | @as("SIMPLE") #SIMPLE]
 type __mapOf__string = Js.Dict.t< __string>
 type __listOf__string = array<__string>
 type __listOfDeploymentMode = array<deploymentMode>
 type weeklyStartTime = {
-@as("TimeZone") timeZone: __string,
-@as("TimeOfDay") timeOfDay: __string,
-@as("DayOfWeek") dayOfWeek: dayOfWeek
+@as("TimeZone") timeZone: option<__string>,
+@as("TimeOfDay") timeOfDay: option<__string>,
+@as("DayOfWeek") dayOfWeek: option<dayOfWeek>
 }
 type userSummary = {
-@as("Username") username: __string,
-@as("PendingChange") pendingChange: changeType
+@as("Username") username: option<__string>,
+@as("PendingChange") pendingChange: option<changeType>
 }
 type sanitizationWarning = {
-@as("Reason") reason: sanitizationWarningReason,
-@as("ElementName") elementName: __string,
-@as("AttributeName") attributeName: __string
+@as("Reason") reason: option<sanitizationWarningReason>,
+@as("ElementName") elementName: option<__string>,
+@as("AttributeName") attributeName: option<__string>
 }
 type pendingLogs = {
-@as("General") general: __boolean,
-@as("Audit") audit: __boolean
+@as("General") general: option<__boolean>,
+@as("Audit") audit: option<__boolean>
 }
 type logs = {
-@as("General") general: __boolean,
-@as("Audit") audit: __boolean
+@as("General") general: option<__boolean>,
+@as("Audit") audit: option<__boolean>
 }
 type engineVersion = {
-@as("Name") name: __string
+@as("Name") name: option<__string>
 }
 type encryptionOptions = {
-@as("UseAwsOwnedKey") useAwsOwnedKey: option<__boolean>,
-@as("KmsKeyId") kmsKeyId: __string
+@as("UseAwsOwnedKey") useAwsOwnedKey: __boolean,
+@as("KmsKeyId") kmsKeyId: option<__string>
 }
 type configurationRevision = {
-@as("Revision") revision: __integer,
-@as("Description") description: __string,
-@as("Created") created: __timestampIso8601
+@as("Revision") revision: option<__integer>,
+@as("Description") description: option<__string>,
+@as("Created") created: option<__timestampIso8601>
 }
 type configurationId = {
-@as("Revision") revision: __integer,
-@as("Id") id: __string
+@as("Revision") revision: option<__integer>,
+@as("Id") id: option<__string>
 }
 type brokerSummary = {
-@as("HostInstanceType") hostInstanceType: __string,
-@as("EngineType") engineType: engineType,
-@as("DeploymentMode") deploymentMode: deploymentMode,
-@as("Created") created: __timestampIso8601,
-@as("BrokerState") brokerState: brokerState,
-@as("BrokerName") brokerName: __string,
-@as("BrokerId") brokerId: __string,
-@as("BrokerArn") brokerArn: __string
+@as("HostInstanceType") hostInstanceType: option<__string>,
+@as("EngineType") engineType: option<engineType>,
+@as("DeploymentMode") deploymentMode: option<deploymentMode>,
+@as("Created") created: option<__timestampIso8601>,
+@as("BrokerState") brokerState: option<brokerState>,
+@as("BrokerName") brokerName: option<__string>,
+@as("BrokerId") brokerId: option<__string>,
+@as("BrokerArn") brokerArn: option<__string>
 }
 type availabilityZone = {
-@as("Name") name: __string
+@as("Name") name: option<__string>
 }
 type __listOfUserSummary = array<userSummary>
 type __listOfSanitizationWarning = array<sanitizationWarning>
@@ -79,469 +87,469 @@ type __listOfConfigurationId = array<configurationId>
 type __listOfBrokerSummary = array<brokerSummary>
 type __listOfAvailabilityZone = array<availabilityZone>
 type userPendingChanges = {
-@as("PendingChange") pendingChange: changeType,
-@as("Groups") groups: __listOf__string,
-@as("ConsoleAccess") consoleAccess: __boolean
+@as("PendingChange") pendingChange: option<changeType>,
+@as("Groups") groups: option<__listOf__string>,
+@as("ConsoleAccess") consoleAccess: option<__boolean>
 }
 type user = {
-@as("Username") username: __string,
-@as("Password") password: __string,
-@as("Groups") groups: __listOf__string,
-@as("ConsoleAccess") consoleAccess: __boolean
+@as("Username") username: option<__string>,
+@as("Password") password: option<__string>,
+@as("Groups") groups: option<__listOf__string>,
+@as("ConsoleAccess") consoleAccess: option<__boolean>
 }
 type logsSummary = {
-@as("Pending") pending: pendingLogs,
-@as("GeneralLogGroup") generalLogGroup: __string,
-@as("General") general: __boolean,
-@as("AuditLogGroup") auditLogGroup: __string,
-@as("Audit") audit: __boolean
+@as("Pending") pending: option<pendingLogs>,
+@as("GeneralLogGroup") generalLogGroup: option<__string>,
+@as("General") general: option<__boolean>,
+@as("AuditLogGroup") auditLogGroup: option<__string>,
+@as("Audit") audit: option<__boolean>
 }
 type ldapServerMetadataOutput = {
-@as("UserSearchSubtree") userSearchSubtree: __boolean,
-@as("UserSearchMatching") userSearchMatching: __string,
-@as("UserRoleName") userRoleName: __string,
-@as("UserBase") userBase: __string,
-@as("ServiceAccountUsername") serviceAccountUsername: __string,
-@as("RoleSearchSubtree") roleSearchSubtree: __boolean,
-@as("RoleSearchMatching") roleSearchMatching: __string,
-@as("RoleName") roleName: __string,
-@as("RoleBase") roleBase: __string,
-@as("Hosts") hosts: __listOf__string
+@as("UserSearchSubtree") userSearchSubtree: option<__boolean>,
+@as("UserSearchMatching") userSearchMatching: option<__string>,
+@as("UserRoleName") userRoleName: option<__string>,
+@as("UserBase") userBase: option<__string>,
+@as("ServiceAccountUsername") serviceAccountUsername: option<__string>,
+@as("RoleSearchSubtree") roleSearchSubtree: option<__boolean>,
+@as("RoleSearchMatching") roleSearchMatching: option<__string>,
+@as("RoleName") roleName: option<__string>,
+@as("RoleBase") roleBase: option<__string>,
+@as("Hosts") hosts: option<__listOf__string>
 }
 type ldapServerMetadataInput = {
-@as("UserSearchSubtree") userSearchSubtree: __boolean,
-@as("UserSearchMatching") userSearchMatching: __string,
-@as("UserRoleName") userRoleName: __string,
-@as("UserBase") userBase: __string,
-@as("ServiceAccountUsername") serviceAccountUsername: __string,
-@as("ServiceAccountPassword") serviceAccountPassword: __string,
-@as("RoleSearchSubtree") roleSearchSubtree: __boolean,
-@as("RoleSearchMatching") roleSearchMatching: __string,
-@as("RoleName") roleName: __string,
-@as("RoleBase") roleBase: __string,
-@as("Hosts") hosts: __listOf__string
+@as("UserSearchSubtree") userSearchSubtree: option<__boolean>,
+@as("UserSearchMatching") userSearchMatching: option<__string>,
+@as("UserRoleName") userRoleName: option<__string>,
+@as("UserBase") userBase: option<__string>,
+@as("ServiceAccountUsername") serviceAccountUsername: option<__string>,
+@as("ServiceAccountPassword") serviceAccountPassword: option<__string>,
+@as("RoleSearchSubtree") roleSearchSubtree: option<__boolean>,
+@as("RoleSearchMatching") roleSearchMatching: option<__string>,
+@as("RoleName") roleName: option<__string>,
+@as("RoleBase") roleBase: option<__string>,
+@as("Hosts") hosts: option<__listOf__string>
 }
 type configuration = {
-@as("Tags") tags: __mapOf__string,
-@as("Name") name: __string,
-@as("LatestRevision") latestRevision: configurationRevision,
-@as("Id") id: __string,
-@as("EngineVersion") engineVersion: __string,
-@as("EngineType") engineType: engineType,
-@as("Description") description: __string,
-@as("Created") created: __timestampIso8601,
-@as("AuthenticationStrategy") authenticationStrategy: authenticationStrategy,
-@as("Arn") arn: __string
+@as("Tags") tags: option<__mapOf__string>,
+@as("Name") name: option<__string>,
+@as("LatestRevision") latestRevision: option<configurationRevision>,
+@as("Id") id: option<__string>,
+@as("EngineVersion") engineVersion: option<__string>,
+@as("EngineType") engineType: option<engineType>,
+@as("Description") description: option<__string>,
+@as("Created") created: option<__timestampIso8601>,
+@as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>,
+@as("Arn") arn: option<__string>
 }
 type brokerInstance = {
-@as("IpAddress") ipAddress: __string,
-@as("Endpoints") endpoints: __listOf__string,
-@as("ConsoleURL") consoleURL: __string
+@as("IpAddress") ipAddress: option<__string>,
+@as("Endpoints") endpoints: option<__listOf__string>,
+@as("ConsoleURL") consoleURL: option<__string>
 }
 type __listOfUser = array<user>
 type __listOfConfiguration = array<configuration>
 type __listOfBrokerInstance = array<brokerInstance>
 type configurations = {
-@as("Pending") pending: configurationId,
-@as("History") history: __listOfConfigurationId,
-@as("Current") current: configurationId
+@as("Pending") pending: option<configurationId>,
+@as("History") history: option<__listOfConfigurationId>,
+@as("Current") current: option<configurationId>
 }
 type brokerInstanceOption = {
-@as("SupportedEngineVersions") supportedEngineVersions: __listOf__string,
-@as("SupportedDeploymentModes") supportedDeploymentModes: __listOfDeploymentMode,
-@as("StorageType") storageType: brokerStorageType,
-@as("HostInstanceType") hostInstanceType: __string,
-@as("EngineType") engineType: engineType,
-@as("AvailabilityZones") availabilityZones: __listOfAvailabilityZone
+@as("SupportedEngineVersions") supportedEngineVersions: option<__listOf__string>,
+@as("SupportedDeploymentModes") supportedDeploymentModes: option<__listOfDeploymentMode>,
+@as("StorageType") storageType: option<brokerStorageType>,
+@as("HostInstanceType") hostInstanceType: option<__string>,
+@as("EngineType") engineType: option<engineType>,
+@as("AvailabilityZones") availabilityZones: option<__listOfAvailabilityZone>
 }
 type brokerEngineType = {
-@as("EngineVersions") engineVersions: __listOfEngineVersion,
-@as("EngineType") engineType: engineType
+@as("EngineVersions") engineVersions: option<__listOfEngineVersion>,
+@as("EngineType") engineType: option<engineType>
 }
 type __listOfBrokerInstanceOption = array<brokerInstanceOption>
 type __listOfBrokerEngineType = array<brokerEngineType>
-type clientType;
-@module("@aws-sdk/client-mq") @new external createClient: unit => clientType = "AmazonMQClient";
+type awsServiceClient;
+@module("@aws-sdk/client-mq") @new external createClient: unit => awsServiceClient = "AmazonMQClient";
 module RebootBroker = {
   type t;
   type request = {
-@as("BrokerId") brokerId: option<__string>
+@as("BrokerId") brokerId: __string
 }
   type response = unit
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "RebootBrokerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConfigurationRevision = {
   type t;
   type request = {
-@as("ConfigurationRevision") configurationRevision: option<__string>,
-@as("ConfigurationId") configurationId: option<__string>
-}
-  type response = {
-@as("Description") description: __string,
-@as("Data") data: __string,
-@as("Created") created: __timestampIso8601,
+@as("ConfigurationRevision") configurationRevision: __string,
 @as("ConfigurationId") configurationId: __string
 }
+  type response = {
+@as("Description") description: option<__string>,
+@as("Data") data: option<__string>,
+@as("Created") created: option<__timestampIso8601>,
+@as("ConfigurationId") configurationId: option<__string>
+}
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "DescribeConfigurationRevisionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteUser = {
   type t;
   type request = {
-@as("Username") username: option<__string>,
-@as("BrokerId") brokerId: option<__string>
+@as("Username") username: __string,
+@as("BrokerId") brokerId: __string
 }
   type response = unit
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "DeleteUserCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteBroker = {
   type t;
   type request = {
-@as("BrokerId") brokerId: option<__string>
-}
-  type response = {
 @as("BrokerId") brokerId: __string
 }
+  type response = {
+@as("BrokerId") brokerId: option<__string>
+}
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "DeleteBrokerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateUser = {
   type t;
   type request = {
-@as("Username") username: option<__string>,
-@as("Password") password: __string,
-@as("Groups") groups: __listOf__string,
-@as("ConsoleAccess") consoleAccess: __boolean,
-@as("BrokerId") brokerId: option<__string>
+@as("Username") username: __string,
+@as("Password") password: option<__string>,
+@as("Groups") groups: option<__listOf__string>,
+@as("ConsoleAccess") consoleAccess: option<__boolean>,
+@as("BrokerId") brokerId: __string
 }
   type response = unit
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "UpdateUserCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTags = {
   type t;
   type request = {
-@as("ResourceArn") resourceArn: option<__string>
+@as("ResourceArn") resourceArn: __string
 }
   type response = {
-@as("Tags") tags: __mapOf__string
+@as("Tags") tags: option<__mapOf__string>
 }
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "ListTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConfiguration = {
   type t;
   type request = {
-@as("ConfigurationId") configurationId: option<__string>
+@as("ConfigurationId") configurationId: __string
 }
   type response = {
-@as("Tags") tags: __mapOf__string,
-@as("Name") name: __string,
-@as("LatestRevision") latestRevision: configurationRevision,
-@as("Id") id: __string,
-@as("EngineVersion") engineVersion: __string,
-@as("EngineType") engineType: engineType,
-@as("Description") description: __string,
-@as("Created") created: __timestampIso8601,
-@as("AuthenticationStrategy") authenticationStrategy: authenticationStrategy,
-@as("Arn") arn: __string
+@as("Tags") tags: option<__mapOf__string>,
+@as("Name") name: option<__string>,
+@as("LatestRevision") latestRevision: option<configurationRevision>,
+@as("Id") id: option<__string>,
+@as("EngineVersion") engineVersion: option<__string>,
+@as("EngineType") engineType: option<engineType>,
+@as("Description") description: option<__string>,
+@as("Created") created: option<__timestampIso8601>,
+@as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>,
+@as("Arn") arn: option<__string>
 }
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "DescribeConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteTags = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<__listOf__string>,
-@as("ResourceArn") resourceArn: option<__string>
+@as("TagKeys") tagKeys: __listOf__string,
+@as("ResourceArn") resourceArn: __string
 }
   
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "DeleteTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateUser = {
   type t;
   type request = {
-@as("Username") username: option<__string>,
-@as("Password") password: __string,
-@as("Groups") groups: __listOf__string,
-@as("ConsoleAccess") consoleAccess: __boolean,
-@as("BrokerId") brokerId: option<__string>
+@as("Username") username: __string,
+@as("Password") password: option<__string>,
+@as("Groups") groups: option<__listOf__string>,
+@as("ConsoleAccess") consoleAccess: option<__boolean>,
+@as("BrokerId") brokerId: __string
 }
   type response = unit
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "CreateUserCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateTags = {
   type t;
   type request = {
-@as("Tags") tags: __mapOf__string,
-@as("ResourceArn") resourceArn: option<__string>
+@as("Tags") tags: option<__mapOf__string>,
+@as("ResourceArn") resourceArn: __string
 }
   
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "CreateTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateConfiguration = {
   type t;
   type request = {
-@as("Tags") tags: __mapOf__string,
-@as("Name") name: __string,
-@as("EngineVersion") engineVersion: __string,
-@as("EngineType") engineType: engineType,
-@as("AuthenticationStrategy") authenticationStrategy: authenticationStrategy
+@as("Tags") tags: option<__mapOf__string>,
+@as("Name") name: option<__string>,
+@as("EngineVersion") engineVersion: option<__string>,
+@as("EngineType") engineType: option<engineType>,
+@as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>
 }
   type response = {
-@as("Name") name: __string,
-@as("LatestRevision") latestRevision: configurationRevision,
-@as("Id") id: __string,
-@as("Created") created: __timestampIso8601,
-@as("AuthenticationStrategy") authenticationStrategy: authenticationStrategy,
-@as("Arn") arn: __string
+@as("Name") name: option<__string>,
+@as("LatestRevision") latestRevision: option<configurationRevision>,
+@as("Id") id: option<__string>,
+@as("Created") created: option<__timestampIso8601>,
+@as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>,
+@as("Arn") arn: option<__string>
 }
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "CreateConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateConfiguration = {
   type t;
   type request = {
-@as("Description") description: __string,
-@as("Data") data: __string,
-@as("ConfigurationId") configurationId: option<__string>
+@as("Description") description: option<__string>,
+@as("Data") data: option<__string>,
+@as("ConfigurationId") configurationId: __string
 }
   type response = {
-@as("Warnings") warnings: __listOfSanitizationWarning,
-@as("Name") name: __string,
-@as("LatestRevision") latestRevision: configurationRevision,
-@as("Id") id: __string,
-@as("Created") created: __timestampIso8601,
-@as("Arn") arn: __string
+@as("Warnings") warnings: option<__listOfSanitizationWarning>,
+@as("Name") name: option<__string>,
+@as("LatestRevision") latestRevision: option<configurationRevision>,
+@as("Id") id: option<__string>,
+@as("Created") created: option<__timestampIso8601>,
+@as("Arn") arn: option<__string>
 }
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "UpdateConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateBroker = {
   type t;
   type request = {
-@as("SecurityGroups") securityGroups: __listOf__string,
-@as("Logs") logs: logs,
-@as("LdapServerMetadata") ldapServerMetadata: ldapServerMetadataInput,
-@as("HostInstanceType") hostInstanceType: __string,
-@as("EngineVersion") engineVersion: __string,
-@as("Configuration") configuration: configurationId,
-@as("BrokerId") brokerId: option<__string>,
-@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: __boolean,
-@as("AuthenticationStrategy") authenticationStrategy: authenticationStrategy
+@as("SecurityGroups") securityGroups: option<__listOf__string>,
+@as("Logs") logs: option<logs>,
+@as("LdapServerMetadata") ldapServerMetadata: option<ldapServerMetadataInput>,
+@as("HostInstanceType") hostInstanceType: option<__string>,
+@as("EngineVersion") engineVersion: option<__string>,
+@as("Configuration") configuration: option<configurationId>,
+@as("BrokerId") brokerId: __string,
+@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: option<__boolean>,
+@as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>
 }
   type response = {
-@as("SecurityGroups") securityGroups: __listOf__string,
-@as("Logs") logs: logs,
-@as("LdapServerMetadata") ldapServerMetadata: ldapServerMetadataOutput,
-@as("HostInstanceType") hostInstanceType: __string,
-@as("EngineVersion") engineVersion: __string,
-@as("Configuration") configuration: configurationId,
-@as("BrokerId") brokerId: __string,
-@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: __boolean,
-@as("AuthenticationStrategy") authenticationStrategy: authenticationStrategy
+@as("SecurityGroups") securityGroups: option<__listOf__string>,
+@as("Logs") logs: option<logs>,
+@as("LdapServerMetadata") ldapServerMetadata: option<ldapServerMetadataOutput>,
+@as("HostInstanceType") hostInstanceType: option<__string>,
+@as("EngineVersion") engineVersion: option<__string>,
+@as("Configuration") configuration: option<configurationId>,
+@as("BrokerId") brokerId: option<__string>,
+@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: option<__boolean>,
+@as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>
 }
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "UpdateBrokerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListUsers = {
   type t;
   type request = {
-@as("NextToken") nextToken: __string,
-@as("MaxResults") maxResults: maxResults,
-@as("BrokerId") brokerId: option<__string>
-}
-  type response = {
-@as("Users") users: __listOfUserSummary,
-@as("NextToken") nextToken: __string,
-@as("MaxResults") maxResults: __integerMin5Max100,
+@as("NextToken") nextToken: option<__string>,
+@as("MaxResults") maxResults: option<maxResults>,
 @as("BrokerId") brokerId: __string
 }
+  type response = {
+@as("Users") users: option<__listOfUserSummary>,
+@as("NextToken") nextToken: option<__string>,
+@as("MaxResults") maxResults: option<__integerMin5Max100>,
+@as("BrokerId") brokerId: option<__string>
+}
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "ListUsersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListConfigurationRevisions = {
   type t;
   type request = {
-@as("NextToken") nextToken: __string,
-@as("MaxResults") maxResults: maxResults,
-@as("ConfigurationId") configurationId: option<__string>
-}
-  type response = {
-@as("Revisions") revisions: __listOfConfigurationRevision,
-@as("NextToken") nextToken: __string,
-@as("MaxResults") maxResults: __integer,
+@as("NextToken") nextToken: option<__string>,
+@as("MaxResults") maxResults: option<maxResults>,
 @as("ConfigurationId") configurationId: __string
 }
+  type response = {
+@as("Revisions") revisions: option<__listOfConfigurationRevision>,
+@as("NextToken") nextToken: option<__string>,
+@as("MaxResults") maxResults: option<__integer>,
+@as("ConfigurationId") configurationId: option<__string>
+}
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "ListConfigurationRevisionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBrokers = {
   type t;
   type request = {
-@as("NextToken") nextToken: __string,
-@as("MaxResults") maxResults: maxResults
+@as("NextToken") nextToken: option<__string>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("NextToken") nextToken: __string,
-@as("BrokerSummaries") brokerSummaries: __listOfBrokerSummary
+@as("NextToken") nextToken: option<__string>,
+@as("BrokerSummaries") brokerSummaries: option<__listOfBrokerSummary>
 }
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "ListBrokersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeUser = {
   type t;
   type request = {
-@as("Username") username: option<__string>,
-@as("BrokerId") brokerId: option<__string>
-}
-  type response = {
 @as("Username") username: __string,
-@as("Pending") pending: userPendingChanges,
-@as("Groups") groups: __listOf__string,
-@as("ConsoleAccess") consoleAccess: __boolean,
 @as("BrokerId") brokerId: __string
 }
+  type response = {
+@as("Username") username: option<__string>,
+@as("Pending") pending: option<userPendingChanges>,
+@as("Groups") groups: option<__listOf__string>,
+@as("ConsoleAccess") consoleAccess: option<__boolean>,
+@as("BrokerId") brokerId: option<__string>
+}
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "DescribeUserCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListConfigurations = {
   type t;
   type request = {
-@as("NextToken") nextToken: __string,
-@as("MaxResults") maxResults: maxResults
+@as("NextToken") nextToken: option<__string>,
+@as("MaxResults") maxResults: option<maxResults>
 }
   type response = {
-@as("NextToken") nextToken: __string,
-@as("MaxResults") maxResults: __integer,
-@as("Configurations") configurations: __listOfConfiguration
+@as("NextToken") nextToken: option<__string>,
+@as("MaxResults") maxResults: option<__integer>,
+@as("Configurations") configurations: option<__listOfConfiguration>
 }
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "ListConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBroker = {
   type t;
   type request = {
-@as("BrokerId") brokerId: option<__string>
+@as("BrokerId") brokerId: __string
 }
   type response = {
-@as("Users") users: __listOfUserSummary,
-@as("Tags") tags: __mapOf__string,
-@as("SubnetIds") subnetIds: __listOf__string,
-@as("StorageType") storageType: brokerStorageType,
-@as("SecurityGroups") securityGroups: __listOf__string,
-@as("PubliclyAccessible") publiclyAccessible: __boolean,
-@as("PendingSecurityGroups") pendingSecurityGroups: __listOf__string,
-@as("PendingLdapServerMetadata") pendingLdapServerMetadata: ldapServerMetadataOutput,
-@as("PendingHostInstanceType") pendingHostInstanceType: __string,
-@as("PendingEngineVersion") pendingEngineVersion: __string,
-@as("PendingAuthenticationStrategy") pendingAuthenticationStrategy: authenticationStrategy,
-@as("MaintenanceWindowStartTime") maintenanceWindowStartTime: weeklyStartTime,
-@as("Logs") logs: logsSummary,
-@as("LdapServerMetadata") ldapServerMetadata: ldapServerMetadataOutput,
-@as("HostInstanceType") hostInstanceType: __string,
-@as("EngineVersion") engineVersion: __string,
-@as("EngineType") engineType: engineType,
-@as("EncryptionOptions") encryptionOptions: encryptionOptions,
-@as("DeploymentMode") deploymentMode: deploymentMode,
-@as("Created") created: __timestampIso8601,
-@as("Configurations") configurations: configurations,
-@as("BrokerState") brokerState: brokerState,
-@as("BrokerName") brokerName: __string,
-@as("BrokerInstances") brokerInstances: __listOfBrokerInstance,
-@as("BrokerId") brokerId: __string,
-@as("BrokerArn") brokerArn: __string,
-@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: __boolean,
-@as("AuthenticationStrategy") authenticationStrategy: authenticationStrategy
+@as("Users") users: option<__listOfUserSummary>,
+@as("Tags") tags: option<__mapOf__string>,
+@as("SubnetIds") subnetIds: option<__listOf__string>,
+@as("StorageType") storageType: option<brokerStorageType>,
+@as("SecurityGroups") securityGroups: option<__listOf__string>,
+@as("PubliclyAccessible") publiclyAccessible: option<__boolean>,
+@as("PendingSecurityGroups") pendingSecurityGroups: option<__listOf__string>,
+@as("PendingLdapServerMetadata") pendingLdapServerMetadata: option<ldapServerMetadataOutput>,
+@as("PendingHostInstanceType") pendingHostInstanceType: option<__string>,
+@as("PendingEngineVersion") pendingEngineVersion: option<__string>,
+@as("PendingAuthenticationStrategy") pendingAuthenticationStrategy: option<authenticationStrategy>,
+@as("MaintenanceWindowStartTime") maintenanceWindowStartTime: option<weeklyStartTime>,
+@as("Logs") logs: option<logsSummary>,
+@as("LdapServerMetadata") ldapServerMetadata: option<ldapServerMetadataOutput>,
+@as("HostInstanceType") hostInstanceType: option<__string>,
+@as("EngineVersion") engineVersion: option<__string>,
+@as("EngineType") engineType: option<engineType>,
+@as("EncryptionOptions") encryptionOptions: option<encryptionOptions>,
+@as("DeploymentMode") deploymentMode: option<deploymentMode>,
+@as("Created") created: option<__timestampIso8601>,
+@as("Configurations") configurations: option<configurations>,
+@as("BrokerState") brokerState: option<brokerState>,
+@as("BrokerName") brokerName: option<__string>,
+@as("BrokerInstances") brokerInstances: option<__listOfBrokerInstance>,
+@as("BrokerId") brokerId: option<__string>,
+@as("BrokerArn") brokerArn: option<__string>,
+@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: option<__boolean>,
+@as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>
 }
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "DescribeBrokerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBroker = {
   type t;
   type request = {
-@as("Users") users: __listOfUser,
-@as("Tags") tags: __mapOf__string,
-@as("SubnetIds") subnetIds: __listOf__string,
-@as("StorageType") storageType: brokerStorageType,
-@as("SecurityGroups") securityGroups: __listOf__string,
-@as("PubliclyAccessible") publiclyAccessible: __boolean,
-@as("MaintenanceWindowStartTime") maintenanceWindowStartTime: weeklyStartTime,
-@as("Logs") logs: logs,
-@as("LdapServerMetadata") ldapServerMetadata: ldapServerMetadataInput,
-@as("HostInstanceType") hostInstanceType: __string,
-@as("EngineVersion") engineVersion: __string,
-@as("EngineType") engineType: engineType,
-@as("EncryptionOptions") encryptionOptions: encryptionOptions,
-@as("DeploymentMode") deploymentMode: deploymentMode,
-@as("CreatorRequestId") creatorRequestId: __string,
-@as("Configuration") configuration: configurationId,
-@as("BrokerName") brokerName: __string,
-@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: __boolean,
-@as("AuthenticationStrategy") authenticationStrategy: authenticationStrategy
+@as("Users") users: option<__listOfUser>,
+@as("Tags") tags: option<__mapOf__string>,
+@as("SubnetIds") subnetIds: option<__listOf__string>,
+@as("StorageType") storageType: option<brokerStorageType>,
+@as("SecurityGroups") securityGroups: option<__listOf__string>,
+@as("PubliclyAccessible") publiclyAccessible: option<__boolean>,
+@as("MaintenanceWindowStartTime") maintenanceWindowStartTime: option<weeklyStartTime>,
+@as("Logs") logs: option<logs>,
+@as("LdapServerMetadata") ldapServerMetadata: option<ldapServerMetadataInput>,
+@as("HostInstanceType") hostInstanceType: option<__string>,
+@as("EngineVersion") engineVersion: option<__string>,
+@as("EngineType") engineType: option<engineType>,
+@as("EncryptionOptions") encryptionOptions: option<encryptionOptions>,
+@as("DeploymentMode") deploymentMode: option<deploymentMode>,
+@as("CreatorRequestId") creatorRequestId: option<__string>,
+@as("Configuration") configuration: option<configurationId>,
+@as("BrokerName") brokerName: option<__string>,
+@as("AutoMinorVersionUpgrade") autoMinorVersionUpgrade: option<__boolean>,
+@as("AuthenticationStrategy") authenticationStrategy: option<authenticationStrategy>
 }
   type response = {
-@as("BrokerId") brokerId: __string,
-@as("BrokerArn") brokerArn: __string
+@as("BrokerId") brokerId: option<__string>,
+@as("BrokerArn") brokerArn: option<__string>
 }
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "CreateBrokerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBrokerInstanceOptions = {
   type t;
   type request = {
-@as("StorageType") storageType: __string,
-@as("NextToken") nextToken: __string,
-@as("MaxResults") maxResults: maxResults,
-@as("HostInstanceType") hostInstanceType: __string,
-@as("EngineType") engineType: __string
+@as("StorageType") storageType: option<__string>,
+@as("NextToken") nextToken: option<__string>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("HostInstanceType") hostInstanceType: option<__string>,
+@as("EngineType") engineType: option<__string>
 }
   type response = {
-@as("NextToken") nextToken: __string,
-@as("MaxResults") maxResults: __integerMin5Max100,
-@as("BrokerInstanceOptions") brokerInstanceOptions: __listOfBrokerInstanceOption
+@as("NextToken") nextToken: option<__string>,
+@as("MaxResults") maxResults: option<__integerMin5Max100>,
+@as("BrokerInstanceOptions") brokerInstanceOptions: option<__listOfBrokerInstanceOption>
 }
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "DescribeBrokerInstanceOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBrokerEngineTypes = {
   type t;
   type request = {
-@as("NextToken") nextToken: __string,
-@as("MaxResults") maxResults: maxResults,
-@as("EngineType") engineType: __string
+@as("NextToken") nextToken: option<__string>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("EngineType") engineType: option<__string>
 }
   type response = {
-@as("NextToken") nextToken: __string,
-@as("MaxResults") maxResults: __integerMin5Max100,
-@as("BrokerEngineTypes") brokerEngineTypes: __listOfBrokerEngineType
+@as("NextToken") nextToken: option<__string>,
+@as("MaxResults") maxResults: option<__integerMin5Max100>,
+@as("BrokerEngineTypes") brokerEngineTypes: option<__listOfBrokerEngineType>
 }
   @module("@aws-sdk/client-mq") @new external new_: (request) => t = "DescribeBrokerEngineTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

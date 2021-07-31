@@ -1,614 +1,621 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type truncated = bool;
-type includedDetails = bool;
-type unsignedInteger = int;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type long = float
+type truncated = bool
+type includedDetails = bool
+type unsignedInteger = int
 type traceHeader = string
-type amazonawsTimestamp = Js.Date.t;
-type timeoutInSeconds = float;
+type timestamp_ = Js.Date.t;
+type timeoutInSeconds = float
 type taskToken = string
 type tagValue = string
 type tagKey = string
-type syncExecutionStatus = [@as("TIMED_OUT") #TIMED_OUT | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED]
+type syncExecutionStatus = [@as("TIMED_OUT") #TIMEDOUT | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED]
 type stateMachineType = [@as("EXPRESS") #EXPRESS | @as("STANDARD") #STANDARD]
 type stateMachineStatus = [@as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE]
 type sensitiveError = string
 type sensitiveDataJobInput = string
 type sensitiveData = string
 type sensitiveCause = string
-type reverseOrder = bool;
+type reverseOrder = bool
 type pageToken = string
-type pageSize = int;
+type pageSize = int
 type name = string
 type logLevel = [@as("OFF") #OFF | @as("FATAL") #FATAL | @as("ERROR") #ERROR | @as("ALL") #ALL]
 type listExecutionsPageToken = string
-type includeExecutionDataGetExecutionHistory = bool;
-type includeExecutionData = bool;
+type includeExecutionDataGetExecutionHistory = bool
+type includeExecutionData = bool
 type identity = string
 type historyEventType = [@as("WaitStateExited") #WaitStateExited | @as("WaitStateEntered") #WaitStateEntered | @as("WaitStateAborted") #WaitStateAborted | @as("TaskTimedOut") #TaskTimedOut | @as("TaskSucceeded") #TaskSucceeded | @as("TaskSubmitted") #TaskSubmitted | @as("TaskSubmitFailed") #TaskSubmitFailed | @as("TaskStateExited") #TaskStateExited | @as("TaskStateEntered") #TaskStateEntered | @as("TaskStateAborted") #TaskStateAborted | @as("TaskStartFailed") #TaskStartFailed | @as("TaskStarted") #TaskStarted | @as("TaskScheduled") #TaskScheduled | @as("TaskFailed") #TaskFailed | @as("SucceedStateExited") #SucceedStateExited | @as("SucceedStateEntered") #SucceedStateEntered | @as("PassStateExited") #PassStateExited | @as("PassStateEntered") #PassStateEntered | @as("ParallelStateSucceeded") #ParallelStateSucceeded | @as("ParallelStateStarted") #ParallelStateStarted | @as("ParallelStateFailed") #ParallelStateFailed | @as("ParallelStateExited") #ParallelStateExited | @as("ParallelStateEntered") #ParallelStateEntered | @as("ParallelStateAborted") #ParallelStateAborted | @as("MapStateSucceeded") #MapStateSucceeded | @as("MapStateStarted") #MapStateStarted | @as("MapStateFailed") #MapStateFailed | @as("MapStateExited") #MapStateExited | @as("MapStateEntered") #MapStateEntered | @as("MapStateAborted") #MapStateAborted | @as("MapIterationSucceeded") #MapIterationSucceeded | @as("MapIterationStarted") #MapIterationStarted | @as("MapIterationFailed") #MapIterationFailed | @as("MapIterationAborted") #MapIterationAborted | @as("LambdaFunctionTimedOut") #LambdaFunctionTimedOut | @as("LambdaFunctionSucceeded") #LambdaFunctionSucceeded | @as("LambdaFunctionStartFailed") #LambdaFunctionStartFailed | @as("LambdaFunctionStarted") #LambdaFunctionStarted | @as("LambdaFunctionScheduleFailed") #LambdaFunctionScheduleFailed | @as("LambdaFunctionScheduled") #LambdaFunctionScheduled | @as("LambdaFunctionFailed") #LambdaFunctionFailed | @as("FailStateEntered") #FailStateEntered | @as("ExecutionTimedOut") #ExecutionTimedOut | @as("ExecutionSucceeded") #ExecutionSucceeded | @as("ExecutionStarted") #ExecutionStarted | @as("ExecutionFailed") #ExecutionFailed | @as("ExecutionAborted") #ExecutionAborted | @as("ChoiceStateExited") #ChoiceStateExited | @as("ChoiceStateEntered") #ChoiceStateEntered | @as("ActivityTimedOut") #ActivityTimedOut | @as("ActivitySucceeded") #ActivitySucceeded | @as("ActivityStarted") #ActivityStarted | @as("ActivityScheduleFailed") #ActivityScheduleFailed | @as("ActivityScheduled") #ActivityScheduled | @as("ActivityFailed") #ActivityFailed]
-type executionStatus = [@as("ABORTED") #ABORTED | @as("TIMED_OUT") #TIMED_OUT | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("RUNNING") #RUNNING]
-type eventId = float;
+type executionStatus = [@as("ABORTED") #ABORTED | @as("TIMED_OUT") #TIMEDOUT | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("RUNNING") #RUNNING]
+type eventId = float
 type errorMessage = string
-type enabled = bool;
+type enabled = bool
 type definition = string
 type connectorParameters = string
-type billedMemoryUsed = float;
-type billedDuration = float;
+type billedMemoryUsed = float
+type billedDuration = float
 type arn = string
 type tracingConfiguration = {
-@as("enabled") enabled: enabled
+enabled: option<enabled>
 }
 type taskTimedOutEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError,
-@as("resource") resource: option<name>,
-@as("resourceType") resourceType: option<name>
+cause: option<sensitiveCause>,
+error: option<sensitiveError>,
+resource: name,
+resourceType: name
 }
 type taskSubmitFailedEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError,
-@as("resource") resource: option<name>,
-@as("resourceType") resourceType: option<name>
+cause: option<sensitiveCause>,
+error: option<sensitiveError>,
+resource: name,
+resourceType: name
 }
 type taskStartedEventDetails = {
-@as("resource") resource: option<name>,
-@as("resourceType") resourceType: option<name>
+resource: name,
+resourceType: name
 }
 type taskStartFailedEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError,
-@as("resource") resource: option<name>,
-@as("resourceType") resourceType: option<name>
+cause: option<sensitiveCause>,
+error: option<sensitiveError>,
+resource: name,
+resourceType: name
 }
 type taskScheduledEventDetails = {
-@as("heartbeatInSeconds") heartbeatInSeconds: timeoutInSeconds,
-@as("timeoutInSeconds") timeoutInSeconds: timeoutInSeconds,
-@as("parameters") parameters: option<connectorParameters>,
-@as("region") region: option<name>,
-@as("resource") resource: option<name>,
-@as("resourceType") resourceType: option<name>
+heartbeatInSeconds: option<timeoutInSeconds>,
+timeoutInSeconds: option<timeoutInSeconds>,
+parameters: connectorParameters,
+region: name,
+resource: name,
+resourceType: name
 }
 type taskFailedEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError,
-@as("resource") resource: option<name>,
-@as("resourceType") resourceType: option<name>
+cause: option<sensitiveCause>,
+error: option<sensitiveError>,
+resource: name,
+resourceType: name
 }
 type tagKeyList = array<tagKey>
 type tag = {
-@as("value") value: tagValue,
-@as("key") key: tagKey
+value: option<tagValue>,
+key: option<tagKey>
 }
 type stateMachineListItem = {
-@as("creationDate") creationDate: option<amazonawsTimestamp>,
-@as("type") type_: option<stateMachineType>,
-@as("name") name: option<name>,
-@as("stateMachineArn") stateMachineArn: option<arn>
+creationDate: timestamp_,
+@as("type") type_: stateMachineType,
+name: name,
+stateMachineArn: arn
 }
 type mapStateStartedEventDetails = {
-@as("length") length: unsignedInteger
+length: option<unsignedInteger>
 }
 type mapIterationEventDetails = {
-@as("index") index: unsignedInteger,
-@as("name") name: name
+index: option<unsignedInteger>,
+name: option<name>
 }
 type lambdaFunctionTimedOutEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError
+cause: option<sensitiveCause>,
+error: option<sensitiveError>
 }
 type lambdaFunctionStartFailedEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError
+cause: option<sensitiveCause>,
+error: option<sensitiveError>
 }
 type lambdaFunctionScheduleFailedEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError
+cause: option<sensitiveCause>,
+error: option<sensitiveError>
 }
 type lambdaFunctionFailedEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError
+cause: option<sensitiveCause>,
+error: option<sensitiveError>
 }
 type historyEventExecutionDataDetails = {
-@as("truncated") truncated: truncated
+truncated: option<truncated>
 }
 type executionTimedOutEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError
+cause: option<sensitiveCause>,
+error: option<sensitiveError>
 }
 type executionListItem = {
-@as("stopDate") stopDate: amazonawsTimestamp,
-@as("startDate") startDate: option<amazonawsTimestamp>,
-@as("status") status: option<executionStatus>,
-@as("name") name: option<name>,
-@as("stateMachineArn") stateMachineArn: option<arn>,
-@as("executionArn") executionArn: option<arn>
+stopDate: option<timestamp_>,
+startDate: timestamp_,
+status: executionStatus,
+name: name,
+stateMachineArn: arn,
+executionArn: arn
 }
 type executionFailedEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError
+cause: option<sensitiveCause>,
+error: option<sensitiveError>
 }
 type executionAbortedEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError
+cause: option<sensitiveCause>,
+error: option<sensitiveError>
 }
 type cloudWatchLogsLogGroup = {
-@as("logGroupArn") logGroupArn: arn
+logGroupArn: option<arn>
 }
 type cloudWatchEventsExecutionDataDetails = {
-@as("included") included: includedDetails
+included: option<includedDetails>
 }
 type billingDetails = {
-@as("billedDurationInMilliseconds") billedDurationInMilliseconds: billedDuration,
-@as("billedMemoryUsedInMB") billedMemoryUsedInMB: billedMemoryUsed
+billedDurationInMilliseconds: option<billedDuration>,
+billedMemoryUsedInMB: option<billedMemoryUsed>
 }
 type activityTimedOutEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError
+cause: option<sensitiveCause>,
+error: option<sensitiveError>
 }
 type activityStartedEventDetails = {
-@as("workerName") workerName: identity
+workerName: option<identity>
 }
 type activityScheduleFailedEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError
+cause: option<sensitiveCause>,
+error: option<sensitiveError>
 }
 type activityListItem = {
-@as("creationDate") creationDate: option<amazonawsTimestamp>,
-@as("name") name: option<name>,
-@as("activityArn") activityArn: option<arn>
+creationDate: timestamp_,
+name: name,
+activityArn: arn
 }
 type activityFailedEventDetails = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError
+cause: option<sensitiveCause>,
+error: option<sensitiveError>
 }
 type taskSucceededEventDetails = {
-@as("outputDetails") outputDetails: historyEventExecutionDataDetails,
-@as("output") output: sensitiveData,
-@as("resource") resource: option<name>,
-@as("resourceType") resourceType: option<name>
+outputDetails: option<historyEventExecutionDataDetails>,
+output: option<sensitiveData>,
+resource: name,
+resourceType: name
 }
 type taskSubmittedEventDetails = {
-@as("outputDetails") outputDetails: historyEventExecutionDataDetails,
-@as("output") output: sensitiveData,
-@as("resource") resource: option<name>,
-@as("resourceType") resourceType: option<name>
+outputDetails: option<historyEventExecutionDataDetails>,
+output: option<sensitiveData>,
+resource: name,
+resourceType: name
 }
-type tagList = array<tag>
+type tagList_ = array<tag>
 type stateMachineList = array<stateMachineListItem>
 type stateExitedEventDetails = {
-@as("outputDetails") outputDetails: historyEventExecutionDataDetails,
-@as("output") output: sensitiveData,
-@as("name") name: option<name>
+outputDetails: option<historyEventExecutionDataDetails>,
+output: option<sensitiveData>,
+name: name
 }
 type stateEnteredEventDetails = {
-@as("inputDetails") inputDetails: historyEventExecutionDataDetails,
-@as("input") input: sensitiveData,
-@as("name") name: option<name>
+inputDetails: option<historyEventExecutionDataDetails>,
+input: option<sensitiveData>,
+name: name
 }
 type logDestination = {
-@as("cloudWatchLogsLogGroup") cloudWatchLogsLogGroup: cloudWatchLogsLogGroup
+cloudWatchLogsLogGroup: option<cloudWatchLogsLogGroup>
 }
 type lambdaFunctionSucceededEventDetails = {
-@as("outputDetails") outputDetails: historyEventExecutionDataDetails,
-@as("output") output: sensitiveData
+outputDetails: option<historyEventExecutionDataDetails>,
+output: option<sensitiveData>
 }
 type lambdaFunctionScheduledEventDetails = {
-@as("timeoutInSeconds") timeoutInSeconds: timeoutInSeconds,
-@as("inputDetails") inputDetails: historyEventExecutionDataDetails,
-@as("input") input: sensitiveData,
-@as("resource") resource: option<arn>
+timeoutInSeconds: option<timeoutInSeconds>,
+inputDetails: option<historyEventExecutionDataDetails>,
+input: option<sensitiveData>,
+resource: arn
 }
 type executionSucceededEventDetails = {
-@as("outputDetails") outputDetails: historyEventExecutionDataDetails,
-@as("output") output: sensitiveData
+outputDetails: option<historyEventExecutionDataDetails>,
+output: option<sensitiveData>
 }
 type executionStartedEventDetails = {
-@as("roleArn") roleArn: arn,
-@as("inputDetails") inputDetails: historyEventExecutionDataDetails,
-@as("input") input: sensitiveData
+roleArn: option<arn>,
+inputDetails: option<historyEventExecutionDataDetails>,
+input: option<sensitiveData>
 }
 type executionList = array<executionListItem>
 type activitySucceededEventDetails = {
-@as("outputDetails") outputDetails: historyEventExecutionDataDetails,
-@as("output") output: sensitiveData
+outputDetails: option<historyEventExecutionDataDetails>,
+output: option<sensitiveData>
 }
 type activityScheduledEventDetails = {
-@as("heartbeatInSeconds") heartbeatInSeconds: timeoutInSeconds,
-@as("timeoutInSeconds") timeoutInSeconds: timeoutInSeconds,
-@as("inputDetails") inputDetails: historyEventExecutionDataDetails,
-@as("input") input: sensitiveData,
-@as("resource") resource: option<arn>
+heartbeatInSeconds: option<timeoutInSeconds>,
+timeoutInSeconds: option<timeoutInSeconds>,
+inputDetails: option<historyEventExecutionDataDetails>,
+input: option<sensitiveData>,
+resource: arn
 }
 type activityList = array<activityListItem>
 type logDestinationList = array<logDestination>
 type historyEvent = {
-@as("stateExitedEventDetails") stateExitedEventDetails: stateExitedEventDetails,
-@as("stateEnteredEventDetails") stateEnteredEventDetails: stateEnteredEventDetails,
-@as("lambdaFunctionTimedOutEventDetails") lambdaFunctionTimedOutEventDetails: lambdaFunctionTimedOutEventDetails,
-@as("lambdaFunctionSucceededEventDetails") lambdaFunctionSucceededEventDetails: lambdaFunctionSucceededEventDetails,
-@as("lambdaFunctionStartFailedEventDetails") lambdaFunctionStartFailedEventDetails: lambdaFunctionStartFailedEventDetails,
-@as("lambdaFunctionScheduledEventDetails") lambdaFunctionScheduledEventDetails: lambdaFunctionScheduledEventDetails,
-@as("lambdaFunctionScheduleFailedEventDetails") lambdaFunctionScheduleFailedEventDetails: lambdaFunctionScheduleFailedEventDetails,
-@as("lambdaFunctionFailedEventDetails") lambdaFunctionFailedEventDetails: lambdaFunctionFailedEventDetails,
-@as("mapIterationAbortedEventDetails") mapIterationAbortedEventDetails: mapIterationEventDetails,
-@as("mapIterationFailedEventDetails") mapIterationFailedEventDetails: mapIterationEventDetails,
-@as("mapIterationSucceededEventDetails") mapIterationSucceededEventDetails: mapIterationEventDetails,
-@as("mapIterationStartedEventDetails") mapIterationStartedEventDetails: mapIterationEventDetails,
-@as("mapStateStartedEventDetails") mapStateStartedEventDetails: mapStateStartedEventDetails,
-@as("executionTimedOutEventDetails") executionTimedOutEventDetails: executionTimedOutEventDetails,
-@as("executionAbortedEventDetails") executionAbortedEventDetails: executionAbortedEventDetails,
-@as("executionSucceededEventDetails") executionSucceededEventDetails: executionSucceededEventDetails,
-@as("executionStartedEventDetails") executionStartedEventDetails: executionStartedEventDetails,
-@as("executionFailedEventDetails") executionFailedEventDetails: executionFailedEventDetails,
-@as("taskTimedOutEventDetails") taskTimedOutEventDetails: taskTimedOutEventDetails,
-@as("taskSucceededEventDetails") taskSucceededEventDetails: taskSucceededEventDetails,
-@as("taskSubmittedEventDetails") taskSubmittedEventDetails: taskSubmittedEventDetails,
-@as("taskSubmitFailedEventDetails") taskSubmitFailedEventDetails: taskSubmitFailedEventDetails,
-@as("taskStartedEventDetails") taskStartedEventDetails: taskStartedEventDetails,
-@as("taskStartFailedEventDetails") taskStartFailedEventDetails: taskStartFailedEventDetails,
-@as("taskScheduledEventDetails") taskScheduledEventDetails: taskScheduledEventDetails,
-@as("taskFailedEventDetails") taskFailedEventDetails: taskFailedEventDetails,
-@as("activityTimedOutEventDetails") activityTimedOutEventDetails: activityTimedOutEventDetails,
-@as("activitySucceededEventDetails") activitySucceededEventDetails: activitySucceededEventDetails,
-@as("activityStartedEventDetails") activityStartedEventDetails: activityStartedEventDetails,
-@as("activityScheduledEventDetails") activityScheduledEventDetails: activityScheduledEventDetails,
-@as("activityScheduleFailedEventDetails") activityScheduleFailedEventDetails: activityScheduleFailedEventDetails,
-@as("activityFailedEventDetails") activityFailedEventDetails: activityFailedEventDetails,
-@as("previousEventId") previousEventId: eventId,
-@as("id") id: option<eventId>,
-@as("type") type_: option<historyEventType>,
-@as("timestamp") timestamp: option<amazonawsTimestamp>
+stateExitedEventDetails: option<stateExitedEventDetails>,
+stateEnteredEventDetails: option<stateEnteredEventDetails>,
+lambdaFunctionTimedOutEventDetails: option<lambdaFunctionTimedOutEventDetails>,
+lambdaFunctionSucceededEventDetails: option<lambdaFunctionSucceededEventDetails>,
+lambdaFunctionStartFailedEventDetails: option<lambdaFunctionStartFailedEventDetails>,
+lambdaFunctionScheduledEventDetails: option<lambdaFunctionScheduledEventDetails>,
+lambdaFunctionScheduleFailedEventDetails: option<lambdaFunctionScheduleFailedEventDetails>,
+lambdaFunctionFailedEventDetails: option<lambdaFunctionFailedEventDetails>,
+mapIterationAbortedEventDetails: option<mapIterationEventDetails>,
+mapIterationFailedEventDetails: option<mapIterationEventDetails>,
+mapIterationSucceededEventDetails: option<mapIterationEventDetails>,
+mapIterationStartedEventDetails: option<mapIterationEventDetails>,
+mapStateStartedEventDetails: option<mapStateStartedEventDetails>,
+executionTimedOutEventDetails: option<executionTimedOutEventDetails>,
+executionAbortedEventDetails: option<executionAbortedEventDetails>,
+executionSucceededEventDetails: option<executionSucceededEventDetails>,
+executionStartedEventDetails: option<executionStartedEventDetails>,
+executionFailedEventDetails: option<executionFailedEventDetails>,
+taskTimedOutEventDetails: option<taskTimedOutEventDetails>,
+taskSucceededEventDetails: option<taskSucceededEventDetails>,
+taskSubmittedEventDetails: option<taskSubmittedEventDetails>,
+taskSubmitFailedEventDetails: option<taskSubmitFailedEventDetails>,
+taskStartedEventDetails: option<taskStartedEventDetails>,
+taskStartFailedEventDetails: option<taskStartFailedEventDetails>,
+taskScheduledEventDetails: option<taskScheduledEventDetails>,
+taskFailedEventDetails: option<taskFailedEventDetails>,
+activityTimedOutEventDetails: option<activityTimedOutEventDetails>,
+activitySucceededEventDetails: option<activitySucceededEventDetails>,
+activityStartedEventDetails: option<activityStartedEventDetails>,
+activityScheduledEventDetails: option<activityScheduledEventDetails>,
+activityScheduleFailedEventDetails: option<activityScheduleFailedEventDetails>,
+activityFailedEventDetails: option<activityFailedEventDetails>,
+previousEventId: option<eventId>,
+id: eventId,
+@as("type") type_: historyEventType,
+@as("timestamp") timestamp_: timestamp_
 }
 type loggingConfiguration = {
-@as("destinations") destinations: logDestinationList,
-@as("includeExecutionData") includeExecutionData: includeExecutionData,
-@as("level") level: logLevel
+destinations: option<logDestinationList>,
+includeExecutionData: option<includeExecutionData>,
+level: option<logLevel>
 }
 type historyEventList = array<historyEvent>
-type clientType;
-@module("@aws-sdk/client-states") @new external createClient: unit => clientType = "StepFunctionsClient";
+type awsServiceClient;
+@module("@aws-sdk/client-states") @new external createClient: unit => awsServiceClient = "StepFunctionsClient";
 module StopExecution = {
   type t;
   type request = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError,
-@as("executionArn") executionArn: option<arn>
+cause: option<sensitiveCause>,
+error: option<sensitiveError>,
+executionArn: arn
 }
   type response = {
-@as("stopDate") stopDate: option<amazonawsTimestamp>
+stopDate: timestamp_
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "StopExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartExecution = {
   type t;
   type request = {
-@as("traceHeader") traceHeader: traceHeader,
-@as("input") input: sensitiveData,
-@as("name") name: name,
-@as("stateMachineArn") stateMachineArn: option<arn>
+traceHeader: option<traceHeader>,
+input: option<sensitiveData>,
+name: option<name>,
+stateMachineArn: arn
 }
   type response = {
-@as("startDate") startDate: option<amazonawsTimestamp>,
-@as("executionArn") executionArn: option<arn>
+startDate: timestamp_,
+executionArn: arn
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "StartExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SendTaskSuccess = {
   type t;
   type request = {
-@as("output") output: option<sensitiveData>,
-@as("taskToken") taskToken: option<taskToken>
+output: sensitiveData,
+taskToken: taskToken
 }
   type response = unit
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "SendTaskSuccessCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SendTaskHeartbeat = {
   type t;
   type request = {
-@as("taskToken") taskToken: option<taskToken>
+taskToken: taskToken
 }
   type response = unit
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "SendTaskHeartbeatCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SendTaskFailure = {
   type t;
   type request = {
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError,
-@as("taskToken") taskToken: option<taskToken>
+cause: option<sensitiveCause>,
+error: option<sensitiveError>,
+taskToken: taskToken
 }
   type response = unit
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "SendTaskFailureCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetActivityTask = {
   type t;
   type request = {
-@as("workerName") workerName: name,
-@as("activityArn") activityArn: option<arn>
+workerName: option<name>,
+activityArn: arn
 }
   type response = {
-@as("input") input: sensitiveDataJobInput,
-@as("taskToken") taskToken: taskToken
+input: option<sensitiveDataJobInput>,
+taskToken: option<taskToken>
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "GetActivityTaskCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeActivity = {
   type t;
   type request = {
-@as("activityArn") activityArn: option<arn>
+activityArn: arn
 }
   type response = {
-@as("creationDate") creationDate: option<amazonawsTimestamp>,
-@as("name") name: option<name>,
-@as("activityArn") activityArn: option<arn>
+creationDate: timestamp_,
+name: name,
+activityArn: arn
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "DescribeActivityCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteStateMachine = {
   type t;
   type request = {
-@as("stateMachineArn") stateMachineArn: option<arn>
+stateMachineArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "DeleteStateMachineCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteActivity = {
   type t;
   type request = {
-@as("activityArn") activityArn: option<arn>
+activityArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "DeleteActivityCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<arn>
+tagKeys: tagKeyList,
+resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartSyncExecution = {
   type t;
   type request = {
-@as("traceHeader") traceHeader: traceHeader,
-@as("input") input: sensitiveData,
-@as("name") name: name,
-@as("stateMachineArn") stateMachineArn: option<arn>
+traceHeader: option<traceHeader>,
+input: option<sensitiveData>,
+name: option<name>,
+stateMachineArn: arn
 }
   type response = {
-@as("billingDetails") billingDetails: billingDetails,
-@as("traceHeader") traceHeader: traceHeader,
-@as("outputDetails") outputDetails: cloudWatchEventsExecutionDataDetails,
-@as("output") output: sensitiveData,
-@as("inputDetails") inputDetails: cloudWatchEventsExecutionDataDetails,
-@as("input") input: sensitiveData,
-@as("cause") cause: sensitiveCause,
-@as("error") error: sensitiveError,
-@as("status") status: option<syncExecutionStatus>,
-@as("stopDate") stopDate: option<amazonawsTimestamp>,
-@as("startDate") startDate: option<amazonawsTimestamp>,
-@as("name") name: name,
-@as("stateMachineArn") stateMachineArn: arn,
-@as("executionArn") executionArn: option<arn>
+billingDetails: option<billingDetails>,
+traceHeader: option<traceHeader>,
+outputDetails: option<cloudWatchEventsExecutionDataDetails>,
+output: option<sensitiveData>,
+inputDetails: option<cloudWatchEventsExecutionDataDetails>,
+input: option<sensitiveData>,
+cause: option<sensitiveCause>,
+error: option<sensitiveError>,
+status: syncExecutionStatus,
+stopDate: timestamp_,
+startDate: timestamp_,
+name: option<name>,
+stateMachineArn: option<arn>,
+executionArn: arn
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "StartSyncExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeExecution = {
   type t;
   type request = {
-@as("executionArn") executionArn: option<arn>
+executionArn: arn
 }
   type response = {
-@as("traceHeader") traceHeader: traceHeader,
-@as("outputDetails") outputDetails: cloudWatchEventsExecutionDataDetails,
-@as("output") output: sensitiveData,
-@as("inputDetails") inputDetails: cloudWatchEventsExecutionDataDetails,
-@as("input") input: sensitiveData,
-@as("stopDate") stopDate: amazonawsTimestamp,
-@as("startDate") startDate: option<amazonawsTimestamp>,
-@as("status") status: option<executionStatus>,
-@as("name") name: name,
-@as("stateMachineArn") stateMachineArn: option<arn>,
-@as("executionArn") executionArn: option<arn>
+traceHeader: option<traceHeader>,
+outputDetails: option<cloudWatchEventsExecutionDataDetails>,
+output: option<sensitiveData>,
+inputDetails: option<cloudWatchEventsExecutionDataDetails>,
+input: option<sensitiveData>,
+stopDate: option<timestamp_>,
+startDate: timestamp_,
+status: executionStatus,
+name: option<name>,
+stateMachineArn: arn,
+executionArn: arn
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "DescribeExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagList>,
-@as("resourceArn") resourceArn: option<arn>
+tags: tagList_,
+resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<arn>
+resourceArn: arn
 }
   type response = {
-@as("tags") tags: tagList
+tags: option<tagList_>
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStateMachines = {
   type t;
   type request = {
-@as("nextToken") nextToken: pageToken,
-@as("maxResults") maxResults: pageSize
+nextToken: option<pageToken>,
+maxResults: option<pageSize>
 }
   type response = {
-@as("nextToken") nextToken: pageToken,
-@as("stateMachines") stateMachines: option<stateMachineList>
+nextToken: option<pageToken>,
+stateMachines: stateMachineList
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "ListStateMachinesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListExecutions = {
   type t;
   type request = {
-@as("nextToken") nextToken: listExecutionsPageToken,
-@as("maxResults") maxResults: pageSize,
-@as("statusFilter") statusFilter: executionStatus,
-@as("stateMachineArn") stateMachineArn: option<arn>
+nextToken: option<listExecutionsPageToken>,
+maxResults: option<pageSize>,
+statusFilter: option<executionStatus>,
+stateMachineArn: arn
 }
   type response = {
-@as("nextToken") nextToken: listExecutionsPageToken,
-@as("executions") executions: option<executionList>
+nextToken: option<listExecutionsPageToken>,
+executions: executionList
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "ListExecutionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListActivities = {
   type t;
   type request = {
-@as("nextToken") nextToken: pageToken,
-@as("maxResults") maxResults: pageSize
+nextToken: option<pageToken>,
+maxResults: option<pageSize>
 }
   type response = {
-@as("nextToken") nextToken: pageToken,
-@as("activities") activities: option<activityList>
+nextToken: option<pageToken>,
+activities: activityList
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "ListActivitiesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateActivity = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("name") name: option<name>
+tags: option<tagList_>,
+name: name
 }
   type response = {
-@as("creationDate") creationDate: option<amazonawsTimestamp>,
-@as("activityArn") activityArn: option<arn>
+creationDate: timestamp_,
+activityArn: arn
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "CreateActivityCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateStateMachine = {
   type t;
   type request = {
-@as("tracingConfiguration") tracingConfiguration: tracingConfiguration,
-@as("loggingConfiguration") loggingConfiguration: loggingConfiguration,
-@as("roleArn") roleArn: arn,
-@as("definition") definition: definition,
-@as("stateMachineArn") stateMachineArn: option<arn>
+tracingConfiguration: option<tracingConfiguration>,
+loggingConfiguration: option<loggingConfiguration>,
+roleArn: option<arn>,
+definition: option<definition>,
+stateMachineArn: arn
 }
   type response = {
-@as("updateDate") updateDate: option<amazonawsTimestamp>
+updateDate: timestamp_
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "UpdateStateMachineCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetExecutionHistory = {
   type t;
   type request = {
-@as("includeExecutionData") includeExecutionData: includeExecutionDataGetExecutionHistory,
-@as("nextToken") nextToken: pageToken,
-@as("reverseOrder") reverseOrder: reverseOrder,
-@as("maxResults") maxResults: pageSize,
-@as("executionArn") executionArn: option<arn>
+includeExecutionData: option<includeExecutionDataGetExecutionHistory>,
+nextToken: option<pageToken>,
+reverseOrder: option<reverseOrder>,
+maxResults: option<pageSize>,
+executionArn: arn
 }
   type response = {
-@as("nextToken") nextToken: pageToken,
-@as("events") events: option<historyEventList>
+nextToken: option<pageToken>,
+events: historyEventList
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "GetExecutionHistoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeStateMachineForExecution = {
   type t;
   type request = {
-@as("executionArn") executionArn: option<arn>
+executionArn: arn
 }
   type response = {
-@as("tracingConfiguration") tracingConfiguration: tracingConfiguration,
-@as("loggingConfiguration") loggingConfiguration: loggingConfiguration,
-@as("updateDate") updateDate: option<amazonawsTimestamp>,
-@as("roleArn") roleArn: option<arn>,
-@as("definition") definition: option<definition>,
-@as("name") name: option<name>,
-@as("stateMachineArn") stateMachineArn: option<arn>
+tracingConfiguration: option<tracingConfiguration>,
+loggingConfiguration: option<loggingConfiguration>,
+updateDate: timestamp_,
+roleArn: arn,
+definition: definition,
+name: name,
+stateMachineArn: arn
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "DescribeStateMachineForExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeStateMachine = {
   type t;
   type request = {
-@as("stateMachineArn") stateMachineArn: option<arn>
+stateMachineArn: arn
 }
   type response = {
-@as("tracingConfiguration") tracingConfiguration: tracingConfiguration,
-@as("loggingConfiguration") loggingConfiguration: loggingConfiguration,
-@as("creationDate") creationDate: option<amazonawsTimestamp>,
-@as("type") type_: option<stateMachineType>,
-@as("roleArn") roleArn: option<arn>,
-@as("definition") definition: option<definition>,
-@as("status") status: stateMachineStatus,
-@as("name") name: option<name>,
-@as("stateMachineArn") stateMachineArn: option<arn>
+tracingConfiguration: option<tracingConfiguration>,
+loggingConfiguration: option<loggingConfiguration>,
+creationDate: timestamp_,
+@as("type") type_: stateMachineType,
+roleArn: arn,
+definition: definition,
+status: option<stateMachineStatus>,
+name: name,
+stateMachineArn: arn
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "DescribeStateMachineCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateStateMachine = {
   type t;
   type request = {
-@as("tracingConfiguration") tracingConfiguration: tracingConfiguration,
-@as("tags") tags: tagList,
-@as("loggingConfiguration") loggingConfiguration: loggingConfiguration,
-@as("type") type_: stateMachineType,
-@as("roleArn") roleArn: option<arn>,
-@as("definition") definition: option<definition>,
-@as("name") name: option<name>
+tracingConfiguration: option<tracingConfiguration>,
+tags: option<tagList_>,
+loggingConfiguration: option<loggingConfiguration>,
+@as("type") type_: option<stateMachineType>,
+roleArn: arn,
+definition: definition,
+name: name
 }
   type response = {
-@as("creationDate") creationDate: option<amazonawsTimestamp>,
-@as("stateMachineArn") stateMachineArn: option<arn>
+creationDate: timestamp_,
+stateMachineArn: arn
 }
   @module("@aws-sdk/client-states") @new external new_: (request) => t = "CreateStateMachineCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

@@ -191,7 +191,11 @@ function convert(parsed) {
           TAG: /* Ok */0,
           _0: {
             moduleName: moduleName,
-            code: Belt_Array.joinWith(Belt_Array.concat(codeSnippets, operationSnippets), "\n", (function (x) {
+            code: Belt_Array.joinWith(Belt_Array.concatMany([
+                      [Generate.generateResponseMetadata(undefined)],
+                      codeSnippets,
+                      operationSnippets
+                    ]), "\n", (function (x) {
                     return x;
                   }))
           }
@@ -205,4 +209,4 @@ exports.kebabCaseToTitleCase = kebabCaseToTitleCase;
 exports.UnexpectedStructure = UnexpectedStructure;
 exports.findOperationalStructure = findOperationalStructure;
 exports.convert = convert;
-/* No side effect */
+/* Generate Not a pure module */

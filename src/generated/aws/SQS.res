@@ -1,74 +1,79 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type timestamp_ = Js.Date.t;
+type long = float
 type token = string
 type tagValue = string
 type tagKey = string
-type amazonawsString = string
+type string_ = string
 type queueAttributeName = [@as("FifoThroughputLimit") #FifoThroughputLimit | @as("DeduplicationScope") #DeduplicationScope | @as("KmsDataKeyReusePeriodSeconds") #KmsDataKeyReusePeriodSeconds | @as("KmsMasterKeyId") #KmsMasterKeyId | @as("ContentBasedDeduplication") #ContentBasedDeduplication | @as("FifoQueue") #FifoQueue | @as("RedrivePolicy") #RedrivePolicy | @as("ReceiveMessageWaitTimeSeconds") #ReceiveMessageWaitTimeSeconds | @as("DelaySeconds") #DelaySeconds | @as("ApproximateNumberOfMessagesDelayed") #ApproximateNumberOfMessagesDelayed | @as("QueueArn") #QueueArn | @as("LastModifiedTimestamp") #LastModifiedTimestamp | @as("CreatedTimestamp") #CreatedTimestamp | @as("ApproximateNumberOfMessagesNotVisible") #ApproximateNumberOfMessagesNotVisible | @as("ApproximateNumberOfMessages") #ApproximateNumberOfMessages | @as("MessageRetentionPeriod") #MessageRetentionPeriod | @as("MaximumMessageSize") #MaximumMessageSize | @as("VisibilityTimeout") #VisibilityTimeout | @as("Policy") #Policy | @as("All") #All]
 type messageSystemAttributeNameForSends = [@as("AWSTraceHeader") #AWSTraceHeader]
 type messageSystemAttributeName = [@as("AWSTraceHeader") #AWSTraceHeader | @as("MessageGroupId") #MessageGroupId | @as("MessageDeduplicationId") #MessageDeduplicationId | @as("SequenceNumber") #SequenceNumber | @as("ApproximateFirstReceiveTimestamp") #ApproximateFirstReceiveTimestamp | @as("ApproximateReceiveCount") #ApproximateReceiveCount | @as("SentTimestamp") #SentTimestamp | @as("SenderId") #SenderId]
 type messageAttributeName = string
-type amazonawsInteger = int;
-type boxedInteger = int;
-type amazonawsBoolean = bool;
-type binary = NodeJs.Buffer.t;
+type integer_ = int
+type boxedInteger = int
+type boolean_ = bool
+type binary = NodeJs.Buffer.t
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
-type stringList = array<amazonawsString>
+type stringList = array<string_>
 type sendMessageBatchResultEntry = {
-@as("SequenceNumber") sequenceNumber: amazonawsString,
-@as("MD5OfMessageSystemAttributes") mD5OfMessageSystemAttributes: amazonawsString,
-@as("MD5OfMessageAttributes") mD5OfMessageAttributes: amazonawsString,
-@as("MD5OfMessageBody") mD5OfMessageBody: option<amazonawsString>,
-@as("MessageId") messageId: option<amazonawsString>,
-@as("Id") id: option<amazonawsString>
+@as("SequenceNumber") sequenceNumber: option<string_>,
+@as("MD5OfMessageSystemAttributes") md5OfMessageSystemAttributes: option<string_>,
+@as("MD5OfMessageAttributes") md5OfMessageAttributes: option<string_>,
+@as("MD5OfMessageBody") md5OfMessageBody: string_,
+@as("MessageId") messageId: string_,
+@as("Id") id: string_
 }
-type queueUrlList = array<amazonawsString>
-type queueAttributeMap = Js.Dict.t< amazonawsString>
-type messageSystemAttributeMap = Js.Dict.t< amazonawsString>
+type queueUrlList = array<string_>
+type queueAttributeMap = Js.Dict.t< string_>
+type messageSystemAttributeMap = Js.Dict.t< string_>
 type messageAttributeNameList = array<messageAttributeName>
 type deleteMessageBatchResultEntry = {
-@as("Id") id: option<amazonawsString>
+@as("Id") id: string_
 }
 type deleteMessageBatchRequestEntry = {
-@as("ReceiptHandle") receiptHandle: option<amazonawsString>,
-@as("Id") id: option<amazonawsString>
+@as("ReceiptHandle") receiptHandle: string_,
+@as("Id") id: string_
 }
 type changeMessageVisibilityBatchResultEntry = {
-@as("Id") id: option<amazonawsString>
+@as("Id") id: string_
 }
 type changeMessageVisibilityBatchRequestEntry = {
-@as("VisibilityTimeout") visibilityTimeout: amazonawsInteger,
-@as("ReceiptHandle") receiptHandle: option<amazonawsString>,
-@as("Id") id: option<amazonawsString>
+@as("VisibilityTimeout") visibilityTimeout: option<integer_>,
+@as("ReceiptHandle") receiptHandle: string_,
+@as("Id") id: string_
 }
 type binaryList = array<binary>
 type batchResultErrorEntry = {
-@as("Message") message: amazonawsString,
-@as("Code") code: option<amazonawsString>,
-@as("SenderFault") senderFault: option<amazonawsBoolean>,
-@as("Id") id: option<amazonawsString>
+@as("Message") message: option<string_>,
+@as("Code") code: string_,
+@as("SenderFault") senderFault: boolean_,
+@as("Id") id: string_
 }
 type attributeNameList = array<queueAttributeName>
-type actionNameList = array<amazonawsString>
-type aWSAccountIdList = array<amazonawsString>
+type actionNameList = array<string_>
+type awsaccountIdList = array<string_>
 type sendMessageBatchResultEntryList = array<sendMessageBatchResultEntry>
 type messageSystemAttributeValue = {
-@as("DataType") dataType: option<amazonawsString>,
-@as("BinaryListValues") binaryListValues: binaryList,
-@as("StringListValues") stringListValues: stringList,
-@as("BinaryValue") binaryValue: binary,
-@as("StringValue") stringValue: amazonawsString
+@as("DataType") dataType: string_,
+@as("BinaryListValues") binaryListValues: option<binaryList>,
+@as("StringListValues") stringListValues: option<stringList>,
+@as("BinaryValue") binaryValue: option<binary>,
+@as("StringValue") stringValue: option<string_>
 }
 type messageAttributeValue = {
-@as("DataType") dataType: option<amazonawsString>,
-@as("BinaryListValues") binaryListValues: binaryList,
-@as("StringListValues") stringListValues: stringList,
-@as("BinaryValue") binaryValue: binary,
-@as("StringValue") stringValue: amazonawsString
+@as("DataType") dataType: string_,
+@as("BinaryListValues") binaryListValues: option<binaryList>,
+@as("StringListValues") stringListValues: option<stringList>,
+@as("BinaryValue") binaryValue: option<binary>,
+@as("StringValue") stringValue: option<string_>
 }
 type deleteMessageBatchResultEntryList = array<deleteMessageBatchResultEntry>
 type deleteMessageBatchRequestEntryList = array<deleteMessageBatchRequestEntry>
@@ -78,287 +83,287 @@ type batchResultErrorEntryList = array<batchResultErrorEntry>
 type messageBodySystemAttributeMap = Js.Dict.t< messageSystemAttributeValue>
 type messageBodyAttributeMap = Js.Dict.t< messageAttributeValue>
 type sendMessageBatchRequestEntry = {
-@as("MessageGroupId") messageGroupId: amazonawsString,
-@as("MessageDeduplicationId") messageDeduplicationId: amazonawsString,
-@as("MessageSystemAttributes") messageSystemAttributes: messageBodySystemAttributeMap,
-@as("MessageAttributes") messageAttributes: messageBodyAttributeMap,
-@as("DelaySeconds") delaySeconds: amazonawsInteger,
-@as("MessageBody") messageBody: option<amazonawsString>,
-@as("Id") id: option<amazonawsString>
+@as("MessageGroupId") messageGroupId: option<string_>,
+@as("MessageDeduplicationId") messageDeduplicationId: option<string_>,
+@as("MessageSystemAttributes") messageSystemAttributes: option<messageBodySystemAttributeMap>,
+@as("MessageAttributes") messageAttributes: option<messageBodyAttributeMap>,
+@as("DelaySeconds") delaySeconds: option<integer_>,
+@as("MessageBody") messageBody: string_,
+@as("Id") id: string_
 }
 type message = {
-@as("MessageAttributes") messageAttributes: messageBodyAttributeMap,
-@as("MD5OfMessageAttributes") mD5OfMessageAttributes: amazonawsString,
-@as("Attributes") attributes: messageSystemAttributeMap,
-@as("Body") body: amazonawsString,
-@as("MD5OfBody") mD5OfBody: amazonawsString,
-@as("ReceiptHandle") receiptHandle: amazonawsString,
-@as("MessageId") messageId: amazonawsString
+@as("MessageAttributes") messageAttributes: option<messageBodyAttributeMap>,
+@as("MD5OfMessageAttributes") md5OfMessageAttributes: option<string_>,
+@as("Attributes") attributes: option<messageSystemAttributeMap>,
+@as("Body") body: option<string_>,
+@as("MD5OfBody") md5OfBody: option<string_>,
+@as("ReceiptHandle") receiptHandle: option<string_>,
+@as("MessageId") messageId: option<string_>
 }
 type sendMessageBatchRequestEntryList = array<sendMessageBatchRequestEntry>
 type messageList = array<message>
-type clientType;
-@module("@aws-sdk/client-sqs") @new external createClient: unit => clientType = "SQSClient";
+type awsServiceClient;
+@module("@aws-sdk/client-sqs") @new external createClient: unit => awsServiceClient = "SQSClient";
 module RemovePermission = {
   type t;
   type request = {
-@as("Label") label: option<amazonawsString>,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("Label") label: string_,
+@as("QueueUrl") queueUrl: string_
 }
   
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "RemovePermissionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PurgeQueue = {
   type t;
   type request = {
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("QueueUrl") queueUrl: string_
 }
   
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "PurgeQueueCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetQueueUrl = {
   type t;
   type request = {
-@as("QueueOwnerAWSAccountId") queueOwnerAWSAccountId: amazonawsString,
-@as("QueueName") queueName: option<amazonawsString>
+@as("QueueOwnerAWSAccountId") queueOwnerAWSAccountId: option<string_>,
+@as("QueueName") queueName: string_
 }
   type response = {
-@as("QueueUrl") queueUrl: amazonawsString
+@as("QueueUrl") queueUrl: option<string_>
 }
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "GetQueueUrlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteQueue = {
   type t;
   type request = {
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("QueueUrl") queueUrl: string_
 }
   
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "DeleteQueueCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteMessage = {
   type t;
   type request = {
-@as("ReceiptHandle") receiptHandle: option<amazonawsString>,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("ReceiptHandle") receiptHandle: string_,
+@as("QueueUrl") queueUrl: string_
 }
   
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "DeleteMessageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module ChangeMessageVisibility = {
   type t;
   type request = {
-@as("VisibilityTimeout") visibilityTimeout: option<amazonawsInteger>,
-@as("ReceiptHandle") receiptHandle: option<amazonawsString>,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("VisibilityTimeout") visibilityTimeout: integer_,
+@as("ReceiptHandle") receiptHandle: string_,
+@as("QueueUrl") queueUrl: string_
 }
   
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ChangeMessageVisibilityCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module UntagQueue = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("QueueUrl") queueUrl: string_
 }
   
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "UntagQueueCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module TagQueue = {
   type t;
   type request = {
-@as("Tags") tags: option<tagMap>,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("Tags") tags: tagMap,
+@as("QueueUrl") queueUrl: string_
 }
   
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "TagQueueCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module SetQueueAttributes = {
   type t;
   type request = {
-@as("Attributes") attributes: option<queueAttributeMap>,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("Attributes") attributes: queueAttributeMap,
+@as("QueueUrl") queueUrl: string_
 }
   
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "SetQueueAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListQueues = {
   type t;
   type request = {
-@as("MaxResults") maxResults: boxedInteger,
-@as("NextToken") nextToken: token,
-@as("QueueNamePrefix") queueNamePrefix: amazonawsString
+@as("MaxResults") maxResults: option<boxedInteger>,
+@as("NextToken") nextToken: option<token>,
+@as("QueueNamePrefix") queueNamePrefix: option<string_>
 }
   type response = {
-@as("QueueUrls") queueUrls: queueUrlList,
-@as("NextToken") nextToken: token
+@as("QueueUrls") queueUrls: option<queueUrlList>,
+@as("NextToken") nextToken: option<token>
 }
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ListQueuesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListQueueTags = {
   type t;
   type request = {
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("QueueUrl") queueUrl: string_
 }
   type response = {
-@as("Tags") tags: tagMap
+@as("Tags") tags: option<tagMap>
 }
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ListQueueTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDeadLetterSourceQueues = {
   type t;
   type request = {
-@as("MaxResults") maxResults: boxedInteger,
-@as("NextToken") nextToken: token,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("MaxResults") maxResults: option<boxedInteger>,
+@as("NextToken") nextToken: option<token>,
+@as("QueueUrl") queueUrl: string_
 }
   type response = {
-@as("NextToken") nextToken: token,
-@as("queueUrls") queueUrls: option<queueUrlList>
+@as("NextToken") nextToken: option<token>,
+queueUrls: queueUrlList
 }
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ListDeadLetterSourceQueuesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetQueueAttributes = {
   type t;
   type request = {
-@as("AttributeNames") attributeNames: attributeNameList,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("AttributeNames") attributeNames: option<attributeNameList>,
+@as("QueueUrl") queueUrl: string_
 }
   type response = {
-@as("Attributes") attributes: queueAttributeMap
+@as("Attributes") attributes: option<queueAttributeMap>
 }
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "GetQueueAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateQueue = {
   type t;
   type request = {
-@as("Attributes") attributes: queueAttributeMap,
-@as("tags") tags: tagMap,
-@as("QueueName") queueName: option<amazonawsString>
+@as("Attributes") attributes: option<queueAttributeMap>,
+tags: option<tagMap>,
+@as("QueueName") queueName: string_
 }
   type response = {
-@as("QueueUrl") queueUrl: amazonawsString
+@as("QueueUrl") queueUrl: option<string_>
 }
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "CreateQueueCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddPermission = {
   type t;
   type request = {
-@as("Actions") actions: option<actionNameList>,
-@as("AWSAccountIds") aWSAccountIds: option<aWSAccountIdList>,
-@as("Label") label: option<amazonawsString>,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("Actions") actions: actionNameList,
+@as("AWSAccountIds") awsaccountIds: awsaccountIdList,
+@as("Label") label: string_,
+@as("QueueUrl") queueUrl: string_
 }
   
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "AddPermissionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteMessageBatch = {
   type t;
   type request = {
-@as("Entries") entries: option<deleteMessageBatchRequestEntryList>,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("Entries") entries: deleteMessageBatchRequestEntryList,
+@as("QueueUrl") queueUrl: string_
 }
   type response = {
-@as("Failed") failed: option<batchResultErrorEntryList>,
-@as("Successful") successful: option<deleteMessageBatchResultEntryList>
+@as("Failed") failed: batchResultErrorEntryList,
+@as("Successful") successful: deleteMessageBatchResultEntryList
 }
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "DeleteMessageBatchCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ChangeMessageVisibilityBatch = {
   type t;
   type request = {
-@as("Entries") entries: option<changeMessageVisibilityBatchRequestEntryList>,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("Entries") entries: changeMessageVisibilityBatchRequestEntryList,
+@as("QueueUrl") queueUrl: string_
 }
   type response = {
-@as("Failed") failed: option<batchResultErrorEntryList>,
-@as("Successful") successful: option<changeMessageVisibilityBatchResultEntryList>
+@as("Failed") failed: batchResultErrorEntryList,
+@as("Successful") successful: changeMessageVisibilityBatchResultEntryList
 }
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ChangeMessageVisibilityBatchCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SendMessage = {
   type t;
   type request = {
-@as("MessageGroupId") messageGroupId: amazonawsString,
-@as("MessageDeduplicationId") messageDeduplicationId: amazonawsString,
-@as("MessageSystemAttributes") messageSystemAttributes: messageBodySystemAttributeMap,
-@as("MessageAttributes") messageAttributes: messageBodyAttributeMap,
-@as("DelaySeconds") delaySeconds: amazonawsInteger,
-@as("MessageBody") messageBody: option<amazonawsString>,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("MessageGroupId") messageGroupId: option<string_>,
+@as("MessageDeduplicationId") messageDeduplicationId: option<string_>,
+@as("MessageSystemAttributes") messageSystemAttributes: option<messageBodySystemAttributeMap>,
+@as("MessageAttributes") messageAttributes: option<messageBodyAttributeMap>,
+@as("DelaySeconds") delaySeconds: option<integer_>,
+@as("MessageBody") messageBody: string_,
+@as("QueueUrl") queueUrl: string_
 }
   type response = {
-@as("SequenceNumber") sequenceNumber: amazonawsString,
-@as("MessageId") messageId: amazonawsString,
-@as("MD5OfMessageSystemAttributes") mD5OfMessageSystemAttributes: amazonawsString,
-@as("MD5OfMessageAttributes") mD5OfMessageAttributes: amazonawsString,
-@as("MD5OfMessageBody") mD5OfMessageBody: amazonawsString
+@as("SequenceNumber") sequenceNumber: option<string_>,
+@as("MessageId") messageId: option<string_>,
+@as("MD5OfMessageSystemAttributes") md5OfMessageSystemAttributes: option<string_>,
+@as("MD5OfMessageAttributes") md5OfMessageAttributes: option<string_>,
+@as("MD5OfMessageBody") md5OfMessageBody: option<string_>
 }
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "SendMessageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SendMessageBatch = {
   type t;
   type request = {
-@as("Entries") entries: option<sendMessageBatchRequestEntryList>,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("Entries") entries: sendMessageBatchRequestEntryList,
+@as("QueueUrl") queueUrl: string_
 }
   type response = {
-@as("Failed") failed: option<batchResultErrorEntryList>,
-@as("Successful") successful: option<sendMessageBatchResultEntryList>
+@as("Failed") failed: batchResultErrorEntryList,
+@as("Successful") successful: sendMessageBatchResultEntryList
 }
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "SendMessageBatchCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ReceiveMessage = {
   type t;
   type request = {
-@as("ReceiveRequestAttemptId") receiveRequestAttemptId: amazonawsString,
-@as("WaitTimeSeconds") waitTimeSeconds: amazonawsInteger,
-@as("VisibilityTimeout") visibilityTimeout: amazonawsInteger,
-@as("MaxNumberOfMessages") maxNumberOfMessages: amazonawsInteger,
-@as("MessageAttributeNames") messageAttributeNames: messageAttributeNameList,
-@as("AttributeNames") attributeNames: attributeNameList,
-@as("QueueUrl") queueUrl: option<amazonawsString>
+@as("ReceiveRequestAttemptId") receiveRequestAttemptId: option<string_>,
+@as("WaitTimeSeconds") waitTimeSeconds: option<integer_>,
+@as("VisibilityTimeout") visibilityTimeout: option<integer_>,
+@as("MaxNumberOfMessages") maxNumberOfMessages: option<integer_>,
+@as("MessageAttributeNames") messageAttributeNames: option<messageAttributeNameList>,
+@as("AttributeNames") attributeNames: option<attributeNameList>,
+@as("QueueUrl") queueUrl: string_
 }
   type response = {
-@as("Messages") messages: messageList
+@as("Messages") messages: option<messageList>
 }
   @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ReceiveMessageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

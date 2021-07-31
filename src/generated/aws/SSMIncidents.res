@@ -1,26 +1,34 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type url = string
-type uUID = string
+type uuid = string
 type timelineEventType = string
-type timelineEventSort = [@as("EVENT_TIME") #EVENT_TIME]
+type timelineEventSort = [@as("EVENT_TIME") #EVENTTIME]
 type tagValue = string
 type tagKey = string
-type stringList = array<apiString>
-type ssmTargetAccount = [@as("IMPACTED_ACCOUNT") #IMPACTED_ACCOUNT | @as("RESPONSE_PLAN_OWNER_ACCOUNT") #RESPONSE_PLAN_OWNER_ACCOUNT]
-type ssmParameterValues = array<apiString>
+type stringList = array<string_>
+type ssmTargetAccount = [@as("IMPACTED_ACCOUNT") #IMPACTEDACCOUNT | @as("RESPONSE_PLAN_OWNER_ACCOUNT") #RESPONSEPLANOWNERACCOUNT]
+type ssmParameterValues = array<string_>
 type ssmContactsArn = string
 type sseKmsKey = string
 type sortOrder = [@as("DESCENDING") #DESCENDING | @as("ASCENDING") #ASCENDING]
 type snsArn = string
-type serviceCode = [@as("ssm-incidents") #ssm_incidents]
+type serviceCode = [@as("ssm-incidents") #SsmIncidents]
 type roleArn = string
 type responsePlanName = string
 type responsePlanDisplayName = string
-type resourceType = [@as("RESOURCE_POLICY") #RESOURCE_POLICY | @as("REPLICATION_SET") #REPLICATION_SET | @as("TIMELINE_EVENT") #TIMELINE_EVENT | @as("INCIDENT_RECORD") #INCIDENT_RECORD | @as("RESPONSE_PLAN") #RESPONSE_PLAN]
+type resourceType = [@as("RESOURCE_POLICY") #RESOURCEPOLICY | @as("REPLICATION_SET") #REPLICATIONSET | @as("TIMELINE_EVENT") #TIMELINEEVENT | @as("INCIDENT_RECORD") #INCIDENTRECORD | @as("RESPONSE_PLAN") #RESPONSEPLAN]
 type replicationSetStatus = [@as("FAILED") #FAILED | @as("DELETING") #DELETING | @as("UPDATING") #UPDATING | @as("CREATING") #CREATING | @as("ACTIVE") #ACTIVE]
 type regionStatus = [@as("FAILED") #FAILED | @as("DELETING") #DELETING | @as("CREATING") #CREATING | @as("ACTIVE") #ACTIVE]
 type regionName = string
@@ -29,14 +37,14 @@ type policyId = string
 type policy = string
 type nextToken = string
 type metricDefinition = string
-type maxResults = int;
+type maxResults = int
 type itemType = [@as("OTHER") #OTHER | @as("ATTACHMENT") #ATTACHMENT | @as("PARENT") #PARENT | @as("METRIC") #METRIC | @as("INCIDENT") #INCIDENT | @as("ANALYSIS") #ANALYSIS]
-type integerList = array<apiInteger>
+type integerList = array<integer_>
 type incidentTitle = string
 type incidentSummary = string
 type incidentSource = string
 type incidentRecordStatus = [@as("RESOLVED") #RESOLVED | @as("OPEN") #OPEN]
-type impact = int;
+type impact = int
 type exceptionMessage = string
 type eventData = string
 type emptyChatChannel = unit
@@ -44,75 +52,75 @@ type dedupeString = string
 type clientToken = string
 type arn = string
 type triggerDetails = {
-@as("rawData") rawData: rawData,
-@as("timestamp") timestamp: option<apiTimestamp>,
-@as("triggerArn") triggerArn: arn,
-@as("source") source: option<incidentSource>
+rawData: option<rawData>,
+@as("timestamp") timestamp_: timestamp_,
+triggerArn: option<arn>,
+source: incidentSource
 }
 type timelineEvent = {
-@as("eventData") eventData: option<eventData>,
-@as("eventType") eventType: option<timelineEventType>,
-@as("eventUpdatedTime") eventUpdatedTime: option<apiTimestamp>,
-@as("eventTime") eventTime: option<apiTimestamp>,
-@as("eventId") eventId: option<uUID>,
-@as("incidentRecordArn") incidentRecordArn: option<arn>
+eventData: eventData,
+eventType: timelineEventType,
+eventUpdatedTime: timestamp_,
+eventTime: timestamp_,
+eventId: uuid,
+incidentRecordArn: arn
 }
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type ssmParameters = Js.Dict.t< ssmParameterValues>
 type responsePlanSummary = {
-@as("displayName") displayName: responsePlanDisplayName,
-@as("name") name: option<responsePlanName>,
-@as("arn") arn: option<arn>
+displayName: option<responsePlanDisplayName>,
+name: responsePlanName,
+arn: arn
 }
 type resourcePolicy = {
-@as("ramResourceShareRegion") ramResourceShareRegion: option<apiString>,
-@as("policyId") policyId: option<policyId>,
-@as("policyDocument") policyDocument: option<policy>
+ramResourceShareRegion: string_,
+policyId: policyId,
+policyDocument: policy
 }
 type replicationSetArnList = array<arn>
 type regionMapInputValue = {
-@as("sseKmsKeyId") sseKmsKeyId: sseKmsKey
+sseKmsKeyId: option<sseKmsKey>
 }
 type regionInfo = {
-@as("statusUpdateDateTime") statusUpdateDateTime: option<apiTimestamp>,
-@as("statusMessage") statusMessage: apiString,
-@as("status") status: option<regionStatus>,
-@as("sseKmsKeyId") sseKmsKeyId: sseKmsKey
+statusUpdateDateTime: timestamp_,
+statusMessage: option<string_>,
+status: regionStatus,
+sseKmsKeyId: option<sseKmsKey>
 }
 type notificationTargetItem = SnsTopicArn(arn);
 type itemValue = MetricDefinition(metricDefinition) | Url(url) | Arn(arn);
 type incidentRecordSource = {
-@as("source") source: option<incidentSource>,
-@as("resourceArn") resourceArn: arn,
-@as("invokedBy") invokedBy: arn,
-@as("createdBy") createdBy: option<arn>
+source: incidentSource,
+resourceArn: option<arn>,
+invokedBy: option<arn>,
+createdBy: arn
 }
 type eventSummary = {
-@as("eventType") eventType: option<timelineEventType>,
-@as("eventUpdatedTime") eventUpdatedTime: option<apiTimestamp>,
-@as("eventTime") eventTime: option<apiTimestamp>,
-@as("eventId") eventId: option<uUID>,
-@as("incidentRecordArn") incidentRecordArn: option<arn>
+eventType: timelineEventType,
+eventUpdatedTime: timestamp_,
+eventTime: timestamp_,
+eventId: uuid,
+incidentRecordArn: arn
 }
 type engagementSet = array<ssmContactsArn>
 type deleteRegionAction = {
-@as("regionName") regionName: option<regionName>
+regionName: regionName
 }
 type chatbotSnsConfigurationSet = array<snsArn>
 type automationExecution = SsmExecutionArn(arn);
 type attributeValueList = IntegerValues(integerList) | StringValues(stringList);
 type addRegionAction = {
-@as("sseKmsKeyId") sseKmsKeyId: sseKmsKey,
-@as("regionName") regionName: option<regionName>
+sseKmsKeyId: option<sseKmsKey>,
+regionName: regionName
 }
 type updateReplicationSetAction = DeleteRegionAction(deleteRegionAction) | AddRegionAction(addRegionAction);
 type ssmAutomation = {
-@as("parameters") parameters: ssmParameters,
-@as("targetAccount") targetAccount: ssmTargetAccount,
-@as("documentVersion") documentVersion: apiString,
-@as("documentName") documentName: option<apiString>,
-@as("roleArn") roleArn: option<roleArn>
+parameters: option<ssmParameters>,
+targetAccount: option<ssmTargetAccount>,
+documentVersion: option<string_>,
+documentName: string_,
+roleArn: roleArn
 }
 type responsePlanSummaryList = array<responsePlanSummary>
 type resourcePolicyList = array<resourcePolicy>
@@ -120,466 +128,466 @@ type regionMapInput = Js.Dict.t< regionMapInputValue>
 type regionInfoMap = Js.Dict.t< regionInfo>
 type notificationTargetSet = array<notificationTargetItem>
 type itemIdentifier = {
-@as("type") type_: option<itemType>,
-@as("value") value: option<itemValue>
+@as("type") type_: itemType,
+value: itemValue
 }
 type incidentRecordSummary = {
-@as("incidentRecordSource") incidentRecordSource: option<incidentRecordSource>,
-@as("resolvedTime") resolvedTime: apiTimestamp,
-@as("creationTime") creationTime: option<apiTimestamp>,
-@as("impact") impact: option<impact>,
-@as("status") status: option<incidentRecordStatus>,
-@as("title") title: option<incidentTitle>,
-@as("arn") arn: option<arn>
+incidentRecordSource: incidentRecordSource,
+resolvedTime: option<timestamp_>,
+creationTime: timestamp_,
+impact: impact,
+status: incidentRecordStatus,
+title: incidentTitle,
+arn: arn
 }
 type eventSummaryList = array<eventSummary>
-type condition = Equals(attributeValueList) | After(apiTimestamp) | Before(apiTimestamp);
+type condition = Equals(attributeValueList) | After(timestamp_) | Before(timestamp_);
 type chatChannel = ChatbotSns(chatbotSnsConfigurationSet) | Empty(emptyChatChannel);
 type automationExecutionSet = array<automationExecution>
 type updateActionList = array<updateReplicationSetAction>
 type replicationSet = {
-@as("lastModifiedBy") lastModifiedBy: option<arn>,
-@as("lastModifiedTime") lastModifiedTime: option<apiTimestamp>,
-@as("createdBy") createdBy: option<arn>,
-@as("createdTime") createdTime: option<apiTimestamp>,
-@as("deletionProtected") deletionProtected: option<apiBoolean>,
-@as("status") status: option<replicationSetStatus>,
-@as("regionMap") regionMap: option<regionInfoMap>
+lastModifiedBy: arn,
+lastModifiedTime: timestamp_,
+createdBy: arn,
+createdTime: timestamp_,
+deletionProtected: boolean_,
+status: replicationSetStatus,
+regionMap: regionInfoMap
 }
 type relatedItem = {
-@as("title") title: apiString,
-@as("identifier") identifier: option<itemIdentifier>
+title: option<string_>,
+identifier: itemIdentifier
 }
 type incidentTemplate = {
-@as("notificationTargets") notificationTargets: notificationTargetSet,
-@as("dedupeString") dedupeString: dedupeString,
-@as("summary") summary: incidentSummary,
-@as("impact") impact: option<impact>,
-@as("title") title: option<incidentTitle>
+notificationTargets: option<notificationTargetSet>,
+dedupeString: option<dedupeString>,
+summary: option<incidentSummary>,
+impact: impact,
+title: incidentTitle
 }
 type incidentRecordSummaryList = array<incidentRecordSummary>
 type incidentRecord = {
-@as("notificationTargets") notificationTargets: notificationTargetSet,
-@as("chatChannel") chatChannel: chatChannel,
-@as("dedupeString") dedupeString: option<dedupeString>,
-@as("incidentRecordSource") incidentRecordSource: option<incidentRecordSource>,
-@as("automationExecutions") automationExecutions: automationExecutionSet,
-@as("lastModifiedBy") lastModifiedBy: option<arn>,
-@as("lastModifiedTime") lastModifiedTime: option<apiTimestamp>,
-@as("resolvedTime") resolvedTime: apiTimestamp,
-@as("creationTime") creationTime: option<apiTimestamp>,
-@as("impact") impact: option<impact>,
-@as("status") status: option<incidentRecordStatus>,
-@as("summary") summary: incidentSummary,
-@as("title") title: option<incidentTitle>,
-@as("arn") arn: option<arn>
+notificationTargets: option<notificationTargetSet>,
+chatChannel: option<chatChannel>,
+dedupeString: dedupeString,
+incidentRecordSource: incidentRecordSource,
+automationExecutions: option<automationExecutionSet>,
+lastModifiedBy: arn,
+lastModifiedTime: timestamp_,
+resolvedTime: option<timestamp_>,
+creationTime: timestamp_,
+impact: impact,
+status: incidentRecordStatus,
+summary: option<incidentSummary>,
+title: incidentTitle,
+arn: arn
 }
 type filter = {
-@as("condition") condition: option<condition>,
-@as("key") key: option<apiString>
+condition: condition,
+key: string_
 }
 type action = SsmAutomation(ssmAutomation);
 type relatedItemsUpdate = ItemToRemove(itemIdentifier) | ItemToAdd(relatedItem);
 type relatedItemList = array<relatedItem>
 type filterList = array<filter>
 type actionsList = array<action>
-type clientType;
-@module("@aws-sdk/client-ssm-incidents") @new external createClient: unit => clientType = "SSMIncidentsClient";
+type awsServiceClient;
+@module("@aws-sdk/client-ssm-incidents") @new external createClient: unit => awsServiceClient = "SSMIncidentsClient";
 module UpdateTimelineEvent = {
   type t;
   type request = {
-@as("eventData") eventData: eventData,
-@as("eventType") eventType: timelineEventType,
-@as("eventTime") eventTime: apiTimestamp,
-@as("eventId") eventId: option<uUID>,
-@as("incidentRecordArn") incidentRecordArn: option<arn>,
-@as("clientToken") clientToken: option<clientToken>
+eventData: option<eventData>,
+eventType: option<timelineEventType>,
+eventTime: option<timestamp_>,
+eventId: uuid,
+incidentRecordArn: arn,
+clientToken: clientToken
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateTimelineEventCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDeletionProtection = {
   type t;
   type request = {
-@as("clientToken") clientToken: clientToken,
-@as("deletionProtected") deletionProtected: option<apiBoolean>,
-@as("arn") arn: option<arn>
+clientToken: option<clientToken>,
+deletionProtected: boolean_,
+arn: arn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateDeletionProtectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutResourcePolicy = {
   type t;
   type request = {
-@as("policy") policy: option<policy>,
-@as("resourceArn") resourceArn: option<arn>
+policy: policy,
+resourceArn: arn
 }
   type response = {
-@as("policyId") policyId: option<policyId>
+policyId: policyId
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "PutResourcePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteTimelineEvent = {
   type t;
   type request = {
-@as("eventId") eventId: option<uUID>,
-@as("incidentRecordArn") incidentRecordArn: option<arn>
+eventId: uuid,
+incidentRecordArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "DeleteTimelineEventCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteResponsePlan = {
   type t;
   type request = {
-@as("arn") arn: option<arn>
+arn: arn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "DeleteResponsePlanCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteResourcePolicy = {
   type t;
   type request = {
-@as("policyId") policyId: option<policyId>,
-@as("resourceArn") resourceArn: option<arn>
+policyId: policyId,
+resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "DeleteResourcePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteReplicationSet = {
   type t;
   type request = {
-@as("arn") arn: option<arn>
+arn: arn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "DeleteReplicationSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteIncidentRecord = {
   type t;
   type request = {
-@as("arn") arn: option<arn>
+arn: arn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "DeleteIncidentRecordCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateTimelineEvent = {
   type t;
   type request = {
-@as("eventData") eventData: option<eventData>,
-@as("eventType") eventType: option<timelineEventType>,
-@as("eventTime") eventTime: option<apiTimestamp>,
-@as("incidentRecordArn") incidentRecordArn: option<arn>,
-@as("clientToken") clientToken: option<clientToken>
+eventData: eventData,
+eventType: timelineEventType,
+eventTime: timestamp_,
+incidentRecordArn: arn,
+clientToken: clientToken
 }
   type response = {
-@as("eventId") eventId: option<uUID>,
-@as("incidentRecordArn") incidentRecordArn: option<arn>
+eventId: uuid,
+incidentRecordArn: arn
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "CreateTimelineEventCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<apiString>
+tagKeys: tagKeyList,
+resourceArn: string_
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceArn") resourceArn: option<apiString>
+tags: tagMap,
+resourceArn: string_
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<apiString>
+resourceArn: string_
 }
   type response = {
-@as("tags") tags: option<tagMap>
+tags: tagMap
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListReplicationSets = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults
+nextToken: option<nextToken>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("replicationSetArns") replicationSetArns: option<replicationSetArnList>
+nextToken: option<nextToken>,
+replicationSetArns: replicationSetArnList
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListReplicationSetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetTimelineEvent = {
   type t;
   type request = {
-@as("eventId") eventId: option<uUID>,
-@as("incidentRecordArn") incidentRecordArn: option<arn>
+eventId: uuid,
+incidentRecordArn: arn
 }
   type response = {
-@as("event") event: option<timelineEvent>
+event: timelineEvent
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "GetTimelineEventCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateIncidentRecord = {
   type t;
   type request = {
-@as("notificationTargets") notificationTargets: notificationTargetSet,
-@as("chatChannel") chatChannel: chatChannel,
-@as("status") status: incidentRecordStatus,
-@as("impact") impact: impact,
-@as("summary") summary: incidentSummary,
-@as("title") title: incidentTitle,
-@as("arn") arn: option<arn>,
-@as("clientToken") clientToken: clientToken
+notificationTargets: option<notificationTargetSet>,
+chatChannel: option<chatChannel>,
+status: option<incidentRecordStatus>,
+impact: option<impact>,
+summary: option<incidentSummary>,
+title: option<incidentTitle>,
+arn: arn,
+clientToken: option<clientToken>
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateIncidentRecordCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListResponsePlans = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults
+nextToken: option<nextToken>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("responsePlanSummaries") responsePlanSummaries: option<responsePlanSummaryList>
+nextToken: option<nextToken>,
+responsePlanSummaries: responsePlanSummaryList
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListResponsePlansCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResourcePolicies = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("resourceArn") resourceArn: option<arn>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+resourceArn: arn
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("resourcePolicies") resourcePolicies: option<resourcePolicyList>
+nextToken: option<nextToken>,
+resourcePolicies: resourcePolicyList
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "GetResourcePoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateReplicationSet = {
   type t;
   type request = {
-@as("clientToken") clientToken: clientToken,
-@as("regions") regions: option<regionMapInput>
+clientToken: option<clientToken>,
+regions: regionMapInput
 }
   type response = {
-@as("arn") arn: option<arn>
+arn: arn
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "CreateReplicationSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateReplicationSet = {
   type t;
   type request = {
-@as("clientToken") clientToken: clientToken,
-@as("actions") actions: option<updateActionList>,
-@as("arn") arn: option<arn>
+clientToken: option<clientToken>,
+actions: updateActionList,
+arn: arn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateReplicationSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetReplicationSet = {
   type t;
   type request = {
-@as("arn") arn: option<arn>
+arn: arn
 }
   type response = {
-@as("replicationSet") replicationSet: option<replicationSet>
+replicationSet: replicationSet
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "GetReplicationSetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetIncidentRecord = {
   type t;
   type request = {
-@as("arn") arn: option<arn>
+arn: arn
 }
   type response = {
-@as("incidentRecord") incidentRecord: option<incidentRecord>
+incidentRecord: incidentRecord
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "GetIncidentRecordCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateResponsePlan = {
   type t;
   type request = {
-@as("actions") actions: actionsList,
-@as("engagements") engagements: engagementSet,
-@as("chatChannel") chatChannel: chatChannel,
-@as("incidentTemplateNotificationTargets") incidentTemplateNotificationTargets: notificationTargetSet,
-@as("incidentTemplateDedupeString") incidentTemplateDedupeString: dedupeString,
-@as("incidentTemplateSummary") incidentTemplateSummary: incidentSummary,
-@as("incidentTemplateImpact") incidentTemplateImpact: impact,
-@as("incidentTemplateTitle") incidentTemplateTitle: incidentTitle,
-@as("displayName") displayName: responsePlanDisplayName,
-@as("arn") arn: option<arn>,
-@as("clientToken") clientToken: clientToken
+actions: option<actionsList>,
+engagements: option<engagementSet>,
+chatChannel: option<chatChannel>,
+incidentTemplateNotificationTargets: option<notificationTargetSet>,
+incidentTemplateDedupeString: option<dedupeString>,
+incidentTemplateSummary: option<incidentSummary>,
+incidentTemplateImpact: option<impact>,
+incidentTemplateTitle: option<incidentTitle>,
+displayName: option<responsePlanDisplayName>,
+arn: arn,
+clientToken: option<clientToken>
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateResponsePlanCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateRelatedItems = {
   type t;
   type request = {
-@as("relatedItemsUpdate") relatedItemsUpdate: option<relatedItemsUpdate>,
-@as("incidentRecordArn") incidentRecordArn: option<arn>,
-@as("clientToken") clientToken: clientToken
+relatedItemsUpdate: relatedItemsUpdate,
+incidentRecordArn: arn,
+clientToken: option<clientToken>
 }
   type response = unit
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateRelatedItemsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartIncident = {
   type t;
   type request = {
-@as("relatedItems") relatedItems: relatedItemList,
-@as("triggerDetails") triggerDetails: triggerDetails,
-@as("impact") impact: impact,
-@as("title") title: incidentTitle,
-@as("responsePlanArn") responsePlanArn: option<arn>,
-@as("clientToken") clientToken: clientToken
+relatedItems: option<relatedItemList>,
+triggerDetails: option<triggerDetails>,
+impact: option<impact>,
+title: option<incidentTitle>,
+responsePlanArn: arn,
+clientToken: option<clientToken>
 }
   type response = {
-@as("incidentRecordArn") incidentRecordArn: option<arn>
+incidentRecordArn: arn
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "StartIncidentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTimelineEvents = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("sortOrder") sortOrder: sortOrder,
-@as("sortBy") sortBy: timelineEventSort,
-@as("filters") filters: filterList,
-@as("incidentRecordArn") incidentRecordArn: option<arn>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+sortOrder: option<sortOrder>,
+sortBy: option<timelineEventSort>,
+filters: option<filterList>,
+incidentRecordArn: arn
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("eventSummaries") eventSummaries: option<eventSummaryList>
+nextToken: option<nextToken>,
+eventSummaries: eventSummaryList
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListTimelineEventsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRelatedItems = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("incidentRecordArn") incidentRecordArn: option<arn>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+incidentRecordArn: arn
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("relatedItems") relatedItems: option<relatedItemList>
+nextToken: option<nextToken>,
+relatedItems: relatedItemList
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListRelatedItemsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListIncidentRecords = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("filters") filters: filterList
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+filters: option<filterList>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("incidentRecordSummaries") incidentRecordSummaries: option<incidentRecordSummaryList>
+nextToken: option<nextToken>,
+incidentRecordSummaries: incidentRecordSummaryList
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListIncidentRecordsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResponsePlan = {
   type t;
   type request = {
-@as("arn") arn: option<arn>
+arn: arn
 }
   type response = {
-@as("actions") actions: actionsList,
-@as("engagements") engagements: engagementSet,
-@as("chatChannel") chatChannel: chatChannel,
-@as("incidentTemplate") incidentTemplate: option<incidentTemplate>,
-@as("displayName") displayName: responsePlanDisplayName,
-@as("name") name: option<responsePlanName>,
-@as("arn") arn: option<arn>
+actions: option<actionsList>,
+engagements: option<engagementSet>,
+chatChannel: option<chatChannel>,
+incidentTemplate: incidentTemplate,
+displayName: option<responsePlanDisplayName>,
+name: responsePlanName,
+arn: arn
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "GetResponsePlanCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateResponsePlan = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("actions") actions: actionsList,
-@as("engagements") engagements: engagementSet,
-@as("chatChannel") chatChannel: chatChannel,
-@as("incidentTemplate") incidentTemplate: option<incidentTemplate>,
-@as("displayName") displayName: responsePlanDisplayName,
-@as("name") name: option<responsePlanName>,
-@as("clientToken") clientToken: clientToken
+tags: option<tagMap>,
+actions: option<actionsList>,
+engagements: option<engagementSet>,
+chatChannel: option<chatChannel>,
+incidentTemplate: incidentTemplate,
+displayName: option<responsePlanDisplayName>,
+name: responsePlanName,
+clientToken: option<clientToken>
 }
   type response = {
-@as("arn") arn: option<arn>
+arn: arn
 }
   @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "CreateResponsePlanCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

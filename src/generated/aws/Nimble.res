@@ -1,54 +1,61 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type long = float
 type __string = string
 type windowsMountDrive = string
-type amazonawsTimestamp = Js.Date.t;
-type studioStatusCode = [@as("AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS") #AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS | @as("AWS_SSO_CONFIGURATION_REPAIRED") #AWS_SSO_CONFIGURATION_REPAIRED | @as("ENCRYPTION_KEY_ACCESS_DENIED") #ENCRYPTION_KEY_ACCESS_DENIED | @as("ENCRYPTION_KEY_NOT_FOUND") #ENCRYPTION_KEY_NOT_FOUND | @as("INTERNAL_ERROR") #INTERNAL_ERROR | @as("ROLE_COULD_NOT_BE_ASSUMED") #ROLE_COULD_NOT_BE_ASSUMED | @as("ROLE_NOT_OWNED_BY_STUDIO_OWNER") #ROLE_NOT_OWNED_BY_STUDIO_OWNER | @as("AWS_SSO_ACCESS_DENIED") #AWS_SSO_ACCESS_DENIED | @as("AWS_SSO_NOT_ENABLED") #AWS_SSO_NOT_ENABLED | @as("STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED") #STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED | @as("STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED") #STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED | @as("STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED") #STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED | @as("STUDIO_DELETE_IN_PROGRESS") #STUDIO_DELETE_IN_PROGRESS | @as("STUDIO_UPDATE_IN_PROGRESS") #STUDIO_UPDATE_IN_PROGRESS | @as("STUDIO_CREATE_IN_PROGRESS") #STUDIO_CREATE_IN_PROGRESS | @as("STUDIO_UPDATED") #STUDIO_UPDATED | @as("STUDIO_DELETED") #STUDIO_DELETED | @as("STUDIO_CREATED") #STUDIO_CREATED]
-type studioState = [@as("UPDATE_FAILED") #UPDATE_FAILED | @as("CREATE_FAILED") #CREATE_FAILED | @as("DELETE_FAILED") #DELETE_FAILED | @as("DELETED") #DELETED | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS | @as("READY") #READY | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS]
+type timestamp_ = Js.Date.t;
+type studioStatusCode = [@as("AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS") #AWSSSOCONFIGURATIONREPAIRINPROGRESS | @as("AWS_SSO_CONFIGURATION_REPAIRED") #AWSSSOCONFIGURATIONREPAIRED | @as("ENCRYPTION_KEY_ACCESS_DENIED") #ENCRYPTIONKEYACCESSDENIED | @as("ENCRYPTION_KEY_NOT_FOUND") #ENCRYPTIONKEYNOTFOUND | @as("INTERNAL_ERROR") #INTERNALERROR | @as("ROLE_COULD_NOT_BE_ASSUMED") #ROLECOULDNOTBEASSUMED | @as("ROLE_NOT_OWNED_BY_STUDIO_OWNER") #ROLENOTOWNEDBYSTUDIOOWNER | @as("AWS_SSO_ACCESS_DENIED") #AWSSSOACCESSDENIED | @as("AWS_SSO_NOT_ENABLED") #AWSSSONOTENABLED | @as("STUDIO_WITH_STREAMING_IMAGES_NOT_DELETED") #STUDIOWITHSTREAMINGIMAGESNOTDELETED | @as("STUDIO_WITH_STUDIO_COMPONENTS_NOT_DELETED") #STUDIOWITHSTUDIOCOMPONENTSNOTDELETED | @as("STUDIO_WITH_LAUNCH_PROFILES_NOT_DELETED") #STUDIOWITHLAUNCHPROFILESNOTDELETED | @as("STUDIO_DELETE_IN_PROGRESS") #STUDIODELETEINPROGRESS | @as("STUDIO_UPDATE_IN_PROGRESS") #STUDIOUPDATEINPROGRESS | @as("STUDIO_CREATE_IN_PROGRESS") #STUDIOCREATEINPROGRESS | @as("STUDIO_UPDATED") #STUDIOUPDATED | @as("STUDIO_DELETED") #STUDIODELETED | @as("STUDIO_CREATED") #STUDIOCREATED]
+type studioState = [@as("UPDATE_FAILED") #UPDATEFAILED | @as("CREATE_FAILED") #CREATEFAILED | @as("DELETE_FAILED") #DELETEFAILED | @as("DELETED") #DELETED | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS | @as("UPDATE_IN_PROGRESS") #UPDATEINPROGRESS | @as("READY") #READY | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS]
 type studioPersona = [@as("ADMINISTRATOR") #ADMINISTRATOR]
 type studioName = string
-type studioEncryptionConfigurationKeyType = [@as("CUSTOMER_MANAGED_KEY") #CUSTOMER_MANAGED_KEY | @as("AWS_OWNED_KEY") #AWS_OWNED_KEY]
+type studioEncryptionConfigurationKeyType = [@as("CUSTOMER_MANAGED_KEY") #CUSTOMERMANAGEDKEY | @as("AWS_OWNED_KEY") #AWSOWNEDKEY]
 type studioEncryptionConfigurationKeyArn = string
 type studioDisplayName = string
-type studioComponentType = [@as("CUSTOM") #CUSTOM | @as("LICENSE_SERVICE") #LICENSE_SERVICE | @as("COMPUTE_FARM") #COMPUTE_FARM | @as("SHARED_FILE_SYSTEM") #SHARED_FILE_SYSTEM | @as("ACTIVE_DIRECTORY") #ACTIVE_DIRECTORY]
-type studioComponentSubtype = [@as("CUSTOM") #CUSTOM | @as("AMAZON_FSX_FOR_LUSTRE") #AMAZON_FSX_FOR_LUSTRE | @as("AMAZON_FSX_FOR_WINDOWS") #AMAZON_FSX_FOR_WINDOWS | @as("AWS_MANAGED_MICROSOFT_AD") #AWS_MANAGED_MICROSOFT_AD]
-type studioComponentStatusCode = [@as("INTERNAL_ERROR") #INTERNAL_ERROR | @as("STUDIO_COMPONENT_DELETE_IN_PROGRESS") #STUDIO_COMPONENT_DELETE_IN_PROGRESS | @as("STUDIO_COMPONENT_UPDATE_IN_PROGRESS") #STUDIO_COMPONENT_UPDATE_IN_PROGRESS | @as("STUDIO_COMPONENT_CREATE_IN_PROGRESS") #STUDIO_COMPONENT_CREATE_IN_PROGRESS | @as("ENCRYPTION_KEY_NOT_FOUND") #ENCRYPTION_KEY_NOT_FOUND | @as("ENCRYPTION_KEY_ACCESS_DENIED") #ENCRYPTION_KEY_ACCESS_DENIED | @as("STUDIO_COMPONENT_DELETED") #STUDIO_COMPONENT_DELETED | @as("STUDIO_COMPONENT_UPDATED") #STUDIO_COMPONENT_UPDATED | @as("STUDIO_COMPONENT_CREATED") #STUDIO_COMPONENT_CREATED | @as("ACTIVE_DIRECTORY_ALREADY_EXISTS") #ACTIVE_DIRECTORY_ALREADY_EXISTS]
-type studioComponentState = [@as("UPDATE_FAILED") #UPDATE_FAILED | @as("CREATE_FAILED") #CREATE_FAILED | @as("DELETE_FAILED") #DELETE_FAILED | @as("DELETED") #DELETED | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS | @as("READY") #READY | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS]
+type studioComponentType = [@as("CUSTOM") #CUSTOM | @as("LICENSE_SERVICE") #LICENSESERVICE | @as("COMPUTE_FARM") #COMPUTEFARM | @as("SHARED_FILE_SYSTEM") #SHAREDFILESYSTEM | @as("ACTIVE_DIRECTORY") #ACTIVEDIRECTORY]
+type studioComponentSubtype = [@as("CUSTOM") #CUSTOM | @as("AMAZON_FSX_FOR_LUSTRE") #AMAZONFSXFORLUSTRE | @as("AMAZON_FSX_FOR_WINDOWS") #AMAZONFSXFORWINDOWS | @as("AWS_MANAGED_MICROSOFT_AD") #AWSMANAGEDMICROSOFTAD]
+type studioComponentStatusCode = [@as("INTERNAL_ERROR") #INTERNALERROR | @as("STUDIO_COMPONENT_DELETE_IN_PROGRESS") #STUDIOCOMPONENTDELETEINPROGRESS | @as("STUDIO_COMPONENT_UPDATE_IN_PROGRESS") #STUDIOCOMPONENTUPDATEINPROGRESS | @as("STUDIO_COMPONENT_CREATE_IN_PROGRESS") #STUDIOCOMPONENTCREATEINPROGRESS | @as("ENCRYPTION_KEY_NOT_FOUND") #ENCRYPTIONKEYNOTFOUND | @as("ENCRYPTION_KEY_ACCESS_DENIED") #ENCRYPTIONKEYACCESSDENIED | @as("STUDIO_COMPONENT_DELETED") #STUDIOCOMPONENTDELETED | @as("STUDIO_COMPONENT_UPDATED") #STUDIOCOMPONENTUPDATED | @as("STUDIO_COMPONENT_CREATED") #STUDIOCOMPONENTCREATED | @as("ACTIVE_DIRECTORY_ALREADY_EXISTS") #ACTIVEDIRECTORYALREADYEXISTS]
+type studioComponentState = [@as("UPDATE_FAILED") #UPDATEFAILED | @as("CREATE_FAILED") #CREATEFAILED | @as("DELETE_FAILED") #DELETEFAILED | @as("DELETED") #DELETED | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS | @as("UPDATE_IN_PROGRESS") #UPDATEINPROGRESS | @as("READY") #READY | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS]
 type studioComponentName = string
-type studioComponentInitializationScriptRunContext = [@as("USER_INITIALIZATION") #USER_INITIALIZATION | @as("SYSTEM_INITIALIZATION") #SYSTEM_INITIALIZATION]
+type studioComponentInitializationScriptRunContext = [@as("USER_INITIALIZATION") #USERINITIALIZATION | @as("SYSTEM_INITIALIZATION") #SYSTEMINITIALIZATION]
 type studioComponentInitializationScriptContent = string
 type studioComponentId = string
 type studioComponentDescription = string
-type streamingSessionStreamStatusCode = [@as("NETWORK_CONNECTION_ERROR") #NETWORK_CONNECTION_ERROR | @as("INTERNAL_ERROR") #INTERNAL_ERROR | @as("STREAM_DELETED") #STREAM_DELETED | @as("STREAM_DELETE_IN_PROGRESS") #STREAM_DELETE_IN_PROGRESS | @as("STREAM_READY") #STREAM_READY | @as("STREAM_CREATE_IN_PROGRESS") #STREAM_CREATE_IN_PROGRESS]
-type streamingSessionStreamState = [@as("DELETE_FAILED") #DELETE_FAILED | @as("CREATE_FAILED") #CREATE_FAILED | @as("DELETED") #DELETED | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS | @as("READY") #READY]
-type streamingSessionStreamExpirationInSeconds = int;
-type streamingSessionStatusCode = [@as("NETWORK_INTERFACE_ERROR") #NETWORK_INTERFACE_ERROR | @as("DECRYPT_STREAMING_IMAGE_ERROR") #DECRYPT_STREAMING_IMAGE_ERROR | @as("INITIALIZATION_SCRIPT_ERROR") #INITIALIZATION_SCRIPT_ERROR | @as("NETWORK_CONNECTION_ERROR") #NETWORK_CONNECTION_ERROR | @as("ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR") #ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR | @as("INSUFFICIENT_CAPACITY") #INSUFFICIENT_CAPACITY | @as("INTERNAL_ERROR") #INTERNAL_ERROR | @as("STREAMING_SESSION_DELETE_IN_PROGRESS") #STREAMING_SESSION_DELETE_IN_PROGRESS | @as("STREAMING_SESSION_CREATE_IN_PROGRESS") #STREAMING_SESSION_CREATE_IN_PROGRESS | @as("STREAMING_SESSION_DELETED") #STREAMING_SESSION_DELETED | @as("STREAMING_SESSION_READY") #STREAMING_SESSION_READY]
-type streamingSessionState = [@as("DELETE_FAILED") #DELETE_FAILED | @as("CREATE_FAILED") #CREATE_FAILED | @as("DELETED") #DELETED | @as("READY") #READY | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS]
-type streamingInstanceType = [@as("g4dn.16xlarge") #g4dn_16xlarge | @as("g4dn.12xlarge") #g4dn_12xlarge | @as("g4dn.8xlarge") #g4dn_8xlarge | @as("g4dn.4xlarge") #g4dn_4xlarge | @as("g4dn.2xlarge") #g4dn_2xlarge | @as("g4dn.xlarge") #g4dn_xlarge]
-type streamingImageStatusCode = [@as("INTERNAL_ERROR") #INTERNAL_ERROR | @as("STREAMING_IMAGE_UPDATE_IN_PROGRESS") #STREAMING_IMAGE_UPDATE_IN_PROGRESS | @as("STREAMING_IMAGE_DELETED") #STREAMING_IMAGE_DELETED | @as("STREAMING_IMAGE_DELETE_IN_PROGRESS") #STREAMING_IMAGE_DELETE_IN_PROGRESS | @as("STREAMING_IMAGE_READY") #STREAMING_IMAGE_READY | @as("STREAMING_IMAGE_CREATE_IN_PROGRESS") #STREAMING_IMAGE_CREATE_IN_PROGRESS]
-type streamingImageState = [@as("DELETE_FAILED") #DELETE_FAILED | @as("CREATE_FAILED") #CREATE_FAILED | @as("UPDATE_FAILED") #UPDATE_FAILED | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS | @as("DELETED") #DELETED | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS | @as("READY") #READY | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS]
+type streamingSessionStreamStatusCode = [@as("NETWORK_CONNECTION_ERROR") #NETWORKCONNECTIONERROR | @as("INTERNAL_ERROR") #INTERNALERROR | @as("STREAM_DELETED") #STREAMDELETED | @as("STREAM_DELETE_IN_PROGRESS") #STREAMDELETEINPROGRESS | @as("STREAM_READY") #STREAMREADY | @as("STREAM_CREATE_IN_PROGRESS") #STREAMCREATEINPROGRESS]
+type streamingSessionStreamState = [@as("DELETE_FAILED") #DELETEFAILED | @as("CREATE_FAILED") #CREATEFAILED | @as("DELETED") #DELETED | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS | @as("READY") #READY]
+type streamingSessionStreamExpirationInSeconds = int
+type streamingSessionStatusCode = [@as("NETWORK_INTERFACE_ERROR") #NETWORKINTERFACEERROR | @as("DECRYPT_STREAMING_IMAGE_ERROR") #DECRYPTSTREAMINGIMAGEERROR | @as("INITIALIZATION_SCRIPT_ERROR") #INITIALIZATIONSCRIPTERROR | @as("NETWORK_CONNECTION_ERROR") #NETWORKCONNECTIONERROR | @as("ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR") #ACTIVEDIRECTORYDOMAINJOINERROR | @as("INSUFFICIENT_CAPACITY") #INSUFFICIENTCAPACITY | @as("INTERNAL_ERROR") #INTERNALERROR | @as("STREAMING_SESSION_DELETE_IN_PROGRESS") #STREAMINGSESSIONDELETEINPROGRESS | @as("STREAMING_SESSION_CREATE_IN_PROGRESS") #STREAMINGSESSIONCREATEINPROGRESS | @as("STREAMING_SESSION_DELETED") #STREAMINGSESSIONDELETED | @as("STREAMING_SESSION_READY") #STREAMINGSESSIONREADY]
+type streamingSessionState = [@as("DELETE_FAILED") #DELETEFAILED | @as("CREATE_FAILED") #CREATEFAILED | @as("DELETED") #DELETED | @as("READY") #READY | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS]
+type streamingInstanceType = [@as("g4dn.16xlarge") #G4dn16xlarge | @as("g4dn.12xlarge") #G4dn12xlarge | @as("g4dn.8xlarge") #G4dn8xlarge | @as("g4dn.4xlarge") #G4dn4xlarge | @as("g4dn.2xlarge") #G4dn2xlarge | @as("g4dn.xlarge") #G4dnXlarge]
+type streamingImageStatusCode = [@as("INTERNAL_ERROR") #INTERNALERROR | @as("STREAMING_IMAGE_UPDATE_IN_PROGRESS") #STREAMINGIMAGEUPDATEINPROGRESS | @as("STREAMING_IMAGE_DELETED") #STREAMINGIMAGEDELETED | @as("STREAMING_IMAGE_DELETE_IN_PROGRESS") #STREAMINGIMAGEDELETEINPROGRESS | @as("STREAMING_IMAGE_READY") #STREAMINGIMAGEREADY | @as("STREAMING_IMAGE_CREATE_IN_PROGRESS") #STREAMINGIMAGECREATEINPROGRESS]
+type streamingImageState = [@as("DELETE_FAILED") #DELETEFAILED | @as("CREATE_FAILED") #CREATEFAILED | @as("UPDATE_FAILED") #UPDATEFAILED | @as("UPDATE_IN_PROGRESS") #UPDATEINPROGRESS | @as("DELETED") #DELETED | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS | @as("READY") #READY | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS]
 type streamingImageSessionId = string
 type streamingImagePlatform = string
 type streamingImageOwner = string
 type streamingImageName = string
 type streamingImageId = string
-type streamingImageEncryptionConfigurationKeyType = [@as("CUSTOMER_MANAGED_KEY") #CUSTOMER_MANAGED_KEY]
+type streamingImageEncryptionConfigurationKeyType = [@as("CUSTOMER_MANAGED_KEY") #CUSTOMERMANAGEDKEY]
 type streamingImageEncryptionConfigurationKeyArn = string
 type streamingImageDescription = string
 type streamingClipboardMode = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
-type streamConfigurationMaxSessionLengthInMinutes = int;
+type streamConfigurationMaxSessionLengthInMinutes = int
 type securityGroupId = string
 type scriptParameterValue = string
 type scriptParameterKey = string
 type region = string
-type maxResults = int;
+type maxResults = int
 type linuxMountPoint = string
 type launchPurpose = string
-type launchProfileStatusCode = [@as("INVALID_SUBNETS_PROVIDED") #INVALID_SUBNETS_PROVIDED | @as("ENCRYPTION_KEY_NOT_FOUND") #ENCRYPTION_KEY_NOT_FOUND | @as("ENCRYPTION_KEY_ACCESS_DENIED") #ENCRYPTION_KEY_ACCESS_DENIED | @as("LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED") #LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED | @as("STREAMING_IMAGE_NOT_READY") #STREAMING_IMAGE_NOT_READY | @as("STREAMING_IMAGE_NOT_FOUND") #STREAMING_IMAGE_NOT_FOUND | @as("INTERNAL_ERROR") #INTERNAL_ERROR | @as("LAUNCH_PROFILE_DELETE_IN_PROGRESS") #LAUNCH_PROFILE_DELETE_IN_PROGRESS | @as("LAUNCH_PROFILE_UPDATE_IN_PROGRESS") #LAUNCH_PROFILE_UPDATE_IN_PROGRESS | @as("LAUNCH_PROFILE_CREATE_IN_PROGRESS") #LAUNCH_PROFILE_CREATE_IN_PROGRESS | @as("LAUNCH_PROFILE_DELETED") #LAUNCH_PROFILE_DELETED | @as("LAUNCH_PROFILE_UPDATED") #LAUNCH_PROFILE_UPDATED | @as("LAUNCH_PROFILE_CREATED") #LAUNCH_PROFILE_CREATED]
-type launchProfileState = [@as("UPDATE_FAILED") #UPDATE_FAILED | @as("CREATE_FAILED") #CREATE_FAILED | @as("DELETE_FAILED") #DELETE_FAILED | @as("DELETED") #DELETED | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS | @as("READY") #READY | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS]
+type launchProfileStatusCode = [@as("INVALID_SUBNETS_PROVIDED") #INVALIDSUBNETSPROVIDED | @as("ENCRYPTION_KEY_NOT_FOUND") #ENCRYPTIONKEYNOTFOUND | @as("ENCRYPTION_KEY_ACCESS_DENIED") #ENCRYPTIONKEYACCESSDENIED | @as("LAUNCH_PROFILE_WITH_STREAM_SESSIONS_NOT_DELETED") #LAUNCHPROFILEWITHSTREAMSESSIONSNOTDELETED | @as("STREAMING_IMAGE_NOT_READY") #STREAMINGIMAGENOTREADY | @as("STREAMING_IMAGE_NOT_FOUND") #STREAMINGIMAGENOTFOUND | @as("INTERNAL_ERROR") #INTERNALERROR | @as("LAUNCH_PROFILE_DELETE_IN_PROGRESS") #LAUNCHPROFILEDELETEINPROGRESS | @as("LAUNCH_PROFILE_UPDATE_IN_PROGRESS") #LAUNCHPROFILEUPDATEINPROGRESS | @as("LAUNCH_PROFILE_CREATE_IN_PROGRESS") #LAUNCHPROFILECREATEINPROGRESS | @as("LAUNCH_PROFILE_DELETED") #LAUNCHPROFILEDELETED | @as("LAUNCH_PROFILE_UPDATED") #LAUNCHPROFILEUPDATED | @as("LAUNCH_PROFILE_CREATED") #LAUNCHPROFILECREATED]
+type launchProfileState = [@as("UPDATE_FAILED") #UPDATEFAILED | @as("CREATE_FAILED") #CREATEFAILED | @as("DELETE_FAILED") #DELETEFAILED | @as("DELETED") #DELETED | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS | @as("UPDATE_IN_PROGRESS") #UPDATEINPROGRESS | @as("READY") #READY | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS]
 type launchProfileProtocolVersion = string
 type launchProfilePlatform = [@as("WINDOWS") #WINDOWS | @as("LINUX") #LINUX]
 type launchProfilePersona = [@as("USER") #USER]
@@ -58,8 +65,8 @@ type launchProfileDescription = string
 type eulaName = string
 type eulaId = string
 type eulaAcceptanceId = string
-type eC2SubnetId = string
-type eC2ImageId = string
+type ec2SubnetId = string
+type ec2ImageId = string
 type directoryId = string
 type clientToken = string
 type activeDirectoryOrganizationalUnitDistinguishedName = string
@@ -69,172 +76,172 @@ type activeDirectoryComputerAttributeName = string
 type multiValueQueryStringList = array<__string>
 type tags = Js.Dict.t< __string>
 type studioMembership = {
-@as("principalId") principalId: __string,
-@as("persona") persona: studioPersona,
-@as("identityStoreId") identityStoreId: __string
+principalId: option<__string>,
+persona: option<studioPersona>,
+identityStoreId: option<__string>
 }
 type studioEncryptionConfiguration = {
-@as("keyType") keyType: option<studioEncryptionConfigurationKeyType>,
-@as("keyArn") keyArn: studioEncryptionConfigurationKeyArn
+keyType: studioEncryptionConfigurationKeyType,
+keyArn: option<studioEncryptionConfigurationKeyArn>
 }
 type studioComponentSummary = {
-@as("updatedBy") updatedBy: __string,
-@as("updatedAt") updatedAt: amazonawsTimestamp,
-@as("type") type_: studioComponentType,
-@as("subtype") subtype: studioComponentSubtype,
-@as("studioComponentId") studioComponentId: studioComponentId,
-@as("name") name: studioComponentName,
-@as("description") description: studioComponentDescription,
-@as("createdBy") createdBy: __string,
-@as("createdAt") createdAt: amazonawsTimestamp
+updatedBy: option<__string>,
+updatedAt: option<timestamp_>,
+@as("type") type_: option<studioComponentType>,
+subtype: option<studioComponentSubtype>,
+studioComponentId: option<studioComponentId>,
+name: option<studioComponentName>,
+description: option<studioComponentDescription>,
+createdBy: option<__string>,
+createdAt: option<timestamp_>
 }
 type studioComponentSecurityGroupIdList = array<securityGroupId>
 type studioComponentInitializationScript = {
-@as("script") script: studioComponentInitializationScriptContent,
-@as("runContext") runContext: studioComponentInitializationScriptRunContext,
-@as("platform") platform: launchProfilePlatform,
-@as("launchProfileProtocolVersion") launchProfileProtocolVersion: launchProfileProtocolVersion
+script: option<studioComponentInitializationScriptContent>,
+runContext: option<studioComponentInitializationScriptRunContext>,
+platform: option<launchProfilePlatform>,
+launchProfileProtocolVersion: option<launchProfileProtocolVersion>
 }
 type streamingSessionStream = {
-@as("url") url: __string,
-@as("streamId") streamId: __string,
-@as("statusCode") statusCode: streamingSessionStreamStatusCode,
-@as("state") state: streamingSessionStreamState,
-@as("expiresAt") expiresAt: amazonawsTimestamp,
-@as("createdBy") createdBy: __string,
-@as("createdAt") createdAt: amazonawsTimestamp
+url: option<__string>,
+streamId: option<__string>,
+statusCode: option<streamingSessionStreamStatusCode>,
+state: option<streamingSessionStreamState>,
+expiresAt: option<timestamp_>,
+createdBy: option<__string>,
+createdAt: option<timestamp_>
 }
 type streamingInstanceTypeList = array<streamingInstanceType>
 type streamingImageIdList = array<streamingImageId>
 type streamingImageEncryptionConfiguration = {
-@as("keyType") keyType: option<streamingImageEncryptionConfigurationKeyType>,
-@as("keyArn") keyArn: streamingImageEncryptionConfigurationKeyArn
+keyType: streamingImageEncryptionConfigurationKeyType,
+keyArn: option<streamingImageEncryptionConfigurationKeyArn>
 }
 type sharedFileSystemConfiguration = {
-@as("windowsMountDrive") windowsMountDrive: windowsMountDrive,
-@as("shareName") shareName: __string,
-@as("linuxMountPoint") linuxMountPoint: linuxMountPoint,
-@as("fileSystemId") fileSystemId: __string,
-@as("endpoint") endpoint: __string
+windowsMountDrive: option<windowsMountDrive>,
+shareName: option<__string>,
+linuxMountPoint: option<linuxMountPoint>,
+fileSystemId: option<__string>,
+endpoint: option<__string>
 }
 type scriptParameterKeyValue = {
-@as("value") value: scriptParameterValue,
-@as("key") key: scriptParameterKey
+value: option<scriptParameterValue>,
+key: option<scriptParameterKey>
 }
 type newStudioMember = {
-@as("principalId") principalId: option<__string>,
-@as("persona") persona: option<studioPersona>
+principalId: __string,
+persona: studioPersona
 }
 type newLaunchProfileMember = {
-@as("principalId") principalId: option<__string>,
-@as("persona") persona: option<launchProfilePersona>
+principalId: __string,
+persona: launchProfilePersona
 }
 type licenseServiceConfiguration = {
-@as("endpoint") endpoint: __string
+endpoint: option<__string>
 }
 type launchProfileStudioComponentIdList = array<__string>
 type launchProfileSecurityGroupIdList = array<securityGroupId>
 type launchProfileProtocolVersionList = array<launchProfileProtocolVersion>
 type launchProfileMembership = {
-@as("principalId") principalId: __string,
-@as("persona") persona: launchProfilePersona,
-@as("identityStoreId") identityStoreId: __string
+principalId: option<__string>,
+persona: option<launchProfilePersona>,
+identityStoreId: option<__string>
 }
 type launchProfileInitializationScript = {
-@as("studioComponentName") studioComponentName: studioComponentName,
-@as("studioComponentId") studioComponentId: studioComponentId,
-@as("script") script: studioComponentInitializationScriptContent
+studioComponentName: option<studioComponentName>,
+studioComponentId: option<studioComponentId>,
+script: option<studioComponentInitializationScriptContent>
 }
 type exceptionContext = Js.Dict.t< __string>
 type eulaIdList = array<__string>
 type eulaAcceptance = {
-@as("eulaId") eulaId: eulaId,
-@as("eulaAcceptanceId") eulaAcceptanceId: eulaAcceptanceId,
-@as("accepteeId") accepteeId: __string,
-@as("acceptedBy") acceptedBy: __string,
-@as("acceptedAt") acceptedAt: amazonawsTimestamp
+eulaId: option<eulaId>,
+eulaAcceptanceId: option<eulaAcceptanceId>,
+accepteeId: option<__string>,
+acceptedBy: option<__string>,
+acceptedAt: option<timestamp_>
 }
 type eula = {
-@as("updatedAt") updatedAt: amazonawsTimestamp,
-@as("name") name: eulaName,
-@as("eulaId") eulaId: eulaId,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("content") content: __string
+updatedAt: option<timestamp_>,
+name: option<eulaName>,
+eulaId: option<eulaId>,
+createdAt: option<timestamp_>,
+content: option<__string>
 }
-type eC2SubnetIdList = array<eC2SubnetId>
+type ec2SubnetIdList = array<ec2SubnetId>
 type computeFarmConfiguration = {
-@as("endpoint") endpoint: __string,
-@as("activeDirectoryUser") activeDirectoryUser: __string
+endpoint: option<__string>,
+activeDirectoryUser: option<__string>
 }
 type activeDirectoryDnsIpAddressList = array<activeDirectoryDnsIpAddress>
 type activeDirectoryComputerAttribute = {
-@as("value") value: activeDirectoryComputerAttributeValue,
-@as("name") name: activeDirectoryComputerAttributeName
+value: option<activeDirectoryComputerAttributeValue>,
+name: option<activeDirectoryComputerAttributeName>
 }
 type studioMembershipList = array<studioMembership>
 type studioComponentSummaryList = array<studioComponentSummary>
 type studioComponentScriptParameterKeyValueList = array<scriptParameterKeyValue>
 type studioComponentInitializationScriptList = array<studioComponentInitializationScript>
 type studio = {
-@as("userRoleArn") userRoleArn: __string,
-@as("updatedAt") updatedAt: amazonawsTimestamp,
-@as("tags") tags: tags,
-@as("studioUrl") studioUrl: __string,
-@as("studioName") studioName: studioName,
-@as("studioId") studioId: __string,
-@as("studioEncryptionConfiguration") studioEncryptionConfiguration: studioEncryptionConfiguration,
-@as("statusMessage") statusMessage: __string,
-@as("statusCode") statusCode: studioStatusCode,
-@as("state") state: studioState,
-@as("ssoClientId") ssoClientId: __string,
-@as("homeRegion") homeRegion: region,
-@as("displayName") displayName: studioDisplayName,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("arn") arn: __string,
-@as("adminRoleArn") adminRoleArn: __string
+userRoleArn: option<__string>,
+updatedAt: option<timestamp_>,
+tags: option<tags>,
+studioUrl: option<__string>,
+studioName: option<studioName>,
+studioId: option<__string>,
+studioEncryptionConfiguration: option<studioEncryptionConfiguration>,
+statusMessage: option<__string>,
+statusCode: option<studioStatusCode>,
+state: option<studioState>,
+ssoClientId: option<__string>,
+homeRegion: option<region>,
+displayName: option<studioDisplayName>,
+createdAt: option<timestamp_>,
+arn: option<__string>,
+adminRoleArn: option<__string>
 }
 type streamingSession = {
-@as("updatedBy") updatedBy: __string,
-@as("updatedAt") updatedAt: amazonawsTimestamp,
-@as("terminateAt") terminateAt: amazonawsTimestamp,
-@as("tags") tags: tags,
-@as("streamingImageId") streamingImageId: streamingImageId,
-@as("statusMessage") statusMessage: __string,
-@as("statusCode") statusCode: streamingSessionStatusCode,
-@as("state") state: streamingSessionState,
-@as("sessionId") sessionId: streamingImageSessionId,
-@as("launchProfileId") launchProfileId: __string,
-@as("ec2InstanceType") ec2InstanceType: __string,
-@as("createdBy") createdBy: __string,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("arn") arn: __string
+updatedBy: option<__string>,
+updatedAt: option<timestamp_>,
+terminateAt: option<timestamp_>,
+tags: option<tags>,
+streamingImageId: option<streamingImageId>,
+statusMessage: option<__string>,
+statusCode: option<streamingSessionStatusCode>,
+state: option<streamingSessionState>,
+sessionId: option<streamingImageSessionId>,
+launchProfileId: option<__string>,
+ec2InstanceType: option<__string>,
+createdBy: option<__string>,
+createdAt: option<timestamp_>,
+arn: option<__string>
 }
 type streamingImage = {
-@as("tags") tags: tags,
-@as("streamingImageId") streamingImageId: streamingImageId,
-@as("statusMessage") statusMessage: __string,
-@as("statusCode") statusCode: streamingImageStatusCode,
-@as("state") state: streamingImageState,
-@as("platform") platform: streamingImagePlatform,
-@as("owner") owner: streamingImageOwner,
-@as("name") name: streamingImageName,
-@as("eulaIds") eulaIds: eulaIdList,
-@as("encryptionConfiguration") encryptionConfiguration: streamingImageEncryptionConfiguration,
-@as("ec2ImageId") ec2ImageId: eC2ImageId,
-@as("description") description: streamingImageDescription,
-@as("arn") arn: __string
+tags: option<tags>,
+streamingImageId: option<streamingImageId>,
+statusMessage: option<__string>,
+statusCode: option<streamingImageStatusCode>,
+state: option<streamingImageState>,
+platform: option<streamingImagePlatform>,
+owner: option<streamingImageOwner>,
+name: option<streamingImageName>,
+eulaIds: option<eulaIdList>,
+encryptionConfiguration: option<streamingImageEncryptionConfiguration>,
+ec2ImageId: option<ec2ImageId>,
+description: option<streamingImageDescription>,
+arn: option<__string>
 }
 type streamConfigurationCreate = {
-@as("streamingImageIds") streamingImageIds: option<streamingImageIdList>,
-@as("maxSessionLengthInMinutes") maxSessionLengthInMinutes: streamConfigurationMaxSessionLengthInMinutes,
-@as("ec2InstanceTypes") ec2InstanceTypes: option<streamingInstanceTypeList>,
-@as("clipboardMode") clipboardMode: option<streamingClipboardMode>
+streamingImageIds: streamingImageIdList,
+maxSessionLengthInMinutes: option<streamConfigurationMaxSessionLengthInMinutes>,
+ec2InstanceTypes: streamingInstanceTypeList,
+clipboardMode: streamingClipboardMode
 }
 type streamConfiguration = {
-@as("streamingImageIds") streamingImageIds: streamingImageIdList,
-@as("maxSessionLengthInMinutes") maxSessionLengthInMinutes: streamConfigurationMaxSessionLengthInMinutes,
-@as("ec2InstanceTypes") ec2InstanceTypes: streamingInstanceTypeList,
-@as("clipboardMode") clipboardMode: streamingClipboardMode
+streamingImageIds: option<streamingImageIdList>,
+maxSessionLengthInMinutes: option<streamConfigurationMaxSessionLengthInMinutes>,
+ec2InstanceTypes: option<streamingInstanceTypeList>,
+clipboardMode: option<streamingClipboardMode>
 }
 type newStudioMemberList = array<newStudioMember>
 type newLaunchProfileMemberList = array<newLaunchProfileMember>
@@ -247,740 +254,740 @@ type studioList = array<studio>
 type streamingSessionList = array<streamingSession>
 type streamingImageList = array<streamingImage>
 type launchProfileInitializationActiveDirectory = {
-@as("studioComponentName") studioComponentName: studioComponentName,
-@as("studioComponentId") studioComponentId: studioComponentId,
-@as("organizationalUnitDistinguishedName") organizationalUnitDistinguishedName: activeDirectoryOrganizationalUnitDistinguishedName,
-@as("dnsIpAddresses") dnsIpAddresses: activeDirectoryDnsIpAddressList,
-@as("directoryName") directoryName: __string,
-@as("directoryId") directoryId: directoryId,
-@as("computerAttributes") computerAttributes: activeDirectoryComputerAttributeList
+studioComponentName: option<studioComponentName>,
+studioComponentId: option<studioComponentId>,
+organizationalUnitDistinguishedName: option<activeDirectoryOrganizationalUnitDistinguishedName>,
+dnsIpAddresses: option<activeDirectoryDnsIpAddressList>,
+directoryName: option<__string>,
+directoryId: option<directoryId>,
+computerAttributes: option<activeDirectoryComputerAttributeList>
 }
 type launchProfile = {
-@as("updatedBy") updatedBy: __string,
-@as("updatedAt") updatedAt: amazonawsTimestamp,
-@as("tags") tags: tags,
-@as("studioComponentIds") studioComponentIds: launchProfileStudioComponentIdList,
-@as("streamConfiguration") streamConfiguration: streamConfiguration,
-@as("statusMessage") statusMessage: __string,
-@as("statusCode") statusCode: launchProfileStatusCode,
-@as("state") state: launchProfileState,
-@as("name") name: launchProfileName,
-@as("launchProfileProtocolVersions") launchProfileProtocolVersions: launchProfileProtocolVersionList,
-@as("launchProfileId") launchProfileId: launchProfileId,
-@as("ec2SubnetIds") ec2SubnetIds: eC2SubnetIdList,
-@as("description") description: launchProfileDescription,
-@as("createdBy") createdBy: __string,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("arn") arn: __string
+updatedBy: option<__string>,
+updatedAt: option<timestamp_>,
+tags: option<tags>,
+studioComponentIds: option<launchProfileStudioComponentIdList>,
+streamConfiguration: option<streamConfiguration>,
+statusMessage: option<__string>,
+statusCode: option<launchProfileStatusCode>,
+state: option<launchProfileState>,
+name: option<launchProfileName>,
+launchProfileProtocolVersions: option<launchProfileProtocolVersionList>,
+launchProfileId: option<launchProfileId>,
+ec2SubnetIds: option<ec2SubnetIdList>,
+description: option<launchProfileDescription>,
+createdBy: option<__string>,
+createdAt: option<timestamp_>,
+arn: option<__string>
 }
 type activeDirectoryConfiguration = {
-@as("organizationalUnitDistinguishedName") organizationalUnitDistinguishedName: activeDirectoryOrganizationalUnitDistinguishedName,
-@as("directoryId") directoryId: directoryId,
-@as("computerAttributes") computerAttributes: activeDirectoryComputerAttributeList
+organizationalUnitDistinguishedName: option<activeDirectoryOrganizationalUnitDistinguishedName>,
+directoryId: option<directoryId>,
+computerAttributes: option<activeDirectoryComputerAttributeList>
 }
 type studioComponentConfiguration = {
-@as("sharedFileSystemConfiguration") sharedFileSystemConfiguration: sharedFileSystemConfiguration,
-@as("licenseServiceConfiguration") licenseServiceConfiguration: licenseServiceConfiguration,
-@as("computeFarmConfiguration") computeFarmConfiguration: computeFarmConfiguration,
-@as("activeDirectoryConfiguration") activeDirectoryConfiguration: activeDirectoryConfiguration
+sharedFileSystemConfiguration: option<sharedFileSystemConfiguration>,
+licenseServiceConfiguration: option<licenseServiceConfiguration>,
+computeFarmConfiguration: option<computeFarmConfiguration>,
+activeDirectoryConfiguration: option<activeDirectoryConfiguration>
 }
 type launchProfileList = array<launchProfile>
 type launchProfileInitialization = {
-@as("userInitializationScripts") userInitializationScripts: launchProfileInitializationScriptList,
-@as("systemInitializationScripts") systemInitializationScripts: launchProfileInitializationScriptList,
-@as("platform") platform: launchProfilePlatform,
-@as("name") name: launchProfileName,
-@as("launchPurpose") launchPurpose: launchPurpose,
-@as("launchProfileProtocolVersion") launchProfileProtocolVersion: launchProfileProtocolVersion,
-@as("launchProfileId") launchProfileId: launchProfileId,
-@as("ec2SecurityGroupIds") ec2SecurityGroupIds: launchProfileSecurityGroupIdList,
-@as("activeDirectory") activeDirectory: launchProfileInitializationActiveDirectory
+userInitializationScripts: option<launchProfileInitializationScriptList>,
+systemInitializationScripts: option<launchProfileInitializationScriptList>,
+platform: option<launchProfilePlatform>,
+name: option<launchProfileName>,
+launchPurpose: option<launchPurpose>,
+launchProfileProtocolVersion: option<launchProfileProtocolVersion>,
+launchProfileId: option<launchProfileId>,
+ec2SecurityGroupIds: option<launchProfileSecurityGroupIdList>,
+activeDirectory: option<launchProfileInitializationActiveDirectory>
 }
 type studioComponent = {
-@as("updatedBy") updatedBy: __string,
-@as("updatedAt") updatedAt: amazonawsTimestamp,
-@as("type") type_: studioComponentType,
-@as("tags") tags: tags,
-@as("subtype") subtype: studioComponentSubtype,
-@as("studioComponentId") studioComponentId: studioComponentId,
-@as("statusMessage") statusMessage: __string,
-@as("statusCode") statusCode: studioComponentStatusCode,
-@as("state") state: studioComponentState,
-@as("scriptParameters") scriptParameters: studioComponentScriptParameterKeyValueList,
-@as("name") name: studioComponentName,
-@as("initializationScripts") initializationScripts: studioComponentInitializationScriptList,
-@as("ec2SecurityGroupIds") ec2SecurityGroupIds: studioComponentSecurityGroupIdList,
-@as("description") description: studioComponentDescription,
-@as("createdBy") createdBy: __string,
-@as("createdAt") createdAt: amazonawsTimestamp,
-@as("configuration") configuration: studioComponentConfiguration,
-@as("arn") arn: __string
+updatedBy: option<__string>,
+updatedAt: option<timestamp_>,
+@as("type") type_: option<studioComponentType>,
+tags: option<tags>,
+subtype: option<studioComponentSubtype>,
+studioComponentId: option<studioComponentId>,
+statusMessage: option<__string>,
+statusCode: option<studioComponentStatusCode>,
+state: option<studioComponentState>,
+scriptParameters: option<studioComponentScriptParameterKeyValueList>,
+name: option<studioComponentName>,
+initializationScripts: option<studioComponentInitializationScriptList>,
+ec2SecurityGroupIds: option<studioComponentSecurityGroupIdList>,
+description: option<studioComponentDescription>,
+createdBy: option<__string>,
+createdAt: option<timestamp_>,
+configuration: option<studioComponentConfiguration>,
+arn: option<__string>
 }
 type studioComponentList = array<studioComponent>
-type clientType;
-@module("@aws-sdk/client-nimble") @new external createClient: unit => clientType = "NimbleClient";
+type awsServiceClient;
+@module("@aws-sdk/client-nimble") @new external createClient: unit => awsServiceClient = "NimbleClient";
 module UpdateLaunchProfileMember = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("principalId") principalId: option<__string>,
-@as("persona") persona: option<launchProfilePersona>,
-@as("launchProfileId") launchProfileId: option<__string>,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+principalId: __string,
+persona: launchProfilePersona,
+launchProfileId: __string,
+clientToken: option<clientToken>
 }
   type response = {
-@as("member") member: launchProfileMembership
+member: option<launchProfileMembership>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "UpdateLaunchProfileMemberCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<multiValueQueryStringList>,
-@as("resourceArn") resourceArn: option<__string>
+tagKeys: multiValueQueryStringList,
+resourceArn: __string
 }
   type response = unit
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: tags,
-@as("resourceArn") resourceArn: option<__string>
+tags: option<tags>,
+resourceArn: __string
 }
   type response = unit
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<__string>
+resourceArn: __string
 }
   type response = {
-@as("tags") tags: tags
+tags: option<tags>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetStudioMember = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("principalId") principalId: option<__string>
+studioId: __string,
+principalId: __string
 }
   type response = {
-@as("member") member: studioMembership
+member: option<studioMembership>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "GetStudioMemberCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetStreamingSessionStream = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("streamId") streamId: option<__string>,
-@as("sessionId") sessionId: option<__string>
+studioId: __string,
+streamId: __string,
+sessionId: __string
 }
   type response = {
-@as("stream") stream: streamingSessionStream
+stream: option<streamingSessionStream>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "GetStreamingSessionStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLaunchProfileMember = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("principalId") principalId: option<__string>,
-@as("launchProfileId") launchProfileId: option<__string>
+studioId: __string,
+principalId: __string,
+launchProfileId: __string
 }
   type response = {
-@as("member") member: launchProfileMembership
+member: option<launchProfileMembership>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "GetLaunchProfileMemberCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEula = {
   type t;
   type request = {
-@as("eulaId") eulaId: option<__string>
+eulaId: __string
 }
   type response = {
-@as("eula") eula: eula
+eula: option<eula>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "GetEulaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteStudioMember = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("principalId") principalId: option<__string>,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+principalId: __string,
+clientToken: option<clientToken>
 }
   type response = unit
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "DeleteStudioMemberCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteLaunchProfileMember = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("principalId") principalId: option<__string>,
-@as("launchProfileId") launchProfileId: option<__string>,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+principalId: __string,
+launchProfileId: __string,
+clientToken: option<clientToken>
 }
   type response = unit
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "DeleteLaunchProfileMemberCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateStreamingSessionStream = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("sessionId") sessionId: option<__string>,
-@as("expirationInSeconds") expirationInSeconds: streamingSessionStreamExpirationInSeconds,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+sessionId: __string,
+expirationInSeconds: option<streamingSessionStreamExpirationInSeconds>,
+clientToken: option<clientToken>
 }
   type response = {
-@as("stream") stream: streamingSessionStream
+stream: option<streamingSessionStream>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "CreateStreamingSessionStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateStudio = {
   type t;
   type request = {
-@as("userRoleArn") userRoleArn: __string,
-@as("studioId") studioId: option<__string>,
-@as("displayName") displayName: studioDisplayName,
-@as("clientToken") clientToken: clientToken,
-@as("adminRoleArn") adminRoleArn: __string
+userRoleArn: option<__string>,
+studioId: __string,
+displayName: option<studioDisplayName>,
+clientToken: option<clientToken>,
+adminRoleArn: option<__string>
 }
   type response = {
-@as("studio") studio: studio
+studio: option<studio>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "UpdateStudioCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateStreamingImage = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("streamingImageId") streamingImageId: option<__string>,
-@as("name") name: streamingImageName,
-@as("description") description: streamingImageDescription,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+streamingImageId: __string,
+name: option<streamingImageName>,
+description: option<streamingImageDescription>,
+clientToken: option<clientToken>
 }
   type response = {
-@as("streamingImage") streamingImage: streamingImage
+streamingImage: option<streamingImage>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "UpdateStreamingImageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartStudioSSOConfigurationRepair = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+clientToken: option<clientToken>
 }
   type response = {
-@as("studio") studio: studio
+studio: option<studio>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "StartStudioSSOConfigurationRepairCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutStudioMembers = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("members") members: option<newStudioMemberList>,
-@as("identityStoreId") identityStoreId: option<__string>,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+members: newStudioMemberList,
+identityStoreId: __string,
+clientToken: option<clientToken>
 }
   type response = unit
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "PutStudioMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutLaunchProfileMembers = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("members") members: option<newLaunchProfileMemberList>,
-@as("launchProfileId") launchProfileId: option<__string>,
-@as("identityStoreId") identityStoreId: option<__string>,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+members: newLaunchProfileMemberList,
+launchProfileId: __string,
+identityStoreId: __string,
+clientToken: option<clientToken>
 }
   type response = unit
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "PutLaunchProfileMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStudioMembers = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: maxResults
+studioId: __string,
+nextToken: option<__string>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("members") members: studioMembershipList
+nextToken: option<__string>,
+members: option<studioMembershipList>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "ListStudioMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListLaunchProfileMembers = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: maxResults,
-@as("launchProfileId") launchProfileId: option<__string>
+studioId: __string,
+nextToken: option<__string>,
+maxResults: option<maxResults>,
+launchProfileId: __string
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("members") members: launchProfileMembershipList
+nextToken: option<__string>,
+members: option<launchProfileMembershipList>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "ListLaunchProfileMembersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEulas = {
   type t;
   type request = {
-@as("nextToken") nextToken: __string,
-@as("eulaIds") eulaIds: multiValueQueryStringList
+nextToken: option<__string>,
+eulaIds: option<multiValueQueryStringList>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("eulas") eulas: eulaList
+nextToken: option<__string>,
+eulas: option<eulaList>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "ListEulasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEulaAcceptances = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("nextToken") nextToken: __string,
-@as("eulaIds") eulaIds: multiValueQueryStringList
+studioId: __string,
+nextToken: option<__string>,
+eulaIds: option<multiValueQueryStringList>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("eulaAcceptances") eulaAcceptances: eulaAcceptanceList
+nextToken: option<__string>,
+eulaAcceptances: option<eulaAcceptanceList>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "ListEulaAcceptancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetStudio = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>
+studioId: __string
 }
   type response = {
-@as("studio") studio: studio
+studio: option<studio>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "GetStudioCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetStreamingSession = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("sessionId") sessionId: option<__string>
+studioId: __string,
+sessionId: __string
 }
   type response = {
-@as("session") session: streamingSession
+session: option<streamingSession>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "GetStreamingSessionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetStreamingImage = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("streamingImageId") streamingImageId: option<__string>
+studioId: __string,
+streamingImageId: __string
 }
   type response = {
-@as("streamingImage") streamingImage: streamingImage
+streamingImage: option<streamingImage>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "GetStreamingImageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteStudio = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+clientToken: option<clientToken>
 }
   type response = {
-@as("studio") studio: studio
+studio: option<studio>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "DeleteStudioCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteStreamingSession = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("sessionId") sessionId: option<__string>,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+sessionId: __string,
+clientToken: option<clientToken>
 }
   type response = {
-@as("session") session: streamingSession
+session: option<streamingSession>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "DeleteStreamingSessionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteStreamingImage = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("streamingImageId") streamingImageId: option<__string>,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+streamingImageId: __string,
+clientToken: option<clientToken>
 }
   type response = {
-@as("streamingImage") streamingImage: streamingImage
+streamingImage: option<streamingImage>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "DeleteStreamingImageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateStudio = {
   type t;
   type request = {
-@as("userRoleArn") userRoleArn: option<__string>,
-@as("tags") tags: tags,
-@as("studioName") studioName: option<studioName>,
-@as("studioEncryptionConfiguration") studioEncryptionConfiguration: studioEncryptionConfiguration,
-@as("displayName") displayName: option<studioDisplayName>,
-@as("clientToken") clientToken: clientToken,
-@as("adminRoleArn") adminRoleArn: option<__string>
+userRoleArn: __string,
+tags: option<tags>,
+studioName: studioName,
+studioEncryptionConfiguration: option<studioEncryptionConfiguration>,
+displayName: studioDisplayName,
+clientToken: option<clientToken>,
+adminRoleArn: __string
 }
   type response = {
-@as("studio") studio: studio
+studio: option<studio>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "CreateStudioCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateStreamingSession = {
   type t;
   type request = {
-@as("tags") tags: tags,
-@as("studioId") studioId: option<__string>,
-@as("streamingImageId") streamingImageId: streamingImageId,
-@as("launchProfileId") launchProfileId: __string,
-@as("ec2InstanceType") ec2InstanceType: streamingInstanceType,
-@as("clientToken") clientToken: clientToken
+tags: option<tags>,
+studioId: __string,
+streamingImageId: option<streamingImageId>,
+launchProfileId: option<__string>,
+ec2InstanceType: option<streamingInstanceType>,
+clientToken: option<clientToken>
 }
   type response = {
-@as("session") session: streamingSession
+session: option<streamingSession>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "CreateStreamingSessionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateStreamingImage = {
   type t;
   type request = {
-@as("tags") tags: tags,
-@as("studioId") studioId: option<__string>,
-@as("name") name: option<streamingImageName>,
-@as("ec2ImageId") ec2ImageId: option<eC2ImageId>,
-@as("description") description: streamingImageDescription,
-@as("clientToken") clientToken: clientToken
+tags: option<tags>,
+studioId: __string,
+name: streamingImageName,
+ec2ImageId: ec2ImageId,
+description: option<streamingImageDescription>,
+clientToken: option<clientToken>
 }
   type response = {
-@as("streamingImage") streamingImage: streamingImage
+streamingImage: option<streamingImage>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "CreateStreamingImageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AcceptEulas = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("eulaIds") eulaIds: eulaIdList,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+eulaIds: option<eulaIdList>,
+clientToken: option<clientToken>
 }
   type response = {
-@as("eulaAcceptances") eulaAcceptances: eulaAcceptanceList
+eulaAcceptances: option<eulaAcceptanceList>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "AcceptEulasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateLaunchProfile = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("studioComponentIds") studioComponentIds: launchProfileStudioComponentIdList,
-@as("streamConfiguration") streamConfiguration: streamConfigurationCreate,
-@as("name") name: launchProfileName,
-@as("launchProfileProtocolVersions") launchProfileProtocolVersions: launchProfileProtocolVersionList,
-@as("launchProfileId") launchProfileId: option<__string>,
-@as("description") description: launchProfileDescription,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+studioComponentIds: option<launchProfileStudioComponentIdList>,
+streamConfiguration: option<streamConfigurationCreate>,
+name: option<launchProfileName>,
+launchProfileProtocolVersions: option<launchProfileProtocolVersionList>,
+launchProfileId: __string,
+description: option<launchProfileDescription>,
+clientToken: option<clientToken>
 }
   type response = {
-@as("launchProfile") launchProfile: launchProfile
+launchProfile: option<launchProfile>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "UpdateLaunchProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStudios = {
   type t;
   type request = {
-@as("nextToken") nextToken: __string
+nextToken: option<__string>
 }
   type response = {
-@as("studios") studios: studioList,
-@as("nextToken") nextToken: __string
+studios: option<studioList>,
+nextToken: option<__string>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "ListStudiosCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStreamingSessions = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("sessionIds") sessionIds: __string,
-@as("nextToken") nextToken: __string,
-@as("createdBy") createdBy: __string
+studioId: __string,
+sessionIds: option<__string>,
+nextToken: option<__string>,
+createdBy: option<__string>
 }
   type response = {
-@as("sessions") sessions: streamingSessionList,
-@as("nextToken") nextToken: __string
+sessions: option<streamingSessionList>,
+nextToken: option<__string>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "ListStreamingSessionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStreamingImages = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("owner") owner: __string,
-@as("nextToken") nextToken: __string
+studioId: __string,
+owner: option<__string>,
+nextToken: option<__string>
 }
   type response = {
-@as("streamingImages") streamingImages: streamingImageList,
-@as("nextToken") nextToken: __string
+streamingImages: option<streamingImageList>,
+nextToken: option<__string>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "ListStreamingImagesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLaunchProfileDetails = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("launchProfileId") launchProfileId: option<__string>
+studioId: __string,
+launchProfileId: __string
 }
   type response = {
-@as("studioComponentSummaries") studioComponentSummaries: studioComponentSummaryList,
-@as("streamingImages") streamingImages: streamingImageList,
-@as("launchProfile") launchProfile: launchProfile
+studioComponentSummaries: option<studioComponentSummaryList>,
+streamingImages: option<streamingImageList>,
+launchProfile: option<launchProfile>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "GetLaunchProfileDetailsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLaunchProfile = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("launchProfileId") launchProfileId: option<__string>
+studioId: __string,
+launchProfileId: __string
 }
   type response = {
-@as("launchProfile") launchProfile: launchProfile
+launchProfile: option<launchProfile>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "GetLaunchProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteLaunchProfile = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("launchProfileId") launchProfileId: option<__string>,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+launchProfileId: __string,
+clientToken: option<clientToken>
 }
   type response = {
-@as("launchProfile") launchProfile: launchProfile
+launchProfile: option<launchProfile>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "DeleteLaunchProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateLaunchProfile = {
   type t;
   type request = {
-@as("tags") tags: tags,
-@as("studioId") studioId: option<__string>,
-@as("studioComponentIds") studioComponentIds: option<launchProfileStudioComponentIdList>,
-@as("streamConfiguration") streamConfiguration: option<streamConfigurationCreate>,
-@as("name") name: option<launchProfileName>,
-@as("launchProfileProtocolVersions") launchProfileProtocolVersions: option<launchProfileProtocolVersionList>,
-@as("ec2SubnetIds") ec2SubnetIds: option<eC2SubnetIdList>,
-@as("description") description: launchProfileDescription,
-@as("clientToken") clientToken: clientToken
+tags: option<tags>,
+studioId: __string,
+studioComponentIds: launchProfileStudioComponentIdList,
+streamConfiguration: streamConfigurationCreate,
+name: launchProfileName,
+launchProfileProtocolVersions: launchProfileProtocolVersionList,
+ec2SubnetIds: ec2SubnetIdList,
+description: option<launchProfileDescription>,
+clientToken: option<clientToken>
 }
   type response = {
-@as("launchProfile") launchProfile: launchProfile
+launchProfile: option<launchProfile>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "CreateLaunchProfileCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListLaunchProfiles = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("states") states: multiValueQueryStringList,
-@as("principalId") principalId: __string,
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: maxResults
+studioId: __string,
+states: option<multiValueQueryStringList>,
+principalId: option<__string>,
+nextToken: option<__string>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("nextToken") nextToken: __string,
-@as("launchProfiles") launchProfiles: launchProfileList
+nextToken: option<__string>,
+launchProfiles: option<launchProfileList>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "ListLaunchProfilesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLaunchProfileInitialization = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("platform") platform: option<__string>,
-@as("launchPurpose") launchPurpose: option<__string>,
-@as("launchProfileProtocolVersions") launchProfileProtocolVersions: option<multiValueQueryStringList>,
-@as("launchProfileId") launchProfileId: option<__string>
+studioId: __string,
+platform: __string,
+launchPurpose: __string,
+launchProfileProtocolVersions: multiValueQueryStringList,
+launchProfileId: __string
 }
   type response = {
-@as("launchProfileInitialization") launchProfileInitialization: launchProfileInitialization
+launchProfileInitialization: option<launchProfileInitialization>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "GetLaunchProfileInitializationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateStudioComponent = {
   type t;
   type request = {
-@as("type") type_: studioComponentType,
-@as("subtype") subtype: studioComponentSubtype,
-@as("studioId") studioId: option<__string>,
-@as("studioComponentId") studioComponentId: option<__string>,
-@as("scriptParameters") scriptParameters: studioComponentScriptParameterKeyValueList,
-@as("name") name: studioComponentName,
-@as("initializationScripts") initializationScripts: studioComponentInitializationScriptList,
-@as("ec2SecurityGroupIds") ec2SecurityGroupIds: studioComponentSecurityGroupIdList,
-@as("description") description: studioComponentDescription,
-@as("configuration") configuration: studioComponentConfiguration,
-@as("clientToken") clientToken: clientToken
+@as("type") type_: option<studioComponentType>,
+subtype: option<studioComponentSubtype>,
+studioId: __string,
+studioComponentId: __string,
+scriptParameters: option<studioComponentScriptParameterKeyValueList>,
+name: option<studioComponentName>,
+initializationScripts: option<studioComponentInitializationScriptList>,
+ec2SecurityGroupIds: option<studioComponentSecurityGroupIdList>,
+description: option<studioComponentDescription>,
+configuration: option<studioComponentConfiguration>,
+clientToken: option<clientToken>
 }
   type response = {
-@as("studioComponent") studioComponent: studioComponent
+studioComponent: option<studioComponent>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "UpdateStudioComponentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetStudioComponent = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("studioComponentId") studioComponentId: option<__string>
+studioId: __string,
+studioComponentId: __string
 }
   type response = {
-@as("studioComponent") studioComponent: studioComponent
+studioComponent: option<studioComponent>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "GetStudioComponentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteStudioComponent = {
   type t;
   type request = {
-@as("studioId") studioId: option<__string>,
-@as("studioComponentId") studioComponentId: option<__string>,
-@as("clientToken") clientToken: clientToken
+studioId: __string,
+studioComponentId: __string,
+clientToken: option<clientToken>
 }
   type response = {
-@as("studioComponent") studioComponent: studioComponent
+studioComponent: option<studioComponent>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "DeleteStudioComponentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateStudioComponent = {
   type t;
   type request = {
-@as("type") type_: option<studioComponentType>,
-@as("tags") tags: tags,
-@as("subtype") subtype: studioComponentSubtype,
-@as("studioId") studioId: option<__string>,
-@as("scriptParameters") scriptParameters: studioComponentScriptParameterKeyValueList,
-@as("name") name: option<studioComponentName>,
-@as("initializationScripts") initializationScripts: studioComponentInitializationScriptList,
-@as("ec2SecurityGroupIds") ec2SecurityGroupIds: studioComponentSecurityGroupIdList,
-@as("description") description: studioComponentDescription,
-@as("configuration") configuration: studioComponentConfiguration,
-@as("clientToken") clientToken: clientToken
+@as("type") type_: studioComponentType,
+tags: option<tags>,
+subtype: option<studioComponentSubtype>,
+studioId: __string,
+scriptParameters: option<studioComponentScriptParameterKeyValueList>,
+name: studioComponentName,
+initializationScripts: option<studioComponentInitializationScriptList>,
+ec2SecurityGroupIds: option<studioComponentSecurityGroupIdList>,
+description: option<studioComponentDescription>,
+configuration: option<studioComponentConfiguration>,
+clientToken: option<clientToken>
 }
   type response = {
-@as("studioComponent") studioComponent: studioComponent
+studioComponent: option<studioComponent>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "CreateStudioComponentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStudioComponents = {
   type t;
   type request = {
-@as("types") types: multiValueQueryStringList,
-@as("studioId") studioId: option<__string>,
-@as("states") states: multiValueQueryStringList,
-@as("nextToken") nextToken: __string,
-@as("maxResults") maxResults: maxResults
+types: option<multiValueQueryStringList>,
+studioId: __string,
+states: option<multiValueQueryStringList>,
+nextToken: option<__string>,
+maxResults: option<maxResults>
 }
   type response = {
-@as("studioComponents") studioComponents: studioComponentList,
-@as("nextToken") nextToken: __string
+studioComponents: option<studioComponentList>,
+nextToken: option<__string>
 }
   @module("@aws-sdk/client-nimble") @new external new_: (request) => t = "ListStudioComponentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

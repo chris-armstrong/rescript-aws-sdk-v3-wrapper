@@ -1,31 +1,37 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type timestamp = Js.Date.t;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type long = float
+type timestamp_ = Js.Date.t;
 type tagValue = string
 type tagKey = string
-type amazonawsString = string
+type string_ = string
 type service = string
 type region = string
 type nextToken = string
 type metadataValue = string
 type metadataKey = string
-type maxResults = int;
+type maxResults = int
 type locale = string
 type healthServiceAccessStatusForOrganization = string
 type eventTypeCode = string
-type eventTypeCategory = [@as("investigation") #investigation | @as("scheduledChange") #scheduledChange | @as("accountNotification") #accountNotification | @as("issue") #issue]
-type eventStatusCode = [@as("upcoming") #upcoming | @as("closed") #closed | @as("open") #open]
-type eventScopeCode = [@as("NONE") #NONE | @as("ACCOUNT_SPECIFIC") #ACCOUNT_SPECIFIC | @as("PUBLIC") #PUBLIC]
+type eventTypeCategory = [@as("investigation") #Investigation | @as("scheduledChange") #ScheduledChange | @as("accountNotification") #AccountNotification | @as("issue") #Issue]
+type eventStatusCode = [@as("upcoming") #Upcoming | @as("closed") #Closed | @as("open") #Open]
+type eventScopeCode = [@as("NONE") #NONE | @as("ACCOUNT_SPECIFIC") #ACCOUNTSPECIFIC | @as("PUBLIC") #PUBLIC]
 type eventArn = string
-type eventAggregateField = [@as("eventTypeCategory") #eventTypeCategory]
+type eventAggregateField = [@as("eventTypeCategory") #EventTypeCategory]
 type entityValue = string
 type entityUrl = string
 type entityStatusCode = [@as("UNKNOWN") #UNKNOWN | @as("UNIMPAIRED") #UNIMPAIRED | @as("IMPAIRED") #IMPAIRED]
 type entityArn = string
-type count = int;
+type count = int
 type availabilityZone = string
 type aggregateValue = string
 type accountId = string
@@ -46,109 +52,109 @@ type awsAccountIdsList = array<accountId>
 type availabilityZones = array<availabilityZone>
 type affectedAccountsList = array<accountId>
 type organizationEventDetailsErrorItem = {
-@as("errorMessage") errorMessage: amazonawsString,
-@as("errorName") errorName: amazonawsString,
-@as("eventArn") eventArn: eventArn,
-@as("awsAccountId") awsAccountId: accountId
+errorMessage: option<string_>,
+errorName: option<string_>,
+eventArn: option<eventArn>,
+awsAccountId: option<accountId>
 }
 type organizationEvent = {
-@as("statusCode") statusCode: eventStatusCode,
-@as("lastUpdatedTime") lastUpdatedTime: timestamp,
-@as("endTime") endTime: timestamp,
-@as("startTime") startTime: timestamp,
-@as("region") region: region,
-@as("eventScopeCode") eventScopeCode: eventScopeCode,
-@as("eventTypeCategory") eventTypeCategory: eventTypeCategory,
-@as("eventTypeCode") eventTypeCode: eventTypeCode,
-@as("service") service: service,
-@as("arn") arn: eventArn
+statusCode: option<eventStatusCode>,
+lastUpdatedTime: option<timestamp_>,
+endTime: option<timestamp_>,
+startTime: option<timestamp_>,
+region: option<region>,
+eventScopeCode: option<eventScopeCode>,
+eventTypeCategory: option<eventTypeCategory>,
+eventTypeCode: option<eventTypeCode>,
+service: option<service>,
+arn: option<eventArn>
 }
 type organizationAffectedEntitiesErrorItem = {
-@as("errorMessage") errorMessage: amazonawsString,
-@as("errorName") errorName: amazonawsString,
-@as("eventArn") eventArn: eventArn,
-@as("awsAccountId") awsAccountId: accountId
+errorMessage: option<string_>,
+errorName: option<string_>,
+eventArn: option<eventArn>,
+awsAccountId: option<accountId>
 }
 type eventTypeCodeList = array<eventTypeCode>
 type eventTypeCategoryList = array<eventTypeCategory>
 type eventType = {
-@as("category") category: eventTypeCategory,
-@as("code") code: eventTypeCode,
-@as("service") service: service
+category: option<eventTypeCategory>,
+code: option<eventTypeCode>,
+service: option<service>
 }
 type eventDetailsErrorItem = {
-@as("errorMessage") errorMessage: amazonawsString,
-@as("errorName") errorName: amazonawsString,
-@as("eventArn") eventArn: eventArn
+errorMessage: option<string_>,
+errorName: option<string_>,
+eventArn: option<eventArn>
 }
 type eventDescription = {
-@as("latestDescription") latestDescription: eventDescription2
+latestDescription: option<eventDescription2>
 }
 type eventArnsList = array<eventArn>
 type eventAggregate = {
-@as("count") count: count,
-@as("aggregateValue") aggregateValue: aggregateValue
+count: option<count>,
+aggregateValue: option<aggregateValue>
 }
 type eventAccountFilter = {
-@as("awsAccountId") awsAccountId: accountId,
-@as("eventArn") eventArn: option<eventArn>
+awsAccountId: option<accountId>,
+eventArn: eventArn
 }
 type event = {
-@as("eventScopeCode") eventScopeCode: eventScopeCode,
-@as("statusCode") statusCode: eventStatusCode,
-@as("lastUpdatedTime") lastUpdatedTime: timestamp,
-@as("endTime") endTime: timestamp,
-@as("startTime") startTime: timestamp,
-@as("availabilityZone") availabilityZone: availabilityZone,
-@as("region") region: region,
-@as("eventTypeCategory") eventTypeCategory: eventTypeCategory,
-@as("eventTypeCode") eventTypeCode: eventTypeCode,
-@as("service") service: service,
-@as("arn") arn: eventArn
+eventScopeCode: option<eventScopeCode>,
+statusCode: option<eventStatusCode>,
+lastUpdatedTime: option<timestamp_>,
+endTime: option<timestamp_>,
+startTime: option<timestamp_>,
+availabilityZone: option<availabilityZone>,
+region: option<region>,
+eventTypeCategory: option<eventTypeCategory>,
+eventTypeCode: option<eventTypeCode>,
+service: option<service>,
+arn: option<eventArn>
 }
 type entityAggregate = {
-@as("count") count: count,
-@as("eventArn") eventArn: eventArn
+count: option<count>,
+eventArn: option<eventArn>
 }
 type dateTimeRange = {
-@as("to") to: timestamp,
-@as("from") from: timestamp
+to: option<timestamp_>,
+from: option<timestamp_>
 }
 type tagFilter = array<tagSet>
 type dateTimeRangeList = array<dateTimeRange>
 type organizationEventList = array<organizationEvent>
 type organizationEventFilter = {
-@as("eventStatusCodes") eventStatusCodes: eventStatusCodeList,
-@as("eventTypeCategories") eventTypeCategories: eventTypeCategoryList2,
-@as("entityValues") entityValues: entityValueList,
-@as("entityArns") entityArns: entityArnList,
-@as("lastUpdatedTime") lastUpdatedTime: dateTimeRange,
-@as("endTime") endTime: dateTimeRange,
-@as("startTime") startTime: dateTimeRange,
-@as("regions") regions: regionList,
-@as("services") services: serviceList,
-@as("awsAccountIds") awsAccountIds: awsAccountIdsList,
-@as("eventTypeCodes") eventTypeCodes: eventTypeList2
+eventStatusCodes: option<eventStatusCodeList>,
+eventTypeCategories: option<eventTypeCategoryList2>,
+entityValues: option<entityValueList>,
+entityArns: option<entityArnList>,
+lastUpdatedTime: option<dateTimeRange>,
+endTime: option<dateTimeRange>,
+startTime: option<dateTimeRange>,
+regions: option<regionList>,
+services: option<serviceList>,
+awsAccountIds: option<awsAccountIdsList>,
+eventTypeCodes: option<eventTypeList2>
 }
 type organizationEventDetails = {
-@as("eventMetadata") eventMetadata: eventMetadata,
-@as("eventDescription") eventDescription: eventDescription,
-@as("event") event: event,
-@as("awsAccountId") awsAccountId: accountId
+eventMetadata: option<eventMetadata>,
+eventDescription: option<eventDescription>,
+event: option<event>,
+awsAccountId: option<accountId>
 }
 type organizationEventDetailFiltersList = array<eventAccountFilter>
 type organizationEntityFiltersList = array<eventAccountFilter>
 type eventTypeList = array<eventType>
 type eventTypeFilter = {
-@as("eventTypeCategories") eventTypeCategories: eventTypeCategoryList,
-@as("services") services: serviceList,
-@as("eventTypeCodes") eventTypeCodes: eventTypeCodeList
+eventTypeCategories: option<eventTypeCategoryList>,
+services: option<serviceList>,
+eventTypeCodes: option<eventTypeCodeList>
 }
 type eventList = array<event>
 type eventDetails = {
-@as("eventMetadata") eventMetadata: eventMetadata,
-@as("eventDescription") eventDescription: eventDescription,
-@as("event") event: event
+eventMetadata: option<eventMetadata>,
+eventDescription: option<eventDescription>,
+event: option<event>
 }
 type eventAggregateList = array<eventAggregate>
 type entityAggregateList = array<entityAggregate>
@@ -156,49 +162,49 @@ type describeEventDetailsForOrganizationFailedSet = array<organizationEventDetai
 type describeEventDetailsFailedSet = array<eventDetailsErrorItem>
 type describeAffectedEntitiesForOrganizationFailedSet = array<organizationAffectedEntitiesErrorItem>
 type affectedEntity = {
-@as("tags") tags: tagSet,
-@as("statusCode") statusCode: entityStatusCode,
-@as("lastUpdatedTime") lastUpdatedTime: timestamp,
-@as("awsAccountId") awsAccountId: accountId,
-@as("entityUrl") entityUrl: entityUrl,
-@as("entityValue") entityValue: entityValue,
-@as("eventArn") eventArn: eventArn,
-@as("entityArn") entityArn: entityArn
+tags: option<tagSet>,
+statusCode: option<entityStatusCode>,
+lastUpdatedTime: option<timestamp_>,
+awsAccountId: option<accountId>,
+entityUrl: option<entityUrl>,
+entityValue: option<entityValue>,
+eventArn: option<eventArn>,
+entityArn: option<entityArn>
 }
 type eventFilter = {
-@as("eventStatusCodes") eventStatusCodes: eventStatusCodeList,
-@as("tags") tags: tagFilter,
-@as("eventTypeCategories") eventTypeCategories: eventTypeCategoryList2,
-@as("entityValues") entityValues: entityValueList,
-@as("entityArns") entityArns: entityArnList,
-@as("lastUpdatedTimes") lastUpdatedTimes: dateTimeRangeList,
-@as("endTimes") endTimes: dateTimeRangeList,
-@as("startTimes") startTimes: dateTimeRangeList,
-@as("availabilityZones") availabilityZones: availabilityZones,
-@as("regions") regions: regionList,
-@as("services") services: serviceList,
-@as("eventTypeCodes") eventTypeCodes: eventTypeList2,
-@as("eventArns") eventArns: eventArnList
+eventStatusCodes: option<eventStatusCodeList>,
+tags: option<tagFilter>,
+eventTypeCategories: option<eventTypeCategoryList2>,
+entityValues: option<entityValueList>,
+entityArns: option<entityArnList>,
+lastUpdatedTimes: option<dateTimeRangeList>,
+endTimes: option<dateTimeRangeList>,
+startTimes: option<dateTimeRangeList>,
+availabilityZones: option<availabilityZones>,
+regions: option<regionList>,
+services: option<serviceList>,
+eventTypeCodes: option<eventTypeList2>,
+eventArns: option<eventArnList>
 }
 type entityList = array<affectedEntity>
 type entityFilter = {
-@as("statusCodes") statusCodes: entityStatusCodeList,
-@as("tags") tags: tagFilter,
-@as("lastUpdatedTimes") lastUpdatedTimes: dateTimeRangeList,
-@as("entityValues") entityValues: entityValueList,
-@as("entityArns") entityArns: entityArnList,
-@as("eventArns") eventArns: option<eventArnList>
+statusCodes: option<entityStatusCodeList>,
+tags: option<tagFilter>,
+lastUpdatedTimes: option<dateTimeRangeList>,
+entityValues: option<entityValueList>,
+entityArns: option<entityArnList>,
+eventArns: eventArnList
 }
 type describeEventDetailsSuccessfulSet = array<eventDetails>
 type describeEventDetailsForOrganizationSuccessfulSet = array<organizationEventDetails>
-type clientType;
-@module("@aws-sdk/client-health") @new external createClient: unit => clientType = "HealthClient";
+type awsServiceClient;
+@module("@aws-sdk/client-health") @new external createClient: unit => awsServiceClient = "HealthClient";
 module EnableHealthServiceAccessForOrganization = {
   type t;
   
   
   @module("@aws-sdk/client-health") @new external new_: (unit) => t = "EnableHealthServiceAccessForOrganizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DisableHealthServiceAccessForOrganization = {
@@ -206,168 +212,168 @@ module DisableHealthServiceAccessForOrganization = {
   
   
   @module("@aws-sdk/client-health") @new external new_: (unit) => t = "DisableHealthServiceAccessForOrganizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DescribeHealthServiceStatusForOrganization = {
   type t;
   
   type response = {
-@as("healthServiceAccessStatusForOrganization") healthServiceAccessStatusForOrganization: healthServiceAccessStatusForOrganization
+healthServiceAccessStatusForOrganization: option<healthServiceAccessStatusForOrganization>
 }
   @module("@aws-sdk/client-health") @new external new_: (unit) => t = "DescribeHealthServiceStatusForOrganizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAffectedAccountsForOrganization = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("eventArn") eventArn: option<eventArn>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+eventArn: eventArn
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("eventScopeCode") eventScopeCode: eventScopeCode,
-@as("affectedAccounts") affectedAccounts: affectedAccountsList
+nextToken: option<nextToken>,
+eventScopeCode: option<eventScopeCode>,
+affectedAccounts: option<affectedAccountsList>
 }
   @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeAffectedAccountsForOrganizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEventsForOrganization = {
   type t;
   type request = {
-@as("locale") locale: locale,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("filter") filter: organizationEventFilter
+locale: option<locale>,
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+filter: option<organizationEventFilter>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("events") events: organizationEventList
+nextToken: option<nextToken>,
+events: option<organizationEventList>
 }
   @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventsForOrganizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEventTypes = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("locale") locale: locale,
-@as("filter") filter: eventTypeFilter
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+locale: option<locale>,
+filter: option<eventTypeFilter>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("eventTypes") eventTypes: eventTypeList
+nextToken: option<nextToken>,
+eventTypes: option<eventTypeList>
 }
   @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEntityAggregates = {
   type t;
   type request = {
-@as("eventArns") eventArns: eventArnsList
+eventArns: option<eventArnsList>
 }
   type response = {
-@as("entityAggregates") entityAggregates: entityAggregateList
+entityAggregates: option<entityAggregateList>
 }
   @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEntityAggregatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEvents = {
   type t;
   type request = {
-@as("locale") locale: locale,
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("filter") filter: eventFilter
+locale: option<locale>,
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+filter: option<eventFilter>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("events") events: eventList
+nextToken: option<nextToken>,
+events: option<eventList>
 }
   @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEventDetailsForOrganization = {
   type t;
   type request = {
-@as("locale") locale: locale,
-@as("organizationEventDetailFilters") organizationEventDetailFilters: option<organizationEventDetailFiltersList>
+locale: option<locale>,
+organizationEventDetailFilters: organizationEventDetailFiltersList
 }
   type response = {
-@as("failedSet") failedSet: describeEventDetailsForOrganizationFailedSet,
-@as("successfulSet") successfulSet: describeEventDetailsForOrganizationSuccessfulSet
+failedSet: option<describeEventDetailsForOrganizationFailedSet>,
+successfulSet: option<describeEventDetailsForOrganizationSuccessfulSet>
 }
   @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventDetailsForOrganizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEventDetails = {
   type t;
   type request = {
-@as("locale") locale: locale,
-@as("eventArns") eventArns: option<eventArnList>
+locale: option<locale>,
+eventArns: eventArnList
 }
   type response = {
-@as("failedSet") failedSet: describeEventDetailsFailedSet,
-@as("successfulSet") successfulSet: describeEventDetailsSuccessfulSet
+failedSet: option<describeEventDetailsFailedSet>,
+successfulSet: option<describeEventDetailsSuccessfulSet>
 }
   @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventDetailsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEventAggregates = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("aggregateField") aggregateField: option<eventAggregateField>,
-@as("filter") filter: eventFilter
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+aggregateField: eventAggregateField,
+filter: option<eventFilter>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("eventAggregates") eventAggregates: eventAggregateList
+nextToken: option<nextToken>,
+eventAggregates: option<eventAggregateList>
 }
   @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventAggregatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAffectedEntitiesForOrganization = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("locale") locale: locale,
-@as("organizationEntityFilters") organizationEntityFilters: option<organizationEntityFiltersList>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+locale: option<locale>,
+organizationEntityFilters: organizationEntityFiltersList
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("failedSet") failedSet: describeAffectedEntitiesForOrganizationFailedSet,
-@as("entities") entities: entityList
+nextToken: option<nextToken>,
+failedSet: option<describeAffectedEntitiesForOrganizationFailedSet>,
+entities: option<entityList>
 }
   @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeAffectedEntitiesForOrganizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAffectedEntities = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("locale") locale: locale,
-@as("filter") filter: option<entityFilter>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+locale: option<locale>,
+filter: entityFilter
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("entities") entities: entityList
+nextToken: option<nextToken>,
+entities: option<entityList>
 }
   @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeAffectedEntitiesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

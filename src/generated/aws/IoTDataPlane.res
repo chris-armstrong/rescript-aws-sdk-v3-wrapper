@@ -1,85 +1,92 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type long = float
 type errorMessage = string
 type topic = string
-type amazonawsTimestamp = float;
+type timestamp_ = float
 type thingName = string
 type shadowName = string
-type qos = int;
-type payload = NodeJs.Buffer.t;
-type pageSize = int;
+type qos = int
+type payload = NodeJs.Buffer.t
+type pageSize = int
 type nextToken = string
-type jsonDocument = NodeJs.Buffer.t;
+type jsonDocument = NodeJs.Buffer.t
 type namedShadowList = array<shadowName>
-type clientType;
-@module("@aws-sdk/client-iotdata") @new external createClient: unit => clientType = "IoTDataPlaneClient";
+type awsServiceClient;
+@module("@aws-sdk/client-iotdata") @new external createClient: unit => awsServiceClient = "IoTDataPlaneClient";
 module UpdateThingShadow = {
   type t;
   type request = {
-@as("payload") payload: option<jsonDocument>,
-@as("shadowName") shadowName: shadowName,
-@as("thingName") thingName: option<thingName>
+payload: jsonDocument,
+shadowName: option<shadowName>,
+thingName: thingName
 }
   type response = {
-@as("payload") payload: jsonDocument
+payload: option<jsonDocument>
 }
   @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "UpdateThingShadowCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module Publish = {
   type t;
   type request = {
-@as("payload") payload: payload,
-@as("qos") qos: qos,
-@as("topic") topic: option<topic>
+payload: option<payload>,
+qos: option<qos>,
+topic: topic
 }
   
   @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "PublishCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetThingShadow = {
   type t;
   type request = {
-@as("shadowName") shadowName: shadowName,
-@as("thingName") thingName: option<thingName>
+shadowName: option<shadowName>,
+thingName: thingName
 }
   type response = {
-@as("payload") payload: jsonDocument
+payload: option<jsonDocument>
 }
   @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "GetThingShadowCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteThingShadow = {
   type t;
   type request = {
-@as("shadowName") shadowName: shadowName,
-@as("thingName") thingName: option<thingName>
+shadowName: option<shadowName>,
+thingName: thingName
 }
   type response = {
-@as("payload") payload: option<jsonDocument>
+payload: jsonDocument
 }
   @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "DeleteThingShadowCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListNamedShadowsForThing = {
   type t;
   type request = {
-@as("pageSize") pageSize: pageSize,
-@as("nextToken") nextToken: nextToken,
-@as("thingName") thingName: option<thingName>
+pageSize: option<pageSize>,
+nextToken: option<nextToken>,
+thingName: thingName
 }
   type response = {
-@as("timestamp") timestamp: amazonawsTimestamp,
-@as("nextToken") nextToken: nextToken,
-@as("results") results: namedShadowList
+@as("timestamp") timestamp_: option<timestamp_>,
+nextToken: option<nextToken>,
+results: option<namedShadowList>
 }
   @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "ListNamedShadowsForThingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

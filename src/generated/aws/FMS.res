@@ -1,23 +1,30 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type violationTarget = string
-type violationReason = [@as("RESOURCE_MISSING_DNS_FIREWALL") #RESOURCE_MISSING_DNS_FIREWALL | @as("NETWORK_FIREWALL_POLICY_MODIFIED") #NETWORK_FIREWALL_POLICY_MODIFIED | @as("MISSING_EXPECTED_ROUTE_TABLE") #MISSING_EXPECTED_ROUTE_TABLE | @as("MISSING_FIREWALL_SUBNET_IN_AZ") #MISSING_FIREWALL_SUBNET_IN_AZ | @as("MISSING_FIREWALL") #MISSING_FIREWALL | @as("FMS_CREATED_SECURITY_GROUP_EDITED") #FMS_CREATED_SECURITY_GROUP_EDITED | @as("SECURITY_GROUP_REDUNDANT") #SECURITY_GROUP_REDUNDANT | @as("SECURITY_GROUP_UNUSED") #SECURITY_GROUP_UNUSED | @as("RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP") #RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP | @as("RESOURCE_MISSING_SECURITY_GROUP") #RESOURCE_MISSING_SECURITY_GROUP | @as("RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION") #RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION | @as("RESOURCE_MISSING_SHIELD_PROTECTION") #RESOURCE_MISSING_SHIELD_PROTECTION | @as("RESOURCE_INCORRECT_WEB_ACL") #RESOURCE_INCORRECT_WEB_ACL | @as("RESOURCE_MISSING_WEB_ACL") #RESOURCE_MISSING_WEB_ACL | @as("WEB_ACL_MISSING_RULE_GROUP") #WEB_ACL_MISSING_RULE_GROUP]
+type violationReason = [@as("RESOURCE_MISSING_DNS_FIREWALL") #RESOURCEMISSINGDNSFIREWALL | @as("NETWORK_FIREWALL_POLICY_MODIFIED") #NETWORKFIREWALLPOLICYMODIFIED | @as("MISSING_EXPECTED_ROUTE_TABLE") #MISSINGEXPECTEDROUTETABLE | @as("MISSING_FIREWALL_SUBNET_IN_AZ") #MISSINGFIREWALLSUBNETINAZ | @as("MISSING_FIREWALL") #MISSINGFIREWALL | @as("FMS_CREATED_SECURITY_GROUP_EDITED") #FMSCREATEDSECURITYGROUPEDITED | @as("SECURITY_GROUP_REDUNDANT") #SECURITYGROUPREDUNDANT | @as("SECURITY_GROUP_UNUSED") #SECURITYGROUPUNUSED | @as("RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP") #RESOURCEVIOLATESAUDITSECURITYGROUP | @as("RESOURCE_MISSING_SECURITY_GROUP") #RESOURCEMISSINGSECURITYGROUP | @as("RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION") #RESOURCEMISSINGWEBACLORSHIELDPROTECTION | @as("RESOURCE_MISSING_SHIELD_PROTECTION") #RESOURCEMISSINGSHIELDPROTECTION | @as("RESOURCE_INCORRECT_WEB_ACL") #RESOURCEINCORRECTWEBACL | @as("RESOURCE_MISSING_WEB_ACL") #RESOURCEMISSINGWEBACL | @as("WEB_ACL_MISSING_RULE_GROUP") #WEBACLMISSINGRULEGROUP]
 type updateToken = string
 type timeStamp = Js.Date.t;
 type targetViolationReason = string
 type tagValue = string
 type tagKey = string
-type statelessRuleGroupPriority = int;
-type securityServiceType = [@as("DNS_FIREWALL") #DNS_FIREWALL | @as("NETWORK_FIREWALL") #NETWORK_FIREWALL | @as("SECURITY_GROUPS_USAGE_AUDIT") #SECURITY_GROUPS_USAGE_AUDIT | @as("SECURITY_GROUPS_CONTENT_AUDIT") #SECURITY_GROUPS_CONTENT_AUDIT | @as("SECURITY_GROUPS_COMMON") #SECURITY_GROUPS_COMMON | @as("SHIELD_ADVANCED") #SHIELD_ADVANCED | @as("WAFV2") #WAFV2 | @as("WAF") #WAF]
+type statelessRuleGroupPriority = int
+type securityServiceType = [@as("DNS_FIREWALL") #DNSFIREWALL | @as("NETWORK_FIREWALL") #NETWORKFIREWALL | @as("SECURITY_GROUPS_USAGE_AUDIT") #SECURITYGROUPSUSAGEAUDIT | @as("SECURITY_GROUPS_CONTENT_AUDIT") #SECURITYGROUPSCONTENTAUDIT | @as("SECURITY_GROUPS_COMMON") #SECURITYGROUPSCOMMON | @as("SHIELD_ADVANCED") #SHIELDADVANCED | @as("WAFV2") #WAFV2 | @as("WAF") #WAF]
 type resourceType = string
 type resourceTagValue = string
 type resourceTagKey = string
 type resourceName = string
 type resourceId = string
-type resourceCount = float;
+type resourceCount = float
 type resourceArn = string
 type remediationActionType = [@as("MODIFY") #MODIFY | @as("REMOVE") #REMOVE]
 type remediationActionDescription = string
@@ -27,312 +34,312 @@ type protectionData = string
 type previousListVersion = string
 type policyUpdateToken = string
 type policyId = string
-type policyComplianceStatusType = [@as("NON_COMPLIANT") #NON_COMPLIANT | @as("COMPLIANT") #COMPLIANT]
+type policyComplianceStatusType = [@as("NON_COMPLIANT") #NONCOMPLIANT | @as("COMPLIANT") #COMPLIANT]
 type paginationToken = string
-type paginationMaxResults = int;
+type paginationMaxResults = int
 type networkFirewallResourceName = string
 type networkFirewallAction = string
 type managedServiceData = string
 type listId = string
 type lengthBoundedString = string
-type iPPortNumber = float;
+type ipportNumber = float
 type errorMessage = string
-type dnsRuleGroupPriority = int;
+type dnsRuleGroupPriority = int
 type detailedInfo = string
-type dependentServiceName = [@as("AWSVPC") #AWSVPC | @as("AWSSHIELD_ADVANCED") #AWSSHIELD_ADVANCED | @as("AWSWAF") #AWSWAF | @as("AWSCONFIG") #AWSCONFIG]
-type customerPolicyScopeIdType = [@as("ORG_UNIT") #ORG_UNIT | @as("ACCOUNT") #ACCOUNT]
+type dependentServiceName = [@as("AWSVPC") #AWSVPC | @as("AWSSHIELD_ADVANCED") #AWSSHIELDADVANCED | @as("AWSWAF") #AWSWAF | @as("AWSCONFIG") #AWSCONFIG]
+type customerPolicyScopeIdType = [@as("ORG_UNIT") #ORGUNIT | @as("ACCOUNT") #ACCOUNT]
 type customerPolicyScopeId = string
-type cIDR = string
-type amazonawsBoolean = bool;
-type basicInteger = int;
-type accountRoleStatus = [@as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("PENDING_DELETION") #PENDING_DELETION | @as("CREATING") #CREATING | @as("READY") #READY]
-type aWSAccountId = string
+type cidr = string
+type boolean_ = bool
+type basicInteger = int
+type accountRoleStatus = [@as("DELETED") #DELETED | @as("DELETING") #DELETING | @as("PENDING_DELETION") #PENDINGDELETION | @as("CREATING") #CREATING | @as("READY") #READY]
+type awsaccountId = string
 type targetViolationReasons = array<targetViolationReason>
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: option<tagValue>,
-@as("Key") key: option<tagKey>
+@as("Value") value: tagValue,
+@as("Key") key: tagKey
 }
 type statelessRuleGroup = {
-@as("Priority") priority: statelessRuleGroupPriority,
-@as("ResourceId") resourceId: resourceId,
-@as("RuleGroupName") ruleGroupName: networkFirewallResourceName
+@as("Priority") priority: option<statelessRuleGroupPriority>,
+@as("ResourceId") resourceId: option<resourceId>,
+@as("RuleGroupName") ruleGroupName: option<networkFirewallResourceName>
 }
 type statefulRuleGroup = {
-@as("ResourceId") resourceId: resourceId,
-@as("RuleGroupName") ruleGroupName: networkFirewallResourceName
+@as("ResourceId") resourceId: option<resourceId>,
+@as("RuleGroupName") ruleGroupName: option<networkFirewallResourceName>
 }
 type securityServicePolicyData = {
-@as("ManagedServiceData") managedServiceData: managedServiceData,
-@as("Type") type_: option<securityServiceType>
+@as("ManagedServiceData") managedServiceData: option<managedServiceData>,
+@as("Type") type_: securityServiceType
 }
 type securityGroupRuleDescription = {
-@as("ToPort") toPort: iPPortNumber,
-@as("FromPort") fromPort: iPPortNumber,
-@as("Protocol") protocol: lengthBoundedString,
-@as("PrefixListId") prefixListId: resourceId,
-@as("IPV6Range") iPV6Range: cIDR,
-@as("IPV4Range") iPV4Range: cIDR
+@as("ToPort") toPort: option<ipportNumber>,
+@as("FromPort") fromPort: option<ipportNumber>,
+@as("Protocol") protocol: option<lengthBoundedString>,
+@as("PrefixListId") prefixListId: option<resourceId>,
+@as("IPV6Range") ipv6Range: option<cidr>,
+@as("IPV4Range") ipv4Range: option<cidr>
 }
 type resourceTypeList = array<resourceType>
 type resourceTag = {
-@as("Value") value: resourceTagValue,
-@as("Key") key: option<resourceTagKey>
+@as("Value") value: option<resourceTagValue>,
+@as("Key") key: resourceTagKey
 }
 type resourceIdList = array<resourceId>
 type protocolsList = array<protocol>
 type policySummary = {
-@as("RemediationEnabled") remediationEnabled: amazonawsBoolean,
-@as("SecurityServiceType") securityServiceType: securityServiceType,
-@as("ResourceType") resourceType: resourceType,
-@as("PolicyName") policyName: resourceName,
-@as("PolicyId") policyId: policyId,
-@as("PolicyArn") policyArn: resourceArn
+@as("RemediationEnabled") remediationEnabled: option<boolean_>,
+@as("SecurityServiceType") securityServiceType: option<securityServiceType>,
+@as("ResourceType") resourceType: option<resourceType>,
+@as("PolicyName") policyName: option<resourceName>,
+@as("PolicyId") policyId: option<policyId>,
+@as("PolicyArn") policyArn: option<resourceArn>
 }
 type networkFirewallMissingSubnetViolation = {
-@as("TargetViolationReason") targetViolationReason: targetViolationReason,
-@as("AvailabilityZone") availabilityZone: lengthBoundedString,
-@as("VPC") vPC: resourceId,
-@as("ViolationTarget") violationTarget: violationTarget
+@as("TargetViolationReason") targetViolationReason: option<targetViolationReason>,
+@as("AvailabilityZone") availabilityZone: option<lengthBoundedString>,
+@as("VPC") vpc: option<resourceId>,
+@as("ViolationTarget") violationTarget: option<violationTarget>
 }
 type networkFirewallMissingFirewallViolation = {
-@as("TargetViolationReason") targetViolationReason: targetViolationReason,
-@as("AvailabilityZone") availabilityZone: lengthBoundedString,
-@as("VPC") vPC: resourceId,
-@as("ViolationTarget") violationTarget: violationTarget
+@as("TargetViolationReason") targetViolationReason: option<targetViolationReason>,
+@as("AvailabilityZone") availabilityZone: option<lengthBoundedString>,
+@as("VPC") vpc: option<resourceId>,
+@as("ViolationTarget") violationTarget: option<violationTarget>
 }
 type networkFirewallMissingExpectedRTViolation = {
-@as("ExpectedRouteTable") expectedRouteTable: resourceId,
-@as("CurrentRouteTable") currentRouteTable: resourceId,
-@as("AvailabilityZone") availabilityZone: lengthBoundedString,
-@as("VPC") vPC: resourceId,
-@as("ViolationTarget") violationTarget: violationTarget
+@as("ExpectedRouteTable") expectedRouteTable: option<resourceId>,
+@as("CurrentRouteTable") currentRouteTable: option<resourceId>,
+@as("AvailabilityZone") availabilityZone: option<lengthBoundedString>,
+@as("VPC") vpc: option<resourceId>,
+@as("ViolationTarget") violationTarget: option<violationTarget>
 }
 type networkFirewallActionList = array<networkFirewallAction>
-type memberAccounts = array<aWSAccountId>
+type memberAccounts = array<awsaccountId>
 type issueInfoMap = Js.Dict.t< detailedInfo>
 type evaluationResult = {
-@as("EvaluationLimitExceeded") evaluationLimitExceeded: amazonawsBoolean,
-@as("ViolatorCount") violatorCount: resourceCount,
-@as("ComplianceStatus") complianceStatus: policyComplianceStatusType
+@as("EvaluationLimitExceeded") evaluationLimitExceeded: option<boolean_>,
+@as("ViolatorCount") violatorCount: option<resourceCount>,
+@as("ComplianceStatus") complianceStatus: option<policyComplianceStatusType>
 }
 type dnsRuleGroupPriorities = array<dnsRuleGroupPriority>
 type dnsRuleGroupLimitExceededViolation = {
-@as("NumberOfRuleGroupsAlreadyAssociated") numberOfRuleGroupsAlreadyAssociated: basicInteger,
-@as("ViolationTargetDescription") violationTargetDescription: lengthBoundedString,
-@as("ViolationTarget") violationTarget: violationTarget
+@as("NumberOfRuleGroupsAlreadyAssociated") numberOfRuleGroupsAlreadyAssociated: option<basicInteger>,
+@as("ViolationTargetDescription") violationTargetDescription: option<lengthBoundedString>,
+@as("ViolationTarget") violationTarget: option<violationTarget>
 }
 type dnsDuplicateRuleGroupViolation = {
-@as("ViolationTargetDescription") violationTargetDescription: lengthBoundedString,
-@as("ViolationTarget") violationTarget: violationTarget
+@as("ViolationTargetDescription") violationTargetDescription: option<lengthBoundedString>,
+@as("ViolationTarget") violationTarget: option<violationTarget>
 }
 type customerPolicyScopeIdList = array<customerPolicyScopeId>
 type complianceViolator = {
-@as("ResourceType") resourceType: resourceType,
-@as("ViolationReason") violationReason: violationReason,
-@as("ResourceId") resourceId: resourceId
+@as("ResourceType") resourceType: option<resourceType>,
+@as("ViolationReason") violationReason: option<violationReason>,
+@as("ResourceId") resourceId: option<resourceId>
 }
 type app = {
-@as("Port") port: option<iPPortNumber>,
-@as("Protocol") protocol: option<protocol>,
-@as("AppName") appName: option<resourceName>
+@as("Port") port: ipportNumber,
+@as("Protocol") protocol: protocol,
+@as("AppName") appName: resourceName
 }
-type tagList = array<tag>
+type tagList_ = array<tag>
 type statelessRuleGroupList = array<statelessRuleGroup>
 type statefulRuleGroupList = array<statefulRuleGroup>
 type securityGroupRemediationAction = {
-@as("IsDefaultAction") isDefaultAction: amazonawsBoolean,
-@as("RemediationResult") remediationResult: securityGroupRuleDescription,
-@as("Description") description: remediationActionDescription,
-@as("RemediationActionType") remediationActionType: remediationActionType
+@as("IsDefaultAction") isDefaultAction: option<boolean_>,
+@as("RemediationResult") remediationResult: option<securityGroupRuleDescription>,
+@as("Description") description: option<remediationActionDescription>,
+@as("RemediationActionType") remediationActionType: option<remediationActionType>
 }
 type resourceTags = array<resourceTag>
 type protocolsListDataSummary = {
-@as("ProtocolsList") protocolsList: protocolsList,
-@as("ListName") listName: resourceName,
-@as("ListId") listId: listId,
-@as("ListArn") listArn: resourceArn
+@as("ProtocolsList") protocolsList: option<protocolsList>,
+@as("ListName") listName: option<resourceName>,
+@as("ListId") listId: option<listId>,
+@as("ListArn") listArn: option<resourceArn>
 }
 type previousProtocolsList = Js.Dict.t< protocolsList>
 type policySummaryList = array<policySummary>
 type partialMatch = {
-@as("TargetViolationReasons") targetViolationReasons: targetViolationReasons,
-@as("Reference") reference: referenceRule
+@as("TargetViolationReasons") targetViolationReasons: option<targetViolationReasons>,
+@as("Reference") reference: option<referenceRule>
 }
 type evaluationResults = array<evaluationResult>
 type dnsRuleGroupPriorityConflictViolation = {
-@as("UnavailablePriorities") unavailablePriorities: dnsRuleGroupPriorities,
-@as("ConflictingPolicyId") conflictingPolicyId: policyId,
-@as("ConflictingPriority") conflictingPriority: dnsRuleGroupPriority,
-@as("ViolationTargetDescription") violationTargetDescription: lengthBoundedString,
-@as("ViolationTarget") violationTarget: violationTarget
+@as("UnavailablePriorities") unavailablePriorities: option<dnsRuleGroupPriorities>,
+@as("ConflictingPolicyId") conflictingPolicyId: option<policyId>,
+@as("ConflictingPriority") conflictingPriority: option<dnsRuleGroupPriority>,
+@as("ViolationTargetDescription") violationTargetDescription: option<lengthBoundedString>,
+@as("ViolationTarget") violationTarget: option<violationTarget>
 }
 type customerPolicyScopeMap = Js.Dict.t< customerPolicyScopeIdList>
 type complianceViolators = array<complianceViolator>
 type awsEc2NetworkInterfaceViolation = {
-@as("ViolatingSecurityGroups") violatingSecurityGroups: resourceIdList,
-@as("ViolationTarget") violationTarget: violationTarget
+@as("ViolatingSecurityGroups") violatingSecurityGroups: option<resourceIdList>,
+@as("ViolationTarget") violationTarget: option<violationTarget>
 }
 type appsList = array<app>
 type securityGroupRemediationActions = array<securityGroupRemediationAction>
 type protocolsListsData = array<protocolsListDataSummary>
 type protocolsListData = {
-@as("PreviousProtocolsList") previousProtocolsList: previousProtocolsList,
-@as("ProtocolsList") protocolsList: option<protocolsList>,
-@as("LastUpdateTime") lastUpdateTime: timeStamp,
-@as("CreateTime") createTime: timeStamp,
-@as("ListUpdateToken") listUpdateToken: updateToken,
-@as("ListName") listName: option<resourceName>,
-@as("ListId") listId: listId
+@as("PreviousProtocolsList") previousProtocolsList: option<previousProtocolsList>,
+@as("ProtocolsList") protocolsList: protocolsList,
+@as("LastUpdateTime") lastUpdateTime: option<timeStamp>,
+@as("CreateTime") createTime: option<timeStamp>,
+@as("ListUpdateToken") listUpdateToken: option<updateToken>,
+@as("ListName") listName: resourceName,
+@as("ListId") listId: option<listId>
 }
 type previousAppsList = Js.Dict.t< appsList>
 type policyComplianceStatus = {
-@as("IssueInfoMap") issueInfoMap: issueInfoMap,
-@as("LastUpdated") lastUpdated: timeStamp,
-@as("EvaluationResults") evaluationResults: evaluationResults,
-@as("MemberAccount") memberAccount: aWSAccountId,
-@as("PolicyName") policyName: resourceName,
-@as("PolicyId") policyId: policyId,
-@as("PolicyOwner") policyOwner: aWSAccountId
+@as("IssueInfoMap") issueInfoMap: option<issueInfoMap>,
+@as("LastUpdated") lastUpdated: option<timeStamp>,
+@as("EvaluationResults") evaluationResults: option<evaluationResults>,
+@as("MemberAccount") memberAccount: option<awsaccountId>,
+@as("PolicyName") policyName: option<resourceName>,
+@as("PolicyId") policyId: option<policyId>,
+@as("PolicyOwner") policyOwner: option<awsaccountId>
 }
 type policyComplianceDetail = {
-@as("IssueInfoMap") issueInfoMap: issueInfoMap,
-@as("ExpiredAt") expiredAt: timeStamp,
-@as("EvaluationLimitExceeded") evaluationLimitExceeded: amazonawsBoolean,
-@as("Violators") violators: complianceViolators,
-@as("MemberAccount") memberAccount: aWSAccountId,
-@as("PolicyId") policyId: policyId,
-@as("PolicyOwner") policyOwner: aWSAccountId
+@as("IssueInfoMap") issueInfoMap: option<issueInfoMap>,
+@as("ExpiredAt") expiredAt: option<timeStamp>,
+@as("EvaluationLimitExceeded") evaluationLimitExceeded: option<boolean_>,
+@as("Violators") violators: option<complianceViolators>,
+@as("MemberAccount") memberAccount: option<awsaccountId>,
+@as("PolicyId") policyId: option<policyId>,
+@as("PolicyOwner") policyOwner: option<awsaccountId>
 }
 type policy = {
-@as("ExcludeMap") excludeMap: customerPolicyScopeMap,
-@as("IncludeMap") includeMap: customerPolicyScopeMap,
-@as("RemediationEnabled") remediationEnabled: option<amazonawsBoolean>,
-@as("ExcludeResourceTags") excludeResourceTags: option<amazonawsBoolean>,
-@as("ResourceTags") resourceTags: resourceTags,
-@as("ResourceTypeList") resourceTypeList: resourceTypeList,
-@as("ResourceType") resourceType: option<resourceType>,
-@as("SecurityServicePolicyData") securityServicePolicyData: option<securityServicePolicyData>,
-@as("PolicyUpdateToken") policyUpdateToken: policyUpdateToken,
-@as("PolicyName") policyName: option<resourceName>,
-@as("PolicyId") policyId: policyId
+@as("ExcludeMap") excludeMap: option<customerPolicyScopeMap>,
+@as("IncludeMap") includeMap: option<customerPolicyScopeMap>,
+@as("RemediationEnabled") remediationEnabled: boolean_,
+@as("ExcludeResourceTags") excludeResourceTags: boolean_,
+@as("ResourceTags") resourceTags: option<resourceTags>,
+@as("ResourceTypeList") resourceTypeList: option<resourceTypeList>,
+@as("ResourceType") resourceType: resourceType,
+@as("SecurityServicePolicyData") securityServicePolicyData: securityServicePolicyData,
+@as("PolicyUpdateToken") policyUpdateToken: option<policyUpdateToken>,
+@as("PolicyName") policyName: resourceName,
+@as("PolicyId") policyId: option<policyId>
 }
 type partialMatches = array<partialMatch>
 type networkFirewallPolicyDescription = {
-@as("StatefulRuleGroups") statefulRuleGroups: statefulRuleGroupList,
-@as("StatelessCustomActions") statelessCustomActions: networkFirewallActionList,
-@as("StatelessFragmentDefaultActions") statelessFragmentDefaultActions: networkFirewallActionList,
-@as("StatelessDefaultActions") statelessDefaultActions: networkFirewallActionList,
-@as("StatelessRuleGroups") statelessRuleGroups: statelessRuleGroupList
+@as("StatefulRuleGroups") statefulRuleGroups: option<statefulRuleGroupList>,
+@as("StatelessCustomActions") statelessCustomActions: option<networkFirewallActionList>,
+@as("StatelessFragmentDefaultActions") statelessFragmentDefaultActions: option<networkFirewallActionList>,
+@as("StatelessDefaultActions") statelessDefaultActions: option<networkFirewallActionList>,
+@as("StatelessRuleGroups") statelessRuleGroups: option<statelessRuleGroupList>
 }
 type awsEc2NetworkInterfaceViolations = array<awsEc2NetworkInterfaceViolation>
 type appsListDataSummary = {
-@as("AppsList") appsList: appsList,
-@as("ListName") listName: resourceName,
-@as("ListId") listId: listId,
-@as("ListArn") listArn: resourceArn
+@as("AppsList") appsList: option<appsList>,
+@as("ListName") listName: option<resourceName>,
+@as("ListId") listId: option<listId>,
+@as("ListArn") listArn: option<resourceArn>
 }
 type policyComplianceStatusList = array<policyComplianceStatus>
 type networkFirewallPolicyModifiedViolation = {
-@as("ExpectedPolicyDescription") expectedPolicyDescription: networkFirewallPolicyDescription,
-@as("CurrentPolicyDescription") currentPolicyDescription: networkFirewallPolicyDescription,
-@as("ViolationTarget") violationTarget: violationTarget
+@as("ExpectedPolicyDescription") expectedPolicyDescription: option<networkFirewallPolicyDescription>,
+@as("CurrentPolicyDescription") currentPolicyDescription: option<networkFirewallPolicyDescription>,
+@as("ViolationTarget") violationTarget: option<violationTarget>
 }
 type awsVPCSecurityGroupViolation = {
-@as("PossibleSecurityGroupRemediationActions") possibleSecurityGroupRemediationActions: securityGroupRemediationActions,
-@as("PartialMatches") partialMatches: partialMatches,
-@as("ViolationTargetDescription") violationTargetDescription: lengthBoundedString,
-@as("ViolationTarget") violationTarget: violationTarget
+@as("PossibleSecurityGroupRemediationActions") possibleSecurityGroupRemediationActions: option<securityGroupRemediationActions>,
+@as("PartialMatches") partialMatches: option<partialMatches>,
+@as("ViolationTargetDescription") violationTargetDescription: option<lengthBoundedString>,
+@as("ViolationTarget") violationTarget: option<violationTarget>
 }
 type awsEc2InstanceViolation = {
-@as("AwsEc2NetworkInterfaceViolations") awsEc2NetworkInterfaceViolations: awsEc2NetworkInterfaceViolations,
-@as("ViolationTarget") violationTarget: violationTarget
+@as("AwsEc2NetworkInterfaceViolations") awsEc2NetworkInterfaceViolations: option<awsEc2NetworkInterfaceViolations>,
+@as("ViolationTarget") violationTarget: option<violationTarget>
 }
 type appsListsData = array<appsListDataSummary>
 type appsListData = {
-@as("PreviousAppsList") previousAppsList: previousAppsList,
-@as("AppsList") appsList: option<appsList>,
-@as("LastUpdateTime") lastUpdateTime: timeStamp,
-@as("CreateTime") createTime: timeStamp,
-@as("ListUpdateToken") listUpdateToken: updateToken,
-@as("ListName") listName: option<resourceName>,
-@as("ListId") listId: listId
+@as("PreviousAppsList") previousAppsList: option<previousAppsList>,
+@as("AppsList") appsList: appsList,
+@as("LastUpdateTime") lastUpdateTime: option<timeStamp>,
+@as("CreateTime") createTime: option<timeStamp>,
+@as("ListUpdateToken") listUpdateToken: option<updateToken>,
+@as("ListName") listName: resourceName,
+@as("ListId") listId: option<listId>
 }
 type resourceViolation = {
-@as("DnsRuleGroupLimitExceededViolation") dnsRuleGroupLimitExceededViolation: dnsRuleGroupLimitExceededViolation,
-@as("DnsDuplicateRuleGroupViolation") dnsDuplicateRuleGroupViolation: dnsDuplicateRuleGroupViolation,
-@as("DnsRuleGroupPriorityConflictViolation") dnsRuleGroupPriorityConflictViolation: dnsRuleGroupPriorityConflictViolation,
-@as("NetworkFirewallPolicyModifiedViolation") networkFirewallPolicyModifiedViolation: networkFirewallPolicyModifiedViolation,
-@as("NetworkFirewallMissingExpectedRTViolation") networkFirewallMissingExpectedRTViolation: networkFirewallMissingExpectedRTViolation,
-@as("NetworkFirewallMissingSubnetViolation") networkFirewallMissingSubnetViolation: networkFirewallMissingSubnetViolation,
-@as("NetworkFirewallMissingFirewallViolation") networkFirewallMissingFirewallViolation: networkFirewallMissingFirewallViolation,
-@as("AwsEc2InstanceViolation") awsEc2InstanceViolation: awsEc2InstanceViolation,
-@as("AwsEc2NetworkInterfaceViolation") awsEc2NetworkInterfaceViolation: awsEc2NetworkInterfaceViolation,
-@as("AwsVPCSecurityGroupViolation") awsVPCSecurityGroupViolation: awsVPCSecurityGroupViolation
+@as("DnsRuleGroupLimitExceededViolation") dnsRuleGroupLimitExceededViolation: option<dnsRuleGroupLimitExceededViolation>,
+@as("DnsDuplicateRuleGroupViolation") dnsDuplicateRuleGroupViolation: option<dnsDuplicateRuleGroupViolation>,
+@as("DnsRuleGroupPriorityConflictViolation") dnsRuleGroupPriorityConflictViolation: option<dnsRuleGroupPriorityConflictViolation>,
+@as("NetworkFirewallPolicyModifiedViolation") networkFirewallPolicyModifiedViolation: option<networkFirewallPolicyModifiedViolation>,
+@as("NetworkFirewallMissingExpectedRTViolation") networkFirewallMissingExpectedRTViolation: option<networkFirewallMissingExpectedRTViolation>,
+@as("NetworkFirewallMissingSubnetViolation") networkFirewallMissingSubnetViolation: option<networkFirewallMissingSubnetViolation>,
+@as("NetworkFirewallMissingFirewallViolation") networkFirewallMissingFirewallViolation: option<networkFirewallMissingFirewallViolation>,
+@as("AwsEc2InstanceViolation") awsEc2InstanceViolation: option<awsEc2InstanceViolation>,
+@as("AwsEc2NetworkInterfaceViolation") awsEc2NetworkInterfaceViolation: option<awsEc2NetworkInterfaceViolation>,
+@as("AwsVPCSecurityGroupViolation") awsVPCSecurityGroupViolation: option<awsVPCSecurityGroupViolation>
 }
 type resourceViolations = array<resourceViolation>
 type violationDetail = {
-@as("ResourceDescription") resourceDescription: lengthBoundedString,
-@as("ResourceTags") resourceTags: tagList,
-@as("ResourceViolations") resourceViolations: option<resourceViolations>,
-@as("ResourceType") resourceType: option<resourceType>,
-@as("ResourceId") resourceId: option<resourceId>,
-@as("MemberAccount") memberAccount: option<aWSAccountId>,
-@as("PolicyId") policyId: option<policyId>
+@as("ResourceDescription") resourceDescription: option<lengthBoundedString>,
+@as("ResourceTags") resourceTags: option<tagList_>,
+@as("ResourceViolations") resourceViolations: resourceViolations,
+@as("ResourceType") resourceType: resourceType,
+@as("ResourceId") resourceId: resourceId,
+@as("MemberAccount") memberAccount: awsaccountId,
+@as("PolicyId") policyId: policyId
 }
-type clientType;
-@module("@aws-sdk/client-fms") @new external createClient: unit => clientType = "FMSClient";
+type awsServiceClient;
+@module("@aws-sdk/client-fms") @new external createClient: unit => awsServiceClient = "FMSClient";
 module PutNotificationChannel = {
   type t;
   type request = {
-@as("SnsRoleName") snsRoleName: option<resourceArn>,
-@as("SnsTopicArn") snsTopicArn: option<resourceArn>
+@as("SnsRoleName") snsRoleName: resourceArn,
+@as("SnsTopicArn") snsTopicArn: resourceArn
 }
   
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "PutNotificationChannelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetProtectionStatus = {
   type t;
   type request = {
-@as("MaxResults") maxResults: paginationMaxResults,
-@as("NextToken") nextToken: paginationToken,
-@as("EndTime") endTime: timeStamp,
-@as("StartTime") startTime: timeStamp,
-@as("MemberAccountId") memberAccountId: aWSAccountId,
-@as("PolicyId") policyId: option<policyId>
+@as("MaxResults") maxResults: option<paginationMaxResults>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("EndTime") endTime: option<timeStamp>,
+@as("StartTime") startTime: option<timeStamp>,
+@as("MemberAccountId") memberAccountId: option<awsaccountId>,
+@as("PolicyId") policyId: policyId
 }
   type response = {
-@as("NextToken") nextToken: paginationToken,
-@as("Data") data: protectionData,
-@as("ServiceType") serviceType: securityServiceType,
-@as("AdminAccountId") adminAccountId: aWSAccountId
+@as("NextToken") nextToken: option<paginationToken>,
+@as("Data") data: option<protectionData>,
+@as("ServiceType") serviceType: option<securityServiceType>,
+@as("AdminAccountId") adminAccountId: option<awsaccountId>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetProtectionStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetNotificationChannel = {
   type t;
   type request = unit
   type response = {
-@as("SnsRoleName") snsRoleName: resourceArn,
-@as("SnsTopicArn") snsTopicArn: resourceArn
+@as("SnsRoleName") snsRoleName: option<resourceArn>,
+@as("SnsTopicArn") snsTopicArn: option<resourceArn>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetNotificationChannelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAdminAccount = {
   type t;
   type request = unit
   type response = {
-@as("RoleStatus") roleStatus: accountRoleStatus,
-@as("AdminAccount") adminAccount: aWSAccountId
+@as("RoleStatus") roleStatus: option<accountRoleStatus>,
+@as("AdminAccount") adminAccount: option<awsaccountId>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetAdminAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateAdminAccount = {
@@ -340,28 +347,28 @@ module DisassociateAdminAccount = {
   type request = unit
   
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "DisassociateAdminAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteProtocolsList = {
   type t;
   type request = {
-@as("ListId") listId: option<listId>
+@as("ListId") listId: listId
 }
   
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "DeleteProtocolsListCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeletePolicy = {
   type t;
   type request = {
-@as("DeleteAllPolicyResources") deleteAllPolicyResources: amazonawsBoolean,
-@as("PolicyId") policyId: option<policyId>
+@as("DeleteAllPolicyResources") deleteAllPolicyResources: option<boolean_>,
+@as("PolicyId") policyId: policyId
 }
   
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "DeletePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteNotificationChannel = {
@@ -369,243 +376,243 @@ module DeleteNotificationChannel = {
   type request = unit
   
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "DeleteNotificationChannelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteAppsList = {
   type t;
   type request = {
-@as("ListId") listId: option<listId>
+@as("ListId") listId: listId
 }
   
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "DeleteAppsListCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module AssociateAdminAccount = {
   type t;
   type request = {
-@as("AdminAccount") adminAccount: option<aWSAccountId>
+@as("AdminAccount") adminAccount: awsaccountId
 }
   
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "AssociateAdminAccountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceArn") resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListMemberAccounts = {
   type t;
   type request = {
-@as("MaxResults") maxResults: paginationMaxResults,
-@as("NextToken") nextToken: paginationToken
+@as("MaxResults") maxResults: option<paginationMaxResults>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("NextToken") nextToken: paginationToken,
-@as("MemberAccounts") memberAccounts: memberAccounts
+@as("NextToken") nextToken: option<paginationToken>,
+@as("MemberAccounts") memberAccounts: option<memberAccounts>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListMemberAccountsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("TagList") tagList: option<tagList>,
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("TagList") tagList_: tagList_,
+@as("ResourceArn") resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("ResourceArn") resourceArn: option<resourceArn>
+@as("ResourceArn") resourceArn: resourceArn
 }
   type response = {
-@as("TagList") tagList: tagList
+@as("TagList") tagList_: option<tagList_>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPolicies = {
   type t;
   type request = {
-@as("MaxResults") maxResults: paginationMaxResults,
-@as("NextToken") nextToken: paginationToken
+@as("MaxResults") maxResults: option<paginationMaxResults>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("NextToken") nextToken: paginationToken,
-@as("PolicyList") policyList: policySummaryList
+@as("NextToken") nextToken: option<paginationToken>,
+@as("PolicyList") policyList: option<policySummaryList>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListPoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutProtocolsList = {
   type t;
   type request = {
-@as("TagList") tagList: tagList,
-@as("ProtocolsList") protocolsList: option<protocolsListData>
-}
-  type response = {
-@as("ProtocolsListArn") protocolsListArn: resourceArn,
+@as("TagList") tagList_: option<tagList_>,
 @as("ProtocolsList") protocolsList: protocolsListData
 }
+  type response = {
+@as("ProtocolsListArn") protocolsListArn: option<resourceArn>,
+@as("ProtocolsList") protocolsList: option<protocolsListData>
+}
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "PutProtocolsListCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutPolicy = {
   type t;
   type request = {
-@as("TagList") tagList: tagList,
-@as("Policy") policy: option<policy>
-}
-  type response = {
-@as("PolicyArn") policyArn: resourceArn,
+@as("TagList") tagList_: option<tagList_>,
 @as("Policy") policy: policy
 }
+  type response = {
+@as("PolicyArn") policyArn: option<resourceArn>,
+@as("Policy") policy: option<policy>
+}
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "PutPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListProtocolsLists = {
   type t;
   type request = {
-@as("MaxResults") maxResults: option<paginationMaxResults>,
-@as("NextToken") nextToken: paginationToken,
-@as("DefaultLists") defaultLists: amazonawsBoolean
+@as("MaxResults") maxResults: paginationMaxResults,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("DefaultLists") defaultLists: option<boolean_>
 }
   type response = {
-@as("NextToken") nextToken: paginationToken,
-@as("ProtocolsLists") protocolsLists: protocolsListsData
+@as("NextToken") nextToken: option<paginationToken>,
+@as("ProtocolsLists") protocolsLists: option<protocolsListsData>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListProtocolsListsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetProtocolsList = {
   type t;
   type request = {
-@as("DefaultList") defaultList: amazonawsBoolean,
-@as("ListId") listId: option<listId>
+@as("DefaultList") defaultList: option<boolean_>,
+@as("ListId") listId: listId
 }
   type response = {
-@as("ProtocolsListArn") protocolsListArn: resourceArn,
-@as("ProtocolsList") protocolsList: protocolsListData
+@as("ProtocolsListArn") protocolsListArn: option<resourceArn>,
+@as("ProtocolsList") protocolsList: option<protocolsListData>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetProtocolsListCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPolicy = {
   type t;
   type request = {
-@as("PolicyId") policyId: option<policyId>
+@as("PolicyId") policyId: policyId
 }
   type response = {
-@as("PolicyArn") policyArn: resourceArn,
-@as("Policy") policy: policy
+@as("PolicyArn") policyArn: option<resourceArn>,
+@as("Policy") policy: option<policy>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetComplianceDetail = {
   type t;
   type request = {
-@as("MemberAccount") memberAccount: option<aWSAccountId>,
-@as("PolicyId") policyId: option<policyId>
+@as("MemberAccount") memberAccount: awsaccountId,
+@as("PolicyId") policyId: policyId
 }
   type response = {
-@as("PolicyComplianceDetail") policyComplianceDetail: policyComplianceDetail
+@as("PolicyComplianceDetail") policyComplianceDetail: option<policyComplianceDetail>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetComplianceDetailCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutAppsList = {
   type t;
   type request = {
-@as("TagList") tagList: tagList,
-@as("AppsList") appsList: option<appsListData>
-}
-  type response = {
-@as("AppsListArn") appsListArn: resourceArn,
+@as("TagList") tagList_: option<tagList_>,
 @as("AppsList") appsList: appsListData
 }
+  type response = {
+@as("AppsListArn") appsListArn: option<resourceArn>,
+@as("AppsList") appsList: option<appsListData>
+}
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "PutAppsListCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListComplianceStatus = {
   type t;
   type request = {
-@as("MaxResults") maxResults: paginationMaxResults,
-@as("NextToken") nextToken: paginationToken,
-@as("PolicyId") policyId: option<policyId>
+@as("MaxResults") maxResults: option<paginationMaxResults>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("PolicyId") policyId: policyId
 }
   type response = {
-@as("NextToken") nextToken: paginationToken,
-@as("PolicyComplianceStatusList") policyComplianceStatusList: policyComplianceStatusList
+@as("NextToken") nextToken: option<paginationToken>,
+@as("PolicyComplianceStatusList") policyComplianceStatusList: option<policyComplianceStatusList>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListComplianceStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAppsLists = {
   type t;
   type request = {
-@as("MaxResults") maxResults: option<paginationMaxResults>,
-@as("NextToken") nextToken: paginationToken,
-@as("DefaultLists") defaultLists: amazonawsBoolean
+@as("MaxResults") maxResults: paginationMaxResults,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("DefaultLists") defaultLists: option<boolean_>
 }
   type response = {
-@as("NextToken") nextToken: paginationToken,
-@as("AppsLists") appsLists: appsListsData
+@as("NextToken") nextToken: option<paginationToken>,
+@as("AppsLists") appsLists: option<appsListsData>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListAppsListsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAppsList = {
   type t;
   type request = {
-@as("DefaultList") defaultList: amazonawsBoolean,
-@as("ListId") listId: option<listId>
+@as("DefaultList") defaultList: option<boolean_>,
+@as("ListId") listId: listId
 }
   type response = {
-@as("AppsListArn") appsListArn: resourceArn,
-@as("AppsList") appsList: appsListData
+@as("AppsListArn") appsListArn: option<resourceArn>,
+@as("AppsList") appsList: option<appsListData>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetAppsListCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetViolationDetails = {
   type t;
   type request = {
-@as("ResourceType") resourceType: option<resourceType>,
-@as("ResourceId") resourceId: option<resourceId>,
-@as("MemberAccount") memberAccount: option<aWSAccountId>,
-@as("PolicyId") policyId: option<policyId>
+@as("ResourceType") resourceType: resourceType,
+@as("ResourceId") resourceId: resourceId,
+@as("MemberAccount") memberAccount: awsaccountId,
+@as("PolicyId") policyId: policyId
 }
   type response = {
-@as("ViolationDetail") violationDetail: violationDetail
+@as("ViolationDetail") violationDetail: option<violationDetail>
 }
   @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetViolationDetailsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

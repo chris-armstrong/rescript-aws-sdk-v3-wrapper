@@ -1,541 +1,602 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type amazonawsTimestamp = Js.Date.t;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type long = float
+type timestamp_ = Js.Date.t;
 type tagValue = string
 type tagKey = string
 type streamStatus = [@as("UPDATING") #UPDATING | @as("ACTIVE") #ACTIVE | @as("DELETING") #DELETING | @as("CREATING") #CREATING]
 type streamName = string
 type streamARN = string
-type shardIteratorType = [@as("AT_TIMESTAMP") #AT_TIMESTAMP | @as("LATEST") #LATEST | @as("TRIM_HORIZON") #TRIM_HORIZON | @as("AFTER_SEQUENCE_NUMBER") #AFTER_SEQUENCE_NUMBER | @as("AT_SEQUENCE_NUMBER") #AT_SEQUENCE_NUMBER]
+type shardIteratorType = [@as("AT_TIMESTAMP") #ATTIMESTAMP | @as("LATEST") #LATEST | @as("TRIM_HORIZON") #TRIMHORIZON | @as("AFTER_SEQUENCE_NUMBER") #AFTERSEQUENCENUMBER | @as("AT_SEQUENCE_NUMBER") #ATSEQUENCENUMBER]
 type shardIterator = string
 type shardId = string
-type shardFilterType = [@as("FROM_TIMESTAMP") #FROM_TIMESTAMP | @as("AT_TIMESTAMP") #AT_TIMESTAMP | @as("AT_LATEST") #AT_LATEST | @as("FROM_TRIM_HORIZON") #FROM_TRIM_HORIZON | @as("AT_TRIM_HORIZON") #AT_TRIM_HORIZON | @as("AFTER_SHARD_ID") #AFTER_SHARD_ID]
-type shardCountObject = int;
+type shardFilterType = [@as("FROM_TIMESTAMP") #FROMTIMESTAMP | @as("AT_TIMESTAMP") #ATTIMESTAMP | @as("AT_LATEST") #ATLATEST | @as("FROM_TRIM_HORIZON") #FROMTRIMHORIZON | @as("AT_TRIM_HORIZON") #ATTRIMHORIZON | @as("AFTER_SHARD_ID") #AFTERSHARDID]
+type shardCountObject = int
 type sequenceNumber = string
-type scalingType = [@as("UNIFORM_SCALING") #UNIFORM_SCALING]
-type retentionPeriodHours = int;
-type positiveIntegerObject = int;
+type scalingType = [@as("UNIFORM_SCALING") #UNIFORMSCALING]
+type retentionPeriodHours = int
+type positiveIntegerObject = int
 type partitionKey = string
 type nextToken = string
-type millisBehindLatest = float;
+type millisBehindLatest = float
 type metricsName = [@as("ALL") #ALL | @as("IteratorAgeMilliseconds") #IteratorAgeMilliseconds | @as("ReadProvisionedThroughputExceeded") #ReadProvisionedThroughputExceeded | @as("WriteProvisionedThroughputExceeded") #WriteProvisionedThroughputExceeded | @as("OutgoingRecords") #OutgoingRecords | @as("OutgoingBytes") #OutgoingBytes | @as("IncomingRecords") #IncomingRecords | @as("IncomingBytes") #IncomingBytes]
-type listTagsForStreamInputLimit = int;
-type listStreamsInputLimit = int;
-type listStreamConsumersInputLimit = int;
-type listShardsInputLimit = int;
+type listTagsForStreamInputLimit = int
+type listStreamsInputLimit = int
+type listStreamConsumersInputLimit = int
+type listShardsInputLimit = int
 type keyId = string
 type hashKey = string
-type getRecordsInputLimit = int;
+type getRecordsInputLimit = int
 type errorMessage = string
 type errorCode = string
 type encryptionType = [@as("KMS") #KMS | @as("NONE") #NONE]
-type describeStreamInputLimit = int;
-type data = NodeJs.Buffer.t;
+type describeStreamInputLimit = int
+type data = NodeJs.Buffer.t
 type consumerStatus = [@as("ACTIVE") #ACTIVE | @as("DELETING") #DELETING | @as("CREATING") #CREATING]
 type consumerName = string
-type consumerCountObject = int;
+type consumerCountObject = int
 type consumerARN = string
-type booleanObject = bool;
+type booleanObject = bool
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: tagValue,
-@as("Key") key: option<tagKey>
+@as("Value") value: option<tagValue>,
+@as("Key") key: tagKey
 }
 type streamNameList = array<streamName>
 type startingPosition = {
-@as("Timestamp") timestamp: amazonawsTimestamp,
-@as("SequenceNumber") sequenceNumber: sequenceNumber,
-@as("Type") type_: option<shardIteratorType>
+@as("Timestamp") timestamp_: option<timestamp_>,
+@as("SequenceNumber") sequenceNumber: option<sequenceNumber>,
+@as("Type") type_: shardIteratorType
 }
 type shardIdList = array<shardId>
 type shardFilter = {
-@as("Timestamp") timestamp: amazonawsTimestamp,
-@as("ShardId") shardId: shardId,
-@as("Type") type_: option<shardFilterType>
+@as("Timestamp") timestamp_: option<timestamp_>,
+@as("ShardId") shardId: option<shardId>,
+@as("Type") type_: shardFilterType
 }
 type sequenceNumberRange = {
-@as("EndingSequenceNumber") endingSequenceNumber: sequenceNumber,
-@as("StartingSequenceNumber") startingSequenceNumber: option<sequenceNumber>
+@as("EndingSequenceNumber") endingSequenceNumber: option<sequenceNumber>,
+@as("StartingSequenceNumber") startingSequenceNumber: sequenceNumber
 }
-exception ResourceNotFoundException;
-exception ResourceInUseException;
+type resourceNotFoundException = {
+name: string,
+  @as("$fault") fault: [#client | #server],
+  @as("$service") service: option<string>,
+  @as("$metadata") metadata: responseMetadata,
+  message: option<errorMessage>
+};
+type resourceInUseException = {
+name: string,
+  @as("$fault") fault: [#client | #server],
+  @as("$service") service: option<string>,
+  @as("$metadata") metadata: responseMetadata,
+  message: option<errorMessage>
+};
 type record = {
-@as("EncryptionType") encryptionType: encryptionType,
-@as("PartitionKey") partitionKey: option<partitionKey>,
-@as("Data") data: option<data>,
-@as("ApproximateArrivalTimestamp") approximateArrivalTimestamp: amazonawsTimestamp,
-@as("SequenceNumber") sequenceNumber: option<sequenceNumber>
-}
-type putRecordsResultEntry = {
-@as("ErrorMessage") errorMessage: errorMessage,
-@as("ErrorCode") errorCode: errorCode,
-@as("ShardId") shardId: shardId,
+@as("EncryptionType") encryptionType: option<encryptionType>,
+@as("PartitionKey") partitionKey: partitionKey,
+@as("Data") data: data,
+@as("ApproximateArrivalTimestamp") approximateArrivalTimestamp: option<timestamp_>,
 @as("SequenceNumber") sequenceNumber: sequenceNumber
 }
+type putRecordsResultEntry = {
+@as("ErrorMessage") errorMessage: option<errorMessage>,
+@as("ErrorCode") errorCode: option<errorCode>,
+@as("ShardId") shardId: option<shardId>,
+@as("SequenceNumber") sequenceNumber: option<sequenceNumber>
+}
 type putRecordsRequestEntry = {
-@as("PartitionKey") partitionKey: option<partitionKey>,
-@as("ExplicitHashKey") explicitHashKey: hashKey,
-@as("Data") data: option<data>
+@as("PartitionKey") partitionKey: partitionKey,
+@as("ExplicitHashKey") explicitHashKey: option<hashKey>,
+@as("Data") data: data
 }
 type metricsNameList = array<metricsName>
-exception KMSThrottlingException;
-exception KMSOptInRequired;
-exception KMSNotFoundException;
-exception KMSInvalidStateException;
-exception KMSDisabledException;
-exception KMSAccessDeniedException;
-exception InternalFailureException;
+type kmsthrottlingException = {
+name: string,
+  @as("$fault") fault: [#client | #server],
+  @as("$service") service: option<string>,
+  @as("$metadata") metadata: responseMetadata,
+  message: option<errorMessage>
+};
+type kmsoptInRequired = {
+name: string,
+  @as("$fault") fault: [#client | #server],
+  @as("$service") service: option<string>,
+  @as("$metadata") metadata: responseMetadata,
+  message: option<errorMessage>
+};
+type kmsnotFoundException = {
+name: string,
+  @as("$fault") fault: [#client | #server],
+  @as("$service") service: option<string>,
+  @as("$metadata") metadata: responseMetadata,
+  message: option<errorMessage>
+};
+type kmsinvalidStateException = {
+name: string,
+  @as("$fault") fault: [#client | #server],
+  @as("$service") service: option<string>,
+  @as("$metadata") metadata: responseMetadata,
+  message: option<errorMessage>
+};
+type kmsdisabledException = {
+name: string,
+  @as("$fault") fault: [#client | #server],
+  @as("$service") service: option<string>,
+  @as("$metadata") metadata: responseMetadata,
+  message: option<errorMessage>
+};
+type kmsaccessDeniedException = {
+name: string,
+  @as("$fault") fault: [#client | #server],
+  @as("$service") service: option<string>,
+  @as("$metadata") metadata: responseMetadata,
+  message: option<errorMessage>
+};
+type internalFailureException = {
+name: string,
+  @as("$fault") fault: [#client | #server],
+  @as("$service") service: option<string>,
+  @as("$metadata") metadata: responseMetadata,
+  message: option<errorMessage>
+};
 type hashKeyRange = {
-@as("EndingHashKey") endingHashKey: option<hashKey>,
-@as("StartingHashKey") startingHashKey: option<hashKey>
+@as("EndingHashKey") endingHashKey: hashKey,
+@as("StartingHashKey") startingHashKey: hashKey
 }
 type consumerDescription = {
-@as("StreamARN") streamARN: option<streamARN>,
-@as("ConsumerCreationTimestamp") consumerCreationTimestamp: option<amazonawsTimestamp>,
-@as("ConsumerStatus") consumerStatus: option<consumerStatus>,
-@as("ConsumerARN") consumerARN: option<consumerARN>,
-@as("ConsumerName") consumerName: option<consumerName>
+@as("StreamARN") streamARN: streamARN,
+@as("ConsumerCreationTimestamp") consumerCreationTimestamp: timestamp_,
+@as("ConsumerStatus") consumerStatus: consumerStatus,
+@as("ConsumerARN") consumerARN: consumerARN,
+@as("ConsumerName") consumerName: consumerName
 }
 type consumer = {
-@as("ConsumerCreationTimestamp") consumerCreationTimestamp: option<amazonawsTimestamp>,
-@as("ConsumerStatus") consumerStatus: option<consumerStatus>,
-@as("ConsumerARN") consumerARN: option<consumerARN>,
-@as("ConsumerName") consumerName: option<consumerName>
+@as("ConsumerCreationTimestamp") consumerCreationTimestamp: timestamp_,
+@as("ConsumerStatus") consumerStatus: consumerStatus,
+@as("ConsumerARN") consumerARN: consumerARN,
+@as("ConsumerName") consumerName: consumerName
 }
-type tagList = array<tag>
+type tagList_ = array<tag>
 type shard = {
-@as("SequenceNumberRange") sequenceNumberRange: option<sequenceNumberRange>,
-@as("HashKeyRange") hashKeyRange: option<hashKeyRange>,
-@as("AdjacentParentShardId") adjacentParentShardId: shardId,
-@as("ParentShardId") parentShardId: shardId,
-@as("ShardId") shardId: option<shardId>
+@as("SequenceNumberRange") sequenceNumberRange: sequenceNumberRange,
+@as("HashKeyRange") hashKeyRange: hashKeyRange,
+@as("AdjacentParentShardId") adjacentParentShardId: option<shardId>,
+@as("ParentShardId") parentShardId: option<shardId>,
+@as("ShardId") shardId: shardId
 }
 type recordList = array<record>
 type putRecordsResultEntryList = array<putRecordsResultEntry>
 type putRecordsRequestEntryList = array<putRecordsRequestEntry>
 type enhancedMetrics = {
-@as("ShardLevelMetrics") shardLevelMetrics: metricsNameList
+@as("ShardLevelMetrics") shardLevelMetrics: option<metricsNameList>
 }
 type consumerList = array<consumer>
 type childShard = {
-@as("HashKeyRange") hashKeyRange: option<hashKeyRange>,
-@as("ParentShards") parentShards: option<shardIdList>,
-@as("ShardId") shardId: option<shardId>
+@as("HashKeyRange") hashKeyRange: hashKeyRange,
+@as("ParentShards") parentShards: shardIdList,
+@as("ShardId") shardId: shardId
 }
 type shardList = array<shard>
 type enhancedMonitoringList = array<enhancedMetrics>
 type childShardList = array<childShard>
 type subscribeToShardEvent = {
-@as("ChildShards") childShards: childShardList,
-@as("MillisBehindLatest") millisBehindLatest: option<millisBehindLatest>,
-@as("ContinuationSequenceNumber") continuationSequenceNumber: option<sequenceNumber>,
-@as("Records") records: option<recordList>
+@as("ChildShards") childShards: option<childShardList>,
+@as("MillisBehindLatest") millisBehindLatest: millisBehindLatest,
+@as("ContinuationSequenceNumber") continuationSequenceNumber: sequenceNumber,
+@as("Records") records: recordList
 }
 type streamDescriptionSummary = {
-@as("ConsumerCount") consumerCount: consumerCountObject,
-@as("OpenShardCount") openShardCount: option<shardCountObject>,
-@as("KeyId") keyId: keyId,
-@as("EncryptionType") encryptionType: encryptionType,
-@as("EnhancedMonitoring") enhancedMonitoring: option<enhancedMonitoringList>,
-@as("StreamCreationTimestamp") streamCreationTimestamp: option<amazonawsTimestamp>,
-@as("RetentionPeriodHours") retentionPeriodHours: option<retentionPeriodHours>,
-@as("StreamStatus") streamStatus: option<streamStatus>,
-@as("StreamARN") streamARN: option<streamARN>,
-@as("StreamName") streamName: option<streamName>
+@as("ConsumerCount") consumerCount: option<consumerCountObject>,
+@as("OpenShardCount") openShardCount: shardCountObject,
+@as("KeyId") keyId: option<keyId>,
+@as("EncryptionType") encryptionType: option<encryptionType>,
+@as("EnhancedMonitoring") enhancedMonitoring: enhancedMonitoringList,
+@as("StreamCreationTimestamp") streamCreationTimestamp: timestamp_,
+@as("RetentionPeriodHours") retentionPeriodHours: retentionPeriodHours,
+@as("StreamStatus") streamStatus: streamStatus,
+@as("StreamARN") streamARN: streamARN,
+@as("StreamName") streamName: streamName
 }
 type streamDescription = {
-@as("KeyId") keyId: keyId,
-@as("EncryptionType") encryptionType: encryptionType,
-@as("EnhancedMonitoring") enhancedMonitoring: option<enhancedMonitoringList>,
-@as("StreamCreationTimestamp") streamCreationTimestamp: option<amazonawsTimestamp>,
-@as("RetentionPeriodHours") retentionPeriodHours: option<retentionPeriodHours>,
-@as("HasMoreShards") hasMoreShards: option<booleanObject>,
-@as("Shards") shards: option<shardList>,
-@as("StreamStatus") streamStatus: option<streamStatus>,
-@as("StreamARN") streamARN: option<streamARN>,
-@as("StreamName") streamName: option<streamName>
+@as("KeyId") keyId: option<keyId>,
+@as("EncryptionType") encryptionType: option<encryptionType>,
+@as("EnhancedMonitoring") enhancedMonitoring: enhancedMonitoringList,
+@as("StreamCreationTimestamp") streamCreationTimestamp: timestamp_,
+@as("RetentionPeriodHours") retentionPeriodHours: retentionPeriodHours,
+@as("HasMoreShards") hasMoreShards: booleanObject,
+@as("Shards") shards: shardList,
+@as("StreamStatus") streamStatus: streamStatus,
+@as("StreamARN") streamARN: streamARN,
+@as("StreamName") streamName: streamName
 }
-type subscribeToShardEventStream = InternalFailureException(internalFailureException) | KMSThrottlingException(kMSThrottlingException) | KMSOptInRequired(kMSOptInRequired) | KMSNotFoundException(kMSNotFoundException) | KMSAccessDeniedException(kMSAccessDeniedException) | KMSInvalidStateException(kMSInvalidStateException) | KMSDisabledException(kMSDisabledException) | ResourceInUseException(resourceInUseException) | ResourceNotFoundException(resourceNotFoundException) | SubscribeToShardEvent(subscribeToShardEvent);
-type clientType;
-@module("@aws-sdk/client-kinesis") @new external createClient: unit => clientType = "KinesisClient";
+type subscribeToShardEventStream = InternalFailureException(internalFailureException) | KMSThrottlingException(kmsthrottlingException) | KMSOptInRequired(kmsoptInRequired) | KMSNotFoundException(kmsnotFoundException) | KMSAccessDeniedException(kmsaccessDeniedException) | KMSInvalidStateException(kmsinvalidStateException) | KMSDisabledException(kmsdisabledException) | ResourceInUseException(resourceInUseException) | ResourceNotFoundException(resourceNotFoundException) | SubscribeToShardEvent(subscribeToShardEvent);
+type awsServiceClient;
+@module("@aws-sdk/client-kinesis") @new external createClient: unit => awsServiceClient = "KinesisClient";
 module UpdateShardCount = {
   type t;
   type request = {
-@as("ScalingType") scalingType: option<scalingType>,
-@as("TargetShardCount") targetShardCount: option<positiveIntegerObject>,
-@as("StreamName") streamName: option<streamName>
-}
-  type response = {
+@as("ScalingType") scalingType: scalingType,
 @as("TargetShardCount") targetShardCount: positiveIntegerObject,
-@as("CurrentShardCount") currentShardCount: positiveIntegerObject,
 @as("StreamName") streamName: streamName
 }
+  type response = {
+@as("TargetShardCount") targetShardCount: option<positiveIntegerObject>,
+@as("CurrentShardCount") currentShardCount: option<positiveIntegerObject>,
+@as("StreamName") streamName: option<streamName>
+}
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "UpdateShardCountCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StopStreamEncryption = {
   type t;
   type request = {
-@as("KeyId") keyId: option<keyId>,
-@as("EncryptionType") encryptionType: option<encryptionType>,
-@as("StreamName") streamName: option<streamName>
+@as("KeyId") keyId: keyId,
+@as("EncryptionType") encryptionType: encryptionType,
+@as("StreamName") streamName: streamName
 }
   
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "StopStreamEncryptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module StartStreamEncryption = {
   type t;
   type request = {
-@as("KeyId") keyId: option<keyId>,
-@as("EncryptionType") encryptionType: option<encryptionType>,
-@as("StreamName") streamName: option<streamName>
+@as("KeyId") keyId: keyId,
+@as("EncryptionType") encryptionType: encryptionType,
+@as("StreamName") streamName: streamName
 }
   
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "StartStreamEncryptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module SplitShard = {
   type t;
   type request = {
-@as("NewStartingHashKey") newStartingHashKey: option<hashKey>,
-@as("ShardToSplit") shardToSplit: option<shardId>,
-@as("StreamName") streamName: option<streamName>
+@as("NewStartingHashKey") newStartingHashKey: hashKey,
+@as("ShardToSplit") shardToSplit: shardId,
+@as("StreamName") streamName: streamName
 }
   
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "SplitShardCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutRecord = {
   type t;
   type request = {
-@as("SequenceNumberForOrdering") sequenceNumberForOrdering: sequenceNumber,
-@as("ExplicitHashKey") explicitHashKey: hashKey,
-@as("PartitionKey") partitionKey: option<partitionKey>,
-@as("Data") data: option<data>,
-@as("StreamName") streamName: option<streamName>
+@as("SequenceNumberForOrdering") sequenceNumberForOrdering: option<sequenceNumber>,
+@as("ExplicitHashKey") explicitHashKey: option<hashKey>,
+@as("PartitionKey") partitionKey: partitionKey,
+@as("Data") data: data,
+@as("StreamName") streamName: streamName
 }
   type response = {
-@as("EncryptionType") encryptionType: encryptionType,
-@as("SequenceNumber") sequenceNumber: option<sequenceNumber>,
-@as("ShardId") shardId: option<shardId>
+@as("EncryptionType") encryptionType: option<encryptionType>,
+@as("SequenceNumber") sequenceNumber: sequenceNumber,
+@as("ShardId") shardId: shardId
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "PutRecordCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module MergeShards = {
   type t;
   type request = {
-@as("AdjacentShardToMerge") adjacentShardToMerge: option<shardId>,
-@as("ShardToMerge") shardToMerge: option<shardId>,
-@as("StreamName") streamName: option<streamName>
+@as("AdjacentShardToMerge") adjacentShardToMerge: shardId,
+@as("ShardToMerge") shardToMerge: shardId,
+@as("StreamName") streamName: streamName
 }
   
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "MergeShardsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module IncreaseStreamRetentionPeriod = {
   type t;
   type request = {
-@as("RetentionPeriodHours") retentionPeriodHours: option<retentionPeriodHours>,
-@as("StreamName") streamName: option<streamName>
+@as("RetentionPeriodHours") retentionPeriodHours: retentionPeriodHours,
+@as("StreamName") streamName: streamName
 }
   
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "IncreaseStreamRetentionPeriodCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetShardIterator = {
   type t;
   type request = {
-@as("Timestamp") timestamp: amazonawsTimestamp,
-@as("StartingSequenceNumber") startingSequenceNumber: sequenceNumber,
-@as("ShardIteratorType") shardIteratorType: option<shardIteratorType>,
-@as("ShardId") shardId: option<shardId>,
-@as("StreamName") streamName: option<streamName>
+@as("Timestamp") timestamp_: option<timestamp_>,
+@as("StartingSequenceNumber") startingSequenceNumber: option<sequenceNumber>,
+@as("ShardIteratorType") shardIteratorType: shardIteratorType,
+@as("ShardId") shardId: shardId,
+@as("StreamName") streamName: streamName
 }
   type response = {
-@as("ShardIterator") shardIterator: shardIterator
+@as("ShardIterator") shardIterator: option<shardIterator>
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "GetShardIteratorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLimits = {
   type t;
   type request = unit
   type response = {
-@as("OpenShardCount") openShardCount: option<shardCountObject>,
-@as("ShardLimit") shardLimit: option<shardCountObject>
+@as("OpenShardCount") openShardCount: shardCountObject,
+@as("ShardLimit") shardLimit: shardCountObject
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "DescribeLimitsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterStreamConsumer = {
   type t;
   type request = {
-@as("ConsumerARN") consumerARN: consumerARN,
-@as("ConsumerName") consumerName: consumerName,
-@as("StreamARN") streamARN: streamARN
+@as("ConsumerARN") consumerARN: option<consumerARN>,
+@as("ConsumerName") consumerName: option<consumerName>,
+@as("StreamARN") streamARN: option<streamARN>
 }
   
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "DeregisterStreamConsumerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteStream = {
   type t;
   type request = {
-@as("EnforceConsumerDeletion") enforceConsumerDeletion: booleanObject,
-@as("StreamName") streamName: option<streamName>
+@as("EnforceConsumerDeletion") enforceConsumerDeletion: option<booleanObject>,
+@as("StreamName") streamName: streamName
 }
   
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "DeleteStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DecreaseStreamRetentionPeriod = {
   type t;
   type request = {
-@as("RetentionPeriodHours") retentionPeriodHours: option<retentionPeriodHours>,
-@as("StreamName") streamName: option<streamName>
+@as("RetentionPeriodHours") retentionPeriodHours: retentionPeriodHours,
+@as("StreamName") streamName: streamName
 }
   
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "DecreaseStreamRetentionPeriodCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateStream = {
   type t;
   type request = {
-@as("ShardCount") shardCount: option<positiveIntegerObject>,
-@as("StreamName") streamName: option<streamName>
+@as("ShardCount") shardCount: positiveIntegerObject,
+@as("StreamName") streamName: streamName
 }
   
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "CreateStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RemoveTagsFromStream = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("StreamName") streamName: option<streamName>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("StreamName") streamName: streamName
 }
   
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "RemoveTagsFromStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RegisterStreamConsumer = {
   type t;
   type request = {
-@as("ConsumerName") consumerName: option<consumerName>,
-@as("StreamARN") streamARN: option<streamARN>
+@as("ConsumerName") consumerName: consumerName,
+@as("StreamARN") streamARN: streamARN
 }
   type response = {
-@as("Consumer") consumer: option<consumer>
+@as("Consumer") consumer: consumer
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "RegisterStreamConsumerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStreams = {
   type t;
   type request = {
-@as("ExclusiveStartStreamName") exclusiveStartStreamName: streamName,
-@as("Limit") limit: listStreamsInputLimit
+@as("ExclusiveStartStreamName") exclusiveStartStreamName: option<streamName>,
+@as("Limit") limit: option<listStreamsInputLimit>
 }
   type response = {
-@as("HasMoreStreams") hasMoreStreams: option<booleanObject>,
-@as("StreamNames") streamNames: option<streamNameList>
+@as("HasMoreStreams") hasMoreStreams: booleanObject,
+@as("StreamNames") streamNames: streamNameList
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "ListStreamsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableEnhancedMonitoring = {
   type t;
   type request = {
-@as("ShardLevelMetrics") shardLevelMetrics: option<metricsNameList>,
-@as("StreamName") streamName: option<streamName>
-}
-  type response = {
-@as("DesiredShardLevelMetrics") desiredShardLevelMetrics: metricsNameList,
-@as("CurrentShardLevelMetrics") currentShardLevelMetrics: metricsNameList,
+@as("ShardLevelMetrics") shardLevelMetrics: metricsNameList,
 @as("StreamName") streamName: streamName
 }
+  type response = {
+@as("DesiredShardLevelMetrics") desiredShardLevelMetrics: option<metricsNameList>,
+@as("CurrentShardLevelMetrics") currentShardLevelMetrics: option<metricsNameList>,
+@as("StreamName") streamName: option<streamName>
+}
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "EnableEnhancedMonitoringCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisableEnhancedMonitoring = {
   type t;
   type request = {
-@as("ShardLevelMetrics") shardLevelMetrics: option<metricsNameList>,
-@as("StreamName") streamName: option<streamName>
-}
-  type response = {
-@as("DesiredShardLevelMetrics") desiredShardLevelMetrics: metricsNameList,
-@as("CurrentShardLevelMetrics") currentShardLevelMetrics: metricsNameList,
+@as("ShardLevelMetrics") shardLevelMetrics: metricsNameList,
 @as("StreamName") streamName: streamName
 }
+  type response = {
+@as("DesiredShardLevelMetrics") desiredShardLevelMetrics: option<metricsNameList>,
+@as("CurrentShardLevelMetrics") currentShardLevelMetrics: option<metricsNameList>,
+@as("StreamName") streamName: option<streamName>
+}
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "DisableEnhancedMonitoringCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeStreamConsumer = {
   type t;
   type request = {
-@as("ConsumerARN") consumerARN: consumerARN,
-@as("ConsumerName") consumerName: consumerName,
-@as("StreamARN") streamARN: streamARN
+@as("ConsumerARN") consumerARN: option<consumerARN>,
+@as("ConsumerName") consumerName: option<consumerName>,
+@as("StreamARN") streamARN: option<streamARN>
 }
   type response = {
-@as("ConsumerDescription") consumerDescription: option<consumerDescription>
+@as("ConsumerDescription") consumerDescription: consumerDescription
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "DescribeStreamConsumerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddTagsToStream = {
   type t;
   type request = {
-@as("Tags") tags: option<tagMap>,
-@as("StreamName") streamName: option<streamName>
+@as("Tags") tags: tagMap,
+@as("StreamName") streamName: streamName
 }
   
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "AddTagsToStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutRecords = {
   type t;
   type request = {
-@as("StreamName") streamName: option<streamName>,
-@as("Records") records: option<putRecordsRequestEntryList>
+@as("StreamName") streamName: streamName,
+@as("Records") records: putRecordsRequestEntryList
 }
   type response = {
-@as("EncryptionType") encryptionType: encryptionType,
-@as("Records") records: option<putRecordsResultEntryList>,
-@as("FailedRecordCount") failedRecordCount: positiveIntegerObject
+@as("EncryptionType") encryptionType: option<encryptionType>,
+@as("Records") records: putRecordsResultEntryList,
+@as("FailedRecordCount") failedRecordCount: option<positiveIntegerObject>
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "PutRecordsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForStream = {
   type t;
   type request = {
-@as("Limit") limit: listTagsForStreamInputLimit,
-@as("ExclusiveStartTagKey") exclusiveStartTagKey: tagKey,
-@as("StreamName") streamName: option<streamName>
+@as("Limit") limit: option<listTagsForStreamInputLimit>,
+@as("ExclusiveStartTagKey") exclusiveStartTagKey: option<tagKey>,
+@as("StreamName") streamName: streamName
 }
   type response = {
-@as("HasMoreTags") hasMoreTags: option<booleanObject>,
-@as("Tags") tags: option<tagList>
+@as("HasMoreTags") hasMoreTags: booleanObject,
+@as("Tags") tags: tagList_
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "ListTagsForStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStreamConsumers = {
   type t;
   type request = {
-@as("StreamCreationTimestamp") streamCreationTimestamp: amazonawsTimestamp,
-@as("MaxResults") maxResults: listStreamConsumersInputLimit,
-@as("NextToken") nextToken: nextToken,
-@as("StreamARN") streamARN: option<streamARN>
+@as("StreamCreationTimestamp") streamCreationTimestamp: option<timestamp_>,
+@as("MaxResults") maxResults: option<listStreamConsumersInputLimit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("StreamARN") streamARN: streamARN
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("Consumers") consumers: consumerList
+@as("NextToken") nextToken: option<nextToken>,
+@as("Consumers") consumers: option<consumerList>
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "ListStreamConsumersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListShards = {
   type t;
   type request = {
-@as("ShardFilter") shardFilter: shardFilter,
-@as("StreamCreationTimestamp") streamCreationTimestamp: amazonawsTimestamp,
-@as("MaxResults") maxResults: listShardsInputLimit,
-@as("ExclusiveStartShardId") exclusiveStartShardId: shardId,
-@as("NextToken") nextToken: nextToken,
-@as("StreamName") streamName: streamName
+@as("ShardFilter") shardFilter: option<shardFilter>,
+@as("StreamCreationTimestamp") streamCreationTimestamp: option<timestamp_>,
+@as("MaxResults") maxResults: option<listShardsInputLimit>,
+@as("ExclusiveStartShardId") exclusiveStartShardId: option<shardId>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("StreamName") streamName: option<streamName>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("Shards") shards: shardList
+@as("NextToken") nextToken: option<nextToken>,
+@as("Shards") shards: option<shardList>
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "ListShardsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetRecords = {
   type t;
   type request = {
-@as("Limit") limit: getRecordsInputLimit,
-@as("ShardIterator") shardIterator: option<shardIterator>
+@as("Limit") limit: option<getRecordsInputLimit>,
+@as("ShardIterator") shardIterator: shardIterator
 }
   type response = {
-@as("ChildShards") childShards: childShardList,
-@as("MillisBehindLatest") millisBehindLatest: millisBehindLatest,
-@as("NextShardIterator") nextShardIterator: shardIterator,
-@as("Records") records: option<recordList>
+@as("ChildShards") childShards: option<childShardList>,
+@as("MillisBehindLatest") millisBehindLatest: option<millisBehindLatest>,
+@as("NextShardIterator") nextShardIterator: option<shardIterator>,
+@as("Records") records: recordList
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "GetRecordsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeStreamSummary = {
   type t;
   type request = {
-@as("StreamName") streamName: option<streamName>
+@as("StreamName") streamName: streamName
 }
   type response = {
-@as("StreamDescriptionSummary") streamDescriptionSummary: option<streamDescriptionSummary>
+@as("StreamDescriptionSummary") streamDescriptionSummary: streamDescriptionSummary
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "DescribeStreamSummaryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeStream = {
   type t;
   type request = {
-@as("ExclusiveStartShardId") exclusiveStartShardId: shardId,
-@as("Limit") limit: describeStreamInputLimit,
-@as("StreamName") streamName: option<streamName>
+@as("ExclusiveStartShardId") exclusiveStartShardId: option<shardId>,
+@as("Limit") limit: option<describeStreamInputLimit>,
+@as("StreamName") streamName: streamName
 }
   type response = {
-@as("StreamDescription") streamDescription: option<streamDescription>
+@as("StreamDescription") streamDescription: streamDescription
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "DescribeStreamCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SubscribeToShard = {
   type t;
   type request = {
-@as("StartingPosition") startingPosition: option<startingPosition>,
-@as("ShardId") shardId: option<shardId>,
-@as("ConsumerARN") consumerARN: option<consumerARN>
+@as("StartingPosition") startingPosition: startingPosition,
+@as("ShardId") shardId: shardId,
+@as("ConsumerARN") consumerARN: consumerARN
 }
   type response = {
-@as("EventStream") eventStream: option<subscribeToShardEventStream>
+@as("EventStream") eventStream: subscribeToShardEventStream
 }
   @module("@aws-sdk/client-kinesis") @new external new_: (request) => t = "SubscribeToShardCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

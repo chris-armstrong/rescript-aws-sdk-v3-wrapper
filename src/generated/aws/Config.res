@@ -1,8 +1,12 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type timestamp_ = Js.Date.t;
 type version = string
 type value = string
 type templateS3Uri = string
@@ -18,23 +22,23 @@ type stringWithCharLimit256 = string
 type stringWithCharLimit2048 = string
 type stringWithCharLimit128 = string
 type stringWithCharLimit1024 = string
-type amazonawsString = string
+type string_ = string
 type stackArn = string
 type schemaVersionId = string
-type ruleLimit = int;
-type retentionPeriodInDays = int;
+type ruleLimit = int
+type retentionPeriodInDays = int
 type retentionConfigurationName = string
-type resourceValueType = [@as("RESOURCE_ID") #RESOURCE_ID]
+type resourceValueType = [@as("RESOURCE_ID") #RESOURCEID]
 type resourceTypeString = string
-type resourceType = [@as("AWS::SSM::FileData") #AWS__SSM__FileData | @as("AWS::SNS::Topic") #AWS__SNS__Topic | @as("AWS::SecretsManager::Secret") #AWS__SecretsManager__Secret | @as("AWS::QLDB::Ledger") #AWS__QLDB__Ledger | @as("AWS::KMS::Key") #AWS__KMS__Key | @as("AWS::SQS::Queue") #AWS__SQS__Queue | @as("AWS::ServiceCatalog::Portfolio") #AWS__ServiceCatalog__Portfolio | @as("AWS::ServiceCatalog::CloudFormationProduct") #AWS__ServiceCatalog__CloudFormationProduct | @as("AWS::ServiceCatalog::CloudFormationProvisionedProduct") #AWS__ServiceCatalog__CloudFormationProvisionedProduct | @as("AWS::CodePipeline::Pipeline") #AWS__CodePipeline__Pipeline | @as("AWS::ApiGatewayV2::Api") #AWS__ApiGatewayV2__Api | @as("AWS::ApiGatewayV2::Stage") #AWS__ApiGatewayV2__Stage | @as("AWS::ApiGateway::RestApi") #AWS__ApiGateway__RestApi | @as("AWS::ApiGateway::Stage") #AWS__ApiGateway__Stage | @as("AWS::Config::ResourceCompliance") #AWS__Config__ResourceCompliance | @as("AWS::Config::ConformancePackCompliance") #AWS__Config__ConformancePackCompliance | @as("AWS::ShieldRegional::Protection") #AWS__ShieldRegional__Protection | @as("AWS::Shield::Protection") #AWS__Shield__Protection | @as("AWS::SSM::PatchCompliance") #AWS__SSM__PatchCompliance | @as("AWS::SSM::AssociationCompliance") #AWS__SSM__AssociationCompliance | @as("AWS::XRay::EncryptionConfig") #AWS__XRay__EncryptionConfig | @as("AWS::WAFv2::ManagedRuleSet") #AWS__WAFv2__ManagedRuleSet | @as("AWS::WAFv2::RegexPatternSet") #AWS__WAFv2__RegexPatternSet | @as("AWS::WAFv2::IPSet") #AWS__WAFv2__IPSet | @as("AWS::WAFv2::RuleGroup") #AWS__WAFv2__RuleGroup | @as("AWS::WAFv2::WebACL") #AWS__WAFv2__WebACL | @as("AWS::ElasticBeanstalk::Environment") #AWS__ElasticBeanstalk__Environment | @as("AWS::ElasticBeanstalk::ApplicationVersion") #AWS__ElasticBeanstalk__ApplicationVersion | @as("AWS::ElasticBeanstalk::Application") #AWS__ElasticBeanstalk__Application | @as("AWS::NetworkFirewall::RuleGroup") #AWS__NetworkFirewall__RuleGroup | @as("AWS::NetworkFirewall::FirewallPolicy") #AWS__NetworkFirewall__FirewallPolicy | @as("AWS::NetworkFirewall::Firewall") #AWS__NetworkFirewall__Firewall | @as("AWS::Lambda::Function") #AWS__Lambda__Function | @as("AWS::CloudFront::StreamingDistribution") #AWS__CloudFront__StreamingDistribution | @as("AWS::CloudFront::Distribution") #AWS__CloudFront__Distribution | @as("AWS::WAFRegional::WebACL") #AWS__WAFRegional__WebACL | @as("AWS::WAFRegional::RuleGroup") #AWS__WAFRegional__RuleGroup | @as("AWS::WAFRegional::Rule") #AWS__WAFRegional__Rule | @as("AWS::WAFRegional::RateBasedRule") #AWS__WAFRegional__RateBasedRule | @as("AWS::WAF::WebACL") #AWS__WAF__WebACL | @as("AWS::WAF::RuleGroup") #AWS__WAF__RuleGroup | @as("AWS::WAF::Rule") #AWS__WAF__Rule | @as("AWS::WAF::RateBasedRule") #AWS__WAF__RateBasedRule | @as("AWS::CodeBuild::Project") #AWS__CodeBuild__Project | @as("AWS::DynamoDB::Table") #AWS__DynamoDB__Table | @as("AWS::AutoScaling::ScheduledAction") #AWS__AutoScaling__ScheduledAction | @as("AWS::AutoScaling::ScalingPolicy") #AWS__AutoScaling__ScalingPolicy | @as("AWS::AutoScaling::LaunchConfiguration") #AWS__AutoScaling__LaunchConfiguration | @as("AWS::AutoScaling::AutoScalingGroup") #AWS__AutoScaling__AutoScalingGroup | @as("AWS::ElasticLoadBalancing::LoadBalancer") #AWS__ElasticLoadBalancing__LoadBalancer | @as("AWS::CloudFormation::Stack") #AWS__CloudFormation__Stack | @as("AWS::CloudWatch::Alarm") #AWS__CloudWatch__Alarm | @as("AWS::SSM::ManagedInstanceInventory") #AWS__SSM__ManagedInstanceInventory | @as("AWS::Redshift::EventSubscription") #AWS__Redshift__EventSubscription | @as("AWS::Redshift::ClusterSubnetGroup") #AWS__Redshift__ClusterSubnetGroup | @as("AWS::Redshift::ClusterSecurityGroup") #AWS__Redshift__ClusterSecurityGroup | @as("AWS::Redshift::ClusterParameterGroup") #AWS__Redshift__ClusterParameterGroup | @as("AWS::Redshift::ClusterSnapshot") #AWS__Redshift__ClusterSnapshot | @as("AWS::Redshift::Cluster") #AWS__Redshift__Cluster | @as("AWS::S3::AccountPublicAccessBlock") #AWS__S3__AccountPublicAccessBlock | @as("AWS::S3::Bucket") #AWS__S3__Bucket | @as("AWS::RDS::EventSubscription") #AWS__RDS__EventSubscription | @as("AWS::RDS::DBClusterSnapshot") #AWS__RDS__DBClusterSnapshot | @as("AWS::RDS::DBCluster") #AWS__RDS__DBCluster | @as("AWS::RDS::DBSnapshot") #AWS__RDS__DBSnapshot | @as("AWS::RDS::DBSecurityGroup") #AWS__RDS__DBSecurityGroup | @as("AWS::RDS::DBSubnetGroup") #AWS__RDS__DBSubnetGroup | @as("AWS::RDS::DBInstance") #AWS__RDS__DBInstance | @as("AWS::ACM::Certificate") #AWS__ACM__Certificate | @as("AWS::ElasticLoadBalancingV2::LoadBalancer") #AWS__ElasticLoadBalancingV2__LoadBalancer | @as("AWS::IAM::User") #AWS__IAM__User | @as("AWS::IAM::Role") #AWS__IAM__Role | @as("AWS::IAM::Policy") #AWS__IAM__Policy | @as("AWS::IAM::Group") #AWS__IAM__Group | @as("AWS::Elasticsearch::Domain") #AWS__Elasticsearch__Domain | @as("AWS::EC2::VPCPeeringConnection") #AWS__EC2__VPCPeeringConnection | @as("AWS::EC2::FlowLog") #AWS__EC2__FlowLog | @as("AWS::EC2::VPCEndpointService") #AWS__EC2__VPCEndpointService | @as("AWS::EC2::VPCEndpoint") #AWS__EC2__VPCEndpoint | @as("AWS::EC2::EgressOnlyInternetGateway") #AWS__EC2__EgressOnlyInternetGateway | @as("AWS::EC2::NatGateway") #AWS__EC2__NatGateway | @as("AWS::EC2::RegisteredHAInstance") #AWS__EC2__RegisteredHAInstance | @as("AWS::EC2::VPNGateway") #AWS__EC2__VPNGateway | @as("AWS::EC2::VPNConnection") #AWS__EC2__VPNConnection | @as("AWS::EC2::VPC") #AWS__EC2__VPC | @as("AWS::EC2::Volume") #AWS__EC2__Volume | @as("AWS::CloudTrail::Trail") #AWS__CloudTrail__Trail | @as("AWS::EC2::Subnet") #AWS__EC2__Subnet | @as("AWS::EC2::SecurityGroup") #AWS__EC2__SecurityGroup | @as("AWS::EC2::RouteTable") #AWS__EC2__RouteTable | @as("AWS::EC2::NetworkInterface") #AWS__EC2__NetworkInterface | @as("AWS::EC2::NetworkAcl") #AWS__EC2__NetworkAcl | @as("AWS::EC2::InternetGateway") #AWS__EC2__InternetGateway | @as("AWS::EC2::Instance") #AWS__EC2__Instance | @as("AWS::EC2::Host") #AWS__EC2__Host | @as("AWS::EC2::EIP") #AWS__EC2__EIP | @as("AWS::EC2::CustomerGateway") #AWS__EC2__CustomerGateway]
+type resourceType = [@as("AWS::SSM::FileData") #AWSSSMFileData | @as("AWS::SNS::Topic") #AWSSNSTopic | @as("AWS::SecretsManager::Secret") #AWSSecretsManagerSecret | @as("AWS::QLDB::Ledger") #AWSQLDBLedger | @as("AWS::KMS::Key") #AWSKMSKey | @as("AWS::SQS::Queue") #AWSSQSQueue | @as("AWS::ServiceCatalog::Portfolio") #AWSServiceCatalogPortfolio | @as("AWS::ServiceCatalog::CloudFormationProduct") #AWSServiceCatalogCloudFormationProduct | @as("AWS::ServiceCatalog::CloudFormationProvisionedProduct") #AWSServiceCatalogCloudFormationProvisionedProduct | @as("AWS::CodePipeline::Pipeline") #AWSCodePipelinePipeline | @as("AWS::ApiGatewayV2::Api") #AWSApiGatewayV2Api | @as("AWS::ApiGatewayV2::Stage") #AWSApiGatewayV2Stage | @as("AWS::ApiGateway::RestApi") #AWSApiGatewayRestApi | @as("AWS::ApiGateway::Stage") #AWSApiGatewayStage | @as("AWS::Config::ResourceCompliance") #AWSConfigResourceCompliance | @as("AWS::Config::ConformancePackCompliance") #AWSConfigConformancePackCompliance | @as("AWS::ShieldRegional::Protection") #AWSShieldRegionalProtection | @as("AWS::Shield::Protection") #AWSShieldProtection | @as("AWS::SSM::PatchCompliance") #AWSSSMPatchCompliance | @as("AWS::SSM::AssociationCompliance") #AWSSSMAssociationCompliance | @as("AWS::XRay::EncryptionConfig") #AWSXRayEncryptionConfig | @as("AWS::WAFv2::ManagedRuleSet") #AWSWAFv2ManagedRuleSet | @as("AWS::WAFv2::RegexPatternSet") #AWSWAFv2RegexPatternSet | @as("AWS::WAFv2::IPSet") #AWSWAFv2IPSet | @as("AWS::WAFv2::RuleGroup") #AWSWAFv2RuleGroup | @as("AWS::WAFv2::WebACL") #AWSWAFv2WebACL | @as("AWS::ElasticBeanstalk::Environment") #AWSElasticBeanstalkEnvironment | @as("AWS::ElasticBeanstalk::ApplicationVersion") #AWSElasticBeanstalkApplicationVersion | @as("AWS::ElasticBeanstalk::Application") #AWSElasticBeanstalkApplication | @as("AWS::NetworkFirewall::RuleGroup") #AWSNetworkFirewallRuleGroup | @as("AWS::NetworkFirewall::FirewallPolicy") #AWSNetworkFirewallFirewallPolicy | @as("AWS::NetworkFirewall::Firewall") #AWSNetworkFirewallFirewall | @as("AWS::Lambda::Function") #AWSLambdaFunction | @as("AWS::CloudFront::StreamingDistribution") #AWSCloudFrontStreamingDistribution | @as("AWS::CloudFront::Distribution") #AWSCloudFrontDistribution | @as("AWS::WAFRegional::WebACL") #AWSWAFRegionalWebACL | @as("AWS::WAFRegional::RuleGroup") #AWSWAFRegionalRuleGroup | @as("AWS::WAFRegional::Rule") #AWSWAFRegionalRule | @as("AWS::WAFRegional::RateBasedRule") #AWSWAFRegionalRateBasedRule | @as("AWS::WAF::WebACL") #AWSWAFWebACL | @as("AWS::WAF::RuleGroup") #AWSWAFRuleGroup | @as("AWS::WAF::Rule") #AWSWAFRule | @as("AWS::WAF::RateBasedRule") #AWSWAFRateBasedRule | @as("AWS::CodeBuild::Project") #AWSCodeBuildProject | @as("AWS::DynamoDB::Table") #AWSDynamoDBTable | @as("AWS::AutoScaling::ScheduledAction") #AWSAutoScalingScheduledAction | @as("AWS::AutoScaling::ScalingPolicy") #AWSAutoScalingScalingPolicy | @as("AWS::AutoScaling::LaunchConfiguration") #AWSAutoScalingLaunchConfiguration | @as("AWS::AutoScaling::AutoScalingGroup") #AWSAutoScalingAutoScalingGroup | @as("AWS::ElasticLoadBalancing::LoadBalancer") #AWSElasticLoadBalancingLoadBalancer | @as("AWS::CloudFormation::Stack") #AWSCloudFormationStack | @as("AWS::CloudWatch::Alarm") #AWSCloudWatchAlarm | @as("AWS::SSM::ManagedInstanceInventory") #AWSSSMManagedInstanceInventory | @as("AWS::Redshift::EventSubscription") #AWSRedshiftEventSubscription | @as("AWS::Redshift::ClusterSubnetGroup") #AWSRedshiftClusterSubnetGroup | @as("AWS::Redshift::ClusterSecurityGroup") #AWSRedshiftClusterSecurityGroup | @as("AWS::Redshift::ClusterParameterGroup") #AWSRedshiftClusterParameterGroup | @as("AWS::Redshift::ClusterSnapshot") #AWSRedshiftClusterSnapshot | @as("AWS::Redshift::Cluster") #AWSRedshiftCluster | @as("AWS::S3::AccountPublicAccessBlock") #AWSS3AccountPublicAccessBlock | @as("AWS::S3::Bucket") #AWSS3Bucket | @as("AWS::RDS::EventSubscription") #AWSRDSEventSubscription | @as("AWS::RDS::DBClusterSnapshot") #AWSRDSDBClusterSnapshot | @as("AWS::RDS::DBCluster") #AWSRDSDBCluster | @as("AWS::RDS::DBSnapshot") #AWSRDSDBSnapshot | @as("AWS::RDS::DBSecurityGroup") #AWSRDSDBSecurityGroup | @as("AWS::RDS::DBSubnetGroup") #AWSRDSDBSubnetGroup | @as("AWS::RDS::DBInstance") #AWSRDSDBInstance | @as("AWS::ACM::Certificate") #AWSACMCertificate | @as("AWS::ElasticLoadBalancingV2::LoadBalancer") #AWSElasticLoadBalancingV2LoadBalancer | @as("AWS::IAM::User") #AWSIAMUser | @as("AWS::IAM::Role") #AWSIAMRole | @as("AWS::IAM::Policy") #AWSIAMPolicy | @as("AWS::IAM::Group") #AWSIAMGroup | @as("AWS::Elasticsearch::Domain") #AWSElasticsearchDomain | @as("AWS::EC2::VPCPeeringConnection") #AWSEC2VPCPeeringConnection | @as("AWS::EC2::FlowLog") #AWSEC2FlowLog | @as("AWS::EC2::VPCEndpointService") #AWSEC2VPCEndpointService | @as("AWS::EC2::VPCEndpoint") #AWSEC2VPCEndpoint | @as("AWS::EC2::EgressOnlyInternetGateway") #AWSEC2EgressOnlyInternetGateway | @as("AWS::EC2::NatGateway") #AWSEC2NatGateway | @as("AWS::EC2::RegisteredHAInstance") #AWSEC2RegisteredHAInstance | @as("AWS::EC2::VPNGateway") #AWSEC2VPNGateway | @as("AWS::EC2::VPNConnection") #AWSEC2VPNConnection | @as("AWS::EC2::VPC") #AWSEC2VPC | @as("AWS::EC2::Volume") #AWSEC2Volume | @as("AWS::CloudTrail::Trail") #AWSCloudTrailTrail | @as("AWS::EC2::Subnet") #AWSEC2Subnet | @as("AWS::EC2::SecurityGroup") #AWSEC2SecurityGroup | @as("AWS::EC2::RouteTable") #AWSEC2RouteTable | @as("AWS::EC2::NetworkInterface") #AWSEC2NetworkInterface | @as("AWS::EC2::NetworkAcl") #AWSEC2NetworkAcl | @as("AWS::EC2::InternetGateway") #AWSEC2InternetGateway | @as("AWS::EC2::Instance") #AWSEC2Instance | @as("AWS::EC2::Host") #AWSEC2Host | @as("AWS::EC2::EIP") #AWSEC2EIP | @as("AWS::EC2::CustomerGateway") #AWSEC2CustomerGateway]
 type resourceName = string
 type resourceId = string
 type resourceDeletionTime = Js.Date.t;
 type resourceCreationTime = Js.Date.t;
-type resourceCountGroupKey = [@as("AWS_REGION") #AWS_REGION | @as("ACCOUNT_ID") #ACCOUNT_ID | @as("RESOURCE_TYPE") #RESOURCE_TYPE]
-type remediationTargetType = [@as("SSM_DOCUMENT") #SSM_DOCUMENT]
+type resourceCountGroupKey = [@as("AWS_REGION") #AWSREGION | @as("ACCOUNT_ID") #ACCOUNTID | @as("RESOURCE_TYPE") #RESOURCETYPE]
+type remediationTargetType = [@as("SSM_DOCUMENT") #SSMDOCUMENT]
 type remediationExecutionStepState = [@as("FAILED") #FAILED | @as("PENDING") #PENDING | @as("SUCCEEDED") #SUCCEEDED]
-type remediationExecutionState = [@as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #IN_PROGRESS | @as("QUEUED") #QUEUED]
+type remediationExecutionState = [@as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #INPROGRESS | @as("QUEUED") #QUEUED]
 type relationshipName = string
 type relatedEvent = string
 type recorderStatus = [@as("Failure") #Failure | @as("Success") #Success | @as("Pending") #Pending]
@@ -44,14 +48,14 @@ type queryId = string
 type queryExpression = string
 type queryDescription = string
 type queryArn = string
-type percentage = int;
+type percentage = int
 type parameterValue = string
 type parameterName = string
-type pageSizeLimit = int;
-type owner = [@as("AWS") #AWS | @as("CUSTOM_LAMBDA") #CUSTOM_LAMBDA]
-type organizationRuleStatus = [@as("UPDATE_FAILED") #UPDATE_FAILED | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS | @as("UPDATE_SUCCESSFUL") #UPDATE_SUCCESSFUL | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS | @as("DELETE_FAILED") #DELETE_FAILED | @as("DELETE_SUCCESSFUL") #DELETE_SUCCESSFUL | @as("CREATE_FAILED") #CREATE_FAILED | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS | @as("CREATE_SUCCESSFUL") #CREATE_SUCCESSFUL]
-type organizationResourceStatus = [@as("UPDATE_FAILED") #UPDATE_FAILED | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS | @as("UPDATE_SUCCESSFUL") #UPDATE_SUCCESSFUL | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS | @as("DELETE_FAILED") #DELETE_FAILED | @as("DELETE_SUCCESSFUL") #DELETE_SUCCESSFUL | @as("CREATE_FAILED") #CREATE_FAILED | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS | @as("CREATE_SUCCESSFUL") #CREATE_SUCCESSFUL]
-type organizationResourceDetailedStatus = [@as("UPDATE_FAILED") #UPDATE_FAILED | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS | @as("UPDATE_SUCCESSFUL") #UPDATE_SUCCESSFUL | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS | @as("DELETE_FAILED") #DELETE_FAILED | @as("DELETE_SUCCESSFUL") #DELETE_SUCCESSFUL | @as("CREATE_FAILED") #CREATE_FAILED | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS | @as("CREATE_SUCCESSFUL") #CREATE_SUCCESSFUL]
+type pageSizeLimit = int
+type owner = [@as("AWS") #AWS | @as("CUSTOM_LAMBDA") #CUSTOMLAMBDA]
+type organizationRuleStatus = [@as("UPDATE_FAILED") #UPDATEFAILED | @as("UPDATE_IN_PROGRESS") #UPDATEINPROGRESS | @as("UPDATE_SUCCESSFUL") #UPDATESUCCESSFUL | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS | @as("DELETE_FAILED") #DELETEFAILED | @as("DELETE_SUCCESSFUL") #DELETESUCCESSFUL | @as("CREATE_FAILED") #CREATEFAILED | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS | @as("CREATE_SUCCESSFUL") #CREATESUCCESSFUL]
+type organizationResourceStatus = [@as("UPDATE_FAILED") #UPDATEFAILED | @as("UPDATE_IN_PROGRESS") #UPDATEINPROGRESS | @as("UPDATE_SUCCESSFUL") #UPDATESUCCESSFUL | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS | @as("DELETE_FAILED") #DELETEFAILED | @as("DELETE_SUCCESSFUL") #DELETESUCCESSFUL | @as("CREATE_FAILED") #CREATEFAILED | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS | @as("CREATE_SUCCESSFUL") #CREATESUCCESSFUL]
+type organizationResourceDetailedStatus = [@as("UPDATE_FAILED") #UPDATEFAILED | @as("UPDATE_IN_PROGRESS") #UPDATEINPROGRESS | @as("UPDATE_SUCCESSFUL") #UPDATESUCCESSFUL | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS | @as("DELETE_FAILED") #DELETEFAILED | @as("DELETE_SUCCESSFUL") #DELETESUCCESSFUL | @as("CREATE_FAILED") #CREATEFAILED | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS | @as("CREATE_SUCCESSFUL") #CREATESUCCESSFUL]
 type organizationConformancePackName = string
 type organizationConfigRuleTriggerType = [@as("ScheduledNotification") #ScheduledNotification | @as("OversizedConfigurationItemChangeNotification") #OversizedConfigurationItemChangeNotification | @as("ConfigurationItemChangeNotification") #ConfigurationItemChangeNotification]
 type organizationConfigRuleName = string
@@ -59,33 +63,33 @@ type orderingTimestamp = Js.Date.t;
 type nextToken = string
 type name = string
 type messageType = [@as("OversizedConfigurationItemChangeNotification") #OversizedConfigurationItemChangeNotification | @as("ScheduledNotification") #ScheduledNotification | @as("ConfigurationSnapshotDeliveryCompleted") #ConfigurationSnapshotDeliveryCompleted | @as("ConfigurationItemChangeNotification") #ConfigurationItemChangeNotification]
-type memberAccountRuleStatus = [@as("UPDATE_FAILED") #UPDATE_FAILED | @as("UPDATE_IN_PROGRESS") #UPDATE_IN_PROGRESS | @as("UPDATE_SUCCESSFUL") #UPDATE_SUCCESSFUL | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS | @as("DELETE_FAILED") #DELETE_FAILED | @as("DELETE_SUCCESSFUL") #DELETE_SUCCESSFUL | @as("CREATE_FAILED") #CREATE_FAILED | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS | @as("CREATE_SUCCESSFUL") #CREATE_SUCCESSFUL]
-type maximumExecutionFrequency = [@as("TwentyFour_Hours") #TwentyFour_Hours | @as("Twelve_Hours") #Twelve_Hours | @as("Six_Hours") #Six_Hours | @as("Three_Hours") #Three_Hours | @as("One_Hour") #One_Hour]
-type amazonawsLong = float;
-type limit = int;
+type memberAccountRuleStatus = [@as("UPDATE_FAILED") #UPDATEFAILED | @as("UPDATE_IN_PROGRESS") #UPDATEINPROGRESS | @as("UPDATE_SUCCESSFUL") #UPDATESUCCESSFUL | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS | @as("DELETE_FAILED") #DELETEFAILED | @as("DELETE_SUCCESSFUL") #DELETESUCCESSFUL | @as("CREATE_FAILED") #CREATEFAILED | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS | @as("CREATE_SUCCESSFUL") #CREATESUCCESSFUL]
+type maximumExecutionFrequency = [@as("TwentyFour_Hours") #TwentyFourHours | @as("Twelve_Hours") #TwelveHours | @as("Six_Hours") #SixHours | @as("Three_Hours") #ThreeHours | @as("One_Hour") #OneHour]
+type long = float
+type limit = int
 type laterTime = Js.Date.t;
-type amazonawsInteger = int;
-type includeGlobalResourceTypes = bool;
-type groupByAPILimit = int;
-type getConformancePackComplianceDetailsLimit = int;
+type integer_ = int
+type includeGlobalResourceTypes = bool
+type groupByAPILimit = int
+type getConformancePackComplianceDetailsLimit = int
 type fieldName = string
 type expression = string
-type eventSource = [@as("aws.config") #aws_config]
+type eventSource = [@as("aws.config") #AwsConfig]
 type errorMessage = string
 type emptiableStringWithCharLimit256 = string
 type earlierTime = Js.Date.t;
-type describePendingAggregationRequestsLimit = int;
-type describeConformancePackComplianceLimit = int;
-type deliveryStatus = [@as("Not_Applicable") #Not_Applicable | @as("Failure") #Failure | @as("Success") #Success]
+type describePendingAggregationRequestsLimit = int
+type describeConformancePackComplianceLimit = int
+type deliveryStatus = [@as("Not_Applicable") #NotApplicable | @as("Failure") #Failure | @as("Success") #Success]
 type deliveryS3KeyPrefix = string
 type deliveryS3Bucket = string
 type date = Js.Date.t;
-type cosmosPageLimit = int;
+type cosmosPageLimit = int
 type conformancePackStatusReason = string
-type conformancePackState = [@as("DELETE_FAILED") #DELETE_FAILED | @as("DELETE_IN_PROGRESS") #DELETE_IN_PROGRESS | @as("CREATE_FAILED") #CREATE_FAILED | @as("CREATE_COMPLETE") #CREATE_COMPLETE | @as("CREATE_IN_PROGRESS") #CREATE_IN_PROGRESS]
+type conformancePackState = [@as("DELETE_FAILED") #DELETEFAILED | @as("DELETE_IN_PROGRESS") #DELETEINPROGRESS | @as("CREATE_FAILED") #CREATEFAILED | @as("CREATE_COMPLETE") #CREATECOMPLETE | @as("CREATE_IN_PROGRESS") #CREATEINPROGRESS]
 type conformancePackName = string
 type conformancePackId = string
-type conformancePackComplianceType = [@as("INSUFFICIENT_DATA") #INSUFFICIENT_DATA | @as("NON_COMPLIANT") #NON_COMPLIANT | @as("COMPLIANT") #COMPLIANT]
+type conformancePackComplianceType = [@as("INSUFFICIENT_DATA") #INSUFFICIENTDATA | @as("NON_COMPLIANT") #NONCOMPLIANT | @as("COMPLIANT") #COMPLIANT]
 type conformancePackArn = string
 type configurationStateId = string
 type configurationItemStatus = [@as("ResourceDeletedNotRecorded") #ResourceDeletedNotRecorded | @as("ResourceDeleted") #ResourceDeleted | @as("ResourceNotRecorded") #ResourceNotRecorded | @as("ResourceDiscovered") #ResourceDiscovered | @as("OK") #OK]
@@ -94,334 +98,334 @@ type configurationItemCaptureTime = Js.Date.t;
 type configurationAggregatorName = string
 type configurationAggregatorArn = string
 type configuration = string
-type configRuleState = [@as("EVALUATING") #EVALUATING | @as("DELETING_RESULTS") #DELETING_RESULTS | @as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE]
+type configRuleState = [@as("EVALUATING") #EVALUATING | @as("DELETING_RESULTS") #DELETINGRESULTS | @as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE]
 type configRuleName = string
-type configRuleComplianceSummaryGroupKey = [@as("AWS_REGION") #AWS_REGION | @as("ACCOUNT_ID") #ACCOUNT_ID]
-type complianceType = [@as("INSUFFICIENT_DATA") #INSUFFICIENT_DATA | @as("NOT_APPLICABLE") #NOT_APPLICABLE | @as("NON_COMPLIANT") #NON_COMPLIANT | @as("COMPLIANT") #COMPLIANT]
+type configRuleComplianceSummaryGroupKey = [@as("AWS_REGION") #AWSREGION | @as("ACCOUNT_ID") #ACCOUNTID]
+type complianceType = [@as("INSUFFICIENT_DATA") #INSUFFICIENTDATA | @as("NOT_APPLICABLE") #NOTAPPLICABLE | @as("NON_COMPLIANT") #NONCOMPLIANT | @as("COMPLIANT") #COMPLIANT]
 type chronologicalOrder = [@as("Forward") #Forward | @as("Reverse") #Reverse]
 type channelName = string
-type amazonawsBoolean = bool;
+type boolean_ = bool
 type baseResourceId = string
 type awsRegion = string
 type availabilityZone = string
-type autoRemediationAttempts = int;
-type autoRemediationAttemptSeconds = float;
+type autoRemediationAttempts = int
+type autoRemediationAttemptSeconds = float
 type annotation = string
 type amazonResourceName = string
-type allSupported = bool;
+type allSupported = bool
 type aggregatedSourceType = [@as("ORGANIZATION") #ORGANIZATION | @as("ACCOUNT") #ACCOUNT]
 type aggregatedSourceStatusType = [@as("OUTDATED") #OUTDATED | @as("SUCCEEDED") #SUCCEEDED | @as("FAILED") #FAILED]
-type aggregateConformancePackComplianceSummaryGroupKey = [@as("AWS_REGION") #AWS_REGION | @as("ACCOUNT_ID") #ACCOUNT_ID]
+type aggregateConformancePackComplianceSummaryGroupKey = [@as("AWS_REGION") #AWSREGION | @as("ACCOUNT_ID") #ACCOUNTID]
 type accountId = string
-type aRN = string
+type arn = string
 type tags = Js.Dict.t< value>
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: tagValue,
-@as("Key") key: tagKey
+@as("Value") value: option<tagValue>,
+@as("Key") key: option<tagKey>
 }
 type supplementaryConfiguration = Js.Dict.t< supplementaryConfigurationValue>
 type storedQueryMetadata = {
-@as("Description") description: queryDescription,
-@as("QueryName") queryName: option<queryName>,
-@as("QueryArn") queryArn: option<queryArn>,
-@as("QueryId") queryId: option<queryId>
-}
-type storedQuery = {
-@as("Expression") expression: queryExpression,
-@as("Description") description: queryDescription,
-@as("QueryName") queryName: option<queryName>,
+@as("Description") description: option<queryDescription>,
+@as("QueryName") queryName: queryName,
 @as("QueryArn") queryArn: queryArn,
 @as("QueryId") queryId: queryId
 }
+type storedQuery = {
+@as("Expression") expression: option<queryExpression>,
+@as("Description") description: option<queryDescription>,
+@as("QueryName") queryName: queryName,
+@as("QueryArn") queryArn: option<queryArn>,
+@as("QueryId") queryId: option<queryId>
+}
 type statusDetailFilters = {
-@as("MemberAccountRuleStatus") memberAccountRuleStatus: memberAccountRuleStatus,
-@as("AccountId") accountId: accountId
+@as("MemberAccountRuleStatus") memberAccountRuleStatus: option<memberAccountRuleStatus>,
+@as("AccountId") accountId: option<accountId>
 }
 type staticParameterValues = array<stringWithCharLimit256>
 type ssmControls = {
-@as("ErrorPercentage") errorPercentage: percentage,
-@as("ConcurrentExecutionRatePercentage") concurrentExecutionRatePercentage: percentage
+@as("ErrorPercentage") errorPercentage: option<percentage>,
+@as("ConcurrentExecutionRatePercentage") concurrentExecutionRatePercentage: option<percentage>
 }
 type sourceDetail = {
-@as("MaximumExecutionFrequency") maximumExecutionFrequency: maximumExecutionFrequency,
-@as("MessageType") messageType: messageType,
-@as("EventSource") eventSource: eventSource
+@as("MaximumExecutionFrequency") maximumExecutionFrequency: option<maximumExecutionFrequency>,
+@as("MessageType") messageType: option<messageType>,
+@as("EventSource") eventSource: option<eventSource>
 }
 type retentionConfigurationNameList = array<retentionConfigurationName>
 type retentionConfiguration = {
-@as("RetentionPeriodInDays") retentionPeriodInDays: option<retentionPeriodInDays>,
-@as("Name") name: option<retentionConfigurationName>
+@as("RetentionPeriodInDays") retentionPeriodInDays: retentionPeriodInDays,
+@as("Name") name: retentionConfigurationName
 }
-type results = array<amazonawsString>
+type results = array<string_>
 type resourceValue = {
-@as("Value") value: option<resourceValueType>
+@as("Value") value: resourceValueType
 }
 type resourceTypesScope = array<stringWithCharLimit256>
 type resourceTypes = array<stringWithCharLimit256>
 type resourceTypeList = array<resourceType>
 type resourceKey = {
-@as("resourceId") resourceId: option<resourceId>,
-@as("resourceType") resourceType: option<resourceType>
+resourceId: resourceId,
+resourceType: resourceType
 }
 type resourceIdentifier = {
-@as("resourceDeletionTime") resourceDeletionTime: resourceDeletionTime,
-@as("resourceName") resourceName: resourceName,
-@as("resourceId") resourceId: resourceId,
-@as("resourceType") resourceType: resourceType
+resourceDeletionTime: option<resourceDeletionTime>,
+resourceName: option<resourceName>,
+resourceId: option<resourceId>,
+resourceType: option<resourceType>
 }
 type resourceIdList = array<resourceId>
 type resourceFilters = {
-@as("Region") region: awsRegion,
-@as("ResourceName") resourceName: resourceName,
-@as("ResourceId") resourceId: resourceId,
-@as("AccountId") accountId: accountId
+@as("Region") region: option<awsRegion>,
+@as("ResourceName") resourceName: option<resourceName>,
+@as("ResourceId") resourceId: option<resourceId>,
+@as("AccountId") accountId: option<accountId>
 }
 type resourceCountFilters = {
-@as("Region") region: awsRegion,
-@as("AccountId") accountId: accountId,
-@as("ResourceType") resourceType: resourceType
+@as("Region") region: option<awsRegion>,
+@as("AccountId") accountId: option<accountId>,
+@as("ResourceType") resourceType: option<resourceType>
 }
 type resourceCount = {
-@as("count") count: amazonawsLong,
-@as("resourceType") resourceType: resourceType
+count: option<long>,
+resourceType: option<resourceType>
 }
 type remediationExecutionStep = {
-@as("StopTime") stopTime: date,
-@as("StartTime") startTime: date,
-@as("ErrorMessage") errorMessage: amazonawsString,
-@as("State") state: remediationExecutionStepState,
-@as("Name") name: amazonawsString
+@as("StopTime") stopTime: option<date>,
+@as("StartTime") startTime: option<date>,
+@as("ErrorMessage") errorMessage: option<string_>,
+@as("State") state: option<remediationExecutionStepState>,
+@as("Name") name: option<string_>
 }
 type remediationExceptionResourceKey = {
-@as("ResourceId") resourceId: stringWithCharLimit1024,
-@as("ResourceType") resourceType: stringWithCharLimit256
+@as("ResourceId") resourceId: option<stringWithCharLimit1024>,
+@as("ResourceType") resourceType: option<stringWithCharLimit256>
 }
 type remediationException = {
-@as("ExpirationTime") expirationTime: date,
-@as("Message") message: stringWithCharLimit1024,
-@as("ResourceId") resourceId: option<stringWithCharLimit1024>,
-@as("ResourceType") resourceType: option<stringWithCharLimit256>,
-@as("ConfigRuleName") configRuleName: option<configRuleName>
+@as("ExpirationTime") expirationTime: option<date>,
+@as("Message") message: option<stringWithCharLimit1024>,
+@as("ResourceId") resourceId: stringWithCharLimit1024,
+@as("ResourceType") resourceType: stringWithCharLimit256,
+@as("ConfigRuleName") configRuleName: configRuleName
 }
 type relationship = {
-@as("relationshipName") relationshipName: relationshipName,
-@as("resourceName") resourceName: resourceName,
-@as("resourceId") resourceId: resourceId,
-@as("resourceType") resourceType: resourceType
+relationshipName: option<relationshipName>,
+resourceName: option<resourceName>,
+resourceId: option<resourceId>,
+resourceType: option<resourceType>
 }
 type relatedEventList = array<relatedEvent>
 type reevaluateConfigRuleNames = array<configRuleName>
 type pendingAggregationRequest = {
-@as("RequesterAwsRegion") requesterAwsRegion: awsRegion,
-@as("RequesterAccountId") requesterAccountId: accountId
+@as("RequesterAwsRegion") requesterAwsRegion: option<awsRegion>,
+@as("RequesterAccountId") requesterAccountId: option<accountId>
 }
 type organizationResourceDetailedStatusFilters = {
-@as("Status") status: organizationResourceDetailedStatus,
-@as("AccountId") accountId: accountId
+@as("Status") status: option<organizationResourceDetailedStatus>,
+@as("AccountId") accountId: option<accountId>
 }
 type organizationConformancePackStatus = {
-@as("LastUpdateTime") lastUpdateTime: date,
-@as("ErrorMessage") errorMessage: amazonawsString,
-@as("ErrorCode") errorCode: amazonawsString,
-@as("Status") status: option<organizationResourceStatus>,
-@as("OrganizationConformancePackName") organizationConformancePackName: option<organizationConformancePackName>
+@as("LastUpdateTime") lastUpdateTime: option<date>,
+@as("ErrorMessage") errorMessage: option<string_>,
+@as("ErrorCode") errorCode: option<string_>,
+@as("Status") status: organizationResourceStatus,
+@as("OrganizationConformancePackName") organizationConformancePackName: organizationConformancePackName
 }
 type organizationConformancePackNames = array<organizationConformancePackName>
 type organizationConformancePackDetailedStatus = {
-@as("LastUpdateTime") lastUpdateTime: date,
-@as("ErrorMessage") errorMessage: amazonawsString,
-@as("ErrorCode") errorCode: amazonawsString,
-@as("Status") status: option<organizationResourceDetailedStatus>,
-@as("ConformancePackName") conformancePackName: option<stringWithCharLimit256>,
-@as("AccountId") accountId: option<accountId>
+@as("LastUpdateTime") lastUpdateTime: option<date>,
+@as("ErrorMessage") errorMessage: option<string_>,
+@as("ErrorCode") errorCode: option<string_>,
+@as("Status") status: organizationResourceDetailedStatus,
+@as("ConformancePackName") conformancePackName: stringWithCharLimit256,
+@as("AccountId") accountId: accountId
 }
 type organizationConfigRuleTriggerTypes = array<organizationConfigRuleTriggerType>
 type organizationConfigRuleStatus = {
-@as("LastUpdateTime") lastUpdateTime: date,
-@as("ErrorMessage") errorMessage: amazonawsString,
-@as("ErrorCode") errorCode: amazonawsString,
-@as("OrganizationRuleStatus") organizationRuleStatus: option<organizationRuleStatus>,
-@as("OrganizationConfigRuleName") organizationConfigRuleName: option<organizationConfigRuleName>
+@as("LastUpdateTime") lastUpdateTime: option<date>,
+@as("ErrorMessage") errorMessage: option<string_>,
+@as("ErrorCode") errorCode: option<string_>,
+@as("OrganizationRuleStatus") organizationRuleStatus: organizationRuleStatus,
+@as("OrganizationConfigRuleName") organizationConfigRuleName: organizationConfigRuleName
 }
 type organizationConfigRuleNames = array<stringWithCharLimit64>
 type memberAccountStatus = {
-@as("LastUpdateTime") lastUpdateTime: date,
-@as("ErrorMessage") errorMessage: amazonawsString,
-@as("ErrorCode") errorCode: amazonawsString,
-@as("MemberAccountRuleStatus") memberAccountRuleStatus: option<memberAccountRuleStatus>,
-@as("ConfigRuleName") configRuleName: option<stringWithCharLimit64>,
-@as("AccountId") accountId: option<accountId>
+@as("LastUpdateTime") lastUpdateTime: option<date>,
+@as("ErrorMessage") errorMessage: option<string_>,
+@as("ErrorCode") errorCode: option<string_>,
+@as("MemberAccountRuleStatus") memberAccountRuleStatus: memberAccountRuleStatus,
+@as("ConfigRuleName") configRuleName: stringWithCharLimit64,
+@as("AccountId") accountId: accountId
 }
 type groupedResourceCount = {
-@as("ResourceCount") resourceCount: option<amazonawsLong>,
-@as("GroupName") groupName: option<stringWithCharLimit256>
+@as("ResourceCount") resourceCount: long,
+@as("GroupName") groupName: stringWithCharLimit256
 }
 type fieldInfo = {
-@as("Name") name: fieldName
+@as("Name") name: option<fieldName>
 }
 type externalEvaluation = {
-@as("OrderingTimestamp") orderingTimestamp: option<orderingTimestamp>,
-@as("Annotation") annotation: stringWithCharLimit256,
-@as("ComplianceType") complianceType: option<complianceType>,
-@as("ComplianceResourceId") complianceResourceId: option<baseResourceId>,
-@as("ComplianceResourceType") complianceResourceType: option<stringWithCharLimit256>
+@as("OrderingTimestamp") orderingTimestamp: orderingTimestamp,
+@as("Annotation") annotation: option<stringWithCharLimit256>,
+@as("ComplianceType") complianceType: complianceType,
+@as("ComplianceResourceId") complianceResourceId: baseResourceId,
+@as("ComplianceResourceType") complianceResourceType: stringWithCharLimit256
 }
 type excludedAccounts = array<accountId>
 type evaluationResultQualifier = {
-@as("ResourceId") resourceId: baseResourceId,
-@as("ResourceType") resourceType: stringWithCharLimit256,
-@as("ConfigRuleName") configRuleName: configRuleName
+@as("ResourceId") resourceId: option<baseResourceId>,
+@as("ResourceType") resourceType: option<stringWithCharLimit256>,
+@as("ConfigRuleName") configRuleName: option<configRuleName>
 }
 type evaluation = {
-@as("OrderingTimestamp") orderingTimestamp: option<orderingTimestamp>,
-@as("Annotation") annotation: stringWithCharLimit256,
-@as("ComplianceType") complianceType: option<complianceType>,
-@as("ComplianceResourceId") complianceResourceId: option<baseResourceId>,
-@as("ComplianceResourceType") complianceResourceType: option<stringWithCharLimit256>
+@as("OrderingTimestamp") orderingTimestamp: orderingTimestamp,
+@as("Annotation") annotation: option<stringWithCharLimit256>,
+@as("ComplianceType") complianceType: complianceType,
+@as("ComplianceResourceId") complianceResourceId: baseResourceId,
+@as("ComplianceResourceType") complianceResourceType: stringWithCharLimit256
 }
 type deliveryChannelNameList = array<channelName>
 type controlsList = array<stringWithCharLimit128>
 type conformancePackStatusDetail = {
-@as("LastUpdateCompletedTime") lastUpdateCompletedTime: date,
-@as("LastUpdateRequestedTime") lastUpdateRequestedTime: option<date>,
-@as("ConformancePackStatusReason") conformancePackStatusReason: conformancePackStatusReason,
-@as("StackArn") stackArn: option<stackArn>,
-@as("ConformancePackState") conformancePackState: option<conformancePackState>,
-@as("ConformancePackArn") conformancePackArn: option<conformancePackArn>,
-@as("ConformancePackId") conformancePackId: option<conformancePackId>,
-@as("ConformancePackName") conformancePackName: option<conformancePackName>
+@as("LastUpdateCompletedTime") lastUpdateCompletedTime: option<date>,
+@as("LastUpdateRequestedTime") lastUpdateRequestedTime: date,
+@as("ConformancePackStatusReason") conformancePackStatusReason: option<conformancePackStatusReason>,
+@as("StackArn") stackArn: stackArn,
+@as("ConformancePackState") conformancePackState: conformancePackState,
+@as("ConformancePackArn") conformancePackArn: conformancePackArn,
+@as("ConformancePackId") conformancePackId: conformancePackId,
+@as("ConformancePackName") conformancePackName: conformancePackName
 }
 type conformancePackNamesToSummarizeList = array<conformancePackName>
 type conformancePackNamesList = array<conformancePackName>
 type conformancePackInputParameter = {
-@as("ParameterValue") parameterValue: option<parameterValue>,
-@as("ParameterName") parameterName: option<parameterName>
+@as("ParameterValue") parameterValue: parameterValue,
+@as("ParameterName") parameterName: parameterName
 }
 type conformancePackConfigRuleNames = array<stringWithCharLimit64>
 type conformancePackComplianceSummary = {
-@as("ConformancePackComplianceStatus") conformancePackComplianceStatus: option<conformancePackComplianceType>,
-@as("ConformancePackName") conformancePackName: option<conformancePackName>
+@as("ConformancePackComplianceStatus") conformancePackComplianceStatus: conformancePackComplianceType,
+@as("ConformancePackName") conformancePackName: conformancePackName
 }
 type conformancePackComplianceResourceIds = array<stringWithCharLimit256>
 type configurationRecorderStatus = {
-@as("lastStatusChangeTime") lastStatusChangeTime: date,
-@as("lastErrorMessage") lastErrorMessage: amazonawsString,
-@as("lastErrorCode") lastErrorCode: amazonawsString,
-@as("lastStatus") lastStatus: recorderStatus,
-@as("recording") recording: amazonawsBoolean,
-@as("lastStopTime") lastStopTime: date,
-@as("lastStartTime") lastStartTime: date,
-@as("name") name: amazonawsString
+lastStatusChangeTime: option<date>,
+lastErrorMessage: option<string_>,
+lastErrorCode: option<string_>,
+lastStatus: option<recorderStatus>,
+recording: option<boolean_>,
+lastStopTime: option<date>,
+lastStartTime: option<date>,
+name: option<string_>
 }
 type configurationRecorderNameList = array<recorderName>
 type configurationAggregatorNameList = array<configurationAggregatorName>
 type configStreamDeliveryInfo = {
-@as("lastStatusChangeTime") lastStatusChangeTime: date,
-@as("lastErrorMessage") lastErrorMessage: amazonawsString,
-@as("lastErrorCode") lastErrorCode: amazonawsString,
-@as("lastStatus") lastStatus: deliveryStatus
+lastStatusChangeTime: option<date>,
+lastErrorMessage: option<string_>,
+lastErrorCode: option<string_>,
+lastStatus: option<deliveryStatus>
 }
 type configSnapshotDeliveryProperties = {
-@as("deliveryFrequency") deliveryFrequency: maximumExecutionFrequency
+deliveryFrequency: option<maximumExecutionFrequency>
 }
 type configRuleNames = array<configRuleName>
 type configRuleEvaluationStatus = {
-@as("FirstEvaluationStarted") firstEvaluationStarted: amazonawsBoolean,
-@as("LastErrorMessage") lastErrorMessage: amazonawsString,
-@as("LastErrorCode") lastErrorCode: amazonawsString,
-@as("LastDeactivatedTime") lastDeactivatedTime: date,
-@as("FirstActivatedTime") firstActivatedTime: date,
-@as("LastFailedEvaluationTime") lastFailedEvaluationTime: date,
-@as("LastSuccessfulEvaluationTime") lastSuccessfulEvaluationTime: date,
-@as("LastFailedInvocationTime") lastFailedInvocationTime: date,
-@as("LastSuccessfulInvocationTime") lastSuccessfulInvocationTime: date,
-@as("ConfigRuleId") configRuleId: amazonawsString,
-@as("ConfigRuleArn") configRuleArn: amazonawsString,
-@as("ConfigRuleName") configRuleName: configRuleName
+@as("FirstEvaluationStarted") firstEvaluationStarted: option<boolean_>,
+@as("LastErrorMessage") lastErrorMessage: option<string_>,
+@as("LastErrorCode") lastErrorCode: option<string_>,
+@as("LastDeactivatedTime") lastDeactivatedTime: option<date>,
+@as("FirstActivatedTime") firstActivatedTime: option<date>,
+@as("LastFailedEvaluationTime") lastFailedEvaluationTime: option<date>,
+@as("LastSuccessfulEvaluationTime") lastSuccessfulEvaluationTime: option<date>,
+@as("LastFailedInvocationTime") lastFailedInvocationTime: option<date>,
+@as("LastSuccessfulInvocationTime") lastSuccessfulInvocationTime: option<date>,
+@as("ConfigRuleId") configRuleId: option<string_>,
+@as("ConfigRuleArn") configRuleArn: option<string_>,
+@as("ConfigRuleName") configRuleName: option<configRuleName>
 }
 type configRuleComplianceSummaryFilters = {
-@as("AwsRegion") awsRegion: awsRegion,
-@as("AccountId") accountId: accountId
+@as("AwsRegion") awsRegion: option<awsRegion>,
+@as("AccountId") accountId: option<accountId>
 }
 type configRuleComplianceFilters = {
-@as("AwsRegion") awsRegion: awsRegion,
-@as("AccountId") accountId: accountId,
-@as("ComplianceType") complianceType: complianceType,
-@as("ConfigRuleName") configRuleName: configRuleName
+@as("AwsRegion") awsRegion: option<awsRegion>,
+@as("AccountId") accountId: option<accountId>,
+@as("ComplianceType") complianceType: option<complianceType>,
+@as("ConfigRuleName") configRuleName: option<configRuleName>
 }
 type configExportDeliveryInfo = {
-@as("nextDeliveryTime") nextDeliveryTime: date,
-@as("lastSuccessfulTime") lastSuccessfulTime: date,
-@as("lastAttemptTime") lastAttemptTime: date,
-@as("lastErrorMessage") lastErrorMessage: amazonawsString,
-@as("lastErrorCode") lastErrorCode: amazonawsString,
-@as("lastStatus") lastStatus: deliveryStatus
+nextDeliveryTime: option<date>,
+lastSuccessfulTime: option<date>,
+lastAttemptTime: option<date>,
+lastErrorMessage: option<string_>,
+lastErrorCode: option<string_>,
+lastStatus: option<deliveryStatus>
 }
 type complianceTypes = array<complianceType>
 type complianceResourceTypes = array<stringWithCharLimit256>
 type complianceContributorCount = {
-@as("CapExceeded") capExceeded: amazonawsBoolean,
-@as("CappedCount") cappedCount: amazonawsInteger
+@as("CapExceeded") capExceeded: option<boolean_>,
+@as("CappedCount") cappedCount: option<integer_>
 }
-type aggregatorRegionList = array<amazonawsString>
+type aggregatorRegionList = array<string_>
 type aggregationAuthorization = {
-@as("CreationTime") creationTime: date,
-@as("AuthorizedAwsRegion") authorizedAwsRegion: awsRegion,
-@as("AuthorizedAccountId") authorizedAccountId: accountId,
-@as("AggregationAuthorizationArn") aggregationAuthorizationArn: amazonawsString
+@as("CreationTime") creationTime: option<date>,
+@as("AuthorizedAwsRegion") authorizedAwsRegion: option<awsRegion>,
+@as("AuthorizedAccountId") authorizedAccountId: option<accountId>,
+@as("AggregationAuthorizationArn") aggregationAuthorizationArn: option<string_>
 }
 type aggregatedSourceStatusTypeList = array<aggregatedSourceStatusType>
 type aggregatedSourceStatus = {
-@as("LastErrorMessage") lastErrorMessage: amazonawsString,
-@as("LastErrorCode") lastErrorCode: amazonawsString,
-@as("LastUpdateTime") lastUpdateTime: date,
-@as("LastUpdateStatus") lastUpdateStatus: aggregatedSourceStatusType,
-@as("AwsRegion") awsRegion: awsRegion,
-@as("SourceType") sourceType: aggregatedSourceType,
-@as("SourceId") sourceId: amazonawsString
+@as("LastErrorMessage") lastErrorMessage: option<string_>,
+@as("LastErrorCode") lastErrorCode: option<string_>,
+@as("LastUpdateTime") lastUpdateTime: option<date>,
+@as("LastUpdateStatus") lastUpdateStatus: option<aggregatedSourceStatusType>,
+@as("AwsRegion") awsRegion: option<awsRegion>,
+@as("SourceType") sourceType: option<aggregatedSourceType>,
+@as("SourceId") sourceId: option<string_>
 }
 type aggregateResourceIdentifier = {
-@as("ResourceName") resourceName: resourceName,
-@as("ResourceType") resourceType: option<resourceType>,
-@as("ResourceId") resourceId: option<resourceId>,
-@as("SourceRegion") sourceRegion: option<awsRegion>,
-@as("SourceAccountId") sourceAccountId: option<accountId>
+@as("ResourceName") resourceName: option<resourceName>,
+@as("ResourceType") resourceType: resourceType,
+@as("ResourceId") resourceId: resourceId,
+@as("SourceRegion") sourceRegion: awsRegion,
+@as("SourceAccountId") sourceAccountId: accountId
 }
 type aggregateConformancePackComplianceSummaryFilters = {
-@as("AwsRegion") awsRegion: awsRegion,
-@as("AccountId") accountId: accountId
+@as("AwsRegion") awsRegion: option<awsRegion>,
+@as("AccountId") accountId: option<accountId>
 }
 type aggregateConformancePackComplianceFilters = {
-@as("AwsRegion") awsRegion: awsRegion,
-@as("AccountId") accountId: accountId,
-@as("ComplianceType") complianceType: conformancePackComplianceType,
-@as("ConformancePackName") conformancePackName: conformancePackName
+@as("AwsRegion") awsRegion: option<awsRegion>,
+@as("AccountId") accountId: option<accountId>,
+@as("ComplianceType") complianceType: option<conformancePackComplianceType>,
+@as("ConformancePackName") conformancePackName: option<conformancePackName>
 }
 type aggregateConformancePackComplianceCount = {
-@as("NonCompliantConformancePackCount") nonCompliantConformancePackCount: amazonawsInteger,
-@as("CompliantConformancePackCount") compliantConformancePackCount: amazonawsInteger
+@as("NonCompliantConformancePackCount") nonCompliantConformancePackCount: option<integer_>,
+@as("CompliantConformancePackCount") compliantConformancePackCount: option<integer_>
 }
 type aggregateConformancePackCompliance = {
-@as("TotalRuleCount") totalRuleCount: amazonawsInteger,
-@as("NonCompliantRuleCount") nonCompliantRuleCount: amazonawsInteger,
-@as("CompliantRuleCount") compliantRuleCount: amazonawsInteger,
-@as("ComplianceType") complianceType: conformancePackComplianceType
+@as("TotalRuleCount") totalRuleCount: option<integer_>,
+@as("NonCompliantRuleCount") nonCompliantRuleCount: option<integer_>,
+@as("CompliantRuleCount") compliantRuleCount: option<integer_>,
+@as("ComplianceType") complianceType: option<conformancePackComplianceType>
 }
 type accountAggregationSourceAccountList = array<accountId>
 type unprocessedResourceIdentifierList = array<aggregateResourceIdentifier>
 type tagsList = array<tag>
-type tagList = array<tag>
+type tagList_ = array<tag>
 type storedQueryMetadataList = array<storedQueryMetadata>
 type staticValue = {
-@as("Values") values: option<staticParameterValues>
+@as("Values") values: staticParameterValues
 }
 type sourceDetails = array<sourceDetail>
 type scope = {
-@as("ComplianceResourceId") complianceResourceId: baseResourceId,
-@as("TagValue") tagValue: stringWithCharLimit256,
-@as("TagKey") tagKey: stringWithCharLimit128,
-@as("ComplianceResourceTypes") complianceResourceTypes: complianceResourceTypes
+@as("ComplianceResourceId") complianceResourceId: option<baseResourceId>,
+@as("TagValue") tagValue: option<stringWithCharLimit256>,
+@as("TagKey") tagKey: option<stringWithCharLimit128>,
+@as("ComplianceResourceTypes") complianceResourceTypes: option<complianceResourceTypes>
 }
 type retentionConfigurationList = array<retentionConfiguration>
 type resourceKeys = array<resourceKey>
@@ -433,259 +437,259 @@ type remediationExceptions = array<remediationException>
 type remediationExceptionResourceKeys = array<remediationExceptionResourceKey>
 type relationshipList = array<relationship>
 type recordingGroup = {
-@as("resourceTypes") resourceTypes: resourceTypeList,
-@as("includeGlobalResourceTypes") includeGlobalResourceTypes: includeGlobalResourceTypes,
-@as("allSupported") allSupported: allSupported
+resourceTypes: option<resourceTypeList>,
+includeGlobalResourceTypes: option<includeGlobalResourceTypes>,
+allSupported: option<allSupported>
 }
 type pendingAggregationRequestList = array<pendingAggregationRequest>
 type organizationManagedRuleMetadata = {
-@as("TagValueScope") tagValueScope: stringWithCharLimit256,
-@as("TagKeyScope") tagKeyScope: stringWithCharLimit128,
-@as("ResourceIdScope") resourceIdScope: stringWithCharLimit768,
-@as("ResourceTypesScope") resourceTypesScope: resourceTypesScope,
-@as("MaximumExecutionFrequency") maximumExecutionFrequency: maximumExecutionFrequency,
-@as("InputParameters") inputParameters: stringWithCharLimit2048,
-@as("RuleIdentifier") ruleIdentifier: option<stringWithCharLimit256>,
-@as("Description") description: stringWithCharLimit256Min0
+@as("TagValueScope") tagValueScope: option<stringWithCharLimit256>,
+@as("TagKeyScope") tagKeyScope: option<stringWithCharLimit128>,
+@as("ResourceIdScope") resourceIdScope: option<stringWithCharLimit768>,
+@as("ResourceTypesScope") resourceTypesScope: option<resourceTypesScope>,
+@as("MaximumExecutionFrequency") maximumExecutionFrequency: option<maximumExecutionFrequency>,
+@as("InputParameters") inputParameters: option<stringWithCharLimit2048>,
+@as("RuleIdentifier") ruleIdentifier: stringWithCharLimit256,
+@as("Description") description: option<stringWithCharLimit256Min0>
 }
 type organizationCustomRuleMetadata = {
-@as("TagValueScope") tagValueScope: stringWithCharLimit256,
-@as("TagKeyScope") tagKeyScope: stringWithCharLimit128,
-@as("ResourceIdScope") resourceIdScope: stringWithCharLimit768,
-@as("ResourceTypesScope") resourceTypesScope: resourceTypesScope,
-@as("MaximumExecutionFrequency") maximumExecutionFrequency: maximumExecutionFrequency,
-@as("InputParameters") inputParameters: stringWithCharLimit2048,
-@as("OrganizationConfigRuleTriggerTypes") organizationConfigRuleTriggerTypes: option<organizationConfigRuleTriggerTypes>,
-@as("LambdaFunctionArn") lambdaFunctionArn: option<stringWithCharLimit256>,
-@as("Description") description: stringWithCharLimit256Min0
+@as("TagValueScope") tagValueScope: option<stringWithCharLimit256>,
+@as("TagKeyScope") tagKeyScope: option<stringWithCharLimit128>,
+@as("ResourceIdScope") resourceIdScope: option<stringWithCharLimit768>,
+@as("ResourceTypesScope") resourceTypesScope: option<resourceTypesScope>,
+@as("MaximumExecutionFrequency") maximumExecutionFrequency: option<maximumExecutionFrequency>,
+@as("InputParameters") inputParameters: option<stringWithCharLimit2048>,
+@as("OrganizationConfigRuleTriggerTypes") organizationConfigRuleTriggerTypes: organizationConfigRuleTriggerTypes,
+@as("LambdaFunctionArn") lambdaFunctionArn: stringWithCharLimit256,
+@as("Description") description: option<stringWithCharLimit256Min0>
 }
 type organizationConformancePackStatuses = array<organizationConformancePackStatus>
 type organizationConformancePackDetailedStatuses = array<organizationConformancePackDetailedStatus>
 type organizationConfigRuleStatuses = array<organizationConfigRuleStatus>
 type organizationConfigRuleDetailedStatus = array<memberAccountStatus>
 type organizationAggregationSource = {
-@as("AllAwsRegions") allAwsRegions: amazonawsBoolean,
-@as("AwsRegions") awsRegions: aggregatorRegionList,
-@as("RoleArn") roleArn: option<amazonawsString>
+@as("AllAwsRegions") allAwsRegions: option<boolean_>,
+@as("AwsRegions") awsRegions: option<aggregatorRegionList>,
+@as("RoleArn") roleArn: string_
 }
 type groupedResourceCountList = array<groupedResourceCount>
 type fieldInfoList = array<fieldInfo>
 type executionControls = {
-@as("SsmControls") ssmControls: ssmControls
+@as("SsmControls") ssmControls: option<ssmControls>
 }
 type evaluations = array<evaluation>
 type evaluationResultIdentifier = {
-@as("OrderingTimestamp") orderingTimestamp: date,
-@as("EvaluationResultQualifier") evaluationResultQualifier: evaluationResultQualifier
+@as("OrderingTimestamp") orderingTimestamp: option<date>,
+@as("EvaluationResultQualifier") evaluationResultQualifier: option<evaluationResultQualifier>
 }
 type discoveredResourceIdentifierList = array<aggregateResourceIdentifier>
 type deliveryChannelStatus = {
-@as("configStreamDeliveryInfo") configStreamDeliveryInfo: configStreamDeliveryInfo,
-@as("configHistoryDeliveryInfo") configHistoryDeliveryInfo: configExportDeliveryInfo,
-@as("configSnapshotDeliveryInfo") configSnapshotDeliveryInfo: configExportDeliveryInfo,
-@as("name") name: amazonawsString
+configStreamDeliveryInfo: option<configStreamDeliveryInfo>,
+configHistoryDeliveryInfo: option<configExportDeliveryInfo>,
+configSnapshotDeliveryInfo: option<configExportDeliveryInfo>,
+name: option<string_>
 }
 type deliveryChannel = {
-@as("configSnapshotDeliveryProperties") configSnapshotDeliveryProperties: configSnapshotDeliveryProperties,
-@as("snsTopicARN") snsTopicARN: amazonawsString,
-@as("s3KmsKeyArn") s3KmsKeyArn: amazonawsString,
-@as("s3KeyPrefix") s3KeyPrefix: amazonawsString,
-@as("s3BucketName") s3BucketName: amazonawsString,
-@as("name") name: channelName
+configSnapshotDeliveryProperties: option<configSnapshotDeliveryProperties>,
+snsTopicARN: option<string_>,
+s3KmsKeyArn: option<string_>,
+s3KeyPrefix: option<string_>,
+s3BucketName: option<string_>,
+name: option<channelName>
 }
 type conformancePackStatusDetailsList = array<conformancePackStatusDetail>
 type conformancePackRuleCompliance = {
-@as("Controls") controls: controlsList,
-@as("ComplianceType") complianceType: conformancePackComplianceType,
-@as("ConfigRuleName") configRuleName: configRuleName
+@as("Controls") controls: option<controlsList>,
+@as("ComplianceType") complianceType: option<conformancePackComplianceType>,
+@as("ConfigRuleName") configRuleName: option<configRuleName>
 }
 type conformancePackInputParameters = array<conformancePackInputParameter>
 type conformancePackEvaluationFilters = {
-@as("ResourceIds") resourceIds: conformancePackComplianceResourceIds,
-@as("ResourceType") resourceType: stringWithCharLimit256,
-@as("ComplianceType") complianceType: conformancePackComplianceType,
-@as("ConfigRuleNames") configRuleNames: conformancePackConfigRuleNames
+@as("ResourceIds") resourceIds: option<conformancePackComplianceResourceIds>,
+@as("ResourceType") resourceType: option<stringWithCharLimit256>,
+@as("ComplianceType") complianceType: option<conformancePackComplianceType>,
+@as("ConfigRuleNames") configRuleNames: option<conformancePackConfigRuleNames>
 }
 type conformancePackComplianceSummaryList = array<conformancePackComplianceSummary>
 type conformancePackComplianceFilters = {
-@as("ComplianceType") complianceType: conformancePackComplianceType,
-@as("ConfigRuleNames") configRuleNames: conformancePackConfigRuleNames
+@as("ComplianceType") complianceType: option<conformancePackComplianceType>,
+@as("ConfigRuleNames") configRuleNames: option<conformancePackConfigRuleNames>
 }
 type configurationRecorderStatusList = array<configurationRecorderStatus>
 type configRuleEvaluationStatusList = array<configRuleEvaluationStatus>
 type complianceSummary = {
-@as("ComplianceSummaryTimestamp") complianceSummaryTimestamp: date,
-@as("NonCompliantResourceCount") nonCompliantResourceCount: complianceContributorCount,
-@as("CompliantResourceCount") compliantResourceCount: complianceContributorCount
+@as("ComplianceSummaryTimestamp") complianceSummaryTimestamp: option<date>,
+@as("NonCompliantResourceCount") nonCompliantResourceCount: option<complianceContributorCount>,
+@as("CompliantResourceCount") compliantResourceCount: option<complianceContributorCount>
 }
 type compliance = {
-@as("ComplianceContributorCount") complianceContributorCount: complianceContributorCount,
-@as("ComplianceType") complianceType: complianceType
+@as("ComplianceContributorCount") complianceContributorCount: option<complianceContributorCount>,
+@as("ComplianceType") complianceType: option<complianceType>
 }
 type baseConfigurationItem = {
-@as("supplementaryConfiguration") supplementaryConfiguration: supplementaryConfiguration,
-@as("configuration") configuration: configuration,
-@as("resourceCreationTime") resourceCreationTime: resourceCreationTime,
-@as("availabilityZone") availabilityZone: availabilityZone,
-@as("awsRegion") awsRegion: awsRegion,
-@as("resourceName") resourceName: resourceName,
-@as("resourceId") resourceId: resourceId,
-@as("resourceType") resourceType: resourceType,
-@as("arn") arn: aRN,
-@as("configurationStateId") configurationStateId: configurationStateId,
-@as("configurationItemStatus") configurationItemStatus: configurationItemStatus,
-@as("configurationItemCaptureTime") configurationItemCaptureTime: configurationItemCaptureTime,
-@as("accountId") accountId: accountId,
-@as("version") version: version
+supplementaryConfiguration: option<supplementaryConfiguration>,
+configuration: option<configuration>,
+resourceCreationTime: option<resourceCreationTime>,
+availabilityZone: option<availabilityZone>,
+awsRegion: option<awsRegion>,
+resourceName: option<resourceName>,
+resourceId: option<resourceId>,
+resourceType: option<resourceType>,
+arn: option<arn>,
+configurationStateId: option<configurationStateId>,
+configurationItemStatus: option<configurationItemStatus>,
+configurationItemCaptureTime: option<configurationItemCaptureTime>,
+accountId: option<accountId>,
+version: option<version>
 }
 type aggregationAuthorizationList = array<aggregationAuthorization>
 type aggregatedSourceStatusList = array<aggregatedSourceStatus>
 type aggregateConformancePackComplianceSummary = {
-@as("GroupName") groupName: stringWithCharLimit256,
-@as("ComplianceSummary") complianceSummary: aggregateConformancePackComplianceCount
+@as("GroupName") groupName: option<stringWithCharLimit256>,
+@as("ComplianceSummary") complianceSummary: option<aggregateConformancePackComplianceCount>
 }
 type aggregateComplianceByConformancePack = {
-@as("AwsRegion") awsRegion: awsRegion,
-@as("AccountId") accountId: accountId,
-@as("Compliance") compliance: aggregateConformancePackCompliance,
-@as("ConformancePackName") conformancePackName: conformancePackName
+@as("AwsRegion") awsRegion: option<awsRegion>,
+@as("AccountId") accountId: option<accountId>,
+@as("Compliance") compliance: option<aggregateConformancePackCompliance>,
+@as("ConformancePackName") conformancePackName: option<conformancePackName>
 }
 type accountAggregationSource = {
-@as("AwsRegions") awsRegions: aggregatorRegionList,
-@as("AllAwsRegions") allAwsRegions: amazonawsBoolean,
-@as("AccountIds") accountIds: option<accountAggregationSourceAccountList>
+@as("AwsRegions") awsRegions: option<aggregatorRegionList>,
+@as("AllAwsRegions") allAwsRegions: option<boolean_>,
+@as("AccountIds") accountIds: accountAggregationSourceAccountList
 }
 type source = {
-@as("SourceDetails") sourceDetails: sourceDetails,
-@as("SourceIdentifier") sourceIdentifier: option<stringWithCharLimit256>,
-@as("Owner") owner: option<owner>
+@as("SourceDetails") sourceDetails: option<sourceDetails>,
+@as("SourceIdentifier") sourceIdentifier: stringWithCharLimit256,
+@as("Owner") owner: owner
 }
 type remediationParameterValue = {
-@as("StaticValue") staticValue: staticValue,
-@as("ResourceValue") resourceValue: resourceValue
+@as("StaticValue") staticValue: option<staticValue>,
+@as("ResourceValue") resourceValue: option<resourceValue>
 }
 type remediationExecutionStatus = {
-@as("LastUpdatedTime") lastUpdatedTime: date,
-@as("InvocationTime") invocationTime: date,
-@as("StepDetails") stepDetails: remediationExecutionSteps,
-@as("State") state: remediationExecutionState,
-@as("ResourceKey") resourceKey: resourceKey
+@as("LastUpdatedTime") lastUpdatedTime: option<date>,
+@as("InvocationTime") invocationTime: option<date>,
+@as("StepDetails") stepDetails: option<remediationExecutionSteps>,
+@as("State") state: option<remediationExecutionState>,
+@as("ResourceKey") resourceKey: option<resourceKey>
 }
 type queryInfo = {
-@as("SelectFields") selectFields: fieldInfoList
+@as("SelectFields") selectFields: option<fieldInfoList>
 }
 type organizationConformancePack = {
-@as("LastUpdateTime") lastUpdateTime: option<date>,
-@as("ExcludedAccounts") excludedAccounts: excludedAccounts,
-@as("ConformancePackInputParameters") conformancePackInputParameters: conformancePackInputParameters,
-@as("DeliveryS3KeyPrefix") deliveryS3KeyPrefix: deliveryS3KeyPrefix,
-@as("DeliveryS3Bucket") deliveryS3Bucket: deliveryS3Bucket,
-@as("OrganizationConformancePackArn") organizationConformancePackArn: option<stringWithCharLimit256>,
-@as("OrganizationConformancePackName") organizationConformancePackName: option<organizationConformancePackName>
+@as("LastUpdateTime") lastUpdateTime: date,
+@as("ExcludedAccounts") excludedAccounts: option<excludedAccounts>,
+@as("ConformancePackInputParameters") conformancePackInputParameters: option<conformancePackInputParameters>,
+@as("DeliveryS3KeyPrefix") deliveryS3KeyPrefix: option<deliveryS3KeyPrefix>,
+@as("DeliveryS3Bucket") deliveryS3Bucket: option<deliveryS3Bucket>,
+@as("OrganizationConformancePackArn") organizationConformancePackArn: stringWithCharLimit256,
+@as("OrganizationConformancePackName") organizationConformancePackName: organizationConformancePackName
 }
 type organizationConfigRule = {
-@as("LastUpdateTime") lastUpdateTime: date,
-@as("ExcludedAccounts") excludedAccounts: excludedAccounts,
-@as("OrganizationCustomRuleMetadata") organizationCustomRuleMetadata: organizationCustomRuleMetadata,
-@as("OrganizationManagedRuleMetadata") organizationManagedRuleMetadata: organizationManagedRuleMetadata,
-@as("OrganizationConfigRuleArn") organizationConfigRuleArn: option<stringWithCharLimit256>,
-@as("OrganizationConfigRuleName") organizationConfigRuleName: option<organizationConfigRuleName>
+@as("LastUpdateTime") lastUpdateTime: option<date>,
+@as("ExcludedAccounts") excludedAccounts: option<excludedAccounts>,
+@as("OrganizationCustomRuleMetadata") organizationCustomRuleMetadata: option<organizationCustomRuleMetadata>,
+@as("OrganizationManagedRuleMetadata") organizationManagedRuleMetadata: option<organizationManagedRuleMetadata>,
+@as("OrganizationConfigRuleArn") organizationConfigRuleArn: stringWithCharLimit256,
+@as("OrganizationConfigRuleName") organizationConfigRuleName: organizationConfigRuleName
 }
 type failedRemediationExceptionBatch = {
-@as("FailedItems") failedItems: remediationExceptions,
-@as("FailureMessage") failureMessage: amazonawsString
+@as("FailedItems") failedItems: option<remediationExceptions>,
+@as("FailureMessage") failureMessage: option<string_>
 }
 type failedDeleteRemediationExceptionsBatch = {
-@as("FailedItems") failedItems: remediationExceptionResourceKeys,
-@as("FailureMessage") failureMessage: amazonawsString
+@as("FailedItems") failedItems: option<remediationExceptionResourceKeys>,
+@as("FailureMessage") failureMessage: option<string_>
 }
 type evaluationResult = {
-@as("ResultToken") resultToken: amazonawsString,
-@as("Annotation") annotation: stringWithCharLimit256,
-@as("ConfigRuleInvokedTime") configRuleInvokedTime: date,
-@as("ResultRecordedTime") resultRecordedTime: date,
-@as("ComplianceType") complianceType: complianceType,
-@as("EvaluationResultIdentifier") evaluationResultIdentifier: evaluationResultIdentifier
+@as("ResultToken") resultToken: option<string_>,
+@as("Annotation") annotation: option<stringWithCharLimit256>,
+@as("ConfigRuleInvokedTime") configRuleInvokedTime: option<date>,
+@as("ResultRecordedTime") resultRecordedTime: option<date>,
+@as("ComplianceType") complianceType: option<complianceType>,
+@as("EvaluationResultIdentifier") evaluationResultIdentifier: option<evaluationResultIdentifier>
 }
 type deliveryChannelStatusList = array<deliveryChannelStatus>
 type deliveryChannelList = array<deliveryChannel>
 type conformancePackRuleComplianceList = array<conformancePackRuleCompliance>
 type conformancePackEvaluationResult = {
-@as("Annotation") annotation: annotation,
-@as("ResultRecordedTime") resultRecordedTime: option<date>,
-@as("ConfigRuleInvokedTime") configRuleInvokedTime: option<date>,
-@as("EvaluationResultIdentifier") evaluationResultIdentifier: option<evaluationResultIdentifier>,
-@as("ComplianceType") complianceType: option<conformancePackComplianceType>
+@as("Annotation") annotation: option<annotation>,
+@as("ResultRecordedTime") resultRecordedTime: date,
+@as("ConfigRuleInvokedTime") configRuleInvokedTime: date,
+@as("EvaluationResultIdentifier") evaluationResultIdentifier: evaluationResultIdentifier,
+@as("ComplianceType") complianceType: conformancePackComplianceType
 }
 type conformancePackDetail = {
-@as("CreatedBy") createdBy: stringWithCharLimit256,
-@as("LastUpdateRequestedTime") lastUpdateRequestedTime: date,
-@as("ConformancePackInputParameters") conformancePackInputParameters: conformancePackInputParameters,
-@as("DeliveryS3KeyPrefix") deliveryS3KeyPrefix: deliveryS3KeyPrefix,
-@as("DeliveryS3Bucket") deliveryS3Bucket: deliveryS3Bucket,
-@as("ConformancePackId") conformancePackId: option<conformancePackId>,
-@as("ConformancePackArn") conformancePackArn: option<conformancePackArn>,
-@as("ConformancePackName") conformancePackName: option<conformancePackName>
+@as("CreatedBy") createdBy: option<stringWithCharLimit256>,
+@as("LastUpdateRequestedTime") lastUpdateRequestedTime: option<date>,
+@as("ConformancePackInputParameters") conformancePackInputParameters: option<conformancePackInputParameters>,
+@as("DeliveryS3KeyPrefix") deliveryS3KeyPrefix: option<deliveryS3KeyPrefix>,
+@as("DeliveryS3Bucket") deliveryS3Bucket: option<deliveryS3Bucket>,
+@as("ConformancePackId") conformancePackId: conformancePackId,
+@as("ConformancePackArn") conformancePackArn: conformancePackArn,
+@as("ConformancePackName") conformancePackName: conformancePackName
 }
 type configurationRecorder = {
-@as("recordingGroup") recordingGroup: recordingGroup,
-@as("roleARN") roleARN: amazonawsString,
-@as("name") name: recorderName
+recordingGroup: option<recordingGroup>,
+roleARN: option<string_>,
+name: option<recorderName>
 }
 type configurationItem = {
-@as("supplementaryConfiguration") supplementaryConfiguration: supplementaryConfiguration,
-@as("configuration") configuration: configuration,
-@as("relationships") relationships: relationshipList,
-@as("relatedEvents") relatedEvents: relatedEventList,
-@as("tags") tags: tags,
-@as("resourceCreationTime") resourceCreationTime: resourceCreationTime,
-@as("availabilityZone") availabilityZone: availabilityZone,
-@as("awsRegion") awsRegion: awsRegion,
-@as("resourceName") resourceName: resourceName,
-@as("resourceId") resourceId: resourceId,
-@as("resourceType") resourceType: resourceType,
-@as("arn") arn: aRN,
-@as("configurationItemMD5Hash") configurationItemMD5Hash: configurationItemMD5Hash,
-@as("configurationStateId") configurationStateId: configurationStateId,
-@as("configurationItemStatus") configurationItemStatus: configurationItemStatus,
-@as("configurationItemCaptureTime") configurationItemCaptureTime: configurationItemCaptureTime,
-@as("accountId") accountId: accountId,
-@as("version") version: version
+supplementaryConfiguration: option<supplementaryConfiguration>,
+configuration: option<configuration>,
+relationships: option<relationshipList>,
+relatedEvents: option<relatedEventList>,
+tags: option<tags>,
+resourceCreationTime: option<resourceCreationTime>,
+availabilityZone: option<availabilityZone>,
+awsRegion: option<awsRegion>,
+resourceName: option<resourceName>,
+resourceId: option<resourceId>,
+resourceType: option<resourceType>,
+arn: option<arn>,
+configurationItemMD5Hash: option<configurationItemMD5Hash>,
+configurationStateId: option<configurationStateId>,
+configurationItemStatus: option<configurationItemStatus>,
+configurationItemCaptureTime: option<configurationItemCaptureTime>,
+accountId: option<accountId>,
+version: option<version>
 }
 type complianceSummaryByResourceType = {
-@as("ComplianceSummary") complianceSummary: complianceSummary,
-@as("ResourceType") resourceType: stringWithCharLimit256
+@as("ComplianceSummary") complianceSummary: option<complianceSummary>,
+@as("ResourceType") resourceType: option<stringWithCharLimit256>
 }
 type complianceByResource = {
-@as("Compliance") compliance: compliance,
-@as("ResourceId") resourceId: baseResourceId,
-@as("ResourceType") resourceType: stringWithCharLimit256
+@as("Compliance") compliance: option<compliance>,
+@as("ResourceId") resourceId: option<baseResourceId>,
+@as("ResourceType") resourceType: option<stringWithCharLimit256>
 }
 type complianceByConfigRule = {
-@as("Compliance") compliance: compliance,
-@as("ConfigRuleName") configRuleName: stringWithCharLimit64
+@as("Compliance") compliance: option<compliance>,
+@as("ConfigRuleName") configRuleName: option<stringWithCharLimit64>
 }
 type baseConfigurationItems = array<baseConfigurationItem>
 type aggregateEvaluationResult = {
-@as("AwsRegion") awsRegion: awsRegion,
-@as("AccountId") accountId: accountId,
-@as("Annotation") annotation: stringWithCharLimit256,
-@as("ConfigRuleInvokedTime") configRuleInvokedTime: date,
-@as("ResultRecordedTime") resultRecordedTime: date,
-@as("ComplianceType") complianceType: complianceType,
-@as("EvaluationResultIdentifier") evaluationResultIdentifier: evaluationResultIdentifier
+@as("AwsRegion") awsRegion: option<awsRegion>,
+@as("AccountId") accountId: option<accountId>,
+@as("Annotation") annotation: option<stringWithCharLimit256>,
+@as("ConfigRuleInvokedTime") configRuleInvokedTime: option<date>,
+@as("ResultRecordedTime") resultRecordedTime: option<date>,
+@as("ComplianceType") complianceType: option<complianceType>,
+@as("EvaluationResultIdentifier") evaluationResultIdentifier: option<evaluationResultIdentifier>
 }
 type aggregateConformancePackComplianceSummaryList = array<aggregateConformancePackComplianceSummary>
 type aggregateComplianceCount = {
-@as("ComplianceSummary") complianceSummary: complianceSummary,
-@as("GroupName") groupName: stringWithCharLimit256
+@as("ComplianceSummary") complianceSummary: option<complianceSummary>,
+@as("GroupName") groupName: option<stringWithCharLimit256>
 }
 type aggregateComplianceByConformancePackList = array<aggregateComplianceByConformancePack>
 type aggregateComplianceByConfigRule = {
-@as("AwsRegion") awsRegion: awsRegion,
-@as("AccountId") accountId: accountId,
-@as("Compliance") compliance: compliance,
-@as("ConfigRuleName") configRuleName: configRuleName
+@as("AwsRegion") awsRegion: option<awsRegion>,
+@as("AccountId") accountId: option<accountId>,
+@as("Compliance") compliance: option<compliance>,
+@as("ConfigRuleName") configRuleName: option<configRuleName>
 }
 type accountAggregationSourceList = array<accountAggregationSource>
 type remediationParameters = Js.Dict.t< remediationParameterValue>
@@ -700,25 +704,25 @@ type conformancePackDetailList = array<conformancePackDetail>
 type configurationRecorderList = array<configurationRecorder>
 type configurationItemList = array<configurationItem>
 type configurationAggregator = {
-@as("CreatedBy") createdBy: stringWithCharLimit256,
-@as("LastUpdatedTime") lastUpdatedTime: date,
-@as("CreationTime") creationTime: date,
-@as("OrganizationAggregationSource") organizationAggregationSource: organizationAggregationSource,
-@as("AccountAggregationSources") accountAggregationSources: accountAggregationSourceList,
-@as("ConfigurationAggregatorArn") configurationAggregatorArn: configurationAggregatorArn,
-@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
+@as("CreatedBy") createdBy: option<stringWithCharLimit256>,
+@as("LastUpdatedTime") lastUpdatedTime: option<date>,
+@as("CreationTime") creationTime: option<date>,
+@as("OrganizationAggregationSource") organizationAggregationSource: option<organizationAggregationSource>,
+@as("AccountAggregationSources") accountAggregationSources: option<accountAggregationSourceList>,
+@as("ConfigurationAggregatorArn") configurationAggregatorArn: option<configurationAggregatorArn>,
+@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
 }
 type configRule = {
-@as("CreatedBy") createdBy: stringWithCharLimit256,
-@as("ConfigRuleState") configRuleState: configRuleState,
-@as("MaximumExecutionFrequency") maximumExecutionFrequency: maximumExecutionFrequency,
-@as("InputParameters") inputParameters: stringWithCharLimit1024,
-@as("Source") source: option<source>,
-@as("Scope") scope: scope,
-@as("Description") description: emptiableStringWithCharLimit256,
-@as("ConfigRuleId") configRuleId: stringWithCharLimit64,
-@as("ConfigRuleArn") configRuleArn: stringWithCharLimit256,
-@as("ConfigRuleName") configRuleName: configRuleName
+@as("CreatedBy") createdBy: option<stringWithCharLimit256>,
+@as("ConfigRuleState") configRuleState: option<configRuleState>,
+@as("MaximumExecutionFrequency") maximumExecutionFrequency: option<maximumExecutionFrequency>,
+@as("InputParameters") inputParameters: option<stringWithCharLimit1024>,
+@as("Source") source: source,
+@as("Scope") scope: option<scope>,
+@as("Description") description: option<emptiableStringWithCharLimit256>,
+@as("ConfigRuleId") configRuleId: option<stringWithCharLimit64>,
+@as("ConfigRuleArn") configRuleArn: option<stringWithCharLimit256>,
+@as("ConfigRuleName") configRuleName: option<configRuleName>
 }
 type complianceSummariesByResourceType = array<complianceSummaryByResourceType>
 type complianceByResources = array<complianceByResource>
@@ -727,1204 +731,1204 @@ type aggregateEvaluationResultList = array<aggregateEvaluationResult>
 type aggregateComplianceCountList = array<aggregateComplianceCount>
 type aggregateComplianceByConfigRuleList = array<aggregateComplianceByConfigRule>
 type remediationConfiguration = {
-@as("CreatedByService") createdByService: stringWithCharLimit1024,
-@as("Arn") arn: stringWithCharLimit1024,
-@as("RetryAttemptSeconds") retryAttemptSeconds: autoRemediationAttemptSeconds,
-@as("MaximumAutomaticAttempts") maximumAutomaticAttempts: autoRemediationAttempts,
-@as("ExecutionControls") executionControls: executionControls,
-@as("Automatic") automatic: amazonawsBoolean,
-@as("ResourceType") resourceType: amazonawsString,
-@as("Parameters") parameters: remediationParameters,
-@as("TargetVersion") targetVersion: amazonawsString,
-@as("TargetId") targetId: option<stringWithCharLimit256>,
-@as("TargetType") targetType: option<remediationTargetType>,
-@as("ConfigRuleName") configRuleName: option<configRuleName>
+@as("CreatedByService") createdByService: option<stringWithCharLimit1024>,
+@as("Arn") arn: option<stringWithCharLimit1024>,
+@as("RetryAttemptSeconds") retryAttemptSeconds: option<autoRemediationAttemptSeconds>,
+@as("MaximumAutomaticAttempts") maximumAutomaticAttempts: option<autoRemediationAttempts>,
+@as("ExecutionControls") executionControls: option<executionControls>,
+@as("Automatic") automatic: option<boolean_>,
+@as("ResourceType") resourceType: option<string_>,
+@as("Parameters") parameters: option<remediationParameters>,
+@as("TargetVersion") targetVersion: option<string_>,
+@as("TargetId") targetId: stringWithCharLimit256,
+@as("TargetType") targetType: remediationTargetType,
+@as("ConfigRuleName") configRuleName: configRuleName
 }
 type configurationAggregatorList = array<configurationAggregator>
 type configRules = array<configRule>
 type remediationConfigurations = array<remediationConfiguration>
 type failedRemediationBatch = {
-@as("FailedItems") failedItems: remediationConfigurations,
-@as("FailureMessage") failureMessage: amazonawsString
+@as("FailedItems") failedItems: option<remediationConfigurations>,
+@as("FailureMessage") failureMessage: option<string_>
 }
 type failedRemediationBatches = array<failedRemediationBatch>
-type clientType;
-@module("@aws-sdk/client-config") @new external createClient: unit => clientType = "ConfigClient";
+type awsServiceClient;
+@module("@aws-sdk/client-config") @new external createClient: unit => awsServiceClient = "ConfigClient";
 module StopConfigurationRecorder = {
   type t;
   type request = {
-@as("ConfigurationRecorderName") configurationRecorderName: option<recorderName>
+@as("ConfigurationRecorderName") configurationRecorderName: recorderName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "StopConfigurationRecorderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module StartConfigurationRecorder = {
   type t;
   type request = {
-@as("ConfigurationRecorderName") configurationRecorderName: option<recorderName>
+@as("ConfigurationRecorderName") configurationRecorderName: recorderName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "StartConfigurationRecorderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeliverConfigSnapshot = {
   type t;
   type request = {
-@as("deliveryChannelName") deliveryChannelName: option<channelName>
+deliveryChannelName: channelName
 }
   type response = {
-@as("configSnapshotId") configSnapshotId: amazonawsString
+configSnapshotId: option<string_>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeliverConfigSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteStoredQuery = {
   type t;
   type request = {
-@as("QueryName") queryName: option<queryName>
+@as("QueryName") queryName: queryName
 }
   type response = unit
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteStoredQueryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteRetentionConfiguration = {
   type t;
   type request = {
-@as("RetentionConfigurationName") retentionConfigurationName: option<retentionConfigurationName>
+@as("RetentionConfigurationName") retentionConfigurationName: retentionConfigurationName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteRetentionConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteResourceConfig = {
   type t;
   type request = {
-@as("ResourceId") resourceId: option<resourceId>,
-@as("ResourceType") resourceType: option<resourceTypeString>
+@as("ResourceId") resourceId: resourceId,
+@as("ResourceType") resourceType: resourceTypeString
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteResourceConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteRemediationConfiguration = {
   type t;
   type request = {
-@as("ResourceType") resourceType: amazonawsString,
-@as("ConfigRuleName") configRuleName: option<configRuleName>
+@as("ResourceType") resourceType: option<string_>,
+@as("ConfigRuleName") configRuleName: configRuleName
 }
   type response = unit
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteRemediationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeletePendingAggregationRequest = {
   type t;
   type request = {
-@as("RequesterAwsRegion") requesterAwsRegion: option<awsRegion>,
-@as("RequesterAccountId") requesterAccountId: option<accountId>
+@as("RequesterAwsRegion") requesterAwsRegion: awsRegion,
+@as("RequesterAccountId") requesterAccountId: accountId
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeletePendingAggregationRequestCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteOrganizationConformancePack = {
   type t;
   type request = {
-@as("OrganizationConformancePackName") organizationConformancePackName: option<organizationConformancePackName>
+@as("OrganizationConformancePackName") organizationConformancePackName: organizationConformancePackName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteOrganizationConformancePackCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteOrganizationConfigRule = {
   type t;
   type request = {
-@as("OrganizationConfigRuleName") organizationConfigRuleName: option<organizationConfigRuleName>
+@as("OrganizationConfigRuleName") organizationConfigRuleName: organizationConfigRuleName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteOrganizationConfigRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteEvaluationResults = {
   type t;
   type request = {
-@as("ConfigRuleName") configRuleName: option<stringWithCharLimit64>
+@as("ConfigRuleName") configRuleName: stringWithCharLimit64
 }
   type response = unit
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteEvaluationResultsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDeliveryChannel = {
   type t;
   type request = {
-@as("DeliveryChannelName") deliveryChannelName: option<channelName>
+@as("DeliveryChannelName") deliveryChannelName: channelName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteDeliveryChannelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteConformancePack = {
   type t;
   type request = {
-@as("ConformancePackName") conformancePackName: option<conformancePackName>
+@as("ConformancePackName") conformancePackName: conformancePackName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteConformancePackCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteConfigurationRecorder = {
   type t;
   type request = {
-@as("ConfigurationRecorderName") configurationRecorderName: option<recorderName>
+@as("ConfigurationRecorderName") configurationRecorderName: recorderName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteConfigurationRecorderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteConfigurationAggregator = {
   type t;
   type request = {
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteConfigurationAggregatorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteConfigRule = {
   type t;
   type request = {
-@as("ConfigRuleName") configRuleName: option<configRuleName>
+@as("ConfigRuleName") configRuleName: configRuleName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteConfigRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteAggregationAuthorization = {
   type t;
   type request = {
-@as("AuthorizedAwsRegion") authorizedAwsRegion: option<awsRegion>,
-@as("AuthorizedAccountId") authorizedAccountId: option<accountId>
+@as("AuthorizedAwsRegion") authorizedAwsRegion: awsRegion,
+@as("AuthorizedAccountId") authorizedAccountId: accountId
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteAggregationAuthorizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceArn") resourceArn: option<amazonResourceName>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceArn") resourceArn: amazonResourceName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module StartConfigRulesEvaluation = {
   type t;
   type request = {
-@as("ConfigRuleNames") configRuleNames: reevaluateConfigRuleNames
+@as("ConfigRuleNames") configRuleNames: option<reevaluateConfigRuleNames>
 }
   type response = unit
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "StartConfigRulesEvaluationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutRetentionConfiguration = {
   type t;
   type request = {
-@as("RetentionPeriodInDays") retentionPeriodInDays: option<retentionPeriodInDays>
+@as("RetentionPeriodInDays") retentionPeriodInDays: retentionPeriodInDays
 }
   type response = {
-@as("RetentionConfiguration") retentionConfiguration: retentionConfiguration
+@as("RetentionConfiguration") retentionConfiguration: option<retentionConfiguration>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutRetentionConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutResourceConfig = {
   type t;
   type request = {
-@as("Tags") tags: tags,
-@as("Configuration") configuration: option<configuration>,
-@as("ResourceName") resourceName: resourceName,
-@as("ResourceId") resourceId: option<resourceId>,
-@as("SchemaVersionId") schemaVersionId: option<schemaVersionId>,
-@as("ResourceType") resourceType: option<resourceTypeString>
+@as("Tags") tags: option<tags>,
+@as("Configuration") configuration: configuration,
+@as("ResourceName") resourceName: option<resourceName>,
+@as("ResourceId") resourceId: resourceId,
+@as("SchemaVersionId") schemaVersionId: schemaVersionId,
+@as("ResourceType") resourceType: resourceTypeString
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutResourceConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutExternalEvaluation = {
   type t;
   type request = {
-@as("ExternalEvaluation") externalEvaluation: option<externalEvaluation>,
-@as("ConfigRuleName") configRuleName: option<configRuleName>
+@as("ExternalEvaluation") externalEvaluation: externalEvaluation,
+@as("ConfigRuleName") configRuleName: configRuleName
 }
   type response = unit
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutExternalEvaluationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetStoredQuery = {
   type t;
   type request = {
-@as("QueryName") queryName: option<queryName>
+@as("QueryName") queryName: queryName
 }
   type response = {
-@as("StoredQuery") storedQuery: storedQuery
+@as("StoredQuery") storedQuery: option<storedQuery>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetStoredQueryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tagList>,
-@as("ResourceArn") resourceArn: option<amazonResourceName>
+@as("Tags") tags: tagList_,
+@as("ResourceArn") resourceArn: amazonResourceName
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module StartRemediationExecution = {
   type t;
   type request = {
-@as("ResourceKeys") resourceKeys: option<resourceKeys>,
-@as("ConfigRuleName") configRuleName: option<configRuleName>
+@as("ResourceKeys") resourceKeys: resourceKeys,
+@as("ConfigRuleName") configRuleName: configRuleName
 }
   type response = {
-@as("FailedItems") failedItems: resourceKeys,
-@as("FailureMessage") failureMessage: amazonawsString
+@as("FailedItems") failedItems: option<resourceKeys>,
+@as("FailureMessage") failureMessage: option<string_>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "StartRemediationExecutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutStoredQuery = {
   type t;
   type request = {
-@as("Tags") tags: tagsList,
-@as("StoredQuery") storedQuery: option<storedQuery>
+@as("Tags") tags: option<tagsList>,
+@as("StoredQuery") storedQuery: storedQuery
 }
   type response = {
-@as("QueryArn") queryArn: queryArn
+@as("QueryArn") queryArn: option<queryArn>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutStoredQueryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutOrganizationConformancePack = {
   type t;
   type request = {
-@as("ExcludedAccounts") excludedAccounts: excludedAccounts,
-@as("ConformancePackInputParameters") conformancePackInputParameters: conformancePackInputParameters,
-@as("DeliveryS3KeyPrefix") deliveryS3KeyPrefix: deliveryS3KeyPrefix,
-@as("DeliveryS3Bucket") deliveryS3Bucket: deliveryS3Bucket,
-@as("TemplateBody") templateBody: templateBody,
-@as("TemplateS3Uri") templateS3Uri: templateS3Uri,
-@as("OrganizationConformancePackName") organizationConformancePackName: option<organizationConformancePackName>
+@as("ExcludedAccounts") excludedAccounts: option<excludedAccounts>,
+@as("ConformancePackInputParameters") conformancePackInputParameters: option<conformancePackInputParameters>,
+@as("DeliveryS3KeyPrefix") deliveryS3KeyPrefix: option<deliveryS3KeyPrefix>,
+@as("DeliveryS3Bucket") deliveryS3Bucket: option<deliveryS3Bucket>,
+@as("TemplateBody") templateBody: option<templateBody>,
+@as("TemplateS3Uri") templateS3Uri: option<templateS3Uri>,
+@as("OrganizationConformancePackName") organizationConformancePackName: organizationConformancePackName
 }
   type response = {
-@as("OrganizationConformancePackArn") organizationConformancePackArn: stringWithCharLimit256
+@as("OrganizationConformancePackArn") organizationConformancePackArn: option<stringWithCharLimit256>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutOrganizationConformancePackCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutOrganizationConfigRule = {
   type t;
   type request = {
-@as("ExcludedAccounts") excludedAccounts: excludedAccounts,
-@as("OrganizationCustomRuleMetadata") organizationCustomRuleMetadata: organizationCustomRuleMetadata,
-@as("OrganizationManagedRuleMetadata") organizationManagedRuleMetadata: organizationManagedRuleMetadata,
-@as("OrganizationConfigRuleName") organizationConfigRuleName: option<organizationConfigRuleName>
+@as("ExcludedAccounts") excludedAccounts: option<excludedAccounts>,
+@as("OrganizationCustomRuleMetadata") organizationCustomRuleMetadata: option<organizationCustomRuleMetadata>,
+@as("OrganizationManagedRuleMetadata") organizationManagedRuleMetadata: option<organizationManagedRuleMetadata>,
+@as("OrganizationConfigRuleName") organizationConfigRuleName: organizationConfigRuleName
 }
   type response = {
-@as("OrganizationConfigRuleArn") organizationConfigRuleArn: stringWithCharLimit256
+@as("OrganizationConfigRuleArn") organizationConfigRuleArn: option<stringWithCharLimit256>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutOrganizationConfigRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutEvaluations = {
   type t;
   type request = {
-@as("TestMode") testMode: amazonawsBoolean,
-@as("ResultToken") resultToken: option<amazonawsString>,
-@as("Evaluations") evaluations: evaluations
+@as("TestMode") testMode: option<boolean_>,
+@as("ResultToken") resultToken: string_,
+@as("Evaluations") evaluations: option<evaluations>
 }
   type response = {
-@as("FailedEvaluations") failedEvaluations: evaluations
+@as("FailedEvaluations") failedEvaluations: option<evaluations>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutEvaluationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutDeliveryChannel = {
   type t;
   type request = {
-@as("DeliveryChannel") deliveryChannel: option<deliveryChannel>
+@as("DeliveryChannel") deliveryChannel: deliveryChannel
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutDeliveryChannelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutConformancePack = {
   type t;
   type request = {
-@as("ConformancePackInputParameters") conformancePackInputParameters: conformancePackInputParameters,
-@as("DeliveryS3KeyPrefix") deliveryS3KeyPrefix: deliveryS3KeyPrefix,
-@as("DeliveryS3Bucket") deliveryS3Bucket: deliveryS3Bucket,
-@as("TemplateBody") templateBody: templateBody,
-@as("TemplateS3Uri") templateS3Uri: templateS3Uri,
-@as("ConformancePackName") conformancePackName: option<conformancePackName>
+@as("ConformancePackInputParameters") conformancePackInputParameters: option<conformancePackInputParameters>,
+@as("DeliveryS3KeyPrefix") deliveryS3KeyPrefix: option<deliveryS3KeyPrefix>,
+@as("DeliveryS3Bucket") deliveryS3Bucket: option<deliveryS3Bucket>,
+@as("TemplateBody") templateBody: option<templateBody>,
+@as("TemplateS3Uri") templateS3Uri: option<templateS3Uri>,
+@as("ConformancePackName") conformancePackName: conformancePackName
 }
   type response = {
-@as("ConformancePackArn") conformancePackArn: conformancePackArn
+@as("ConformancePackArn") conformancePackArn: option<conformancePackArn>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutConformancePackCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutAggregationAuthorization = {
   type t;
   type request = {
-@as("Tags") tags: tagsList,
-@as("AuthorizedAwsRegion") authorizedAwsRegion: option<awsRegion>,
-@as("AuthorizedAccountId") authorizedAccountId: option<accountId>
+@as("Tags") tags: option<tagsList>,
+@as("AuthorizedAwsRegion") authorizedAwsRegion: awsRegion,
+@as("AuthorizedAccountId") authorizedAccountId: accountId
 }
   type response = {
-@as("AggregationAuthorization") aggregationAuthorization: aggregationAuthorization
+@as("AggregationAuthorization") aggregationAuthorization: option<aggregationAuthorization>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutAggregationAuthorizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: limit,
-@as("ResourceArn") resourceArn: option<amazonResourceName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<limit>,
+@as("ResourceArn") resourceArn: amazonResourceName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("Tags") tags: tagList
+@as("NextToken") nextToken: option<nextToken>,
+@as("Tags") tags: option<tagList_>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStoredQueries = {
   type t;
   type request = {
-@as("MaxResults") maxResults: limit,
-@as("NextToken") nextToken: amazonawsString
+@as("MaxResults") maxResults: option<limit>,
+@as("NextToken") nextToken: option<string_>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("StoredQueryMetadata") storedQueryMetadata: storedQueryMetadataList
+@as("NextToken") nextToken: option<string_>,
+@as("StoredQueryMetadata") storedQueryMetadata: option<storedQueryMetadataList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "ListStoredQueriesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDiscoveredResources = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("includeDeletedResources") includeDeletedResources: amazonawsBoolean,
-@as("limit") limit: limit,
-@as("resourceName") resourceName: resourceName,
-@as("resourceIds") resourceIds: resourceIdList,
-@as("resourceType") resourceType: option<resourceType>
+nextToken: option<nextToken>,
+includeDeletedResources: option<boolean_>,
+limit: option<limit>,
+resourceName: option<resourceName>,
+resourceIds: option<resourceIdList>,
+resourceType: resourceType
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("resourceIdentifiers") resourceIdentifiers: resourceIdentifierList
+nextToken: option<nextToken>,
+resourceIdentifiers: option<resourceIdentifierList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "ListDiscoveredResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAggregateDiscoveredResources = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: limit,
-@as("Filters") filters: resourceFilters,
-@as("ResourceType") resourceType: option<resourceType>,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<limit>,
+@as("Filters") filters: option<resourceFilters>,
+@as("ResourceType") resourceType: resourceType,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("ResourceIdentifiers") resourceIdentifiers: discoveredResourceIdentifierList
+@as("NextToken") nextToken: option<nextToken>,
+@as("ResourceIdentifiers") resourceIdentifiers: option<discoveredResourceIdentifierList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "ListAggregateDiscoveredResourcesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetOrganizationConformancePackDetailedStatus = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Limit") limit: cosmosPageLimit,
-@as("Filters") filters: organizationResourceDetailedStatusFilters,
-@as("OrganizationConformancePackName") organizationConformancePackName: option<organizationConformancePackName>
+@as("NextToken") nextToken: option<string_>,
+@as("Limit") limit: option<cosmosPageLimit>,
+@as("Filters") filters: option<organizationResourceDetailedStatusFilters>,
+@as("OrganizationConformancePackName") organizationConformancePackName: organizationConformancePackName
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("OrganizationConformancePackDetailedStatuses") organizationConformancePackDetailedStatuses: organizationConformancePackDetailedStatuses
+@as("NextToken") nextToken: option<string_>,
+@as("OrganizationConformancePackDetailedStatuses") organizationConformancePackDetailedStatuses: option<organizationConformancePackDetailedStatuses>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetOrganizationConformancePackDetailedStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetOrganizationConfigRuleDetailedStatus = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Limit") limit: cosmosPageLimit,
-@as("Filters") filters: statusDetailFilters,
-@as("OrganizationConfigRuleName") organizationConfigRuleName: option<organizationConfigRuleName>
+@as("NextToken") nextToken: option<string_>,
+@as("Limit") limit: option<cosmosPageLimit>,
+@as("Filters") filters: option<statusDetailFilters>,
+@as("OrganizationConfigRuleName") organizationConfigRuleName: organizationConfigRuleName
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("OrganizationConfigRuleDetailedStatus") organizationConfigRuleDetailedStatus: organizationConfigRuleDetailedStatus
+@as("NextToken") nextToken: option<string_>,
+@as("OrganizationConfigRuleDetailedStatus") organizationConfigRuleDetailedStatus: option<organizationConfigRuleDetailedStatus>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetOrganizationConfigRuleDetailedStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDiscoveredResourceCounts = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("limit") limit: limit,
-@as("resourceTypes") resourceTypes: resourceTypes
+nextToken: option<nextToken>,
+limit: option<limit>,
+resourceTypes: option<resourceTypes>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("resourceCounts") resourceCounts: resourceCounts,
-@as("totalDiscoveredResources") totalDiscoveredResources: amazonawsLong
+nextToken: option<nextToken>,
+resourceCounts: option<resourceCounts>,
+totalDiscoveredResources: option<long>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetDiscoveredResourceCountsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetConformancePackComplianceSummary = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: pageSizeLimit,
-@as("ConformancePackNames") conformancePackNames: option<conformancePackNamesToSummarizeList>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<pageSizeLimit>,
+@as("ConformancePackNames") conformancePackNames: conformancePackNamesToSummarizeList
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("ConformancePackComplianceSummaryList") conformancePackComplianceSummaryList: conformancePackComplianceSummaryList
+@as("NextToken") nextToken: option<nextToken>,
+@as("ConformancePackComplianceSummaryList") conformancePackComplianceSummaryList: option<conformancePackComplianceSummaryList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetConformancePackComplianceSummaryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetComplianceSummaryByConfigRule = {
   type t;
   
   type response = {
-@as("ComplianceSummary") complianceSummary: complianceSummary
+@as("ComplianceSummary") complianceSummary: option<complianceSummary>
 }
   @module("@aws-sdk/client-config") @new external new_: (unit) => t = "GetComplianceSummaryByConfigRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAggregateDiscoveredResourceCounts = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: groupByAPILimit,
-@as("GroupByKey") groupByKey: resourceCountGroupKey,
-@as("Filters") filters: resourceCountFilters,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<groupByAPILimit>,
+@as("GroupByKey") groupByKey: option<resourceCountGroupKey>,
+@as("Filters") filters: option<resourceCountFilters>,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("GroupedResourceCounts") groupedResourceCounts: groupedResourceCountList,
-@as("GroupByKey") groupByKey: stringWithCharLimit256,
-@as("TotalDiscoveredResources") totalDiscoveredResources: option<amazonawsLong>
+@as("NextToken") nextToken: option<nextToken>,
+@as("GroupedResourceCounts") groupedResourceCounts: option<groupedResourceCountList>,
+@as("GroupByKey") groupByKey: option<stringWithCharLimit256>,
+@as("TotalDiscoveredResources") totalDiscoveredResources: long
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetAggregateDiscoveredResourceCountsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRetentionConfigurations = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("RetentionConfigurationNames") retentionConfigurationNames: retentionConfigurationNameList
+@as("NextToken") nextToken: option<nextToken>,
+@as("RetentionConfigurationNames") retentionConfigurationNames: option<retentionConfigurationNameList>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("RetentionConfigurations") retentionConfigurations: retentionConfigurationList
+@as("NextToken") nextToken: option<nextToken>,
+@as("RetentionConfigurations") retentionConfigurations: option<retentionConfigurationList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeRetentionConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRemediationExceptions = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Limit") limit: limit,
-@as("ResourceKeys") resourceKeys: remediationExceptionResourceKeys,
-@as("ConfigRuleName") configRuleName: option<configRuleName>
+@as("NextToken") nextToken: option<string_>,
+@as("Limit") limit: option<limit>,
+@as("ResourceKeys") resourceKeys: option<remediationExceptionResourceKeys>,
+@as("ConfigRuleName") configRuleName: configRuleName
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("RemediationExceptions") remediationExceptions: remediationExceptions
+@as("NextToken") nextToken: option<string_>,
+@as("RemediationExceptions") remediationExceptions: option<remediationExceptions>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeRemediationExceptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribePendingAggregationRequests = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Limit") limit: describePendingAggregationRequestsLimit
+@as("NextToken") nextToken: option<string_>,
+@as("Limit") limit: option<describePendingAggregationRequestsLimit>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("PendingAggregationRequests") pendingAggregationRequests: pendingAggregationRequestList
+@as("NextToken") nextToken: option<string_>,
+@as("PendingAggregationRequests") pendingAggregationRequests: option<pendingAggregationRequestList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribePendingAggregationRequestsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeOrganizationConformancePackStatuses = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Limit") limit: cosmosPageLimit,
-@as("OrganizationConformancePackNames") organizationConformancePackNames: organizationConformancePackNames
+@as("NextToken") nextToken: option<string_>,
+@as("Limit") limit: option<cosmosPageLimit>,
+@as("OrganizationConformancePackNames") organizationConformancePackNames: option<organizationConformancePackNames>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("OrganizationConformancePackStatuses") organizationConformancePackStatuses: organizationConformancePackStatuses
+@as("NextToken") nextToken: option<string_>,
+@as("OrganizationConformancePackStatuses") organizationConformancePackStatuses: option<organizationConformancePackStatuses>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeOrganizationConformancePackStatusesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeOrganizationConfigRuleStatuses = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Limit") limit: cosmosPageLimit,
-@as("OrganizationConfigRuleNames") organizationConfigRuleNames: organizationConfigRuleNames
+@as("NextToken") nextToken: option<string_>,
+@as("Limit") limit: option<cosmosPageLimit>,
+@as("OrganizationConfigRuleNames") organizationConfigRuleNames: option<organizationConfigRuleNames>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("OrganizationConfigRuleStatuses") organizationConfigRuleStatuses: organizationConfigRuleStatuses
+@as("NextToken") nextToken: option<string_>,
+@as("OrganizationConfigRuleStatuses") organizationConfigRuleStatuses: option<organizationConfigRuleStatuses>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeOrganizationConfigRuleStatusesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConformancePackStatus = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: pageSizeLimit,
-@as("ConformancePackNames") conformancePackNames: conformancePackNamesList
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<pageSizeLimit>,
+@as("ConformancePackNames") conformancePackNames: option<conformancePackNamesList>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("ConformancePackStatusDetails") conformancePackStatusDetails: conformancePackStatusDetailsList
+@as("NextToken") nextToken: option<nextToken>,
+@as("ConformancePackStatusDetails") conformancePackStatusDetails: option<conformancePackStatusDetailsList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConformancePackStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConfigurationRecorderStatus = {
   type t;
   type request = {
-@as("ConfigurationRecorderNames") configurationRecorderNames: configurationRecorderNameList
+@as("ConfigurationRecorderNames") configurationRecorderNames: option<configurationRecorderNameList>
 }
   type response = {
-@as("ConfigurationRecordersStatus") configurationRecordersStatus: configurationRecorderStatusList
+@as("ConfigurationRecordersStatus") configurationRecordersStatus: option<configurationRecorderStatusList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigurationRecorderStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConfigurationAggregatorSourcesStatus = {
   type t;
   type request = {
-@as("Limit") limit: limit,
-@as("NextToken") nextToken: amazonawsString,
-@as("UpdateStatus") updateStatus: aggregatedSourceStatusTypeList,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("Limit") limit: option<limit>,
+@as("NextToken") nextToken: option<string_>,
+@as("UpdateStatus") updateStatus: option<aggregatedSourceStatusTypeList>,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("AggregatedSourceStatusList") aggregatedSourceStatusList: aggregatedSourceStatusList
+@as("NextToken") nextToken: option<string_>,
+@as("AggregatedSourceStatusList") aggregatedSourceStatusList: option<aggregatedSourceStatusList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigurationAggregatorSourcesStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConfigRuleEvaluationStatus = {
   type t;
   type request = {
-@as("Limit") limit: ruleLimit,
-@as("NextToken") nextToken: amazonawsString,
-@as("ConfigRuleNames") configRuleNames: configRuleNames
+@as("Limit") limit: option<ruleLimit>,
+@as("NextToken") nextToken: option<string_>,
+@as("ConfigRuleNames") configRuleNames: option<configRuleNames>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("ConfigRulesEvaluationStatus") configRulesEvaluationStatus: configRuleEvaluationStatusList
+@as("NextToken") nextToken: option<string_>,
+@as("ConfigRulesEvaluationStatus") configRulesEvaluationStatus: option<configRuleEvaluationStatusList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigRuleEvaluationStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAggregationAuthorizations = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Limit") limit: limit
+@as("NextToken") nextToken: option<string_>,
+@as("Limit") limit: option<limit>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("AggregationAuthorizations") aggregationAuthorizations: aggregationAuthorizationList
+@as("NextToken") nextToken: option<string_>,
+@as("AggregationAuthorizations") aggregationAuthorizations: option<aggregationAuthorizationList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeAggregationAuthorizationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SelectResourceConfig = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: limit,
-@as("Expression") expression: option<expression>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<limit>,
+@as("Expression") expression: expression
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("QueryInfo") queryInfo: queryInfo,
-@as("Results") results: results
+@as("NextToken") nextToken: option<nextToken>,
+@as("QueryInfo") queryInfo: option<queryInfo>,
+@as("Results") results: option<results>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "SelectResourceConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SelectAggregateResourceConfig = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("MaxResults") maxResults: limit,
-@as("Limit") limit: limit,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>,
-@as("Expression") expression: option<expression>
+@as("NextToken") nextToken: option<nextToken>,
+@as("MaxResults") maxResults: option<limit>,
+@as("Limit") limit: option<limit>,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName,
+@as("Expression") expression: expression
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("QueryInfo") queryInfo: queryInfo,
-@as("Results") results: results
+@as("NextToken") nextToken: option<nextToken>,
+@as("QueryInfo") queryInfo: option<queryInfo>,
+@as("Results") results: option<results>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "SelectAggregateResourceConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutConfigurationRecorder = {
   type t;
   type request = {
-@as("ConfigurationRecorder") configurationRecorder: option<configurationRecorder>
+@as("ConfigurationRecorder") configurationRecorder: configurationRecorder
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutConfigurationRecorderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetAggregateResourceConfig = {
   type t;
   type request = {
-@as("ResourceIdentifier") resourceIdentifier: option<aggregateResourceIdentifier>,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("ResourceIdentifier") resourceIdentifier: aggregateResourceIdentifier,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   type response = {
-@as("ConfigurationItem") configurationItem: configurationItem
+@as("ConfigurationItem") configurationItem: option<configurationItem>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetAggregateResourceConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAggregateConformancePackComplianceSummary = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: limit,
-@as("GroupByKey") groupByKey: aggregateConformancePackComplianceSummaryGroupKey,
-@as("Filters") filters: aggregateConformancePackComplianceSummaryFilters,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<limit>,
+@as("GroupByKey") groupByKey: option<aggregateConformancePackComplianceSummaryGroupKey>,
+@as("Filters") filters: option<aggregateConformancePackComplianceSummaryFilters>,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("GroupByKey") groupByKey: stringWithCharLimit256,
-@as("AggregateConformancePackComplianceSummaries") aggregateConformancePackComplianceSummaries: aggregateConformancePackComplianceSummaryList
+@as("NextToken") nextToken: option<nextToken>,
+@as("GroupByKey") groupByKey: option<stringWithCharLimit256>,
+@as("AggregateConformancePackComplianceSummaries") aggregateConformancePackComplianceSummaries: option<aggregateConformancePackComplianceSummaryList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetAggregateConformancePackComplianceSummaryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDeliveryChannels = {
   type t;
   type request = {
-@as("DeliveryChannelNames") deliveryChannelNames: deliveryChannelNameList
+@as("DeliveryChannelNames") deliveryChannelNames: option<deliveryChannelNameList>
 }
   type response = {
-@as("DeliveryChannels") deliveryChannels: deliveryChannelList
+@as("DeliveryChannels") deliveryChannels: option<deliveryChannelList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeDeliveryChannelsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDeliveryChannelStatus = {
   type t;
   type request = {
-@as("DeliveryChannelNames") deliveryChannelNames: deliveryChannelNameList
+@as("DeliveryChannelNames") deliveryChannelNames: option<deliveryChannelNameList>
 }
   type response = {
-@as("DeliveryChannelsStatus") deliveryChannelsStatus: deliveryChannelStatusList
+@as("DeliveryChannelsStatus") deliveryChannelsStatus: option<deliveryChannelStatusList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeDeliveryChannelStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConformancePackCompliance = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: describeConformancePackComplianceLimit,
-@as("Filters") filters: conformancePackComplianceFilters,
-@as("ConformancePackName") conformancePackName: option<conformancePackName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<describeConformancePackComplianceLimit>,
+@as("Filters") filters: option<conformancePackComplianceFilters>,
+@as("ConformancePackName") conformancePackName: conformancePackName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("ConformancePackRuleComplianceList") conformancePackRuleComplianceList: option<conformancePackRuleComplianceList>,
-@as("ConformancePackName") conformancePackName: option<conformancePackName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("ConformancePackRuleComplianceList") conformancePackRuleComplianceList: conformancePackRuleComplianceList,
+@as("ConformancePackName") conformancePackName: conformancePackName
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConformancePackComplianceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAggregateComplianceByConformancePacks = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: limit,
-@as("Filters") filters: aggregateConformancePackComplianceFilters,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<limit>,
+@as("Filters") filters: option<aggregateConformancePackComplianceFilters>,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("AggregateComplianceByConformancePacks") aggregateComplianceByConformancePacks: aggregateComplianceByConformancePackList
+@as("NextToken") nextToken: option<nextToken>,
+@as("AggregateComplianceByConformancePacks") aggregateComplianceByConformancePacks: option<aggregateComplianceByConformancePackList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeAggregateComplianceByConformancePacksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchGetResourceConfig = {
   type t;
   type request = {
-@as("resourceKeys") resourceKeys: option<resourceKeys>
+resourceKeys: resourceKeys
 }
   type response = {
-@as("unprocessedResourceKeys") unprocessedResourceKeys: resourceKeys,
-@as("baseConfigurationItems") baseConfigurationItems: baseConfigurationItems
+unprocessedResourceKeys: option<resourceKeys>,
+baseConfigurationItems: option<baseConfigurationItems>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "BatchGetResourceConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchGetAggregateResourceConfig = {
   type t;
   type request = {
-@as("ResourceIdentifiers") resourceIdentifiers: option<resourceIdentifiersList>,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("ResourceIdentifiers") resourceIdentifiers: resourceIdentifiersList,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   type response = {
-@as("UnprocessedResourceIdentifiers") unprocessedResourceIdentifiers: unprocessedResourceIdentifierList,
-@as("BaseConfigurationItems") baseConfigurationItems: baseConfigurationItems
+@as("UnprocessedResourceIdentifiers") unprocessedResourceIdentifiers: option<unprocessedResourceIdentifierList>,
+@as("BaseConfigurationItems") baseConfigurationItems: option<baseConfigurationItems>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "BatchGetAggregateResourceConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutRemediationExceptions = {
   type t;
   type request = {
-@as("ExpirationTime") expirationTime: date,
-@as("Message") message: stringWithCharLimit1024,
-@as("ResourceKeys") resourceKeys: option<remediationExceptionResourceKeys>,
-@as("ConfigRuleName") configRuleName: option<configRuleName>
+@as("ExpirationTime") expirationTime: option<date>,
+@as("Message") message: option<stringWithCharLimit1024>,
+@as("ResourceKeys") resourceKeys: remediationExceptionResourceKeys,
+@as("ConfigRuleName") configRuleName: configRuleName
 }
   type response = {
-@as("FailedBatches") failedBatches: failedRemediationExceptionBatches
+@as("FailedBatches") failedBatches: option<failedRemediationExceptionBatches>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutRemediationExceptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutConfigurationAggregator = {
   type t;
   type request = {
-@as("Tags") tags: tagsList,
-@as("OrganizationAggregationSource") organizationAggregationSource: organizationAggregationSource,
-@as("AccountAggregationSources") accountAggregationSources: accountAggregationSourceList,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("Tags") tags: option<tagsList>,
+@as("OrganizationAggregationSource") organizationAggregationSource: option<organizationAggregationSource>,
+@as("AccountAggregationSources") accountAggregationSources: option<accountAggregationSourceList>,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   type response = {
-@as("ConfigurationAggregator") configurationAggregator: configurationAggregator
+@as("ConfigurationAggregator") configurationAggregator: option<configurationAggregator>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutConfigurationAggregatorCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutConfigRule = {
   type t;
   type request = {
-@as("Tags") tags: tagsList,
-@as("ConfigRule") configRule: option<configRule>
+@as("Tags") tags: option<tagsList>,
+@as("ConfigRule") configRule: configRule
 }
   
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutConfigRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetResourceConfigHistory = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("limit") limit: limit,
-@as("chronologicalOrder") chronologicalOrder: chronologicalOrder,
-@as("earlierTime") earlierTime: earlierTime,
-@as("laterTime") laterTime: laterTime,
-@as("resourceId") resourceId: option<resourceId>,
-@as("resourceType") resourceType: option<resourceType>
+nextToken: option<nextToken>,
+limit: option<limit>,
+chronologicalOrder: option<chronologicalOrder>,
+earlierTime: option<earlierTime>,
+laterTime: option<laterTime>,
+resourceId: resourceId,
+resourceType: resourceType
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("configurationItems") configurationItems: configurationItemList
+nextToken: option<nextToken>,
+configurationItems: option<configurationItemList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetResourceConfigHistoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetConformancePackComplianceDetails = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: getConformancePackComplianceDetailsLimit,
-@as("Filters") filters: conformancePackEvaluationFilters,
-@as("ConformancePackName") conformancePackName: option<conformancePackName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<getConformancePackComplianceDetailsLimit>,
+@as("Filters") filters: option<conformancePackEvaluationFilters>,
+@as("ConformancePackName") conformancePackName: conformancePackName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("ConformancePackRuleEvaluationResults") conformancePackRuleEvaluationResults: conformancePackRuleEvaluationResultsList,
-@as("ConformancePackName") conformancePackName: option<conformancePackName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("ConformancePackRuleEvaluationResults") conformancePackRuleEvaluationResults: option<conformancePackRuleEvaluationResultsList>,
+@as("ConformancePackName") conformancePackName: conformancePackName
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetConformancePackComplianceDetailsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetComplianceSummaryByResourceType = {
   type t;
   type request = {
-@as("ResourceTypes") resourceTypes: resourceTypes
+@as("ResourceTypes") resourceTypes: option<resourceTypes>
 }
   type response = {
-@as("ComplianceSummariesByResourceType") complianceSummariesByResourceType: complianceSummariesByResourceType
+@as("ComplianceSummariesByResourceType") complianceSummariesByResourceType: option<complianceSummariesByResourceType>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetComplianceSummaryByResourceTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetComplianceDetailsByResource = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("ComplianceTypes") complianceTypes: complianceTypes,
-@as("ResourceId") resourceId: option<baseResourceId>,
-@as("ResourceType") resourceType: option<stringWithCharLimit256>
+@as("NextToken") nextToken: option<string_>,
+@as("ComplianceTypes") complianceTypes: option<complianceTypes>,
+@as("ResourceId") resourceId: baseResourceId,
+@as("ResourceType") resourceType: stringWithCharLimit256
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("EvaluationResults") evaluationResults: evaluationResults
+@as("NextToken") nextToken: option<string_>,
+@as("EvaluationResults") evaluationResults: option<evaluationResults>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetComplianceDetailsByResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetComplianceDetailsByConfigRule = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: limit,
-@as("ComplianceTypes") complianceTypes: complianceTypes,
-@as("ConfigRuleName") configRuleName: option<stringWithCharLimit64>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<limit>,
+@as("ComplianceTypes") complianceTypes: option<complianceTypes>,
+@as("ConfigRuleName") configRuleName: stringWithCharLimit64
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("EvaluationResults") evaluationResults: evaluationResults
+@as("NextToken") nextToken: option<nextToken>,
+@as("EvaluationResults") evaluationResults: option<evaluationResults>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetComplianceDetailsByConfigRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAggregateConfigRuleComplianceSummary = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: groupByAPILimit,
-@as("GroupByKey") groupByKey: configRuleComplianceSummaryGroupKey,
-@as("Filters") filters: configRuleComplianceSummaryFilters,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<groupByAPILimit>,
+@as("GroupByKey") groupByKey: option<configRuleComplianceSummaryGroupKey>,
+@as("Filters") filters: option<configRuleComplianceSummaryFilters>,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("AggregateComplianceCounts") aggregateComplianceCounts: aggregateComplianceCountList,
-@as("GroupByKey") groupByKey: stringWithCharLimit256
+@as("NextToken") nextToken: option<nextToken>,
+@as("AggregateComplianceCounts") aggregateComplianceCounts: option<aggregateComplianceCountList>,
+@as("GroupByKey") groupByKey: option<stringWithCharLimit256>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetAggregateConfigRuleComplianceSummaryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAggregateComplianceDetailsByConfigRule = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: limit,
-@as("ComplianceType") complianceType: complianceType,
-@as("AwsRegion") awsRegion: option<awsRegion>,
-@as("AccountId") accountId: option<accountId>,
-@as("ConfigRuleName") configRuleName: option<configRuleName>,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<limit>,
+@as("ComplianceType") complianceType: option<complianceType>,
+@as("AwsRegion") awsRegion: awsRegion,
+@as("AccountId") accountId: accountId,
+@as("ConfigRuleName") configRuleName: configRuleName,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("AggregateEvaluationResults") aggregateEvaluationResults: aggregateEvaluationResultList
+@as("NextToken") nextToken: option<nextToken>,
+@as("AggregateEvaluationResults") aggregateEvaluationResults: option<aggregateEvaluationResultList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetAggregateComplianceDetailsByConfigRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRemediationExecutionStatus = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Limit") limit: limit,
-@as("ResourceKeys") resourceKeys: resourceKeys,
-@as("ConfigRuleName") configRuleName: option<configRuleName>
+@as("NextToken") nextToken: option<string_>,
+@as("Limit") limit: option<limit>,
+@as("ResourceKeys") resourceKeys: option<resourceKeys>,
+@as("ConfigRuleName") configRuleName: configRuleName
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("RemediationExecutionStatuses") remediationExecutionStatuses: remediationExecutionStatuses
+@as("NextToken") nextToken: option<string_>,
+@as("RemediationExecutionStatuses") remediationExecutionStatuses: option<remediationExecutionStatuses>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeRemediationExecutionStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeOrganizationConformancePacks = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Limit") limit: cosmosPageLimit,
-@as("OrganizationConformancePackNames") organizationConformancePackNames: organizationConformancePackNames
+@as("NextToken") nextToken: option<string_>,
+@as("Limit") limit: option<cosmosPageLimit>,
+@as("OrganizationConformancePackNames") organizationConformancePackNames: option<organizationConformancePackNames>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("OrganizationConformancePacks") organizationConformancePacks: organizationConformancePacks
+@as("NextToken") nextToken: option<string_>,
+@as("OrganizationConformancePacks") organizationConformancePacks: option<organizationConformancePacks>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeOrganizationConformancePacksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeOrganizationConfigRules = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Limit") limit: cosmosPageLimit,
-@as("OrganizationConfigRuleNames") organizationConfigRuleNames: organizationConfigRuleNames
+@as("NextToken") nextToken: option<string_>,
+@as("Limit") limit: option<cosmosPageLimit>,
+@as("OrganizationConfigRuleNames") organizationConfigRuleNames: option<organizationConfigRuleNames>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("OrganizationConfigRules") organizationConfigRules: organizationConfigRules
+@as("NextToken") nextToken: option<string_>,
+@as("OrganizationConfigRules") organizationConfigRules: option<organizationConfigRules>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeOrganizationConfigRulesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConformancePacks = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: pageSizeLimit,
-@as("ConformancePackNames") conformancePackNames: conformancePackNamesList
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<pageSizeLimit>,
+@as("ConformancePackNames") conformancePackNames: option<conformancePackNamesList>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("ConformancePackDetails") conformancePackDetails: conformancePackDetailList
+@as("NextToken") nextToken: option<nextToken>,
+@as("ConformancePackDetails") conformancePackDetails: option<conformancePackDetailList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConformancePacksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConfigurationRecorders = {
   type t;
   type request = {
-@as("ConfigurationRecorderNames") configurationRecorderNames: configurationRecorderNameList
+@as("ConfigurationRecorderNames") configurationRecorderNames: option<configurationRecorderNameList>
 }
   type response = {
-@as("ConfigurationRecorders") configurationRecorders: configurationRecorderList
+@as("ConfigurationRecorders") configurationRecorders: option<configurationRecorderList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigurationRecordersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeComplianceByResource = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: limit,
-@as("ComplianceTypes") complianceTypes: complianceTypes,
-@as("ResourceId") resourceId: baseResourceId,
-@as("ResourceType") resourceType: stringWithCharLimit256
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<limit>,
+@as("ComplianceTypes") complianceTypes: option<complianceTypes>,
+@as("ResourceId") resourceId: option<baseResourceId>,
+@as("ResourceType") resourceType: option<stringWithCharLimit256>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("ComplianceByResources") complianceByResources: complianceByResources
+@as("NextToken") nextToken: option<nextToken>,
+@as("ComplianceByResources") complianceByResources: option<complianceByResources>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeComplianceByResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeComplianceByConfigRule = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("ComplianceTypes") complianceTypes: complianceTypes,
-@as("ConfigRuleNames") configRuleNames: configRuleNames
+@as("NextToken") nextToken: option<string_>,
+@as("ComplianceTypes") complianceTypes: option<complianceTypes>,
+@as("ConfigRuleNames") configRuleNames: option<configRuleNames>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("ComplianceByConfigRules") complianceByConfigRules: complianceByConfigRules
+@as("NextToken") nextToken: option<string_>,
+@as("ComplianceByConfigRules") complianceByConfigRules: option<complianceByConfigRules>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeComplianceByConfigRuleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAggregateComplianceByConfigRules = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("Limit") limit: groupByAPILimit,
-@as("Filters") filters: configRuleComplianceFilters,
-@as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
+@as("NextToken") nextToken: option<nextToken>,
+@as("Limit") limit: option<groupByAPILimit>,
+@as("Filters") filters: option<configRuleComplianceFilters>,
+@as("ConfigurationAggregatorName") configurationAggregatorName: configurationAggregatorName
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("AggregateComplianceByConfigRules") aggregateComplianceByConfigRules: aggregateComplianceByConfigRuleList
+@as("NextToken") nextToken: option<nextToken>,
+@as("AggregateComplianceByConfigRules") aggregateComplianceByConfigRules: option<aggregateComplianceByConfigRuleList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeAggregateComplianceByConfigRulesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteRemediationExceptions = {
   type t;
   type request = {
-@as("ResourceKeys") resourceKeys: option<remediationExceptionResourceKeys>,
-@as("ConfigRuleName") configRuleName: option<configRuleName>
+@as("ResourceKeys") resourceKeys: remediationExceptionResourceKeys,
+@as("ConfigRuleName") configRuleName: configRuleName
 }
   type response = {
-@as("FailedBatches") failedBatches: failedDeleteRemediationExceptionsBatches
+@as("FailedBatches") failedBatches: option<failedDeleteRemediationExceptionsBatches>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteRemediationExceptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConfigurationAggregators = {
   type t;
   type request = {
-@as("Limit") limit: limit,
-@as("NextToken") nextToken: amazonawsString,
-@as("ConfigurationAggregatorNames") configurationAggregatorNames: configurationAggregatorNameList
+@as("Limit") limit: option<limit>,
+@as("NextToken") nextToken: option<string_>,
+@as("ConfigurationAggregatorNames") configurationAggregatorNames: option<configurationAggregatorNameList>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("ConfigurationAggregators") configurationAggregators: configurationAggregatorList
+@as("NextToken") nextToken: option<string_>,
+@as("ConfigurationAggregators") configurationAggregators: option<configurationAggregatorList>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigurationAggregatorsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConfigRules = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("ConfigRuleNames") configRuleNames: configRuleNames
+@as("NextToken") nextToken: option<string_>,
+@as("ConfigRuleNames") configRuleNames: option<configRuleNames>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("ConfigRules") configRules: configRules
+@as("NextToken") nextToken: option<string_>,
+@as("ConfigRules") configRules: option<configRules>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigRulesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRemediationConfigurations = {
   type t;
   type request = {
-@as("ConfigRuleNames") configRuleNames: option<configRuleNames>
+@as("ConfigRuleNames") configRuleNames: configRuleNames
 }
   type response = {
-@as("RemediationConfigurations") remediationConfigurations: remediationConfigurations
+@as("RemediationConfigurations") remediationConfigurations: option<remediationConfigurations>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeRemediationConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutRemediationConfigurations = {
   type t;
   type request = {
-@as("RemediationConfigurations") remediationConfigurations: option<remediationConfigurations>
+@as("RemediationConfigurations") remediationConfigurations: remediationConfigurations
 }
   type response = {
-@as("FailedBatches") failedBatches: failedRemediationBatches
+@as("FailedBatches") failedBatches: option<failedRemediationBatches>
 }
   @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutRemediationConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

@@ -1,15 +1,20 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type integer_ = int
+type long = float
 type vpcId = string
-type amazonawsTimestamp = string
+type timestamp_ = string
 type tagValue = string
 type tagKey = string
 type subscriptionType = [@as("PRODUCTION") #PRODUCTION]
 type subnetId = string
-type amazonawsString = string
+type string_ = string
 type sshKey = string
 type partitionSerial = string
 type partitionArn = string
@@ -24,321 +29,321 @@ type hapgArn = string
 type externalId = string
 type eniId = string
 type cloudHsmObjectState = [@as("DEGRADED") #DEGRADED | @as("UPDATING") #UPDATING | @as("READY") #READY]
-type clientVersion = [@as("5.3") #5_3 | @as("5.1") #5_1]
+type clientVersion = [@as("5.3") #53 | @as("5.1") #51]
 type clientToken = string
 type clientLabel = string
 type clientArn = string
 type certificateFingerprint = string
 type certificate = string
-type amazonawsBoolean = bool;
-type aZ = string
+type boolean_ = bool
+type az = string
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: option<tagValue>,
-@as("Key") key: option<tagKey>
+@as("Value") value: tagValue,
+@as("Key") key: tagKey
 }
 type partitionSerialList = array<partitionSerial>
 type partitionList = array<partitionArn>
 type hsmList = array<hsmArn>
 type hapgList = array<hapgArn>
 type clientList = array<clientArn>
-type aZList = array<aZ>
-type tagList = array<tag>
-type clientType;
-@module("@aws-sdk/client-cloudhsm") @new external createClient: unit => clientType = "CloudHSMClient";
+type azlist = array<az>
+type tagList_ = array<tag>
+type awsServiceClient;
+@module("@aws-sdk/client-cloudhsm") @new external createClient: unit => awsServiceClient = "CloudHSMClient";
 module ModifyLunaClient = {
   type t;
   type request = {
-@as("Certificate") certificate: option<certificate>,
-@as("ClientArn") clientArn: option<clientArn>
-}
-  type response = {
+@as("Certificate") certificate: certificate,
 @as("ClientArn") clientArn: clientArn
 }
+  type response = {
+@as("ClientArn") clientArn: option<clientArn>
+}
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "ModifyLunaClientCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyHsm = {
   type t;
   type request = {
-@as("SyslogIp") syslogIp: ipAddress,
-@as("ExternalId") externalId: externalId,
-@as("IamRoleArn") iamRoleArn: iamRoleArn,
-@as("EniIp") eniIp: ipAddress,
-@as("SubnetId") subnetId: subnetId,
-@as("HsmArn") hsmArn: option<hsmArn>
-}
-  type response = {
+@as("SyslogIp") syslogIp: option<ipAddress>,
+@as("ExternalId") externalId: option<externalId>,
+@as("IamRoleArn") iamRoleArn: option<iamRoleArn>,
+@as("EniIp") eniIp: option<ipAddress>,
+@as("SubnetId") subnetId: option<subnetId>,
 @as("HsmArn") hsmArn: hsmArn
 }
+  type response = {
+@as("HsmArn") hsmArn: option<hsmArn>
+}
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "ModifyHsmCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLunaClient = {
   type t;
   type request = {
-@as("CertificateFingerprint") certificateFingerprint: certificateFingerprint,
-@as("ClientArn") clientArn: clientArn
+@as("CertificateFingerprint") certificateFingerprint: option<certificateFingerprint>,
+@as("ClientArn") clientArn: option<clientArn>
 }
   type response = {
-@as("Label") label: label,
-@as("LastModifiedTimestamp") lastModifiedTimestamp: amazonawsTimestamp,
-@as("CertificateFingerprint") certificateFingerprint: certificateFingerprint,
-@as("Certificate") certificate: certificate,
-@as("ClientArn") clientArn: clientArn
+@as("Label") label: option<label>,
+@as("LastModifiedTimestamp") lastModifiedTimestamp: option<timestamp_>,
+@as("CertificateFingerprint") certificateFingerprint: option<certificateFingerprint>,
+@as("Certificate") certificate: option<certificate>,
+@as("ClientArn") clientArn: option<clientArn>
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "DescribeLunaClientCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteLunaClient = {
   type t;
   type request = {
-@as("ClientArn") clientArn: option<clientArn>
+@as("ClientArn") clientArn: clientArn
 }
   type response = {
-@as("Status") status: option<amazonawsString>
+@as("Status") status: string_
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "DeleteLunaClientCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteHsm = {
   type t;
   type request = {
-@as("HsmArn") hsmArn: option<hsmArn>
+@as("HsmArn") hsmArn: hsmArn
 }
   type response = {
-@as("Status") status: option<amazonawsString>
+@as("Status") status: string_
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "DeleteHsmCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteHapg = {
   type t;
   type request = {
-@as("HapgArn") hapgArn: option<hapgArn>
+@as("HapgArn") hapgArn: hapgArn
 }
   type response = {
-@as("Status") status: option<amazonawsString>
+@as("Status") status: string_
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "DeleteHapgCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateLunaClient = {
   type t;
   type request = {
-@as("Certificate") certificate: option<certificate>,
-@as("Label") label: clientLabel
+@as("Certificate") certificate: certificate,
+@as("Label") label: option<clientLabel>
 }
   type response = {
-@as("ClientArn") clientArn: clientArn
+@as("ClientArn") clientArn: option<clientArn>
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "CreateLunaClientCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateHsm = {
   type t;
   type request = {
-@as("SyslogIp") syslogIp: ipAddress,
-@as("ClientToken") clientToken: clientToken,
-@as("SubscriptionType") subscriptionType: option<subscriptionType>,
-@as("ExternalId") externalId: externalId,
-@as("IamRoleArn") iamRoleArn: option<iamRoleArn>,
-@as("EniIp") eniIp: ipAddress,
-@as("SshKey") sshKey: option<sshKey>,
-@as("SubnetId") subnetId: option<subnetId>
+@as("SyslogIp") syslogIp: option<ipAddress>,
+@as("ClientToken") clientToken: option<clientToken>,
+@as("SubscriptionType") subscriptionType: subscriptionType,
+@as("ExternalId") externalId: option<externalId>,
+@as("IamRoleArn") iamRoleArn: iamRoleArn,
+@as("EniIp") eniIp: option<ipAddress>,
+@as("SshKey") sshKey: sshKey,
+@as("SubnetId") subnetId: subnetId
 }
   type response = {
-@as("HsmArn") hsmArn: hsmArn
+@as("HsmArn") hsmArn: option<hsmArn>
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "CreateHsmCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateHapg = {
   type t;
   type request = {
-@as("Label") label: option<label>
+@as("Label") label: label
 }
   type response = {
-@as("HapgArn") hapgArn: hapgArn
+@as("HapgArn") hapgArn: option<hapgArn>
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "CreateHapgCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RemoveTagsFromResource = {
   type t;
   type request = {
-@as("TagKeyList") tagKeyList: option<tagKeyList>,
-@as("ResourceArn") resourceArn: option<amazonawsString>
+@as("TagKeyList") tagKeyList: tagKeyList,
+@as("ResourceArn") resourceArn: string_
 }
   type response = {
-@as("Status") status: option<amazonawsString>
+@as("Status") status: string_
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "RemoveTagsFromResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyHapg = {
   type t;
   type request = {
-@as("PartitionSerialList") partitionSerialList: partitionSerialList,
-@as("Label") label: label,
-@as("HapgArn") hapgArn: option<hapgArn>
-}
-  type response = {
+@as("PartitionSerialList") partitionSerialList: option<partitionSerialList>,
+@as("Label") label: option<label>,
 @as("HapgArn") hapgArn: hapgArn
 }
+  type response = {
+@as("HapgArn") hapgArn: option<hapgArn>
+}
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "ModifyHapgCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListLunaClients = {
   type t;
   type request = {
-@as("NextToken") nextToken: paginationToken
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("NextToken") nextToken: paginationToken,
-@as("ClientList") clientList: option<clientList>
+@as("NextToken") nextToken: option<paginationToken>,
+@as("ClientList") clientList: clientList
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "ListLunaClientsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListHsms = {
   type t;
   type request = {
-@as("NextToken") nextToken: paginationToken
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("NextToken") nextToken: paginationToken,
-@as("HsmList") hsmList: hsmList
+@as("NextToken") nextToken: option<paginationToken>,
+@as("HsmList") hsmList: option<hsmList>
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "ListHsmsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListHapgs = {
   type t;
   type request = {
-@as("NextToken") nextToken: paginationToken
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("NextToken") nextToken: paginationToken,
-@as("HapgList") hapgList: option<hapgList>
+@as("NextToken") nextToken: option<paginationToken>,
+@as("HapgList") hapgList: hapgList
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "ListHapgsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAvailableZones = {
   type t;
   type request = unit
   type response = {
-@as("AZList") aZList: aZList
+@as("AZList") azlist: option<azlist>
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "ListAvailableZonesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetConfig = {
   type t;
   type request = {
-@as("HapgList") hapgList: option<hapgList>,
-@as("ClientVersion") clientVersion: option<clientVersion>,
-@as("ClientArn") clientArn: option<clientArn>
+@as("HapgList") hapgList: hapgList,
+@as("ClientVersion") clientVersion: clientVersion,
+@as("ClientArn") clientArn: clientArn
 }
   type response = {
-@as("ConfigCred") configCred: amazonawsString,
-@as("ConfigFile") configFile: amazonawsString,
-@as("ConfigType") configType: amazonawsString
+@as("ConfigCred") configCred: option<string_>,
+@as("ConfigFile") configFile: option<string_>,
+@as("ConfigType") configType: option<string_>
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "GetConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeHsm = {
   type t;
   type request = {
-@as("HsmSerialNumber") hsmSerialNumber: hsmSerialNumber,
-@as("HsmArn") hsmArn: hsmArn
+@as("HsmSerialNumber") hsmSerialNumber: option<hsmSerialNumber>,
+@as("HsmArn") hsmArn: option<hsmArn>
 }
   type response = {
-@as("Partitions") partitions: partitionList,
-@as("ServerCertLastUpdated") serverCertLastUpdated: amazonawsTimestamp,
-@as("ServerCertUri") serverCertUri: amazonawsString,
-@as("SshKeyLastUpdated") sshKeyLastUpdated: amazonawsTimestamp,
-@as("SshPublicKey") sshPublicKey: sshKey,
-@as("SoftwareVersion") softwareVersion: amazonawsString,
-@as("HsmType") hsmType: amazonawsString,
-@as("VendorName") vendorName: amazonawsString,
-@as("SerialNumber") serialNumber: hsmSerialNumber,
-@as("IamRoleArn") iamRoleArn: iamRoleArn,
-@as("SubnetId") subnetId: subnetId,
-@as("VpcId") vpcId: vpcId,
-@as("SubscriptionEndDate") subscriptionEndDate: amazonawsTimestamp,
-@as("SubscriptionStartDate") subscriptionStartDate: amazonawsTimestamp,
-@as("SubscriptionType") subscriptionType: subscriptionType,
-@as("EniIp") eniIp: ipAddress,
-@as("EniId") eniId: eniId,
-@as("AvailabilityZone") availabilityZone: aZ,
-@as("StatusDetails") statusDetails: amazonawsString,
-@as("Status") status: hsmStatus,
-@as("HsmArn") hsmArn: hsmArn
+@as("Partitions") partitions: option<partitionList>,
+@as("ServerCertLastUpdated") serverCertLastUpdated: option<timestamp_>,
+@as("ServerCertUri") serverCertUri: option<string_>,
+@as("SshKeyLastUpdated") sshKeyLastUpdated: option<timestamp_>,
+@as("SshPublicKey") sshPublicKey: option<sshKey>,
+@as("SoftwareVersion") softwareVersion: option<string_>,
+@as("HsmType") hsmType: option<string_>,
+@as("VendorName") vendorName: option<string_>,
+@as("SerialNumber") serialNumber: option<hsmSerialNumber>,
+@as("IamRoleArn") iamRoleArn: option<iamRoleArn>,
+@as("SubnetId") subnetId: option<subnetId>,
+@as("VpcId") vpcId: option<vpcId>,
+@as("SubscriptionEndDate") subscriptionEndDate: option<timestamp_>,
+@as("SubscriptionStartDate") subscriptionStartDate: option<timestamp_>,
+@as("SubscriptionType") subscriptionType: option<subscriptionType>,
+@as("EniIp") eniIp: option<ipAddress>,
+@as("EniId") eniId: option<eniId>,
+@as("AvailabilityZone") availabilityZone: option<az>,
+@as("StatusDetails") statusDetails: option<string_>,
+@as("Status") status: option<hsmStatus>,
+@as("HsmArn") hsmArn: option<hsmArn>
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "DescribeHsmCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeHapg = {
   type t;
   type request = {
-@as("HapgArn") hapgArn: option<hapgArn>
-}
-  type response = {
-@as("State") state: cloudHsmObjectState,
-@as("PartitionSerialList") partitionSerialList: partitionSerialList,
-@as("LastModifiedTimestamp") lastModifiedTimestamp: amazonawsTimestamp,
-@as("Label") label: label,
-@as("HsmsPendingRegistration") hsmsPendingRegistration: hsmList,
-@as("HsmsPendingDeletion") hsmsPendingDeletion: hsmList,
-@as("HsmsLastActionFailed") hsmsLastActionFailed: hsmList,
-@as("HapgSerial") hapgSerial: amazonawsString,
 @as("HapgArn") hapgArn: hapgArn
 }
+  type response = {
+@as("State") state: option<cloudHsmObjectState>,
+@as("PartitionSerialList") partitionSerialList: option<partitionSerialList>,
+@as("LastModifiedTimestamp") lastModifiedTimestamp: option<timestamp_>,
+@as("Label") label: option<label>,
+@as("HsmsPendingRegistration") hsmsPendingRegistration: option<hsmList>,
+@as("HsmsPendingDeletion") hsmsPendingDeletion: option<hsmList>,
+@as("HsmsLastActionFailed") hsmsLastActionFailed: option<hsmList>,
+@as("HapgSerial") hapgSerial: option<string_>,
+@as("HapgArn") hapgArn: option<hapgArn>
+}
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "DescribeHapgCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("ResourceArn") resourceArn: option<amazonawsString>
+@as("ResourceArn") resourceArn: string_
 }
   type response = {
-@as("TagList") tagList: option<tagList>
+@as("TagList") tagList_: tagList_
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddTagsToResource = {
   type t;
   type request = {
-@as("TagList") tagList: option<tagList>,
-@as("ResourceArn") resourceArn: option<amazonawsString>
+@as("TagList") tagList_: tagList_,
+@as("ResourceArn") resourceArn: string_
 }
   type response = {
-@as("Status") status: option<amazonawsString>
+@as("Status") status: string_
 }
   @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "AddTagsToResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

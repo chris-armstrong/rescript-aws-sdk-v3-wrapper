@@ -1,45 +1,52 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type success = bool;
-type amazonawsString = string
-type serialPort = int;
-type sSHPublicKey = string
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
+type success = bool
+type string_ = string
+type serialPort = int
+type sshpublicKey = string
 type requestId = string
 type instanceOSUser = string
 type instanceId = string
 type availabilityZone = string
-type clientType;
-@module("@aws-sdk/client-ec2-instance-connect") @new external createClient: unit => clientType = "EC2InstanceConnectClient";
+type awsServiceClient;
+@module("@aws-sdk/client-ec2-instance-connect") @new external createClient: unit => awsServiceClient = "EC2InstanceConnectClient";
 module SendSerialConsoleSSHPublicKey = {
   type t;
   type request = {
-@as("SSHPublicKey") sSHPublicKey: option<sSHPublicKey>,
-@as("SerialPort") serialPort: serialPort,
-@as("InstanceId") instanceId: option<instanceId>
+@as("SSHPublicKey") sshpublicKey: sshpublicKey,
+@as("SerialPort") serialPort: option<serialPort>,
+@as("InstanceId") instanceId: instanceId
 }
   type response = {
-@as("Success") success: success,
-@as("RequestId") requestId: requestId
+@as("Success") success: option<success>,
+@as("RequestId") requestId: option<requestId>
 }
   @module("@aws-sdk/client-ec2-instance-connect") @new external new_: (request) => t = "SendSerialConsoleSSHPublicKeyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SendSSHPublicKey = {
   type t;
   type request = {
-@as("AvailabilityZone") availabilityZone: option<availabilityZone>,
-@as("SSHPublicKey") sSHPublicKey: option<sSHPublicKey>,
-@as("InstanceOSUser") instanceOSUser: option<instanceOSUser>,
-@as("InstanceId") instanceId: option<instanceId>
+@as("AvailabilityZone") availabilityZone: availabilityZone,
+@as("SSHPublicKey") sshpublicKey: sshpublicKey,
+@as("InstanceOSUser") instanceOSUser: instanceOSUser,
+@as("InstanceId") instanceId: instanceId
 }
   type response = {
-@as("Success") success: success,
-@as("RequestId") requestId: requestId
+@as("Success") success: option<success>,
+@as("RequestId") requestId: option<requestId>
 }
   @module("@aws-sdk/client-ec2-instance-connect") @new external new_: (request) => t = "SendSSHPublicKeyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

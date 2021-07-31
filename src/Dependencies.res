@@ -1,5 +1,7 @@
 open Shape
 open Belt
+open Util
+open SafeNames
 
 type rec shapeWithTarget = {
   name: string,
@@ -151,7 +153,7 @@ let rec order_ = (remaining: array<shapeWithTarget>, ordered: array<shapeWithTar
 }
 let order = shapesWithTargets => {
   let implicitShapes = Array.keepMap(smithyImplicitShapes, shape =>
-    Array.every(shapesWithTargets, ({name}) => name != shape.name) ? Some(shape) : None
+    Array.every(shapesWithTargets, ({name}) => safeTypeName(name) != safeTypeName(shape.name)) ? Some(shape) : None
   )
   order_(shapesWithTargets, implicitShapes)
 }

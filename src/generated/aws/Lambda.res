@@ -1,67 +1,70 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
 type workingDirectory = string
-type weight = float;
+type weight = float
 type vpcId = string
 type version = string
-type unreservedConcurrentExecutions = int;
-type uRI = string
-type tumblingWindowInSeconds = int;
+type unreservedConcurrentExecutions = int
+type uri = string
+type tumblingWindowInSeconds = int
 type tracingMode = [@as("PassThrough") #PassThrough | @as("Active") #Active]
 type topic = string
-type amazonawsTimestamp = string
-type timeout = int;
+type timestamp_ = string
+type timeout = int
 type throttleReason = [@as("CallerRateLimitExceeded") #CallerRateLimitExceeded | @as("ReservedFunctionInvocationRateLimitExceeded") #ReservedFunctionInvocationRateLimitExceeded | @as("ReservedFunctionConcurrentInvocationLimitExceeded") #ReservedFunctionConcurrentInvocationLimitExceeded | @as("FunctionInvocationRateLimitExceeded") #FunctionInvocationRateLimitExceeded | @as("ConcurrentInvocationLimitExceeded") #ConcurrentInvocationLimitExceeded]
 type tagValue = string
 type tagKey = string
 type subnetId = string
-type amazonawsString = string
+type string_ = string
 type statementId = string
 type stateReasonCode = [@as("InvalidImage") #InvalidImage | @as("ImageAccessDenied") #ImageAccessDenied | @as("ImageDeleted") #ImageDeleted | @as("InvalidSecurityGroup") #InvalidSecurityGroup | @as("InvalidSubnet") #InvalidSubnet | @as("SubnetOutOfIPAddresses") #SubnetOutOfIPAddresses | @as("InternalError") #InternalError | @as("InvalidConfiguration") #InvalidConfiguration | @as("InsufficientRolePermissions") #InsufficientRolePermissions | @as("EniLimitExceeded") #EniLimitExceeded | @as("Restoring") #Restoring | @as("Creating") #Creating | @as("Idle") #Idle]
 type stateReason = string
 type state = [@as("Failed") #Failed | @as("Inactive") #Inactive | @as("Active") #Active | @as("Pending") #Pending]
 type sourceOwner = string
-type sourceAccessType = [@as("SASL_SCRAM_256_AUTH") #SASL_SCRAM_256_AUTH | @as("SASL_SCRAM_512_AUTH") #SASL_SCRAM_512_AUTH | @as("VPC_SECURITY_GROUP") #VPC_SECURITY_GROUP | @as("VPC_SUBNET") #VPC_SUBNET | @as("BASIC_AUTH") #BASIC_AUTH]
+type sourceAccessType = [@as("SASL_SCRAM_256_AUTH") #SASLSCRAM256AUTH | @as("SASL_SCRAM_512_AUTH") #SASLSCRAM512AUTH | @as("VPC_SECURITY_GROUP") #VPCSECURITYGROUP | @as("VPC_SUBNET") #VPCSUBNET | @as("BASIC_AUTH") #BASICAUTH]
 type sensitiveString = string
 type securityGroupId = string
 type s3ObjectVersion = string
 type s3Key = string
 type s3Bucket = string
-type runtime = [@as("provided.al2") #provided_al2 | @as("provided") #provided | @as("ruby2.7") #ruby2_7 | @as("ruby2.5") #ruby2_5 | @as("go1.x") #go1_x | @as("nodejs4.3-edge") #nodejs4_3_edge | @as("dotnetcore3.1") #dotnetcore3_1 | @as("dotnetcore2.1") #dotnetcore2_1 | @as("dotnetcore2.0") #dotnetcore2_0 | @as("dotnetcore1.0") #dotnetcore1_0 | @as("python3.8") #python3_8 | @as("python3.7") #python3_7 | @as("python3.6") #python3_6 | @as("python2.7") #python2_7 | @as("java11") #java11 | @as("java8.al2") #java8_al2 | @as("java8") #java8 | @as("nodejs14.x") #nodejs14_x | @as("nodejs12.x") #nodejs12_x | @as("nodejs10.x") #nodejs10_x | @as("nodejs8.10") #nodejs8_10 | @as("nodejs6.10") #nodejs6_10 | @as("nodejs4.3") #nodejs4_3 | @as("nodejs") #nodejs]
+type runtime = [@as("provided.al2") #ProvidedAl2 | @as("provided") #Provided | @as("ruby2.7") #Ruby27 | @as("ruby2.5") #Ruby25 | @as("go1.x") #Go1X | @as("nodejs4.3-edge") #Nodejs43Edge | @as("dotnetcore3.1") #Dotnetcore31 | @as("dotnetcore2.1") #Dotnetcore21 | @as("dotnetcore2.0") #Dotnetcore20 | @as("dotnetcore1.0") #Dotnetcore10 | @as("python3.8") #Python38 | @as("python3.7") #Python37 | @as("python3.6") #Python36 | @as("python2.7") #Python27 | @as("java11") #Java11 | @as("java8.al2") #Java8Al2 | @as("java8") #Java8 | @as("nodejs14.x") #Nodejs14X | @as("nodejs12.x") #Nodejs12X | @as("nodejs10.x") #Nodejs10X | @as("nodejs8.10") #Nodejs810 | @as("nodejs6.10") #Nodejs610 | @as("nodejs4.3") #Nodejs43 | @as("nodejs") #Nodejs]
 type roleArn = string
 type resourceArn = string
-type reservedConcurrentExecutions = int;
+type reservedConcurrentExecutions = int
 type queue = string
 type qualifier = string
-type provisionedConcurrencyStatusEnum = [@as("FAILED") #FAILED | @as("READY") #READY | @as("IN_PROGRESS") #IN_PROGRESS]
+type provisionedConcurrencyStatusEnum = [@as("FAILED") #FAILED | @as("READY") #READY | @as("IN_PROGRESS") #INPROGRESS]
 type principal = string
-type positiveInteger = int;
-type parallelizationFactor = int;
+type positiveInteger = int
+type parallelizationFactor = int
 type packageType = [@as("Image") #Image | @as("Zip") #Zip]
 type organizationId = string
-type nonNegativeInteger = int;
+type nonNegativeInteger = int
 type namespacedStatementId = string
 type namespacedFunctionName = string
 type nameSpacedFunctionArn = string
-type memorySize = int;
-type maximumRetryAttemptsEventSourceMapping = int;
-type maximumRetryAttempts = int;
-type maximumRecordAgeInSeconds = int;
-type maximumEventAgeInSeconds = int;
-type maximumBatchingWindowInSeconds = int;
-type maxProvisionedConcurrencyConfigListItems = int;
-type maxListItems = int;
-type maxLayerListItems = int;
-type maxFunctionEventInvokeConfigListItems = int;
+type memorySize = int
+type maximumRetryAttemptsEventSourceMapping = int
+type maximumRetryAttempts = int
+type maximumRecordAgeInSeconds = int
+type maximumEventAgeInSeconds = int
+type maximumBatchingWindowInSeconds = int
+type maxProvisionedConcurrencyConfigListItems = int
+type maxListItems = int
+type maxLayerListItems = int
+type maxFunctionEventInvokeConfigListItems = int
 type masterRegion = string
-type amazonawsLong = float;
+type long = float
 type logType = [@as("Tail") #Tail | @as("None") #None]
 type localMountPath = string
 type licenseInfo = string
-type layerVersionNumber = float;
+type layerVersionNumber = float
 type layerVersionArn = string
 type layerPermissionAllowedPrincipal = string
 type layerPermissionAllowedAction = string
@@ -70,10 +73,10 @@ type layerArn = string
 type lastUpdateStatusReasonCode = [@as("InvalidImage") #InvalidImage | @as("ImageAccessDenied") #ImageAccessDenied | @as("ImageDeleted") #ImageDeleted | @as("InvalidSecurityGroup") #InvalidSecurityGroup | @as("InvalidSubnet") #InvalidSubnet | @as("SubnetOutOfIPAddresses") #SubnetOutOfIPAddresses | @as("InternalError") #InternalError | @as("InvalidConfiguration") #InvalidConfiguration | @as("InsufficientRolePermissions") #InsufficientRolePermissions | @as("EniLimitExceeded") #EniLimitExceeded]
 type lastUpdateStatusReason = string
 type lastUpdateStatus = [@as("InProgress") #InProgress | @as("Failed") #Failed | @as("Successful") #Successful]
-type kMSKeyArn = string
+type kmskeyArn = string
 type invocationType = [@as("DryRun") #DryRun | @as("RequestResponse") #RequestResponse | @as("Event") #Event]
-type amazonawsInteger = int;
-type httpStatus = int;
+type integer_ = int
+type httpStatus = int
 type handler = string
 type functionVersion = [@as("ALL") #ALL]
 type functionResponseType = [@as("ReportBatchItemFailures") #ReportBatchItemFailures]
@@ -81,1132 +84,1132 @@ type functionName = string
 type functionArn = string
 type fileSystemArn = string
 type eventSourceToken = string
-type eventSourcePosition = [@as("AT_TIMESTAMP") #AT_TIMESTAMP | @as("LATEST") #LATEST | @as("TRIM_HORIZON") #TRIM_HORIZON]
+type eventSourcePosition = [@as("AT_TIMESTAMP") #ATTIMESTAMP | @as("LATEST") #LATEST | @as("TRIM_HORIZON") #TRIMHORIZON]
 type environmentVariableValue = string
 type environmentVariableName = string
 type endpoint = string
-type endPointType = [@as("KAFKA_BOOTSTRAP_SERVERS") #KAFKA_BOOTSTRAP_SERVERS]
-type enabled = bool;
+type endPointType = [@as("KAFKA_BOOTSTRAP_SERVERS") #KAFKABOOTSTRAPSERVERS]
+type enabled = bool
 type destinationArn = string
 type description = string
 type date = Js.Date.t;
 type codeSigningPolicy = [@as("Enforce") #Enforce | @as("Warn") #Warn]
 type codeSigningConfigId = string
 type codeSigningConfigArn = string
-type amazonawsBoolean = bool;
-type blobStream = NodeJs.Buffer.t;
-type blob = NodeJs.Buffer.t;
-type bisectBatchOnFunctionError = bool;
-type batchSize = int;
+type boolean_ = bool
+type blobStream = NodeJs.Buffer.t
+type blob = NodeJs.Buffer.t
+type bisectBatchOnFunctionError = bool
+type batchSize = int
 type arn = string
 type alias = string
 type additionalVersion = string
 type action = string
 type tracingConfigResponse = {
-@as("Mode") mode: tracingMode
+@as("Mode") mode: option<tracingMode>
 }
 type tracingConfig = {
-@as("Mode") mode: tracingMode
+@as("Mode") mode: option<tracingMode>
 }
 type topics = array<topic>
 type tags = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type subnetIds = array<subnetId>
-type stringList = array<amazonawsString>
+type stringList = array<string_>
 type sourceAccessConfiguration = {
-@as("URI") uRI: uRI,
-@as("Type") type_: sourceAccessType
+@as("URI") uri: option<uri>,
+@as("Type") type_: option<sourceAccessType>
 }
 type signingProfileVersionArns = array<arn>
 type securityGroupIds = array<securityGroupId>
 type queues = array<queue>
 type provisionedConcurrencyConfigListItem = {
-@as("LastModified") lastModified: amazonawsTimestamp,
-@as("StatusReason") statusReason: amazonawsString,
-@as("Status") status: provisionedConcurrencyStatusEnum,
-@as("AllocatedProvisionedConcurrentExecutions") allocatedProvisionedConcurrentExecutions: nonNegativeInteger,
-@as("AvailableProvisionedConcurrentExecutions") availableProvisionedConcurrentExecutions: nonNegativeInteger,
-@as("RequestedProvisionedConcurrentExecutions") requestedProvisionedConcurrentExecutions: positiveInteger,
-@as("FunctionArn") functionArn: functionArn
+@as("LastModified") lastModified: option<timestamp_>,
+@as("StatusReason") statusReason: option<string_>,
+@as("Status") status: option<provisionedConcurrencyStatusEnum>,
+@as("AllocatedProvisionedConcurrentExecutions") allocatedProvisionedConcurrentExecutions: option<nonNegativeInteger>,
+@as("AvailableProvisionedConcurrentExecutions") availableProvisionedConcurrentExecutions: option<nonNegativeInteger>,
+@as("RequestedProvisionedConcurrentExecutions") requestedProvisionedConcurrentExecutions: option<positiveInteger>,
+@as("FunctionArn") functionArn: option<functionArn>
 }
 type onSuccess = {
-@as("Destination") destination: destinationArn
+@as("Destination") destination: option<destinationArn>
 }
 type onFailure = {
-@as("Destination") destination: destinationArn
+@as("Destination") destination: option<destinationArn>
 }
 type layerVersionContentOutput = {
-@as("SigningJobArn") signingJobArn: amazonawsString,
-@as("SigningProfileVersionArn") signingProfileVersionArn: amazonawsString,
-@as("CodeSize") codeSize: amazonawsLong,
-@as("CodeSha256") codeSha256: amazonawsString,
-@as("Location") location: amazonawsString
+@as("SigningJobArn") signingJobArn: option<string_>,
+@as("SigningProfileVersionArn") signingProfileVersionArn: option<string_>,
+@as("CodeSize") codeSize: option<long>,
+@as("CodeSha256") codeSha256: option<string_>,
+@as("Location") location: option<string_>
 }
 type layerVersionContentInput = {
-@as("ZipFile") zipFile: blob,
-@as("S3ObjectVersion") s3ObjectVersion: s3ObjectVersion,
-@as("S3Key") s3Key: s3Key,
-@as("S3Bucket") s3Bucket: s3Bucket
+@as("ZipFile") zipFile: option<blob>,
+@as("S3ObjectVersion") s3ObjectVersion: option<s3ObjectVersion>,
+@as("S3Key") s3Key: option<s3Key>,
+@as("S3Bucket") s3Bucket: option<s3Bucket>
 }
 type layerList = array<layerVersionArn>
 type layer = {
-@as("SigningJobArn") signingJobArn: arn,
-@as("SigningProfileVersionArn") signingProfileVersionArn: arn,
-@as("CodeSize") codeSize: amazonawsLong,
-@as("Arn") arn: layerVersionArn
+@as("SigningJobArn") signingJobArn: option<arn>,
+@as("SigningProfileVersionArn") signingProfileVersionArn: option<arn>,
+@as("CodeSize") codeSize: option<long>,
+@as("Arn") arn: option<layerVersionArn>
 }
 type imageConfigError = {
-@as("Message") message: sensitiveString,
-@as("ErrorCode") errorCode: amazonawsString
+@as("Message") message: option<sensitiveString>,
+@as("ErrorCode") errorCode: option<string_>
 }
 type functionResponseTypeList = array<functionResponseType>
 type functionCodeLocation = {
-@as("ResolvedImageUri") resolvedImageUri: amazonawsString,
-@as("ImageUri") imageUri: amazonawsString,
-@as("Location") location: amazonawsString,
-@as("RepositoryType") repositoryType: amazonawsString
+@as("ResolvedImageUri") resolvedImageUri: option<string_>,
+@as("ImageUri") imageUri: option<string_>,
+@as("Location") location: option<string_>,
+@as("RepositoryType") repositoryType: option<string_>
 }
 type functionCode = {
-@as("ImageUri") imageUri: amazonawsString,
-@as("S3ObjectVersion") s3ObjectVersion: s3ObjectVersion,
-@as("S3Key") s3Key: s3Key,
-@as("S3Bucket") s3Bucket: s3Bucket,
-@as("ZipFile") zipFile: blob
+@as("ImageUri") imageUri: option<string_>,
+@as("S3ObjectVersion") s3ObjectVersion: option<s3ObjectVersion>,
+@as("S3Key") s3Key: option<s3Key>,
+@as("S3Bucket") s3Bucket: option<s3Bucket>,
+@as("ZipFile") zipFile: option<blob>
 }
 type functionArnList = array<functionArn>
 type fileSystemConfig = {
-@as("LocalMountPath") localMountPath: option<localMountPath>,
-@as("Arn") arn: option<fileSystemArn>
+@as("LocalMountPath") localMountPath: localMountPath,
+@as("Arn") arn: fileSystemArn
 }
 type environmentVariables = Js.Dict.t< environmentVariableValue>
 type environmentError = {
-@as("Message") message: sensitiveString,
-@as("ErrorCode") errorCode: amazonawsString
+@as("Message") message: option<sensitiveString>,
+@as("ErrorCode") errorCode: option<string_>
 }
 type endpointLists = array<endpoint>
 type deadLetterConfig = {
-@as("TargetArn") targetArn: resourceArn
+@as("TargetArn") targetArn: option<resourceArn>
 }
 type concurrency = {
-@as("ReservedConcurrentExecutions") reservedConcurrentExecutions: reservedConcurrentExecutions
+@as("ReservedConcurrentExecutions") reservedConcurrentExecutions: option<reservedConcurrentExecutions>
 }
 type compatibleRuntimes = array<runtime>
 type codeSigningPolicies = {
-@as("UntrustedArtifactOnDeployment") untrustedArtifactOnDeployment: codeSigningPolicy
+@as("UntrustedArtifactOnDeployment") untrustedArtifactOnDeployment: option<codeSigningPolicy>
 }
 type additionalVersionWeights = Js.Dict.t< weight>
 type accountUsage = {
-@as("FunctionCount") functionCount: amazonawsLong,
-@as("TotalCodeSize") totalCodeSize: amazonawsLong
+@as("FunctionCount") functionCount: option<long>,
+@as("TotalCodeSize") totalCodeSize: option<long>
 }
 type accountLimit = {
-@as("UnreservedConcurrentExecutions") unreservedConcurrentExecutions: unreservedConcurrentExecutions,
-@as("ConcurrentExecutions") concurrentExecutions: amazonawsInteger,
-@as("CodeSizeZipped") codeSizeZipped: amazonawsLong,
-@as("CodeSizeUnzipped") codeSizeUnzipped: amazonawsLong,
-@as("TotalCodeSize") totalCodeSize: amazonawsLong
+@as("UnreservedConcurrentExecutions") unreservedConcurrentExecutions: option<unreservedConcurrentExecutions>,
+@as("ConcurrentExecutions") concurrentExecutions: option<integer_>,
+@as("CodeSizeZipped") codeSizeZipped: option<long>,
+@as("CodeSizeUnzipped") codeSizeUnzipped: option<long>,
+@as("TotalCodeSize") totalCodeSize: option<long>
 }
 type vpcConfigResponse = {
-@as("VpcId") vpcId: vpcId,
-@as("SecurityGroupIds") securityGroupIds: securityGroupIds,
-@as("SubnetIds") subnetIds: subnetIds
+@as("VpcId") vpcId: option<vpcId>,
+@as("SecurityGroupIds") securityGroupIds: option<securityGroupIds>,
+@as("SubnetIds") subnetIds: option<subnetIds>
 }
 type vpcConfig = {
-@as("SecurityGroupIds") securityGroupIds: securityGroupIds,
-@as("SubnetIds") subnetIds: subnetIds
+@as("SecurityGroupIds") securityGroupIds: option<securityGroupIds>,
+@as("SubnetIds") subnetIds: option<subnetIds>
 }
 type sourceAccessConfigurations = array<sourceAccessConfiguration>
 type provisionedConcurrencyConfigList = array<provisionedConcurrencyConfigListItem>
 type layersReferenceList = array<layer>
 type layerVersionsListItem = {
-@as("LicenseInfo") licenseInfo: licenseInfo,
-@as("CompatibleRuntimes") compatibleRuntimes: compatibleRuntimes,
-@as("CreatedDate") createdDate: amazonawsTimestamp,
-@as("Description") description: description,
-@as("Version") version: layerVersionNumber,
-@as("LayerVersionArn") layerVersionArn: layerVersionArn
+@as("LicenseInfo") licenseInfo: option<licenseInfo>,
+@as("CompatibleRuntimes") compatibleRuntimes: option<compatibleRuntimes>,
+@as("CreatedDate") createdDate: option<timestamp_>,
+@as("Description") description: option<description>,
+@as("Version") version: option<layerVersionNumber>,
+@as("LayerVersionArn") layerVersionArn: option<layerVersionArn>
 }
 type imageConfig = {
-@as("WorkingDirectory") workingDirectory: workingDirectory,
-@as("Command") command: stringList,
-@as("EntryPoint") entryPoint: stringList
+@as("WorkingDirectory") workingDirectory: option<workingDirectory>,
+@as("Command") command: option<stringList>,
+@as("EntryPoint") entryPoint: option<stringList>
 }
 type fileSystemConfigList = array<fileSystemConfig>
 type environmentResponse = {
-@as("Error") error: environmentError,
-@as("Variables") variables: environmentVariables
+@as("Error") error: option<environmentError>,
+@as("Variables") variables: option<environmentVariables>
 }
 type environment = {
-@as("Variables") variables: environmentVariables
+@as("Variables") variables: option<environmentVariables>
 }
 type endpoints = Js.Dict.t< endpointLists>
 type destinationConfig = {
-@as("OnFailure") onFailure: onFailure,
-@as("OnSuccess") onSuccess: onSuccess
+@as("OnFailure") onFailure: option<onFailure>,
+@as("OnSuccess") onSuccess: option<onSuccess>
 }
 type allowedPublishers = {
-@as("SigningProfileVersionArns") signingProfileVersionArns: option<signingProfileVersionArns>
+@as("SigningProfileVersionArns") signingProfileVersionArns: signingProfileVersionArns
 }
 type aliasRoutingConfiguration = {
-@as("AdditionalVersionWeights") additionalVersionWeights: additionalVersionWeights
+@as("AdditionalVersionWeights") additionalVersionWeights: option<additionalVersionWeights>
 }
 type selfManagedEventSource = {
-@as("Endpoints") endpoints: endpoints
+@as("Endpoints") endpoints: option<endpoints>
 }
 type layersListItem = {
-@as("LatestMatchingVersion") latestMatchingVersion: layerVersionsListItem,
-@as("LayerArn") layerArn: layerArn,
-@as("LayerName") layerName: layerName
+@as("LatestMatchingVersion") latestMatchingVersion: option<layerVersionsListItem>,
+@as("LayerArn") layerArn: option<layerArn>,
+@as("LayerName") layerName: option<layerName>
 }
 type layerVersionsList = array<layerVersionsListItem>
 type imageConfigResponse = {
-@as("Error") error: imageConfigError,
-@as("ImageConfig") imageConfig: imageConfig
+@as("Error") error: option<imageConfigError>,
+@as("ImageConfig") imageConfig: option<imageConfig>
 }
 type functionEventInvokeConfig = {
-@as("DestinationConfig") destinationConfig: destinationConfig,
-@as("MaximumEventAgeInSeconds") maximumEventAgeInSeconds: maximumEventAgeInSeconds,
-@as("MaximumRetryAttempts") maximumRetryAttempts: maximumRetryAttempts,
-@as("FunctionArn") functionArn: functionArn,
-@as("LastModified") lastModified: date
+@as("DestinationConfig") destinationConfig: option<destinationConfig>,
+@as("MaximumEventAgeInSeconds") maximumEventAgeInSeconds: option<maximumEventAgeInSeconds>,
+@as("MaximumRetryAttempts") maximumRetryAttempts: option<maximumRetryAttempts>,
+@as("FunctionArn") functionArn: option<functionArn>,
+@as("LastModified") lastModified: option<date>
 }
 type codeSigningConfig = {
-@as("LastModified") lastModified: option<amazonawsTimestamp>,
-@as("CodeSigningPolicies") codeSigningPolicies: option<codeSigningPolicies>,
-@as("AllowedPublishers") allowedPublishers: option<allowedPublishers>,
-@as("Description") description: description,
-@as("CodeSigningConfigArn") codeSigningConfigArn: option<codeSigningConfigArn>,
-@as("CodeSigningConfigId") codeSigningConfigId: option<codeSigningConfigId>
+@as("LastModified") lastModified: timestamp_,
+@as("CodeSigningPolicies") codeSigningPolicies: codeSigningPolicies,
+@as("AllowedPublishers") allowedPublishers: allowedPublishers,
+@as("Description") description: option<description>,
+@as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn,
+@as("CodeSigningConfigId") codeSigningConfigId: codeSigningConfigId
 }
 type aliasConfiguration = {
-@as("RevisionId") revisionId: amazonawsString,
-@as("RoutingConfig") routingConfig: aliasRoutingConfiguration,
-@as("Description") description: description,
-@as("FunctionVersion") functionVersion: version,
-@as("Name") name: alias,
-@as("AliasArn") aliasArn: functionArn
+@as("RevisionId") revisionId: option<string_>,
+@as("RoutingConfig") routingConfig: option<aliasRoutingConfiguration>,
+@as("Description") description: option<description>,
+@as("FunctionVersion") functionVersion: option<version>,
+@as("Name") name: option<alias>,
+@as("AliasArn") aliasArn: option<functionArn>
 }
 type layersList = array<layersListItem>
 type functionEventInvokeConfigList = array<functionEventInvokeConfig>
 type functionConfiguration = {
-@as("SigningJobArn") signingJobArn: arn,
-@as("SigningProfileVersionArn") signingProfileVersionArn: arn,
-@as("ImageConfigResponse") imageConfigResponse: imageConfigResponse,
-@as("PackageType") packageType: packageType,
-@as("FileSystemConfigs") fileSystemConfigs: fileSystemConfigList,
-@as("LastUpdateStatusReasonCode") lastUpdateStatusReasonCode: lastUpdateStatusReasonCode,
-@as("LastUpdateStatusReason") lastUpdateStatusReason: lastUpdateStatusReason,
-@as("LastUpdateStatus") lastUpdateStatus: lastUpdateStatus,
-@as("StateReasonCode") stateReasonCode: stateReasonCode,
-@as("StateReason") stateReason: stateReason,
-@as("State") state: state,
-@as("Layers") layers: layersReferenceList,
-@as("RevisionId") revisionId: amazonawsString,
-@as("MasterArn") masterArn: functionArn,
-@as("TracingConfig") tracingConfig: tracingConfigResponse,
-@as("KMSKeyArn") kMSKeyArn: kMSKeyArn,
-@as("Environment") environment: environmentResponse,
-@as("DeadLetterConfig") deadLetterConfig: deadLetterConfig,
-@as("VpcConfig") vpcConfig: vpcConfigResponse,
-@as("Version") version: version,
-@as("CodeSha256") codeSha256: amazonawsString,
-@as("LastModified") lastModified: amazonawsTimestamp,
-@as("MemorySize") memorySize: memorySize,
-@as("Timeout") timeout: timeout,
-@as("Description") description: description,
-@as("CodeSize") codeSize: amazonawsLong,
-@as("Handler") handler: handler,
-@as("Role") role: roleArn,
-@as("Runtime") runtime: runtime,
-@as("FunctionArn") functionArn: nameSpacedFunctionArn,
-@as("FunctionName") functionName: namespacedFunctionName
+@as("SigningJobArn") signingJobArn: option<arn>,
+@as("SigningProfileVersionArn") signingProfileVersionArn: option<arn>,
+@as("ImageConfigResponse") imageConfigResponse: option<imageConfigResponse>,
+@as("PackageType") packageType: option<packageType>,
+@as("FileSystemConfigs") fileSystemConfigs: option<fileSystemConfigList>,
+@as("LastUpdateStatusReasonCode") lastUpdateStatusReasonCode: option<lastUpdateStatusReasonCode>,
+@as("LastUpdateStatusReason") lastUpdateStatusReason: option<lastUpdateStatusReason>,
+@as("LastUpdateStatus") lastUpdateStatus: option<lastUpdateStatus>,
+@as("StateReasonCode") stateReasonCode: option<stateReasonCode>,
+@as("StateReason") stateReason: option<stateReason>,
+@as("State") state: option<state>,
+@as("Layers") layers: option<layersReferenceList>,
+@as("RevisionId") revisionId: option<string_>,
+@as("MasterArn") masterArn: option<functionArn>,
+@as("TracingConfig") tracingConfig: option<tracingConfigResponse>,
+@as("KMSKeyArn") kmskeyArn: option<kmskeyArn>,
+@as("Environment") environment: option<environmentResponse>,
+@as("DeadLetterConfig") deadLetterConfig: option<deadLetterConfig>,
+@as("VpcConfig") vpcConfig: option<vpcConfigResponse>,
+@as("Version") version: option<version>,
+@as("CodeSha256") codeSha256: option<string_>,
+@as("LastModified") lastModified: option<timestamp_>,
+@as("MemorySize") memorySize: option<memorySize>,
+@as("Timeout") timeout: option<timeout>,
+@as("Description") description: option<description>,
+@as("CodeSize") codeSize: option<long>,
+@as("Handler") handler: option<handler>,
+@as("Role") role: option<roleArn>,
+@as("Runtime") runtime: option<runtime>,
+@as("FunctionArn") functionArn: option<nameSpacedFunctionArn>,
+@as("FunctionName") functionName: option<namespacedFunctionName>
 }
 type eventSourceMappingConfiguration = {
-@as("FunctionResponseTypes") functionResponseTypes: functionResponseTypeList,
-@as("TumblingWindowInSeconds") tumblingWindowInSeconds: tumblingWindowInSeconds,
-@as("MaximumRetryAttempts") maximumRetryAttempts: maximumRetryAttemptsEventSourceMapping,
-@as("BisectBatchOnFunctionError") bisectBatchOnFunctionError: bisectBatchOnFunctionError,
-@as("MaximumRecordAgeInSeconds") maximumRecordAgeInSeconds: maximumRecordAgeInSeconds,
-@as("SelfManagedEventSource") selfManagedEventSource: selfManagedEventSource,
-@as("SourceAccessConfigurations") sourceAccessConfigurations: sourceAccessConfigurations,
-@as("Queues") queues: queues,
-@as("Topics") topics: topics,
-@as("DestinationConfig") destinationConfig: destinationConfig,
-@as("StateTransitionReason") stateTransitionReason: amazonawsString,
-@as("State") state: amazonawsString,
-@as("LastProcessingResult") lastProcessingResult: amazonawsString,
-@as("LastModified") lastModified: date,
-@as("FunctionArn") functionArn: functionArn,
-@as("EventSourceArn") eventSourceArn: arn,
-@as("ParallelizationFactor") parallelizationFactor: parallelizationFactor,
-@as("MaximumBatchingWindowInSeconds") maximumBatchingWindowInSeconds: maximumBatchingWindowInSeconds,
-@as("BatchSize") batchSize: batchSize,
-@as("StartingPositionTimestamp") startingPositionTimestamp: date,
-@as("StartingPosition") startingPosition: eventSourcePosition,
-@as("UUID") uUID: amazonawsString
+@as("FunctionResponseTypes") functionResponseTypes: option<functionResponseTypeList>,
+@as("TumblingWindowInSeconds") tumblingWindowInSeconds: option<tumblingWindowInSeconds>,
+@as("MaximumRetryAttempts") maximumRetryAttempts: option<maximumRetryAttemptsEventSourceMapping>,
+@as("BisectBatchOnFunctionError") bisectBatchOnFunctionError: option<bisectBatchOnFunctionError>,
+@as("MaximumRecordAgeInSeconds") maximumRecordAgeInSeconds: option<maximumRecordAgeInSeconds>,
+@as("SelfManagedEventSource") selfManagedEventSource: option<selfManagedEventSource>,
+@as("SourceAccessConfigurations") sourceAccessConfigurations: option<sourceAccessConfigurations>,
+@as("Queues") queues: option<queues>,
+@as("Topics") topics: option<topics>,
+@as("DestinationConfig") destinationConfig: option<destinationConfig>,
+@as("StateTransitionReason") stateTransitionReason: option<string_>,
+@as("State") state: option<string_>,
+@as("LastProcessingResult") lastProcessingResult: option<string_>,
+@as("LastModified") lastModified: option<date>,
+@as("FunctionArn") functionArn: option<functionArn>,
+@as("EventSourceArn") eventSourceArn: option<arn>,
+@as("ParallelizationFactor") parallelizationFactor: option<parallelizationFactor>,
+@as("MaximumBatchingWindowInSeconds") maximumBatchingWindowInSeconds: option<maximumBatchingWindowInSeconds>,
+@as("BatchSize") batchSize: option<batchSize>,
+@as("StartingPositionTimestamp") startingPositionTimestamp: option<date>,
+@as("StartingPosition") startingPosition: option<eventSourcePosition>,
+@as("UUID") uuid: option<string_>
 }
 type codeSigningConfigList = array<codeSigningConfig>
 type aliasList = array<aliasConfiguration>
 type functionList = array<functionConfiguration>
 type eventSourceMappingsList = array<eventSourceMappingConfiguration>
-type clientType;
-@module("@aws-sdk/client-lambda") @new external createClient: unit => clientType = "LambdaClient";
+type awsServiceClient;
+@module("@aws-sdk/client-lambda") @new external createClient: unit => awsServiceClient = "LambdaClient";
 module RemovePermission = {
   type t;
   type request = {
-@as("RevisionId") revisionId: amazonawsString,
-@as("Qualifier") qualifier: qualifier,
-@as("StatementId") statementId: option<namespacedStatementId>,
-@as("FunctionName") functionName: option<functionName>
+@as("RevisionId") revisionId: option<string_>,
+@as("Qualifier") qualifier: option<qualifier>,
+@as("StatementId") statementId: namespacedStatementId,
+@as("FunctionName") functionName: functionName
 }
   
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "RemovePermissionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RemoveLayerVersionPermission = {
   type t;
   type request = {
-@as("RevisionId") revisionId: amazonawsString,
-@as("StatementId") statementId: option<statementId>,
-@as("VersionNumber") versionNumber: option<layerVersionNumber>,
-@as("LayerName") layerName: option<layerName>
+@as("RevisionId") revisionId: option<string_>,
+@as("StatementId") statementId: statementId,
+@as("VersionNumber") versionNumber: layerVersionNumber,
+@as("LayerName") layerName: layerName
 }
   
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "RemoveLayerVersionPermissionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutProvisionedConcurrencyConfig = {
   type t;
   type request = {
-@as("ProvisionedConcurrentExecutions") provisionedConcurrentExecutions: option<positiveInteger>,
-@as("Qualifier") qualifier: option<qualifier>,
-@as("FunctionName") functionName: option<functionName>
+@as("ProvisionedConcurrentExecutions") provisionedConcurrentExecutions: positiveInteger,
+@as("Qualifier") qualifier: qualifier,
+@as("FunctionName") functionName: functionName
 }
   type response = {
-@as("LastModified") lastModified: amazonawsTimestamp,
-@as("StatusReason") statusReason: amazonawsString,
-@as("Status") status: provisionedConcurrencyStatusEnum,
-@as("AllocatedProvisionedConcurrentExecutions") allocatedProvisionedConcurrentExecutions: nonNegativeInteger,
-@as("AvailableProvisionedConcurrentExecutions") availableProvisionedConcurrentExecutions: nonNegativeInteger,
-@as("RequestedProvisionedConcurrentExecutions") requestedProvisionedConcurrentExecutions: positiveInteger
+@as("LastModified") lastModified: option<timestamp_>,
+@as("StatusReason") statusReason: option<string_>,
+@as("Status") status: option<provisionedConcurrencyStatusEnum>,
+@as("AllocatedProvisionedConcurrentExecutions") allocatedProvisionedConcurrentExecutions: option<nonNegativeInteger>,
+@as("AvailableProvisionedConcurrentExecutions") availableProvisionedConcurrentExecutions: option<nonNegativeInteger>,
+@as("RequestedProvisionedConcurrentExecutions") requestedProvisionedConcurrentExecutions: option<positiveInteger>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "PutProvisionedConcurrencyConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutFunctionConcurrency = {
   type t;
   type request = {
-@as("ReservedConcurrentExecutions") reservedConcurrentExecutions: option<reservedConcurrentExecutions>,
-@as("FunctionName") functionName: option<functionName>
+@as("ReservedConcurrentExecutions") reservedConcurrentExecutions: reservedConcurrentExecutions,
+@as("FunctionName") functionName: functionName
 }
   type response = concurrency;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "PutFunctionConcurrencyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutFunctionCodeSigningConfig = {
   type t;
   type request = {
-@as("FunctionName") functionName: option<functionName>,
-@as("CodeSigningConfigArn") codeSigningConfigArn: option<codeSigningConfigArn>
+@as("FunctionName") functionName: functionName,
+@as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn
 }
   type response = {
-@as("FunctionName") functionName: option<functionName>,
-@as("CodeSigningConfigArn") codeSigningConfigArn: option<codeSigningConfigArn>
+@as("FunctionName") functionName: functionName,
+@as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "PutFunctionCodeSigningConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module InvokeAsync = {
   type t;
   type request = {
-@as("InvokeArgs") invokeArgs: option<blobStream>,
-@as("FunctionName") functionName: option<namespacedFunctionName>
+@as("InvokeArgs") invokeArgs: blobStream,
+@as("FunctionName") functionName: namespacedFunctionName
 }
   type response = {
-@as("Status") status: httpStatus
+@as("Status") status: option<httpStatus>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "InvokeAsyncCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module Invoke = {
   type t;
   type request = {
-@as("Qualifier") qualifier: qualifier,
-@as("Payload") payload: blob,
-@as("ClientContext") clientContext: amazonawsString,
-@as("LogType") logType: logType,
-@as("InvocationType") invocationType: invocationType,
-@as("FunctionName") functionName: option<namespacedFunctionName>
+@as("Qualifier") qualifier: option<qualifier>,
+@as("Payload") payload: option<blob>,
+@as("ClientContext") clientContext: option<string_>,
+@as("LogType") logType: option<logType>,
+@as("InvocationType") invocationType: option<invocationType>,
+@as("FunctionName") functionName: namespacedFunctionName
 }
   type response = {
-@as("ExecutedVersion") executedVersion: version,
-@as("Payload") payload: blob,
-@as("LogResult") logResult: amazonawsString,
-@as("FunctionError") functionError: amazonawsString,
-@as("StatusCode") statusCode: amazonawsInteger
+@as("ExecutedVersion") executedVersion: option<version>,
+@as("Payload") payload: option<blob>,
+@as("LogResult") logResult: option<string_>,
+@as("FunctionError") functionError: option<string_>,
+@as("StatusCode") statusCode: option<integer_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "InvokeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetProvisionedConcurrencyConfig = {
   type t;
   type request = {
-@as("Qualifier") qualifier: option<qualifier>,
-@as("FunctionName") functionName: option<functionName>
+@as("Qualifier") qualifier: qualifier,
+@as("FunctionName") functionName: functionName
 }
   type response = {
-@as("LastModified") lastModified: amazonawsTimestamp,
-@as("StatusReason") statusReason: amazonawsString,
-@as("Status") status: provisionedConcurrencyStatusEnum,
-@as("AllocatedProvisionedConcurrentExecutions") allocatedProvisionedConcurrentExecutions: nonNegativeInteger,
-@as("AvailableProvisionedConcurrentExecutions") availableProvisionedConcurrentExecutions: nonNegativeInteger,
-@as("RequestedProvisionedConcurrentExecutions") requestedProvisionedConcurrentExecutions: positiveInteger
+@as("LastModified") lastModified: option<timestamp_>,
+@as("StatusReason") statusReason: option<string_>,
+@as("Status") status: option<provisionedConcurrencyStatusEnum>,
+@as("AllocatedProvisionedConcurrentExecutions") allocatedProvisionedConcurrentExecutions: option<nonNegativeInteger>,
+@as("AvailableProvisionedConcurrentExecutions") availableProvisionedConcurrentExecutions: option<nonNegativeInteger>,
+@as("RequestedProvisionedConcurrentExecutions") requestedProvisionedConcurrentExecutions: option<positiveInteger>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetProvisionedConcurrencyConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPolicy = {
   type t;
   type request = {
-@as("Qualifier") qualifier: qualifier,
-@as("FunctionName") functionName: option<namespacedFunctionName>
+@as("Qualifier") qualifier: option<qualifier>,
+@as("FunctionName") functionName: namespacedFunctionName
 }
   type response = {
-@as("RevisionId") revisionId: amazonawsString,
-@as("Policy") policy: amazonawsString
+@as("RevisionId") revisionId: option<string_>,
+@as("Policy") policy: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLayerVersionPolicy = {
   type t;
   type request = {
-@as("VersionNumber") versionNumber: option<layerVersionNumber>,
-@as("LayerName") layerName: option<layerName>
+@as("VersionNumber") versionNumber: layerVersionNumber,
+@as("LayerName") layerName: layerName
 }
   type response = {
-@as("RevisionId") revisionId: amazonawsString,
-@as("Policy") policy: amazonawsString
+@as("RevisionId") revisionId: option<string_>,
+@as("Policy") policy: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetLayerVersionPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFunctionConcurrency = {
   type t;
   type request = {
-@as("FunctionName") functionName: option<functionName>
+@as("FunctionName") functionName: functionName
 }
   type response = {
-@as("ReservedConcurrentExecutions") reservedConcurrentExecutions: reservedConcurrentExecutions
+@as("ReservedConcurrentExecutions") reservedConcurrentExecutions: option<reservedConcurrentExecutions>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetFunctionConcurrencyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFunctionCodeSigningConfig = {
   type t;
   type request = {
-@as("FunctionName") functionName: option<functionName>
+@as("FunctionName") functionName: functionName
 }
   type response = {
-@as("FunctionName") functionName: option<functionName>,
-@as("CodeSigningConfigArn") codeSigningConfigArn: option<codeSigningConfigArn>
+@as("FunctionName") functionName: functionName,
+@as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetFunctionCodeSigningConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteProvisionedConcurrencyConfig = {
   type t;
   type request = {
-@as("Qualifier") qualifier: option<qualifier>,
-@as("FunctionName") functionName: option<functionName>
+@as("Qualifier") qualifier: qualifier,
+@as("FunctionName") functionName: functionName
 }
   
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "DeleteProvisionedConcurrencyConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteLayerVersion = {
   type t;
   type request = {
-@as("VersionNumber") versionNumber: option<layerVersionNumber>,
-@as("LayerName") layerName: option<layerName>
+@as("VersionNumber") versionNumber: layerVersionNumber,
+@as("LayerName") layerName: layerName
 }
   
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "DeleteLayerVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteFunctionEventInvokeConfig = {
   type t;
   type request = {
-@as("Qualifier") qualifier: qualifier,
-@as("FunctionName") functionName: option<functionName>
+@as("Qualifier") qualifier: option<qualifier>,
+@as("FunctionName") functionName: functionName
 }
   
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "DeleteFunctionEventInvokeConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteFunctionConcurrency = {
   type t;
   type request = {
-@as("FunctionName") functionName: option<functionName>
+@as("FunctionName") functionName: functionName
 }
   
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "DeleteFunctionConcurrencyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteFunctionCodeSigningConfig = {
   type t;
   type request = {
-@as("FunctionName") functionName: option<functionName>
+@as("FunctionName") functionName: functionName
 }
   
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "DeleteFunctionCodeSigningConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteFunction = {
   type t;
   type request = {
-@as("Qualifier") qualifier: qualifier,
-@as("FunctionName") functionName: option<functionName>
+@as("Qualifier") qualifier: option<qualifier>,
+@as("FunctionName") functionName: functionName
 }
   
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "DeleteFunctionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteCodeSigningConfig = {
   type t;
   type request = {
-@as("CodeSigningConfigArn") codeSigningConfigArn: option<codeSigningConfigArn>
+@as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn
 }
   type response = unit
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "DeleteCodeSigningConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAlias = {
   type t;
   type request = {
-@as("Name") name: option<alias>,
-@as("FunctionName") functionName: option<functionName>
+@as("Name") name: alias,
+@as("FunctionName") functionName: functionName
 }
   
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "DeleteAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module AddPermission = {
   type t;
   type request = {
-@as("RevisionId") revisionId: amazonawsString,
-@as("Qualifier") qualifier: qualifier,
-@as("EventSourceToken") eventSourceToken: eventSourceToken,
-@as("SourceAccount") sourceAccount: sourceOwner,
-@as("SourceArn") sourceArn: arn,
-@as("Principal") principal: option<principal>,
-@as("Action") action: option<action>,
-@as("StatementId") statementId: option<statementId>,
-@as("FunctionName") functionName: option<functionName>
+@as("RevisionId") revisionId: option<string_>,
+@as("Qualifier") qualifier: option<qualifier>,
+@as("EventSourceToken") eventSourceToken: option<eventSourceToken>,
+@as("SourceAccount") sourceAccount: option<sourceOwner>,
+@as("SourceArn") sourceArn: option<arn>,
+@as("Principal") principal: principal,
+@as("Action") action: action,
+@as("StatementId") statementId: statementId,
+@as("FunctionName") functionName: functionName
 }
   type response = {
-@as("Statement") statement: amazonawsString
+@as("Statement") statement: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "AddPermissionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddLayerVersionPermission = {
   type t;
   type request = {
-@as("RevisionId") revisionId: amazonawsString,
-@as("OrganizationId") organizationId: organizationId,
-@as("Principal") principal: option<layerPermissionAllowedPrincipal>,
-@as("Action") action: option<layerPermissionAllowedAction>,
-@as("StatementId") statementId: option<statementId>,
-@as("VersionNumber") versionNumber: option<layerVersionNumber>,
-@as("LayerName") layerName: option<layerName>
+@as("RevisionId") revisionId: option<string_>,
+@as("OrganizationId") organizationId: option<organizationId>,
+@as("Principal") principal: layerPermissionAllowedPrincipal,
+@as("Action") action: layerPermissionAllowedAction,
+@as("StatementId") statementId: statementId,
+@as("VersionNumber") versionNumber: layerVersionNumber,
+@as("LayerName") layerName: layerName
 }
   type response = {
-@as("RevisionId") revisionId: amazonawsString,
-@as("Statement") statement: amazonawsString
+@as("RevisionId") revisionId: option<string_>,
+@as("Statement") statement: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "AddLayerVersionPermissionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("Resource") resource: option<functionArn>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("Resource") resource: functionArn
 }
   
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tags>,
-@as("Resource") resource: option<functionArn>
+@as("Tags") tags: tags,
+@as("Resource") resource: functionArn
 }
   
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PublishLayerVersion = {
   type t;
   type request = {
-@as("LicenseInfo") licenseInfo: licenseInfo,
-@as("CompatibleRuntimes") compatibleRuntimes: compatibleRuntimes,
-@as("Content") content: option<layerVersionContentInput>,
-@as("Description") description: description,
-@as("LayerName") layerName: option<layerName>
+@as("LicenseInfo") licenseInfo: option<licenseInfo>,
+@as("CompatibleRuntimes") compatibleRuntimes: option<compatibleRuntimes>,
+@as("Content") content: layerVersionContentInput,
+@as("Description") description: option<description>,
+@as("LayerName") layerName: layerName
 }
   type response = {
-@as("LicenseInfo") licenseInfo: licenseInfo,
-@as("CompatibleRuntimes") compatibleRuntimes: compatibleRuntimes,
-@as("Version") version: layerVersionNumber,
-@as("CreatedDate") createdDate: amazonawsTimestamp,
-@as("Description") description: description,
-@as("LayerVersionArn") layerVersionArn: layerVersionArn,
-@as("LayerArn") layerArn: layerArn,
-@as("Content") content: layerVersionContentOutput
+@as("LicenseInfo") licenseInfo: option<licenseInfo>,
+@as("CompatibleRuntimes") compatibleRuntimes: option<compatibleRuntimes>,
+@as("Version") version: option<layerVersionNumber>,
+@as("CreatedDate") createdDate: option<timestamp_>,
+@as("Description") description: option<description>,
+@as("LayerVersionArn") layerVersionArn: option<layerVersionArn>,
+@as("LayerArn") layerArn: option<layerArn>,
+@as("Content") content: option<layerVersionContentOutput>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "PublishLayerVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTags = {
   type t;
   type request = {
-@as("Resource") resource: option<functionArn>
+@as("Resource") resource: functionArn
 }
   type response = {
-@as("Tags") tags: tags
+@as("Tags") tags: option<tags>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "ListTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFunctionsByCodeSigningConfig = {
   type t;
   type request = {
-@as("MaxItems") maxItems: maxListItems,
-@as("Marker") marker: amazonawsString,
-@as("CodeSigningConfigArn") codeSigningConfigArn: option<codeSigningConfigArn>
+@as("MaxItems") maxItems: option<maxListItems>,
+@as("Marker") marker: option<string_>,
+@as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn
 }
   type response = {
-@as("FunctionArns") functionArns: functionArnList,
-@as("NextMarker") nextMarker: amazonawsString
+@as("FunctionArns") functionArns: option<functionArnList>,
+@as("NextMarker") nextMarker: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "ListFunctionsByCodeSigningConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLayerVersionByArn = {
   type t;
   type request = {
-@as("Arn") arn: option<layerVersionArn>
+@as("Arn") arn: layerVersionArn
 }
   type response = {
-@as("LicenseInfo") licenseInfo: licenseInfo,
-@as("CompatibleRuntimes") compatibleRuntimes: compatibleRuntimes,
-@as("Version") version: layerVersionNumber,
-@as("CreatedDate") createdDate: amazonawsTimestamp,
-@as("Description") description: description,
-@as("LayerVersionArn") layerVersionArn: layerVersionArn,
-@as("LayerArn") layerArn: layerArn,
-@as("Content") content: layerVersionContentOutput
+@as("LicenseInfo") licenseInfo: option<licenseInfo>,
+@as("CompatibleRuntimes") compatibleRuntimes: option<compatibleRuntimes>,
+@as("Version") version: option<layerVersionNumber>,
+@as("CreatedDate") createdDate: option<timestamp_>,
+@as("Description") description: option<description>,
+@as("LayerVersionArn") layerVersionArn: option<layerVersionArn>,
+@as("LayerArn") layerArn: option<layerArn>,
+@as("Content") content: option<layerVersionContentOutput>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetLayerVersionByArnCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLayerVersion = {
   type t;
   type request = {
-@as("VersionNumber") versionNumber: option<layerVersionNumber>,
-@as("LayerName") layerName: option<layerName>
+@as("VersionNumber") versionNumber: layerVersionNumber,
+@as("LayerName") layerName: layerName
 }
   type response = {
-@as("LicenseInfo") licenseInfo: licenseInfo,
-@as("CompatibleRuntimes") compatibleRuntimes: compatibleRuntimes,
-@as("Version") version: layerVersionNumber,
-@as("CreatedDate") createdDate: amazonawsTimestamp,
-@as("Description") description: description,
-@as("LayerVersionArn") layerVersionArn: layerVersionArn,
-@as("LayerArn") layerArn: layerArn,
-@as("Content") content: layerVersionContentOutput
+@as("LicenseInfo") licenseInfo: option<licenseInfo>,
+@as("CompatibleRuntimes") compatibleRuntimes: option<compatibleRuntimes>,
+@as("Version") version: option<layerVersionNumber>,
+@as("CreatedDate") createdDate: option<timestamp_>,
+@as("Description") description: option<description>,
+@as("LayerVersionArn") layerVersionArn: option<layerVersionArn>,
+@as("LayerArn") layerArn: option<layerArn>,
+@as("Content") content: option<layerVersionContentOutput>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetLayerVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAccountSettings = {
   type t;
   type request = unit
   type response = {
-@as("AccountUsage") accountUsage: accountUsage,
-@as("AccountLimit") accountLimit: accountLimit
+@as("AccountUsage") accountUsage: option<accountUsage>,
+@as("AccountLimit") accountLimit: option<accountLimit>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetAccountSettingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFunctionEventInvokeConfig = {
   type t;
   type request = {
-@as("DestinationConfig") destinationConfig: destinationConfig,
-@as("MaximumEventAgeInSeconds") maximumEventAgeInSeconds: maximumEventAgeInSeconds,
-@as("MaximumRetryAttempts") maximumRetryAttempts: maximumRetryAttempts,
-@as("Qualifier") qualifier: qualifier,
-@as("FunctionName") functionName: option<functionName>
+@as("DestinationConfig") destinationConfig: option<destinationConfig>,
+@as("MaximumEventAgeInSeconds") maximumEventAgeInSeconds: option<maximumEventAgeInSeconds>,
+@as("MaximumRetryAttempts") maximumRetryAttempts: option<maximumRetryAttempts>,
+@as("Qualifier") qualifier: option<qualifier>,
+@as("FunctionName") functionName: functionName
 }
   type response = functionEventInvokeConfig;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "UpdateFunctionEventInvokeConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAlias = {
   type t;
   type request = {
-@as("RevisionId") revisionId: amazonawsString,
-@as("RoutingConfig") routingConfig: aliasRoutingConfiguration,
-@as("Description") description: description,
-@as("FunctionVersion") functionVersion: version,
-@as("Name") name: option<alias>,
-@as("FunctionName") functionName: option<functionName>
+@as("RevisionId") revisionId: option<string_>,
+@as("RoutingConfig") routingConfig: option<aliasRoutingConfiguration>,
+@as("Description") description: option<description>,
+@as("FunctionVersion") functionVersion: option<version>,
+@as("Name") name: alias,
+@as("FunctionName") functionName: functionName
 }
   type response = aliasConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "UpdateAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutFunctionEventInvokeConfig = {
   type t;
   type request = {
-@as("DestinationConfig") destinationConfig: destinationConfig,
-@as("MaximumEventAgeInSeconds") maximumEventAgeInSeconds: maximumEventAgeInSeconds,
-@as("MaximumRetryAttempts") maximumRetryAttempts: maximumRetryAttempts,
-@as("Qualifier") qualifier: qualifier,
-@as("FunctionName") functionName: option<functionName>
+@as("DestinationConfig") destinationConfig: option<destinationConfig>,
+@as("MaximumEventAgeInSeconds") maximumEventAgeInSeconds: option<maximumEventAgeInSeconds>,
+@as("MaximumRetryAttempts") maximumRetryAttempts: option<maximumRetryAttempts>,
+@as("Qualifier") qualifier: option<qualifier>,
+@as("FunctionName") functionName: functionName
 }
   type response = functionEventInvokeConfig;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "PutFunctionEventInvokeConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListProvisionedConcurrencyConfigs = {
   type t;
   type request = {
-@as("MaxItems") maxItems: maxProvisionedConcurrencyConfigListItems,
-@as("Marker") marker: amazonawsString,
-@as("FunctionName") functionName: option<functionName>
+@as("MaxItems") maxItems: option<maxProvisionedConcurrencyConfigListItems>,
+@as("Marker") marker: option<string_>,
+@as("FunctionName") functionName: functionName
 }
   type response = {
-@as("NextMarker") nextMarker: amazonawsString,
-@as("ProvisionedConcurrencyConfigs") provisionedConcurrencyConfigs: provisionedConcurrencyConfigList
+@as("NextMarker") nextMarker: option<string_>,
+@as("ProvisionedConcurrencyConfigs") provisionedConcurrencyConfigs: option<provisionedConcurrencyConfigList>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "ListProvisionedConcurrencyConfigsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFunctionEventInvokeConfig = {
   type t;
   type request = {
-@as("Qualifier") qualifier: qualifier,
-@as("FunctionName") functionName: option<functionName>
+@as("Qualifier") qualifier: option<qualifier>,
+@as("FunctionName") functionName: functionName
 }
   type response = functionEventInvokeConfig;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetFunctionEventInvokeConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAlias = {
   type t;
   type request = {
-@as("Name") name: option<alias>,
-@as("FunctionName") functionName: option<functionName>
+@as("Name") name: alias,
+@as("FunctionName") functionName: functionName
 }
   type response = aliasConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAlias = {
   type t;
   type request = {
-@as("RoutingConfig") routingConfig: aliasRoutingConfiguration,
-@as("Description") description: description,
-@as("FunctionVersion") functionVersion: option<version>,
-@as("Name") name: option<alias>,
-@as("FunctionName") functionName: option<functionName>
+@as("RoutingConfig") routingConfig: option<aliasRoutingConfiguration>,
+@as("Description") description: option<description>,
+@as("FunctionVersion") functionVersion: version,
+@as("Name") name: alias,
+@as("FunctionName") functionName: functionName
 }
   type response = aliasConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "CreateAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFunctionConfiguration = {
   type t;
   type request = {
-@as("ImageConfig") imageConfig: imageConfig,
-@as("FileSystemConfigs") fileSystemConfigs: fileSystemConfigList,
-@as("Layers") layers: layerList,
-@as("RevisionId") revisionId: amazonawsString,
-@as("TracingConfig") tracingConfig: tracingConfig,
-@as("KMSKeyArn") kMSKeyArn: kMSKeyArn,
-@as("DeadLetterConfig") deadLetterConfig: deadLetterConfig,
-@as("Runtime") runtime: runtime,
-@as("Environment") environment: environment,
-@as("VpcConfig") vpcConfig: vpcConfig,
-@as("MemorySize") memorySize: memorySize,
-@as("Timeout") timeout: timeout,
-@as("Description") description: description,
-@as("Handler") handler: handler,
-@as("Role") role: roleArn,
-@as("FunctionName") functionName: option<functionName>
+@as("ImageConfig") imageConfig: option<imageConfig>,
+@as("FileSystemConfigs") fileSystemConfigs: option<fileSystemConfigList>,
+@as("Layers") layers: option<layerList>,
+@as("RevisionId") revisionId: option<string_>,
+@as("TracingConfig") tracingConfig: option<tracingConfig>,
+@as("KMSKeyArn") kmskeyArn: option<kmskeyArn>,
+@as("DeadLetterConfig") deadLetterConfig: option<deadLetterConfig>,
+@as("Runtime") runtime: option<runtime>,
+@as("Environment") environment: option<environment>,
+@as("VpcConfig") vpcConfig: option<vpcConfig>,
+@as("MemorySize") memorySize: option<memorySize>,
+@as("Timeout") timeout: option<timeout>,
+@as("Description") description: option<description>,
+@as("Handler") handler: option<handler>,
+@as("Role") role: option<roleArn>,
+@as("FunctionName") functionName: functionName
 }
   type response = functionConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "UpdateFunctionConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateFunctionCode = {
   type t;
   type request = {
-@as("RevisionId") revisionId: amazonawsString,
-@as("DryRun") dryRun: amazonawsBoolean,
-@as("Publish") publish: amazonawsBoolean,
-@as("ImageUri") imageUri: amazonawsString,
-@as("S3ObjectVersion") s3ObjectVersion: s3ObjectVersion,
-@as("S3Key") s3Key: s3Key,
-@as("S3Bucket") s3Bucket: s3Bucket,
-@as("ZipFile") zipFile: blob,
-@as("FunctionName") functionName: option<functionName>
+@as("RevisionId") revisionId: option<string_>,
+@as("DryRun") dryRun: option<boolean_>,
+@as("Publish") publish: option<boolean_>,
+@as("ImageUri") imageUri: option<string_>,
+@as("S3ObjectVersion") s3ObjectVersion: option<s3ObjectVersion>,
+@as("S3Key") s3Key: option<s3Key>,
+@as("S3Bucket") s3Bucket: option<s3Bucket>,
+@as("ZipFile") zipFile: option<blob>,
+@as("FunctionName") functionName: functionName
 }
   type response = functionConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "UpdateFunctionCodeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateEventSourceMapping = {
   type t;
   type request = {
-@as("FunctionResponseTypes") functionResponseTypes: functionResponseTypeList,
-@as("TumblingWindowInSeconds") tumblingWindowInSeconds: tumblingWindowInSeconds,
-@as("SourceAccessConfigurations") sourceAccessConfigurations: sourceAccessConfigurations,
-@as("ParallelizationFactor") parallelizationFactor: parallelizationFactor,
-@as("MaximumRetryAttempts") maximumRetryAttempts: maximumRetryAttemptsEventSourceMapping,
-@as("BisectBatchOnFunctionError") bisectBatchOnFunctionError: bisectBatchOnFunctionError,
-@as("MaximumRecordAgeInSeconds") maximumRecordAgeInSeconds: maximumRecordAgeInSeconds,
-@as("DestinationConfig") destinationConfig: destinationConfig,
-@as("MaximumBatchingWindowInSeconds") maximumBatchingWindowInSeconds: maximumBatchingWindowInSeconds,
-@as("BatchSize") batchSize: batchSize,
-@as("Enabled") enabled: enabled,
-@as("FunctionName") functionName: functionName,
-@as("UUID") uUID: option<amazonawsString>
+@as("FunctionResponseTypes") functionResponseTypes: option<functionResponseTypeList>,
+@as("TumblingWindowInSeconds") tumblingWindowInSeconds: option<tumblingWindowInSeconds>,
+@as("SourceAccessConfigurations") sourceAccessConfigurations: option<sourceAccessConfigurations>,
+@as("ParallelizationFactor") parallelizationFactor: option<parallelizationFactor>,
+@as("MaximumRetryAttempts") maximumRetryAttempts: option<maximumRetryAttemptsEventSourceMapping>,
+@as("BisectBatchOnFunctionError") bisectBatchOnFunctionError: option<bisectBatchOnFunctionError>,
+@as("MaximumRecordAgeInSeconds") maximumRecordAgeInSeconds: option<maximumRecordAgeInSeconds>,
+@as("DestinationConfig") destinationConfig: option<destinationConfig>,
+@as("MaximumBatchingWindowInSeconds") maximumBatchingWindowInSeconds: option<maximumBatchingWindowInSeconds>,
+@as("BatchSize") batchSize: option<batchSize>,
+@as("Enabled") enabled: option<enabled>,
+@as("FunctionName") functionName: option<functionName>,
+@as("UUID") uuid: string_
 }
   type response = eventSourceMappingConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "UpdateEventSourceMappingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateCodeSigningConfig = {
   type t;
   type request = {
-@as("CodeSigningPolicies") codeSigningPolicies: codeSigningPolicies,
-@as("AllowedPublishers") allowedPublishers: allowedPublishers,
-@as("Description") description: description,
-@as("CodeSigningConfigArn") codeSigningConfigArn: option<codeSigningConfigArn>
+@as("CodeSigningPolicies") codeSigningPolicies: option<codeSigningPolicies>,
+@as("AllowedPublishers") allowedPublishers: option<allowedPublishers>,
+@as("Description") description: option<description>,
+@as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn
 }
   type response = {
-@as("CodeSigningConfig") codeSigningConfig: option<codeSigningConfig>
+@as("CodeSigningConfig") codeSigningConfig: codeSigningConfig
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "UpdateCodeSigningConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PublishVersion = {
   type t;
   type request = {
-@as("RevisionId") revisionId: amazonawsString,
-@as("Description") description: description,
-@as("CodeSha256") codeSha256: amazonawsString,
-@as("FunctionName") functionName: option<functionName>
+@as("RevisionId") revisionId: option<string_>,
+@as("Description") description: option<description>,
+@as("CodeSha256") codeSha256: option<string_>,
+@as("FunctionName") functionName: functionName
 }
   type response = functionConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "PublishVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListLayerVersions = {
   type t;
   type request = {
-@as("MaxItems") maxItems: maxLayerListItems,
-@as("Marker") marker: amazonawsString,
-@as("LayerName") layerName: option<layerName>,
-@as("CompatibleRuntime") compatibleRuntime: runtime
+@as("MaxItems") maxItems: option<maxLayerListItems>,
+@as("Marker") marker: option<string_>,
+@as("LayerName") layerName: layerName,
+@as("CompatibleRuntime") compatibleRuntime: option<runtime>
 }
   type response = {
-@as("LayerVersions") layerVersions: layerVersionsList,
-@as("NextMarker") nextMarker: amazonawsString
+@as("LayerVersions") layerVersions: option<layerVersionsList>,
+@as("NextMarker") nextMarker: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "ListLayerVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFunctionConfiguration = {
   type t;
   type request = {
-@as("Qualifier") qualifier: qualifier,
-@as("FunctionName") functionName: option<namespacedFunctionName>
+@as("Qualifier") qualifier: option<qualifier>,
+@as("FunctionName") functionName: namespacedFunctionName
 }
   type response = functionConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetFunctionConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetEventSourceMapping = {
   type t;
   type request = {
-@as("UUID") uUID: option<amazonawsString>
+@as("UUID") uuid: string_
 }
   type response = eventSourceMappingConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetEventSourceMappingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetCodeSigningConfig = {
   type t;
   type request = {
-@as("CodeSigningConfigArn") codeSigningConfigArn: option<codeSigningConfigArn>
+@as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn
 }
   type response = {
-@as("CodeSigningConfig") codeSigningConfig: option<codeSigningConfig>
+@as("CodeSigningConfig") codeSigningConfig: codeSigningConfig
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetCodeSigningConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteEventSourceMapping = {
   type t;
   type request = {
-@as("UUID") uUID: option<amazonawsString>
+@as("UUID") uuid: string_
 }
   type response = eventSourceMappingConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "DeleteEventSourceMappingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFunction = {
   type t;
   type request = {
-@as("CodeSigningConfigArn") codeSigningConfigArn: codeSigningConfigArn,
-@as("ImageConfig") imageConfig: imageConfig,
-@as("FileSystemConfigs") fileSystemConfigs: fileSystemConfigList,
-@as("Layers") layers: layerList,
-@as("Tags") tags: tags,
-@as("TracingConfig") tracingConfig: tracingConfig,
-@as("KMSKeyArn") kMSKeyArn: kMSKeyArn,
-@as("Environment") environment: environment,
-@as("DeadLetterConfig") deadLetterConfig: deadLetterConfig,
-@as("PackageType") packageType: packageType,
-@as("VpcConfig") vpcConfig: vpcConfig,
-@as("Publish") publish: amazonawsBoolean,
-@as("MemorySize") memorySize: memorySize,
-@as("Timeout") timeout: timeout,
-@as("Description") description: description,
-@as("Code") code: option<functionCode>,
-@as("Handler") handler: handler,
-@as("Role") role: option<roleArn>,
-@as("Runtime") runtime: runtime,
-@as("FunctionName") functionName: option<functionName>
+@as("CodeSigningConfigArn") codeSigningConfigArn: option<codeSigningConfigArn>,
+@as("ImageConfig") imageConfig: option<imageConfig>,
+@as("FileSystemConfigs") fileSystemConfigs: option<fileSystemConfigList>,
+@as("Layers") layers: option<layerList>,
+@as("Tags") tags: option<tags>,
+@as("TracingConfig") tracingConfig: option<tracingConfig>,
+@as("KMSKeyArn") kmskeyArn: option<kmskeyArn>,
+@as("Environment") environment: option<environment>,
+@as("DeadLetterConfig") deadLetterConfig: option<deadLetterConfig>,
+@as("PackageType") packageType: option<packageType>,
+@as("VpcConfig") vpcConfig: option<vpcConfig>,
+@as("Publish") publish: option<boolean_>,
+@as("MemorySize") memorySize: option<memorySize>,
+@as("Timeout") timeout: option<timeout>,
+@as("Description") description: option<description>,
+@as("Code") code: functionCode,
+@as("Handler") handler: option<handler>,
+@as("Role") role: roleArn,
+@as("Runtime") runtime: option<runtime>,
+@as("FunctionName") functionName: functionName
 }
   type response = functionConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "CreateFunctionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateEventSourceMapping = {
   type t;
   type request = {
-@as("FunctionResponseTypes") functionResponseTypes: functionResponseTypeList,
-@as("SelfManagedEventSource") selfManagedEventSource: selfManagedEventSource,
-@as("SourceAccessConfigurations") sourceAccessConfigurations: sourceAccessConfigurations,
-@as("Queues") queues: queues,
-@as("Topics") topics: topics,
-@as("TumblingWindowInSeconds") tumblingWindowInSeconds: tumblingWindowInSeconds,
-@as("MaximumRetryAttempts") maximumRetryAttempts: maximumRetryAttemptsEventSourceMapping,
-@as("BisectBatchOnFunctionError") bisectBatchOnFunctionError: bisectBatchOnFunctionError,
-@as("MaximumRecordAgeInSeconds") maximumRecordAgeInSeconds: maximumRecordAgeInSeconds,
-@as("DestinationConfig") destinationConfig: destinationConfig,
-@as("StartingPositionTimestamp") startingPositionTimestamp: date,
-@as("StartingPosition") startingPosition: eventSourcePosition,
-@as("ParallelizationFactor") parallelizationFactor: parallelizationFactor,
-@as("MaximumBatchingWindowInSeconds") maximumBatchingWindowInSeconds: maximumBatchingWindowInSeconds,
-@as("BatchSize") batchSize: batchSize,
-@as("Enabled") enabled: enabled,
-@as("FunctionName") functionName: option<functionName>,
-@as("EventSourceArn") eventSourceArn: arn
+@as("FunctionResponseTypes") functionResponseTypes: option<functionResponseTypeList>,
+@as("SelfManagedEventSource") selfManagedEventSource: option<selfManagedEventSource>,
+@as("SourceAccessConfigurations") sourceAccessConfigurations: option<sourceAccessConfigurations>,
+@as("Queues") queues: option<queues>,
+@as("Topics") topics: option<topics>,
+@as("TumblingWindowInSeconds") tumblingWindowInSeconds: option<tumblingWindowInSeconds>,
+@as("MaximumRetryAttempts") maximumRetryAttempts: option<maximumRetryAttemptsEventSourceMapping>,
+@as("BisectBatchOnFunctionError") bisectBatchOnFunctionError: option<bisectBatchOnFunctionError>,
+@as("MaximumRecordAgeInSeconds") maximumRecordAgeInSeconds: option<maximumRecordAgeInSeconds>,
+@as("DestinationConfig") destinationConfig: option<destinationConfig>,
+@as("StartingPositionTimestamp") startingPositionTimestamp: option<date>,
+@as("StartingPosition") startingPosition: option<eventSourcePosition>,
+@as("ParallelizationFactor") parallelizationFactor: option<parallelizationFactor>,
+@as("MaximumBatchingWindowInSeconds") maximumBatchingWindowInSeconds: option<maximumBatchingWindowInSeconds>,
+@as("BatchSize") batchSize: option<batchSize>,
+@as("Enabled") enabled: option<enabled>,
+@as("FunctionName") functionName: functionName,
+@as("EventSourceArn") eventSourceArn: option<arn>
 }
   type response = eventSourceMappingConfiguration;
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "CreateEventSourceMappingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCodeSigningConfig = {
   type t;
   type request = {
-@as("CodeSigningPolicies") codeSigningPolicies: codeSigningPolicies,
-@as("AllowedPublishers") allowedPublishers: option<allowedPublishers>,
-@as("Description") description: description
+@as("CodeSigningPolicies") codeSigningPolicies: option<codeSigningPolicies>,
+@as("AllowedPublishers") allowedPublishers: allowedPublishers,
+@as("Description") description: option<description>
 }
   type response = {
-@as("CodeSigningConfig") codeSigningConfig: option<codeSigningConfig>
+@as("CodeSigningConfig") codeSigningConfig: codeSigningConfig
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "CreateCodeSigningConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListLayers = {
   type t;
   type request = {
-@as("MaxItems") maxItems: maxLayerListItems,
-@as("Marker") marker: amazonawsString,
-@as("CompatibleRuntime") compatibleRuntime: runtime
+@as("MaxItems") maxItems: option<maxLayerListItems>,
+@as("Marker") marker: option<string_>,
+@as("CompatibleRuntime") compatibleRuntime: option<runtime>
 }
   type response = {
-@as("Layers") layers: layersList,
-@as("NextMarker") nextMarker: amazonawsString
+@as("Layers") layers: option<layersList>,
+@as("NextMarker") nextMarker: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "ListLayersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFunctionEventInvokeConfigs = {
   type t;
   type request = {
-@as("MaxItems") maxItems: maxFunctionEventInvokeConfigListItems,
-@as("Marker") marker: amazonawsString,
-@as("FunctionName") functionName: option<functionName>
+@as("MaxItems") maxItems: option<maxFunctionEventInvokeConfigListItems>,
+@as("Marker") marker: option<string_>,
+@as("FunctionName") functionName: functionName
 }
   type response = {
-@as("NextMarker") nextMarker: amazonawsString,
-@as("FunctionEventInvokeConfigs") functionEventInvokeConfigs: functionEventInvokeConfigList
+@as("NextMarker") nextMarker: option<string_>,
+@as("FunctionEventInvokeConfigs") functionEventInvokeConfigs: option<functionEventInvokeConfigList>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "ListFunctionEventInvokeConfigsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCodeSigningConfigs = {
   type t;
   type request = {
-@as("MaxItems") maxItems: maxListItems,
-@as("Marker") marker: amazonawsString
+@as("MaxItems") maxItems: option<maxListItems>,
+@as("Marker") marker: option<string_>
 }
   type response = {
-@as("CodeSigningConfigs") codeSigningConfigs: codeSigningConfigList,
-@as("NextMarker") nextMarker: amazonawsString
+@as("CodeSigningConfigs") codeSigningConfigs: option<codeSigningConfigList>,
+@as("NextMarker") nextMarker: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "ListCodeSigningConfigsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAliases = {
   type t;
   type request = {
-@as("MaxItems") maxItems: maxListItems,
-@as("Marker") marker: amazonawsString,
-@as("FunctionVersion") functionVersion: version,
-@as("FunctionName") functionName: option<functionName>
+@as("MaxItems") maxItems: option<maxListItems>,
+@as("Marker") marker: option<string_>,
+@as("FunctionVersion") functionVersion: option<version>,
+@as("FunctionName") functionName: functionName
 }
   type response = {
-@as("Aliases") aliases: aliasList,
-@as("NextMarker") nextMarker: amazonawsString
+@as("Aliases") aliases: option<aliasList>,
+@as("NextMarker") nextMarker: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "ListAliasesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetFunction = {
   type t;
   type request = {
-@as("Qualifier") qualifier: qualifier,
-@as("FunctionName") functionName: option<namespacedFunctionName>
+@as("Qualifier") qualifier: option<qualifier>,
+@as("FunctionName") functionName: namespacedFunctionName
 }
   type response = {
-@as("Concurrency") concurrency: concurrency,
-@as("Tags") tags: tags,
-@as("Code") code: functionCodeLocation,
-@as("Configuration") configuration: functionConfiguration
+@as("Concurrency") concurrency: option<concurrency>,
+@as("Tags") tags: option<tags>,
+@as("Code") code: option<functionCodeLocation>,
+@as("Configuration") configuration: option<functionConfiguration>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "GetFunctionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListVersionsByFunction = {
   type t;
   type request = {
-@as("MaxItems") maxItems: maxListItems,
-@as("Marker") marker: amazonawsString,
-@as("FunctionName") functionName: option<namespacedFunctionName>
+@as("MaxItems") maxItems: option<maxListItems>,
+@as("Marker") marker: option<string_>,
+@as("FunctionName") functionName: namespacedFunctionName
 }
   type response = {
-@as("Versions") versions: functionList,
-@as("NextMarker") nextMarker: amazonawsString
+@as("Versions") versions: option<functionList>,
+@as("NextMarker") nextMarker: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "ListVersionsByFunctionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFunctions = {
   type t;
   type request = {
-@as("MaxItems") maxItems: maxListItems,
-@as("Marker") marker: amazonawsString,
-@as("FunctionVersion") functionVersion: functionVersion,
-@as("MasterRegion") masterRegion: masterRegion
+@as("MaxItems") maxItems: option<maxListItems>,
+@as("Marker") marker: option<string_>,
+@as("FunctionVersion") functionVersion: option<functionVersion>,
+@as("MasterRegion") masterRegion: option<masterRegion>
 }
   type response = {
-@as("Functions") functions: functionList,
-@as("NextMarker") nextMarker: amazonawsString
+@as("Functions") functions: option<functionList>,
+@as("NextMarker") nextMarker: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "ListFunctionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEventSourceMappings = {
   type t;
   type request = {
-@as("MaxItems") maxItems: maxListItems,
-@as("Marker") marker: amazonawsString,
-@as("FunctionName") functionName: functionName,
-@as("EventSourceArn") eventSourceArn: arn
+@as("MaxItems") maxItems: option<maxListItems>,
+@as("Marker") marker: option<string_>,
+@as("FunctionName") functionName: option<functionName>,
+@as("EventSourceArn") eventSourceArn: option<arn>
 }
   type response = {
-@as("EventSourceMappings") eventSourceMappings: eventSourceMappingsList,
-@as("NextMarker") nextMarker: amazonawsString
+@as("EventSourceMappings") eventSourceMappings: option<eventSourceMappingsList>,
+@as("NextMarker") nextMarker: option<string_>
 }
   @module("@aws-sdk/client-lambda") @new external new_: (request) => t = "ListEventSourceMappingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

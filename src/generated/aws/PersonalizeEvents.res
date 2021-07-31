@@ -1,8 +1,16 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type userId = string
 type synthesizedJsonUserProperties = string
 type synthesizedJsonItemProperties = string
@@ -10,65 +18,65 @@ type synthesizedJsonEventPropertiesJSON = string
 type stringType = string
 type recommendationId = string
 type itemId = string
-type floatType = float;
+type floatType = float
 type errorMessage = string
 type date = Js.Date.t;
 type arn = string
 type user = {
-@as("properties") properties: synthesizedJsonUserProperties,
-@as("userId") userId: option<stringType>
+properties: option<synthesizedJsonUserProperties>,
+userId: stringType
 }
 type item = {
-@as("properties") properties: synthesizedJsonItemProperties,
-@as("itemId") itemId: option<stringType>
+properties: option<synthesizedJsonItemProperties>,
+itemId: stringType
 }
 type impression = array<itemId>
 type userList = array<user>
 type itemList = array<item>
 type event = {
-@as("impression") impression: impression,
-@as("recommendationId") recommendationId: recommendationId,
-@as("sentAt") sentAt: option<date>,
-@as("properties") properties: synthesizedJsonEventPropertiesJSON,
-@as("itemId") itemId: itemId,
-@as("eventValue") eventValue: floatType,
-@as("eventType") eventType: option<stringType>,
-@as("eventId") eventId: stringType
+impression: option<impression>,
+recommendationId: option<recommendationId>,
+sentAt: date,
+properties: option<synthesizedJsonEventPropertiesJSON>,
+itemId: option<itemId>,
+eventValue: option<floatType>,
+eventType: stringType,
+eventId: option<stringType>
 }
 type eventList = array<event>
-type clientType;
-@module("@aws-sdk/client-personalize") @new external createClient: unit => clientType = "PersonalizeEventsClient";
+type awsServiceClient;
+@module("@aws-sdk/client-personalize") @new external createClient: unit => awsServiceClient = "PersonalizeEventsClient";
 module PutUsers = {
   type t;
   type request = {
-@as("users") users: option<userList>,
-@as("datasetArn") datasetArn: option<arn>
+users: userList,
+datasetArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "PutUsersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutItems = {
   type t;
   type request = {
-@as("items") items: option<itemList>,
-@as("datasetArn") datasetArn: option<arn>
+items: itemList,
+datasetArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "PutItemsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutEvents = {
   type t;
   type request = {
-@as("eventList") eventList: option<eventList>,
-@as("sessionId") sessionId: option<stringType>,
-@as("userId") userId: userId,
-@as("trackingId") trackingId: option<stringType>
+eventList: eventList,
+sessionId: stringType,
+userId: option<userId>,
+trackingId: stringType
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "PutEventsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }

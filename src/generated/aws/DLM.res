@@ -1,44 +1,50 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type amazonawsTimestamp = Js.Date.t;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type long = float
+type timestamp_ = Js.Date.t;
 type time = string
 type targetRegion = string
 type target = string
 type tagValue = string
 type tagKey = string
 type tagFilter = string
-type amazonawsString = string
+type string_ = string
 type statusMessage = string
 type settablePolicyStateValues = [@as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type scheduleName = string
 type retentionIntervalUnitValues = [@as("YEARS") #YEARS | @as("MONTHS") #MONTHS | @as("WEEKS") #WEEKS | @as("DAYS") #DAYS]
 type resourceTypeValues = [@as("INSTANCE") #INSTANCE | @as("VOLUME") #VOLUME]
 type resourceLocationValues = [@as("OUTPOST") #OUTPOST | @as("CLOUD") #CLOUD]
-type policyTypeValues = [@as("EVENT_BASED_POLICY") #EVENT_BASED_POLICY | @as("IMAGE_MANAGEMENT") #IMAGE_MANAGEMENT | @as("EBS_SNAPSHOT_MANAGEMENT") #EBS_SNAPSHOT_MANAGEMENT]
+type policyTypeValues = [@as("EVENT_BASED_POLICY") #EVENTBASEDPOLICY | @as("IMAGE_MANAGEMENT") #IMAGEMANAGEMENT | @as("EBS_SNAPSHOT_MANAGEMENT") #EBSSNAPSHOTMANAGEMENT]
 type policyId = string
 type policyDescription = string
 type policyArn = string
 type parameter = string
-type noReboot = bool;
-type locationValues = [@as("OUTPOST_LOCAL") #OUTPOST_LOCAL | @as("CLOUD") #CLOUD]
+type noReboot = bool
+type locationValues = [@as("OUTPOST_LOCAL") #OUTPOSTLOCAL | @as("CLOUD") #CLOUD]
 type intervalUnitValues = [@as("HOURS") #HOURS]
-type interval = int;
+type interval = int
 type gettablePolicyStateValues = [@as("ERROR") #ERROR | @as("DISABLED") #DISABLED | @as("ENABLED") #ENABLED]
 type executionRoleArn = string
-type excludeBootVolume = bool;
-type eventTypeValues = [@as("shareSnapshot") #shareSnapshot]
-type eventSourceValues = [@as("MANAGED_CWE") #MANAGED_CWE]
+type excludeBootVolume = bool
+type eventTypeValues = [@as("shareSnapshot") #ShareSnapshot]
+type eventSourceValues = [@as("MANAGED_CWE") #MANAGEDCWE]
 type errorMessage = string
 type errorCode = string
-type encrypted = bool;
+type encrypted = bool
 type descriptionRegex = string
 type cronExpression = string
-type count = int;
-type copyTagsNullable = bool;
-type copyTags = bool;
+type count = int
+type copyTagsNullable = bool
+type copyTags = bool
 type cmkArn = string
 type awsAccountId = string
 type availabilityZone = string
@@ -49,226 +55,226 @@ type tagsToAddFilterList = array<tagFilter>
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: option<amazonawsString>,
-@as("Key") key: option<amazonawsString>
+@as("Value") value: string_,
+@as("Key") key: string_
 }
 type snapshotOwnerList = array<awsAccountId>
 type shareTargetAccountList = array<awsAccountId>
 type retainRule = {
-@as("IntervalUnit") intervalUnit: retentionIntervalUnitValues,
-@as("Interval") interval: interval,
-@as("Count") count: count
+@as("IntervalUnit") intervalUnit: option<retentionIntervalUnitValues>,
+@as("Interval") interval: option<interval>,
+@as("Count") count: option<count>
 }
 type resourceTypeValuesList = array<resourceTypeValues>
 type resourceLocationList = array<resourceLocationValues>
 type policyIdList = array<policyId>
 type parameters = {
-@as("NoReboot") noReboot: noReboot,
-@as("ExcludeBootVolume") excludeBootVolume: excludeBootVolume
+@as("NoReboot") noReboot: option<noReboot>,
+@as("ExcludeBootVolume") excludeBootVolume: option<excludeBootVolume>
 }
 type parameterList = array<parameter>
 type encryptionConfiguration = {
-@as("CmkArn") cmkArn: cmkArn,
-@as("Encrypted") encrypted: option<encrypted>
+@as("CmkArn") cmkArn: option<cmkArn>,
+@as("Encrypted") encrypted: encrypted
 }
 type crossRegionCopyRetainRule = {
-@as("IntervalUnit") intervalUnit: retentionIntervalUnitValues,
-@as("Interval") interval: interval
+@as("IntervalUnit") intervalUnit: option<retentionIntervalUnitValues>,
+@as("Interval") interval: option<interval>
 }
 type availabilityZoneList = array<availabilityZone>
 type variableTagsList = array<tag>
 type targetTagList = array<tag>
 type tagsToAddList = array<tag>
 type shareRule = {
-@as("UnshareIntervalUnit") unshareIntervalUnit: retentionIntervalUnitValues,
-@as("UnshareInterval") unshareInterval: interval,
-@as("TargetAccounts") targetAccounts: option<shareTargetAccountList>
+@as("UnshareIntervalUnit") unshareIntervalUnit: option<retentionIntervalUnitValues>,
+@as("UnshareInterval") unshareInterval: option<interval>,
+@as("TargetAccounts") targetAccounts: shareTargetAccountList
 }
 type lifecyclePolicySummary = {
-@as("PolicyType") policyType: policyTypeValues,
-@as("Tags") tags: tagMap,
-@as("State") state: gettablePolicyStateValues,
-@as("Description") description: policyDescription,
-@as("PolicyId") policyId: policyId
+@as("PolicyType") policyType: option<policyTypeValues>,
+@as("Tags") tags: option<tagMap>,
+@as("State") state: option<gettablePolicyStateValues>,
+@as("Description") description: option<policyDescription>,
+@as("PolicyId") policyId: option<policyId>
 }
 type fastRestoreRule = {
-@as("AvailabilityZones") availabilityZones: option<availabilityZoneList>,
-@as("IntervalUnit") intervalUnit: retentionIntervalUnitValues,
-@as("Interval") interval: interval,
-@as("Count") count: count
+@as("AvailabilityZones") availabilityZones: availabilityZoneList,
+@as("IntervalUnit") intervalUnit: option<retentionIntervalUnitValues>,
+@as("Interval") interval: option<interval>,
+@as("Count") count: option<count>
 }
 type eventParameters = {
-@as("DescriptionRegex") descriptionRegex: option<descriptionRegex>,
-@as("SnapshotOwner") snapshotOwner: option<snapshotOwnerList>,
-@as("EventType") eventType: option<eventTypeValues>
+@as("DescriptionRegex") descriptionRegex: descriptionRegex,
+@as("SnapshotOwner") snapshotOwner: snapshotOwnerList,
+@as("EventType") eventType: eventTypeValues
 }
 type crossRegionCopyRule = {
-@as("RetainRule") retainRule: crossRegionCopyRetainRule,
-@as("CopyTags") copyTags: copyTagsNullable,
-@as("CmkArn") cmkArn: cmkArn,
-@as("Encrypted") encrypted: option<encrypted>,
-@as("Target") target: target,
-@as("TargetRegion") targetRegion: targetRegion
+@as("RetainRule") retainRule: option<crossRegionCopyRetainRule>,
+@as("CopyTags") copyTags: option<copyTagsNullable>,
+@as("CmkArn") cmkArn: option<cmkArn>,
+@as("Encrypted") encrypted: encrypted,
+@as("Target") target: option<target>,
+@as("TargetRegion") targetRegion: option<targetRegion>
 }
 type crossRegionCopyAction = {
-@as("RetainRule") retainRule: crossRegionCopyRetainRule,
-@as("EncryptionConfiguration") encryptionConfiguration: option<encryptionConfiguration>,
-@as("Target") target: option<target>
+@as("RetainRule") retainRule: option<crossRegionCopyRetainRule>,
+@as("EncryptionConfiguration") encryptionConfiguration: encryptionConfiguration,
+@as("Target") target: target
 }
 type createRule = {
-@as("CronExpression") cronExpression: cronExpression,
-@as("Times") times: timesList,
-@as("IntervalUnit") intervalUnit: intervalUnitValues,
-@as("Interval") interval: interval,
-@as("Location") location: locationValues
+@as("CronExpression") cronExpression: option<cronExpression>,
+@as("Times") times: option<timesList>,
+@as("IntervalUnit") intervalUnit: option<intervalUnitValues>,
+@as("Interval") interval: option<interval>,
+@as("Location") location: option<locationValues>
 }
 type shareRules = array<shareRule>
 type lifecyclePolicySummaryList = array<lifecyclePolicySummary>
 type eventSource = {
-@as("Parameters") parameters: eventParameters,
-@as("Type") type_: option<eventSourceValues>
+@as("Parameters") parameters: option<eventParameters>,
+@as("Type") type_: eventSourceValues
 }
 type crossRegionCopyRules = array<crossRegionCopyRule>
 type crossRegionCopyActionList = array<crossRegionCopyAction>
 type schedule = {
-@as("ShareRules") shareRules: shareRules,
-@as("CrossRegionCopyRules") crossRegionCopyRules: crossRegionCopyRules,
-@as("FastRestoreRule") fastRestoreRule: fastRestoreRule,
-@as("RetainRule") retainRule: retainRule,
-@as("CreateRule") createRule: createRule,
-@as("VariableTags") variableTags: variableTagsList,
-@as("TagsToAdd") tagsToAdd: tagsToAddList,
-@as("CopyTags") copyTags: copyTags,
-@as("Name") name: scheduleName
+@as("ShareRules") shareRules: option<shareRules>,
+@as("CrossRegionCopyRules") crossRegionCopyRules: option<crossRegionCopyRules>,
+@as("FastRestoreRule") fastRestoreRule: option<fastRestoreRule>,
+@as("RetainRule") retainRule: option<retainRule>,
+@as("CreateRule") createRule: option<createRule>,
+@as("VariableTags") variableTags: option<variableTagsList>,
+@as("TagsToAdd") tagsToAdd: option<tagsToAddList>,
+@as("CopyTags") copyTags: option<copyTags>,
+@as("Name") name: option<scheduleName>
 }
 type action = {
-@as("CrossRegionCopy") crossRegionCopy: option<crossRegionCopyActionList>,
-@as("Name") name: option<actionName>
+@as("CrossRegionCopy") crossRegionCopy: crossRegionCopyActionList,
+@as("Name") name: actionName
 }
 type scheduleList = array<schedule>
 type actionList = array<action>
 type policyDetails = {
-@as("Actions") actions: actionList,
-@as("EventSource") eventSource: eventSource,
-@as("Parameters") parameters: parameters,
-@as("Schedules") schedules: scheduleList,
-@as("TargetTags") targetTags: targetTagList,
-@as("ResourceLocations") resourceLocations: resourceLocationList,
-@as("ResourceTypes") resourceTypes: resourceTypeValuesList,
-@as("PolicyType") policyType: policyTypeValues
+@as("Actions") actions: option<actionList>,
+@as("EventSource") eventSource: option<eventSource>,
+@as("Parameters") parameters: option<parameters>,
+@as("Schedules") schedules: option<scheduleList>,
+@as("TargetTags") targetTags: option<targetTagList>,
+@as("ResourceLocations") resourceLocations: option<resourceLocationList>,
+@as("ResourceTypes") resourceTypes: option<resourceTypeValuesList>,
+@as("PolicyType") policyType: option<policyTypeValues>
 }
 type lifecyclePolicy = {
-@as("PolicyArn") policyArn: policyArn,
-@as("Tags") tags: tagMap,
-@as("PolicyDetails") policyDetails: policyDetails,
-@as("DateModified") dateModified: amazonawsTimestamp,
-@as("DateCreated") dateCreated: amazonawsTimestamp,
-@as("ExecutionRoleArn") executionRoleArn: executionRoleArn,
-@as("StatusMessage") statusMessage: statusMessage,
-@as("State") state: gettablePolicyStateValues,
-@as("Description") description: policyDescription,
-@as("PolicyId") policyId: policyId
+@as("PolicyArn") policyArn: option<policyArn>,
+@as("Tags") tags: option<tagMap>,
+@as("PolicyDetails") policyDetails: option<policyDetails>,
+@as("DateModified") dateModified: option<timestamp_>,
+@as("DateCreated") dateCreated: option<timestamp_>,
+@as("ExecutionRoleArn") executionRoleArn: option<executionRoleArn>,
+@as("StatusMessage") statusMessage: option<statusMessage>,
+@as("State") state: option<gettablePolicyStateValues>,
+@as("Description") description: option<policyDescription>,
+@as("PolicyId") policyId: option<policyId>
 }
-type clientType;
-@module("@aws-sdk/client-dlm") @new external createClient: unit => clientType = "DLMClient";
+type awsServiceClient;
+@module("@aws-sdk/client-dlm") @new external createClient: unit => awsServiceClient = "DLMClient";
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceArn") resourceArn: option<policyArn>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceArn") resourceArn: policyArn
 }
   type response = unit
   @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tagMap>,
-@as("ResourceArn") resourceArn: option<policyArn>
+@as("Tags") tags: tagMap,
+@as("ResourceArn") resourceArn: policyArn
 }
   type response = unit
   @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("ResourceArn") resourceArn: option<policyArn>
+@as("ResourceArn") resourceArn: policyArn
 }
   type response = {
-@as("Tags") tags: tagMap
+@as("Tags") tags: option<tagMap>
 }
   @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteLifecyclePolicy = {
   type t;
   type request = {
-@as("PolicyId") policyId: option<policyId>
+@as("PolicyId") policyId: policyId
 }
   type response = unit
   @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "DeleteLifecyclePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLifecyclePolicies = {
   type t;
   type request = {
-@as("TagsToAdd") tagsToAdd: tagsToAddFilterList,
-@as("TargetTags") targetTags: targetTagsFilterList,
-@as("ResourceTypes") resourceTypes: resourceTypeValuesList,
-@as("State") state: gettablePolicyStateValues,
-@as("PolicyIds") policyIds: policyIdList
+@as("TagsToAdd") tagsToAdd: option<tagsToAddFilterList>,
+@as("TargetTags") targetTags: option<targetTagsFilterList>,
+@as("ResourceTypes") resourceTypes: option<resourceTypeValuesList>,
+@as("State") state: option<gettablePolicyStateValues>,
+@as("PolicyIds") policyIds: option<policyIdList>
 }
   type response = {
-@as("Policies") policies: lifecyclePolicySummaryList
+@as("Policies") policies: option<lifecyclePolicySummaryList>
 }
   @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "GetLifecyclePoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateLifecyclePolicy = {
   type t;
   type request = {
-@as("PolicyDetails") policyDetails: policyDetails,
-@as("Description") description: policyDescription,
-@as("State") state: settablePolicyStateValues,
-@as("ExecutionRoleArn") executionRoleArn: executionRoleArn,
-@as("PolicyId") policyId: option<policyId>
+@as("PolicyDetails") policyDetails: option<policyDetails>,
+@as("Description") description: option<policyDescription>,
+@as("State") state: option<settablePolicyStateValues>,
+@as("ExecutionRoleArn") executionRoleArn: option<executionRoleArn>,
+@as("PolicyId") policyId: policyId
 }
   type response = unit
   @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "UpdateLifecyclePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateLifecyclePolicy = {
   type t;
   type request = {
-@as("Tags") tags: tagMap,
-@as("PolicyDetails") policyDetails: option<policyDetails>,
-@as("State") state: option<settablePolicyStateValues>,
-@as("Description") description: option<policyDescription>,
-@as("ExecutionRoleArn") executionRoleArn: option<executionRoleArn>
+@as("Tags") tags: option<tagMap>,
+@as("PolicyDetails") policyDetails: policyDetails,
+@as("State") state: settablePolicyStateValues,
+@as("Description") description: policyDescription,
+@as("ExecutionRoleArn") executionRoleArn: executionRoleArn
 }
   type response = {
-@as("PolicyId") policyId: policyId
+@as("PolicyId") policyId: option<policyId>
 }
   @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "CreateLifecyclePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetLifecyclePolicy = {
   type t;
   type request = {
-@as("PolicyId") policyId: option<policyId>
+@as("PolicyId") policyId: policyId
 }
   type response = {
-@as("Policy") policy: lifecyclePolicy
+@as("Policy") policy: option<lifecyclePolicy>
 }
   @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "GetLifecyclePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

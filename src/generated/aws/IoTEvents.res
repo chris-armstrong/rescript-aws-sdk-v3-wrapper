@@ -1,35 +1,42 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type long = float
 type resourceId = string
 type resourceArn = string
 type errorMessage = string
 type variableValue = string
 type variableName = string
-type useBase64 = bool;
-type amazonawsTimestamp = Js.Date.t;
+type useBase64 = bool
+type timestamp_ = Js.Date.t;
 type timerName = string
 type threshold = string
 type tagValue = string
 type tagKey = string
 type statusMessage = string
 type stateName = string
-type severity = int;
-type seconds = int;
-type sSOReferenceId = string
-type sMSSenderId = string
+type severity = int
+type seconds = int
+type ssoreferenceId = string
+type smssenderId = string
 type resourceName = string
 type queueUrl = string
 type payloadType = [@as("JSON") #JSON | @as("STRING") #STRING]
 type notificationAdditionalMessage = string
 type nextToken = string
-type maxResults = int;
-type maxAnalysisResults = int;
-type mQTTTopic = string
+type maxResults = int
+type maxAnalysisResults = int
+type mqtttopic = string
 type loggingLevel = [@as("DEBUG") #DEBUG | @as("INFO") #INFO | @as("ERROR") #ERROR]
-type loggingEnabled = bool;
+type loggingEnabled = bool
 type keyValue = string
 type inputStatus = [@as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE | @as("UPDATING") #UPDATING | @as("CREATING") #CREATING]
 type inputProperty = string
@@ -47,7 +54,7 @@ type dynamoOperation = string
 type dynamoKeyValue = string
 type dynamoKeyType = string
 type dynamoKeyField = string
-type disabledOnInitialization = bool;
+type disabledOnInitialization = bool
 type detectorModelVersionStatus = [@as("FAILED") #FAILED | @as("PAUSED") #PAUSED | @as("DRAFT") #DRAFT | @as("DEPRECATED") #DEPRECATED | @as("INACTIVE") #INACTIVE | @as("ACTIVATING") #ACTIVATING | @as("ACTIVE") #ACTIVE]
 type detectorModelVersion = string
 type detectorModelName = string
@@ -56,7 +63,7 @@ type detectorModelArn = string
 type deliveryStreamName = string
 type contentExpression = string
 type condition = string
-type comparisonOperator = [@as("NOT_EQUAL") #NOT_EQUAL | @as("EQUAL") #EQUAL | @as("LESS_OR_EQUAL") #LESS_OR_EQUAL | @as("LESS") #LESS | @as("GREATER_OR_EQUAL") #GREATER_OR_EQUAL | @as("GREATER") #GREATER]
+type comparisonOperator = [@as("NOT_EQUAL") #NOTEQUAL | @as("EQUAL") #EQUAL | @as("LESS_OR_EQUAL") #LESSOREQUAL | @as("LESS") #LESS | @as("GREATER_OR_EQUAL") #GREATEROREQUAL | @as("GREATER") #GREATER]
 type attributeJsonPath = string
 type assetPropertyTimeInSeconds = string
 type assetPropertyStringValue = string
@@ -82,708 +89,708 @@ type alarmModelVersion = string
 type alarmModelName = string
 type alarmModelDescription = string
 type alarmModelArn = string
-type acknowledgeFlowEnabled = bool;
+type acknowledgeFlowEnabled = bool
 type tagKeys = array<tagKey>
 type tag = {
-@as("value") value: option<tagValue>,
-@as("key") key: option<tagKey>
+value: tagValue,
+key: tagKey
 }
 type simpleRule = {
-@as("threshold") threshold: option<threshold>,
-@as("comparisonOperator") comparisonOperator: option<comparisonOperator>,
-@as("inputProperty") inputProperty: option<inputProperty>
+threshold: threshold,
+comparisonOperator: comparisonOperator,
+inputProperty: inputProperty
 }
 type setVariableAction = {
-@as("value") value: option<variableValue>,
-@as("variableName") variableName: option<variableName>
+value: variableValue,
+variableName: variableName
 }
 type setTimerAction = {
-@as("durationExpression") durationExpression: variableValue,
-@as("seconds") seconds: seconds,
-@as("timerName") timerName: option<timerName>
+durationExpression: option<variableValue>,
+seconds: option<seconds>,
+timerName: timerName
 }
-type sSOIdentity = {
-@as("userId") userId: sSOReferenceId,
-@as("identityStoreId") identityStoreId: option<identityStoreId>
+type ssoidentity = {
+userId: option<ssoreferenceId>,
+identityStoreId: identityStoreId
 }
 type routedResource = {
-@as("arn") arn: amazonResourceName,
-@as("name") name: resourceName
+arn: option<amazonResourceName>,
+name: option<resourceName>
 }
 type resetTimerAction = {
-@as("timerName") timerName: option<timerName>
+timerName: timerName
 }
 type payload = {
-@as("type") type_: option<payloadType>,
-@as("contentExpression") contentExpression: option<contentExpression>
+@as("type") type_: payloadType,
+contentExpression: contentExpression
 }
 type iotSiteWiseAssetModelPropertyIdentifier = {
-@as("propertyId") propertyId: option<assetPropertyId>,
-@as("assetModelId") assetModelId: option<assetModelId>
+propertyId: assetPropertyId,
+assetModelId: assetModelId
 }
 type iotEventsInputIdentifier = {
-@as("inputName") inputName: option<inputName>
+inputName: inputName
 }
 type inputSummary = {
-@as("status") status: inputStatus,
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("inputArn") inputArn: inputArn,
-@as("inputDescription") inputDescription: inputDescription,
-@as("inputName") inputName: inputName
+status: option<inputStatus>,
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+inputArn: option<inputArn>,
+inputDescription: option<inputDescription>,
+inputName: option<inputName>
 }
 type inputConfiguration = {
-@as("status") status: option<inputStatus>,
-@as("lastUpdateTime") lastUpdateTime: option<amazonawsTimestamp>,
-@as("creationTime") creationTime: option<amazonawsTimestamp>,
-@as("inputArn") inputArn: option<inputArn>,
-@as("inputDescription") inputDescription: inputDescription,
-@as("inputName") inputName: option<inputName>
+status: inputStatus,
+lastUpdateTime: timestamp_,
+creationTime: timestamp_,
+inputArn: inputArn,
+inputDescription: option<inputDescription>,
+inputName: inputName
 }
 type initializationConfiguration = {
-@as("disabledOnInitialization") disabledOnInitialization: option<disabledOnInitialization>
+disabledOnInitialization: disabledOnInitialization
 }
 type emailContent = {
-@as("additionalMessage") additionalMessage: notificationAdditionalMessage,
-@as("subject") subject: emailSubject
+additionalMessage: option<notificationAdditionalMessage>,
+subject: option<emailSubject>
 }
 type detectorModelVersionSummary = {
-@as("evaluationMethod") evaluationMethod: evaluationMethod,
-@as("status") status: detectorModelVersionStatus,
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("roleArn") roleArn: amazonResourceName,
-@as("detectorModelArn") detectorModelArn: detectorModelArn,
-@as("detectorModelVersion") detectorModelVersion: detectorModelVersion,
-@as("detectorModelName") detectorModelName: detectorModelName
+evaluationMethod: option<evaluationMethod>,
+status: option<detectorModelVersionStatus>,
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+roleArn: option<amazonResourceName>,
+detectorModelArn: option<detectorModelArn>,
+detectorModelVersion: option<detectorModelVersion>,
+detectorModelName: option<detectorModelName>
 }
 type detectorModelSummary = {
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("detectorModelDescription") detectorModelDescription: detectorModelDescription,
-@as("detectorModelName") detectorModelName: detectorModelName
+creationTime: option<timestamp_>,
+detectorModelDescription: option<detectorModelDescription>,
+detectorModelName: option<detectorModelName>
 }
 type detectorModelConfiguration = {
-@as("evaluationMethod") evaluationMethod: evaluationMethod,
-@as("key") key: attributeJsonPath,
-@as("status") status: detectorModelVersionStatus,
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("roleArn") roleArn: amazonResourceName,
-@as("detectorModelArn") detectorModelArn: detectorModelArn,
-@as("detectorModelDescription") detectorModelDescription: detectorModelDescription,
-@as("detectorModelVersion") detectorModelVersion: detectorModelVersion,
-@as("detectorModelName") detectorModelName: detectorModelName
+evaluationMethod: option<evaluationMethod>,
+key: option<attributeJsonPath>,
+status: option<detectorModelVersionStatus>,
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+roleArn: option<amazonResourceName>,
+detectorModelArn: option<detectorModelArn>,
+detectorModelDescription: option<detectorModelDescription>,
+detectorModelVersion: option<detectorModelVersion>,
+detectorModelName: option<detectorModelName>
 }
 type detectorDebugOption = {
-@as("keyValue") keyValue: keyValue,
-@as("detectorModelName") detectorModelName: option<detectorModelName>
+keyValue: option<keyValue>,
+detectorModelName: detectorModelName
 }
 type clearTimerAction = {
-@as("timerName") timerName: option<timerName>
+timerName: timerName
 }
 type attribute = {
-@as("jsonPath") jsonPath: option<attributeJsonPath>
+jsonPath: attributeJsonPath
 }
 type assetPropertyVariant = {
-@as("booleanValue") booleanValue: assetPropertyBooleanValue,
-@as("doubleValue") doubleValue: assetPropertyDoubleValue,
-@as("integerValue") integerValue: assetPropertyIntegerValue,
-@as("stringValue") stringValue: assetPropertyStringValue
+booleanValue: option<assetPropertyBooleanValue>,
+doubleValue: option<assetPropertyDoubleValue>,
+integerValue: option<assetPropertyIntegerValue>,
+stringValue: option<assetPropertyStringValue>
 }
 type assetPropertyTimestamp = {
-@as("offsetInNanos") offsetInNanos: assetPropertyOffsetInNanos,
-@as("timeInSeconds") timeInSeconds: option<assetPropertyTimeInSeconds>
+offsetInNanos: option<assetPropertyOffsetInNanos>,
+timeInSeconds: assetPropertyTimeInSeconds
 }
 type analysisResultLocation = {
-@as("path") path: analysisResultLocationPath
+path: option<analysisResultLocationPath>
 }
 type alarmModelVersionSummary = {
-@as("statusMessage") statusMessage: statusMessage,
-@as("status") status: alarmModelVersionStatus,
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("creationTime") creationTime: amazonawsTimestamp,
-@as("roleArn") roleArn: amazonResourceName,
-@as("alarmModelVersion") alarmModelVersion: alarmModelVersion,
-@as("alarmModelArn") alarmModelArn: alarmModelArn,
-@as("alarmModelName") alarmModelName: alarmModelName
+statusMessage: option<statusMessage>,
+status: option<alarmModelVersionStatus>,
+lastUpdateTime: option<timestamp_>,
+creationTime: option<timestamp_>,
+roleArn: option<amazonResourceName>,
+alarmModelVersion: option<alarmModelVersion>,
+alarmModelArn: option<alarmModelArn>,
+alarmModelName: option<alarmModelName>
 }
 type alarmModelSummary = {
-@as("alarmModelName") alarmModelName: alarmModelName,
-@as("alarmModelDescription") alarmModelDescription: alarmModelDescription,
-@as("creationTime") creationTime: amazonawsTimestamp
+alarmModelName: option<alarmModelName>,
+alarmModelDescription: option<alarmModelDescription>,
+creationTime: option<timestamp_>
 }
 type acknowledgeFlow = {
-@as("enabled") enabled: option<acknowledgeFlowEnabled>
+enabled: acknowledgeFlowEnabled
 }
 type tags = array<tag>
 type sqsAction = {
-@as("payload") payload: payload,
-@as("useBase64") useBase64: useBase64,
-@as("queueUrl") queueUrl: option<queueUrl>
+payload: option<payload>,
+useBase64: option<useBase64>,
+queueUrl: queueUrl
 }
-type sNSTopicPublishAction = {
-@as("payload") payload: payload,
-@as("targetArn") targetArn: option<amazonResourceName>
+type snstopicPublishAction = {
+payload: option<payload>,
+targetArn: amazonResourceName
 }
 type routedResources = array<routedResource>
 type recipientDetail = {
-@as("ssoIdentity") ssoIdentity: sSOIdentity
+ssoIdentity: option<ssoidentity>
 }
 type lambdaAction = {
-@as("payload") payload: payload,
-@as("functionArn") functionArn: option<amazonResourceName>
+payload: option<payload>,
+functionArn: amazonResourceName
 }
 type iotTopicPublishAction = {
-@as("payload") payload: payload,
-@as("mqttTopic") mqttTopic: option<mQTTTopic>
+payload: option<payload>,
+mqttTopic: mqtttopic
 }
 type iotSiteWiseInputIdentifier = {
-@as("iotSiteWiseAssetModelPropertyIdentifier") iotSiteWiseAssetModelPropertyIdentifier: iotSiteWiseAssetModelPropertyIdentifier
+iotSiteWiseAssetModelPropertyIdentifier: option<iotSiteWiseAssetModelPropertyIdentifier>
 }
 type iotEventsAction = {
-@as("payload") payload: payload,
-@as("inputName") inputName: option<inputName>
+payload: option<payload>,
+inputName: inputName
 }
 type inputSummaries = array<inputSummary>
 type firehoseAction = {
-@as("payload") payload: payload,
-@as("separator") separator: firehoseSeparator,
-@as("deliveryStreamName") deliveryStreamName: option<deliveryStreamName>
+payload: option<payload>,
+separator: option<firehoseSeparator>,
+deliveryStreamName: deliveryStreamName
 }
 type dynamoDBv2Action = {
-@as("payload") payload: payload,
-@as("tableName") tableName: option<dynamoTableName>
+payload: option<payload>,
+tableName: dynamoTableName
 }
 type dynamoDBAction = {
-@as("payload") payload: payload,
-@as("tableName") tableName: option<dynamoTableName>,
-@as("payloadField") payloadField: dynamoKeyField,
-@as("operation") operation: dynamoOperation,
-@as("rangeKeyValue") rangeKeyValue: dynamoKeyValue,
-@as("rangeKeyField") rangeKeyField: dynamoKeyField,
-@as("rangeKeyType") rangeKeyType: dynamoKeyType,
-@as("hashKeyValue") hashKeyValue: option<dynamoKeyValue>,
-@as("hashKeyField") hashKeyField: option<dynamoKeyField>,
-@as("hashKeyType") hashKeyType: dynamoKeyType
+payload: option<payload>,
+tableName: dynamoTableName,
+payloadField: option<dynamoKeyField>,
+operation: option<dynamoOperation>,
+rangeKeyValue: option<dynamoKeyValue>,
+rangeKeyField: option<dynamoKeyField>,
+rangeKeyType: option<dynamoKeyType>,
+hashKeyValue: dynamoKeyValue,
+hashKeyField: dynamoKeyField,
+hashKeyType: option<dynamoKeyType>
 }
 type detectorModelVersionSummaries = array<detectorModelVersionSummary>
 type detectorModelSummaries = array<detectorModelSummary>
 type detectorDebugOptions = array<detectorDebugOption>
 type attributes = array<attribute>
 type assetPropertyValue = {
-@as("quality") quality: assetPropertyQuality,
-@as("timestamp") timestamp: assetPropertyTimestamp,
-@as("value") value: assetPropertyVariant
+quality: option<assetPropertyQuality>,
+@as("timestamp") timestamp_: option<assetPropertyTimestamp>,
+value: option<assetPropertyVariant>
 }
 type analysisResultLocations = array<analysisResultLocation>
 type alarmRule = {
-@as("simpleRule") simpleRule: simpleRule
+simpleRule: option<simpleRule>
 }
 type alarmModelVersionSummaries = array<alarmModelVersionSummary>
 type alarmModelSummaries = array<alarmModelSummary>
 type alarmCapabilities = {
-@as("acknowledgeFlow") acknowledgeFlow: acknowledgeFlow,
-@as("initializationConfiguration") initializationConfiguration: initializationConfiguration
+acknowledgeFlow: option<acknowledgeFlow>,
+initializationConfiguration: option<initializationConfiguration>
 }
 type recipientDetails = array<recipientDetail>
 type notificationTargetActions = {
-@as("lambdaAction") lambdaAction: lambdaAction
+lambdaAction: option<lambdaAction>
 }
 type loggingOptions = {
-@as("detectorDebugOptions") detectorDebugOptions: detectorDebugOptions,
-@as("enabled") enabled: option<loggingEnabled>,
-@as("level") level: option<loggingLevel>,
-@as("roleArn") roleArn: option<amazonResourceName>
+detectorDebugOptions: option<detectorDebugOptions>,
+enabled: loggingEnabled,
+level: loggingLevel,
+roleArn: amazonResourceName
 }
 type iotSiteWiseAction = {
-@as("propertyValue") propertyValue: assetPropertyValue,
-@as("propertyAlias") propertyAlias: assetPropertyAlias,
-@as("propertyId") propertyId: assetPropertyId,
-@as("assetId") assetId: assetId,
-@as("entryId") entryId: assetPropertyEntryId
+propertyValue: option<assetPropertyValue>,
+propertyAlias: option<assetPropertyAlias>,
+propertyId: option<assetPropertyId>,
+assetId: option<assetId>,
+entryId: option<assetPropertyEntryId>
 }
 type inputIdentifier = {
-@as("iotSiteWiseInputIdentifier") iotSiteWiseInputIdentifier: iotSiteWiseInputIdentifier,
-@as("iotEventsInputIdentifier") iotEventsInputIdentifier: iotEventsInputIdentifier
+iotSiteWiseInputIdentifier: option<iotSiteWiseInputIdentifier>,
+iotEventsInputIdentifier: option<iotEventsInputIdentifier>
 }
 type inputDefinition = {
-@as("attributes") attributes: option<attributes>
+attributes: attributes
 }
 type analysisResult = {
-@as("locations") locations: analysisResultLocations,
-@as("message") message: analysisMessage,
-@as("level") level: analysisResultLevel,
-@as("type") type_: analysisType
+locations: option<analysisResultLocations>,
+message: option<analysisMessage>,
+level: option<analysisResultLevel>,
+@as("type") type_: option<analysisType>
 }
-type sMSConfiguration = {
-@as("recipients") recipients: option<recipientDetails>,
-@as("additionalMessage") additionalMessage: notificationAdditionalMessage,
-@as("senderId") senderId: sMSSenderId
+type smsconfiguration = {
+recipients: recipientDetails,
+additionalMessage: option<notificationAdditionalMessage>,
+senderId: option<smssenderId>
 }
 type input = {
-@as("inputDefinition") inputDefinition: inputDefinition,
-@as("inputConfiguration") inputConfiguration: inputConfiguration
+inputDefinition: option<inputDefinition>,
+inputConfiguration: option<inputConfiguration>
 }
 type emailRecipients = {
-@as("to") to: recipientDetails
+to: option<recipientDetails>
 }
 type analysisResults = array<analysisResult>
 type alarmAction = {
-@as("iotSiteWise") iotSiteWise: iotSiteWiseAction,
-@as("dynamoDBv2") dynamoDBv2: dynamoDBv2Action,
-@as("dynamoDB") dynamoDB: dynamoDBAction,
-@as("firehose") firehose: firehoseAction,
-@as("sqs") sqs: sqsAction,
-@as("iotEvents") iotEvents: iotEventsAction,
-@as("lambda") lambda: lambdaAction,
-@as("iotTopicPublish") iotTopicPublish: iotTopicPublishAction,
-@as("sns") sns: sNSTopicPublishAction
+iotSiteWise: option<iotSiteWiseAction>,
+dynamoDBv2: option<dynamoDBv2Action>,
+dynamoDB: option<dynamoDBAction>,
+firehose: option<firehoseAction>,
+sqs: option<sqsAction>,
+iotEvents: option<iotEventsAction>,
+lambda: option<lambdaAction>,
+iotTopicPublish: option<iotTopicPublishAction>,
+sns: option<snstopicPublishAction>
 }
 type action = {
-@as("iotSiteWise") iotSiteWise: iotSiteWiseAction,
-@as("dynamoDBv2") dynamoDBv2: dynamoDBv2Action,
-@as("dynamoDB") dynamoDB: dynamoDBAction,
-@as("firehose") firehose: firehoseAction,
-@as("sqs") sqs: sqsAction,
-@as("iotEvents") iotEvents: iotEventsAction,
-@as("lambda") lambda: lambdaAction,
-@as("resetTimer") resetTimer: resetTimerAction,
-@as("clearTimer") clearTimer: clearTimerAction,
-@as("setTimer") setTimer: setTimerAction,
-@as("iotTopicPublish") iotTopicPublish: iotTopicPublishAction,
-@as("sns") sns: sNSTopicPublishAction,
-@as("setVariable") setVariable: setVariableAction
+iotSiteWise: option<iotSiteWiseAction>,
+dynamoDBv2: option<dynamoDBv2Action>,
+dynamoDB: option<dynamoDBAction>,
+firehose: option<firehoseAction>,
+sqs: option<sqsAction>,
+iotEvents: option<iotEventsAction>,
+lambda: option<lambdaAction>,
+resetTimer: option<resetTimerAction>,
+clearTimer: option<clearTimerAction>,
+setTimer: option<setTimerAction>,
+iotTopicPublish: option<iotTopicPublishAction>,
+sns: option<snstopicPublishAction>,
+setVariable: option<setVariableAction>
 }
-type sMSConfigurations = array<sMSConfiguration>
+type smsconfigurations = array<smsconfiguration>
 type emailConfiguration = {
-@as("recipients") recipients: option<emailRecipients>,
-@as("content") content: emailContent,
-@as("from") from: option<fromEmail>
+recipients: emailRecipients,
+content: option<emailContent>,
+from: fromEmail
 }
 type alarmActions = array<alarmAction>
 type actions = array<action>
 type transitionEvent = {
-@as("nextState") nextState: option<stateName>,
-@as("actions") actions: actions,
-@as("condition") condition: option<condition>,
-@as("eventName") eventName: option<eventName>
+nextState: stateName,
+actions: option<actions>,
+condition: condition,
+eventName: eventName
 }
 type event = {
-@as("actions") actions: actions,
-@as("condition") condition: condition,
-@as("eventName") eventName: option<eventName>
+actions: option<actions>,
+condition: option<condition>,
+eventName: eventName
 }
 type emailConfigurations = array<emailConfiguration>
 type alarmEventActions = {
-@as("alarmActions") alarmActions: alarmActions
+alarmActions: option<alarmActions>
 }
 type transitionEvents = array<transitionEvent>
 type notificationAction = {
-@as("emailConfigurations") emailConfigurations: emailConfigurations,
-@as("smsConfigurations") smsConfigurations: sMSConfigurations,
-@as("action") action: option<notificationTargetActions>
+emailConfigurations: option<emailConfigurations>,
+smsConfigurations: option<smsconfigurations>,
+action: notificationTargetActions
 }
 type events = array<event>
 type onInputLifecycle = {
-@as("transitionEvents") transitionEvents: transitionEvents,
-@as("events") events: events
+transitionEvents: option<transitionEvents>,
+events: option<events>
 }
 type onExitLifecycle = {
-@as("events") events: events
+events: option<events>
 }
 type onEnterLifecycle = {
-@as("events") events: events
+events: option<events>
 }
 type notificationActions = array<notificationAction>
 type state = {
-@as("onExit") onExit: onExitLifecycle,
-@as("onEnter") onEnter: onEnterLifecycle,
-@as("onInput") onInput: onInputLifecycle,
-@as("stateName") stateName: option<stateName>
+onExit: option<onExitLifecycle>,
+onEnter: option<onEnterLifecycle>,
+onInput: option<onInputLifecycle>,
+stateName: stateName
 }
 type alarmNotification = {
-@as("notificationActions") notificationActions: notificationActions
+notificationActions: option<notificationActions>
 }
 type states = array<state>
 type detectorModelDefinition = {
-@as("initialStateName") initialStateName: option<stateName>,
-@as("states") states: option<states>
+initialStateName: stateName,
+states: states
 }
 type detectorModel = {
-@as("detectorModelConfiguration") detectorModelConfiguration: detectorModelConfiguration,
-@as("detectorModelDefinition") detectorModelDefinition: detectorModelDefinition
+detectorModelConfiguration: option<detectorModelConfiguration>,
+detectorModelDefinition: option<detectorModelDefinition>
 }
-type clientType;
-@module("@aws-sdk/client-iotevents") @new external createClient: unit => clientType = "IoTEventsClient";
+type awsServiceClient;
+@module("@aws-sdk/client-iotevents") @new external createClient: unit => awsServiceClient = "IoTEventsClient";
 module DescribeDetectorModelAnalysis = {
   type t;
   type request = {
-@as("analysisId") analysisId: option<analysisId>
+analysisId: analysisId
 }
   type response = {
-@as("status") status: analysisStatus
+status: option<analysisStatus>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DescribeDetectorModelAnalysisCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteInput = {
   type t;
   type request = {
-@as("inputName") inputName: option<inputName>
+inputName: inputName
 }
   type response = unit
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DeleteInputCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDetectorModel = {
   type t;
   type request = {
-@as("detectorModelName") detectorModelName: option<detectorModelName>
+detectorModelName: detectorModelName
 }
   type response = unit
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DeleteDetectorModelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAlarmModel = {
   type t;
   type request = {
-@as("alarmModelName") alarmModelName: option<alarmModelName>
+alarmModelName: alarmModelName
 }
   type response = unit
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DeleteAlarmModelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeys>,
-@as("resourceArn") resourceArn: option<amazonResourceName>
+tagKeys: tagKeys,
+resourceArn: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tags>,
-@as("resourceArn") resourceArn: option<amazonResourceName>
+tags: tags,
+resourceArn: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<amazonResourceName>
+resourceArn: amazonResourceName
 }
   type response = {
-@as("tags") tags: tags
+tags: option<tags>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListInputs = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("inputSummaries") inputSummaries: inputSummaries
+nextToken: option<nextToken>,
+inputSummaries: option<inputSummaries>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListInputsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDetectorModels = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("detectorModelSummaries") detectorModelSummaries: detectorModelSummaries
+nextToken: option<nextToken>,
+detectorModelSummaries: option<detectorModelSummaries>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListDetectorModelsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDetectorModelVersions = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("detectorModelName") detectorModelName: option<detectorModelName>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+detectorModelName: detectorModelName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("detectorModelVersionSummaries") detectorModelVersionSummaries: detectorModelVersionSummaries
+nextToken: option<nextToken>,
+detectorModelVersionSummaries: option<detectorModelVersionSummaries>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListDetectorModelVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAlarmModels = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("alarmModelSummaries") alarmModelSummaries: alarmModelSummaries
+nextToken: option<nextToken>,
+alarmModelSummaries: option<alarmModelSummaries>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListAlarmModelsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListAlarmModelVersions = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("alarmModelName") alarmModelName: option<alarmModelName>
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+alarmModelName: alarmModelName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("alarmModelVersionSummaries") alarmModelVersionSummaries: alarmModelVersionSummaries
+nextToken: option<nextToken>,
+alarmModelVersionSummaries: option<alarmModelVersionSummaries>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListAlarmModelVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateInput = {
   type t;
   type request = {
-@as("inputDefinition") inputDefinition: option<inputDefinition>,
-@as("inputDescription") inputDescription: inputDescription,
-@as("inputName") inputName: option<inputName>
+inputDefinition: inputDefinition,
+inputDescription: option<inputDescription>,
+inputName: inputName
 }
   type response = {
-@as("inputConfiguration") inputConfiguration: inputConfiguration
+inputConfiguration: option<inputConfiguration>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "UpdateInputCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutLoggingOptions = {
   type t;
   type request = {
-@as("loggingOptions") loggingOptions: option<loggingOptions>
+loggingOptions: loggingOptions
 }
   
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "PutLoggingOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListInputRoutings = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("inputIdentifier") inputIdentifier: option<inputIdentifier>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+inputIdentifier: inputIdentifier
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("routedResources") routedResources: routedResources
+nextToken: option<nextToken>,
+routedResources: option<routedResources>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListInputRoutingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLoggingOptions = {
   type t;
   type request = unit
   type response = {
-@as("loggingOptions") loggingOptions: loggingOptions
+loggingOptions: option<loggingOptions>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DescribeLoggingOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateInput = {
   type t;
   type request = {
-@as("tags") tags: tags,
-@as("inputDefinition") inputDefinition: option<inputDefinition>,
-@as("inputDescription") inputDescription: inputDescription,
-@as("inputName") inputName: option<inputName>
+tags: option<tags>,
+inputDefinition: inputDefinition,
+inputDescription: option<inputDescription>,
+inputName: inputName
 }
   type response = {
-@as("inputConfiguration") inputConfiguration: inputConfiguration
+inputConfiguration: option<inputConfiguration>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "CreateInputCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDetectorModelAnalysisResults = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxAnalysisResults,
-@as("nextToken") nextToken: nextToken,
-@as("analysisId") analysisId: option<analysisId>
+maxResults: option<maxAnalysisResults>,
+nextToken: option<nextToken>,
+analysisId: analysisId
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("analysisResults") analysisResults: analysisResults
+nextToken: option<nextToken>,
+analysisResults: option<analysisResults>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "GetDetectorModelAnalysisResultsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeInput = {
   type t;
   type request = {
-@as("inputName") inputName: option<inputName>
+inputName: inputName
 }
   type response = {
-@as("input") input: input
+input: option<input>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DescribeInputCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAlarmModel = {
   type t;
   type request = {
-@as("alarmCapabilities") alarmCapabilities: alarmCapabilities,
-@as("alarmEventActions") alarmEventActions: alarmEventActions,
-@as("alarmNotification") alarmNotification: alarmNotification,
-@as("alarmRule") alarmRule: option<alarmRule>,
-@as("severity") severity: severity,
-@as("roleArn") roleArn: option<amazonResourceName>,
-@as("alarmModelDescription") alarmModelDescription: alarmModelDescription,
-@as("alarmModelName") alarmModelName: option<alarmModelName>
+alarmCapabilities: option<alarmCapabilities>,
+alarmEventActions: option<alarmEventActions>,
+alarmNotification: option<alarmNotification>,
+alarmRule: alarmRule,
+severity: option<severity>,
+roleArn: amazonResourceName,
+alarmModelDescription: option<alarmModelDescription>,
+alarmModelName: alarmModelName
 }
   type response = {
-@as("status") status: alarmModelVersionStatus,
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("alarmModelVersion") alarmModelVersion: alarmModelVersion,
-@as("alarmModelArn") alarmModelArn: alarmModelArn,
-@as("creationTime") creationTime: amazonawsTimestamp
+status: option<alarmModelVersionStatus>,
+lastUpdateTime: option<timestamp_>,
+alarmModelVersion: option<alarmModelVersion>,
+alarmModelArn: option<alarmModelArn>,
+creationTime: option<timestamp_>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "UpdateAlarmModelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAlarmModel = {
   type t;
   type request = {
-@as("alarmModelVersion") alarmModelVersion: alarmModelVersion,
-@as("alarmModelName") alarmModelName: option<alarmModelName>
+alarmModelVersion: option<alarmModelVersion>,
+alarmModelName: alarmModelName
 }
   type response = {
-@as("alarmCapabilities") alarmCapabilities: alarmCapabilities,
-@as("alarmEventActions") alarmEventActions: alarmEventActions,
-@as("alarmNotification") alarmNotification: alarmNotification,
-@as("alarmRule") alarmRule: alarmRule,
-@as("severity") severity: severity,
-@as("key") key: attributeJsonPath,
-@as("roleArn") roleArn: amazonResourceName,
-@as("alarmModelDescription") alarmModelDescription: alarmModelDescription,
-@as("alarmModelName") alarmModelName: alarmModelName,
-@as("statusMessage") statusMessage: statusMessage,
-@as("status") status: alarmModelVersionStatus,
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("alarmModelVersion") alarmModelVersion: alarmModelVersion,
-@as("alarmModelArn") alarmModelArn: alarmModelArn,
-@as("creationTime") creationTime: amazonawsTimestamp
+alarmCapabilities: option<alarmCapabilities>,
+alarmEventActions: option<alarmEventActions>,
+alarmNotification: option<alarmNotification>,
+alarmRule: option<alarmRule>,
+severity: option<severity>,
+key: option<attributeJsonPath>,
+roleArn: option<amazonResourceName>,
+alarmModelDescription: option<alarmModelDescription>,
+alarmModelName: option<alarmModelName>,
+statusMessage: option<statusMessage>,
+status: option<alarmModelVersionStatus>,
+lastUpdateTime: option<timestamp_>,
+alarmModelVersion: option<alarmModelVersion>,
+alarmModelArn: option<alarmModelArn>,
+creationTime: option<timestamp_>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DescribeAlarmModelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAlarmModel = {
   type t;
   type request = {
-@as("alarmCapabilities") alarmCapabilities: alarmCapabilities,
-@as("alarmEventActions") alarmEventActions: alarmEventActions,
-@as("alarmNotification") alarmNotification: alarmNotification,
-@as("alarmRule") alarmRule: option<alarmRule>,
-@as("severity") severity: severity,
-@as("key") key: attributeJsonPath,
-@as("tags") tags: tags,
-@as("roleArn") roleArn: option<amazonResourceName>,
-@as("alarmModelDescription") alarmModelDescription: alarmModelDescription,
-@as("alarmModelName") alarmModelName: option<alarmModelName>
+alarmCapabilities: option<alarmCapabilities>,
+alarmEventActions: option<alarmEventActions>,
+alarmNotification: option<alarmNotification>,
+alarmRule: alarmRule,
+severity: option<severity>,
+key: option<attributeJsonPath>,
+tags: option<tags>,
+roleArn: amazonResourceName,
+alarmModelDescription: option<alarmModelDescription>,
+alarmModelName: alarmModelName
 }
   type response = {
-@as("status") status: alarmModelVersionStatus,
-@as("lastUpdateTime") lastUpdateTime: amazonawsTimestamp,
-@as("alarmModelVersion") alarmModelVersion: alarmModelVersion,
-@as("alarmModelArn") alarmModelArn: alarmModelArn,
-@as("creationTime") creationTime: amazonawsTimestamp
+status: option<alarmModelVersionStatus>,
+lastUpdateTime: option<timestamp_>,
+alarmModelVersion: option<alarmModelVersion>,
+alarmModelArn: option<alarmModelArn>,
+creationTime: option<timestamp_>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "CreateAlarmModelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDetectorModel = {
   type t;
   type request = {
-@as("evaluationMethod") evaluationMethod: evaluationMethod,
-@as("roleArn") roleArn: option<amazonResourceName>,
-@as("detectorModelDescription") detectorModelDescription: detectorModelDescription,
-@as("detectorModelDefinition") detectorModelDefinition: option<detectorModelDefinition>,
-@as("detectorModelName") detectorModelName: option<detectorModelName>
+evaluationMethod: option<evaluationMethod>,
+roleArn: amazonResourceName,
+detectorModelDescription: option<detectorModelDescription>,
+detectorModelDefinition: detectorModelDefinition,
+detectorModelName: detectorModelName
 }
   type response = {
-@as("detectorModelConfiguration") detectorModelConfiguration: detectorModelConfiguration
+detectorModelConfiguration: option<detectorModelConfiguration>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "UpdateDetectorModelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartDetectorModelAnalysis = {
   type t;
   type request = {
-@as("detectorModelDefinition") detectorModelDefinition: option<detectorModelDefinition>
+detectorModelDefinition: detectorModelDefinition
 }
   type response = {
-@as("analysisId") analysisId: analysisId
+analysisId: option<analysisId>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "StartDetectorModelAnalysisCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDetectorModel = {
   type t;
   type request = {
-@as("evaluationMethod") evaluationMethod: evaluationMethod,
-@as("tags") tags: tags,
-@as("roleArn") roleArn: option<amazonResourceName>,
-@as("key") key: attributeJsonPath,
-@as("detectorModelDescription") detectorModelDescription: detectorModelDescription,
-@as("detectorModelDefinition") detectorModelDefinition: option<detectorModelDefinition>,
-@as("detectorModelName") detectorModelName: option<detectorModelName>
+evaluationMethod: option<evaluationMethod>,
+tags: option<tags>,
+roleArn: amazonResourceName,
+key: option<attributeJsonPath>,
+detectorModelDescription: option<detectorModelDescription>,
+detectorModelDefinition: detectorModelDefinition,
+detectorModelName: detectorModelName
 }
   type response = {
-@as("detectorModelConfiguration") detectorModelConfiguration: detectorModelConfiguration
+detectorModelConfiguration: option<detectorModelConfiguration>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "CreateDetectorModelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDetectorModel = {
   type t;
   type request = {
-@as("detectorModelVersion") detectorModelVersion: detectorModelVersion,
-@as("detectorModelName") detectorModelName: option<detectorModelName>
+detectorModelVersion: option<detectorModelVersion>,
+detectorModelName: detectorModelName
 }
   type response = {
-@as("detectorModel") detectorModel: detectorModel
+detectorModel: option<detectorModel>
 }
   @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DescribeDetectorModelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

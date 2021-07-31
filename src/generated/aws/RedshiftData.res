@@ -1,55 +1,60 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type bool = bool;
-type uUID = string
-type amazonawsString = string
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type timestamp_ = Js.Date.t;
+type bool_ = bool
+type uuid = string
+type string_ = string
 type statusString = [@as("ALL") #ALL | @as("FAILED") #FAILED | @as("ABORTED") #ABORTED | @as("FINISHED") #FINISHED | @as("STARTED") #STARTED | @as("PICKED") #PICKED | @as("SUBMITTED") #SUBMITTED]
 type statementString = string
 type statementNameString = string
 type secretArn = string
-type pageSize = int;
-type amazonawsLong = float;
+type pageSize = int
+type long = float
 type location = string
-type listStatementsLimit = int;
-type amazonawsInteger = int;
-type boxedLong = float;
-type boxedDouble = float;
-type boxedBoolean = bool;
-type blob = NodeJs.Buffer.t;
+type listStatementsLimit = int
+type integer_ = int
+type boxedLong = float
+type boxedDouble = float
+type boxedBoolean = bool
+type blob = NodeJs.Buffer.t
 type tableMember = {
-@as("schema") schema: amazonawsString,
-@as("type") type_: amazonawsString,
-@as("name") name: amazonawsString
+schema: option<string_>,
+@as("type") type_: option<string_>,
+name: option<string_>
 }
 type statementData = {
-@as("UpdatedAt") updatedAt: apiTimestamp,
-@as("CreatedAt") createdAt: apiTimestamp,
-@as("StatementName") statementName: statementNameString,
-@as("Status") status: statusString,
-@as("SecretArn") secretArn: secretArn,
-@as("QueryString") queryString: statementString,
-@as("Id") id: option<uUID>
+@as("UpdatedAt") updatedAt: option<timestamp_>,
+@as("CreatedAt") createdAt: option<timestamp_>,
+@as("StatementName") statementName: option<statementNameString>,
+@as("Status") status: option<statusString>,
+@as("SecretArn") secretArn: option<secretArn>,
+@as("QueryString") queryString: option<statementString>,
+@as("Id") id: uuid
 }
-type schemaList = array<amazonawsString>
-type field = BlobValue(blob) | StringValue(amazonawsString) | DoubleValue(boxedDouble) | LongValue(boxedLong) | BooleanValue(boxedBoolean) | IsNull(boxedBoolean);
-type databaseList = array<amazonawsString>
+type schemaList = array<string_>
+type field = BlobValue(blob) | StringValue(string_) | DoubleValue(boxedDouble) | LongValue(boxedLong) | BooleanValue(boxedBoolean) | IsNull(boxedBoolean);
+type databaseList = array<string_>
 type columnMetadata = {
-@as("columnDefault") columnDefault: amazonawsString,
-@as("length") length: amazonawsInteger,
-@as("typeName") typeName: amazonawsString,
-@as("tableName") tableName: amazonawsString,
-@as("schemaName") schemaName: amazonawsString,
-@as("scale") scale: amazonawsInteger,
-@as("precision") precision: amazonawsInteger,
-@as("nullable") nullable: amazonawsInteger,
-@as("name") name: amazonawsString,
-@as("label") label: amazonawsString,
-@as("isSigned") isSigned: bool,
-@as("isCurrency") isCurrency: bool,
-@as("isCaseSensitive") isCaseSensitive: bool
+columnDefault: option<string_>,
+length: option<integer_>,
+typeName: option<string_>,
+tableName: option<string_>,
+schemaName: option<string_>,
+scale: option<integer_>,
+precision: option<integer_>,
+nullable: option<integer_>,
+name: option<string_>,
+label: option<string_>,
+isSigned: option<bool_>,
+isCurrency: option<bool_>,
+isCaseSensitive: option<bool_>
 }
 type tableList = array<tableMember>
 type statementList = array<statementData>
@@ -57,180 +62,180 @@ type fieldList = array<field>
 type columnMetadataList = array<columnMetadata>
 type columnList = array<columnMetadata>
 type sqlRecords = array<fieldList>
-type clientType;
-@module("@aws-sdk/client-redshift-data") @new external createClient: unit => clientType = "RedshiftDataClient";
+type awsServiceClient;
+@module("@aws-sdk/client-redshift-data") @new external createClient: unit => awsServiceClient = "RedshiftDataClient";
 module ExecuteStatement = {
   type t;
   type request = {
-@as("StatementName") statementName: statementNameString,
-@as("WithEvent") withEvent: apiBoolean,
-@as("Database") database: amazonawsString,
-@as("DbUser") dbUser: amazonawsString,
-@as("SecretArn") secretArn: secretArn,
-@as("ClusterIdentifier") clusterIdentifier: option<location>,
-@as("Sql") sql: option<statementString>
+@as("StatementName") statementName: option<statementNameString>,
+@as("WithEvent") withEvent: option<boolean_>,
+@as("Database") database: option<string_>,
+@as("DbUser") dbUser: option<string_>,
+@as("SecretArn") secretArn: option<secretArn>,
+@as("ClusterIdentifier") clusterIdentifier: location,
+@as("Sql") sql: statementString
 }
   type response = {
-@as("SecretArn") secretArn: secretArn,
-@as("Database") database: amazonawsString,
-@as("DbUser") dbUser: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: location,
-@as("CreatedAt") createdAt: apiTimestamp,
-@as("Id") id: uUID
+@as("SecretArn") secretArn: option<secretArn>,
+@as("Database") database: option<string_>,
+@as("DbUser") dbUser: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<location>,
+@as("CreatedAt") createdAt: option<timestamp_>,
+@as("Id") id: option<uuid>
 }
   @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "ExecuteStatementCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeStatement = {
   type t;
   type request = {
-@as("Id") id: option<uUID>
+@as("Id") id: uuid
 }
   type response = {
-@as("HasResultSet") hasResultSet: apiBoolean,
-@as("RedshiftPid") redshiftPid: amazonawsLong,
-@as("RedshiftQueryId") redshiftQueryId: amazonawsLong,
-@as("UpdatedAt") updatedAt: apiTimestamp,
-@as("CreatedAt") createdAt: apiTimestamp,
-@as("Status") status: statusString,
-@as("Error") error: amazonawsString,
-@as("Duration") duration: amazonawsLong,
-@as("ResultSize") resultSize: amazonawsLong,
-@as("ResultRows") resultRows: amazonawsLong,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString,
-@as("Database") database: amazonawsString,
-@as("DbUser") dbUser: amazonawsString,
-@as("SecretArn") secretArn: secretArn,
-@as("QueryString") queryString: statementString,
-@as("Id") id: option<uUID>
+@as("HasResultSet") hasResultSet: option<boolean_>,
+@as("RedshiftPid") redshiftPid: option<long>,
+@as("RedshiftQueryId") redshiftQueryId: option<long>,
+@as("UpdatedAt") updatedAt: option<timestamp_>,
+@as("CreatedAt") createdAt: option<timestamp_>,
+@as("Status") status: option<statusString>,
+@as("Error") error: option<string_>,
+@as("Duration") duration: option<long>,
+@as("ResultSize") resultSize: option<long>,
+@as("ResultRows") resultRows: option<long>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>,
+@as("Database") database: option<string_>,
+@as("DbUser") dbUser: option<string_>,
+@as("SecretArn") secretArn: option<secretArn>,
+@as("QueryString") queryString: option<statementString>,
+@as("Id") id: uuid
 }
   @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "DescribeStatementCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelStatement = {
   type t;
   type request = {
-@as("Id") id: option<uUID>
+@as("Id") id: uuid
 }
   type response = {
-@as("Status") status: apiBoolean
+@as("Status") status: option<boolean_>
 }
   @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "CancelStatementCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSchemas = {
   type t;
   type request = {
-@as("MaxResults") maxResults: pageSize,
-@as("NextToken") nextToken: amazonawsString,
-@as("SchemaPattern") schemaPattern: amazonawsString,
-@as("ConnectedDatabase") connectedDatabase: amazonawsString,
-@as("Database") database: option<amazonawsString>,
-@as("DbUser") dbUser: amazonawsString,
-@as("SecretArn") secretArn: secretArn,
-@as("ClusterIdentifier") clusterIdentifier: option<location>
+@as("MaxResults") maxResults: option<pageSize>,
+@as("NextToken") nextToken: option<string_>,
+@as("SchemaPattern") schemaPattern: option<string_>,
+@as("ConnectedDatabase") connectedDatabase: option<string_>,
+@as("Database") database: string_,
+@as("DbUser") dbUser: option<string_>,
+@as("SecretArn") secretArn: option<secretArn>,
+@as("ClusterIdentifier") clusterIdentifier: location
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Schemas") schemas: schemaList
+@as("NextToken") nextToken: option<string_>,
+@as("Schemas") schemas: option<schemaList>
 }
   @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "ListSchemasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDatabases = {
   type t;
   type request = {
-@as("MaxResults") maxResults: pageSize,
-@as("NextToken") nextToken: amazonawsString,
-@as("DbUser") dbUser: amazonawsString,
-@as("SecretArn") secretArn: secretArn,
-@as("Database") database: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: option<location>
+@as("MaxResults") maxResults: option<pageSize>,
+@as("NextToken") nextToken: option<string_>,
+@as("DbUser") dbUser: option<string_>,
+@as("SecretArn") secretArn: option<secretArn>,
+@as("Database") database: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: location
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Databases") databases: databaseList
+@as("NextToken") nextToken: option<string_>,
+@as("Databases") databases: option<databaseList>
 }
   @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "ListDatabasesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTables = {
   type t;
   type request = {
-@as("MaxResults") maxResults: pageSize,
-@as("NextToken") nextToken: amazonawsString,
-@as("TablePattern") tablePattern: amazonawsString,
-@as("SchemaPattern") schemaPattern: amazonawsString,
-@as("ConnectedDatabase") connectedDatabase: amazonawsString,
-@as("Database") database: option<amazonawsString>,
-@as("DbUser") dbUser: amazonawsString,
-@as("SecretArn") secretArn: secretArn,
-@as("ClusterIdentifier") clusterIdentifier: option<location>
+@as("MaxResults") maxResults: option<pageSize>,
+@as("NextToken") nextToken: option<string_>,
+@as("TablePattern") tablePattern: option<string_>,
+@as("SchemaPattern") schemaPattern: option<string_>,
+@as("ConnectedDatabase") connectedDatabase: option<string_>,
+@as("Database") database: string_,
+@as("DbUser") dbUser: option<string_>,
+@as("SecretArn") secretArn: option<secretArn>,
+@as("ClusterIdentifier") clusterIdentifier: location
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Tables") tables: tableList
+@as("NextToken") nextToken: option<string_>,
+@as("Tables") tables: option<tableList>
 }
   @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "ListTablesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListStatements = {
   type t;
   type request = {
-@as("RoleLevel") roleLevel: apiBoolean,
-@as("Status") status: statusString,
-@as("StatementName") statementName: statementNameString,
-@as("MaxResults") maxResults: listStatementsLimit,
-@as("NextToken") nextToken: amazonawsString
+@as("RoleLevel") roleLevel: option<boolean_>,
+@as("Status") status: option<statusString>,
+@as("StatementName") statementName: option<statementNameString>,
+@as("MaxResults") maxResults: option<listStatementsLimit>,
+@as("NextToken") nextToken: option<string_>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Statements") statements: option<statementList>
+@as("NextToken") nextToken: option<string_>,
+@as("Statements") statements: statementList
 }
   @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "ListStatementsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTable = {
   type t;
   type request = {
-@as("MaxResults") maxResults: pageSize,
-@as("NextToken") nextToken: amazonawsString,
-@as("Table") table: amazonawsString,
-@as("Schema") schema: amazonawsString,
-@as("ConnectedDatabase") connectedDatabase: amazonawsString,
-@as("Database") database: option<amazonawsString>,
-@as("DbUser") dbUser: amazonawsString,
-@as("SecretArn") secretArn: secretArn,
-@as("ClusterIdentifier") clusterIdentifier: option<location>
+@as("MaxResults") maxResults: option<pageSize>,
+@as("NextToken") nextToken: option<string_>,
+@as("Table") table: option<string_>,
+@as("Schema") schema: option<string_>,
+@as("ConnectedDatabase") connectedDatabase: option<string_>,
+@as("Database") database: string_,
+@as("DbUser") dbUser: option<string_>,
+@as("SecretArn") secretArn: option<secretArn>,
+@as("ClusterIdentifier") clusterIdentifier: location
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("ColumnList") columnList: columnList,
-@as("TableName") tableName: amazonawsString
+@as("NextToken") nextToken: option<string_>,
+@as("ColumnList") columnList: option<columnList>,
+@as("TableName") tableName: option<string_>
 }
   @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "DescribeTableCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetStatementResult = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Id") id: option<uUID>
+@as("NextToken") nextToken: option<string_>,
+@as("Id") id: uuid
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("TotalNumRows") totalNumRows: amazonawsLong,
-@as("ColumnMetadata") columnMetadata: columnMetadataList,
-@as("Records") records: option<sqlRecords>
+@as("NextToken") nextToken: option<string_>,
+@as("TotalNumRows") totalNumRows: option<long>,
+@as("ColumnMetadata") columnMetadata: option<columnMetadataList>,
+@as("Records") records: sqlRecords
 }
   @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "GetStatementResultCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

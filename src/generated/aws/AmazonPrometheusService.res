@@ -1,104 +1,112 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type workspaceStatusCode = [@as("CREATION_FAILED") #CREATION_FAILED | @as("DELETING") #DELETING | @as("UPDATING") #UPDATING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
+type workspaceStatusCode = [@as("CREATION_FAILED") #CREATIONFAILED | @as("DELETING") #DELETING | @as("UPDATING") #UPDATING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
 type workspaceId = string
 type workspaceArn = string
 type workspaceAlias = string
 
-type validationExceptionReason = [@as("OTHER") #OTHER | @as("FIELD_VALIDATION_FAILED") #FIELD_VALIDATION_FAILED | @as("CANNOT_PARSE") #CANNOT_PARSE | @as("UNKNOWN_OPERATION") #UNKNOWN_OPERATION]
+type validationExceptionReason = [@as("OTHER") #OTHER | @as("FIELD_VALIDATION_FAILED") #FIELDVALIDATIONFAILED | @as("CANNOT_PARSE") #CANNOTPARSE | @as("UNKNOWN_OPERATION") #UNKNOWNOPERATION]
 type validationExceptionField = {
-@as("message") message: option<apiString>,
-@as("name") name: option<apiString>
+message: string_,
+name: string_
 }
 type uri = string
 type paginationToken = string
 type idempotencyToken = string
-type clientType;
-@module("@aws-sdk/client-aps") @new external createClient: unit => clientType = "AmazonPrometheusServiceClient";
+type awsServiceClient;
+@module("@aws-sdk/client-aps") @new external createClient: unit => awsServiceClient = "AmazonPrometheusServiceClient";
 type workspaceStatus = {
-@as("statusCode") statusCode: option<workspaceStatusCode>
+statusCode: workspaceStatusCode
 }
 type validationExceptionFieldList = array<validationExceptionField>
 type workspaceSummary = {
-@as("createdAt") createdAt: option<apiTimestamp>,
-@as("status") status: option<workspaceStatus>,
-@as("arn") arn: option<workspaceArn>,
-@as("alias") alias: workspaceAlias,
-@as("workspaceId") workspaceId: option<workspaceId>
+createdAt: timestamp_,
+status: workspaceStatus,
+arn: workspaceArn,
+alias: option<workspaceAlias>,
+workspaceId: workspaceId
 }
 type workspaceDescription = {
-@as("createdAt") createdAt: option<apiTimestamp>,
-@as("prometheusEndpoint") prometheusEndpoint: uri,
-@as("status") status: option<workspaceStatus>,
-@as("arn") arn: option<workspaceArn>,
-@as("alias") alias: workspaceAlias,
-@as("workspaceId") workspaceId: option<workspaceId>
+createdAt: timestamp_,
+prometheusEndpoint: option<uri>,
+status: workspaceStatus,
+arn: workspaceArn,
+alias: option<workspaceAlias>,
+workspaceId: workspaceId
 }
 type workspaceSummaryList = array<workspaceSummary>
 module UpdateWorkspaceAlias = {
   type t;
   type request = {
-@as("clientToken") clientToken: idempotencyToken,
-@as("alias") alias: workspaceAlias,
-@as("workspaceId") workspaceId: option<workspaceId>
+clientToken: option<idempotencyToken>,
+alias: option<workspaceAlias>,
+workspaceId: workspaceId
 }
   
   @module("@aws-sdk/client-aps") @new external new_: (request) => t = "UpdateWorkspaceAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteWorkspace = {
   type t;
   type request = {
-@as("clientToken") clientToken: idempotencyToken,
-@as("workspaceId") workspaceId: option<workspaceId>
+clientToken: option<idempotencyToken>,
+workspaceId: workspaceId
 }
   
   @module("@aws-sdk/client-aps") @new external new_: (request) => t = "DeleteWorkspaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateWorkspace = {
   type t;
   type request = {
-@as("clientToken") clientToken: idempotencyToken,
-@as("alias") alias: workspaceAlias
+clientToken: option<idempotencyToken>,
+alias: option<workspaceAlias>
 }
   type response = {
-@as("status") status: option<workspaceStatus>,
-@as("arn") arn: option<workspaceArn>,
-@as("workspaceId") workspaceId: option<workspaceId>
+status: workspaceStatus,
+arn: workspaceArn,
+workspaceId: workspaceId
 }
   @module("@aws-sdk/client-aps") @new external new_: (request) => t = "CreateWorkspaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeWorkspace = {
   type t;
   type request = {
-@as("workspaceId") workspaceId: option<workspaceId>
+workspaceId: workspaceId
 }
   type response = {
-@as("workspace") workspace: option<workspaceDescription>
+workspace: workspaceDescription
 }
   @module("@aws-sdk/client-aps") @new external new_: (request) => t = "DescribeWorkspaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListWorkspaces = {
   type t;
   type request = {
-@as("maxResults") maxResults: apiInteger,
-@as("alias") alias: workspaceAlias,
-@as("nextToken") nextToken: paginationToken
+maxResults: option<integer_>,
+alias: option<workspaceAlias>,
+nextToken: option<paginationToken>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("workspaces") workspaces: option<workspaceSummaryList>
+nextToken: option<paginationToken>,
+workspaces: workspaceSummaryList
 }
   @module("@aws-sdk/client-aps") @new external new_: (request) => t = "ListWorkspacesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

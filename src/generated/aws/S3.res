@@ -1,16 +1,24 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type years = int;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
+type years = int
 type websiteRedirectLocation = string
 type versionIdMarker = string
 type value = string
 type uploadIdMarker = string
-type uRI = string
+type uri = string
 type type_ = [@as("Group") #Group | @as("AmazonCustomerByEmail") #AmazonCustomerByEmail | @as("CanonicalUser") #CanonicalUser]
-type transitionStorageClass = [@as("DEEP_ARCHIVE") #DEEP_ARCHIVE | @as("INTELLIGENT_TIERING") #INTELLIGENT_TIERING | @as("ONEZONE_IA") #ONEZONE_IA | @as("STANDARD_IA") #STANDARD_IA | @as("GLACIER") #GLACIER]
+type transitionStorageClass = [@as("DEEP_ARCHIVE") #DEEPARCHIVE | @as("INTELLIGENT_TIERING") #INTELLIGENTTIERING | @as("ONEZONE_IA") #ONEZONEIA | @as("STANDARD_IA") #STANDARDIA | @as("GLACIER") #GLACIER]
 type topicArn = string
 type token = string
 type tier = [@as("Expedited") #Expedited | @as("Bulk") #Bulk | @as("Standard") #Standard]
@@ -18,23 +26,23 @@ type targetPrefix = string
 type targetBucket = string
 type taggingHeader = string
 type taggingDirective = [@as("REPLACE") #REPLACE | @as("COPY") #COPY]
-type tagCount = int;
+type tagCount = int
 type suffix = string
-type streamingBlob = NodeJs.Buffer.t;
-type storageClassAnalysisSchemaVersion = [@as("V_1") #V_1]
-type storageClass = [@as("OUTPOSTS") #OUTPOSTS | @as("DEEP_ARCHIVE") #DEEP_ARCHIVE | @as("GLACIER") #GLACIER | @as("INTELLIGENT_TIERING") #INTELLIGENT_TIERING | @as("ONEZONE_IA") #ONEZONE_IA | @as("STANDARD_IA") #STANDARD_IA | @as("REDUCED_REDUNDANCY") #REDUCED_REDUNDANCY | @as("STANDARD") #STANDARD]
+type streamingBlob = NodeJs.Buffer.t
+type storageClassAnalysisSchemaVersion = [@as("V_1") #V1]
+type storageClass = [@as("OUTPOSTS") #OUTPOSTS | @as("DEEP_ARCHIVE") #DEEPARCHIVE | @as("GLACIER") #GLACIER | @as("INTELLIGENT_TIERING") #INTELLIGENTTIERING | @as("ONEZONE_IA") #ONEZONEIA | @as("STANDARD_IA") #STANDARDIA | @as("REDUCED_REDUNDANCY") #REDUCEDREDUNDANCY | @as("STANDARD") #STANDARD]
 type startAfter = string
-type start = float;
+type start = float
 type sseKmsEncryptedObjectsStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
-type size = int;
-type setting = bool;
-type serverSideEncryption = [@as("aws:kms") #aws_kms | @as("AES256") #AES256]
-type sSES3 = unit
-type sSEKMSKeyId = string
-type sSEKMSEncryptionContext = string
-type sSECustomerKeyMD5 = string
-type sSECustomerKey = string
-type sSECustomerAlgorithm = string
+type size = int
+type setting = bool
+type serverSideEncryption = [@as("aws:kms") #AwsKms | @as("AES256") #AES256]
+type sses3 = unit
+type ssekmskeyId = string
+type ssekmsencryptionContext = string
+type ssecustomerKeyMD5 = string
+type ssecustomerKey = string
+type ssecustomerAlgorithm = string
 type role = string
 type restoreRequestType = [@as("SELECT") #SELECT]
 type restoreOutputPath = string
@@ -47,8 +55,8 @@ type responseContentDisposition = string
 type responseCacheControl = string
 type requestToken = string
 type requestRoute = string
-type requestPayer = [@as("requester") #requester]
-type requestCharged = [@as("requester") #requester]
+type requestPayer = [@as("requester") #Requester]
+type requestCharged = [@as("requester") #Requester]
 type replicationTimeStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
 type replicationStatus = [@as("REPLICA") #REPLICA | @as("FAILED") #FAILED | @as("PENDING") #PENDING | @as("COMPLETE") #COMPLETE]
 type replicationRuleStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
@@ -61,32 +69,32 @@ type range = string
 type quoteFields = [@as("ASNEEDED") #ASNEEDED | @as("ALWAYS") #ALWAYS]
 type quoteEscapeCharacter = string
 type quoteCharacter = string
-type quiet = bool;
+type quiet = bool
 type queueArn = string
-type protocol = [@as("https") #https | @as("http") #http]
-type priority = int;
+type protocol = [@as("https") #Https | @as("http") #Http]
+type priority = int
 type prefix = string
 type policy = string
-type permission = [@as("READ_ACP") #READ_ACP | @as("READ") #READ | @as("WRITE_ACP") #WRITE_ACP | @as("WRITE") #WRITE | @as("FULL_CONTROL") #FULL_CONTROL]
+type permission = [@as("READ_ACP") #READACP | @as("READ") #READ | @as("WRITE_ACP") #WRITEACP | @as("WRITE") #WRITE | @as("FULL_CONTROL") #FULLCONTROL]
 type payer = [@as("BucketOwner") #BucketOwner | @as("Requester") #Requester]
-type partsCount = int;
+type partsCount = int
 type partNumberMarker = string
-type partNumber = int;
+type partNumber = int
 type parquetInput = unit
 type ownerOverride = [@as("Destination") #Destination]
 type objectVersionStorageClass = [@as("STANDARD") #STANDARD]
 type objectVersionId = string
-type objectStorageClass = [@as("OUTPOSTS") #OUTPOSTS | @as("DEEP_ARCHIVE") #DEEP_ARCHIVE | @as("INTELLIGENT_TIERING") #INTELLIGENT_TIERING | @as("ONEZONE_IA") #ONEZONE_IA | @as("STANDARD_IA") #STANDARD_IA | @as("GLACIER") #GLACIER | @as("REDUCED_REDUNDANCY") #REDUCED_REDUNDANCY | @as("STANDARD") #STANDARD]
+type objectStorageClass = [@as("OUTPOSTS") #OUTPOSTS | @as("DEEP_ARCHIVE") #DEEPARCHIVE | @as("INTELLIGENT_TIERING") #INTELLIGENTTIERING | @as("ONEZONE_IA") #ONEZONEIA | @as("STANDARD_IA") #STANDARDIA | @as("GLACIER") #GLACIER | @as("REDUCED_REDUNDANCY") #REDUCEDREDUNDANCY | @as("STANDARD") #STANDARD]
 type objectOwnership = [@as("ObjectWriter") #ObjectWriter | @as("BucketOwnerPreferred") #BucketOwnerPreferred]
 type objectLockToken = string
 type objectLockRetentionMode = [@as("COMPLIANCE") #COMPLIANCE | @as("GOVERNANCE") #GOVERNANCE]
 type objectLockRetainUntilDate = Js.Date.t;
 type objectLockMode = [@as("COMPLIANCE") #COMPLIANCE | @as("GOVERNANCE") #GOVERNANCE]
 type objectLockLegalHoldStatus = [@as("OFF") #OFF | @as("ON") #ON]
-type objectLockEnabledForBucket = bool;
+type objectLockEnabledForBucket = bool
 type objectLockEnabled = [@as("Enabled") #Enabled]
 type objectKey = string
-type objectCannedACL = [@as("bucket-owner-full-control") #bucket_owner_full_control | @as("bucket-owner-read") #bucket_owner_read | @as("aws-exec-read") #aws_exec_read | @as("authenticated-read") #authenticated_read | @as("public-read-write") #public_read_write | @as("public-read") #public_read | @as("private") #private]
+type objectCannedACL = [@as("bucket-owner-full-control") #BucketOwnerFullControl | @as("bucket-owner-read") #BucketOwnerRead | @as("aws-exec-read") #AwsExecRead | @as("authenticated-read") #AuthenticatedRead | @as("public-read-write") #PublicReadWrite | @as("public-read") #PublicRead | @as("private") #Private]
 type notificationId = string
 type nextVersionIdMarker = string
 type nextUploadIdMarker = string
@@ -95,35 +103,35 @@ type nextPartNumberMarker = string
 type nextMarker = string
 type nextKeyMarker = string
 type multipartUploadId = string
-type missingMeta = int;
-type minutes = int;
+type missingMeta = int
+type minutes = int
 type metricsStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
 type metricsId = string
 type metadataValue = string
 type metadataKey = string
 type metadataDirective = [@as("REPLACE") #REPLACE | @as("COPY") #COPY]
 type message = string
-type maxUploads = int;
-type maxParts = int;
-type maxKeys = int;
-type maxAgeSeconds = int;
+type maxUploads = int
+type maxParts = int
+type maxKeys = int
+type maxAgeSeconds = int
 type marker = string
-type mFADeleteStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
-type mFADelete = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
-type mFA = string
+type mfadeleteStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
+type mfadelete = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
+type mfa = string
 type locationPrefix = string
 type location = string
 type lastModified = Js.Date.t;
 type lambdaFunctionArn = string
 type keyPrefixEquals = string
 type keyMarker = string
-type keyCount = int;
-type kMSContext = string
-type jSONType = [@as("LINES") #LINES | @as("DOCUMENT") #DOCUMENT]
-type isTruncated = bool;
-type isPublic = bool;
-type isLatest = bool;
-type isEnabled = bool;
+type keyCount = int
+type kmscontext = string
+type jsontype = [@as("LINES") #LINES | @as("DOCUMENT") #DOCUMENT]
+type isTruncated = bool
+type isPublic = bool
+type isLatest = bool
+type isEnabled = bool
 type inventoryOptionalField = [@as("BucketKeyStatus") #BucketKeyStatus | @as("IntelligentTieringAccessTier") #IntelligentTieringAccessTier | @as("ObjectLockLegalHoldStatus") #ObjectLockLegalHoldStatus | @as("ObjectLockMode") #ObjectLockMode | @as("ObjectLockRetainUntilDate") #ObjectLockRetainUntilDate | @as("EncryptionStatus") #EncryptionStatus | @as("ReplicationStatus") #ReplicationStatus | @as("IsMultipartUploaded") #IsMultipartUploaded | @as("ETag") #ETag | @as("StorageClass") #StorageClass | @as("LastModifiedDate") #LastModifiedDate | @as("Size") #Size]
 type inventoryIncludedObjectVersions = [@as("Current") #Current | @as("All") #All]
 type inventoryId = string
@@ -131,14 +139,14 @@ type inventoryFrequency = [@as("Weekly") #Weekly | @as("Daily") #Daily]
 type inventoryFormat = [@as("Parquet") #Parquet | @as("ORC") #ORC | @as("CSV") #CSV]
 type intelligentTieringStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
 type intelligentTieringId = string
-type intelligentTieringDays = int;
-type intelligentTieringAccessTier = [@as("DEEP_ARCHIVE_ACCESS") #DEEP_ARCHIVE_ACCESS | @as("ARCHIVE_ACCESS") #ARCHIVE_ACCESS]
+type intelligentTieringDays = int
+type intelligentTieringAccessTier = [@as("DEEP_ARCHIVE_ACCESS") #DEEPARCHIVEACCESS | @as("ARCHIVE_ACCESS") #ARCHIVEACCESS]
 type initiated = Js.Date.t;
 type ifUnmodifiedSince = Js.Date.t;
 type ifNoneMatch = string
 type ifModifiedSince = Js.Date.t;
 type ifMatch = string
-type iD = string
+type id = string
 type httpRedirectCode = string
 type httpErrorCodeReturnedEquals = string
 type hostName = string
@@ -147,37 +155,37 @@ type grantWrite = string
 type grantReadACP = string
 type grantRead = string
 type grantFullControl = string
-type getObjectResponseStatusCode = int;
+type getObjectResponseStatusCode = int
 type filterRuleValue = string
-type filterRuleName = [@as("suffix") #suffix | @as("prefix") #prefix]
+type filterRuleName = [@as("suffix") #Suffix | @as("prefix") #Prefix]
 type fileHeaderInfo = [@as("NONE") #NONE | @as("IGNORE") #IGNORE | @as("USE") #USE]
 type fieldDelimiter = string
-type fetchOwner = bool;
+type fetchOwner = bool
 type expressionType = [@as("SQL") #SQL]
 type expression = string
 type exposeHeader = string
 type expires = Js.Date.t;
-type expiredObjectDeleteMarker = bool;
+type expiredObjectDeleteMarker = bool
 type expirationStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
 type expiration = string
 type existingObjectReplicationStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
-type event = [@as("s3:Replication:OperationReplicatedAfterThreshold") #s3_Replication_OperationReplicatedAfterThreshold | @as("s3:Replication:OperationMissedThreshold") #s3_Replication_OperationMissedThreshold | @as("s3:Replication:OperationNotTracked") #s3_Replication_OperationNotTracked | @as("s3:Replication:OperationFailedReplication") #s3_Replication_OperationFailedReplication | @as("s3:Replication:*") #s3_Replication_* | @as("s3:ObjectRestore:Completed") #s3_ObjectRestore_Completed | @as("s3:ObjectRestore:Post") #s3_ObjectRestore_Post | @as("s3:ObjectRestore:*") #s3_ObjectRestore_* | @as("s3:ObjectRemoved:DeleteMarkerCreated") #s3_ObjectRemoved_DeleteMarkerCreated | @as("s3:ObjectRemoved:Delete") #s3_ObjectRemoved_Delete | @as("s3:ObjectRemoved:*") #s3_ObjectRemoved_* | @as("s3:ObjectCreated:CompleteMultipartUpload") #s3_ObjectCreated_CompleteMultipartUpload | @as("s3:ObjectCreated:Copy") #s3_ObjectCreated_Copy | @as("s3:ObjectCreated:Post") #s3_ObjectCreated_Post | @as("s3:ObjectCreated:Put") #s3_ObjectCreated_Put | @as("s3:ObjectCreated:*") #s3_ObjectCreated_* | @as("s3:ReducedRedundancyLostObject") #s3_ReducedRedundancyLostObject]
+type event = [@as("s3:Replication:OperationReplicatedAfterThreshold") #S3ReplicationOperationReplicatedAfterThreshold | @as("s3:Replication:OperationMissedThreshold") #S3ReplicationOperationMissedThreshold | @as("s3:Replication:OperationNotTracked") #S3ReplicationOperationNotTracked | @as("s3:Replication:OperationFailedReplication") #S3ReplicationOperationFailedReplication | @as("s3:Replication:*") #S3ReplicationStar | @as("s3:ObjectRestore:Completed") #S3ObjectRestoreCompleted | @as("s3:ObjectRestore:Post") #S3ObjectRestorePost | @as("s3:ObjectRestore:*") #S3ObjectRestoreStar | @as("s3:ObjectRemoved:DeleteMarkerCreated") #S3ObjectRemovedDeleteMarkerCreated | @as("s3:ObjectRemoved:Delete") #S3ObjectRemovedDelete | @as("s3:ObjectRemoved:*") #S3ObjectRemovedStar | @as("s3:ObjectCreated:CompleteMultipartUpload") #S3ObjectCreatedCompleteMultipartUpload | @as("s3:ObjectCreated:Copy") #S3ObjectCreatedCopy | @as("s3:ObjectCreated:Post") #S3ObjectCreatedPost | @as("s3:ObjectCreated:Put") #S3ObjectCreatedPut | @as("s3:ObjectCreated:*") #S3ObjectCreatedStar | @as("s3:ReducedRedundancyLostObject") #S3ReducedRedundancyLostObject]
 type errorMessage = string
 type errorCode = string
 type endEvent = unit
-type end = float;
-type encodingType = [@as("url") #url]
-type enableRequestProgress = bool;
+type end = float
+type encodingType = [@as("url") #Url]
+type enableRequestProgress = bool
 type emailAddress = string
-type eTag = string
+type etag = string
 type displayName = string
 type description = string
 type delimiter = string
 type deleteMarkerVersionId = string
 type deleteMarkerReplicationStatus = [@as("Disabled") #Disabled | @as("Enabled") #Enabled]
-type deleteMarker = bool;
-type daysAfterInitiation = int;
-type days = int;
+type deleteMarker = bool
+type daysAfterInitiation = int
+type days = int
 type date = Js.Date.t;
 type creationDate = Js.Date.t;
 type copySourceVersionId = string
@@ -194,598 +202,598 @@ type continuationEvent = unit
 type contentType = string
 type contentRange = string
 type contentMD5 = string
-type contentLength = float;
+type contentLength = float
 type contentLanguage = string
 type contentEncoding = string
 type contentDisposition = string
-type confirmRemoveSelfBucketAccess = bool;
+type confirmRemoveSelfBucketAccess = bool
 type compressionType = [@as("BZIP2") #BZIP2 | @as("GZIP") #GZIP | @as("NONE") #NONE]
 type comments = string
 type code = string
 type cacheControl = string
-type bytesScanned = float;
-type bytesReturned = float;
-type bytesProcessed = float;
-type bypassGovernanceRetention = bool;
+type bytesScanned = float
+type bytesReturned = float
+type bytesProcessed = float
+type bypassGovernanceRetention = bool
 type bucketVersioningStatus = [@as("Suspended") #Suspended | @as("Enabled") #Enabled]
 type bucketName = string
-type bucketLogsPermission = [@as("WRITE") #WRITE | @as("READ") #READ | @as("FULL_CONTROL") #FULL_CONTROL]
-type bucketLocationConstraint = [@as("us-west-2") #us_west_2 | @as("us-west-1") #us_west_1 | @as("us-gov-west-1") #us_gov_west_1 | @as("us-gov-east-1") #us_gov_east_1 | @as("us-east-2") #us_east_2 | @as("sa-east-1") #sa_east_1 | @as("me-south-1") #me_south_1 | @as("eu-west-3") #eu_west_3 | @as("eu-west-2") #eu_west_2 | @as("eu-west-1") #eu_west_1 | @as("eu-south-1") #eu_south_1 | @as("eu-north-1") #eu_north_1 | @as("eu-central-1") #eu_central_1 | @as("EU") #EU | @as("cn-northwest-1") #cn_northwest_1 | @as("cn-north-1") #cn_north_1 | @as("ca-central-1") #ca_central_1 | @as("ap-southeast-2") #ap_southeast_2 | @as("ap-southeast-1") #ap_southeast_1 | @as("ap-south-1") #ap_south_1 | @as("ap-northeast-3") #ap_northeast_3 | @as("ap-northeast-2") #ap_northeast_2 | @as("ap-northeast-1") #ap_northeast_1 | @as("ap-east-1") #ap_east_1 | @as("af-south-1") #af_south_1]
-type bucketKeyEnabled = bool;
-type bucketCannedACL = [@as("authenticated-read") #authenticated_read | @as("public-read-write") #public_read_write | @as("public-read") #public_read | @as("private") #private]
+type bucketLogsPermission = [@as("WRITE") #WRITE | @as("READ") #READ | @as("FULL_CONTROL") #FULLCONTROL]
+type bucketLocationConstraint = [@as("us-west-2") #UsWest2 | @as("us-west-1") #UsWest1 | @as("us-gov-west-1") #UsGovWest1 | @as("us-gov-east-1") #UsGovEast1 | @as("us-east-2") #UsEast2 | @as("sa-east-1") #SaEast1 | @as("me-south-1") #MeSouth1 | @as("eu-west-3") #EuWest3 | @as("eu-west-2") #EuWest2 | @as("eu-west-1") #EuWest1 | @as("eu-south-1") #EuSouth1 | @as("eu-north-1") #EuNorth1 | @as("eu-central-1") #EuCentral1 | @as("EU") #EU | @as("cn-northwest-1") #CnNorthwest1 | @as("cn-north-1") #CnNorth1 | @as("ca-central-1") #CaCentral1 | @as("ap-southeast-2") #ApSoutheast2 | @as("ap-southeast-1") #ApSoutheast1 | @as("ap-south-1") #ApSouth1 | @as("ap-northeast-3") #ApNortheast3 | @as("ap-northeast-2") #ApNortheast2 | @as("ap-northeast-1") #ApNortheast1 | @as("ap-east-1") #ApEast1 | @as("af-south-1") #AfSouth1]
+type bucketKeyEnabled = bool
+type bucketCannedACL = [@as("authenticated-read") #AuthenticatedRead | @as("public-read-write") #PublicReadWrite | @as("public-read") #PublicRead | @as("private") #Private]
 type bucketAccelerateStatus = [@as("Suspended") #Suspended | @as("Enabled") #Enabled]
-type body = NodeJs.Buffer.t;
-type archiveStatus = [@as("DEEP_ARCHIVE_ACCESS") #DEEP_ARCHIVE_ACCESS | @as("ARCHIVE_ACCESS") #ARCHIVE_ACCESS]
+type body = NodeJs.Buffer.t
+type archiveStatus = [@as("DEEP_ARCHIVE_ACCESS") #DEEPARCHIVEACCESS | @as("ARCHIVE_ACCESS") #ARCHIVEACCESS]
 type analyticsS3ExportFileFormat = [@as("CSV") #CSV]
 type analyticsId = string
 type allowedOrigin = string
 type allowedMethod = string
 type allowedHeader = string
-type allowQuotedRecordDelimiter = bool;
+type allowQuotedRecordDelimiter = bool
 type accountId = string
 type acceptRanges = string
 type abortRuleId = string
 type abortDate = Js.Date.t;
 type versioningConfiguration = {
-@as("Status") status: bucketVersioningStatus,
-@as("MFADelete") mFADelete: mFADelete
+@as("Status") status: option<bucketVersioningStatus>,
+@as("MFADelete") mfadelete: option<mfadelete>
 }
 type transition = {
-@as("StorageClass") storageClass: transitionStorageClass,
-@as("Days") days: days,
-@as("Date") date: date
+@as("StorageClass") storageClass: option<transitionStorageClass>,
+@as("Days") days: option<days>,
+@as("Date") date: option<date>
 }
 type tiering = {
-@as("AccessTier") accessTier: option<intelligentTieringAccessTier>,
-@as("Days") days: option<intelligentTieringDays>
+@as("AccessTier") accessTier: intelligentTieringAccessTier,
+@as("Days") days: intelligentTieringDays
 }
 type tag = {
-@as("Value") value: option<value>,
-@as("Key") key: option<objectKey>
+@as("Value") value: value,
+@as("Key") key: objectKey
 }
 type stats = {
-@as("BytesReturned") bytesReturned: bytesReturned,
-@as("BytesProcessed") bytesProcessed: bytesProcessed,
-@as("BytesScanned") bytesScanned: bytesScanned
+@as("BytesReturned") bytesReturned: option<bytesReturned>,
+@as("BytesProcessed") bytesProcessed: option<bytesProcessed>,
+@as("BytesScanned") bytesScanned: option<bytesScanned>
 }
 type sseKmsEncryptedObjects = {
-@as("Status") status: option<sseKmsEncryptedObjectsStatus>
+@as("Status") status: sseKmsEncryptedObjectsStatus
 }
 type serverSideEncryptionByDefault = {
-@as("KMSMasterKeyID") kMSMasterKeyID: sSEKMSKeyId,
-@as("SSEAlgorithm") sSEAlgorithm: option<serverSideEncryption>
+@as("KMSMasterKeyID") kmsmasterKeyID: option<ssekmskeyId>,
+@as("SSEAlgorithm") ssealgorithm: serverSideEncryption
 }
 type scanRange = {
-@as("End") end: end,
-@as("Start") start: start
+@as("End") end: option<end>,
+@as("Start") start: option<start>
 }
-type sSEKMS = {
-@as("KeyId") keyId: option<sSEKMSKeyId>
+type ssekms = {
+@as("KeyId") keyId: ssekmskeyId
 }
 type requestProgress = {
-@as("Enabled") enabled: enableRequestProgress
+@as("Enabled") enabled: option<enableRequestProgress>
 }
 type requestPaymentConfiguration = {
-@as("Payer") payer: option<payer>
+@as("Payer") payer: payer
 }
 type replicationTimeValue = {
-@as("Minutes") minutes: minutes
+@as("Minutes") minutes: option<minutes>
 }
 type replicaModifications = {
-@as("Status") status: option<replicaModificationsStatus>
+@as("Status") status: replicaModificationsStatus
 }
 type redirectAllRequestsTo = {
-@as("Protocol") protocol: protocol,
-@as("HostName") hostName: option<hostName>
-}
-type redirect = {
-@as("ReplaceKeyWith") replaceKeyWith: replaceKeyWith,
-@as("ReplaceKeyPrefixWith") replaceKeyPrefixWith: replaceKeyPrefixWith,
-@as("Protocol") protocol: protocol,
-@as("HttpRedirectCode") httpRedirectCode: httpRedirectCode,
+@as("Protocol") protocol: option<protocol>,
 @as("HostName") hostName: hostName
 }
+type redirect = {
+@as("ReplaceKeyWith") replaceKeyWith: option<replaceKeyWith>,
+@as("ReplaceKeyPrefixWith") replaceKeyPrefixWith: option<replaceKeyPrefixWith>,
+@as("Protocol") protocol: option<protocol>,
+@as("HttpRedirectCode") httpRedirectCode: option<httpRedirectCode>,
+@as("HostName") hostName: option<hostName>
+}
 type recordsEvent = {
-@as("Payload") payload: body
+@as("Payload") payload: option<body>
 }
 type publicAccessBlockConfiguration = {
-@as("RestrictPublicBuckets") restrictPublicBuckets: setting,
-@as("BlockPublicPolicy") blockPublicPolicy: setting,
-@as("IgnorePublicAcls") ignorePublicAcls: setting,
-@as("BlockPublicAcls") blockPublicAcls: setting
+@as("RestrictPublicBuckets") restrictPublicBuckets: option<setting>,
+@as("BlockPublicPolicy") blockPublicPolicy: option<setting>,
+@as("IgnorePublicAcls") ignorePublicAcls: option<setting>,
+@as("BlockPublicAcls") blockPublicAcls: option<setting>
 }
 type progress = {
-@as("BytesReturned") bytesReturned: bytesReturned,
-@as("BytesProcessed") bytesProcessed: bytesProcessed,
-@as("BytesScanned") bytesScanned: bytesScanned
+@as("BytesReturned") bytesReturned: option<bytesReturned>,
+@as("BytesProcessed") bytesProcessed: option<bytesProcessed>,
+@as("BytesScanned") bytesScanned: option<bytesScanned>
 }
 type policyStatus = {
-@as("IsPublic") isPublic: isPublic
+@as("IsPublic") isPublic: option<isPublic>
 }
 type part = {
-@as("Size") size: size,
-@as("ETag") eTag: eTag,
-@as("LastModified") lastModified: lastModified,
-@as("PartNumber") partNumber: partNumber
+@as("Size") size: option<size>,
+@as("ETag") etag: option<etag>,
+@as("LastModified") lastModified: option<lastModified>,
+@as("PartNumber") partNumber: option<partNumber>
 }
 type ownershipControlsRule = {
-@as("ObjectOwnership") objectOwnership: option<objectOwnership>
+@as("ObjectOwnership") objectOwnership: objectOwnership
 }
 type owner = {
-@as("ID") iD: iD,
-@as("DisplayName") displayName: displayName
+@as("ID") id: option<id>,
+@as("DisplayName") displayName: option<displayName>
 }
 type objectLockRetention = {
-@as("RetainUntilDate") retainUntilDate: date,
-@as("Mode") mode: objectLockRetentionMode
+@as("RetainUntilDate") retainUntilDate: option<date>,
+@as("Mode") mode: option<objectLockRetentionMode>
 }
 type objectLockLegalHold = {
-@as("Status") status: objectLockLegalHoldStatus
+@as("Status") status: option<objectLockLegalHoldStatus>
 }
 type objectIdentifier = {
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: option<objectKey>
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: objectKey
 }
 type noncurrentVersionTransition = {
-@as("StorageClass") storageClass: transitionStorageClass,
-@as("NoncurrentDays") noncurrentDays: days
+@as("StorageClass") storageClass: option<transitionStorageClass>,
+@as("NoncurrentDays") noncurrentDays: option<days>
 }
 type noncurrentVersionExpiration = {
-@as("NoncurrentDays") noncurrentDays: days
+@as("NoncurrentDays") noncurrentDays: option<days>
 }
 type metadataEntry = {
-@as("Value") value: metadataValue,
-@as("Name") name: metadataKey
+@as("Value") value: option<metadataValue>,
+@as("Name") name: option<metadataKey>
 }
 type metadata = Js.Dict.t< metadataValue>
 type lifecycleExpiration = {
-@as("ExpiredObjectDeleteMarker") expiredObjectDeleteMarker: expiredObjectDeleteMarker,
-@as("Days") days: days,
-@as("Date") date: date
+@as("ExpiredObjectDeleteMarker") expiredObjectDeleteMarker: option<expiredObjectDeleteMarker>,
+@as("Days") days: option<days>,
+@as("Date") date: option<date>
 }
-type jSONOutput = {
-@as("RecordDelimiter") recordDelimiter: recordDelimiter
+type jsonoutput = {
+@as("RecordDelimiter") recordDelimiter: option<recordDelimiter>
 }
-type jSONInput = {
-@as("Type") type_: jSONType
+type jsoninput = {
+@as("Type") type_: option<jsontype>
 }
 type inventorySchedule = {
-@as("Frequency") frequency: option<inventoryFrequency>
+@as("Frequency") frequency: inventoryFrequency
 }
 type inventoryOptionalFields = array<inventoryOptionalField>
 type inventoryFilter = {
-@as("Prefix") prefix: option<prefix>
+@as("Prefix") prefix: prefix
 }
 type initiator = {
-@as("DisplayName") displayName: displayName,
-@as("ID") iD: iD
+@as("DisplayName") displayName: option<displayName>,
+@as("ID") id: option<id>
 }
 type indexDocument = {
-@as("Suffix") suffix: option<suffix>
+@as("Suffix") suffix: suffix
 }
 type grantee = {
-@as("Type") type_: option<type_>,
-@as("URI") uRI: uRI,
-@as("ID") iD: iD,
-@as("EmailAddress") emailAddress: emailAddress,
-@as("DisplayName") displayName: displayName
+@as("Type") type_: type_,
+@as("URI") uri: option<uri>,
+@as("ID") id: option<id>,
+@as("EmailAddress") emailAddress: option<emailAddress>,
+@as("DisplayName") displayName: option<displayName>
 }
 type glacierJobParameters = {
-@as("Tier") tier: option<tier>
+@as("Tier") tier: tier
 }
 type filterRule = {
-@as("Value") value: filterRuleValue,
-@as("Name") name: filterRuleName
+@as("Value") value: option<filterRuleValue>,
+@as("Name") name: option<filterRuleName>
 }
 type exposeHeaders = array<exposeHeader>
 type existingObjectReplication = {
-@as("Status") status: option<existingObjectReplicationStatus>
+@as("Status") status: existingObjectReplicationStatus
 }
 type eventList = array<event>
 type errorDocument = {
-@as("Key") key: option<objectKey>
+@as("Key") key: objectKey
 }
 type error = {
-@as("Message") message: message,
-@as("Code") code: code,
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: objectKey
+@as("Message") message: option<message>,
+@as("Code") code: option<code>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: option<objectKey>
 }
 type encryptionConfiguration = {
-@as("ReplicaKmsKeyID") replicaKmsKeyID: replicaKmsKeyID
+@as("ReplicaKmsKeyID") replicaKmsKeyID: option<replicaKmsKeyID>
 }
 type encryption = {
-@as("KMSContext") kMSContext: kMSContext,
-@as("KMSKeyId") kMSKeyId: sSEKMSKeyId,
-@as("EncryptionType") encryptionType: option<serverSideEncryption>
+@as("KMSContext") kmscontext: option<kmscontext>,
+@as("KMSKeyId") kmskeyId: option<ssekmskeyId>,
+@as("EncryptionType") encryptionType: serverSideEncryption
 }
 type deletedObject = {
-@as("DeleteMarkerVersionId") deleteMarkerVersionId: deleteMarkerVersionId,
-@as("DeleteMarker") deleteMarker: deleteMarker,
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: objectKey
+@as("DeleteMarkerVersionId") deleteMarkerVersionId: option<deleteMarkerVersionId>,
+@as("DeleteMarker") deleteMarker: option<deleteMarker>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: option<objectKey>
 }
 type deleteMarkerReplication = {
-@as("Status") status: deleteMarkerReplicationStatus
+@as("Status") status: option<deleteMarkerReplicationStatus>
 }
 type defaultRetention = {
-@as("Years") years: years,
-@as("Days") days: days,
-@as("Mode") mode: objectLockRetentionMode
+@as("Years") years: option<years>,
+@as("Days") days: option<days>,
+@as("Mode") mode: option<objectLockRetentionMode>
 }
 type createBucketConfiguration = {
-@as("LocationConstraint") locationConstraint: bucketLocationConstraint
+@as("LocationConstraint") locationConstraint: option<bucketLocationConstraint>
 }
 type copyPartResult = {
-@as("LastModified") lastModified: lastModified,
-@as("ETag") eTag: eTag
+@as("LastModified") lastModified: option<lastModified>,
+@as("ETag") etag: option<etag>
 }
 type copyObjectResult = {
-@as("LastModified") lastModified: lastModified,
-@as("ETag") eTag: eTag
+@as("LastModified") lastModified: option<lastModified>,
+@as("ETag") etag: option<etag>
 }
 type condition = {
-@as("KeyPrefixEquals") keyPrefixEquals: keyPrefixEquals,
-@as("HttpErrorCodeReturnedEquals") httpErrorCodeReturnedEquals: httpErrorCodeReturnedEquals
+@as("KeyPrefixEquals") keyPrefixEquals: option<keyPrefixEquals>,
+@as("HttpErrorCodeReturnedEquals") httpErrorCodeReturnedEquals: option<httpErrorCodeReturnedEquals>
 }
 type completedPart = {
-@as("PartNumber") partNumber: partNumber,
-@as("ETag") eTag: eTag
+@as("PartNumber") partNumber: option<partNumber>,
+@as("ETag") etag: option<etag>
 }
 type commonPrefix = {
-@as("Prefix") prefix: prefix
+@as("Prefix") prefix: option<prefix>
 }
-type cSVOutput = {
-@as("QuoteCharacter") quoteCharacter: quoteCharacter,
-@as("FieldDelimiter") fieldDelimiter: fieldDelimiter,
-@as("RecordDelimiter") recordDelimiter: recordDelimiter,
-@as("QuoteEscapeCharacter") quoteEscapeCharacter: quoteEscapeCharacter,
-@as("QuoteFields") quoteFields: quoteFields
+type csvoutput = {
+@as("QuoteCharacter") quoteCharacter: option<quoteCharacter>,
+@as("FieldDelimiter") fieldDelimiter: option<fieldDelimiter>,
+@as("RecordDelimiter") recordDelimiter: option<recordDelimiter>,
+@as("QuoteEscapeCharacter") quoteEscapeCharacter: option<quoteEscapeCharacter>,
+@as("QuoteFields") quoteFields: option<quoteFields>
 }
-type cSVInput = {
-@as("AllowQuotedRecordDelimiter") allowQuotedRecordDelimiter: allowQuotedRecordDelimiter,
-@as("QuoteCharacter") quoteCharacter: quoteCharacter,
-@as("FieldDelimiter") fieldDelimiter: fieldDelimiter,
-@as("RecordDelimiter") recordDelimiter: recordDelimiter,
-@as("QuoteEscapeCharacter") quoteEscapeCharacter: quoteEscapeCharacter,
-@as("Comments") comments: comments,
-@as("FileHeaderInfo") fileHeaderInfo: fileHeaderInfo
+type csvinput = {
+@as("AllowQuotedRecordDelimiter") allowQuotedRecordDelimiter: option<allowQuotedRecordDelimiter>,
+@as("QuoteCharacter") quoteCharacter: option<quoteCharacter>,
+@as("FieldDelimiter") fieldDelimiter: option<fieldDelimiter>,
+@as("RecordDelimiter") recordDelimiter: option<recordDelimiter>,
+@as("QuoteEscapeCharacter") quoteEscapeCharacter: option<quoteEscapeCharacter>,
+@as("Comments") comments: option<comments>,
+@as("FileHeaderInfo") fileHeaderInfo: option<fileHeaderInfo>
 }
 type bucket = {
-@as("CreationDate") creationDate: creationDate,
-@as("Name") name: bucketName
+@as("CreationDate") creationDate: option<creationDate>,
+@as("Name") name: option<bucketName>
 }
 type analyticsS3BucketDestination = {
-@as("Prefix") prefix: prefix,
-@as("Bucket") bucket: option<bucketName>,
-@as("BucketAccountId") bucketAccountId: accountId,
-@as("Format") format: option<analyticsS3ExportFileFormat>
+@as("Prefix") prefix: option<prefix>,
+@as("Bucket") bucket: bucketName,
+@as("BucketAccountId") bucketAccountId: option<accountId>,
+@as("Format") format: analyticsS3ExportFileFormat
 }
 type allowedOrigins = array<allowedOrigin>
 type allowedMethods = array<allowedMethod>
 type allowedHeaders = array<allowedHeader>
 type accessControlTranslation = {
-@as("Owner") owner: option<ownerOverride>
+@as("Owner") owner: ownerOverride
 }
 type accelerateConfiguration = {
-@as("Status") status: bucketAccelerateStatus
+@as("Status") status: option<bucketAccelerateStatus>
 }
 type abortIncompleteMultipartUpload = {
-@as("DaysAfterInitiation") daysAfterInitiation: daysAfterInitiation
+@as("DaysAfterInitiation") daysAfterInitiation: option<daysAfterInitiation>
 }
 type userMetadata = array<metadataEntry>
 type transitionList = array<transition>
 type tieringList = array<tiering>
 type targetGrant = {
-@as("Permission") permission: bucketLogsPermission,
-@as("Grantee") grantee: grantee
+@as("Permission") permission: option<bucketLogsPermission>,
+@as("Grantee") grantee: option<grantee>
 }
 type tagSet = array<tag>
 type statsEvent = {
-@as("Details") details: stats
+@as("Details") details: option<stats>
 }
 type sourceSelectionCriteria = {
-@as("ReplicaModifications") replicaModifications: replicaModifications,
-@as("SseKmsEncryptedObjects") sseKmsEncryptedObjects: sseKmsEncryptedObjects
+@as("ReplicaModifications") replicaModifications: option<replicaModifications>,
+@as("SseKmsEncryptedObjects") sseKmsEncryptedObjects: option<sseKmsEncryptedObjects>
 }
 type serverSideEncryptionRule = {
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("ApplyServerSideEncryptionByDefault") applyServerSideEncryptionByDefault: serverSideEncryptionByDefault
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("ApplyServerSideEncryptionByDefault") applyServerSideEncryptionByDefault: option<serverSideEncryptionByDefault>
 }
 type routingRule = {
-@as("Redirect") redirect: option<redirect>,
-@as("Condition") condition: condition
+@as("Redirect") redirect: redirect,
+@as("Condition") condition: option<condition>
 }
 type replicationTime = {
-@as("Time") time: option<replicationTimeValue>,
-@as("Status") status: option<replicationTimeStatus>
+@as("Time") time: replicationTimeValue,
+@as("Status") status: replicationTimeStatus
 }
 type progressEvent = {
-@as("Details") details: progress
+@as("Details") details: option<progress>
 }
 type parts = array<part>
 type ownershipControlsRules = array<ownershipControlsRule>
 type outputSerialization = {
-@as("JSON") jSON: jSONOutput,
-@as("CSV") cSV: cSVOutput
+@as("JSON") json: option<jsonoutput>,
+@as("CSV") csv: option<csvoutput>
 }
 type objectVersion = {
-@as("Owner") owner: owner,
-@as("LastModified") lastModified: lastModified,
-@as("IsLatest") isLatest: isLatest,
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: objectKey,
-@as("StorageClass") storageClass: objectVersionStorageClass,
-@as("Size") size: size,
-@as("ETag") eTag: eTag
+@as("Owner") owner: option<owner>,
+@as("LastModified") lastModified: option<lastModified>,
+@as("IsLatest") isLatest: option<isLatest>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: option<objectKey>,
+@as("StorageClass") storageClass: option<objectVersionStorageClass>,
+@as("Size") size: option<size>,
+@as("ETag") etag: option<etag>
 }
 type objectLockRule = {
-@as("DefaultRetention") defaultRetention: defaultRetention
+@as("DefaultRetention") defaultRetention: option<defaultRetention>
 }
 type objectIdentifierList = array<objectIdentifier>
-type object = {
-@as("Owner") owner: owner,
-@as("StorageClass") storageClass: objectStorageClass,
-@as("Size") size: size,
-@as("ETag") eTag: eTag,
-@as("LastModified") lastModified: lastModified,
-@as("Key") key: objectKey
+type object_ = {
+@as("Owner") owner: option<owner>,
+@as("StorageClass") storageClass: option<objectStorageClass>,
+@as("Size") size: option<size>,
+@as("ETag") etag: option<etag>,
+@as("LastModified") lastModified: option<lastModified>,
+@as("Key") key: option<objectKey>
 }
 type noncurrentVersionTransitionList = array<noncurrentVersionTransition>
 type multipartUpload = {
-@as("Initiator") initiator: initiator,
-@as("Owner") owner: owner,
-@as("StorageClass") storageClass: storageClass,
-@as("Initiated") initiated: initiated,
-@as("Key") key: objectKey,
-@as("UploadId") uploadId: multipartUploadId
+@as("Initiator") initiator: option<initiator>,
+@as("Owner") owner: option<owner>,
+@as("StorageClass") storageClass: option<storageClass>,
+@as("Initiated") initiated: option<initiated>,
+@as("Key") key: option<objectKey>,
+@as("UploadId") uploadId: option<multipartUploadId>
 }
 type metrics = {
-@as("EventThreshold") eventThreshold: replicationTimeValue,
-@as("Status") status: option<metricsStatus>
+@as("EventThreshold") eventThreshold: option<replicationTimeValue>,
+@as("Status") status: metricsStatus
 }
 type inventoryEncryption = {
-@as("SSEKMS") sSEKMS: sSEKMS,
-@as("SSES3") sSES3: sSES3
+@as("SSEKMS") ssekms: option<ssekms>,
+@as("SSES3") sses3: option<sses3>
 }
 type inputSerialization = {
-@as("Parquet") parquet: parquetInput,
-@as("JSON") jSON: jSONInput,
-@as("CompressionType") compressionType: compressionType,
-@as("CSV") cSV: cSVInput
+@as("Parquet") parquet: option<parquetInput>,
+@as("JSON") json: option<jsoninput>,
+@as("CompressionType") compressionType: option<compressionType>,
+@as("CSV") csv: option<csvinput>
 }
 type grant = {
-@as("Permission") permission: permission,
-@as("Grantee") grantee: grantee
+@as("Permission") permission: option<permission>,
+@as("Grantee") grantee: option<grantee>
 }
 type filterRuleList = array<filterRule>
 type errors = array<error>
 type deletedObjects = array<deletedObject>
 type deleteMarkerEntry = {
-@as("LastModified") lastModified: lastModified,
-@as("IsLatest") isLatest: isLatest,
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: objectKey,
-@as("Owner") owner: owner
+@as("LastModified") lastModified: option<lastModified>,
+@as("IsLatest") isLatest: option<isLatest>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: option<objectKey>,
+@as("Owner") owner: option<owner>
 }
 type completedPartList = array<completedPart>
 type commonPrefixList = array<commonPrefix>
-type cORSRule = {
-@as("MaxAgeSeconds") maxAgeSeconds: maxAgeSeconds,
-@as("ExposeHeaders") exposeHeaders: exposeHeaders,
-@as("AllowedOrigins") allowedOrigins: option<allowedOrigins>,
-@as("AllowedMethods") allowedMethods: option<allowedMethods>,
-@as("AllowedHeaders") allowedHeaders: allowedHeaders,
-@as("ID") iD: iD
+type corsrule = {
+@as("MaxAgeSeconds") maxAgeSeconds: option<maxAgeSeconds>,
+@as("ExposeHeaders") exposeHeaders: option<exposeHeaders>,
+@as("AllowedOrigins") allowedOrigins: allowedOrigins,
+@as("AllowedMethods") allowedMethods: allowedMethods,
+@as("AllowedHeaders") allowedHeaders: option<allowedHeaders>,
+@as("ID") id: option<id>
 }
 type buckets = array<bucket>
 type analyticsExportDestination = {
-@as("S3BucketDestination") s3BucketDestination: option<analyticsS3BucketDestination>
+@as("S3BucketDestination") s3BucketDestination: analyticsS3BucketDestination
 }
 type targetGrants = array<targetGrant>
 type tagging = {
-@as("TagSet") tagSet: option<tagSet>
+@as("TagSet") tagSet: tagSet
 }
 type storageClassAnalysisDataExport = {
-@as("Destination") destination: option<analyticsExportDestination>,
-@as("OutputSchemaVersion") outputSchemaVersion: option<storageClassAnalysisSchemaVersion>
+@as("Destination") destination: analyticsExportDestination,
+@as("OutputSchemaVersion") outputSchemaVersion: storageClassAnalysisSchemaVersion
 }
 type serverSideEncryptionRules = array<serverSideEncryptionRule>
 type selectParameters = {
-@as("OutputSerialization") outputSerialization: option<outputSerialization>,
-@as("Expression") expression: option<expression>,
-@as("ExpressionType") expressionType: option<expressionType>,
-@as("InputSerialization") inputSerialization: option<inputSerialization>
+@as("OutputSerialization") outputSerialization: outputSerialization,
+@as("Expression") expression: expression,
+@as("ExpressionType") expressionType: expressionType,
+@as("InputSerialization") inputSerialization: inputSerialization
 }
 type selectObjectContentEventStream = End(endEvent) | Cont(continuationEvent) | Progress(progressEvent) | Stats(statsEvent) | Records(recordsEvent);
 type s3KeyFilter = {
-@as("FilterRules") filterRules: filterRuleList
+@as("FilterRules") filterRules: option<filterRuleList>
 }
 type routingRules = array<routingRule>
 type replicationRuleAndOperator = {
-@as("Tags") tags: tagSet,
-@as("Prefix") prefix: prefix
+@as("Tags") tags: option<tagSet>,
+@as("Prefix") prefix: option<prefix>
 }
 type ownershipControls = {
-@as("Rules") rules: option<ownershipControlsRules>
+@as("Rules") rules: ownershipControlsRules
 }
 type objectVersionList = array<objectVersion>
 type objectLockConfiguration = {
-@as("Rule") rule: objectLockRule,
-@as("ObjectLockEnabled") objectLockEnabled: objectLockEnabled
+@as("Rule") rule: option<objectLockRule>,
+@as("ObjectLockEnabled") objectLockEnabled: option<objectLockEnabled>
 }
-type objectList = array<object>
+type objectList = array<object_>
 type multipartUploadList = array<multipartUpload>
 type metricsAndOperator = {
-@as("Tags") tags: tagSet,
-@as("Prefix") prefix: prefix
+@as("Tags") tags: option<tagSet>,
+@as("Prefix") prefix: option<prefix>
 }
 type lifecycleRuleAndOperator = {
-@as("Tags") tags: tagSet,
-@as("Prefix") prefix: prefix
+@as("Tags") tags: option<tagSet>,
+@as("Prefix") prefix: option<prefix>
 }
 type inventoryS3BucketDestination = {
-@as("Encryption") encryption: inventoryEncryption,
-@as("Prefix") prefix: prefix,
-@as("Format") format: option<inventoryFormat>,
-@as("Bucket") bucket: option<bucketName>,
-@as("AccountId") accountId: accountId
+@as("Encryption") encryption: option<inventoryEncryption>,
+@as("Prefix") prefix: option<prefix>,
+@as("Format") format: inventoryFormat,
+@as("Bucket") bucket: bucketName,
+@as("AccountId") accountId: option<accountId>
 }
 type intelligentTieringAndOperator = {
-@as("Tags") tags: tagSet,
-@as("Prefix") prefix: prefix
+@as("Tags") tags: option<tagSet>,
+@as("Prefix") prefix: option<prefix>
 }
 type grants = array<grant>
 type destination = {
-@as("Metrics") metrics: metrics,
-@as("ReplicationTime") replicationTime: replicationTime,
-@as("EncryptionConfiguration") encryptionConfiguration: encryptionConfiguration,
-@as("AccessControlTranslation") accessControlTranslation: accessControlTranslation,
-@as("StorageClass") storageClass: storageClass,
-@as("Account") account: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("Metrics") metrics: option<metrics>,
+@as("ReplicationTime") replicationTime: option<replicationTime>,
+@as("EncryptionConfiguration") encryptionConfiguration: option<encryptionConfiguration>,
+@as("AccessControlTranslation") accessControlTranslation: option<accessControlTranslation>,
+@as("StorageClass") storageClass: option<storageClass>,
+@as("Account") account: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
 type deleteMarkers = array<deleteMarkerEntry>
 type delete = {
-@as("Quiet") quiet: quiet,
-@as("Objects") objects: option<objectIdentifierList>
+@as("Quiet") quiet: option<quiet>,
+@as("Objects") objects: objectIdentifierList
 }
 type completedMultipartUpload = {
-@as("Parts") parts: completedPartList
+@as("Parts") parts: option<completedPartList>
 }
-type cORSRules = array<cORSRule>
+type corsrules = array<corsrule>
 type analyticsAndOperator = {
-@as("Tags") tags: tagSet,
-@as("Prefix") prefix: prefix
+@as("Tags") tags: option<tagSet>,
+@as("Prefix") prefix: option<prefix>
 }
 type websiteConfiguration = {
-@as("RoutingRules") routingRules: routingRules,
-@as("RedirectAllRequestsTo") redirectAllRequestsTo: redirectAllRequestsTo,
-@as("IndexDocument") indexDocument: indexDocument,
-@as("ErrorDocument") errorDocument: errorDocument
+@as("RoutingRules") routingRules: option<routingRules>,
+@as("RedirectAllRequestsTo") redirectAllRequestsTo: option<redirectAllRequestsTo>,
+@as("IndexDocument") indexDocument: option<indexDocument>,
+@as("ErrorDocument") errorDocument: option<errorDocument>
 }
 type storageClassAnalysis = {
-@as("DataExport") dataExport: storageClassAnalysisDataExport
+@as("DataExport") dataExport: option<storageClassAnalysisDataExport>
 }
 type serverSideEncryptionConfiguration = {
-@as("Rules") rules: option<serverSideEncryptionRules>
+@as("Rules") rules: serverSideEncryptionRules
 }
 type s3Location = {
-@as("StorageClass") storageClass: storageClass,
-@as("UserMetadata") userMetadata: userMetadata,
-@as("Tagging") tagging: tagging,
-@as("AccessControlList") accessControlList: grants,
-@as("CannedACL") cannedACL: objectCannedACL,
-@as("Encryption") encryption: encryption,
-@as("Prefix") prefix: option<locationPrefix>,
-@as("BucketName") bucketName: option<bucketName>
+@as("StorageClass") storageClass: option<storageClass>,
+@as("UserMetadata") userMetadata: option<userMetadata>,
+@as("Tagging") tagging: option<tagging>,
+@as("AccessControlList") accessControlList: option<grants>,
+@as("CannedACL") cannedACL: option<objectCannedACL>,
+@as("Encryption") encryption: option<encryption>,
+@as("Prefix") prefix: locationPrefix,
+@as("BucketName") bucketName: bucketName
 }
 type replicationRuleFilter = And(replicationRuleAndOperator) | Tag(tag) | Prefix(prefix);
 type notificationConfigurationFilter = {
-@as("Key") key: s3KeyFilter
+@as("Key") key: option<s3KeyFilter>
 }
 type metricsFilter = And(metricsAndOperator) | Tag(tag) | Prefix(prefix);
 type loggingEnabled = {
-@as("TargetPrefix") targetPrefix: option<targetPrefix>,
-@as("TargetGrants") targetGrants: targetGrants,
-@as("TargetBucket") targetBucket: option<targetBucket>
+@as("TargetPrefix") targetPrefix: targetPrefix,
+@as("TargetGrants") targetGrants: option<targetGrants>,
+@as("TargetBucket") targetBucket: targetBucket
 }
 type lifecycleRuleFilter = And(lifecycleRuleAndOperator) | Tag(tag) | Prefix(prefix);
 type inventoryDestination = {
-@as("S3BucketDestination") s3BucketDestination: option<inventoryS3BucketDestination>
+@as("S3BucketDestination") s3BucketDestination: inventoryS3BucketDestination
 }
 type intelligentTieringFilter = {
-@as("And") and: intelligentTieringAndOperator,
-@as("Tag") tag: tag,
-@as("Prefix") prefix: prefix
+@as("And") and_: option<intelligentTieringAndOperator>,
+@as("Tag") tag: option<tag>,
+@as("Prefix") prefix: option<prefix>
 }
-type cORSConfiguration = {
-@as("CORSRules") cORSRules: option<cORSRules>
+type corsconfiguration = {
+@as("CORSRules") corsrules: corsrules
 }
 type analyticsFilter = And(analyticsAndOperator) | Tag(tag) | Prefix(prefix);
 type accessControlPolicy = {
-@as("Owner") owner: owner,
-@as("Grants") grants: grants
+@as("Owner") owner: option<owner>,
+@as("Grants") grants: option<grants>
 }
 type topicConfiguration = {
-@as("Filter") filter: notificationConfigurationFilter,
-@as("Events") events: option<eventList>,
-@as("TopicArn") topicArn: option<topicArn>,
-@as("Id") id: notificationId
+@as("Filter") filter: option<notificationConfigurationFilter>,
+@as("Events") events: eventList,
+@as("TopicArn") topicArn: topicArn,
+@as("Id") id: option<notificationId>
 }
 type replicationRule = {
-@as("DeleteMarkerReplication") deleteMarkerReplication: deleteMarkerReplication,
-@as("Destination") destination: option<destination>,
-@as("ExistingObjectReplication") existingObjectReplication: existingObjectReplication,
-@as("SourceSelectionCriteria") sourceSelectionCriteria: sourceSelectionCriteria,
-@as("Status") status: option<replicationRuleStatus>,
-@as("Filter") filter: replicationRuleFilter,
-@as("Prefix") prefix: prefix,
-@as("Priority") priority: priority,
-@as("ID") iD: iD
+@as("DeleteMarkerReplication") deleteMarkerReplication: option<deleteMarkerReplication>,
+@as("Destination") destination: destination,
+@as("ExistingObjectReplication") existingObjectReplication: option<existingObjectReplication>,
+@as("SourceSelectionCriteria") sourceSelectionCriteria: option<sourceSelectionCriteria>,
+@as("Status") status: replicationRuleStatus,
+@as("Filter") filter: option<replicationRuleFilter>,
+@as("Prefix") prefix: option<prefix>,
+@as("Priority") priority: option<priority>,
+@as("ID") id: option<id>
 }
 type queueConfiguration = {
-@as("Filter") filter: notificationConfigurationFilter,
-@as("Events") events: option<eventList>,
-@as("QueueArn") queueArn: option<queueArn>,
-@as("Id") id: notificationId
+@as("Filter") filter: option<notificationConfigurationFilter>,
+@as("Events") events: eventList,
+@as("QueueArn") queueArn: queueArn,
+@as("Id") id: option<notificationId>
 }
 type outputLocation = {
-@as("S3") s3: s3Location
+@as("S3") s3: option<s3Location>
 }
 type metricsConfiguration = {
-@as("Filter") filter: metricsFilter,
-@as("Id") id: option<metricsId>
+@as("Filter") filter: option<metricsFilter>,
+@as("Id") id: metricsId
 }
 type lifecycleRule = {
-@as("AbortIncompleteMultipartUpload") abortIncompleteMultipartUpload: abortIncompleteMultipartUpload,
-@as("NoncurrentVersionExpiration") noncurrentVersionExpiration: noncurrentVersionExpiration,
-@as("NoncurrentVersionTransitions") noncurrentVersionTransitions: noncurrentVersionTransitionList,
-@as("Transitions") transitions: transitionList,
-@as("Status") status: option<expirationStatus>,
-@as("Filter") filter: lifecycleRuleFilter,
-@as("Prefix") prefix: prefix,
-@as("ID") iD: iD,
-@as("Expiration") expiration: lifecycleExpiration
+@as("AbortIncompleteMultipartUpload") abortIncompleteMultipartUpload: option<abortIncompleteMultipartUpload>,
+@as("NoncurrentVersionExpiration") noncurrentVersionExpiration: option<noncurrentVersionExpiration>,
+@as("NoncurrentVersionTransitions") noncurrentVersionTransitions: option<noncurrentVersionTransitionList>,
+@as("Transitions") transitions: option<transitionList>,
+@as("Status") status: expirationStatus,
+@as("Filter") filter: option<lifecycleRuleFilter>,
+@as("Prefix") prefix: option<prefix>,
+@as("ID") id: option<id>,
+@as("Expiration") expiration: option<lifecycleExpiration>
 }
 type lambdaFunctionConfiguration = {
-@as("Filter") filter: notificationConfigurationFilter,
-@as("Events") events: option<eventList>,
-@as("LambdaFunctionArn") lambdaFunctionArn: option<lambdaFunctionArn>,
-@as("Id") id: notificationId
+@as("Filter") filter: option<notificationConfigurationFilter>,
+@as("Events") events: eventList,
+@as("LambdaFunctionArn") lambdaFunctionArn: lambdaFunctionArn,
+@as("Id") id: option<notificationId>
 }
 type inventoryConfiguration = {
-@as("Schedule") schedule: option<inventorySchedule>,
-@as("OptionalFields") optionalFields: inventoryOptionalFields,
-@as("IncludedObjectVersions") includedObjectVersions: option<inventoryIncludedObjectVersions>,
-@as("Id") id: option<inventoryId>,
-@as("Filter") filter: inventoryFilter,
-@as("IsEnabled") isEnabled: option<isEnabled>,
-@as("Destination") destination: option<inventoryDestination>
+@as("Schedule") schedule: inventorySchedule,
+@as("OptionalFields") optionalFields: option<inventoryOptionalFields>,
+@as("IncludedObjectVersions") includedObjectVersions: inventoryIncludedObjectVersions,
+@as("Id") id: inventoryId,
+@as("Filter") filter: option<inventoryFilter>,
+@as("IsEnabled") isEnabled: isEnabled,
+@as("Destination") destination: inventoryDestination
 }
 type intelligentTieringConfiguration = {
-@as("Tierings") tierings: option<tieringList>,
-@as("Status") status: option<intelligentTieringStatus>,
-@as("Filter") filter: intelligentTieringFilter,
-@as("Id") id: option<intelligentTieringId>
+@as("Tierings") tierings: tieringList,
+@as("Status") status: intelligentTieringStatus,
+@as("Filter") filter: option<intelligentTieringFilter>,
+@as("Id") id: intelligentTieringId
 }
 type bucketLoggingStatus = {
-@as("LoggingEnabled") loggingEnabled: loggingEnabled
+@as("LoggingEnabled") loggingEnabled: option<loggingEnabled>
 }
 type analyticsConfiguration = {
-@as("StorageClassAnalysis") storageClassAnalysis: option<storageClassAnalysis>,
-@as("Filter") filter: analyticsFilter,
-@as("Id") id: option<analyticsId>
+@as("StorageClassAnalysis") storageClassAnalysis: storageClassAnalysis,
+@as("Filter") filter: option<analyticsFilter>,
+@as("Id") id: analyticsId
 }
 type topicConfigurationList = array<topicConfiguration>
 type restoreRequest = {
-@as("OutputLocation") outputLocation: outputLocation,
-@as("SelectParameters") selectParameters: selectParameters,
-@as("Description") description: description,
-@as("Tier") tier: tier,
-@as("Type") type_: restoreRequestType,
-@as("GlacierJobParameters") glacierJobParameters: glacierJobParameters,
-@as("Days") days: days
+@as("OutputLocation") outputLocation: option<outputLocation>,
+@as("SelectParameters") selectParameters: option<selectParameters>,
+@as("Description") description: option<description>,
+@as("Tier") tier: option<tier>,
+@as("Type") type_: option<restoreRequestType>,
+@as("GlacierJobParameters") glacierJobParameters: option<glacierJobParameters>,
+@as("Days") days: option<days>
 }
 type replicationRules = array<replicationRule>
 type queueConfigurationList = array<queueConfiguration>
@@ -796,1684 +804,1684 @@ type inventoryConfigurationList = array<inventoryConfiguration>
 type intelligentTieringConfigurationList = array<intelligentTieringConfiguration>
 type analyticsConfigurationList = array<analyticsConfiguration>
 type replicationConfiguration = {
-@as("Rules") rules: option<replicationRules>,
-@as("Role") role: option<role>
+@as("Rules") rules: replicationRules,
+@as("Role") role: role
 }
 type notificationConfiguration = {
-@as("LambdaFunctionConfigurations") lambdaFunctionConfigurations: lambdaFunctionConfigurationList,
-@as("QueueConfigurations") queueConfigurations: queueConfigurationList,
-@as("TopicConfigurations") topicConfigurations: topicConfigurationList
+@as("LambdaFunctionConfigurations") lambdaFunctionConfigurations: option<lambdaFunctionConfigurationList>,
+@as("QueueConfigurations") queueConfigurations: option<queueConfigurationList>,
+@as("TopicConfigurations") topicConfigurations: option<topicConfigurationList>
 }
 type bucketLifecycleConfiguration = {
-@as("Rules") rules: option<lifecycleRules>
+@as("Rules") rules: lifecycleRules
 }
-type clientType;
-@module("@aws-sdk/client-s3") @new external createClient: unit => clientType = "S3Client";
+type awsServiceClient;
+@module("@aws-sdk/client-s3") @new external createClient: unit => awsServiceClient = "S3Client";
 module UploadPart = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerKey") sSECustomerKey: sSECustomerKey,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("UploadId") uploadId: option<multipartUploadId>,
-@as("PartNumber") partNumber: option<partNumber>,
-@as("Key") key: option<objectKey>,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("ContentLength") contentLength: contentLength,
-@as("Bucket") bucket: option<bucketName>,
-@as("Body") body: streamingBlob
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerKey") ssecustomerKey: option<ssecustomerKey>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("UploadId") uploadId: multipartUploadId,
+@as("PartNumber") partNumber: partNumber,
+@as("Key") key: objectKey,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("ContentLength") contentLength: option<contentLength>,
+@as("Bucket") bucket: bucketName,
+@as("Body") body: option<streamingBlob>
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged,
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("ETag") eTag: eTag,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("ETag") etag: option<etag>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "UploadPartCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutBucketPolicy = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Policy") policy: option<policy>,
-@as("ConfirmRemoveSelfBucketAccess") confirmRemoveSelfBucketAccess: confirmRemoveSelfBucketAccess,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Policy") policy: policy,
+@as("ConfirmRemoveSelfBucketAccess") confirmRemoveSelfBucketAccess: option<confirmRemoveSelfBucketAccess>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module HeadBucket = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "HeadBucketCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetObjectTorrent = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged,
-@as("Body") body: streamingBlob
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("Body") body: option<streamingBlob>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectTorrentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketVersioning = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("MFADelete") mFADelete: mFADeleteStatus,
-@as("Status") status: bucketVersioningStatus
+@as("MFADelete") mfadelete: option<mfadeleteStatus>,
+@as("Status") status: option<bucketVersioningStatus>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketVersioningCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketRequestPayment = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("Payer") payer: payer
+@as("Payer") payer: option<payer>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketRequestPaymentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketPolicy = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("Policy") policy: policy
+@as("Policy") policy: option<policy>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketLocation = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("LocationConstraint") locationConstraint: bucketLocationConstraint
+@as("LocationConstraint") locationConstraint: option<bucketLocationConstraint>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketLocationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketAccelerateConfiguration = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("Status") status: bucketAccelerateStatus
+@as("Status") status: option<bucketAccelerateStatus>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketAccelerateConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeletePublicAccessBlock = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeletePublicAccessBlockCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteObjectTagging = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("VersionId") versionId: objectVersionId
+@as("VersionId") versionId: option<objectVersionId>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteObjectTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteObject = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("BypassGovernanceRetention") bypassGovernanceRetention: bypassGovernanceRetention,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("VersionId") versionId: objectVersionId,
-@as("MFA") mFA: mFA,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("BypassGovernanceRetention") bypassGovernanceRetention: option<bypassGovernanceRetention>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("MFA") mfa: option<mfa>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged,
-@as("VersionId") versionId: objectVersionId,
-@as("DeleteMarker") deleteMarker: deleteMarker
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("DeleteMarker") deleteMarker: option<deleteMarker>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteObjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteBucketWebsite = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketWebsiteCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketTagging = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketReplication = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketReplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketPolicy = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketOwnershipControls = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketOwnershipControlsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketMetricsConfiguration = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Id") id: option<metricsId>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Id") id: metricsId,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketMetricsConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketLifecycle = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketLifecycleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketInventoryConfiguration = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Id") id: option<inventoryId>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Id") id: inventoryId,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketInventoryConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketIntelligentTieringConfiguration = {
   type t;
   type request = {
-@as("Id") id: option<intelligentTieringId>,
-@as("Bucket") bucket: option<bucketName>
+@as("Id") id: intelligentTieringId,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketIntelligentTieringConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketEncryption = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketEncryptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketCors = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketCorsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucketAnalyticsConfiguration = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Id") id: option<analyticsId>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Id") id: analyticsId,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketAnalyticsConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteBucket = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module AbortMultipartUpload = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("UploadId") uploadId: option<multipartUploadId>,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("UploadId") uploadId: multipartUploadId,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged
+@as("RequestCharged") requestCharged: option<requestCharged>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "AbortMultipartUploadCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module WriteGetObjectResponse = {
   type t;
   type request = {
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("VersionId") versionId: objectVersionId,
-@as("TagCount") tagCount: tagCount,
-@as("StorageClass") storageClass: storageClass,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("Restore") restore: restore,
-@as("RequestCharged") requestCharged: requestCharged,
-@as("ReplicationStatus") replicationStatus: replicationStatus,
-@as("PartsCount") partsCount: partsCount,
-@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: objectLockRetainUntilDate,
-@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: objectLockLegalHoldStatus,
-@as("ObjectLockMode") objectLockMode: objectLockMode,
-@as("Metadata") metadata: metadata,
-@as("MissingMeta") missingMeta: missingMeta,
-@as("LastModified") lastModified: lastModified,
-@as("Expiration") expiration: expiration,
-@as("Expires") expires: expires,
-@as("ETag") eTag: eTag,
-@as("DeleteMarker") deleteMarker: deleteMarker,
-@as("ContentType") contentType: contentType,
-@as("ContentRange") contentRange: contentRange,
-@as("ContentLength") contentLength: contentLength,
-@as("ContentLanguage") contentLanguage: contentLanguage,
-@as("ContentEncoding") contentEncoding: contentEncoding,
-@as("ContentDisposition") contentDisposition: contentDisposition,
-@as("CacheControl") cacheControl: cacheControl,
-@as("AcceptRanges") acceptRanges: acceptRanges,
-@as("ErrorMessage") errorMessage: errorMessage,
-@as("ErrorCode") errorCode: errorCode,
-@as("StatusCode") statusCode: getObjectResponseStatusCode,
-@as("Body") body: streamingBlob,
-@as("RequestToken") requestToken: option<requestToken>,
-@as("RequestRoute") requestRoute: option<requestRoute>
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("TagCount") tagCount: option<tagCount>,
+@as("StorageClass") storageClass: option<storageClass>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>,
+@as("Restore") restore: option<restore>,
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("ReplicationStatus") replicationStatus: option<replicationStatus>,
+@as("PartsCount") partsCount: option<partsCount>,
+@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: option<objectLockRetainUntilDate>,
+@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: option<objectLockLegalHoldStatus>,
+@as("ObjectLockMode") objectLockMode: option<objectLockMode>,
+@as("Metadata") metadata: option<metadata>,
+@as("MissingMeta") missingMeta: option<missingMeta>,
+@as("LastModified") lastModified: option<lastModified>,
+@as("Expiration") expiration: option<expiration>,
+@as("Expires") expires: option<expires>,
+@as("ETag") etag: option<etag>,
+@as("DeleteMarker") deleteMarker: option<deleteMarker>,
+@as("ContentType") contentType: option<contentType>,
+@as("ContentRange") contentRange: option<contentRange>,
+@as("ContentLength") contentLength: option<contentLength>,
+@as("ContentLanguage") contentLanguage: option<contentLanguage>,
+@as("ContentEncoding") contentEncoding: option<contentEncoding>,
+@as("ContentDisposition") contentDisposition: option<contentDisposition>,
+@as("CacheControl") cacheControl: option<cacheControl>,
+@as("AcceptRanges") acceptRanges: option<acceptRanges>,
+@as("ErrorMessage") errorMessage: option<errorMessage>,
+@as("ErrorCode") errorCode: option<errorCode>,
+@as("StatusCode") statusCode: option<getObjectResponseStatusCode>,
+@as("Body") body: option<streamingBlob>,
+@as("RequestToken") requestToken: requestToken,
+@as("RequestRoute") requestRoute: requestRoute
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "WriteGetObjectResponseCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module UploadPartCopy = {
   type t;
   type request = {
-@as("ExpectedSourceBucketOwner") expectedSourceBucketOwner: accountId,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("CopySourceSSECustomerKeyMD5") copySourceSSECustomerKeyMD5: copySourceSSECustomerKeyMD5,
-@as("CopySourceSSECustomerKey") copySourceSSECustomerKey: copySourceSSECustomerKey,
-@as("CopySourceSSECustomerAlgorithm") copySourceSSECustomerAlgorithm: copySourceSSECustomerAlgorithm,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerKey") sSECustomerKey: sSECustomerKey,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("UploadId") uploadId: option<multipartUploadId>,
-@as("PartNumber") partNumber: option<partNumber>,
-@as("Key") key: option<objectKey>,
-@as("CopySourceRange") copySourceRange: copySourceRange,
-@as("CopySourceIfUnmodifiedSince") copySourceIfUnmodifiedSince: copySourceIfUnmodifiedSince,
-@as("CopySourceIfNoneMatch") copySourceIfNoneMatch: copySourceIfNoneMatch,
-@as("CopySourceIfModifiedSince") copySourceIfModifiedSince: copySourceIfModifiedSince,
-@as("CopySourceIfMatch") copySourceIfMatch: copySourceIfMatch,
-@as("CopySource") copySource: option<copySource>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedSourceBucketOwner") expectedSourceBucketOwner: option<accountId>,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("CopySourceSSECustomerKeyMD5") copySourceSSECustomerKeyMD5: option<copySourceSSECustomerKeyMD5>,
+@as("CopySourceSSECustomerKey") copySourceSSECustomerKey: option<copySourceSSECustomerKey>,
+@as("CopySourceSSECustomerAlgorithm") copySourceSSECustomerAlgorithm: option<copySourceSSECustomerAlgorithm>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerKey") ssecustomerKey: option<ssecustomerKey>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("UploadId") uploadId: multipartUploadId,
+@as("PartNumber") partNumber: partNumber,
+@as("Key") key: objectKey,
+@as("CopySourceRange") copySourceRange: option<copySourceRange>,
+@as("CopySourceIfUnmodifiedSince") copySourceIfUnmodifiedSince: option<copySourceIfUnmodifiedSince>,
+@as("CopySourceIfNoneMatch") copySourceIfNoneMatch: option<copySourceIfNoneMatch>,
+@as("CopySourceIfModifiedSince") copySourceIfModifiedSince: option<copySourceIfModifiedSince>,
+@as("CopySourceIfMatch") copySourceIfMatch: option<copySourceIfMatch>,
+@as("CopySource") copySource: copySource,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged,
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("CopyPartResult") copyPartResult: copyPartResult,
-@as("CopySourceVersionId") copySourceVersionId: copySourceVersionId
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>,
+@as("CopyPartResult") copyPartResult: option<copyPartResult>,
+@as("CopySourceVersionId") copySourceVersionId: option<copySourceVersionId>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "UploadPartCopyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutPublicAccessBlock = {
   type t;
   type request = {
-@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: option<publicAccessBlockConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>
+@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: publicAccessBlockConfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutPublicAccessBlockCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutObjectRetention = {
   type t;
   type request = {
-@as("Retention") retention: objectLockRetention,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("BypassGovernanceRetention") bypassGovernanceRetention: bypassGovernanceRetention,
-@as("VersionId") versionId: objectVersionId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("Retention") retention: option<objectLockRetention>,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("BypassGovernanceRetention") bypassGovernanceRetention: option<bypassGovernanceRetention>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged
+@as("RequestCharged") requestCharged: option<requestCharged>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectRetentionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutObjectLegalHold = {
   type t;
   type request = {
-@as("LegalHold") legalHold: objectLockLegalHold,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("VersionId") versionId: objectVersionId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("LegalHold") legalHold: option<objectLockLegalHold>,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged
+@as("RequestCharged") requestCharged: option<requestCharged>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectLegalHoldCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutObject = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: objectLockLegalHoldStatus,
-@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: objectLockRetainUntilDate,
-@as("ObjectLockMode") objectLockMode: objectLockMode,
-@as("Tagging") tagging: taggingHeader,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("SSEKMSEncryptionContext") sSEKMSEncryptionContext: sSEKMSEncryptionContext,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerKey") sSECustomerKey: sSECustomerKey,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("WebsiteRedirectLocation") websiteRedirectLocation: websiteRedirectLocation,
-@as("StorageClass") storageClass: storageClass,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("Metadata") metadata: metadata,
-@as("Key") key: option<objectKey>,
-@as("GrantWriteACP") grantWriteACP: grantWriteACP,
-@as("GrantReadACP") grantReadACP: grantReadACP,
-@as("GrantRead") grantRead: grantRead,
-@as("GrantFullControl") grantFullControl: grantFullControl,
-@as("Expires") expires: expires,
-@as("ContentType") contentType: contentType,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("ContentLength") contentLength: contentLength,
-@as("ContentLanguage") contentLanguage: contentLanguage,
-@as("ContentEncoding") contentEncoding: contentEncoding,
-@as("ContentDisposition") contentDisposition: contentDisposition,
-@as("CacheControl") cacheControl: cacheControl,
-@as("Bucket") bucket: option<bucketName>,
-@as("Body") body: streamingBlob,
-@as("ACL") aCL: objectCannedACL
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: option<objectLockLegalHoldStatus>,
+@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: option<objectLockRetainUntilDate>,
+@as("ObjectLockMode") objectLockMode: option<objectLockMode>,
+@as("Tagging") tagging: option<taggingHeader>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("SSEKMSEncryptionContext") ssekmsencryptionContext: option<ssekmsencryptionContext>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerKey") ssecustomerKey: option<ssecustomerKey>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("WebsiteRedirectLocation") websiteRedirectLocation: option<websiteRedirectLocation>,
+@as("StorageClass") storageClass: option<storageClass>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>,
+@as("Metadata") metadata: option<metadata>,
+@as("Key") key: objectKey,
+@as("GrantWriteACP") grantWriteACP: option<grantWriteACP>,
+@as("GrantReadACP") grantReadACP: option<grantReadACP>,
+@as("GrantRead") grantRead: option<grantRead>,
+@as("GrantFullControl") grantFullControl: option<grantFullControl>,
+@as("Expires") expires: option<expires>,
+@as("ContentType") contentType: option<contentType>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("ContentLength") contentLength: option<contentLength>,
+@as("ContentLanguage") contentLanguage: option<contentLanguage>,
+@as("ContentEncoding") contentEncoding: option<contentEncoding>,
+@as("ContentDisposition") contentDisposition: option<contentDisposition>,
+@as("CacheControl") cacheControl: option<cacheControl>,
+@as("Bucket") bucket: bucketName,
+@as("Body") body: option<streamingBlob>,
+@as("ACL") acl: option<objectCannedACL>
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged,
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("SSEKMSEncryptionContext") sSEKMSEncryptionContext: sSEKMSEncryptionContext,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("VersionId") versionId: objectVersionId,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("ETag") eTag: eTag,
-@as("Expiration") expiration: expiration
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("SSEKMSEncryptionContext") ssekmsencryptionContext: option<ssekmsencryptionContext>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>,
+@as("ETag") etag: option<etag>,
+@as("Expiration") expiration: option<expiration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutBucketVersioning = {
   type t;
   type request = {
-@as("VersioningConfiguration") versioningConfiguration: option<versioningConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("MFA") mFA: mFA,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>
+@as("VersioningConfiguration") versioningConfiguration: versioningConfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("MFA") mfa: option<mfa>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketVersioningCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketRequestPayment = {
   type t;
   type request = {
-@as("RequestPaymentConfiguration") requestPaymentConfiguration: option<requestPaymentConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>
+@as("RequestPaymentConfiguration") requestPaymentConfiguration: requestPaymentConfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketRequestPaymentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketAccelerateConfiguration = {
   type t;
   type request = {
-@as("AccelerateConfiguration") accelerateConfiguration: option<accelerateConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("AccelerateConfiguration") accelerateConfiguration: accelerateConfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketAccelerateConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module HeadObject = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("PartNumber") partNumber: partNumber,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerKey") sSECustomerKey: sSECustomerKey,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("VersionId") versionId: objectVersionId,
-@as("Range") range: range,
-@as("Key") key: option<objectKey>,
-@as("IfUnmodifiedSince") ifUnmodifiedSince: ifUnmodifiedSince,
-@as("IfNoneMatch") ifNoneMatch: ifNoneMatch,
-@as("IfModifiedSince") ifModifiedSince: ifModifiedSince,
-@as("IfMatch") ifMatch: ifMatch,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("PartNumber") partNumber: option<partNumber>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerKey") ssecustomerKey: option<ssecustomerKey>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Range") range: option<range>,
+@as("Key") key: objectKey,
+@as("IfUnmodifiedSince") ifUnmodifiedSince: option<ifUnmodifiedSince>,
+@as("IfNoneMatch") ifNoneMatch: option<ifNoneMatch>,
+@as("IfModifiedSince") ifModifiedSince: option<ifModifiedSince>,
+@as("IfMatch") ifMatch: option<ifMatch>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: objectLockLegalHoldStatus,
-@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: objectLockRetainUntilDate,
-@as("ObjectLockMode") objectLockMode: objectLockMode,
-@as("PartsCount") partsCount: partsCount,
-@as("ReplicationStatus") replicationStatus: replicationStatus,
-@as("RequestCharged") requestCharged: requestCharged,
-@as("StorageClass") storageClass: storageClass,
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("Metadata") metadata: metadata,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("WebsiteRedirectLocation") websiteRedirectLocation: websiteRedirectLocation,
-@as("Expires") expires: expires,
-@as("ContentType") contentType: contentType,
-@as("ContentLanguage") contentLanguage: contentLanguage,
-@as("ContentEncoding") contentEncoding: contentEncoding,
-@as("ContentDisposition") contentDisposition: contentDisposition,
-@as("CacheControl") cacheControl: cacheControl,
-@as("VersionId") versionId: objectVersionId,
-@as("MissingMeta") missingMeta: missingMeta,
-@as("ETag") eTag: eTag,
-@as("ContentLength") contentLength: contentLength,
-@as("LastModified") lastModified: lastModified,
-@as("ArchiveStatus") archiveStatus: archiveStatus,
-@as("Restore") restore: restore,
-@as("Expiration") expiration: expiration,
-@as("AcceptRanges") acceptRanges: acceptRanges,
-@as("DeleteMarker") deleteMarker: deleteMarker
+@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: option<objectLockLegalHoldStatus>,
+@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: option<objectLockRetainUntilDate>,
+@as("ObjectLockMode") objectLockMode: option<objectLockMode>,
+@as("PartsCount") partsCount: option<partsCount>,
+@as("ReplicationStatus") replicationStatus: option<replicationStatus>,
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("StorageClass") storageClass: option<storageClass>,
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("Metadata") metadata: option<metadata>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>,
+@as("WebsiteRedirectLocation") websiteRedirectLocation: option<websiteRedirectLocation>,
+@as("Expires") expires: option<expires>,
+@as("ContentType") contentType: option<contentType>,
+@as("ContentLanguage") contentLanguage: option<contentLanguage>,
+@as("ContentEncoding") contentEncoding: option<contentEncoding>,
+@as("ContentDisposition") contentDisposition: option<contentDisposition>,
+@as("CacheControl") cacheControl: option<cacheControl>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("MissingMeta") missingMeta: option<missingMeta>,
+@as("ETag") etag: option<etag>,
+@as("ContentLength") contentLength: option<contentLength>,
+@as("LastModified") lastModified: option<lastModified>,
+@as("ArchiveStatus") archiveStatus: option<archiveStatus>,
+@as("Restore") restore: option<restore>,
+@as("Expiration") expiration: option<expiration>,
+@as("AcceptRanges") acceptRanges: option<acceptRanges>,
+@as("DeleteMarker") deleteMarker: option<deleteMarker>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "HeadObjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPublicAccessBlock = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: publicAccessBlockConfiguration
+@as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: option<publicAccessBlockConfiguration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetPublicAccessBlockCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetObjectRetention = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("Retention") retention: objectLockRetention
+@as("Retention") retention: option<objectLockRetention>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectRetentionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetObjectLegalHold = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("LegalHold") legalHold: objectLockLegalHold
+@as("LegalHold") legalHold: option<objectLockLegalHold>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectLegalHoldCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetObject = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("PartNumber") partNumber: partNumber,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerKey") sSECustomerKey: sSECustomerKey,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("VersionId") versionId: objectVersionId,
-@as("ResponseExpires") responseExpires: responseExpires,
-@as("ResponseContentType") responseContentType: responseContentType,
-@as("ResponseContentLanguage") responseContentLanguage: responseContentLanguage,
-@as("ResponseContentEncoding") responseContentEncoding: responseContentEncoding,
-@as("ResponseContentDisposition") responseContentDisposition: responseContentDisposition,
-@as("ResponseCacheControl") responseCacheControl: responseCacheControl,
-@as("Range") range: range,
-@as("Key") key: option<objectKey>,
-@as("IfUnmodifiedSince") ifUnmodifiedSince: ifUnmodifiedSince,
-@as("IfNoneMatch") ifNoneMatch: ifNoneMatch,
-@as("IfModifiedSince") ifModifiedSince: ifModifiedSince,
-@as("IfMatch") ifMatch: ifMatch,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("PartNumber") partNumber: option<partNumber>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerKey") ssecustomerKey: option<ssecustomerKey>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("ResponseExpires") responseExpires: option<responseExpires>,
+@as("ResponseContentType") responseContentType: option<responseContentType>,
+@as("ResponseContentLanguage") responseContentLanguage: option<responseContentLanguage>,
+@as("ResponseContentEncoding") responseContentEncoding: option<responseContentEncoding>,
+@as("ResponseContentDisposition") responseContentDisposition: option<responseContentDisposition>,
+@as("ResponseCacheControl") responseCacheControl: option<responseCacheControl>,
+@as("Range") range: option<range>,
+@as("Key") key: objectKey,
+@as("IfUnmodifiedSince") ifUnmodifiedSince: option<ifUnmodifiedSince>,
+@as("IfNoneMatch") ifNoneMatch: option<ifNoneMatch>,
+@as("IfModifiedSince") ifModifiedSince: option<ifModifiedSince>,
+@as("IfMatch") ifMatch: option<ifMatch>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: objectLockLegalHoldStatus,
-@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: objectLockRetainUntilDate,
-@as("ObjectLockMode") objectLockMode: objectLockMode,
-@as("TagCount") tagCount: tagCount,
-@as("PartsCount") partsCount: partsCount,
-@as("ReplicationStatus") replicationStatus: replicationStatus,
-@as("RequestCharged") requestCharged: requestCharged,
-@as("StorageClass") storageClass: storageClass,
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("Metadata") metadata: metadata,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("WebsiteRedirectLocation") websiteRedirectLocation: websiteRedirectLocation,
-@as("Expires") expires: expires,
-@as("ContentType") contentType: contentType,
-@as("ContentRange") contentRange: contentRange,
-@as("ContentLanguage") contentLanguage: contentLanguage,
-@as("ContentEncoding") contentEncoding: contentEncoding,
-@as("ContentDisposition") contentDisposition: contentDisposition,
-@as("CacheControl") cacheControl: cacheControl,
-@as("VersionId") versionId: objectVersionId,
-@as("MissingMeta") missingMeta: missingMeta,
-@as("ETag") eTag: eTag,
-@as("ContentLength") contentLength: contentLength,
-@as("LastModified") lastModified: lastModified,
-@as("Restore") restore: restore,
-@as("Expiration") expiration: expiration,
-@as("AcceptRanges") acceptRanges: acceptRanges,
-@as("DeleteMarker") deleteMarker: deleteMarker,
-@as("Body") body: streamingBlob
+@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: option<objectLockLegalHoldStatus>,
+@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: option<objectLockRetainUntilDate>,
+@as("ObjectLockMode") objectLockMode: option<objectLockMode>,
+@as("TagCount") tagCount: option<tagCount>,
+@as("PartsCount") partsCount: option<partsCount>,
+@as("ReplicationStatus") replicationStatus: option<replicationStatus>,
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("StorageClass") storageClass: option<storageClass>,
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("Metadata") metadata: option<metadata>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>,
+@as("WebsiteRedirectLocation") websiteRedirectLocation: option<websiteRedirectLocation>,
+@as("Expires") expires: option<expires>,
+@as("ContentType") contentType: option<contentType>,
+@as("ContentRange") contentRange: option<contentRange>,
+@as("ContentLanguage") contentLanguage: option<contentLanguage>,
+@as("ContentEncoding") contentEncoding: option<contentEncoding>,
+@as("ContentDisposition") contentDisposition: option<contentDisposition>,
+@as("CacheControl") cacheControl: option<cacheControl>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("MissingMeta") missingMeta: option<missingMeta>,
+@as("ETag") etag: option<etag>,
+@as("ContentLength") contentLength: option<contentLength>,
+@as("LastModified") lastModified: option<lastModified>,
+@as("Restore") restore: option<restore>,
+@as("Expiration") expiration: option<expiration>,
+@as("AcceptRanges") acceptRanges: option<acceptRanges>,
+@as("DeleteMarker") deleteMarker: option<deleteMarker>,
+@as("Body") body: option<streamingBlob>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketPolicyStatus = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("PolicyStatus") policyStatus: policyStatus
+@as("PolicyStatus") policyStatus: option<policyStatus>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketPolicyStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateMultipartUpload = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: objectLockLegalHoldStatus,
-@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: objectLockRetainUntilDate,
-@as("ObjectLockMode") objectLockMode: objectLockMode,
-@as("Tagging") tagging: taggingHeader,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("SSEKMSEncryptionContext") sSEKMSEncryptionContext: sSEKMSEncryptionContext,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerKey") sSECustomerKey: sSECustomerKey,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("WebsiteRedirectLocation") websiteRedirectLocation: websiteRedirectLocation,
-@as("StorageClass") storageClass: storageClass,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("Metadata") metadata: metadata,
-@as("Key") key: option<objectKey>,
-@as("GrantWriteACP") grantWriteACP: grantWriteACP,
-@as("GrantReadACP") grantReadACP: grantReadACP,
-@as("GrantRead") grantRead: grantRead,
-@as("GrantFullControl") grantFullControl: grantFullControl,
-@as("Expires") expires: expires,
-@as("ContentType") contentType: contentType,
-@as("ContentLanguage") contentLanguage: contentLanguage,
-@as("ContentEncoding") contentEncoding: contentEncoding,
-@as("ContentDisposition") contentDisposition: contentDisposition,
-@as("CacheControl") cacheControl: cacheControl,
-@as("Bucket") bucket: option<bucketName>,
-@as("ACL") aCL: objectCannedACL
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: option<objectLockLegalHoldStatus>,
+@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: option<objectLockRetainUntilDate>,
+@as("ObjectLockMode") objectLockMode: option<objectLockMode>,
+@as("Tagging") tagging: option<taggingHeader>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("SSEKMSEncryptionContext") ssekmsencryptionContext: option<ssekmsencryptionContext>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerKey") ssecustomerKey: option<ssecustomerKey>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("WebsiteRedirectLocation") websiteRedirectLocation: option<websiteRedirectLocation>,
+@as("StorageClass") storageClass: option<storageClass>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>,
+@as("Metadata") metadata: option<metadata>,
+@as("Key") key: objectKey,
+@as("GrantWriteACP") grantWriteACP: option<grantWriteACP>,
+@as("GrantReadACP") grantReadACP: option<grantReadACP>,
+@as("GrantRead") grantRead: option<grantRead>,
+@as("GrantFullControl") grantFullControl: option<grantFullControl>,
+@as("Expires") expires: option<expires>,
+@as("ContentType") contentType: option<contentType>,
+@as("ContentLanguage") contentLanguage: option<contentLanguage>,
+@as("ContentEncoding") contentEncoding: option<contentEncoding>,
+@as("ContentDisposition") contentDisposition: option<contentDisposition>,
+@as("CacheControl") cacheControl: option<cacheControl>,
+@as("Bucket") bucket: bucketName,
+@as("ACL") acl: option<objectCannedACL>
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged,
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("SSEKMSEncryptionContext") sSEKMSEncryptionContext: sSEKMSEncryptionContext,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("UploadId") uploadId: multipartUploadId,
-@as("Key") key: objectKey,
-@as("Bucket") bucket: bucketName,
-@as("AbortRuleId") abortRuleId: abortRuleId,
-@as("AbortDate") abortDate: abortDate
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("SSEKMSEncryptionContext") ssekmsencryptionContext: option<ssekmsencryptionContext>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>,
+@as("UploadId") uploadId: option<multipartUploadId>,
+@as("Key") key: option<objectKey>,
+@as("Bucket") bucket: option<bucketName>,
+@as("AbortRuleId") abortRuleId: option<abortRuleId>,
+@as("AbortDate") abortDate: option<abortDate>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateMultipartUploadCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBucket = {
   type t;
   type request = {
-@as("CreateBucketConfiguration") createBucketConfiguration: createBucketConfiguration,
-@as("ObjectLockEnabledForBucket") objectLockEnabledForBucket: objectLockEnabledForBucket,
-@as("GrantWriteACP") grantWriteACP: grantWriteACP,
-@as("GrantWrite") grantWrite: grantWrite,
-@as("GrantReadACP") grantReadACP: grantReadACP,
-@as("GrantRead") grantRead: grantRead,
-@as("GrantFullControl") grantFullControl: grantFullControl,
-@as("Bucket") bucket: option<bucketName>,
-@as("ACL") aCL: bucketCannedACL
+@as("CreateBucketConfiguration") createBucketConfiguration: option<createBucketConfiguration>,
+@as("ObjectLockEnabledForBucket") objectLockEnabledForBucket: option<objectLockEnabledForBucket>,
+@as("GrantWriteACP") grantWriteACP: option<grantWriteACP>,
+@as("GrantWrite") grantWrite: option<grantWrite>,
+@as("GrantReadACP") grantReadACP: option<grantReadACP>,
+@as("GrantRead") grantRead: option<grantRead>,
+@as("GrantFullControl") grantFullControl: option<grantFullControl>,
+@as("Bucket") bucket: bucketName,
+@as("ACL") acl: option<bucketCannedACL>
 }
   type response = {
-@as("Location") location: location
+@as("Location") location: option<location>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateBucketCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CopyObject = {
   type t;
   type request = {
-@as("ExpectedSourceBucketOwner") expectedSourceBucketOwner: accountId,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: objectLockLegalHoldStatus,
-@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: objectLockRetainUntilDate,
-@as("ObjectLockMode") objectLockMode: objectLockMode,
-@as("Tagging") tagging: taggingHeader,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("CopySourceSSECustomerKeyMD5") copySourceSSECustomerKeyMD5: copySourceSSECustomerKeyMD5,
-@as("CopySourceSSECustomerKey") copySourceSSECustomerKey: copySourceSSECustomerKey,
-@as("CopySourceSSECustomerAlgorithm") copySourceSSECustomerAlgorithm: copySourceSSECustomerAlgorithm,
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("SSEKMSEncryptionContext") sSEKMSEncryptionContext: sSEKMSEncryptionContext,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerKey") sSECustomerKey: sSECustomerKey,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("WebsiteRedirectLocation") websiteRedirectLocation: websiteRedirectLocation,
-@as("StorageClass") storageClass: storageClass,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("TaggingDirective") taggingDirective: taggingDirective,
-@as("MetadataDirective") metadataDirective: metadataDirective,
-@as("Metadata") metadata: metadata,
-@as("Key") key: option<objectKey>,
-@as("GrantWriteACP") grantWriteACP: grantWriteACP,
-@as("GrantReadACP") grantReadACP: grantReadACP,
-@as("GrantRead") grantRead: grantRead,
-@as("GrantFullControl") grantFullControl: grantFullControl,
-@as("Expires") expires: expires,
-@as("CopySourceIfUnmodifiedSince") copySourceIfUnmodifiedSince: copySourceIfUnmodifiedSince,
-@as("CopySourceIfNoneMatch") copySourceIfNoneMatch: copySourceIfNoneMatch,
-@as("CopySourceIfModifiedSince") copySourceIfModifiedSince: copySourceIfModifiedSince,
-@as("CopySourceIfMatch") copySourceIfMatch: copySourceIfMatch,
-@as("CopySource") copySource: option<copySource>,
-@as("ContentType") contentType: contentType,
-@as("ContentLanguage") contentLanguage: contentLanguage,
-@as("ContentEncoding") contentEncoding: contentEncoding,
-@as("ContentDisposition") contentDisposition: contentDisposition,
-@as("CacheControl") cacheControl: cacheControl,
-@as("Bucket") bucket: option<bucketName>,
-@as("ACL") aCL: objectCannedACL
+@as("ExpectedSourceBucketOwner") expectedSourceBucketOwner: option<accountId>,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ObjectLockLegalHoldStatus") objectLockLegalHoldStatus: option<objectLockLegalHoldStatus>,
+@as("ObjectLockRetainUntilDate") objectLockRetainUntilDate: option<objectLockRetainUntilDate>,
+@as("ObjectLockMode") objectLockMode: option<objectLockMode>,
+@as("Tagging") tagging: option<taggingHeader>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("CopySourceSSECustomerKeyMD5") copySourceSSECustomerKeyMD5: option<copySourceSSECustomerKeyMD5>,
+@as("CopySourceSSECustomerKey") copySourceSSECustomerKey: option<copySourceSSECustomerKey>,
+@as("CopySourceSSECustomerAlgorithm") copySourceSSECustomerAlgorithm: option<copySourceSSECustomerAlgorithm>,
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("SSEKMSEncryptionContext") ssekmsencryptionContext: option<ssekmsencryptionContext>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerKey") ssecustomerKey: option<ssecustomerKey>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("WebsiteRedirectLocation") websiteRedirectLocation: option<websiteRedirectLocation>,
+@as("StorageClass") storageClass: option<storageClass>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>,
+@as("TaggingDirective") taggingDirective: option<taggingDirective>,
+@as("MetadataDirective") metadataDirective: option<metadataDirective>,
+@as("Metadata") metadata: option<metadata>,
+@as("Key") key: objectKey,
+@as("GrantWriteACP") grantWriteACP: option<grantWriteACP>,
+@as("GrantReadACP") grantReadACP: option<grantReadACP>,
+@as("GrantRead") grantRead: option<grantRead>,
+@as("GrantFullControl") grantFullControl: option<grantFullControl>,
+@as("Expires") expires: option<expires>,
+@as("CopySourceIfUnmodifiedSince") copySourceIfUnmodifiedSince: option<copySourceIfUnmodifiedSince>,
+@as("CopySourceIfNoneMatch") copySourceIfNoneMatch: option<copySourceIfNoneMatch>,
+@as("CopySourceIfModifiedSince") copySourceIfModifiedSince: option<copySourceIfModifiedSince>,
+@as("CopySourceIfMatch") copySourceIfMatch: option<copySourceIfMatch>,
+@as("CopySource") copySource: copySource,
+@as("ContentType") contentType: option<contentType>,
+@as("ContentLanguage") contentLanguage: option<contentLanguage>,
+@as("ContentEncoding") contentEncoding: option<contentEncoding>,
+@as("ContentDisposition") contentDisposition: option<contentDisposition>,
+@as("CacheControl") cacheControl: option<cacheControl>,
+@as("Bucket") bucket: bucketName,
+@as("ACL") acl: option<objectCannedACL>
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged,
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("SSEKMSEncryptionContext") sSEKMSEncryptionContext: sSEKMSEncryptionContext,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("VersionId") versionId: objectVersionId,
-@as("CopySourceVersionId") copySourceVersionId: copySourceVersionId,
-@as("Expiration") expiration: expiration,
-@as("CopyObjectResult") copyObjectResult: copyObjectResult
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("SSEKMSEncryptionContext") ssekmsencryptionContext: option<ssekmsencryptionContext>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("CopySourceVersionId") copySourceVersionId: option<copySourceVersionId>,
+@as("Expiration") expiration: option<expiration>,
+@as("CopyObjectResult") copyObjectResult: option<copyObjectResult>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CopyObjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListParts = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("UploadId") uploadId: option<multipartUploadId>,
-@as("PartNumberMarker") partNumberMarker: partNumberMarker,
-@as("MaxParts") maxParts: maxParts,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("UploadId") uploadId: multipartUploadId,
+@as("PartNumberMarker") partNumberMarker: option<partNumberMarker>,
+@as("MaxParts") maxParts: option<maxParts>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged,
-@as("StorageClass") storageClass: storageClass,
-@as("Owner") owner: owner,
-@as("Initiator") initiator: initiator,
-@as("Parts") parts: parts,
-@as("IsTruncated") isTruncated: isTruncated,
-@as("MaxParts") maxParts: maxParts,
-@as("NextPartNumberMarker") nextPartNumberMarker: nextPartNumberMarker,
-@as("PartNumberMarker") partNumberMarker: partNumberMarker,
-@as("UploadId") uploadId: multipartUploadId,
-@as("Key") key: objectKey,
-@as("Bucket") bucket: bucketName,
-@as("AbortRuleId") abortRuleId: abortRuleId,
-@as("AbortDate") abortDate: abortDate
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("StorageClass") storageClass: option<storageClass>,
+@as("Owner") owner: option<owner>,
+@as("Initiator") initiator: option<initiator>,
+@as("Parts") parts: option<parts>,
+@as("IsTruncated") isTruncated: option<isTruncated>,
+@as("MaxParts") maxParts: option<maxParts>,
+@as("NextPartNumberMarker") nextPartNumberMarker: option<nextPartNumberMarker>,
+@as("PartNumberMarker") partNumberMarker: option<partNumberMarker>,
+@as("UploadId") uploadId: option<multipartUploadId>,
+@as("Key") key: option<objectKey>,
+@as("Bucket") bucket: option<bucketName>,
+@as("AbortRuleId") abortRuleId: option<abortRuleId>,
+@as("AbortDate") abortDate: option<abortDate>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListPartsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBuckets = {
   type t;
   
   type response = {
-@as("Owner") owner: owner,
-@as("Buckets") buckets: buckets
+@as("Owner") owner: option<owner>,
+@as("Buckets") buckets: option<buckets>
 }
   @module("@aws-sdk/client-s3") @new external new_: (unit) => t = "ListBucketsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetObjectTagging = {
   type t;
   type request = {
-@as("RequestPayer") requestPayer: requestPayer,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("TagSet") tagSet: option<tagSet>,
-@as("VersionId") versionId: objectVersionId
+@as("TagSet") tagSet: tagSet,
+@as("VersionId") versionId: option<objectVersionId>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketTagging = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("TagSet") tagSet: option<tagSet>
+@as("TagSet") tagSet: tagSet
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SelectObjectContent = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ScanRange") scanRange: scanRange,
-@as("OutputSerialization") outputSerialization: option<outputSerialization>,
-@as("InputSerialization") inputSerialization: option<inputSerialization>,
-@as("RequestProgress") requestProgress: requestProgress,
-@as("ExpressionType") expressionType: option<expressionType>,
-@as("Expression") expression: option<expression>,
-@as("SSECustomerKeyMD5") sSECustomerKeyMD5: sSECustomerKeyMD5,
-@as("SSECustomerKey") sSECustomerKey: sSECustomerKey,
-@as("SSECustomerAlgorithm") sSECustomerAlgorithm: sSECustomerAlgorithm,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ScanRange") scanRange: option<scanRange>,
+@as("OutputSerialization") outputSerialization: outputSerialization,
+@as("InputSerialization") inputSerialization: inputSerialization,
+@as("RequestProgress") requestProgress: option<requestProgress>,
+@as("ExpressionType") expressionType: expressionType,
+@as("Expression") expression: expression,
+@as("SSECustomerKeyMD5") ssecustomerKeyMD5: option<ssecustomerKeyMD5>,
+@as("SSECustomerKey") ssecustomerKey: option<ssecustomerKey>,
+@as("SSECustomerAlgorithm") ssecustomerAlgorithm: option<ssecustomerAlgorithm>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("Payload") payload: selectObjectContentEventStream
+@as("Payload") payload: option<selectObjectContentEventStream>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "SelectObjectContentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutObjectTagging = {
   type t;
   type request = {
-@as("Tagging") tagging: option<tagging>,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("Tagging") tagging: tagging,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("VersionId") versionId: objectVersionId
+@as("VersionId") versionId: option<objectVersionId>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutObjectLockConfiguration = {
   type t;
   type request = {
-@as("ObjectLockConfiguration") objectLockConfiguration: objectLockConfiguration,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Token") token: objectLockToken,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("Bucket") bucket: option<bucketName>
+@as("ObjectLockConfiguration") objectLockConfiguration: option<objectLockConfiguration>,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Token") token: option<objectLockToken>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged
+@as("RequestCharged") requestCharged: option<requestCharged>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectLockConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutBucketTagging = {
   type t;
   type request = {
-@as("Tagging") tagging: option<tagging>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>
+@as("Tagging") tagging: tagging,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketTaggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketOwnershipControls = {
   type t;
   type request = {
-@as("OwnershipControls") ownershipControls: option<ownershipControls>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>
+@as("OwnershipControls") ownershipControls: ownershipControls,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketOwnershipControlsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListObjectsV2 = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("StartAfter") startAfter: startAfter,
-@as("FetchOwner") fetchOwner: fetchOwner,
-@as("ContinuationToken") continuationToken: token,
-@as("Prefix") prefix: prefix,
-@as("MaxKeys") maxKeys: maxKeys,
-@as("EncodingType") encodingType: encodingType,
-@as("Delimiter") delimiter: delimiter,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("StartAfter") startAfter: option<startAfter>,
+@as("FetchOwner") fetchOwner: option<fetchOwner>,
+@as("ContinuationToken") continuationToken: option<token>,
+@as("Prefix") prefix: option<prefix>,
+@as("MaxKeys") maxKeys: option<maxKeys>,
+@as("EncodingType") encodingType: option<encodingType>,
+@as("Delimiter") delimiter: option<delimiter>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("StartAfter") startAfter: startAfter,
-@as("NextContinuationToken") nextContinuationToken: nextToken,
-@as("ContinuationToken") continuationToken: token,
-@as("KeyCount") keyCount: keyCount,
-@as("EncodingType") encodingType: encodingType,
-@as("CommonPrefixes") commonPrefixes: commonPrefixList,
-@as("MaxKeys") maxKeys: maxKeys,
-@as("Delimiter") delimiter: delimiter,
-@as("Prefix") prefix: prefix,
-@as("Name") name: bucketName,
-@as("Contents") contents: objectList,
-@as("IsTruncated") isTruncated: isTruncated
+@as("StartAfter") startAfter: option<startAfter>,
+@as("NextContinuationToken") nextContinuationToken: option<nextToken>,
+@as("ContinuationToken") continuationToken: option<token>,
+@as("KeyCount") keyCount: option<keyCount>,
+@as("EncodingType") encodingType: option<encodingType>,
+@as("CommonPrefixes") commonPrefixes: option<commonPrefixList>,
+@as("MaxKeys") maxKeys: option<maxKeys>,
+@as("Delimiter") delimiter: option<delimiter>,
+@as("Prefix") prefix: option<prefix>,
+@as("Name") name: option<bucketName>,
+@as("Contents") contents: option<objectList>,
+@as("IsTruncated") isTruncated: option<isTruncated>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListObjectsV2Command";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListObjects = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("Prefix") prefix: prefix,
-@as("MaxKeys") maxKeys: maxKeys,
-@as("Marker") marker: marker,
-@as("EncodingType") encodingType: encodingType,
-@as("Delimiter") delimiter: delimiter,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("Prefix") prefix: option<prefix>,
+@as("MaxKeys") maxKeys: option<maxKeys>,
+@as("Marker") marker: option<marker>,
+@as("EncodingType") encodingType: option<encodingType>,
+@as("Delimiter") delimiter: option<delimiter>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("EncodingType") encodingType: encodingType,
-@as("CommonPrefixes") commonPrefixes: commonPrefixList,
-@as("MaxKeys") maxKeys: maxKeys,
-@as("Delimiter") delimiter: delimiter,
-@as("Prefix") prefix: prefix,
-@as("Name") name: bucketName,
-@as("Contents") contents: objectList,
-@as("NextMarker") nextMarker: nextMarker,
-@as("Marker") marker: marker,
-@as("IsTruncated") isTruncated: isTruncated
+@as("EncodingType") encodingType: option<encodingType>,
+@as("CommonPrefixes") commonPrefixes: option<commonPrefixList>,
+@as("MaxKeys") maxKeys: option<maxKeys>,
+@as("Delimiter") delimiter: option<delimiter>,
+@as("Prefix") prefix: option<prefix>,
+@as("Name") name: option<bucketName>,
+@as("Contents") contents: option<objectList>,
+@as("NextMarker") nextMarker: option<nextMarker>,
+@as("Marker") marker: option<marker>,
+@as("IsTruncated") isTruncated: option<isTruncated>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListObjectsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListObjectVersions = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("VersionIdMarker") versionIdMarker: versionIdMarker,
-@as("Prefix") prefix: prefix,
-@as("MaxKeys") maxKeys: maxKeys,
-@as("KeyMarker") keyMarker: keyMarker,
-@as("EncodingType") encodingType: encodingType,
-@as("Delimiter") delimiter: delimiter,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("VersionIdMarker") versionIdMarker: option<versionIdMarker>,
+@as("Prefix") prefix: option<prefix>,
+@as("MaxKeys") maxKeys: option<maxKeys>,
+@as("KeyMarker") keyMarker: option<keyMarker>,
+@as("EncodingType") encodingType: option<encodingType>,
+@as("Delimiter") delimiter: option<delimiter>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("EncodingType") encodingType: encodingType,
-@as("CommonPrefixes") commonPrefixes: commonPrefixList,
-@as("MaxKeys") maxKeys: maxKeys,
-@as("Delimiter") delimiter: delimiter,
-@as("Prefix") prefix: prefix,
-@as("Name") name: bucketName,
-@as("DeleteMarkers") deleteMarkers: deleteMarkers,
-@as("Versions") versions: objectVersionList,
-@as("NextVersionIdMarker") nextVersionIdMarker: nextVersionIdMarker,
-@as("NextKeyMarker") nextKeyMarker: nextKeyMarker,
-@as("VersionIdMarker") versionIdMarker: versionIdMarker,
-@as("KeyMarker") keyMarker: keyMarker,
-@as("IsTruncated") isTruncated: isTruncated
+@as("EncodingType") encodingType: option<encodingType>,
+@as("CommonPrefixes") commonPrefixes: option<commonPrefixList>,
+@as("MaxKeys") maxKeys: option<maxKeys>,
+@as("Delimiter") delimiter: option<delimiter>,
+@as("Prefix") prefix: option<prefix>,
+@as("Name") name: option<bucketName>,
+@as("DeleteMarkers") deleteMarkers: option<deleteMarkers>,
+@as("Versions") versions: option<objectVersionList>,
+@as("NextVersionIdMarker") nextVersionIdMarker: option<nextVersionIdMarker>,
+@as("NextKeyMarker") nextKeyMarker: option<nextKeyMarker>,
+@as("VersionIdMarker") versionIdMarker: option<versionIdMarker>,
+@as("KeyMarker") keyMarker: option<keyMarker>,
+@as("IsTruncated") isTruncated: option<isTruncated>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListObjectVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListMultipartUploads = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("UploadIdMarker") uploadIdMarker: uploadIdMarker,
-@as("Prefix") prefix: prefix,
-@as("MaxUploads") maxUploads: maxUploads,
-@as("KeyMarker") keyMarker: keyMarker,
-@as("EncodingType") encodingType: encodingType,
-@as("Delimiter") delimiter: delimiter,
-@as("Bucket") bucket: option<bucketName>
-}
-  type response = {
-@as("EncodingType") encodingType: encodingType,
-@as("CommonPrefixes") commonPrefixes: commonPrefixList,
-@as("Uploads") uploads: multipartUploadList,
-@as("IsTruncated") isTruncated: isTruncated,
-@as("MaxUploads") maxUploads: maxUploads,
-@as("NextUploadIdMarker") nextUploadIdMarker: nextUploadIdMarker,
-@as("Delimiter") delimiter: delimiter,
-@as("Prefix") prefix: prefix,
-@as("NextKeyMarker") nextKeyMarker: nextKeyMarker,
-@as("UploadIdMarker") uploadIdMarker: uploadIdMarker,
-@as("KeyMarker") keyMarker: keyMarker,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("UploadIdMarker") uploadIdMarker: option<uploadIdMarker>,
+@as("Prefix") prefix: option<prefix>,
+@as("MaxUploads") maxUploads: option<maxUploads>,
+@as("KeyMarker") keyMarker: option<keyMarker>,
+@as("EncodingType") encodingType: option<encodingType>,
+@as("Delimiter") delimiter: option<delimiter>,
 @as("Bucket") bucket: bucketName
 }
+  type response = {
+@as("EncodingType") encodingType: option<encodingType>,
+@as("CommonPrefixes") commonPrefixes: option<commonPrefixList>,
+@as("Uploads") uploads: option<multipartUploadList>,
+@as("IsTruncated") isTruncated: option<isTruncated>,
+@as("MaxUploads") maxUploads: option<maxUploads>,
+@as("NextUploadIdMarker") nextUploadIdMarker: option<nextUploadIdMarker>,
+@as("Delimiter") delimiter: option<delimiter>,
+@as("Prefix") prefix: option<prefix>,
+@as("NextKeyMarker") nextKeyMarker: option<nextKeyMarker>,
+@as("UploadIdMarker") uploadIdMarker: option<uploadIdMarker>,
+@as("KeyMarker") keyMarker: option<keyMarker>,
+@as("Bucket") bucket: option<bucketName>
+}
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListMultipartUploadsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetObjectLockConfiguration = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("ObjectLockConfiguration") objectLockConfiguration: objectLockConfiguration
+@as("ObjectLockConfiguration") objectLockConfiguration: option<objectLockConfiguration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectLockConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetObjectAcl = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged,
-@as("Grants") grants: grants,
-@as("Owner") owner: owner
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("Grants") grants: option<grants>,
+@as("Owner") owner: option<owner>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectAclCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketWebsite = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RoutingRules") routingRules: routingRules,
-@as("ErrorDocument") errorDocument: errorDocument,
-@as("IndexDocument") indexDocument: indexDocument,
-@as("RedirectAllRequestsTo") redirectAllRequestsTo: redirectAllRequestsTo
+@as("RoutingRules") routingRules: option<routingRules>,
+@as("ErrorDocument") errorDocument: option<errorDocument>,
+@as("IndexDocument") indexDocument: option<indexDocument>,
+@as("RedirectAllRequestsTo") redirectAllRequestsTo: option<redirectAllRequestsTo>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketWebsiteCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketOwnershipControls = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("OwnershipControls") ownershipControls: ownershipControls
+@as("OwnershipControls") ownershipControls: option<ownershipControls>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketOwnershipControlsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketCors = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("CORSRules") cORSRules: cORSRules
+@as("CORSRules") corsrules: option<corsrules>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketCorsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketAcl = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("Grants") grants: grants,
-@as("Owner") owner: owner
+@as("Grants") grants: option<grants>,
+@as("Owner") owner: option<owner>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketAclCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteObjects = {
   type t;
   type request = {
-@as("Delete") delete: option<delete>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("BypassGovernanceRetention") bypassGovernanceRetention: bypassGovernanceRetention,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("MFA") mFA: mFA,
-@as("Bucket") bucket: option<bucketName>
+@as("Delete") delete: delete,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("BypassGovernanceRetention") bypassGovernanceRetention: option<bypassGovernanceRetention>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("MFA") mfa: option<mfa>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("Errors") errors: errors,
-@as("RequestCharged") requestCharged: requestCharged,
-@as("Deleted") deleted: deletedObjects
+@as("Errors") errors: option<errors>,
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("Deleted") deleted: option<deletedObjects>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteObjectsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CompleteMultipartUpload = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("UploadId") uploadId: option<multipartUploadId>,
-@as("MultipartUpload") multipartUpload: completedMultipartUpload,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("UploadId") uploadId: multipartUploadId,
+@as("MultipartUpload") multipartUpload: option<completedMultipartUpload>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged,
-@as("BucketKeyEnabled") bucketKeyEnabled: bucketKeyEnabled,
-@as("SSEKMSKeyId") sSEKMSKeyId: sSEKMSKeyId,
-@as("VersionId") versionId: objectVersionId,
-@as("ServerSideEncryption") serverSideEncryption: serverSideEncryption,
-@as("ETag") eTag: eTag,
-@as("Expiration") expiration: expiration,
-@as("Key") key: objectKey,
-@as("Bucket") bucket: bucketName,
-@as("Location") location: location
+@as("RequestCharged") requestCharged: option<requestCharged>,
+@as("BucketKeyEnabled") bucketKeyEnabled: option<bucketKeyEnabled>,
+@as("SSEKMSKeyId") ssekmskeyId: option<ssekmskeyId>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("ServerSideEncryption") serverSideEncryption: option<serverSideEncryption>,
+@as("ETag") etag: option<etag>,
+@as("Expiration") expiration: option<expiration>,
+@as("Key") key: option<objectKey>,
+@as("Bucket") bucket: option<bucketName>,
+@as("Location") location: option<location>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CompleteMultipartUploadCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutObjectAcl = {
   type t;
   type request = {
-@as("AccessControlPolicy") accessControlPolicy: accessControlPolicy,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("VersionId") versionId: objectVersionId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("Key") key: option<objectKey>,
-@as("GrantWriteACP") grantWriteACP: grantWriteACP,
-@as("GrantWrite") grantWrite: grantWrite,
-@as("GrantReadACP") grantReadACP: grantReadACP,
-@as("GrantRead") grantRead: grantRead,
-@as("GrantFullControl") grantFullControl: grantFullControl,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>,
-@as("ACL") aCL: objectCannedACL
+@as("AccessControlPolicy") accessControlPolicy: option<accessControlPolicy>,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("Key") key: objectKey,
+@as("GrantWriteACP") grantWriteACP: option<grantWriteACP>,
+@as("GrantWrite") grantWrite: option<grantWrite>,
+@as("GrantReadACP") grantReadACP: option<grantReadACP>,
+@as("GrantRead") grantRead: option<grantRead>,
+@as("GrantFullControl") grantFullControl: option<grantFullControl>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName,
+@as("ACL") acl: option<objectCannedACL>
 }
   type response = {
-@as("RequestCharged") requestCharged: requestCharged
+@as("RequestCharged") requestCharged: option<requestCharged>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectAclCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutBucketWebsite = {
   type t;
   type request = {
-@as("WebsiteConfiguration") websiteConfiguration: option<websiteConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>
+@as("WebsiteConfiguration") websiteConfiguration: websiteConfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketWebsiteCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketEncryption = {
   type t;
   type request = {
-@as("ServerSideEncryptionConfiguration") serverSideEncryptionConfiguration: option<serverSideEncryptionConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>
+@as("ServerSideEncryptionConfiguration") serverSideEncryptionConfiguration: serverSideEncryptionConfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketEncryptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketCors = {
   type t;
   type request = {
-@as("CORSConfiguration") cORSConfiguration: option<cORSConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>
+@as("CORSConfiguration") corsconfiguration: corsconfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketCorsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketAcl = {
   type t;
   type request = {
-@as("AccessControlPolicy") accessControlPolicy: accessControlPolicy,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("GrantWriteACP") grantWriteACP: grantWriteACP,
-@as("GrantWrite") grantWrite: grantWrite,
-@as("GrantReadACP") grantReadACP: grantReadACP,
-@as("GrantRead") grantRead: grantRead,
-@as("GrantFullControl") grantFullControl: grantFullControl,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>,
-@as("ACL") aCL: bucketCannedACL
+@as("AccessControlPolicy") accessControlPolicy: option<accessControlPolicy>,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("GrantWriteACP") grantWriteACP: option<grantWriteACP>,
+@as("GrantWrite") grantWrite: option<grantWrite>,
+@as("GrantReadACP") grantReadACP: option<grantReadACP>,
+@as("GrantRead") grantRead: option<grantRead>,
+@as("GrantFullControl") grantFullControl: option<grantFullControl>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName,
+@as("ACL") acl: option<bucketCannedACL>
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketAclCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetBucketLogging = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("LoggingEnabled") loggingEnabled: loggingEnabled
+@as("LoggingEnabled") loggingEnabled: option<loggingEnabled>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketLoggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketEncryption = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("ServerSideEncryptionConfiguration") serverSideEncryptionConfiguration: serverSideEncryptionConfiguration
+@as("ServerSideEncryptionConfiguration") serverSideEncryptionConfiguration: option<serverSideEncryptionConfiguration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketEncryptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutBucketMetricsConfiguration = {
   type t;
   type request = {
-@as("MetricsConfiguration") metricsConfiguration: option<metricsConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Id") id: option<metricsId>,
-@as("Bucket") bucket: option<bucketName>
+@as("MetricsConfiguration") metricsConfiguration: metricsConfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Id") id: metricsId,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketMetricsConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketLogging = {
   type t;
   type request = {
-@as("BucketLoggingStatus") bucketLoggingStatus: option<bucketLoggingStatus>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>
+@as("BucketLoggingStatus") bucketLoggingStatus: bucketLoggingStatus,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketLoggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketInventoryConfiguration = {
   type t;
   type request = {
-@as("InventoryConfiguration") inventoryConfiguration: option<inventoryConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Id") id: option<inventoryId>,
-@as("Bucket") bucket: option<bucketName>
+@as("InventoryConfiguration") inventoryConfiguration: inventoryConfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Id") id: inventoryId,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketInventoryConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketIntelligentTieringConfiguration = {
   type t;
   type request = {
-@as("IntelligentTieringConfiguration") intelligentTieringConfiguration: option<intelligentTieringConfiguration>,
-@as("Id") id: option<intelligentTieringId>,
-@as("Bucket") bucket: option<bucketName>
+@as("IntelligentTieringConfiguration") intelligentTieringConfiguration: intelligentTieringConfiguration,
+@as("Id") id: intelligentTieringId,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketIntelligentTieringConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketAnalyticsConfiguration = {
   type t;
   type request = {
-@as("AnalyticsConfiguration") analyticsConfiguration: option<analyticsConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Id") id: option<analyticsId>,
-@as("Bucket") bucket: option<bucketName>
+@as("AnalyticsConfiguration") analyticsConfiguration: analyticsConfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Id") id: analyticsId,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketAnalyticsConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetBucketMetricsConfiguration = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Id") id: option<metricsId>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Id") id: metricsId,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("MetricsConfiguration") metricsConfiguration: metricsConfiguration
+@as("MetricsConfiguration") metricsConfiguration: option<metricsConfiguration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketMetricsConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketInventoryConfiguration = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Id") id: option<inventoryId>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Id") id: inventoryId,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("InventoryConfiguration") inventoryConfiguration: inventoryConfiguration
+@as("InventoryConfiguration") inventoryConfiguration: option<inventoryConfiguration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketInventoryConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketIntelligentTieringConfiguration = {
   type t;
   type request = {
-@as("Id") id: option<intelligentTieringId>,
-@as("Bucket") bucket: option<bucketName>
+@as("Id") id: intelligentTieringId,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("IntelligentTieringConfiguration") intelligentTieringConfiguration: intelligentTieringConfiguration
+@as("IntelligentTieringConfiguration") intelligentTieringConfiguration: option<intelligentTieringConfiguration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketIntelligentTieringConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketAnalyticsConfiguration = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Id") id: option<analyticsId>,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Id") id: analyticsId,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("AnalyticsConfiguration") analyticsConfiguration: analyticsConfiguration
+@as("AnalyticsConfiguration") analyticsConfiguration: option<analyticsConfiguration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketAnalyticsConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RestoreObject = {
   type t;
   type request = {
-@as("RestoreRequest") restoreRequest: restoreRequest,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("RequestPayer") requestPayer: requestPayer,
-@as("VersionId") versionId: objectVersionId,
-@as("Key") key: option<objectKey>,
-@as("Bucket") bucket: option<bucketName>
+@as("RestoreRequest") restoreRequest: option<restoreRequest>,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("RequestPayer") requestPayer: option<requestPayer>,
+@as("VersionId") versionId: option<objectVersionId>,
+@as("Key") key: objectKey,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("RestoreOutputPath") restoreOutputPath: restoreOutputPath,
-@as("RequestCharged") requestCharged: requestCharged
+@as("RestoreOutputPath") restoreOutputPath: option<restoreOutputPath>,
+@as("RequestCharged") requestCharged: option<requestCharged>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "RestoreObjectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBucketMetricsConfigurations = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContinuationToken") continuationToken: token,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContinuationToken") continuationToken: option<token>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("MetricsConfigurationList") metricsConfigurationList: metricsConfigurationList,
-@as("NextContinuationToken") nextContinuationToken: nextToken,
-@as("ContinuationToken") continuationToken: token,
-@as("IsTruncated") isTruncated: isTruncated
+@as("MetricsConfigurationList") metricsConfigurationList: option<metricsConfigurationList>,
+@as("NextContinuationToken") nextContinuationToken: option<nextToken>,
+@as("ContinuationToken") continuationToken: option<token>,
+@as("IsTruncated") isTruncated: option<isTruncated>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListBucketMetricsConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBucketInventoryConfigurations = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContinuationToken") continuationToken: token,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContinuationToken") continuationToken: option<token>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("NextContinuationToken") nextContinuationToken: nextToken,
-@as("IsTruncated") isTruncated: isTruncated,
-@as("InventoryConfigurationList") inventoryConfigurationList: inventoryConfigurationList,
-@as("ContinuationToken") continuationToken: token
+@as("NextContinuationToken") nextContinuationToken: option<nextToken>,
+@as("IsTruncated") isTruncated: option<isTruncated>,
+@as("InventoryConfigurationList") inventoryConfigurationList: option<inventoryConfigurationList>,
+@as("ContinuationToken") continuationToken: option<token>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListBucketInventoryConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBucketIntelligentTieringConfigurations = {
   type t;
   type request = {
-@as("ContinuationToken") continuationToken: token,
-@as("Bucket") bucket: option<bucketName>
+@as("ContinuationToken") continuationToken: option<token>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("IntelligentTieringConfigurationList") intelligentTieringConfigurationList: intelligentTieringConfigurationList,
-@as("NextContinuationToken") nextContinuationToken: nextToken,
-@as("ContinuationToken") continuationToken: token,
-@as("IsTruncated") isTruncated: isTruncated
+@as("IntelligentTieringConfigurationList") intelligentTieringConfigurationList: option<intelligentTieringConfigurationList>,
+@as("NextContinuationToken") nextContinuationToken: option<nextToken>,
+@as("ContinuationToken") continuationToken: option<token>,
+@as("IsTruncated") isTruncated: option<isTruncated>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListBucketIntelligentTieringConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBucketAnalyticsConfigurations = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("ContinuationToken") continuationToken: token,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("ContinuationToken") continuationToken: option<token>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("AnalyticsConfigurationList") analyticsConfigurationList: analyticsConfigurationList,
-@as("NextContinuationToken") nextContinuationToken: nextToken,
-@as("ContinuationToken") continuationToken: token,
-@as("IsTruncated") isTruncated: isTruncated
+@as("AnalyticsConfigurationList") analyticsConfigurationList: option<analyticsConfigurationList>,
+@as("NextContinuationToken") nextContinuationToken: option<nextToken>,
+@as("ContinuationToken") continuationToken: option<token>,
+@as("IsTruncated") isTruncated: option<isTruncated>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListBucketAnalyticsConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketNotificationConfiguration = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = notificationConfiguration;
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketNotificationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetBucketLifecycleConfiguration = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("Rules") rules: lifecycleRules
+@as("Rules") rules: option<lifecycleRules>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketLifecycleConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutBucketReplication = {
   type t;
   type request = {
-@as("ReplicationConfiguration") replicationConfiguration: option<replicationConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Token") token: objectLockToken,
-@as("ContentMD5") contentMD5: contentMD5,
-@as("Bucket") bucket: option<bucketName>
+@as("ReplicationConfiguration") replicationConfiguration: replicationConfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Token") token: option<objectLockToken>,
+@as("ContentMD5") contentMD5: option<contentMD5>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketReplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketNotificationConfiguration = {
   type t;
   type request = {
-@as("NotificationConfiguration") notificationConfiguration: option<notificationConfiguration>,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("NotificationConfiguration") notificationConfiguration: notificationConfiguration,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketNotificationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutBucketLifecycleConfiguration = {
   type t;
   type request = {
-@as("LifecycleConfiguration") lifecycleConfiguration: bucketLifecycleConfiguration,
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("LifecycleConfiguration") lifecycleConfiguration: option<bucketLifecycleConfiguration>,
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketLifecycleConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetBucketReplication = {
   type t;
   type request = {
-@as("ExpectedBucketOwner") expectedBucketOwner: accountId,
-@as("Bucket") bucket: option<bucketName>
+@as("ExpectedBucketOwner") expectedBucketOwner: option<accountId>,
+@as("Bucket") bucket: bucketName
 }
   type response = {
-@as("ReplicationConfiguration") replicationConfiguration: replicationConfiguration
+@as("ReplicationConfiguration") replicationConfiguration: option<replicationConfiguration>
 }
   @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketReplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

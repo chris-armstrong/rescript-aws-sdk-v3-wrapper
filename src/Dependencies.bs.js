@@ -2,6 +2,7 @@
 'use strict';
 
 var Caml_obj = require("rescript/lib/js/caml_obj.js");
+var SafeNames = require("./SafeNames.bs.js");
 var Belt_Array = require("rescript/lib/js/belt_Array.js");
 var Belt_Option = require("rescript/lib/js/belt_Option.js");
 var Caml_exceptions = require("rescript/lib/js/caml_exceptions.js");
@@ -183,7 +184,7 @@ function order_(_remaining, _ordered) {
 function order(shapesWithTargets) {
   var implicitShapes = Belt_Array.keepMap(smithyImplicitShapes, (function (shape) {
           if (Belt_Array.every(shapesWithTargets, (function (param) {
-                    return param.name !== shape.name;
+                    return SafeNames.safeTypeName(param.name) !== SafeNames.safeTypeName(shape.name);
                   }))) {
             return shape;
           }
@@ -202,4 +203,4 @@ exports.filterOut = filterOut;
 exports.getShapeWithTargetNames = getShapeWithTargetNames;
 exports.order_ = order_;
 exports.order = order;
-/* No side effect */
+/* SafeNames Not a pure module */

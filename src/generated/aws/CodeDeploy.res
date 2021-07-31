@@ -1,18 +1,24 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type waitTimeInMins = int;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type integer_ = int
+type long = float
+type waitTimeInMins = int
 type versionId = string
 type version = string
 type value = string
 type triggerTargetArn = string
 type triggerName = string
 type triggerEventType = [@as("InstanceReady") #InstanceReady | @as("InstanceFailure") #InstanceFailure | @as("InstanceSuccess") #InstanceSuccess | @as("InstanceStart") #InstanceStart | @as("DeploymentReady") #DeploymentReady | @as("DeploymentRollback") #DeploymentRollback | @as("DeploymentStop") #DeploymentStop | @as("DeploymentFailure") #DeploymentFailure | @as("DeploymentSuccess") #DeploymentSuccess | @as("DeploymentStart") #DeploymentStart]
-type trafficWeight = float;
+type trafficWeight = float
 type trafficRoutingType = [@as("AllAtOnce") #AllAtOnce | @as("TimeBasedLinear") #TimeBasedLinear | @as("TimeBasedCanary") #TimeBasedCanary]
-type amazonawsTimestamp = Js.Date.t;
+type timestamp_ = Js.Date.t;
 type time = Js.Date.t;
 type targetStatus = [@as("Ready") #Ready | @as("Unknown") #Unknown | @as("Skipped") #Skipped | @as("Failed") #Failed | @as("Succeeded") #Succeeded | @as("InProgress") #InProgress | @as("Pending") #Pending]
 type targetLabel = [@as("Green") #Green | @as("Blue") #Blue]
@@ -20,9 +26,9 @@ type targetId = string
 type targetGroupName = string
 type targetFilterName = [@as("ServerInstanceLabel") #ServerInstanceLabel | @as("TargetStatus") #TargetStatus]
 type targetArn = string
-type tagFilterType = [@as("KEY_AND_VALUE") #KEY_AND_VALUE | @as("VALUE_ONLY") #VALUE_ONLY | @as("KEY_ONLY") #KEY_ONLY]
+type tagFilterType = [@as("KEY_AND_VALUE") #KEYANDVALUE | @as("VALUE_ONLY") #VALUEONLY | @as("KEY_ONLY") #KEYONLY]
 type stopStatus = [@as("Succeeded") #Succeeded | @as("Pending") #Pending]
-type sortOrder = [@as("descending") #descending | @as("ascending") #ascending]
+type sortOrder = [@as("descending") #Descending | @as("ascending") #Ascending]
 type scriptName = string
 type s3Key = string
 type s3Bucket = string
@@ -32,16 +38,16 @@ type repository = string
 type registrationStatus = [@as("Deregistered") #Deregistered | @as("Registered") #Registered]
 type rawStringSha256 = string
 type rawStringContent = string
-type percentage = int;
+type percentage = int
 type outdatedInstancesStrategy = [@as("IGNORE") #IGNORE | @as("UPDATE") #UPDATE]
-type nullableBoolean = bool;
+type nullableBoolean = bool
 type nextToken = string
-type minimumHealthyHostsValue = int;
-type minimumHealthyHostsType = [@as("FLEET_PERCENT") #FLEET_PERCENT | @as("HOST_COUNT") #HOST_COUNT]
+type minimumHealthyHostsValue = int
+type minimumHealthyHostsType = [@as("FLEET_PERCENT") #FLEETPERCENT | @as("HOST_COUNT") #HOSTCOUNT]
 type message = string
 type logTail = string
 type listenerArn = string
-type listStateFilterAction = [@as("ignore") #ignore | @as("exclude") #exclude | @as("include") #include]
+type listStateFilterAction = [@as("ignore") #Ignore | @as("exclude") #Exclude | @as("include") #Include]
 type lifecycleMessage = string
 type lifecycleEventStatus = [@as("Unknown") #Unknown | @as("Skipped") #Skipped | @as("Failed") #Failed | @as("Succeeded") #Succeeded | @as("InProgress") #InProgress | @as("Pending") #Pending]
 type lifecycleEventName = string
@@ -54,1074 +60,1074 @@ type instanceType = [@as("Green") #Green | @as("Blue") #Blue]
 type instanceStatus = [@as("Ready") #Ready | @as("Unknown") #Unknown | @as("Skipped") #Skipped | @as("Failed") #Failed | @as("Succeeded") #Succeeded | @as("InProgress") #InProgress | @as("Pending") #Pending]
 type instanceName = string
 type instanceId = string
-type instanceCount = float;
+type instanceCount = float
 type instanceArn = string
-type instanceAction = [@as("KEEP_ALIVE") #KEEP_ALIVE | @as("TERMINATE") #TERMINATE]
+type instanceAction = [@as("KEEP_ALIVE") #KEEPALIVE | @as("TERMINATE") #TERMINATE]
 type iamUserArn = string
 type iamSessionArn = string
-type greenFleetProvisioningAction = [@as("COPY_AUTO_SCALING_GROUP") #COPY_AUTO_SCALING_GROUP | @as("DISCOVER_EXISTING") #DISCOVER_EXISTING]
+type greenFleetProvisioningAction = [@as("COPY_AUTO_SCALING_GROUP") #COPYAUTOSCALINGGROUP | @as("DISCOVER_EXISTING") #DISCOVEREXISTING]
 type gitHubAccountTokenName = string
 type filterValue = string
 type fileExistsBehavior = [@as("RETAIN") #RETAIN | @as("OVERWRITE") #OVERWRITE | @as("DISALLOW") #DISALLOW]
 type externalId = string
 type errorMessage = string
-type errorCode = [@as("CLOUDFORMATION_STACK_FAILURE") #CLOUDFORMATION_STACK_FAILURE | @as("TIMEOUT") #TIMEOUT | @as("THROTTLED") #THROTTLED | @as("REVISION_MISSING") #REVISION_MISSING | @as("RESOURCE_LIMIT_EXCEEDED") #RESOURCE_LIMIT_EXCEEDED | @as("OVER_MAX_INSTANCES") #OVER_MAX_INSTANCES | @as("NO_INSTANCES") #NO_INSTANCES | @as("NO_EC2_SUBSCRIPTION") #NO_EC2_SUBSCRIPTION | @as("MISSING_GITHUB_TOKEN") #MISSING_GITHUB_TOKEN | @as("MISSING_ELB_INFORMATION") #MISSING_ELB_INFORMATION | @as("MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION") #MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION | @as("MANUAL_STOP") #MANUAL_STOP | @as("INVALID_REVISION") #INVALID_REVISION | @as("INVALID_LAMBDA_FUNCTION") #INVALID_LAMBDA_FUNCTION | @as("INVALID_LAMBDA_CONFIGURATION") #INVALID_LAMBDA_CONFIGURATION | @as("INVALID_ECS_SERVICE") #INVALID_ECS_SERVICE | @as("INTERNAL_ERROR") #INTERNAL_ERROR | @as("IAM_ROLE_PERMISSIONS") #IAM_ROLE_PERMISSIONS | @as("IAM_ROLE_MISSING") #IAM_ROLE_MISSING | @as("HOOK_EXECUTION_FAILURE") #HOOK_EXECUTION_FAILURE | @as("HEALTH_CONSTRAINTS_INVALID") #HEALTH_CONSTRAINTS_INVALID | @as("HEALTH_CONSTRAINTS") #HEALTH_CONSTRAINTS | @as("ELB_INVALID_INSTANCE") #ELB_INVALID_INSTANCE | @as("ELASTIC_LOAD_BALANCING_INVALID") #ELASTIC_LOAD_BALANCING_INVALID | @as("ECS_UPDATE_ERROR") #ECS_UPDATE_ERROR | @as("DEPLOYMENT_GROUP_MISSING") #DEPLOYMENT_GROUP_MISSING | @as("CUSTOMER_APPLICATION_UNHEALTHY") #CUSTOMER_APPLICATION_UNHEALTHY | @as("CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND") #CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND | @as("AUTO_SCALING_IAM_ROLE_PERMISSIONS") #AUTO_SCALING_IAM_ROLE_PERMISSIONS | @as("AUTO_SCALING_CONFIGURATION") #AUTO_SCALING_CONFIGURATION | @as("AUTOSCALING_VALIDATION_ERROR") #AUTOSCALING_VALIDATION_ERROR | @as("APPLICATION_MISSING") #APPLICATION_MISSING | @as("ALARM_ACTIVE") #ALARM_ACTIVE | @as("AGENT_ISSUE") #AGENT_ISSUE]
-type eTag = string
-type eLBName = string
-type eCSTaskSetStatus = string
-type eCSTaskSetIdentifier = string
-type eCSTaskSetCount = float;
-type eCSServiceName = string
-type eCSClusterName = string
-type eC2TagFilterType = [@as("KEY_AND_VALUE") #KEY_AND_VALUE | @as("VALUE_ONLY") #VALUE_ONLY | @as("KEY_ONLY") #KEY_ONLY]
-type duration = int;
+type errorCode = [@as("CLOUDFORMATION_STACK_FAILURE") #CLOUDFORMATIONSTACKFAILURE | @as("TIMEOUT") #TIMEOUT | @as("THROTTLED") #THROTTLED | @as("REVISION_MISSING") #REVISIONMISSING | @as("RESOURCE_LIMIT_EXCEEDED") #RESOURCELIMITEXCEEDED | @as("OVER_MAX_INSTANCES") #OVERMAXINSTANCES | @as("NO_INSTANCES") #NOINSTANCES | @as("NO_EC2_SUBSCRIPTION") #NOEC2SUBSCRIPTION | @as("MISSING_GITHUB_TOKEN") #MISSINGGITHUBTOKEN | @as("MISSING_ELB_INFORMATION") #MISSINGELBINFORMATION | @as("MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION") #MISSINGBLUEGREENDEPLOYMENTCONFIGURATION | @as("MANUAL_STOP") #MANUALSTOP | @as("INVALID_REVISION") #INVALIDREVISION | @as("INVALID_LAMBDA_FUNCTION") #INVALIDLAMBDAFUNCTION | @as("INVALID_LAMBDA_CONFIGURATION") #INVALIDLAMBDACONFIGURATION | @as("INVALID_ECS_SERVICE") #INVALIDECSSERVICE | @as("INTERNAL_ERROR") #INTERNALERROR | @as("IAM_ROLE_PERMISSIONS") #IAMROLEPERMISSIONS | @as("IAM_ROLE_MISSING") #IAMROLEMISSING | @as("HOOK_EXECUTION_FAILURE") #HOOKEXECUTIONFAILURE | @as("HEALTH_CONSTRAINTS_INVALID") #HEALTHCONSTRAINTSINVALID | @as("HEALTH_CONSTRAINTS") #HEALTHCONSTRAINTS | @as("ELB_INVALID_INSTANCE") #ELBINVALIDINSTANCE | @as("ELASTIC_LOAD_BALANCING_INVALID") #ELASTICLOADBALANCINGINVALID | @as("ECS_UPDATE_ERROR") #ECSUPDATEERROR | @as("DEPLOYMENT_GROUP_MISSING") #DEPLOYMENTGROUPMISSING | @as("CUSTOMER_APPLICATION_UNHEALTHY") #CUSTOMERAPPLICATIONUNHEALTHY | @as("CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND") #CODEDEPLOYRESOURCECANNOTBEFOUND | @as("AUTO_SCALING_IAM_ROLE_PERMISSIONS") #AUTOSCALINGIAMROLEPERMISSIONS | @as("AUTO_SCALING_CONFIGURATION") #AUTOSCALINGCONFIGURATION | @as("AUTOSCALING_VALIDATION_ERROR") #AUTOSCALINGVALIDATIONERROR | @as("APPLICATION_MISSING") #APPLICATIONMISSING | @as("ALARM_ACTIVE") #ALARMACTIVE | @as("AGENT_ISSUE") #AGENTISSUE]
+type etag = string
+type elbname = string
+type ecstaskSetStatus = string
+type ecstaskSetIdentifier = string
+type ecstaskSetCount = float
+type ecsserviceName = string
+type ecsclusterName = string
+type ec2TagFilterType = [@as("KEY_AND_VALUE") #KEYANDVALUE | @as("VALUE_ONLY") #VALUEONLY | @as("KEY_ONLY") #KEYONLY]
+type duration = int
 type description = string
-type deploymentWaitType = [@as("TERMINATION_WAIT") #TERMINATION_WAIT | @as("READY_WAIT") #READY_WAIT]
-type deploymentType = [@as("BLUE_GREEN") #BLUE_GREEN | @as("IN_PLACE") #IN_PLACE]
+type deploymentWaitType = [@as("TERMINATION_WAIT") #TERMINATIONWAIT | @as("READY_WAIT") #READYWAIT]
+type deploymentType = [@as("BLUE_GREEN") #BLUEGREEN | @as("IN_PLACE") #INPLACE]
 type deploymentTargetType = [@as("CloudFormationTarget") #CloudFormationTarget | @as("ECSTarget") #ECSTarget | @as("LambdaTarget") #LambdaTarget | @as("InstanceTarget") #InstanceTarget]
 type deploymentStatus = [@as("Ready") #Ready | @as("Stopped") #Stopped | @as("Failed") #Failed | @as("Succeeded") #Succeeded | @as("Baking") #Baking | @as("InProgress") #InProgress | @as("Queued") #Queued | @as("Created") #Created]
-type deploymentReadyAction = [@as("STOP_DEPLOYMENT") #STOP_DEPLOYMENT | @as("CONTINUE_DEPLOYMENT") #CONTINUE_DEPLOYMENT]
-type deploymentOption = [@as("WITHOUT_TRAFFIC_CONTROL") #WITHOUT_TRAFFIC_CONTROL | @as("WITH_TRAFFIC_CONTROL") #WITH_TRAFFIC_CONTROL]
+type deploymentReadyAction = [@as("STOP_DEPLOYMENT") #STOPDEPLOYMENT | @as("CONTINUE_DEPLOYMENT") #CONTINUEDEPLOYMENT]
+type deploymentOption = [@as("WITHOUT_TRAFFIC_CONTROL") #WITHOUTTRAFFICCONTROL | @as("WITH_TRAFFIC_CONTROL") #WITHTRAFFICCONTROL]
 type deploymentId = string
 type deploymentGroupName = string
 type deploymentGroupId = string
-type deploymentCreator = [@as("CloudFormationRollback") #CloudFormationRollback | @as("CloudFormation") #CloudFormation | @as("CodeDeployAutoUpdate") #CodeDeployAutoUpdate | @as("CodeDeploy") #CodeDeploy | @as("codeDeployRollback") #codeDeployRollback | @as("autoscaling") #autoscaling | @as("user") #user]
+type deploymentCreator = [@as("CloudFormationRollback") #CloudFormationRollback | @as("CloudFormation") #CloudFormation | @as("CodeDeployAutoUpdate") #CodeDeployAutoUpdate | @as("CodeDeploy") #CodeDeploy | @as("codeDeployRollback") #CodeDeployRollback | @as("autoscaling") #Autoscaling | @as("user") #User]
 type deploymentConfigName = string
 type deploymentConfigId = string
 type computePlatform = [@as("ECS") #ECS | @as("Lambda") #Lambda | @as("Server") #Server]
 type commitId = string
 type cloudFormationResourceType = string
-type bundleType = [@as("JSON") #JSON | @as("YAML") #YAML | @as("zip") #zip | @as("tgz") #tgz | @as("tar") #tar]
-type amazonawsBoolean = bool;
+type bundleType = [@as("JSON") #JSON | @as("YAML") #YAML | @as("zip") #Zip | @as("tgz") #Tgz | @as("tar") #Tar]
+type boolean_ = bool
 type autoScalingGroupName = string
 type autoScalingGroupHook = string
-type autoRollbackEvent = [@as("DEPLOYMENT_STOP_ON_REQUEST") #DEPLOYMENT_STOP_ON_REQUEST | @as("DEPLOYMENT_STOP_ON_ALARM") #DEPLOYMENT_STOP_ON_ALARM | @as("DEPLOYMENT_FAILURE") #DEPLOYMENT_FAILURE]
+type autoRollbackEvent = [@as("DEPLOYMENT_STOP_ON_REQUEST") #DEPLOYMENTSTOPONREQUEST | @as("DEPLOYMENT_STOP_ON_ALARM") #DEPLOYMENTSTOPONALARM | @as("DEPLOYMENT_FAILURE") #DEPLOYMENTFAILURE]
 type arn = string
-type applicationRevisionSortBy = [@as("lastUsedTime") #lastUsedTime | @as("firstUsedTime") #firstUsedTime | @as("registerTime") #registerTime]
+type applicationRevisionSortBy = [@as("lastUsedTime") #LastUsedTime | @as("firstUsedTime") #FirstUsedTime | @as("registerTime") #RegisterTime]
 type applicationName = string
 type applicationId = string
 type alarmName = string
 type additionalDeploymentStatusInfo = string
 type triggerEventTypeList = array<triggerEventType>
 type timeRange = {
-@as("end") end: amazonawsTimestamp,
-@as("start") start: amazonawsTimestamp
+end: option<timestamp_>,
+start: option<timestamp_>
 }
 type timeBasedLinear = {
-@as("linearInterval") linearInterval: waitTimeInMins,
-@as("linearPercentage") linearPercentage: percentage
+linearInterval: option<waitTimeInMins>,
+linearPercentage: option<percentage>
 }
 type timeBasedCanary = {
-@as("canaryInterval") canaryInterval: waitTimeInMins,
-@as("canaryPercentage") canaryPercentage: percentage
+canaryInterval: option<waitTimeInMins>,
+canaryPercentage: option<percentage>
 }
 type targetIdList = array<targetId>
 type targetGroupInfo = {
-@as("name") name: targetGroupName
+name: option<targetGroupName>
 }
 type tagKeyList = array<key>
 type tagFilter = {
-@as("Type") type_: tagFilterType,
-@as("Value") value: value,
-@as("Key") key: key
+@as("Type") type_: option<tagFilterType>,
+@as("Value") value: option<value>,
+@as("Key") key: option<key>
 }
 type tag = {
-@as("Value") value: value,
-@as("Key") key: key
+@as("Value") value: option<value>,
+@as("Key") key: option<key>
 }
 type s3Location = {
-@as("eTag") eTag: eTag,
-@as("version") version: versionId,
-@as("bundleType") bundleType: bundleType,
-@as("key") key: s3Key,
-@as("bucket") bucket: s3Bucket
+eTag: option<etag>,
+version: option<versionId>,
+bundleType: option<bundleType>,
+key: option<s3Key>,
+bucket: option<s3Bucket>
 }
 type rollbackInfo = {
-@as("rollbackMessage") rollbackMessage: description,
-@as("rollbackTriggeringDeploymentId") rollbackTriggeringDeploymentId: deploymentId,
-@as("rollbackDeploymentId") rollbackDeploymentId: deploymentId
+rollbackMessage: option<description>,
+rollbackTriggeringDeploymentId: option<deploymentId>,
+rollbackDeploymentId: option<deploymentId>
 }
 type rawString = {
-@as("sha256") sha256: rawStringSha256,
-@as("content") content: rawStringContent
+sha256: option<rawStringSha256>,
+content: option<rawStringContent>
 }
 type minimumHealthyHosts = {
-@as("value") value: minimumHealthyHostsValue,
-@as("type") type_: minimumHealthyHostsType
+value: option<minimumHealthyHostsValue>,
+@as("type") type_: option<minimumHealthyHostsType>
 }
 type listenerArnList = array<listenerArn>
 type lastDeploymentInfo = {
-@as("createTime") createTime: amazonawsTimestamp,
-@as("endTime") endTime: amazonawsTimestamp,
-@as("status") status: deploymentStatus,
-@as("deploymentId") deploymentId: deploymentId
+createTime: option<timestamp_>,
+endTime: option<timestamp_>,
+status: option<deploymentStatus>,
+deploymentId: option<deploymentId>
 }
 type lambdaFunctionInfo = {
-@as("targetVersionWeight") targetVersionWeight: trafficWeight,
-@as("targetVersion") targetVersion: version,
-@as("currentVersion") currentVersion: version,
-@as("functionAlias") functionAlias: lambdaFunctionAlias,
-@as("functionName") functionName: lambdaFunctionName
+targetVersionWeight: option<trafficWeight>,
+targetVersion: option<version>,
+currentVersion: option<version>,
+functionAlias: option<lambdaFunctionAlias>,
+functionName: option<lambdaFunctionName>
 }
 type instancesList = array<instanceId>
 type instanceTypeList = array<instanceType>
 type instanceStatusList = array<instanceStatus>
 type instanceNameList = array<instanceName>
 type greenFleetProvisioningOption = {
-@as("action") action: greenFleetProvisioningAction
+action: option<greenFleetProvisioningAction>
 }
 type gitHubLocation = {
-@as("commitId") commitId: commitId,
-@as("repository") repository: repository
+commitId: option<commitId>,
+repository: option<repository>
 }
 type gitHubAccountTokenNameList = array<gitHubAccountTokenName>
 type filterValueList = array<filterValue>
 type errorInformation = {
-@as("message") message: errorMessage,
-@as("code") code: errorCode
+message: option<errorMessage>,
+code: option<errorCode>
 }
-type eLBInfo = {
-@as("name") name: eLBName
+type elbinfo = {
+name: option<elbname>
 }
-type eCSService = {
-@as("clusterName") clusterName: eCSClusterName,
-@as("serviceName") serviceName: eCSServiceName
+type ecsservice = {
+clusterName: option<ecsclusterName>,
+serviceName: option<ecsserviceName>
 }
-type eC2TagFilter = {
-@as("Type") type_: eC2TagFilterType,
-@as("Value") value: value,
-@as("Key") key: key
+type ec2TagFilter = {
+@as("Type") type_: option<ec2TagFilterType>,
+@as("Value") value: option<value>,
+@as("Key") key: option<key>
 }
 type diagnostics = {
-@as("logTail") logTail: logTail,
-@as("message") message: lifecycleMessage,
-@as("scriptName") scriptName: scriptName,
-@as("errorCode") errorCode: lifecycleErrorCode
+logTail: option<logTail>,
+message: option<lifecycleMessage>,
+scriptName: option<scriptName>,
+errorCode: option<lifecycleErrorCode>
 }
 type deploymentsList = array<deploymentId>
 type deploymentStyle = {
-@as("deploymentOption") deploymentOption: deploymentOption,
-@as("deploymentType") deploymentType: deploymentType
+deploymentOption: option<deploymentOption>,
+deploymentType: option<deploymentType>
 }
 type deploymentStatusMessageList = array<errorMessage>
 type deploymentStatusList = array<deploymentStatus>
 type deploymentReadyOption = {
-@as("waitTimeInMinutes") waitTimeInMinutes: duration,
-@as("actionOnTimeout") actionOnTimeout: deploymentReadyAction
+waitTimeInMinutes: option<duration>,
+actionOnTimeout: option<deploymentReadyAction>
 }
 type deploymentOverview = {
-@as("Ready") ready: instanceCount,
-@as("Skipped") skipped: instanceCount,
-@as("Failed") failed: instanceCount,
-@as("Succeeded") succeeded: instanceCount,
-@as("InProgress") inProgress: instanceCount,
-@as("Pending") pending: instanceCount
+@as("Ready") ready: option<instanceCount>,
+@as("Skipped") skipped: option<instanceCount>,
+@as("Failed") failed: option<instanceCount>,
+@as("Succeeded") succeeded: option<instanceCount>,
+@as("InProgress") inProgress: option<instanceCount>,
+@as("Pending") pending: option<instanceCount>
 }
 type deploymentGroupsList = array<deploymentGroupName>
 type deploymentConfigsList = array<deploymentConfigName>
 type blueInstanceTerminationOption = {
-@as("terminationWaitTimeInMinutes") terminationWaitTimeInMinutes: duration,
-@as("action") action: instanceAction
+terminationWaitTimeInMinutes: option<duration>,
+action: option<instanceAction>
 }
 type autoScalingGroupNameList = array<autoScalingGroupName>
 type autoScalingGroup = {
-@as("hook") hook: autoScalingGroupHook,
-@as("name") name: autoScalingGroupName
+hook: option<autoScalingGroupHook>,
+name: option<autoScalingGroupName>
 }
 type autoRollbackEventsList = array<autoRollbackEvent>
 type applicationsList = array<applicationName>
 type applicationInfo = {
-@as("computePlatform") computePlatform: computePlatform,
-@as("gitHubAccountName") gitHubAccountName: gitHubAccountTokenName,
-@as("linkedToGitHub") linkedToGitHub: amazonawsBoolean,
-@as("createTime") createTime: amazonawsTimestamp,
-@as("applicationName") applicationName: applicationName,
-@as("applicationId") applicationId: applicationId
+computePlatform: option<computePlatform>,
+gitHubAccountName: option<gitHubAccountTokenName>,
+linkedToGitHub: option<boolean_>,
+createTime: option<timestamp_>,
+applicationName: option<applicationName>,
+applicationId: option<applicationId>
 }
 type appSpecContent = {
-@as("sha256") sha256: rawStringSha256,
-@as("content") content: rawStringContent
+sha256: option<rawStringSha256>,
+content: option<rawStringContent>
 }
 type alarm = {
-@as("name") name: alarmName
+name: option<alarmName>
 }
 type triggerConfig = {
-@as("triggerEvents") triggerEvents: triggerEventTypeList,
-@as("triggerTargetArn") triggerTargetArn: triggerTargetArn,
-@as("triggerName") triggerName: triggerName
+triggerEvents: option<triggerEventTypeList>,
+triggerTargetArn: option<triggerTargetArn>,
+triggerName: option<triggerName>
 }
 type trafficRoutingConfig = {
-@as("timeBasedLinear") timeBasedLinear: timeBasedLinear,
-@as("timeBasedCanary") timeBasedCanary: timeBasedCanary,
-@as("type") type_: trafficRoutingType
+timeBasedLinear: option<timeBasedLinear>,
+timeBasedCanary: option<timeBasedCanary>,
+@as("type") type_: option<trafficRoutingType>
 }
 type trafficRoute = {
-@as("listenerArns") listenerArns: listenerArnList
+listenerArns: option<listenerArnList>
 }
 type targetGroupInfoList = array<targetGroupInfo>
 type targetFilters = Js.Dict.t< filterValueList>
-type tagList = array<tag>
+type tagList_ = array<tag>
 type tagFilterList = array<tagFilter>
 type revisionLocation = {
-@as("appSpecContent") appSpecContent: appSpecContent,
-@as("string") string: rawString,
-@as("gitHubLocation") gitHubLocation: gitHubLocation,
-@as("s3Location") s3Location: s3Location,
-@as("revisionType") revisionType: revisionLocationType
+appSpecContent: option<appSpecContent>,
+@as("string") string_: option<rawString>,
+gitHubLocation: option<gitHubLocation>,
+s3Location: option<s3Location>,
+revisionType: option<revisionLocationType>
 }
 type relatedDeployments = {
-@as("autoUpdateOutdatedInstancesDeploymentIds") autoUpdateOutdatedInstancesDeploymentIds: deploymentsList,
-@as("autoUpdateOutdatedInstancesRootDeploymentId") autoUpdateOutdatedInstancesRootDeploymentId: deploymentId
+autoUpdateOutdatedInstancesDeploymentIds: option<deploymentsList>,
+autoUpdateOutdatedInstancesRootDeploymentId: option<deploymentId>
 }
 type lifecycleEvent = {
-@as("status") status: lifecycleEventStatus,
-@as("endTime") endTime: amazonawsTimestamp,
-@as("startTime") startTime: amazonawsTimestamp,
-@as("diagnostics") diagnostics: diagnostics,
-@as("lifecycleEventName") lifecycleEventName: lifecycleEventName
+status: option<lifecycleEventStatus>,
+endTime: option<timestamp_>,
+startTime: option<timestamp_>,
+diagnostics: option<diagnostics>,
+lifecycleEventName: option<lifecycleEventName>
 }
 type genericRevisionInfo = {
-@as("registerTime") registerTime: amazonawsTimestamp,
-@as("lastUsedTime") lastUsedTime: amazonawsTimestamp,
-@as("firstUsedTime") firstUsedTime: amazonawsTimestamp,
-@as("deploymentGroups") deploymentGroups: deploymentGroupsList,
-@as("description") description: description
+registerTime: option<timestamp_>,
+lastUsedTime: option<timestamp_>,
+firstUsedTime: option<timestamp_>,
+deploymentGroups: option<deploymentGroupsList>,
+description: option<description>
 }
-type eLBInfoList = array<eLBInfo>
-type eCSTaskSet = {
-@as("taskSetLabel") taskSetLabel: targetLabel,
-@as("targetGroup") targetGroup: targetGroupInfo,
-@as("trafficWeight") trafficWeight: trafficWeight,
-@as("status") status: eCSTaskSetStatus,
-@as("runningCount") runningCount: eCSTaskSetCount,
-@as("pendingCount") pendingCount: eCSTaskSetCount,
-@as("desiredCount") desiredCount: eCSTaskSetCount,
-@as("identifer") identifer: eCSTaskSetIdentifier
+type elbinfoList = array<elbinfo>
+type ecstaskSet = {
+taskSetLabel: option<targetLabel>,
+targetGroup: option<targetGroupInfo>,
+trafficWeight: option<trafficWeight>,
+status: option<ecstaskSetStatus>,
+runningCount: option<ecstaskSetCount>,
+pendingCount: option<ecstaskSetCount>,
+desiredCount: option<ecstaskSetCount>,
+identifer: option<ecstaskSetIdentifier>
 }
-type eCSServiceList = array<eCSService>
-type eC2TagFilterList = array<eC2TagFilter>
+type ecsserviceList = array<ecsservice>
+type ec2TagFilterList = array<ec2TagFilter>
 type blueGreenDeploymentConfiguration = {
-@as("greenFleetProvisioningOption") greenFleetProvisioningOption: greenFleetProvisioningOption,
-@as("deploymentReadyOption") deploymentReadyOption: deploymentReadyOption,
-@as("terminateBlueInstancesOnDeploymentSuccess") terminateBlueInstancesOnDeploymentSuccess: blueInstanceTerminationOption
+greenFleetProvisioningOption: option<greenFleetProvisioningOption>,
+deploymentReadyOption: option<deploymentReadyOption>,
+terminateBlueInstancesOnDeploymentSuccess: option<blueInstanceTerminationOption>
 }
 type autoScalingGroupList = array<autoScalingGroup>
 type autoRollbackConfiguration = {
-@as("events") events: autoRollbackEventsList,
-@as("enabled") enabled: amazonawsBoolean
+events: option<autoRollbackEventsList>,
+enabled: option<boolean_>
 }
 type applicationsInfoList = array<applicationInfo>
 type alarmList = array<alarm>
 type triggerConfigList = array<triggerConfig>
 type targetGroupPairInfo = {
-@as("testTrafficRoute") testTrafficRoute: trafficRoute,
-@as("prodTrafficRoute") prodTrafficRoute: trafficRoute,
-@as("targetGroups") targetGroups: targetGroupInfoList
+testTrafficRoute: option<trafficRoute>,
+prodTrafficRoute: option<trafficRoute>,
+targetGroups: option<targetGroupInfoList>
 }
 type revisionLocationList = array<revisionLocation>
 type revisionInfo = {
-@as("genericRevisionInfo") genericRevisionInfo: genericRevisionInfo,
-@as("revisionLocation") revisionLocation: revisionLocation
+genericRevisionInfo: option<genericRevisionInfo>,
+revisionLocation: option<revisionLocation>
 }
 type onPremisesTagSetList = array<tagFilterList>
 type lifecycleEventList = array<lifecycleEvent>
 type instanceInfo = {
-@as("tags") tags: tagList,
-@as("deregisterTime") deregisterTime: amazonawsTimestamp,
-@as("registerTime") registerTime: amazonawsTimestamp,
-@as("instanceArn") instanceArn: instanceArn,
-@as("iamUserArn") iamUserArn: iamUserArn,
-@as("iamSessionArn") iamSessionArn: iamSessionArn,
-@as("instanceName") instanceName: instanceName
+tags: option<tagList_>,
+deregisterTime: option<timestamp_>,
+registerTime: option<timestamp_>,
+instanceArn: option<instanceArn>,
+iamUserArn: option<iamUserArn>,
+iamSessionArn: option<iamSessionArn>,
+instanceName: option<instanceName>
 }
-type eCSTaskSetList = array<eCSTaskSet>
-type eC2TagSetList = array<eC2TagFilterList>
+type ecstaskSetList = array<ecstaskSet>
+type ec2TagSetList = array<ec2TagFilterList>
 type deploymentConfigInfo = {
-@as("trafficRoutingConfig") trafficRoutingConfig: trafficRoutingConfig,
-@as("computePlatform") computePlatform: computePlatform,
-@as("createTime") createTime: amazonawsTimestamp,
-@as("minimumHealthyHosts") minimumHealthyHosts: minimumHealthyHosts,
-@as("deploymentConfigName") deploymentConfigName: deploymentConfigName,
-@as("deploymentConfigId") deploymentConfigId: deploymentConfigId
+trafficRoutingConfig: option<trafficRoutingConfig>,
+computePlatform: option<computePlatform>,
+createTime: option<timestamp_>,
+minimumHealthyHosts: option<minimumHealthyHosts>,
+deploymentConfigName: option<deploymentConfigName>,
+deploymentConfigId: option<deploymentConfigId>
 }
 type alarmConfiguration = {
-@as("alarms") alarms: alarmList,
-@as("ignorePollAlarmFailure") ignorePollAlarmFailure: amazonawsBoolean,
-@as("enabled") enabled: amazonawsBoolean
+alarms: option<alarmList>,
+ignorePollAlarmFailure: option<boolean_>,
+enabled: option<boolean_>
 }
 type targetGroupPairInfoList = array<targetGroupPairInfo>
 type revisionInfoList = array<revisionInfo>
 type onPremisesTagSet = {
-@as("onPremisesTagSetList") onPremisesTagSetList: onPremisesTagSetList
+onPremisesTagSetList: option<onPremisesTagSetList>
 }
 type lambdaTarget = {
-@as("lambdaFunctionInfo") lambdaFunctionInfo: lambdaFunctionInfo,
-@as("lifecycleEvents") lifecycleEvents: lifecycleEventList,
-@as("lastUpdatedAt") lastUpdatedAt: time,
-@as("status") status: targetStatus,
-@as("targetArn") targetArn: targetArn,
-@as("targetId") targetId: targetId,
-@as("deploymentId") deploymentId: deploymentId
+lambdaFunctionInfo: option<lambdaFunctionInfo>,
+lifecycleEvents: option<lifecycleEventList>,
+lastUpdatedAt: option<time>,
+status: option<targetStatus>,
+targetArn: option<targetArn>,
+targetId: option<targetId>,
+deploymentId: option<deploymentId>
 }
 type instanceTarget = {
-@as("instanceLabel") instanceLabel: targetLabel,
-@as("lifecycleEvents") lifecycleEvents: lifecycleEventList,
-@as("lastUpdatedAt") lastUpdatedAt: time,
-@as("status") status: targetStatus,
-@as("targetArn") targetArn: targetArn,
-@as("targetId") targetId: targetId,
-@as("deploymentId") deploymentId: deploymentId
+instanceLabel: option<targetLabel>,
+lifecycleEvents: option<lifecycleEventList>,
+lastUpdatedAt: option<time>,
+status: option<targetStatus>,
+targetArn: option<targetArn>,
+targetId: option<targetId>,
+deploymentId: option<deploymentId>
 }
 type instanceSummary = {
-@as("instanceType") instanceType: instanceType,
-@as("lifecycleEvents") lifecycleEvents: lifecycleEventList,
-@as("lastUpdatedAt") lastUpdatedAt: amazonawsTimestamp,
-@as("status") status: instanceStatus,
-@as("instanceId") instanceId: instanceId,
-@as("deploymentId") deploymentId: deploymentId
+instanceType: option<instanceType>,
+lifecycleEvents: option<lifecycleEventList>,
+lastUpdatedAt: option<timestamp_>,
+status: option<instanceStatus>,
+instanceId: option<instanceId>,
+deploymentId: option<deploymentId>
 }
 type instanceInfoList = array<instanceInfo>
-type eCSTarget = {
-@as("taskSetsInfo") taskSetsInfo: eCSTaskSetList,
-@as("status") status: targetStatus,
-@as("lifecycleEvents") lifecycleEvents: lifecycleEventList,
-@as("lastUpdatedAt") lastUpdatedAt: time,
-@as("targetArn") targetArn: targetArn,
-@as("targetId") targetId: targetId,
-@as("deploymentId") deploymentId: deploymentId
+type ecstarget = {
+taskSetsInfo: option<ecstaskSetList>,
+status: option<targetStatus>,
+lifecycleEvents: option<lifecycleEventList>,
+lastUpdatedAt: option<time>,
+targetArn: option<targetArn>,
+targetId: option<targetId>,
+deploymentId: option<deploymentId>
 }
-type eC2TagSet = {
-@as("ec2TagSetList") ec2TagSetList: eC2TagSetList
+type ec2TagSet = {
+ec2TagSetList: option<ec2TagSetList>
 }
 type cloudFormationTarget = {
-@as("targetVersionWeight") targetVersionWeight: trafficWeight,
-@as("resourceType") resourceType: cloudFormationResourceType,
-@as("status") status: targetStatus,
-@as("lifecycleEvents") lifecycleEvents: lifecycleEventList,
-@as("lastUpdatedAt") lastUpdatedAt: time,
-@as("targetId") targetId: targetId,
-@as("deploymentId") deploymentId: deploymentId
+targetVersionWeight: option<trafficWeight>,
+resourceType: option<cloudFormationResourceType>,
+status: option<targetStatus>,
+lifecycleEvents: option<lifecycleEventList>,
+lastUpdatedAt: option<time>,
+targetId: option<targetId>,
+deploymentId: option<deploymentId>
 }
 type targetInstances = {
-@as("ec2TagSet") ec2TagSet: eC2TagSet,
-@as("autoScalingGroups") autoScalingGroups: autoScalingGroupNameList,
-@as("tagFilters") tagFilters: eC2TagFilterList
+ec2TagSet: option<ec2TagSet>,
+autoScalingGroups: option<autoScalingGroupNameList>,
+tagFilters: option<ec2TagFilterList>
 }
 type loadBalancerInfo = {
-@as("targetGroupPairInfoList") targetGroupPairInfoList: targetGroupPairInfoList,
-@as("targetGroupInfoList") targetGroupInfoList: targetGroupInfoList,
-@as("elbInfoList") elbInfoList: eLBInfoList
+targetGroupPairInfoList: option<targetGroupPairInfoList>,
+targetGroupInfoList: option<targetGroupInfoList>,
+elbInfoList: option<elbinfoList>
 }
 type instanceSummaryList = array<instanceSummary>
 type deploymentTarget = {
-@as("cloudFormationTarget") cloudFormationTarget: cloudFormationTarget,
-@as("ecsTarget") ecsTarget: eCSTarget,
-@as("lambdaTarget") lambdaTarget: lambdaTarget,
-@as("instanceTarget") instanceTarget: instanceTarget,
-@as("deploymentTargetType") deploymentTargetType: deploymentTargetType
+cloudFormationTarget: option<cloudFormationTarget>,
+ecsTarget: option<ecstarget>,
+lambdaTarget: option<lambdaTarget>,
+instanceTarget: option<instanceTarget>,
+deploymentTargetType: option<deploymentTargetType>
 }
 type deploymentTargetList = array<deploymentTarget>
 type deploymentInfo = {
-@as("relatedDeployments") relatedDeployments: relatedDeployments,
-@as("externalId") externalId: externalId,
-@as("computePlatform") computePlatform: computePlatform,
-@as("deploymentStatusMessages") deploymentStatusMessages: deploymentStatusMessageList,
-@as("fileExistsBehavior") fileExistsBehavior: fileExistsBehavior,
-@as("additionalDeploymentStatusInfo") additionalDeploymentStatusInfo: additionalDeploymentStatusInfo,
-@as("loadBalancerInfo") loadBalancerInfo: loadBalancerInfo,
-@as("blueGreenDeploymentConfiguration") blueGreenDeploymentConfiguration: blueGreenDeploymentConfiguration,
-@as("instanceTerminationWaitTimeStarted") instanceTerminationWaitTimeStarted: amazonawsBoolean,
-@as("targetInstances") targetInstances: targetInstances,
-@as("deploymentStyle") deploymentStyle: deploymentStyle,
-@as("rollbackInfo") rollbackInfo: rollbackInfo,
-@as("updateOutdatedInstancesOnly") updateOutdatedInstancesOnly: amazonawsBoolean,
-@as("autoRollbackConfiguration") autoRollbackConfiguration: autoRollbackConfiguration,
-@as("ignoreApplicationStopFailures") ignoreApplicationStopFailures: amazonawsBoolean,
-@as("creator") creator: deploymentCreator,
-@as("description") description: description,
-@as("deploymentOverview") deploymentOverview: deploymentOverview,
-@as("completeTime") completeTime: amazonawsTimestamp,
-@as("startTime") startTime: amazonawsTimestamp,
-@as("createTime") createTime: amazonawsTimestamp,
-@as("errorInformation") errorInformation: errorInformation,
-@as("status") status: deploymentStatus,
-@as("revision") revision: revisionLocation,
-@as("previousRevision") previousRevision: revisionLocation,
-@as("deploymentId") deploymentId: deploymentId,
-@as("deploymentConfigName") deploymentConfigName: deploymentConfigName,
-@as("deploymentGroupName") deploymentGroupName: deploymentGroupName,
-@as("applicationName") applicationName: applicationName
+relatedDeployments: option<relatedDeployments>,
+externalId: option<externalId>,
+computePlatform: option<computePlatform>,
+deploymentStatusMessages: option<deploymentStatusMessageList>,
+fileExistsBehavior: option<fileExistsBehavior>,
+additionalDeploymentStatusInfo: option<additionalDeploymentStatusInfo>,
+loadBalancerInfo: option<loadBalancerInfo>,
+blueGreenDeploymentConfiguration: option<blueGreenDeploymentConfiguration>,
+instanceTerminationWaitTimeStarted: option<boolean_>,
+targetInstances: option<targetInstances>,
+deploymentStyle: option<deploymentStyle>,
+rollbackInfo: option<rollbackInfo>,
+updateOutdatedInstancesOnly: option<boolean_>,
+autoRollbackConfiguration: option<autoRollbackConfiguration>,
+ignoreApplicationStopFailures: option<boolean_>,
+creator: option<deploymentCreator>,
+description: option<description>,
+deploymentOverview: option<deploymentOverview>,
+completeTime: option<timestamp_>,
+startTime: option<timestamp_>,
+createTime: option<timestamp_>,
+errorInformation: option<errorInformation>,
+status: option<deploymentStatus>,
+revision: option<revisionLocation>,
+previousRevision: option<revisionLocation>,
+deploymentId: option<deploymentId>,
+deploymentConfigName: option<deploymentConfigName>,
+deploymentGroupName: option<deploymentGroupName>,
+applicationName: option<applicationName>
 }
 type deploymentGroupInfo = {
-@as("ecsServices") ecsServices: eCSServiceList,
-@as("computePlatform") computePlatform: computePlatform,
-@as("onPremisesTagSet") onPremisesTagSet: onPremisesTagSet,
-@as("ec2TagSet") ec2TagSet: eC2TagSet,
-@as("lastAttemptedDeployment") lastAttemptedDeployment: lastDeploymentInfo,
-@as("lastSuccessfulDeployment") lastSuccessfulDeployment: lastDeploymentInfo,
-@as("loadBalancerInfo") loadBalancerInfo: loadBalancerInfo,
-@as("blueGreenDeploymentConfiguration") blueGreenDeploymentConfiguration: blueGreenDeploymentConfiguration,
-@as("outdatedInstancesStrategy") outdatedInstancesStrategy: outdatedInstancesStrategy,
-@as("deploymentStyle") deploymentStyle: deploymentStyle,
-@as("autoRollbackConfiguration") autoRollbackConfiguration: autoRollbackConfiguration,
-@as("alarmConfiguration") alarmConfiguration: alarmConfiguration,
-@as("triggerConfigurations") triggerConfigurations: triggerConfigList,
-@as("targetRevision") targetRevision: revisionLocation,
-@as("serviceRoleArn") serviceRoleArn: role,
-@as("autoScalingGroups") autoScalingGroups: autoScalingGroupList,
-@as("onPremisesInstanceTagFilters") onPremisesInstanceTagFilters: tagFilterList,
-@as("ec2TagFilters") ec2TagFilters: eC2TagFilterList,
-@as("deploymentConfigName") deploymentConfigName: deploymentConfigName,
-@as("deploymentGroupName") deploymentGroupName: deploymentGroupName,
-@as("deploymentGroupId") deploymentGroupId: deploymentGroupId,
-@as("applicationName") applicationName: applicationName
+ecsServices: option<ecsserviceList>,
+computePlatform: option<computePlatform>,
+onPremisesTagSet: option<onPremisesTagSet>,
+ec2TagSet: option<ec2TagSet>,
+lastAttemptedDeployment: option<lastDeploymentInfo>,
+lastSuccessfulDeployment: option<lastDeploymentInfo>,
+loadBalancerInfo: option<loadBalancerInfo>,
+blueGreenDeploymentConfiguration: option<blueGreenDeploymentConfiguration>,
+outdatedInstancesStrategy: option<outdatedInstancesStrategy>,
+deploymentStyle: option<deploymentStyle>,
+autoRollbackConfiguration: option<autoRollbackConfiguration>,
+alarmConfiguration: option<alarmConfiguration>,
+triggerConfigurations: option<triggerConfigList>,
+targetRevision: option<revisionLocation>,
+serviceRoleArn: option<role>,
+autoScalingGroups: option<autoScalingGroupList>,
+onPremisesInstanceTagFilters: option<tagFilterList>,
+ec2TagFilters: option<ec2TagFilterList>,
+deploymentConfigName: option<deploymentConfigName>,
+deploymentGroupName: option<deploymentGroupName>,
+deploymentGroupId: option<deploymentGroupId>,
+applicationName: option<applicationName>
 }
 type deploymentsInfoList = array<deploymentInfo>
 type deploymentGroupInfoList = array<deploymentGroupInfo>
-type clientType;
-@module("@aws-sdk/client-codedeploy") @new external createClient: unit => clientType = "CodeDeployClient";
+type awsServiceClient;
+@module("@aws-sdk/client-codedeploy") @new external createClient: unit => awsServiceClient = "CodeDeployClient";
 module UpdateApplication = {
   type t;
   type request = {
-@as("newApplicationName") newApplicationName: applicationName,
-@as("applicationName") applicationName: applicationName
+newApplicationName: option<applicationName>,
+applicationName: option<applicationName>
 }
   
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "UpdateApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module StopDeployment = {
   type t;
   type request = {
-@as("autoRollbackEnabled") autoRollbackEnabled: nullableBoolean,
-@as("deploymentId") deploymentId: option<deploymentId>
+autoRollbackEnabled: option<nullableBoolean>,
+deploymentId: deploymentId
 }
   type response = {
-@as("statusMessage") statusMessage: message,
-@as("status") status: stopStatus
+statusMessage: option<message>,
+status: option<stopStatus>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "StopDeploymentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SkipWaitTimeForInstanceTermination = {
   type t;
   type request = {
-@as("deploymentId") deploymentId: deploymentId
+deploymentId: option<deploymentId>
 }
   
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "SkipWaitTimeForInstanceTerminationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RegisterOnPremisesInstance = {
   type t;
   type request = {
-@as("iamUserArn") iamUserArn: iamUserArn,
-@as("iamSessionArn") iamSessionArn: iamSessionArn,
-@as("instanceName") instanceName: option<instanceName>
+iamUserArn: option<iamUserArn>,
+iamSessionArn: option<iamSessionArn>,
+instanceName: instanceName
 }
   
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "RegisterOnPremisesInstanceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutLifecycleEventHookExecutionStatus = {
   type t;
   type request = {
-@as("status") status: lifecycleEventStatus,
-@as("lifecycleEventHookExecutionId") lifecycleEventHookExecutionId: lifecycleEventHookExecutionId,
-@as("deploymentId") deploymentId: deploymentId
+status: option<lifecycleEventStatus>,
+lifecycleEventHookExecutionId: option<lifecycleEventHookExecutionId>,
+deploymentId: option<deploymentId>
 }
   type response = {
-@as("lifecycleEventHookExecutionId") lifecycleEventHookExecutionId: lifecycleEventHookExecutionId
+lifecycleEventHookExecutionId: option<lifecycleEventHookExecutionId>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "PutLifecycleEventHookExecutionStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterOnPremisesInstance = {
   type t;
   type request = {
-@as("instanceName") instanceName: option<instanceName>
+instanceName: instanceName
 }
   
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeregisterOnPremisesInstanceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteResourcesByExternalId = {
   type t;
   type request = {
-@as("externalId") externalId: externalId
+externalId: option<externalId>
 }
   type response = unit
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeleteResourcesByExternalIdCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteGitHubAccountToken = {
   type t;
   type request = {
-@as("tokenName") tokenName: gitHubAccountTokenName
+tokenName: option<gitHubAccountTokenName>
 }
   type response = {
-@as("tokenName") tokenName: gitHubAccountTokenName
+tokenName: option<gitHubAccountTokenName>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeleteGitHubAccountTokenCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDeploymentConfig = {
   type t;
   type request = {
-@as("deploymentConfigName") deploymentConfigName: option<deploymentConfigName>
+deploymentConfigName: deploymentConfigName
 }
   
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeleteDeploymentConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteApplication = {
   type t;
   type request = {
-@as("applicationName") applicationName: option<applicationName>
+applicationName: applicationName
 }
   
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeleteApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module ContinueDeployment = {
   type t;
   type request = {
-@as("deploymentWaitType") deploymentWaitType: deploymentWaitType,
-@as("deploymentId") deploymentId: deploymentId
+deploymentWaitType: option<deploymentWaitType>,
+deploymentId: option<deploymentId>
 }
   
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ContinueDeploymentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceArn") resourceArn: option<arn>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceArn") resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListGitHubAccountTokenNames = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("tokenNameList") tokenNameList: gitHubAccountTokenNameList
+nextToken: option<nextToken>,
+tokenNameList: option<gitHubAccountTokenNameList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListGitHubAccountTokenNamesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDeployments = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("createTimeRange") createTimeRange: timeRange,
-@as("includeOnlyStatuses") includeOnlyStatuses: deploymentStatusList,
-@as("externalId") externalId: externalId,
-@as("deploymentGroupName") deploymentGroupName: deploymentGroupName,
-@as("applicationName") applicationName: applicationName
+nextToken: option<nextToken>,
+createTimeRange: option<timeRange>,
+includeOnlyStatuses: option<deploymentStatusList>,
+externalId: option<externalId>,
+deploymentGroupName: option<deploymentGroupName>,
+applicationName: option<applicationName>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("deployments") deployments: deploymentsList
+nextToken: option<nextToken>,
+deployments: option<deploymentsList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListDeploymentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDeploymentInstances = {
   type t;
   type request = {
-@as("instanceTypeFilter") instanceTypeFilter: instanceTypeList,
-@as("instanceStatusFilter") instanceStatusFilter: instanceStatusList,
-@as("nextToken") nextToken: nextToken,
-@as("deploymentId") deploymentId: option<deploymentId>
+instanceTypeFilter: option<instanceTypeList>,
+instanceStatusFilter: option<instanceStatusList>,
+nextToken: option<nextToken>,
+deploymentId: deploymentId
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("instancesList") instancesList: instancesList
+nextToken: option<nextToken>,
+instancesList: option<instancesList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListDeploymentInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDeploymentGroups = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("applicationName") applicationName: option<applicationName>
+nextToken: option<nextToken>,
+applicationName: applicationName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("deploymentGroups") deploymentGroups: deploymentGroupsList,
-@as("applicationName") applicationName: applicationName
+nextToken: option<nextToken>,
+deploymentGroups: option<deploymentGroupsList>,
+applicationName: option<applicationName>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListDeploymentGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDeploymentConfigs = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("deploymentConfigsList") deploymentConfigsList: deploymentConfigsList
+nextToken: option<nextToken>,
+deploymentConfigsList: option<deploymentConfigsList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListDeploymentConfigsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListApplications = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("applications") applications: applicationsList
+nextToken: option<nextToken>,
+applications: option<applicationsList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListApplicationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetApplication = {
   type t;
   type request = {
-@as("applicationName") applicationName: option<applicationName>
+applicationName: applicationName
 }
   type response = {
-@as("application") application: applicationInfo
+application: option<applicationInfo>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tagList>,
-@as("ResourceArn") resourceArn: option<arn>
+@as("Tags") tags: tagList_,
+@as("ResourceArn") resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RemoveTagsFromOnPremisesInstances = {
   type t;
   type request = {
-@as("instanceNames") instanceNames: option<instanceNameList>,
-@as("tags") tags: option<tagList>
+instanceNames: instanceNameList,
+tags: tagList_
 }
   
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "RemoveTagsFromOnPremisesInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RegisterApplicationRevision = {
   type t;
   type request = {
-@as("revision") revision: option<revisionLocation>,
-@as("description") description: description,
-@as("applicationName") applicationName: option<applicationName>
+revision: revisionLocation,
+description: option<description>,
+applicationName: applicationName
 }
   
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "RegisterApplicationRevisionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("ResourceArn") resourceArn: option<arn>
+@as("NextToken") nextToken: option<nextToken>,
+@as("ResourceArn") resourceArn: arn
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("Tags") tags: tagList
+@as("NextToken") nextToken: option<nextToken>,
+@as("Tags") tags: option<tagList_>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListOnPremisesInstances = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("tagFilters") tagFilters: tagFilterList,
-@as("registrationStatus") registrationStatus: registrationStatus
+nextToken: option<nextToken>,
+tagFilters: option<tagFilterList>,
+registrationStatus: option<registrationStatus>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("instanceNames") instanceNames: instanceNameList
+nextToken: option<nextToken>,
+instanceNames: option<instanceNameList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListOnPremisesInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDeploymentTargets = {
   type t;
   type request = {
-@as("targetFilters") targetFilters: targetFilters,
-@as("nextToken") nextToken: nextToken,
-@as("deploymentId") deploymentId: deploymentId
+targetFilters: option<targetFilters>,
+nextToken: option<nextToken>,
+deploymentId: option<deploymentId>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("targetIds") targetIds: targetIdList
+nextToken: option<nextToken>,
+targetIds: option<targetIdList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListDeploymentTargetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetApplicationRevision = {
   type t;
   type request = {
-@as("revision") revision: option<revisionLocation>,
-@as("applicationName") applicationName: option<applicationName>
+revision: revisionLocation,
+applicationName: applicationName
 }
   type response = {
-@as("revisionInfo") revisionInfo: genericRevisionInfo,
-@as("revision") revision: revisionLocation,
-@as("applicationName") applicationName: applicationName
+revisionInfo: option<genericRevisionInfo>,
+revision: option<revisionLocation>,
+applicationName: option<applicationName>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetApplicationRevisionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDeploymentGroup = {
   type t;
   type request = {
-@as("deploymentGroupName") deploymentGroupName: option<deploymentGroupName>,
-@as("applicationName") applicationName: option<applicationName>
+deploymentGroupName: deploymentGroupName,
+applicationName: applicationName
 }
   type response = {
-@as("hooksNotCleanedUp") hooksNotCleanedUp: autoScalingGroupList
+hooksNotCleanedUp: option<autoScalingGroupList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeleteDeploymentGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDeploymentConfig = {
   type t;
   type request = {
-@as("computePlatform") computePlatform: computePlatform,
-@as("trafficRoutingConfig") trafficRoutingConfig: trafficRoutingConfig,
-@as("minimumHealthyHosts") minimumHealthyHosts: minimumHealthyHosts,
-@as("deploymentConfigName") deploymentConfigName: option<deploymentConfigName>
+computePlatform: option<computePlatform>,
+trafficRoutingConfig: option<trafficRoutingConfig>,
+minimumHealthyHosts: option<minimumHealthyHosts>,
+deploymentConfigName: deploymentConfigName
 }
   type response = {
-@as("deploymentConfigId") deploymentConfigId: deploymentConfigId
+deploymentConfigId: option<deploymentConfigId>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "CreateDeploymentConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateApplication = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("computePlatform") computePlatform: computePlatform,
-@as("applicationName") applicationName: option<applicationName>
+tags: option<tagList_>,
+computePlatform: option<computePlatform>,
+applicationName: applicationName
 }
   type response = {
-@as("applicationId") applicationId: applicationId
+applicationId: option<applicationId>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "CreateApplicationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchGetApplications = {
   type t;
   type request = {
-@as("applicationNames") applicationNames: option<applicationsList>
+applicationNames: applicationsList
 }
   type response = {
-@as("applicationsInfo") applicationsInfo: applicationsInfoList
+applicationsInfo: option<applicationsInfoList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetApplicationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddTagsToOnPremisesInstances = {
   type t;
   type request = {
-@as("instanceNames") instanceNames: option<instanceNameList>,
-@as("tags") tags: option<tagList>
+instanceNames: instanceNameList,
+tags: tagList_
 }
   
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "AddTagsToOnPremisesInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module ListApplicationRevisions = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("deployed") deployed: listStateFilterAction,
-@as("s3KeyPrefix") s3KeyPrefix: s3Key,
-@as("s3Bucket") s3Bucket: s3Bucket,
-@as("sortOrder") sortOrder: sortOrder,
-@as("sortBy") sortBy: applicationRevisionSortBy,
-@as("applicationName") applicationName: option<applicationName>
+nextToken: option<nextToken>,
+deployed: option<listStateFilterAction>,
+s3KeyPrefix: option<s3Key>,
+s3Bucket: option<s3Bucket>,
+sortOrder: option<sortOrder>,
+sortBy: option<applicationRevisionSortBy>,
+applicationName: applicationName
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("revisions") revisions: revisionLocationList
+nextToken: option<nextToken>,
+revisions: option<revisionLocationList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListApplicationRevisionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetOnPremisesInstance = {
   type t;
   type request = {
-@as("instanceName") instanceName: option<instanceName>
+instanceName: instanceName
 }
   type response = {
-@as("instanceInfo") instanceInfo: instanceInfo
+instanceInfo: option<instanceInfo>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetOnPremisesInstanceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDeploymentConfig = {
   type t;
   type request = {
-@as("deploymentConfigName") deploymentConfigName: option<deploymentConfigName>
+deploymentConfigName: deploymentConfigName
 }
   type response = {
-@as("deploymentConfigInfo") deploymentConfigInfo: deploymentConfigInfo
+deploymentConfigInfo: option<deploymentConfigInfo>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetDeploymentConfigCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDeploymentInstance = {
   type t;
   type request = {
-@as("instanceId") instanceId: option<instanceId>,
-@as("deploymentId") deploymentId: option<deploymentId>
+instanceId: instanceId,
+deploymentId: deploymentId
 }
   type response = {
-@as("instanceSummary") instanceSummary: instanceSummary
+instanceSummary: option<instanceSummary>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetDeploymentInstanceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchGetOnPremisesInstances = {
   type t;
   type request = {
-@as("instanceNames") instanceNames: option<instanceNameList>
+instanceNames: instanceNameList
 }
   type response = {
-@as("instanceInfos") instanceInfos: instanceInfoList
+instanceInfos: option<instanceInfoList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetOnPremisesInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchGetApplicationRevisions = {
   type t;
   type request = {
-@as("revisions") revisions: option<revisionLocationList>,
-@as("applicationName") applicationName: option<applicationName>
+revisions: revisionLocationList,
+applicationName: applicationName
 }
   type response = {
-@as("revisions") revisions: revisionInfoList,
-@as("errorMessage") errorMessage: errorMessage,
-@as("applicationName") applicationName: applicationName
+revisions: option<revisionInfoList>,
+errorMessage: option<errorMessage>,
+applicationName: option<applicationName>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetApplicationRevisionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDeploymentGroup = {
   type t;
   type request = {
-@as("onPremisesTagSet") onPremisesTagSet: onPremisesTagSet,
-@as("ecsServices") ecsServices: eCSServiceList,
-@as("ec2TagSet") ec2TagSet: eC2TagSet,
-@as("loadBalancerInfo") loadBalancerInfo: loadBalancerInfo,
-@as("blueGreenDeploymentConfiguration") blueGreenDeploymentConfiguration: blueGreenDeploymentConfiguration,
-@as("deploymentStyle") deploymentStyle: deploymentStyle,
-@as("outdatedInstancesStrategy") outdatedInstancesStrategy: outdatedInstancesStrategy,
-@as("autoRollbackConfiguration") autoRollbackConfiguration: autoRollbackConfiguration,
-@as("alarmConfiguration") alarmConfiguration: alarmConfiguration,
-@as("triggerConfigurations") triggerConfigurations: triggerConfigList,
-@as("serviceRoleArn") serviceRoleArn: role,
-@as("autoScalingGroups") autoScalingGroups: autoScalingGroupNameList,
-@as("onPremisesInstanceTagFilters") onPremisesInstanceTagFilters: tagFilterList,
-@as("ec2TagFilters") ec2TagFilters: eC2TagFilterList,
-@as("deploymentConfigName") deploymentConfigName: deploymentConfigName,
-@as("newDeploymentGroupName") newDeploymentGroupName: deploymentGroupName,
-@as("currentDeploymentGroupName") currentDeploymentGroupName: option<deploymentGroupName>,
-@as("applicationName") applicationName: option<applicationName>
+onPremisesTagSet: option<onPremisesTagSet>,
+ecsServices: option<ecsserviceList>,
+ec2TagSet: option<ec2TagSet>,
+loadBalancerInfo: option<loadBalancerInfo>,
+blueGreenDeploymentConfiguration: option<blueGreenDeploymentConfiguration>,
+deploymentStyle: option<deploymentStyle>,
+outdatedInstancesStrategy: option<outdatedInstancesStrategy>,
+autoRollbackConfiguration: option<autoRollbackConfiguration>,
+alarmConfiguration: option<alarmConfiguration>,
+triggerConfigurations: option<triggerConfigList>,
+serviceRoleArn: option<role>,
+autoScalingGroups: option<autoScalingGroupNameList>,
+onPremisesInstanceTagFilters: option<tagFilterList>,
+ec2TagFilters: option<ec2TagFilterList>,
+deploymentConfigName: option<deploymentConfigName>,
+newDeploymentGroupName: option<deploymentGroupName>,
+currentDeploymentGroupName: deploymentGroupName,
+applicationName: applicationName
 }
   type response = {
-@as("hooksNotCleanedUp") hooksNotCleanedUp: autoScalingGroupList
+hooksNotCleanedUp: option<autoScalingGroupList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "UpdateDeploymentGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDeploymentTarget = {
   type t;
   type request = {
-@as("targetId") targetId: targetId,
-@as("deploymentId") deploymentId: deploymentId
+targetId: option<targetId>,
+deploymentId: option<deploymentId>
 }
   type response = {
-@as("deploymentTarget") deploymentTarget: deploymentTarget
+deploymentTarget: option<deploymentTarget>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetDeploymentTargetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDeploymentGroup = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("onPremisesTagSet") onPremisesTagSet: onPremisesTagSet,
-@as("ecsServices") ecsServices: eCSServiceList,
-@as("ec2TagSet") ec2TagSet: eC2TagSet,
-@as("loadBalancerInfo") loadBalancerInfo: loadBalancerInfo,
-@as("blueGreenDeploymentConfiguration") blueGreenDeploymentConfiguration: blueGreenDeploymentConfiguration,
-@as("deploymentStyle") deploymentStyle: deploymentStyle,
-@as("outdatedInstancesStrategy") outdatedInstancesStrategy: outdatedInstancesStrategy,
-@as("autoRollbackConfiguration") autoRollbackConfiguration: autoRollbackConfiguration,
-@as("alarmConfiguration") alarmConfiguration: alarmConfiguration,
-@as("triggerConfigurations") triggerConfigurations: triggerConfigList,
-@as("serviceRoleArn") serviceRoleArn: option<role>,
-@as("autoScalingGroups") autoScalingGroups: autoScalingGroupNameList,
-@as("onPremisesInstanceTagFilters") onPremisesInstanceTagFilters: tagFilterList,
-@as("ec2TagFilters") ec2TagFilters: eC2TagFilterList,
-@as("deploymentConfigName") deploymentConfigName: deploymentConfigName,
-@as("deploymentGroupName") deploymentGroupName: option<deploymentGroupName>,
-@as("applicationName") applicationName: option<applicationName>
+tags: option<tagList_>,
+onPremisesTagSet: option<onPremisesTagSet>,
+ecsServices: option<ecsserviceList>,
+ec2TagSet: option<ec2TagSet>,
+loadBalancerInfo: option<loadBalancerInfo>,
+blueGreenDeploymentConfiguration: option<blueGreenDeploymentConfiguration>,
+deploymentStyle: option<deploymentStyle>,
+outdatedInstancesStrategy: option<outdatedInstancesStrategy>,
+autoRollbackConfiguration: option<autoRollbackConfiguration>,
+alarmConfiguration: option<alarmConfiguration>,
+triggerConfigurations: option<triggerConfigList>,
+serviceRoleArn: role,
+autoScalingGroups: option<autoScalingGroupNameList>,
+onPremisesInstanceTagFilters: option<tagFilterList>,
+ec2TagFilters: option<ec2TagFilterList>,
+deploymentConfigName: option<deploymentConfigName>,
+deploymentGroupName: deploymentGroupName,
+applicationName: applicationName
 }
   type response = {
-@as("deploymentGroupId") deploymentGroupId: deploymentGroupId
+deploymentGroupId: option<deploymentGroupId>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "CreateDeploymentGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDeployment = {
   type t;
   type request = {
-@as("fileExistsBehavior") fileExistsBehavior: fileExistsBehavior,
-@as("updateOutdatedInstancesOnly") updateOutdatedInstancesOnly: amazonawsBoolean,
-@as("autoRollbackConfiguration") autoRollbackConfiguration: autoRollbackConfiguration,
-@as("targetInstances") targetInstances: targetInstances,
-@as("ignoreApplicationStopFailures") ignoreApplicationStopFailures: amazonawsBoolean,
-@as("description") description: description,
-@as("deploymentConfigName") deploymentConfigName: deploymentConfigName,
-@as("revision") revision: revisionLocation,
-@as("deploymentGroupName") deploymentGroupName: deploymentGroupName,
-@as("applicationName") applicationName: option<applicationName>
+fileExistsBehavior: option<fileExistsBehavior>,
+updateOutdatedInstancesOnly: option<boolean_>,
+autoRollbackConfiguration: option<autoRollbackConfiguration>,
+targetInstances: option<targetInstances>,
+ignoreApplicationStopFailures: option<boolean_>,
+description: option<description>,
+deploymentConfigName: option<deploymentConfigName>,
+revision: option<revisionLocation>,
+deploymentGroupName: option<deploymentGroupName>,
+applicationName: applicationName
 }
   type response = {
-@as("deploymentId") deploymentId: deploymentId
+deploymentId: option<deploymentId>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "CreateDeploymentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchGetDeploymentInstances = {
   type t;
   type request = {
-@as("instanceIds") instanceIds: option<instancesList>,
-@as("deploymentId") deploymentId: option<deploymentId>
+instanceIds: instancesList,
+deploymentId: deploymentId
 }
   type response = {
-@as("errorMessage") errorMessage: errorMessage,
-@as("instancesSummary") instancesSummary: instanceSummaryList
+errorMessage: option<errorMessage>,
+instancesSummary: option<instanceSummaryList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetDeploymentInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDeploymentGroup = {
   type t;
   type request = {
-@as("deploymentGroupName") deploymentGroupName: option<deploymentGroupName>,
-@as("applicationName") applicationName: option<applicationName>
+deploymentGroupName: deploymentGroupName,
+applicationName: applicationName
 }
   type response = {
-@as("deploymentGroupInfo") deploymentGroupInfo: deploymentGroupInfo
+deploymentGroupInfo: option<deploymentGroupInfo>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetDeploymentGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDeployment = {
   type t;
   type request = {
-@as("deploymentId") deploymentId: option<deploymentId>
+deploymentId: deploymentId
 }
   type response = {
-@as("deploymentInfo") deploymentInfo: deploymentInfo
+deploymentInfo: option<deploymentInfo>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetDeploymentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchGetDeploymentTargets = {
   type t;
   type request = {
-@as("targetIds") targetIds: targetIdList,
-@as("deploymentId") deploymentId: deploymentId
+targetIds: option<targetIdList>,
+deploymentId: option<deploymentId>
 }
   type response = {
-@as("deploymentTargets") deploymentTargets: deploymentTargetList
+deploymentTargets: option<deploymentTargetList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetDeploymentTargetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchGetDeployments = {
   type t;
   type request = {
-@as("deploymentIds") deploymentIds: option<deploymentsList>
+deploymentIds: deploymentsList
 }
   type response = {
-@as("deploymentsInfo") deploymentsInfo: deploymentsInfoList
+deploymentsInfo: option<deploymentsInfoList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetDeploymentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchGetDeploymentGroups = {
   type t;
   type request = {
-@as("deploymentGroupNames") deploymentGroupNames: option<deploymentGroupsList>,
-@as("applicationName") applicationName: option<applicationName>
+deploymentGroupNames: deploymentGroupsList,
+applicationName: applicationName
 }
   type response = {
-@as("errorMessage") errorMessage: errorMessage,
-@as("deploymentGroupsInfo") deploymentGroupsInfo: deploymentGroupInfoList
+errorMessage: option<errorMessage>,
+deploymentGroupsInfo: option<deploymentGroupInfoList>
 }
   @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetDeploymentGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

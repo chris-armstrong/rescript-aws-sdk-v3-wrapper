@@ -1,101 +1,107 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type amazonawsString = string
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type timestamp_ = Js.Date.t;
+type long = float
+type string_ = string
 type serviceType = [@as("RDS") #RDS]
-type maxResults = int;
-type limit = int;
-type amazonawsInteger = int;
-type iSOTimestamp = Js.Date.t;
-type amazonawsDouble = float;
-type stringList = array<amazonawsString>
-type metricValuesList = array<amazonawsDouble>
-type metricQueryFilterMap = Js.Dict.t< amazonawsString>
-type dimensionMap = Js.Dict.t< amazonawsString>
+type maxResults = int
+type limit = int
+type integer_ = int
+type isotimestamp = Js.Date.t;
+type double = float
+type stringList = array<string_>
+type metricValuesList = array<double>
+type metricQueryFilterMap = Js.Dict.t< string_>
+type dimensionMap = Js.Dict.t< string_>
 type dataPoint = {
-@as("Value") value: option<amazonawsDouble>,
-@as("Timestamp") timestamp: option<iSOTimestamp>
+@as("Value") value: double,
+@as("Timestamp") timestamp_: isotimestamp
 }
 type responseResourceMetricKey = {
-@as("Dimensions") dimensions: dimensionMap,
-@as("Metric") metric: option<amazonawsString>
+@as("Dimensions") dimensions: option<dimensionMap>,
+@as("Metric") metric: string_
 }
 type responsePartitionKey = {
-@as("Dimensions") dimensions: option<dimensionMap>
-}
-type dimensionKeyDescription = {
-@as("Partitions") partitions: metricValuesList,
-@as("Total") total: amazonawsDouble,
 @as("Dimensions") dimensions: dimensionMap
 }
+type dimensionKeyDescription = {
+@as("Partitions") partitions: option<metricValuesList>,
+@as("Total") total: option<double>,
+@as("Dimensions") dimensions: option<dimensionMap>
+}
 type dimensionGroup = {
-@as("Limit") limit: limit,
-@as("Dimensions") dimensions: stringList,
-@as("Group") group: option<amazonawsString>
+@as("Limit") limit: option<limit>,
+@as("Dimensions") dimensions: option<stringList>,
+@as("Group") group: string_
 }
 type dataPointsList = array<dataPoint>
 type responsePartitionKeyList = array<responsePartitionKey>
 type metricQuery = {
-@as("Filter") filter: metricQueryFilterMap,
-@as("GroupBy") groupBy: dimensionGroup,
-@as("Metric") metric: option<amazonawsString>
+@as("Filter") filter: option<metricQueryFilterMap>,
+@as("GroupBy") groupBy: option<dimensionGroup>,
+@as("Metric") metric: string_
 }
 type metricKeyDataPoints = {
-@as("DataPoints") dataPoints: dataPointsList,
-@as("Key") key: responseResourceMetricKey
+@as("DataPoints") dataPoints: option<dataPointsList>,
+@as("Key") key: option<responseResourceMetricKey>
 }
 type dimensionKeyDescriptionList = array<dimensionKeyDescription>
 type metricQueryList = array<metricQuery>
 type metricKeyDataPointsList = array<metricKeyDataPoints>
-type clientType;
-@module("@aws-sdk/client-pi") @new external createClient: unit => clientType = "PIClient";
+type awsServiceClient;
+@module("@aws-sdk/client-pi") @new external createClient: unit => awsServiceClient = "PIClient";
 module DescribeDimensionKeys = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults,
-@as("Filter") filter: metricQueryFilterMap,
-@as("PartitionBy") partitionBy: dimensionGroup,
-@as("GroupBy") groupBy: option<dimensionGroup>,
-@as("PeriodInSeconds") periodInSeconds: amazonawsInteger,
-@as("Metric") metric: option<amazonawsString>,
-@as("EndTime") endTime: option<iSOTimestamp>,
-@as("StartTime") startTime: option<iSOTimestamp>,
-@as("Identifier") identifier: option<amazonawsString>,
-@as("ServiceType") serviceType: option<serviceType>
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("Filter") filter: option<metricQueryFilterMap>,
+@as("PartitionBy") partitionBy: option<dimensionGroup>,
+@as("GroupBy") groupBy: dimensionGroup,
+@as("PeriodInSeconds") periodInSeconds: option<integer_>,
+@as("Metric") metric: string_,
+@as("EndTime") endTime: isotimestamp,
+@as("StartTime") startTime: isotimestamp,
+@as("Identifier") identifier: string_,
+@as("ServiceType") serviceType: serviceType
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Keys") keys: dimensionKeyDescriptionList,
-@as("PartitionKeys") partitionKeys: responsePartitionKeyList,
-@as("AlignedEndTime") alignedEndTime: iSOTimestamp,
-@as("AlignedStartTime") alignedStartTime: iSOTimestamp
+@as("NextToken") nextToken: option<string_>,
+@as("Keys") keys: option<dimensionKeyDescriptionList>,
+@as("PartitionKeys") partitionKeys: option<responsePartitionKeyList>,
+@as("AlignedEndTime") alignedEndTime: option<isotimestamp>,
+@as("AlignedStartTime") alignedStartTime: option<isotimestamp>
 }
   @module("@aws-sdk/client-pi") @new external new_: (request) => t = "DescribeDimensionKeysCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetResourceMetrics = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: maxResults,
-@as("PeriodInSeconds") periodInSeconds: amazonawsInteger,
-@as("EndTime") endTime: option<iSOTimestamp>,
-@as("StartTime") startTime: option<iSOTimestamp>,
-@as("MetricQueries") metricQueries: option<metricQueryList>,
-@as("Identifier") identifier: option<amazonawsString>,
-@as("ServiceType") serviceType: option<serviceType>
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("PeriodInSeconds") periodInSeconds: option<integer_>,
+@as("EndTime") endTime: isotimestamp,
+@as("StartTime") startTime: isotimestamp,
+@as("MetricQueries") metricQueries: metricQueryList,
+@as("Identifier") identifier: string_,
+@as("ServiceType") serviceType: serviceType
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MetricList") metricList: metricKeyDataPointsList,
-@as("Identifier") identifier: amazonawsString,
-@as("AlignedEndTime") alignedEndTime: iSOTimestamp,
-@as("AlignedStartTime") alignedStartTime: iSOTimestamp
+@as("NextToken") nextToken: option<string_>,
+@as("MetricList") metricList: option<metricKeyDataPointsList>,
+@as("Identifier") identifier: option<string_>,
+@as("AlignedEndTime") alignedEndTime: option<isotimestamp>,
+@as("AlignedStartTime") alignedStartTime: option<isotimestamp>
 }
   @module("@aws-sdk/client-pi") @new external new_: (request) => t = "GetResourceMetricsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

@@ -1,134 +1,137 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type amazonawsTimestamp = Js.Date.t;
-type amazonawsString = string
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type timestamp_ = Js.Date.t;
+type string_ = string
 type snsTopicARN = string
-type snowballType = [@as("SNC1_SSD") #SNC1_SSD | @as("SNC1_HDD") #SNC1_HDD | @as("EDGE_S") #EDGE_S | @as("EDGE_CG") #EDGE_CG | @as("EDGE_C") #EDGE_C | @as("EDGE") #EDGE | @as("STANDARD") #STANDARD]
+type snowballType = [@as("SNC1_SSD") #SNC1SSD | @as("SNC1_HDD") #SNC1HDD | @as("EDGE_S") #EDGES | @as("EDGE_CG") #EDGECG | @as("EDGE_C") #EDGEC | @as("EDGE") #EDGE | @as("STANDARD") #STANDARD]
 type snowballCapacity = [@as("NoPreference") #NoPreference | @as("T14") #T14 | @as("T8") #T8 | @as("T98") #T98 | @as("T42") #T42 | @as("T100") #T100 | @as("T80") #T80 | @as("T50") #T50]
-type shippingOption = [@as("STANDARD") #STANDARD | @as("EXPRESS") #EXPRESS | @as("NEXT_DAY") #NEXT_DAY | @as("SECOND_DAY") #SECOND_DAY]
+type shippingOption = [@as("STANDARD") #STANDARD | @as("EXPRESS") #EXPRESS | @as("NEXT_DAY") #NEXTDAY | @as("SECOND_DAY") #SECONDDAY]
 type shippingLabelStatus = [@as("Failed") #Failed | @as("Succeeded") #Succeeded | @as("TimedOut") #TimedOut | @as("InProgress") #InProgress]
 type shipmentState = [@as("RETURNED") #RETURNED | @as("RECEIVED") #RECEIVED]
 type roleARN = string
 type resourceARN = string
 type longTermPricingType = [@as("ThreeYear") #ThreeYear | @as("OneYear") #OneYear]
 type longTermPricingId = string
-type amazonawsLong = float;
-type listLimit = int;
+type long = float
+type listLimit = int
 type kmsKeyARN = string
-type jobType = [@as("LOCAL_USE") #LOCAL_USE | @as("EXPORT") #EXPORT | @as("IMPORT") #IMPORT]
+type jobType = [@as("LOCAL_USE") #LOCALUSE | @as("EXPORT") #EXPORT | @as("IMPORT") #IMPORT]
 type jobState = [@as("Pending") #Pending | @as("Listing") #Listing | @as("Cancelled") #Cancelled | @as("Complete") #Complete | @as("InProgress") #InProgress | @as("WithAWS") #WithAWS | @as("WithAWSSortingFacility") #WithAWSSortingFacility | @as("InTransitToAWS") #InTransitToAWS | @as("WithCustomer") #WithCustomer | @as("InTransitToCustomer") #InTransitToCustomer | @as("PreparingShipment") #PreparingShipment | @as("PreparingAppliance") #PreparingAppliance | @as("New") #New]
 type jobId = string
-type javaBoolean = bool;
-type amazonawsInteger = int;
-type gSTIN = string
+type javaBoolean = bool
+type integer_ = int
+type gstin = string
 type clusterState = [@as("Cancelled") #Cancelled | @as("Complete") #Complete | @as("InUse") #InUse | @as("Pending") #Pending | @as("AwaitingQuorum") #AwaitingQuorum]
 type clusterId = string
-type amazonawsBoolean = bool;
+type boolean_ = bool
 type amiId = string
 type addressId = string
 type wirelessConnection = {
-@as("IsWifiEnabled") isWifiEnabled: amazonawsBoolean
+@as("IsWifiEnabled") isWifiEnabled: option<boolean_>
 }
 type shipment = {
-@as("TrackingNumber") trackingNumber: amazonawsString,
-@as("Status") status: amazonawsString
+@as("TrackingNumber") trackingNumber: option<string_>,
+@as("Status") status: option<string_>
 }
 type longTermPricingAssociatedJobIdList = array<jobId>
 type keyRange = {
-@as("EndMarker") endMarker: amazonawsString,
-@as("BeginMarker") beginMarker: amazonawsString
+@as("EndMarker") endMarker: option<string_>,
+@as("BeginMarker") beginMarker: option<string_>
 }
 type jobStateList = array<jobState>
 type jobLogs = {
-@as("JobFailureLogURI") jobFailureLogURI: amazonawsString,
-@as("JobSuccessLogURI") jobSuccessLogURI: amazonawsString,
-@as("JobCompletionReportURI") jobCompletionReportURI: amazonawsString
+@as("JobFailureLogURI") jobFailureLogURI: option<string_>,
+@as("JobSuccessLogURI") jobSuccessLogURI: option<string_>,
+@as("JobCompletionReportURI") jobCompletionReportURI: option<string_>
 }
 type jobListEntry = {
-@as("Description") description: amazonawsString,
-@as("CreationDate") creationDate: amazonawsTimestamp,
-@as("SnowballType") snowballType: snowballType,
-@as("JobType") jobType: jobType,
-@as("IsMaster") isMaster: amazonawsBoolean,
-@as("JobState") jobState: jobState,
-@as("JobId") jobId: amazonawsString
+@as("Description") description: option<string_>,
+@as("CreationDate") creationDate: option<timestamp_>,
+@as("SnowballType") snowballType: option<snowballType>,
+@as("JobType") jobType: option<jobType>,
+@as("IsMaster") isMaster: option<boolean_>,
+@as("JobState") jobState: option<jobState>,
+@as("JobId") jobId: option<string_>
 }
-type iNDTaxDocuments = {
-@as("GSTIN") gSTIN: gSTIN
+type indtaxDocuments = {
+@as("GSTIN") gstin: option<gstin>
 }
 type eventTriggerDefinition = {
-@as("EventResourceARN") eventResourceARN: resourceARN
+@as("EventResourceARN") eventResourceARN: option<resourceARN>
 }
 type ec2AmiResource = {
-@as("SnowballAmiId") snowballAmiId: amazonawsString,
-@as("AmiId") amiId: option<amiId>
+@as("SnowballAmiId") snowballAmiId: option<string_>,
+@as("AmiId") amiId: amiId
 }
 type dataTransfer = {
-@as("TotalObjects") totalObjects: amazonawsLong,
-@as("TotalBytes") totalBytes: amazonawsLong,
-@as("ObjectsTransferred") objectsTransferred: amazonawsLong,
-@as("BytesTransferred") bytesTransferred: amazonawsLong
+@as("TotalObjects") totalObjects: option<long>,
+@as("TotalBytes") totalBytes: option<long>,
+@as("ObjectsTransferred") objectsTransferred: option<long>,
+@as("BytesTransferred") bytesTransferred: option<long>
 }
 type compatibleImage = {
-@as("Name") name: amazonawsString,
-@as("AmiId") amiId: amazonawsString
+@as("Name") name: option<string_>,
+@as("AmiId") amiId: option<string_>
 }
 type clusterListEntry = {
-@as("Description") description: amazonawsString,
-@as("CreationDate") creationDate: amazonawsTimestamp,
-@as("ClusterState") clusterState: clusterState,
-@as("ClusterId") clusterId: amazonawsString
+@as("Description") description: option<string_>,
+@as("CreationDate") creationDate: option<timestamp_>,
+@as("ClusterState") clusterState: option<clusterState>,
+@as("ClusterId") clusterId: option<string_>
 }
 type address = {
-@as("IsRestricted") isRestricted: amazonawsBoolean,
-@as("PhoneNumber") phoneNumber: amazonawsString,
-@as("PostalCode") postalCode: amazonawsString,
-@as("Country") country: amazonawsString,
-@as("Landmark") landmark: amazonawsString,
-@as("PrefectureOrDistrict") prefectureOrDistrict: amazonawsString,
-@as("StateOrProvince") stateOrProvince: amazonawsString,
-@as("City") city: amazonawsString,
-@as("Street3") street3: amazonawsString,
-@as("Street2") street2: amazonawsString,
-@as("Street1") street1: amazonawsString,
-@as("Company") company: amazonawsString,
-@as("Name") name: amazonawsString,
-@as("AddressId") addressId: addressId
+@as("IsRestricted") isRestricted: option<boolean_>,
+@as("PhoneNumber") phoneNumber: option<string_>,
+@as("PostalCode") postalCode: option<string_>,
+@as("Country") country: option<string_>,
+@as("Landmark") landmark: option<string_>,
+@as("PrefectureOrDistrict") prefectureOrDistrict: option<string_>,
+@as("StateOrProvince") stateOrProvince: option<string_>,
+@as("City") city: option<string_>,
+@as("Street3") street3: option<string_>,
+@as("Street2") street2: option<string_>,
+@as("Street1") street1: option<string_>,
+@as("Company") company: option<string_>,
+@as("Name") name: option<string_>,
+@as("AddressId") addressId: option<addressId>
 }
 type taxDocuments = {
-@as("IND") iND: iNDTaxDocuments
+@as("IND") ind: option<indtaxDocuments>
 }
 type snowconeDeviceConfiguration = {
-@as("WirelessConnection") wirelessConnection: wirelessConnection
+@as("WirelessConnection") wirelessConnection: option<wirelessConnection>
 }
 type shippingDetails = {
-@as("OutboundShipment") outboundShipment: shipment,
-@as("InboundShipment") inboundShipment: shipment,
-@as("ShippingOption") shippingOption: shippingOption
+@as("OutboundShipment") outboundShipment: option<shipment>,
+@as("InboundShipment") inboundShipment: option<shipment>,
+@as("ShippingOption") shippingOption: option<shippingOption>
 }
 type s3Resource = {
-@as("KeyRange") keyRange: keyRange,
-@as("BucketArn") bucketArn: resourceARN
+@as("KeyRange") keyRange: option<keyRange>,
+@as("BucketArn") bucketArn: option<resourceARN>
 }
 type notification = {
-@as("NotifyAll") notifyAll: amazonawsBoolean,
-@as("JobStatesToNotify") jobStatesToNotify: jobStateList,
-@as("SnsTopicARN") snsTopicARN: snsTopicARN
+@as("NotifyAll") notifyAll: option<boolean_>,
+@as("JobStatesToNotify") jobStatesToNotify: option<jobStateList>,
+@as("SnsTopicARN") snsTopicARN: option<snsTopicARN>
 }
 type longTermPricingListEntry = {
-@as("JobIds") jobIds: longTermPricingAssociatedJobIdList,
-@as("SnowballType") snowballType: snowballType,
-@as("LongTermPricingStatus") longTermPricingStatus: amazonawsString,
-@as("IsLongTermPricingAutoRenew") isLongTermPricingAutoRenew: javaBoolean,
-@as("ReplacementJob") replacementJob: jobId,
-@as("CurrentActiveJob") currentActiveJob: jobId,
-@as("LongTermPricingType") longTermPricingType: longTermPricingType,
-@as("LongTermPricingStartDate") longTermPricingStartDate: amazonawsTimestamp,
-@as("LongTermPricingEndDate") longTermPricingEndDate: amazonawsTimestamp,
-@as("LongTermPricingId") longTermPricingId: longTermPricingId
+@as("JobIds") jobIds: option<longTermPricingAssociatedJobIdList>,
+@as("SnowballType") snowballType: option<snowballType>,
+@as("LongTermPricingStatus") longTermPricingStatus: option<string_>,
+@as("IsLongTermPricingAutoRenew") isLongTermPricingAutoRenew: option<javaBoolean>,
+@as("ReplacementJob") replacementJob: option<jobId>,
+@as("CurrentActiveJob") currentActiveJob: option<jobId>,
+@as("LongTermPricingType") longTermPricingType: option<longTermPricingType>,
+@as("LongTermPricingStartDate") longTermPricingStartDate: option<timestamp_>,
+@as("LongTermPricingEndDate") longTermPricingEndDate: option<timestamp_>,
+@as("LongTermPricingId") longTermPricingId: option<longTermPricingId>
 }
 type jobListEntryList = array<jobListEntry>
 type eventTriggerDefinitionList = array<eventTriggerDefinition>
@@ -139,402 +142,402 @@ type addressList = array<address>
 type s3ResourceList = array<s3Resource>
 type longTermPricingEntryList = array<longTermPricingListEntry>
 type lambdaResource = {
-@as("EventTriggers") eventTriggers: eventTriggerDefinitionList,
-@as("LambdaArn") lambdaArn: resourceARN
+@as("EventTriggers") eventTriggers: option<eventTriggerDefinitionList>,
+@as("LambdaArn") lambdaArn: option<resourceARN>
 }
 type deviceConfiguration = {
-@as("SnowconeDeviceConfiguration") snowconeDeviceConfiguration: snowconeDeviceConfiguration
+@as("SnowconeDeviceConfiguration") snowconeDeviceConfiguration: option<snowconeDeviceConfiguration>
 }
 type lambdaResourceList = array<lambdaResource>
 type jobResource = {
-@as("Ec2AmiResources") ec2AmiResources: ec2AmiResourceList,
-@as("LambdaResources") lambdaResources: lambdaResourceList,
-@as("S3Resources") s3Resources: s3ResourceList
+@as("Ec2AmiResources") ec2AmiResources: option<ec2AmiResourceList>,
+@as("LambdaResources") lambdaResources: option<lambdaResourceList>,
+@as("S3Resources") s3Resources: option<s3ResourceList>
 }
 type jobMetadata = {
-@as("LongTermPricingId") longTermPricingId: longTermPricingId,
-@as("DeviceConfiguration") deviceConfiguration: deviceConfiguration,
-@as("TaxDocuments") taxDocuments: taxDocuments,
-@as("ForwardingAddressId") forwardingAddressId: addressId,
-@as("ClusterId") clusterId: amazonawsString,
-@as("JobLogInfo") jobLogInfo: jobLogs,
-@as("DataTransferProgress") dataTransferProgress: dataTransfer,
-@as("Notification") notification: notification,
-@as("SnowballCapacityPreference") snowballCapacityPreference: snowballCapacity,
-@as("ShippingDetails") shippingDetails: shippingDetails,
-@as("AddressId") addressId: addressId,
-@as("RoleARN") roleARN: roleARN,
-@as("KmsKeyARN") kmsKeyARN: kmsKeyARN,
-@as("Description") description: amazonawsString,
-@as("Resources") resources: jobResource,
-@as("CreationDate") creationDate: amazonawsTimestamp,
-@as("SnowballType") snowballType: snowballType,
-@as("JobType") jobType: jobType,
-@as("JobState") jobState: jobState,
-@as("JobId") jobId: amazonawsString
+@as("LongTermPricingId") longTermPricingId: option<longTermPricingId>,
+@as("DeviceConfiguration") deviceConfiguration: option<deviceConfiguration>,
+@as("TaxDocuments") taxDocuments: option<taxDocuments>,
+@as("ForwardingAddressId") forwardingAddressId: option<addressId>,
+@as("ClusterId") clusterId: option<string_>,
+@as("JobLogInfo") jobLogInfo: option<jobLogs>,
+@as("DataTransferProgress") dataTransferProgress: option<dataTransfer>,
+@as("Notification") notification: option<notification>,
+@as("SnowballCapacityPreference") snowballCapacityPreference: option<snowballCapacity>,
+@as("ShippingDetails") shippingDetails: option<shippingDetails>,
+@as("AddressId") addressId: option<addressId>,
+@as("RoleARN") roleARN: option<roleARN>,
+@as("KmsKeyARN") kmsKeyARN: option<kmsKeyARN>,
+@as("Description") description: option<string_>,
+@as("Resources") resources: option<jobResource>,
+@as("CreationDate") creationDate: option<timestamp_>,
+@as("SnowballType") snowballType: option<snowballType>,
+@as("JobType") jobType: option<jobType>,
+@as("JobState") jobState: option<jobState>,
+@as("JobId") jobId: option<string_>
 }
 type clusterMetadata = {
-@as("TaxDocuments") taxDocuments: taxDocuments,
-@as("ForwardingAddressId") forwardingAddressId: addressId,
-@as("Notification") notification: notification,
-@as("ShippingOption") shippingOption: shippingOption,
-@as("AddressId") addressId: addressId,
-@as("Resources") resources: jobResource,
-@as("CreationDate") creationDate: amazonawsTimestamp,
-@as("SnowballType") snowballType: snowballType,
-@as("JobType") jobType: jobType,
-@as("ClusterState") clusterState: clusterState,
-@as("RoleARN") roleARN: roleARN,
-@as("KmsKeyARN") kmsKeyARN: kmsKeyARN,
-@as("Description") description: amazonawsString,
-@as("ClusterId") clusterId: amazonawsString
+@as("TaxDocuments") taxDocuments: option<taxDocuments>,
+@as("ForwardingAddressId") forwardingAddressId: option<addressId>,
+@as("Notification") notification: option<notification>,
+@as("ShippingOption") shippingOption: option<shippingOption>,
+@as("AddressId") addressId: option<addressId>,
+@as("Resources") resources: option<jobResource>,
+@as("CreationDate") creationDate: option<timestamp_>,
+@as("SnowballType") snowballType: option<snowballType>,
+@as("JobType") jobType: option<jobType>,
+@as("ClusterState") clusterState: option<clusterState>,
+@as("RoleARN") roleARN: option<roleARN>,
+@as("KmsKeyARN") kmsKeyARN: option<kmsKeyARN>,
+@as("Description") description: option<string_>,
+@as("ClusterId") clusterId: option<string_>
 }
 type jobMetadataList = array<jobMetadata>
-type clientType;
-@module("@aws-sdk/client-snowball") @new external createClient: unit => clientType = "SnowballClient";
+type awsServiceClient;
+@module("@aws-sdk/client-snowball") @new external createClient: unit => awsServiceClient = "SnowballClient";
 module UpdateLongTermPricing = {
   type t;
   type request = {
-@as("IsLongTermPricingAutoRenew") isLongTermPricingAutoRenew: javaBoolean,
-@as("ReplacementJob") replacementJob: jobId,
-@as("LongTermPricingId") longTermPricingId: option<longTermPricingId>
+@as("IsLongTermPricingAutoRenew") isLongTermPricingAutoRenew: option<javaBoolean>,
+@as("ReplacementJob") replacementJob: option<jobId>,
+@as("LongTermPricingId") longTermPricingId: longTermPricingId
 }
   type response = unit
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "UpdateLongTermPricingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateJobShipmentState = {
   type t;
   type request = {
-@as("ShipmentState") shipmentState: option<shipmentState>,
-@as("JobId") jobId: option<jobId>
+@as("ShipmentState") shipmentState: shipmentState,
+@as("JobId") jobId: jobId
 }
   type response = unit
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "UpdateJobShipmentStateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSoftwareUpdates = {
   type t;
   type request = {
-@as("JobId") jobId: option<jobId>
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("UpdatesURI") updatesURI: amazonawsString
+@as("UpdatesURI") updatesURI: option<string_>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "GetSoftwareUpdatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSnowballUsage = {
   type t;
   type request = unit
   type response = {
-@as("SnowballsInUse") snowballsInUse: amazonawsInteger,
-@as("SnowballLimit") snowballLimit: amazonawsInteger
+@as("SnowballsInUse") snowballsInUse: option<integer_>,
+@as("SnowballLimit") snowballLimit: option<integer_>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "GetSnowballUsageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetJobUnlockCode = {
   type t;
   type request = {
-@as("JobId") jobId: option<jobId>
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("UnlockCode") unlockCode: amazonawsString
+@as("UnlockCode") unlockCode: option<string_>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "GetJobUnlockCodeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetJobManifest = {
   type t;
   type request = {
-@as("JobId") jobId: option<jobId>
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("ManifestURI") manifestURI: amazonawsString
+@as("ManifestURI") manifestURI: option<string_>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "GetJobManifestCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeReturnShippingLabel = {
   type t;
   type request = {
-@as("JobId") jobId: option<jobId>
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("ExpirationDate") expirationDate: amazonawsTimestamp,
-@as("Status") status: shippingLabelStatus
+@as("ExpirationDate") expirationDate: option<timestamp_>,
+@as("Status") status: option<shippingLabelStatus>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "DescribeReturnShippingLabelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateReturnShippingLabel = {
   type t;
   type request = {
-@as("ShippingOption") shippingOption: shippingOption,
-@as("JobId") jobId: option<jobId>
+@as("ShippingOption") shippingOption: option<shippingOption>,
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("Status") status: shippingLabelStatus
+@as("Status") status: option<shippingLabelStatus>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "CreateReturnShippingLabelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateLongTermPricing = {
   type t;
   type request = {
-@as("SnowballType") snowballType: snowballType,
-@as("IsLongTermPricingAutoRenew") isLongTermPricingAutoRenew: javaBoolean,
-@as("LongTermPricingType") longTermPricingType: option<longTermPricingType>
+@as("SnowballType") snowballType: option<snowballType>,
+@as("IsLongTermPricingAutoRenew") isLongTermPricingAutoRenew: option<javaBoolean>,
+@as("LongTermPricingType") longTermPricingType: longTermPricingType
 }
   type response = {
-@as("LongTermPricingId") longTermPricingId: longTermPricingId
+@as("LongTermPricingId") longTermPricingId: option<longTermPricingId>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "CreateLongTermPricingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelJob = {
   type t;
   type request = {
-@as("JobId") jobId: option<jobId>
+@as("JobId") jobId: jobId
 }
   type response = unit
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "CancelJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelCluster = {
   type t;
   type request = {
-@as("ClusterId") clusterId: option<clusterId>
+@as("ClusterId") clusterId: clusterId
 }
   type response = unit
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "CancelClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAddress = {
   type t;
   type request = {
-@as("AddressId") addressId: option<addressId>
+@as("AddressId") addressId: addressId
 }
   type response = {
-@as("Address") address: address
+@as("Address") address: option<address>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "DescribeAddressCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAddress = {
   type t;
   type request = {
-@as("Address") address: option<address>
+@as("Address") address: address
 }
   type response = {
-@as("AddressId") addressId: amazonawsString
+@as("AddressId") addressId: option<string_>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "CreateAddressCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListJobs = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: listLimit
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<listLimit>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("JobListEntries") jobListEntries: jobListEntryList
+@as("NextToken") nextToken: option<string_>,
+@as("JobListEntries") jobListEntries: option<jobListEntryList>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "ListJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCompatibleImages = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: listLimit
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<listLimit>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("CompatibleImages") compatibleImages: compatibleImageList
+@as("NextToken") nextToken: option<string_>,
+@as("CompatibleImages") compatibleImages: option<compatibleImageList>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "ListCompatibleImagesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListClusters = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: listLimit
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<listLimit>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("ClusterListEntries") clusterListEntries: clusterListEntryList
+@as("NextToken") nextToken: option<string_>,
+@as("ClusterListEntries") clusterListEntries: option<clusterListEntryList>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "ListClustersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListClusterJobs = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: listLimit,
-@as("ClusterId") clusterId: option<clusterId>
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<listLimit>,
+@as("ClusterId") clusterId: clusterId
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("JobListEntries") jobListEntries: jobListEntryList
+@as("NextToken") nextToken: option<string_>,
+@as("JobListEntries") jobListEntries: option<jobListEntryList>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "ListClusterJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAddresses = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: listLimit
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<listLimit>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Addresses") addresses: addressList
+@as("NextToken") nextToken: option<string_>,
+@as("Addresses") addresses: option<addressList>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "DescribeAddressesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListLongTermPricing = {
   type t;
   type request = {
-@as("NextToken") nextToken: amazonawsString,
-@as("MaxResults") maxResults: listLimit
+@as("NextToken") nextToken: option<string_>,
+@as("MaxResults") maxResults: option<listLimit>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("LongTermPricingEntries") longTermPricingEntries: longTermPricingEntryList
+@as("NextToken") nextToken: option<string_>,
+@as("LongTermPricingEntries") longTermPricingEntries: option<longTermPricingEntryList>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "ListLongTermPricingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateJob = {
   type t;
   type request = {
-@as("ForwardingAddressId") forwardingAddressId: addressId,
-@as("SnowballCapacityPreference") snowballCapacityPreference: snowballCapacity,
-@as("Description") description: amazonawsString,
-@as("ShippingOption") shippingOption: shippingOption,
-@as("AddressId") addressId: addressId,
-@as("Resources") resources: jobResource,
-@as("Notification") notification: notification,
-@as("RoleARN") roleARN: roleARN,
-@as("JobId") jobId: option<jobId>
+@as("ForwardingAddressId") forwardingAddressId: option<addressId>,
+@as("SnowballCapacityPreference") snowballCapacityPreference: option<snowballCapacity>,
+@as("Description") description: option<string_>,
+@as("ShippingOption") shippingOption: option<shippingOption>,
+@as("AddressId") addressId: option<addressId>,
+@as("Resources") resources: option<jobResource>,
+@as("Notification") notification: option<notification>,
+@as("RoleARN") roleARN: option<roleARN>,
+@as("JobId") jobId: jobId
 }
   type response = unit
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "UpdateJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateCluster = {
   type t;
   type request = {
-@as("ForwardingAddressId") forwardingAddressId: addressId,
-@as("Notification") notification: notification,
-@as("ShippingOption") shippingOption: shippingOption,
-@as("AddressId") addressId: addressId,
-@as("Resources") resources: jobResource,
-@as("Description") description: amazonawsString,
-@as("RoleARN") roleARN: roleARN,
-@as("ClusterId") clusterId: option<clusterId>
+@as("ForwardingAddressId") forwardingAddressId: option<addressId>,
+@as("Notification") notification: option<notification>,
+@as("ShippingOption") shippingOption: option<shippingOption>,
+@as("AddressId") addressId: option<addressId>,
+@as("Resources") resources: option<jobResource>,
+@as("Description") description: option<string_>,
+@as("RoleARN") roleARN: option<roleARN>,
+@as("ClusterId") clusterId: clusterId
 }
   type response = unit
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "UpdateClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateJob = {
   type t;
   type request = {
-@as("LongTermPricingId") longTermPricingId: longTermPricingId,
-@as("DeviceConfiguration") deviceConfiguration: deviceConfiguration,
-@as("TaxDocuments") taxDocuments: taxDocuments,
-@as("ForwardingAddressId") forwardingAddressId: addressId,
-@as("SnowballType") snowballType: snowballType,
-@as("ClusterId") clusterId: clusterId,
-@as("Notification") notification: notification,
-@as("ShippingOption") shippingOption: shippingOption,
-@as("SnowballCapacityPreference") snowballCapacityPreference: snowballCapacity,
-@as("RoleARN") roleARN: roleARN,
-@as("KmsKeyARN") kmsKeyARN: kmsKeyARN,
-@as("AddressId") addressId: addressId,
-@as("Description") description: amazonawsString,
-@as("Resources") resources: jobResource,
-@as("JobType") jobType: jobType
+@as("LongTermPricingId") longTermPricingId: option<longTermPricingId>,
+@as("DeviceConfiguration") deviceConfiguration: option<deviceConfiguration>,
+@as("TaxDocuments") taxDocuments: option<taxDocuments>,
+@as("ForwardingAddressId") forwardingAddressId: option<addressId>,
+@as("SnowballType") snowballType: option<snowballType>,
+@as("ClusterId") clusterId: option<clusterId>,
+@as("Notification") notification: option<notification>,
+@as("ShippingOption") shippingOption: option<shippingOption>,
+@as("SnowballCapacityPreference") snowballCapacityPreference: option<snowballCapacity>,
+@as("RoleARN") roleARN: option<roleARN>,
+@as("KmsKeyARN") kmsKeyARN: option<kmsKeyARN>,
+@as("AddressId") addressId: option<addressId>,
+@as("Description") description: option<string_>,
+@as("Resources") resources: option<jobResource>,
+@as("JobType") jobType: option<jobType>
 }
   type response = {
-@as("JobId") jobId: jobId
+@as("JobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "CreateJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCluster = {
   type t;
   type request = {
-@as("TaxDocuments") taxDocuments: taxDocuments,
-@as("ForwardingAddressId") forwardingAddressId: addressId,
-@as("Notification") notification: notification,
-@as("ShippingOption") shippingOption: option<shippingOption>,
-@as("SnowballType") snowballType: option<snowballType>,
-@as("RoleARN") roleARN: option<roleARN>,
-@as("KmsKeyARN") kmsKeyARN: kmsKeyARN,
-@as("AddressId") addressId: option<addressId>,
-@as("Description") description: amazonawsString,
-@as("Resources") resources: option<jobResource>,
-@as("JobType") jobType: option<jobType>
+@as("TaxDocuments") taxDocuments: option<taxDocuments>,
+@as("ForwardingAddressId") forwardingAddressId: option<addressId>,
+@as("Notification") notification: option<notification>,
+@as("ShippingOption") shippingOption: shippingOption,
+@as("SnowballType") snowballType: snowballType,
+@as("RoleARN") roleARN: roleARN,
+@as("KmsKeyARN") kmsKeyARN: option<kmsKeyARN>,
+@as("AddressId") addressId: addressId,
+@as("Description") description: option<string_>,
+@as("Resources") resources: jobResource,
+@as("JobType") jobType: jobType
 }
   type response = {
-@as("ClusterId") clusterId: clusterId
+@as("ClusterId") clusterId: option<clusterId>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "CreateClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCluster = {
   type t;
   type request = {
-@as("ClusterId") clusterId: option<clusterId>
+@as("ClusterId") clusterId: clusterId
 }
   type response = {
-@as("ClusterMetadata") clusterMetadata: clusterMetadata
+@as("ClusterMetadata") clusterMetadata: option<clusterMetadata>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "DescribeClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeJob = {
   type t;
   type request = {
-@as("JobId") jobId: option<jobId>
+@as("JobId") jobId: jobId
 }
   type response = {
-@as("SubJobMetadata") subJobMetadata: jobMetadataList,
-@as("JobMetadata") jobMetadata: jobMetadata
+@as("SubJobMetadata") subJobMetadata: option<jobMetadataList>,
+@as("JobMetadata") jobMetadata: option<jobMetadata>
 }
   @module("@aws-sdk/client-snowball") @new external new_: (request) => t = "DescribeJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

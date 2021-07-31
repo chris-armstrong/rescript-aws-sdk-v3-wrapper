@@ -1,43 +1,47 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type amazonawsTimestamp = Js.Date.t;
-type amazonawsString = string
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type long = float
+type timestamp_ = Js.Date.t;
+type string_ = string
 type productCode = string
 type nonEmptyString = string
-type amazonawsInteger = int;
-type getEntitlementFilterName = [@as("DIMENSION") #DIMENSION | @as("CUSTOMER_IDENTIFIER") #CUSTOMER_IDENTIFIER]
+type integer_ = int
+type getEntitlementFilterName = [@as("DIMENSION") #DIMENSION | @as("CUSTOMER_IDENTIFIER") #CUSTOMERIDENTIFIER]
 type filterValue = string
 type errorMessage = string
-type amazonawsDouble = float;
-type amazonawsBoolean = bool;
+type double = float
+type boolean_ = bool
 type filterValueList = array<filterValue>
-type entitlementValue = StringValue(amazonawsString) | BooleanValue(amazonawsBoolean) | DoubleValue(amazonawsDouble) | IntegerValue(amazonawsInteger);
+type entitlementValue = StringValue(string_) | BooleanValue(boolean_) | DoubleValue(double) | IntegerValue(integer_);
 type getEntitlementFilters = Js.Dict.t< filterValueList>
 type entitlement = {
-@as("ExpirationDate") expirationDate: amazonawsTimestamp,
-@as("Value") value: entitlementValue,
-@as("CustomerIdentifier") customerIdentifier: nonEmptyString,
-@as("Dimension") dimension: nonEmptyString,
-@as("ProductCode") productCode: productCode
+@as("ExpirationDate") expirationDate: option<timestamp_>,
+@as("Value") value: option<entitlementValue>,
+@as("CustomerIdentifier") customerIdentifier: option<nonEmptyString>,
+@as("Dimension") dimension: option<nonEmptyString>,
+@as("ProductCode") productCode: option<productCode>
 }
 type entitlementList = array<entitlement>
-type clientType;
-@module("@aws-sdk/client-aws-marketplace") @new external createClient: unit => clientType = "MarketplaceEntitlementServiceClient";
+type awsServiceClient;
+@module("@aws-sdk/client-aws-marketplace") @new external createClient: unit => awsServiceClient = "MarketplaceEntitlementServiceClient";
 module GetEntitlements = {
   type t;
   type request = {
-@as("MaxResults") maxResults: amazonawsInteger,
-@as("NextToken") nextToken: nonEmptyString,
-@as("Filter") filter: getEntitlementFilters,
-@as("ProductCode") productCode: option<productCode>
+@as("MaxResults") maxResults: option<integer_>,
+@as("NextToken") nextToken: option<nonEmptyString>,
+@as("Filter") filter: option<getEntitlementFilters>,
+@as("ProductCode") productCode: productCode
 }
   type response = {
-@as("NextToken") nextToken: nonEmptyString,
-@as("Entitlements") entitlements: entitlementList
+@as("NextToken") nextToken: option<nonEmptyString>,
+@as("Entitlements") entitlements: option<entitlementList>
 }
   @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "GetEntitlementsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

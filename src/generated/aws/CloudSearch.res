@@ -1,27 +1,32 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type integer_ = int
+type timestamp_ = Js.Date.t;
 type word = string
 type updateTimestamp = Js.Date.t;
-type uIntValue = int;
-type tLSSecurityPolicy = [@as("Policy-Min-TLS-1-2-2019-07") #Policy_Min_TLS_1_2_2019_07 | @as("Policy-Min-TLS-1-0-2019-07") #Policy_Min_TLS_1_0_2019_07]
-type suggesterFuzzyMatching = [@as("high") #high | @as("low") #low | @as("none") #none]
-type amazonawsString = string
+type uintValue = int
+type tlssecurityPolicy = [@as("Policy-Min-TLS-1-2-2019-07") #PolicyMinTLS12201907 | @as("Policy-Min-TLS-1-0-2019-07") #PolicyMinTLS10201907]
+type suggesterFuzzyMatching = [@as("high") #High | @as("low") #Low | @as("none") #None]
+type string_ = string
 type standardName = string
 type serviceUrl = string
 type searchInstanceType = string
 type policyDocument = string
-type partitionInstanceType = [@as("search.2xlarge") #search_2xlarge | @as("search.xlarge") #search_xlarge | @as("search.large") #search_large | @as("search.medium") #search_medium | @as("search.small") #search_small | @as("search.m3.2xlarge") #search_m3_2xlarge | @as("search.m3.xlarge") #search_m3_xlarge | @as("search.m3.large") #search_m3_large | @as("search.m3.medium") #search_m3_medium | @as("search.m2.2xlarge") #search_m2_2xlarge | @as("search.m2.xlarge") #search_m2_xlarge | @as("search.m1.large") #search_m1_large | @as("search.m1.small") #search_m1_small]
-type partitionCount = int;
+type partitionInstanceType = [@as("search.2xlarge") #Search2xlarge | @as("search.xlarge") #SearchXlarge | @as("search.large") #SearchLarge | @as("search.medium") #SearchMedium | @as("search.small") #SearchSmall | @as("search.m3.2xlarge") #SearchM32xlarge | @as("search.m3.xlarge") #SearchM3Xlarge | @as("search.m3.large") #SearchM3Large | @as("search.m3.medium") #SearchM3Medium | @as("search.m2.2xlarge") #SearchM22xlarge | @as("search.m2.xlarge") #SearchM2Xlarge | @as("search.m1.large") #SearchM1Large | @as("search.m1.small") #SearchM1Small]
+type partitionCount = int
 type optionState = [@as("FailedToValidate") #FailedToValidate | @as("Active") #Active | @as("Processing") #Processing | @as("RequiresIndexDocuments") #RequiresIndexDocuments]
-type multiAZ = bool;
-type maximumReplicationCount = int;
-type maximumPartitionCount = int;
-type amazonawsLong = float;
-type instanceCount = int;
-type indexFieldType = [@as("date-array") #date_array | @as("text-array") #text_array | @as("literal-array") #literal_array | @as("double-array") #double_array | @as("int-array") #int_array | @as("latlon") #latlon | @as("date") #date | @as("text") #text | @as("literal") #literal | @as("double") #double | @as("int") #int]
+type multiAZ = bool
+type maximumReplicationCount = int
+type maximumPartitionCount = int
+type long = float
+type instanceCount = int
+type indexFieldType = [@as("date-array") #DateArray | @as("text-array") #TextArray | @as("literal-array") #LiteralArray | @as("double-array") #DoubleArray | @as("int-array") #IntArray | @as("latlon") #Latlon | @as("date") #Date | @as("text") #Text | @as("literal") #Literal | @as("double") #Double | @as("int") #Int]
 type fieldValue = string
 type fieldNameCommaList = string
 type fieldName = string
@@ -29,548 +34,548 @@ type expressionValue = string
 type errorMessage = string
 type errorCode = string
 type dynamicFieldName = string
-type amazonawsDouble = float;
+type double = float
 type domainName = string
 type domainId = string
-type amazonawsBoolean = bool;
-type analysisSchemeLanguage = [@as("zh-Hant") #zh_Hant | @as("zh-Hans") #zh_Hans | @as("tr") #tr | @as("th") #th | @as("sv") #sv | @as("ru") #ru | @as("ro") #ro | @as("pt") #pt | @as("no") #no | @as("nl") #nl | @as("mul") #mul | @as("lv") #lv | @as("ko") #ko | @as("ja") #ja | @as("it") #it | @as("id") #id | @as("hy") #hy | @as("hu") #hu | @as("hi") #hi | @as("he") #he | @as("gl") #gl | @as("ga") #ga | @as("fr") #fr | @as("fi") #fi | @as("fa") #fa | @as("eu") #eu | @as("es") #es | @as("en") #en | @as("el") #el | @as("de") #de | @as("da") #da | @as("cs") #cs | @as("ca") #ca | @as("bg") #bg | @as("ar") #ar]
-type algorithmicStemming = [@as("full") #full | @as("light") #light | @as("minimal") #minimal | @as("none") #none]
-type aRN = string
-type aPIVersion = string
+type boolean_ = bool
+type analysisSchemeLanguage = [@as("zh-Hant") #ZhHant | @as("zh-Hans") #ZhHans | @as("tr") #Tr | @as("th") #Th | @as("sv") #Sv | @as("ru") #Ru | @as("ro") #Ro | @as("pt") #Pt | @as("no") #No | @as("nl") #Nl | @as("mul") #Mul | @as("lv") #Lv | @as("ko") #Ko | @as("ja") #Ja | @as("it") #It | @as("id") #Id | @as("hy") #Hy | @as("hu") #Hu | @as("hi") #Hi | @as("he") #He | @as("gl") #Gl | @as("ga") #Ga | @as("fr") #Fr | @as("fi") #Fi | @as("fa") #Fa | @as("eu") #Eu | @as("es") #Es | @as("en") #En | @as("el") #El | @as("de") #De | @as("da") #Da | @as("cs") #Cs | @as("ca") #Ca | @as("bg") #Bg | @as("ar") #Ar]
+type algorithmicStemming = [@as("full") #Full | @as("light") #Light | @as("minimal") #Minimal | @as("none") #None]
+type arn = string
+type apiversion = string
 type textOptions = {
-@as("AnalysisScheme") analysisScheme: word,
-@as("HighlightEnabled") highlightEnabled: amazonawsBoolean,
-@as("SortEnabled") sortEnabled: amazonawsBoolean,
-@as("ReturnEnabled") returnEnabled: amazonawsBoolean,
-@as("SourceField") sourceField: fieldName,
-@as("DefaultValue") defaultValue: fieldValue
+@as("AnalysisScheme") analysisScheme: option<word>,
+@as("HighlightEnabled") highlightEnabled: option<boolean_>,
+@as("SortEnabled") sortEnabled: option<boolean_>,
+@as("ReturnEnabled") returnEnabled: option<boolean_>,
+@as("SourceField") sourceField: option<fieldName>,
+@as("DefaultValue") defaultValue: option<fieldValue>
 }
 type textArrayOptions = {
-@as("AnalysisScheme") analysisScheme: word,
-@as("HighlightEnabled") highlightEnabled: amazonawsBoolean,
-@as("ReturnEnabled") returnEnabled: amazonawsBoolean,
-@as("SourceFields") sourceFields: fieldNameCommaList,
-@as("DefaultValue") defaultValue: fieldValue
+@as("AnalysisScheme") analysisScheme: option<word>,
+@as("HighlightEnabled") highlightEnabled: option<boolean_>,
+@as("ReturnEnabled") returnEnabled: option<boolean_>,
+@as("SourceFields") sourceFields: option<fieldNameCommaList>,
+@as("DefaultValue") defaultValue: option<fieldValue>
 }
 type standardNameList = array<standardName>
 type serviceEndpoint = {
-@as("Endpoint") endpoint: serviceUrl
+@as("Endpoint") endpoint: option<serviceUrl>
 }
 type scalingParameters = {
-@as("DesiredPartitionCount") desiredPartitionCount: uIntValue,
-@as("DesiredReplicationCount") desiredReplicationCount: uIntValue,
-@as("DesiredInstanceType") desiredInstanceType: partitionInstanceType
+@as("DesiredPartitionCount") desiredPartitionCount: option<uintValue>,
+@as("DesiredReplicationCount") desiredReplicationCount: option<uintValue>,
+@as("DesiredInstanceType") desiredInstanceType: option<partitionInstanceType>
 }
 type optionStatus = {
-@as("PendingDeletion") pendingDeletion: amazonawsBoolean,
-@as("State") state: option<optionState>,
-@as("UpdateVersion") updateVersion: uIntValue,
-@as("UpdateDate") updateDate: option<updateTimestamp>,
-@as("CreationDate") creationDate: option<updateTimestamp>
+@as("PendingDeletion") pendingDeletion: option<boolean_>,
+@as("State") state: optionState,
+@as("UpdateVersion") updateVersion: option<uintValue>,
+@as("UpdateDate") updateDate: updateTimestamp,
+@as("CreationDate") creationDate: updateTimestamp
 }
 type literalOptions = {
-@as("SortEnabled") sortEnabled: amazonawsBoolean,
-@as("ReturnEnabled") returnEnabled: amazonawsBoolean,
-@as("SearchEnabled") searchEnabled: amazonawsBoolean,
-@as("FacetEnabled") facetEnabled: amazonawsBoolean,
-@as("SourceField") sourceField: fieldName,
-@as("DefaultValue") defaultValue: fieldValue
+@as("SortEnabled") sortEnabled: option<boolean_>,
+@as("ReturnEnabled") returnEnabled: option<boolean_>,
+@as("SearchEnabled") searchEnabled: option<boolean_>,
+@as("FacetEnabled") facetEnabled: option<boolean_>,
+@as("SourceField") sourceField: option<fieldName>,
+@as("DefaultValue") defaultValue: option<fieldValue>
 }
 type literalArrayOptions = {
-@as("ReturnEnabled") returnEnabled: amazonawsBoolean,
-@as("SearchEnabled") searchEnabled: amazonawsBoolean,
-@as("FacetEnabled") facetEnabled: amazonawsBoolean,
-@as("SourceFields") sourceFields: fieldNameCommaList,
-@as("DefaultValue") defaultValue: fieldValue
+@as("ReturnEnabled") returnEnabled: option<boolean_>,
+@as("SearchEnabled") searchEnabled: option<boolean_>,
+@as("FacetEnabled") facetEnabled: option<boolean_>,
+@as("SourceFields") sourceFields: option<fieldNameCommaList>,
+@as("DefaultValue") defaultValue: option<fieldValue>
 }
 type limits = {
-@as("MaximumPartitionCount") maximumPartitionCount: option<maximumPartitionCount>,
-@as("MaximumReplicationCount") maximumReplicationCount: option<maximumReplicationCount>
+@as("MaximumPartitionCount") maximumPartitionCount: maximumPartitionCount,
+@as("MaximumReplicationCount") maximumReplicationCount: maximumReplicationCount
 }
 type latLonOptions = {
-@as("SortEnabled") sortEnabled: amazonawsBoolean,
-@as("ReturnEnabled") returnEnabled: amazonawsBoolean,
-@as("SearchEnabled") searchEnabled: amazonawsBoolean,
-@as("FacetEnabled") facetEnabled: amazonawsBoolean,
-@as("SourceField") sourceField: fieldName,
-@as("DefaultValue") defaultValue: fieldValue
+@as("SortEnabled") sortEnabled: option<boolean_>,
+@as("ReturnEnabled") returnEnabled: option<boolean_>,
+@as("SearchEnabled") searchEnabled: option<boolean_>,
+@as("FacetEnabled") facetEnabled: option<boolean_>,
+@as("SourceField") sourceField: option<fieldName>,
+@as("DefaultValue") defaultValue: option<fieldValue>
 }
 type intOptions = {
-@as("SortEnabled") sortEnabled: amazonawsBoolean,
-@as("ReturnEnabled") returnEnabled: amazonawsBoolean,
-@as("SearchEnabled") searchEnabled: amazonawsBoolean,
-@as("FacetEnabled") facetEnabled: amazonawsBoolean,
-@as("SourceField") sourceField: fieldName,
-@as("DefaultValue") defaultValue: amazonawsLong
+@as("SortEnabled") sortEnabled: option<boolean_>,
+@as("ReturnEnabled") returnEnabled: option<boolean_>,
+@as("SearchEnabled") searchEnabled: option<boolean_>,
+@as("FacetEnabled") facetEnabled: option<boolean_>,
+@as("SourceField") sourceField: option<fieldName>,
+@as("DefaultValue") defaultValue: option<long>
 }
 type intArrayOptions = {
-@as("ReturnEnabled") returnEnabled: amazonawsBoolean,
-@as("SearchEnabled") searchEnabled: amazonawsBoolean,
-@as("FacetEnabled") facetEnabled: amazonawsBoolean,
-@as("SourceFields") sourceFields: fieldNameCommaList,
-@as("DefaultValue") defaultValue: amazonawsLong
+@as("ReturnEnabled") returnEnabled: option<boolean_>,
+@as("SearchEnabled") searchEnabled: option<boolean_>,
+@as("FacetEnabled") facetEnabled: option<boolean_>,
+@as("SourceFields") sourceFields: option<fieldNameCommaList>,
+@as("DefaultValue") defaultValue: option<long>
 }
 type fieldNameList = array<fieldName>
 type expression = {
-@as("ExpressionValue") expressionValue: option<expressionValue>,
-@as("ExpressionName") expressionName: option<standardName>
+@as("ExpressionValue") expressionValue: expressionValue,
+@as("ExpressionName") expressionName: standardName
 }
 type dynamicFieldNameList = array<dynamicFieldName>
 type doubleOptions = {
-@as("SortEnabled") sortEnabled: amazonawsBoolean,
-@as("ReturnEnabled") returnEnabled: amazonawsBoolean,
-@as("SearchEnabled") searchEnabled: amazonawsBoolean,
-@as("FacetEnabled") facetEnabled: amazonawsBoolean,
-@as("SourceField") sourceField: fieldName,
-@as("DefaultValue") defaultValue: amazonawsDouble
+@as("SortEnabled") sortEnabled: option<boolean_>,
+@as("ReturnEnabled") returnEnabled: option<boolean_>,
+@as("SearchEnabled") searchEnabled: option<boolean_>,
+@as("FacetEnabled") facetEnabled: option<boolean_>,
+@as("SourceField") sourceField: option<fieldName>,
+@as("DefaultValue") defaultValue: option<double>
 }
 type doubleArrayOptions = {
-@as("ReturnEnabled") returnEnabled: amazonawsBoolean,
-@as("SearchEnabled") searchEnabled: amazonawsBoolean,
-@as("FacetEnabled") facetEnabled: amazonawsBoolean,
-@as("SourceFields") sourceFields: fieldNameCommaList,
-@as("DefaultValue") defaultValue: amazonawsDouble
+@as("ReturnEnabled") returnEnabled: option<boolean_>,
+@as("SearchEnabled") searchEnabled: option<boolean_>,
+@as("FacetEnabled") facetEnabled: option<boolean_>,
+@as("SourceFields") sourceFields: option<fieldNameCommaList>,
+@as("DefaultValue") defaultValue: option<double>
 }
-type domainNameMap = Js.Dict.t< aPIVersion>
+type domainNameMap = Js.Dict.t< apiversion>
 type domainNameList = array<domainName>
 type domainEndpointOptions = {
-@as("TLSSecurityPolicy") tLSSecurityPolicy: tLSSecurityPolicy,
-@as("EnforceHTTPS") enforceHTTPS: amazonawsBoolean
+@as("TLSSecurityPolicy") tlssecurityPolicy: option<tlssecurityPolicy>,
+@as("EnforceHTTPS") enforceHTTPS: option<boolean_>
 }
 type documentSuggesterOptions = {
-@as("SortExpression") sortExpression: amazonawsString,
-@as("FuzzyMatching") fuzzyMatching: suggesterFuzzyMatching,
-@as("SourceField") sourceField: option<fieldName>
+@as("SortExpression") sortExpression: option<string_>,
+@as("FuzzyMatching") fuzzyMatching: option<suggesterFuzzyMatching>,
+@as("SourceField") sourceField: fieldName
 }
 type dateOptions = {
-@as("SortEnabled") sortEnabled: amazonawsBoolean,
-@as("ReturnEnabled") returnEnabled: amazonawsBoolean,
-@as("SearchEnabled") searchEnabled: amazonawsBoolean,
-@as("FacetEnabled") facetEnabled: amazonawsBoolean,
-@as("SourceField") sourceField: fieldName,
-@as("DefaultValue") defaultValue: fieldValue
+@as("SortEnabled") sortEnabled: option<boolean_>,
+@as("ReturnEnabled") returnEnabled: option<boolean_>,
+@as("SearchEnabled") searchEnabled: option<boolean_>,
+@as("FacetEnabled") facetEnabled: option<boolean_>,
+@as("SourceField") sourceField: option<fieldName>,
+@as("DefaultValue") defaultValue: option<fieldValue>
 }
 type dateArrayOptions = {
-@as("ReturnEnabled") returnEnabled: amazonawsBoolean,
-@as("SearchEnabled") searchEnabled: amazonawsBoolean,
-@as("FacetEnabled") facetEnabled: amazonawsBoolean,
-@as("SourceFields") sourceFields: fieldNameCommaList,
-@as("DefaultValue") defaultValue: fieldValue
+@as("ReturnEnabled") returnEnabled: option<boolean_>,
+@as("SearchEnabled") searchEnabled: option<boolean_>,
+@as("FacetEnabled") facetEnabled: option<boolean_>,
+@as("SourceFields") sourceFields: option<fieldNameCommaList>,
+@as("DefaultValue") defaultValue: option<fieldValue>
 }
 type analysisOptions = {
-@as("AlgorithmicStemming") algorithmicStemming: algorithmicStemming,
-@as("JapaneseTokenizationDictionary") japaneseTokenizationDictionary: amazonawsString,
-@as("StemmingDictionary") stemmingDictionary: amazonawsString,
-@as("Stopwords") stopwords: amazonawsString,
-@as("Synonyms") synonyms: amazonawsString
+@as("AlgorithmicStemming") algorithmicStemming: option<algorithmicStemming>,
+@as("JapaneseTokenizationDictionary") japaneseTokenizationDictionary: option<string_>,
+@as("StemmingDictionary") stemmingDictionary: option<string_>,
+@as("Stopwords") stopwords: option<string_>,
+@as("Synonyms") synonyms: option<string_>
 }
 type suggester = {
-@as("DocumentSuggesterOptions") documentSuggesterOptions: option<documentSuggesterOptions>,
-@as("SuggesterName") suggesterName: option<standardName>
+@as("DocumentSuggesterOptions") documentSuggesterOptions: documentSuggesterOptions,
+@as("SuggesterName") suggesterName: standardName
 }
 type scalingParametersStatus = {
-@as("Status") status: option<optionStatus>,
-@as("Options") options: option<scalingParameters>
+@as("Status") status: optionStatus,
+@as("Options") options: scalingParameters
 }
 type indexField = {
-@as("DateArrayOptions") dateArrayOptions: dateArrayOptions,
-@as("TextArrayOptions") textArrayOptions: textArrayOptions,
-@as("LiteralArrayOptions") literalArrayOptions: literalArrayOptions,
-@as("DoubleArrayOptions") doubleArrayOptions: doubleArrayOptions,
-@as("IntArrayOptions") intArrayOptions: intArrayOptions,
-@as("LatLonOptions") latLonOptions: latLonOptions,
-@as("DateOptions") dateOptions: dateOptions,
-@as("TextOptions") textOptions: textOptions,
-@as("LiteralOptions") literalOptions: literalOptions,
-@as("DoubleOptions") doubleOptions: doubleOptions,
-@as("IntOptions") intOptions: intOptions,
-@as("IndexFieldType") indexFieldType: option<indexFieldType>,
-@as("IndexFieldName") indexFieldName: option<dynamicFieldName>
+@as("DateArrayOptions") dateArrayOptions: option<dateArrayOptions>,
+@as("TextArrayOptions") textArrayOptions: option<textArrayOptions>,
+@as("LiteralArrayOptions") literalArrayOptions: option<literalArrayOptions>,
+@as("DoubleArrayOptions") doubleArrayOptions: option<doubleArrayOptions>,
+@as("IntArrayOptions") intArrayOptions: option<intArrayOptions>,
+@as("LatLonOptions") latLonOptions: option<latLonOptions>,
+@as("DateOptions") dateOptions: option<dateOptions>,
+@as("TextOptions") textOptions: option<textOptions>,
+@as("LiteralOptions") literalOptions: option<literalOptions>,
+@as("DoubleOptions") doubleOptions: option<doubleOptions>,
+@as("IntOptions") intOptions: option<intOptions>,
+@as("IndexFieldType") indexFieldType: indexFieldType,
+@as("IndexFieldName") indexFieldName: dynamicFieldName
 }
 type expressionStatus = {
-@as("Status") status: option<optionStatus>,
-@as("Options") options: option<expression>
+@as("Status") status: optionStatus,
+@as("Options") options: expression
 }
 type domainStatus = {
-@as("Limits") limits: limits,
-@as("SearchInstanceCount") searchInstanceCount: instanceCount,
-@as("SearchPartitionCount") searchPartitionCount: partitionCount,
-@as("SearchInstanceType") searchInstanceType: searchInstanceType,
-@as("Processing") processing: amazonawsBoolean,
-@as("RequiresIndexDocuments") requiresIndexDocuments: option<amazonawsBoolean>,
-@as("SearchService") searchService: serviceEndpoint,
-@as("DocService") docService: serviceEndpoint,
-@as("Deleted") deleted: amazonawsBoolean,
-@as("Created") created: amazonawsBoolean,
-@as("ARN") aRN: aRN,
-@as("DomainName") domainName: option<domainName>,
-@as("DomainId") domainId: option<domainId>
+@as("Limits") limits: option<limits>,
+@as("SearchInstanceCount") searchInstanceCount: option<instanceCount>,
+@as("SearchPartitionCount") searchPartitionCount: option<partitionCount>,
+@as("SearchInstanceType") searchInstanceType: option<searchInstanceType>,
+@as("Processing") processing: option<boolean_>,
+@as("RequiresIndexDocuments") requiresIndexDocuments: boolean_,
+@as("SearchService") searchService: option<serviceEndpoint>,
+@as("DocService") docService: option<serviceEndpoint>,
+@as("Deleted") deleted: option<boolean_>,
+@as("Created") created: option<boolean_>,
+@as("ARN") arn: option<arn>,
+@as("DomainName") domainName: domainName,
+@as("DomainId") domainId: domainId
 }
 type domainEndpointOptionsStatus = {
-@as("Status") status: option<optionStatus>,
-@as("Options") options: option<domainEndpointOptions>
+@as("Status") status: optionStatus,
+@as("Options") options: domainEndpointOptions
 }
 type availabilityOptionsStatus = {
-@as("Status") status: option<optionStatus>,
-@as("Options") options: option<multiAZ>
+@as("Status") status: optionStatus,
+@as("Options") options: multiAZ
 }
 type analysisScheme = {
-@as("AnalysisOptions") analysisOptions: analysisOptions,
-@as("AnalysisSchemeLanguage") analysisSchemeLanguage: option<analysisSchemeLanguage>,
-@as("AnalysisSchemeName") analysisSchemeName: option<standardName>
+@as("AnalysisOptions") analysisOptions: option<analysisOptions>,
+@as("AnalysisSchemeLanguage") analysisSchemeLanguage: analysisSchemeLanguage,
+@as("AnalysisSchemeName") analysisSchemeName: standardName
 }
 type accessPoliciesStatus = {
-@as("Status") status: option<optionStatus>,
-@as("Options") options: option<policyDocument>
+@as("Status") status: optionStatus,
+@as("Options") options: policyDocument
 }
 type suggesterStatus = {
-@as("Status") status: option<optionStatus>,
-@as("Options") options: option<suggester>
+@as("Status") status: optionStatus,
+@as("Options") options: suggester
 }
 type indexFieldStatus = {
-@as("Status") status: option<optionStatus>,
-@as("Options") options: option<indexField>
+@as("Status") status: optionStatus,
+@as("Options") options: indexField
 }
 type expressionStatusList = array<expressionStatus>
 type domainStatusList = array<domainStatus>
 type analysisSchemeStatus = {
-@as("Status") status: option<optionStatus>,
-@as("Options") options: option<analysisScheme>
+@as("Status") status: optionStatus,
+@as("Options") options: analysisScheme
 }
 type suggesterStatusList = array<suggesterStatus>
 type indexFieldStatusList = array<indexFieldStatus>
 type analysisSchemeStatusList = array<analysisSchemeStatus>
-type clientType;
-@module("@aws-sdk/client-cloudsearch") @new external createClient: unit => clientType = "CloudSearchClient";
+type awsServiceClient;
+@module("@aws-sdk/client-cloudsearch") @new external createClient: unit => awsServiceClient = "CloudSearchClient";
 module ListDomainNames = {
   type t;
   
   type response = {
-@as("DomainNames") domainNames: domainNameMap
+@as("DomainNames") domainNames: option<domainNameMap>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (unit) => t = "ListDomainNamesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module IndexDocuments = {
   type t;
   type request = {
-@as("DomainName") domainName: option<domainName>
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("FieldNames") fieldNames: fieldNameList
+@as("FieldNames") fieldNames: option<fieldNameList>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "IndexDocumentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BuildSuggesters = {
   type t;
   type request = {
-@as("DomainName") domainName: option<domainName>
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("FieldNames") fieldNames: fieldNameList
+@as("FieldNames") fieldNames: option<fieldNameList>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "BuildSuggestersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateServiceAccessPolicies = {
   type t;
   type request = {
-@as("AccessPolicies") accessPolicies: option<policyDocument>,
-@as("DomainName") domainName: option<domainName>
+@as("AccessPolicies") accessPolicies: policyDocument,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("AccessPolicies") accessPolicies: option<accessPoliciesStatus>
+@as("AccessPolicies") accessPolicies: accessPoliciesStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "UpdateServiceAccessPoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateScalingParameters = {
   type t;
   type request = {
-@as("ScalingParameters") scalingParameters: option<scalingParameters>,
-@as("DomainName") domainName: option<domainName>
+@as("ScalingParameters") scalingParameters: scalingParameters,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("ScalingParameters") scalingParameters: option<scalingParametersStatus>
+@as("ScalingParameters") scalingParameters: scalingParametersStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "UpdateScalingParametersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDomainEndpointOptions = {
   type t;
   type request = {
-@as("DomainEndpointOptions") domainEndpointOptions: option<domainEndpointOptions>,
-@as("DomainName") domainName: option<domainName>
+@as("DomainEndpointOptions") domainEndpointOptions: domainEndpointOptions,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("DomainEndpointOptions") domainEndpointOptions: domainEndpointOptionsStatus
+@as("DomainEndpointOptions") domainEndpointOptions: option<domainEndpointOptionsStatus>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "UpdateDomainEndpointOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAvailabilityOptions = {
   type t;
   type request = {
-@as("MultiAZ") multiAZ: option<amazonawsBoolean>,
-@as("DomainName") domainName: option<domainName>
+@as("MultiAZ") multiAZ: boolean_,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("AvailabilityOptions") availabilityOptions: availabilityOptionsStatus
+@as("AvailabilityOptions") availabilityOptions: option<availabilityOptionsStatus>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "UpdateAvailabilityOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeServiceAccessPolicies = {
   type t;
   type request = {
-@as("Deployed") deployed: amazonawsBoolean,
-@as("DomainName") domainName: option<domainName>
+@as("Deployed") deployed: option<boolean_>,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("AccessPolicies") accessPolicies: option<accessPoliciesStatus>
+@as("AccessPolicies") accessPolicies: accessPoliciesStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DescribeServiceAccessPoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScalingParameters = {
   type t;
   type request = {
-@as("DomainName") domainName: option<domainName>
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("ScalingParameters") scalingParameters: option<scalingParametersStatus>
+@as("ScalingParameters") scalingParameters: scalingParametersStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DescribeScalingParametersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDomainEndpointOptions = {
   type t;
   type request = {
-@as("Deployed") deployed: amazonawsBoolean,
-@as("DomainName") domainName: option<domainName>
+@as("Deployed") deployed: option<boolean_>,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("DomainEndpointOptions") domainEndpointOptions: domainEndpointOptionsStatus
+@as("DomainEndpointOptions") domainEndpointOptions: option<domainEndpointOptionsStatus>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DescribeDomainEndpointOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAvailabilityOptions = {
   type t;
   type request = {
-@as("Deployed") deployed: amazonawsBoolean,
-@as("DomainName") domainName: option<domainName>
+@as("Deployed") deployed: option<boolean_>,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("AvailabilityOptions") availabilityOptions: availabilityOptionsStatus
+@as("AvailabilityOptions") availabilityOptions: option<availabilityOptionsStatus>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DescribeAvailabilityOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteExpression = {
   type t;
   type request = {
-@as("ExpressionName") expressionName: option<standardName>,
-@as("DomainName") domainName: option<domainName>
+@as("ExpressionName") expressionName: standardName,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("Expression") expression: option<expressionStatus>
+@as("Expression") expression: expressionStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DeleteExpressionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDomain = {
   type t;
   type request = {
-@as("DomainName") domainName: option<domainName>
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("DomainStatus") domainStatus: domainStatus
+@as("DomainStatus") domainStatus: option<domainStatus>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DeleteDomainCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DefineExpression = {
   type t;
   type request = {
-@as("Expression") expression: option<expression>,
-@as("DomainName") domainName: option<domainName>
+@as("Expression") expression: expression,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("Expression") expression: option<expressionStatus>
+@as("Expression") expression: expressionStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DefineExpressionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDomain = {
   type t;
   type request = {
-@as("DomainName") domainName: option<domainName>
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("DomainStatus") domainStatus: domainStatus
+@as("DomainStatus") domainStatus: option<domainStatus>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "CreateDomainCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeExpressions = {
   type t;
   type request = {
-@as("Deployed") deployed: amazonawsBoolean,
-@as("ExpressionNames") expressionNames: standardNameList,
-@as("DomainName") domainName: option<domainName>
+@as("Deployed") deployed: option<boolean_>,
+@as("ExpressionNames") expressionNames: option<standardNameList>,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("Expressions") expressions: option<expressionStatusList>
+@as("Expressions") expressions: expressionStatusList
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DescribeExpressionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDomains = {
   type t;
   type request = {
-@as("DomainNames") domainNames: domainNameList
+@as("DomainNames") domainNames: option<domainNameList>
 }
   type response = {
-@as("DomainStatusList") domainStatusList: option<domainStatusList>
+@as("DomainStatusList") domainStatusList: domainStatusList
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DescribeDomainsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteSuggester = {
   type t;
   type request = {
-@as("SuggesterName") suggesterName: option<standardName>,
-@as("DomainName") domainName: option<domainName>
+@as("SuggesterName") suggesterName: standardName,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("Suggester") suggester: option<suggesterStatus>
+@as("Suggester") suggester: suggesterStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DeleteSuggesterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteIndexField = {
   type t;
   type request = {
-@as("IndexFieldName") indexFieldName: option<dynamicFieldName>,
-@as("DomainName") domainName: option<domainName>
+@as("IndexFieldName") indexFieldName: dynamicFieldName,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("IndexField") indexField: option<indexFieldStatus>
+@as("IndexField") indexField: indexFieldStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DeleteIndexFieldCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteAnalysisScheme = {
   type t;
   type request = {
-@as("AnalysisSchemeName") analysisSchemeName: option<standardName>,
-@as("DomainName") domainName: option<domainName>
+@as("AnalysisSchemeName") analysisSchemeName: standardName,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("AnalysisScheme") analysisScheme: option<analysisSchemeStatus>
+@as("AnalysisScheme") analysisScheme: analysisSchemeStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DeleteAnalysisSchemeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DefineSuggester = {
   type t;
   type request = {
-@as("Suggester") suggester: option<suggester>,
-@as("DomainName") domainName: option<domainName>
+@as("Suggester") suggester: suggester,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("Suggester") suggester: option<suggesterStatus>
+@as("Suggester") suggester: suggesterStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DefineSuggesterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DefineIndexField = {
   type t;
   type request = {
-@as("IndexField") indexField: option<indexField>,
-@as("DomainName") domainName: option<domainName>
+@as("IndexField") indexField: indexField,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("IndexField") indexField: option<indexFieldStatus>
+@as("IndexField") indexField: indexFieldStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DefineIndexFieldCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DefineAnalysisScheme = {
   type t;
   type request = {
-@as("AnalysisScheme") analysisScheme: option<analysisScheme>,
-@as("DomainName") domainName: option<domainName>
+@as("AnalysisScheme") analysisScheme: analysisScheme,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("AnalysisScheme") analysisScheme: option<analysisSchemeStatus>
+@as("AnalysisScheme") analysisScheme: analysisSchemeStatus
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DefineAnalysisSchemeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSuggesters = {
   type t;
   type request = {
-@as("Deployed") deployed: amazonawsBoolean,
-@as("SuggesterNames") suggesterNames: standardNameList,
-@as("DomainName") domainName: option<domainName>
+@as("Deployed") deployed: option<boolean_>,
+@as("SuggesterNames") suggesterNames: option<standardNameList>,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("Suggesters") suggesters: option<suggesterStatusList>
+@as("Suggesters") suggesters: suggesterStatusList
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DescribeSuggestersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeIndexFields = {
   type t;
   type request = {
-@as("Deployed") deployed: amazonawsBoolean,
-@as("FieldNames") fieldNames: dynamicFieldNameList,
-@as("DomainName") domainName: option<domainName>
+@as("Deployed") deployed: option<boolean_>,
+@as("FieldNames") fieldNames: option<dynamicFieldNameList>,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("IndexFields") indexFields: option<indexFieldStatusList>
+@as("IndexFields") indexFields: indexFieldStatusList
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DescribeIndexFieldsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAnalysisSchemes = {
   type t;
   type request = {
-@as("Deployed") deployed: amazonawsBoolean,
-@as("AnalysisSchemeNames") analysisSchemeNames: standardNameList,
-@as("DomainName") domainName: option<domainName>
+@as("Deployed") deployed: option<boolean_>,
+@as("AnalysisSchemeNames") analysisSchemeNames: option<standardNameList>,
+@as("DomainName") domainName: domainName
 }
   type response = {
-@as("AnalysisSchemes") analysisSchemes: option<analysisSchemeStatusList>
+@as("AnalysisSchemes") analysisSchemes: analysisSchemeStatusList
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "DescribeAnalysisSchemesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

@@ -1,67 +1,73 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
 type timeUnit = [@as("NANOSECONDS") #NANOSECONDS | @as("MICROSECONDS") #MICROSECONDS | @as("SECONDS") #SECONDS | @as("MILLISECONDS") #MILLISECONDS]
 type tagValue = string
 type tagKey = string
 type tableStatus = [@as("DELETING") #DELETING | @as("ACTIVE") #ACTIVE]
 type stringValue256 = string
 type stringValue2048 = string
-type amazonawsString = string
+type string_ = string
 type resourceName = string
-type recordVersion = float;
-type recordIndex = int;
-type paginationLimit = int;
-type memoryStoreRetentionPeriodInHours = float;
+type recordVersion = float
+type recordIndex = int
+type paginationLimit = int
+type memoryStoreRetentionPeriodInHours = float
 type measureValueType = [@as("BOOLEAN") #BOOLEAN | @as("VARCHAR") #VARCHAR | @as("BIGINT") #BIGINT | @as("DOUBLE") #DOUBLE]
-type magneticStoreRetentionPeriodInDays = float;
-type amazonawsLong = float;
+type magneticStoreRetentionPeriodInDays = float
+type long = float
 type errorMessage = string
 type dimensionValueType = [@as("VARCHAR") #VARCHAR]
 type date = Js.Date.t;
 type amazonResourceName = string
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: option<tagValue>,
-@as("Key") key: option<tagKey>
+@as("Value") value: tagValue,
+@as("Key") key: tagKey
 }
 type retentionProperties = {
-@as("MagneticStoreRetentionPeriodInDays") magneticStoreRetentionPeriodInDays: option<magneticStoreRetentionPeriodInDays>,
-@as("MemoryStoreRetentionPeriodInHours") memoryStoreRetentionPeriodInHours: option<memoryStoreRetentionPeriodInHours>
+@as("MagneticStoreRetentionPeriodInDays") magneticStoreRetentionPeriodInDays: magneticStoreRetentionPeriodInDays,
+@as("MemoryStoreRetentionPeriodInHours") memoryStoreRetentionPeriodInHours: memoryStoreRetentionPeriodInHours
 }
 type rejectedRecord = {
-@as("ExistingVersion") existingVersion: recordVersion,
-@as("Reason") reason: errorMessage,
-@as("RecordIndex") recordIndex: recordIndex
+@as("ExistingVersion") existingVersion: option<recordVersion>,
+@as("Reason") reason: option<errorMessage>,
+@as("RecordIndex") recordIndex: option<recordIndex>
 }
 type endpoint = {
-@as("CachePeriodInMinutes") cachePeriodInMinutes: option<amazonawsLong>,
-@as("Address") address: option<amazonawsString>
+@as("CachePeriodInMinutes") cachePeriodInMinutes: long,
+@as("Address") address: string_
 }
 type dimension = {
-@as("DimensionValueType") dimensionValueType: dimensionValueType,
-@as("Value") value: option<stringValue2048>,
-@as("Name") name: option<stringValue256>
+@as("DimensionValueType") dimensionValueType: option<dimensionValueType>,
+@as("Value") value: stringValue2048,
+@as("Name") name: stringValue256
 }
 type database = {
-@as("LastUpdatedTime") lastUpdatedTime: date,
-@as("CreationTime") creationTime: date,
-@as("KmsKeyId") kmsKeyId: stringValue2048,
-@as("TableCount") tableCount: amazonawsLong,
-@as("DatabaseName") databaseName: resourceName,
-@as("Arn") arn: amazonawsString
+@as("LastUpdatedTime") lastUpdatedTime: option<date>,
+@as("CreationTime") creationTime: option<date>,
+@as("KmsKeyId") kmsKeyId: option<stringValue2048>,
+@as("TableCount") tableCount: option<long>,
+@as("DatabaseName") databaseName: option<resourceName>,
+@as("Arn") arn: option<string_>
 }
-type tagList = array<tag>
+type tagList_ = array<tag>
 type table = {
-@as("LastUpdatedTime") lastUpdatedTime: date,
-@as("CreationTime") creationTime: date,
-@as("RetentionProperties") retentionProperties: retentionProperties,
-@as("TableStatus") tableStatus: tableStatus,
-@as("DatabaseName") databaseName: resourceName,
-@as("TableName") tableName: resourceName,
-@as("Arn") arn: amazonawsString
+@as("LastUpdatedTime") lastUpdatedTime: option<date>,
+@as("CreationTime") creationTime: option<date>,
+@as("RetentionProperties") retentionProperties: option<retentionProperties>,
+@as("TableStatus") tableStatus: option<tableStatus>,
+@as("DatabaseName") databaseName: option<resourceName>,
+@as("TableName") tableName: option<resourceName>,
+@as("Arn") arn: option<string_>
 }
 type rejectedRecords = array<rejectedRecord>
 type endpoints = array<endpoint>
@@ -69,201 +75,201 @@ type dimensions = array<dimension>
 type databaseList = array<database>
 type tableList = array<table>
 type record = {
-@as("Version") version: recordVersion,
-@as("TimeUnit") timeUnit: timeUnit,
-@as("Time") time: stringValue256,
-@as("MeasureValueType") measureValueType: measureValueType,
-@as("MeasureValue") measureValue: stringValue2048,
-@as("MeasureName") measureName: stringValue256,
-@as("Dimensions") dimensions: dimensions
+@as("Version") version: option<recordVersion>,
+@as("TimeUnit") timeUnit: option<timeUnit>,
+@as("Time") time: option<stringValue256>,
+@as("MeasureValueType") measureValueType: option<measureValueType>,
+@as("MeasureValue") measureValue: option<stringValue2048>,
+@as("MeasureName") measureName: option<stringValue256>,
+@as("Dimensions") dimensions: option<dimensions>
 }
 type records = array<record>
-type clientType;
-@module("@aws-sdk/client-timestream") @new external createClient: unit => clientType = "TimestreamWriteClient";
+type awsServiceClient;
+@module("@aws-sdk/client-timestream") @new external createClient: unit => awsServiceClient = "TimestreamWriteClient";
 module DeleteTable = {
   type t;
   type request = {
-@as("TableName") tableName: option<resourceName>,
-@as("DatabaseName") databaseName: option<resourceName>
+@as("TableName") tableName: resourceName,
+@as("DatabaseName") databaseName: resourceName
 }
   
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "DeleteTableCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteDatabase = {
   type t;
   type request = {
-@as("DatabaseName") databaseName: option<resourceName>
+@as("DatabaseName") databaseName: resourceName
 }
   
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "DeleteDatabaseCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module UpdateDatabase = {
   type t;
   type request = {
-@as("KmsKeyId") kmsKeyId: option<stringValue2048>,
-@as("DatabaseName") databaseName: option<resourceName>
+@as("KmsKeyId") kmsKeyId: stringValue2048,
+@as("DatabaseName") databaseName: resourceName
 }
   type response = {
-@as("Database") database: database
+@as("Database") database: option<database>
 }
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "UpdateDatabaseCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceARN") resourceARN: option<amazonResourceName>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceARN") resourceARN: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDatabase = {
   type t;
   type request = {
-@as("DatabaseName") databaseName: option<resourceName>
+@as("DatabaseName") databaseName: resourceName
 }
   type response = {
-@as("Database") database: database
+@as("Database") database: option<database>
 }
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "DescribeDatabaseCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateTable = {
   type t;
   type request = {
-@as("RetentionProperties") retentionProperties: option<retentionProperties>,
-@as("TableName") tableName: option<resourceName>,
-@as("DatabaseName") databaseName: option<resourceName>
+@as("RetentionProperties") retentionProperties: retentionProperties,
+@as("TableName") tableName: resourceName,
+@as("DatabaseName") databaseName: resourceName
 }
   type response = {
-@as("Table") table: table
+@as("Table") table: option<table>
 }
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "UpdateTableCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tagList>,
-@as("ResourceARN") resourceARN: option<amazonResourceName>
+@as("Tags") tags: tagList_,
+@as("ResourceARN") resourceARN: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("ResourceARN") resourceARN: option<amazonResourceName>
+@as("ResourceARN") resourceARN: amazonResourceName
 }
   type response = {
-@as("Tags") tags: tagList
+@as("Tags") tags: option<tagList_>
 }
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDatabases = {
   type t;
   type request = {
-@as("MaxResults") maxResults: paginationLimit,
-@as("NextToken") nextToken: amazonawsString
+@as("MaxResults") maxResults: option<paginationLimit>,
+@as("NextToken") nextToken: option<string_>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Databases") databases: databaseList
+@as("NextToken") nextToken: option<string_>,
+@as("Databases") databases: option<databaseList>
 }
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "ListDatabasesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTable = {
   type t;
   type request = {
-@as("TableName") tableName: option<resourceName>,
-@as("DatabaseName") databaseName: option<resourceName>
+@as("TableName") tableName: resourceName,
+@as("DatabaseName") databaseName: resourceName
 }
   type response = {
-@as("Table") table: table
+@as("Table") table: option<table>
 }
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "DescribeTableCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEndpoints = {
   type t;
   type request = unit
   type response = {
-@as("Endpoints") endpoints: option<endpoints>
+@as("Endpoints") endpoints: endpoints
 }
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "DescribeEndpointsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateTable = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("RetentionProperties") retentionProperties: retentionProperties,
-@as("TableName") tableName: option<resourceName>,
-@as("DatabaseName") databaseName: option<resourceName>
+@as("Tags") tags: option<tagList_>,
+@as("RetentionProperties") retentionProperties: option<retentionProperties>,
+@as("TableName") tableName: resourceName,
+@as("DatabaseName") databaseName: resourceName
 }
   type response = {
-@as("Table") table: table
+@as("Table") table: option<table>
 }
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "CreateTableCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDatabase = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("KmsKeyId") kmsKeyId: stringValue2048,
-@as("DatabaseName") databaseName: option<resourceName>
+@as("Tags") tags: option<tagList_>,
+@as("KmsKeyId") kmsKeyId: option<stringValue2048>,
+@as("DatabaseName") databaseName: resourceName
 }
   type response = {
-@as("Database") database: database
+@as("Database") database: option<database>
 }
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "CreateDatabaseCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTables = {
   type t;
   type request = {
-@as("MaxResults") maxResults: paginationLimit,
-@as("NextToken") nextToken: amazonawsString,
-@as("DatabaseName") databaseName: resourceName
+@as("MaxResults") maxResults: option<paginationLimit>,
+@as("NextToken") nextToken: option<string_>,
+@as("DatabaseName") databaseName: option<resourceName>
 }
   type response = {
-@as("NextToken") nextToken: amazonawsString,
-@as("Tables") tables: tableList
+@as("NextToken") nextToken: option<string_>,
+@as("Tables") tables: option<tableList>
 }
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "ListTablesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module WriteRecords = {
   type t;
   type request = {
-@as("Records") records: option<records>,
-@as("CommonAttributes") commonAttributes: record,
-@as("TableName") tableName: option<resourceName>,
-@as("DatabaseName") databaseName: option<resourceName>
+@as("Records") records: records,
+@as("CommonAttributes") commonAttributes: option<record>,
+@as("TableName") tableName: resourceName,
+@as("DatabaseName") databaseName: resourceName
 }
   
   @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "WriteRecordsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }

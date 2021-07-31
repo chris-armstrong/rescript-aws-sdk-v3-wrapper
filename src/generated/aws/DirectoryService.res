@@ -1,20 +1,28 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type vpcId = string
 type userPassword = string
 type userName = string
-type useSameUsername = bool;
-type updateSecurityGroupForDirectoryControllers = bool;
+type useSameUsername = bool
+type updateSecurityGroupForDirectoryControllers = bool
 type trustType = [@as("External") #External | @as("Forest") #Forest]
 type trustStateReason = string
 type trustState = [@as("Failed") #Failed | @as("Deleted") #Deleted | @as("Deleting") #Deleting | @as("Updated") #Updated | @as("UpdateFailed") #UpdateFailed | @as("Updating") #Updating | @as("Verified") #Verified | @as("VerifyFailed") #VerifyFailed | @as("Verifying") #Verifying | @as("Created") #Created | @as("Creating") #Creating]
 type trustPassword = string
 type trustId = string
-type trustDirection = [@as("Two-Way") #Two_Way | @as("One-Way: Incoming") #One_Way_ Incoming | @as("One-Way: Outgoing") #One_Way_ Outgoing]
-type topicStatus = [@as("Deleted") #Deleted | @as("Failed") #Failed | @as("Topic not found") #Topic not found | @as("Registered") #Registered]
+type trustDirection = [@as("Two-Way") #TwoWay | @as("One-Way: Incoming") #OneWayIncoming | @as("One-Way: Outgoing") #OneWayOutgoing]
+type topicStatus = [@as("Deleted") #Deleted | @as("Failed") #Failed | @as("Topic not found") #TopicNotFound | @as("Registered") #Registered]
 type topicName = string
 type topicArn = string
 type targetType = [@as("ACCOUNT") #ACCOUNT]
@@ -27,7 +35,7 @@ type stateLastUpdatedDateTime = Js.Date.t;
 type startTime = Js.Date.t;
 type startDateTime = Js.Date.t;
 type stageReason = string
-type ssoEnabled = bool;
+type ssoEnabled = bool
 type snapshotType = [@as("Manual") #Manual | @as("Auto") #Auto]
 type snapshotStatus = [@as("Failed") #Failed | @as("Completed") #Completed | @as("Creating") #Creating]
 type snapshotName = string
@@ -40,35 +48,35 @@ type securityGroupId = string
 type schemaExtensionStatusReason = string
 type schemaExtensionStatus = [@as("Completed") #Completed | @as("Failed") #Failed | @as("Cancelled") #Cancelled | @as("RollbackInProgress") #RollbackInProgress | @as("CancelInProgress") #CancelInProgress | @as("Replicating") #Replicating | @as("UpdatingSchema") #UpdatingSchema | @as("CreatingSnapshot") #CreatingSnapshot | @as("Initializing") #Initializing]
 type schemaExtensionId = string
-type sID = string
+type sid = string
 type resourceId = string
 type requestId = string
 type replicationScope = [@as("Domain") #Domain]
 type remoteDomainName = string
 type regionType = [@as("Additional") #Additional | @as("Primary") #Primary]
 type regionName = string
-type radiusTimeout = int;
+type radiusTimeout = int
 type radiusStatus = [@as("Failed") #Failed | @as("Completed") #Completed | @as("Creating") #Creating]
 type radiusSharedSecret = string
-type radiusRetries = int;
+type radiusRetries = int
 type radiusDisplayLabel = string
-type radiusAuthenticationProtocol = [@as("MS-CHAPv2") #MS_CHAPv2 | @as("MS-CHAPv1") #MS_CHAPv1 | @as("CHAP") #CHAP | @as("PAP") #PAP]
-type portNumber = int;
+type radiusAuthenticationProtocol = [@as("MS-CHAPv2") #MSCHAPv2 | @as("MS-CHAPv1") #MSCHAPv1 | @as("CHAP") #CHAP | @as("PAP") #PAP]
+type portNumber = int
 type password = string
-type pageLimit = int;
+type pageLimit = int
 type organizationalUnitDN = string
-type oCSPUrl = string
+type ocspurl = string
 type notes = string
 type nextToken = string
-type manualSnapshotsLimitReached = bool;
+type manualSnapshotsLimitReached = bool
 type logGroupName = string
-type limit = int;
+type limit = int
 type ldifContent = string
 type launchTime = Js.Date.t;
 type lastUpdatedDateTime = Js.Date.t;
-type lDAPSType = [@as("Client") #Client]
-type lDAPSStatusReason = string
-type lDAPSStatus = [@as("Disabled") #Disabled | @as("EnableFailed") #EnableFailed | @as("Enabled") #Enabled | @as("Enabling") #Enabling]
+type ldapstype = [@as("Client") #Client]
+type ldapsstatusReason = string
+type ldapsstatus = [@as("Disabled") #Disabled | @as("EnableFailed") #EnableFailed | @as("Enabled") #Enabled | @as("Enabling") #Enabling]
 type ipRouteStatusReason = string
 type ipRouteStatusMsg = [@as("RemoveFailed") #RemoveFailed | @as("AddFailed") #AddFailed | @as("Removed") #Removed | @as("Removing") #Removing | @as("Added") #Added | @as("Adding") #Adding]
 type ipAddr = string
@@ -84,18 +92,18 @@ type directoryShortName = string
 type directoryName = string
 type directoryId = string
 type directoryEdition = [@as("Standard") #Standard | @as("Enterprise") #Enterprise]
-type desiredNumberOfDomainControllers = int;
+type desiredNumberOfDomainControllers = int
 type description = string
-type deleteAssociatedConditionalForwarder = bool;
+type deleteAssociatedConditionalForwarder = bool
 type customerUserName = string
 type customerId = string
 type createdDateTime = Js.Date.t;
-type createSnapshotBeforeSchemaExtension = bool;
-type connectedDirectoriesLimitReached = bool;
+type createSnapshotBeforeSchemaExtension = bool
+type connectedDirectoriesLimitReached = bool
 type connectPassword = string
 type computerPassword = string
 type computerName = string
-type cloudOnlyDirectoriesLimitReached = bool;
+type cloudOnlyDirectoriesLimitReached = bool
 type clientAuthenticationType = [@as("SmartCard") #SmartCard]
 type cidrIp = string
 type certificateType = [@as("ClientLDAPS") #ClientLDAPS | @as("ClientCertAuth") #ClientCertAuth]
@@ -113,141 +121,141 @@ type aliasName = string
 type addedDateTime = Js.Date.t;
 type accessUrl = string
 type unshareTarget = {
-@as("Type") type_: option<targetType>,
-@as("Id") id: option<targetId>
+@as("Type") type_: targetType,
+@as("Id") id: targetId
 }
 type trustIds = array<trustId>
 type trust = {
-@as("SelectiveAuth") selectiveAuth: selectiveAuth,
-@as("TrustStateReason") trustStateReason: trustStateReason,
-@as("StateLastUpdatedDateTime") stateLastUpdatedDateTime: stateLastUpdatedDateTime,
-@as("LastUpdatedDateTime") lastUpdatedDateTime: lastUpdatedDateTime,
-@as("CreatedDateTime") createdDateTime: createdDateTime,
-@as("TrustState") trustState: trustState,
-@as("TrustDirection") trustDirection: trustDirection,
-@as("TrustType") trustType: trustType,
-@as("RemoteDomainName") remoteDomainName: remoteDomainName,
-@as("TrustId") trustId: trustId,
-@as("DirectoryId") directoryId: directoryId
+@as("SelectiveAuth") selectiveAuth: option<selectiveAuth>,
+@as("TrustStateReason") trustStateReason: option<trustStateReason>,
+@as("StateLastUpdatedDateTime") stateLastUpdatedDateTime: option<stateLastUpdatedDateTime>,
+@as("LastUpdatedDateTime") lastUpdatedDateTime: option<lastUpdatedDateTime>,
+@as("CreatedDateTime") createdDateTime: option<createdDateTime>,
+@as("TrustState") trustState: option<trustState>,
+@as("TrustDirection") trustDirection: option<trustDirection>,
+@as("TrustType") trustType: option<trustType>,
+@as("RemoteDomainName") remoteDomainName: option<remoteDomainName>,
+@as("TrustId") trustId: option<trustId>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
 type topicNames = array<topicName>
 type tagKeys = array<tagKey>
 type tag = {
-@as("Value") value: option<tagValue>,
-@as("Key") key: option<tagKey>
+@as("Value") value: tagValue,
+@as("Key") key: tagKey
 }
 type subnetIds = array<subnetId>
 type snapshotLimits = {
-@as("ManualSnapshotsLimitReached") manualSnapshotsLimitReached: manualSnapshotsLimitReached,
-@as("ManualSnapshotsCurrentCount") manualSnapshotsCurrentCount: limit,
-@as("ManualSnapshotsLimit") manualSnapshotsLimit: limit
+@as("ManualSnapshotsLimitReached") manualSnapshotsLimitReached: option<manualSnapshotsLimitReached>,
+@as("ManualSnapshotsCurrentCount") manualSnapshotsCurrentCount: option<limit>,
+@as("ManualSnapshotsLimit") manualSnapshotsLimit: option<limit>
 }
 type snapshotIds = array<snapshotId>
 type snapshot = {
-@as("StartTime") startTime: startTime,
-@as("Status") status: snapshotStatus,
-@as("Name") name: snapshotName,
-@as("Type") type_: snapshotType,
-@as("SnapshotId") snapshotId: snapshotId,
-@as("DirectoryId") directoryId: directoryId
+@as("StartTime") startTime: option<startTime>,
+@as("Status") status: option<snapshotStatus>,
+@as("Name") name: option<snapshotName>,
+@as("Type") type_: option<snapshotType>,
+@as("SnapshotId") snapshotId: option<snapshotId>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
 type sharedDirectory = {
-@as("LastUpdatedDateTime") lastUpdatedDateTime: lastUpdatedDateTime,
-@as("CreatedDateTime") createdDateTime: createdDateTime,
-@as("ShareNotes") shareNotes: notes,
-@as("ShareStatus") shareStatus: shareStatus,
-@as("SharedDirectoryId") sharedDirectoryId: directoryId,
-@as("SharedAccountId") sharedAccountId: customerId,
-@as("ShareMethod") shareMethod: shareMethod,
-@as("OwnerDirectoryId") ownerDirectoryId: directoryId,
-@as("OwnerAccountId") ownerAccountId: customerId
+@as("LastUpdatedDateTime") lastUpdatedDateTime: option<lastUpdatedDateTime>,
+@as("CreatedDateTime") createdDateTime: option<createdDateTime>,
+@as("ShareNotes") shareNotes: option<notes>,
+@as("ShareStatus") shareStatus: option<shareStatus>,
+@as("SharedDirectoryId") sharedDirectoryId: option<directoryId>,
+@as("SharedAccountId") sharedAccountId: option<customerId>,
+@as("ShareMethod") shareMethod: option<shareMethod>,
+@as("OwnerDirectoryId") ownerDirectoryId: option<directoryId>,
+@as("OwnerAccountId") ownerAccountId: option<customerId>
 }
 type shareTarget = {
-@as("Type") type_: option<targetType>,
-@as("Id") id: option<targetId>
+@as("Type") type_: targetType,
+@as("Id") id: targetId
 }
 type servers = array<server>
 type schemaExtensionInfo = {
-@as("EndDateTime") endDateTime: endDateTime,
-@as("StartDateTime") startDateTime: startDateTime,
-@as("SchemaExtensionStatusReason") schemaExtensionStatusReason: schemaExtensionStatusReason,
-@as("SchemaExtensionStatus") schemaExtensionStatus: schemaExtensionStatus,
-@as("Description") description: description,
-@as("SchemaExtensionId") schemaExtensionId: schemaExtensionId,
-@as("DirectoryId") directoryId: directoryId
+@as("EndDateTime") endDateTime: option<endDateTime>,
+@as("StartDateTime") startDateTime: option<startDateTime>,
+@as("SchemaExtensionStatusReason") schemaExtensionStatusReason: option<schemaExtensionStatusReason>,
+@as("SchemaExtensionStatus") schemaExtensionStatus: option<schemaExtensionStatus>,
+@as("Description") description: option<description>,
+@as("SchemaExtensionId") schemaExtensionId: option<schemaExtensionId>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
 type remoteDomainNames = array<remoteDomainName>
 type logSubscription = {
-@as("SubscriptionCreatedDateTime") subscriptionCreatedDateTime: subscriptionCreatedDateTime,
-@as("LogGroupName") logGroupName: logGroupName,
-@as("DirectoryId") directoryId: directoryId
+@as("SubscriptionCreatedDateTime") subscriptionCreatedDateTime: option<subscriptionCreatedDateTime>,
+@as("LogGroupName") logGroupName: option<logGroupName>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
-type lDAPSSettingInfo = {
-@as("LastUpdatedDateTime") lastUpdatedDateTime: lastUpdatedDateTime,
-@as("LDAPSStatusReason") lDAPSStatusReason: lDAPSStatusReason,
-@as("LDAPSStatus") lDAPSStatus: lDAPSStatus
+type ldapssettingInfo = {
+@as("LastUpdatedDateTime") lastUpdatedDateTime: option<lastUpdatedDateTime>,
+@as("LDAPSStatusReason") ldapsstatusReason: option<ldapsstatusReason>,
+@as("LDAPSStatus") ldapsstatus: option<ldapsstatus>
 }
 type ipRouteInfo = {
-@as("Description") description: description,
-@as("IpRouteStatusReason") ipRouteStatusReason: ipRouteStatusReason,
-@as("AddedDateTime") addedDateTime: addedDateTime,
-@as("IpRouteStatusMsg") ipRouteStatusMsg: ipRouteStatusMsg,
-@as("CidrIp") cidrIp: cidrIp,
-@as("DirectoryId") directoryId: directoryId
+@as("Description") description: option<description>,
+@as("IpRouteStatusReason") ipRouteStatusReason: option<ipRouteStatusReason>,
+@as("AddedDateTime") addedDateTime: option<addedDateTime>,
+@as("IpRouteStatusMsg") ipRouteStatusMsg: option<ipRouteStatusMsg>,
+@as("CidrIp") cidrIp: option<cidrIp>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
 type ipRoute = {
-@as("Description") description: description,
-@as("CidrIp") cidrIp: cidrIp
+@as("Description") description: option<description>,
+@as("CidrIp") cidrIp: option<cidrIp>
 }
 type ipAddrs = array<ipAddr>
 type eventTopic = {
-@as("Status") status: topicStatus,
-@as("CreatedDateTime") createdDateTime: createdDateTime,
-@as("TopicArn") topicArn: topicArn,
-@as("TopicName") topicName: topicName,
-@as("DirectoryId") directoryId: directoryId
+@as("Status") status: option<topicStatus>,
+@as("CreatedDateTime") createdDateTime: option<createdDateTime>,
+@as("TopicArn") topicArn: option<topicArn>,
+@as("TopicName") topicName: option<topicName>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
 type domainControllerIds = array<domainControllerId>
 type domainController = {
-@as("StatusLastUpdatedDateTime") statusLastUpdatedDateTime: lastUpdatedDateTime,
-@as("LaunchTime") launchTime: launchTime,
-@as("StatusReason") statusReason: domainControllerStatusReason,
-@as("Status") status: domainControllerStatus,
-@as("AvailabilityZone") availabilityZone: availabilityZone,
-@as("SubnetId") subnetId: subnetId,
-@as("VpcId") vpcId: vpcId,
-@as("DnsIpAddr") dnsIpAddr: ipAddr,
-@as("DomainControllerId") domainControllerId: domainControllerId,
-@as("DirectoryId") directoryId: directoryId
+@as("StatusLastUpdatedDateTime") statusLastUpdatedDateTime: option<lastUpdatedDateTime>,
+@as("LaunchTime") launchTime: option<launchTime>,
+@as("StatusReason") statusReason: option<domainControllerStatusReason>,
+@as("Status") status: option<domainControllerStatus>,
+@as("AvailabilityZone") availabilityZone: option<availabilityZone>,
+@as("SubnetId") subnetId: option<subnetId>,
+@as("VpcId") vpcId: option<vpcId>,
+@as("DnsIpAddr") dnsIpAddr: option<ipAddr>,
+@as("DomainControllerId") domainControllerId: option<domainControllerId>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
 type dnsIpAddrs = array<ipAddr>
 type directoryLimits = {
-@as("ConnectedDirectoriesLimitReached") connectedDirectoriesLimitReached: connectedDirectoriesLimitReached,
-@as("ConnectedDirectoriesCurrentCount") connectedDirectoriesCurrentCount: limit,
-@as("ConnectedDirectoriesLimit") connectedDirectoriesLimit: limit,
-@as("CloudOnlyMicrosoftADLimitReached") cloudOnlyMicrosoftADLimitReached: cloudOnlyDirectoriesLimitReached,
-@as("CloudOnlyMicrosoftADCurrentCount") cloudOnlyMicrosoftADCurrentCount: limit,
-@as("CloudOnlyMicrosoftADLimit") cloudOnlyMicrosoftADLimit: limit,
-@as("CloudOnlyDirectoriesLimitReached") cloudOnlyDirectoriesLimitReached: cloudOnlyDirectoriesLimitReached,
-@as("CloudOnlyDirectoriesCurrentCount") cloudOnlyDirectoriesCurrentCount: limit,
-@as("CloudOnlyDirectoriesLimit") cloudOnlyDirectoriesLimit: limit
+@as("ConnectedDirectoriesLimitReached") connectedDirectoriesLimitReached: option<connectedDirectoriesLimitReached>,
+@as("ConnectedDirectoriesCurrentCount") connectedDirectoriesCurrentCount: option<limit>,
+@as("ConnectedDirectoriesLimit") connectedDirectoriesLimit: option<limit>,
+@as("CloudOnlyMicrosoftADLimitReached") cloudOnlyMicrosoftADLimitReached: option<cloudOnlyDirectoriesLimitReached>,
+@as("CloudOnlyMicrosoftADCurrentCount") cloudOnlyMicrosoftADCurrentCount: option<limit>,
+@as("CloudOnlyMicrosoftADLimit") cloudOnlyMicrosoftADLimit: option<limit>,
+@as("CloudOnlyDirectoriesLimitReached") cloudOnlyDirectoriesLimitReached: option<cloudOnlyDirectoriesLimitReached>,
+@as("CloudOnlyDirectoriesCurrentCount") cloudOnlyDirectoriesCurrentCount: option<limit>,
+@as("CloudOnlyDirectoriesLimit") cloudOnlyDirectoriesLimit: option<limit>
 }
 type directoryIds = array<directoryId>
 type clientCertAuthSettings = {
-@as("OCSPUrl") oCSPUrl: oCSPUrl
+@as("OCSPUrl") ocspurl: option<ocspurl>
 }
 type cidrIps = array<cidrIp>
 type certificateInfo = {
-@as("Type") type_: certificateType,
-@as("ExpiryDateTime") expiryDateTime: certificateExpiryDateTime,
-@as("State") state: certificateState,
-@as("CommonName") commonName: certificateCN,
-@as("CertificateId") certificateId: certificateId
+@as("Type") type_: option<certificateType>,
+@as("ExpiryDateTime") expiryDateTime: option<certificateExpiryDateTime>,
+@as("State") state: option<certificateState>,
+@as("CommonName") commonName: option<certificateCN>,
+@as("CertificateId") certificateId: option<certificateId>
 }
 type availabilityZones = array<availabilityZone>
 type attribute = {
-@as("Value") value: attributeValue,
-@as("Name") name: attributeName
+@as("Value") value: option<attributeValue>,
+@as("Name") name: option<attributeName>
 }
 type additionalRegions = array<regionName>
 type trusts = array<trust>
@@ -256,924 +264,924 @@ type snapshots = array<snapshot>
 type sharedDirectories = array<sharedDirectory>
 type schemaExtensionsInfo = array<schemaExtensionInfo>
 type regionsInfo = {
-@as("AdditionalRegions") additionalRegions: additionalRegions,
-@as("PrimaryRegion") primaryRegion: regionName
+@as("AdditionalRegions") additionalRegions: option<additionalRegions>,
+@as("PrimaryRegion") primaryRegion: option<regionName>
 }
 type radiusSettings = {
-@as("UseSameUsername") useSameUsername: useSameUsername,
-@as("DisplayLabel") displayLabel: radiusDisplayLabel,
-@as("AuthenticationProtocol") authenticationProtocol: radiusAuthenticationProtocol,
-@as("SharedSecret") sharedSecret: radiusSharedSecret,
-@as("RadiusRetries") radiusRetries: radiusRetries,
-@as("RadiusTimeout") radiusTimeout: radiusTimeout,
-@as("RadiusPort") radiusPort: portNumber,
-@as("RadiusServers") radiusServers: servers
+@as("UseSameUsername") useSameUsername: option<useSameUsername>,
+@as("DisplayLabel") displayLabel: option<radiusDisplayLabel>,
+@as("AuthenticationProtocol") authenticationProtocol: option<radiusAuthenticationProtocol>,
+@as("SharedSecret") sharedSecret: option<radiusSharedSecret>,
+@as("RadiusRetries") radiusRetries: option<radiusRetries>,
+@as("RadiusTimeout") radiusTimeout: option<radiusTimeout>,
+@as("RadiusPort") radiusPort: option<portNumber>,
+@as("RadiusServers") radiusServers: option<servers>
 }
 type logSubscriptions = array<logSubscription>
-type lDAPSSettingsInfo = array<lDAPSSettingInfo>
+type ldapssettingsInfo = array<ldapssettingInfo>
 type ipRoutesInfo = array<ipRouteInfo>
 type ipRoutes = array<ipRoute>
 type eventTopics = array<eventTopic>
 type domainControllers = array<domainController>
 type directoryVpcSettingsDescription = {
-@as("AvailabilityZones") availabilityZones: availabilityZones,
-@as("SecurityGroupId") securityGroupId: securityGroupId,
-@as("SubnetIds") subnetIds: subnetIds,
-@as("VpcId") vpcId: vpcId
+@as("AvailabilityZones") availabilityZones: option<availabilityZones>,
+@as("SecurityGroupId") securityGroupId: option<securityGroupId>,
+@as("SubnetIds") subnetIds: option<subnetIds>,
+@as("VpcId") vpcId: option<vpcId>
 }
 type directoryVpcSettings = {
-@as("SubnetIds") subnetIds: option<subnetIds>,
-@as("VpcId") vpcId: option<vpcId>
-}
-type directoryConnectSettingsDescription = {
-@as("ConnectIps") connectIps: ipAddrs,
-@as("AvailabilityZones") availabilityZones: availabilityZones,
-@as("SecurityGroupId") securityGroupId: securityGroupId,
-@as("CustomerUserName") customerUserName: userName,
 @as("SubnetIds") subnetIds: subnetIds,
 @as("VpcId") vpcId: vpcId
 }
-type directoryConnectSettings = {
+type directoryConnectSettingsDescription = {
+@as("ConnectIps") connectIps: option<ipAddrs>,
+@as("AvailabilityZones") availabilityZones: option<availabilityZones>,
+@as("SecurityGroupId") securityGroupId: option<securityGroupId>,
 @as("CustomerUserName") customerUserName: option<userName>,
-@as("CustomerDnsIps") customerDnsIps: option<dnsIpAddrs>,
 @as("SubnetIds") subnetIds: option<subnetIds>,
 @as("VpcId") vpcId: option<vpcId>
 }
+type directoryConnectSettings = {
+@as("CustomerUserName") customerUserName: userName,
+@as("CustomerDnsIps") customerDnsIps: dnsIpAddrs,
+@as("SubnetIds") subnetIds: subnetIds,
+@as("VpcId") vpcId: vpcId
+}
 type conditionalForwarder = {
-@as("ReplicationScope") replicationScope: replicationScope,
-@as("DnsIpAddrs") dnsIpAddrs: dnsIpAddrs,
-@as("RemoteDomainName") remoteDomainName: remoteDomainName
+@as("ReplicationScope") replicationScope: option<replicationScope>,
+@as("DnsIpAddrs") dnsIpAddrs: option<dnsIpAddrs>,
+@as("RemoteDomainName") remoteDomainName: option<remoteDomainName>
 }
 type certificatesInfo = array<certificateInfo>
 type certificate = {
-@as("ClientCertAuthSettings") clientCertAuthSettings: clientCertAuthSettings,
-@as("Type") type_: certificateType,
-@as("ExpiryDateTime") expiryDateTime: certificateExpiryDateTime,
-@as("RegisteredDateTime") registeredDateTime: certificateRegisteredDateTime,
-@as("CommonName") commonName: certificateCN,
-@as("StateReason") stateReason: certificateStateReason,
-@as("State") state: certificateState,
-@as("CertificateId") certificateId: certificateId
+@as("ClientCertAuthSettings") clientCertAuthSettings: option<clientCertAuthSettings>,
+@as("Type") type_: option<certificateType>,
+@as("ExpiryDateTime") expiryDateTime: option<certificateExpiryDateTime>,
+@as("RegisteredDateTime") registeredDateTime: option<certificateRegisteredDateTime>,
+@as("CommonName") commonName: option<certificateCN>,
+@as("StateReason") stateReason: option<certificateStateReason>,
+@as("State") state: option<certificateState>,
+@as("CertificateId") certificateId: option<certificateId>
 }
 type attributes = array<attribute>
 type regionDescription = {
-@as("LastUpdatedDateTime") lastUpdatedDateTime: lastUpdatedDateTime,
-@as("StatusLastUpdatedDateTime") statusLastUpdatedDateTime: stateLastUpdatedDateTime,
-@as("LaunchTime") launchTime: launchTime,
-@as("DesiredNumberOfDomainControllers") desiredNumberOfDomainControllers: desiredNumberOfDomainControllers,
-@as("VpcSettings") vpcSettings: directoryVpcSettings,
-@as("Status") status: directoryStage,
-@as("RegionType") regionType: regionType,
-@as("RegionName") regionName: regionName,
-@as("DirectoryId") directoryId: directoryId
+@as("LastUpdatedDateTime") lastUpdatedDateTime: option<lastUpdatedDateTime>,
+@as("StatusLastUpdatedDateTime") statusLastUpdatedDateTime: option<stateLastUpdatedDateTime>,
+@as("LaunchTime") launchTime: option<launchTime>,
+@as("DesiredNumberOfDomainControllers") desiredNumberOfDomainControllers: option<desiredNumberOfDomainControllers>,
+@as("VpcSettings") vpcSettings: option<directoryVpcSettings>,
+@as("Status") status: option<directoryStage>,
+@as("RegionType") regionType: option<regionType>,
+@as("RegionName") regionName: option<regionName>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
 type ownerDirectoryDescription = {
-@as("RadiusStatus") radiusStatus: radiusStatus,
-@as("RadiusSettings") radiusSettings: radiusSettings,
-@as("VpcSettings") vpcSettings: directoryVpcSettingsDescription,
-@as("DnsIpAddrs") dnsIpAddrs: dnsIpAddrs,
-@as("AccountId") accountId: customerId,
-@as("DirectoryId") directoryId: directoryId
+@as("RadiusStatus") radiusStatus: option<radiusStatus>,
+@as("RadiusSettings") radiusSettings: option<radiusSettings>,
+@as("VpcSettings") vpcSettings: option<directoryVpcSettingsDescription>,
+@as("DnsIpAddrs") dnsIpAddrs: option<dnsIpAddrs>,
+@as("AccountId") accountId: option<customerId>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
 type conditionalForwarders = array<conditionalForwarder>
 type computer = {
-@as("ComputerAttributes") computerAttributes: attributes,
-@as("ComputerName") computerName: computerName,
-@as("ComputerId") computerId: sID
+@as("ComputerAttributes") computerAttributes: option<attributes>,
+@as("ComputerName") computerName: option<computerName>,
+@as("ComputerId") computerId: option<sid>
 }
 type regionsDescription = array<regionDescription>
 type directoryDescription = {
-@as("RegionsInfo") regionsInfo: regionsInfo,
-@as("OwnerDirectoryDescription") ownerDirectoryDescription: ownerDirectoryDescription,
-@as("DesiredNumberOfDomainControllers") desiredNumberOfDomainControllers: desiredNumberOfDomainControllers,
-@as("SsoEnabled") ssoEnabled: ssoEnabled,
-@as("StageReason") stageReason: stageReason,
-@as("RadiusStatus") radiusStatus: radiusStatus,
-@as("RadiusSettings") radiusSettings: radiusSettings,
-@as("ConnectSettings") connectSettings: directoryConnectSettingsDescription,
-@as("VpcSettings") vpcSettings: directoryVpcSettingsDescription,
-@as("Type") type_: directoryType,
-@as("StageLastUpdatedDateTime") stageLastUpdatedDateTime: lastUpdatedDateTime,
-@as("LaunchTime") launchTime: launchTime,
-@as("ShareNotes") shareNotes: notes,
-@as("ShareMethod") shareMethod: shareMethod,
-@as("ShareStatus") shareStatus: shareStatus,
-@as("Stage") stage: directoryStage,
-@as("DnsIpAddrs") dnsIpAddrs: dnsIpAddrs,
-@as("Description") description: description,
-@as("AccessUrl") accessUrl: accessUrl,
-@as("Alias") alias: aliasName,
-@as("Edition") edition: directoryEdition,
-@as("Size") size: directorySize,
-@as("ShortName") shortName: directoryShortName,
-@as("Name") name: directoryName,
-@as("DirectoryId") directoryId: directoryId
+@as("RegionsInfo") regionsInfo: option<regionsInfo>,
+@as("OwnerDirectoryDescription") ownerDirectoryDescription: option<ownerDirectoryDescription>,
+@as("DesiredNumberOfDomainControllers") desiredNumberOfDomainControllers: option<desiredNumberOfDomainControllers>,
+@as("SsoEnabled") ssoEnabled: option<ssoEnabled>,
+@as("StageReason") stageReason: option<stageReason>,
+@as("RadiusStatus") radiusStatus: option<radiusStatus>,
+@as("RadiusSettings") radiusSettings: option<radiusSettings>,
+@as("ConnectSettings") connectSettings: option<directoryConnectSettingsDescription>,
+@as("VpcSettings") vpcSettings: option<directoryVpcSettingsDescription>,
+@as("Type") type_: option<directoryType>,
+@as("StageLastUpdatedDateTime") stageLastUpdatedDateTime: option<lastUpdatedDateTime>,
+@as("LaunchTime") launchTime: option<launchTime>,
+@as("ShareNotes") shareNotes: option<notes>,
+@as("ShareMethod") shareMethod: option<shareMethod>,
+@as("ShareStatus") shareStatus: option<shareStatus>,
+@as("Stage") stage: option<directoryStage>,
+@as("DnsIpAddrs") dnsIpAddrs: option<dnsIpAddrs>,
+@as("Description") description: option<description>,
+@as("AccessUrl") accessUrl: option<accessUrl>,
+@as("Alias") alias: option<aliasName>,
+@as("Edition") edition: option<directoryEdition>,
+@as("Size") size: option<directorySize>,
+@as("ShortName") shortName: option<directoryShortName>,
+@as("Name") name: option<directoryName>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
 type directoryDescriptions = array<directoryDescription>
-type clientType;
-@module("@aws-sdk/client-ds") @new external createClient: unit => clientType = "DirectoryServiceClient";
+type awsServiceClient;
+@module("@aws-sdk/client-ds") @new external createClient: unit => awsServiceClient = "DirectoryServiceClient";
 module VerifyTrust = {
   type t;
   type request = {
-@as("TrustId") trustId: option<trustId>
-}
-  type response = {
 @as("TrustId") trustId: trustId
 }
+  type response = {
+@as("TrustId") trustId: option<trustId>
+}
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "VerifyTrustCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateTrust = {
   type t;
   type request = {
-@as("SelectiveAuth") selectiveAuth: selectiveAuth,
-@as("TrustId") trustId: option<trustId>
+@as("SelectiveAuth") selectiveAuth: option<selectiveAuth>,
+@as("TrustId") trustId: trustId
 }
   type response = {
-@as("TrustId") trustId: trustId,
-@as("RequestId") requestId: requestId
+@as("TrustId") trustId: option<trustId>,
+@as("RequestId") requestId: option<requestId>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "UpdateTrustCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateNumberOfDomainControllers = {
   type t;
   type request = {
-@as("DesiredNumber") desiredNumber: option<desiredNumberOfDomainControllers>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("DesiredNumber") desiredNumber: desiredNumberOfDomainControllers,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "UpdateNumberOfDomainControllersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartSchemaExtension = {
   type t;
   type request = {
-@as("Description") description: option<description>,
-@as("LdifContent") ldifContent: option<ldifContent>,
-@as("CreateSnapshotBeforeSchemaExtension") createSnapshotBeforeSchemaExtension: option<createSnapshotBeforeSchemaExtension>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Description") description: description,
+@as("LdifContent") ldifContent: ldifContent,
+@as("CreateSnapshotBeforeSchemaExtension") createSnapshotBeforeSchemaExtension: createSnapshotBeforeSchemaExtension,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("SchemaExtensionId") schemaExtensionId: schemaExtensionId
+@as("SchemaExtensionId") schemaExtensionId: option<schemaExtensionId>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "StartSchemaExtensionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RestoreFromSnapshot = {
   type t;
   type request = {
-@as("SnapshotId") snapshotId: option<snapshotId>
+@as("SnapshotId") snapshotId: snapshotId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RestoreFromSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ResetUserPassword = {
   type t;
   type request = {
-@as("NewPassword") newPassword: option<userPassword>,
-@as("UserName") userName: option<customerUserName>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("NewPassword") newPassword: userPassword,
+@as("UserName") userName: customerUserName,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ResetUserPasswordCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RemoveRegion = {
   type t;
   type request = {
-@as("DirectoryId") directoryId: option<directoryId>
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RemoveRegionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RejectSharedDirectory = {
   type t;
   type request = {
-@as("SharedDirectoryId") sharedDirectoryId: option<directoryId>
-}
-  type response = {
 @as("SharedDirectoryId") sharedDirectoryId: directoryId
 }
+  type response = {
+@as("SharedDirectoryId") sharedDirectoryId: option<directoryId>
+}
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RejectSharedDirectoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterEventTopic = {
   type t;
   type request = {
-@as("TopicName") topicName: option<topicName>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("TopicName") topicName: topicName,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RegisterEventTopicCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableSso = {
   type t;
   type request = {
-@as("Password") password: connectPassword,
-@as("UserName") userName: userName,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Password") password: option<connectPassword>,
+@as("UserName") userName: option<userName>,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "EnableSsoCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableLDAPS = {
   type t;
   type request = {
-@as("Type") type_: option<lDAPSType>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Type") type_: ldapstype,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "EnableLDAPSCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableClientAuthentication = {
   type t;
   type request = {
-@as("Type") type_: option<clientAuthenticationType>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Type") type_: clientAuthenticationType,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "EnableClientAuthenticationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisableSso = {
   type t;
   type request = {
-@as("Password") password: connectPassword,
-@as("UserName") userName: userName,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Password") password: option<connectPassword>,
+@as("UserName") userName: option<userName>,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DisableSsoCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisableRadius = {
   type t;
   type request = {
-@as("DirectoryId") directoryId: option<directoryId>
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DisableRadiusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisableLDAPS = {
   type t;
   type request = {
-@as("Type") type_: option<lDAPSType>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Type") type_: ldapstype,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DisableLDAPSCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisableClientAuthentication = {
   type t;
   type request = {
-@as("Type") type_: option<clientAuthenticationType>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Type") type_: clientAuthenticationType,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DisableClientAuthenticationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterEventTopic = {
   type t;
   type request = {
-@as("TopicName") topicName: option<topicName>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("TopicName") topicName: topicName,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeregisterEventTopicCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeregisterCertificate = {
   type t;
   type request = {
-@as("CertificateId") certificateId: option<certificateId>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("CertificateId") certificateId: certificateId,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeregisterCertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteTrust = {
   type t;
   type request = {
-@as("DeleteAssociatedConditionalForwarder") deleteAssociatedConditionalForwarder: deleteAssociatedConditionalForwarder,
-@as("TrustId") trustId: option<trustId>
-}
-  type response = {
+@as("DeleteAssociatedConditionalForwarder") deleteAssociatedConditionalForwarder: option<deleteAssociatedConditionalForwarder>,
 @as("TrustId") trustId: trustId
 }
+  type response = {
+@as("TrustId") trustId: option<trustId>
+}
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeleteTrustCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteSnapshot = {
   type t;
   type request = {
-@as("SnapshotId") snapshotId: option<snapshotId>
-}
-  type response = {
 @as("SnapshotId") snapshotId: snapshotId
 }
+  type response = {
+@as("SnapshotId") snapshotId: option<snapshotId>
+}
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeleteSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteLogSubscription = {
   type t;
   type request = {
-@as("DirectoryId") directoryId: option<directoryId>
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeleteLogSubscriptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDirectory = {
   type t;
   type request = {
-@as("DirectoryId") directoryId: option<directoryId>
-}
-  type response = {
 @as("DirectoryId") directoryId: directoryId
 }
+  type response = {
+@as("DirectoryId") directoryId: option<directoryId>
+}
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeleteDirectoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteConditionalForwarder = {
   type t;
   type request = {
-@as("RemoteDomainName") remoteDomainName: option<remoteDomainName>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("RemoteDomainName") remoteDomainName: remoteDomainName,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeleteConditionalForwarderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSnapshot = {
   type t;
   type request = {
-@as("Name") name: snapshotName,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Name") name: option<snapshotName>,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("SnapshotId") snapshotId: snapshotId
+@as("SnapshotId") snapshotId: option<snapshotId>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateLogSubscription = {
   type t;
   type request = {
-@as("LogGroupName") logGroupName: option<logGroupName>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("LogGroupName") logGroupName: logGroupName,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateLogSubscriptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAlias = {
   type t;
   type request = {
-@as("Alias") alias: option<aliasName>,
-@as("DirectoryId") directoryId: option<directoryId>
-}
-  type response = {
 @as("Alias") alias: aliasName,
 @as("DirectoryId") directoryId: directoryId
 }
+  type response = {
+@as("Alias") alias: option<aliasName>,
+@as("DirectoryId") directoryId: option<directoryId>
+}
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelSchemaExtension = {
   type t;
   type request = {
-@as("SchemaExtensionId") schemaExtensionId: option<schemaExtensionId>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("SchemaExtensionId") schemaExtensionId: schemaExtensionId,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CancelSchemaExtensionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateConditionalForwarder = {
   type t;
   type request = {
-@as("DnsIpAddrs") dnsIpAddrs: option<dnsIpAddrs>,
-@as("RemoteDomainName") remoteDomainName: option<remoteDomainName>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("DnsIpAddrs") dnsIpAddrs: dnsIpAddrs,
+@as("RemoteDomainName") remoteDomainName: remoteDomainName,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "UpdateConditionalForwarderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UnshareDirectory = {
   type t;
   type request = {
-@as("UnshareTarget") unshareTarget: option<unshareTarget>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("UnshareTarget") unshareTarget: unshareTarget,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("SharedDirectoryId") sharedDirectoryId: directoryId
+@as("SharedDirectoryId") sharedDirectoryId: option<directoryId>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "UnshareDirectoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ShareDirectory = {
   type t;
   type request = {
-@as("ShareMethod") shareMethod: option<shareMethod>,
-@as("ShareTarget") shareTarget: option<shareTarget>,
-@as("ShareNotes") shareNotes: notes,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("ShareMethod") shareMethod: shareMethod,
+@as("ShareTarget") shareTarget: shareTarget,
+@as("ShareNotes") shareNotes: option<notes>,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("SharedDirectoryId") sharedDirectoryId: directoryId
+@as("SharedDirectoryId") sharedDirectoryId: option<directoryId>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ShareDirectoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RemoveTagsFromResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeys>,
-@as("ResourceId") resourceId: option<resourceId>
+@as("TagKeys") tagKeys: tagKeys,
+@as("ResourceId") resourceId: resourceId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RemoveTagsFromResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RemoveIpRoutes = {
   type t;
   type request = {
-@as("CidrIps") cidrIps: option<cidrIps>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("CidrIps") cidrIps: cidrIps,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RemoveIpRoutesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RegisterCertificate = {
   type t;
   type request = {
-@as("ClientCertAuthSettings") clientCertAuthSettings: clientCertAuthSettings,
-@as("Type") type_: certificateType,
-@as("CertificateData") certificateData: option<certificateData>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("ClientCertAuthSettings") clientCertAuthSettings: option<clientCertAuthSettings>,
+@as("Type") type_: option<certificateType>,
+@as("CertificateData") certificateData: certificateData,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("CertificateId") certificateId: certificateId
+@as("CertificateId") certificateId: option<certificateId>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RegisterCertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSnapshotLimits = {
   type t;
   type request = {
-@as("DirectoryId") directoryId: option<directoryId>
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("SnapshotLimits") snapshotLimits: snapshotLimits
+@as("SnapshotLimits") snapshotLimits: option<snapshotLimits>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "GetSnapshotLimitsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDirectoryLimits = {
   type t;
   type request = unit
   type response = {
-@as("DirectoryLimits") directoryLimits: directoryLimits
+@as("DirectoryLimits") directoryLimits: option<directoryLimits>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "GetDirectoryLimitsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateTrust = {
   type t;
   type request = {
-@as("SelectiveAuth") selectiveAuth: selectiveAuth,
-@as("ConditionalForwarderIpAddrs") conditionalForwarderIpAddrs: dnsIpAddrs,
-@as("TrustType") trustType: trustType,
-@as("TrustDirection") trustDirection: option<trustDirection>,
-@as("TrustPassword") trustPassword: option<trustPassword>,
-@as("RemoteDomainName") remoteDomainName: option<remoteDomainName>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("SelectiveAuth") selectiveAuth: option<selectiveAuth>,
+@as("ConditionalForwarderIpAddrs") conditionalForwarderIpAddrs: option<dnsIpAddrs>,
+@as("TrustType") trustType: option<trustType>,
+@as("TrustDirection") trustDirection: trustDirection,
+@as("TrustPassword") trustPassword: trustPassword,
+@as("RemoteDomainName") remoteDomainName: remoteDomainName,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("TrustId") trustId: trustId
+@as("TrustId") trustId: option<trustId>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateTrustCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateConditionalForwarder = {
   type t;
   type request = {
-@as("DnsIpAddrs") dnsIpAddrs: option<dnsIpAddrs>,
-@as("RemoteDomainName") remoteDomainName: option<remoteDomainName>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("DnsIpAddrs") dnsIpAddrs: dnsIpAddrs,
+@as("RemoteDomainName") remoteDomainName: remoteDomainName,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateConditionalForwarderCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AcceptSharedDirectory = {
   type t;
   type request = {
-@as("SharedDirectoryId") sharedDirectoryId: option<directoryId>
+@as("SharedDirectoryId") sharedDirectoryId: directoryId
 }
   type response = {
-@as("SharedDirectory") sharedDirectory: sharedDirectory
+@as("SharedDirectory") sharedDirectory: option<sharedDirectory>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "AcceptSharedDirectoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateRadius = {
   type t;
   type request = {
-@as("RadiusSettings") radiusSettings: option<radiusSettings>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("RadiusSettings") radiusSettings: radiusSettings,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "UpdateRadiusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("Limit") limit: limit,
-@as("NextToken") nextToken: nextToken,
-@as("ResourceId") resourceId: option<resourceId>
+@as("Limit") limit: option<limit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("ResourceId") resourceId: resourceId
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("Tags") tags: tags
+@as("NextToken") nextToken: option<nextToken>,
+@as("Tags") tags: option<tags>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSchemaExtensions = {
   type t;
   type request = {
-@as("Limit") limit: limit,
-@as("NextToken") nextToken: nextToken,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Limit") limit: option<limit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("SchemaExtensionsInfo") schemaExtensionsInfo: schemaExtensionsInfo
+@as("NextToken") nextToken: option<nextToken>,
+@as("SchemaExtensionsInfo") schemaExtensionsInfo: option<schemaExtensionsInfo>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ListSchemaExtensionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListLogSubscriptions = {
   type t;
   type request = {
-@as("Limit") limit: limit,
-@as("NextToken") nextToken: nextToken,
-@as("DirectoryId") directoryId: directoryId
+@as("Limit") limit: option<limit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("LogSubscriptions") logSubscriptions: logSubscriptions
+@as("NextToken") nextToken: option<nextToken>,
+@as("LogSubscriptions") logSubscriptions: option<logSubscriptions>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ListLogSubscriptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListIpRoutes = {
   type t;
   type request = {
-@as("Limit") limit: limit,
-@as("NextToken") nextToken: nextToken,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Limit") limit: option<limit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("IpRoutesInfo") ipRoutesInfo: ipRoutesInfo
+@as("NextToken") nextToken: option<nextToken>,
+@as("IpRoutesInfo") ipRoutesInfo: option<ipRoutesInfo>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ListIpRoutesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCertificates = {
   type t;
   type request = {
-@as("Limit") limit: pageLimit,
-@as("NextToken") nextToken: nextToken,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Limit") limit: option<pageLimit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("CertificatesInfo") certificatesInfo: certificatesInfo,
-@as("NextToken") nextToken: nextToken
+@as("CertificatesInfo") certificatesInfo: option<certificatesInfo>,
+@as("NextToken") nextToken: option<nextToken>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ListCertificatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableRadius = {
   type t;
   type request = {
-@as("RadiusSettings") radiusSettings: option<radiusSettings>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("RadiusSettings") radiusSettings: radiusSettings,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "EnableRadiusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTrusts = {
   type t;
   type request = {
-@as("Limit") limit: limit,
-@as("NextToken") nextToken: nextToken,
-@as("TrustIds") trustIds: trustIds,
-@as("DirectoryId") directoryId: directoryId
+@as("Limit") limit: option<limit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("TrustIds") trustIds: option<trustIds>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("Trusts") trusts: trusts
+@as("NextToken") nextToken: option<nextToken>,
+@as("Trusts") trusts: option<trusts>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeTrustsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSnapshots = {
   type t;
   type request = {
-@as("Limit") limit: limit,
-@as("NextToken") nextToken: nextToken,
-@as("SnapshotIds") snapshotIds: snapshotIds,
-@as("DirectoryId") directoryId: directoryId
+@as("Limit") limit: option<limit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("SnapshotIds") snapshotIds: option<snapshotIds>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("Snapshots") snapshots: snapshots
+@as("NextToken") nextToken: option<nextToken>,
+@as("Snapshots") snapshots: option<snapshots>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeSnapshotsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSharedDirectories = {
   type t;
   type request = {
-@as("Limit") limit: limit,
-@as("NextToken") nextToken: nextToken,
-@as("SharedDirectoryIds") sharedDirectoryIds: directoryIds,
-@as("OwnerDirectoryId") ownerDirectoryId: option<directoryId>
+@as("Limit") limit: option<limit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("SharedDirectoryIds") sharedDirectoryIds: option<directoryIds>,
+@as("OwnerDirectoryId") ownerDirectoryId: directoryId
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("SharedDirectories") sharedDirectories: sharedDirectories
+@as("NextToken") nextToken: option<nextToken>,
+@as("SharedDirectories") sharedDirectories: option<sharedDirectories>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeSharedDirectoriesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLDAPSSettings = {
   type t;
   type request = {
-@as("Limit") limit: pageLimit,
-@as("NextToken") nextToken: nextToken,
-@as("Type") type_: lDAPSType,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Limit") limit: option<pageLimit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("Type") type_: option<ldapstype>,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("LDAPSSettingsInfo") lDAPSSettingsInfo: lDAPSSettingsInfo
+@as("NextToken") nextToken: option<nextToken>,
+@as("LDAPSSettingsInfo") ldapssettingsInfo: option<ldapssettingsInfo>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeLDAPSSettingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEventTopics = {
   type t;
   type request = {
-@as("TopicNames") topicNames: topicNames,
-@as("DirectoryId") directoryId: directoryId
+@as("TopicNames") topicNames: option<topicNames>,
+@as("DirectoryId") directoryId: option<directoryId>
 }
   type response = {
-@as("EventTopics") eventTopics: eventTopics
+@as("EventTopics") eventTopics: option<eventTopics>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeEventTopicsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDomainControllers = {
   type t;
   type request = {
-@as("Limit") limit: limit,
-@as("NextToken") nextToken: nextToken,
-@as("DomainControllerIds") domainControllerIds: domainControllerIds,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("Limit") limit: option<limit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("DomainControllerIds") domainControllerIds: option<domainControllerIds>,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("DomainControllers") domainControllers: domainControllers
+@as("NextToken") nextToken: option<nextToken>,
+@as("DomainControllers") domainControllers: option<domainControllers>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeDomainControllersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCertificate = {
   type t;
   type request = {
-@as("CertificateId") certificateId: option<certificateId>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("CertificateId") certificateId: certificateId,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("Certificate") certificate: certificate
+@as("Certificate") certificate: option<certificate>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeCertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateMicrosoftAD = {
   type t;
   type request = {
-@as("Tags") tags: tags,
-@as("Edition") edition: directoryEdition,
-@as("VpcSettings") vpcSettings: option<directoryVpcSettings>,
-@as("Description") description: description,
-@as("Password") password: option<password>,
-@as("ShortName") shortName: directoryShortName,
-@as("Name") name: option<directoryName>
+@as("Tags") tags: option<tags>,
+@as("Edition") edition: option<directoryEdition>,
+@as("VpcSettings") vpcSettings: directoryVpcSettings,
+@as("Description") description: option<description>,
+@as("Password") password: password,
+@as("ShortName") shortName: option<directoryShortName>,
+@as("Name") name: directoryName
 }
   type response = {
-@as("DirectoryId") directoryId: directoryId
+@as("DirectoryId") directoryId: option<directoryId>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateMicrosoftADCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDirectory = {
   type t;
   type request = {
-@as("Tags") tags: tags,
-@as("VpcSettings") vpcSettings: directoryVpcSettings,
-@as("Size") size: option<directorySize>,
-@as("Description") description: description,
-@as("Password") password: option<password>,
-@as("ShortName") shortName: directoryShortName,
-@as("Name") name: option<directoryName>
+@as("Tags") tags: option<tags>,
+@as("VpcSettings") vpcSettings: option<directoryVpcSettings>,
+@as("Size") size: directorySize,
+@as("Description") description: option<description>,
+@as("Password") password: password,
+@as("ShortName") shortName: option<directoryShortName>,
+@as("Name") name: directoryName
 }
   type response = {
-@as("DirectoryId") directoryId: directoryId
+@as("DirectoryId") directoryId: option<directoryId>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateDirectoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ConnectDirectory = {
   type t;
   type request = {
-@as("Tags") tags: tags,
-@as("ConnectSettings") connectSettings: option<directoryConnectSettings>,
-@as("Size") size: option<directorySize>,
-@as("Description") description: description,
-@as("Password") password: option<connectPassword>,
-@as("ShortName") shortName: directoryShortName,
-@as("Name") name: option<directoryName>
+@as("Tags") tags: option<tags>,
+@as("ConnectSettings") connectSettings: directoryConnectSettings,
+@as("Size") size: directorySize,
+@as("Description") description: option<description>,
+@as("Password") password: connectPassword,
+@as("ShortName") shortName: option<directoryShortName>,
+@as("Name") name: directoryName
 }
   type response = {
-@as("DirectoryId") directoryId: directoryId
+@as("DirectoryId") directoryId: option<directoryId>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ConnectDirectoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddTagsToResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tags>,
-@as("ResourceId") resourceId: option<resourceId>
+@as("Tags") tags: tags,
+@as("ResourceId") resourceId: resourceId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "AddTagsToResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddRegion = {
   type t;
   type request = {
-@as("VPCSettings") vPCSettings: option<directoryVpcSettings>,
-@as("RegionName") regionName: option<regionName>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("VPCSettings") vpcsettings: directoryVpcSettings,
+@as("RegionName") regionName: regionName,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "AddRegionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AddIpRoutes = {
   type t;
   type request = {
-@as("UpdateSecurityGroupForDirectoryControllers") updateSecurityGroupForDirectoryControllers: updateSecurityGroupForDirectoryControllers,
-@as("IpRoutes") ipRoutes: option<ipRoutes>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("UpdateSecurityGroupForDirectoryControllers") updateSecurityGroupForDirectoryControllers: option<updateSecurityGroupForDirectoryControllers>,
+@as("IpRoutes") ipRoutes: ipRoutes,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = unit
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "AddIpRoutesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConditionalForwarders = {
   type t;
   type request = {
-@as("RemoteDomainNames") remoteDomainNames: remoteDomainNames,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("RemoteDomainNames") remoteDomainNames: option<remoteDomainNames>,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("ConditionalForwarders") conditionalForwarders: conditionalForwarders
+@as("ConditionalForwarders") conditionalForwarders: option<conditionalForwarders>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeConditionalForwardersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateComputer = {
   type t;
   type request = {
-@as("ComputerAttributes") computerAttributes: attributes,
-@as("OrganizationalUnitDistinguishedName") organizationalUnitDistinguishedName: organizationalUnitDN,
-@as("Password") password: option<computerPassword>,
-@as("ComputerName") computerName: option<computerName>,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("ComputerAttributes") computerAttributes: option<attributes>,
+@as("OrganizationalUnitDistinguishedName") organizationalUnitDistinguishedName: option<organizationalUnitDN>,
+@as("Password") password: computerPassword,
+@as("ComputerName") computerName: computerName,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("Computer") computer: computer
+@as("Computer") computer: option<computer>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateComputerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRegions = {
   type t;
   type request = {
-@as("NextToken") nextToken: nextToken,
-@as("RegionName") regionName: regionName,
-@as("DirectoryId") directoryId: option<directoryId>
+@as("NextToken") nextToken: option<nextToken>,
+@as("RegionName") regionName: option<regionName>,
+@as("DirectoryId") directoryId: directoryId
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("RegionsDescription") regionsDescription: regionsDescription
+@as("NextToken") nextToken: option<nextToken>,
+@as("RegionsDescription") regionsDescription: option<regionsDescription>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeRegionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDirectories = {
   type t;
   type request = {
-@as("Limit") limit: limit,
-@as("NextToken") nextToken: nextToken,
-@as("DirectoryIds") directoryIds: directoryIds
+@as("Limit") limit: option<limit>,
+@as("NextToken") nextToken: option<nextToken>,
+@as("DirectoryIds") directoryIds: option<directoryIds>
 }
   type response = {
-@as("NextToken") nextToken: nextToken,
-@as("DirectoryDescriptions") directoryDescriptions: directoryDescriptions
+@as("NextToken") nextToken: option<nextToken>,
+@as("DirectoryDescriptions") directoryDescriptions: option<directoryDescriptions>
 }
   @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeDirectoriesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

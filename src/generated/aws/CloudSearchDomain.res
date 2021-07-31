@@ -1,63 +1,69 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type suggestionsSize = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type suggestionsSize = float
 type suggester = string
-type amazonawsString = string
+type string_ = string
 type stat = string
-type start = float;
+type start = float
 type sort = string
-type size = float;
+type size = float
 type return = string
-type queryParser = [@as("dismax") #dismax | @as("lucene") #lucene | @as("structured") #structured | @as("simple") #simple]
+type queryParser = [@as("dismax") #Dismax | @as("lucene") #Lucene | @as("structured") #Structured | @as("simple") #Simple]
 type queryOptions = string
 type query = string
-type partial = bool;
-type amazonawsLong = float;
+type partial = bool
+type long = float
 type highlight = string
 type filterQuery = string
 type facet = string
 type expr = string
-type amazonawsDouble = float;
-type deletes = float;
+type double = float
+type deletes = float
 type cursor = string
-type contentType = [@as("application/xml") #application_xml | @as("application/json") #application_json]
-type blob = NodeJs.Buffer.t;
-type adds = float;
+type contentType = [@as("application/xml") #ApplicationXml | @as("application/json") #ApplicationJson]
+type blob = NodeJs.Buffer.t
+type adds = float
 type suggestionMatch = {
-@as("id") id: amazonawsString,
-@as("score") score: amazonawsLong,
-@as("suggestion") suggestion: amazonawsString
+id: option<string_>,
+score: option<long>,
+suggestion: option<string_>
 }
 type suggestStatus = {
-@as("rid") rid: amazonawsString,
-@as("timems") timems: amazonawsLong
+rid: option<string_>,
+timems: option<long>
 }
 type searchStatus = {
-@as("rid") rid: amazonawsString,
-@as("timems") timems: amazonawsLong
+rid: option<string_>,
+timems: option<long>
 }
-type highlights = Js.Dict.t< amazonawsString>
-type fieldValue = array<amazonawsString>
+type highlights = Js.Dict.t< string_>
+type fieldValue = array<string_>
 type fieldStats = {
-@as("stddev") stddev: amazonawsDouble,
-@as("mean") mean: amazonawsString,
-@as("sumOfSquares") sumOfSquares: amazonawsDouble,
-@as("sum") sum: amazonawsDouble,
-@as("missing") missing: amazonawsLong,
-@as("count") count: amazonawsLong,
-@as("max") max: amazonawsString,
-@as("min") min: amazonawsString
+stddev: option<double>,
+mean: option<string_>,
+sumOfSquares: option<double>,
+sum: option<double>,
+missing: option<long>,
+count: option<long>,
+max: option<string_>,
+min: option<string_>
 }
-type exprs = Js.Dict.t< amazonawsString>
+type exprs = Js.Dict.t< string_>
 type documentServiceWarning = {
-@as("message") message: amazonawsString
+message: option<string_>
 }
 type bucket = {
-@as("count") count: amazonawsLong,
-@as("value") value: amazonawsString
+count: option<long>,
+value: option<string_>
 }
 type suggestions = array<suggestionMatch>
 type stats = Js.Dict.t< fieldStats>
@@ -65,84 +71,84 @@ type fields = Js.Dict.t< fieldValue>
 type documentServiceWarnings = array<documentServiceWarning>
 type bucketList = array<bucket>
 type suggestModel = {
-@as("suggestions") suggestions: suggestions,
-@as("found") found: amazonawsLong,
-@as("query") query: amazonawsString
+suggestions: option<suggestions>,
+found: option<long>,
+query: option<string_>
 }
 type hit = {
-@as("highlights") highlights: highlights,
-@as("exprs") exprs: exprs,
-@as("fields") fields: fields,
-@as("id") id: amazonawsString
+highlights: option<highlights>,
+exprs: option<exprs>,
+fields: option<fields>,
+id: option<string_>
 }
 type bucketInfo = {
-@as("buckets") buckets: bucketList
+buckets: option<bucketList>
 }
 type hitList = array<hit>
 type facets = Js.Dict.t< bucketInfo>
 type hits = {
-@as("hit") hit: hitList,
-@as("cursor") cursor: amazonawsString,
-@as("start") start: amazonawsLong,
-@as("found") found: amazonawsLong
+hit: option<hitList>,
+cursor: option<string_>,
+start: option<long>,
+found: option<long>
 }
-type clientType;
-@module("@aws-sdk/client-cloudsearch") @new external createClient: unit => clientType = "CloudSearchDomainClient";
+type awsServiceClient;
+@module("@aws-sdk/client-cloudsearch") @new external createClient: unit => awsServiceClient = "CloudSearchDomainClient";
 module UploadDocuments = {
   type t;
   type request = {
-@as("contentType") contentType: option<contentType>,
-@as("documents") documents: option<blob>
+contentType: contentType,
+documents: blob
 }
   type response = {
-@as("warnings") warnings: documentServiceWarnings,
-@as("deletes") deletes: deletes,
-@as("adds") adds: adds,
-@as("status") status: amazonawsString
+warnings: option<documentServiceWarnings>,
+deletes: option<deletes>,
+adds: option<adds>,
+status: option<string_>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "UploadDocumentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module Suggest = {
   type t;
   type request = {
-@as("size") size: suggestionsSize,
-@as("suggester") suggester: option<suggester>,
-@as("query") query: option<query>
+size: option<suggestionsSize>,
+suggester: suggester,
+query: query
 }
   type response = {
-@as("suggest") suggest: suggestModel,
-@as("status") status: suggestStatus
+suggest: option<suggestModel>,
+status: option<suggestStatus>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "SuggestCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module Search = {
   type t;
   type request = {
-@as("stats") stats: stat,
-@as("start") start: start,
-@as("sort") sort: sort,
-@as("size") size: size,
-@as("return") return: return,
-@as("queryParser") queryParser: queryParser,
-@as("queryOptions") queryOptions: queryOptions,
-@as("query") query: option<query>,
-@as("partial") partial: partial,
-@as("highlight") highlight: highlight,
-@as("filterQuery") filterQuery: filterQuery,
-@as("facet") facet: facet,
-@as("expr") expr: expr,
-@as("cursor") cursor: cursor
+stats: option<stat>,
+start: option<start>,
+sort: option<sort>,
+size: option<size>,
+return: option<return>,
+queryParser: option<queryParser>,
+queryOptions: option<queryOptions>,
+query: query,
+partial: option<partial>,
+highlight: option<highlight>,
+filterQuery: option<filterQuery>,
+facet: option<facet>,
+expr: option<expr>,
+cursor: option<cursor>
 }
   type response = {
-@as("stats") stats: stats,
-@as("facets") facets: facets,
-@as("hits") hits: hits,
-@as("status") status: searchStatus
+stats: option<stats>,
+facets: option<facets>,
+hits: option<hits>,
+status: option<searchStatus>
 }
   @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "SearchCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

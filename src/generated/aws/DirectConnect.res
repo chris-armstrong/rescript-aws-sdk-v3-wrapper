@@ -1,19 +1,27 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type virtualInterfaceType = string
-type virtualInterfaceState = [@as("unknown") #unknown | @as("rejected") #rejected | @as("deleted") #deleted | @as("deleting") #deleting | @as("down") #down | @as("available") #available | @as("pending") #pending | @as("verifying") #verifying | @as("confirming") #confirming]
+type virtualInterfaceState = [@as("unknown") #Unknown | @as("rejected") #Rejected | @as("deleted") #Deleted | @as("deleting") #Deleting | @as("down") #Down | @as("available") #Available | @as("pending") #Pending | @as("verifying") #Verifying | @as("confirming") #Confirming]
 type virtualInterfaceRegion = string
 type virtualInterfaceName = string
 type virtualInterfaceId = string
 type virtualGatewayState = string
 type virtualGatewayRegion = string
 type virtualGatewayId = string
-type vLAN = int;
+type vlan = int
 type testId = string
-type testDuration = int;
+type testDuration = int
 type tagValue = string
 type tagKey = string
 type stateChangeError = string
@@ -23,7 +31,7 @@ type startOnDate = string
 type secretARN = string
 type routerConfig = string
 type resourceArn = string
-type requestMACSec = bool;
+type requestMACSec = bool
 type region = string
 type providerName = string
 type portSpeed = string
@@ -31,312 +39,312 @@ type portEncryptionStatus = string
 type partnerName = string
 type paginationToken = string
 type ownerAccount = string
-type maxResultSetSize = int;
-type macSecCapable = bool;
-type mTU = int;
-type longAsn = float;
+type maxResultSetSize = int
+type macSecCapable = bool
+type mtu = int
+type longAsn = float
 type locationName = string
 type locationCode = string
 type loaIssueTime = Js.Date.t;
-type loaContentType = [@as("application/pdf") #application_pdf]
-type loaContent = NodeJs.Buffer.t;
-type lagState = [@as("unknown") #unknown | @as("deleted") #deleted | @as("deleting") #deleting | @as("down") #down | @as("available") #available | @as("pending") #pending | @as("requested") #requested]
+type loaContentType = [@as("application/pdf") #ApplicationPdf]
+type loaContent = NodeJs.Buffer.t
+type lagState = [@as("unknown") #Unknown | @as("deleted") #Deleted | @as("deleting") #Deleting | @as("down") #Down | @as("available") #Available | @as("pending") #Pending | @as("requested") #Requested]
 type lagName = string
 type lagId = string
-type jumboFrameCapable = bool;
-type interconnectState = [@as("unknown") #unknown | @as("deleted") #deleted | @as("deleting") #deleting | @as("down") #down | @as("available") #available | @as("pending") #pending | @as("requested") #requested]
+type jumboFrameCapable = bool
+type interconnectState = [@as("unknown") #Unknown | @as("deleted") #Deleted | @as("deleting") #Deleting | @as("down") #Down | @as("available") #Available | @as("pending") #Pending | @as("requested") #Requested]
 type interconnectName = string
 type interconnectId = string
-type hasLogicalRedundancy = [@as("no") #no | @as("yes") #yes | @as("unknown") #unknown]
-type gatewayType = [@as("transitGateway") #transitGateway | @as("virtualPrivateGateway") #virtualPrivateGateway]
+type hasLogicalRedundancy = [@as("no") #No | @as("yes") #Yes | @as("unknown") #Unknown]
+type gatewayType = [@as("transitGateway") #TransitGateway | @as("virtualPrivateGateway") #VirtualPrivateGateway]
 type gatewayIdentifier = string
 type gatewayIdToAssociate = string
 type failureTestHistoryStatus = string
 type errorMessage = string
 type endTime = Js.Date.t;
 type encryptionMode = string
-type directConnectGatewayState = [@as("deleted") #deleted | @as("deleting") #deleting | @as("available") #available | @as("pending") #pending]
+type directConnectGatewayState = [@as("deleted") #Deleted | @as("deleting") #Deleting | @as("available") #Available | @as("pending") #Pending]
 type directConnectGatewayName = string
 type directConnectGatewayId = string
 type directConnectGatewayAttachmentType = [@as("PrivateVirtualInterface") #PrivateVirtualInterface | @as("TransitVirtualInterface") #TransitVirtualInterface]
-type directConnectGatewayAttachmentState = [@as("detached") #detached | @as("detaching") #detaching | @as("attached") #attached | @as("attaching") #attaching]
-type directConnectGatewayAssociationState = [@as("updating") #updating | @as("disassociated") #disassociated | @as("disassociating") #disassociating | @as("associated") #associated | @as("associating") #associating]
-type directConnectGatewayAssociationProposalState = [@as("deleted") #deleted | @as("accepted") #accepted | @as("requested") #requested]
+type directConnectGatewayAttachmentState = [@as("detached") #Detached | @as("detaching") #Detaching | @as("attached") #Attached | @as("attaching") #Attaching]
+type directConnectGatewayAssociationState = [@as("updating") #Updating | @as("disassociated") #Disassociated | @as("disassociating") #Disassociating | @as("associated") #Associated | @as("associating") #Associating]
+type directConnectGatewayAssociationProposalState = [@as("deleted") #Deleted | @as("accepted") #Accepted | @as("requested") #Requested]
 type directConnectGatewayAssociationProposalId = string
 type directConnectGatewayAssociationId = string
 type customerAddress = string
-type count = int;
-type connectionState = [@as("unknown") #unknown | @as("rejected") #rejected | @as("deleted") #deleted | @as("deleting") #deleting | @as("down") #down | @as("available") #available | @as("pending") #pending | @as("requested") #requested | @as("ordering") #ordering]
+type count = int
+type connectionState = [@as("unknown") #Unknown | @as("rejected") #Rejected | @as("deleted") #Deleted | @as("deleting") #Deleting | @as("down") #Down | @as("available") #Available | @as("pending") #Pending | @as("requested") #Requested | @as("ordering") #Ordering]
 type connectionName = string
 type connectionId = string
 type ckn = string
 type cak = string
-type cIDR = string
-type booleanFlag = bool;
+type cidr = string
+type booleanFlag = bool
 type bandwidth = string
-type bGPStatus = [@as("unknown") #unknown | @as("down") #down | @as("up") #up]
-type bGPPeerState = [@as("deleted") #deleted | @as("deleting") #deleting | @as("available") #available | @as("pending") #pending | @as("verifying") #verifying]
-type bGPPeerId = string
-type bGPAuthKey = string
+type bgpstatus = [@as("unknown") #Unknown | @as("down") #Down | @as("up") #Up]
+type bgppeerState = [@as("deleted") #Deleted | @as("deleting") #Deleting | @as("available") #Available | @as("pending") #Pending | @as("verifying") #Verifying]
+type bgppeerId = string
+type bgpauthKey = string
 type awsDeviceV2 = string
 type awsDevice = string
 type associatedGatewayId = string
 type amazonAddress = string
-type addressFamily = [@as("ipv6") #ipv6 | @as("ipv4") #ipv4]
-type aSN = int;
+type addressFamily = [@as("ipv6") #Ipv6 | @as("ipv4") #Ipv4]
+type asn = int
 type virtualGateway = {
-@as("virtualGatewayState") virtualGatewayState: virtualGatewayState,
-@as("virtualGatewayId") virtualGatewayId: virtualGatewayId
+virtualGatewayState: option<virtualGatewayState>,
+virtualGatewayId: option<virtualGatewayId>
 }
 type tagKeyList = array<tagKey>
 type tag = {
-@as("value") value: tagValue,
-@as("key") key: option<tagKey>
+value: option<tagValue>,
+key: tagKey
 }
 type routeFilterPrefix = {
-@as("cidr") cidr: cIDR
+cidr: option<cidr>
 }
 type resourceArnList = array<resourceArn>
 type providerList = array<providerName>
 type newBGPPeer = {
-@as("customerAddress") customerAddress: customerAddress,
-@as("amazonAddress") amazonAddress: amazonAddress,
-@as("addressFamily") addressFamily: addressFamily,
-@as("authKey") authKey: bGPAuthKey,
-@as("asn") asn: aSN
+customerAddress: option<customerAddress>,
+amazonAddress: option<amazonAddress>,
+addressFamily: option<addressFamily>,
+authKey: option<bgpauthKey>,
+asn: option<asn>
 }
 type macSecKey = {
-@as("startOn") startOn: startOnDate,
-@as("state") state: state,
-@as("ckn") ckn: ckn,
-@as("secretARN") secretARN: secretARN
+startOn: option<startOnDate>,
+state: option<state>,
+ckn: option<ckn>,
+secretARN: option<secretARN>
 }
 type loa = {
-@as("loaContentType") loaContentType: loaContentType,
-@as("loaContent") loaContent: loaContent
+loaContentType: option<loaContentType>,
+loaContent: option<loaContent>
 }
 type directConnectGatewayAttachment = {
-@as("stateChangeError") stateChangeError: stateChangeError,
-@as("attachmentType") attachmentType: directConnectGatewayAttachmentType,
-@as("attachmentState") attachmentState: directConnectGatewayAttachmentState,
-@as("virtualInterfaceOwnerAccount") virtualInterfaceOwnerAccount: ownerAccount,
-@as("virtualInterfaceRegion") virtualInterfaceRegion: virtualInterfaceRegion,
-@as("virtualInterfaceId") virtualInterfaceId: virtualInterfaceId,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId
+stateChangeError: option<stateChangeError>,
+attachmentType: option<directConnectGatewayAttachmentType>,
+attachmentState: option<directConnectGatewayAttachmentState>,
+virtualInterfaceOwnerAccount: option<ownerAccount>,
+virtualInterfaceRegion: option<virtualInterfaceRegion>,
+virtualInterfaceId: option<virtualInterfaceId>,
+directConnectGatewayId: option<directConnectGatewayId>
 }
 type directConnectGateway = {
-@as("stateChangeError") stateChangeError: stateChangeError,
-@as("directConnectGatewayState") directConnectGatewayState: directConnectGatewayState,
-@as("ownerAccount") ownerAccount: ownerAccount,
-@as("amazonSideAsn") amazonSideAsn: longAsn,
-@as("directConnectGatewayName") directConnectGatewayName: directConnectGatewayName,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId
+stateChangeError: option<stateChangeError>,
+directConnectGatewayState: option<directConnectGatewayState>,
+ownerAccount: option<ownerAccount>,
+amazonSideAsn: option<longAsn>,
+directConnectGatewayName: option<directConnectGatewayName>,
+directConnectGatewayId: option<directConnectGatewayId>
 }
-type bGPPeerIdList = array<bGPPeerId>
-type bGPPeer = {
-@as("awsDeviceV2") awsDeviceV2: awsDeviceV2,
-@as("bgpStatus") bgpStatus: bGPStatus,
-@as("bgpPeerState") bgpPeerState: bGPPeerState,
-@as("customerAddress") customerAddress: customerAddress,
-@as("amazonAddress") amazonAddress: amazonAddress,
-@as("addressFamily") addressFamily: addressFamily,
-@as("authKey") authKey: bGPAuthKey,
-@as("asn") asn: aSN,
-@as("bgpPeerId") bgpPeerId: bGPPeerId
+type bgppeerIdList = array<bgppeerId>
+type bgppeer = {
+awsDeviceV2: option<awsDeviceV2>,
+bgpStatus: option<bgpstatus>,
+bgpPeerState: option<bgppeerState>,
+customerAddress: option<customerAddress>,
+amazonAddress: option<amazonAddress>,
+addressFamily: option<addressFamily>,
+authKey: option<bgpauthKey>,
+asn: option<asn>,
+bgpPeerId: option<bgppeerId>
 }
 type availablePortSpeeds = array<portSpeed>
 type availableMacSecPortSpeeds = array<portSpeed>
 type associatedGateway = {
-@as("region") region: region,
-@as("ownerAccount") ownerAccount: ownerAccount,
-@as("type") type_: gatewayType,
-@as("id") id: gatewayIdentifier
+region: option<region>,
+ownerAccount: option<ownerAccount>,
+@as("type") type_: option<gatewayType>,
+id: option<gatewayIdentifier>
 }
 type virtualInterfaceTestHistory = {
-@as("endTime") endTime: endTime,
-@as("startTime") startTime: startTime,
-@as("testDurationInMinutes") testDurationInMinutes: testDuration,
-@as("ownerAccount") ownerAccount: ownerAccount,
-@as("status") status: failureTestHistoryStatus,
-@as("bgpPeers") bgpPeers: bGPPeerIdList,
-@as("virtualInterfaceId") virtualInterfaceId: virtualInterfaceId,
-@as("testId") testId: testId
+endTime: option<endTime>,
+startTime: option<startTime>,
+testDurationInMinutes: option<testDuration>,
+ownerAccount: option<ownerAccount>,
+status: option<failureTestHistoryStatus>,
+bgpPeers: option<bgppeerIdList>,
+virtualInterfaceId: option<virtualInterfaceId>,
+testId: option<testId>
 }
 type virtualGatewayList = array<virtualGateway>
-type tagList = array<tag>
+type tagList_ = array<tag>
 type routeFilterPrefixList = array<routeFilterPrefix>
 type macSecKeyList = array<macSecKey>
 type location = {
-@as("availableMacSecPortSpeeds") availableMacSecPortSpeeds: availableMacSecPortSpeeds,
-@as("availableProviders") availableProviders: providerList,
-@as("availablePortSpeeds") availablePortSpeeds: availablePortSpeeds,
-@as("region") region: region,
-@as("locationName") locationName: locationName,
-@as("locationCode") locationCode: locationCode
+availableMacSecPortSpeeds: option<availableMacSecPortSpeeds>,
+availableProviders: option<providerList>,
+availablePortSpeeds: option<availablePortSpeeds>,
+region: option<region>,
+locationName: option<locationName>,
+locationCode: option<locationCode>
 }
 type directConnectGatewayList = array<directConnectGateway>
 type directConnectGatewayAttachmentList = array<directConnectGatewayAttachment>
-type bGPPeerList = array<bGPPeer>
+type bgppeerList = array<bgppeer>
 type virtualInterfaceTestHistoryList = array<virtualInterfaceTestHistory>
 type virtualInterface = {
-@as("tags") tags: tagList,
-@as("awsDeviceV2") awsDeviceV2: awsDeviceV2,
-@as("region") region: region,
-@as("bgpPeers") bgpPeers: bGPPeerList,
-@as("routeFilterPrefixes") routeFilterPrefixes: routeFilterPrefixList,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId,
-@as("virtualGatewayId") virtualGatewayId: virtualGatewayId,
-@as("jumboFrameCapable") jumboFrameCapable: jumboFrameCapable,
-@as("mtu") mtu: mTU,
-@as("customerRouterConfig") customerRouterConfig: routerConfig,
-@as("virtualInterfaceState") virtualInterfaceState: virtualInterfaceState,
-@as("addressFamily") addressFamily: addressFamily,
-@as("customerAddress") customerAddress: customerAddress,
-@as("amazonAddress") amazonAddress: amazonAddress,
-@as("authKey") authKey: bGPAuthKey,
-@as("amazonSideAsn") amazonSideAsn: longAsn,
-@as("asn") asn: aSN,
-@as("vlan") vlan: vLAN,
-@as("virtualInterfaceName") virtualInterfaceName: virtualInterfaceName,
-@as("virtualInterfaceType") virtualInterfaceType: virtualInterfaceType,
-@as("connectionId") connectionId: connectionId,
-@as("location") location: locationCode,
-@as("virtualInterfaceId") virtualInterfaceId: virtualInterfaceId,
-@as("ownerAccount") ownerAccount: ownerAccount
+tags: option<tagList_>,
+awsDeviceV2: option<awsDeviceV2>,
+region: option<region>,
+bgpPeers: option<bgppeerList>,
+routeFilterPrefixes: option<routeFilterPrefixList>,
+directConnectGatewayId: option<directConnectGatewayId>,
+virtualGatewayId: option<virtualGatewayId>,
+jumboFrameCapable: option<jumboFrameCapable>,
+mtu: option<mtu>,
+customerRouterConfig: option<routerConfig>,
+virtualInterfaceState: option<virtualInterfaceState>,
+addressFamily: option<addressFamily>,
+customerAddress: option<customerAddress>,
+amazonAddress: option<amazonAddress>,
+authKey: option<bgpauthKey>,
+amazonSideAsn: option<longAsn>,
+asn: option<asn>,
+vlan: option<vlan>,
+virtualInterfaceName: option<virtualInterfaceName>,
+virtualInterfaceType: option<virtualInterfaceType>,
+connectionId: option<connectionId>,
+location: option<locationCode>,
+virtualInterfaceId: option<virtualInterfaceId>,
+ownerAccount: option<ownerAccount>
 }
 type resourceTag = {
-@as("tags") tags: tagList,
-@as("resourceArn") resourceArn: resourceArn
+tags: option<tagList_>,
+resourceArn: option<resourceArn>
 }
 type newTransitVirtualInterfaceAllocation = {
-@as("tags") tags: tagList,
-@as("addressFamily") addressFamily: addressFamily,
-@as("customerAddress") customerAddress: customerAddress,
-@as("amazonAddress") amazonAddress: amazonAddress,
-@as("authKey") authKey: bGPAuthKey,
-@as("mtu") mtu: mTU,
-@as("asn") asn: aSN,
-@as("vlan") vlan: vLAN,
-@as("virtualInterfaceName") virtualInterfaceName: virtualInterfaceName
+tags: option<tagList_>,
+addressFamily: option<addressFamily>,
+customerAddress: option<customerAddress>,
+amazonAddress: option<amazonAddress>,
+authKey: option<bgpauthKey>,
+mtu: option<mtu>,
+asn: option<asn>,
+vlan: option<vlan>,
+virtualInterfaceName: option<virtualInterfaceName>
 }
 type newTransitVirtualInterface = {
-@as("tags") tags: tagList,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId,
-@as("addressFamily") addressFamily: addressFamily,
-@as("customerAddress") customerAddress: customerAddress,
-@as("amazonAddress") amazonAddress: amazonAddress,
-@as("authKey") authKey: bGPAuthKey,
-@as("mtu") mtu: mTU,
-@as("asn") asn: aSN,
-@as("vlan") vlan: vLAN,
-@as("virtualInterfaceName") virtualInterfaceName: virtualInterfaceName
+tags: option<tagList_>,
+directConnectGatewayId: option<directConnectGatewayId>,
+addressFamily: option<addressFamily>,
+customerAddress: option<customerAddress>,
+amazonAddress: option<amazonAddress>,
+authKey: option<bgpauthKey>,
+mtu: option<mtu>,
+asn: option<asn>,
+vlan: option<vlan>,
+virtualInterfaceName: option<virtualInterfaceName>
 }
 type newPublicVirtualInterfaceAllocation = {
-@as("tags") tags: tagList,
-@as("routeFilterPrefixes") routeFilterPrefixes: routeFilterPrefixList,
-@as("addressFamily") addressFamily: addressFamily,
-@as("customerAddress") customerAddress: customerAddress,
-@as("amazonAddress") amazonAddress: amazonAddress,
-@as("authKey") authKey: bGPAuthKey,
-@as("asn") asn: option<aSN>,
-@as("vlan") vlan: option<vLAN>,
-@as("virtualInterfaceName") virtualInterfaceName: option<virtualInterfaceName>
+tags: option<tagList_>,
+routeFilterPrefixes: option<routeFilterPrefixList>,
+addressFamily: option<addressFamily>,
+customerAddress: option<customerAddress>,
+amazonAddress: option<amazonAddress>,
+authKey: option<bgpauthKey>,
+asn: asn,
+vlan: vlan,
+virtualInterfaceName: virtualInterfaceName
 }
 type newPublicVirtualInterface = {
-@as("tags") tags: tagList,
-@as("routeFilterPrefixes") routeFilterPrefixes: routeFilterPrefixList,
-@as("addressFamily") addressFamily: addressFamily,
-@as("customerAddress") customerAddress: customerAddress,
-@as("amazonAddress") amazonAddress: amazonAddress,
-@as("authKey") authKey: bGPAuthKey,
-@as("asn") asn: option<aSN>,
-@as("vlan") vlan: option<vLAN>,
-@as("virtualInterfaceName") virtualInterfaceName: option<virtualInterfaceName>
+tags: option<tagList_>,
+routeFilterPrefixes: option<routeFilterPrefixList>,
+addressFamily: option<addressFamily>,
+customerAddress: option<customerAddress>,
+amazonAddress: option<amazonAddress>,
+authKey: option<bgpauthKey>,
+asn: asn,
+vlan: vlan,
+virtualInterfaceName: virtualInterfaceName
 }
 type newPrivateVirtualInterfaceAllocation = {
-@as("tags") tags: tagList,
-@as("customerAddress") customerAddress: customerAddress,
-@as("addressFamily") addressFamily: addressFamily,
-@as("amazonAddress") amazonAddress: amazonAddress,
-@as("authKey") authKey: bGPAuthKey,
-@as("mtu") mtu: mTU,
-@as("asn") asn: option<aSN>,
-@as("vlan") vlan: option<vLAN>,
-@as("virtualInterfaceName") virtualInterfaceName: option<virtualInterfaceName>
+tags: option<tagList_>,
+customerAddress: option<customerAddress>,
+addressFamily: option<addressFamily>,
+amazonAddress: option<amazonAddress>,
+authKey: option<bgpauthKey>,
+mtu: option<mtu>,
+asn: asn,
+vlan: vlan,
+virtualInterfaceName: virtualInterfaceName
 }
 type newPrivateVirtualInterface = {
-@as("tags") tags: tagList,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId,
-@as("virtualGatewayId") virtualGatewayId: virtualGatewayId,
-@as("addressFamily") addressFamily: addressFamily,
-@as("customerAddress") customerAddress: customerAddress,
-@as("amazonAddress") amazonAddress: amazonAddress,
-@as("authKey") authKey: bGPAuthKey,
-@as("mtu") mtu: mTU,
-@as("asn") asn: option<aSN>,
-@as("vlan") vlan: option<vLAN>,
-@as("virtualInterfaceName") virtualInterfaceName: option<virtualInterfaceName>
+tags: option<tagList_>,
+directConnectGatewayId: option<directConnectGatewayId>,
+virtualGatewayId: option<virtualGatewayId>,
+addressFamily: option<addressFamily>,
+customerAddress: option<customerAddress>,
+amazonAddress: option<amazonAddress>,
+authKey: option<bgpauthKey>,
+mtu: option<mtu>,
+asn: asn,
+vlan: vlan,
+virtualInterfaceName: virtualInterfaceName
 }
 type locationList = array<location>
 type interconnect = {
-@as("providerName") providerName: providerName,
-@as("tags") tags: tagList,
-@as("hasLogicalRedundancy") hasLogicalRedundancy: hasLogicalRedundancy,
-@as("awsDeviceV2") awsDeviceV2: awsDeviceV2,
-@as("jumboFrameCapable") jumboFrameCapable: jumboFrameCapable,
-@as("awsDevice") awsDevice: awsDevice,
-@as("lagId") lagId: lagId,
-@as("loaIssueTime") loaIssueTime: loaIssueTime,
-@as("bandwidth") bandwidth: bandwidth,
-@as("location") location: locationCode,
-@as("region") region: region,
-@as("interconnectState") interconnectState: interconnectState,
-@as("interconnectName") interconnectName: interconnectName,
-@as("interconnectId") interconnectId: interconnectId
+providerName: option<providerName>,
+tags: option<tagList_>,
+hasLogicalRedundancy: option<hasLogicalRedundancy>,
+awsDeviceV2: option<awsDeviceV2>,
+jumboFrameCapable: option<jumboFrameCapable>,
+awsDevice: option<awsDevice>,
+lagId: option<lagId>,
+loaIssueTime: option<loaIssueTime>,
+bandwidth: option<bandwidth>,
+location: option<locationCode>,
+region: option<region>,
+interconnectState: option<interconnectState>,
+interconnectName: option<interconnectName>,
+interconnectId: option<interconnectId>
 }
 type directConnectGatewayAssociationProposal = {
-@as("requestedAllowedPrefixesToDirectConnectGateway") requestedAllowedPrefixesToDirectConnectGateway: routeFilterPrefixList,
-@as("existingAllowedPrefixesToDirectConnectGateway") existingAllowedPrefixesToDirectConnectGateway: routeFilterPrefixList,
-@as("associatedGateway") associatedGateway: associatedGateway,
-@as("proposalState") proposalState: directConnectGatewayAssociationProposalState,
-@as("directConnectGatewayOwnerAccount") directConnectGatewayOwnerAccount: ownerAccount,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId,
-@as("proposalId") proposalId: directConnectGatewayAssociationProposalId
+requestedAllowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
+existingAllowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
+associatedGateway: option<associatedGateway>,
+proposalState: option<directConnectGatewayAssociationProposalState>,
+directConnectGatewayOwnerAccount: option<ownerAccount>,
+directConnectGatewayId: option<directConnectGatewayId>,
+proposalId: option<directConnectGatewayAssociationProposalId>
 }
 type directConnectGatewayAssociation = {
-@as("virtualGatewayOwnerAccount") virtualGatewayOwnerAccount: ownerAccount,
-@as("virtualGatewayRegion") virtualGatewayRegion: virtualGatewayRegion,
-@as("virtualGatewayId") virtualGatewayId: virtualGatewayId,
-@as("allowedPrefixesToDirectConnectGateway") allowedPrefixesToDirectConnectGateway: routeFilterPrefixList,
-@as("associationId") associationId: directConnectGatewayAssociationId,
-@as("associatedGateway") associatedGateway: associatedGateway,
-@as("stateChangeError") stateChangeError: stateChangeError,
-@as("associationState") associationState: directConnectGatewayAssociationState,
-@as("directConnectGatewayOwnerAccount") directConnectGatewayOwnerAccount: ownerAccount,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId
+virtualGatewayOwnerAccount: option<ownerAccount>,
+virtualGatewayRegion: option<virtualGatewayRegion>,
+virtualGatewayId: option<virtualGatewayId>,
+allowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
+associationId: option<directConnectGatewayAssociationId>,
+associatedGateway: option<associatedGateway>,
+stateChangeError: option<stateChangeError>,
+associationState: option<directConnectGatewayAssociationState>,
+directConnectGatewayOwnerAccount: option<ownerAccount>,
+directConnectGatewayId: option<directConnectGatewayId>
 }
 type connection = {
-@as("macSecKeys") macSecKeys: macSecKeyList,
-@as("encryptionMode") encryptionMode: encryptionMode,
-@as("portEncryptionStatus") portEncryptionStatus: portEncryptionStatus,
-@as("macSecCapable") macSecCapable: macSecCapable,
-@as("providerName") providerName: providerName,
-@as("tags") tags: tagList,
-@as("hasLogicalRedundancy") hasLogicalRedundancy: hasLogicalRedundancy,
-@as("awsDeviceV2") awsDeviceV2: awsDeviceV2,
-@as("jumboFrameCapable") jumboFrameCapable: jumboFrameCapable,
-@as("awsDevice") awsDevice: awsDevice,
-@as("lagId") lagId: lagId,
-@as("loaIssueTime") loaIssueTime: loaIssueTime,
-@as("partnerName") partnerName: partnerName,
-@as("vlan") vlan: vLAN,
-@as("bandwidth") bandwidth: bandwidth,
-@as("location") location: locationCode,
-@as("region") region: region,
-@as("connectionState") connectionState: connectionState,
-@as("connectionName") connectionName: connectionName,
-@as("connectionId") connectionId: connectionId,
-@as("ownerAccount") ownerAccount: ownerAccount
+macSecKeys: option<macSecKeyList>,
+encryptionMode: option<encryptionMode>,
+portEncryptionStatus: option<portEncryptionStatus>,
+macSecCapable: option<macSecCapable>,
+providerName: option<providerName>,
+tags: option<tagList_>,
+hasLogicalRedundancy: option<hasLogicalRedundancy>,
+awsDeviceV2: option<awsDeviceV2>,
+jumboFrameCapable: option<jumboFrameCapable>,
+awsDevice: option<awsDevice>,
+lagId: option<lagId>,
+loaIssueTime: option<loaIssueTime>,
+partnerName: option<partnerName>,
+vlan: option<vlan>,
+bandwidth: option<bandwidth>,
+location: option<locationCode>,
+region: option<region>,
+connectionState: option<connectionState>,
+connectionName: option<connectionName>,
+connectionId: option<connectionId>,
+ownerAccount: option<ownerAccount>
 }
 type virtualInterfaceList = array<virtualInterface>
 type resourceTagList = array<resourceTag>
@@ -345,798 +353,798 @@ type directConnectGatewayAssociationProposalList = array<directConnectGatewayAss
 type directConnectGatewayAssociationList = array<directConnectGatewayAssociation>
 type connectionList = array<connection>
 type lag = {
-@as("macSecKeys") macSecKeys: macSecKeyList,
-@as("encryptionMode") encryptionMode: encryptionMode,
-@as("macSecCapable") macSecCapable: macSecCapable,
-@as("providerName") providerName: providerName,
-@as("tags") tags: tagList,
-@as("hasLogicalRedundancy") hasLogicalRedundancy: hasLogicalRedundancy,
-@as("jumboFrameCapable") jumboFrameCapable: jumboFrameCapable,
-@as("allowsHostedConnections") allowsHostedConnections: booleanFlag,
-@as("connections") connections: connectionList,
-@as("awsDeviceV2") awsDeviceV2: awsDeviceV2,
-@as("awsDevice") awsDevice: awsDevice,
-@as("minimumLinks") minimumLinks: count,
-@as("region") region: region,
-@as("location") location: locationCode,
-@as("lagState") lagState: lagState,
-@as("lagName") lagName: lagName,
-@as("ownerAccount") ownerAccount: ownerAccount,
-@as("lagId") lagId: lagId,
-@as("numberOfConnections") numberOfConnections: count,
-@as("connectionsBandwidth") connectionsBandwidth: bandwidth
+macSecKeys: option<macSecKeyList>,
+encryptionMode: option<encryptionMode>,
+macSecCapable: option<macSecCapable>,
+providerName: option<providerName>,
+tags: option<tagList_>,
+hasLogicalRedundancy: option<hasLogicalRedundancy>,
+jumboFrameCapable: option<jumboFrameCapable>,
+allowsHostedConnections: option<booleanFlag>,
+connections: option<connectionList>,
+awsDeviceV2: option<awsDeviceV2>,
+awsDevice: option<awsDevice>,
+minimumLinks: option<count>,
+region: option<region>,
+location: option<locationCode>,
+lagState: option<lagState>,
+lagName: option<lagName>,
+ownerAccount: option<ownerAccount>,
+lagId: option<lagId>,
+numberOfConnections: option<count>,
+connectionsBandwidth: option<bandwidth>
 }
 type lagList = array<lag>
-type clientType;
-@module("@aws-sdk/client-directconnect") @new external createClient: unit => clientType = "DirectConnectClient";
+type awsServiceClient;
+@module("@aws-sdk/client-directconnect") @new external createClient: unit => awsServiceClient = "DirectConnectClient";
 module DescribeLoa = {
   type t;
   type request = {
-@as("loaContentType") loaContentType: loaContentType,
-@as("providerName") providerName: providerName,
-@as("connectionId") connectionId: option<connectionId>
+loaContentType: option<loaContentType>,
+providerName: option<providerName>,
+connectionId: connectionId
 }
   type response = loa;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeLoaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteVirtualInterface = {
   type t;
   type request = {
-@as("virtualInterfaceId") virtualInterfaceId: option<virtualInterfaceId>
+virtualInterfaceId: virtualInterfaceId
 }
   type response = {
-@as("virtualInterfaceState") virtualInterfaceState: virtualInterfaceState
+virtualInterfaceState: option<virtualInterfaceState>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DeleteVirtualInterfaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteInterconnect = {
   type t;
   type request = {
-@as("interconnectId") interconnectId: option<interconnectId>
+interconnectId: interconnectId
 }
   type response = {
-@as("interconnectState") interconnectState: interconnectState
+interconnectState: option<interconnectState>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DeleteInterconnectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ConfirmTransitVirtualInterface = {
   type t;
   type request = {
-@as("directConnectGatewayId") directConnectGatewayId: option<directConnectGatewayId>,
-@as("virtualInterfaceId") virtualInterfaceId: option<virtualInterfaceId>
+directConnectGatewayId: directConnectGatewayId,
+virtualInterfaceId: virtualInterfaceId
 }
   type response = {
-@as("virtualInterfaceState") virtualInterfaceState: virtualInterfaceState
+virtualInterfaceState: option<virtualInterfaceState>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "ConfirmTransitVirtualInterfaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ConfirmPublicVirtualInterface = {
   type t;
   type request = {
-@as("virtualInterfaceId") virtualInterfaceId: option<virtualInterfaceId>
+virtualInterfaceId: virtualInterfaceId
 }
   type response = {
-@as("virtualInterfaceState") virtualInterfaceState: virtualInterfaceState
+virtualInterfaceState: option<virtualInterfaceState>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "ConfirmPublicVirtualInterfaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ConfirmPrivateVirtualInterface = {
   type t;
   type request = {
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId,
-@as("virtualGatewayId") virtualGatewayId: virtualGatewayId,
-@as("virtualInterfaceId") virtualInterfaceId: option<virtualInterfaceId>
+directConnectGatewayId: option<directConnectGatewayId>,
+virtualGatewayId: option<virtualGatewayId>,
+virtualInterfaceId: virtualInterfaceId
 }
   type response = {
-@as("virtualInterfaceState") virtualInterfaceState: virtualInterfaceState
+virtualInterfaceState: option<virtualInterfaceState>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "ConfirmPrivateVirtualInterfaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ConfirmConnection = {
   type t;
   type request = {
-@as("connectionId") connectionId: option<connectionId>
+connectionId: connectionId
 }
   type response = {
-@as("connectionState") connectionState: connectionState
+connectionState: option<connectionState>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "ConfirmConnectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<resourceArn>
+tagKeys: tagKeyList,
+resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeInterconnectLoa = {
   type t;
   type request = {
-@as("loaContentType") loaContentType: loaContentType,
-@as("providerName") providerName: providerName,
-@as("interconnectId") interconnectId: option<interconnectId>
+loaContentType: option<loaContentType>,
+providerName: option<providerName>,
+interconnectId: interconnectId
 }
   type response = {
-@as("loa") loa: loa
+loa: option<loa>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeInterconnectLoaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConnectionLoa = {
   type t;
   type request = {
-@as("loaContentType") loaContentType: loaContentType,
-@as("providerName") providerName: providerName,
-@as("connectionId") connectionId: option<connectionId>
+loaContentType: option<loaContentType>,
+providerName: option<providerName>,
+connectionId: connectionId
 }
   type response = {
-@as("loa") loa: loa
+loa: option<loa>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeConnectionLoaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDirectConnectGateway = {
   type t;
   type request = {
-@as("directConnectGatewayId") directConnectGatewayId: option<directConnectGatewayId>
+directConnectGatewayId: directConnectGatewayId
 }
   type response = {
-@as("directConnectGateway") directConnectGateway: directConnectGateway
+directConnectGateway: option<directConnectGateway>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DeleteDirectConnectGatewayCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDirectConnectGateway = {
   type t;
   type request = {
-@as("amazonSideAsn") amazonSideAsn: longAsn,
-@as("directConnectGatewayName") directConnectGatewayName: option<directConnectGatewayName>
+amazonSideAsn: option<longAsn>,
+directConnectGatewayName: directConnectGatewayName
 }
   type response = {
-@as("directConnectGateway") directConnectGateway: directConnectGateway
+directConnectGateway: option<directConnectGateway>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "CreateDirectConnectGatewayCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateVirtualInterfaceAttributes = {
   type t;
   type request = {
-@as("mtu") mtu: mTU,
-@as("virtualInterfaceId") virtualInterfaceId: option<virtualInterfaceId>
+mtu: option<mtu>,
+virtualInterfaceId: virtualInterfaceId
 }
   type response = virtualInterface;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "UpdateVirtualInterfaceAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateConnection = {
   type t;
   type request = {
-@as("encryptionMode") encryptionMode: encryptionMode,
-@as("connectionName") connectionName: connectionName,
-@as("connectionId") connectionId: option<connectionId>
+encryptionMode: option<encryptionMode>,
+connectionName: option<connectionName>,
+connectionId: connectionId
 }
   type response = connection;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "UpdateConnectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagList>,
-@as("resourceArn") resourceArn: option<resourceArn>
+tags: tagList_,
+resourceArn: resourceArn
 }
   type response = unit
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StopBgpFailoverTest = {
   type t;
   type request = {
-@as("virtualInterfaceId") virtualInterfaceId: option<virtualInterfaceId>
+virtualInterfaceId: virtualInterfaceId
 }
   type response = {
-@as("virtualInterfaceTest") virtualInterfaceTest: virtualInterfaceTestHistory
+virtualInterfaceTest: option<virtualInterfaceTestHistory>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "StopBgpFailoverTestCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartBgpFailoverTest = {
   type t;
   type request = {
-@as("testDurationInMinutes") testDurationInMinutes: testDuration,
-@as("bgpPeers") bgpPeers: bGPPeerIdList,
-@as("virtualInterfaceId") virtualInterfaceId: option<virtualInterfaceId>
+testDurationInMinutes: option<testDuration>,
+bgpPeers: option<bgppeerIdList>,
+virtualInterfaceId: virtualInterfaceId
 }
   type response = {
-@as("virtualInterfaceTest") virtualInterfaceTest: virtualInterfaceTestHistory
+virtualInterfaceTest: option<virtualInterfaceTestHistory>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "StartBgpFailoverTestCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateMacSecKey = {
   type t;
   type request = {
-@as("secretARN") secretARN: option<secretARN>,
-@as("connectionId") connectionId: option<connectionId>
+secretARN: secretARN,
+connectionId: connectionId
 }
   type response = {
-@as("macSecKeys") macSecKeys: macSecKeyList,
-@as("connectionId") connectionId: connectionId
+macSecKeys: option<macSecKeyList>,
+connectionId: option<connectionId>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DisassociateMacSecKeyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateConnectionFromLag = {
   type t;
   type request = {
-@as("lagId") lagId: option<lagId>,
-@as("connectionId") connectionId: option<connectionId>
+lagId: lagId,
+connectionId: connectionId
 }
   type response = connection;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DisassociateConnectionFromLagCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeVirtualGateways = {
   type t;
   
   type response = {
-@as("virtualGateways") virtualGateways: virtualGatewayList
+virtualGateways: option<virtualGatewayList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (unit) => t = "DescribeVirtualGatewaysCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDirectConnectGateways = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: maxResultSetSize,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId
+nextToken: option<paginationToken>,
+maxResults: option<maxResultSetSize>,
+directConnectGatewayId: option<directConnectGatewayId>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("directConnectGateways") directConnectGateways: directConnectGatewayList
+nextToken: option<paginationToken>,
+directConnectGateways: option<directConnectGatewayList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeDirectConnectGatewaysCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDirectConnectGatewayAttachments = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: maxResultSetSize,
-@as("virtualInterfaceId") virtualInterfaceId: virtualInterfaceId,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId
+nextToken: option<paginationToken>,
+maxResults: option<maxResultSetSize>,
+virtualInterfaceId: option<virtualInterfaceId>,
+directConnectGatewayId: option<directConnectGatewayId>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("directConnectGatewayAttachments") directConnectGatewayAttachments: directConnectGatewayAttachmentList
+nextToken: option<paginationToken>,
+directConnectGatewayAttachments: option<directConnectGatewayAttachmentList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeDirectConnectGatewayAttachmentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteConnection = {
   type t;
   type request = {
-@as("connectionId") connectionId: option<connectionId>
+connectionId: connectionId
 }
   type response = connection;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DeleteConnectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateInterconnect = {
   type t;
   type request = {
-@as("providerName") providerName: providerName,
-@as("tags") tags: tagList,
-@as("lagId") lagId: lagId,
-@as("location") location: option<locationCode>,
-@as("bandwidth") bandwidth: option<bandwidth>,
-@as("interconnectName") interconnectName: option<interconnectName>
+providerName: option<providerName>,
+tags: option<tagList_>,
+lagId: option<lagId>,
+location: locationCode,
+bandwidth: bandwidth,
+interconnectName: interconnectName
 }
   type response = interconnect;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "CreateInterconnectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateConnection = {
   type t;
   type request = {
-@as("requestMACSec") requestMACSec: requestMACSec,
-@as("providerName") providerName: providerName,
-@as("tags") tags: tagList,
-@as("lagId") lagId: lagId,
-@as("connectionName") connectionName: option<connectionName>,
-@as("bandwidth") bandwidth: option<bandwidth>,
-@as("location") location: option<locationCode>
+requestMACSec: option<requestMACSec>,
+providerName: option<providerName>,
+tags: option<tagList_>,
+lagId: option<lagId>,
+connectionName: connectionName,
+bandwidth: bandwidth,
+location: locationCode
 }
   type response = connection;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "CreateConnectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateVirtualInterface = {
   type t;
   type request = {
-@as("connectionId") connectionId: option<connectionId>,
-@as("virtualInterfaceId") virtualInterfaceId: option<virtualInterfaceId>
+connectionId: connectionId,
+virtualInterfaceId: virtualInterfaceId
 }
   type response = virtualInterface;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "AssociateVirtualInterfaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateMacSecKey = {
   type t;
   type request = {
-@as("cak") cak: cak,
-@as("ckn") ckn: ckn,
-@as("secretARN") secretARN: secretARN,
-@as("connectionId") connectionId: option<connectionId>
+cak: option<cak>,
+ckn: option<ckn>,
+secretARN: option<secretARN>,
+connectionId: connectionId
 }
   type response = {
-@as("macSecKeys") macSecKeys: macSecKeyList,
-@as("connectionId") connectionId: connectionId
+macSecKeys: option<macSecKeyList>,
+connectionId: option<connectionId>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "AssociateMacSecKeyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateHostedConnection = {
   type t;
   type request = {
-@as("parentConnectionId") parentConnectionId: option<connectionId>,
-@as("connectionId") connectionId: option<connectionId>
+parentConnectionId: connectionId,
+connectionId: connectionId
 }
   type response = connection;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "AssociateHostedConnectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateConnectionWithLag = {
   type t;
   type request = {
-@as("lagId") lagId: option<lagId>,
-@as("connectionId") connectionId: option<connectionId>
+lagId: lagId,
+connectionId: connectionId
 }
   type response = connection;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "AssociateConnectionWithLagCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AllocateHostedConnection = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("vlan") vlan: option<vLAN>,
-@as("connectionName") connectionName: option<connectionName>,
-@as("bandwidth") bandwidth: option<bandwidth>,
-@as("ownerAccount") ownerAccount: option<ownerAccount>,
-@as("connectionId") connectionId: option<connectionId>
+tags: option<tagList_>,
+vlan: vlan,
+connectionName: connectionName,
+bandwidth: bandwidth,
+ownerAccount: ownerAccount,
+connectionId: connectionId
 }
   type response = connection;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "AllocateHostedConnectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AllocateConnectionOnInterconnect = {
   type t;
   type request = {
-@as("vlan") vlan: option<vLAN>,
-@as("interconnectId") interconnectId: option<interconnectId>,
-@as("ownerAccount") ownerAccount: option<ownerAccount>,
-@as("connectionName") connectionName: option<connectionName>,
-@as("bandwidth") bandwidth: option<bandwidth>
+vlan: vlan,
+interconnectId: interconnectId,
+ownerAccount: ownerAccount,
+connectionName: connectionName,
+bandwidth: bandwidth
 }
   type response = connection;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "AllocateConnectionOnInterconnectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateDirectConnectGatewayAssociation = {
   type t;
   type request = {
-@as("removeAllowedPrefixesToDirectConnectGateway") removeAllowedPrefixesToDirectConnectGateway: routeFilterPrefixList,
-@as("addAllowedPrefixesToDirectConnectGateway") addAllowedPrefixesToDirectConnectGateway: routeFilterPrefixList,
-@as("associationId") associationId: directConnectGatewayAssociationId
+removeAllowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
+addAllowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
+associationId: option<directConnectGatewayAssociationId>
 }
   type response = {
-@as("directConnectGatewayAssociation") directConnectGatewayAssociation: directConnectGatewayAssociation
+directConnectGatewayAssociation: option<directConnectGatewayAssociation>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "UpdateDirectConnectGatewayAssociationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListVirtualInterfaceTestHistory = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: maxResultSetSize,
-@as("status") status: failureTestHistoryStatus,
-@as("bgpPeers") bgpPeers: bGPPeerIdList,
-@as("virtualInterfaceId") virtualInterfaceId: virtualInterfaceId,
-@as("testId") testId: testId
+nextToken: option<paginationToken>,
+maxResults: option<maxResultSetSize>,
+status: option<failureTestHistoryStatus>,
+bgpPeers: option<bgppeerIdList>,
+virtualInterfaceId: option<virtualInterfaceId>,
+testId: option<testId>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("virtualInterfaceTestHistory") virtualInterfaceTestHistory: virtualInterfaceTestHistoryList
+nextToken: option<paginationToken>,
+virtualInterfaceTestHistory: option<virtualInterfaceTestHistoryList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "ListVirtualInterfaceTestHistoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLocations = {
   type t;
   
   type response = {
-@as("locations") locations: locationList
+locations: option<locationList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (unit) => t = "DescribeLocationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDirectConnectGatewayAssociationProposal = {
   type t;
   type request = {
-@as("proposalId") proposalId: option<directConnectGatewayAssociationProposalId>
+proposalId: directConnectGatewayAssociationProposalId
 }
   type response = {
-@as("directConnectGatewayAssociationProposal") directConnectGatewayAssociationProposal: directConnectGatewayAssociationProposal
+directConnectGatewayAssociationProposal: option<directConnectGatewayAssociationProposal>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DeleteDirectConnectGatewayAssociationProposalCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDirectConnectGatewayAssociation = {
   type t;
   type request = {
-@as("virtualGatewayId") virtualGatewayId: virtualGatewayId,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId,
-@as("associationId") associationId: directConnectGatewayAssociationId
+virtualGatewayId: option<virtualGatewayId>,
+directConnectGatewayId: option<directConnectGatewayId>,
+associationId: option<directConnectGatewayAssociationId>
 }
   type response = {
-@as("directConnectGatewayAssociation") directConnectGatewayAssociation: directConnectGatewayAssociation
+directConnectGatewayAssociation: option<directConnectGatewayAssociation>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DeleteDirectConnectGatewayAssociationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteBGPPeer = {
   type t;
   type request = {
-@as("bgpPeerId") bgpPeerId: bGPPeerId,
-@as("customerAddress") customerAddress: customerAddress,
-@as("asn") asn: aSN,
-@as("virtualInterfaceId") virtualInterfaceId: virtualInterfaceId
+bgpPeerId: option<bgppeerId>,
+customerAddress: option<customerAddress>,
+asn: option<asn>,
+virtualInterfaceId: option<virtualInterfaceId>
 }
   type response = {
-@as("virtualInterface") virtualInterface: virtualInterface
+virtualInterface: option<virtualInterface>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DeleteBGPPeerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateTransitVirtualInterface = {
   type t;
   type request = {
-@as("newTransitVirtualInterface") newTransitVirtualInterface: option<newTransitVirtualInterface>,
-@as("connectionId") connectionId: option<connectionId>
+newTransitVirtualInterface: newTransitVirtualInterface,
+connectionId: connectionId
 }
   type response = {
-@as("virtualInterface") virtualInterface: virtualInterface
+virtualInterface: option<virtualInterface>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "CreateTransitVirtualInterfaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreatePublicVirtualInterface = {
   type t;
   type request = {
-@as("newPublicVirtualInterface") newPublicVirtualInterface: option<newPublicVirtualInterface>,
-@as("connectionId") connectionId: option<connectionId>
+newPublicVirtualInterface: newPublicVirtualInterface,
+connectionId: connectionId
 }
   type response = virtualInterface;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "CreatePublicVirtualInterfaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreatePrivateVirtualInterface = {
   type t;
   type request = {
-@as("newPrivateVirtualInterface") newPrivateVirtualInterface: option<newPrivateVirtualInterface>,
-@as("connectionId") connectionId: option<connectionId>
+newPrivateVirtualInterface: newPrivateVirtualInterface,
+connectionId: connectionId
 }
   type response = virtualInterface;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "CreatePrivateVirtualInterfaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDirectConnectGatewayAssociationProposal = {
   type t;
   type request = {
-@as("removeAllowedPrefixesToDirectConnectGateway") removeAllowedPrefixesToDirectConnectGateway: routeFilterPrefixList,
-@as("addAllowedPrefixesToDirectConnectGateway") addAllowedPrefixesToDirectConnectGateway: routeFilterPrefixList,
-@as("gatewayId") gatewayId: option<gatewayIdToAssociate>,
-@as("directConnectGatewayOwnerAccount") directConnectGatewayOwnerAccount: option<ownerAccount>,
-@as("directConnectGatewayId") directConnectGatewayId: option<directConnectGatewayId>
+removeAllowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
+addAllowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
+gatewayId: gatewayIdToAssociate,
+directConnectGatewayOwnerAccount: ownerAccount,
+directConnectGatewayId: directConnectGatewayId
 }
   type response = {
-@as("directConnectGatewayAssociationProposal") directConnectGatewayAssociationProposal: directConnectGatewayAssociationProposal
+directConnectGatewayAssociationProposal: option<directConnectGatewayAssociationProposal>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "CreateDirectConnectGatewayAssociationProposalCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDirectConnectGatewayAssociation = {
   type t;
   type request = {
-@as("virtualGatewayId") virtualGatewayId: virtualGatewayId,
-@as("addAllowedPrefixesToDirectConnectGateway") addAllowedPrefixesToDirectConnectGateway: routeFilterPrefixList,
-@as("gatewayId") gatewayId: gatewayIdToAssociate,
-@as("directConnectGatewayId") directConnectGatewayId: option<directConnectGatewayId>
+virtualGatewayId: option<virtualGatewayId>,
+addAllowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
+gatewayId: option<gatewayIdToAssociate>,
+directConnectGatewayId: directConnectGatewayId
 }
   type response = {
-@as("directConnectGatewayAssociation") directConnectGatewayAssociation: directConnectGatewayAssociation
+directConnectGatewayAssociation: option<directConnectGatewayAssociation>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "CreateDirectConnectGatewayAssociationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBGPPeer = {
   type t;
   type request = {
-@as("newBGPPeer") newBGPPeer: newBGPPeer,
-@as("virtualInterfaceId") virtualInterfaceId: virtualInterfaceId
+newBGPPeer: option<newBGPPeer>,
+virtualInterfaceId: option<virtualInterfaceId>
 }
   type response = {
-@as("virtualInterface") virtualInterface: virtualInterface
+virtualInterface: option<virtualInterface>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "CreateBGPPeerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AllocateTransitVirtualInterface = {
   type t;
   type request = {
-@as("newTransitVirtualInterfaceAllocation") newTransitVirtualInterfaceAllocation: option<newTransitVirtualInterfaceAllocation>,
-@as("ownerAccount") ownerAccount: option<ownerAccount>,
-@as("connectionId") connectionId: option<connectionId>
+newTransitVirtualInterfaceAllocation: newTransitVirtualInterfaceAllocation,
+ownerAccount: ownerAccount,
+connectionId: connectionId
 }
   type response = {
-@as("virtualInterface") virtualInterface: virtualInterface
+virtualInterface: option<virtualInterface>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "AllocateTransitVirtualInterfaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AllocatePublicVirtualInterface = {
   type t;
   type request = {
-@as("newPublicVirtualInterfaceAllocation") newPublicVirtualInterfaceAllocation: option<newPublicVirtualInterfaceAllocation>,
-@as("ownerAccount") ownerAccount: option<ownerAccount>,
-@as("connectionId") connectionId: option<connectionId>
+newPublicVirtualInterfaceAllocation: newPublicVirtualInterfaceAllocation,
+ownerAccount: ownerAccount,
+connectionId: connectionId
 }
   type response = virtualInterface;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "AllocatePublicVirtualInterfaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AllocatePrivateVirtualInterface = {
   type t;
   type request = {
-@as("newPrivateVirtualInterfaceAllocation") newPrivateVirtualInterfaceAllocation: option<newPrivateVirtualInterfaceAllocation>,
-@as("ownerAccount") ownerAccount: option<ownerAccount>,
-@as("connectionId") connectionId: option<connectionId>
+newPrivateVirtualInterfaceAllocation: newPrivateVirtualInterfaceAllocation,
+ownerAccount: ownerAccount,
+connectionId: connectionId
 }
   type response = virtualInterface;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "AllocatePrivateVirtualInterfaceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AcceptDirectConnectGatewayAssociationProposal = {
   type t;
   type request = {
-@as("overrideAllowedPrefixesToDirectConnectGateway") overrideAllowedPrefixesToDirectConnectGateway: routeFilterPrefixList,
-@as("associatedGatewayOwnerAccount") associatedGatewayOwnerAccount: option<ownerAccount>,
-@as("proposalId") proposalId: option<directConnectGatewayAssociationProposalId>,
-@as("directConnectGatewayId") directConnectGatewayId: option<directConnectGatewayId>
+overrideAllowedPrefixesToDirectConnectGateway: option<routeFilterPrefixList>,
+associatedGatewayOwnerAccount: ownerAccount,
+proposalId: directConnectGatewayAssociationProposalId,
+directConnectGatewayId: directConnectGatewayId
 }
   type response = {
-@as("directConnectGatewayAssociation") directConnectGatewayAssociation: directConnectGatewayAssociation
+directConnectGatewayAssociation: option<directConnectGatewayAssociation>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "AcceptDirectConnectGatewayAssociationProposalCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateLag = {
   type t;
   type request = {
-@as("encryptionMode") encryptionMode: encryptionMode,
-@as("minimumLinks") minimumLinks: count,
-@as("lagName") lagName: lagName,
-@as("lagId") lagId: option<lagId>
+encryptionMode: option<encryptionMode>,
+minimumLinks: option<count>,
+lagName: option<lagName>,
+lagId: lagId
 }
   type response = lag;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "UpdateLagCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeVirtualInterfaces = {
   type t;
   type request = {
-@as("virtualInterfaceId") virtualInterfaceId: virtualInterfaceId,
-@as("connectionId") connectionId: connectionId
+virtualInterfaceId: option<virtualInterfaceId>,
+connectionId: option<connectionId>
 }
   type response = {
-@as("virtualInterfaces") virtualInterfaces: virtualInterfaceList
+virtualInterfaces: option<virtualInterfaceList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeVirtualInterfacesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTags = {
   type t;
   type request = {
-@as("resourceArns") resourceArns: option<resourceArnList>
+resourceArns: resourceArnList
 }
   type response = {
-@as("resourceTags") resourceTags: resourceTagList
+resourceTags: option<resourceTagList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeInterconnects = {
   type t;
   type request = {
-@as("interconnectId") interconnectId: interconnectId
+interconnectId: option<interconnectId>
 }
   type response = {
-@as("interconnects") interconnects: interconnectList
+interconnects: option<interconnectList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeInterconnectsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeHostedConnections = {
   type t;
   type request = {
-@as("connectionId") connectionId: option<connectionId>
+connectionId: connectionId
 }
   type response = {
-@as("connections") connections: connectionList
+connections: option<connectionList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeHostedConnectionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDirectConnectGatewayAssociations = {
   type t;
   type request = {
-@as("virtualGatewayId") virtualGatewayId: virtualGatewayId,
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: maxResultSetSize,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId,
-@as("associatedGatewayId") associatedGatewayId: associatedGatewayId,
-@as("associationId") associationId: directConnectGatewayAssociationId
+virtualGatewayId: option<virtualGatewayId>,
+nextToken: option<paginationToken>,
+maxResults: option<maxResultSetSize>,
+directConnectGatewayId: option<directConnectGatewayId>,
+associatedGatewayId: option<associatedGatewayId>,
+associationId: option<directConnectGatewayAssociationId>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("directConnectGatewayAssociations") directConnectGatewayAssociations: directConnectGatewayAssociationList
+nextToken: option<paginationToken>,
+directConnectGatewayAssociations: option<directConnectGatewayAssociationList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeDirectConnectGatewayAssociationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDirectConnectGatewayAssociationProposals = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: maxResultSetSize,
-@as("associatedGatewayId") associatedGatewayId: associatedGatewayId,
-@as("proposalId") proposalId: directConnectGatewayAssociationProposalId,
-@as("directConnectGatewayId") directConnectGatewayId: directConnectGatewayId
+nextToken: option<paginationToken>,
+maxResults: option<maxResultSetSize>,
+associatedGatewayId: option<associatedGatewayId>,
+proposalId: option<directConnectGatewayAssociationProposalId>,
+directConnectGatewayId: option<directConnectGatewayId>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("directConnectGatewayAssociationProposals") directConnectGatewayAssociationProposals: directConnectGatewayAssociationProposalList
+nextToken: option<paginationToken>,
+directConnectGatewayAssociationProposals: option<directConnectGatewayAssociationProposalList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeDirectConnectGatewayAssociationProposalsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConnectionsOnInterconnect = {
   type t;
   type request = {
-@as("interconnectId") interconnectId: option<interconnectId>
+interconnectId: interconnectId
 }
   type response = {
-@as("connections") connections: connectionList
+connections: option<connectionList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeConnectionsOnInterconnectCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeConnections = {
   type t;
   type request = {
-@as("connectionId") connectionId: connectionId
+connectionId: option<connectionId>
 }
   type response = {
-@as("connections") connections: connectionList
+connections: option<connectionList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeConnectionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteLag = {
   type t;
   type request = {
-@as("lagId") lagId: option<lagId>
+lagId: lagId
 }
   type response = lag;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DeleteLagCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateLag = {
   type t;
   type request = {
-@as("requestMACSec") requestMACSec: requestMACSec,
-@as("providerName") providerName: providerName,
-@as("childConnectionTags") childConnectionTags: tagList,
-@as("tags") tags: tagList,
-@as("connectionId") connectionId: connectionId,
-@as("lagName") lagName: option<lagName>,
-@as("connectionsBandwidth") connectionsBandwidth: option<bandwidth>,
-@as("location") location: option<locationCode>,
-@as("numberOfConnections") numberOfConnections: option<count>
+requestMACSec: option<requestMACSec>,
+providerName: option<providerName>,
+childConnectionTags: option<tagList_>,
+tags: option<tagList_>,
+connectionId: option<connectionId>,
+lagName: lagName,
+connectionsBandwidth: bandwidth,
+location: locationCode,
+numberOfConnections: count
 }
   type response = lag;
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "CreateLagCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLags = {
   type t;
   type request = {
-@as("lagId") lagId: lagId
+lagId: option<lagId>
 }
   type response = {
-@as("lags") lags: lagList
+lags: option<lagList>
 }
   @module("@aws-sdk/client-directconnect") @new external new_: (request) => t = "DescribeLagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

@@ -1,16 +1,22 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type integer_ = int
+type long = float
 type voiceId = string
 type value = string
 type utterance = string
-type amazonawsTimestamp = Js.Date.t;
+type timestamp_ = Js.Date.t;
 type tagValue = string
 type tagKey = string
-type stillWaitingResponseTimeout = int;
-type stillWaitingResponseFrequency = int;
+type stillWaitingResponseTimeout = int
+type stillWaitingResponseFrequency = int
 type sortOrder = [@as("Descending") #Descending | @as("Ascending") #Ascending]
 type slotValueResolutionStrategy = [@as("TopResolution") #TopResolution | @as("OriginalValue") #OriginalValue]
 type slotTypeSortAttribute = [@as("LastUpdatedDateTime") #LastUpdatedDateTime | @as("SlotTypeName") #SlotTypeName]
@@ -22,19 +28,19 @@ type slotFilterOperator = [@as("EQ") #EQ | @as("CO") #CO]
 type slotFilterName = [@as("SlotName") #SlotName]
 type slotDefaultValueString = string
 type slotConstraint = [@as("Optional") #Optional | @as("Required") #Required]
-type skipResourceInUseCheck = bool;
-type sessionTTL = int;
+type skipResourceInUseCheck = bool
+type sessionTTL = int
 type servicePrincipal = string
-type sSMLMessageValue = string
+type ssmlmessageValue = string
 type s3BucketArn = string
 type roleArn = string
 type revisionId = string
-type retryAfterSeconds = int;
-type resourceCount = int;
+type retryAfterSeconds = int
+type resourceCount = int
 type regexPattern = string
 type queryFilterString = string
-type promptMaxRetries = int;
-type priorityValue = int;
+type promptMaxRetries = int
+type priorityValue = int
 type principalArn = string
 type presignedS3Url = string
 type policy = string
@@ -45,7 +51,7 @@ type numericalBotVersion = string
 type nextToken = string
 type name = string
 type mergeStrategy = [@as("FailOnConflict") #FailOnConflict | @as("Overwrite") #Overwrite]
-type maxResults = int;
+type maxResults = int
 type logPrefix = string
 type localeName = string
 type localeId = string
@@ -75,22 +81,22 @@ type effect = [@as("Deny") #Deny | @as("Allow") #Allow]
 type draftBotVersion = string
 type description = string
 type customPayloadValue = string
-type contextTurnsToLive = int;
-type contextTimeToLiveInSeconds = int;
-type confidenceThreshold = float;
+type contextTurnsToLive = int
+type contextTimeToLiveInSeconds = int
+type confidenceThreshold = float
 type conditionValue = string
 type conditionOperator = string
 type conditionKey = string
 type codeHookInterfaceVersion = string
 type cloudWatchLogGroupArn = string
-type childDirected = bool;
+type childDirected = bool
 type buttonValue = string
 type buttonText = string
-type builtInsMaxResults = int;
+type builtInsMaxResults = int
 type builtInSlotTypeSortAttribute = [@as("SlotTypeSignature") #SlotTypeSignature]
 type builtInOrCustomSlotTypeId = string
 type builtInIntentSortAttribute = [@as("IntentSignature") #IntentSignature]
-type boxedBoolean = bool;
+type boxedBoolean = bool
 type botVersionSortAttribute = [@as("BotVersion") #BotVersion]
 type botVersion = string
 type botStatus = [@as("Importing") #Importing | @as("Versioning") #Versioning | @as("Failed") #Failed | @as("Deleting") #Deleting | @as("Inactive") #Inactive | @as("Available") #Available | @as("Creating") #Creating]
@@ -104,258 +110,258 @@ type botFilterOperator = [@as("EQ") #EQ | @as("CO") #CO]
 type botFilterName = [@as("BotName") #BotName]
 type botAliasStatus = [@as("Failed") #Failed | @as("Deleting") #Deleting | @as("Available") #Available | @as("Creating") #Creating]
 type botAliasId = string
-type amazonawsBoolean = bool;
+type boolean_ = bool
 type attachmentUrl = string
 type attachmentTitle = string
 type amazonResourceName = string
 type voiceSettings = {
-@as("voiceId") voiceId: option<voiceId>
+voiceId: voiceId
 }
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type slotValueRegexFilter = {
-@as("pattern") pattern: option<regexPattern>
+pattern: regexPattern
 }
 type slotTypeSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("parentSlotTypeSignature") parentSlotTypeSignature: slotTypeSignature,
-@as("description") description: description,
-@as("slotTypeName") slotTypeName: name,
-@as("slotTypeId") slotTypeId: id
+lastUpdatedDateTime: option<timestamp_>,
+parentSlotTypeSignature: option<slotTypeSignature>,
+description: option<description>,
+slotTypeName: option<name>,
+slotTypeId: option<id>
 }
 type slotTypeSortBy = {
-@as("order") order: option<sortOrder>,
-@as("attribute") attribute: option<slotTypeSortAttribute>
+order: sortOrder,
+attribute: slotTypeSortAttribute
 }
 type slotSortBy = {
-@as("order") order: option<sortOrder>,
-@as("attribute") attribute: option<slotSortAttribute>
+order: sortOrder,
+attribute: slotSortAttribute
 }
 type slotPriority = {
-@as("slotId") slotId: option<id>,
-@as("priority") priority: option<priorityValue>
+slotId: id,
+priority: priorityValue
 }
 type slotDefaultValue = {
-@as("defaultValue") defaultValue: option<slotDefaultValueString>
+defaultValue: slotDefaultValueString
 }
 type sentimentAnalysisSettings = {
-@as("detectSentiment") detectSentiment: option<amazonawsBoolean>
+detectSentiment: boolean_
 }
 type sampleValue = {
-@as("value") value: option<value>
+value: value
 }
 type sampleUtterance = {
-@as("utterance") utterance: option<utterance>
+utterance: utterance
 }
-type sSMLMessage = {
-@as("value") value: option<sSMLMessageValue>
+type ssmlmessage = {
+value: ssmlmessageValue
 }
 type s3BucketLogDestination = {
-@as("logPrefix") logPrefix: option<logPrefix>,
-@as("s3BucketArn") s3BucketArn: option<s3BucketArn>,
-@as("kmsKeyArn") kmsKeyArn: kmsKeyArn
+logPrefix: logPrefix,
+s3BucketArn: s3BucketArn,
+kmsKeyArn: option<kmsKeyArn>
 }
 type principal = {
-@as("arn") arn: principalArn,
-@as("service") service: servicePrincipal
+arn: option<principalArn>,
+service: option<servicePrincipal>
 }
 type plainTextMessage = {
-@as("value") value: option<plainTextMessageValue>
+value: plainTextMessageValue
 }
 type outputContext = {
-@as("turnsToLive") turnsToLive: option<contextTurnsToLive>,
-@as("timeToLiveInSeconds") timeToLiveInSeconds: option<contextTimeToLiveInSeconds>,
-@as("name") name: option<name>
+turnsToLive: contextTurnsToLive,
+timeToLiveInSeconds: contextTimeToLiveInSeconds,
+name: name
 }
 type operationList = array<operation>
 type obfuscationSetting = {
-@as("obfuscationSettingType") obfuscationSettingType: option<obfuscationSettingType>
+obfuscationSettingType: obfuscationSettingType
 }
 type lambdaCodeHook = {
-@as("codeHookInterfaceVersion") codeHookInterfaceVersion: option<codeHookInterfaceVersion>,
-@as("lambdaARN") lambdaARN: option<lambdaARN>
+codeHookInterfaceVersion: codeHookInterfaceVersion,
+lambdaARN: lambdaARN
 }
 type kendraConfiguration = {
-@as("queryFilterString") queryFilterString: queryFilterString,
-@as("queryFilterStringEnabled") queryFilterStringEnabled: amazonawsBoolean,
-@as("kendraIndex") kendraIndex: option<kendraIndexArn>
+queryFilterString: option<queryFilterString>,
+queryFilterStringEnabled: option<boolean_>,
+kendraIndex: kendraIndexArn
 }
 type intentSortBy = {
-@as("order") order: option<sortOrder>,
-@as("attribute") attribute: option<intentSortAttribute>
+order: sortOrder,
+attribute: intentSortAttribute
 }
 type inputContext = {
-@as("name") name: option<name>
+name: name
 }
 type importSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("mergeStrategy") mergeStrategy: mergeStrategy,
-@as("importStatus") importStatus: importStatus,
-@as("importedResourceName") importedResourceName: name,
-@as("importedResourceId") importedResourceId: importedResourceId,
-@as("importId") importId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+mergeStrategy: option<mergeStrategy>,
+importStatus: option<importStatus>,
+importedResourceName: option<name>,
+importedResourceId: option<importedResourceId>,
+importId: option<id>
 }
 type importSortBy = {
-@as("order") order: option<sortOrder>,
-@as("attribute") attribute: option<importSortAttribute>
+order: sortOrder,
+attribute: importSortAttribute
 }
 type fulfillmentCodeHookSettings = {
-@as("enabled") enabled: option<amazonawsBoolean>
+enabled: boolean_
 }
 type filterValues = array<filterValue>
 type failureReasons = array<failureReason>
 type exportSortBy = {
-@as("order") order: option<sortOrder>,
-@as("attribute") attribute: option<exportSortAttribute>
+order: sortOrder,
+attribute: exportSortAttribute
 }
 type dialogCodeHookSettings = {
-@as("enabled") enabled: option<amazonawsBoolean>
+enabled: boolean_
 }
 type dataPrivacy = {
-@as("childDirected") childDirected: option<childDirected>
+childDirected: childDirected
 }
 type customPayload = {
-@as("value") value: option<customPayloadValue>
+value: customPayloadValue
 }
 type conditionKeyValueMap = Js.Dict.t< conditionValue>
 type cloudWatchLogGroupLogDestination = {
-@as("logPrefix") logPrefix: option<logPrefix>,
-@as("cloudWatchLogGroupArn") cloudWatchLogGroupArn: option<cloudWatchLogGroupArn>
+logPrefix: logPrefix,
+cloudWatchLogGroupArn: cloudWatchLogGroupArn
 }
 type button = {
-@as("value") value: option<buttonValue>,
-@as("text") text: option<buttonText>
+value: buttonValue,
+text: buttonText
 }
 type builtInSlotTypeSummary = {
-@as("description") description: description,
-@as("slotTypeSignature") slotTypeSignature: slotTypeSignature
+description: option<description>,
+slotTypeSignature: option<slotTypeSignature>
 }
 type builtInSlotTypeSortBy = {
-@as("order") order: option<sortOrder>,
-@as("attribute") attribute: option<builtInSlotTypeSortAttribute>
+order: sortOrder,
+attribute: builtInSlotTypeSortAttribute
 }
 type builtInIntentSummary = {
-@as("description") description: description,
-@as("intentSignature") intentSignature: intentSignature
+description: option<description>,
+intentSignature: option<intentSignature>
 }
 type builtInIntentSortBy = {
-@as("order") order: option<sortOrder>,
-@as("attribute") attribute: option<builtInIntentSortAttribute>
+order: sortOrder,
+attribute: builtInIntentSortAttribute
 }
 type botVersionSummary = {
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("botStatus") botStatus: botStatus,
-@as("description") description: description,
-@as("botVersion") botVersion: botVersion,
-@as("botName") botName: name
+creationDateTime: option<timestamp_>,
+botStatus: option<botStatus>,
+description: option<description>,
+botVersion: option<botVersion>,
+botName: option<name>
 }
 type botVersionSortBy = {
-@as("order") order: option<sortOrder>,
-@as("attribute") attribute: option<botVersionSortAttribute>
+order: sortOrder,
+attribute: botVersionSortAttribute
 }
 type botVersionLocaleDetails = {
-@as("sourceBotVersion") sourceBotVersion: option<botVersion>
+sourceBotVersion: botVersion
 }
 type botSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("latestBotVersion") latestBotVersion: numericalBotVersion,
-@as("botStatus") botStatus: botStatus,
-@as("description") description: description,
-@as("botName") botName: name,
-@as("botId") botId: id
+lastUpdatedDateTime: option<timestamp_>,
+latestBotVersion: option<numericalBotVersion>,
+botStatus: option<botStatus>,
+description: option<description>,
+botName: option<name>,
+botId: option<id>
 }
 type botSortBy = {
-@as("order") order: option<sortOrder>,
-@as("attribute") attribute: option<botSortAttribute>
+order: sortOrder,
+attribute: botSortAttribute
 }
 type botLocaleSummary = {
-@as("lastBuildSubmittedDateTime") lastBuildSubmittedDateTime: amazonawsTimestamp,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("botLocaleStatus") botLocaleStatus: botLocaleStatus,
-@as("description") description: description,
-@as("localeName") localeName: localeName,
-@as("localeId") localeId: localeId
+lastBuildSubmittedDateTime: option<timestamp_>,
+lastUpdatedDateTime: option<timestamp_>,
+botLocaleStatus: option<botLocaleStatus>,
+description: option<description>,
+localeName: option<localeName>,
+localeId: option<localeId>
 }
 type botLocaleSortBy = {
-@as("order") order: option<sortOrder>,
-@as("attribute") attribute: option<botLocaleSortAttribute>
+order: sortOrder,
+attribute: botLocaleSortAttribute
 }
 type botLocaleHistoryEvent = {
-@as("eventDate") eventDate: option<amazonawsTimestamp>,
-@as("event") event: option<botLocaleHistoryEventDescription>
+eventDate: timestamp_,
+event: botLocaleHistoryEventDescription
 }
 type botLocaleExportSpecification = {
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<botVersion>,
-@as("botId") botId: option<id>
+localeId: localeId,
+botVersion: botVersion,
+botId: id
 }
 type botExportSpecification = {
-@as("botVersion") botVersion: option<botVersion>,
-@as("botId") botId: option<id>
+botVersion: botVersion,
+botId: id
 }
 type botAliasSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("botAliasStatus") botAliasStatus: botAliasStatus,
-@as("botVersion") botVersion: botVersion,
-@as("description") description: description,
-@as("botAliasName") botAliasName: name,
-@as("botAliasId") botAliasId: botAliasId
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+botAliasStatus: option<botAliasStatus>,
+botVersion: option<botVersion>,
+description: option<description>,
+botAliasName: option<name>,
+botAliasId: option<botAliasId>
 }
 type botAliasHistoryEvent = {
-@as("endDate") endDate: amazonawsTimestamp,
-@as("startDate") startDate: amazonawsTimestamp,
-@as("botVersion") botVersion: botVersion
+endDate: option<timestamp_>,
+startDate: option<timestamp_>,
+botVersion: option<botVersion>
 }
 type textLogDestination = {
-@as("cloudWatch") cloudWatch: option<cloudWatchLogGroupLogDestination>
+cloudWatch: cloudWatchLogGroupLogDestination
 }
 type synonymList = array<sampleValue>
 type slotValueSelectionSetting = {
-@as("regexFilter") regexFilter: slotValueRegexFilter,
-@as("resolutionStrategy") resolutionStrategy: option<slotValueResolutionStrategy>
+regexFilter: option<slotValueRegexFilter>,
+resolutionStrategy: slotValueResolutionStrategy
 }
 type slotTypeSummaryList = array<slotTypeSummary>
 type slotTypeFilter = {
-@as("operator") operator: option<slotTypeFilterOperator>,
-@as("values") values: option<filterValues>,
-@as("name") name: option<slotTypeFilterName>
+operator: slotTypeFilterOperator,
+values: filterValues,
+name: slotTypeFilterName
 }
 type slotPrioritiesList = array<slotPriority>
 type slotFilter = {
-@as("operator") operator: option<slotFilterOperator>,
-@as("values") values: option<filterValues>,
-@as("name") name: option<slotFilterName>
+operator: slotFilterOperator,
+values: filterValues,
+name: slotFilterName
 }
 type slotDefaultValueList = array<slotDefaultValue>
 type sampleUtterancesList = array<sampleUtterance>
 type principalList = array<principal>
 type outputContextsList = array<outputContext>
 type intentFilter = {
-@as("operator") operator: option<intentFilterOperator>,
-@as("values") values: option<filterValues>,
-@as("name") name: option<intentFilterName>
+operator: intentFilterOperator,
+values: filterValues,
+name: intentFilterName
 }
 type inputContextsList = array<inputContext>
 type importSummaryList = array<importSummary>
 type importFilter = {
-@as("operator") operator: option<importFilterOperator>,
-@as("values") values: option<filterValues>,
-@as("name") name: option<importFilterName>
+operator: importFilterOperator,
+values: filterValues,
+name: importFilterName
 }
 type exportResourceSpecification = {
-@as("botLocaleExportSpecification") botLocaleExportSpecification: botLocaleExportSpecification,
-@as("botExportSpecification") botExportSpecification: botExportSpecification
+botLocaleExportSpecification: option<botLocaleExportSpecification>,
+botExportSpecification: option<botExportSpecification>
 }
 type exportFilter = {
-@as("operator") operator: option<exportFilterOperator>,
-@as("values") values: option<filterValues>,
-@as("name") name: option<exportFilterName>
+operator: exportFilterOperator,
+values: filterValues,
+name: exportFilterName
 }
 type conditionMap = Js.Dict.t< conditionKeyValueMap>
 type codeHookSpecification = {
-@as("lambdaCodeHook") lambdaCodeHook: option<lambdaCodeHook>
+lambdaCodeHook: lambdaCodeHook
 }
 type buttonsList = array<button>
 type builtInSlotTypeSummaryList = array<builtInSlotTypeSummary>
@@ -365,96 +371,96 @@ type botVersionLocaleSpecification = Js.Dict.t< botVersionLocaleDetails>
 type botSummaryList = array<botSummary>
 type botLocaleSummaryList = array<botLocaleSummary>
 type botLocaleImportSpecification = {
-@as("voiceSettings") voiceSettings: voiceSettings,
-@as("nluIntentConfidenceThreshold") nluIntentConfidenceThreshold: confidenceThreshold,
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>
+voiceSettings: option<voiceSettings>,
+nluIntentConfidenceThreshold: option<confidenceThreshold>,
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id
 }
 type botLocaleHistoryEventsList = array<botLocaleHistoryEvent>
 type botLocaleFilter = {
-@as("operator") operator: option<botLocaleFilterOperator>,
-@as("values") values: option<filterValues>,
-@as("name") name: option<botLocaleFilterName>
+operator: botLocaleFilterOperator,
+values: filterValues,
+name: botLocaleFilterName
 }
 type botImportSpecification = {
-@as("testBotAliasTags") testBotAliasTags: tagMap,
-@as("botTags") botTags: tagMap,
-@as("idleSessionTTLInSeconds") idleSessionTTLInSeconds: sessionTTL,
-@as("dataPrivacy") dataPrivacy: option<dataPrivacy>,
-@as("roleArn") roleArn: option<roleArn>,
-@as("botName") botName: option<name>
+testBotAliasTags: option<tagMap>,
+botTags: option<tagMap>,
+idleSessionTTLInSeconds: option<sessionTTL>,
+dataPrivacy: dataPrivacy,
+roleArn: roleArn,
+botName: name
 }
 type botFilter = {
-@as("operator") operator: option<botFilterOperator>,
-@as("values") values: option<filterValues>,
-@as("name") name: option<botFilterName>
+operator: botFilterOperator,
+values: filterValues,
+name: botFilterName
 }
 type botAliasSummaryList = array<botAliasSummary>
 type botAliasHistoryEventsList = array<botAliasHistoryEvent>
 type audioLogDestination = {
-@as("s3Bucket") s3Bucket: option<s3BucketLogDestination>
+s3Bucket: s3BucketLogDestination
 }
 type textLogSetting = {
-@as("destination") destination: option<textLogDestination>,
-@as("enabled") enabled: option<amazonawsBoolean>
+destination: textLogDestination,
+enabled: boolean_
 }
 type slotTypeValue = {
-@as("synonyms") synonyms: synonymList,
-@as("sampleValue") sampleValue: sampleValue
+synonyms: option<synonymList>,
+sampleValue: option<sampleValue>
 }
 type slotTypeFilters = array<slotTypeFilter>
 type slotFilters = array<slotFilter>
 type slotDefaultValueSpecification = {
-@as("defaultValueList") defaultValueList: option<slotDefaultValueList>
+defaultValueList: slotDefaultValueList
 }
 type intentSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("outputContexts") outputContexts: outputContextsList,
-@as("inputContexts") inputContexts: inputContextsList,
-@as("parentIntentSignature") parentIntentSignature: intentSignature,
-@as("description") description: description,
-@as("intentName") intentName: name,
-@as("intentId") intentId: id
+lastUpdatedDateTime: option<timestamp_>,
+outputContexts: option<outputContextsList>,
+inputContexts: option<inputContextsList>,
+parentIntentSignature: option<intentSignature>,
+description: option<description>,
+intentName: option<name>,
+intentId: option<id>
 }
 type intentFilters = array<intentFilter>
 type importResourceSpecification = {
-@as("botLocaleImportSpecification") botLocaleImportSpecification: botLocaleImportSpecification,
-@as("botImportSpecification") botImportSpecification: botImportSpecification
+botLocaleImportSpecification: option<botLocaleImportSpecification>,
+botImportSpecification: option<botImportSpecification>
 }
 type importFilters = array<importFilter>
 type imageResponseCard = {
-@as("buttons") buttons: buttonsList,
-@as("imageUrl") imageUrl: attachmentUrl,
-@as("subtitle") subtitle: attachmentTitle,
-@as("title") title: option<attachmentTitle>
+buttons: option<buttonsList>,
+imageUrl: option<attachmentUrl>,
+subtitle: option<attachmentTitle>,
+title: attachmentTitle
 }
 type exportSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("exportStatus") exportStatus: exportStatus,
-@as("fileFormat") fileFormat: importExportFileFormat,
-@as("resourceSpecification") resourceSpecification: exportResourceSpecification,
-@as("exportId") exportId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+exportStatus: option<exportStatus>,
+fileFormat: option<importExportFileFormat>,
+resourceSpecification: option<exportResourceSpecification>,
+exportId: option<id>
 }
 type exportFilters = array<exportFilter>
 type botLocaleFilters = array<botLocaleFilter>
 type botFilters = array<botFilter>
 type botAliasLocaleSettings = {
-@as("codeHookSpecification") codeHookSpecification: codeHookSpecification,
-@as("enabled") enabled: option<amazonawsBoolean>
+codeHookSpecification: option<codeHookSpecification>,
+enabled: boolean_
 }
 type audioLogSetting = {
-@as("destination") destination: option<audioLogDestination>,
-@as("enabled") enabled: option<amazonawsBoolean>
+destination: audioLogDestination,
+enabled: boolean_
 }
 type textLogSettingsList = array<textLogSetting>
 type slotTypeValues = array<slotTypeValue>
 type message = {
-@as("imageResponseCard") imageResponseCard: imageResponseCard,
-@as("ssmlMessage") ssmlMessage: sSMLMessage,
-@as("customPayload") customPayload: customPayload,
-@as("plainTextMessage") plainTextMessage: plainTextMessage
+imageResponseCard: option<imageResponseCard>,
+ssmlMessage: option<ssmlmessage>,
+customPayload: option<customPayload>,
+plainTextMessage: option<plainTextMessage>
 }
 type intentSummaryList = array<intentSummary>
 type exportSummaryList = array<exportSummary>
@@ -462,1208 +468,1208 @@ type botAliasLocaleSettingsMap = Js.Dict.t< botAliasLocaleSettings>
 type audioLogSettingsList = array<audioLogSetting>
 type messageVariationsList = array<message>
 type conversationLogSettings = {
-@as("audioLogSettings") audioLogSettings: audioLogSettingsList,
-@as("textLogSettings") textLogSettings: textLogSettingsList
+audioLogSettings: option<audioLogSettingsList>,
+textLogSettings: option<textLogSettingsList>
 }
 type messageGroup = {
-@as("variations") variations: messageVariationsList,
-@as("message") message: option<message>
+variations: option<messageVariationsList>,
+message: message
 }
 type messageGroupsList = array<messageGroup>
 type stillWaitingResponseSpecification = {
-@as("allowInterrupt") allowInterrupt: boxedBoolean,
-@as("timeoutInSeconds") timeoutInSeconds: option<stillWaitingResponseTimeout>,
-@as("frequencyInSeconds") frequencyInSeconds: option<stillWaitingResponseFrequency>,
-@as("messageGroups") messageGroups: option<messageGroupsList>
+allowInterrupt: option<boxedBoolean>,
+timeoutInSeconds: stillWaitingResponseTimeout,
+frequencyInSeconds: stillWaitingResponseFrequency,
+messageGroups: messageGroupsList
 }
 type responseSpecification = {
-@as("allowInterrupt") allowInterrupt: boxedBoolean,
-@as("messageGroups") messageGroups: option<messageGroupsList>
+allowInterrupt: option<boxedBoolean>,
+messageGroups: messageGroupsList
 }
 type promptSpecification = {
-@as("allowInterrupt") allowInterrupt: boxedBoolean,
-@as("maxRetries") maxRetries: option<promptMaxRetries>,
-@as("messageGroups") messageGroups: option<messageGroupsList>
+allowInterrupt: option<boxedBoolean>,
+maxRetries: promptMaxRetries,
+messageGroups: messageGroupsList
 }
 type waitAndContinueSpecification = {
-@as("stillWaitingResponse") stillWaitingResponse: stillWaitingResponseSpecification,
-@as("continueResponse") continueResponse: option<responseSpecification>,
-@as("waitingResponse") waitingResponse: option<responseSpecification>
+stillWaitingResponse: option<stillWaitingResponseSpecification>,
+continueResponse: responseSpecification,
+waitingResponse: responseSpecification
 }
 type slotSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("valueElicitationPromptSpecification") valueElicitationPromptSpecification: promptSpecification,
-@as("slotTypeId") slotTypeId: builtInOrCustomSlotTypeId,
-@as("slotConstraint") slotConstraint: slotConstraint,
-@as("description") description: description,
-@as("slotName") slotName: name,
-@as("slotId") slotId: id
+lastUpdatedDateTime: option<timestamp_>,
+valueElicitationPromptSpecification: option<promptSpecification>,
+slotTypeId: option<builtInOrCustomSlotTypeId>,
+slotConstraint: option<slotConstraint>,
+description: option<description>,
+slotName: option<name>,
+slotId: option<id>
 }
 type intentConfirmationSetting = {
-@as("declinationResponse") declinationResponse: option<responseSpecification>,
-@as("promptSpecification") promptSpecification: option<promptSpecification>
+declinationResponse: responseSpecification,
+promptSpecification: promptSpecification
 }
 type intentClosingSetting = {
-@as("closingResponse") closingResponse: option<responseSpecification>
+closingResponse: responseSpecification
 }
 type slotValueElicitationSetting = {
-@as("waitAndContinueSpecification") waitAndContinueSpecification: waitAndContinueSpecification,
-@as("sampleUtterances") sampleUtterances: sampleUtterancesList,
-@as("promptSpecification") promptSpecification: promptSpecification,
-@as("slotConstraint") slotConstraint: option<slotConstraint>,
-@as("defaultValueSpecification") defaultValueSpecification: slotDefaultValueSpecification
+waitAndContinueSpecification: option<waitAndContinueSpecification>,
+sampleUtterances: option<sampleUtterancesList>,
+promptSpecification: option<promptSpecification>,
+slotConstraint: slotConstraint,
+defaultValueSpecification: option<slotDefaultValueSpecification>
 }
 type slotSummaryList = array<slotSummary>
-type clientType;
-@module("@aws-sdk/client-lex") @new external createClient: unit => clientType = "LexModelsV2Client";
+type awsServiceClient;
+@module("@aws-sdk/client-lex") @new external createClient: unit => awsServiceClient = "LexModelsV2Client";
 module UpdateResourcePolicy = {
   type t;
   type request = {
-@as("expectedRevisionId") expectedRevisionId: revisionId,
-@as("policy") policy: option<policy>,
-@as("resourceArn") resourceArn: option<amazonResourceName>
+expectedRevisionId: option<revisionId>,
+policy: policy,
+resourceArn: amazonResourceName
 }
   type response = {
-@as("revisionId") revisionId: revisionId,
-@as("resourceArn") resourceArn: amazonResourceName
+revisionId: option<revisionId>,
+resourceArn: option<amazonResourceName>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "UpdateResourcePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeResourcePolicy = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<amazonResourceName>
+resourceArn: amazonResourceName
 }
   type response = {
-@as("revisionId") revisionId: revisionId,
-@as("policy") policy: policy,
-@as("resourceArn") resourceArn: amazonResourceName
+revisionId: option<revisionId>,
+policy: option<policy>,
+resourceArn: option<amazonResourceName>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DescribeResourcePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteSlotType = {
   type t;
   type request = {
-@as("skipResourceInUseCheck") skipResourceInUseCheck: skipResourceInUseCheck,
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>,
-@as("slotTypeId") slotTypeId: option<id>
+skipResourceInUseCheck: option<skipResourceInUseCheck>,
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id,
+slotTypeId: id
 }
   
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteSlotTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteSlot = {
   type t;
   type request = {
-@as("intentId") intentId: option<id>,
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>,
-@as("slotId") slotId: option<id>
+intentId: id,
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id,
+slotId: id
 }
   
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteSlotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteResourcePolicyStatement = {
   type t;
   type request = {
-@as("expectedRevisionId") expectedRevisionId: revisionId,
-@as("statementId") statementId: option<name>,
-@as("resourceArn") resourceArn: option<amazonResourceName>
+expectedRevisionId: option<revisionId>,
+statementId: name,
+resourceArn: amazonResourceName
 }
   type response = {
-@as("revisionId") revisionId: revisionId,
-@as("resourceArn") resourceArn: amazonResourceName
+revisionId: option<revisionId>,
+resourceArn: option<amazonResourceName>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteResourcePolicyStatementCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteResourcePolicy = {
   type t;
   type request = {
-@as("expectedRevisionId") expectedRevisionId: revisionId,
-@as("resourceArn") resourceArn: option<amazonResourceName>
+expectedRevisionId: option<revisionId>,
+resourceArn: amazonResourceName
 }
   type response = {
-@as("revisionId") revisionId: revisionId,
-@as("resourceArn") resourceArn: amazonResourceName
+revisionId: option<revisionId>,
+resourceArn: option<amazonResourceName>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteResourcePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteIntent = {
   type t;
   type request = {
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>,
-@as("intentId") intentId: option<id>
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id,
+intentId: id
 }
   
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteIntentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteImport = {
   type t;
   type request = {
-@as("importId") importId: option<id>
+importId: id
 }
   type response = {
-@as("importStatus") importStatus: importStatus,
-@as("importId") importId: id
+importStatus: option<importStatus>,
+importId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteImportCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteExport = {
   type t;
   type request = {
-@as("exportId") exportId: option<id>
+exportId: id
 }
   type response = {
-@as("exportStatus") exportStatus: exportStatus,
-@as("exportId") exportId: id
+exportStatus: option<exportStatus>,
+exportId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteExportCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteBotVersion = {
   type t;
   type request = {
-@as("skipResourceInUseCheck") skipResourceInUseCheck: skipResourceInUseCheck,
-@as("botVersion") botVersion: option<numericalBotVersion>,
-@as("botId") botId: option<id>
+skipResourceInUseCheck: option<skipResourceInUseCheck>,
+botVersion: numericalBotVersion,
+botId: id
 }
   type response = {
-@as("botStatus") botStatus: botStatus,
-@as("botVersion") botVersion: numericalBotVersion,
-@as("botId") botId: id
+botStatus: option<botStatus>,
+botVersion: option<numericalBotVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteBotVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteBotLocale = {
   type t;
   type request = {
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id
 }
   type response = {
-@as("botLocaleStatus") botLocaleStatus: botLocaleStatus,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id
+botLocaleStatus: option<botLocaleStatus>,
+localeId: option<localeId>,
+botVersion: option<draftBotVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteBotLocaleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteBotAlias = {
   type t;
   type request = {
-@as("skipResourceInUseCheck") skipResourceInUseCheck: skipResourceInUseCheck,
-@as("botId") botId: option<id>,
-@as("botAliasId") botAliasId: option<botAliasId>
+skipResourceInUseCheck: option<skipResourceInUseCheck>,
+botId: id,
+botAliasId: botAliasId
 }
   type response = {
-@as("botAliasStatus") botAliasStatus: botAliasStatus,
-@as("botId") botId: id,
-@as("botAliasId") botAliasId: botAliasId
+botAliasStatus: option<botAliasStatus>,
+botId: option<id>,
+botAliasId: option<botAliasId>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteBotAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteBot = {
   type t;
   type request = {
-@as("skipResourceInUseCheck") skipResourceInUseCheck: skipResourceInUseCheck,
-@as("botId") botId: option<id>
+skipResourceInUseCheck: option<skipResourceInUseCheck>,
+botId: id
 }
   type response = {
-@as("botStatus") botStatus: botStatus,
-@as("botId") botId: id
+botStatus: option<botStatus>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteBotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateUploadUrl = {
   type t;
   type request = unit
   type response = {
-@as("uploadUrl") uploadUrl: presignedS3Url,
-@as("importId") importId: id
+uploadUrl: option<presignedS3Url>,
+importId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateUploadUrlCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateResourcePolicy = {
   type t;
   type request = {
-@as("policy") policy: option<policy>,
-@as("resourceArn") resourceArn: option<amazonResourceName>
+policy: policy,
+resourceArn: amazonResourceName
 }
   type response = {
-@as("revisionId") revisionId: revisionId,
-@as("resourceArn") resourceArn: amazonResourceName
+revisionId: option<revisionId>,
+resourceArn: option<amazonResourceName>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateResourcePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BuildBotLocale = {
   type t;
   type request = {
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id
 }
   type response = {
-@as("lastBuildSubmittedDateTime") lastBuildSubmittedDateTime: amazonawsTimestamp,
-@as("botLocaleStatus") botLocaleStatus: botLocaleStatus,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id
+lastBuildSubmittedDateTime: option<timestamp_>,
+botLocaleStatus: option<botLocaleStatus>,
+localeId: option<localeId>,
+botVersion: option<draftBotVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "BuildBotLocaleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateBotLocale = {
   type t;
   type request = {
-@as("voiceSettings") voiceSettings: voiceSettings,
-@as("nluIntentConfidenceThreshold") nluIntentConfidenceThreshold: option<confidenceThreshold>,
-@as("description") description: description,
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>
+voiceSettings: option<voiceSettings>,
+nluIntentConfidenceThreshold: confidenceThreshold,
+description: option<description>,
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("failureReasons") failureReasons: failureReasons,
-@as("botLocaleStatus") botLocaleStatus: botLocaleStatus,
-@as("voiceSettings") voiceSettings: voiceSettings,
-@as("nluIntentConfidenceThreshold") nluIntentConfidenceThreshold: confidenceThreshold,
-@as("description") description: description,
-@as("localeName") localeName: localeName,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+failureReasons: option<failureReasons>,
+botLocaleStatus: option<botLocaleStatus>,
+voiceSettings: option<voiceSettings>,
+nluIntentConfidenceThreshold: option<confidenceThreshold>,
+description: option<description>,
+localeName: option<localeName>,
+localeId: option<localeId>,
+botVersion: option<draftBotVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "UpdateBotLocaleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateBot = {
   type t;
   type request = {
-@as("idleSessionTTLInSeconds") idleSessionTTLInSeconds: option<sessionTTL>,
-@as("dataPrivacy") dataPrivacy: option<dataPrivacy>,
-@as("roleArn") roleArn: option<roleArn>,
-@as("description") description: description,
-@as("botName") botName: option<name>,
-@as("botId") botId: option<id>
+idleSessionTTLInSeconds: sessionTTL,
+dataPrivacy: dataPrivacy,
+roleArn: roleArn,
+description: option<description>,
+botName: name,
+botId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("botStatus") botStatus: botStatus,
-@as("idleSessionTTLInSeconds") idleSessionTTLInSeconds: sessionTTL,
-@as("dataPrivacy") dataPrivacy: dataPrivacy,
-@as("roleArn") roleArn: roleArn,
-@as("description") description: description,
-@as("botName") botName: name,
-@as("botId") botId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+botStatus: option<botStatus>,
+idleSessionTTLInSeconds: option<sessionTTL>,
+dataPrivacy: option<dataPrivacy>,
+roleArn: option<roleArn>,
+description: option<description>,
+botName: option<name>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "UpdateBotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceARN") resourceARN: option<amazonResourceName>
+tagKeys: tagKeyList,
+resourceARN: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagMap>,
-@as("resourceARN") resourceARN: option<amazonResourceName>
+tags: tagMap,
+resourceARN: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceARN") resourceARN: option<amazonResourceName>
+resourceARN: amazonResourceName
 }
   type response = {
-@as("tags") tags: tagMap
+tags: option<tagMap>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBotVersion = {
   type t;
   type request = {
-@as("botVersion") botVersion: option<numericalBotVersion>,
-@as("botId") botId: option<id>
+botVersion: numericalBotVersion,
+botId: id
 }
   type response = {
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("failureReasons") failureReasons: failureReasons,
-@as("botStatus") botStatus: botStatus,
-@as("idleSessionTTLInSeconds") idleSessionTTLInSeconds: sessionTTL,
-@as("dataPrivacy") dataPrivacy: dataPrivacy,
-@as("roleArn") roleArn: roleArn,
-@as("description") description: description,
-@as("botVersion") botVersion: numericalBotVersion,
-@as("botName") botName: name,
-@as("botId") botId: id
+creationDateTime: option<timestamp_>,
+failureReasons: option<failureReasons>,
+botStatus: option<botStatus>,
+idleSessionTTLInSeconds: option<sessionTTL>,
+dataPrivacy: option<dataPrivacy>,
+roleArn: option<roleArn>,
+description: option<description>,
+botVersion: option<numericalBotVersion>,
+botName: option<name>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DescribeBotVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBot = {
   type t;
   type request = {
-@as("botId") botId: option<id>
+botId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("botStatus") botStatus: botStatus,
-@as("idleSessionTTLInSeconds") idleSessionTTLInSeconds: sessionTTL,
-@as("dataPrivacy") dataPrivacy: dataPrivacy,
-@as("roleArn") roleArn: roleArn,
-@as("description") description: description,
-@as("botName") botName: name,
-@as("botId") botId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+botStatus: option<botStatus>,
+idleSessionTTLInSeconds: option<sessionTTL>,
+dataPrivacy: option<dataPrivacy>,
+roleArn: option<roleArn>,
+description: option<description>,
+botName: option<name>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DescribeBotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBotLocale = {
   type t;
   type request = {
-@as("voiceSettings") voiceSettings: voiceSettings,
-@as("nluIntentConfidenceThreshold") nluIntentConfidenceThreshold: option<confidenceThreshold>,
-@as("description") description: description,
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>
+voiceSettings: option<voiceSettings>,
+nluIntentConfidenceThreshold: confidenceThreshold,
+description: option<description>,
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id
 }
   type response = {
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("botLocaleStatus") botLocaleStatus: botLocaleStatus,
-@as("voiceSettings") voiceSettings: voiceSettings,
-@as("nluIntentConfidenceThreshold") nluIntentConfidenceThreshold: confidenceThreshold,
-@as("description") description: description,
-@as("localeId") localeId: localeId,
-@as("localeName") localeName: localeName,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id
+creationDateTime: option<timestamp_>,
+botLocaleStatus: option<botLocaleStatus>,
+voiceSettings: option<voiceSettings>,
+nluIntentConfidenceThreshold: option<confidenceThreshold>,
+description: option<description>,
+localeId: option<localeId>,
+localeName: option<localeName>,
+botVersion: option<draftBotVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateBotLocaleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBot = {
   type t;
   type request = {
-@as("testBotAliasTags") testBotAliasTags: tagMap,
-@as("botTags") botTags: tagMap,
-@as("idleSessionTTLInSeconds") idleSessionTTLInSeconds: option<sessionTTL>,
-@as("dataPrivacy") dataPrivacy: option<dataPrivacy>,
-@as("roleArn") roleArn: option<roleArn>,
-@as("description") description: description,
-@as("botName") botName: option<name>
+testBotAliasTags: option<tagMap>,
+botTags: option<tagMap>,
+idleSessionTTLInSeconds: sessionTTL,
+dataPrivacy: dataPrivacy,
+roleArn: roleArn,
+description: option<description>,
+botName: name
 }
   type response = {
-@as("testBotAliasTags") testBotAliasTags: tagMap,
-@as("botTags") botTags: tagMap,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("botStatus") botStatus: botStatus,
-@as("idleSessionTTLInSeconds") idleSessionTTLInSeconds: sessionTTL,
-@as("dataPrivacy") dataPrivacy: dataPrivacy,
-@as("roleArn") roleArn: roleArn,
-@as("description") description: description,
-@as("botName") botName: name,
-@as("botId") botId: id
+testBotAliasTags: option<tagMap>,
+botTags: option<tagMap>,
+creationDateTime: option<timestamp_>,
+botStatus: option<botStatus>,
+idleSessionTTLInSeconds: option<sessionTTL>,
+dataPrivacy: option<dataPrivacy>,
+roleArn: option<roleArn>,
+description: option<description>,
+botName: option<name>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateBotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateExport = {
   type t;
   type request = {
-@as("filePassword") filePassword: importExportFilePassword,
-@as("exportId") exportId: option<id>
+filePassword: option<importExportFilePassword>,
+exportId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("exportStatus") exportStatus: exportStatus,
-@as("fileFormat") fileFormat: importExportFileFormat,
-@as("resourceSpecification") resourceSpecification: exportResourceSpecification,
-@as("exportId") exportId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+exportStatus: option<exportStatus>,
+fileFormat: option<importExportFileFormat>,
+resourceSpecification: option<exportResourceSpecification>,
+exportId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "UpdateExportCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBuiltInSlotTypes = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: builtInsMaxResults,
-@as("sortBy") sortBy: builtInSlotTypeSortBy,
-@as("localeId") localeId: option<localeId>
+nextToken: option<nextToken>,
+maxResults: option<builtInsMaxResults>,
+sortBy: option<builtInSlotTypeSortBy>,
+localeId: localeId
 }
   type response = {
-@as("localeId") localeId: localeId,
-@as("nextToken") nextToken: nextToken,
-@as("builtInSlotTypeSummaries") builtInSlotTypeSummaries: builtInSlotTypeSummaryList
+localeId: option<localeId>,
+nextToken: option<nextToken>,
+builtInSlotTypeSummaries: option<builtInSlotTypeSummaryList>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListBuiltInSlotTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBuiltInIntents = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: builtInsMaxResults,
-@as("sortBy") sortBy: builtInIntentSortBy,
-@as("localeId") localeId: option<localeId>
+nextToken: option<nextToken>,
+maxResults: option<builtInsMaxResults>,
+sortBy: option<builtInIntentSortBy>,
+localeId: localeId
 }
   type response = {
-@as("localeId") localeId: localeId,
-@as("nextToken") nextToken: nextToken,
-@as("builtInIntentSummaries") builtInIntentSummaries: builtInIntentSummaryList
+localeId: option<localeId>,
+nextToken: option<nextToken>,
+builtInIntentSummaries: option<builtInIntentSummaryList>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListBuiltInIntentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBotVersions = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("sortBy") sortBy: botVersionSortBy,
-@as("botId") botId: option<id>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+sortBy: option<botVersionSortBy>,
+botId: id
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("botVersionSummaries") botVersionSummaries: botVersionSummaryList,
-@as("botId") botId: id
+nextToken: option<nextToken>,
+botVersionSummaries: option<botVersionSummaryList>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListBotVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBotAliases = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("botId") botId: option<id>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+botId: id
 }
   type response = {
-@as("botId") botId: id,
-@as("nextToken") nextToken: nextToken,
-@as("botAliasSummaries") botAliasSummaries: botAliasSummaryList
+botId: option<id>,
+nextToken: option<nextToken>,
+botAliasSummaries: option<botAliasSummaryList>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListBotAliasesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeExport = {
   type t;
   type request = {
-@as("exportId") exportId: option<id>
+exportId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("downloadUrl") downloadUrl: presignedS3Url,
-@as("failureReasons") failureReasons: failureReasons,
-@as("exportStatus") exportStatus: exportStatus,
-@as("fileFormat") fileFormat: importExportFileFormat,
-@as("resourceSpecification") resourceSpecification: exportResourceSpecification,
-@as("exportId") exportId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+downloadUrl: option<presignedS3Url>,
+failureReasons: option<failureReasons>,
+exportStatus: option<exportStatus>,
+fileFormat: option<importExportFileFormat>,
+resourceSpecification: option<exportResourceSpecification>,
+exportId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DescribeExportCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBotLocale = {
   type t;
   type request = {
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<botVersion>,
-@as("botId") botId: option<id>
+localeId: localeId,
+botVersion: botVersion,
+botId: id
 }
   type response = {
-@as("botLocaleHistoryEvents") botLocaleHistoryEvents: botLocaleHistoryEventsList,
-@as("lastBuildSubmittedDateTime") lastBuildSubmittedDateTime: amazonawsTimestamp,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("failureReasons") failureReasons: failureReasons,
-@as("botLocaleStatus") botLocaleStatus: botLocaleStatus,
-@as("slotTypesCount") slotTypesCount: resourceCount,
-@as("intentsCount") intentsCount: resourceCount,
-@as("voiceSettings") voiceSettings: voiceSettings,
-@as("nluIntentConfidenceThreshold") nluIntentConfidenceThreshold: confidenceThreshold,
-@as("description") description: description,
-@as("localeName") localeName: localeName,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: botVersion,
-@as("botId") botId: id
+botLocaleHistoryEvents: option<botLocaleHistoryEventsList>,
+lastBuildSubmittedDateTime: option<timestamp_>,
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+failureReasons: option<failureReasons>,
+botLocaleStatus: option<botLocaleStatus>,
+slotTypesCount: option<resourceCount>,
+intentsCount: option<resourceCount>,
+voiceSettings: option<voiceSettings>,
+nluIntentConfidenceThreshold: option<confidenceThreshold>,
+description: option<description>,
+localeName: option<localeName>,
+localeId: option<localeId>,
+botVersion: option<botVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DescribeBotLocaleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateResourcePolicyStatement = {
   type t;
   type request = {
-@as("expectedRevisionId") expectedRevisionId: revisionId,
-@as("condition") condition: conditionMap,
-@as("action") action: option<operationList>,
-@as("principal") principal: option<principalList>,
-@as("effect") effect: option<effect>,
-@as("statementId") statementId: option<name>,
-@as("resourceArn") resourceArn: option<amazonResourceName>
+expectedRevisionId: option<revisionId>,
+condition: option<conditionMap>,
+action: operationList,
+principal: principalList,
+effect: effect,
+statementId: name,
+resourceArn: amazonResourceName
 }
   type response = {
-@as("revisionId") revisionId: revisionId,
-@as("resourceArn") resourceArn: amazonResourceName
+revisionId: option<revisionId>,
+resourceArn: option<amazonResourceName>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateResourcePolicyStatementCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateExport = {
   type t;
   type request = {
-@as("filePassword") filePassword: importExportFilePassword,
-@as("fileFormat") fileFormat: option<importExportFileFormat>,
-@as("resourceSpecification") resourceSpecification: option<exportResourceSpecification>
+filePassword: option<importExportFilePassword>,
+fileFormat: importExportFileFormat,
+resourceSpecification: exportResourceSpecification
 }
   type response = {
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("exportStatus") exportStatus: exportStatus,
-@as("fileFormat") fileFormat: importExportFileFormat,
-@as("resourceSpecification") resourceSpecification: exportResourceSpecification,
-@as("exportId") exportId: id
+creationDateTime: option<timestamp_>,
+exportStatus: option<exportStatus>,
+fileFormat: option<importExportFileFormat>,
+resourceSpecification: option<exportResourceSpecification>,
+exportId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateExportCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBotVersion = {
   type t;
   type request = {
-@as("botVersionLocaleSpecification") botVersionLocaleSpecification: option<botVersionLocaleSpecification>,
-@as("description") description: description,
-@as("botId") botId: option<id>
+botVersionLocaleSpecification: botVersionLocaleSpecification,
+description: option<description>,
+botId: id
 }
   type response = {
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("botStatus") botStatus: botStatus,
-@as("botVersionLocaleSpecification") botVersionLocaleSpecification: botVersionLocaleSpecification,
-@as("botVersion") botVersion: numericalBotVersion,
-@as("description") description: description,
-@as("botId") botId: id
+creationDateTime: option<timestamp_>,
+botStatus: option<botStatus>,
+botVersionLocaleSpecification: option<botVersionLocaleSpecification>,
+botVersion: option<numericalBotVersion>,
+description: option<description>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateBotVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartImport = {
   type t;
   type request = {
-@as("filePassword") filePassword: importExportFilePassword,
-@as("mergeStrategy") mergeStrategy: option<mergeStrategy>,
-@as("resourceSpecification") resourceSpecification: option<importResourceSpecification>,
-@as("importId") importId: option<id>
+filePassword: option<importExportFilePassword>,
+mergeStrategy: mergeStrategy,
+resourceSpecification: importResourceSpecification,
+importId: id
 }
   type response = {
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("importStatus") importStatus: importStatus,
-@as("mergeStrategy") mergeStrategy: mergeStrategy,
-@as("resourceSpecification") resourceSpecification: importResourceSpecification,
-@as("importId") importId: id
+creationDateTime: option<timestamp_>,
+importStatus: option<importStatus>,
+mergeStrategy: option<mergeStrategy>,
+resourceSpecification: option<importResourceSpecification>,
+importId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "StartImportCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSlotTypes = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("filters") filters: slotTypeFilters,
-@as("sortBy") sortBy: slotTypeSortBy,
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<botVersion>,
-@as("botId") botId: option<id>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+filters: option<slotTypeFilters>,
+sortBy: option<slotTypeSortBy>,
+localeId: localeId,
+botVersion: botVersion,
+botId: id
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("slotTypeSummaries") slotTypeSummaries: slotTypeSummaryList,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: botVersion,
-@as("botId") botId: id
+nextToken: option<nextToken>,
+slotTypeSummaries: option<slotTypeSummaryList>,
+localeId: option<localeId>,
+botVersion: option<botVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListSlotTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListImports = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("filters") filters: importFilters,
-@as("sortBy") sortBy: importSortBy,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+filters: option<importFilters>,
+sortBy: option<importSortBy>,
+botVersion: option<draftBotVersion>,
+botId: option<id>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("importSummaries") importSummaries: importSummaryList,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id
+nextToken: option<nextToken>,
+importSummaries: option<importSummaryList>,
+botVersion: option<draftBotVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListImportsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBots = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("filters") filters: botFilters,
-@as("sortBy") sortBy: botSortBy
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+filters: option<botFilters>,
+sortBy: option<botSortBy>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("botSummaries") botSummaries: botSummaryList
+nextToken: option<nextToken>,
+botSummaries: option<botSummaryList>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListBotsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBotLocales = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("filters") filters: botLocaleFilters,
-@as("sortBy") sortBy: botLocaleSortBy,
-@as("botVersion") botVersion: option<botVersion>,
-@as("botId") botId: option<id>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+filters: option<botLocaleFilters>,
+sortBy: option<botLocaleSortBy>,
+botVersion: botVersion,
+botId: id
 }
   type response = {
-@as("botLocaleSummaries") botLocaleSummaries: botLocaleSummaryList,
-@as("nextToken") nextToken: nextToken,
-@as("botVersion") botVersion: botVersion,
-@as("botId") botId: id
+botLocaleSummaries: option<botLocaleSummaryList>,
+nextToken: option<nextToken>,
+botVersion: option<botVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListBotLocalesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeImport = {
   type t;
   type request = {
-@as("importId") importId: option<id>
+importId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("failureReasons") failureReasons: failureReasons,
-@as("importStatus") importStatus: importStatus,
-@as("mergeStrategy") mergeStrategy: mergeStrategy,
-@as("importedResourceName") importedResourceName: name,
-@as("importedResourceId") importedResourceId: importedResourceId,
-@as("resourceSpecification") resourceSpecification: importResourceSpecification,
-@as("importId") importId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+failureReasons: option<failureReasons>,
+importStatus: option<importStatus>,
+mergeStrategy: option<mergeStrategy>,
+importedResourceName: option<name>,
+importedResourceId: option<importedResourceId>,
+resourceSpecification: option<importResourceSpecification>,
+importId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DescribeImportCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateSlotType = {
   type t;
   type request = {
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>,
-@as("parentSlotTypeSignature") parentSlotTypeSignature: slotTypeSignature,
-@as("valueSelectionSetting") valueSelectionSetting: option<slotValueSelectionSetting>,
-@as("slotTypeValues") slotTypeValues: slotTypeValues,
-@as("description") description: description,
-@as("slotTypeName") slotTypeName: option<name>,
-@as("slotTypeId") slotTypeId: option<id>
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id,
+parentSlotTypeSignature: option<slotTypeSignature>,
+valueSelectionSetting: slotValueSelectionSetting,
+slotTypeValues: option<slotTypeValues>,
+description: option<description>,
+slotTypeName: name,
+slotTypeId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id,
-@as("parentSlotTypeSignature") parentSlotTypeSignature: slotTypeSignature,
-@as("valueSelectionSetting") valueSelectionSetting: slotValueSelectionSetting,
-@as("slotTypeValues") slotTypeValues: slotTypeValues,
-@as("description") description: description,
-@as("slotTypeName") slotTypeName: name,
-@as("slotTypeId") slotTypeId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+localeId: option<localeId>,
+botVersion: option<draftBotVersion>,
+botId: option<id>,
+parentSlotTypeSignature: option<slotTypeSignature>,
+valueSelectionSetting: option<slotValueSelectionSetting>,
+slotTypeValues: option<slotTypeValues>,
+description: option<description>,
+slotTypeName: option<name>,
+slotTypeId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "UpdateSlotTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListIntents = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("filters") filters: intentFilters,
-@as("sortBy") sortBy: intentSortBy,
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<botVersion>,
-@as("botId") botId: option<id>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+filters: option<intentFilters>,
+sortBy: option<intentSortBy>,
+localeId: localeId,
+botVersion: botVersion,
+botId: id
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("intentSummaries") intentSummaries: intentSummaryList,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: botVersion,
-@as("botId") botId: id
+nextToken: option<nextToken>,
+intentSummaries: option<intentSummaryList>,
+localeId: option<localeId>,
+botVersion: option<botVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListIntentsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListExports = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("filters") filters: exportFilters,
-@as("sortBy") sortBy: exportSortBy,
-@as("botVersion") botVersion: botVersion,
-@as("botId") botId: id
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+filters: option<exportFilters>,
+sortBy: option<exportSortBy>,
+botVersion: option<botVersion>,
+botId: option<id>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("exportSummaries") exportSummaries: exportSummaryList,
-@as("botVersion") botVersion: botVersion,
-@as("botId") botId: id
+nextToken: option<nextToken>,
+exportSummaries: option<exportSummaryList>,
+botVersion: option<botVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListExportsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSlotType = {
   type t;
   type request = {
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<botVersion>,
-@as("botId") botId: option<id>,
-@as("slotTypeId") slotTypeId: option<id>
+localeId: localeId,
+botVersion: botVersion,
+botId: id,
+slotTypeId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: botVersion,
-@as("botId") botId: id,
-@as("parentSlotTypeSignature") parentSlotTypeSignature: slotTypeSignature,
-@as("valueSelectionSetting") valueSelectionSetting: slotValueSelectionSetting,
-@as("slotTypeValues") slotTypeValues: slotTypeValues,
-@as("description") description: description,
-@as("slotTypeName") slotTypeName: name,
-@as("slotTypeId") slotTypeId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+localeId: option<localeId>,
+botVersion: option<botVersion>,
+botId: option<id>,
+parentSlotTypeSignature: option<slotTypeSignature>,
+valueSelectionSetting: option<slotValueSelectionSetting>,
+slotTypeValues: option<slotTypeValues>,
+description: option<description>,
+slotTypeName: option<name>,
+slotTypeId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DescribeSlotTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSlotType = {
   type t;
   type request = {
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>,
-@as("parentSlotTypeSignature") parentSlotTypeSignature: slotTypeSignature,
-@as("valueSelectionSetting") valueSelectionSetting: option<slotValueSelectionSetting>,
-@as("slotTypeValues") slotTypeValues: slotTypeValues,
-@as("description") description: description,
-@as("slotTypeName") slotTypeName: option<name>
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id,
+parentSlotTypeSignature: option<slotTypeSignature>,
+valueSelectionSetting: slotValueSelectionSetting,
+slotTypeValues: option<slotTypeValues>,
+description: option<description>,
+slotTypeName: name
 }
   type response = {
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id,
-@as("parentSlotTypeSignature") parentSlotTypeSignature: slotTypeSignature,
-@as("valueSelectionSetting") valueSelectionSetting: slotValueSelectionSetting,
-@as("slotTypeValues") slotTypeValues: slotTypeValues,
-@as("description") description: description,
-@as("slotTypeName") slotTypeName: name,
-@as("slotTypeId") slotTypeId: id
+creationDateTime: option<timestamp_>,
+localeId: option<localeId>,
+botVersion: option<draftBotVersion>,
+botId: option<id>,
+parentSlotTypeSignature: option<slotTypeSignature>,
+valueSelectionSetting: option<slotValueSelectionSetting>,
+slotTypeValues: option<slotTypeValues>,
+description: option<description>,
+slotTypeName: option<name>,
+slotTypeId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateSlotTypeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateBotAlias = {
   type t;
   type request = {
-@as("botId") botId: option<id>,
-@as("sentimentAnalysisSettings") sentimentAnalysisSettings: sentimentAnalysisSettings,
-@as("conversationLogSettings") conversationLogSettings: conversationLogSettings,
-@as("botAliasLocaleSettings") botAliasLocaleSettings: botAliasLocaleSettingsMap,
-@as("botVersion") botVersion: botVersion,
-@as("description") description: description,
-@as("botAliasName") botAliasName: option<name>,
-@as("botAliasId") botAliasId: option<botAliasId>
+botId: id,
+sentimentAnalysisSettings: option<sentimentAnalysisSettings>,
+conversationLogSettings: option<conversationLogSettings>,
+botAliasLocaleSettings: option<botAliasLocaleSettingsMap>,
+botVersion: option<botVersion>,
+description: option<description>,
+botAliasName: name,
+botAliasId: botAliasId
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("botId") botId: id,
-@as("botAliasStatus") botAliasStatus: botAliasStatus,
-@as("sentimentAnalysisSettings") sentimentAnalysisSettings: sentimentAnalysisSettings,
-@as("conversationLogSettings") conversationLogSettings: conversationLogSettings,
-@as("botAliasLocaleSettings") botAliasLocaleSettings: botAliasLocaleSettingsMap,
-@as("botVersion") botVersion: botVersion,
-@as("description") description: description,
-@as("botAliasName") botAliasName: name,
-@as("botAliasId") botAliasId: botAliasId
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+botId: option<id>,
+botAliasStatus: option<botAliasStatus>,
+sentimentAnalysisSettings: option<sentimentAnalysisSettings>,
+conversationLogSettings: option<conversationLogSettings>,
+botAliasLocaleSettings: option<botAliasLocaleSettingsMap>,
+botVersion: option<botVersion>,
+description: option<description>,
+botAliasName: option<name>,
+botAliasId: option<botAliasId>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "UpdateBotAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBotAlias = {
   type t;
   type request = {
-@as("botId") botId: option<id>,
-@as("botAliasId") botAliasId: option<botAliasId>
+botId: id,
+botAliasId: botAliasId
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("botId") botId: id,
-@as("botAliasStatus") botAliasStatus: botAliasStatus,
-@as("botAliasHistoryEvents") botAliasHistoryEvents: botAliasHistoryEventsList,
-@as("sentimentAnalysisSettings") sentimentAnalysisSettings: sentimentAnalysisSettings,
-@as("conversationLogSettings") conversationLogSettings: conversationLogSettings,
-@as("botAliasLocaleSettings") botAliasLocaleSettings: botAliasLocaleSettingsMap,
-@as("botVersion") botVersion: botVersion,
-@as("description") description: description,
-@as("botAliasName") botAliasName: name,
-@as("botAliasId") botAliasId: botAliasId
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+botId: option<id>,
+botAliasStatus: option<botAliasStatus>,
+botAliasHistoryEvents: option<botAliasHistoryEventsList>,
+sentimentAnalysisSettings: option<sentimentAnalysisSettings>,
+conversationLogSettings: option<conversationLogSettings>,
+botAliasLocaleSettings: option<botAliasLocaleSettingsMap>,
+botVersion: option<botVersion>,
+description: option<description>,
+botAliasName: option<name>,
+botAliasId: option<botAliasId>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DescribeBotAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBotAlias = {
   type t;
   type request = {
-@as("tags") tags: tagMap,
-@as("botId") botId: option<id>,
-@as("sentimentAnalysisSettings") sentimentAnalysisSettings: sentimentAnalysisSettings,
-@as("conversationLogSettings") conversationLogSettings: conversationLogSettings,
-@as("botAliasLocaleSettings") botAliasLocaleSettings: botAliasLocaleSettingsMap,
-@as("botVersion") botVersion: numericalBotVersion,
-@as("description") description: description,
-@as("botAliasName") botAliasName: option<name>
+tags: option<tagMap>,
+botId: id,
+sentimentAnalysisSettings: option<sentimentAnalysisSettings>,
+conversationLogSettings: option<conversationLogSettings>,
+botAliasLocaleSettings: option<botAliasLocaleSettingsMap>,
+botVersion: option<numericalBotVersion>,
+description: option<description>,
+botAliasName: name
 }
   type response = {
-@as("tags") tags: tagMap,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("botId") botId: id,
-@as("botAliasStatus") botAliasStatus: botAliasStatus,
-@as("sentimentAnalysisSettings") sentimentAnalysisSettings: sentimentAnalysisSettings,
-@as("conversationLogSettings") conversationLogSettings: conversationLogSettings,
-@as("botAliasLocaleSettings") botAliasLocaleSettings: botAliasLocaleSettingsMap,
-@as("botVersion") botVersion: numericalBotVersion,
-@as("description") description: description,
-@as("botAliasName") botAliasName: name,
-@as("botAliasId") botAliasId: botAliasId
+tags: option<tagMap>,
+creationDateTime: option<timestamp_>,
+botId: option<id>,
+botAliasStatus: option<botAliasStatus>,
+sentimentAnalysisSettings: option<sentimentAnalysisSettings>,
+conversationLogSettings: option<conversationLogSettings>,
+botAliasLocaleSettings: option<botAliasLocaleSettingsMap>,
+botVersion: option<numericalBotVersion>,
+description: option<description>,
+botAliasName: option<name>,
+botAliasId: option<botAliasId>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateBotAliasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateIntent = {
   type t;
   type request = {
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>,
-@as("kendraConfiguration") kendraConfiguration: kendraConfiguration,
-@as("outputContexts") outputContexts: outputContextsList,
-@as("inputContexts") inputContexts: inputContextsList,
-@as("intentClosingSetting") intentClosingSetting: intentClosingSetting,
-@as("intentConfirmationSetting") intentConfirmationSetting: intentConfirmationSetting,
-@as("slotPriorities") slotPriorities: slotPrioritiesList,
-@as("fulfillmentCodeHook") fulfillmentCodeHook: fulfillmentCodeHookSettings,
-@as("dialogCodeHook") dialogCodeHook: dialogCodeHookSettings,
-@as("sampleUtterances") sampleUtterances: sampleUtterancesList,
-@as("parentIntentSignature") parentIntentSignature: intentSignature,
-@as("description") description: description,
-@as("intentName") intentName: option<name>,
-@as("intentId") intentId: option<id>
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id,
+kendraConfiguration: option<kendraConfiguration>,
+outputContexts: option<outputContextsList>,
+inputContexts: option<inputContextsList>,
+intentClosingSetting: option<intentClosingSetting>,
+intentConfirmationSetting: option<intentConfirmationSetting>,
+slotPriorities: option<slotPrioritiesList>,
+fulfillmentCodeHook: option<fulfillmentCodeHookSettings>,
+dialogCodeHook: option<dialogCodeHookSettings>,
+sampleUtterances: option<sampleUtterancesList>,
+parentIntentSignature: option<intentSignature>,
+description: option<description>,
+intentName: name,
+intentId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id,
-@as("kendraConfiguration") kendraConfiguration: kendraConfiguration,
-@as("outputContexts") outputContexts: outputContextsList,
-@as("inputContexts") inputContexts: inputContextsList,
-@as("intentClosingSetting") intentClosingSetting: intentClosingSetting,
-@as("intentConfirmationSetting") intentConfirmationSetting: intentConfirmationSetting,
-@as("slotPriorities") slotPriorities: slotPrioritiesList,
-@as("fulfillmentCodeHook") fulfillmentCodeHook: fulfillmentCodeHookSettings,
-@as("dialogCodeHook") dialogCodeHook: dialogCodeHookSettings,
-@as("sampleUtterances") sampleUtterances: sampleUtterancesList,
-@as("parentIntentSignature") parentIntentSignature: intentSignature,
-@as("description") description: description,
-@as("intentName") intentName: name,
-@as("intentId") intentId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+localeId: option<localeId>,
+botVersion: option<draftBotVersion>,
+botId: option<id>,
+kendraConfiguration: option<kendraConfiguration>,
+outputContexts: option<outputContextsList>,
+inputContexts: option<inputContextsList>,
+intentClosingSetting: option<intentClosingSetting>,
+intentConfirmationSetting: option<intentConfirmationSetting>,
+slotPriorities: option<slotPrioritiesList>,
+fulfillmentCodeHook: option<fulfillmentCodeHookSettings>,
+dialogCodeHook: option<dialogCodeHookSettings>,
+sampleUtterances: option<sampleUtterancesList>,
+parentIntentSignature: option<intentSignature>,
+description: option<description>,
+intentName: option<name>,
+intentId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "UpdateIntentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeIntent = {
   type t;
   type request = {
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<botVersion>,
-@as("botId") botId: option<id>,
-@as("intentId") intentId: option<id>
+localeId: localeId,
+botVersion: botVersion,
+botId: id,
+intentId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id,
-@as("kendraConfiguration") kendraConfiguration: kendraConfiguration,
-@as("outputContexts") outputContexts: outputContextsList,
-@as("inputContexts") inputContexts: inputContextsList,
-@as("intentClosingSetting") intentClosingSetting: intentClosingSetting,
-@as("intentConfirmationSetting") intentConfirmationSetting: intentConfirmationSetting,
-@as("slotPriorities") slotPriorities: slotPrioritiesList,
-@as("fulfillmentCodeHook") fulfillmentCodeHook: fulfillmentCodeHookSettings,
-@as("dialogCodeHook") dialogCodeHook: dialogCodeHookSettings,
-@as("sampleUtterances") sampleUtterances: sampleUtterancesList,
-@as("parentIntentSignature") parentIntentSignature: intentSignature,
-@as("description") description: description,
-@as("intentName") intentName: name,
-@as("intentId") intentId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+localeId: option<localeId>,
+botVersion: option<draftBotVersion>,
+botId: option<id>,
+kendraConfiguration: option<kendraConfiguration>,
+outputContexts: option<outputContextsList>,
+inputContexts: option<inputContextsList>,
+intentClosingSetting: option<intentClosingSetting>,
+intentConfirmationSetting: option<intentConfirmationSetting>,
+slotPriorities: option<slotPrioritiesList>,
+fulfillmentCodeHook: option<fulfillmentCodeHookSettings>,
+dialogCodeHook: option<dialogCodeHookSettings>,
+sampleUtterances: option<sampleUtterancesList>,
+parentIntentSignature: option<intentSignature>,
+description: option<description>,
+intentName: option<name>,
+intentId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DescribeIntentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateIntent = {
   type t;
   type request = {
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>,
-@as("kendraConfiguration") kendraConfiguration: kendraConfiguration,
-@as("outputContexts") outputContexts: outputContextsList,
-@as("inputContexts") inputContexts: inputContextsList,
-@as("intentClosingSetting") intentClosingSetting: intentClosingSetting,
-@as("intentConfirmationSetting") intentConfirmationSetting: intentConfirmationSetting,
-@as("fulfillmentCodeHook") fulfillmentCodeHook: fulfillmentCodeHookSettings,
-@as("dialogCodeHook") dialogCodeHook: dialogCodeHookSettings,
-@as("sampleUtterances") sampleUtterances: sampleUtterancesList,
-@as("parentIntentSignature") parentIntentSignature: intentSignature,
-@as("description") description: description,
-@as("intentName") intentName: option<name>
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id,
+kendraConfiguration: option<kendraConfiguration>,
+outputContexts: option<outputContextsList>,
+inputContexts: option<inputContextsList>,
+intentClosingSetting: option<intentClosingSetting>,
+intentConfirmationSetting: option<intentConfirmationSetting>,
+fulfillmentCodeHook: option<fulfillmentCodeHookSettings>,
+dialogCodeHook: option<dialogCodeHookSettings>,
+sampleUtterances: option<sampleUtterancesList>,
+parentIntentSignature: option<intentSignature>,
+description: option<description>,
+intentName: name
 }
   type response = {
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id,
-@as("kendraConfiguration") kendraConfiguration: kendraConfiguration,
-@as("outputContexts") outputContexts: outputContextsList,
-@as("inputContexts") inputContexts: inputContextsList,
-@as("intentClosingSetting") intentClosingSetting: intentClosingSetting,
-@as("intentConfirmationSetting") intentConfirmationSetting: intentConfirmationSetting,
-@as("fulfillmentCodeHook") fulfillmentCodeHook: fulfillmentCodeHookSettings,
-@as("dialogCodeHook") dialogCodeHook: dialogCodeHookSettings,
-@as("sampleUtterances") sampleUtterances: sampleUtterancesList,
-@as("parentIntentSignature") parentIntentSignature: intentSignature,
-@as("description") description: description,
-@as("intentName") intentName: name,
-@as("intentId") intentId: id
+creationDateTime: option<timestamp_>,
+localeId: option<localeId>,
+botVersion: option<draftBotVersion>,
+botId: option<id>,
+kendraConfiguration: option<kendraConfiguration>,
+outputContexts: option<outputContextsList>,
+inputContexts: option<inputContextsList>,
+intentClosingSetting: option<intentClosingSetting>,
+intentConfirmationSetting: option<intentConfirmationSetting>,
+fulfillmentCodeHook: option<fulfillmentCodeHookSettings>,
+dialogCodeHook: option<dialogCodeHookSettings>,
+sampleUtterances: option<sampleUtterancesList>,
+parentIntentSignature: option<intentSignature>,
+description: option<description>,
+intentName: option<name>,
+intentId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateIntentCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateSlot = {
   type t;
   type request = {
-@as("intentId") intentId: option<id>,
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>,
-@as("obfuscationSetting") obfuscationSetting: obfuscationSetting,
-@as("valueElicitationSetting") valueElicitationSetting: option<slotValueElicitationSetting>,
-@as("slotTypeId") slotTypeId: option<builtInOrCustomSlotTypeId>,
-@as("description") description: description,
-@as("slotName") slotName: option<name>,
-@as("slotId") slotId: option<id>
+intentId: id,
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id,
+obfuscationSetting: option<obfuscationSetting>,
+valueElicitationSetting: slotValueElicitationSetting,
+slotTypeId: builtInOrCustomSlotTypeId,
+description: option<description>,
+slotName: name,
+slotId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("intentId") intentId: id,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id,
-@as("obfuscationSetting") obfuscationSetting: obfuscationSetting,
-@as("valueElicitationSetting") valueElicitationSetting: slotValueElicitationSetting,
-@as("slotTypeId") slotTypeId: builtInOrCustomSlotTypeId,
-@as("description") description: description,
-@as("slotName") slotName: name,
-@as("slotId") slotId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+intentId: option<id>,
+localeId: option<localeId>,
+botVersion: option<draftBotVersion>,
+botId: option<id>,
+obfuscationSetting: option<obfuscationSetting>,
+valueElicitationSetting: option<slotValueElicitationSetting>,
+slotTypeId: option<builtInOrCustomSlotTypeId>,
+description: option<description>,
+slotName: option<name>,
+slotId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "UpdateSlotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSlots = {
   type t;
   type request = {
-@as("nextToken") nextToken: nextToken,
-@as("maxResults") maxResults: maxResults,
-@as("filters") filters: slotFilters,
-@as("sortBy") sortBy: slotSortBy,
-@as("intentId") intentId: option<id>,
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<botVersion>,
-@as("botId") botId: option<id>
+nextToken: option<nextToken>,
+maxResults: option<maxResults>,
+filters: option<slotFilters>,
+sortBy: option<slotSortBy>,
+intentId: id,
+localeId: localeId,
+botVersion: botVersion,
+botId: id
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("slotSummaries") slotSummaries: slotSummaryList,
-@as("intentId") intentId: id,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: botVersion,
-@as("botId") botId: id
+nextToken: option<nextToken>,
+slotSummaries: option<slotSummaryList>,
+intentId: option<id>,
+localeId: option<localeId>,
+botVersion: option<botVersion>,
+botId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListSlotsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSlot = {
   type t;
   type request = {
-@as("intentId") intentId: option<id>,
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<botVersion>,
-@as("botId") botId: option<id>,
-@as("slotId") slotId: option<id>
+intentId: id,
+localeId: localeId,
+botVersion: botVersion,
+botId: id,
+slotId: id
 }
   type response = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: amazonawsTimestamp,
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("intentId") intentId: id,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: botVersion,
-@as("botId") botId: id,
-@as("obfuscationSetting") obfuscationSetting: obfuscationSetting,
-@as("valueElicitationSetting") valueElicitationSetting: slotValueElicitationSetting,
-@as("slotTypeId") slotTypeId: builtInOrCustomSlotTypeId,
-@as("description") description: description,
-@as("slotName") slotName: name,
-@as("slotId") slotId: id
+lastUpdatedDateTime: option<timestamp_>,
+creationDateTime: option<timestamp_>,
+intentId: option<id>,
+localeId: option<localeId>,
+botVersion: option<botVersion>,
+botId: option<id>,
+obfuscationSetting: option<obfuscationSetting>,
+valueElicitationSetting: option<slotValueElicitationSetting>,
+slotTypeId: option<builtInOrCustomSlotTypeId>,
+description: option<description>,
+slotName: option<name>,
+slotId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DescribeSlotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSlot = {
   type t;
   type request = {
-@as("intentId") intentId: option<id>,
-@as("localeId") localeId: option<localeId>,
-@as("botVersion") botVersion: option<draftBotVersion>,
-@as("botId") botId: option<id>,
-@as("obfuscationSetting") obfuscationSetting: obfuscationSetting,
-@as("valueElicitationSetting") valueElicitationSetting: option<slotValueElicitationSetting>,
-@as("slotTypeId") slotTypeId: option<builtInOrCustomSlotTypeId>,
-@as("description") description: description,
-@as("slotName") slotName: option<name>
+intentId: id,
+localeId: localeId,
+botVersion: draftBotVersion,
+botId: id,
+obfuscationSetting: option<obfuscationSetting>,
+valueElicitationSetting: slotValueElicitationSetting,
+slotTypeId: builtInOrCustomSlotTypeId,
+description: option<description>,
+slotName: name
 }
   type response = {
-@as("creationDateTime") creationDateTime: amazonawsTimestamp,
-@as("intentId") intentId: id,
-@as("localeId") localeId: localeId,
-@as("botVersion") botVersion: draftBotVersion,
-@as("botId") botId: id,
-@as("obfuscationSetting") obfuscationSetting: obfuscationSetting,
-@as("valueElicitationSetting") valueElicitationSetting: slotValueElicitationSetting,
-@as("slotTypeId") slotTypeId: builtInOrCustomSlotTypeId,
-@as("description") description: description,
-@as("slotName") slotName: name,
-@as("slotId") slotId: id
+creationDateTime: option<timestamp_>,
+intentId: option<id>,
+localeId: option<localeId>,
+botVersion: option<draftBotVersion>,
+botId: option<id>,
+obfuscationSetting: option<obfuscationSetting>,
+valueElicitationSetting: option<slotValueElicitationSetting>,
+slotTypeId: option<builtInOrCustomSlotTypeId>,
+description: option<description>,
+slotName: option<name>,
+slotId: option<id>
 }
   @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateSlotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

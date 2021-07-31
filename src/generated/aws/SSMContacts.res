@@ -1,31 +1,38 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type validationExceptionReason = [@as("OTHER") #OTHER | @as("FIELD_VALIDATION_FAILED") #FIELD_VALIDATION_FAILED | @as("CANNOT_PARSE") #CANNOT_PARSE | @as("UNKNOWN_OPERATION") #UNKNOWN_OPERATION]
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
+type validationExceptionReason = [@as("OTHER") #OTHER | @as("FIELD_VALIDATION_FAILED") #FIELDVALIDATIONFAILED | @as("CANNOT_PARSE") #CANNOTPARSE | @as("UNKNOWN_OPERATION") #UNKNOWNOPERATION]
 type tagValue = string
 type tagKey = string
 type subject = string
-type amazonawsString = string
+type string_ = string
 type stopReason = string
-type stageDurationInMins = int;
+type stageDurationInMins = int
 type ssmContactsArn = string
 type simpleAddress = string
 type sender = string
-type retryIntervalInMinutes = int;
-type retryAfterSeconds = int;
+type retryIntervalInMinutes = int
+type retryAfterSeconds = int
 type receiptType = [@as("STOP") #STOP | @as("SENT") #SENT | @as("READ") #READ | @as("ERROR") #ERROR | @as("DELIVERED") #DELIVERED]
 type receiptInfo = string
 type publicSubject = string
 type publicContent = string
 type policy = string
 type paginationToken = string
-type maxResults = int;
-type isEssential = bool;
+type maxResults = int
+type isEssential = bool
 type incidentId = string
 type idempotencyToken = string
-type deferActivation = bool;
+type deferActivation = bool
 type dateTime = Js.Date.t;
 type content = string
 type contactType = [@as("ESCALATION") #ESCALATION | @as("PERSONAL") #PERSONAL]
@@ -34,68 +41,68 @@ type contactAlias = string
 type channelType = [@as("EMAIL") #EMAIL | @as("VOICE") #VOICE | @as("SMS") #SMS]
 type channelName = string
 type amazonResourceName = string
-type activationStatus = [@as("NOT_ACTIVATED") #NOT_ACTIVATED | @as("ACTIVATED") #ACTIVATED]
+type activationStatus = [@as("NOT_ACTIVATED") #NOTACTIVATED | @as("ACTIVATED") #ACTIVATED]
 type activationCode = string
 type acceptType = [@as("READ") #READ | @as("DELIVERED") #DELIVERED]
 type acceptCode = string
 type validationExceptionField = {
-@as("Message") message: option<amazonawsString>,
-@as("Name") name: option<amazonawsString>
+@as("Message") message: string_,
+@as("Name") name: string_
 }
 type timeRange = {
-@as("EndTime") endTime: dateTime,
-@as("StartTime") startTime: dateTime
+@as("EndTime") endTime: option<dateTime>,
+@as("StartTime") startTime: option<dateTime>
 }
 type tagKeyList = array<tagKey>
 type tag = {
-@as("Value") value: tagValue,
-@as("Key") key: tagKey
+@as("Value") value: option<tagValue>,
+@as("Key") key: option<tagKey>
 }
 type receipt = {
-@as("ReceiptTime") receiptTime: option<dateTime>,
-@as("ReceiptInfo") receiptInfo: receiptInfo,
-@as("ReceiptType") receiptType: option<receiptType>,
-@as("ContactChannelArn") contactChannelArn: ssmContactsArn
+@as("ReceiptTime") receiptTime: dateTime,
+@as("ReceiptInfo") receiptInfo: option<receiptInfo>,
+@as("ReceiptType") receiptType: receiptType,
+@as("ContactChannelArn") contactChannelArn: option<ssmContactsArn>
 }
 type page = {
-@as("ReadTime") readTime: dateTime,
-@as("DeliveryTime") deliveryTime: dateTime,
-@as("SentTime") sentTime: dateTime,
-@as("IncidentId") incidentId: incidentId,
-@as("Sender") sender: option<sender>,
-@as("ContactArn") contactArn: option<ssmContactsArn>,
-@as("EngagementArn") engagementArn: option<ssmContactsArn>,
-@as("PageArn") pageArn: option<ssmContactsArn>
+@as("ReadTime") readTime: option<dateTime>,
+@as("DeliveryTime") deliveryTime: option<dateTime>,
+@as("SentTime") sentTime: option<dateTime>,
+@as("IncidentId") incidentId: option<incidentId>,
+@as("Sender") sender: sender,
+@as("ContactArn") contactArn: ssmContactsArn,
+@as("EngagementArn") engagementArn: ssmContactsArn,
+@as("PageArn") pageArn: ssmContactsArn
 }
 type engagement = {
-@as("StopTime") stopTime: dateTime,
-@as("StartTime") startTime: dateTime,
-@as("IncidentId") incidentId: incidentId,
-@as("Sender") sender: option<sender>,
-@as("ContactArn") contactArn: option<ssmContactsArn>,
-@as("EngagementArn") engagementArn: option<ssmContactsArn>
+@as("StopTime") stopTime: option<dateTime>,
+@as("StartTime") startTime: option<dateTime>,
+@as("IncidentId") incidentId: option<incidentId>,
+@as("Sender") sender: sender,
+@as("ContactArn") contactArn: ssmContactsArn,
+@as("EngagementArn") engagementArn: ssmContactsArn
 }
 type contactTargetInfo = {
-@as("IsEssential") isEssential: option<isEssential>,
-@as("ContactId") contactId: ssmContactsArn
+@as("IsEssential") isEssential: isEssential,
+@as("ContactId") contactId: option<ssmContactsArn>
 }
 type contactChannelAddress = {
-@as("SimpleAddress") simpleAddress: simpleAddress
+@as("SimpleAddress") simpleAddress: option<simpleAddress>
 }
 type contact = {
-@as("Type") type_: option<contactType>,
-@as("DisplayName") displayName: contactName,
-@as("Alias") alias: option<contactAlias>,
-@as("ContactArn") contactArn: option<ssmContactsArn>
+@as("Type") type_: contactType,
+@as("DisplayName") displayName: option<contactName>,
+@as("Alias") alias: contactAlias,
+@as("ContactArn") contactArn: ssmContactsArn
 }
 type channelTargetInfo = {
-@as("RetryIntervalInMinutes") retryIntervalInMinutes: retryIntervalInMinutes,
-@as("ContactChannelId") contactChannelId: option<ssmContactsArn>
+@as("RetryIntervalInMinutes") retryIntervalInMinutes: option<retryIntervalInMinutes>,
+@as("ContactChannelId") contactChannelId: ssmContactsArn
 }
 type validationExceptionFieldList = array<validationExceptionField>
 type target = {
-@as("ContactTargetInfo") contactTargetInfo: contactTargetInfo,
-@as("ChannelTargetInfo") channelTargetInfo: channelTargetInfo
+@as("ContactTargetInfo") contactTargetInfo: option<contactTargetInfo>,
+@as("ChannelTargetInfo") channelTargetInfo: option<channelTargetInfo>
 }
 type tagsList = array<tag>
 type receiptsList = array<receipt>
@@ -103,401 +110,401 @@ type pagesList = array<page>
 type engagementsList = array<engagement>
 type contactsList = array<contact>
 type contactChannel = {
-@as("ActivationStatus") activationStatus: option<activationStatus>,
-@as("DeliveryAddress") deliveryAddress: option<contactChannelAddress>,
-@as("Type") type_: channelType,
-@as("Name") name: option<channelName>,
-@as("ContactArn") contactArn: option<ssmContactsArn>,
-@as("ContactChannelArn") contactChannelArn: option<ssmContactsArn>
+@as("ActivationStatus") activationStatus: activationStatus,
+@as("DeliveryAddress") deliveryAddress: contactChannelAddress,
+@as("Type") type_: option<channelType>,
+@as("Name") name: channelName,
+@as("ContactArn") contactArn: ssmContactsArn,
+@as("ContactChannelArn") contactChannelArn: ssmContactsArn
 }
 type targetsList = array<target>
 type contactChannelList = array<contactChannel>
 type stage = {
-@as("Targets") targets: option<targetsList>,
-@as("DurationInMinutes") durationInMinutes: option<stageDurationInMins>
+@as("Targets") targets: targetsList,
+@as("DurationInMinutes") durationInMinutes: stageDurationInMins
 }
 type stagesList = array<stage>
 type plan = {
-@as("Stages") stages: option<stagesList>
+@as("Stages") stages: stagesList
 }
-type clientType;
-@module("@aws-sdk/client-ssm-contacts") @new external createClient: unit => clientType = "SSMContactsClient";
+type awsServiceClient;
+@module("@aws-sdk/client-ssm-contacts") @new external createClient: unit => awsServiceClient = "SSMContactsClient";
 module UntagResource = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceARN") resourceARN: option<amazonResourceName>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceARN") resourceARN: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateContactChannel = {
   type t;
   type request = {
-@as("DeliveryAddress") deliveryAddress: contactChannelAddress,
-@as("Name") name: channelName,
-@as("ContactChannelId") contactChannelId: option<ssmContactsArn>
+@as("DeliveryAddress") deliveryAddress: option<contactChannelAddress>,
+@as("Name") name: option<channelName>,
+@as("ContactChannelId") contactChannelId: ssmContactsArn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "UpdateContactChannelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("Tags") tags: option<tagsList>,
-@as("ResourceARN") resourceARN: option<amazonResourceName>
+@as("Tags") tags: tagsList,
+@as("ResourceARN") resourceARN: amazonResourceName
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StopEngagement = {
   type t;
   type request = {
-@as("Reason") reason: stopReason,
-@as("EngagementId") engagementId: option<ssmContactsArn>
+@as("Reason") reason: option<stopReason>,
+@as("EngagementId") engagementId: ssmContactsArn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "StopEngagementCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module StartEngagement = {
   type t;
   type request = {
-@as("IdempotencyToken") idempotencyToken: idempotencyToken,
-@as("IncidentId") incidentId: incidentId,
-@as("PublicContent") publicContent: publicContent,
-@as("PublicSubject") publicSubject: publicSubject,
-@as("Content") content: option<content>,
-@as("Subject") subject: option<subject>,
-@as("Sender") sender: option<sender>,
-@as("ContactId") contactId: option<ssmContactsArn>
+@as("IdempotencyToken") idempotencyToken: option<idempotencyToken>,
+@as("IncidentId") incidentId: option<incidentId>,
+@as("PublicContent") publicContent: option<publicContent>,
+@as("PublicSubject") publicSubject: option<publicSubject>,
+@as("Content") content: content,
+@as("Subject") subject: subject,
+@as("Sender") sender: sender,
+@as("ContactId") contactId: ssmContactsArn
 }
   type response = {
-@as("EngagementArn") engagementArn: option<ssmContactsArn>
+@as("EngagementArn") engagementArn: ssmContactsArn
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "StartEngagementCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SendActivationCode = {
   type t;
   type request = {
-@as("ContactChannelId") contactChannelId: option<ssmContactsArn>
+@as("ContactChannelId") contactChannelId: ssmContactsArn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "SendActivationCodeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutContactPolicy = {
   type t;
   type request = {
-@as("Policy") policy: option<policy>,
-@as("ContactArn") contactArn: option<ssmContactsArn>
+@as("Policy") policy: policy,
+@as("ContactArn") contactArn: ssmContactsArn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "PutContactPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("ResourceARN") resourceARN: option<amazonResourceName>
+@as("ResourceARN") resourceARN: amazonResourceName
 }
   type response = {
-@as("Tags") tags: tagsList
+@as("Tags") tags: option<tagsList>
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPagesByEngagement = {
   type t;
   type request = {
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: paginationToken,
-@as("EngagementId") engagementId: option<ssmContactsArn>
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("EngagementId") engagementId: ssmContactsArn
 }
   type response = {
-@as("Pages") pages: option<pagesList>,
-@as("NextToken") nextToken: paginationToken
+@as("Pages") pages: pagesList,
+@as("NextToken") nextToken: option<paginationToken>
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListPagesByEngagementCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPagesByContact = {
   type t;
   type request = {
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: paginationToken,
-@as("ContactId") contactId: option<ssmContactsArn>
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("ContactId") contactId: ssmContactsArn
 }
   type response = {
-@as("Pages") pages: option<pagesList>,
-@as("NextToken") nextToken: paginationToken
+@as("Pages") pages: pagesList,
+@as("NextToken") nextToken: option<paginationToken>
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListPagesByContactCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPageReceipts = {
   type t;
   type request = {
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: paginationToken,
-@as("PageId") pageId: option<ssmContactsArn>
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("PageId") pageId: ssmContactsArn
 }
   type response = {
-@as("Receipts") receipts: receiptsList,
-@as("NextToken") nextToken: paginationToken
+@as("Receipts") receipts: option<receiptsList>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListPageReceiptsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEngagements = {
   type t;
   type request = {
-@as("TimeRangeValue") timeRangeValue: timeRange,
-@as("IncidentId") incidentId: incidentId,
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: paginationToken
+@as("TimeRangeValue") timeRangeValue: option<timeRange>,
+@as("IncidentId") incidentId: option<incidentId>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("Engagements") engagements: option<engagementsList>,
-@as("NextToken") nextToken: paginationToken
+@as("Engagements") engagements: engagementsList,
+@as("NextToken") nextToken: option<paginationToken>
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListEngagementsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListContacts = {
   type t;
   type request = {
-@as("Type") type_: contactType,
-@as("AliasPrefix") aliasPrefix: contactAlias,
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: paginationToken
+@as("Type") type_: option<contactType>,
+@as("AliasPrefix") aliasPrefix: option<contactAlias>,
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   type response = {
-@as("Contacts") contacts: contactsList,
-@as("NextToken") nextToken: paginationToken
+@as("Contacts") contacts: option<contactsList>,
+@as("NextToken") nextToken: option<paginationToken>
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListContactsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetContactPolicy = {
   type t;
   type request = {
-@as("ContactArn") contactArn: option<ssmContactsArn>
-}
-  type response = {
-@as("Policy") policy: policy,
 @as("ContactArn") contactArn: ssmContactsArn
 }
+  type response = {
+@as("Policy") policy: option<policy>,
+@as("ContactArn") contactArn: option<ssmContactsArn>
+}
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "GetContactPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetContactChannel = {
   type t;
   type request = {
-@as("ContactChannelId") contactChannelId: option<ssmContactsArn>
+@as("ContactChannelId") contactChannelId: ssmContactsArn
 }
   type response = {
-@as("ActivationStatus") activationStatus: activationStatus,
-@as("DeliveryAddress") deliveryAddress: option<contactChannelAddress>,
-@as("Type") type_: option<channelType>,
-@as("Name") name: option<channelName>,
-@as("ContactChannelArn") contactChannelArn: option<ssmContactsArn>,
-@as("ContactArn") contactArn: option<ssmContactsArn>
+@as("ActivationStatus") activationStatus: option<activationStatus>,
+@as("DeliveryAddress") deliveryAddress: contactChannelAddress,
+@as("Type") type_: channelType,
+@as("Name") name: channelName,
+@as("ContactChannelArn") contactChannelArn: ssmContactsArn,
+@as("ContactArn") contactArn: ssmContactsArn
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "GetContactChannelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribePage = {
   type t;
   type request = {
-@as("PageId") pageId: option<ssmContactsArn>
+@as("PageId") pageId: ssmContactsArn
 }
   type response = {
-@as("DeliveryTime") deliveryTime: dateTime,
-@as("ReadTime") readTime: dateTime,
-@as("SentTime") sentTime: dateTime,
-@as("IncidentId") incidentId: incidentId,
-@as("PublicContent") publicContent: publicContent,
-@as("PublicSubject") publicSubject: publicSubject,
-@as("Content") content: option<content>,
-@as("Subject") subject: option<subject>,
-@as("Sender") sender: option<sender>,
-@as("ContactArn") contactArn: option<ssmContactsArn>,
-@as("EngagementArn") engagementArn: option<ssmContactsArn>,
-@as("PageArn") pageArn: option<ssmContactsArn>
+@as("DeliveryTime") deliveryTime: option<dateTime>,
+@as("ReadTime") readTime: option<dateTime>,
+@as("SentTime") sentTime: option<dateTime>,
+@as("IncidentId") incidentId: option<incidentId>,
+@as("PublicContent") publicContent: option<publicContent>,
+@as("PublicSubject") publicSubject: option<publicSubject>,
+@as("Content") content: content,
+@as("Subject") subject: subject,
+@as("Sender") sender: sender,
+@as("ContactArn") contactArn: ssmContactsArn,
+@as("EngagementArn") engagementArn: ssmContactsArn,
+@as("PageArn") pageArn: ssmContactsArn
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "DescribePageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEngagement = {
   type t;
   type request = {
-@as("EngagementId") engagementId: option<ssmContactsArn>
+@as("EngagementId") engagementId: ssmContactsArn
 }
   type response = {
-@as("StopTime") stopTime: dateTime,
-@as("StartTime") startTime: dateTime,
-@as("IncidentId") incidentId: incidentId,
-@as("PublicContent") publicContent: publicContent,
-@as("PublicSubject") publicSubject: publicSubject,
-@as("Content") content: option<content>,
-@as("Subject") subject: option<subject>,
-@as("Sender") sender: option<sender>,
-@as("EngagementArn") engagementArn: option<ssmContactsArn>,
-@as("ContactArn") contactArn: option<ssmContactsArn>
+@as("StopTime") stopTime: option<dateTime>,
+@as("StartTime") startTime: option<dateTime>,
+@as("IncidentId") incidentId: option<incidentId>,
+@as("PublicContent") publicContent: option<publicContent>,
+@as("PublicSubject") publicSubject: option<publicSubject>,
+@as("Content") content: content,
+@as("Subject") subject: subject,
+@as("Sender") sender: sender,
+@as("EngagementArn") engagementArn: ssmContactsArn,
+@as("ContactArn") contactArn: ssmContactsArn
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "DescribeEngagementCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteContactChannel = {
   type t;
   type request = {
-@as("ContactChannelId") contactChannelId: option<ssmContactsArn>
+@as("ContactChannelId") contactChannelId: ssmContactsArn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "DeleteContactChannelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteContact = {
   type t;
   type request = {
-@as("ContactId") contactId: option<ssmContactsArn>
+@as("ContactId") contactId: ssmContactsArn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "DeleteContactCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeactivateContactChannel = {
   type t;
   type request = {
-@as("ContactChannelId") contactChannelId: option<ssmContactsArn>
+@as("ContactChannelId") contactChannelId: ssmContactsArn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "DeactivateContactChannelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateContactChannel = {
   type t;
   type request = {
-@as("IdempotencyToken") idempotencyToken: idempotencyToken,
-@as("DeferActivation") deferActivation: deferActivation,
-@as("DeliveryAddress") deliveryAddress: option<contactChannelAddress>,
-@as("Type") type_: option<channelType>,
-@as("Name") name: option<channelName>,
-@as("ContactId") contactId: option<ssmContactsArn>
+@as("IdempotencyToken") idempotencyToken: option<idempotencyToken>,
+@as("DeferActivation") deferActivation: option<deferActivation>,
+@as("DeliveryAddress") deliveryAddress: contactChannelAddress,
+@as("Type") type_: channelType,
+@as("Name") name: channelName,
+@as("ContactId") contactId: ssmContactsArn
 }
   type response = {
-@as("ContactChannelArn") contactChannelArn: option<ssmContactsArn>
+@as("ContactChannelArn") contactChannelArn: ssmContactsArn
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "CreateContactChannelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ActivateContactChannel = {
   type t;
   type request = {
-@as("ActivationCode") activationCode: option<activationCode>,
-@as("ContactChannelId") contactChannelId: option<ssmContactsArn>
+@as("ActivationCode") activationCode: activationCode,
+@as("ContactChannelId") contactChannelId: ssmContactsArn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ActivateContactChannelCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AcceptPage = {
   type t;
   type request = {
-@as("AcceptCode") acceptCode: option<acceptCode>,
-@as("Note") note: receiptInfo,
-@as("AcceptType") acceptType: option<acceptType>,
-@as("ContactChannelId") contactChannelId: ssmContactsArn,
-@as("PageId") pageId: option<ssmContactsArn>
+@as("AcceptCode") acceptCode: acceptCode,
+@as("Note") note: option<receiptInfo>,
+@as("AcceptType") acceptType: acceptType,
+@as("ContactChannelId") contactChannelId: option<ssmContactsArn>,
+@as("PageId") pageId: ssmContactsArn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "AcceptPageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListContactChannels = {
   type t;
   type request = {
-@as("MaxResults") maxResults: maxResults,
-@as("NextToken") nextToken: paginationToken,
-@as("ContactId") contactId: option<ssmContactsArn>
+@as("MaxResults") maxResults: option<maxResults>,
+@as("NextToken") nextToken: option<paginationToken>,
+@as("ContactId") contactId: ssmContactsArn
 }
   type response = {
-@as("ContactChannels") contactChannels: option<contactChannelList>,
-@as("NextToken") nextToken: paginationToken
+@as("ContactChannels") contactChannels: contactChannelList,
+@as("NextToken") nextToken: option<paginationToken>
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListContactChannelsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateContact = {
   type t;
   type request = {
-@as("Plan") plan: plan,
-@as("DisplayName") displayName: contactName,
-@as("ContactId") contactId: option<ssmContactsArn>
+@as("Plan") plan: option<plan>,
+@as("DisplayName") displayName: option<contactName>,
+@as("ContactId") contactId: ssmContactsArn
 }
   type response = unit
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "UpdateContactCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetContact = {
   type t;
   type request = {
-@as("ContactId") contactId: option<ssmContactsArn>
+@as("ContactId") contactId: ssmContactsArn
 }
   type response = {
-@as("Plan") plan: option<plan>,
-@as("Type") type_: option<contactType>,
-@as("DisplayName") displayName: contactName,
-@as("Alias") alias: option<contactAlias>,
-@as("ContactArn") contactArn: option<ssmContactsArn>
+@as("Plan") plan: plan,
+@as("Type") type_: contactType,
+@as("DisplayName") displayName: option<contactName>,
+@as("Alias") alias: contactAlias,
+@as("ContactArn") contactArn: ssmContactsArn
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "GetContactCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateContact = {
   type t;
   type request = {
-@as("IdempotencyToken") idempotencyToken: idempotencyToken,
-@as("Tags") tags: tagsList,
-@as("Plan") plan: option<plan>,
-@as("Type") type_: option<contactType>,
-@as("DisplayName") displayName: contactName,
-@as("Alias") alias: option<contactAlias>
+@as("IdempotencyToken") idempotencyToken: option<idempotencyToken>,
+@as("Tags") tags: option<tagsList>,
+@as("Plan") plan: plan,
+@as("Type") type_: contactType,
+@as("DisplayName") displayName: option<contactName>,
+@as("Alias") alias: contactAlias
 }
   type response = {
-@as("ContactArn") contactArn: option<ssmContactsArn>
+@as("ContactArn") contactArn: ssmContactsArn
 }
   @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "CreateContactCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

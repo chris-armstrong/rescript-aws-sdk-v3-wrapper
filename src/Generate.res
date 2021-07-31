@@ -1,76 +1,42 @@
 open Belt
 open Util
+open SafeNames;
 
-let reservedWords = [
-"open",
-"private",
-"as",
-"external",
-"public",
-"protected",
-"string",
-"bool",
-"integer",
-"object",
-"type",
-"let",
-"and",
-"open",
-""
-]
-
-let safeMemberName = name => switch name {
-  | "type" => "type_"
-  | "Type" => "type_"
-  | _ => Js.String2.toLowerCase(Js.String2.charAt(name, 0)) ++ Js.String2.sliceToEnd(name, ~from=1)
+let generateType = (name, definition) => {
+  `type ${safeTypeName(name)} = ${definition}`;
 }
 
-let safeTypeName = (target) => {
-  let name = symbolName(target)
-  let namespace = symbolNamespace(target)
-  let namespacePrefix =
-    Belt.Option.getWithDefault(Js.String2.split(namespace, ".")[1], "")
-  switch name {
-  | "String" => namespacePrefix ++ "String"
-  | "string" => namespacePrefix ++ "String"
-  | "Integer" => namespacePrefix ++ "Integer"
-  | "Boolean" => namespacePrefix ++ "Boolean"
-  | "Bool" => namespacePrefix ++ "Bool"
-  | "bool" => namespacePrefix ++ "Bool"
-  | "Long" => namespacePrefix ++ "Long"
-  | "Timestamp" => namespacePrefix ++ "Timestamp"
-  | "Double" => namespacePrefix ++ "Double"
-  | "Float" => namespacePrefix ++ "Float"
-  | "type" => "type_"
-  | "Type" => "type_"
-  | "unit" => "unit_"
-  | "Unit" => "unit_"
-  | "Export" => "export_"
-  | "export" => "export_"
-  | _ => Js.String2.toLowerCase(Js.String2.charAt(name, 0)) ++ Js.String2.sliceToEnd(name, ~from=1)
-  }
+let generateField = (~asName=?, fieldName, typeName) => `${Option.mapWithDefault(asName, "", x => `@as("${x}") `)}${safeMemberName(fieldName)}: ${typeName}`
+
+let generateRecordTypeDefinition = members => `{\n${Array.joinWith(members, ",\n  ", x => x)}\n};`;
+
+let generateIntegerShape = name => generateType(name, "int")
+let generateLongShape = name => generateType(name, "float");
+let generateDoubleShape = name => generateType(name, "float");
+let generateFloatShape = name => generateType(name, "float");
+let generateBooleanShape = name => generateType(name, "bool");
+let generateBinaryShape = name => generateType(name, "NodeJs.Buffer.t");
+
+let generateResponseMetadata = () => {
+  generateType("responseMetadata", generateRecordTypeDefinition([
+    generateField("httpStatusCode", "option<float>"),
+    generateField("requestId", "option<string>"),
+    generateField("extendedRequestId", "option<string>"),
+    generateField("cfId", "option<string>"),
+    generateField("attempts", "option<int>"),
+    generateField("totalRetryDelay", "option<int>"),
+  ]))
 }
 
-let safeConstructorName = name => {
-  switch (name) {
-  | _ => Js.String2.toUpperCase(Js.String2.charAt(name, 0)) ++ Js.String2.sliceToEnd(name, ~from=1)
-  }
+let generateExceptionType = (name, members) => {
+  generateType(name, generateRecordTypeDefinition(Array.concat([
+    generateField("name", "string"),
+    generateField(~asName="$fault", "fault", "[#client | #server]"),
+    generateField(~asName="$service", "service", "option<string>"),
+    generateField(~asName="$metadata", "metadata", "responseMetadata"),
+  ], members)))
+
 }
-
-let safeVariantName = name =>
-  name->Js.String2.replaceByRe(Js.Re.fromStringWithFlags("-|#|:|\\.|/", ~flags="g"), "_")
-
-let generateIntegerShape = name =>
-  `type ${safeTypeName(name)} = int;`
-let generateLongShape = name =>
-  `type ${safeTypeName(name)} = float;` // ReScript doesn't properly support longs
-let generateDoubleShape = name =>
-  `type ${safeTypeName(name)} = float;` // ReScript doesn't properly support doubles
-let generateFloatShape = name =>
-  `type ${safeTypeName(name)} = float;`
-let generateBooleanShape = name =>
-  `type ${safeTypeName(name)} = bool;`
-let generateBinaryShape = name => `type ${safeTypeName(name)} = NodeJs.Buffer.t;`
 
 let generateStringShape = (name, details: Shape.primitiveShapeDetails) => {
   let enumTrait = Js.Option.map(
@@ -92,14 +58,14 @@ let generateStringShape = (name, details: Shape.primitiveShapeDetails) => {
   }
 }
 let generateMember = (m: Shape.member) => {
+  let safeName = safeMemberName(m.name)
   let required = Trait.hasTrait(m.traits, Trait.isRequiredTrait)
-  `@as("${m.name}") ` ++
-  safeMemberName(m.name) ++
-  ": " ++ (
+  let valueType =
     required
-      ? `option<${safeTypeName(m.target)}>`
-      : safeTypeName(m.target)
-  )
+      ? safeTypeName(m.target)
+      : `option<${safeTypeName(m.target)}>`
+  let asName = (safeName != m.name ? Some(m.name) : None)
+  generateField(~asName=?asName, safeName, valueType)
 }
 
 let indentString = indent => {
@@ -113,7 +79,7 @@ let generateStructureShape = (name, details: Shape.structureShapeDetails, ~inden
   let memberStrings = Array.map(details.members, member => is ++ indentString(2) ++generateMember(member))
   let isError = Trait.hasTrait(details.traits, Trait.isErrorTrait)
   if isError {
-    `exception ${safeConstructorName(symbolName(name))};`
+    generateExceptionType(name, Array.map(details.members, generateMember))
   } else {
     is++"type " ++
     safeTypeName(name) ++
@@ -148,12 +114,19 @@ name
     )} = Js.Dict.t< ${valueType}>`
 }
 
+/*
+ * thrown when the ServiceTrait is missing
+ */
 exception NoServiceTrait(string)
+/*
+ * thrown for unknown timestamp format trait
+ */
+exception UnknownTimestampFormat(string)
 
 let generateServiceShape = (serviceName, traits) => {
   switch traits->Trait.findTrait(Trait.isAwsApiServiceTrait) {
   | Some(ServiceTrait({cloudFormationName})) =>
-    `type clientType;\n@module("@aws-sdk/client-${serviceName}") @new external createClient: unit => clientType = "${cloudFormationName}Client";`
+    `type awsServiceClient;\n@module("@aws-sdk/client-${serviceName}") @new external createClient: unit => awsServiceClient = "${cloudFormationName}Client";`
   | _ => ""
   }
 }
@@ -162,8 +135,6 @@ let generateSetShape = (name, details: Shape.setShapeDetails) => {
   // These appear to be generated as arrays
   `type ${safeTypeName(name)} = array<${safeTypeName(details.target)}>`;
 }
-
-exception UnknownTimestampFormat(string)
 
 let generateTimestampShape = (name, {traits}: Shape.timestampShapeDetails) => {
   let timestampFormat = Trait.findTrait(
@@ -178,6 +149,11 @@ let generateTimestampShape = (name, {traits}: Shape.timestampShapeDetails) => {
   }
 }
 
+/**
+ * The operation structure, which may be generated inline (OperationStructure), as
+ * a type alias to a shared structure (OperationStructureRef), or as a unit when
+ * has no parameters (OperationStructureNone)
+ */
 type operationStructure = | OperationStructure(Shape.structureShapeDetails) | OperationStructureRef(string) | OperationStructureNone
 let generateOperationStructureType = (varName, opStruct) => switch opStruct {
   | OperationStructure(details) => generateStructureShape("#"++varName, details, ~indent=2, ())
@@ -199,7 +175,7 @@ let generateOperationModule = (
   `  ${request}\n` ++
   `  ${response}\n` ++
   `  @module("@aws-sdk/client-${moduleName}") @new external new_: (${inputType}) => t = "${commandName}";\n` ++
-  `  @send external rawSend: (clientType, t) => ${outputType} = "send";\n` ++
+  `  @send external rawSend: (awsServiceClient, t) => ${outputType} = "send";\n` ++
   `}\n`
 }
 

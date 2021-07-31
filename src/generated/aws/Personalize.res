@@ -1,38 +1,45 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type tunable = bool;
-type transactionsPerSecond = int;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
+type tunable = bool
+type transactionsPerSecond = int
 type trainingMode = [@as("UPDATE") #UPDATE | @as("FULL") #FULL]
 type trainingInputMode = string
-type trainingHours = float;
+type trainingHours = float
 type trackingId = string
 type status = string
 type s3Location = string
 type roleArn = string
 type recipeType = string
 type recipeProvider = [@as("SERVICE") #SERVICE]
-type performHPO = bool;
-type performAutoML = bool;
+type performHPO = bool
+type performAutoML = bool
 type parameterValue = string
 type parameterName = string
 type objectiveSensitivity = [@as("OFF") #OFF | @as("HIGH") #HIGH | @as("MEDIUM") #MEDIUM | @as("LOW") #LOW]
-type numBatchResults = int;
+type numBatchResults = int
 type nextToken = string
 type name = string
-type metricValue = float;
+type metricValue = float
 type metricRegex = string
 type metricName = string
-type maxResults = int;
+type maxResults = int
 type kmsKeyArn = string
 type itemAttribute = string
-type integerMinValue = int;
-type integerMaxValue = int;
+type integerMinValue = int
+type integerMaxValue = int
 type ingestionMode = [@as("ALL") #ALL | @as("PUT") #PUT | @as("BULK") #BULK]
-type hPOResource = string
-type hPOObjectiveType = string
+type hporesource = string
+type hpoobjectiveType = string
 type filterExpression = string
 type failureReason = string
 type eventValueThreshold = string
@@ -42,221 +49,221 @@ type dockerURI = string
 type description = string
 type date = Js.Date.t;
 type datasetType = string
-type continuousMinValue = float;
-type continuousMaxValue = float;
+type continuousMinValue = float
+type continuousMaxValue = float
 type categoricalValue = string
-type amazonawsBoolean = bool;
+type boolean_ = bool
 type avroSchema = string
 type arn = string
 type accountId = string
 type solutionVersionSummary = {
-@as("failureReason") failureReason: failureReason,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("solutionVersionArn") solutionVersionArn: arn
+failureReason: option<failureReason>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+solutionVersionArn: option<arn>
 }
 type solutionSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("solutionArn") solutionArn: arn,
-@as("name") name: name
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+solutionArn: option<arn>,
+name: option<name>
 }
 type s3DataConfig = {
-@as("kmsKeyArn") kmsKeyArn: kmsKeyArn,
-@as("path") path: option<s3Location>
+kmsKeyArn: option<kmsKeyArn>,
+path: s3Location
 }
 type resourceConfig = Js.Dict.t< parameterValue>
 type recipeSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("recipeArn") recipeArn: arn,
-@as("name") name: name
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+recipeArn: option<arn>,
+name: option<name>
 }
 type recipe = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("recipeType") recipeType: recipeType,
-@as("creationDateTime") creationDateTime: date,
-@as("description") description: description,
-@as("status") status: status,
-@as("featureTransformationArn") featureTransformationArn: arn,
-@as("algorithmArn") algorithmArn: arn,
-@as("recipeArn") recipeArn: arn,
-@as("name") name: name
+lastUpdatedDateTime: option<date>,
+recipeType: option<recipeType>,
+creationDateTime: option<date>,
+description: option<description>,
+status: option<status>,
+featureTransformationArn: option<arn>,
+algorithmArn: option<arn>,
+recipeArn: option<arn>,
+name: option<name>
 }
 type optimizationObjective = {
-@as("objectiveSensitivity") objectiveSensitivity: objectiveSensitivity,
-@as("itemAttribute") itemAttribute: itemAttribute
+objectiveSensitivity: option<objectiveSensitivity>,
+itemAttribute: option<itemAttribute>
 }
 type metrics = Js.Dict.t< metricValue>
 type integerHyperParameterRange = {
-@as("maxValue") maxValue: integerMaxValue,
-@as("minValue") minValue: integerMinValue,
-@as("name") name: parameterName
+maxValue: option<integerMaxValue>,
+minValue: option<integerMinValue>,
+name: option<parameterName>
 }
 type hyperParameters = Js.Dict.t< parameterValue>
-type hPOResourceConfig = {
-@as("maxParallelTrainingJobs") maxParallelTrainingJobs: hPOResource,
-@as("maxNumberOfTrainingJobs") maxNumberOfTrainingJobs: hPOResource
+type hporesourceConfig = {
+maxParallelTrainingJobs: option<hporesource>,
+maxNumberOfTrainingJobs: option<hporesource>
 }
-type hPOObjective = {
-@as("metricRegex") metricRegex: metricRegex,
-@as("metricName") metricName: metricName,
-@as("type") type_: hPOObjectiveType
+type hpoobjective = {
+metricRegex: option<metricRegex>,
+metricName: option<metricName>,
+@as("type") type_: option<hpoobjectiveType>
 }
 type filterSummary = {
-@as("status") status: status,
-@as("failureReason") failureReason: failureReason,
-@as("datasetGroupArn") datasetGroupArn: arn,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("filterArn") filterArn: arn,
-@as("name") name: name
+status: option<status>,
+failureReason: option<failureReason>,
+datasetGroupArn: option<arn>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+filterArn: option<arn>,
+name: option<name>
 }
 type filter = {
-@as("status") status: status,
-@as("filterExpression") filterExpression: filterExpression,
-@as("failureReason") failureReason: failureReason,
-@as("datasetGroupArn") datasetGroupArn: arn,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("filterArn") filterArn: arn,
-@as("name") name: name
+status: option<status>,
+filterExpression: option<filterExpression>,
+failureReason: option<failureReason>,
+datasetGroupArn: option<arn>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+filterArn: option<arn>,
+name: option<name>
 }
 type featurizationParameters = Js.Dict.t< parameterValue>
 type featureTransformationParameters = Js.Dict.t< parameterValue>
 type eventTrackerSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("eventTrackerArn") eventTrackerArn: arn,
-@as("name") name: name
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+eventTrackerArn: option<arn>,
+name: option<name>
 }
 type eventTracker = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("datasetGroupArn") datasetGroupArn: arn,
-@as("trackingId") trackingId: trackingId,
-@as("accountId") accountId: accountId,
-@as("eventTrackerArn") eventTrackerArn: arn,
-@as("name") name: name
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+datasetGroupArn: option<arn>,
+trackingId: option<trackingId>,
+accountId: option<accountId>,
+eventTrackerArn: option<arn>,
+name: option<name>
 }
 type defaultIntegerHyperParameterRange = {
-@as("isTunable") isTunable: tunable,
-@as("maxValue") maxValue: integerMaxValue,
-@as("minValue") minValue: integerMinValue,
-@as("name") name: parameterName
+isTunable: option<tunable>,
+maxValue: option<integerMaxValue>,
+minValue: option<integerMinValue>,
+name: option<parameterName>
 }
 type defaultContinuousHyperParameterRange = {
-@as("isTunable") isTunable: tunable,
-@as("maxValue") maxValue: continuousMaxValue,
-@as("minValue") minValue: continuousMinValue,
-@as("name") name: parameterName
+isTunable: option<tunable>,
+maxValue: option<continuousMaxValue>,
+minValue: option<continuousMinValue>,
+name: option<parameterName>
 }
 type datasetSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("datasetType") datasetType: datasetType,
-@as("datasetArn") datasetArn: arn,
-@as("name") name: name
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+datasetType: option<datasetType>,
+datasetArn: option<arn>,
+name: option<name>
 }
 type datasetSchemaSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("schemaArn") schemaArn: arn,
-@as("name") name: name
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+schemaArn: option<arn>,
+name: option<name>
 }
 type datasetSchema = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("schema") schema: avroSchema,
-@as("schemaArn") schemaArn: arn,
-@as("name") name: name
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+schema: option<avroSchema>,
+schemaArn: option<arn>,
+name: option<name>
 }
 type datasetImportJobSummary = {
-@as("failureReason") failureReason: failureReason,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("jobName") jobName: name,
-@as("datasetImportJobArn") datasetImportJobArn: arn
+failureReason: option<failureReason>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+jobName: option<name>,
+datasetImportJobArn: option<arn>
 }
 type datasetGroupSummary = {
-@as("failureReason") failureReason: failureReason,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("datasetGroupArn") datasetGroupArn: arn,
-@as("name") name: name
+failureReason: option<failureReason>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+datasetGroupArn: option<arn>,
+name: option<name>
 }
 type datasetGroup = {
-@as("failureReason") failureReason: failureReason,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("kmsKeyArn") kmsKeyArn: kmsKeyArn,
-@as("roleArn") roleArn: roleArn,
-@as("status") status: status,
-@as("datasetGroupArn") datasetGroupArn: arn,
-@as("name") name: name
+failureReason: option<failureReason>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+kmsKeyArn: option<kmsKeyArn>,
+roleArn: option<roleArn>,
+status: option<status>,
+datasetGroupArn: option<arn>,
+name: option<name>
 }
 type datasetExportJobSummary = {
-@as("failureReason") failureReason: failureReason,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("jobName") jobName: name,
-@as("datasetExportJobArn") datasetExportJobArn: arn
+failureReason: option<failureReason>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+jobName: option<name>,
+datasetExportJobArn: option<arn>
 }
 type dataset = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("schemaArn") schemaArn: arn,
-@as("datasetType") datasetType: datasetType,
-@as("datasetGroupArn") datasetGroupArn: arn,
-@as("datasetArn") datasetArn: arn,
-@as("name") name: name
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+schemaArn: option<arn>,
+datasetType: option<datasetType>,
+datasetGroupArn: option<arn>,
+datasetArn: option<arn>,
+name: option<name>
 }
 type dataSource = {
-@as("dataLocation") dataLocation: s3Location
+dataLocation: option<s3Location>
 }
 type continuousHyperParameterRange = {
-@as("maxValue") maxValue: continuousMaxValue,
-@as("minValue") minValue: continuousMinValue,
-@as("name") name: parameterName
+maxValue: option<continuousMaxValue>,
+minValue: option<continuousMinValue>,
+name: option<parameterName>
 }
 type categoricalValues = array<categoricalValue>
 type campaignSummary = {
-@as("failureReason") failureReason: failureReason,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("campaignArn") campaignArn: arn,
-@as("name") name: name
+failureReason: option<failureReason>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+campaignArn: option<arn>,
+name: option<name>
 }
 type batchInferenceJobSummary = {
-@as("solutionVersionArn") solutionVersionArn: arn,
-@as("failureReason") failureReason: failureReason,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("jobName") jobName: name,
-@as("batchInferenceJobArn") batchInferenceJobArn: arn
+solutionVersionArn: option<arn>,
+failureReason: option<failureReason>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+jobName: option<name>,
+batchInferenceJobArn: option<arn>
 }
 type autoMLResult = {
-@as("bestRecipeArn") bestRecipeArn: arn
+bestRecipeArn: option<arn>
 }
 type arnList = array<arn>
 type algorithmImage = {
-@as("dockerURI") dockerURI: option<dockerURI>,
-@as("name") name: name
+dockerURI: dockerURI,
+name: option<name>
 }
 type tunedHPOParams = {
-@as("algorithmHyperParameters") algorithmHyperParameters: hyperParameters
+algorithmHyperParameters: option<hyperParameters>
 }
 type solutions = array<solutionSummary>
 type solutionVersions = array<solutionVersionSummary>
@@ -265,797 +272,797 @@ type recipes = array<recipeSummary>
 type integerHyperParameterRanges = array<integerHyperParameterRange>
 type filters = array<filterSummary>
 type featureTransformation = {
-@as("status") status: status,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("defaultParameters") defaultParameters: featurizationParameters,
-@as("featureTransformationArn") featureTransformationArn: arn,
-@as("name") name: name
+status: option<status>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+defaultParameters: option<featurizationParameters>,
+featureTransformationArn: option<arn>,
+name: option<name>
 }
 type eventTrackers = array<eventTrackerSummary>
 type defaultIntegerHyperParameterRanges = array<defaultIntegerHyperParameterRange>
 type defaultContinuousHyperParameterRanges = array<defaultContinuousHyperParameterRange>
 type defaultCategoricalHyperParameterRange = {
-@as("isTunable") isTunable: tunable,
-@as("values") values: categoricalValues,
-@as("name") name: parameterName
+isTunable: option<tunable>,
+values: option<categoricalValues>,
+name: option<parameterName>
 }
 type datasets = array<datasetSummary>
 type datasetImportJobs = array<datasetImportJobSummary>
 type datasetImportJob = {
-@as("failureReason") failureReason: failureReason,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("roleArn") roleArn: arn,
-@as("dataSource") dataSource: dataSource,
-@as("datasetArn") datasetArn: arn,
-@as("datasetImportJobArn") datasetImportJobArn: arn,
-@as("jobName") jobName: name
+failureReason: option<failureReason>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+roleArn: option<arn>,
+dataSource: option<dataSource>,
+datasetArn: option<arn>,
+datasetImportJobArn: option<arn>,
+jobName: option<name>
 }
 type datasetGroups = array<datasetGroupSummary>
 type datasetExportJobs = array<datasetExportJobSummary>
 type datasetExportJobOutput = {
-@as("s3DataDestination") s3DataDestination: option<s3DataConfig>
+s3DataDestination: s3DataConfig
 }
 type continuousHyperParameterRanges = array<continuousHyperParameterRange>
 type categoricalHyperParameterRange = {
-@as("values") values: categoricalValues,
-@as("name") name: parameterName
+values: option<categoricalValues>,
+name: option<parameterName>
 }
 type campaigns = array<campaignSummary>
 type campaignConfig = {
-@as("itemExplorationConfig") itemExplorationConfig: hyperParameters
+itemExplorationConfig: option<hyperParameters>
 }
 type batchInferenceJobs = array<batchInferenceJobSummary>
 type batchInferenceJobOutput = {
-@as("s3DataDestination") s3DataDestination: option<s3DataConfig>
+s3DataDestination: s3DataConfig
 }
 type batchInferenceJobInput = {
-@as("s3DataSource") s3DataSource: option<s3DataConfig>
+s3DataSource: s3DataConfig
 }
 type batchInferenceJobConfig = {
-@as("itemExplorationConfig") itemExplorationConfig: hyperParameters
+itemExplorationConfig: option<hyperParameters>
 }
 type autoMLConfig = {
-@as("recipeList") recipeList: arnList,
-@as("metricName") metricName: metricName
+recipeList: option<arnList>,
+metricName: option<metricName>
 }
 type defaultCategoricalHyperParameterRanges = array<defaultCategoricalHyperParameterRange>
 type datasetExportJob = {
-@as("failureReason") failureReason: failureReason,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("jobOutput") jobOutput: datasetExportJobOutput,
-@as("status") status: status,
-@as("roleArn") roleArn: arn,
-@as("ingestionMode") ingestionMode: ingestionMode,
-@as("datasetArn") datasetArn: arn,
-@as("datasetExportJobArn") datasetExportJobArn: arn,
-@as("jobName") jobName: name
+failureReason: option<failureReason>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+jobOutput: option<datasetExportJobOutput>,
+status: option<status>,
+roleArn: option<arn>,
+ingestionMode: option<ingestionMode>,
+datasetArn: option<arn>,
+datasetExportJobArn: option<arn>,
+jobName: option<name>
 }
 type categoricalHyperParameterRanges = array<categoricalHyperParameterRange>
 type campaignUpdateSummary = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("failureReason") failureReason: failureReason,
-@as("status") status: status,
-@as("campaignConfig") campaignConfig: campaignConfig,
-@as("minProvisionedTPS") minProvisionedTPS: transactionsPerSecond,
-@as("solutionVersionArn") solutionVersionArn: arn
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+failureReason: option<failureReason>,
+status: option<status>,
+campaignConfig: option<campaignConfig>,
+minProvisionedTPS: option<transactionsPerSecond>,
+solutionVersionArn: option<arn>
 }
 type batchInferenceJob = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("roleArn") roleArn: roleArn,
-@as("batchInferenceJobConfig") batchInferenceJobConfig: batchInferenceJobConfig,
-@as("jobOutput") jobOutput: batchInferenceJobOutput,
-@as("jobInput") jobInput: batchInferenceJobInput,
-@as("numResults") numResults: numBatchResults,
-@as("solutionVersionArn") solutionVersionArn: arn,
-@as("failureReason") failureReason: failureReason,
-@as("filterArn") filterArn: arn,
-@as("batchInferenceJobArn") batchInferenceJobArn: arn,
-@as("jobName") jobName: name
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+roleArn: option<roleArn>,
+batchInferenceJobConfig: option<batchInferenceJobConfig>,
+jobOutput: option<batchInferenceJobOutput>,
+jobInput: option<batchInferenceJobInput>,
+numResults: option<numBatchResults>,
+solutionVersionArn: option<arn>,
+failureReason: option<failureReason>,
+filterArn: option<arn>,
+batchInferenceJobArn: option<arn>,
+jobName: option<name>
 }
 type hyperParameterRanges = {
-@as("categoricalHyperParameterRanges") categoricalHyperParameterRanges: categoricalHyperParameterRanges,
-@as("continuousHyperParameterRanges") continuousHyperParameterRanges: continuousHyperParameterRanges,
-@as("integerHyperParameterRanges") integerHyperParameterRanges: integerHyperParameterRanges
+categoricalHyperParameterRanges: option<categoricalHyperParameterRanges>,
+continuousHyperParameterRanges: option<continuousHyperParameterRanges>,
+integerHyperParameterRanges: option<integerHyperParameterRanges>
 }
 type defaultHyperParameterRanges = {
-@as("categoricalHyperParameterRanges") categoricalHyperParameterRanges: defaultCategoricalHyperParameterRanges,
-@as("continuousHyperParameterRanges") continuousHyperParameterRanges: defaultContinuousHyperParameterRanges,
-@as("integerHyperParameterRanges") integerHyperParameterRanges: defaultIntegerHyperParameterRanges
+categoricalHyperParameterRanges: option<defaultCategoricalHyperParameterRanges>,
+continuousHyperParameterRanges: option<defaultContinuousHyperParameterRanges>,
+integerHyperParameterRanges: option<defaultIntegerHyperParameterRanges>
 }
 type campaign = {
-@as("latestCampaignUpdate") latestCampaignUpdate: campaignUpdateSummary,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("failureReason") failureReason: failureReason,
-@as("status") status: status,
-@as("campaignConfig") campaignConfig: campaignConfig,
-@as("minProvisionedTPS") minProvisionedTPS: transactionsPerSecond,
-@as("solutionVersionArn") solutionVersionArn: arn,
-@as("campaignArn") campaignArn: arn,
-@as("name") name: name
+latestCampaignUpdate: option<campaignUpdateSummary>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+failureReason: option<failureReason>,
+status: option<status>,
+campaignConfig: option<campaignConfig>,
+minProvisionedTPS: option<transactionsPerSecond>,
+solutionVersionArn: option<arn>,
+campaignArn: option<arn>,
+name: option<name>
 }
-type hPOConfig = {
-@as("algorithmHyperParameterRanges") algorithmHyperParameterRanges: hyperParameterRanges,
-@as("hpoResourceConfig") hpoResourceConfig: hPOResourceConfig,
-@as("hpoObjective") hpoObjective: hPOObjective
+type hpoconfig = {
+algorithmHyperParameterRanges: option<hyperParameterRanges>,
+hpoResourceConfig: option<hporesourceConfig>,
+hpoObjective: option<hpoobjective>
 }
 type algorithm = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("roleArn") roleArn: arn,
-@as("trainingInputMode") trainingInputMode: trainingInputMode,
-@as("defaultResourceConfig") defaultResourceConfig: resourceConfig,
-@as("defaultHyperParameterRanges") defaultHyperParameterRanges: defaultHyperParameterRanges,
-@as("defaultHyperParameters") defaultHyperParameters: hyperParameters,
-@as("algorithmImage") algorithmImage: algorithmImage,
-@as("algorithmArn") algorithmArn: arn,
-@as("name") name: name
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+roleArn: option<arn>,
+trainingInputMode: option<trainingInputMode>,
+defaultResourceConfig: option<resourceConfig>,
+defaultHyperParameterRanges: option<defaultHyperParameterRanges>,
+defaultHyperParameters: option<hyperParameters>,
+algorithmImage: option<algorithmImage>,
+algorithmArn: option<arn>,
+name: option<name>
 }
 type solutionConfig = {
-@as("optimizationObjective") optimizationObjective: optimizationObjective,
-@as("autoMLConfig") autoMLConfig: autoMLConfig,
-@as("featureTransformationParameters") featureTransformationParameters: featureTransformationParameters,
-@as("algorithmHyperParameters") algorithmHyperParameters: hyperParameters,
-@as("hpoConfig") hpoConfig: hPOConfig,
-@as("eventValueThreshold") eventValueThreshold: eventValueThreshold
+optimizationObjective: option<optimizationObjective>,
+autoMLConfig: option<autoMLConfig>,
+featureTransformationParameters: option<featureTransformationParameters>,
+algorithmHyperParameters: option<hyperParameters>,
+hpoConfig: option<hpoconfig>,
+eventValueThreshold: option<eventValueThreshold>
 }
 type solutionVersion = {
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("failureReason") failureReason: failureReason,
-@as("status") status: status,
-@as("tunedHPOParams") tunedHPOParams: tunedHPOParams,
-@as("trainingMode") trainingMode: trainingMode,
-@as("trainingHours") trainingHours: trainingHours,
-@as("solutionConfig") solutionConfig: solutionConfig,
-@as("datasetGroupArn") datasetGroupArn: arn,
-@as("eventType") eventType: eventType,
-@as("recipeArn") recipeArn: arn,
-@as("performAutoML") performAutoML: performAutoML,
-@as("performHPO") performHPO: performHPO,
-@as("solutionArn") solutionArn: arn,
-@as("solutionVersionArn") solutionVersionArn: arn
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+failureReason: option<failureReason>,
+status: option<status>,
+tunedHPOParams: option<tunedHPOParams>,
+trainingMode: option<trainingMode>,
+trainingHours: option<trainingHours>,
+solutionConfig: option<solutionConfig>,
+datasetGroupArn: option<arn>,
+eventType: option<eventType>,
+recipeArn: option<arn>,
+performAutoML: option<performAutoML>,
+performHPO: option<performHPO>,
+solutionArn: option<arn>,
+solutionVersionArn: option<arn>
 }
 type solution = {
-@as("latestSolutionVersion") latestSolutionVersion: solutionVersionSummary,
-@as("lastUpdatedDateTime") lastUpdatedDateTime: date,
-@as("creationDateTime") creationDateTime: date,
-@as("status") status: status,
-@as("autoMLResult") autoMLResult: autoMLResult,
-@as("solutionConfig") solutionConfig: solutionConfig,
-@as("eventType") eventType: eventType,
-@as("datasetGroupArn") datasetGroupArn: arn,
-@as("recipeArn") recipeArn: arn,
-@as("performAutoML") performAutoML: performAutoML,
-@as("performHPO") performHPO: performHPO,
-@as("solutionArn") solutionArn: arn,
-@as("name") name: name
+latestSolutionVersion: option<solutionVersionSummary>,
+lastUpdatedDateTime: option<date>,
+creationDateTime: option<date>,
+status: option<status>,
+autoMLResult: option<autoMLResult>,
+solutionConfig: option<solutionConfig>,
+eventType: option<eventType>,
+datasetGroupArn: option<arn>,
+recipeArn: option<arn>,
+performAutoML: option<performAutoML>,
+performHPO: option<performHPO>,
+solutionArn: option<arn>,
+name: option<name>
 }
-type clientType;
-@module("@aws-sdk/client-personalize") @new external createClient: unit => clientType = "PersonalizeClient";
+type awsServiceClient;
+@module("@aws-sdk/client-personalize") @new external createClient: unit => awsServiceClient = "PersonalizeClient";
 module StopSolutionVersionCreation = {
   type t;
   type request = {
-@as("solutionVersionArn") solutionVersionArn: option<arn>
+solutionVersionArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "StopSolutionVersionCreationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteSolution = {
   type t;
   type request = {
-@as("solutionArn") solutionArn: option<arn>
+solutionArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteSolutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteSchema = {
   type t;
   type request = {
-@as("schemaArn") schemaArn: option<arn>
+schemaArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteSchemaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteFilter = {
   type t;
   type request = {
-@as("filterArn") filterArn: option<arn>
+filterArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteFilterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteEventTracker = {
   type t;
   type request = {
-@as("eventTrackerArn") eventTrackerArn: option<arn>
+eventTrackerArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteEventTrackerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteDatasetGroup = {
   type t;
   type request = {
-@as("datasetGroupArn") datasetGroupArn: option<arn>
+datasetGroupArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteDatasetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteDataset = {
   type t;
   type request = {
-@as("datasetArn") datasetArn: option<arn>
+datasetArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteDatasetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteCampaign = {
   type t;
   type request = {
-@as("campaignArn") campaignArn: option<arn>
+campaignArn: arn
 }
   
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteCampaignCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateSolutionVersion = {
   type t;
   type request = {
-@as("trainingMode") trainingMode: trainingMode,
-@as("solutionArn") solutionArn: option<arn>
+trainingMode: option<trainingMode>,
+solutionArn: arn
 }
   type response = {
-@as("solutionVersionArn") solutionVersionArn: arn
+solutionVersionArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateSolutionVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSchema = {
   type t;
   type request = {
-@as("schema") schema: option<avroSchema>,
-@as("name") name: option<name>
+schema: avroSchema,
+name: name
 }
   type response = {
-@as("schemaArn") schemaArn: arn
+schemaArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateSchemaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateFilter = {
   type t;
   type request = {
-@as("filterExpression") filterExpression: option<filterExpression>,
-@as("datasetGroupArn") datasetGroupArn: option<arn>,
-@as("name") name: option<name>
+filterExpression: filterExpression,
+datasetGroupArn: arn,
+name: name
 }
   type response = {
-@as("filterArn") filterArn: arn
+filterArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateFilterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateEventTracker = {
   type t;
   type request = {
-@as("datasetGroupArn") datasetGroupArn: option<arn>,
-@as("name") name: option<name>
+datasetGroupArn: arn,
+name: name
 }
   type response = {
-@as("trackingId") trackingId: trackingId,
-@as("eventTrackerArn") eventTrackerArn: arn
+trackingId: option<trackingId>,
+eventTrackerArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateEventTrackerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDatasetGroup = {
   type t;
   type request = {
-@as("kmsKeyArn") kmsKeyArn: kmsKeyArn,
-@as("roleArn") roleArn: roleArn,
-@as("name") name: option<name>
+kmsKeyArn: option<kmsKeyArn>,
+roleArn: option<roleArn>,
+name: name
 }
   type response = {
-@as("datasetGroupArn") datasetGroupArn: arn
+datasetGroupArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateDatasetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDataset = {
   type t;
   type request = {
-@as("datasetType") datasetType: option<datasetType>,
-@as("datasetGroupArn") datasetGroupArn: option<arn>,
-@as("schemaArn") schemaArn: option<arn>,
-@as("name") name: option<name>
+datasetType: datasetType,
+datasetGroupArn: arn,
+schemaArn: arn,
+name: name
 }
   type response = {
-@as("datasetArn") datasetArn: arn
+datasetArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateDatasetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetSolutionMetrics = {
   type t;
   type request = {
-@as("solutionVersionArn") solutionVersionArn: option<arn>
+solutionVersionArn: arn
 }
   type response = {
-@as("metrics") metrics: metrics,
-@as("solutionVersionArn") solutionVersionArn: arn
+metrics: option<metrics>,
+solutionVersionArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "GetSolutionMetricsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSchema = {
   type t;
   type request = {
-@as("schemaArn") schemaArn: option<arn>
+schemaArn: arn
 }
   type response = {
-@as("schema") schema: datasetSchema
+schema: option<datasetSchema>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeSchemaCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRecipe = {
   type t;
   type request = {
-@as("recipeArn") recipeArn: option<arn>
+recipeArn: arn
 }
   type response = {
-@as("recipe") recipe: recipe
+recipe: option<recipe>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeRecipeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeFilter = {
   type t;
   type request = {
-@as("filterArn") filterArn: option<arn>
+filterArn: arn
 }
   type response = {
-@as("filter") filter: filter
+filter: option<filter>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeFilterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEventTracker = {
   type t;
   type request = {
-@as("eventTrackerArn") eventTrackerArn: option<arn>
+eventTrackerArn: arn
 }
   type response = {
-@as("eventTracker") eventTracker: eventTracker
+eventTracker: option<eventTracker>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeEventTrackerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDatasetGroup = {
   type t;
   type request = {
-@as("datasetGroupArn") datasetGroupArn: option<arn>
+datasetGroupArn: arn
 }
   type response = {
-@as("datasetGroup") datasetGroup: datasetGroup
+datasetGroup: option<datasetGroup>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeDatasetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDataset = {
   type t;
   type request = {
-@as("datasetArn") datasetArn: option<arn>
+datasetArn: arn
 }
   type response = {
-@as("dataset") dataset: dataset
+dataset: option<dataset>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeDatasetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDatasetImportJob = {
   type t;
   type request = {
-@as("roleArn") roleArn: option<roleArn>,
-@as("dataSource") dataSource: option<dataSource>,
-@as("datasetArn") datasetArn: option<arn>,
-@as("jobName") jobName: option<name>
+roleArn: roleArn,
+dataSource: dataSource,
+datasetArn: arn,
+jobName: name
 }
   type response = {
-@as("datasetImportJobArn") datasetImportJobArn: arn
+datasetImportJobArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateDatasetImportJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateCampaign = {
   type t;
   type request = {
-@as("campaignConfig") campaignConfig: campaignConfig,
-@as("minProvisionedTPS") minProvisionedTPS: transactionsPerSecond,
-@as("solutionVersionArn") solutionVersionArn: arn,
-@as("campaignArn") campaignArn: option<arn>
+campaignConfig: option<campaignConfig>,
+minProvisionedTPS: option<transactionsPerSecond>,
+solutionVersionArn: option<arn>,
+campaignArn: arn
 }
   type response = {
-@as("campaignArn") campaignArn: arn
+campaignArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "UpdateCampaignCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSolutions = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("datasetGroupArn") datasetGroupArn: arn
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+datasetGroupArn: option<arn>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("solutions") solutions: solutions
+nextToken: option<nextToken>,
+solutions: option<solutions>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListSolutionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSolutionVersions = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("solutionArn") solutionArn: arn
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+solutionArn: option<arn>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("solutionVersions") solutionVersions: solutionVersions
+nextToken: option<nextToken>,
+solutionVersions: option<solutionVersions>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListSolutionVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListSchemas = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("schemas") schemas: schemas
+nextToken: option<nextToken>,
+schemas: option<schemas>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListSchemasCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRecipes = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("recipeProvider") recipeProvider: recipeProvider
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+recipeProvider: option<recipeProvider>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("recipes") recipes: recipes
+nextToken: option<nextToken>,
+recipes: option<recipes>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListRecipesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListFilters = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("datasetGroupArn") datasetGroupArn: arn
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+datasetGroupArn: option<arn>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("Filters") filters: filters
+nextToken: option<nextToken>,
+@as("Filters") filters: option<filters>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListFiltersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListEventTrackers = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("datasetGroupArn") datasetGroupArn: arn
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+datasetGroupArn: option<arn>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("eventTrackers") eventTrackers: eventTrackers
+nextToken: option<nextToken>,
+eventTrackers: option<eventTrackers>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListEventTrackersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDatasets = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("datasetGroupArn") datasetGroupArn: arn
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+datasetGroupArn: option<arn>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("datasets") datasets: datasets
+nextToken: option<nextToken>,
+datasets: option<datasets>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDatasetImportJobs = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("datasetArn") datasetArn: arn
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+datasetArn: option<arn>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("datasetImportJobs") datasetImportJobs: datasetImportJobs
+nextToken: option<nextToken>,
+datasetImportJobs: option<datasetImportJobs>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetImportJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDatasetGroups = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken
+maxResults: option<maxResults>,
+nextToken: option<nextToken>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("datasetGroups") datasetGroups: datasetGroups
+nextToken: option<nextToken>,
+datasetGroups: option<datasetGroups>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDatasetExportJobs = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("datasetArn") datasetArn: arn
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+datasetArn: option<arn>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("datasetExportJobs") datasetExportJobs: datasetExportJobs
+nextToken: option<nextToken>,
+datasetExportJobs: option<datasetExportJobs>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetExportJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListCampaigns = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("solutionArn") solutionArn: arn
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+solutionArn: option<arn>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("campaigns") campaigns: campaigns
+nextToken: option<nextToken>,
+campaigns: option<campaigns>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListCampaignsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListBatchInferenceJobs = {
   type t;
   type request = {
-@as("maxResults") maxResults: maxResults,
-@as("nextToken") nextToken: nextToken,
-@as("solutionVersionArn") solutionVersionArn: arn
+maxResults: option<maxResults>,
+nextToken: option<nextToken>,
+solutionVersionArn: option<arn>
 }
   type response = {
-@as("nextToken") nextToken: nextToken,
-@as("batchInferenceJobs") batchInferenceJobs: batchInferenceJobs
+nextToken: option<nextToken>,
+batchInferenceJobs: option<batchInferenceJobs>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListBatchInferenceJobsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeFeatureTransformation = {
   type t;
   type request = {
-@as("featureTransformationArn") featureTransformationArn: option<arn>
+featureTransformationArn: arn
 }
   type response = {
-@as("featureTransformation") featureTransformation: featureTransformation
+featureTransformation: option<featureTransformation>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeFeatureTransformationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDatasetImportJob = {
   type t;
   type request = {
-@as("datasetImportJobArn") datasetImportJobArn: option<arn>
+datasetImportJobArn: arn
 }
   type response = {
-@as("datasetImportJob") datasetImportJob: datasetImportJob
+datasetImportJob: option<datasetImportJob>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeDatasetImportJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDatasetExportJob = {
   type t;
   type request = {
-@as("jobOutput") jobOutput: option<datasetExportJobOutput>,
-@as("roleArn") roleArn: option<roleArn>,
-@as("ingestionMode") ingestionMode: ingestionMode,
-@as("datasetArn") datasetArn: option<arn>,
-@as("jobName") jobName: option<name>
+jobOutput: datasetExportJobOutput,
+roleArn: roleArn,
+ingestionMode: option<ingestionMode>,
+datasetArn: arn,
+jobName: name
 }
   type response = {
-@as("datasetExportJobArn") datasetExportJobArn: arn
+datasetExportJobArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateDatasetExportJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCampaign = {
   type t;
   type request = {
-@as("campaignConfig") campaignConfig: campaignConfig,
-@as("minProvisionedTPS") minProvisionedTPS: option<transactionsPerSecond>,
-@as("solutionVersionArn") solutionVersionArn: option<arn>,
-@as("name") name: option<name>
+campaignConfig: option<campaignConfig>,
+minProvisionedTPS: transactionsPerSecond,
+solutionVersionArn: arn,
+name: name
 }
   type response = {
-@as("campaignArn") campaignArn: arn
+campaignArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateCampaignCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateBatchInferenceJob = {
   type t;
   type request = {
-@as("batchInferenceJobConfig") batchInferenceJobConfig: batchInferenceJobConfig,
-@as("roleArn") roleArn: option<roleArn>,
-@as("jobOutput") jobOutput: option<batchInferenceJobOutput>,
-@as("jobInput") jobInput: option<batchInferenceJobInput>,
-@as("numResults") numResults: numBatchResults,
-@as("filterArn") filterArn: arn,
-@as("solutionVersionArn") solutionVersionArn: option<arn>,
-@as("jobName") jobName: option<name>
+batchInferenceJobConfig: option<batchInferenceJobConfig>,
+roleArn: roleArn,
+jobOutput: batchInferenceJobOutput,
+jobInput: batchInferenceJobInput,
+numResults: option<numBatchResults>,
+filterArn: option<arn>,
+solutionVersionArn: arn,
+jobName: name
 }
   type response = {
-@as("batchInferenceJobArn") batchInferenceJobArn: arn
+batchInferenceJobArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateBatchInferenceJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDatasetExportJob = {
   type t;
   type request = {
-@as("datasetExportJobArn") datasetExportJobArn: option<arn>
+datasetExportJobArn: arn
 }
   type response = {
-@as("datasetExportJob") datasetExportJob: datasetExportJob
+datasetExportJob: option<datasetExportJob>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeDatasetExportJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeBatchInferenceJob = {
   type t;
   type request = {
-@as("batchInferenceJobArn") batchInferenceJobArn: option<arn>
+batchInferenceJobArn: arn
 }
   type response = {
-@as("batchInferenceJob") batchInferenceJob: batchInferenceJob
+batchInferenceJob: option<batchInferenceJob>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeBatchInferenceJobCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeCampaign = {
   type t;
   type request = {
-@as("campaignArn") campaignArn: option<arn>
+campaignArn: arn
 }
   type response = {
-@as("campaign") campaign: campaign
+campaign: option<campaign>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeCampaignCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAlgorithm = {
   type t;
   type request = {
-@as("algorithmArn") algorithmArn: option<arn>
+algorithmArn: arn
 }
   type response = {
-@as("algorithm") algorithm: algorithm
+algorithm: option<algorithm>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeAlgorithmCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSolution = {
   type t;
   type request = {
-@as("solutionConfig") solutionConfig: solutionConfig,
-@as("eventType") eventType: eventType,
-@as("datasetGroupArn") datasetGroupArn: option<arn>,
-@as("recipeArn") recipeArn: arn,
-@as("performAutoML") performAutoML: performAutoML,
-@as("performHPO") performHPO: amazonawsBoolean,
-@as("name") name: option<name>
+solutionConfig: option<solutionConfig>,
+eventType: option<eventType>,
+datasetGroupArn: arn,
+recipeArn: option<arn>,
+performAutoML: option<performAutoML>,
+performHPO: option<boolean_>,
+name: name
 }
   type response = {
-@as("solutionArn") solutionArn: arn
+solutionArn: option<arn>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateSolutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSolutionVersion = {
   type t;
   type request = {
-@as("solutionVersionArn") solutionVersionArn: option<arn>
+solutionVersionArn: arn
 }
   type response = {
-@as("solutionVersion") solutionVersion: solutionVersion
+solutionVersion: option<solutionVersion>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeSolutionVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSolution = {
   type t;
   type request = {
-@as("solutionArn") solutionArn: option<arn>
+solutionArn: arn
 }
   type response = {
-@as("solution") solution: solution
+solution: option<solution>
 }
   @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeSolutionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

@@ -1,22 +1,26 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type usageLimitPeriod = [@as("monthly") #monthly | @as("weekly") #weekly | @as("daily") #daily]
-type usageLimitLimitType = [@as("data-scanned") #data_scanned | @as("time") #time]
-type usageLimitFeatureType = [@as("concurrency-scaling") #concurrency_scaling | @as("spectrum") #spectrum]
-type usageLimitBreachAction = [@as("disable") #disable | @as("emit-metric") #emit_metric | @as("log") #log]
-type tableRestoreStatusType = [@as("CANCELED") #CANCELED | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #IN_PROGRESS | @as("PENDING") #PENDING]
-type tStamp = Js.Date.t;
-type amazonawsString = string
-type sourceType = [@as("scheduled-action") #scheduled_action | @as("cluster-snapshot") #cluster_snapshot | @as("cluster-security-group") #cluster_security_group | @as("cluster-parameter-group") #cluster_parameter_group | @as("cluster") #cluster]
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type timestamp_ = Js.Date.t;
+type usageLimitPeriod = [@as("monthly") #Monthly | @as("weekly") #Weekly | @as("daily") #Daily]
+type usageLimitLimitType = [@as("data-scanned") #DataScanned | @as("time") #Time]
+type usageLimitFeatureType = [@as("concurrency-scaling") #ConcurrencyScaling | @as("spectrum") #Spectrum]
+type usageLimitBreachAction = [@as("disable") #Disable | @as("emit-metric") #EmitMetric | @as("log") #Log]
+type tableRestoreStatusType = [@as("CANCELED") #CANCELED | @as("FAILED") #FAILED | @as("SUCCEEDED") #SUCCEEDED | @as("IN_PROGRESS") #INPROGRESS | @as("PENDING") #PENDING]
+type tstamp = Js.Date.t;
+type string_ = string
+type sourceType = [@as("scheduled-action") #ScheduledAction | @as("cluster-snapshot") #ClusterSnapshot | @as("cluster-security-group") #ClusterSecurityGroup | @as("cluster-parameter-group") #ClusterParameterGroup | @as("cluster") #Cluster]
 type sortByOrder = [@as("DESC") #DESC | @as("ASC") #ASC]
-type snapshotAttributeToSortBy = [@as("CREATE_TIME") #CREATE_TIME | @as("TOTAL_SIZE") #TOTAL_SIZE | @as("SOURCE_TYPE") #SOURCE_TYPE]
+type snapshotAttributeToSortBy = [@as("CREATE_TIME") #CREATETIME | @as("TOTAL_SIZE") #TOTALSIZE | @as("SOURCE_TYPE") #SOURCETYPE]
 type sensitiveString = string
 type scheduledActionTypeValues = [@as("ResumeCluster") #ResumeCluster | @as("PauseCluster") #PauseCluster | @as("ResizeCluster") #ResizeCluster]
 type scheduledActionState = [@as("DISABLED") #DISABLED | @as("ACTIVE") #ACTIVE]
-type scheduledActionFilterName = [@as("iam-role") #iam_role | @as("cluster-identifier") #cluster_identifier]
+type scheduledActionFilterName = [@as("iam-role") #IamRole | @as("cluster-identifier") #ClusterIdentifier]
 type scheduleState = [@as("FAILED") #FAILED | @as("ACTIVE") #ACTIVE | @as("MODIFYING") #MODIFYING]
 type reservedNodeOfferingType = [@as("Upgradable") #Upgradable | @as("Regular") #Regular]
 type partnerIntegrationStatusMessage = string
@@ -25,288 +29,288 @@ type partnerIntegrationPartnerName = string
 type partnerIntegrationDatabaseName = string
 type partnerIntegrationClusterIdentifier = string
 type partnerIntegrationAccountId = string
-type parameterApplyType = [@as("dynamic") #dynamic | @as("static") #static]
-type operatorType = [@as("between") #between | @as("in") #in | @as("ge") #ge | @as("le") #le | @as("gt") #gt | @as("lt") #lt | @as("eq") #eq]
+type parameterApplyType = [@as("dynamic") #Dynamic | @as("static") #Static]
+type operatorType = [@as("between") #Between | @as("in") #In | @as("ge") #Ge | @as("le") #Le | @as("gt") #Gt | @as("lt") #Lt | @as("eq") #Eq]
 type nodeConfigurationOptionsFilterName = [@as("Mode") #Mode | @as("EstimatedDiskUtilizationPercent") #EstimatedDiskUtilizationPercent | @as("NumberOfNodes") #NumberOfNodes | @as("NodeType") #NodeType]
-type mode = [@as("high-performance") #high_performance | @as("standard") #standard]
-type longOptional = float;
-type amazonawsLong = float;
-type integerOptional = int;
-type amazonawsInteger = int;
+type mode = [@as("high-performance") #HighPerformance | @as("standard") #Standard]
+type longOptional = float
+type long = float
+type integerOptional = int
+type integer_ = int
 type exceptionMessage = string
-type doubleOptional = float;
-type amazonawsDouble = float;
-type booleanOptional = bool;
-type amazonawsBoolean = bool;
+type doubleOptional = float
+type double = float
+type booleanOptional = bool
+type boolean_ = bool
 type authorizationStatus = [@as("Revoking") #Revoking | @as("Authorized") #Authorized]
-type aquaStatus = [@as("applying") #applying | @as("disabled") #disabled | @as("enabled") #enabled]
-type aquaConfigurationStatus = [@as("auto") #auto | @as("disabled") #disabled | @as("enabled") #enabled]
-type actionType = [@as("resize-cluster") #resize_cluster | @as("recommend-node-config") #recommend_node_config | @as("restore-cluster") #restore_cluster]
+type aquaStatus = [@as("applying") #Applying | @as("disabled") #Disabled | @as("enabled") #Enabled]
+type aquaConfigurationStatus = [@as("auto") #Auto | @as("disabled") #Disabled | @as("enabled") #Enabled]
+type actionType = [@as("resize-cluster") #ResizeCluster | @as("recommend-node-config") #RecommendNodeConfig | @as("restore-cluster") #RestoreCluster]
 type vpcSecurityGroupMembership = {
-@as("Status") status: amazonawsString,
-@as("VpcSecurityGroupId") vpcSecurityGroupId: amazonawsString
+@as("Status") status: option<string_>,
+@as("VpcSecurityGroupId") vpcSecurityGroupId: option<string_>
 }
-type vpcSecurityGroupIdList = array<amazonawsString>
-type vpcIdentifierList = array<amazonawsString>
-type valueStringList = array<amazonawsString>
-type tagValueList = array<amazonawsString>
-type tagKeyList = array<amazonawsString>
+type vpcSecurityGroupIdList = array<string_>
+type vpcIdentifierList = array<string_>
+type valueStringList = array<string_>
+type tagValueList = array<string_>
+type tagKeyList = array<string_>
 type tag = {
-@as("Value") value: amazonawsString,
-@as("Key") key: amazonawsString
+@as("Value") value: option<string_>,
+@as("Key") key: option<string_>
 }
 type tableRestoreStatus = {
-@as("NewTableName") newTableName: amazonawsString,
-@as("TargetSchemaName") targetSchemaName: amazonawsString,
-@as("TargetDatabaseName") targetDatabaseName: amazonawsString,
-@as("SourceTableName") sourceTableName: amazonawsString,
-@as("SourceSchemaName") sourceSchemaName: amazonawsString,
-@as("SourceDatabaseName") sourceDatabaseName: amazonawsString,
-@as("SnapshotIdentifier") snapshotIdentifier: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString,
-@as("TotalDataInMegaBytes") totalDataInMegaBytes: longOptional,
-@as("ProgressInMegaBytes") progressInMegaBytes: longOptional,
-@as("RequestTime") requestTime: tStamp,
-@as("Message") message: amazonawsString,
-@as("Status") status: tableRestoreStatusType,
-@as("TableRestoreRequestId") tableRestoreRequestId: amazonawsString
+@as("NewTableName") newTableName: option<string_>,
+@as("TargetSchemaName") targetSchemaName: option<string_>,
+@as("TargetDatabaseName") targetDatabaseName: option<string_>,
+@as("SourceTableName") sourceTableName: option<string_>,
+@as("SourceSchemaName") sourceSchemaName: option<string_>,
+@as("SourceDatabaseName") sourceDatabaseName: option<string_>,
+@as("SnapshotIdentifier") snapshotIdentifier: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>,
+@as("TotalDataInMegaBytes") totalDataInMegaBytes: option<longOptional>,
+@as("ProgressInMegaBytes") progressInMegaBytes: option<longOptional>,
+@as("RequestTime") requestTime: option<tstamp>,
+@as("Message") message: option<string_>,
+@as("Status") status: option<tableRestoreStatusType>,
+@as("TableRestoreRequestId") tableRestoreRequestId: option<string_>
 }
 type supportedPlatform = {
-@as("Name") name: amazonawsString
+@as("Name") name: option<string_>
 }
 type supportedOperation = {
-@as("OperationName") operationName: amazonawsString
+@as("OperationName") operationName: option<string_>
 }
-type subnetIdentifierList = array<amazonawsString>
-type sourceIdsList = array<amazonawsString>
+type subnetIdentifierList = array<string_>
+type sourceIdsList = array<string_>
 type snapshotSortingEntity = {
-@as("SortOrder") sortOrder: sortByOrder,
-@as("Attribute") attribute: option<snapshotAttributeToSortBy>
+@as("SortOrder") sortOrder: option<sortByOrder>,
+@as("Attribute") attribute: snapshotAttributeToSortBy
 }
-type snapshotIdentifierList = array<amazonawsString>
+type snapshotIdentifierList = array<string_>
 type snapshotErrorMessage = {
-@as("FailureReason") failureReason: amazonawsString,
-@as("FailureCode") failureCode: amazonawsString,
-@as("SnapshotClusterIdentifier") snapshotClusterIdentifier: amazonawsString,
-@as("SnapshotIdentifier") snapshotIdentifier: amazonawsString
+@as("FailureReason") failureReason: option<string_>,
+@as("FailureCode") failureCode: option<string_>,
+@as("SnapshotClusterIdentifier") snapshotClusterIdentifier: option<string_>,
+@as("SnapshotIdentifier") snapshotIdentifier: option<string_>
 }
-type scheduledSnapshotTimeList = array<tStamp>
-type scheduledActionTimeList = array<tStamp>
-type scheduleDefinitionList = array<amazonawsString>
+type scheduledSnapshotTimeList = array<tstamp>
+type scheduledActionTimeList = array<tstamp>
+type scheduleDefinitionList = array<string_>
 type revisionTarget = {
-@as("DatabaseRevisionReleaseDate") databaseRevisionReleaseDate: tStamp,
-@as("Description") description: amazonawsString,
-@as("DatabaseRevision") databaseRevision: amazonawsString
+@as("DatabaseRevisionReleaseDate") databaseRevisionReleaseDate: option<tstamp>,
+@as("Description") description: option<string_>,
+@as("DatabaseRevision") databaseRevision: option<string_>
 }
 type resumeClusterMessage = {
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
 type restoreStatus = {
-@as("EstimatedTimeToCompletionInSeconds") estimatedTimeToCompletionInSeconds: amazonawsLong,
-@as("ElapsedTimeInSeconds") elapsedTimeInSeconds: amazonawsLong,
-@as("ProgressInMegaBytes") progressInMegaBytes: amazonawsLong,
-@as("SnapshotSizeInMegaBytes") snapshotSizeInMegaBytes: amazonawsLong,
-@as("CurrentRestoreRateInMegaBytesPerSecond") currentRestoreRateInMegaBytesPerSecond: amazonawsDouble,
-@as("Status") status: amazonawsString
+@as("EstimatedTimeToCompletionInSeconds") estimatedTimeToCompletionInSeconds: option<long>,
+@as("ElapsedTimeInSeconds") elapsedTimeInSeconds: option<long>,
+@as("ProgressInMegaBytes") progressInMegaBytes: option<long>,
+@as("SnapshotSizeInMegaBytes") snapshotSizeInMegaBytes: option<long>,
+@as("CurrentRestoreRateInMegaBytesPerSecond") currentRestoreRateInMegaBytesPerSecond: option<double>,
+@as("Status") status: option<string_>
 }
-type restorableNodeTypeList = array<amazonawsString>
+type restorableNodeTypeList = array<string_>
 type resizeInfo = {
-@as("AllowCancelResize") allowCancelResize: amazonawsBoolean,
-@as("ResizeType") resizeType: amazonawsString
+@as("AllowCancelResize") allowCancelResize: option<boolean_>,
+@as("ResizeType") resizeType: option<string_>
 }
 type resizeClusterMessage = {
-@as("Classic") classic: booleanOptional,
-@as("NumberOfNodes") numberOfNodes: integerOptional,
-@as("NodeType") nodeType: amazonawsString,
-@as("ClusterType") clusterType: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("Classic") classic: option<booleanOptional>,
+@as("NumberOfNodes") numberOfNodes: option<integerOptional>,
+@as("NodeType") nodeType: option<string_>,
+@as("ClusterType") clusterType: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
 type recurringCharge = {
-@as("RecurringChargeFrequency") recurringChargeFrequency: amazonawsString,
-@as("RecurringChargeAmount") recurringChargeAmount: amazonawsDouble
+@as("RecurringChargeFrequency") recurringChargeFrequency: option<string_>,
+@as("RecurringChargeAmount") recurringChargeAmount: option<double>
 }
 type pendingModifiedValues = {
-@as("EncryptionType") encryptionType: amazonawsString,
-@as("MaintenanceTrackName") maintenanceTrackName: amazonawsString,
-@as("EnhancedVpcRouting") enhancedVpcRouting: booleanOptional,
-@as("PubliclyAccessible") publiclyAccessible: booleanOptional,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString,
-@as("AutomatedSnapshotRetentionPeriod") automatedSnapshotRetentionPeriod: integerOptional,
-@as("ClusterVersion") clusterVersion: amazonawsString,
-@as("ClusterType") clusterType: amazonawsString,
-@as("NumberOfNodes") numberOfNodes: integerOptional,
-@as("NodeType") nodeType: amazonawsString,
-@as("MasterUserPassword") masterUserPassword: amazonawsString
+@as("EncryptionType") encryptionType: option<string_>,
+@as("MaintenanceTrackName") maintenanceTrackName: option<string_>,
+@as("EnhancedVpcRouting") enhancedVpcRouting: option<booleanOptional>,
+@as("PubliclyAccessible") publiclyAccessible: option<booleanOptional>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>,
+@as("AutomatedSnapshotRetentionPeriod") automatedSnapshotRetentionPeriod: option<integerOptional>,
+@as("ClusterVersion") clusterVersion: option<string_>,
+@as("ClusterType") clusterType: option<string_>,
+@as("NumberOfNodes") numberOfNodes: option<integerOptional>,
+@as("NodeType") nodeType: option<string_>,
+@as("MasterUserPassword") masterUserPassword: option<string_>
 }
-type pendingActionsList = array<amazonawsString>
+type pendingActionsList = array<string_>
 type pauseClusterMessage = {
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
 type partnerIntegrationInfo = {
-@as("UpdatedAt") updatedAt: tStamp,
-@as("CreatedAt") createdAt: tStamp,
-@as("StatusMessage") statusMessage: partnerIntegrationStatusMessage,
-@as("Status") status: partnerIntegrationStatus,
-@as("PartnerName") partnerName: partnerIntegrationPartnerName,
-@as("DatabaseName") databaseName: partnerIntegrationDatabaseName
+@as("UpdatedAt") updatedAt: option<tstamp>,
+@as("CreatedAt") createdAt: option<tstamp>,
+@as("StatusMessage") statusMessage: option<partnerIntegrationStatusMessage>,
+@as("Status") status: option<partnerIntegrationStatus>,
+@as("PartnerName") partnerName: option<partnerIntegrationPartnerName>,
+@as("DatabaseName") databaseName: option<partnerIntegrationDatabaseName>
 }
 type parameter = {
-@as("MinimumEngineVersion") minimumEngineVersion: amazonawsString,
-@as("IsModifiable") isModifiable: amazonawsBoolean,
-@as("ApplyType") applyType: parameterApplyType,
-@as("AllowedValues") allowedValues: amazonawsString,
-@as("DataType") dataType: amazonawsString,
-@as("Source") source: amazonawsString,
-@as("Description") description: amazonawsString,
-@as("ParameterValue") parameterValue: amazonawsString,
-@as("ParameterName") parameterName: amazonawsString
+@as("MinimumEngineVersion") minimumEngineVersion: option<string_>,
+@as("IsModifiable") isModifiable: option<boolean_>,
+@as("ApplyType") applyType: option<parameterApplyType>,
+@as("AllowedValues") allowedValues: option<string_>,
+@as("DataType") dataType: option<string_>,
+@as("Source") source: option<string_>,
+@as("Description") description: option<string_>,
+@as("ParameterValue") parameterValue: option<string_>,
+@as("ParameterName") parameterName: option<string_>
 }
 type nodeConfigurationOption = {
-@as("Mode") mode: mode,
-@as("EstimatedDiskUtilizationPercent") estimatedDiskUtilizationPercent: doubleOptional,
-@as("NumberOfNodes") numberOfNodes: amazonawsInteger,
-@as("NodeType") nodeType: amazonawsString
+@as("Mode") mode: option<mode>,
+@as("EstimatedDiskUtilizationPercent") estimatedDiskUtilizationPercent: option<doubleOptional>,
+@as("NumberOfNodes") numberOfNodes: option<integer_>,
+@as("NodeType") nodeType: option<string_>
 }
 type networkInterface = {
-@as("AvailabilityZone") availabilityZone: amazonawsString,
-@as("PrivateIpAddress") privateIpAddress: amazonawsString,
-@as("SubnetId") subnetId: amazonawsString,
-@as("NetworkInterfaceId") networkInterfaceId: amazonawsString
+@as("AvailabilityZone") availabilityZone: option<string_>,
+@as("PrivateIpAddress") privateIpAddress: option<string_>,
+@as("SubnetId") subnetId: option<string_>,
+@as("NetworkInterfaceId") networkInterfaceId: option<string_>
 }
-type importTablesNotStarted = array<amazonawsString>
-type importTablesInProgress = array<amazonawsString>
-type importTablesCompleted = array<amazonawsString>
-type iamRoleArnList = array<amazonawsString>
+type importTablesNotStarted = array<string_>
+type importTablesInProgress = array<string_>
+type importTablesCompleted = array<string_>
+type iamRoleArnList = array<string_>
 type hsmStatus = {
-@as("Status") status: amazonawsString,
-@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: amazonawsString,
-@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: amazonawsString
+@as("Status") status: option<string_>,
+@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: option<string_>,
+@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: option<string_>
 }
-type eventCategoriesList = array<amazonawsString>
+type eventCategoriesList = array<string_>
 type elasticIpStatus = {
-@as("Status") status: amazonawsString,
-@as("ElasticIp") elasticIp: amazonawsString
+@as("Status") status: option<string_>,
+@as("ElasticIp") elasticIp: option<string_>
 }
 type deleteClusterSnapshotMessage = {
-@as("SnapshotClusterIdentifier") snapshotClusterIdentifier: amazonawsString,
-@as("SnapshotIdentifier") snapshotIdentifier: option<amazonawsString>
+@as("SnapshotClusterIdentifier") snapshotClusterIdentifier: option<string_>,
+@as("SnapshotIdentifier") snapshotIdentifier: string_
 }
 type deferredMaintenanceWindow = {
-@as("DeferMaintenanceEndTime") deferMaintenanceEndTime: tStamp,
-@as("DeferMaintenanceStartTime") deferMaintenanceStartTime: tStamp,
-@as("DeferMaintenanceIdentifier") deferMaintenanceIdentifier: amazonawsString
+@as("DeferMaintenanceEndTime") deferMaintenanceEndTime: option<tstamp>,
+@as("DeferMaintenanceStartTime") deferMaintenanceStartTime: option<tstamp>,
+@as("DeferMaintenanceIdentifier") deferMaintenanceIdentifier: option<string_>
 }
-type dbGroupList = array<amazonawsString>
+type dbGroupList = array<string_>
 type dataTransferProgress = {
-@as("ElapsedTimeInSeconds") elapsedTimeInSeconds: longOptional,
-@as("EstimatedTimeToCompletionInSeconds") estimatedTimeToCompletionInSeconds: longOptional,
-@as("DataTransferredInMegaBytes") dataTransferredInMegaBytes: amazonawsLong,
-@as("TotalDataInMegaBytes") totalDataInMegaBytes: amazonawsLong,
-@as("CurrentRateInMegaBytesPerSecond") currentRateInMegaBytesPerSecond: doubleOptional,
-@as("Status") status: amazonawsString
+@as("ElapsedTimeInSeconds") elapsedTimeInSeconds: option<longOptional>,
+@as("EstimatedTimeToCompletionInSeconds") estimatedTimeToCompletionInSeconds: option<longOptional>,
+@as("DataTransferredInMegaBytes") dataTransferredInMegaBytes: option<long>,
+@as("TotalDataInMegaBytes") totalDataInMegaBytes: option<long>,
+@as("CurrentRateInMegaBytesPerSecond") currentRateInMegaBytesPerSecond: option<doubleOptional>,
+@as("Status") status: option<string_>
 }
 type clusterVersion = {
-@as("Description") description: amazonawsString,
-@as("ClusterParameterGroupFamily") clusterParameterGroupFamily: amazonawsString,
-@as("ClusterVersion") clusterVersion: amazonawsString
+@as("Description") description: option<string_>,
+@as("ClusterParameterGroupFamily") clusterParameterGroupFamily: option<string_>,
+@as("ClusterVersion") clusterVersion: option<string_>
 }
 type clusterSnapshotCopyStatus = {
-@as("SnapshotCopyGrantName") snapshotCopyGrantName: amazonawsString,
-@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: amazonawsInteger,
-@as("RetentionPeriod") retentionPeriod: amazonawsLong,
-@as("DestinationRegion") destinationRegion: amazonawsString
+@as("SnapshotCopyGrantName") snapshotCopyGrantName: option<string_>,
+@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: option<integer_>,
+@as("RetentionPeriod") retentionPeriod: option<long>,
+@as("DestinationRegion") destinationRegion: option<string_>
 }
-type clusterSecurityGroupNameList = array<amazonawsString>
+type clusterSecurityGroupNameList = array<string_>
 type clusterSecurityGroupMembership = {
-@as("Status") status: amazonawsString,
-@as("ClusterSecurityGroupName") clusterSecurityGroupName: amazonawsString
+@as("Status") status: option<string_>,
+@as("ClusterSecurityGroupName") clusterSecurityGroupName: option<string_>
 }
 type clusterParameterStatus = {
-@as("ParameterApplyErrorDescription") parameterApplyErrorDescription: amazonawsString,
-@as("ParameterApplyStatus") parameterApplyStatus: amazonawsString,
-@as("ParameterName") parameterName: amazonawsString
+@as("ParameterApplyErrorDescription") parameterApplyErrorDescription: option<string_>,
+@as("ParameterApplyStatus") parameterApplyStatus: option<string_>,
+@as("ParameterName") parameterName: option<string_>
 }
 type clusterNode = {
-@as("PublicIPAddress") publicIPAddress: amazonawsString,
-@as("PrivateIPAddress") privateIPAddress: amazonawsString,
-@as("NodeRole") nodeRole: amazonawsString
+@as("PublicIPAddress") publicIPAddress: option<string_>,
+@as("PrivateIPAddress") privateIPAddress: option<string_>,
+@as("NodeRole") nodeRole: option<string_>
 }
 type clusterIamRole = {
-@as("ApplyStatus") applyStatus: amazonawsString,
-@as("IamRoleArn") iamRoleArn: amazonawsString
+@as("ApplyStatus") applyStatus: option<string_>,
+@as("IamRoleArn") iamRoleArn: option<string_>
 }
 type clusterAssociatedToSchedule = {
-@as("ScheduleAssociationState") scheduleAssociationState: scheduleState,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("ScheduleAssociationState") scheduleAssociationState: option<scheduleState>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
 type attributeValueTarget = {
-@as("AttributeValue") attributeValue: amazonawsString
+@as("AttributeValue") attributeValue: option<string_>
 }
-type attributeNameList = array<amazonawsString>
+type attributeNameList = array<string_>
 type aquaConfiguration = {
-@as("AquaConfigurationStatus") aquaConfigurationStatus: aquaConfigurationStatus,
-@as("AquaStatus") aquaStatus: aquaStatus
+@as("AquaConfigurationStatus") aquaConfigurationStatus: option<aquaConfigurationStatus>,
+@as("AquaStatus") aquaStatus: option<aquaStatus>
 }
 type accountWithRestoreAccess = {
-@as("AccountAlias") accountAlias: amazonawsString,
-@as("AccountId") accountId: amazonawsString
+@as("AccountAlias") accountAlias: option<string_>,
+@as("AccountId") accountId: option<string_>
 }
 type vpcSecurityGroupMembershipList = array<vpcSecurityGroupMembership>
 type taggedResource = {
-@as("ResourceType") resourceType: amazonawsString,
-@as("ResourceName") resourceName: amazonawsString,
-@as("Tag") tag: tag
+@as("ResourceType") resourceType: option<string_>,
+@as("ResourceName") resourceName: option<string_>,
+@as("Tag") tag: option<tag>
 }
-type tagList = array<tag>
+type tagList_ = array<tag>
 type tableRestoreStatusList = array<tableRestoreStatus>
 type supportedPlatformsList = array<supportedPlatform>
 type supportedOperationList = array<supportedOperation>
 type snapshotSortingEntityList = array<snapshotSortingEntity>
 type scheduledActionType = {
-@as("ResumeCluster") resumeCluster: resumeClusterMessage,
-@as("PauseCluster") pauseCluster: pauseClusterMessage,
-@as("ResizeCluster") resizeCluster: resizeClusterMessage
+@as("ResumeCluster") resumeCluster: option<resumeClusterMessage>,
+@as("PauseCluster") pauseCluster: option<pauseClusterMessage>,
+@as("ResizeCluster") resizeCluster: option<resizeClusterMessage>
 }
 type scheduledActionFilter = {
-@as("Values") values: option<valueStringList>,
-@as("Name") name: option<scheduledActionFilterName>
+@as("Values") values: valueStringList,
+@as("Name") name: scheduledActionFilterName
 }
 type revisionTargetsList = array<revisionTarget>
 type recurringChargeList = array<recurringCharge>
 type partnerIntegrationInfoList = array<partnerIntegrationInfo>
 type parametersList = array<parameter>
 type nodeConfigurationOptionsFilter = {
-@as("Values") values: valueStringList,
-@as("Operator") operator: operatorType,
-@as("Name") name: nodeConfigurationOptionsFilterName
+@as("Values") values: option<valueStringList>,
+@as("Operator") operator: option<operatorType>,
+@as("Name") name: option<nodeConfigurationOptionsFilterName>
 }
 type nodeConfigurationOptionList = array<nodeConfigurationOption>
 type networkInterfaceList = array<networkInterface>
 type eventInfoMap = {
-@as("Severity") severity: amazonawsString,
-@as("EventDescription") eventDescription: amazonawsString,
-@as("EventCategories") eventCategories: eventCategoriesList,
-@as("EventId") eventId: amazonawsString
+@as("Severity") severity: option<string_>,
+@as("EventDescription") eventDescription: option<string_>,
+@as("EventCategories") eventCategories: option<eventCategoriesList>,
+@as("EventId") eventId: option<string_>
 }
 type event = {
-@as("EventId") eventId: amazonawsString,
-@as("Date") date: tStamp,
-@as("Severity") severity: amazonawsString,
-@as("EventCategories") eventCategories: eventCategoriesList,
-@as("Message") message: amazonawsString,
-@as("SourceType") sourceType: sourceType,
-@as("SourceIdentifier") sourceIdentifier: amazonawsString
+@as("EventId") eventId: option<string_>,
+@as("Date") date: option<tstamp>,
+@as("Severity") severity: option<string_>,
+@as("EventCategories") eventCategories: option<eventCategoriesList>,
+@as("Message") message: option<string_>,
+@as("SourceType") sourceType: option<sourceType>,
+@as("SourceIdentifier") sourceIdentifier: option<string_>
 }
 type endpointAuthorization = {
-@as("EndpointCount") endpointCount: amazonawsInteger,
-@as("AllowedVPCs") allowedVPCs: vpcIdentifierList,
-@as("AllowedAllVPCs") allowedAllVPCs: amazonawsBoolean,
-@as("Status") status: authorizationStatus,
-@as("ClusterStatus") clusterStatus: amazonawsString,
-@as("AuthorizeTime") authorizeTime: tStamp,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString,
-@as("Grantee") grantee: amazonawsString,
-@as("Grantor") grantor: amazonawsString
+@as("EndpointCount") endpointCount: option<integer_>,
+@as("AllowedVPCs") allowedVPCs: option<vpcIdentifierList>,
+@as("AllowedAllVPCs") allowedAllVPCs: option<boolean_>,
+@as("Status") status: option<authorizationStatus>,
+@as("ClusterStatus") clusterStatus: option<string_>,
+@as("AuthorizeTime") authorizeTime: option<tstamp>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>,
+@as("Grantee") grantee: option<string_>,
+@as("Grantor") grantor: option<string_>
 }
 type deleteClusterSnapshotMessageList = array<deleteClusterSnapshotMessage>
 type deferredMaintenanceWindowsList = array<deferredMaintenanceWindow>
@@ -321,190 +325,190 @@ type attributeValueList = array<attributeValueTarget>
 type associatedClusterList = array<clusterAssociatedToSchedule>
 type accountsWithRestoreAccessList = array<accountWithRestoreAccess>
 type vpcEndpoint = {
-@as("NetworkInterfaces") networkInterfaces: networkInterfaceList,
-@as("VpcId") vpcId: amazonawsString,
-@as("VpcEndpointId") vpcEndpointId: amazonawsString
+@as("NetworkInterfaces") networkInterfaces: option<networkInterfaceList>,
+@as("VpcId") vpcId: option<string_>,
+@as("VpcEndpointId") vpcEndpointId: option<string_>
 }
 type usageLimit = {
-@as("Tags") tags: tagList,
-@as("BreachAction") breachAction: usageLimitBreachAction,
-@as("Period") period: usageLimitPeriod,
-@as("Amount") amount: amazonawsLong,
-@as("LimitType") limitType: usageLimitLimitType,
-@as("FeatureType") featureType: usageLimitFeatureType,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString,
-@as("UsageLimitId") usageLimitId: amazonawsString
+@as("Tags") tags: option<tagList_>,
+@as("BreachAction") breachAction: option<usageLimitBreachAction>,
+@as("Period") period: option<usageLimitPeriod>,
+@as("Amount") amount: option<long>,
+@as("LimitType") limitType: option<usageLimitLimitType>,
+@as("FeatureType") featureType: option<usageLimitFeatureType>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>,
+@as("UsageLimitId") usageLimitId: option<string_>
 }
 type updateTarget = {
-@as("SupportedOperations") supportedOperations: supportedOperationList,
-@as("DatabaseVersion") databaseVersion: amazonawsString,
-@as("MaintenanceTrackName") maintenanceTrackName: amazonawsString
+@as("SupportedOperations") supportedOperations: option<supportedOperationList>,
+@as("DatabaseVersion") databaseVersion: option<string_>,
+@as("MaintenanceTrackName") maintenanceTrackName: option<string_>
 }
 type taggedResourceList = array<taggedResource>
 type snapshotSchedule = {
-@as("AssociatedClusters") associatedClusters: associatedClusterList,
-@as("AssociatedClusterCount") associatedClusterCount: integerOptional,
-@as("NextInvocations") nextInvocations: scheduledSnapshotTimeList,
-@as("Tags") tags: tagList,
-@as("ScheduleDescription") scheduleDescription: amazonawsString,
-@as("ScheduleIdentifier") scheduleIdentifier: amazonawsString,
-@as("ScheduleDefinitions") scheduleDefinitions: scheduleDefinitionList
+@as("AssociatedClusters") associatedClusters: option<associatedClusterList>,
+@as("AssociatedClusterCount") associatedClusterCount: option<integerOptional>,
+@as("NextInvocations") nextInvocations: option<scheduledSnapshotTimeList>,
+@as("Tags") tags: option<tagList_>,
+@as("ScheduleDescription") scheduleDescription: option<string_>,
+@as("ScheduleIdentifier") scheduleIdentifier: option<string_>,
+@as("ScheduleDefinitions") scheduleDefinitions: option<scheduleDefinitionList>
 }
 type snapshotCopyGrant = {
-@as("Tags") tags: tagList,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("SnapshotCopyGrantName") snapshotCopyGrantName: amazonawsString
+@as("Tags") tags: option<tagList_>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("SnapshotCopyGrantName") snapshotCopyGrantName: option<string_>
 }
 type snapshot = {
-@as("SnapshotRetentionStartTime") snapshotRetentionStartTime: tStamp,
-@as("ManualSnapshotRemainingDays") manualSnapshotRemainingDays: integerOptional,
-@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: integerOptional,
-@as("MaintenanceTrackName") maintenanceTrackName: amazonawsString,
-@as("EnhancedVpcRouting") enhancedVpcRouting: amazonawsBoolean,
-@as("RestorableNodeTypes") restorableNodeTypes: restorableNodeTypeList,
-@as("Tags") tags: tagList,
-@as("SourceRegion") sourceRegion: amazonawsString,
-@as("ElapsedTimeInSeconds") elapsedTimeInSeconds: amazonawsLong,
-@as("EstimatedSecondsToCompletion") estimatedSecondsToCompletion: amazonawsLong,
-@as("CurrentBackupRateInMegaBytesPerSecond") currentBackupRateInMegaBytesPerSecond: amazonawsDouble,
-@as("BackupProgressInMegaBytes") backupProgressInMegaBytes: amazonawsDouble,
-@as("ActualIncrementalBackupSizeInMegaBytes") actualIncrementalBackupSizeInMegaBytes: amazonawsDouble,
-@as("TotalBackupSizeInMegaBytes") totalBackupSizeInMegaBytes: amazonawsDouble,
-@as("OwnerAccount") ownerAccount: amazonawsString,
-@as("AccountsWithRestoreAccess") accountsWithRestoreAccess: accountsWithRestoreAccessList,
-@as("EncryptedWithHSM") encryptedWithHSM: amazonawsBoolean,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("Encrypted") encrypted: amazonawsBoolean,
-@as("VpcId") vpcId: amazonawsString,
-@as("DBName") dBName: amazonawsString,
-@as("NumberOfNodes") numberOfNodes: amazonawsInteger,
-@as("NodeType") nodeType: amazonawsString,
-@as("SnapshotType") snapshotType: amazonawsString,
-@as("EngineFullVersion") engineFullVersion: amazonawsString,
-@as("ClusterVersion") clusterVersion: amazonawsString,
-@as("MasterUsername") masterUsername: amazonawsString,
-@as("ClusterCreateTime") clusterCreateTime: tStamp,
-@as("AvailabilityZone") availabilityZone: amazonawsString,
-@as("Port") port: amazonawsInteger,
-@as("Status") status: amazonawsString,
-@as("SnapshotCreateTime") snapshotCreateTime: tStamp,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString,
-@as("SnapshotIdentifier") snapshotIdentifier: amazonawsString
+@as("SnapshotRetentionStartTime") snapshotRetentionStartTime: option<tstamp>,
+@as("ManualSnapshotRemainingDays") manualSnapshotRemainingDays: option<integerOptional>,
+@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: option<integerOptional>,
+@as("MaintenanceTrackName") maintenanceTrackName: option<string_>,
+@as("EnhancedVpcRouting") enhancedVpcRouting: option<boolean_>,
+@as("RestorableNodeTypes") restorableNodeTypes: option<restorableNodeTypeList>,
+@as("Tags") tags: option<tagList_>,
+@as("SourceRegion") sourceRegion: option<string_>,
+@as("ElapsedTimeInSeconds") elapsedTimeInSeconds: option<long>,
+@as("EstimatedSecondsToCompletion") estimatedSecondsToCompletion: option<long>,
+@as("CurrentBackupRateInMegaBytesPerSecond") currentBackupRateInMegaBytesPerSecond: option<double>,
+@as("BackupProgressInMegaBytes") backupProgressInMegaBytes: option<double>,
+@as("ActualIncrementalBackupSizeInMegaBytes") actualIncrementalBackupSizeInMegaBytes: option<double>,
+@as("TotalBackupSizeInMegaBytes") totalBackupSizeInMegaBytes: option<double>,
+@as("OwnerAccount") ownerAccount: option<string_>,
+@as("AccountsWithRestoreAccess") accountsWithRestoreAccess: option<accountsWithRestoreAccessList>,
+@as("EncryptedWithHSM") encryptedWithHSM: option<boolean_>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("Encrypted") encrypted: option<boolean_>,
+@as("VpcId") vpcId: option<string_>,
+@as("DBName") dbname: option<string_>,
+@as("NumberOfNodes") numberOfNodes: option<integer_>,
+@as("NodeType") nodeType: option<string_>,
+@as("SnapshotType") snapshotType: option<string_>,
+@as("EngineFullVersion") engineFullVersion: option<string_>,
+@as("ClusterVersion") clusterVersion: option<string_>,
+@as("MasterUsername") masterUsername: option<string_>,
+@as("ClusterCreateTime") clusterCreateTime: option<tstamp>,
+@as("AvailabilityZone") availabilityZone: option<string_>,
+@as("Port") port: option<integer_>,
+@as("Status") status: option<string_>,
+@as("SnapshotCreateTime") snapshotCreateTime: option<tstamp>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>,
+@as("SnapshotIdentifier") snapshotIdentifier: option<string_>
 }
 type scheduledActionFilterList = array<scheduledActionFilter>
 type scheduledAction = {
-@as("EndTime") endTime: tStamp,
-@as("StartTime") startTime: tStamp,
-@as("NextInvocations") nextInvocations: scheduledActionTimeList,
-@as("State") state: scheduledActionState,
-@as("ScheduledActionDescription") scheduledActionDescription: amazonawsString,
-@as("IamRole") iamRole: amazonawsString,
-@as("Schedule") schedule: amazonawsString,
-@as("TargetAction") targetAction: scheduledActionType,
-@as("ScheduledActionName") scheduledActionName: amazonawsString
+@as("EndTime") endTime: option<tstamp>,
+@as("StartTime") startTime: option<tstamp>,
+@as("NextInvocations") nextInvocations: option<scheduledActionTimeList>,
+@as("State") state: option<scheduledActionState>,
+@as("ScheduledActionDescription") scheduledActionDescription: option<string_>,
+@as("IamRole") iamRole: option<string_>,
+@as("Schedule") schedule: option<string_>,
+@as("TargetAction") targetAction: option<scheduledActionType>,
+@as("ScheduledActionName") scheduledActionName: option<string_>
 }
 type reservedNodeOffering = {
-@as("ReservedNodeOfferingType") reservedNodeOfferingType: reservedNodeOfferingType,
-@as("RecurringCharges") recurringCharges: recurringChargeList,
-@as("OfferingType") offeringType: amazonawsString,
-@as("CurrencyCode") currencyCode: amazonawsString,
-@as("UsagePrice") usagePrice: amazonawsDouble,
-@as("FixedPrice") fixedPrice: amazonawsDouble,
-@as("Duration") duration: amazonawsInteger,
-@as("NodeType") nodeType: amazonawsString,
-@as("ReservedNodeOfferingId") reservedNodeOfferingId: amazonawsString
+@as("ReservedNodeOfferingType") reservedNodeOfferingType: option<reservedNodeOfferingType>,
+@as("RecurringCharges") recurringCharges: option<recurringChargeList>,
+@as("OfferingType") offeringType: option<string_>,
+@as("CurrencyCode") currencyCode: option<string_>,
+@as("UsagePrice") usagePrice: option<double>,
+@as("FixedPrice") fixedPrice: option<double>,
+@as("Duration") duration: option<integer_>,
+@as("NodeType") nodeType: option<string_>,
+@as("ReservedNodeOfferingId") reservedNodeOfferingId: option<string_>
 }
 type reservedNode = {
-@as("ReservedNodeOfferingType") reservedNodeOfferingType: reservedNodeOfferingType,
-@as("RecurringCharges") recurringCharges: recurringChargeList,
-@as("OfferingType") offeringType: amazonawsString,
-@as("State") state: amazonawsString,
-@as("NodeCount") nodeCount: amazonawsInteger,
-@as("CurrencyCode") currencyCode: amazonawsString,
-@as("UsagePrice") usagePrice: amazonawsDouble,
-@as("FixedPrice") fixedPrice: amazonawsDouble,
-@as("Duration") duration: amazonawsInteger,
-@as("StartTime") startTime: tStamp,
-@as("NodeType") nodeType: amazonawsString,
-@as("ReservedNodeOfferingId") reservedNodeOfferingId: amazonawsString,
-@as("ReservedNodeId") reservedNodeId: amazonawsString
+@as("ReservedNodeOfferingType") reservedNodeOfferingType: option<reservedNodeOfferingType>,
+@as("RecurringCharges") recurringCharges: option<recurringChargeList>,
+@as("OfferingType") offeringType: option<string_>,
+@as("State") state: option<string_>,
+@as("NodeCount") nodeCount: option<integer_>,
+@as("CurrencyCode") currencyCode: option<string_>,
+@as("UsagePrice") usagePrice: option<double>,
+@as("FixedPrice") fixedPrice: option<double>,
+@as("Duration") duration: option<integer_>,
+@as("StartTime") startTime: option<tstamp>,
+@as("NodeType") nodeType: option<string_>,
+@as("ReservedNodeOfferingId") reservedNodeOfferingId: option<string_>,
+@as("ReservedNodeId") reservedNodeId: option<string_>
 }
 type nodeConfigurationOptionsFilterList = array<nodeConfigurationOptionsFilter>
-type iPRange = {
-@as("Tags") tags: tagList,
-@as("CIDRIP") cIDRIP: amazonawsString,
-@as("Status") status: amazonawsString
+type iprange = {
+@as("Tags") tags: option<tagList_>,
+@as("CIDRIP") cidrip: option<string_>,
+@as("Status") status: option<string_>
 }
 type hsmConfiguration = {
-@as("Tags") tags: tagList,
-@as("HsmPartitionName") hsmPartitionName: amazonawsString,
-@as("HsmIpAddress") hsmIpAddress: amazonawsString,
-@as("Description") description: amazonawsString,
-@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: amazonawsString
+@as("Tags") tags: option<tagList_>,
+@as("HsmPartitionName") hsmPartitionName: option<string_>,
+@as("HsmIpAddress") hsmIpAddress: option<string_>,
+@as("Description") description: option<string_>,
+@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: option<string_>
 }
 type hsmClientCertificate = {
-@as("Tags") tags: tagList,
-@as("HsmClientCertificatePublicKey") hsmClientCertificatePublicKey: amazonawsString,
-@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: amazonawsString
+@as("Tags") tags: option<tagList_>,
+@as("HsmClientCertificatePublicKey") hsmClientCertificatePublicKey: option<string_>,
+@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: option<string_>
 }
 type eventSubscription = {
-@as("Tags") tags: tagList,
-@as("Enabled") enabled: amazonawsBoolean,
-@as("Severity") severity: amazonawsString,
-@as("EventCategoriesList") eventCategoriesList: eventCategoriesList,
-@as("SourceIdsList") sourceIdsList: sourceIdsList,
-@as("SourceType") sourceType: amazonawsString,
-@as("SubscriptionCreationTime") subscriptionCreationTime: tStamp,
-@as("Status") status: amazonawsString,
-@as("SnsTopicArn") snsTopicArn: amazonawsString,
-@as("CustSubscriptionId") custSubscriptionId: amazonawsString,
-@as("CustomerAwsId") customerAwsId: amazonawsString
+@as("Tags") tags: option<tagList_>,
+@as("Enabled") enabled: option<boolean_>,
+@as("Severity") severity: option<string_>,
+@as("EventCategoriesList") eventCategoriesList: option<eventCategoriesList>,
+@as("SourceIdsList") sourceIdsList: option<sourceIdsList>,
+@as("SourceType") sourceType: option<string_>,
+@as("SubscriptionCreationTime") subscriptionCreationTime: option<tstamp>,
+@as("Status") status: option<string_>,
+@as("SnsTopicArn") snsTopicArn: option<string_>,
+@as("CustSubscriptionId") custSubscriptionId: option<string_>,
+@as("CustomerAwsId") customerAwsId: option<string_>
 }
 type eventList = array<event>
 type eventInfoMapList = array<eventInfoMap>
 type endpointAuthorizations = array<endpointAuthorization>
-type eC2SecurityGroup = {
-@as("Tags") tags: tagList,
-@as("EC2SecurityGroupOwnerId") eC2SecurityGroupOwnerId: amazonawsString,
-@as("EC2SecurityGroupName") eC2SecurityGroupName: amazonawsString,
-@as("Status") status: amazonawsString
+type ec2SecurityGroup = {
+@as("Tags") tags: option<tagList_>,
+@as("EC2SecurityGroupOwnerId") ec2SecurityGroupOwnerId: option<string_>,
+@as("EC2SecurityGroupName") ec2SecurityGroupName: option<string_>,
+@as("Status") status: option<string_>
 }
 type defaultClusterParameters = {
-@as("Parameters") parameters: parametersList,
-@as("Marker") marker: amazonawsString,
-@as("ParameterGroupFamily") parameterGroupFamily: amazonawsString
+@as("Parameters") parameters: option<parametersList>,
+@as("Marker") marker: option<string_>,
+@as("ParameterGroupFamily") parameterGroupFamily: option<string_>
 }
 type clusterParameterGroupStatus = {
-@as("ClusterParameterStatusList") clusterParameterStatusList: clusterParameterStatusList,
-@as("ParameterApplyStatus") parameterApplyStatus: amazonawsString,
-@as("ParameterGroupName") parameterGroupName: amazonawsString
+@as("ClusterParameterStatusList") clusterParameterStatusList: option<clusterParameterStatusList>,
+@as("ParameterApplyStatus") parameterApplyStatus: option<string_>,
+@as("ParameterGroupName") parameterGroupName: option<string_>
 }
 type clusterParameterGroup = {
-@as("Tags") tags: tagList,
-@as("Description") description: amazonawsString,
-@as("ParameterGroupFamily") parameterGroupFamily: amazonawsString,
-@as("ParameterGroupName") parameterGroupName: amazonawsString
+@as("Tags") tags: option<tagList_>,
+@as("Description") description: option<string_>,
+@as("ParameterGroupFamily") parameterGroupFamily: option<string_>,
+@as("ParameterGroupName") parameterGroupName: option<string_>
 }
 type clusterDbRevision = {
-@as("RevisionTargets") revisionTargets: revisionTargetsList,
-@as("DatabaseRevisionReleaseDate") databaseRevisionReleaseDate: tStamp,
-@as("CurrentDatabaseRevision") currentDatabaseRevision: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("RevisionTargets") revisionTargets: option<revisionTargetsList>,
+@as("DatabaseRevisionReleaseDate") databaseRevisionReleaseDate: option<tstamp>,
+@as("CurrentDatabaseRevision") currentDatabaseRevision: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
 type availabilityZone = {
-@as("SupportedPlatforms") supportedPlatforms: supportedPlatformsList,
-@as("Name") name: amazonawsString
+@as("SupportedPlatforms") supportedPlatforms: option<supportedPlatformsList>,
+@as("Name") name: option<string_>
 }
 type accountAttribute = {
-@as("AttributeValues") attributeValues: attributeValueList,
-@as("AttributeName") attributeName: amazonawsString
+@as("AttributeValues") attributeValues: option<attributeValueList>,
+@as("AttributeName") attributeName: option<string_>
 }
 type vpcEndpointsList = array<vpcEndpoint>
 type usageLimits = array<usageLimit>
 type subnet = {
-@as("SubnetStatus") subnetStatus: amazonawsString,
-@as("SubnetAvailabilityZone") subnetAvailabilityZone: availabilityZone,
-@as("SubnetIdentifier") subnetIdentifier: amazonawsString
+@as("SubnetStatus") subnetStatus: option<string_>,
+@as("SubnetAvailabilityZone") subnetAvailabilityZone: option<availabilityZone>,
+@as("SubnetIdentifier") subnetIdentifier: option<string_>
 }
 type snapshotScheduleList = array<snapshotSchedule>
 type snapshotList = array<snapshot>
@@ -513,1731 +517,1731 @@ type scheduledActionList = array<scheduledAction>
 type reservedNodeOfferingList = array<reservedNodeOffering>
 type reservedNodeList = array<reservedNode>
 type parameterGroupList = array<clusterParameterGroup>
-type iPRangeList = array<iPRange>
+type iprangeList = array<iprange>
 type hsmConfigurationList = array<hsmConfiguration>
 type hsmClientCertificateList = array<hsmClientCertificate>
 type eventSubscriptionsList = array<eventSubscription>
 type eventCategoriesMap = {
-@as("Events") events: eventInfoMapList,
-@as("SourceType") sourceType: amazonawsString
+@as("Events") events: option<eventInfoMapList>,
+@as("SourceType") sourceType: option<string_>
 }
 type endpointAccess = {
-@as("VpcEndpoint") vpcEndpoint: vpcEndpoint,
-@as("VpcSecurityGroups") vpcSecurityGroups: vpcSecurityGroupMembershipList,
-@as("Address") address: amazonawsString,
-@as("Port") port: amazonawsInteger,
-@as("EndpointCreateTime") endpointCreateTime: tStamp,
-@as("EndpointName") endpointName: amazonawsString,
-@as("EndpointStatus") endpointStatus: amazonawsString,
-@as("SubnetGroupName") subnetGroupName: amazonawsString,
-@as("ResourceOwner") resourceOwner: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("VpcEndpoint") vpcEndpoint: option<vpcEndpoint>,
+@as("VpcSecurityGroups") vpcSecurityGroups: option<vpcSecurityGroupMembershipList>,
+@as("Address") address: option<string_>,
+@as("Port") port: option<integer_>,
+@as("EndpointCreateTime") endpointCreateTime: option<tstamp>,
+@as("EndpointName") endpointName: option<string_>,
+@as("EndpointStatus") endpointStatus: option<string_>,
+@as("SubnetGroupName") subnetGroupName: option<string_>,
+@as("ResourceOwner") resourceOwner: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
 type eligibleTracksToUpdateList = array<updateTarget>
-type eC2SecurityGroupList = array<eC2SecurityGroup>
+type ec2SecurityGroupList = array<ec2SecurityGroup>
 type clusterParameterGroupStatusList = array<clusterParameterGroupStatus>
 type clusterDbRevisionsList = array<clusterDbRevision>
 type availabilityZoneList = array<availabilityZone>
 type attributeList = array<accountAttribute>
 type subnetList = array<subnet>
 type orderableClusterOption = {
-@as("AvailabilityZones") availabilityZones: availabilityZoneList,
-@as("NodeType") nodeType: amazonawsString,
-@as("ClusterType") clusterType: amazonawsString,
-@as("ClusterVersion") clusterVersion: amazonawsString
+@as("AvailabilityZones") availabilityZones: option<availabilityZoneList>,
+@as("NodeType") nodeType: option<string_>,
+@as("ClusterType") clusterType: option<string_>,
+@as("ClusterVersion") clusterVersion: option<string_>
 }
 type maintenanceTrack = {
-@as("UpdateTargets") updateTargets: eligibleTracksToUpdateList,
-@as("DatabaseVersion") databaseVersion: amazonawsString,
-@as("MaintenanceTrackName") maintenanceTrackName: amazonawsString
+@as("UpdateTargets") updateTargets: option<eligibleTracksToUpdateList>,
+@as("DatabaseVersion") databaseVersion: option<string_>,
+@as("MaintenanceTrackName") maintenanceTrackName: option<string_>
 }
 type eventCategoriesMapList = array<eventCategoriesMap>
 type endpointAccesses = array<endpointAccess>
 type endpoint = {
-@as("VpcEndpoints") vpcEndpoints: vpcEndpointsList,
-@as("Port") port: amazonawsInteger,
-@as("Address") address: amazonawsString
+@as("VpcEndpoints") vpcEndpoints: option<vpcEndpointsList>,
+@as("Port") port: option<integer_>,
+@as("Address") address: option<string_>
 }
 type clusterSecurityGroup = {
-@as("Tags") tags: tagList,
-@as("IPRanges") iPRanges: iPRangeList,
-@as("EC2SecurityGroups") eC2SecurityGroups: eC2SecurityGroupList,
-@as("Description") description: amazonawsString,
-@as("ClusterSecurityGroupName") clusterSecurityGroupName: amazonawsString
+@as("Tags") tags: option<tagList_>,
+@as("IPRanges") ipranges: option<iprangeList>,
+@as("EC2SecurityGroups") ec2SecurityGroups: option<ec2SecurityGroupList>,
+@as("Description") description: option<string_>,
+@as("ClusterSecurityGroupName") clusterSecurityGroupName: option<string_>
 }
 type trackList = array<maintenanceTrack>
 type orderableClusterOptionsList = array<orderableClusterOption>
 type clusterSubnetGroup = {
-@as("Tags") tags: tagList,
-@as("Subnets") subnets: subnetList,
-@as("SubnetGroupStatus") subnetGroupStatus: amazonawsString,
-@as("VpcId") vpcId: amazonawsString,
-@as("Description") description: amazonawsString,
-@as("ClusterSubnetGroupName") clusterSubnetGroupName: amazonawsString
+@as("Tags") tags: option<tagList_>,
+@as("Subnets") subnets: option<subnetList>,
+@as("SubnetGroupStatus") subnetGroupStatus: option<string_>,
+@as("VpcId") vpcId: option<string_>,
+@as("Description") description: option<string_>,
+@as("ClusterSubnetGroupName") clusterSubnetGroupName: option<string_>
 }
 type clusterSecurityGroups = array<clusterSecurityGroup>
 type cluster = {
-@as("AquaConfiguration") aquaConfiguration: aquaConfiguration,
-@as("TotalStorageCapacityInMegaBytes") totalStorageCapacityInMegaBytes: longOptional,
-@as("ClusterNamespaceArn") clusterNamespaceArn: amazonawsString,
-@as("AvailabilityZoneRelocationStatus") availabilityZoneRelocationStatus: amazonawsString,
-@as("ResizeInfo") resizeInfo: resizeInfo,
-@as("NextMaintenanceWindowStartTime") nextMaintenanceWindowStartTime: tStamp,
-@as("ExpectedNextSnapshotScheduleTimeStatus") expectedNextSnapshotScheduleTimeStatus: amazonawsString,
-@as("ExpectedNextSnapshotScheduleTime") expectedNextSnapshotScheduleTime: tStamp,
-@as("SnapshotScheduleState") snapshotScheduleState: scheduleState,
-@as("SnapshotScheduleIdentifier") snapshotScheduleIdentifier: amazonawsString,
-@as("DeferredMaintenanceWindows") deferredMaintenanceWindows: deferredMaintenanceWindowsList,
-@as("ElasticResizeNumberOfNodeOptions") elasticResizeNumberOfNodeOptions: amazonawsString,
-@as("MaintenanceTrackName") maintenanceTrackName: amazonawsString,
-@as("PendingActions") pendingActions: pendingActionsList,
-@as("IamRoles") iamRoles: clusterIamRoleList,
-@as("EnhancedVpcRouting") enhancedVpcRouting: amazonawsBoolean,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("Tags") tags: tagList,
-@as("ClusterRevisionNumber") clusterRevisionNumber: amazonawsString,
-@as("ElasticIpStatus") elasticIpStatus: elasticIpStatus,
-@as("ClusterNodes") clusterNodes: clusterNodesList,
-@as("ClusterPublicKey") clusterPublicKey: amazonawsString,
-@as("ClusterSnapshotCopyStatus") clusterSnapshotCopyStatus: clusterSnapshotCopyStatus,
-@as("HsmStatus") hsmStatus: hsmStatus,
-@as("DataTransferProgress") dataTransferProgress: dataTransferProgress,
-@as("RestoreStatus") restoreStatus: restoreStatus,
-@as("Encrypted") encrypted: amazonawsBoolean,
-@as("PubliclyAccessible") publiclyAccessible: amazonawsBoolean,
-@as("NumberOfNodes") numberOfNodes: amazonawsInteger,
-@as("AllowVersionUpgrade") allowVersionUpgrade: amazonawsBoolean,
-@as("ClusterVersion") clusterVersion: amazonawsString,
-@as("PendingModifiedValues") pendingModifiedValues: pendingModifiedValues,
-@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: amazonawsString,
-@as("AvailabilityZone") availabilityZone: amazonawsString,
-@as("VpcId") vpcId: amazonawsString,
-@as("ClusterSubnetGroupName") clusterSubnetGroupName: amazonawsString,
-@as("ClusterParameterGroups") clusterParameterGroups: clusterParameterGroupStatusList,
-@as("VpcSecurityGroups") vpcSecurityGroups: vpcSecurityGroupMembershipList,
-@as("ClusterSecurityGroups") clusterSecurityGroups: clusterSecurityGroupMembershipList,
-@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: amazonawsInteger,
-@as("AutomatedSnapshotRetentionPeriod") automatedSnapshotRetentionPeriod: amazonawsInteger,
-@as("ClusterCreateTime") clusterCreateTime: tStamp,
-@as("Endpoint") endpoint: endpoint,
-@as("DBName") dBName: amazonawsString,
-@as("MasterUsername") masterUsername: amazonawsString,
-@as("ModifyStatus") modifyStatus: amazonawsString,
-@as("ClusterAvailabilityStatus") clusterAvailabilityStatus: amazonawsString,
-@as("ClusterStatus") clusterStatus: amazonawsString,
-@as("NodeType") nodeType: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("AquaConfiguration") aquaConfiguration: option<aquaConfiguration>,
+@as("TotalStorageCapacityInMegaBytes") totalStorageCapacityInMegaBytes: option<longOptional>,
+@as("ClusterNamespaceArn") clusterNamespaceArn: option<string_>,
+@as("AvailabilityZoneRelocationStatus") availabilityZoneRelocationStatus: option<string_>,
+@as("ResizeInfo") resizeInfo: option<resizeInfo>,
+@as("NextMaintenanceWindowStartTime") nextMaintenanceWindowStartTime: option<tstamp>,
+@as("ExpectedNextSnapshotScheduleTimeStatus") expectedNextSnapshotScheduleTimeStatus: option<string_>,
+@as("ExpectedNextSnapshotScheduleTime") expectedNextSnapshotScheduleTime: option<tstamp>,
+@as("SnapshotScheduleState") snapshotScheduleState: option<scheduleState>,
+@as("SnapshotScheduleIdentifier") snapshotScheduleIdentifier: option<string_>,
+@as("DeferredMaintenanceWindows") deferredMaintenanceWindows: option<deferredMaintenanceWindowsList>,
+@as("ElasticResizeNumberOfNodeOptions") elasticResizeNumberOfNodeOptions: option<string_>,
+@as("MaintenanceTrackName") maintenanceTrackName: option<string_>,
+@as("PendingActions") pendingActions: option<pendingActionsList>,
+@as("IamRoles") iamRoles: option<clusterIamRoleList>,
+@as("EnhancedVpcRouting") enhancedVpcRouting: option<boolean_>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("Tags") tags: option<tagList_>,
+@as("ClusterRevisionNumber") clusterRevisionNumber: option<string_>,
+@as("ElasticIpStatus") elasticIpStatus: option<elasticIpStatus>,
+@as("ClusterNodes") clusterNodes: option<clusterNodesList>,
+@as("ClusterPublicKey") clusterPublicKey: option<string_>,
+@as("ClusterSnapshotCopyStatus") clusterSnapshotCopyStatus: option<clusterSnapshotCopyStatus>,
+@as("HsmStatus") hsmStatus: option<hsmStatus>,
+@as("DataTransferProgress") dataTransferProgress: option<dataTransferProgress>,
+@as("RestoreStatus") restoreStatus: option<restoreStatus>,
+@as("Encrypted") encrypted: option<boolean_>,
+@as("PubliclyAccessible") publiclyAccessible: option<boolean_>,
+@as("NumberOfNodes") numberOfNodes: option<integer_>,
+@as("AllowVersionUpgrade") allowVersionUpgrade: option<boolean_>,
+@as("ClusterVersion") clusterVersion: option<string_>,
+@as("PendingModifiedValues") pendingModifiedValues: option<pendingModifiedValues>,
+@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: option<string_>,
+@as("AvailabilityZone") availabilityZone: option<string_>,
+@as("VpcId") vpcId: option<string_>,
+@as("ClusterSubnetGroupName") clusterSubnetGroupName: option<string_>,
+@as("ClusterParameterGroups") clusterParameterGroups: option<clusterParameterGroupStatusList>,
+@as("VpcSecurityGroups") vpcSecurityGroups: option<vpcSecurityGroupMembershipList>,
+@as("ClusterSecurityGroups") clusterSecurityGroups: option<clusterSecurityGroupMembershipList>,
+@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: option<integer_>,
+@as("AutomatedSnapshotRetentionPeriod") automatedSnapshotRetentionPeriod: option<integer_>,
+@as("ClusterCreateTime") clusterCreateTime: option<tstamp>,
+@as("Endpoint") endpoint: option<endpoint>,
+@as("DBName") dbname: option<string_>,
+@as("MasterUsername") masterUsername: option<string_>,
+@as("ModifyStatus") modifyStatus: option<string_>,
+@as("ClusterAvailabilityStatus") clusterAvailabilityStatus: option<string_>,
+@as("ClusterStatus") clusterStatus: option<string_>,
+@as("NodeType") nodeType: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
 type clusterSubnetGroups = array<clusterSubnetGroup>
 type clusterList = array<cluster>
-type clientType;
-@module("@aws-sdk/client-redshift") @new external createClient: unit => clientType = "RedshiftClient";
+type awsServiceClient;
+@module("@aws-sdk/client-redshift") @new external createClient: unit => awsServiceClient = "RedshiftClient";
 module UpdatePartnerStatus = {
   type t;
   type request = {
-@as("StatusMessage") statusMessage: partnerIntegrationStatusMessage,
-@as("Status") status: option<partnerIntegrationStatus>,
-@as("PartnerName") partnerName: option<partnerIntegrationPartnerName>,
-@as("DatabaseName") databaseName: option<partnerIntegrationDatabaseName>,
-@as("ClusterIdentifier") clusterIdentifier: option<partnerIntegrationClusterIdentifier>,
-@as("AccountId") accountId: option<partnerIntegrationAccountId>
+@as("StatusMessage") statusMessage: option<partnerIntegrationStatusMessage>,
+@as("Status") status: partnerIntegrationStatus,
+@as("PartnerName") partnerName: partnerIntegrationPartnerName,
+@as("DatabaseName") databaseName: partnerIntegrationDatabaseName,
+@as("ClusterIdentifier") clusterIdentifier: partnerIntegrationClusterIdentifier,
+@as("AccountId") accountId: partnerIntegrationAccountId
 }
   type response = {
-@as("PartnerName") partnerName: partnerIntegrationPartnerName,
-@as("DatabaseName") databaseName: partnerIntegrationDatabaseName
+@as("PartnerName") partnerName: option<partnerIntegrationPartnerName>,
+@as("DatabaseName") databaseName: option<partnerIntegrationDatabaseName>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "UpdatePartnerStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyClusterSnapshotSchedule = {
   type t;
   type request = {
-@as("DisassociateSchedule") disassociateSchedule: booleanOptional,
-@as("ScheduleIdentifier") scheduleIdentifier: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("DisassociateSchedule") disassociateSchedule: option<booleanOptional>,
+@as("ScheduleIdentifier") scheduleIdentifier: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterSnapshotScheduleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module EnableLogging = {
   type t;
   type request = {
-@as("S3KeyPrefix") s3KeyPrefix: amazonawsString,
-@as("BucketName") bucketName: option<amazonawsString>,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("S3KeyPrefix") s3KeyPrefix: option<string_>,
+@as("BucketName") bucketName: string_,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("LastFailureMessage") lastFailureMessage: amazonawsString,
-@as("LastFailureTime") lastFailureTime: tStamp,
-@as("LastSuccessfulDeliveryTime") lastSuccessfulDeliveryTime: tStamp,
-@as("S3KeyPrefix") s3KeyPrefix: amazonawsString,
-@as("BucketName") bucketName: amazonawsString,
-@as("LoggingEnabled") loggingEnabled: amazonawsBoolean
+@as("LastFailureMessage") lastFailureMessage: option<string_>,
+@as("LastFailureTime") lastFailureTime: option<tstamp>,
+@as("LastSuccessfulDeliveryTime") lastSuccessfulDeliveryTime: option<tstamp>,
+@as("S3KeyPrefix") s3KeyPrefix: option<string_>,
+@as("BucketName") bucketName: option<string_>,
+@as("LoggingEnabled") loggingEnabled: option<boolean_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "EnableLoggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisableLogging = {
   type t;
   type request = {
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("LastFailureMessage") lastFailureMessage: amazonawsString,
-@as("LastFailureTime") lastFailureTime: tStamp,
-@as("LastSuccessfulDeliveryTime") lastSuccessfulDeliveryTime: tStamp,
-@as("S3KeyPrefix") s3KeyPrefix: amazonawsString,
-@as("BucketName") bucketName: amazonawsString,
-@as("LoggingEnabled") loggingEnabled: amazonawsBoolean
+@as("LastFailureMessage") lastFailureMessage: option<string_>,
+@as("LastFailureTime") lastFailureTime: option<tstamp>,
+@as("LastSuccessfulDeliveryTime") lastSuccessfulDeliveryTime: option<tstamp>,
+@as("S3KeyPrefix") s3KeyPrefix: option<string_>,
+@as("BucketName") bucketName: option<string_>,
+@as("LoggingEnabled") loggingEnabled: option<boolean_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DisableLoggingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeStorage = {
   type t;
   
   type response = {
-@as("TotalProvisionedStorageInMegaBytes") totalProvisionedStorageInMegaBytes: amazonawsDouble,
-@as("TotalBackupSizeInMegaBytes") totalBackupSizeInMegaBytes: amazonawsDouble
+@as("TotalProvisionedStorageInMegaBytes") totalProvisionedStorageInMegaBytes: option<double>,
+@as("TotalBackupSizeInMegaBytes") totalBackupSizeInMegaBytes: option<double>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (unit) => t = "DescribeStorageCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLoggingStatus = {
   type t;
   type request = {
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("LastFailureMessage") lastFailureMessage: amazonawsString,
-@as("LastFailureTime") lastFailureTime: tStamp,
-@as("LastSuccessfulDeliveryTime") lastSuccessfulDeliveryTime: tStamp,
-@as("S3KeyPrefix") s3KeyPrefix: amazonawsString,
-@as("BucketName") bucketName: amazonawsString,
-@as("LoggingEnabled") loggingEnabled: amazonawsBoolean
+@as("LastFailureMessage") lastFailureMessage: option<string_>,
+@as("LastFailureTime") lastFailureTime: option<tstamp>,
+@as("LastSuccessfulDeliveryTime") lastSuccessfulDeliveryTime: option<tstamp>,
+@as("S3KeyPrefix") s3KeyPrefix: option<string_>,
+@as("BucketName") bucketName: option<string_>,
+@as("LoggingEnabled") loggingEnabled: option<boolean_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeLoggingStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteUsageLimit = {
   type t;
   type request = {
-@as("UsageLimitId") usageLimitId: option<amazonawsString>
+@as("UsageLimitId") usageLimitId: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteUsageLimitCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteSnapshotSchedule = {
   type t;
   type request = {
-@as("ScheduleIdentifier") scheduleIdentifier: option<amazonawsString>
+@as("ScheduleIdentifier") scheduleIdentifier: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteSnapshotScheduleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteSnapshotCopyGrant = {
   type t;
   type request = {
-@as("SnapshotCopyGrantName") snapshotCopyGrantName: option<amazonawsString>
+@as("SnapshotCopyGrantName") snapshotCopyGrantName: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteSnapshotCopyGrantCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteScheduledAction = {
   type t;
   type request = {
-@as("ScheduledActionName") scheduledActionName: option<amazonawsString>
+@as("ScheduledActionName") scheduledActionName: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteScheduledActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeletePartner = {
   type t;
   type request = {
-@as("PartnerName") partnerName: option<partnerIntegrationPartnerName>,
-@as("DatabaseName") databaseName: option<partnerIntegrationDatabaseName>,
-@as("ClusterIdentifier") clusterIdentifier: option<partnerIntegrationClusterIdentifier>,
-@as("AccountId") accountId: option<partnerIntegrationAccountId>
+@as("PartnerName") partnerName: partnerIntegrationPartnerName,
+@as("DatabaseName") databaseName: partnerIntegrationDatabaseName,
+@as("ClusterIdentifier") clusterIdentifier: partnerIntegrationClusterIdentifier,
+@as("AccountId") accountId: partnerIntegrationAccountId
 }
   type response = {
-@as("PartnerName") partnerName: partnerIntegrationPartnerName,
-@as("DatabaseName") databaseName: partnerIntegrationDatabaseName
+@as("PartnerName") partnerName: option<partnerIntegrationPartnerName>,
+@as("DatabaseName") databaseName: option<partnerIntegrationDatabaseName>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeletePartnerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteHsmConfiguration = {
   type t;
   type request = {
-@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: option<amazonawsString>
+@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteHsmConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteHsmClientCertificate = {
   type t;
   type request = {
-@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: option<amazonawsString>
+@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteHsmClientCertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteEventSubscription = {
   type t;
   type request = {
-@as("SubscriptionName") subscriptionName: option<amazonawsString>
+@as("SubscriptionName") subscriptionName: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteEventSubscriptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteClusterSubnetGroup = {
   type t;
   type request = {
-@as("ClusterSubnetGroupName") clusterSubnetGroupName: option<amazonawsString>
+@as("ClusterSubnetGroupName") clusterSubnetGroupName: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteClusterSubnetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteClusterSecurityGroup = {
   type t;
   type request = {
-@as("ClusterSecurityGroupName") clusterSecurityGroupName: option<amazonawsString>
+@as("ClusterSecurityGroupName") clusterSecurityGroupName: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteClusterSecurityGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteClusterParameterGroup = {
   type t;
   type request = {
-@as("ParameterGroupName") parameterGroupName: option<amazonawsString>
+@as("ParameterGroupName") parameterGroupName: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteClusterParameterGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module AddPartner = {
   type t;
   type request = {
-@as("PartnerName") partnerName: option<partnerIntegrationPartnerName>,
-@as("DatabaseName") databaseName: option<partnerIntegrationDatabaseName>,
-@as("ClusterIdentifier") clusterIdentifier: option<partnerIntegrationClusterIdentifier>,
-@as("AccountId") accountId: option<partnerIntegrationAccountId>
+@as("PartnerName") partnerName: partnerIntegrationPartnerName,
+@as("DatabaseName") databaseName: partnerIntegrationDatabaseName,
+@as("ClusterIdentifier") clusterIdentifier: partnerIntegrationClusterIdentifier,
+@as("AccountId") accountId: partnerIntegrationAccountId
 }
   type response = {
-@as("PartnerName") partnerName: partnerIntegrationPartnerName,
-@as("DatabaseName") databaseName: partnerIntegrationDatabaseName
+@as("PartnerName") partnerName: option<partnerIntegrationPartnerName>,
+@as("DatabaseName") databaseName: option<partnerIntegrationDatabaseName>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "AddPartnerCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RevokeEndpointAccess = {
   type t;
   type request = {
-@as("Force") force: amazonawsBoolean,
-@as("VpcIds") vpcIds: vpcIdentifierList,
-@as("Account") account: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("Force") force: option<boolean_>,
+@as("VpcIds") vpcIds: option<vpcIdentifierList>,
+@as("Account") account: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
   type response = endpointAuthorization;
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RevokeEndpointAccessCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RestoreTableFromClusterSnapshot = {
   type t;
   type request = {
-@as("EnableCaseSensitiveIdentifier") enableCaseSensitiveIdentifier: booleanOptional,
-@as("NewTableName") newTableName: option<amazonawsString>,
-@as("TargetSchemaName") targetSchemaName: amazonawsString,
-@as("TargetDatabaseName") targetDatabaseName: amazonawsString,
-@as("SourceTableName") sourceTableName: option<amazonawsString>,
-@as("SourceSchemaName") sourceSchemaName: amazonawsString,
-@as("SourceDatabaseName") sourceDatabaseName: option<amazonawsString>,
-@as("SnapshotIdentifier") snapshotIdentifier: option<amazonawsString>,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("EnableCaseSensitiveIdentifier") enableCaseSensitiveIdentifier: option<booleanOptional>,
+@as("NewTableName") newTableName: string_,
+@as("TargetSchemaName") targetSchemaName: option<string_>,
+@as("TargetDatabaseName") targetDatabaseName: option<string_>,
+@as("SourceTableName") sourceTableName: string_,
+@as("SourceSchemaName") sourceSchemaName: option<string_>,
+@as("SourceDatabaseName") sourceDatabaseName: string_,
+@as("SnapshotIdentifier") snapshotIdentifier: string_,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("TableRestoreStatus") tableRestoreStatus: tableRestoreStatus
+@as("TableRestoreStatus") tableRestoreStatus: option<tableRestoreStatus>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RestoreTableFromClusterSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyAquaConfiguration = {
   type t;
   type request = {
-@as("AquaConfigurationStatus") aquaConfigurationStatus: aquaConfigurationStatus,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("AquaConfigurationStatus") aquaConfigurationStatus: option<aquaConfigurationStatus>,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("AquaConfiguration") aquaConfiguration: aquaConfiguration
+@as("AquaConfiguration") aquaConfiguration: option<aquaConfiguration>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyAquaConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetClusterCredentials = {
   type t;
   type request = {
-@as("DbGroups") dbGroups: dbGroupList,
-@as("AutoCreate") autoCreate: booleanOptional,
-@as("DurationSeconds") durationSeconds: integerOptional,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>,
-@as("DbName") dbName: amazonawsString,
-@as("DbUser") dbUser: option<amazonawsString>
+@as("DbGroups") dbGroups: option<dbGroupList>,
+@as("AutoCreate") autoCreate: option<booleanOptional>,
+@as("DurationSeconds") durationSeconds: option<integerOptional>,
+@as("ClusterIdentifier") clusterIdentifier: string_,
+@as("DbName") dbName: option<string_>,
+@as("DbUser") dbUser: string_
 }
   type response = {
-@as("Expiration") expiration: tStamp,
-@as("DbPassword") dbPassword: sensitiveString,
-@as("DbUser") dbUser: amazonawsString
+@as("Expiration") expiration: option<tstamp>,
+@as("DbPassword") dbPassword: option<sensitiveString>,
+@as("DbUser") dbUser: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "GetClusterCredentialsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeResize = {
   type t;
   type request = {
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("DataTransferProgressPercent") dataTransferProgressPercent: doubleOptional,
-@as("TargetEncryptionType") targetEncryptionType: amazonawsString,
-@as("Message") message: amazonawsString,
-@as("ResizeType") resizeType: amazonawsString,
-@as("EstimatedTimeToCompletionInSeconds") estimatedTimeToCompletionInSeconds: longOptional,
-@as("ElapsedTimeInSeconds") elapsedTimeInSeconds: longOptional,
-@as("ProgressInMegaBytes") progressInMegaBytes: longOptional,
-@as("TotalResizeDataInMegaBytes") totalResizeDataInMegaBytes: longOptional,
-@as("AvgResizeRateInMegaBytesPerSecond") avgResizeRateInMegaBytesPerSecond: doubleOptional,
-@as("ImportTablesNotStarted") importTablesNotStarted: importTablesNotStarted,
-@as("ImportTablesInProgress") importTablesInProgress: importTablesInProgress,
-@as("ImportTablesCompleted") importTablesCompleted: importTablesCompleted,
-@as("Status") status: amazonawsString,
-@as("TargetClusterType") targetClusterType: amazonawsString,
-@as("TargetNumberOfNodes") targetNumberOfNodes: integerOptional,
-@as("TargetNodeType") targetNodeType: amazonawsString
+@as("DataTransferProgressPercent") dataTransferProgressPercent: option<doubleOptional>,
+@as("TargetEncryptionType") targetEncryptionType: option<string_>,
+@as("Message") message: option<string_>,
+@as("ResizeType") resizeType: option<string_>,
+@as("EstimatedTimeToCompletionInSeconds") estimatedTimeToCompletionInSeconds: option<longOptional>,
+@as("ElapsedTimeInSeconds") elapsedTimeInSeconds: option<longOptional>,
+@as("ProgressInMegaBytes") progressInMegaBytes: option<longOptional>,
+@as("TotalResizeDataInMegaBytes") totalResizeDataInMegaBytes: option<longOptional>,
+@as("AvgResizeRateInMegaBytesPerSecond") avgResizeRateInMegaBytesPerSecond: option<doubleOptional>,
+@as("ImportTablesNotStarted") importTablesNotStarted: option<importTablesNotStarted>,
+@as("ImportTablesInProgress") importTablesInProgress: option<importTablesInProgress>,
+@as("ImportTablesCompleted") importTablesCompleted: option<importTablesCompleted>,
+@as("Status") status: option<string_>,
+@as("TargetClusterType") targetClusterType: option<string_>,
+@as("TargetNumberOfNodes") targetNumberOfNodes: option<integerOptional>,
+@as("TargetNodeType") targetNodeType: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeResizeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteTags = {
   type t;
   type request = {
-@as("TagKeys") tagKeys: option<tagKeyList>,
-@as("ResourceName") resourceName: option<amazonawsString>
+@as("TagKeys") tagKeys: tagKeyList,
+@as("ResourceName") resourceName: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CancelResize = {
   type t;
   type request = {
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("DataTransferProgressPercent") dataTransferProgressPercent: doubleOptional,
-@as("TargetEncryptionType") targetEncryptionType: amazonawsString,
-@as("Message") message: amazonawsString,
-@as("ResizeType") resizeType: amazonawsString,
-@as("EstimatedTimeToCompletionInSeconds") estimatedTimeToCompletionInSeconds: longOptional,
-@as("ElapsedTimeInSeconds") elapsedTimeInSeconds: longOptional,
-@as("ProgressInMegaBytes") progressInMegaBytes: longOptional,
-@as("TotalResizeDataInMegaBytes") totalResizeDataInMegaBytes: longOptional,
-@as("AvgResizeRateInMegaBytesPerSecond") avgResizeRateInMegaBytesPerSecond: doubleOptional,
-@as("ImportTablesNotStarted") importTablesNotStarted: importTablesNotStarted,
-@as("ImportTablesInProgress") importTablesInProgress: importTablesInProgress,
-@as("ImportTablesCompleted") importTablesCompleted: importTablesCompleted,
-@as("Status") status: amazonawsString,
-@as("TargetClusterType") targetClusterType: amazonawsString,
-@as("TargetNumberOfNodes") targetNumberOfNodes: integerOptional,
-@as("TargetNodeType") targetNodeType: amazonawsString
+@as("DataTransferProgressPercent") dataTransferProgressPercent: option<doubleOptional>,
+@as("TargetEncryptionType") targetEncryptionType: option<string_>,
+@as("Message") message: option<string_>,
+@as("ResizeType") resizeType: option<string_>,
+@as("EstimatedTimeToCompletionInSeconds") estimatedTimeToCompletionInSeconds: option<longOptional>,
+@as("ElapsedTimeInSeconds") elapsedTimeInSeconds: option<longOptional>,
+@as("ProgressInMegaBytes") progressInMegaBytes: option<longOptional>,
+@as("TotalResizeDataInMegaBytes") totalResizeDataInMegaBytes: option<longOptional>,
+@as("AvgResizeRateInMegaBytesPerSecond") avgResizeRateInMegaBytesPerSecond: option<doubleOptional>,
+@as("ImportTablesNotStarted") importTablesNotStarted: option<importTablesNotStarted>,
+@as("ImportTablesInProgress") importTablesInProgress: option<importTablesInProgress>,
+@as("ImportTablesCompleted") importTablesCompleted: option<importTablesCompleted>,
+@as("Status") status: option<string_>,
+@as("TargetClusterType") targetClusterType: option<string_>,
+@as("TargetNumberOfNodes") targetNumberOfNodes: option<integerOptional>,
+@as("TargetNodeType") targetNodeType: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CancelResizeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AuthorizeEndpointAccess = {
   type t;
   type request = {
-@as("VpcIds") vpcIds: vpcIdentifierList,
-@as("Account") account: option<amazonawsString>,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("VpcIds") vpcIds: option<vpcIdentifierList>,
+@as("Account") account: string_,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
   type response = endpointAuthorization;
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "AuthorizeEndpointAccessCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ResetClusterParameterGroup = {
   type t;
   type request = {
-@as("Parameters") parameters: parametersList,
-@as("ResetAllParameters") resetAllParameters: amazonawsBoolean,
-@as("ParameterGroupName") parameterGroupName: option<amazonawsString>
+@as("Parameters") parameters: option<parametersList>,
+@as("ResetAllParameters") resetAllParameters: option<boolean_>,
+@as("ParameterGroupName") parameterGroupName: string_
 }
   type response = {
-@as("ParameterGroupStatus") parameterGroupStatus: amazonawsString,
-@as("ParameterGroupName") parameterGroupName: amazonawsString
+@as("ParameterGroupStatus") parameterGroupStatus: option<string_>,
+@as("ParameterGroupName") parameterGroupName: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ResetClusterParameterGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyUsageLimit = {
   type t;
   type request = {
-@as("BreachAction") breachAction: usageLimitBreachAction,
-@as("Amount") amount: longOptional,
-@as("UsageLimitId") usageLimitId: option<amazonawsString>
+@as("BreachAction") breachAction: option<usageLimitBreachAction>,
+@as("Amount") amount: option<longOptional>,
+@as("UsageLimitId") usageLimitId: string_
 }
   type response = usageLimit;
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyUsageLimitCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifySnapshotSchedule = {
   type t;
   type request = {
-@as("ScheduleDefinitions") scheduleDefinitions: option<scheduleDefinitionList>,
-@as("ScheduleIdentifier") scheduleIdentifier: option<amazonawsString>
+@as("ScheduleDefinitions") scheduleDefinitions: scheduleDefinitionList,
+@as("ScheduleIdentifier") scheduleIdentifier: string_
 }
   type response = snapshotSchedule;
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifySnapshotScheduleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyScheduledAction = {
   type t;
   type request = {
-@as("Enable") enable: booleanOptional,
-@as("EndTime") endTime: tStamp,
-@as("StartTime") startTime: tStamp,
-@as("ScheduledActionDescription") scheduledActionDescription: amazonawsString,
-@as("IamRole") iamRole: amazonawsString,
-@as("Schedule") schedule: amazonawsString,
-@as("TargetAction") targetAction: scheduledActionType,
-@as("ScheduledActionName") scheduledActionName: option<amazonawsString>
+@as("Enable") enable: option<booleanOptional>,
+@as("EndTime") endTime: option<tstamp>,
+@as("StartTime") startTime: option<tstamp>,
+@as("ScheduledActionDescription") scheduledActionDescription: option<string_>,
+@as("IamRole") iamRole: option<string_>,
+@as("Schedule") schedule: option<string_>,
+@as("TargetAction") targetAction: option<scheduledActionType>,
+@as("ScheduledActionName") scheduledActionName: string_
 }
   type response = scheduledAction;
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyScheduledActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyClusterParameterGroup = {
   type t;
   type request = {
-@as("Parameters") parameters: option<parametersList>,
-@as("ParameterGroupName") parameterGroupName: option<amazonawsString>
+@as("Parameters") parameters: parametersList,
+@as("ParameterGroupName") parameterGroupName: string_
 }
   type response = {
-@as("ParameterGroupStatus") parameterGroupStatus: amazonawsString,
-@as("ParameterGroupName") parameterGroupName: amazonawsString
+@as("ParameterGroupStatus") parameterGroupStatus: option<string_>,
+@as("ParameterGroupName") parameterGroupName: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterParameterGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTableRestoreStatus = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("TableRestoreRequestId") tableRestoreRequestId: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("TableRestoreRequestId") tableRestoreRequestId: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("TableRestoreStatusDetails") tableRestoreStatusDetails: tableRestoreStatusList
+@as("Marker") marker: option<string_>,
+@as("TableRestoreStatusDetails") tableRestoreStatusDetails: option<tableRestoreStatusList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeTableRestoreStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribePartners = {
   type t;
   type request = {
-@as("PartnerName") partnerName: partnerIntegrationPartnerName,
-@as("DatabaseName") databaseName: partnerIntegrationDatabaseName,
-@as("ClusterIdentifier") clusterIdentifier: option<partnerIntegrationClusterIdentifier>,
-@as("AccountId") accountId: option<partnerIntegrationAccountId>
+@as("PartnerName") partnerName: option<partnerIntegrationPartnerName>,
+@as("DatabaseName") databaseName: option<partnerIntegrationDatabaseName>,
+@as("ClusterIdentifier") clusterIdentifier: partnerIntegrationClusterIdentifier,
+@as("AccountId") accountId: partnerIntegrationAccountId
 }
   type response = {
-@as("PartnerIntegrationInfoList") partnerIntegrationInfoList: partnerIntegrationInfoList
+@as("PartnerIntegrationInfoList") partnerIntegrationInfoList: option<partnerIntegrationInfoList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribePartnersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeClusterVersions = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("ClusterParameterGroupFamily") clusterParameterGroupFamily: amazonawsString,
-@as("ClusterVersion") clusterVersion: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("ClusterParameterGroupFamily") clusterParameterGroupFamily: option<string_>,
+@as("ClusterVersion") clusterVersion: option<string_>
 }
   type response = {
-@as("ClusterVersions") clusterVersions: clusterVersionList,
-@as("Marker") marker: amazonawsString
+@as("ClusterVersions") clusterVersions: option<clusterVersionList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeClusterParameters = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Source") source: amazonawsString,
-@as("ParameterGroupName") parameterGroupName: option<amazonawsString>
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Source") source: option<string_>,
+@as("ParameterGroupName") parameterGroupName: string_
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("Parameters") parameters: parametersList
+@as("Marker") marker: option<string_>,
+@as("Parameters") parameters: option<parametersList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterParametersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateUsageLimit = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("BreachAction") breachAction: usageLimitBreachAction,
-@as("Period") period: usageLimitPeriod,
-@as("Amount") amount: option<amazonawsLong>,
-@as("LimitType") limitType: option<usageLimitLimitType>,
-@as("FeatureType") featureType: option<usageLimitFeatureType>,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("BreachAction") breachAction: option<usageLimitBreachAction>,
+@as("Period") period: option<usageLimitPeriod>,
+@as("Amount") amount: long,
+@as("LimitType") limitType: usageLimitLimitType,
+@as("FeatureType") featureType: usageLimitFeatureType,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = usageLimit;
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateUsageLimitCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateTags = {
   type t;
   type request = {
-@as("Tags") tags: option<tagList>,
-@as("ResourceName") resourceName: option<amazonawsString>
+@as("Tags") tags: tagList_,
+@as("ResourceName") resourceName: string_
 }
   
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateSnapshotSchedule = {
   type t;
   type request = {
-@as("NextInvocations") nextInvocations: integerOptional,
-@as("DryRun") dryRun: booleanOptional,
-@as("Tags") tags: tagList,
-@as("ScheduleDescription") scheduleDescription: amazonawsString,
-@as("ScheduleIdentifier") scheduleIdentifier: amazonawsString,
-@as("ScheduleDefinitions") scheduleDefinitions: scheduleDefinitionList
+@as("NextInvocations") nextInvocations: option<integerOptional>,
+@as("DryRun") dryRun: option<booleanOptional>,
+@as("Tags") tags: option<tagList_>,
+@as("ScheduleDescription") scheduleDescription: option<string_>,
+@as("ScheduleIdentifier") scheduleIdentifier: option<string_>,
+@as("ScheduleDefinitions") scheduleDefinitions: option<scheduleDefinitionList>
 }
   type response = snapshotSchedule;
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateSnapshotScheduleCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateScheduledAction = {
   type t;
   type request = {
-@as("Enable") enable: booleanOptional,
-@as("EndTime") endTime: tStamp,
-@as("StartTime") startTime: tStamp,
-@as("ScheduledActionDescription") scheduledActionDescription: amazonawsString,
-@as("IamRole") iamRole: option<amazonawsString>,
-@as("Schedule") schedule: option<amazonawsString>,
-@as("TargetAction") targetAction: option<scheduledActionType>,
-@as("ScheduledActionName") scheduledActionName: option<amazonawsString>
+@as("Enable") enable: option<booleanOptional>,
+@as("EndTime") endTime: option<tstamp>,
+@as("StartTime") startTime: option<tstamp>,
+@as("ScheduledActionDescription") scheduledActionDescription: option<string_>,
+@as("IamRole") iamRole: string_,
+@as("Schedule") schedule: string_,
+@as("TargetAction") targetAction: scheduledActionType,
+@as("ScheduledActionName") scheduledActionName: string_
 }
   type response = scheduledAction;
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateScheduledActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchModifyClusterSnapshots = {
   type t;
   type request = {
-@as("Force") force: amazonawsBoolean,
-@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: integerOptional,
-@as("SnapshotIdentifierList") snapshotIdentifierList: option<snapshotIdentifierList>
+@as("Force") force: option<boolean_>,
+@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: option<integerOptional>,
+@as("SnapshotIdentifierList") snapshotIdentifierList: snapshotIdentifierList
 }
   type response = {
-@as("Errors") errors: batchSnapshotOperationErrors,
-@as("Resources") resources: snapshotIdentifierList
+@as("Errors") errors: option<batchSnapshotOperationErrors>,
+@as("Resources") resources: option<snapshotIdentifierList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "BatchModifyClusterSnapshotsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchDeleteClusterSnapshots = {
   type t;
   type request = {
-@as("Identifiers") identifiers: option<deleteClusterSnapshotMessageList>
+@as("Identifiers") identifiers: deleteClusterSnapshotMessageList
 }
   type response = {
-@as("Errors") errors: batchSnapshotOperationErrorList,
-@as("Resources") resources: snapshotIdentifierList
+@as("Errors") errors: option<batchSnapshotOperationErrorList>,
+@as("Resources") resources: option<snapshotIdentifierList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "BatchDeleteClusterSnapshotsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RevokeSnapshotAccess = {
   type t;
   type request = {
-@as("AccountWithRestoreAccess") accountWithRestoreAccess: option<amazonawsString>,
-@as("SnapshotClusterIdentifier") snapshotClusterIdentifier: amazonawsString,
-@as("SnapshotIdentifier") snapshotIdentifier: option<amazonawsString>
+@as("AccountWithRestoreAccess") accountWithRestoreAccess: string_,
+@as("SnapshotClusterIdentifier") snapshotClusterIdentifier: option<string_>,
+@as("SnapshotIdentifier") snapshotIdentifier: string_
 }
   type response = {
-@as("Snapshot") snapshot: snapshot
+@as("Snapshot") snapshot: option<snapshot>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RevokeSnapshotAccessCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PurchaseReservedNodeOffering = {
   type t;
   type request = {
-@as("NodeCount") nodeCount: integerOptional,
-@as("ReservedNodeOfferingId") reservedNodeOfferingId: option<amazonawsString>
+@as("NodeCount") nodeCount: option<integerOptional>,
+@as("ReservedNodeOfferingId") reservedNodeOfferingId: string_
 }
   type response = {
-@as("ReservedNode") reservedNode: reservedNode
+@as("ReservedNode") reservedNode: option<reservedNode>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "PurchaseReservedNodeOfferingCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyEventSubscription = {
   type t;
   type request = {
-@as("Enabled") enabled: booleanOptional,
-@as("Severity") severity: amazonawsString,
-@as("EventCategories") eventCategories: eventCategoriesList,
-@as("SourceIds") sourceIds: sourceIdsList,
-@as("SourceType") sourceType: amazonawsString,
-@as("SnsTopicArn") snsTopicArn: amazonawsString,
-@as("SubscriptionName") subscriptionName: option<amazonawsString>
+@as("Enabled") enabled: option<booleanOptional>,
+@as("Severity") severity: option<string_>,
+@as("EventCategories") eventCategories: option<eventCategoriesList>,
+@as("SourceIds") sourceIds: option<sourceIdsList>,
+@as("SourceType") sourceType: option<string_>,
+@as("SnsTopicArn") snsTopicArn: option<string_>,
+@as("SubscriptionName") subscriptionName: string_
 }
   type response = {
-@as("EventSubscription") eventSubscription: eventSubscription
+@as("EventSubscription") eventSubscription: option<eventSubscription>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyEventSubscriptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyEndpointAccess = {
   type t;
   type request = {
-@as("VpcSecurityGroupIds") vpcSecurityGroupIds: vpcSecurityGroupIdList,
-@as("EndpointName") endpointName: option<amazonawsString>
+@as("VpcSecurityGroupIds") vpcSecurityGroupIds: option<vpcSecurityGroupIdList>,
+@as("EndpointName") endpointName: string_
 }
   type response = endpointAccess;
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyEndpointAccessCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyClusterSnapshot = {
   type t;
   type request = {
-@as("Force") force: amazonawsBoolean,
-@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: integerOptional,
-@as("SnapshotIdentifier") snapshotIdentifier: option<amazonawsString>
+@as("Force") force: option<boolean_>,
+@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: option<integerOptional>,
+@as("SnapshotIdentifier") snapshotIdentifier: string_
 }
   type response = {
-@as("Snapshot") snapshot: snapshot
+@as("Snapshot") snapshot: option<snapshot>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTags = {
   type t;
   type request = {
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("ResourceType") resourceType: amazonawsString,
-@as("ResourceName") resourceName: amazonawsString
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("ResourceType") resourceType: option<string_>,
+@as("ResourceName") resourceName: option<string_>
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("TaggedResources") taggedResources: taggedResourceList
+@as("Marker") marker: option<string_>,
+@as("TaggedResources") taggedResources: option<taggedResourceList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeNodeConfigurationOptions = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Marker") marker: amazonawsString,
-@as("Filters") filters: nodeConfigurationOptionsFilterList,
-@as("OwnerAccount") ownerAccount: amazonawsString,
-@as("SnapshotIdentifier") snapshotIdentifier: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString,
-@as("ActionType") actionType: option<actionType>
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Marker") marker: option<string_>,
+@as("Filters") filters: option<nodeConfigurationOptionsFilterList>,
+@as("OwnerAccount") ownerAccount: option<string_>,
+@as("SnapshotIdentifier") snapshotIdentifier: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>,
+@as("ActionType") actionType: actionType
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("NodeConfigurationOptionList") nodeConfigurationOptionList: nodeConfigurationOptionList
+@as("Marker") marker: option<string_>,
+@as("NodeConfigurationOptionList") nodeConfigurationOptionList: option<nodeConfigurationOptionList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeNodeConfigurationOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEvents = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Duration") duration: integerOptional,
-@as("EndTime") endTime: tStamp,
-@as("StartTime") startTime: tStamp,
-@as("SourceType") sourceType: sourceType,
-@as("SourceIdentifier") sourceIdentifier: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Duration") duration: option<integerOptional>,
+@as("EndTime") endTime: option<tstamp>,
+@as("StartTime") startTime: option<tstamp>,
+@as("SourceType") sourceType: option<sourceType>,
+@as("SourceIdentifier") sourceIdentifier: option<string_>
 }
   type response = {
-@as("Events") events: eventList,
-@as("Marker") marker: amazonawsString
+@as("Events") events: option<eventList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeEventsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEndpointAuthorization = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Grantee") grantee: booleanOptional,
-@as("Account") account: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Grantee") grantee: option<booleanOptional>,
+@as("Account") account: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("EndpointAuthorizationList") endpointAuthorizationList: endpointAuthorizations
+@as("Marker") marker: option<string_>,
+@as("EndpointAuthorizationList") endpointAuthorizationList: option<endpointAuthorizations>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeEndpointAuthorizationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDefaultClusterParameters = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("ParameterGroupFamily") parameterGroupFamily: option<amazonawsString>
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("ParameterGroupFamily") parameterGroupFamily: string_
 }
   type response = {
-@as("DefaultClusterParameters") defaultClusterParameters: defaultClusterParameters
+@as("DefaultClusterParameters") defaultClusterParameters: option<defaultClusterParameters>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeDefaultClusterParametersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteEndpointAccess = {
   type t;
   type request = {
-@as("EndpointName") endpointName: option<amazonawsString>
+@as("EndpointName") endpointName: string_
 }
   type response = endpointAccess;
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteEndpointAccessCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteClusterSnapshot = {
   type t;
   type request = deleteClusterSnapshotMessage;
   type response = {
-@as("Snapshot") snapshot: snapshot
+@as("Snapshot") snapshot: option<snapshot>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteClusterSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateSnapshotCopyGrant = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("SnapshotCopyGrantName") snapshotCopyGrantName: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("SnapshotCopyGrantName") snapshotCopyGrantName: string_
 }
   type response = {
-@as("SnapshotCopyGrant") snapshotCopyGrant: snapshotCopyGrant
+@as("SnapshotCopyGrant") snapshotCopyGrant: option<snapshotCopyGrant>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateSnapshotCopyGrantCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateHsmConfiguration = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("HsmServerPublicCertificate") hsmServerPublicCertificate: option<amazonawsString>,
-@as("HsmPartitionPassword") hsmPartitionPassword: option<amazonawsString>,
-@as("HsmPartitionName") hsmPartitionName: option<amazonawsString>,
-@as("HsmIpAddress") hsmIpAddress: option<amazonawsString>,
-@as("Description") description: option<amazonawsString>,
-@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("HsmServerPublicCertificate") hsmServerPublicCertificate: string_,
+@as("HsmPartitionPassword") hsmPartitionPassword: string_,
+@as("HsmPartitionName") hsmPartitionName: string_,
+@as("HsmIpAddress") hsmIpAddress: string_,
+@as("Description") description: string_,
+@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: string_
 }
   type response = {
-@as("HsmConfiguration") hsmConfiguration: hsmConfiguration
+@as("HsmConfiguration") hsmConfiguration: option<hsmConfiguration>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateHsmConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateHsmClientCertificate = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: string_
 }
   type response = {
-@as("HsmClientCertificate") hsmClientCertificate: hsmClientCertificate
+@as("HsmClientCertificate") hsmClientCertificate: option<hsmClientCertificate>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateHsmClientCertificateCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateEventSubscription = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("Enabled") enabled: booleanOptional,
-@as("Severity") severity: amazonawsString,
-@as("EventCategories") eventCategories: eventCategoriesList,
-@as("SourceIds") sourceIds: sourceIdsList,
-@as("SourceType") sourceType: amazonawsString,
-@as("SnsTopicArn") snsTopicArn: option<amazonawsString>,
-@as("SubscriptionName") subscriptionName: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("Enabled") enabled: option<booleanOptional>,
+@as("Severity") severity: option<string_>,
+@as("EventCategories") eventCategories: option<eventCategoriesList>,
+@as("SourceIds") sourceIds: option<sourceIdsList>,
+@as("SourceType") sourceType: option<string_>,
+@as("SnsTopicArn") snsTopicArn: string_,
+@as("SubscriptionName") subscriptionName: string_
 }
   type response = {
-@as("EventSubscription") eventSubscription: eventSubscription
+@as("EventSubscription") eventSubscription: option<eventSubscription>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateEventSubscriptionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateEndpointAccess = {
   type t;
   type request = {
-@as("VpcSecurityGroupIds") vpcSecurityGroupIds: vpcSecurityGroupIdList,
-@as("SubnetGroupName") subnetGroupName: option<amazonawsString>,
-@as("EndpointName") endpointName: option<amazonawsString>,
-@as("ResourceOwner") resourceOwner: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("VpcSecurityGroupIds") vpcSecurityGroupIds: option<vpcSecurityGroupIdList>,
+@as("SubnetGroupName") subnetGroupName: string_,
+@as("EndpointName") endpointName: string_,
+@as("ResourceOwner") resourceOwner: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
   type response = endpointAccess;
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateEndpointAccessCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateClusterSnapshot = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: integerOptional,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>,
-@as("SnapshotIdentifier") snapshotIdentifier: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: option<integerOptional>,
+@as("ClusterIdentifier") clusterIdentifier: string_,
+@as("SnapshotIdentifier") snapshotIdentifier: string_
 }
   type response = {
-@as("Snapshot") snapshot: snapshot
+@as("Snapshot") snapshot: option<snapshot>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateClusterSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateClusterParameterGroup = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("Description") description: option<amazonawsString>,
-@as("ParameterGroupFamily") parameterGroupFamily: option<amazonawsString>,
-@as("ParameterGroupName") parameterGroupName: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("Description") description: string_,
+@as("ParameterGroupFamily") parameterGroupFamily: string_,
+@as("ParameterGroupName") parameterGroupName: string_
 }
   type response = {
-@as("ClusterParameterGroup") clusterParameterGroup: clusterParameterGroup
+@as("ClusterParameterGroup") clusterParameterGroup: option<clusterParameterGroup>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateClusterParameterGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CopyClusterSnapshot = {
   type t;
   type request = {
-@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: integerOptional,
-@as("TargetSnapshotIdentifier") targetSnapshotIdentifier: option<amazonawsString>,
-@as("SourceSnapshotClusterIdentifier") sourceSnapshotClusterIdentifier: amazonawsString,
-@as("SourceSnapshotIdentifier") sourceSnapshotIdentifier: option<amazonawsString>
+@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: option<integerOptional>,
+@as("TargetSnapshotIdentifier") targetSnapshotIdentifier: string_,
+@as("SourceSnapshotClusterIdentifier") sourceSnapshotClusterIdentifier: option<string_>,
+@as("SourceSnapshotIdentifier") sourceSnapshotIdentifier: string_
 }
   type response = {
-@as("Snapshot") snapshot: snapshot
+@as("Snapshot") snapshot: option<snapshot>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CopyClusterSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AuthorizeSnapshotAccess = {
   type t;
   type request = {
-@as("AccountWithRestoreAccess") accountWithRestoreAccess: option<amazonawsString>,
-@as("SnapshotClusterIdentifier") snapshotClusterIdentifier: amazonawsString,
-@as("SnapshotIdentifier") snapshotIdentifier: option<amazonawsString>
+@as("AccountWithRestoreAccess") accountWithRestoreAccess: string_,
+@as("SnapshotClusterIdentifier") snapshotClusterIdentifier: option<string_>,
+@as("SnapshotIdentifier") snapshotIdentifier: string_
 }
   type response = {
-@as("Snapshot") snapshot: snapshot
+@as("Snapshot") snapshot: option<snapshot>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "AuthorizeSnapshotAccessCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AcceptReservedNodeExchange = {
   type t;
   type request = {
-@as("TargetReservedNodeOfferingId") targetReservedNodeOfferingId: option<amazonawsString>,
-@as("ReservedNodeId") reservedNodeId: option<amazonawsString>
+@as("TargetReservedNodeOfferingId") targetReservedNodeOfferingId: string_,
+@as("ReservedNodeId") reservedNodeId: string_
 }
   type response = {
-@as("ExchangedReservedNode") exchangedReservedNode: reservedNode
+@as("ExchangedReservedNode") exchangedReservedNode: option<reservedNode>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "AcceptReservedNodeExchangeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetReservedNodeExchangeOfferings = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("ReservedNodeId") reservedNodeId: option<amazonawsString>
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("ReservedNodeId") reservedNodeId: string_
 }
   type response = {
-@as("ReservedNodeOfferings") reservedNodeOfferings: reservedNodeOfferingList,
-@as("Marker") marker: amazonawsString
+@as("ReservedNodeOfferings") reservedNodeOfferings: option<reservedNodeOfferingList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "GetReservedNodeExchangeOfferingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeUsageLimits = {
   type t;
   type request = {
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("FeatureType") featureType: usageLimitFeatureType,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString,
-@as("UsageLimitId") usageLimitId: amazonawsString
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("FeatureType") featureType: option<usageLimitFeatureType>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>,
+@as("UsageLimitId") usageLimitId: option<string_>
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("UsageLimits") usageLimits: usageLimits
+@as("Marker") marker: option<string_>,
+@as("UsageLimits") usageLimits: option<usageLimits>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeUsageLimitsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSnapshotSchedules = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Marker") marker: amazonawsString,
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("ScheduleIdentifier") scheduleIdentifier: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Marker") marker: option<string_>,
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("ScheduleIdentifier") scheduleIdentifier: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("SnapshotSchedules") snapshotSchedules: snapshotScheduleList
+@as("Marker") marker: option<string_>,
+@as("SnapshotSchedules") snapshotSchedules: option<snapshotScheduleList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeSnapshotSchedulesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeSnapshotCopyGrants = {
   type t;
   type request = {
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("SnapshotCopyGrantName") snapshotCopyGrantName: amazonawsString
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("SnapshotCopyGrantName") snapshotCopyGrantName: option<string_>
 }
   type response = {
-@as("SnapshotCopyGrants") snapshotCopyGrants: snapshotCopyGrantList,
-@as("Marker") marker: amazonawsString
+@as("SnapshotCopyGrants") snapshotCopyGrants: option<snapshotCopyGrantList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeSnapshotCopyGrantsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScheduledActions = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: integerOptional,
-@as("Marker") marker: amazonawsString,
-@as("Filters") filters: scheduledActionFilterList,
-@as("Active") active: booleanOptional,
-@as("EndTime") endTime: tStamp,
-@as("StartTime") startTime: tStamp,
-@as("TargetActionType") targetActionType: scheduledActionTypeValues,
-@as("ScheduledActionName") scheduledActionName: amazonawsString
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("Marker") marker: option<string_>,
+@as("Filters") filters: option<scheduledActionFilterList>,
+@as("Active") active: option<booleanOptional>,
+@as("EndTime") endTime: option<tstamp>,
+@as("StartTime") startTime: option<tstamp>,
+@as("TargetActionType") targetActionType: option<scheduledActionTypeValues>,
+@as("ScheduledActionName") scheduledActionName: option<string_>
 }
   type response = {
-@as("ScheduledActions") scheduledActions: scheduledActionList,
-@as("Marker") marker: amazonawsString
+@as("ScheduledActions") scheduledActions: option<scheduledActionList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeScheduledActionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeReservedNodes = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("ReservedNodeId") reservedNodeId: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("ReservedNodeId") reservedNodeId: option<string_>
 }
   type response = {
-@as("ReservedNodes") reservedNodes: reservedNodeList,
-@as("Marker") marker: amazonawsString
+@as("ReservedNodes") reservedNodes: option<reservedNodeList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeReservedNodesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeReservedNodeOfferings = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("ReservedNodeOfferingId") reservedNodeOfferingId: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("ReservedNodeOfferingId") reservedNodeOfferingId: option<string_>
 }
   type response = {
-@as("ReservedNodeOfferings") reservedNodeOfferings: reservedNodeOfferingList,
-@as("Marker") marker: amazonawsString
+@as("ReservedNodeOfferings") reservedNodeOfferings: option<reservedNodeOfferingList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeReservedNodeOfferingsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeHsmConfigurations = {
   type t;
   type request = {
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: amazonawsString
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: option<string_>
 }
   type response = {
-@as("HsmConfigurations") hsmConfigurations: hsmConfigurationList,
-@as("Marker") marker: amazonawsString
+@as("HsmConfigurations") hsmConfigurations: option<hsmConfigurationList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeHsmConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeHsmClientCertificates = {
   type t;
   type request = {
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: amazonawsString
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: option<string_>
 }
   type response = {
-@as("HsmClientCertificates") hsmClientCertificates: hsmClientCertificateList,
-@as("Marker") marker: amazonawsString
+@as("HsmClientCertificates") hsmClientCertificates: option<hsmClientCertificateList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeHsmClientCertificatesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEventSubscriptions = {
   type t;
   type request = {
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("SubscriptionName") subscriptionName: amazonawsString
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("SubscriptionName") subscriptionName: option<string_>
 }
   type response = {
-@as("EventSubscriptionsList") eventSubscriptionsList: eventSubscriptionsList,
-@as("Marker") marker: amazonawsString
+@as("EventSubscriptionsList") eventSubscriptionsList: option<eventSubscriptionsList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeEventSubscriptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeClusterSnapshots = {
   type t;
   type request = {
-@as("SortingEntities") sortingEntities: snapshotSortingEntityList,
-@as("ClusterExists") clusterExists: booleanOptional,
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("OwnerAccount") ownerAccount: amazonawsString,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("EndTime") endTime: tStamp,
-@as("StartTime") startTime: tStamp,
-@as("SnapshotType") snapshotType: amazonawsString,
-@as("SnapshotIdentifier") snapshotIdentifier: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("SortingEntities") sortingEntities: option<snapshotSortingEntityList>,
+@as("ClusterExists") clusterExists: option<booleanOptional>,
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("OwnerAccount") ownerAccount: option<string_>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("EndTime") endTime: option<tstamp>,
+@as("StartTime") startTime: option<tstamp>,
+@as("SnapshotType") snapshotType: option<string_>,
+@as("SnapshotIdentifier") snapshotIdentifier: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
   type response = {
-@as("Snapshots") snapshots: snapshotList,
-@as("Marker") marker: amazonawsString
+@as("Snapshots") snapshots: option<snapshotList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterSnapshotsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeClusterParameterGroups = {
   type t;
   type request = {
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("ParameterGroupName") parameterGroupName: amazonawsString
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("ParameterGroupName") parameterGroupName: option<string_>
 }
   type response = {
-@as("ParameterGroups") parameterGroups: parameterGroupList,
-@as("Marker") marker: amazonawsString
+@as("ParameterGroups") parameterGroups: option<parameterGroupList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterParameterGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeClusterDbRevisions = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
   type response = {
-@as("ClusterDbRevisions") clusterDbRevisions: clusterDbRevisionsList,
-@as("Marker") marker: amazonawsString
+@as("ClusterDbRevisions") clusterDbRevisions: option<clusterDbRevisionsList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterDbRevisionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAccountAttributes = {
   type t;
   type request = {
-@as("AttributeNames") attributeNames: attributeNameList
+@as("AttributeNames") attributeNames: option<attributeNameList>
 }
   type response = {
-@as("AccountAttributes") accountAttributes: attributeList
+@as("AccountAttributes") accountAttributes: option<attributeList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeAccountAttributesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RevokeClusterSecurityGroupIngress = {
   type t;
   type request = {
-@as("EC2SecurityGroupOwnerId") eC2SecurityGroupOwnerId: amazonawsString,
-@as("EC2SecurityGroupName") eC2SecurityGroupName: amazonawsString,
-@as("CIDRIP") cIDRIP: amazonawsString,
-@as("ClusterSecurityGroupName") clusterSecurityGroupName: option<amazonawsString>
+@as("EC2SecurityGroupOwnerId") ec2SecurityGroupOwnerId: option<string_>,
+@as("EC2SecurityGroupName") ec2SecurityGroupName: option<string_>,
+@as("CIDRIP") cidrip: option<string_>,
+@as("ClusterSecurityGroupName") clusterSecurityGroupName: string_
 }
   type response = {
-@as("ClusterSecurityGroup") clusterSecurityGroup: clusterSecurityGroup
+@as("ClusterSecurityGroup") clusterSecurityGroup: option<clusterSecurityGroup>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RevokeClusterSecurityGroupIngressCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEventCategories = {
   type t;
   type request = {
-@as("SourceType") sourceType: amazonawsString
+@as("SourceType") sourceType: option<string_>
 }
   type response = {
-@as("EventCategoriesMapList") eventCategoriesMapList: eventCategoriesMapList
+@as("EventCategoriesMapList") eventCategoriesMapList: option<eventCategoriesMapList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeEventCategoriesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeEndpointAccess = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("VpcId") vpcId: amazonawsString,
-@as("EndpointName") endpointName: amazonawsString,
-@as("ResourceOwner") resourceOwner: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("VpcId") vpcId: option<string_>,
+@as("EndpointName") endpointName: option<string_>,
+@as("ResourceOwner") resourceOwner: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("EndpointAccessList") endpointAccessList: endpointAccesses
+@as("Marker") marker: option<string_>,
+@as("EndpointAccessList") endpointAccessList: option<endpointAccesses>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeEndpointAccessCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateClusterSecurityGroup = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("Description") description: option<amazonawsString>,
-@as("ClusterSecurityGroupName") clusterSecurityGroupName: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("Description") description: string_,
+@as("ClusterSecurityGroupName") clusterSecurityGroupName: string_
 }
   type response = {
-@as("ClusterSecurityGroup") clusterSecurityGroup: clusterSecurityGroup
+@as("ClusterSecurityGroup") clusterSecurityGroup: option<clusterSecurityGroup>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateClusterSecurityGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AuthorizeClusterSecurityGroupIngress = {
   type t;
   type request = {
-@as("EC2SecurityGroupOwnerId") eC2SecurityGroupOwnerId: amazonawsString,
-@as("EC2SecurityGroupName") eC2SecurityGroupName: amazonawsString,
-@as("CIDRIP") cIDRIP: amazonawsString,
-@as("ClusterSecurityGroupName") clusterSecurityGroupName: option<amazonawsString>
+@as("EC2SecurityGroupOwnerId") ec2SecurityGroupOwnerId: option<string_>,
+@as("EC2SecurityGroupName") ec2SecurityGroupName: option<string_>,
+@as("CIDRIP") cidrip: option<string_>,
+@as("ClusterSecurityGroupName") clusterSecurityGroupName: string_
 }
   type response = {
-@as("ClusterSecurityGroup") clusterSecurityGroup: clusterSecurityGroup
+@as("ClusterSecurityGroup") clusterSecurityGroup: option<clusterSecurityGroup>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "AuthorizeClusterSecurityGroupIngressCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RotateEncryptionKey = {
   type t;
   type request = {
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RotateEncryptionKeyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ResumeCluster = {
   type t;
   type request = resumeClusterMessage;
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ResumeClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RestoreFromClusterSnapshot = {
   type t;
   type request = {
-@as("AquaConfigurationStatus") aquaConfigurationStatus: aquaConfigurationStatus,
-@as("AvailabilityZoneRelocation") availabilityZoneRelocation: booleanOptional,
-@as("NumberOfNodes") numberOfNodes: integerOptional,
-@as("SnapshotScheduleIdentifier") snapshotScheduleIdentifier: amazonawsString,
-@as("MaintenanceTrackName") maintenanceTrackName: amazonawsString,
-@as("IamRoles") iamRoles: iamRoleArnList,
-@as("AdditionalInfo") additionalInfo: amazonawsString,
-@as("EnhancedVpcRouting") enhancedVpcRouting: booleanOptional,
-@as("NodeType") nodeType: amazonawsString,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: integerOptional,
-@as("AutomatedSnapshotRetentionPeriod") automatedSnapshotRetentionPeriod: integerOptional,
-@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: amazonawsString,
-@as("VpcSecurityGroupIds") vpcSecurityGroupIds: vpcSecurityGroupIdList,
-@as("ClusterSecurityGroups") clusterSecurityGroups: clusterSecurityGroupNameList,
-@as("ClusterParameterGroupName") clusterParameterGroupName: amazonawsString,
-@as("ElasticIp") elasticIp: amazonawsString,
-@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: amazonawsString,
-@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: amazonawsString,
-@as("OwnerAccount") ownerAccount: amazonawsString,
-@as("PubliclyAccessible") publiclyAccessible: booleanOptional,
-@as("ClusterSubnetGroupName") clusterSubnetGroupName: amazonawsString,
-@as("AllowVersionUpgrade") allowVersionUpgrade: booleanOptional,
-@as("AvailabilityZone") availabilityZone: amazonawsString,
-@as("Port") port: integerOptional,
-@as("SnapshotClusterIdentifier") snapshotClusterIdentifier: amazonawsString,
-@as("SnapshotIdentifier") snapshotIdentifier: option<amazonawsString>,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("AquaConfigurationStatus") aquaConfigurationStatus: option<aquaConfigurationStatus>,
+@as("AvailabilityZoneRelocation") availabilityZoneRelocation: option<booleanOptional>,
+@as("NumberOfNodes") numberOfNodes: option<integerOptional>,
+@as("SnapshotScheduleIdentifier") snapshotScheduleIdentifier: option<string_>,
+@as("MaintenanceTrackName") maintenanceTrackName: option<string_>,
+@as("IamRoles") iamRoles: option<iamRoleArnList>,
+@as("AdditionalInfo") additionalInfo: option<string_>,
+@as("EnhancedVpcRouting") enhancedVpcRouting: option<booleanOptional>,
+@as("NodeType") nodeType: option<string_>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: option<integerOptional>,
+@as("AutomatedSnapshotRetentionPeriod") automatedSnapshotRetentionPeriod: option<integerOptional>,
+@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: option<string_>,
+@as("VpcSecurityGroupIds") vpcSecurityGroupIds: option<vpcSecurityGroupIdList>,
+@as("ClusterSecurityGroups") clusterSecurityGroups: option<clusterSecurityGroupNameList>,
+@as("ClusterParameterGroupName") clusterParameterGroupName: option<string_>,
+@as("ElasticIp") elasticIp: option<string_>,
+@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: option<string_>,
+@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: option<string_>,
+@as("OwnerAccount") ownerAccount: option<string_>,
+@as("PubliclyAccessible") publiclyAccessible: option<booleanOptional>,
+@as("ClusterSubnetGroupName") clusterSubnetGroupName: option<string_>,
+@as("AllowVersionUpgrade") allowVersionUpgrade: option<booleanOptional>,
+@as("AvailabilityZone") availabilityZone: option<string_>,
+@as("Port") port: option<integerOptional>,
+@as("SnapshotClusterIdentifier") snapshotClusterIdentifier: option<string_>,
+@as("SnapshotIdentifier") snapshotIdentifier: string_,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RestoreFromClusterSnapshotCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ResizeCluster = {
   type t;
   type request = resizeClusterMessage;
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ResizeClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module RebootCluster = {
   type t;
   type request = {
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RebootClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PauseCluster = {
   type t;
   type request = pauseClusterMessage;
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "PauseClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifySnapshotCopyRetentionPeriod = {
   type t;
   type request = {
-@as("Manual") manual: amazonawsBoolean,
-@as("RetentionPeriod") retentionPeriod: option<amazonawsInteger>,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("Manual") manual: option<boolean_>,
+@as("RetentionPeriod") retentionPeriod: integer_,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifySnapshotCopyRetentionPeriodCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyClusterSubnetGroup = {
   type t;
   type request = {
-@as("SubnetIds") subnetIds: option<subnetIdentifierList>,
-@as("Description") description: amazonawsString,
-@as("ClusterSubnetGroupName") clusterSubnetGroupName: option<amazonawsString>
+@as("SubnetIds") subnetIds: subnetIdentifierList,
+@as("Description") description: option<string_>,
+@as("ClusterSubnetGroupName") clusterSubnetGroupName: string_
 }
   type response = {
-@as("ClusterSubnetGroup") clusterSubnetGroup: clusterSubnetGroup
+@as("ClusterSubnetGroup") clusterSubnetGroup: option<clusterSubnetGroup>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterSubnetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyClusterMaintenance = {
   type t;
   type request = {
-@as("DeferMaintenanceDuration") deferMaintenanceDuration: integerOptional,
-@as("DeferMaintenanceEndTime") deferMaintenanceEndTime: tStamp,
-@as("DeferMaintenanceStartTime") deferMaintenanceStartTime: tStamp,
-@as("DeferMaintenanceIdentifier") deferMaintenanceIdentifier: amazonawsString,
-@as("DeferMaintenance") deferMaintenance: booleanOptional,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("DeferMaintenanceDuration") deferMaintenanceDuration: option<integerOptional>,
+@as("DeferMaintenanceEndTime") deferMaintenanceEndTime: option<tstamp>,
+@as("DeferMaintenanceStartTime") deferMaintenanceStartTime: option<tstamp>,
+@as("DeferMaintenanceIdentifier") deferMaintenanceIdentifier: option<string_>,
+@as("DeferMaintenance") deferMaintenance: option<booleanOptional>,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterMaintenanceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyClusterIamRoles = {
   type t;
   type request = {
-@as("RemoveIamRoles") removeIamRoles: iamRoleArnList,
-@as("AddIamRoles") addIamRoles: iamRoleArnList,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("RemoveIamRoles") removeIamRoles: option<iamRoleArnList>,
+@as("AddIamRoles") addIamRoles: option<iamRoleArnList>,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterIamRolesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyClusterDbRevision = {
   type t;
   type request = {
-@as("RevisionTarget") revisionTarget: option<amazonawsString>,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("RevisionTarget") revisionTarget: string_,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterDbRevisionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ModifyCluster = {
   type t;
   type request = {
-@as("Port") port: integerOptional,
-@as("AvailabilityZone") availabilityZone: amazonawsString,
-@as("AvailabilityZoneRelocation") availabilityZoneRelocation: booleanOptional,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("Encrypted") encrypted: booleanOptional,
-@as("MaintenanceTrackName") maintenanceTrackName: amazonawsString,
-@as("EnhancedVpcRouting") enhancedVpcRouting: booleanOptional,
-@as("ElasticIp") elasticIp: amazonawsString,
-@as("PubliclyAccessible") publiclyAccessible: booleanOptional,
-@as("NewClusterIdentifier") newClusterIdentifier: amazonawsString,
-@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: amazonawsString,
-@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: amazonawsString,
-@as("AllowVersionUpgrade") allowVersionUpgrade: booleanOptional,
-@as("ClusterVersion") clusterVersion: amazonawsString,
-@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: amazonawsString,
-@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: integerOptional,
-@as("AutomatedSnapshotRetentionPeriod") automatedSnapshotRetentionPeriod: integerOptional,
-@as("ClusterParameterGroupName") clusterParameterGroupName: amazonawsString,
-@as("MasterUserPassword") masterUserPassword: amazonawsString,
-@as("VpcSecurityGroupIds") vpcSecurityGroupIds: vpcSecurityGroupIdList,
-@as("ClusterSecurityGroups") clusterSecurityGroups: clusterSecurityGroupNameList,
-@as("NumberOfNodes") numberOfNodes: integerOptional,
-@as("NodeType") nodeType: amazonawsString,
-@as("ClusterType") clusterType: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("Port") port: option<integerOptional>,
+@as("AvailabilityZone") availabilityZone: option<string_>,
+@as("AvailabilityZoneRelocation") availabilityZoneRelocation: option<booleanOptional>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("Encrypted") encrypted: option<booleanOptional>,
+@as("MaintenanceTrackName") maintenanceTrackName: option<string_>,
+@as("EnhancedVpcRouting") enhancedVpcRouting: option<booleanOptional>,
+@as("ElasticIp") elasticIp: option<string_>,
+@as("PubliclyAccessible") publiclyAccessible: option<booleanOptional>,
+@as("NewClusterIdentifier") newClusterIdentifier: option<string_>,
+@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: option<string_>,
+@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: option<string_>,
+@as("AllowVersionUpgrade") allowVersionUpgrade: option<booleanOptional>,
+@as("ClusterVersion") clusterVersion: option<string_>,
+@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: option<string_>,
+@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: option<integerOptional>,
+@as("AutomatedSnapshotRetentionPeriod") automatedSnapshotRetentionPeriod: option<integerOptional>,
+@as("ClusterParameterGroupName") clusterParameterGroupName: option<string_>,
+@as("MasterUserPassword") masterUserPassword: option<string_>,
+@as("VpcSecurityGroupIds") vpcSecurityGroupIds: option<vpcSecurityGroupIdList>,
+@as("ClusterSecurityGroups") clusterSecurityGroups: option<clusterSecurityGroupNameList>,
+@as("NumberOfNodes") numberOfNodes: option<integerOptional>,
+@as("NodeType") nodeType: option<string_>,
+@as("ClusterType") clusterType: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnableSnapshotCopy = {
   type t;
   type request = {
-@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: integerOptional,
-@as("SnapshotCopyGrantName") snapshotCopyGrantName: amazonawsString,
-@as("RetentionPeriod") retentionPeriod: integerOptional,
-@as("DestinationRegion") destinationRegion: option<amazonawsString>,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: option<integerOptional>,
+@as("SnapshotCopyGrantName") snapshotCopyGrantName: option<string_>,
+@as("RetentionPeriod") retentionPeriod: option<integerOptional>,
+@as("DestinationRegion") destinationRegion: string_,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "EnableSnapshotCopyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisableSnapshotCopy = {
   type t;
   type request = {
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DisableSnapshotCopyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeOrderableClusterOptions = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("NodeType") nodeType: amazonawsString,
-@as("ClusterVersion") clusterVersion: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("NodeType") nodeType: option<string_>,
+@as("ClusterVersion") clusterVersion: option<string_>
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("OrderableClusterOptions") orderableClusterOptions: orderableClusterOptionsList
+@as("Marker") marker: option<string_>,
+@as("OrderableClusterOptions") orderableClusterOptions: option<orderableClusterOptionsList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeOrderableClusterOptionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeClusterTracks = {
   type t;
   type request = {
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("MaintenanceTrackName") maintenanceTrackName: amazonawsString
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("MaintenanceTrackName") maintenanceTrackName: option<string_>
 }
   type response = {
-@as("Marker") marker: amazonawsString,
-@as("MaintenanceTracks") maintenanceTracks: trackList
+@as("Marker") marker: option<string_>,
+@as("MaintenanceTracks") maintenanceTracks: option<trackList>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterTracksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeClusterSecurityGroups = {
   type t;
   type request = {
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("ClusterSecurityGroupName") clusterSecurityGroupName: amazonawsString
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("ClusterSecurityGroupName") clusterSecurityGroupName: option<string_>
 }
   type response = {
-@as("ClusterSecurityGroups") clusterSecurityGroups: clusterSecurityGroups,
-@as("Marker") marker: amazonawsString
+@as("ClusterSecurityGroups") clusterSecurityGroups: option<clusterSecurityGroups>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterSecurityGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteCluster = {
   type t;
   type request = {
-@as("FinalClusterSnapshotRetentionPeriod") finalClusterSnapshotRetentionPeriod: integerOptional,
-@as("FinalClusterSnapshotIdentifier") finalClusterSnapshotIdentifier: amazonawsString,
-@as("SkipFinalClusterSnapshot") skipFinalClusterSnapshot: amazonawsBoolean,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
+@as("FinalClusterSnapshotRetentionPeriod") finalClusterSnapshotRetentionPeriod: option<integerOptional>,
+@as("FinalClusterSnapshotIdentifier") finalClusterSnapshotIdentifier: option<string_>,
+@as("SkipFinalClusterSnapshot") skipFinalClusterSnapshot: option<boolean_>,
+@as("ClusterIdentifier") clusterIdentifier: string_
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateClusterSubnetGroup = {
   type t;
   type request = {
-@as("Tags") tags: tagList,
-@as("SubnetIds") subnetIds: option<subnetIdentifierList>,
-@as("Description") description: option<amazonawsString>,
-@as("ClusterSubnetGroupName") clusterSubnetGroupName: option<amazonawsString>
+@as("Tags") tags: option<tagList_>,
+@as("SubnetIds") subnetIds: subnetIdentifierList,
+@as("Description") description: string_,
+@as("ClusterSubnetGroupName") clusterSubnetGroupName: string_
 }
   type response = {
-@as("ClusterSubnetGroup") clusterSubnetGroup: clusterSubnetGroup
+@as("ClusterSubnetGroup") clusterSubnetGroup: option<clusterSubnetGroup>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateClusterSubnetGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateCluster = {
   type t;
   type request = {
-@as("AquaConfigurationStatus") aquaConfigurationStatus: aquaConfigurationStatus,
-@as("AvailabilityZoneRelocation") availabilityZoneRelocation: booleanOptional,
-@as("SnapshotScheduleIdentifier") snapshotScheduleIdentifier: amazonawsString,
-@as("MaintenanceTrackName") maintenanceTrackName: amazonawsString,
-@as("IamRoles") iamRoles: iamRoleArnList,
-@as("AdditionalInfo") additionalInfo: amazonawsString,
-@as("EnhancedVpcRouting") enhancedVpcRouting: booleanOptional,
-@as("KmsKeyId") kmsKeyId: amazonawsString,
-@as("Tags") tags: tagList,
-@as("ElasticIp") elasticIp: amazonawsString,
-@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: amazonawsString,
-@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: amazonawsString,
-@as("Encrypted") encrypted: booleanOptional,
-@as("PubliclyAccessible") publiclyAccessible: booleanOptional,
-@as("NumberOfNodes") numberOfNodes: integerOptional,
-@as("AllowVersionUpgrade") allowVersionUpgrade: booleanOptional,
-@as("ClusterVersion") clusterVersion: amazonawsString,
-@as("Port") port: integerOptional,
-@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: integerOptional,
-@as("AutomatedSnapshotRetentionPeriod") automatedSnapshotRetentionPeriod: integerOptional,
-@as("ClusterParameterGroupName") clusterParameterGroupName: amazonawsString,
-@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: amazonawsString,
-@as("AvailabilityZone") availabilityZone: amazonawsString,
-@as("ClusterSubnetGroupName") clusterSubnetGroupName: amazonawsString,
-@as("VpcSecurityGroupIds") vpcSecurityGroupIds: vpcSecurityGroupIdList,
-@as("ClusterSecurityGroups") clusterSecurityGroups: clusterSecurityGroupNameList,
-@as("MasterUserPassword") masterUserPassword: option<amazonawsString>,
-@as("MasterUsername") masterUsername: option<amazonawsString>,
-@as("NodeType") nodeType: option<amazonawsString>,
-@as("ClusterType") clusterType: amazonawsString,
-@as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>,
-@as("DBName") dBName: amazonawsString
+@as("AquaConfigurationStatus") aquaConfigurationStatus: option<aquaConfigurationStatus>,
+@as("AvailabilityZoneRelocation") availabilityZoneRelocation: option<booleanOptional>,
+@as("SnapshotScheduleIdentifier") snapshotScheduleIdentifier: option<string_>,
+@as("MaintenanceTrackName") maintenanceTrackName: option<string_>,
+@as("IamRoles") iamRoles: option<iamRoleArnList>,
+@as("AdditionalInfo") additionalInfo: option<string_>,
+@as("EnhancedVpcRouting") enhancedVpcRouting: option<booleanOptional>,
+@as("KmsKeyId") kmsKeyId: option<string_>,
+@as("Tags") tags: option<tagList_>,
+@as("ElasticIp") elasticIp: option<string_>,
+@as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: option<string_>,
+@as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: option<string_>,
+@as("Encrypted") encrypted: option<booleanOptional>,
+@as("PubliclyAccessible") publiclyAccessible: option<booleanOptional>,
+@as("NumberOfNodes") numberOfNodes: option<integerOptional>,
+@as("AllowVersionUpgrade") allowVersionUpgrade: option<booleanOptional>,
+@as("ClusterVersion") clusterVersion: option<string_>,
+@as("Port") port: option<integerOptional>,
+@as("ManualSnapshotRetentionPeriod") manualSnapshotRetentionPeriod: option<integerOptional>,
+@as("AutomatedSnapshotRetentionPeriod") automatedSnapshotRetentionPeriod: option<integerOptional>,
+@as("ClusterParameterGroupName") clusterParameterGroupName: option<string_>,
+@as("PreferredMaintenanceWindow") preferredMaintenanceWindow: option<string_>,
+@as("AvailabilityZone") availabilityZone: option<string_>,
+@as("ClusterSubnetGroupName") clusterSubnetGroupName: option<string_>,
+@as("VpcSecurityGroupIds") vpcSecurityGroupIds: option<vpcSecurityGroupIdList>,
+@as("ClusterSecurityGroups") clusterSecurityGroups: option<clusterSecurityGroupNameList>,
+@as("MasterUserPassword") masterUserPassword: string_,
+@as("MasterUsername") masterUsername: string_,
+@as("NodeType") nodeType: string_,
+@as("ClusterType") clusterType: option<string_>,
+@as("ClusterIdentifier") clusterIdentifier: string_,
+@as("DBName") dbname: option<string_>
 }
   type response = {
-@as("Cluster") cluster: cluster
+@as("Cluster") cluster: option<cluster>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateClusterCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeClusters = {
   type t;
   type request = {
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("ClusterIdentifier") clusterIdentifier: amazonawsString
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("ClusterIdentifier") clusterIdentifier: option<string_>
 }
   type response = {
-@as("Clusters") clusters: clusterList,
-@as("Marker") marker: amazonawsString
+@as("Clusters") clusters: option<clusterList>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClustersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeClusterSubnetGroups = {
   type t;
   type request = {
-@as("TagValues") tagValues: tagValueList,
-@as("TagKeys") tagKeys: tagKeyList,
-@as("Marker") marker: amazonawsString,
-@as("MaxRecords") maxRecords: integerOptional,
-@as("ClusterSubnetGroupName") clusterSubnetGroupName: amazonawsString
+@as("TagValues") tagValues: option<tagValueList>,
+@as("TagKeys") tagKeys: option<tagKeyList>,
+@as("Marker") marker: option<string_>,
+@as("MaxRecords") maxRecords: option<integerOptional>,
+@as("ClusterSubnetGroupName") clusterSubnetGroupName: option<string_>
 }
   type response = {
-@as("ClusterSubnetGroups") clusterSubnetGroups: clusterSubnetGroups,
-@as("Marker") marker: amazonawsString
+@as("ClusterSubnetGroups") clusterSubnetGroups: option<clusterSubnetGroups>,
+@as("Marker") marker: option<string_>
 }
   @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterSubnetGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

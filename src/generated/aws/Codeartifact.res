@@ -1,133 +1,137 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
-type validationExceptionReason = [@as("OTHER") #OTHER | @as("UNKNOWN_OPERATION") #UNKNOWN_OPERATION | @as("FIELD_VALIDATION_FAILED") #FIELD_VALIDATION_FAILED | @as("ENCRYPTION_KEY_ERROR") #ENCRYPTION_KEY_ERROR | @as("CANNOT_PARSE") #CANNOT_PARSE]
-type amazonawsTimestamp = Js.Date.t;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type boolean_ = bool
+type validationExceptionReason = [@as("OTHER") #OTHER | @as("UNKNOWN_OPERATION") #UNKNOWNOPERATION | @as("FIELD_VALIDATION_FAILED") #FIELDVALIDATIONFAILED | @as("ENCRYPTION_KEY_ERROR") #ENCRYPTIONKEYERROR | @as("CANNOT_PARSE") #CANNOTPARSE]
+type timestamp_ = Js.Date.t;
 type tagValue = string
 type tagKey = string
 type string255 = string
-type amazonawsString = string
-type retryAfterSeconds = int;
-type resourceType = [@as("asset") #asset | @as("package-version") #package_version | @as("package") #package | @as("repository") #repository | @as("domain") #domain]
+type string_ = string
+type retryAfterSeconds = int
+type resourceType = [@as("asset") #Asset | @as("package-version") #PackageVersion | @as("package") #Package | @as("repository") #Repository | @as("domain") #Domain]
 type repositoryName = string
 type policyRevision = string
 type policyDocument = string
 type paginationToken = string
 type packageVersionStatus = [@as("Deleted") #Deleted | @as("Disposed") #Disposed | @as("Archived") #Archived | @as("Unlisted") #Unlisted | @as("Unfinished") #Unfinished | @as("Published") #Published]
-type packageVersionSortType = [@as("PUBLISHED_TIME") #PUBLISHED_TIME]
+type packageVersionSortType = [@as("PUBLISHED_TIME") #PUBLISHEDTIME]
 type packageVersionRevision = string
-type packageVersionErrorCode = [@as("SKIPPED") #SKIPPED | @as("NOT_FOUND") #NOT_FOUND | @as("NOT_ALLOWED") #NOT_ALLOWED | @as("MISMATCHED_STATUS") #MISMATCHED_STATUS | @as("MISMATCHED_REVISION") #MISMATCHED_REVISION | @as("ALREADY_EXISTS") #ALREADY_EXISTS]
+type packageVersionErrorCode = [@as("SKIPPED") #SKIPPED | @as("NOT_FOUND") #NOTFOUND | @as("NOT_ALLOWED") #NOTALLOWED | @as("MISMATCHED_STATUS") #MISMATCHEDSTATUS | @as("MISMATCHED_REVISION") #MISMATCHEDREVISION | @as("ALREADY_EXISTS") #ALREADYEXISTS]
 type packageVersion = string
 type packageNamespace = string
 type packageName = string
-type packageFormat = [@as("nuget") #nuget | @as("maven") #maven | @as("pypi") #pypi | @as("npm") #npm]
-type longOptional = float;
-type amazonawsLong = float;
-type listRepositoriesMaxResults = int;
-type listRepositoriesInDomainMaxResults = int;
-type listPackagesMaxResults = int;
-type listPackageVersionsMaxResults = int;
-type listPackageVersionAssetsMaxResults = int;
-type listDomainsMaxResults = int;
-type amazonawsInteger = int;
+type packageFormat = [@as("nuget") #Nuget | @as("maven") #Maven | @as("pypi") #Pypi | @as("npm") #Npm]
+type longOptional = float
+type long = float
+type listRepositoriesMaxResults = int
+type listRepositoriesInDomainMaxResults = int
+type listPackagesMaxResults = int
+type listPackageVersionsMaxResults = int
+type listPackageVersionAssetsMaxResults = int
+type listDomainsMaxResults = int
+type integer_ = int
 type hashValue = string
-type hashAlgorithm = [@as("SHA-512") #SHA_512 | @as("SHA-256") #SHA_256 | @as("SHA-1") #SHA_1 | @as("MD5") #MD5]
+type hashAlgorithm = [@as("SHA-512") #SHA512 | @as("SHA-256") #SHA256 | @as("SHA-1") #SHA1 | @as("MD5") #MD5]
 type externalConnectionStatus = [@as("Available") #Available]
 type externalConnectionName = string
 type errorMessage = string
 type domainStatus = [@as("Deleted") #Deleted | @as("Active") #Active]
 type domainName = string
 type description = string
-type booleanOptional = bool;
-type authorizationTokenDurationSeconds = float;
+type booleanOptional = bool
+type authorizationTokenDurationSeconds = float
 type assetName = string
-type asset = NodeJs.Buffer.t;
+type asset = NodeJs.Buffer.t
 type arn = string
 type accountId = string
 type upstreamRepositoryInfo = {
-@as("repositoryName") repositoryName: repositoryName
+repositoryName: option<repositoryName>
 }
 type upstreamRepository = {
-@as("repositoryName") repositoryName: option<repositoryName>
+repositoryName: repositoryName
 }
 type tagKeyList = array<tagKey>
 type tag = {
-@as("value") value: option<tagValue>,
-@as("key") key: option<tagKey>
+value: tagValue,
+key: tagKey
 }
 type successfulPackageVersionInfo = {
-@as("status") status: packageVersionStatus,
-@as("revision") revision: amazonawsString
+status: option<packageVersionStatus>,
+revision: option<string_>
 }
 type resourcePolicy = {
-@as("document") document: policyDocument,
-@as("revision") revision: policyRevision,
-@as("resourceArn") resourceArn: arn
+document: option<policyDocument>,
+revision: option<policyRevision>,
+resourceArn: option<arn>
 }
 type repositorySummary = {
-@as("description") description: description,
-@as("arn") arn: arn,
-@as("domainOwner") domainOwner: accountId,
-@as("domainName") domainName: domainName,
-@as("administratorAccount") administratorAccount: accountId,
-@as("name") name: repositoryName
+description: option<description>,
+arn: option<arn>,
+domainOwner: option<accountId>,
+domainName: option<domainName>,
+administratorAccount: option<accountId>,
+name: option<repositoryName>
 }
 type repositoryExternalConnectionInfo = {
-@as("status") status: externalConnectionStatus,
-@as("packageFormat") packageFormat: packageFormat,
-@as("externalConnectionName") externalConnectionName: externalConnectionName
+status: option<externalConnectionStatus>,
+packageFormat: option<packageFormat>,
+externalConnectionName: option<externalConnectionName>
 }
 type packageVersionSummary = {
-@as("status") status: option<packageVersionStatus>,
-@as("revision") revision: packageVersionRevision,
-@as("version") version: option<packageVersion>
+status: packageVersionStatus,
+revision: option<packageVersionRevision>,
+version: packageVersion
 }
 type packageVersionRevisionMap = Js.Dict.t< packageVersionRevision>
 type packageVersionList = array<packageVersion>
 type packageVersionError = {
-@as("errorMessage") errorMessage: errorMessage,
-@as("errorCode") errorCode: packageVersionErrorCode
+errorMessage: option<errorMessage>,
+errorCode: option<packageVersionErrorCode>
 }
 type packageSummary = {
-@as("package") package: packageName,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: packageFormat
+package: option<packageName>,
+namespace: option<packageNamespace>,
+format: option<packageFormat>
 }
 type packageDependency = {
-@as("versionRequirement") versionRequirement: amazonawsString,
-@as("dependencyType") dependencyType: amazonawsString,
-@as("package") package: packageName,
-@as("namespace") namespace: packageNamespace
+versionRequirement: option<string_>,
+dependencyType: option<string_>,
+package: option<packageName>,
+namespace: option<packageNamespace>
 }
 type licenseInfo = {
-@as("url") url: amazonawsString,
-@as("name") name: amazonawsString
+url: option<string_>,
+name: option<string_>
 }
 type domainSummary = {
-@as("encryptionKey") encryptionKey: arn,
-@as("createdTime") createdTime: amazonawsTimestamp,
-@as("status") status: domainStatus,
-@as("arn") arn: arn,
-@as("owner") owner: accountId,
-@as("name") name: domainName
+encryptionKey: option<arn>,
+createdTime: option<timestamp_>,
+status: option<domainStatus>,
+arn: option<arn>,
+owner: option<accountId>,
+name: option<domainName>
 }
 type domainDescription = {
-@as("s3BucketArn") s3BucketArn: arn,
-@as("assetSizeBytes") assetSizeBytes: amazonawsLong,
-@as("repositoryCount") repositoryCount: amazonawsInteger,
-@as("encryptionKey") encryptionKey: arn,
-@as("createdTime") createdTime: amazonawsTimestamp,
-@as("status") status: domainStatus,
-@as("arn") arn: arn,
-@as("owner") owner: accountId,
-@as("name") name: domainName
+s3BucketArn: option<arn>,
+assetSizeBytes: option<long>,
+repositoryCount: option<integer_>,
+encryptionKey: option<arn>,
+createdTime: option<timestamp_>,
+status: option<domainStatus>,
+arn: option<arn>,
+owner: option<accountId>,
+name: option<domainName>
 }
 type assetHashes = Js.Dict.t< hashValue>
 type upstreamRepositoryList = array<upstreamRepository>
 type upstreamRepositoryInfoList = array<upstreamRepositoryInfo>
-type tagList = array<tag>
+type tagList_ = array<tag>
 type successfulPackageVersionInfoMap = Js.Dict.t< successfulPackageVersionInfo>
 type repositorySummaryList = array<repositorySummary>
 type repositoryExternalConnectionInfoList = array<repositoryExternalConnectionInfo>
@@ -138,609 +142,609 @@ type packageDependencyList = array<packageDependency>
 type licenseInfoList = array<licenseInfo>
 type domainSummaryList = array<domainSummary>
 type assetSummary = {
-@as("hashes") hashes: assetHashes,
-@as("size") size: longOptional,
-@as("name") name: option<assetName>
+hashes: option<assetHashes>,
+size: option<longOptional>,
+name: assetName
 }
 type repositoryDescription = {
-@as("externalConnections") externalConnections: repositoryExternalConnectionInfoList,
-@as("upstreams") upstreams: upstreamRepositoryInfoList,
-@as("description") description: description,
-@as("arn") arn: arn,
-@as("domainOwner") domainOwner: accountId,
-@as("domainName") domainName: domainName,
-@as("administratorAccount") administratorAccount: accountId,
-@as("name") name: repositoryName
+externalConnections: option<repositoryExternalConnectionInfoList>,
+upstreams: option<upstreamRepositoryInfoList>,
+description: option<description>,
+arn: option<arn>,
+domainOwner: option<accountId>,
+domainName: option<domainName>,
+administratorAccount: option<accountId>,
+name: option<repositoryName>
 }
 type packageVersionDescription = {
-@as("status") status: packageVersionStatus,
-@as("revision") revision: packageVersionRevision,
-@as("licenses") licenses: licenseInfoList,
-@as("publishedTime") publishedTime: amazonawsTimestamp,
-@as("sourceCodeRepository") sourceCodeRepository: amazonawsString,
-@as("homePage") homePage: amazonawsString,
-@as("summary") summary: amazonawsString,
-@as("version") version: packageVersion,
-@as("displayName") displayName: string255,
-@as("packageName") packageName: packageName,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: packageFormat
+status: option<packageVersionStatus>,
+revision: option<packageVersionRevision>,
+licenses: option<licenseInfoList>,
+publishedTime: option<timestamp_>,
+sourceCodeRepository: option<string_>,
+homePage: option<string_>,
+summary: option<string_>,
+version: option<packageVersion>,
+displayName: option<string255>,
+packageName: option<packageName>,
+namespace: option<packageNamespace>,
+format: option<packageFormat>
 }
 type assetSummaryList = array<assetSummary>
-type clientType;
-@module("@aws-sdk/client-codeartifact") @new external createClient: unit => clientType = "CodeartifactClient";
+type awsServiceClient;
+@module("@aws-sdk/client-codeartifact") @new external createClient: unit => awsServiceClient = "CodeartifactClient";
 module GetRepositoryEndpoint = {
   type t;
   type request = {
-@as("format") format: option<packageFormat>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+format: packageFormat,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("repositoryEndpoint") repositoryEndpoint: amazonawsString
+repositoryEndpoint: option<string_>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "GetRepositoryEndpointCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPackageVersionReadme = {
   type t;
   type request = {
-@as("packageVersion") packageVersion: option<packageVersion>,
-@as("package") package: option<packageName>,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: option<packageFormat>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+packageVersion: packageVersion,
+package: packageName,
+namespace: option<packageNamespace>,
+format: packageFormat,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("readme") readme: amazonawsString,
-@as("versionRevision") versionRevision: packageVersionRevision,
-@as("version") version: packageVersion,
-@as("package") package: packageName,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: packageFormat
+readme: option<string_>,
+versionRevision: option<packageVersionRevision>,
+version: option<packageVersion>,
+package: option<packageName>,
+namespace: option<packageNamespace>,
+format: option<packageFormat>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "GetPackageVersionReadmeCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPackageVersionAsset = {
   type t;
   type request = {
-@as("packageVersionRevision") packageVersionRevision: packageVersionRevision,
-@as("asset") asset: option<assetName>,
-@as("packageVersion") packageVersion: option<packageVersion>,
-@as("package") package: option<packageName>,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: option<packageFormat>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+packageVersionRevision: option<packageVersionRevision>,
+asset: assetName,
+packageVersion: packageVersion,
+package: packageName,
+namespace: option<packageNamespace>,
+format: packageFormat,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("packageVersionRevision") packageVersionRevision: packageVersionRevision,
-@as("packageVersion") packageVersion: packageVersion,
-@as("assetName") assetName: assetName,
-@as("asset") asset: asset
+packageVersionRevision: option<packageVersionRevision>,
+packageVersion: option<packageVersion>,
+assetName: option<assetName>,
+asset: option<asset>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "GetPackageVersionAssetCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetAuthorizationToken = {
   type t;
   type request = {
-@as("durationSeconds") durationSeconds: authorizationTokenDurationSeconds,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+durationSeconds: option<authorizationTokenDurationSeconds>,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("expiration") expiration: amazonawsTimestamp,
-@as("authorizationToken") authorizationToken: amazonawsString
+expiration: option<timestamp_>,
+authorizationToken: option<string_>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "GetAuthorizationTokenCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UntagResource = {
   type t;
   type request = {
-@as("tagKeys") tagKeys: option<tagKeyList>,
-@as("resourceArn") resourceArn: option<arn>
+tagKeys: tagKeyList,
+resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutRepositoryPermissionsPolicy = {
   type t;
   type request = {
-@as("policyDocument") policyDocument: option<policyDocument>,
-@as("policyRevision") policyRevision: policyRevision,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+policyDocument: policyDocument,
+policyRevision: option<policyRevision>,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("policy") policy: resourcePolicy
+policy: option<resourcePolicy>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "PutRepositoryPermissionsPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutDomainPermissionsPolicy = {
   type t;
   type request = {
-@as("policyDocument") policyDocument: option<policyDocument>,
-@as("policyRevision") policyRevision: policyRevision,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+policyDocument: policyDocument,
+policyRevision: option<policyRevision>,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("policy") policy: resourcePolicy
+policy: option<resourcePolicy>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "PutDomainPermissionsPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetRepositoryPermissionsPolicy = {
   type t;
   type request = {
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("policy") policy: resourcePolicy
+policy: option<resourcePolicy>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "GetRepositoryPermissionsPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetDomainPermissionsPolicy = {
   type t;
   type request = {
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("policy") policy: resourcePolicy
+policy: option<resourcePolicy>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "GetDomainPermissionsPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeDomain = {
   type t;
   type request = {
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("domain") domain: domainDescription
+domain: option<domainDescription>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "DescribeDomainCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteRepositoryPermissionsPolicy = {
   type t;
   type request = {
-@as("policyRevision") policyRevision: policyRevision,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+policyRevision: option<policyRevision>,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("policy") policy: resourcePolicy
+policy: option<resourcePolicy>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "DeleteRepositoryPermissionsPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDomainPermissionsPolicy = {
   type t;
   type request = {
-@as("policyRevision") policyRevision: policyRevision,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+policyRevision: option<policyRevision>,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("policy") policy: resourcePolicy
+policy: option<resourcePolicy>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "DeleteDomainPermissionsPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteDomain = {
   type t;
   type request = {
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("domain") domain: domainDescription
+domain: option<domainDescription>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "DeleteDomainCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdatePackageVersionsStatus = {
   type t;
   type request = {
-@as("targetStatus") targetStatus: option<packageVersionStatus>,
-@as("expectedStatus") expectedStatus: packageVersionStatus,
-@as("versionRevisions") versionRevisions: packageVersionRevisionMap,
-@as("versions") versions: option<packageVersionList>,
-@as("package") package: option<packageName>,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: option<packageFormat>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+targetStatus: packageVersionStatus,
+expectedStatus: option<packageVersionStatus>,
+versionRevisions: option<packageVersionRevisionMap>,
+versions: packageVersionList,
+package: packageName,
+namespace: option<packageNamespace>,
+format: packageFormat,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("failedVersions") failedVersions: packageVersionErrorMap,
-@as("successfulVersions") successfulVersions: successfulPackageVersionInfoMap
+failedVersions: option<packageVersionErrorMap>,
+successfulVersions: option<successfulPackageVersionInfoMap>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "UpdatePackageVersionsStatusCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
   type request = {
-@as("tags") tags: option<tagList>,
-@as("resourceArn") resourceArn: option<arn>
+tags: tagList_,
+resourceArn: arn
 }
   type response = unit
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListTagsForResource = {
   type t;
   type request = {
-@as("resourceArn") resourceArn: option<arn>
+resourceArn: arn
 }
   type response = {
-@as("tags") tags: tagList
+tags: option<tagList_>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRepositoriesInDomain = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: listRepositoriesInDomainMaxResults,
-@as("repositoryPrefix") repositoryPrefix: repositoryName,
-@as("administratorAccount") administratorAccount: accountId,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+nextToken: option<paginationToken>,
+maxResults: option<listRepositoriesInDomainMaxResults>,
+repositoryPrefix: option<repositoryName>,
+administratorAccount: option<accountId>,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("repositories") repositories: repositorySummaryList
+nextToken: option<paginationToken>,
+repositories: option<repositorySummaryList>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "ListRepositoriesInDomainCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListRepositories = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: listRepositoriesMaxResults,
-@as("repositoryPrefix") repositoryPrefix: repositoryName
+nextToken: option<paginationToken>,
+maxResults: option<listRepositoriesMaxResults>,
+repositoryPrefix: option<repositoryName>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("repositories") repositories: repositorySummaryList
+nextToken: option<paginationToken>,
+repositories: option<repositorySummaryList>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "ListRepositoriesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPackages = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: listPackagesMaxResults,
-@as("packagePrefix") packagePrefix: packageName,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: packageFormat,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+nextToken: option<paginationToken>,
+maxResults: option<listPackagesMaxResults>,
+packagePrefix: option<packageName>,
+namespace: option<packageNamespace>,
+format: option<packageFormat>,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("packages") packages: packageSummaryList
+nextToken: option<paginationToken>,
+packages: option<packageSummaryList>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "ListPackagesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPackageVersions = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: listPackageVersionsMaxResults,
-@as("sortBy") sortBy: packageVersionSortType,
-@as("status") status: packageVersionStatus,
-@as("package") package: option<packageName>,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: option<packageFormat>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+nextToken: option<paginationToken>,
+maxResults: option<listPackageVersionsMaxResults>,
+sortBy: option<packageVersionSortType>,
+status: option<packageVersionStatus>,
+package: packageName,
+namespace: option<packageNamespace>,
+format: packageFormat,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("versions") versions: packageVersionSummaryList,
-@as("package") package: packageName,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: packageFormat,
-@as("defaultDisplayVersion") defaultDisplayVersion: packageVersion
+nextToken: option<paginationToken>,
+versions: option<packageVersionSummaryList>,
+package: option<packageName>,
+namespace: option<packageNamespace>,
+format: option<packageFormat>,
+defaultDisplayVersion: option<packageVersion>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "ListPackageVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPackageVersionDependencies = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("packageVersion") packageVersion: option<packageVersion>,
-@as("package") package: option<packageName>,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: option<packageFormat>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+nextToken: option<paginationToken>,
+packageVersion: packageVersion,
+package: packageName,
+namespace: option<packageNamespace>,
+format: packageFormat,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("dependencies") dependencies: packageDependencyList,
-@as("nextToken") nextToken: paginationToken,
-@as("versionRevision") versionRevision: packageVersionRevision,
-@as("version") version: packageVersion,
-@as("package") package: packageName,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: packageFormat
+dependencies: option<packageDependencyList>,
+nextToken: option<paginationToken>,
+versionRevision: option<packageVersionRevision>,
+version: option<packageVersion>,
+package: option<packageName>,
+namespace: option<packageNamespace>,
+format: option<packageFormat>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "ListPackageVersionDependenciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListDomains = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: listDomainsMaxResults
+nextToken: option<paginationToken>,
+maxResults: option<listDomainsMaxResults>
 }
   type response = {
-@as("nextToken") nextToken: paginationToken,
-@as("domains") domains: domainSummaryList
+nextToken: option<paginationToken>,
+domains: option<domainSummaryList>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "ListDomainsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisposePackageVersions = {
   type t;
   type request = {
-@as("expectedStatus") expectedStatus: packageVersionStatus,
-@as("versionRevisions") versionRevisions: packageVersionRevisionMap,
-@as("versions") versions: option<packageVersionList>,
-@as("package") package: option<packageName>,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: option<packageFormat>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+expectedStatus: option<packageVersionStatus>,
+versionRevisions: option<packageVersionRevisionMap>,
+versions: packageVersionList,
+package: packageName,
+namespace: option<packageNamespace>,
+format: packageFormat,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("failedVersions") failedVersions: packageVersionErrorMap,
-@as("successfulVersions") successfulVersions: successfulPackageVersionInfoMap
+failedVersions: option<packageVersionErrorMap>,
+successfulVersions: option<successfulPackageVersionInfoMap>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "DisposePackageVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeletePackageVersions = {
   type t;
   type request = {
-@as("expectedStatus") expectedStatus: packageVersionStatus,
-@as("versions") versions: option<packageVersionList>,
-@as("package") package: option<packageName>,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: option<packageFormat>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+expectedStatus: option<packageVersionStatus>,
+versions: packageVersionList,
+package: packageName,
+namespace: option<packageNamespace>,
+format: packageFormat,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("failedVersions") failedVersions: packageVersionErrorMap,
-@as("successfulVersions") successfulVersions: successfulPackageVersionInfoMap
+failedVersions: option<packageVersionErrorMap>,
+successfulVersions: option<successfulPackageVersionInfoMap>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "DeletePackageVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateDomain = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("encryptionKey") encryptionKey: arn,
-@as("domain") domain: option<domainName>
+tags: option<tagList_>,
+encryptionKey: option<arn>,
+domain: domainName
 }
   type response = {
-@as("domain") domain: domainDescription
+domain: option<domainDescription>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "CreateDomainCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CopyPackageVersions = {
   type t;
   type request = {
-@as("includeFromUpstream") includeFromUpstream: booleanOptional,
-@as("allowOverwrite") allowOverwrite: booleanOptional,
-@as("versionRevisions") versionRevisions: packageVersionRevisionMap,
-@as("versions") versions: packageVersionList,
-@as("package") package: option<packageName>,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: option<packageFormat>,
-@as("destinationRepository") destinationRepository: option<repositoryName>,
-@as("sourceRepository") sourceRepository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+includeFromUpstream: option<booleanOptional>,
+allowOverwrite: option<booleanOptional>,
+versionRevisions: option<packageVersionRevisionMap>,
+versions: option<packageVersionList>,
+package: packageName,
+namespace: option<packageNamespace>,
+format: packageFormat,
+destinationRepository: repositoryName,
+sourceRepository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("failedVersions") failedVersions: packageVersionErrorMap,
-@as("successfulVersions") successfulVersions: successfulPackageVersionInfoMap
+failedVersions: option<packageVersionErrorMap>,
+successfulVersions: option<successfulPackageVersionInfoMap>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "CopyPackageVersionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateRepository = {
   type t;
   type request = {
-@as("upstreams") upstreams: upstreamRepositoryList,
-@as("description") description: description,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+upstreams: option<upstreamRepositoryList>,
+description: option<description>,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("repository") repository: repositoryDescription
+repository: option<repositoryDescription>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "UpdateRepositoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ListPackageVersionAssets = {
   type t;
   type request = {
-@as("nextToken") nextToken: paginationToken,
-@as("maxResults") maxResults: listPackageVersionAssetsMaxResults,
-@as("packageVersion") packageVersion: option<packageVersion>,
-@as("package") package: option<packageName>,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: option<packageFormat>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+nextToken: option<paginationToken>,
+maxResults: option<listPackageVersionAssetsMaxResults>,
+packageVersion: packageVersion,
+package: packageName,
+namespace: option<packageNamespace>,
+format: packageFormat,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("assets") assets: assetSummaryList,
-@as("nextToken") nextToken: paginationToken,
-@as("versionRevision") versionRevision: packageVersionRevision,
-@as("version") version: packageVersion,
-@as("package") package: packageName,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: packageFormat
+assets: option<assetSummaryList>,
+nextToken: option<paginationToken>,
+versionRevision: option<packageVersionRevision>,
+version: option<packageVersion>,
+package: option<packageName>,
+namespace: option<packageNamespace>,
+format: option<packageFormat>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "ListPackageVersionAssetsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DisassociateExternalConnection = {
   type t;
   type request = {
-@as("externalConnection") externalConnection: option<externalConnectionName>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+externalConnection: externalConnectionName,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("repository") repository: repositoryDescription
+repository: option<repositoryDescription>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "DisassociateExternalConnectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeRepository = {
   type t;
   type request = {
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("repository") repository: repositoryDescription
+repository: option<repositoryDescription>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "DescribeRepositoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribePackageVersion = {
   type t;
   type request = {
-@as("packageVersion") packageVersion: option<packageVersion>,
-@as("package") package: option<packageName>,
-@as("namespace") namespace: packageNamespace,
-@as("format") format: option<packageFormat>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+packageVersion: packageVersion,
+package: packageName,
+namespace: option<packageNamespace>,
+format: packageFormat,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("packageVersion") packageVersion: option<packageVersionDescription>
+packageVersion: packageVersionDescription
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "DescribePackageVersionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteRepository = {
   type t;
   type request = {
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("repository") repository: repositoryDescription
+repository: option<repositoryDescription>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "DeleteRepositoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateRepository = {
   type t;
   type request = {
-@as("tags") tags: tagList,
-@as("upstreams") upstreams: upstreamRepositoryList,
-@as("description") description: description,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+tags: option<tagList_>,
+upstreams: option<upstreamRepositoryList>,
+description: option<description>,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("repository") repository: repositoryDescription
+repository: option<repositoryDescription>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "CreateRepositoryCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AssociateExternalConnection = {
   type t;
   type request = {
-@as("externalConnection") externalConnection: option<externalConnectionName>,
-@as("repository") repository: option<repositoryName>,
-@as("domainOwner") domainOwner: accountId,
-@as("domain") domain: option<domainName>
+externalConnection: externalConnectionName,
+repository: repositoryName,
+domainOwner: option<accountId>,
+domain: domainName
 }
   type response = {
-@as("repository") repository: repositoryDescription
+repository: option<repositoryDescription>
 }
   @module("@aws-sdk/client-codeartifact") @new external new_: (request) => t = "AssociateExternalConnectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }

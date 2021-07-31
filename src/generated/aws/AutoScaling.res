@@ -1,8 +1,16 @@
-type apiString = string
-type apiBoolean = bool;
-type apiInteger = int;
-type apiTimestamp = Js.Date.t;
-type apiLong = float;
+type responseMetadata = {
+httpStatusCode: option<float>,
+  requestId: option<string>,
+  extendedRequestId: option<string>,
+  cfId: option<string>,
+  attempts: option<int>,
+  totalRetryDelay: option<int>
+};
+type string_ = string
+type boolean_ = bool
+type integer_ = int
+type timestamp_ = Js.Date.t;
+type long = float
 type xmlStringUserData = string
 type xmlStringMaxLen64 = string
 type xmlStringMaxLen511 = string
@@ -15,268 +23,268 @@ type xmlStringMaxLen1023 = string
 type xmlString = string
 type warmPoolStatus = [@as("PendingDelete") #PendingDelete]
 type warmPoolState = [@as("Running") #Running | @as("Stopped") #Stopped]
-type warmPoolSize = int;
-type warmPoolMinSize = int;
+type warmPoolSize = int
+type warmPoolMinSize = int
 type timestampType = Js.Date.t;
 type tagValue = string
 type tagKey = string
 type spotPrice = string
-type spotInstancePools = int;
-type shouldRespectGracePeriod = bool;
-type shouldDecrementDesiredCapacity = bool;
-type scalingPolicyEnabled = bool;
+type spotInstancePools = int
+type shouldRespectGracePeriod = bool
+type shouldDecrementDesiredCapacity = bool
+type scalingPolicyEnabled = bool
 type scalingActivityStatusCode = [@as("Cancelled") #Cancelled | @as("Failed") #Failed | @as("Successful") #Successful | @as("WaitingForInstanceWarmup") #WaitingForInstanceWarmup | @as("MidLifecycleAction") #MidLifecycleAction | @as("WaitingForELBConnectionDraining") #WaitingForELBConnectionDraining | @as("InProgress") #InProgress | @as("PreInService") #PreInService | @as("WaitingForInstanceId") #WaitingForInstanceId | @as("WaitingForSpotInstanceId") #WaitingForSpotInstanceId | @as("WaitingForSpotInstanceRequestId") #WaitingForSpotInstanceRequestId | @as("PendingSpotBidPlacement") #PendingSpotBidPlacement]
 type resourceName = string
 type refreshStrategy = [@as("Rolling") #Rolling]
-type refreshInstanceWarmup = int;
-type protectedFromScaleIn = bool;
-type propagateAtLaunch = bool;
-type progress = int;
-type predictiveScalingSchedulingBufferTime = int;
+type refreshInstanceWarmup = int
+type protectedFromScaleIn = bool
+type propagateAtLaunch = bool
+type progress = int
+type predictiveScalingSchedulingBufferTime = int
 type predictiveScalingMode = [@as("ForecastOnly") #ForecastOnly | @as("ForecastAndScale") #ForecastAndScale]
-type predictiveScalingMaxCapacityBuffer = int;
+type predictiveScalingMaxCapacityBuffer = int
 type predictiveScalingMaxCapacityBreachBehavior = [@as("IncreaseMaxCapacity") #IncreaseMaxCapacity | @as("HonorMaxCapacity") #HonorMaxCapacity]
 type predefinedScalingMetricType = [@as("ALBRequestCountPerTarget") #ALBRequestCountPerTarget | @as("ASGAverageNetworkOut") #ASGAverageNetworkOut | @as("ASGAverageNetworkIn") #ASGAverageNetworkIn | @as("ASGAverageCPUUtilization") #ASGAverageCPUUtilization]
 type predefinedMetricPairType = [@as("ALBRequestCount") #ALBRequestCount | @as("ASGNetworkOut") #ASGNetworkOut | @as("ASGNetworkIn") #ASGNetworkIn | @as("ASGCPUUtilization") #ASGCPUUtilization]
 type predefinedLoadMetricType = [@as("ALBTargetGroupRequestCount") #ALBTargetGroupRequestCount | @as("ASGTotalNetworkOut") #ASGTotalNetworkOut | @as("ASGTotalNetworkIn") #ASGTotalNetworkIn | @as("ASGTotalCPUUtilization") #ASGTotalCPUUtilization]
-type policyIncrement = int;
-type onDemandPercentageAboveBaseCapacity = int;
-type onDemandBaseCapacity = int;
-type numberOfLaunchConfigurations = int;
-type numberOfAutoScalingGroups = int;
+type policyIncrement = int
+type onDemandPercentageAboveBaseCapacity = int
+type onDemandBaseCapacity = int
+type numberOfLaunchConfigurations = int
+type numberOfAutoScalingGroups = int
 type notificationTargetResourceName = string
-type nonZeroIntPercent = int;
-type noDevice = bool;
-type monitoringEnabled = bool;
+type nonZeroIntPercent = int
+type noDevice = bool
+type monitoringEnabled = bool
 type mixedInstanceSpotPrice = string
-type minAdjustmentStep = int;
-type minAdjustmentMagnitude = int;
+type minAdjustmentStep = int
+type minAdjustmentMagnitude = int
 type metricUnit = string
 type metricType = [@as("ALBRequestCountPerTarget") #ALBRequestCountPerTarget | @as("ASGAverageNetworkOut") #ASGAverageNetworkOut | @as("ASGAverageNetworkIn") #ASGAverageNetworkIn | @as("ASGAverageCPUUtilization") #ASGAverageCPUUtilization]
 type metricStatistic = [@as("Sum") #Sum | @as("SampleCount") #SampleCount | @as("Maximum") #Maximum | @as("Minimum") #Minimum | @as("Average") #Average]
-type metricScale = float;
+type metricScale = float
 type metricNamespace = string
 type metricName = string
 type metricDimensionValue = string
 type metricDimensionName = string
-type maxRecords = int;
-type maxNumberOfLaunchConfigurations = int;
-type maxNumberOfAutoScalingGroups = int;
-type maxInstanceLifetime = int;
-type maxGroupPreparedCapacity = int;
+type maxRecords = int
+type maxNumberOfLaunchConfigurations = int
+type maxNumberOfAutoScalingGroups = int
+type maxInstanceLifetime = int
+type maxGroupPreparedCapacity = int
 type lifecycleTransition = string
-type lifecycleState = [@as("Warmed:Running") #Warmed_Running | @as("Warmed:Stopped") #Warmed_Stopped | @as("Warmed:Terminated") #Warmed_Terminated | @as("Warmed:Terminating:Proceed") #Warmed_Terminating_Proceed | @as("Warmed:Terminating:Wait") #Warmed_Terminating_Wait | @as("Warmed:Terminating") #Warmed_Terminating | @as("Warmed:Pending:Proceed") #Warmed_Pending_Proceed | @as("Warmed:Pending:Wait") #Warmed_Pending_Wait | @as("Warmed:Pending") #Warmed_Pending | @as("Standby") #Standby | @as("EnteringStandby") #EnteringStandby | @as("Detached") #Detached | @as("Detaching") #Detaching | @as("Terminated") #Terminated | @as("Terminating:Proceed") #Terminating_Proceed | @as("Terminating:Wait") #Terminating_Wait | @as("Terminating") #Terminating | @as("InService") #InService | @as("Quarantined") #Quarantined | @as("Pending:Proceed") #Pending_Proceed | @as("Pending:Wait") #Pending_Wait | @as("Pending") #Pending]
+type lifecycleState = [@as("Warmed:Running") #WarmedRunning | @as("Warmed:Stopped") #WarmedStopped | @as("Warmed:Terminated") #WarmedTerminated | @as("Warmed:Terminating:Proceed") #WarmedTerminatingProceed | @as("Warmed:Terminating:Wait") #WarmedTerminatingWait | @as("Warmed:Terminating") #WarmedTerminating | @as("Warmed:Pending:Proceed") #WarmedPendingProceed | @as("Warmed:Pending:Wait") #WarmedPendingWait | @as("Warmed:Pending") #WarmedPending | @as("Standby") #Standby | @as("EnteringStandby") #EnteringStandby | @as("Detached") #Detached | @as("Detaching") #Detaching | @as("Terminated") #Terminated | @as("Terminating:Proceed") #TerminatingProceed | @as("Terminating:Wait") #TerminatingWait | @as("Terminating") #Terminating | @as("InService") #InService | @as("Quarantined") #Quarantined | @as("Pending:Proceed") #PendingProceed | @as("Pending:Wait") #PendingWait | @as("Pending") #Pending]
 type lifecycleActionToken = string
 type lifecycleActionResult = string
 type launchTemplateName = string
-type intPercent = int;
-type instancesToUpdate = int;
+type intPercent = int
+type instancesToUpdate = int
 type instanceRefreshStatus = [@as("Cancelled") #Cancelled | @as("Cancelling") #Cancelling | @as("Failed") #Failed | @as("Successful") #Successful | @as("InProgress") #InProgress | @as("Pending") #Pending]
-type instanceProtected = bool;
-type instanceMetadataHttpTokensState = [@as("required") #required | @as("optional") #optional]
-type instanceMetadataHttpPutResponseHopLimit = int;
-type instanceMetadataEndpointState = [@as("enabled") #enabled | @as("disabled") #disabled]
-type includeDeletedGroups = bool;
-type honorCooldown = bool;
-type heartbeatTimeout = int;
-type healthCheckGracePeriod = int;
-type globalTimeout = int;
-type forceDelete = bool;
-type estimatedInstanceWarmup = int;
-type ebsOptimized = bool;
-type disableScaleIn = bool;
-type cooldown = int;
-type checkpointDelay = int;
-type capacityRebalanceEnabled = bool;
+type instanceProtected = bool
+type instanceMetadataHttpTokensState = [@as("required") #Required | @as("optional") #Optional]
+type instanceMetadataHttpPutResponseHopLimit = int
+type instanceMetadataEndpointState = [@as("enabled") #Enabled | @as("disabled") #Disabled]
+type includeDeletedGroups = bool
+type honorCooldown = bool
+type heartbeatTimeout = int
+type healthCheckGracePeriod = int
+type globalTimeout = int
+type forceDelete = bool
+type estimatedInstanceWarmup = int
+type ebsOptimized = bool
+type disableScaleIn = bool
+type cooldown = int
+type checkpointDelay = int
+type capacityRebalanceEnabled = bool
 type blockDeviceEbsVolumeType = string
-type blockDeviceEbsVolumeSize = int;
-type blockDeviceEbsThroughput = int;
-type blockDeviceEbsIops = int;
-type blockDeviceEbsEncrypted = bool;
-type blockDeviceEbsDeleteOnTermination = bool;
+type blockDeviceEbsVolumeSize = int
+type blockDeviceEbsThroughput = int
+type blockDeviceEbsIops = int
+type blockDeviceEbsEncrypted = bool
+type blockDeviceEbsDeleteOnTermination = bool
 type autoScalingGroupState = string
-type autoScalingGroupPredictedCapacity = int;
-type autoScalingGroupMinSize = int;
-type autoScalingGroupMaxSize = int;
-type autoScalingGroupDesiredCapacity = int;
-type associatePublicIpAddress = bool;
+type autoScalingGroupPredictedCapacity = int
+type autoScalingGroupMinSize = int
+type autoScalingGroupMaxSize = int
+type autoScalingGroupDesiredCapacity = int
+type associatePublicIpAddress = bool
 type asciiStringMaxLen255 = string
 type warmPoolConfiguration = {
-@as("Status") status: warmPoolStatus,
-@as("PoolState") poolState: warmPoolState,
-@as("MinSize") minSize: warmPoolMinSize,
-@as("MaxGroupPreparedCapacity") maxGroupPreparedCapacity: maxGroupPreparedCapacity
+@as("Status") status: option<warmPoolStatus>,
+@as("PoolState") poolState: option<warmPoolState>,
+@as("MinSize") minSize: option<warmPoolMinSize>,
+@as("MaxGroupPreparedCapacity") maxGroupPreparedCapacity: option<maxGroupPreparedCapacity>
 }
 type values = array<xmlString>
 type terminationPolicies = array<xmlStringMaxLen1600>
 type targetGroupARNs = array<xmlStringMaxLen511>
 type tagDescription = {
-@as("PropagateAtLaunch") propagateAtLaunch: propagateAtLaunch,
-@as("Value") value: tagValue,
-@as("Key") key: tagKey,
-@as("ResourceType") resourceType: xmlString,
-@as("ResourceId") resourceId: xmlString
+@as("PropagateAtLaunch") propagateAtLaunch: option<propagateAtLaunch>,
+@as("Value") value: option<tagValue>,
+@as("Key") key: option<tagKey>,
+@as("ResourceType") resourceType: option<xmlString>,
+@as("ResourceId") resourceId: option<xmlString>
 }
 type tag = {
-@as("PropagateAtLaunch") propagateAtLaunch: propagateAtLaunch,
-@as("Value") value: tagValue,
-@as("Key") key: option<tagKey>,
-@as("ResourceType") resourceType: xmlString,
-@as("ResourceId") resourceId: xmlString
+@as("PropagateAtLaunch") propagateAtLaunch: option<propagateAtLaunch>,
+@as("Value") value: option<tagValue>,
+@as("Key") key: tagKey,
+@as("ResourceType") resourceType: option<xmlString>,
+@as("ResourceId") resourceId: option<xmlString>
 }
 type suspendedProcess = {
-@as("SuspensionReason") suspensionReason: xmlStringMaxLen255,
-@as("ProcessName") processName: xmlStringMaxLen255
+@as("SuspensionReason") suspensionReason: option<xmlStringMaxLen255>,
+@as("ProcessName") processName: option<xmlStringMaxLen255>
 }
 type stepAdjustment = {
-@as("ScalingAdjustment") scalingAdjustment: option<policyIncrement>,
-@as("MetricIntervalUpperBound") metricIntervalUpperBound: metricScale,
-@as("MetricIntervalLowerBound") metricIntervalLowerBound: metricScale
+@as("ScalingAdjustment") scalingAdjustment: policyIncrement,
+@as("MetricIntervalUpperBound") metricIntervalUpperBound: option<metricScale>,
+@as("MetricIntervalLowerBound") metricIntervalLowerBound: option<metricScale>
 }
 type securityGroups = array<xmlString>
 type scheduledUpdateGroupActionRequest = {
-@as("TimeZone") timeZone: xmlStringMaxLen255,
-@as("DesiredCapacity") desiredCapacity: autoScalingGroupDesiredCapacity,
-@as("MaxSize") maxSize: autoScalingGroupMaxSize,
-@as("MinSize") minSize: autoScalingGroupMinSize,
-@as("Recurrence") recurrence: xmlStringMaxLen255,
-@as("EndTime") endTime: timestampType,
-@as("StartTime") startTime: timestampType,
-@as("ScheduledActionName") scheduledActionName: option<xmlStringMaxLen255>
+@as("TimeZone") timeZone: option<xmlStringMaxLen255>,
+@as("DesiredCapacity") desiredCapacity: option<autoScalingGroupDesiredCapacity>,
+@as("MaxSize") maxSize: option<autoScalingGroupMaxSize>,
+@as("MinSize") minSize: option<autoScalingGroupMinSize>,
+@as("Recurrence") recurrence: option<xmlStringMaxLen255>,
+@as("EndTime") endTime: option<timestampType>,
+@as("StartTime") startTime: option<timestampType>,
+@as("ScheduledActionName") scheduledActionName: xmlStringMaxLen255
 }
 type scheduledUpdateGroupAction = {
-@as("TimeZone") timeZone: xmlStringMaxLen255,
-@as("DesiredCapacity") desiredCapacity: autoScalingGroupDesiredCapacity,
-@as("MaxSize") maxSize: autoScalingGroupMaxSize,
-@as("MinSize") minSize: autoScalingGroupMinSize,
-@as("Recurrence") recurrence: xmlStringMaxLen255,
-@as("EndTime") endTime: timestampType,
-@as("StartTime") startTime: timestampType,
-@as("Time") time: timestampType,
-@as("ScheduledActionARN") scheduledActionARN: resourceName,
-@as("ScheduledActionName") scheduledActionName: xmlStringMaxLen255,
-@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
+@as("TimeZone") timeZone: option<xmlStringMaxLen255>,
+@as("DesiredCapacity") desiredCapacity: option<autoScalingGroupDesiredCapacity>,
+@as("MaxSize") maxSize: option<autoScalingGroupMaxSize>,
+@as("MinSize") minSize: option<autoScalingGroupMinSize>,
+@as("Recurrence") recurrence: option<xmlStringMaxLen255>,
+@as("EndTime") endTime: option<timestampType>,
+@as("StartTime") startTime: option<timestampType>,
+@as("Time") time: option<timestampType>,
+@as("ScheduledActionARN") scheduledActionARN: option<resourceName>,
+@as("ScheduledActionName") scheduledActionName: option<xmlStringMaxLen255>,
+@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
 type scheduledActionNames = array<xmlStringMaxLen255>
 type processType = {
-@as("ProcessName") processName: option<xmlStringMaxLen255>
+@as("ProcessName") processName: xmlStringMaxLen255
 }
 type processNames = array<xmlStringMaxLen255>
 type predictiveScalingPredefinedScalingMetric = {
-@as("ResourceLabel") resourceLabel: xmlStringMaxLen1023,
-@as("PredefinedMetricType") predefinedMetricType: option<predefinedScalingMetricType>
+@as("ResourceLabel") resourceLabel: option<xmlStringMaxLen1023>,
+@as("PredefinedMetricType") predefinedMetricType: predefinedScalingMetricType
 }
 type predictiveScalingPredefinedMetricPair = {
-@as("ResourceLabel") resourceLabel: xmlStringMaxLen1023,
-@as("PredefinedMetricType") predefinedMetricType: option<predefinedMetricPairType>
+@as("ResourceLabel") resourceLabel: option<xmlStringMaxLen1023>,
+@as("PredefinedMetricType") predefinedMetricType: predefinedMetricPairType
 }
 type predictiveScalingPredefinedLoadMetric = {
-@as("ResourceLabel") resourceLabel: xmlStringMaxLen1023,
-@as("PredefinedMetricType") predefinedMetricType: option<predefinedLoadMetricType>
+@as("ResourceLabel") resourceLabel: option<xmlStringMaxLen1023>,
+@as("PredefinedMetricType") predefinedMetricType: predefinedLoadMetricType
 }
 type predictiveScalingForecastValues = array<metricScale>
 type predictiveScalingForecastTimestamps = array<timestampType>
 type predefinedMetricSpecification = {
-@as("ResourceLabel") resourceLabel: xmlStringMaxLen1023,
-@as("PredefinedMetricType") predefinedMetricType: option<metricType>
+@as("ResourceLabel") resourceLabel: option<xmlStringMaxLen1023>,
+@as("PredefinedMetricType") predefinedMetricType: metricType
 }
 type policyTypes = array<xmlStringMaxLen64>
 type policyNames = array<resourceName>
 type notificationConfiguration = {
-@as("NotificationType") notificationType: xmlStringMaxLen255,
-@as("TopicARN") topicARN: xmlStringMaxLen255,
-@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
+@as("NotificationType") notificationType: option<xmlStringMaxLen255>,
+@as("TopicARN") topicARN: option<xmlStringMaxLen255>,
+@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
 type metrics = array<xmlStringMaxLen255>
 type metricGranularityType = {
-@as("Granularity") granularity: xmlStringMaxLen255
+@as("Granularity") granularity: option<xmlStringMaxLen255>
 }
 type metricDimension = {
-@as("Value") value: option<metricDimensionValue>,
-@as("Name") name: option<metricDimensionName>
+@as("Value") value: metricDimensionValue,
+@as("Name") name: metricDimensionName
 }
 type metricCollectionType = {
-@as("Metric") metric: xmlStringMaxLen255
+@as("Metric") metric: option<xmlStringMaxLen255>
 }
 type loadBalancerTargetGroupState = {
-@as("State") state: xmlStringMaxLen255,
-@as("LoadBalancerTargetGroupARN") loadBalancerTargetGroupARN: xmlStringMaxLen511
+@as("State") state: option<xmlStringMaxLen255>,
+@as("LoadBalancerTargetGroupARN") loadBalancerTargetGroupARN: option<xmlStringMaxLen511>
 }
 type loadBalancerState = {
-@as("State") state: xmlStringMaxLen255,
-@as("LoadBalancerName") loadBalancerName: xmlStringMaxLen255
+@as("State") state: option<xmlStringMaxLen255>,
+@as("LoadBalancerName") loadBalancerName: option<xmlStringMaxLen255>
 }
 type loadBalancerNames = array<xmlStringMaxLen255>
 type lifecycleHookSpecification = {
-@as("RoleARN") roleARN: xmlStringMaxLen255,
-@as("NotificationTargetARN") notificationTargetARN: notificationTargetResourceName,
-@as("DefaultResult") defaultResult: lifecycleActionResult,
-@as("HeartbeatTimeout") heartbeatTimeout: heartbeatTimeout,
-@as("NotificationMetadata") notificationMetadata: xmlStringMaxLen1023,
-@as("LifecycleTransition") lifecycleTransition: option<lifecycleTransition>,
-@as("LifecycleHookName") lifecycleHookName: option<asciiStringMaxLen255>
+@as("RoleARN") roleARN: option<xmlStringMaxLen255>,
+@as("NotificationTargetARN") notificationTargetARN: option<notificationTargetResourceName>,
+@as("DefaultResult") defaultResult: option<lifecycleActionResult>,
+@as("HeartbeatTimeout") heartbeatTimeout: option<heartbeatTimeout>,
+@as("NotificationMetadata") notificationMetadata: option<xmlStringMaxLen1023>,
+@as("LifecycleTransition") lifecycleTransition: lifecycleTransition,
+@as("LifecycleHookName") lifecycleHookName: asciiStringMaxLen255
 }
 type lifecycleHookNames = array<asciiStringMaxLen255>
 type lifecycleHook = {
-@as("DefaultResult") defaultResult: lifecycleActionResult,
-@as("GlobalTimeout") globalTimeout: globalTimeout,
-@as("HeartbeatTimeout") heartbeatTimeout: heartbeatTimeout,
-@as("NotificationMetadata") notificationMetadata: xmlStringMaxLen1023,
-@as("RoleARN") roleARN: xmlStringMaxLen255,
-@as("NotificationTargetARN") notificationTargetARN: notificationTargetResourceName,
-@as("LifecycleTransition") lifecycleTransition: lifecycleTransition,
-@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
-@as("LifecycleHookName") lifecycleHookName: asciiStringMaxLen255
+@as("DefaultResult") defaultResult: option<lifecycleActionResult>,
+@as("GlobalTimeout") globalTimeout: option<globalTimeout>,
+@as("HeartbeatTimeout") heartbeatTimeout: option<heartbeatTimeout>,
+@as("NotificationMetadata") notificationMetadata: option<xmlStringMaxLen1023>,
+@as("RoleARN") roleARN: option<xmlStringMaxLen255>,
+@as("NotificationTargetARN") notificationTargetARN: option<notificationTargetResourceName>,
+@as("LifecycleTransition") lifecycleTransition: option<lifecycleTransition>,
+@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
+@as("LifecycleHookName") lifecycleHookName: option<asciiStringMaxLen255>
 }
 type launchTemplateSpecification = {
-@as("Version") version: xmlStringMaxLen255,
-@as("LaunchTemplateName") launchTemplateName: launchTemplateName,
-@as("LaunchTemplateId") launchTemplateId: xmlStringMaxLen255
+@as("Version") version: option<xmlStringMaxLen255>,
+@as("LaunchTemplateName") launchTemplateName: option<launchTemplateName>,
+@as("LaunchTemplateId") launchTemplateId: option<xmlStringMaxLen255>
 }
 type launchConfigurationNames = array<xmlStringMaxLen255>
 type instancesDistribution = {
-@as("SpotMaxPrice") spotMaxPrice: mixedInstanceSpotPrice,
-@as("SpotInstancePools") spotInstancePools: spotInstancePools,
-@as("SpotAllocationStrategy") spotAllocationStrategy: xmlString,
-@as("OnDemandPercentageAboveBaseCapacity") onDemandPercentageAboveBaseCapacity: onDemandPercentageAboveBaseCapacity,
-@as("OnDemandBaseCapacity") onDemandBaseCapacity: onDemandBaseCapacity,
-@as("OnDemandAllocationStrategy") onDemandAllocationStrategy: xmlString
+@as("SpotMaxPrice") spotMaxPrice: option<mixedInstanceSpotPrice>,
+@as("SpotInstancePools") spotInstancePools: option<spotInstancePools>,
+@as("SpotAllocationStrategy") spotAllocationStrategy: option<xmlString>,
+@as("OnDemandPercentageAboveBaseCapacity") onDemandPercentageAboveBaseCapacity: option<onDemandPercentageAboveBaseCapacity>,
+@as("OnDemandBaseCapacity") onDemandBaseCapacity: option<onDemandBaseCapacity>,
+@as("OnDemandAllocationStrategy") onDemandAllocationStrategy: option<xmlString>
 }
 type instanceRefreshWarmPoolProgress = {
-@as("InstancesToUpdate") instancesToUpdate: instancesToUpdate,
-@as("PercentageComplete") percentageComplete: intPercent
+@as("InstancesToUpdate") instancesToUpdate: option<instancesToUpdate>,
+@as("PercentageComplete") percentageComplete: option<intPercent>
 }
 type instanceRefreshLivePoolProgress = {
-@as("InstancesToUpdate") instancesToUpdate: instancesToUpdate,
-@as("PercentageComplete") percentageComplete: intPercent
+@as("InstancesToUpdate") instancesToUpdate: option<instancesToUpdate>,
+@as("PercentageComplete") percentageComplete: option<intPercent>
 }
 type instanceRefreshIds = array<xmlStringMaxLen255>
 type instanceMonitoring = {
-@as("Enabled") enabled: monitoringEnabled
+@as("Enabled") enabled: option<monitoringEnabled>
 }
 type instanceMetadataOptions = {
-@as("HttpEndpoint") httpEndpoint: instanceMetadataEndpointState,
-@as("HttpPutResponseHopLimit") httpPutResponseHopLimit: instanceMetadataHttpPutResponseHopLimit,
-@as("HttpTokens") httpTokens: instanceMetadataHttpTokensState
+@as("HttpEndpoint") httpEndpoint: option<instanceMetadataEndpointState>,
+@as("HttpPutResponseHopLimit") httpPutResponseHopLimit: option<instanceMetadataHttpPutResponseHopLimit>,
+@as("HttpTokens") httpTokens: option<instanceMetadataHttpTokensState>
 }
 type instanceIds = array<xmlStringMaxLen19>
 type failedScheduledUpdateGroupActionRequest = {
-@as("ErrorMessage") errorMessage: xmlString,
-@as("ErrorCode") errorCode: xmlStringMaxLen64,
-@as("ScheduledActionName") scheduledActionName: option<xmlStringMaxLen255>
+@as("ErrorMessage") errorMessage: option<xmlString>,
+@as("ErrorCode") errorCode: option<xmlStringMaxLen64>,
+@as("ScheduledActionName") scheduledActionName: xmlStringMaxLen255
 }
 type enabledMetric = {
-@as("Granularity") granularity: xmlStringMaxLen255,
-@as("Metric") metric: xmlStringMaxLen255
+@as("Granularity") granularity: option<xmlStringMaxLen255>,
+@as("Metric") metric: option<xmlStringMaxLen255>
 }
 type ebs = {
-@as("Throughput") throughput: blockDeviceEbsThroughput,
-@as("Encrypted") encrypted: blockDeviceEbsEncrypted,
-@as("Iops") iops: blockDeviceEbsIops,
-@as("DeleteOnTermination") deleteOnTermination: blockDeviceEbsDeleteOnTermination,
-@as("VolumeType") volumeType: blockDeviceEbsVolumeType,
-@as("VolumeSize") volumeSize: blockDeviceEbsVolumeSize,
-@as("SnapshotId") snapshotId: xmlStringMaxLen255
+@as("Throughput") throughput: option<blockDeviceEbsThroughput>,
+@as("Encrypted") encrypted: option<blockDeviceEbsEncrypted>,
+@as("Iops") iops: option<blockDeviceEbsIops>,
+@as("DeleteOnTermination") deleteOnTermination: option<blockDeviceEbsDeleteOnTermination>,
+@as("VolumeType") volumeType: option<blockDeviceEbsVolumeType>,
+@as("VolumeSize") volumeSize: option<blockDeviceEbsVolumeSize>,
+@as("SnapshotId") snapshotId: option<xmlStringMaxLen255>
 }
 type classicLinkVPCSecurityGroups = array<xmlStringMaxLen255>
 type checkpointPercentages = array<nonZeroIntPercent>
@@ -284,26 +292,26 @@ type availabilityZones = array<xmlStringMaxLen255>
 type autoScalingNotificationTypes = array<xmlStringMaxLen255>
 type autoScalingGroupNames = array<xmlStringMaxLen255>
 type alarm = {
-@as("AlarmARN") alarmARN: resourceName,
-@as("AlarmName") alarmName: xmlStringMaxLen255
+@as("AlarmARN") alarmARN: option<resourceName>,
+@as("AlarmName") alarmName: option<xmlStringMaxLen255>
 }
 type adjustmentType = {
-@as("AdjustmentType") adjustmentType: xmlStringMaxLen255
+@as("AdjustmentType") adjustmentType: option<xmlStringMaxLen255>
 }
 type activityIds = array<xmlString>
 type activity = {
-@as("AutoScalingGroupARN") autoScalingGroupARN: resourceName,
-@as("AutoScalingGroupState") autoScalingGroupState: autoScalingGroupState,
-@as("Details") details: xmlString,
-@as("Progress") progress: progress,
-@as("StatusMessage") statusMessage: xmlStringMaxLen255,
-@as("StatusCode") statusCode: option<scalingActivityStatusCode>,
-@as("EndTime") endTime: timestampType,
-@as("StartTime") startTime: option<timestampType>,
-@as("Cause") cause: option<xmlStringMaxLen1023>,
-@as("Description") description: xmlString,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
-@as("ActivityId") activityId: option<xmlString>
+@as("AutoScalingGroupARN") autoScalingGroupARN: option<resourceName>,
+@as("AutoScalingGroupState") autoScalingGroupState: option<autoScalingGroupState>,
+@as("Details") details: option<xmlString>,
+@as("Progress") progress: option<progress>,
+@as("StatusMessage") statusMessage: option<xmlStringMaxLen255>,
+@as("StatusCode") statusCode: scalingActivityStatusCode,
+@as("EndTime") endTime: option<timestampType>,
+@as("StartTime") startTime: timestampType,
+@as("Cause") cause: xmlStringMaxLen1023,
+@as("Description") description: option<xmlString>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
+@as("ActivityId") activityId: xmlString
 }
 type tags = array<tag>
 type tagDescriptionList = array<tagDescription>
@@ -312,17 +320,17 @@ type stepAdjustments = array<stepAdjustment>
 type scheduledUpdateGroupActions = array<scheduledUpdateGroupAction>
 type scheduledUpdateGroupActionRequests = array<scheduledUpdateGroupActionRequest>
 type refreshPreferences = {
-@as("CheckpointDelay") checkpointDelay: checkpointDelay,
-@as("CheckpointPercentages") checkpointPercentages: checkpointPercentages,
-@as("InstanceWarmup") instanceWarmup: refreshInstanceWarmup,
-@as("MinHealthyPercentage") minHealthyPercentage: intPercent
+@as("CheckpointDelay") checkpointDelay: option<checkpointDelay>,
+@as("CheckpointPercentages") checkpointPercentages: option<checkpointPercentages>,
+@as("InstanceWarmup") instanceWarmup: option<refreshInstanceWarmup>,
+@as("MinHealthyPercentage") minHealthyPercentage: option<intPercent>
 }
 type processes = array<processType>
 type predictiveScalingMetricSpecification = {
-@as("PredefinedLoadMetricSpecification") predefinedLoadMetricSpecification: predictiveScalingPredefinedLoadMetric,
-@as("PredefinedScalingMetricSpecification") predefinedScalingMetricSpecification: predictiveScalingPredefinedScalingMetric,
-@as("PredefinedMetricPairSpecification") predefinedMetricPairSpecification: predictiveScalingPredefinedMetricPair,
-@as("TargetValue") targetValue: option<metricScale>
+@as("PredefinedLoadMetricSpecification") predefinedLoadMetricSpecification: option<predictiveScalingPredefinedLoadMetric>,
+@as("PredefinedScalingMetricSpecification") predefinedScalingMetricSpecification: option<predictiveScalingPredefinedScalingMetric>,
+@as("PredefinedMetricPairSpecification") predefinedMetricPairSpecification: option<predictiveScalingPredefinedMetricPair>,
+@as("TargetValue") targetValue: metricScale
 }
 type notificationConfigurations = array<notificationConfiguration>
 type metricGranularityTypes = array<metricGranularityType>
@@ -333,52 +341,52 @@ type loadBalancerStates = array<loadBalancerState>
 type lifecycleHooks = array<lifecycleHook>
 type lifecycleHookSpecifications = array<lifecycleHookSpecification>
 type launchTemplateOverrides = {
-@as("LaunchTemplateSpecification") launchTemplateSpecification: launchTemplateSpecification,
-@as("WeightedCapacity") weightedCapacity: xmlStringMaxLen32,
-@as("InstanceType") instanceType: xmlStringMaxLen255
+@as("LaunchTemplateSpecification") launchTemplateSpecification: option<launchTemplateSpecification>,
+@as("WeightedCapacity") weightedCapacity: option<xmlStringMaxLen32>,
+@as("InstanceType") instanceType: option<xmlStringMaxLen255>
 }
 type instanceRefreshProgressDetails = {
-@as("WarmPoolProgress") warmPoolProgress: instanceRefreshWarmPoolProgress,
-@as("LivePoolProgress") livePoolProgress: instanceRefreshLivePoolProgress
+@as("WarmPoolProgress") warmPoolProgress: option<instanceRefreshWarmPoolProgress>,
+@as("LivePoolProgress") livePoolProgress: option<instanceRefreshLivePoolProgress>
 }
 type instance = {
-@as("WeightedCapacity") weightedCapacity: xmlStringMaxLen32,
-@as("ProtectedFromScaleIn") protectedFromScaleIn: option<instanceProtected>,
-@as("LaunchTemplate") launchTemplate: launchTemplateSpecification,
-@as("LaunchConfigurationName") launchConfigurationName: xmlStringMaxLen255,
-@as("HealthStatus") healthStatus: option<xmlStringMaxLen32>,
-@as("LifecycleState") lifecycleState: option<lifecycleState>,
-@as("AvailabilityZone") availabilityZone: option<xmlStringMaxLen255>,
-@as("InstanceType") instanceType: xmlStringMaxLen255,
-@as("InstanceId") instanceId: option<xmlStringMaxLen19>
+@as("WeightedCapacity") weightedCapacity: option<xmlStringMaxLen32>,
+@as("ProtectedFromScaleIn") protectedFromScaleIn: instanceProtected,
+@as("LaunchTemplate") launchTemplate: option<launchTemplateSpecification>,
+@as("LaunchConfigurationName") launchConfigurationName: option<xmlStringMaxLen255>,
+@as("HealthStatus") healthStatus: xmlStringMaxLen32,
+@as("LifecycleState") lifecycleState: lifecycleState,
+@as("AvailabilityZone") availabilityZone: xmlStringMaxLen255,
+@as("InstanceType") instanceType: option<xmlStringMaxLen255>,
+@as("InstanceId") instanceId: xmlStringMaxLen19
 }
 type filter = {
-@as("Values") values: values,
-@as("Name") name: xmlString
+@as("Values") values: option<values>,
+@as("Name") name: option<xmlString>
 }
 type failedScheduledUpdateGroupActionRequests = array<failedScheduledUpdateGroupActionRequest>
 type enabledMetrics = array<enabledMetric>
 type capacityForecast = {
-@as("Values") values: option<predictiveScalingForecastValues>,
-@as("Timestamps") timestamps: option<predictiveScalingForecastTimestamps>
+@as("Values") values: predictiveScalingForecastValues,
+@as("Timestamps") timestamps: predictiveScalingForecastTimestamps
 }
 type blockDeviceMapping = {
-@as("NoDevice") noDevice: noDevice,
-@as("Ebs") ebs: ebs,
-@as("DeviceName") deviceName: option<xmlStringMaxLen255>,
-@as("VirtualName") virtualName: xmlStringMaxLen255
+@as("NoDevice") noDevice: option<noDevice>,
+@as("Ebs") ebs: option<ebs>,
+@as("DeviceName") deviceName: xmlStringMaxLen255,
+@as("VirtualName") virtualName: option<xmlStringMaxLen255>
 }
 type autoScalingInstanceDetails = {
-@as("WeightedCapacity") weightedCapacity: xmlStringMaxLen32,
-@as("ProtectedFromScaleIn") protectedFromScaleIn: option<instanceProtected>,
-@as("LaunchTemplate") launchTemplate: launchTemplateSpecification,
-@as("LaunchConfigurationName") launchConfigurationName: xmlStringMaxLen255,
-@as("HealthStatus") healthStatus: option<xmlStringMaxLen32>,
-@as("LifecycleState") lifecycleState: option<xmlStringMaxLen32>,
-@as("AvailabilityZone") availabilityZone: option<xmlStringMaxLen255>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
-@as("InstanceType") instanceType: xmlStringMaxLen255,
-@as("InstanceId") instanceId: option<xmlStringMaxLen19>
+@as("WeightedCapacity") weightedCapacity: option<xmlStringMaxLen32>,
+@as("ProtectedFromScaleIn") protectedFromScaleIn: instanceProtected,
+@as("LaunchTemplate") launchTemplate: option<launchTemplateSpecification>,
+@as("LaunchConfigurationName") launchConfigurationName: option<xmlStringMaxLen255>,
+@as("HealthStatus") healthStatus: xmlStringMaxLen32,
+@as("LifecycleState") lifecycleState: xmlStringMaxLen32,
+@as("AvailabilityZone") availabilityZone: xmlStringMaxLen255,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
+@as("InstanceType") instanceType: option<xmlStringMaxLen255>,
+@as("InstanceId") instanceId: xmlStringMaxLen19
 }
 type alarms = array<alarm>
 type adjustmentTypes = array<adjustmentType>
@@ -386,974 +394,974 @@ type activities = array<activity>
 type predictiveScalingMetricSpecifications = array<predictiveScalingMetricSpecification>
 type overrides = array<launchTemplateOverrides>
 type loadForecast = {
-@as("MetricSpecification") metricSpecification: option<predictiveScalingMetricSpecification>,
-@as("Values") values: option<predictiveScalingForecastValues>,
-@as("Timestamps") timestamps: option<predictiveScalingForecastTimestamps>
+@as("MetricSpecification") metricSpecification: predictiveScalingMetricSpecification,
+@as("Values") values: predictiveScalingForecastValues,
+@as("Timestamps") timestamps: predictiveScalingForecastTimestamps
 }
 type instances = array<instance>
 type instanceRefresh = {
-@as("ProgressDetails") progressDetails: instanceRefreshProgressDetails,
-@as("InstancesToUpdate") instancesToUpdate: instancesToUpdate,
-@as("PercentageComplete") percentageComplete: intPercent,
-@as("EndTime") endTime: timestampType,
-@as("StartTime") startTime: timestampType,
-@as("StatusReason") statusReason: xmlStringMaxLen1023,
-@as("Status") status: instanceRefreshStatus,
-@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
-@as("InstanceRefreshId") instanceRefreshId: xmlStringMaxLen255
+@as("ProgressDetails") progressDetails: option<instanceRefreshProgressDetails>,
+@as("InstancesToUpdate") instancesToUpdate: option<instancesToUpdate>,
+@as("PercentageComplete") percentageComplete: option<intPercent>,
+@as("EndTime") endTime: option<timestampType>,
+@as("StartTime") startTime: option<timestampType>,
+@as("StatusReason") statusReason: option<xmlStringMaxLen1023>,
+@as("Status") status: option<instanceRefreshStatus>,
+@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
+@as("InstanceRefreshId") instanceRefreshId: option<xmlStringMaxLen255>
 }
 type filters = array<filter>
 type customizedMetricSpecification = {
-@as("Unit") unit: metricUnit,
-@as("Statistic") statistic: option<metricStatistic>,
-@as("Dimensions") dimensions: metricDimensions,
-@as("Namespace") namespace: option<metricNamespace>,
-@as("MetricName") metricName: option<metricName>
+@as("Unit") unit_: option<metricUnit>,
+@as("Statistic") statistic: metricStatistic,
+@as("Dimensions") dimensions: option<metricDimensions>,
+@as("Namespace") namespace: metricNamespace,
+@as("MetricName") metricName: metricName
 }
 type blockDeviceMappings = array<blockDeviceMapping>
 type autoScalingInstances = array<autoScalingInstanceDetails>
 type targetTrackingConfiguration = {
-@as("DisableScaleIn") disableScaleIn: disableScaleIn,
-@as("TargetValue") targetValue: option<metricScale>,
-@as("CustomizedMetricSpecification") customizedMetricSpecification: customizedMetricSpecification,
-@as("PredefinedMetricSpecification") predefinedMetricSpecification: predefinedMetricSpecification
+@as("DisableScaleIn") disableScaleIn: option<disableScaleIn>,
+@as("TargetValue") targetValue: metricScale,
+@as("CustomizedMetricSpecification") customizedMetricSpecification: option<customizedMetricSpecification>,
+@as("PredefinedMetricSpecification") predefinedMetricSpecification: option<predefinedMetricSpecification>
 }
 type predictiveScalingConfiguration = {
-@as("MaxCapacityBuffer") maxCapacityBuffer: predictiveScalingMaxCapacityBuffer,
-@as("MaxCapacityBreachBehavior") maxCapacityBreachBehavior: predictiveScalingMaxCapacityBreachBehavior,
-@as("SchedulingBufferTime") schedulingBufferTime: predictiveScalingSchedulingBufferTime,
-@as("Mode") mode: predictiveScalingMode,
-@as("MetricSpecifications") metricSpecifications: option<predictiveScalingMetricSpecifications>
+@as("MaxCapacityBuffer") maxCapacityBuffer: option<predictiveScalingMaxCapacityBuffer>,
+@as("MaxCapacityBreachBehavior") maxCapacityBreachBehavior: option<predictiveScalingMaxCapacityBreachBehavior>,
+@as("SchedulingBufferTime") schedulingBufferTime: option<predictiveScalingSchedulingBufferTime>,
+@as("Mode") mode: option<predictiveScalingMode>,
+@as("MetricSpecifications") metricSpecifications: predictiveScalingMetricSpecifications
 }
 type loadForecasts = array<loadForecast>
 type launchTemplate = {
-@as("Overrides") overrides: overrides,
-@as("LaunchTemplateSpecification") launchTemplateSpecification: launchTemplateSpecification
+@as("Overrides") overrides: option<overrides>,
+@as("LaunchTemplateSpecification") launchTemplateSpecification: option<launchTemplateSpecification>
 }
 type launchConfiguration = {
-@as("MetadataOptions") metadataOptions: instanceMetadataOptions,
-@as("PlacementTenancy") placementTenancy: xmlStringMaxLen64,
-@as("AssociatePublicIpAddress") associatePublicIpAddress: associatePublicIpAddress,
-@as("EbsOptimized") ebsOptimized: ebsOptimized,
-@as("CreatedTime") createdTime: option<timestampType>,
-@as("IamInstanceProfile") iamInstanceProfile: xmlStringMaxLen1600,
-@as("SpotPrice") spotPrice: spotPrice,
-@as("InstanceMonitoring") instanceMonitoring: instanceMonitoring,
-@as("BlockDeviceMappings") blockDeviceMappings: blockDeviceMappings,
-@as("RamdiskId") ramdiskId: xmlStringMaxLen255,
-@as("KernelId") kernelId: xmlStringMaxLen255,
-@as("InstanceType") instanceType: option<xmlStringMaxLen255>,
-@as("UserData") userData: xmlStringUserData,
-@as("ClassicLinkVPCSecurityGroups") classicLinkVPCSecurityGroups: classicLinkVPCSecurityGroups,
-@as("ClassicLinkVPCId") classicLinkVPCId: xmlStringMaxLen255,
-@as("SecurityGroups") securityGroups: securityGroups,
-@as("KeyName") keyName: xmlStringMaxLen255,
-@as("ImageId") imageId: option<xmlStringMaxLen255>,
-@as("LaunchConfigurationARN") launchConfigurationARN: resourceName,
-@as("LaunchConfigurationName") launchConfigurationName: option<xmlStringMaxLen255>
+@as("MetadataOptions") metadataOptions: option<instanceMetadataOptions>,
+@as("PlacementTenancy") placementTenancy: option<xmlStringMaxLen64>,
+@as("AssociatePublicIpAddress") associatePublicIpAddress: option<associatePublicIpAddress>,
+@as("EbsOptimized") ebsOptimized: option<ebsOptimized>,
+@as("CreatedTime") createdTime: timestampType,
+@as("IamInstanceProfile") iamInstanceProfile: option<xmlStringMaxLen1600>,
+@as("SpotPrice") spotPrice: option<spotPrice>,
+@as("InstanceMonitoring") instanceMonitoring: option<instanceMonitoring>,
+@as("BlockDeviceMappings") blockDeviceMappings: option<blockDeviceMappings>,
+@as("RamdiskId") ramdiskId: option<xmlStringMaxLen255>,
+@as("KernelId") kernelId: option<xmlStringMaxLen255>,
+@as("InstanceType") instanceType: xmlStringMaxLen255,
+@as("UserData") userData: option<xmlStringUserData>,
+@as("ClassicLinkVPCSecurityGroups") classicLinkVPCSecurityGroups: option<classicLinkVPCSecurityGroups>,
+@as("ClassicLinkVPCId") classicLinkVPCId: option<xmlStringMaxLen255>,
+@as("SecurityGroups") securityGroups: option<securityGroups>,
+@as("KeyName") keyName: option<xmlStringMaxLen255>,
+@as("ImageId") imageId: xmlStringMaxLen255,
+@as("LaunchConfigurationARN") launchConfigurationARN: option<resourceName>,
+@as("LaunchConfigurationName") launchConfigurationName: xmlStringMaxLen255
 }
 type instanceRefreshes = array<instanceRefresh>
 type scalingPolicy = {
-@as("PredictiveScalingConfiguration") predictiveScalingConfiguration: predictiveScalingConfiguration,
-@as("Enabled") enabled: scalingPolicyEnabled,
-@as("TargetTrackingConfiguration") targetTrackingConfiguration: targetTrackingConfiguration,
-@as("Alarms") alarms: alarms,
-@as("EstimatedInstanceWarmup") estimatedInstanceWarmup: estimatedInstanceWarmup,
-@as("MetricAggregationType") metricAggregationType: xmlStringMaxLen32,
-@as("StepAdjustments") stepAdjustments: stepAdjustments,
-@as("Cooldown") cooldown: cooldown,
-@as("ScalingAdjustment") scalingAdjustment: policyIncrement,
-@as("MinAdjustmentMagnitude") minAdjustmentMagnitude: minAdjustmentMagnitude,
-@as("MinAdjustmentStep") minAdjustmentStep: minAdjustmentStep,
-@as("AdjustmentType") adjustmentType: xmlStringMaxLen255,
-@as("PolicyType") policyType: xmlStringMaxLen64,
-@as("PolicyARN") policyARN: resourceName,
-@as("PolicyName") policyName: xmlStringMaxLen255,
-@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
+@as("PredictiveScalingConfiguration") predictiveScalingConfiguration: option<predictiveScalingConfiguration>,
+@as("Enabled") enabled: option<scalingPolicyEnabled>,
+@as("TargetTrackingConfiguration") targetTrackingConfiguration: option<targetTrackingConfiguration>,
+@as("Alarms") alarms: option<alarms>,
+@as("EstimatedInstanceWarmup") estimatedInstanceWarmup: option<estimatedInstanceWarmup>,
+@as("MetricAggregationType") metricAggregationType: option<xmlStringMaxLen32>,
+@as("StepAdjustments") stepAdjustments: option<stepAdjustments>,
+@as("Cooldown") cooldown: option<cooldown>,
+@as("ScalingAdjustment") scalingAdjustment: option<policyIncrement>,
+@as("MinAdjustmentMagnitude") minAdjustmentMagnitude: option<minAdjustmentMagnitude>,
+@as("MinAdjustmentStep") minAdjustmentStep: option<minAdjustmentStep>,
+@as("AdjustmentType") adjustmentType: option<xmlStringMaxLen255>,
+@as("PolicyType") policyType: option<xmlStringMaxLen64>,
+@as("PolicyARN") policyARN: option<resourceName>,
+@as("PolicyName") policyName: option<xmlStringMaxLen255>,
+@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
 type mixedInstancesPolicy = {
-@as("InstancesDistribution") instancesDistribution: instancesDistribution,
-@as("LaunchTemplate") launchTemplate: launchTemplate
+@as("InstancesDistribution") instancesDistribution: option<instancesDistribution>,
+@as("LaunchTemplate") launchTemplate: option<launchTemplate>
 }
 type launchConfigurations = array<launchConfiguration>
 type scalingPolicies = array<scalingPolicy>
 type autoScalingGroup = {
-@as("WarmPoolSize") warmPoolSize: warmPoolSize,
-@as("WarmPoolConfiguration") warmPoolConfiguration: warmPoolConfiguration,
-@as("CapacityRebalance") capacityRebalance: capacityRebalanceEnabled,
-@as("MaxInstanceLifetime") maxInstanceLifetime: maxInstanceLifetime,
-@as("ServiceLinkedRoleARN") serviceLinkedRoleARN: resourceName,
-@as("NewInstancesProtectedFromScaleIn") newInstancesProtectedFromScaleIn: instanceProtected,
-@as("TerminationPolicies") terminationPolicies: terminationPolicies,
-@as("Tags") tags: tagDescriptionList,
-@as("Status") status: xmlStringMaxLen255,
-@as("EnabledMetrics") enabledMetrics: enabledMetrics,
-@as("VPCZoneIdentifier") vPCZoneIdentifier: xmlStringMaxLen2047,
-@as("PlacementGroup") placementGroup: xmlStringMaxLen255,
-@as("SuspendedProcesses") suspendedProcesses: suspendedProcesses,
-@as("CreatedTime") createdTime: option<timestampType>,
-@as("Instances") instances: instances,
-@as("HealthCheckGracePeriod") healthCheckGracePeriod: healthCheckGracePeriod,
-@as("HealthCheckType") healthCheckType: option<xmlStringMaxLen32>,
-@as("TargetGroupARNs") targetGroupARNs: targetGroupARNs,
-@as("LoadBalancerNames") loadBalancerNames: loadBalancerNames,
-@as("AvailabilityZones") availabilityZones: option<availabilityZones>,
-@as("DefaultCooldown") defaultCooldown: option<cooldown>,
-@as("PredictedCapacity") predictedCapacity: autoScalingGroupPredictedCapacity,
-@as("DesiredCapacity") desiredCapacity: option<autoScalingGroupDesiredCapacity>,
-@as("MaxSize") maxSize: option<autoScalingGroupMaxSize>,
-@as("MinSize") minSize: option<autoScalingGroupMinSize>,
-@as("MixedInstancesPolicy") mixedInstancesPolicy: mixedInstancesPolicy,
-@as("LaunchTemplate") launchTemplate: launchTemplateSpecification,
-@as("LaunchConfigurationName") launchConfigurationName: xmlStringMaxLen255,
-@as("AutoScalingGroupARN") autoScalingGroupARN: resourceName,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("WarmPoolSize") warmPoolSize: option<warmPoolSize>,
+@as("WarmPoolConfiguration") warmPoolConfiguration: option<warmPoolConfiguration>,
+@as("CapacityRebalance") capacityRebalance: option<capacityRebalanceEnabled>,
+@as("MaxInstanceLifetime") maxInstanceLifetime: option<maxInstanceLifetime>,
+@as("ServiceLinkedRoleARN") serviceLinkedRoleARN: option<resourceName>,
+@as("NewInstancesProtectedFromScaleIn") newInstancesProtectedFromScaleIn: option<instanceProtected>,
+@as("TerminationPolicies") terminationPolicies: option<terminationPolicies>,
+@as("Tags") tags: option<tagDescriptionList>,
+@as("Status") status: option<xmlStringMaxLen255>,
+@as("EnabledMetrics") enabledMetrics: option<enabledMetrics>,
+@as("VPCZoneIdentifier") vpczoneIdentifier: option<xmlStringMaxLen2047>,
+@as("PlacementGroup") placementGroup: option<xmlStringMaxLen255>,
+@as("SuspendedProcesses") suspendedProcesses: option<suspendedProcesses>,
+@as("CreatedTime") createdTime: timestampType,
+@as("Instances") instances: option<instances>,
+@as("HealthCheckGracePeriod") healthCheckGracePeriod: option<healthCheckGracePeriod>,
+@as("HealthCheckType") healthCheckType: xmlStringMaxLen32,
+@as("TargetGroupARNs") targetGroupARNs: option<targetGroupARNs>,
+@as("LoadBalancerNames") loadBalancerNames: option<loadBalancerNames>,
+@as("AvailabilityZones") availabilityZones: availabilityZones,
+@as("DefaultCooldown") defaultCooldown: cooldown,
+@as("PredictedCapacity") predictedCapacity: option<autoScalingGroupPredictedCapacity>,
+@as("DesiredCapacity") desiredCapacity: autoScalingGroupDesiredCapacity,
+@as("MaxSize") maxSize: autoScalingGroupMaxSize,
+@as("MinSize") minSize: autoScalingGroupMinSize,
+@as("MixedInstancesPolicy") mixedInstancesPolicy: option<mixedInstancesPolicy>,
+@as("LaunchTemplate") launchTemplate: option<launchTemplateSpecification>,
+@as("LaunchConfigurationName") launchConfigurationName: option<xmlStringMaxLen255>,
+@as("AutoScalingGroupARN") autoScalingGroupARN: option<resourceName>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
 type autoScalingGroups = array<autoScalingGroup>
-type clientType;
-@module("@aws-sdk/client-autoscaling") @new external createClient: unit => clientType = "AutoScalingClient";
+type awsServiceClient;
+@module("@aws-sdk/client-autoscaling") @new external createClient: unit => awsServiceClient = "AutoScalingClient";
 module SetInstanceHealth = {
   type t;
   type request = {
-@as("ShouldRespectGracePeriod") shouldRespectGracePeriod: shouldRespectGracePeriod,
-@as("HealthStatus") healthStatus: option<xmlStringMaxLen32>,
-@as("InstanceId") instanceId: option<xmlStringMaxLen19>
+@as("ShouldRespectGracePeriod") shouldRespectGracePeriod: option<shouldRespectGracePeriod>,
+@as("HealthStatus") healthStatus: xmlStringMaxLen32,
+@as("InstanceId") instanceId: xmlStringMaxLen19
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "SetInstanceHealthCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module SetDesiredCapacity = {
   type t;
   type request = {
-@as("HonorCooldown") honorCooldown: honorCooldown,
-@as("DesiredCapacity") desiredCapacity: option<autoScalingGroupDesiredCapacity>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("HonorCooldown") honorCooldown: option<honorCooldown>,
+@as("DesiredCapacity") desiredCapacity: autoScalingGroupDesiredCapacity,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "SetDesiredCapacityCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module RecordLifecycleActionHeartbeat = {
   type t;
   type request = {
-@as("InstanceId") instanceId: xmlStringMaxLen19,
-@as("LifecycleActionToken") lifecycleActionToken: lifecycleActionToken,
-@as("AutoScalingGroupName") autoScalingGroupName: option<resourceName>,
-@as("LifecycleHookName") lifecycleHookName: option<asciiStringMaxLen255>
+@as("InstanceId") instanceId: option<xmlStringMaxLen19>,
+@as("LifecycleActionToken") lifecycleActionToken: option<lifecycleActionToken>,
+@as("AutoScalingGroupName") autoScalingGroupName: resourceName,
+@as("LifecycleHookName") lifecycleHookName: asciiStringMaxLen255
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "RecordLifecycleActionHeartbeatCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutWarmPool = {
   type t;
   type request = {
-@as("PoolState") poolState: warmPoolState,
-@as("MinSize") minSize: warmPoolMinSize,
-@as("MaxGroupPreparedCapacity") maxGroupPreparedCapacity: maxGroupPreparedCapacity,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("PoolState") poolState: option<warmPoolState>,
+@as("MinSize") minSize: option<warmPoolMinSize>,
+@as("MaxGroupPreparedCapacity") maxGroupPreparedCapacity: option<maxGroupPreparedCapacity>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "PutWarmPoolCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module PutScheduledUpdateGroupAction = {
   type t;
   type request = {
-@as("TimeZone") timeZone: xmlStringMaxLen255,
-@as("DesiredCapacity") desiredCapacity: autoScalingGroupDesiredCapacity,
-@as("MaxSize") maxSize: autoScalingGroupMaxSize,
-@as("MinSize") minSize: autoScalingGroupMinSize,
-@as("Recurrence") recurrence: xmlStringMaxLen255,
-@as("EndTime") endTime: timestampType,
-@as("StartTime") startTime: timestampType,
-@as("Time") time: timestampType,
-@as("ScheduledActionName") scheduledActionName: option<xmlStringMaxLen255>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("TimeZone") timeZone: option<xmlStringMaxLen255>,
+@as("DesiredCapacity") desiredCapacity: option<autoScalingGroupDesiredCapacity>,
+@as("MaxSize") maxSize: option<autoScalingGroupMaxSize>,
+@as("MinSize") minSize: option<autoScalingGroupMinSize>,
+@as("Recurrence") recurrence: option<xmlStringMaxLen255>,
+@as("EndTime") endTime: option<timestampType>,
+@as("StartTime") startTime: option<timestampType>,
+@as("Time") time: option<timestampType>,
+@as("ScheduledActionName") scheduledActionName: xmlStringMaxLen255,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "PutScheduledUpdateGroupActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutLifecycleHook = {
   type t;
   type request = {
-@as("DefaultResult") defaultResult: lifecycleActionResult,
-@as("HeartbeatTimeout") heartbeatTimeout: heartbeatTimeout,
-@as("NotificationMetadata") notificationMetadata: xmlStringMaxLen1023,
-@as("NotificationTargetARN") notificationTargetARN: notificationTargetResourceName,
-@as("RoleARN") roleARN: xmlStringMaxLen255,
-@as("LifecycleTransition") lifecycleTransition: lifecycleTransition,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
-@as("LifecycleHookName") lifecycleHookName: option<asciiStringMaxLen255>
+@as("DefaultResult") defaultResult: option<lifecycleActionResult>,
+@as("HeartbeatTimeout") heartbeatTimeout: option<heartbeatTimeout>,
+@as("NotificationMetadata") notificationMetadata: option<xmlStringMaxLen1023>,
+@as("NotificationTargetARN") notificationTargetARN: option<notificationTargetResourceName>,
+@as("RoleARN") roleARN: option<xmlStringMaxLen255>,
+@as("LifecycleTransition") lifecycleTransition: option<lifecycleTransition>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
+@as("LifecycleHookName") lifecycleHookName: asciiStringMaxLen255
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "PutLifecycleHookCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ExecutePolicy = {
   type t;
   type request = {
-@as("BreachThreshold") breachThreshold: metricScale,
-@as("MetricValue") metricValue: metricScale,
-@as("HonorCooldown") honorCooldown: honorCooldown,
-@as("PolicyName") policyName: option<resourceName>,
-@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
+@as("BreachThreshold") breachThreshold: option<metricScale>,
+@as("MetricValue") metricValue: option<metricScale>,
+@as("HonorCooldown") honorCooldown: option<honorCooldown>,
+@as("PolicyName") policyName: resourceName,
+@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "ExecutePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DescribeAccountLimits = {
   type t;
   
   type response = {
-@as("NumberOfLaunchConfigurations") numberOfLaunchConfigurations: numberOfLaunchConfigurations,
-@as("NumberOfAutoScalingGroups") numberOfAutoScalingGroups: numberOfAutoScalingGroups,
-@as("MaxNumberOfLaunchConfigurations") maxNumberOfLaunchConfigurations: maxNumberOfLaunchConfigurations,
-@as("MaxNumberOfAutoScalingGroups") maxNumberOfAutoScalingGroups: maxNumberOfAutoScalingGroups
+@as("NumberOfLaunchConfigurations") numberOfLaunchConfigurations: option<numberOfLaunchConfigurations>,
+@as("NumberOfAutoScalingGroups") numberOfAutoScalingGroups: option<numberOfAutoScalingGroups>,
+@as("MaxNumberOfLaunchConfigurations") maxNumberOfLaunchConfigurations: option<maxNumberOfLaunchConfigurations>,
+@as("MaxNumberOfAutoScalingGroups") maxNumberOfAutoScalingGroups: option<maxNumberOfAutoScalingGroups>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeAccountLimitsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteWarmPool = {
   type t;
   type request = {
-@as("ForceDelete") forceDelete: forceDelete,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("ForceDelete") forceDelete: option<forceDelete>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteWarmPoolCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteScheduledAction = {
   type t;
   type request = {
-@as("ScheduledActionName") scheduledActionName: option<xmlStringMaxLen255>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("ScheduledActionName") scheduledActionName: xmlStringMaxLen255,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteScheduledActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeletePolicy = {
   type t;
   type request = {
-@as("PolicyName") policyName: option<resourceName>,
-@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
+@as("PolicyName") policyName: resourceName,
+@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeletePolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteNotificationConfiguration = {
   type t;
   type request = {
-@as("TopicARN") topicARN: option<xmlStringMaxLen255>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("TopicARN") topicARN: xmlStringMaxLen255,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteNotificationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteLifecycleHook = {
   type t;
   type request = {
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
-@as("LifecycleHookName") lifecycleHookName: option<asciiStringMaxLen255>
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
+@as("LifecycleHookName") lifecycleHookName: asciiStringMaxLen255
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteLifecycleHookCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteLaunchConfiguration = {
   type t;
   type request = {
-@as("LaunchConfigurationName") launchConfigurationName: option<xmlStringMaxLen255>
+@as("LaunchConfigurationName") launchConfigurationName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteLaunchConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DeleteAutoScalingGroup = {
   type t;
   type request = {
-@as("ForceDelete") forceDelete: forceDelete,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("ForceDelete") forceDelete: option<forceDelete>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteAutoScalingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CompleteLifecycleAction = {
   type t;
   type request = {
-@as("InstanceId") instanceId: xmlStringMaxLen19,
-@as("LifecycleActionResult") lifecycleActionResult: option<lifecycleActionResult>,
-@as("LifecycleActionToken") lifecycleActionToken: lifecycleActionToken,
-@as("AutoScalingGroupName") autoScalingGroupName: option<resourceName>,
-@as("LifecycleHookName") lifecycleHookName: option<asciiStringMaxLen255>
+@as("InstanceId") instanceId: option<xmlStringMaxLen19>,
+@as("LifecycleActionResult") lifecycleActionResult: lifecycleActionResult,
+@as("LifecycleActionToken") lifecycleActionToken: option<lifecycleActionToken>,
+@as("AutoScalingGroupName") autoScalingGroupName: resourceName,
+@as("LifecycleHookName") lifecycleHookName: asciiStringMaxLen255
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "CompleteLifecycleActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CancelInstanceRefresh = {
   type t;
   type request = {
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = {
-@as("InstanceRefreshId") instanceRefreshId: xmlStringMaxLen255
+@as("InstanceRefreshId") instanceRefreshId: option<xmlStringMaxLen255>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "CancelInstanceRefreshCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module TerminateInstanceInAutoScalingGroup = {
   type t;
   type request = {
-@as("ShouldDecrementDesiredCapacity") shouldDecrementDesiredCapacity: option<shouldDecrementDesiredCapacity>,
-@as("InstanceId") instanceId: option<xmlStringMaxLen19>
+@as("ShouldDecrementDesiredCapacity") shouldDecrementDesiredCapacity: shouldDecrementDesiredCapacity,
+@as("InstanceId") instanceId: xmlStringMaxLen19
 }
   type response = {
-@as("Activity") activity: activity
+@as("Activity") activity: option<activity>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "TerminateInstanceInAutoScalingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module SuspendProcesses = {
   type t;
   type request = {
-@as("ScalingProcesses") scalingProcesses: processNames,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("ScalingProcesses") scalingProcesses: option<processNames>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "SuspendProcessesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module SetInstanceProtection = {
   type t;
   type request = {
-@as("ProtectedFromScaleIn") protectedFromScaleIn: option<protectedFromScaleIn>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
-@as("InstanceIds") instanceIds: option<instanceIds>
+@as("ProtectedFromScaleIn") protectedFromScaleIn: protectedFromScaleIn,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
+@as("InstanceIds") instanceIds: instanceIds
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "SetInstanceProtectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ResumeProcesses = {
   type t;
   type request = {
-@as("ScalingProcesses") scalingProcesses: processNames,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("ScalingProcesses") scalingProcesses: option<processNames>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "ResumeProcessesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutNotificationConfiguration = {
   type t;
   type request = {
-@as("NotificationTypes") notificationTypes: option<autoScalingNotificationTypes>,
-@as("TopicARN") topicARN: option<xmlStringMaxLen255>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("NotificationTypes") notificationTypes: autoScalingNotificationTypes,
+@as("TopicARN") topicARN: xmlStringMaxLen255,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "PutNotificationConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module EnableMetricsCollection = {
   type t;
   type request = {
-@as("Granularity") granularity: option<xmlStringMaxLen255>,
-@as("Metrics") metrics: metrics,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("Granularity") granularity: xmlStringMaxLen255,
+@as("Metrics") metrics: option<metrics>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "EnableMetricsCollectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DisableMetricsCollection = {
   type t;
   type request = {
-@as("Metrics") metrics: metrics,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("Metrics") metrics: option<metrics>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DisableMetricsCollectionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DetachLoadBalancers = {
   type t;
   type request = {
-@as("LoadBalancerNames") loadBalancerNames: option<loadBalancerNames>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("LoadBalancerNames") loadBalancerNames: loadBalancerNames,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DetachLoadBalancersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DetachLoadBalancerTargetGroups = {
   type t;
   type request = {
-@as("TargetGroupARNs") targetGroupARNs: option<targetGroupARNs>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("TargetGroupARNs") targetGroupARNs: targetGroupARNs,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DetachLoadBalancerTargetGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTerminationPolicyTypes = {
   type t;
   
   type response = {
-@as("TerminationPolicyTypes") terminationPolicyTypes: terminationPolicies
+@as("TerminationPolicyTypes") terminationPolicyTypes: option<terminationPolicies>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeTerminationPolicyTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLifecycleHookTypes = {
   type t;
   
   type response = {
-@as("LifecycleHookTypes") lifecycleHookTypes: autoScalingNotificationTypes
+@as("LifecycleHookTypes") lifecycleHookTypes: option<autoScalingNotificationTypes>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeLifecycleHookTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAutoScalingNotificationTypes = {
   type t;
   
   type response = {
-@as("AutoScalingNotificationTypes") autoScalingNotificationTypes: autoScalingNotificationTypes
+@as("AutoScalingNotificationTypes") autoScalingNotificationTypes: option<autoScalingNotificationTypes>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeAutoScalingNotificationTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AttachLoadBalancers = {
   type t;
   type request = {
-@as("LoadBalancerNames") loadBalancerNames: option<loadBalancerNames>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("LoadBalancerNames") loadBalancerNames: loadBalancerNames,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "AttachLoadBalancersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AttachLoadBalancerTargetGroups = {
   type t;
   type request = {
-@as("TargetGroupARNs") targetGroupARNs: option<targetGroupARNs>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("TargetGroupARNs") targetGroupARNs: targetGroupARNs,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = unit
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "AttachLoadBalancerTargetGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module AttachInstances = {
   type t;
   type request = {
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
-@as("InstanceIds") instanceIds: instanceIds
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
+@as("InstanceIds") instanceIds: option<instanceIds>
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "AttachInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module StartInstanceRefresh = {
   type t;
   type request = {
-@as("Preferences") preferences: refreshPreferences,
-@as("Strategy") strategy: refreshStrategy,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("Preferences") preferences: option<refreshPreferences>,
+@as("Strategy") strategy: option<refreshStrategy>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = {
-@as("InstanceRefreshId") instanceRefreshId: xmlStringMaxLen255
+@as("InstanceRefreshId") instanceRefreshId: option<xmlStringMaxLen255>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "StartInstanceRefreshCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module ExitStandby = {
   type t;
   type request = {
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
-@as("InstanceIds") instanceIds: instanceIds
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
+@as("InstanceIds") instanceIds: option<instanceIds>
 }
   type response = {
-@as("Activities") activities: activities
+@as("Activities") activities: option<activities>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "ExitStandbyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module EnterStandby = {
   type t;
   type request = {
-@as("ShouldDecrementDesiredCapacity") shouldDecrementDesiredCapacity: option<shouldDecrementDesiredCapacity>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
-@as("InstanceIds") instanceIds: instanceIds
+@as("ShouldDecrementDesiredCapacity") shouldDecrementDesiredCapacity: shouldDecrementDesiredCapacity,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
+@as("InstanceIds") instanceIds: option<instanceIds>
 }
   type response = {
-@as("Activities") activities: activities
+@as("Activities") activities: option<activities>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "EnterStandbyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DetachInstances = {
   type t;
   type request = {
-@as("ShouldDecrementDesiredCapacity") shouldDecrementDesiredCapacity: option<shouldDecrementDesiredCapacity>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
-@as("InstanceIds") instanceIds: instanceIds
+@as("ShouldDecrementDesiredCapacity") shouldDecrementDesiredCapacity: shouldDecrementDesiredCapacity,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
+@as("InstanceIds") instanceIds: option<instanceIds>
 }
   type response = {
-@as("Activities") activities: activities
+@as("Activities") activities: option<activities>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DetachInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScheduledActions = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: maxRecords,
-@as("NextToken") nextToken: xmlString,
-@as("EndTime") endTime: timestampType,
-@as("StartTime") startTime: timestampType,
-@as("ScheduledActionNames") scheduledActionNames: scheduledActionNames,
-@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("NextToken") nextToken: option<xmlString>,
+@as("EndTime") endTime: option<timestampType>,
+@as("StartTime") startTime: option<timestampType>,
+@as("ScheduledActionNames") scheduledActionNames: option<scheduledActionNames>,
+@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("ScheduledUpdateGroupActions") scheduledUpdateGroupActions: scheduledUpdateGroupActions
+@as("NextToken") nextToken: option<xmlString>,
+@as("ScheduledUpdateGroupActions") scheduledUpdateGroupActions: option<scheduledUpdateGroupActions>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeScheduledActionsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScalingProcessTypes = {
   type t;
   
   type response = {
-@as("Processes") processes: processes
+@as("Processes") processes: option<processes>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeScalingProcessTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeScalingActivities = {
   type t;
   type request = {
-@as("NextToken") nextToken: xmlString,
-@as("MaxRecords") maxRecords: maxRecords,
-@as("IncludeDeletedGroups") includeDeletedGroups: includeDeletedGroups,
-@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255,
-@as("ActivityIds") activityIds: activityIds
+@as("NextToken") nextToken: option<xmlString>,
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("IncludeDeletedGroups") includeDeletedGroups: option<includeDeletedGroups>,
+@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>,
+@as("ActivityIds") activityIds: option<activityIds>
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("Activities") activities: option<activities>
+@as("NextToken") nextToken: option<xmlString>,
+@as("Activities") activities: activities
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeScalingActivitiesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeNotificationConfigurations = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: maxRecords,
-@as("NextToken") nextToken: xmlString,
-@as("AutoScalingGroupNames") autoScalingGroupNames: autoScalingGroupNames
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("NextToken") nextToken: option<xmlString>,
+@as("AutoScalingGroupNames") autoScalingGroupNames: option<autoScalingGroupNames>
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("NotificationConfigurations") notificationConfigurations: option<notificationConfigurations>
+@as("NextToken") nextToken: option<xmlString>,
+@as("NotificationConfigurations") notificationConfigurations: notificationConfigurations
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeNotificationConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeMetricCollectionTypes = {
   type t;
   
   type response = {
-@as("Granularities") granularities: metricGranularityTypes,
-@as("Metrics") metrics: metricCollectionTypes
+@as("Granularities") granularities: option<metricGranularityTypes>,
+@as("Metrics") metrics: option<metricCollectionTypes>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeMetricCollectionTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLoadBalancers = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: maxRecords,
-@as("NextToken") nextToken: xmlString,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("NextToken") nextToken: option<xmlString>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("LoadBalancers") loadBalancers: loadBalancerStates
+@as("NextToken") nextToken: option<xmlString>,
+@as("LoadBalancers") loadBalancers: option<loadBalancerStates>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeLoadBalancersCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLoadBalancerTargetGroups = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: maxRecords,
-@as("NextToken") nextToken: xmlString,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("NextToken") nextToken: option<xmlString>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("LoadBalancerTargetGroups") loadBalancerTargetGroups: loadBalancerTargetGroupStates
+@as("NextToken") nextToken: option<xmlString>,
+@as("LoadBalancerTargetGroups") loadBalancerTargetGroups: option<loadBalancerTargetGroupStates>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeLoadBalancerTargetGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeLifecycleHooks = {
   type t;
   type request = {
-@as("LifecycleHookNames") lifecycleHookNames: lifecycleHookNames,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("LifecycleHookNames") lifecycleHookNames: option<lifecycleHookNames>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = {
-@as("LifecycleHooks") lifecycleHooks: lifecycleHooks
+@as("LifecycleHooks") lifecycleHooks: option<lifecycleHooks>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeLifecycleHooksCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAdjustmentTypes = {
   type t;
   
   type response = {
-@as("AdjustmentTypes") adjustmentTypes: adjustmentTypes
+@as("AdjustmentTypes") adjustmentTypes: option<adjustmentTypes>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeAdjustmentTypesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DeleteTags = {
   type t;
   type request = {
-@as("Tags") tags: option<tags>
+@as("Tags") tags: tags
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateOrUpdateTags = {
   type t;
   type request = {
-@as("Tags") tags: option<tags>
+@as("Tags") tags: tags
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "CreateOrUpdateTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module BatchPutScheduledUpdateGroupAction = {
   type t;
   type request = {
-@as("ScheduledUpdateGroupActions") scheduledUpdateGroupActions: option<scheduledUpdateGroupActionRequests>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("ScheduledUpdateGroupActions") scheduledUpdateGroupActions: scheduledUpdateGroupActionRequests,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = {
-@as("FailedScheduledUpdateGroupActions") failedScheduledUpdateGroupActions: failedScheduledUpdateGroupActionRequests
+@as("FailedScheduledUpdateGroupActions") failedScheduledUpdateGroupActions: option<failedScheduledUpdateGroupActionRequests>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "BatchPutScheduledUpdateGroupActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module BatchDeleteScheduledAction = {
   type t;
   type request = {
-@as("ScheduledActionNames") scheduledActionNames: option<scheduledActionNames>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("ScheduledActionNames") scheduledActionNames: scheduledActionNames,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = {
-@as("FailedScheduledActions") failedScheduledActions: failedScheduledUpdateGroupActionRequests
+@as("FailedScheduledActions") failedScheduledActions: option<failedScheduledUpdateGroupActionRequests>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "BatchDeleteScheduledActionCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeWarmPool = {
   type t;
   type request = {
-@as("NextToken") nextToken: xmlString,
-@as("MaxRecords") maxRecords: maxRecords,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("NextToken") nextToken: option<xmlString>,
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("Instances") instances: instances,
-@as("WarmPoolConfiguration") warmPoolConfiguration: warmPoolConfiguration
+@as("NextToken") nextToken: option<xmlString>,
+@as("Instances") instances: option<instances>,
+@as("WarmPoolConfiguration") warmPoolConfiguration: option<warmPoolConfiguration>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeWarmPoolCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeTags = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: maxRecords,
-@as("NextToken") nextToken: xmlString,
-@as("Filters") filters: filters
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("NextToken") nextToken: option<xmlString>,
+@as("Filters") filters: option<filters>
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("Tags") tags: tagDescriptionList
+@as("NextToken") nextToken: option<xmlString>,
+@as("Tags") tags: option<tagDescriptionList>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeTagsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAutoScalingInstances = {
   type t;
   type request = {
-@as("NextToken") nextToken: xmlString,
-@as("MaxRecords") maxRecords: maxRecords,
-@as("InstanceIds") instanceIds: instanceIds
+@as("NextToken") nextToken: option<xmlString>,
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("InstanceIds") instanceIds: option<instanceIds>
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("AutoScalingInstances") autoScalingInstances: autoScalingInstances
+@as("NextToken") nextToken: option<xmlString>,
+@as("AutoScalingInstances") autoScalingInstances: option<autoScalingInstances>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeAutoScalingInstancesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateLaunchConfiguration = {
   type t;
   type request = {
-@as("MetadataOptions") metadataOptions: instanceMetadataOptions,
-@as("PlacementTenancy") placementTenancy: xmlStringMaxLen64,
-@as("AssociatePublicIpAddress") associatePublicIpAddress: associatePublicIpAddress,
-@as("EbsOptimized") ebsOptimized: ebsOptimized,
-@as("IamInstanceProfile") iamInstanceProfile: xmlStringMaxLen1600,
-@as("SpotPrice") spotPrice: spotPrice,
-@as("InstanceMonitoring") instanceMonitoring: instanceMonitoring,
-@as("BlockDeviceMappings") blockDeviceMappings: blockDeviceMappings,
-@as("RamdiskId") ramdiskId: xmlStringMaxLen255,
-@as("KernelId") kernelId: xmlStringMaxLen255,
-@as("InstanceType") instanceType: xmlStringMaxLen255,
-@as("InstanceId") instanceId: xmlStringMaxLen19,
-@as("UserData") userData: xmlStringUserData,
-@as("ClassicLinkVPCSecurityGroups") classicLinkVPCSecurityGroups: classicLinkVPCSecurityGroups,
-@as("ClassicLinkVPCId") classicLinkVPCId: xmlStringMaxLen255,
-@as("SecurityGroups") securityGroups: securityGroups,
-@as("KeyName") keyName: xmlStringMaxLen255,
-@as("ImageId") imageId: xmlStringMaxLen255,
-@as("LaunchConfigurationName") launchConfigurationName: option<xmlStringMaxLen255>
+@as("MetadataOptions") metadataOptions: option<instanceMetadataOptions>,
+@as("PlacementTenancy") placementTenancy: option<xmlStringMaxLen64>,
+@as("AssociatePublicIpAddress") associatePublicIpAddress: option<associatePublicIpAddress>,
+@as("EbsOptimized") ebsOptimized: option<ebsOptimized>,
+@as("IamInstanceProfile") iamInstanceProfile: option<xmlStringMaxLen1600>,
+@as("SpotPrice") spotPrice: option<spotPrice>,
+@as("InstanceMonitoring") instanceMonitoring: option<instanceMonitoring>,
+@as("BlockDeviceMappings") blockDeviceMappings: option<blockDeviceMappings>,
+@as("RamdiskId") ramdiskId: option<xmlStringMaxLen255>,
+@as("KernelId") kernelId: option<xmlStringMaxLen255>,
+@as("InstanceType") instanceType: option<xmlStringMaxLen255>,
+@as("InstanceId") instanceId: option<xmlStringMaxLen19>,
+@as("UserData") userData: option<xmlStringUserData>,
+@as("ClassicLinkVPCSecurityGroups") classicLinkVPCSecurityGroups: option<classicLinkVPCSecurityGroups>,
+@as("ClassicLinkVPCId") classicLinkVPCId: option<xmlStringMaxLen255>,
+@as("SecurityGroups") securityGroups: option<securityGroups>,
+@as("KeyName") keyName: option<xmlStringMaxLen255>,
+@as("ImageId") imageId: option<xmlStringMaxLen255>,
+@as("LaunchConfigurationName") launchConfigurationName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "CreateLaunchConfigurationCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module PutScalingPolicy = {
   type t;
   type request = {
-@as("PredictiveScalingConfiguration") predictiveScalingConfiguration: predictiveScalingConfiguration,
-@as("Enabled") enabled: scalingPolicyEnabled,
-@as("TargetTrackingConfiguration") targetTrackingConfiguration: targetTrackingConfiguration,
-@as("EstimatedInstanceWarmup") estimatedInstanceWarmup: estimatedInstanceWarmup,
-@as("StepAdjustments") stepAdjustments: stepAdjustments,
-@as("MetricAggregationType") metricAggregationType: xmlStringMaxLen32,
-@as("Cooldown") cooldown: cooldown,
-@as("ScalingAdjustment") scalingAdjustment: policyIncrement,
-@as("MinAdjustmentMagnitude") minAdjustmentMagnitude: minAdjustmentMagnitude,
-@as("MinAdjustmentStep") minAdjustmentStep: minAdjustmentStep,
-@as("AdjustmentType") adjustmentType: xmlStringMaxLen255,
-@as("PolicyType") policyType: xmlStringMaxLen64,
-@as("PolicyName") policyName: option<xmlStringMaxLen255>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("PredictiveScalingConfiguration") predictiveScalingConfiguration: option<predictiveScalingConfiguration>,
+@as("Enabled") enabled: option<scalingPolicyEnabled>,
+@as("TargetTrackingConfiguration") targetTrackingConfiguration: option<targetTrackingConfiguration>,
+@as("EstimatedInstanceWarmup") estimatedInstanceWarmup: option<estimatedInstanceWarmup>,
+@as("StepAdjustments") stepAdjustments: option<stepAdjustments>,
+@as("MetricAggregationType") metricAggregationType: option<xmlStringMaxLen32>,
+@as("Cooldown") cooldown: option<cooldown>,
+@as("ScalingAdjustment") scalingAdjustment: option<policyIncrement>,
+@as("MinAdjustmentMagnitude") minAdjustmentMagnitude: option<minAdjustmentMagnitude>,
+@as("MinAdjustmentStep") minAdjustmentStep: option<minAdjustmentStep>,
+@as("AdjustmentType") adjustmentType: option<xmlStringMaxLen255>,
+@as("PolicyType") policyType: option<xmlStringMaxLen64>,
+@as("PolicyName") policyName: xmlStringMaxLen255,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = {
-@as("Alarms") alarms: alarms,
-@as("PolicyARN") policyARN: resourceName
+@as("Alarms") alarms: option<alarms>,
+@as("PolicyARN") policyARN: option<resourceName>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "PutScalingPolicyCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module GetPredictiveScalingForecast = {
   type t;
   type request = {
-@as("EndTime") endTime: option<timestampType>,
-@as("StartTime") startTime: option<timestampType>,
-@as("PolicyName") policyName: option<xmlStringMaxLen255>,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("EndTime") endTime: timestampType,
+@as("StartTime") startTime: timestampType,
+@as("PolicyName") policyName: xmlStringMaxLen255,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = {
-@as("UpdateTime") updateTime: option<timestampType>,
-@as("CapacityForecast") capacityForecast: option<capacityForecast>,
-@as("LoadForecast") loadForecast: option<loadForecasts>
+@as("UpdateTime") updateTime: timestampType,
+@as("CapacityForecast") capacityForecast: capacityForecast,
+@as("LoadForecast") loadForecast: loadForecasts
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "GetPredictiveScalingForecastCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeInstanceRefreshes = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: maxRecords,
-@as("NextToken") nextToken: xmlString,
-@as("InstanceRefreshIds") instanceRefreshIds: instanceRefreshIds,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("NextToken") nextToken: option<xmlString>,
+@as("InstanceRefreshIds") instanceRefreshIds: option<instanceRefreshIds>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("InstanceRefreshes") instanceRefreshes: instanceRefreshes
+@as("NextToken") nextToken: option<xmlString>,
+@as("InstanceRefreshes") instanceRefreshes: option<instanceRefreshes>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeInstanceRefreshesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module UpdateAutoScalingGroup = {
   type t;
   type request = {
-@as("CapacityRebalance") capacityRebalance: capacityRebalanceEnabled,
-@as("MaxInstanceLifetime") maxInstanceLifetime: maxInstanceLifetime,
-@as("ServiceLinkedRoleARN") serviceLinkedRoleARN: resourceName,
-@as("NewInstancesProtectedFromScaleIn") newInstancesProtectedFromScaleIn: instanceProtected,
-@as("TerminationPolicies") terminationPolicies: terminationPolicies,
-@as("VPCZoneIdentifier") vPCZoneIdentifier: xmlStringMaxLen2047,
-@as("PlacementGroup") placementGroup: xmlStringMaxLen255,
-@as("HealthCheckGracePeriod") healthCheckGracePeriod: healthCheckGracePeriod,
-@as("HealthCheckType") healthCheckType: xmlStringMaxLen32,
-@as("AvailabilityZones") availabilityZones: availabilityZones,
-@as("DefaultCooldown") defaultCooldown: cooldown,
-@as("DesiredCapacity") desiredCapacity: autoScalingGroupDesiredCapacity,
-@as("MaxSize") maxSize: autoScalingGroupMaxSize,
-@as("MinSize") minSize: autoScalingGroupMinSize,
-@as("MixedInstancesPolicy") mixedInstancesPolicy: mixedInstancesPolicy,
-@as("LaunchTemplate") launchTemplate: launchTemplateSpecification,
-@as("LaunchConfigurationName") launchConfigurationName: xmlStringMaxLen255,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("CapacityRebalance") capacityRebalance: option<capacityRebalanceEnabled>,
+@as("MaxInstanceLifetime") maxInstanceLifetime: option<maxInstanceLifetime>,
+@as("ServiceLinkedRoleARN") serviceLinkedRoleARN: option<resourceName>,
+@as("NewInstancesProtectedFromScaleIn") newInstancesProtectedFromScaleIn: option<instanceProtected>,
+@as("TerminationPolicies") terminationPolicies: option<terminationPolicies>,
+@as("VPCZoneIdentifier") vpczoneIdentifier: option<xmlStringMaxLen2047>,
+@as("PlacementGroup") placementGroup: option<xmlStringMaxLen255>,
+@as("HealthCheckGracePeriod") healthCheckGracePeriod: option<healthCheckGracePeriod>,
+@as("HealthCheckType") healthCheckType: option<xmlStringMaxLen32>,
+@as("AvailabilityZones") availabilityZones: option<availabilityZones>,
+@as("DefaultCooldown") defaultCooldown: option<cooldown>,
+@as("DesiredCapacity") desiredCapacity: option<autoScalingGroupDesiredCapacity>,
+@as("MaxSize") maxSize: option<autoScalingGroupMaxSize>,
+@as("MinSize") minSize: option<autoScalingGroupMinSize>,
+@as("MixedInstancesPolicy") mixedInstancesPolicy: option<mixedInstancesPolicy>,
+@as("LaunchTemplate") launchTemplate: option<launchTemplateSpecification>,
+@as("LaunchConfigurationName") launchConfigurationName: option<xmlStringMaxLen255>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "UpdateAutoScalingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DescribeLaunchConfigurations = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: maxRecords,
-@as("NextToken") nextToken: xmlString,
-@as("LaunchConfigurationNames") launchConfigurationNames: launchConfigurationNames
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("NextToken") nextToken: option<xmlString>,
+@as("LaunchConfigurationNames") launchConfigurationNames: option<launchConfigurationNames>
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("LaunchConfigurations") launchConfigurations: option<launchConfigurations>
+@as("NextToken") nextToken: option<xmlString>,
+@as("LaunchConfigurations") launchConfigurations: launchConfigurations
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeLaunchConfigurationsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module CreateAutoScalingGroup = {
   type t;
   type request = {
-@as("MaxInstanceLifetime") maxInstanceLifetime: maxInstanceLifetime,
-@as("ServiceLinkedRoleARN") serviceLinkedRoleARN: resourceName,
-@as("Tags") tags: tags,
-@as("LifecycleHookSpecificationList") lifecycleHookSpecificationList: lifecycleHookSpecifications,
-@as("CapacityRebalance") capacityRebalance: capacityRebalanceEnabled,
-@as("NewInstancesProtectedFromScaleIn") newInstancesProtectedFromScaleIn: instanceProtected,
-@as("TerminationPolicies") terminationPolicies: terminationPolicies,
-@as("VPCZoneIdentifier") vPCZoneIdentifier: xmlStringMaxLen2047,
-@as("PlacementGroup") placementGroup: xmlStringMaxLen255,
-@as("HealthCheckGracePeriod") healthCheckGracePeriod: healthCheckGracePeriod,
-@as("HealthCheckType") healthCheckType: xmlStringMaxLen32,
-@as("TargetGroupARNs") targetGroupARNs: targetGroupARNs,
-@as("LoadBalancerNames") loadBalancerNames: loadBalancerNames,
-@as("AvailabilityZones") availabilityZones: availabilityZones,
-@as("DefaultCooldown") defaultCooldown: cooldown,
-@as("DesiredCapacity") desiredCapacity: autoScalingGroupDesiredCapacity,
-@as("MaxSize") maxSize: option<autoScalingGroupMaxSize>,
-@as("MinSize") minSize: option<autoScalingGroupMinSize>,
-@as("InstanceId") instanceId: xmlStringMaxLen19,
-@as("MixedInstancesPolicy") mixedInstancesPolicy: mixedInstancesPolicy,
-@as("LaunchTemplate") launchTemplate: launchTemplateSpecification,
-@as("LaunchConfigurationName") launchConfigurationName: xmlStringMaxLen255,
-@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
+@as("MaxInstanceLifetime") maxInstanceLifetime: option<maxInstanceLifetime>,
+@as("ServiceLinkedRoleARN") serviceLinkedRoleARN: option<resourceName>,
+@as("Tags") tags: option<tags>,
+@as("LifecycleHookSpecificationList") lifecycleHookSpecificationList: option<lifecycleHookSpecifications>,
+@as("CapacityRebalance") capacityRebalance: option<capacityRebalanceEnabled>,
+@as("NewInstancesProtectedFromScaleIn") newInstancesProtectedFromScaleIn: option<instanceProtected>,
+@as("TerminationPolicies") terminationPolicies: option<terminationPolicies>,
+@as("VPCZoneIdentifier") vpczoneIdentifier: option<xmlStringMaxLen2047>,
+@as("PlacementGroup") placementGroup: option<xmlStringMaxLen255>,
+@as("HealthCheckGracePeriod") healthCheckGracePeriod: option<healthCheckGracePeriod>,
+@as("HealthCheckType") healthCheckType: option<xmlStringMaxLen32>,
+@as("TargetGroupARNs") targetGroupARNs: option<targetGroupARNs>,
+@as("LoadBalancerNames") loadBalancerNames: option<loadBalancerNames>,
+@as("AvailabilityZones") availabilityZones: option<availabilityZones>,
+@as("DefaultCooldown") defaultCooldown: option<cooldown>,
+@as("DesiredCapacity") desiredCapacity: option<autoScalingGroupDesiredCapacity>,
+@as("MaxSize") maxSize: autoScalingGroupMaxSize,
+@as("MinSize") minSize: autoScalingGroupMinSize,
+@as("InstanceId") instanceId: option<xmlStringMaxLen19>,
+@as("MixedInstancesPolicy") mixedInstancesPolicy: option<mixedInstancesPolicy>,
+@as("LaunchTemplate") launchTemplate: option<launchTemplateSpecification>,
+@as("LaunchConfigurationName") launchConfigurationName: option<xmlStringMaxLen255>,
+@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "CreateAutoScalingGroupCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
 }
 
 module DescribePolicies = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: maxRecords,
-@as("NextToken") nextToken: xmlString,
-@as("PolicyTypes") policyTypes: policyTypes,
-@as("PolicyNames") policyNames: policyNames,
-@as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("NextToken") nextToken: option<xmlString>,
+@as("PolicyTypes") policyTypes: option<policyTypes>,
+@as("PolicyNames") policyNames: option<policyNames>,
+@as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("ScalingPolicies") scalingPolicies: scalingPolicies
+@as("NextToken") nextToken: option<xmlString>,
+@as("ScalingPolicies") scalingPolicies: option<scalingPolicies>
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribePoliciesCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
 
 module DescribeAutoScalingGroups = {
   type t;
   type request = {
-@as("MaxRecords") maxRecords: maxRecords,
-@as("NextToken") nextToken: xmlString,
-@as("AutoScalingGroupNames") autoScalingGroupNames: autoScalingGroupNames
+@as("MaxRecords") maxRecords: option<maxRecords>,
+@as("NextToken") nextToken: option<xmlString>,
+@as("AutoScalingGroupNames") autoScalingGroupNames: option<autoScalingGroupNames>
 }
   type response = {
-@as("NextToken") nextToken: xmlString,
-@as("AutoScalingGroups") autoScalingGroups: option<autoScalingGroups>
+@as("NextToken") nextToken: option<xmlString>,
+@as("AutoScalingGroups") autoScalingGroups: autoScalingGroups
 }
   @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeAutoScalingGroupsCommand";
-  @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
 }
