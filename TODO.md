@@ -14,4 +14,4 @@
 * Add @obj or @deriving("abstract") functions for creating request types with lots of optional fields
 * Combined request create / send helper in each module
 * Run code through refmt
-* Generate better formatted code / introduce a print context
+* Generate types and operations with documentation (from Documentation traits)
