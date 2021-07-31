@@ -2,12 +2,12 @@
 'use strict';
 
 var Fs = require("fs");
-var Json = require("./json.bs.js");
+var Json = require("./Json.bs.js");
 var Path = require("path");
-var Parse = require("./parse.bs.js");
-var Convert = require("./convert.bs.js");
+var Parse = require("./Parse.bs.js");
+var Convert = require("./Convert.bs.js");
 var Belt_Array = require("rescript/lib/js/belt_Array.js");
-var Dependencies = require("./dependencies.bs.js");
+var Dependencies = require("./Dependencies.bs.js");
 var Caml_js_exceptions = require("rescript/lib/js/caml_js_exceptions.js");
 
 var basepath = "aws-sdk-js-v3/codegen/sdk-codegen/aws-models";
