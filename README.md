@@ -1,21 +1,8 @@
-# ReScript Project Template
+# ReScript AWS SDK v3 bindings
 
-The only official ReScript starter template.
+A set of bindings for the AWS JavaScript SDK v3 for use with ReScript.
 
-## Installation
+**These are an unofficial set of ReScript bindings - they are not officially provided by or endorsed by AWS.**
 
-```sh
-npm install
-```
-
-## Build
-
-- Build: `npm run build`
-- Clean: `npm run clean`
-- Build & watch: `npm run start`
-
-## Run
-
-```sh
-node src/Demo.bs.js
-```
+The bindings are still experimental as a number of outstanding issues with generation
+need to be resolved (see the [TODO](TODO.md) for more details).

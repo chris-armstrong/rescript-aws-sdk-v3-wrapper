@@ -1,22 +1,22 @@
 {
-  "name": "rescript-project-template",
+  "name": "rescript-aws-sdk-v3-bindings",
   "version": "0.0.1",
   "scripts": {
     "build": "rescript",
     "clean": "rescript clean -with-deps",
-    "start": "rescript build -w"
+    "start": "rescript build -w",
+    "regenerate": "node src/AwsGen.bs.js"
   },
   "keywords": [
-    "rescript"
+    "rescript",
+    "aws",
+    "aws-sdk-v3"
   ],
-  "author": "",
+  "author": "Chris Armstrong <chris-armstrong@github.com>",
   "license": "MIT",
   "dependencies": {
     "reason-nodejs": "^13.0.0-beta.1",
     "rescript": "*",
     "rescript-tinycolor": "^4.0.0"
-  },
-  "devDependencies": {
-    "@aws-sdk/client-sqs": "^3.20.0"
   }
 }
