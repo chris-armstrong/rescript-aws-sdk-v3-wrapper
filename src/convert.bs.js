@@ -8,6 +8,7 @@ var Belt_Array = require("rescript/lib/js/belt_Array.js");
 var Belt_Option = require("rescript/lib/js/belt_Option.js");
 var Caml_option = require("rescript/lib/js/caml_option.js");
 var Dependencies = require("./dependencies.bs.js");
+var Caml_exceptions = require("rescript/lib/js/caml_exceptions.js");
 
 function optionalServiceName(optShape) {
   if (optShape !== undefined) {
@@ -47,6 +48,42 @@ function kebabCaseToTitleCase(str) {
               }));
 }
 
+var UnexpectedStructure = /* @__PURE__ */Caml_exceptions.create("Convert.UnexpectedStructure");
+
+function findOperationalStructure(structures, input) {
+  if (input === undefined) {
+    return /* OperationStructureNone */0;
+  }
+  var structure = structures.find(function (structure) {
+        return structure.name === input;
+      });
+  if (structure === undefined) {
+    return {
+            TAG: /* OperationStructureRef */1,
+            _0: input
+          };
+  }
+  var details = structure.descriptor;
+  if (typeof details === "number") {
+    throw {
+          RE_EXN_ID: UnexpectedStructure,
+          _1: "expected structure type for " + input,
+          Error: new Error()
+        };
+  }
+  if (details.TAG === /* StructureShape */2) {
+    return {
+            TAG: /* OperationStructure */0,
+            _0: details._0
+          };
+  }
+  throw {
+        RE_EXN_ID: UnexpectedStructure,
+        _1: "expected structure type for " + input,
+        Error: new Error()
+      };
+}
+
 function convert(parsed) {
   if (parsed.TAG !== /* Ok */0) {
     return {
@@ -54,8 +91,16 @@ function convert(parsed) {
             _0: "Unknown conversion error: " + parsed._0
           };
   }
-  var ordered = Dependencies.order(parsed._0);
-  var match = Belt_Array.partition(ordered, (function (param) {
+  var shapesWithTargets = Belt_Array.map(parsed._0, (function (param) {
+          var descriptor = param.descriptor;
+          return {
+                  name: param.name,
+                  descriptor: descriptor,
+                  targets: Dependencies.getTargets(descriptor)
+                };
+        }));
+  var shapesWithTargets$1 = Dependencies.order(shapesWithTargets);
+  var match = Belt_Array.partition(shapesWithTargets$1, (function (param) {
           var tmp = param.descriptor;
           if (typeof tmp === "number" || tmp.TAG !== /* OperationShape */1) {
             return false;
@@ -63,6 +108,7 @@ function convert(parsed) {
             return true;
           }
         }));
+  var allStructures = match[1];
   var operations = Belt_Array.keepMap(match[0], (function (shape) {
           var details = shape.descriptor;
           if (typeof details === "number" || details.TAG !== /* OperationShape */1) {
@@ -70,24 +116,25 @@ function convert(parsed) {
           } else {
             return [
                     shape.name,
-                    details._0
+                    details._0,
+                    shape.targets
                   ];
           }
         }));
   var operationDependencies = Belt_Array.concatMany(Belt_Array.map(operations, (function (param) {
-              var match = param[1];
-              return Belt_Array.concat(Belt_Option.mapWithDefault(match.input, [], (function (input) {
-                                return [input];
-                              })), Belt_Option.mapWithDefault(match.output, [], (function (output) {
-                                return [output];
-                              })));
+              return param[2];
             })));
-  var match$1 = Belt_Array.partition(match[1], (function (structure) {
+  var match$1 = Belt_Array.partition(allStructures, (function (structure) {
+          var name = structure.name;
           var tmp = structure.descriptor;
-          if (typeof tmp === "number" || tmp.TAG !== /* StructureShape */2) {
+          if (typeof tmp === "number" || !(tmp.TAG === /* StructureShape */2 && operationDependencies.includes(name))) {
             return false;
           } else {
-            return operationDependencies.includes(structure.name);
+            return !Belt_Array.some(allStructures, (function (param) {
+                          return Belt_Array.some(param.targets, (function (target) {
+                                        return target === name;
+                                      }));
+                        }));
           }
         }));
   var remainingStructures = match$1[1];
@@ -119,11 +166,22 @@ function convert(parsed) {
   }
   var packagingName = serviceDetails.arnNamespace;
   var moduleName = serviceDetails.cloudFormationName.replace(" ", "");
-  var operationSnippets = Belt_Array.map(operationModuleParts, (function (modulePart) {
-          return Generate.generateOperationModule(packagingName, modulePart);
+  var operationSnippets = Belt_Array.map(operationModuleParts, (function (param) {
+          var structures = param[2];
+          var details = param[1];
+          var inputOperationStructure = findOperationalStructure(structures, details.input);
+          var outputOperationStructure = findOperationalStructure(structures, details.output);
+          return Generate.generateOperationModule(packagingName, [
+                      param[0],
+                      inputOperationStructure,
+                      outputOperationStructure
+                    ]);
         }));
   var codeSnippets = Belt_Array.map(remainingStructures, (function (shape) {
-          return Generate.generateTypeBlock(packagingName, shape);
+          return Generate.generateTypeBlock(packagingName, {
+                      name: shape.name,
+                      descriptor: shape.descriptor
+                    });
         }));
   return {
           TAG: /* Ok */0,
@@ -140,5 +198,7 @@ exports.optionalServiceName = optionalServiceName;
 exports.findServiceShape = findServiceShape;
 exports.getServiceDetails = getServiceDetails;
 exports.kebabCaseToTitleCase = kebabCaseToTitleCase;
+exports.UnexpectedStructure = UnexpectedStructure;
+exports.findOperationalStructure = findOperationalStructure;
 exports.convert = convert;
 /* No side effect */

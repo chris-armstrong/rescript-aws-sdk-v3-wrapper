@@ -13,7 +13,8 @@ var smithyImplicitShapes = [
       _0: {
         traits: undefined
       }
-    }
+    },
+    targets: []
   },
   {
     name: "smithy.api#Boolean",
@@ -22,7 +23,8 @@ var smithyImplicitShapes = [
       _0: {
         traits: undefined
       }
-    }
+    },
+    targets: []
   },
   {
     name: "smithy.api#Integer",
@@ -31,7 +33,8 @@ var smithyImplicitShapes = [
       _0: {
         traits: undefined
       }
-    }
+    },
+    targets: []
   },
   {
     name: "smithy.api#Timestamp",
@@ -40,45 +43,71 @@ var smithyImplicitShapes = [
       _0: {
         traits: undefined
       }
-    }
+    },
+    targets: []
+  },
+  {
+    name: "smithy.api#Long",
+    descriptor: {
+      TAG: /* LongShape */10,
+      _0: {
+        traits: undefined
+      }
+    },
+    targets: []
   }
 ];
 
-function getTargets(shape) {
-  if (typeof shape === "number") {
+function getTargets(descriptor) {
+  if (typeof descriptor === "number") {
     return [];
   }
-  switch (shape.TAG | 0) {
+  switch (descriptor.TAG | 0) {
     case /* ListShape */0 :
-        return [shape._0.target];
+        return [descriptor._0.target];
     case /* OperationShape */1 :
-        var details = shape._0;
-        return Belt_Option.getWithDefault(Belt_Option.map(details.input, (function (extracted) {
-                            return [extracted];
-                          })), []).concat(Belt_Option.getWithDefault(Belt_Option.map(details.output, (function (extracted) {
-                              return [extracted];
-                            })), []), Belt_Option.getWithDefault(Belt_Option.map(details.errors, (function (extracted) {
-                              return extracted;
-                            })), []));
+        var details = descriptor._0;
+        return Belt_Array.concatMany([
+                    Belt_Option.getWithDefault(Belt_Option.map(details.input, (function (extracted) {
+                                return [extracted];
+                              })), []),
+                    Belt_Option.getWithDefault(Belt_Option.map(details.output, (function (extracted) {
+                                return [extracted];
+                              })), []),
+                    Belt_Option.getWithDefault(Belt_Option.map(details.errors, (function (extracted) {
+                                return extracted;
+                              })), [])
+                  ]);
     case /* StructureShape */2 :
-        return shape._0.members.map(function (member) {
+        return descriptor._0.members.map(function (member) {
                     return member.target;
                   });
     case /* UnionShape */3 :
-        return shape._0.members.map(function (member) {
+        return descriptor._0.members.map(function (member) {
                     return member.target;
                   });
     case /* ServiceShape */4 :
-        return Belt_Option.getWithDefault(shape._0.operations, []);
+        return Belt_Option.getWithDefault(descriptor._0.operations, []);
     case /* MapShape */8 :
-        var match = shape._0;
+        var match = descriptor._0;
         return [
                 match.mapKey.target,
                 match.mapValue.target
               ];
+    case /* SetShape */13 :
+        return [descriptor._0.target];
     default:
       return [];
   }
+}
+
+function getShapeTargets(shapes) {
+  return Belt_Array.map(shapes, (function (shape) {
+                return [
+                        shape,
+                        getTargets(shape.descriptor)
+                      ];
+              }));
 }
 
 var DependencyError = /* @__PURE__ */Caml_exceptions.create("Dependencies.DependencyError");
@@ -93,10 +122,6 @@ function containsAll(within, targets) {
   }
 }
 
-function part1(param) {
-  return param[0];
-}
-
 function order_(_remaining, _ordered) {
   while(true) {
     var ordered = _ordered;
@@ -104,18 +129,12 @@ function order_(_remaining, _ordered) {
     if (remaining.length === 0) {
       return ordered;
     }
-    var remainingShapesWithTargets = Belt_Array.map(remaining, (function (shape) {
-            return [
-                    shape,
-                    getTargets(shape.descriptor)
-                  ];
-          }));
     var orderedNames = Belt_Array.map(ordered, (function (param) {
             return param.name;
           }));
-    var match = Belt_Array.partition(remainingShapesWithTargets, (function(orderedNames){
+    var match = Belt_Array.partition(remaining, (function(orderedNames){
         return function (param) {
-          return containsAll(orderedNames, param[1]);
+          return containsAll(orderedNames, param.targets);
         }
         }(orderedNames)));
     var unfree = match[1];
@@ -124,7 +143,7 @@ function order_(_remaining, _ordered) {
       throw {
             RE_EXN_ID: DependencyError,
             _1: Belt_Array.map(unfree, (function (param) {
-                    return param[0].name;
+                    return param.name;
                   })),
             _2: Belt_Array.map(ordered, (function (param) {
                     return param.name;
@@ -132,31 +151,30 @@ function order_(_remaining, _ordered) {
             Error: new Error()
           };
     }
-    var ordered$1 = Belt_Array.concat(ordered, Belt_Array.map(free, (function (param) {
-                return param[0];
-              })));
+    var ordered$1 = Belt_Array.concat(ordered, free);
     _ordered = ordered$1;
-    _remaining = Belt_Array.map(unfree, (function (param) {
-            return param[0];
-          }));
+    _remaining = unfree;
     continue ;
   };
 }
 
-function order(shapes) {
-  var implicitShapes = Belt_Array.keep(smithyImplicitShapes, (function (shape) {
-          return Belt_Array.every(shapes, (function (param) {
-                        return param.name !== shape.name;
-                      }));
+function order(shapesWithTargets) {
+  var implicitShapes = Belt_Array.keepMap(smithyImplicitShapes, (function (shape) {
+          if (Belt_Array.every(shapesWithTargets, (function (param) {
+                    return param.name !== shape.name;
+                  }))) {
+            return shape;
+          }
+          
         }));
-  return order_(shapes, implicitShapes);
+  return order_(shapesWithTargets, implicitShapes);
 }
 
 exports.smithyImplicitShapes = smithyImplicitShapes;
 exports.getTargets = getTargets;
+exports.getShapeTargets = getShapeTargets;
 exports.DependencyError = DependencyError;
 exports.containsAll = containsAll;
-exports.part1 = part1;
 exports.order_ = order_;
 exports.order = order;
 /* No side effect */

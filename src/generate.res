@@ -16,11 +16,16 @@ let safeTypeName = (target) => {
   | "String" => namespacePrefix ++ "String"
   | "Integer" => namespacePrefix ++ "Integer"
   | "Boolean" => namespacePrefix ++ "Boolean"
+  | "Bool" => namespacePrefix ++ "Bool"
   | "Long" => namespacePrefix ++ "Long"
   | "Timestamp" => namespacePrefix ++ "Timestamp"
   | "Double" => namespacePrefix ++ "Double"
   | "type" => "type_"
   | "Type" => "type_"
+  | "unit" => "unit_"
+  | "Unit" => "unit_"
+  | "Export" => "export_"
+  | "export" => "export_"
   | _ => Js.String2.toLowerCase(Js.String2.charAt(name, 0)) ++ Js.String2.sliceToEnd(name, ~from=1)
   }
 }
@@ -32,14 +37,16 @@ let safeConstructorName = name => {
 }
 
 let safeVariantName = name =>
-  name->Js.String2.replaceByRe(Js.Re.fromStringWithFlags("-|#|:", ~flags="g"), "_")
+  name->Js.String2.replaceByRe(Js.Re.fromStringWithFlags("-|#|:|\\.", ~flags="g"), "_")
 
 let generateIntegerShape = name =>
   `type ${safeTypeName(name)} = int;`
 let generateLongShape = name =>
   `type ${safeTypeName(name)} = float;` // ReScript doesn't properly support longs
 let generateDoubleShape = name =>
-  `type ${safeTypeName(name)} = double;` // ReScript doesn't properly support longs
+  `type ${safeTypeName(name)} = float;` // ReScript doesn't properly support doubles
+let generateFloatShape = name =>
+  `type ${safeTypeName(name)} = float;`
 let generateBooleanShape = name =>
   `type ${safeTypeName(name)} = bool;`
 let generateBinaryShape = name => `type ${safeTypeName(name)} = NodeJs.Buffer.t;`
@@ -130,6 +137,11 @@ let generateServiceShape = (serviceName, traits) => {
   }
 }
 
+let generateSetShape = (name, details: Shape.setShapeDetails) => {
+  // These appear to be generated as arrays
+  `type ${safeTypeName(name)} = array<${safeTypeName(details.target)}>`;
+}
+
 exception UnknownTimestampFormat(string)
 
 let generateTimestampShape = (name, {traits}: Shape.timestampShapeDetails) => {
@@ -145,27 +157,26 @@ let generateTimestampShape = (name, {traits}: Shape.timestampShapeDetails) => {
   }
 }
 
+type operationStructure = | OperationStructure(Shape.structureShapeDetails) | OperationStructureRef(string) | OperationStructureNone
+let generateOperationStructureType = (varName, opStruct) => switch opStruct {
+  | OperationStructure(details) => generateStructureShape("#"++varName, details, ~indent=2, ())
+  | OperationStructureRef(name) => `type ${varName} = ${safeTypeName(name)};`;
+  | OperationStructureNone => ""
+}
+let isOperationStructureNone = opStruct => switch opStruct { |OperationStructureNone => true | _ => false}
 let generateOperationModule = (
   moduleName,
-  (name, {input, output}, structures): (string, Shape.operationShapeDetails, array<Shape.t>),
+  (name, input, output): (string, operationStructure, operationStructure),
 ) => {
   let commandName = `${symbolName(name)}Command`
-  let inputString = Belt.Option.getWithDefault(input, "")
-  let structureDeclarations =
-    structures
-    ->Array.keepMap(structure =>
-      switch structure {
-      | {name, descriptor: StructureShape(shapeDetails)} =>
-        Some(generateStructureShape(inputString == name ? "#request" : "#response", shapeDetails, ~indent=2, ()))
-      | _ => None
-      }
-    )
-    ->Array.joinWith("\n", x => x)
-  let inputType = Option.isNone(input) ? "Js.Promise.t<unit>" : "Js.Promise.t<request>"
-  let outputType = Option.isNone(output) ? "Js.Promise.t<unit>" : "Js.Promise.t<response>"
+  let request = generateOperationStructureType("request", input)
+  let response = generateOperationStructureType("response", output)
+  let inputType = isOperationStructureNone(input) ? "Js.Promise.t<unit>" : "Js.Promise.t<request>"
+  let outputType = isOperationStructureNone(output)? "Js.Promise.t<unit>" : "Js.Promise.t<response>"
   `module ${symbolName(name)} = {\n` ++
   `  type t;\n` ++
-  `  ${structureDeclarations}\n` ++
+  `  ${request}\n` ++
+  `  ${response}\n` ++
   `  @module("@aws-sdk/client-${moduleName}") @new external new_: (${inputType}) => t = "${commandName}";\n` ++
   `  @send external send: (clientType, t) => ${outputType} = "send";\n` ++
   `}\n`
@@ -180,6 +191,7 @@ let generateTypeBlock = (serviceName, { name, descriptor }: Shape.t) => {
   | IntegerShape(_) => generateIntegerShape(name)
   | LongShape(_) => generateLongShape(name)
   | DoubleShape(_) => generateDoubleShape(name)
+  | FloatShape(_) => generateFloatShape(name)
   | BooleanShape(_) => generateBooleanShape(name)
   | BlobShape => generateBinaryShape(name)
   | MapShape(details) => generateMapShape(name, details.mapKey, details.mapValue)
@@ -188,5 +200,6 @@ let generateTypeBlock = (serviceName, { name, descriptor }: Shape.t) => {
   | TimestampShape(details) => generateTimestampShape(name, details)
   | ResourceShape => "" // TODO: do we need to generate for these?
   | OperationShape(_) => "" // generated separately, no need to do here
+  | SetShape(details) => generateSetShape(name, details)
   }
 }

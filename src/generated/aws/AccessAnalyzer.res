@@ -2,6 +2,7 @@ type apiString = string
 type apiBoolean = bool;
 type apiInteger = int;
 type apiTimestamp = Js.Date.t;
+type apiLong = float;
 type vpcId = string
 type valueList = array<apiString>
 type validationExceptionReason = [@as("other") #other | @as("fieldValidationFailed") #fieldValidationFailed | @as("cannotParse") #cannotParse | @as("unknownOperation") #unknownOperation]
@@ -13,7 +14,6 @@ type validatePolicyFindingType = [@as("WARNING") #WARNING | @as("SUGGESTION") #S
 type type_ = [@as("ORGANIZATION") #ORGANIZATION | @as("ACCOUNT") #ACCOUNT]
 type token = string
 type amazonawsTimestamp = Js.Date.t;
-exception ThrottlingException;
 type tagsMap = Js.Dict.t< apiString>
 type tagKeys = array<apiString>
 type substring = {
@@ -22,7 +22,6 @@ type substring = {
 }
 type sqsQueuePolicy = string
 type sharedViaList = array<apiString>
-exception ServiceQuotaExceededException;
 type secretsManagerSecretPolicy = string
 type secretsManagerSecretKmsId = string
 type s3PublicAccessBlockConfiguration = {
@@ -33,7 +32,6 @@ type s3BucketPolicy = string
 type roleArn = string
 type retiringPrincipal = string
 type resourceType = [@as("AWS::SecretsManager::Secret") #AWS__SecretsManager__Secret | @as("AWS::KMS::Key") #AWS__KMS__Key | @as("AWS::Lambda::LayerVersion") #AWS__Lambda__LayerVersion | @as("AWS::Lambda::Function") #AWS__Lambda__Function | @as("AWS::SQS::Queue") #AWS__SQS__Queue | @as("AWS::IAM::Role") #AWS__IAM__Role | @as("AWS::S3::Bucket") #AWS__S3__Bucket]
-exception ResourceNotFoundException;
 type resourceArn = string
 type regionList = array<apiString>
 type reasonCode = [@as("SERVICE_LINKED_ROLE_CREATION_FAILED") #SERVICE_LINKED_ROLE_CREATION_FAILED | @as("ORGANIZATION_DELETED") #ORGANIZATION_DELETED | @as("DELEGATED_ADMINISTRATOR_DEREGISTERED") #DELEGATED_ADMINISTRATOR_DEREGISTERED | @as("AWS_SERVICE_ACCESS_DISABLED") #AWS_SERVICE_ACCESS_DISABLED]
@@ -61,7 +59,6 @@ type jobErrorCode = [@as("SERVICE_ERROR") #SERVICE_ERROR | @as("SERVICE_QUOTA_EX
 type issuingAccount = string
 type issueCode = string
 type internetConfiguration = unit
-exception InternalServerException;
 type iamTrustPolicy = string
 type granteePrincipal = string
 type generatedPolicy = {
@@ -75,7 +72,6 @@ type findingSourceDetail = {
 }
 type findingId = string
 type findingChangeType = [@as("UNCHANGED") #UNCHANGED | @as("NEW") #NEW | @as("CHANGED") #CHANGED]
-exception ConflictException;
 type configurationsMapKey = string
 type conditionKeyMap = Js.Dict.t< apiString>
 type cloudTrailArn = string
@@ -93,7 +89,6 @@ type accessPreviewId = string
 type accessPreviewFindingId = string
 type accessPointPolicy = string
 type accessPointArn = string
-exception AccessDeniedException;
 type vpcConfiguration = {
 @as("vpcId") vpcId: option<vpcId>
 }
@@ -181,7 +176,6 @@ type aclGrantee = Uri(aclUri) | Id(aclCanonicalId);
 type accessPreviewStatusReason = {
 @as("code") code: option<accessPreviewStatusReasonCode>
 }
-exception ValidationException;
 type trailPropertiesList = array<trailProperties>
 type trailList = array<trail>
 type s3BucketAclGrantConfiguration = {
@@ -367,28 +361,29 @@ module UpdateFindings = {
 @as("status") status: option<findingStatusUpdate>,
 @as("analyzerArn") analyzerArn: option<analyzerArn>
 }
+  
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "UpdateFindingsCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module UntagResource = {
   type t;
-  type response = unit
-type request = {
+  type request = {
 @as("tagKeys") tagKeys: option<tagKeys>,
 @as("resourceArn") resourceArn: option<apiString>
 }
+  type response = unit
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
-  type response = unit
-type request = {
+  type request = {
 @as("tags") tags: option<tagsMap>,
 @as("resourceArn") resourceArn: option<apiString>
 }
+  type response = unit
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
 }
@@ -399,6 +394,7 @@ module StartResourceScan = {
 @as("resourceArn") resourceArn: option<resourceArn>,
 @as("analyzerArn") analyzerArn: option<analyzerArn>
 }
+  
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "StartResourceScanCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -408,7 +404,7 @@ module ListTagsForResource = {
   type request = {
 @as("resourceArn") resourceArn: option<apiString>
 }
-type response = {
+  type response = {
 @as("tags") tags: tagsMap
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
@@ -421,7 +417,7 @@ module GetAnalyzedResource = {
 @as("resourceArn") resourceArn: option<resourceArn>,
 @as("analyzerArn") analyzerArn: option<analyzerArn>
 }
-type response = {
+  type response = {
 @as("resource") resource: analyzedResource
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "GetAnalyzedResourceCommand";
@@ -435,6 +431,7 @@ module DeleteArchiveRule = {
 @as("ruleName") ruleName: option<name>,
 @as("analyzerName") analyzerName: option<name>
 }
+  
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "DeleteArchiveRuleCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -445,16 +442,17 @@ module DeleteAnalyzer = {
 @as("clientToken") clientToken: apiString,
 @as("analyzerName") analyzerName: option<name>
 }
+  
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "DeleteAnalyzerCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module CancelPolicyGeneration = {
   type t;
-  type response = unit
-type request = {
+  type request = {
 @as("jobId") jobId: option<jobId>
 }
+  type response = unit
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "CancelPolicyGenerationCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
 }
@@ -466,6 +464,7 @@ module ApplyArchiveRule = {
 @as("ruleName") ruleName: option<name>,
 @as("analyzerArn") analyzerArn: option<analyzerArn>
 }
+  
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "ApplyArchiveRuleCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -478,6 +477,7 @@ module UpdateArchiveRule = {
 @as("ruleName") ruleName: option<name>,
 @as("analyzerName") analyzerName: option<name>
 }
+  
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "UpdateArchiveRuleCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -489,7 +489,7 @@ module ListPolicyGenerations = {
 @as("maxResults") maxResults: apiInteger,
 @as("principalArn") principalArn: principalArn
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: token,
 @as("policyGenerations") policyGenerations: option<policyGenerationList>
 }
@@ -505,7 +505,7 @@ module ListAnalyzedResources = {
 @as("resourceType") resourceType: resourceType,
 @as("analyzerArn") analyzerArn: option<analyzerArn>
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: token,
 @as("analyzedResources") analyzedResources: option<analyzedResourcesList>
 }
@@ -518,7 +518,7 @@ module GetAnalyzer = {
   type request = {
 @as("analyzerName") analyzerName: option<name>
 }
-type response = {
+  type response = {
 @as("analyzer") analyzer: option<analyzerSummary>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "GetAnalyzerCommand";
@@ -533,19 +533,20 @@ module CreateArchiveRule = {
 @as("ruleName") ruleName: option<name>,
 @as("analyzerName") analyzerName: option<name>
 }
+  
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "CreateArchiveRuleCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module StartPolicyGeneration = {
   type t;
-  type response = {
-@as("jobId") jobId: option<jobId>
-}
-type request = {
+  type request = {
 @as("clientToken") clientToken: apiString,
 @as("cloudTrailDetails") cloudTrailDetails: cloudTrailDetails,
 @as("policyGenerationDetails") policyGenerationDetails: option<policyGenerationDetails>
+}
+  type response = {
+@as("jobId") jobId: option<jobId>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "StartPolicyGenerationCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -558,7 +559,7 @@ module ListAnalyzers = {
 @as("maxResults") maxResults: apiInteger,
 @as("nextToken") nextToken: token
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: token,
 @as("analyzers") analyzers: option<analyzersList>
 }
@@ -573,7 +574,7 @@ module ListAccessPreviews = {
 @as("nextToken") nextToken: token,
 @as("analyzerArn") analyzerArn: option<analyzerArn>
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: token,
 @as("accessPreviews") accessPreviews: option<accessPreviewsList>
 }
@@ -587,7 +588,7 @@ module GetFinding = {
 @as("id") id: option<findingId>,
 @as("analyzerArn") analyzerArn: option<analyzerArn>
 }
-type response = {
+  type response = {
 @as("finding") finding: finding
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "GetFindingCommand";
@@ -600,7 +601,7 @@ module GetArchiveRule = {
 @as("ruleName") ruleName: option<name>,
 @as("analyzerName") analyzerName: option<name>
 }
-type response = {
+  type response = {
 @as("archiveRule") archiveRule: option<archiveRuleSummary>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "GetArchiveRuleCommand";
@@ -616,7 +617,7 @@ module ListFindings = {
 @as("filter") filter: filterCriteriaMap,
 @as("analyzerArn") analyzerArn: option<analyzerArn>
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: token,
 @as("findings") findings: option<findingsList>
 }
@@ -631,7 +632,7 @@ module ListArchiveRules = {
 @as("nextToken") nextToken: token,
 @as("analyzerName") analyzerName: option<name>
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: token,
 @as("archiveRules") archiveRules: option<archiveRulesList>
 }
@@ -648,7 +649,7 @@ module ListAccessPreviewFindings = {
 @as("analyzerArn") analyzerArn: option<analyzerArn>,
 @as("accessPreviewId") accessPreviewId: option<accessPreviewId>
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: token,
 @as("findings") findings: option<accessPreviewFindingsList>
 }
@@ -658,15 +659,15 @@ type response = {
 
 module CreateAnalyzer = {
   type t;
-  type response = {
-@as("arn") arn: analyzerArn
-}
-type request = {
+  type request = {
 @as("clientToken") clientToken: apiString,
 @as("tags") tags: tagsMap,
 @as("archiveRules") archiveRules: inlineArchiveRulesList,
 @as("type") type_: option<type_>,
 @as("analyzerName") analyzerName: option<name>
+}
+  type response = {
+@as("arn") arn: analyzerArn
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "CreateAnalyzerCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -679,7 +680,7 @@ module GetGeneratedPolicy = {
 @as("includeResourcePlaceholders") includeResourcePlaceholders: apiBoolean,
 @as("jobId") jobId: option<jobId>
 }
-type response = {
+  type response = {
 @as("generatedPolicyResult") generatedPolicyResult: option<generatedPolicyResult>,
 @as("jobDetails") jobDetails: option<jobDetails>
 }
@@ -696,7 +697,7 @@ module ValidatePolicy = {
 @as("maxResults") maxResults: apiInteger,
 @as("locale") locale: locale
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: token,
 @as("findings") findings: option<validatePolicyFindingList>
 }
@@ -706,13 +707,13 @@ type response = {
 
 module CreateAccessPreview = {
   type t;
-  type response = {
-@as("id") id: option<accessPreviewId>
-}
-type request = {
+  type request = {
 @as("clientToken") clientToken: apiString,
 @as("configurations") configurations: option<configurationsMap>,
 @as("analyzerArn") analyzerArn: option<analyzerArn>
+}
+  type response = {
+@as("id") id: option<accessPreviewId>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "CreateAccessPreviewCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -724,7 +725,7 @@ module GetAccessPreview = {
 @as("analyzerArn") analyzerArn: option<analyzerArn>,
 @as("accessPreviewId") accessPreviewId: option<accessPreviewId>
 }
-type response = {
+  type response = {
 @as("accessPreview") accessPreview: option<accessPreview>
 }
   @module("@aws-sdk/client-access-analyzer") @new external new_: (Js.Promise.t<request>) => t = "GetAccessPreviewCommand";

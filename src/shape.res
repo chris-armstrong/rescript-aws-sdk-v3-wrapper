@@ -9,6 +9,11 @@ type structureShapeDetails = {
   members: array<member>,
 }
 
+type setShapeDetails = {
+  traits: option<array<Trait.t>>,
+  target: string,
+}
+
 type listShapeDetails = {target: string, traits: option<array<Trait.t>>}
 type operationShapeDetails = {
   input: option<string>,
@@ -54,7 +59,9 @@ type shapeDescriptor =
   | ResourceShape
   | TimestampShape(timestampShapeDetails)
   | LongShape(primitiveShapeDetails)
+  | FloatShape(primitiveShapeDetails)
   | DoubleShape(primitiveShapeDetails)
+  | SetShape(setShapeDetails)
 
 type t = {
   name: string,

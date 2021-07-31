@@ -24,6 +24,8 @@ function safeTypeName(target) {
   var namespace = Util.symbolNamespace(target);
   var namespacePrefix = Belt_Option.getWithDefault(Belt_Array.get(namespace.split("."), 1), "");
   switch (name) {
+    case "Bool" :
+        return namespacePrefix + "Bool";
     case "Boolean" :
         return namespacePrefix + "Boolean";
     case "Double" :
@@ -36,9 +38,15 @@ function safeTypeName(target) {
         return namespacePrefix + "String";
     case "Timestamp" :
         return namespacePrefix + "Timestamp";
+    case "Export" :
+    case "export" :
+        return "export_";
     case "Type" :
     case "type" :
         return "type_";
+    case "Unit" :
+    case "unit" :
+        return "unit_";
     default:
       return name.charAt(0).toLowerCase() + name.slice(1);
   }
@@ -49,7 +57,7 @@ function safeConstructorName(name) {
 }
 
 function safeVariantName(name) {
-  return name.replace(new RegExp("-|#|:", "g"), "_");
+  return name.replace(new RegExp("-|#|:|\\.", "g"), "_");
 }
 
 function generateIntegerShape(name) {
@@ -61,7 +69,11 @@ function generateLongShape(name) {
 }
 
 function generateDoubleShape(name) {
-  return "type " + safeTypeName(name) + " = double;";
+  return "type " + safeTypeName(name) + " = float;";
+}
+
+function generateFloatShape(name) {
+  return "type " + safeTypeName(name) + " = float;";
 }
 
 function generateBooleanShape(name) {
@@ -155,6 +167,10 @@ function generateServiceShape(serviceName, traits) {
   }
 }
 
+function generateSetShape(name, details) {
+  return "type " + safeTypeName(name) + " = array<" + safeTypeName(details.target) + ">";
+}
+
 var UnknownTimestampFormat = /* @__PURE__ */Caml_exceptions.create("Generate.UnknownTimestampFormat");
 
 function generateTimestampShape(name, param) {
@@ -173,25 +189,34 @@ function generateTimestampShape(name, param) {
   return "type " + typeName + " = Js.Date.t;";
 }
 
+function generateOperationStructureType(varName, opStruct) {
+  if (typeof opStruct === "number") {
+    return "";
+  } else if (opStruct.TAG === /* OperationStructure */0) {
+    return generateStructureShape("#" + varName, opStruct._0, 2, undefined);
+  } else {
+    return "type " + varName + " = " + safeTypeName(opStruct._0) + ";";
+  }
+}
+
+function isOperationStructureNone(opStruct) {
+  if (typeof opStruct === "number") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 function generateOperationModule(moduleName, param) {
-  var match = param[1];
-  var input = match.input;
+  var output = param[2];
+  var input = param[1];
   var name = param[0];
   var commandName = Util.symbolName(name) + "Command";
-  var inputString = Belt_Option.getWithDefault(input, "");
-  var structureDeclarations = Belt_Array.joinWith(Belt_Array.keepMap(param[2], (function (structure) {
-              var shapeDetails = structure.descriptor;
-              if (typeof shapeDetails === "number" || shapeDetails.TAG !== /* StructureShape */2) {
-                return ;
-              } else {
-                return generateStructureShape(inputString === structure.name ? "#request" : "#response", shapeDetails._0, 2, undefined);
-              }
-            })), "\n", (function (x) {
-          return x;
-        }));
-  var inputType = Belt_Option.isNone(input) ? "Js.Promise.t<unit>" : "Js.Promise.t<request>";
-  var outputType = Belt_Option.isNone(match.output) ? "Js.Promise.t<unit>" : "Js.Promise.t<response>";
-  return "module " + Util.symbolName(name) + " = {\n" + "  type t;\n" + ("  " + structureDeclarations + "\n") + ("  @module(\"@aws-sdk/client-" + moduleName + "\") @new external new_: (" + inputType + ") => t = \"" + commandName + "\";\n") + ("  @send external send: (clientType, t) => " + outputType + " = \"send\";\n") + "}\n";
+  var request = generateOperationStructureType("request", input);
+  var response = generateOperationStructureType("response", output);
+  var inputType = isOperationStructureNone(input) ? "Js.Promise.t<unit>" : "Js.Promise.t<request>";
+  var outputType = isOperationStructureNone(output) ? "Js.Promise.t<unit>" : "Js.Promise.t<response>";
+  return "module " + Util.symbolName(name) + " = {\n" + "  type t;\n" + ("  " + request + "\n") + ("  " + response + "\n") + ("  @module(\"@aws-sdk/client-" + moduleName + "\") @new external new_: (" + inputType + ") => t = \"" + commandName + "\";\n") + ("  @send external send: (clientType, t) => " + outputType + " = \"send\";\n") + "}\n";
 }
 
 function generateTypeBlock(serviceName, param) {
@@ -228,8 +253,12 @@ function generateTypeBlock(serviceName, param) {
         return generateTimestampShape(name, descriptor._0);
     case /* LongShape */10 :
         return generateLongShape(name);
-    case /* DoubleShape */11 :
+    case /* FloatShape */11 :
+        return generateFloatShape(name);
+    case /* DoubleShape */12 :
         return generateDoubleShape(name);
+    case /* SetShape */13 :
+        return generateSetShape(name, descriptor._0);
     
   }
 }
@@ -241,6 +270,7 @@ exports.safeVariantName = safeVariantName;
 exports.generateIntegerShape = generateIntegerShape;
 exports.generateLongShape = generateLongShape;
 exports.generateDoubleShape = generateDoubleShape;
+exports.generateFloatShape = generateFloatShape;
 exports.generateBooleanShape = generateBooleanShape;
 exports.generateBinaryShape = generateBinaryShape;
 exports.generateStringShape = generateStringShape;
@@ -253,8 +283,11 @@ exports.generateListShape = generateListShape;
 exports.generateMapShape = generateMapShape;
 exports.NoServiceTrait = NoServiceTrait;
 exports.generateServiceShape = generateServiceShape;
+exports.generateSetShape = generateSetShape;
 exports.UnknownTimestampFormat = UnknownTimestampFormat;
 exports.generateTimestampShape = generateTimestampShape;
+exports.generateOperationStructureType = generateOperationStructureType;
+exports.isOperationStructureNone = isOperationStructureNone;
 exports.generateOperationModule = generateOperationModule;
 exports.generateTypeBlock = generateTypeBlock;
 /* No side effect */

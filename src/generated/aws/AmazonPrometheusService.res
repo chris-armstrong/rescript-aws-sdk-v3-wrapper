@@ -2,6 +2,7 @@ type apiString = string
 type apiBoolean = bool;
 type apiInteger = int;
 type apiTimestamp = Js.Date.t;
+type apiLong = float;
 type workspaceStatusCode = [@as("CREATION_FAILED") #CREATION_FAILED | @as("DELETING") #DELETING | @as("UPDATING") #UPDATING | @as("ACTIVE") #ACTIVE | @as("CREATING") #CREATING]
 type workspaceId = string
 type workspaceArn = string
@@ -13,16 +14,10 @@ type validationExceptionField = {
 @as("name") name: option<apiString>
 }
 type uri = string
-exception ThrottlingException;
-exception ServiceQuotaExceededException;
-exception ResourceNotFoundException;
 type paginationToken = string
-exception InternalServerException;
 type idempotencyToken = string
-exception ConflictException;
 type clientType;
 @module("@aws-sdk/client-aps") @new external createClient: unit => clientType = "AmazonPrometheusServiceClient";
-exception AccessDeniedException;
 type workspaceStatus = {
 @as("statusCode") statusCode: option<workspaceStatusCode>
 }
@@ -42,7 +37,6 @@ type workspaceDescription = {
 @as("alias") alias: workspaceAlias,
 @as("workspaceId") workspaceId: option<workspaceId>
 }
-exception ValidationException;
 type workspaceSummaryList = array<workspaceSummary>
 module UpdateWorkspaceAlias = {
   type t;
@@ -51,6 +45,7 @@ module UpdateWorkspaceAlias = {
 @as("alias") alias: workspaceAlias,
 @as("workspaceId") workspaceId: option<workspaceId>
 }
+  
   @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "UpdateWorkspaceAliasCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -61,6 +56,7 @@ module DeleteWorkspace = {
 @as("clientToken") clientToken: idempotencyToken,
 @as("workspaceId") workspaceId: option<workspaceId>
 }
+  
   @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "DeleteWorkspaceCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -71,7 +67,7 @@ module CreateWorkspace = {
 @as("clientToken") clientToken: idempotencyToken,
 @as("alias") alias: workspaceAlias
 }
-type response = {
+  type response = {
 @as("status") status: option<workspaceStatus>,
 @as("arn") arn: option<workspaceArn>,
 @as("workspaceId") workspaceId: option<workspaceId>
@@ -85,7 +81,7 @@ module DescribeWorkspace = {
   type request = {
 @as("workspaceId") workspaceId: option<workspaceId>
 }
-type response = {
+  type response = {
 @as("workspace") workspace: option<workspaceDescription>
 }
   @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkspaceCommand";
@@ -99,7 +95,7 @@ module ListWorkspaces = {
 @as("alias") alias: workspaceAlias,
 @as("nextToken") nextToken: paginationToken
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: paginationToken,
 @as("workspaces") workspaces: option<workspaceSummaryList>
 }

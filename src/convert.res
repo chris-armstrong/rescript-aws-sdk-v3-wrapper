@@ -1,5 +1,6 @@
 open Belt
 open Generate
+open Dependencies
 
 let optionalServiceName = (optShape: option<Shape.t>) =>
   switch optShape {
@@ -8,9 +9,9 @@ let optionalServiceName = (optShape: option<Shape.t>) =>
   }
 
 let findServiceShape = shapes =>
-  shapes->Js.Array2.find(({descriptor}: Shape.t) => Shape.isServiceShape(descriptor))
+  shapes->Js.Array2.find(({descriptor}) => Shape.isServiceShape(descriptor))
 
-let getServiceDetails = (serviceShapeOpt: option<Shape.t>) =>
+let getServiceDetails = serviceShapeOpt =>
   Option.flatMap(serviceShapeOpt, ({descriptor}) =>
     switch descriptor {
     | ServiceShape({traits}) =>
@@ -26,52 +27,77 @@ let kebabCaseToTitleCase = str =>
   str
   ->Js.String2.split("-")
   ->Belt.Array.map(part =>
-    Js.String2.toUpperCase(Js.String2.slice(part, ~from=0, ~to_=1)) ++ Js.String2.sliceToEnd(part, ~from=1)
-  )->Belt.Array.joinWith("", x => x)
+    Js.String2.toUpperCase(Js.String2.slice(part, ~from=0, ~to_=1)) ++
+    Js.String2.sliceToEnd(part, ~from=1)
+  )
+  ->Belt.Array.joinWith("", x => x)
 
 type convertedModule = {
   moduleName: string,
   code: string,
 }
 
-let convert = parsed => {
+exception UnexpectedStructure(string)
+
+let findOperationalStructure = (structures, input) => {
+  switch input {
+  | Some(target) =>
+    switch Js.Array2.find(structures, structure => structure.name == target) {
+    | Some(structure) =>
+      switch structure.descriptor {
+      | StructureShape(details) => OperationStructure(details)
+      | _ => raise(UnexpectedStructure("expected structure type for " ++ target))
+      }
+    | None => OperationStructureRef(target)
+    }
+  | None => OperationStructureNone
+  }
+}
+
+let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
   switch parsed {
   | Ok(shapes) => {
-      // Put shapes in dependency order
-      let ordered = Dependencies.order(shapes)
+      let shapesWithTargets = Array.map(shapes, ({
+        name,
+        descriptor,
+      }): Dependencies.shapeWithTarget => {
+        name: name,
+        descriptor: descriptor,
+        targets: Dependencies.getTargets(descriptor),
+      })
+      let shapesWithTargets = Dependencies.order(shapesWithTargets)
+
       // Separate out all operation shapes
-      let (operationShapes, allStructures) = Array.partition(ordered, ({descriptor}) =>
+      let (operationShapes, allStructures) = Array.partition(shapesWithTargets, ({descriptor}) =>
         switch descriptor {
         | OperationShape(_) => true
         | _ => false
         }
       )
+
       // Simplify operations to their constituent parts
       let operations = Array.keepMap(operationShapes, shape =>
         switch shape {
-        | {name, descriptor: OperationShape(details)} => Some((name, details))
+        | {name, descriptor: OperationShape(details), targets} => Some((name, details, targets))
         | _ => None
         }
       )
       // Get list of all operation dependencies
       let operationDependencies =
-        operations
-        ->Array.map(((_, {input, output})) =>
-          Array.concat(
-            Option.mapWithDefault(input, [], input => [input]),
-            Option.mapWithDefault(output, [], output => [output]),
-          )
-        )
-        ->Array.concatMany
-      // Separate operation structures (input and output) from remaining structures
+        operations->Array.map(((_, _, targets)) => targets)->Array.concatMany
+
+      // Separate operation structures (input and output) from remaining structures (except those that operations depend on)
       let (operationStructures, remainingStructures) = Array.partition(allStructures, structure =>
         switch structure {
-        | {name, descriptor: StructureShape(_)} => Js.Array2.includes(operationDependencies, name)
+        | {name, descriptor: StructureShape(_)} =>
+          Js.Array2.includes(operationDependencies, name) &&
+          !Array.some(allStructures, ({targets}) => Array.some(targets, target => target === name))
         | _ => false
         }
       )
+
       // Group operation structure with input/output dependencies
-      let operationModuleParts = Array.map(operations, ((name, details)) => {
+      let operationModuleParts = Array.map(operations, ((name, details, targets)) => {
         let {input, output} = details
         let inputString = Belt.Option.getWithDefault(input, "")
         let outputString = Belt.Option.getWithDefault(output, "")
@@ -84,13 +110,18 @@ let convert = parsed => {
       let service = findServiceShape(remainingStructures)
       let serviceDetails = getServiceDetails(service)
       switch serviceDetails {
-      | Some({ arnNamespace: packagingName, cloudFormationName }) => {
-          let moduleName = Js.String2.replace(cloudFormationName, " ", "");
-          let operationSnippets = Array.map(operationModuleParts, modulePart =>
-            generateOperationModule(packagingName, modulePart)
-          )
+      | Some({arnNamespace: packagingName, cloudFormationName}) => {
+          let moduleName = Js.String2.replace(cloudFormationName, " ", "")
+          let operationSnippets = Array.map(operationModuleParts, ((name, details, structures)) => {
+            let inputOperationStructure = findOperationalStructure(structures, details.input)
+            let outputOperationStructure = findOperationalStructure(structures, details.output)
+            generateOperationModule(
+              packagingName,
+              (name, inputOperationStructure, outputOperationStructure),
+            )
+          })
           let codeSnippets = Array.map(remainingStructures, shape =>
-            generateTypeBlock(packagingName, shape)
+            generateTypeBlock(packagingName, {name: shape.name, descriptor: shape.descriptor})
           )
           Ok({
             code: Array.concat(codeSnippets, operationSnippets)->Array.joinWith("\n", x => x),

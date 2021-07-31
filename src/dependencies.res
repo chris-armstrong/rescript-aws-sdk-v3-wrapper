@@ -1,26 +1,28 @@
 open Shape
+open Belt
 
-let smithyImplicitShapes: array<t> = [
-  {name: "smithy.api#String", descriptor: StringShape({traits: None})},
-  {name: "smithy.api#Boolean", descriptor: BooleanShape({ traits: None })},
-  {name: "smithy.api#Integer", descriptor: IntegerShape({ traits: None })},
-  {name: "smithy.api#Timestamp", descriptor: TimestampShape({traits: None})},
+type shapeWithTarget = {name: string, descriptor: Shape.shapeDescriptor, targets: array<string>}
+
+let smithyImplicitShapes = [
+  {name: "smithy.api#String", descriptor: StringShape({traits: None}), targets: []},
+  {name: "smithy.api#Boolean", descriptor: BooleanShape({traits: None}), targets: []},
+  {name: "smithy.api#Integer", descriptor: IntegerShape({traits: None}), targets: []},
+  {name: "smithy.api#Timestamp", descriptor: TimestampShape({traits: None}), targets: []},
+  {name: "smithy.api#Long", descriptor: LongShape({traits: None}), targets: []},
 ]
 
 /**
  * Get the targets for each shape type
  */
-let getTargets = shape =>
-  switch shape {
+let getTargets = descriptor =>
+  switch descriptor {
   | ListShape(listShapeDetails) => [listShapeDetails.target]
   | OperationShape(details) =>
-    Js.Array2.concatMany(
-      Belt.Option.getWithDefault(Belt.Option.map(details.input, extracted => [extracted]), []),
-      [
-        Belt.Option.getWithDefault(Belt.Option.map(details.output, extracted => [extracted]), []),
-        Belt.Option.getWithDefault(Belt.Option.map(details.errors, extracted => extracted), []),
-      ],
-    )
+    Array.concatMany([
+      Option.getWithDefault(Option.map(details.input, extracted => [extracted]), []),
+      Option.getWithDefault(Option.map(details.output, extracted => [extracted]), []),
+      Option.getWithDefault(Option.map(details.errors, extracted => extracted), []),
+    ])
   | StructureShape({members}) => Js.Array2.map(members, member => member.target)
   | ServiceShape({operations}) => Belt.Option.getWithDefault(operations, [])
   | MapShape({mapKey, mapValue}) => [mapKey.target, mapValue.target]
@@ -33,46 +35,46 @@ let getTargets = shape =>
   | UnionShape({members}) => Js.Array2.map(members, member => member.target)
   | LongShape(_) => []
   | DoubleShape(_) => []
+  | SetShape({target}) => [target]
+  | FloatShape(_) => []
   }
+
+let getShapeTargets = shapes =>
+  Array.map(shapes, (shape: Shape.t) => (shape, getTargets(shape.descriptor)))
 
 exception DependencyError(array<string>, array<string>)
 
 let containsAll = (within: array<string>, targets: array<string>) => {
-  if Belt.Array.length(targets) === 0 {
+  if Array.length(targets) === 0 {
     true
   } else {
-    Belt.Array.every(targets, target => Js.Array2.includes(within, target))
+    Array.every(targets, target => Js.Array2.includes(within, target))
   }
 }
-let part1 = ((x, _)) => x
-let rec order_ = (remaining, ordered: array<Shape.t>): array<Shape.t> => {
-  if Belt.Array.length(remaining) > 0 {
-    let remainingShapesWithTargets = Belt.Array.map(remaining, shape => (
-      shape,
-      getTargets(shape.descriptor),
-    ))
-
-    let orderedNames = Belt.Array.map(ordered, ({name}) => name)
-    let (free, unfree) = Belt.Array.partition(remainingShapesWithTargets, ((_, targets)) =>
+let rec order_ = (remaining: array<shapeWithTarget>, ordered: array<shapeWithTarget>): array<
+  shapeWithTarget,
+> => {
+  if Array.length(remaining) > 0 {
+    let orderedNames = Array.map(ordered, ({name}) => name)
+    let (free, unfree) = Array.partition(remaining, ({targets}) =>
       containsAll(orderedNames, targets)
     )
-    if Belt.Array.length(free) === 0 {
+    if Array.length(free) === 0 {
       raise(
-        DependencyError(
-          Belt.Array.map(unfree, (({name}, _)) => name),
-          Belt.Array.map(ordered, ({name}) => name),
-        ),
+        DependencyError(Array.map(unfree, ({name}) => name), Array.map(ordered, ({name}) => name)),
       )
     }
-    let ordered = Belt.Array.concat(ordered, Belt.Array.map(free, ((shape, _)) => shape))
-    order_(Belt.Array.map(unfree, ((shape, _)) => shape), ordered)
+    let ordered = Array.concat(ordered, free)
+    order_(unfree, ordered)
   } else {
     ordered
   }
 }
-let order = shapes => {
-  let implicitShapes = Belt.Array.keep(smithyImplicitShapes, shape =>
-    Belt.Array.every(shapes, ({name}) => name != shape.name)
+let order = shapesWithTargets => {
+  let implicitShapes = Array.keepMap(smithyImplicitShapes, shape =>
+    Array.every(shapesWithTargets, ({name}) => name != shape.name)
+      ? Some(shape)
+      : None
   )
-  order_(shapes, implicitShapes)
+  order_(shapesWithTargets, implicitShapes)
 }

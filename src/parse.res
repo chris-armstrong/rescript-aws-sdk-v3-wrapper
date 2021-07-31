@@ -59,7 +59,7 @@ let parseEnumNameValue = (enum): Result.t<Trait.enumPair, jsonParseError> => {
 
 let parseArnReferenceTrait = (value): Result.t<Trait.t, jsonParseError> => {
   let record = parseObject(value)
-  let type__ = record->field("type")->parseString
+  let type__ = optional(record->field("type"))->mapOptional(parseString)
   let service_ = record->field("service")->parseString
   let resource_ = record->field("resource")->parseString
   map3(type__, service_, resource_, (type_, service, resource) => Trait.AwsApiArnReferenceTrait({
@@ -111,8 +111,12 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
   | "smithy.api#retryable" => Ok(Trait.RetryableTrait)
   | "smithy.api#timestampFormat" =>
     value->parseString->map(timestampFormat => Trait.TimestampFormatTrait(timestampFormat))
-  | "smithy.api#range" =>
-    value->parseObject->field("min")->parseInteger->map(min => Trait.RangeTrait(min))
+  | "smithy.api#range" => {
+    let obj = value->parseObject;
+    let min = optional(obj->field("min"))->mapOptional(parseInteger);
+    let max = optional(obj->field("max"))->mapOptional(parseInteger);
+    map2(min, max, (min, max) => Trait.RangeTrait(min, max))
+  }
   | "smithy.api#length" => {
       let record = value->parseObject
       map2(
@@ -121,6 +125,7 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
         (min, max) => Trait.LengthTrait(min, max),
       )
     }
+  | "aws.protocols#awsJson1_0" => Ok(Trait.AwsProtocolAwsJson1_0Trait)
   | "aws.protocols#awsJson1_1" => Ok(Trait.AwsProtocolAwsJson1_1Trait)
   | "smithy.api#box" => Ok(Trait.BoxTrait)
   | "smithy.api#sensitive" => Ok(Trait.SensitiveTrait)
@@ -129,6 +134,11 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
     ->parseArray(parseReference)
     ->map(references => Trait.ReferencesTrait(references))
   | "smithy.api#jsonName" => parseString(value)->map(jsonName => Trait.JsonNameTrait(jsonName))
+  | "smithy.api#httpPayload" => Ok(Trait.HttpPayloadTrait)
+  | "smithy.api#httpQueryParams" => Ok(Trait.HttpQueryParams)
+  | "smithy.api#tags" => value->parseArray(parseString)->map(tags => Trait.TagsTrait(tags))
+  | "smithy.api#deprecated" => Ok(Trait.DeprecatedTrait)
+  | "smithy.api#mediaType" => parseString(value)->map(mediaType => Trait.MediaTypeTrait(mediaType))
   | _ => raise(UnknownTrait(name))
   }
   traitValue
@@ -238,6 +248,12 @@ let parsePrimitive = shapeDict => {
 // TODO: figure out if this is important for wrapper, or only for SDK codegen
 let parseResourceShape = _ => Ok(Shape.ResourceShape)
 
+let parseSetShape = shapeDict => {
+  let target = shapeDict->field("member")->parseObject->field("target")->parseString;
+  let traits = optional(shapeDict->field("traits"))->mapOptional(traits => traits->parseRecord(parseTrait))
+  map2(target, traits, (target, traits) => Shape.SetShape({ target, traits }))
+}
+
 let parseTimestampShape = shapeDict => {
   let traits_ =
     optional(shapeDict->field("traits"))->mapOptional(traits => traits->parseRecord(parseTrait))
@@ -263,6 +279,8 @@ let parseShape = (name, shape) => {
     | "timestamp" => parseTimestampShape(shapeDict)
     | "long" => parsePrimitive(shapeDict)->map(primitive => Shape.LongShape(primitive))
     | "double" => parsePrimitive(shapeDict)->map(primitive => Shape.DoubleShape(primitive))
+    | "float" => parsePrimitive(shapeDict)->map(primitive => Shape.FloatShape(primitive))
+    | "set" => parseSetShape(shapeDict)
     | _ => Error(CustomError(`unknown shape type ${typeValue}`))
     }
     map(descriptor_, descriptor => {

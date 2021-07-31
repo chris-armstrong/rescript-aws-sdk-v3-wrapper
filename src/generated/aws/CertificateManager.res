@@ -2,6 +2,7 @@ type apiString = string
 type apiBoolean = bool;
 type apiInteger = int;
 type apiTimestamp = Js.Date.t;
+type apiLong = float;
 type validationMethod = [@as("DNS") #DNS | @as("EMAIL") #EMAIL]
 type validationExceptionMessage = string
 type tagValue = string
@@ -35,11 +36,7 @@ type certificateBodyBlob = NodeJs.Buffer.t;
 type certificateBody = string
 type availabilityErrorMessage = string
 type arn = string
-exception ValidationException;
 type validationEmailList = array<amazonawsString>
-exception TooManyTagsException;
-exception ThrottlingException;
-exception TagPolicyException;
 type tag = {
 @as("Value") value: tagValue,
 @as("Key") key: option<tagKey>
@@ -49,21 +46,11 @@ type resourceRecord = {
 @as("Type") type_: option<recordType>,
 @as("Name") name: option<amazonawsString>
 }
-exception ResourceNotFoundException;
-exception ResourceInUseException;
-exception RequestInProgressException;
-exception LimitExceededException;
 type keyUsageFilterList = array<keyUsageName>
 type keyUsage = {
 @as("Name") name: keyUsageName
 }
 type keyAlgorithmList = array<keyAlgorithm>
-exception InvalidTagException;
-exception InvalidStateException;
-exception InvalidParameterException;
-exception InvalidDomainValidationOptionsException;
-exception InvalidArnException;
-exception InvalidArgsException;
 type inUseList = array<amazonawsString>
 type extendedKeyUsageFilterList = array<extendedKeyUsageName>
 type extendedKeyUsage = {
@@ -78,7 +65,6 @@ type domainValidationOption = {
 @as("DomainName") domainName: option<domainNameString>
 }
 type domainList = array<domainNameString>
-exception ConflictException;
 type certificateSummary = {
 @as("DomainName") domainName: domainNameString,
 @as("CertificateArn") certificateArn: arn
@@ -87,7 +73,6 @@ type certificateStatuses = array<certificateStatus>
 type certificateOptions = {
 @as("CertificateTransparencyLoggingPreference") certificateTransparencyLoggingPreference: certificateTransparencyLoggingPreference
 }
-exception AccessDeniedException;
 type tagList = array<tag>
 type keyUsageList = array<keyUsage>
 type filters = {
@@ -150,6 +135,7 @@ module ResendValidationEmail = {
 @as("Domain") domain: option<domainNameString>,
 @as("CertificateArn") certificateArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "ResendValidationEmailCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -159,18 +145,19 @@ module RenewCertificate = {
   type request = {
 @as("CertificateArn") certificateArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "RenewCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetCertificate = {
   type t;
+  type request = {
+@as("CertificateArn") certificateArn: option<arn>
+}
   type response = {
 @as("CertificateChain") certificateChain: certificateChain,
 @as("Certificate") certificate: certificateBody
-}
-type request = {
-@as("CertificateArn") certificateArn: option<arn>
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "GetCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -178,14 +165,14 @@ type request = {
 
 module ExportCertificate = {
   type t;
+  type request = {
+@as("Passphrase") passphrase: option<passphraseBlob>,
+@as("CertificateArn") certificateArn: option<arn>
+}
   type response = {
 @as("PrivateKey") privateKey: privateKey,
 @as("CertificateChain") certificateChain: certificateChain,
 @as("Certificate") certificate: certificateBody
-}
-type request = {
-@as("Passphrase") passphrase: option<passphraseBlob>,
-@as("CertificateArn") certificateArn: option<arn>
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "ExportCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -196,6 +183,7 @@ module DeleteCertificate = {
   type request = {
 @as("CertificateArn") certificateArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "DeleteCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -206,6 +194,7 @@ module UpdateCertificateOptions = {
 @as("Options") options: option<certificateOptions>,
 @as("CertificateArn") certificateArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "UpdateCertificateOptionsCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -216,12 +205,14 @@ module PutAccountConfiguration = {
 @as("IdempotencyToken") idempotencyToken: option<idempotencyToken>,
 @as("ExpiryEvents") expiryEvents: expiryEventsConfiguration
 }
+  
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "PutAccountConfigurationCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetAccountConfiguration = {
   type t;
+  
   type response = {
 @as("ExpiryEvents") expiryEvents: expiryEventsConfiguration
 }
@@ -231,10 +222,7 @@ module GetAccountConfiguration = {
 
 module RequestCertificate = {
   type t;
-  type response = {
-@as("CertificateArn") certificateArn: arn
-}
-type request = {
+  type request = {
 @as("Tags") tags: tagList,
 @as("CertificateAuthorityArn") certificateAuthorityArn: arn,
 @as("Options") options: certificateOptions,
@@ -243,6 +231,9 @@ type request = {
 @as("SubjectAlternativeNames") subjectAlternativeNames: domainList,
 @as("ValidationMethod") validationMethod: validationMethod,
 @as("DomainName") domainName: option<domainNameString>
+}
+  type response = {
+@as("CertificateArn") certificateArn: arn
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "RequestCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -254,6 +245,7 @@ module RemoveTagsFromCertificate = {
 @as("Tags") tags: option<tagList>,
 @as("CertificateArn") certificateArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "RemoveTagsFromCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -263,7 +255,7 @@ module ListTagsForCertificate = {
   type request = {
 @as("CertificateArn") certificateArn: option<arn>
 }
-type response = {
+  type response = {
 @as("Tags") tags: tagList
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForCertificateCommand";
@@ -272,15 +264,15 @@ type response = {
 
 module ListCertificates = {
   type t;
-  type response = {
-@as("CertificateSummaryList") certificateSummaryList: certificateSummaryList,
-@as("NextToken") nextToken: nextToken
-}
-type request = {
+  type request = {
 @as("MaxItems") maxItems: maxItems,
 @as("NextToken") nextToken: nextToken,
 @as("Includes") includes: filters,
 @as("CertificateStatuses") certificateStatuses: certificateStatuses
+}
+  type response = {
+@as("CertificateSummaryList") certificateSummaryList: certificateSummaryList,
+@as("NextToken") nextToken: nextToken
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "ListCertificatesCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -288,14 +280,14 @@ type request = {
 
 module ImportCertificate = {
   type t;
-  type response = {
-@as("CertificateArn") certificateArn: arn
-}
-type request = {
+  type request = {
 @as("Tags") tags: tagList,
 @as("CertificateChain") certificateChain: certificateChainBlob,
 @as("PrivateKey") privateKey: option<privateKeyBlob>,
 @as("Certificate") certificate: option<certificateBodyBlob>,
+@as("CertificateArn") certificateArn: arn
+}
+  type response = {
 @as("CertificateArn") certificateArn: arn
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "ImportCertificateCommand";
@@ -308,6 +300,7 @@ module AddTagsToCertificate = {
 @as("Tags") tags: option<tagList>,
 @as("CertificateArn") certificateArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "AddTagsToCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -317,7 +310,7 @@ module DescribeCertificate = {
   type request = {
 @as("CertificateArn") certificateArn: option<arn>
 }
-type response = {
+  type response = {
 @as("Certificate") certificate: certificateDetail
 }
   @module("@aws-sdk/client-acm") @new external new_: (Js.Promise.t<request>) => t = "DescribeCertificateCommand";

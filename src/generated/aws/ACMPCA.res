@@ -2,6 +2,7 @@ type apiString = string
 type apiBoolean = bool;
 type apiInteger = int;
 type apiTimestamp = Js.Date.t;
+type apiLong = float;
 type validityPeriodType = [@as("YEARS") #YEARS | @as("MONTHS") #MONTHS | @as("DAYS") #DAYS | @as("ABSOLUTE") #ABSOLUTE | @as("END_DATE") #END_DATE]
 type tagValue = string
 type tagKey = string
@@ -59,27 +60,17 @@ type validity = {
 @as("Type") type_: option<validityPeriodType>,
 @as("Value") value: option<positiveLong>
 }
-exception TooManyTagsException;
 type tag = {
 @as("Value") value: tagValue,
 @as("Key") key: option<tagKey>
 }
-exception ResourceNotFoundException;
-exception RequestInProgressException;
-exception RequestFailedException;
-exception RequestAlreadyProcessedException;
 type qualifier = {
 @as("CpsUri") cpsUri: option<string256>
 }
-exception PermissionAlreadyExistsException;
 type otherName = {
 @as("Value") value: option<string256>,
 @as("TypeId") typeId: option<customObjectIdentifier>
 }
-exception MalformedCertificateException;
-exception MalformedCSRException;
-exception LockoutPreventedException;
-exception LimitExceededException;
 type keyUsage = {
 @as("DecipherOnly") decipherOnly: amazonawsBoolean,
 @as("EncipherOnly") encipherOnly: amazonawsBoolean,
@@ -91,13 +82,6 @@ type keyUsage = {
 @as("NonRepudiation") nonRepudiation: amazonawsBoolean,
 @as("DigitalSignature") digitalSignature: amazonawsBoolean
 }
-exception InvalidTagException;
-exception InvalidStateException;
-exception InvalidRequestException;
-exception InvalidPolicyException;
-exception InvalidNextTokenException;
-exception InvalidArnException;
-exception InvalidArgsException;
 type extendedKeyUsage = {
 @as("ExtendedKeyUsageObjectIdentifier") extendedKeyUsageObjectIdentifier: customObjectIdentifier,
 @as("ExtendedKeyUsageType") extendedKeyUsageType: extendedKeyUsageType
@@ -113,8 +97,6 @@ type crlConfiguration = {
 @as("ExpirationInDays") expirationInDays: integer1To5000,
 @as("Enabled") enabled: option<amazonawsBoolean>
 }
-exception ConcurrentModificationException;
-exception CertificateMismatchException;
 type actionList = array<actionType>
 type accessMethod = {
 @as("AccessMethodType") accessMethodType: accessMethodType,
@@ -222,6 +204,7 @@ module RevokeCertificate = {
 @as("CertificateSerial") certificateSerial: option<string128>,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "RevokeCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -231,6 +214,7 @@ module RestoreCertificateAuthority = {
   type request = {
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "RestoreCertificateAuthorityCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -241,6 +225,7 @@ module PutPolicy = {
 @as("Policy") policy: option<aWSPolicy>,
 @as("ResourceArn") resourceArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "PutPolicyCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -252,17 +237,18 @@ module ImportCertificateAuthorityCertificate = {
 @as("Certificate") certificate: option<certificateBodyBlob>,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "ImportCertificateAuthorityCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module GetPolicy = {
   type t;
+  type request = {
+@as("ResourceArn") resourceArn: option<arn>
+}
   type response = {
 @as("Policy") policy: aWSPolicy
-}
-type request = {
-@as("ResourceArn") resourceArn: option<arn>
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "GetPolicyCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -270,11 +256,11 @@ type request = {
 
 module GetCertificateAuthorityCsr = {
   type t;
+  type request = {
+@as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
+}
   type response = {
 @as("Csr") csr: csrBody
-}
-type request = {
-@as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "GetCertificateAuthorityCsrCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -282,12 +268,12 @@ type request = {
 
 module GetCertificateAuthorityCertificate = {
   type t;
+  type request = {
+@as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
+}
   type response = {
 @as("CertificateChain") certificateChain: certificateChain,
 @as("Certificate") certificate: certificateBody
-}
-type request = {
-@as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "GetCertificateAuthorityCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -295,13 +281,13 @@ type request = {
 
 module GetCertificate = {
   type t;
+  type request = {
+@as("CertificateArn") certificateArn: option<arn>,
+@as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
+}
   type response = {
 @as("CertificateChain") certificateChain: certificateChain,
 @as("Certificate") certificate: certificateBody
-}
-type request = {
-@as("CertificateArn") certificateArn: option<arn>,
-@as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "GetCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -309,15 +295,15 @@ type request = {
 
 module DescribeCertificateAuthorityAuditReport = {
   type t;
+  type request = {
+@as("AuditReportId") auditReportId: option<auditReportId>,
+@as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
+}
   type response = {
 @as("CreatedAt") createdAt: tStamp,
 @as("S3Key") s3Key: s3Key,
 @as("S3BucketName") s3BucketName: s3BucketName,
 @as("AuditReportStatus") auditReportStatus: auditReportStatus
-}
-type request = {
-@as("AuditReportId") auditReportId: option<auditReportId>,
-@as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "DescribeCertificateAuthorityAuditReportCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -328,6 +314,7 @@ module DeletePolicy = {
   type request = {
 @as("ResourceArn") resourceArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "DeletePolicyCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -339,6 +326,7 @@ module DeletePermission = {
 @as("Principal") principal: option<principal>,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "DeletePermissionCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -349,20 +337,21 @@ module DeleteCertificateAuthority = {
 @as("PermanentDeletionTimeInDays") permanentDeletionTimeInDays: permanentDeletionTimeInDays,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "DeleteCertificateAuthorityCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
 module CreateCertificateAuthorityAuditReport = {
   type t;
-  type response = {
-@as("S3Key") s3Key: s3Key,
-@as("AuditReportId") auditReportId: auditReportId
-}
-type request = {
+  type request = {
 @as("AuditReportResponseFormat") auditReportResponseFormat: option<auditReportResponseFormat>,
 @as("S3BucketName") s3BucketName: option<s3BucketName>,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
+}
+  type response = {
+@as("S3Key") s3Key: s3Key,
+@as("AuditReportId") auditReportId: auditReportId
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "CreateCertificateAuthorityAuditReportCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -376,6 +365,7 @@ module CreatePermission = {
 @as("Principal") principal: option<principal>,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "CreatePermissionCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -387,6 +377,7 @@ module UpdateCertificateAuthority = {
 @as("RevocationConfiguration") revocationConfiguration: revocationConfiguration,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "UpdateCertificateAuthorityCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -397,6 +388,7 @@ module UntagCertificateAuthority = {
 @as("Tags") tags: option<tagList>,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "UntagCertificateAuthorityCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -407,6 +399,7 @@ module TagCertificateAuthority = {
 @as("Tags") tags: option<tagList>,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
+  
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "TagCertificateAuthorityCommand";
   @send external send: (clientType, t) => Js.Promise.t<unit> = "send";
 }
@@ -418,7 +411,7 @@ module ListTags = {
 @as("NextToken") nextToken: nextToken,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
-type response = {
+  type response = {
 @as("NextToken") nextToken: nextToken,
 @as("Tags") tags: tagList
 }
@@ -433,7 +426,7 @@ module ListPermissions = {
 @as("NextToken") nextToken: nextToken,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
-type response = {
+  type response = {
 @as("NextToken") nextToken: nextToken,
 @as("Permissions") permissions: permissionList
 }
@@ -443,10 +436,7 @@ type response = {
 
 module CreateCertificateAuthority = {
   type t;
-  type response = {
-@as("CertificateAuthorityArn") certificateAuthorityArn: arn
-}
-type request = {
+  type request = {
 @as("Tags") tags: tagList,
 @as("KeyStorageSecurityStandard") keyStorageSecurityStandard: keyStorageSecurityStandard,
 @as("IdempotencyToken") idempotencyToken: idempotencyToken,
@@ -454,16 +444,16 @@ type request = {
 @as("RevocationConfiguration") revocationConfiguration: revocationConfiguration,
 @as("CertificateAuthorityConfiguration") certificateAuthorityConfiguration: option<certificateAuthorityConfiguration>
 }
+  type response = {
+@as("CertificateAuthorityArn") certificateAuthorityArn: arn
+}
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "CreateCertificateAuthorityCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module IssueCertificate = {
   type t;
-  type response = {
-@as("CertificateArn") certificateArn: arn
-}
-type request = {
+  type request = {
 @as("IdempotencyToken") idempotencyToken: idempotencyToken,
 @as("ValidityNotBefore") validityNotBefore: validity,
 @as("Validity") validity: option<validity>,
@@ -472,6 +462,9 @@ type request = {
 @as("Csr") csr: option<csrBlob>,
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>,
 @as("ApiPassthrough") apiPassthrough: apiPassthrough
+}
+  type response = {
+@as("CertificateArn") certificateArn: arn
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "IssueCertificateCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -482,7 +475,7 @@ module DescribeCertificateAuthority = {
   type request = {
 @as("CertificateAuthorityArn") certificateAuthorityArn: option<arn>
 }
-type response = {
+  type response = {
 @as("CertificateAuthority") certificateAuthority: certificateAuthority
 }
   @module("@aws-sdk/client-acm-pca") @new external new_: (Js.Promise.t<request>) => t = "DescribeCertificateAuthorityCommand";
@@ -496,7 +489,7 @@ module ListCertificateAuthorities = {
 @as("MaxResults") maxResults: maxResults,
 @as("NextToken") nextToken: nextToken
 }
-type response = {
+  type response = {
 @as("NextToken") nextToken: nextToken,
 @as("CertificateAuthorities") certificateAuthorities: certificateAuthorities
 }

@@ -14,7 +14,7 @@ type enumPair = {
 type errorTraitType = Server | Client
 
 type arnReferenceDetails = {
-  type_: string,
+  type_: option<string>,
   service: string,
   resource: string,
 }
@@ -43,15 +43,21 @@ type t =
   | HttpQueryTrait
   | HttpHeaderTrait
   | RetryableTrait
-  | RangeTrait(int)
+  | RangeTrait(option<int>, option<int>)
   | LengthTrait(int, option<int>)
   | TimestampFormatTrait(string)
+  | AwsProtocolAwsJson1_0Trait
   | AwsProtocolAwsJson1_1Trait
   | BoxTrait
   | SensitiveTrait
   | AwsApiArnReferenceTrait(arnReferenceDetails)
   | ReferencesTrait(array<reference>)
   | JsonNameTrait(string)
+  | HttpPayloadTrait
+  | HttpQueryParams
+  | TagsTrait(array<string>)
+  | DeprecatedTrait
+  | MediaTypeTrait(string)
 
 let isEnumTrait = trait =>
   switch trait {

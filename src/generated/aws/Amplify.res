@@ -2,6 +2,7 @@ type apiString = string
 type apiBoolean = bool;
 type apiInteger = int;
 type apiTimestamp = Js.Date.t;
+type apiLong = float;
 type webhookUrl = string
 type webhookId = string
 type webhookArn = string
@@ -103,7 +104,6 @@ type webhook = {
 @as("webhookId") webhookId: option<webhookId>,
 @as("webhookArn") webhookArn: option<webhookArn>
 }
-exception UnauthorizedException;
 type tagMap = Js.Dict.t< tagValue>
 type tagKeyList = array<tagKey>
 type subDomainSetting = {
@@ -111,15 +111,12 @@ type subDomainSetting = {
 @as("prefix") prefix: option<domainPrefix>
 }
 type screenshots = Js.Dict.t< thumbnailUrl>
-exception ResourceNotFoundException;
 type productionBranch = {
 @as("branchName") branchName: branchName,
 @as("thumbnailUrl") thumbnailUrl: thumbnailUrl,
 @as("status") status: status,
 @as("lastDeployTime") lastDeployTime: lastDeployTime
 }
-exception NotFoundException;
-exception LimitExceededException;
 type jobSummary = {
 @as("jobType") jobType: option<jobType>,
 @as("endTime") endTime: endTime,
@@ -131,11 +128,9 @@ type jobSummary = {
 @as("jobId") jobId: option<jobId>,
 @as("jobArn") jobArn: option<jobArn>
 }
-exception InternalFailureException;
 type fileUploadUrls = Js.Dict.t< uploadUrl>
 type fileMap = Js.Dict.t< mD5Hash>
 type environmentVariables = Js.Dict.t< envValue>
-exception DependentServiceFailureException;
 type customRule = {
 @as("condition") condition: condition,
 @as("status") status: status,
@@ -143,7 +138,6 @@ type customRule = {
 @as("source") source: option<source>
 }
 type customDomains = array<customDomain>
-exception BadRequestException;
 type backendEnvironment = {
 @as("updateTime") updateTime: option<updateTime>,
 @as("createTime") createTime: option<createTime>,
@@ -273,11 +267,11 @@ type clientType;
 @module("@aws-sdk/client-amplify") @new external createClient: unit => clientType = "AmplifyClient";
 module GetArtifactUrl = {
   type t;
-  type response = {
-@as("artifactUrl") artifactUrl: option<artifactUrl>,
+  type request = {
 @as("artifactId") artifactId: option<artifactId>
 }
-type request = {
+  type response = {
+@as("artifactUrl") artifactUrl: option<artifactUrl>,
 @as("artifactId") artifactId: option<artifactId>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetArtifactUrlCommand";
@@ -286,14 +280,14 @@ type request = {
 
 module GenerateAccessLogs = {
   type t;
-  type response = {
-@as("logUrl") logUrl: logUrl
-}
-type request = {
+  type request = {
 @as("appId") appId: option<appId>,
 @as("domainName") domainName: option<domainName>,
 @as("endTime") endTime: endTime,
 @as("startTime") startTime: startTime
+}
+  type response = {
+@as("logUrl") logUrl: logUrl
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GenerateAccessLogsCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -306,7 +300,7 @@ module UpdateWebhook = {
 @as("branchName") branchName: branchName,
 @as("webhookId") webhookId: option<webhookId>
 }
-type response = {
+  type response = {
 @as("webhook") webhook: option<webhook>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "UpdateWebhookCommand";
@@ -315,22 +309,22 @@ type response = {
 
 module UntagResource = {
   type t;
-  type response = unit
-type request = {
+  type request = {
 @as("tagKeys") tagKeys: option<tagKeyList>,
 @as("resourceArn") resourceArn: option<resourceArn>
 }
+  type response = unit
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
 module TagResource = {
   type t;
-  type response = unit
-type request = {
+  type request = {
 @as("tags") tags: option<tagMap>,
 @as("resourceArn") resourceArn: option<resourceArn>
 }
+  type response = unit
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
 }
@@ -342,7 +336,7 @@ module StopJob = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("jobSummary") jobSummary: option<jobSummary>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "StopJobCommand";
@@ -361,7 +355,7 @@ module StartJob = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("jobSummary") jobSummary: option<jobSummary>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "StartJobCommand";
@@ -376,7 +370,7 @@ module StartDeployment = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("jobSummary") jobSummary: option<jobSummary>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "StartDeploymentCommand";
@@ -388,7 +382,7 @@ module ListTagsForResource = {
   type request = {
 @as("resourceArn") resourceArn: option<resourceArn>
 }
-type response = {
+  type response = {
 @as("tags") tags: tagMap
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
@@ -400,7 +394,7 @@ module GetWebhook = {
   type request = {
 @as("webhookId") webhookId: option<webhookId>
 }
-type response = {
+  type response = {
 @as("webhook") webhook: option<webhook>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetWebhookCommand";
@@ -413,7 +407,7 @@ module GetBackendEnvironment = {
 @as("environmentName") environmentName: option<environmentName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("backendEnvironment") backendEnvironment: option<backendEnvironment>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetBackendEnvironmentCommand";
@@ -425,7 +419,7 @@ module DeleteWebhook = {
   type request = {
 @as("webhookId") webhookId: option<webhookId>
 }
-type response = {
+  type response = {
 @as("webhook") webhook: option<webhook>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteWebhookCommand";
@@ -439,7 +433,7 @@ module DeleteJob = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("jobSummary") jobSummary: option<jobSummary>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteJobCommand";
@@ -452,7 +446,7 @@ module DeleteBackendEnvironment = {
 @as("environmentName") environmentName: option<environmentName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("backendEnvironment") backendEnvironment: option<backendEnvironment>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteBackendEnvironmentCommand";
@@ -466,7 +460,7 @@ module CreateWebhook = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("webhook") webhook: option<webhook>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateWebhookCommand";
@@ -475,15 +469,15 @@ type response = {
 
 module CreateDeployment = {
   type t;
+  type request = {
+@as("fileMap") fileMap: fileMap,
+@as("branchName") branchName: option<branchName>,
+@as("appId") appId: option<appId>
+}
   type response = {
 @as("zipUploadUrl") zipUploadUrl: option<uploadUrl>,
 @as("fileUploadUrls") fileUploadUrls: option<fileUploadUrls>,
 @as("jobId") jobId: jobId
-}
-type request = {
-@as("fileMap") fileMap: fileMap,
-@as("branchName") branchName: option<branchName>,
-@as("appId") appId: option<appId>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateDeploymentCommand";
   @send external send: (clientType, t) => Js.Promise.t<response> = "send";
@@ -497,7 +491,7 @@ module CreateBackendEnvironment = {
 @as("environmentName") environmentName: option<environmentName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("backendEnvironment") backendEnvironment: option<backendEnvironment>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateBackendEnvironmentCommand";
@@ -525,7 +519,7 @@ module UpdateBranch = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("branch") branch: option<branch>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "UpdateBranchCommand";
@@ -539,7 +533,7 @@ module ListWebhooks = {
 @as("nextToken") nextToken: nextToken,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: nextToken,
 @as("webhooks") webhooks: option<webhooks>
 }
@@ -555,7 +549,7 @@ module ListJobs = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: nextToken,
 @as("jobSummaries") jobSummaries: option<jobSummaries>
 }
@@ -571,7 +565,7 @@ module ListBackendEnvironments = {
 @as("environmentName") environmentName: environmentName,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: nextToken,
 @as("backendEnvironments") backendEnvironments: option<backendEnvironments>
 }
@@ -588,7 +582,7 @@ module ListArtifacts = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: nextToken,
 @as("artifacts") artifacts: option<artifacts>
 }
@@ -602,7 +596,7 @@ module GetBranch = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("branch") branch: option<branch>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetBranchCommand";
@@ -615,7 +609,7 @@ module DeleteBranch = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("branch") branch: option<branch>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteBranchCommand";
@@ -644,7 +638,7 @@ module CreateBranch = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("branch") branch: option<branch>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateBranchCommand";
@@ -674,7 +668,7 @@ module UpdateApp = {
 @as("name") name: name,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("app") app: option<app>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "UpdateAppCommand";
@@ -688,7 +682,7 @@ module ListBranches = {
 @as("nextToken") nextToken: nextToken,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: nextToken,
 @as("branches") branches: option<branches>
 }
@@ -701,7 +695,7 @@ module GetApp = {
   type request = {
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("app") app: option<app>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetAppCommand";
@@ -713,7 +707,7 @@ module DeleteApp = {
   type request = {
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("app") app: option<app>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteAppCommand";
@@ -743,7 +737,7 @@ module CreateApp = {
 @as("description") description: description,
 @as("name") name: option<name>
 }
-type response = {
+  type response = {
 @as("app") app: option<app>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateAppCommand";
@@ -760,7 +754,7 @@ module UpdateDomainAssociation = {
 @as("domainName") domainName: option<domainName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("domainAssociation") domainAssociation: option<domainAssociation>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "UpdateDomainAssociationCommand";
@@ -773,7 +767,7 @@ module ListApps = {
 @as("maxResults") maxResults: maxResults,
 @as("nextToken") nextToken: nextToken
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: nextToken,
 @as("apps") apps: option<apps>
 }
@@ -788,7 +782,7 @@ module GetJob = {
 @as("branchName") branchName: option<branchName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("job") job: option<job>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetJobCommand";
@@ -801,7 +795,7 @@ module GetDomainAssociation = {
 @as("domainName") domainName: option<domainName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("domainAssociation") domainAssociation: option<domainAssociation>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "GetDomainAssociationCommand";
@@ -814,7 +808,7 @@ module DeleteDomainAssociation = {
 @as("domainName") domainName: option<domainName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("domainAssociation") domainAssociation: option<domainAssociation>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "DeleteDomainAssociationCommand";
@@ -831,7 +825,7 @@ module CreateDomainAssociation = {
 @as("domainName") domainName: option<domainName>,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("domainAssociation") domainAssociation: option<domainAssociation>
 }
   @module("@aws-sdk/client-amplify") @new external new_: (Js.Promise.t<request>) => t = "CreateDomainAssociationCommand";
@@ -845,7 +839,7 @@ module ListDomainAssociations = {
 @as("nextToken") nextToken: nextToken,
 @as("appId") appId: option<appId>
 }
-type response = {
+  type response = {
 @as("nextToken") nextToken: nextToken,
 @as("domainAssociations") domainAssociations: option<domainAssociations>
 }

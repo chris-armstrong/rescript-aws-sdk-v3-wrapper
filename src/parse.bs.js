@@ -82,7 +82,7 @@ function parseEnumNameValue($$enum) {
 
 function parseArnReferenceTrait(value) {
   var record = Json.Decode.parseObject(value);
-  var type__ = Json.Decode.parseString(Json.Decode.field(record, "type"));
+  var type__ = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(record, "type")), Json.Decode.parseString);
   var service_ = Json.Decode.parseString(Json.Decode.field(record, "service"));
   var resource_ = Json.Decode.parseString(Json.Decode.field(record, "resource"));
   return Json.ResultHelpers.map3(type__, service_, resource_, (function (type_, service, resource) {
@@ -124,10 +124,15 @@ function parseTrait(name, value) {
                               _0: name
                             };
                     }));
+    case "aws.protocols#awsJson1_0" :
+        return {
+                TAG: /* Ok */0,
+                _0: /* AwsProtocolAwsJson1_0Trait */11
+              };
     case "aws.protocols#awsJson1_1" :
         return {
                 TAG: /* Ok */0,
-                _0: /* AwsProtocolAwsJson1_1Trait */11
+                _0: /* AwsProtocolAwsJson1_1Trait */12
               };
     case "aws.protocols#awsQuery" :
         return {
@@ -142,12 +147,17 @@ function parseTrait(name, value) {
     case "smithy.api#box" :
         return {
                 TAG: /* Ok */0,
-                _0: /* BoxTrait */12
+                _0: /* BoxTrait */13
               };
     case "smithy.api#cors" :
         return {
                 TAG: /* Ok */0,
                 _0: /* CorsTrait */4
+              };
+    case "smithy.api#deprecated" :
+        return {
+                TAG: /* Ok */0,
+                _0: /* DeprecatedTrait */17
               };
     case "smithy.api#documentation" :
         return Belt_Result.map(Json.Decode.parseString(value), (function (documentation) {
@@ -194,10 +204,20 @@ function parseTrait(name, value) {
                 TAG: /* Ok */0,
                 _0: /* HttpLabelTrait */7
               };
+    case "smithy.api#httpPayload" :
+        return {
+                TAG: /* Ok */0,
+                _0: /* HttpPayloadTrait */15
+              };
     case "smithy.api#httpQuery" :
         return {
                 TAG: /* Ok */0,
                 _0: /* HttpQueryTrait */8
+              };
+    case "smithy.api#httpQueryParams" :
+        return {
+                TAG: /* Ok */0,
+                _0: /* HttpQueryParams */16
               };
     case "smithy.api#idempotencyToken" :
         return {
@@ -220,6 +240,13 @@ function parseTrait(name, value) {
                               _1: max
                             };
                     }));
+    case "smithy.api#mediaType" :
+        return Belt_Result.map(Json.Decode.parseString(value), (function (mediaType) {
+                      return {
+                              TAG: /* MediaTypeTrait */17,
+                              _0: mediaType
+                            };
+                    }));
     case "smithy.api#paginated" :
         return {
                 TAG: /* Ok */0,
@@ -233,10 +260,14 @@ function parseTrait(name, value) {
                             };
                     }));
     case "smithy.api#range" :
-        return Belt_Result.map(Json.Decode.parseInteger(Json.Decode.field(Json.Decode.parseObject(value), "min")), (function (min) {
+        var obj = Json.Decode.parseObject(value);
+        var min = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(obj, "min")), Json.Decode.parseInteger);
+        var max = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(obj, "max")), Json.Decode.parseInteger);
+        return Json.ResultHelpers.map2(min, max, (function (min, max) {
                       return {
                               TAG: /* RangeTrait */10,
-                              _0: min
+                              _0: min,
+                              _1: max
                             };
                     }));
     case "smithy.api#references" :
@@ -259,8 +290,15 @@ function parseTrait(name, value) {
     case "smithy.api#sensitive" :
         return {
                 TAG: /* Ok */0,
-                _0: /* SensitiveTrait */13
+                _0: /* SensitiveTrait */14
               };
+    case "smithy.api#tags" :
+        return Belt_Result.map(Json.Decode.parseArray(value, Json.Decode.parseString), (function (tags) {
+                      return {
+                              TAG: /* TagsTrait */16,
+                              _0: tags
+                            };
+                    }));
     case "smithy.api#timestampFormat" :
         return Belt_Result.map(Json.Decode.parseString(value), (function (timestampFormat) {
                       return {
@@ -460,6 +498,22 @@ function parseResourceShape(param) {
         };
 }
 
+function parseSetShape(shapeDict) {
+  var target = Json.Decode.parseString(Json.Decode.field(Json.Decode.parseObject(Json.Decode.field(shapeDict, "member")), "target"));
+  var traits = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(shapeDict, "traits")), (function (traits) {
+          return Json.Decode.parseRecord(traits, parseTrait);
+        }));
+  return Json.ResultHelpers.map2(target, traits, (function (target, traits) {
+                return {
+                        TAG: /* SetShape */13,
+                        _0: {
+                          traits: traits,
+                          target: target
+                        }
+                      };
+              }));
+}
+
 function parseTimestampShape(shapeDict) {
   var traits_ = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(shapeDict, "traits")), (function (traits) {
           return Json.Decode.parseRecord(traits, parseTrait);
@@ -497,7 +551,15 @@ function parseShape(name, shape) {
                   case "double" :
                       descriptor_ = Belt_Result.map(parsePrimitive(shapeDict), (function (primitive) {
                               return {
-                                      TAG: /* DoubleShape */11,
+                                      TAG: /* DoubleShape */12,
+                                      _0: primitive
+                                    };
+                            }));
+                      break;
+                  case "float" :
+                      descriptor_ = Belt_Result.map(parsePrimitive(shapeDict), (function (primitive) {
+                              return {
+                                      TAG: /* FloatShape */11,
                                       _0: primitive
                                     };
                             }));
@@ -535,6 +597,9 @@ function parseShape(name, shape) {
                       break;
                   case "service" :
                       descriptor_ = parseServiceShape(shapeDict);
+                      break;
+                  case "set" :
+                      descriptor_ = parseSetShape(shapeDict);
                       break;
                   case "string" :
                       descriptor_ = parseStringShape(shapeDict);
@@ -595,6 +660,7 @@ exports.parseMapShape = parseMapShape;
 exports.parseUnionShape = parseUnionShape;
 exports.parsePrimitive = parsePrimitive;
 exports.parseResourceShape = parseResourceShape;
+exports.parseSetShape = parseSetShape;
 exports.parseTimestampShape = parseTimestampShape;
 exports.parseShape = parseShape;
 exports.parseShapes = parseShapes;
