@@ -15,3 +15,4 @@
 * Combined request create / send helper in each module
 * Run code through refmt
 * Generate types and operations with documentation (from Documentation traits)
+* Hand-written wrappers around AWS-helpers like DynamoDB's DocumentClient, etc.
