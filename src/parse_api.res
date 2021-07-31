@@ -36,7 +36,7 @@ type enumPair = {
   value: string,
 }
 
-type traitValueType =
+type trait =
   | DocumentationTrait(string)
   | ErrorTrait(string)
   | HttpErrorTrait(float)
@@ -49,8 +49,6 @@ type traitValueType =
   | ApiXmlNamespaceTrait(string)
   | AwsProtocolAwsQueryTrait
   | EnumTrait(array<enumPair>)
-
-type trait = (string, string, traitValueType)
 
 exception UnknownTrait(string)
 
@@ -91,16 +89,21 @@ type mapShapeDetails = {
   mapValue: mapKeyValue,
 }
 
-type rec shape =
-  | ListShape(string, listShapeDetails)
-  | OperationShape(string, operationShapeDetails)
-  | StructureShape(string, structureShapeDetails)
-  | ServiceShape(string, serviceShapeDetails)
-  | BlobShape(string)
-  | BooleanShape(string)
-  | IntegerShape(string)
-  | StringShape(string, stringShapeDetails)
-  | MapShape(string, mapShapeDetails)
+type shapeDescriptor =
+  | ListShape(listShapeDetails)
+  | OperationShape(operationShapeDetails)
+  | StructureShape(structureShapeDetails)
+  | ServiceShape(serviceShapeDetails)
+  | BlobShape
+  | BooleanShape
+  | IntegerShape
+  | StringShape(stringShapeDetails)
+  | MapShape(mapShapeDetails)
+
+type shape = {
+  name: string,
+  descriptor: shapeDescriptor
+}
 
 let extractTargetSpec = target => target->parseObject->field("target")->parseString
 
@@ -134,8 +137,6 @@ let parseEnumNameValue = (enum): Belt.Result.t<enumPair, jsonParseError> => {
 }
 
 let parseTrait = (name, value: t<jsonTreeRef, jsonParseError>) => {
-  let namespace = symbolNamespace(name)
-  let traitName = symbolName(name)
   let traitValue = switch name {
   | "aws.api#service" => parseServiceTrait(value)
   | "smithy.api#documentation" =>
@@ -155,13 +156,13 @@ let parseTrait = (name, value: t<jsonTreeRef, jsonParseError>) => {
   | "aws.protocols#awsQuery" => Ok(AwsProtocolAwsQueryTrait)
   | _ => raise(UnknownTrait(name))
   }
-  traitValue->map(traitValueDecoded => (namespace, traitName, traitValueDecoded))
+  traitValue
 }
 
-let parseListShape = (shapeName, shape) => {
+let parseListShape = (shape) => {
   let target_ = shape->field("member")->extractTargetSpec
   let traits_ = optional(shape->field("traits")->parseRecord(parseTrait))
-  map2(target_, traits_, (target, traits) => ListShape(shapeName, {target: target, traits: traits}))
+  map2(target_, traits_, (target, traits) => ListShape({target: target, traits: traits}))
 }
 
 let parseMember = (name, value) => {
@@ -178,16 +179,15 @@ let parseMembers = value => {
   parseRecord(value, parseMember)
 }
 
-let parseStructureShape = (shapeName, value) => {
+let parseStructureShape = (value) => {
   let members = value->field("members")->parseMembers
   let traits = optional(value->field("traits")->parseRecord(parseTrait))
   map2(members, traits, (members, traits) => StructureShape(
-    shapeName,
     {members: members, traits: traits},
   ))
 }
 
-let parseOperationShape = (shapeName, shape) => {
+let parseOperationShape = (shape) => {
   let inputTarget = shape->field("input")->extractTargetSpec
   let outputTarget = optional(shape->field("output")->extractTargetSpec)
   let errors = optional(shape->field("errors")->parseArray(extractTargetSpec))
@@ -200,7 +200,6 @@ let parseOperationShape = (shapeName, shape) => {
     errorsValue,
     documentationValue,
   ) => OperationShape(
-    shapeName,
     {
       input: inputValue,
       output: outputValue,
@@ -210,12 +209,11 @@ let parseOperationShape = (shapeName, shape) => {
   ))
 }
 
-let parseServiceShape = (shapeName, shapeDict) => {
+let parseServiceShape = (shapeDict) => {
   let version_ = shapeDict->field("version")->parseString
   let operations_ = shapeDict->field("operations")->parseArray(extractTargetSpec)
   let traits_ = shapeDict->field("traits")->parseRecord(parseTrait)
   map3(version_, operations_, traits_, (version, operations, traits) => ServiceShape(
-    shapeName,
     {
       version: version,
       operations: operations,
@@ -224,10 +222,10 @@ let parseServiceShape = (shapeName, shapeDict) => {
   ))
 }
 
-let parseStringShape = (shapeName, shapeDict) => {
+let parseStringShape = (shapeDict) => {
   let traits_ =
     shapeDict->field("traits")->optional->mapOptional(traits => parseRecord(traits, parseTrait))
-  map(traits_, traits => StringShape(shapeName, {traits: traits}))
+  map(traits_, traits => StringShape({traits: traits}))
 }
 
 let parseMapKey = val => {
@@ -237,10 +235,10 @@ let parseMapKey = val => {
   map2(target_, traits_, (target, traits) => {target: target, traits: traits})
 }
 
-let parseMapShape = (shapeName, shapeDict) => {
+let parseMapShape = (shapeDict) => {
   let key_ = parseMapKey(shapeDict->field("key"))
   let value_ = parseMapKey(shapeDict->field("key"))
-  map2(key_, value_, (key, value) => MapShape(shapeName, {mapKey: key, mapValue: value}))
+  map2(key_, value_, (key, value) => MapShape({mapKey: key, mapValue: value}))
 }
 
 let parseShape = (name, shape) => {
@@ -248,20 +246,21 @@ let parseShape = (name, shape) => {
   let shapeName = Js.String2.split(name, "#")[1]
   let shapeDict = parseObject(shape)
   let typeDiscriminator = shapeDict->field("type")->parseString
-  flatMap(typeDiscriminator, typeValue =>
-    switch typeValue {
-    | "list" => parseListShape(shapeName, shapeDict)
-    | "operation" => parseOperationShape(shapeName, shapeDict)
-    | "structure" => parseStructureShape(shapeName, shapeDict)
-    | "service" => parseServiceShape(shapeName, shapeDict)
-    | "blob" => Ok(BlobShape(shapeName))
-    | "boolean" => Ok(BooleanShape(shapeName))
-    | "integer" => Ok(IntegerShape(shapeName))
-    | "string" => parseStringShape(shapeName, shapeDict)
-    | "map" => parseMapShape(shapeName, shapeDict)
+  flatMap(typeDiscriminator, typeValue => {
+    let descriptor_ = switch typeValue {
+    | "list" => parseListShape(shapeDict)
+    | "operation" => parseOperationShape(shapeDict)
+    | "structure" => parseStructureShape(shapeDict)
+    | "service" => parseServiceShape(shapeDict)
+    | "blob" => Ok(BlobShape)
+    | "boolean" => Ok(BooleanShape)
+    | "integer" => Ok(IntegerShape)
+    | "string" => parseStringShape(shapeDict)
+    | "map" => parseMapShape(shapeDict)
     | _ => Error(CustomError(`unknown shape type ${shapeName}`))
     }
-  )
+    map(descriptor_, descriptor => { name, descriptor })
+  })
 }
 
 let parseShapes = shapesModel => parseRecord(shapesModel, parseShape)

@@ -91,95 +91,80 @@ function parseEnumNameValue($$enum) {
 }
 
 function parseTrait(name, value) {
-  var namespace = symbolNamespace(name);
-  var traitName = symbolName(name);
-  var traitValue;
   switch (name) {
     case "aws.api#service" :
-        traitValue = parseServiceTrait(value);
-        break;
+        return parseServiceTrait(value);
     case "aws.auth#sigv4" :
-        traitValue = Belt_Result.map(Json.Decode.parseString(Json.Decode.field(Json.Decode.parseObject(value), "name")), (function (name) {
-                return {
-                        TAG: /* AwsAuthSigV4Trait */5,
-                        _0: name
-                      };
-              }));
-        break;
+        return Belt_Result.map(Json.Decode.parseString(Json.Decode.field(Json.Decode.parseObject(value), "name")), (function (name) {
+                      return {
+                              TAG: /* AwsAuthSigV4Trait */5,
+                              _0: name
+                            };
+                    }));
     case "aws.protocols#awsQuery" :
-        traitValue = {
-          TAG: /* Ok */0,
-          _0: /* AwsProtocolAwsQueryTrait */2
-        };
-        break;
+        return {
+                TAG: /* Ok */0,
+                _0: /* AwsProtocolAwsQueryTrait */2
+              };
     case "smithy.api#documentation" :
-        traitValue = Belt_Result.map(Json.Decode.parseString(value), (function (documentation) {
-                return {
-                        TAG: /* DocumentationTrait */0,
-                        _0: documentation
-                      };
-              }));
-        break;
+        return Belt_Result.map(Json.Decode.parseString(value), (function (documentation) {
+                      return {
+                              TAG: /* DocumentationTrait */0,
+                              _0: documentation
+                            };
+                    }));
     case "smithy.api#enum" :
-        traitValue = Belt_Result.map(Json.Decode.parseArray(value, parseEnumNameValue), (function (enumPairs) {
-                return {
-                        TAG: /* EnumTrait */8,
-                        _0: enumPairs
-                      };
-              }));
-        break;
+        return Belt_Result.map(Json.Decode.parseArray(value, parseEnumNameValue), (function (enumPairs) {
+                      return {
+                              TAG: /* EnumTrait */8,
+                              _0: enumPairs
+                            };
+                    }));
     case "smithy.api#error" :
-        traitValue = Belt_Result.map(Json.Decode.parseString(value), (function (error) {
-                return {
-                        TAG: /* ErrorTrait */1,
-                        _0: error
-                      };
-              }));
-        break;
+        return Belt_Result.map(Json.Decode.parseString(value), (function (error) {
+                      return {
+                              TAG: /* ErrorTrait */1,
+                              _0: error
+                            };
+                    }));
     case "smithy.api#httpError" :
-        traitValue = Belt_Result.map(Json.Decode.parseNumber(value), (function (error) {
-                return {
-                        TAG: /* HttpErrorTrait */2,
-                        _0: error
-                      };
-              }));
-        break;
+        return Belt_Result.map(Json.Decode.parseNumber(value), (function (error) {
+                      return {
+                              TAG: /* HttpErrorTrait */2,
+                              _0: error
+                            };
+                    }));
     case "smithy.api#required" :
-        traitValue = {
-          TAG: /* Ok */0,
-          _0: /* RequiredTrait */0
-        };
-        break;
+        return {
+                TAG: /* Ok */0,
+                _0: /* RequiredTrait */0
+              };
     case "smithy.api#title" :
-        traitValue = Belt_Result.map(Json.Decode.parseString(value), (function (title) {
-                return {
-                        TAG: /* ApiTitleTrait */6,
-                        _0: title
-                      };
-              }));
-        break;
+        return Belt_Result.map(Json.Decode.parseString(value), (function (title) {
+                      return {
+                              TAG: /* ApiTitleTrait */6,
+                              _0: title
+                            };
+                    }));
     case "smithy.api#xmlFlattened" :
-        traitValue = {
-          TAG: /* Ok */0,
-          _0: /* XmlFlattenedTrait */1
-        };
-        break;
+        return {
+                TAG: /* Ok */0,
+                _0: /* XmlFlattenedTrait */1
+              };
     case "smithy.api#xmlName" :
-        traitValue = Belt_Result.map(Json.Decode.parseString(value), (function (xmlName) {
-                return {
-                        TAG: /* XmlNameTrait */4,
-                        _0: xmlName
-                      };
-              }));
-        break;
+        return Belt_Result.map(Json.Decode.parseString(value), (function (xmlName) {
+                      return {
+                              TAG: /* XmlNameTrait */4,
+                              _0: xmlName
+                            };
+                    }));
     case "smithy.api#xmlNamespace" :
-        traitValue = Belt_Result.map(Json.Decode.parseString(Json.Decode.field(Json.Decode.parseObject(value), "uri")), (function (uri) {
-                return {
-                        TAG: /* ApiXmlNamespaceTrait */7,
-                        _0: uri
-                      };
-              }));
-        break;
+        return Belt_Result.map(Json.Decode.parseString(Json.Decode.field(Json.Decode.parseObject(value), "uri")), (function (uri) {
+                      return {
+                              TAG: /* ApiXmlNamespaceTrait */7,
+                              _0: uri
+                            };
+                    }));
     default:
       throw {
             RE_EXN_ID: UnknownTrait,
@@ -187,23 +172,15 @@ function parseTrait(name, value) {
             Error: new Error()
           };
   }
-  return Belt_Result.map(traitValue, (function (traitValueDecoded) {
-                return [
-                        namespace,
-                        traitName,
-                        traitValueDecoded
-                      ];
-              }));
 }
 
-function parseListShape(shapeName, shape) {
+function parseListShape(shape) {
   var target_ = extractTargetSpec(Json.Decode.field(shape, "member"));
   var traits_ = Json.Decode.optional(Json.Decode.parseRecord(Json.Decode.field(shape, "traits"), parseTrait));
   return Json.ResultHelpers.map2(target_, traits_, (function (target, traits) {
                 return {
                         TAG: /* ListShape */0,
-                        _0: shapeName,
-                        _1: {
+                        _0: {
                           target: target,
                           traits: traits
                         }
@@ -228,15 +205,14 @@ function parseMembers(value) {
   return Json.Decode.parseRecord(value, parseMember);
 }
 
-function parseStructureShape(shapeName, value) {
+function parseStructureShape(value) {
   var value$1 = Json.Decode.field(value, "members");
   var members = Json.Decode.parseRecord(value$1, parseMember);
   var traits = Json.Decode.optional(Json.Decode.parseRecord(Json.Decode.field(value, "traits"), parseTrait));
   return Json.ResultHelpers.map2(members, traits, (function (members, traits) {
                 return {
                         TAG: /* StructureShape */2,
-                        _0: shapeName,
-                        _1: {
+                        _0: {
                           traits: traits,
                           members: members
                         }
@@ -244,7 +220,7 @@ function parseStructureShape(shapeName, value) {
               }));
 }
 
-function parseOperationShape(shapeName, shape) {
+function parseOperationShape(shape) {
   var inputTarget = extractTargetSpec(Json.Decode.field(shape, "input"));
   var outputTarget = Json.Decode.optional(extractTargetSpec(Json.Decode.field(shape, "output")));
   var errors = Json.Decode.optional(Json.Decode.parseArray(Json.Decode.field(shape, "errors"), extractTargetSpec));
@@ -252,8 +228,7 @@ function parseOperationShape(shapeName, shape) {
   return Json.ResultHelpers.map4(inputTarget, outputTarget, errors, documentation, (function (inputValue, outputValue, errorsValue, documentationValue) {
                 return {
                         TAG: /* OperationShape */1,
-                        _0: shapeName,
-                        _1: {
+                        _0: {
                           input: inputValue,
                           output: outputValue,
                           errors: errorsValue,
@@ -263,15 +238,14 @@ function parseOperationShape(shapeName, shape) {
               }));
 }
 
-function parseServiceShape(shapeName, shapeDict) {
+function parseServiceShape(shapeDict) {
   var version_ = Json.Decode.parseString(Json.Decode.field(shapeDict, "version"));
   var operations_ = Json.Decode.parseArray(Json.Decode.field(shapeDict, "operations"), extractTargetSpec);
   var traits_ = Json.Decode.parseRecord(Json.Decode.field(shapeDict, "traits"), parseTrait);
   return Json.ResultHelpers.map3(version_, operations_, traits_, (function (version, operations, traits) {
                 return {
                         TAG: /* ServiceShape */3,
-                        _0: shapeName,
-                        _1: {
+                        _0: {
                           version: version,
                           operations: operations,
                           traits: traits
@@ -280,15 +254,14 @@ function parseServiceShape(shapeName, shapeDict) {
               }));
 }
 
-function parseStringShape(shapeName, shapeDict) {
+function parseStringShape(shapeDict) {
   var traits_ = Json.ResultHelpers.mapOptional(Json.Decode.optional(Json.Decode.field(shapeDict, "traits")), (function (traits) {
           return Json.Decode.parseRecord(traits, parseTrait);
         }));
   return Belt_Result.map(traits_, (function (traits) {
                 return {
-                        TAG: /* StringShape */7,
-                        _0: shapeName,
-                        _1: {
+                        TAG: /* StringShape */4,
+                        _0: {
                           traits: traits
                         }
                       };
@@ -307,14 +280,13 @@ function parseMapKey(val) {
               }));
 }
 
-function parseMapShape(shapeName, shapeDict) {
+function parseMapShape(shapeDict) {
   var key_ = parseMapKey(Json.Decode.field(shapeDict, "key"));
   var value_ = parseMapKey(Json.Decode.field(shapeDict, "key"));
   return Json.ResultHelpers.map2(key_, value_, (function (key, value) {
                 return {
-                        TAG: /* MapShape */8,
-                        _0: shapeName,
-                        _1: {
+                        TAG: /* MapShape */5,
+                        _0: {
                           mapKey: key,
                           mapValue: value
                         }
@@ -328,52 +300,59 @@ function parseShape(name, shape) {
   var shapeDict = Json.Decode.parseObject(shape);
   var typeDiscriminator = Json.Decode.parseString(Json.Decode.field(shapeDict, "type"));
   return Belt_Result.flatMap(typeDiscriminator, (function (typeValue) {
+                var descriptor_;
                 switch (typeValue) {
                   case "blob" :
-                      return {
-                              TAG: /* Ok */0,
-                              _0: {
-                                TAG: /* BlobShape */4,
-                                _0: shapeName
-                              }
-                            };
+                      descriptor_ = {
+                        TAG: /* Ok */0,
+                        _0: /* BlobShape */0
+                      };
+                      break;
                   case "boolean" :
-                      return {
-                              TAG: /* Ok */0,
-                              _0: {
-                                TAG: /* BooleanShape */5,
-                                _0: shapeName
-                              }
-                            };
+                      descriptor_ = {
+                        TAG: /* Ok */0,
+                        _0: /* BooleanShape */1
+                      };
+                      break;
                   case "integer" :
-                      return {
-                              TAG: /* Ok */0,
-                              _0: {
-                                TAG: /* IntegerShape */6,
-                                _0: shapeName
-                              }
-                            };
+                      descriptor_ = {
+                        TAG: /* Ok */0,
+                        _0: /* IntegerShape */2
+                      };
+                      break;
                   case "list" :
-                      return parseListShape(shapeName, shapeDict);
+                      descriptor_ = parseListShape(shapeDict);
+                      break;
                   case "map" :
-                      return parseMapShape(shapeName, shapeDict);
+                      descriptor_ = parseMapShape(shapeDict);
+                      break;
                   case "operation" :
-                      return parseOperationShape(shapeName, shapeDict);
+                      descriptor_ = parseOperationShape(shapeDict);
+                      break;
                   case "service" :
-                      return parseServiceShape(shapeName, shapeDict);
+                      descriptor_ = parseServiceShape(shapeDict);
+                      break;
                   case "string" :
-                      return parseStringShape(shapeName, shapeDict);
+                      descriptor_ = parseStringShape(shapeDict);
+                      break;
                   case "structure" :
-                      return parseStructureShape(shapeName, shapeDict);
+                      descriptor_ = parseStructureShape(shapeDict);
+                      break;
                   default:
-                    return {
-                            TAG: /* Error */1,
-                            _0: {
-                              TAG: /* CustomError */4,
-                              _0: "unknown shape type " + shapeName
-                            }
-                          };
+                    descriptor_ = {
+                      TAG: /* Error */1,
+                      _0: {
+                        TAG: /* CustomError */4,
+                        _0: "unknown shape type " + shapeName
+                      }
+                    };
                 }
+                return Belt_Result.map(descriptor_, (function (descriptor) {
+                              return {
+                                      name: name,
+                                      descriptor: descriptor
+                                    };
+                            }));
               }));
 }
 
