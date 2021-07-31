@@ -311,7 +311,7 @@ module UpdateAnomalyDetector = {
   type response = {
 @as("AnomalyDetectorArn") anomalyDetectorArn: arn
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "UpdateAnomalyDetectorCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "UpdateAnomalyDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -322,7 +322,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -333,7 +333,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -344,7 +344,7 @@ module PutFeedback = {
 @as("AnomalyDetectorArn") anomalyDetectorArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "PutFeedbackCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "PutFeedbackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -356,7 +356,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -372,7 +372,7 @@ module GetFeedback = {
 @as("NextToken") nextToken: nextToken,
 @as("AnomalyGroupTimeSeriesFeedback") anomalyGroupTimeSeriesFeedback: timeSeriesFeedbackList
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "GetFeedbackCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "GetFeedbackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -392,7 +392,7 @@ module DescribeAnomalyDetector = {
 @as("AnomalyDetectorName") anomalyDetectorName: anomalyDetectorName,
 @as("AnomalyDetectorArn") anomalyDetectorArn: arn
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "DescribeAnomalyDetectorCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "DescribeAnomalyDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -408,7 +408,7 @@ module DescribeAnomalyDetectionExecutions = {
 @as("NextToken") nextToken: nextToken,
 @as("ExecutionList") executionList: executionList
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "DescribeAnomalyDetectionExecutionsCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "DescribeAnomalyDetectionExecutionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -418,7 +418,7 @@ module DeleteAnomalyDetector = {
 @as("AnomalyDetectorArn") anomalyDetectorArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "DeleteAnomalyDetectorCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "DeleteAnomalyDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -428,7 +428,7 @@ module DeleteAlert = {
 @as("AlertArn") alertArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "DeleteAlertCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "DeleteAlertCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -444,7 +444,7 @@ module CreateAnomalyDetector = {
   type response = {
 @as("AnomalyDetectorArn") anomalyDetectorArn: arn
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "CreateAnomalyDetectorCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "CreateAnomalyDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -461,7 +461,7 @@ module CreateAlert = {
   type response = {
 @as("AlertArn") alertArn: arn
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "CreateAlertCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "CreateAlertCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -471,7 +471,7 @@ module BackTestAnomalyDetector = {
 @as("AnomalyDetectorArn") anomalyDetectorArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "BackTestAnomalyDetectorCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "BackTestAnomalyDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -481,7 +481,7 @@ module ActivateAnomalyDetector = {
 @as("AnomalyDetectorArn") anomalyDetectorArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "ActivateAnomalyDetectorCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "ActivateAnomalyDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -496,7 +496,7 @@ module ListMetricSets = {
 @as("NextToken") nextToken: nextToken,
 @as("MetricSetSummaryList") metricSetSummaryList: metricSetSummaryList
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "ListMetricSetsCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "ListMetricSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -513,7 +513,7 @@ module ListAnomalyGroupSummaries = {
 @as("AnomalyGroupStatistics") anomalyGroupStatistics: anomalyGroupStatistics,
 @as("AnomalyGroupSummaryList") anomalyGroupSummaryList: anomalyGroupSummaryList
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "ListAnomalyGroupSummariesCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "ListAnomalyGroupSummariesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -527,7 +527,7 @@ module ListAnomalyDetectors = {
 @as("NextToken") nextToken: nextToken,
 @as("AnomalyDetectorSummaryList") anomalyDetectorSummaryList: anomalyDetectorSummaryList
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "ListAnomalyDetectorsCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "ListAnomalyDetectorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -542,7 +542,7 @@ module ListAlerts = {
 @as("NextToken") nextToken: nextToken,
 @as("AlertSummaryList") alertSummaryList: alertSummaryList
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "ListAlertsCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "ListAlertsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -554,7 +554,7 @@ module DescribeAlert = {
   type response = {
 @as("Alert") alert: alert
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "DescribeAlertCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "DescribeAlertCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -574,7 +574,7 @@ module ListAnomalyGroupTimeSeries = {
 @as("MetricName") metricName: metricName,
 @as("AnomalyGroupId") anomalyGroupId: uUID
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "ListAnomalyGroupTimeSeriesCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "ListAnomalyGroupTimeSeriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -587,7 +587,7 @@ module GetSampleData = {
 @as("SampleRows") sampleRows: sampleRows,
 @as("HeaderValues") headerValues: headerValueList
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "GetSampleDataCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "GetSampleDataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -606,7 +606,7 @@ module UpdateMetricSet = {
   type response = {
 @as("MetricSetArn") metricSetArn: arn
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "UpdateMetricSetCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "UpdateMetricSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -630,7 +630,7 @@ module DescribeMetricSet = {
 @as("AnomalyDetectorArn") anomalyDetectorArn: arn,
 @as("MetricSetArn") metricSetArn: arn
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "DescribeMetricSetCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "DescribeMetricSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -652,7 +652,7 @@ module CreateMetricSet = {
   type response = {
 @as("MetricSetArn") metricSetArn: arn
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "CreateMetricSetCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "CreateMetricSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -665,6 +665,6 @@ module GetAnomalyGroup = {
   type response = {
 @as("AnomalyGroup") anomalyGroup: anomalyGroup
 }
-  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (Js.Promise.t<request>) => t = "GetAnomalyGroupCommand";
+  @module("@aws-sdk/client-lookoutmetrics") @new external new_: (request) => t = "GetAnomalyGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

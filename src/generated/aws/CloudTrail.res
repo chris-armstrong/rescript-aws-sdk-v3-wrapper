@@ -149,7 +149,7 @@ module UpdateTrail = {
 @as("S3BucketName") s3BucketName: amazonawsString,
 @as("Name") name: amazonawsString
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "UpdateTrailCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "UpdateTrailCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -159,7 +159,7 @@ module StopLogging = {
 @as("Name") name: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "StopLoggingCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "StopLoggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -169,7 +169,7 @@ module StartLogging = {
 @as("Name") name: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "StartLoggingCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "StartLoggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -197,7 +197,7 @@ module GetTrailStatus = {
 @as("LatestDeliveryError") latestDeliveryError: amazonawsString,
 @as("IsLogging") isLogging: amazonawsBoolean
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "GetTrailStatusCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "GetTrailStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -207,7 +207,7 @@ module DeleteTrail = {
 @as("Name") name: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "DeleteTrailCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "DeleteTrailCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -219,7 +219,7 @@ module GetTrail = {
   type response = {
 @as("Trail") trail: trail
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "GetTrailCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "GetTrailCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -230,7 +230,7 @@ module RemoveTags = {
 @as("ResourceId") resourceId: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "RemoveTagsCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "RemoveTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -244,7 +244,7 @@ module PutInsightSelectors = {
 @as("InsightSelectors") insightSelectors: insightSelectors,
 @as("TrailARN") trailARN: amazonawsString
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "PutInsightSelectorsCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "PutInsightSelectorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -257,7 +257,7 @@ module ListTrails = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Trails") trails: trails
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "ListTrailsCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "ListTrailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -272,7 +272,7 @@ module ListPublicKeys = {
 @as("NextToken") nextToken: amazonawsString,
 @as("PublicKeyList") publicKeyList: publicKeyList
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "ListPublicKeysCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "ListPublicKeysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -285,7 +285,7 @@ module GetInsightSelectors = {
 @as("InsightSelectors") insightSelectors: insightSelectors,
 @as("TrailARN") trailARN: amazonawsString
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "GetInsightSelectorsCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "GetInsightSelectorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -298,7 +298,7 @@ module DescribeTrails = {
   type response = {
 @as("trailList") trailList: trailList
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "DescribeTrailsCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "DescribeTrailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -333,7 +333,7 @@ module CreateTrail = {
 @as("S3BucketName") s3BucketName: amazonawsString,
 @as("Name") name: amazonawsString
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "CreateTrailCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "CreateTrailCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -344,7 +344,7 @@ module AddTags = {
 @as("ResourceId") resourceId: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "AddTagsCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "AddTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -362,7 +362,7 @@ module LookupEvents = {
 @as("NextToken") nextToken: nextToken,
 @as("Events") events: eventsList
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "LookupEventsCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "LookupEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -376,7 +376,7 @@ module ListTags = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ResourceTagList") resourceTagList: resourceTagList
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "ListTagsCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "ListTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -392,7 +392,7 @@ module PutEventSelectors = {
 @as("EventSelectors") eventSelectors: eventSelectors,
 @as("TrailARN") trailARN: amazonawsString
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "PutEventSelectorsCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "PutEventSelectorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -406,6 +406,6 @@ module GetEventSelectors = {
 @as("EventSelectors") eventSelectors: eventSelectors,
 @as("TrailARN") trailARN: amazonawsString
 }
-  @module("@aws-sdk/client-cloudtrail") @new external new_: (Js.Promise.t<request>) => t = "GetEventSelectorsCommand";
+  @module("@aws-sdk/client-cloudtrail") @new external new_: (request) => t = "GetEventSelectorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

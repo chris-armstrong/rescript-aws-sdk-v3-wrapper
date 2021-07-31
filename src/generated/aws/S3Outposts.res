@@ -37,7 +37,7 @@ module DeleteEndpoint = {
 @as("EndpointId") endpointId: option<endpointId>
 }
   
-  @module("@aws-sdk/client-s3-outposts") @new external new_: (Js.Promise.t<request>) => t = "DeleteEndpointCommand";
+  @module("@aws-sdk/client-s3-outposts") @new external new_: (request) => t = "DeleteEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -51,7 +51,7 @@ module CreateEndpoint = {
   type response = {
 @as("EndpointArn") endpointArn: endpointArn
 }
-  @module("@aws-sdk/client-s3-outposts") @new external new_: (Js.Promise.t<request>) => t = "CreateEndpointCommand";
+  @module("@aws-sdk/client-s3-outposts") @new external new_: (request) => t = "CreateEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -65,6 +65,6 @@ module ListEndpoints = {
 @as("NextToken") nextToken: nextToken,
 @as("Endpoints") endpoints: endpoints
 }
-  @module("@aws-sdk/client-s3-outposts") @new external new_: (Js.Promise.t<request>) => t = "ListEndpointsCommand";
+  @module("@aws-sdk/client-s3-outposts") @new external new_: (request) => t = "ListEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -520,7 +520,7 @@ module SetInstanceHealth = {
 @as("InstanceId") instanceId: option<xmlStringMaxLen19>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "SetInstanceHealthCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "SetInstanceHealthCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -532,7 +532,7 @@ module SetDesiredCapacity = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "SetDesiredCapacityCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "SetDesiredCapacityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -545,7 +545,7 @@ module RecordLifecycleActionHeartbeat = {
 @as("LifecycleHookName") lifecycleHookName: option<asciiStringMaxLen255>
 }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "RecordLifecycleActionHeartbeatCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "RecordLifecycleActionHeartbeatCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -558,7 +558,7 @@ module PutWarmPool = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "PutWarmPoolCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "PutWarmPoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -577,7 +577,7 @@ module PutScheduledUpdateGroupAction = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "PutScheduledUpdateGroupActionCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "PutScheduledUpdateGroupActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -594,7 +594,7 @@ module PutLifecycleHook = {
 @as("LifecycleHookName") lifecycleHookName: option<asciiStringMaxLen255>
 }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "PutLifecycleHookCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "PutLifecycleHookCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -608,7 +608,7 @@ module ExecutePolicy = {
 @as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "ExecutePolicyCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "ExecutePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -621,7 +621,7 @@ module DescribeAccountLimits = {
 @as("MaxNumberOfLaunchConfigurations") maxNumberOfLaunchConfigurations: maxNumberOfLaunchConfigurations,
 @as("MaxNumberOfAutoScalingGroups") maxNumberOfAutoScalingGroups: maxNumberOfAutoScalingGroups
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<unit>) => t = "DescribeAccountLimitsCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeAccountLimitsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -632,7 +632,7 @@ module DeleteWarmPool = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeleteWarmPoolCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteWarmPoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -643,7 +643,7 @@ module DeleteScheduledAction = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeleteScheduledActionCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteScheduledActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -654,7 +654,7 @@ module DeletePolicy = {
 @as("AutoScalingGroupName") autoScalingGroupName: xmlStringMaxLen255
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeletePolicyCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeletePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -665,7 +665,7 @@ module DeleteNotificationConfiguration = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeleteNotificationConfigurationCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteNotificationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -676,7 +676,7 @@ module DeleteLifecycleHook = {
 @as("LifecycleHookName") lifecycleHookName: option<asciiStringMaxLen255>
 }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeleteLifecycleHookCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteLifecycleHookCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -686,7 +686,7 @@ module DeleteLaunchConfiguration = {
 @as("LaunchConfigurationName") launchConfigurationName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeleteLaunchConfigurationCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteLaunchConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -697,7 +697,7 @@ module DeleteAutoScalingGroup = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeleteAutoScalingGroupCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteAutoScalingGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -711,7 +711,7 @@ module CompleteLifecycleAction = {
 @as("LifecycleHookName") lifecycleHookName: option<asciiStringMaxLen255>
 }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "CompleteLifecycleActionCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "CompleteLifecycleActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -723,7 +723,7 @@ module CancelInstanceRefresh = {
   type response = {
 @as("InstanceRefreshId") instanceRefreshId: xmlStringMaxLen255
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "CancelInstanceRefreshCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "CancelInstanceRefreshCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -736,7 +736,7 @@ module TerminateInstanceInAutoScalingGroup = {
   type response = {
 @as("Activity") activity: activity
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "TerminateInstanceInAutoScalingGroupCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "TerminateInstanceInAutoScalingGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -747,7 +747,7 @@ module SuspendProcesses = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "SuspendProcessesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "SuspendProcessesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -759,7 +759,7 @@ module SetInstanceProtection = {
 @as("InstanceIds") instanceIds: option<instanceIds>
 }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "SetInstanceProtectionCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "SetInstanceProtectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -770,7 +770,7 @@ module ResumeProcesses = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "ResumeProcessesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "ResumeProcessesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -782,7 +782,7 @@ module PutNotificationConfiguration = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "PutNotificationConfigurationCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "PutNotificationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -794,7 +794,7 @@ module EnableMetricsCollection = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "EnableMetricsCollectionCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "EnableMetricsCollectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -805,7 +805,7 @@ module DisableMetricsCollection = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DisableMetricsCollectionCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DisableMetricsCollectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -816,7 +816,7 @@ module DetachLoadBalancers = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DetachLoadBalancersCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DetachLoadBalancersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -827,7 +827,7 @@ module DetachLoadBalancerTargetGroups = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DetachLoadBalancerTargetGroupsCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DetachLoadBalancerTargetGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -837,7 +837,7 @@ module DescribeTerminationPolicyTypes = {
   type response = {
 @as("TerminationPolicyTypes") terminationPolicyTypes: terminationPolicies
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<unit>) => t = "DescribeTerminationPolicyTypesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeTerminationPolicyTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -847,7 +847,7 @@ module DescribeLifecycleHookTypes = {
   type response = {
 @as("LifecycleHookTypes") lifecycleHookTypes: autoScalingNotificationTypes
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<unit>) => t = "DescribeLifecycleHookTypesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeLifecycleHookTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -857,7 +857,7 @@ module DescribeAutoScalingNotificationTypes = {
   type response = {
 @as("AutoScalingNotificationTypes") autoScalingNotificationTypes: autoScalingNotificationTypes
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<unit>) => t = "DescribeAutoScalingNotificationTypesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeAutoScalingNotificationTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -868,7 +868,7 @@ module AttachLoadBalancers = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "AttachLoadBalancersCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "AttachLoadBalancersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -879,7 +879,7 @@ module AttachLoadBalancerTargetGroups = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   type response = unit
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "AttachLoadBalancerTargetGroupsCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "AttachLoadBalancerTargetGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -890,7 +890,7 @@ module AttachInstances = {
 @as("InstanceIds") instanceIds: instanceIds
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "AttachInstancesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "AttachInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -904,7 +904,7 @@ module StartInstanceRefresh = {
   type response = {
 @as("InstanceRefreshId") instanceRefreshId: xmlStringMaxLen255
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "StartInstanceRefreshCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "StartInstanceRefreshCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -917,7 +917,7 @@ module ExitStandby = {
   type response = {
 @as("Activities") activities: activities
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "ExitStandbyCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "ExitStandbyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -931,7 +931,7 @@ module EnterStandby = {
   type response = {
 @as("Activities") activities: activities
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "EnterStandbyCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "EnterStandbyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -945,7 +945,7 @@ module DetachInstances = {
   type response = {
 @as("Activities") activities: activities
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DetachInstancesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DetachInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -963,7 +963,7 @@ module DescribeScheduledActions = {
 @as("NextToken") nextToken: xmlString,
 @as("ScheduledUpdateGroupActions") scheduledUpdateGroupActions: scheduledUpdateGroupActions
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeScheduledActionsCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeScheduledActionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -973,7 +973,7 @@ module DescribeScalingProcessTypes = {
   type response = {
 @as("Processes") processes: processes
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<unit>) => t = "DescribeScalingProcessTypesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeScalingProcessTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -990,7 +990,7 @@ module DescribeScalingActivities = {
 @as("NextToken") nextToken: xmlString,
 @as("Activities") activities: option<activities>
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeScalingActivitiesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeScalingActivitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1005,7 +1005,7 @@ module DescribeNotificationConfigurations = {
 @as("NextToken") nextToken: xmlString,
 @as("NotificationConfigurations") notificationConfigurations: option<notificationConfigurations>
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeNotificationConfigurationsCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeNotificationConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1016,7 +1016,7 @@ module DescribeMetricCollectionTypes = {
 @as("Granularities") granularities: metricGranularityTypes,
 @as("Metrics") metrics: metricCollectionTypes
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<unit>) => t = "DescribeMetricCollectionTypesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeMetricCollectionTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1031,7 +1031,7 @@ module DescribeLoadBalancers = {
 @as("NextToken") nextToken: xmlString,
 @as("LoadBalancers") loadBalancers: loadBalancerStates
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeLoadBalancersCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeLoadBalancersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1046,7 +1046,7 @@ module DescribeLoadBalancerTargetGroups = {
 @as("NextToken") nextToken: xmlString,
 @as("LoadBalancerTargetGroups") loadBalancerTargetGroups: loadBalancerTargetGroupStates
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeLoadBalancerTargetGroupsCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeLoadBalancerTargetGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1059,7 +1059,7 @@ module DescribeLifecycleHooks = {
   type response = {
 @as("LifecycleHooks") lifecycleHooks: lifecycleHooks
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeLifecycleHooksCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeLifecycleHooksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1069,7 +1069,7 @@ module DescribeAdjustmentTypes = {
   type response = {
 @as("AdjustmentTypes") adjustmentTypes: adjustmentTypes
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<unit>) => t = "DescribeAdjustmentTypesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (unit) => t = "DescribeAdjustmentTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1079,7 +1079,7 @@ module DeleteTags = {
 @as("Tags") tags: option<tags>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeleteTagsCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DeleteTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1089,7 +1089,7 @@ module CreateOrUpdateTags = {
 @as("Tags") tags: option<tags>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "CreateOrUpdateTagsCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "CreateOrUpdateTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1102,7 +1102,7 @@ module BatchPutScheduledUpdateGroupAction = {
   type response = {
 @as("FailedScheduledUpdateGroupActions") failedScheduledUpdateGroupActions: failedScheduledUpdateGroupActionRequests
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "BatchPutScheduledUpdateGroupActionCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "BatchPutScheduledUpdateGroupActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1115,7 +1115,7 @@ module BatchDeleteScheduledAction = {
   type response = {
 @as("FailedScheduledActions") failedScheduledActions: failedScheduledUpdateGroupActionRequests
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "BatchDeleteScheduledActionCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "BatchDeleteScheduledActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1131,7 +1131,7 @@ module DescribeWarmPool = {
 @as("Instances") instances: instances,
 @as("WarmPoolConfiguration") warmPoolConfiguration: warmPoolConfiguration
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeWarmPoolCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeWarmPoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1146,7 +1146,7 @@ module DescribeTags = {
 @as("NextToken") nextToken: xmlString,
 @as("Tags") tags: tagDescriptionList
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeTagsCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1161,7 +1161,7 @@ module DescribeAutoScalingInstances = {
 @as("NextToken") nextToken: xmlString,
 @as("AutoScalingInstances") autoScalingInstances: autoScalingInstances
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeAutoScalingInstancesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeAutoScalingInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1189,7 +1189,7 @@ module CreateLaunchConfiguration = {
 @as("LaunchConfigurationName") launchConfigurationName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "CreateLaunchConfigurationCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "CreateLaunchConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1215,7 +1215,7 @@ module PutScalingPolicy = {
 @as("Alarms") alarms: alarms,
 @as("PolicyARN") policyARN: resourceName
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "PutScalingPolicyCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "PutScalingPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1232,7 +1232,7 @@ module GetPredictiveScalingForecast = {
 @as("CapacityForecast") capacityForecast: option<capacityForecast>,
 @as("LoadForecast") loadForecast: option<loadForecasts>
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "GetPredictiveScalingForecastCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "GetPredictiveScalingForecastCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1248,7 +1248,7 @@ module DescribeInstanceRefreshes = {
 @as("NextToken") nextToken: xmlString,
 @as("InstanceRefreshes") instanceRefreshes: instanceRefreshes
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeInstanceRefreshesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeInstanceRefreshesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1275,7 +1275,7 @@ module UpdateAutoScalingGroup = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "UpdateAutoScalingGroupCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "UpdateAutoScalingGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1290,7 +1290,7 @@ module DescribeLaunchConfigurations = {
 @as("NextToken") nextToken: xmlString,
 @as("LaunchConfigurations") launchConfigurations: option<launchConfigurations>
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeLaunchConfigurationsCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeLaunchConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1322,7 +1322,7 @@ module CreateAutoScalingGroup = {
 @as("AutoScalingGroupName") autoScalingGroupName: option<xmlStringMaxLen255>
 }
   
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "CreateAutoScalingGroupCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "CreateAutoScalingGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1339,7 +1339,7 @@ module DescribePolicies = {
 @as("NextToken") nextToken: xmlString,
 @as("ScalingPolicies") scalingPolicies: scalingPolicies
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribePoliciesCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribePoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1354,6 +1354,6 @@ module DescribeAutoScalingGroups = {
 @as("NextToken") nextToken: xmlString,
 @as("AutoScalingGroups") autoScalingGroups: option<autoScalingGroups>
 }
-  @module("@aws-sdk/client-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeAutoScalingGroupsCommand";
+  @module("@aws-sdk/client-autoscaling") @new external new_: (request) => t = "DescribeAutoScalingGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

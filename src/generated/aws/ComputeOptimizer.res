@@ -306,7 +306,7 @@ module UpdateEnrollmentStatus = {
 @as("statusReason") statusReason: statusReason,
 @as("status") status: status
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "UpdateEnrollmentStatusCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "UpdateEnrollmentStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -318,7 +318,7 @@ module GetEnrollmentStatus = {
 @as("statusReason") statusReason: statusReason,
 @as("status") status: status
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "GetEnrollmentStatusCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetEnrollmentStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -336,7 +336,7 @@ module ExportLambdaFunctionRecommendations = {
 @as("s3Destination") s3Destination: s3Destination,
 @as("jobId") jobId: jobId
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "ExportLambdaFunctionRecommendationsCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "ExportLambdaFunctionRecommendationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -354,7 +354,7 @@ module ExportEC2InstanceRecommendations = {
 @as("s3Destination") s3Destination: s3Destination,
 @as("jobId") jobId: jobId
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "ExportEC2InstanceRecommendationsCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "ExportEC2InstanceRecommendationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -372,7 +372,7 @@ module ExportEBSVolumeRecommendations = {
 @as("s3Destination") s3Destination: s3Destination,
 @as("jobId") jobId: jobId
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "ExportEBSVolumeRecommendationsCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "ExportEBSVolumeRecommendationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -390,7 +390,7 @@ module ExportAutoScalingGroupRecommendations = {
 @as("s3Destination") s3Destination: s3Destination,
 @as("jobId") jobId: jobId
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "ExportAutoScalingGroupRecommendationsCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "ExportAutoScalingGroupRecommendationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -406,7 +406,7 @@ module DescribeRecommendationExportJobs = {
 @as("nextToken") nextToken: nextToken,
 @as("recommendationExportJobs") recommendationExportJobs: recommendationExportJobs
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "DescribeRecommendationExportJobsCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "DescribeRecommendationExportJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -422,7 +422,7 @@ module GetEC2RecommendationProjectedMetrics = {
   type response = {
 @as("recommendedOptionProjectedMetrics") recommendedOptionProjectedMetrics: recommendedOptionProjectedMetrics
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "GetEC2RecommendationProjectedMetricsCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetEC2RecommendationProjectedMetricsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -440,7 +440,7 @@ module GetEBSVolumeRecommendations = {
 @as("volumeRecommendations") volumeRecommendations: volumeRecommendations,
 @as("nextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "GetEBSVolumeRecommendationsCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetEBSVolumeRecommendationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -455,7 +455,7 @@ module GetRecommendationSummaries = {
 @as("recommendationSummaries") recommendationSummaries: recommendationSummaries,
 @as("nextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "GetRecommendationSummariesCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetRecommendationSummariesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -472,7 +472,7 @@ module GetLambdaFunctionRecommendations = {
 @as("lambdaFunctionRecommendations") lambdaFunctionRecommendations: lambdaFunctionRecommendations,
 @as("nextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "GetLambdaFunctionRecommendationsCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetLambdaFunctionRecommendationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -490,7 +490,7 @@ module GetEC2InstanceRecommendations = {
 @as("instanceRecommendations") instanceRecommendations: instanceRecommendations,
 @as("nextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "GetEC2InstanceRecommendationsCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetEC2InstanceRecommendationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -508,6 +508,6 @@ module GetAutoScalingGroupRecommendations = {
 @as("autoScalingGroupRecommendations") autoScalingGroupRecommendations: autoScalingGroupRecommendations,
 @as("nextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-compute-optimizer") @new external new_: (Js.Promise.t<request>) => t = "GetAutoScalingGroupRecommendationsCommand";
+  @module("@aws-sdk/client-compute-optimizer") @new external new_: (request) => t = "GetAutoScalingGroupRecommendationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -334,7 +334,7 @@ module UpdateWorkspaceImagePermission = {
 @as("ImageId") imageId: option<workspaceImageId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "UpdateWorkspaceImagePermissionCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "UpdateWorkspaceImagePermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -345,7 +345,7 @@ module UpdateWorkspaceBundle = {
 @as("BundleId") bundleId: bundleId
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "UpdateWorkspaceBundleCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "UpdateWorkspaceBundleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -355,7 +355,7 @@ module RestoreWorkspace = {
 @as("WorkspaceId") workspaceId: option<workspaceId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "RestoreWorkspaceCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "RestoreWorkspaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -366,7 +366,7 @@ module ModifyWorkspaceState = {
 @as("WorkspaceId") workspaceId: option<workspaceId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "ModifyWorkspaceStateCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "ModifyWorkspaceStateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -377,7 +377,7 @@ module ModifyAccount = {
 @as("DedicatedTenancySupport") dedicatedTenancySupport: dedicatedTenancySupportEnum
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "ModifyAccountCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "ModifyAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -391,7 +391,7 @@ module MigrateWorkspace = {
 @as("TargetWorkspaceId") targetWorkspaceId: workspaceId,
 @as("SourceWorkspaceId") sourceWorkspaceId: workspaceId
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "MigrateWorkspaceCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "MigrateWorkspaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -401,7 +401,7 @@ module DisassociateConnectionAlias = {
 @as("AliasId") aliasId: option<connectionAliasId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DisassociateConnectionAliasCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DisassociateConnectionAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -412,7 +412,7 @@ module DescribeAccount = {
 @as("DedicatedTenancyManagementCidrRange") dedicatedTenancyManagementCidrRange: dedicatedTenancyManagementCidrRange,
 @as("DedicatedTenancySupport") dedicatedTenancySupport: dedicatedTenancySupportResultEnum
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -422,7 +422,7 @@ module DeregisterWorkspaceDirectory = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DeregisterWorkspaceDirectoryCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DeregisterWorkspaceDirectoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -432,7 +432,7 @@ module DeleteWorkspaceImage = {
 @as("ImageId") imageId: option<workspaceImageId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DeleteWorkspaceImageCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DeleteWorkspaceImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -442,7 +442,7 @@ module DeleteWorkspaceBundle = {
 @as("BundleId") bundleId: bundleId
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DeleteWorkspaceBundleCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DeleteWorkspaceBundleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -452,7 +452,7 @@ module DeleteIpGroup = {
 @as("GroupId") groupId: option<ipGroupId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DeleteIpGroupCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DeleteIpGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -462,7 +462,7 @@ module DeleteConnectionAlias = {
 @as("AliasId") aliasId: option<connectionAliasId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DeleteConnectionAliasCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DeleteConnectionAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -475,7 +475,7 @@ module AssociateConnectionAlias = {
   type response = {
 @as("ConnectionIdentifier") connectionIdentifier: connectionIdentifier
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "AssociateConnectionAliasCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "AssociateConnectionAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -486,7 +486,7 @@ module UpdateConnectionAliasPermission = {
 @as("AliasId") aliasId: option<connectionAliasId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "UpdateConnectionAliasPermissionCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "UpdateConnectionAliasPermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -497,7 +497,7 @@ module RevokeIpRules = {
 @as("GroupId") groupId: option<ipGroupId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "RevokeIpRulesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "RevokeIpRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -508,7 +508,7 @@ module ModifyWorkspaceProperties = {
 @as("WorkspaceId") workspaceId: option<workspaceId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "ModifyWorkspacePropertiesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "ModifyWorkspacePropertiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -519,7 +519,7 @@ module ModifyWorkspaceCreationProperties = {
 @as("ResourceId") resourceId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "ModifyWorkspaceCreationPropertiesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "ModifyWorkspaceCreationPropertiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -530,7 +530,7 @@ module ModifyWorkspaceAccessProperties = {
 @as("ResourceId") resourceId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "ModifyWorkspaceAccessPropertiesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "ModifyWorkspaceAccessPropertiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -541,7 +541,7 @@ module ModifySelfservicePermissions = {
 @as("ResourceId") resourceId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "ModifySelfservicePermissionsCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "ModifySelfservicePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -552,7 +552,7 @@ module ModifyClientProperties = {
 @as("ResourceId") resourceId: option<nonEmptyString>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "ModifyClientPropertiesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "ModifyClientPropertiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -567,7 +567,7 @@ module ListAvailableManagementCidrRanges = {
 @as("NextToken") nextToken: paginationToken,
 @as("ManagementCidrRanges") managementCidrRanges: dedicatedTenancyCidrRangeList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "ListAvailableManagementCidrRangesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "ListAvailableManagementCidrRangesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -578,7 +578,7 @@ module DisassociateIpGroups = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DisassociateIpGroupsCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DisassociateIpGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -589,7 +589,7 @@ module DeleteTags = {
 @as("ResourceId") resourceId: option<nonEmptyString>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DeleteTagsCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DeleteTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -600,7 +600,7 @@ module AssociateIpGroups = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "AssociateIpGroupsCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "AssociateIpGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -611,7 +611,7 @@ module UpdateRulesOfIpGroup = {
 @as("GroupId") groupId: option<ipGroupId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "UpdateRulesOfIpGroupCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "UpdateRulesOfIpGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -623,7 +623,7 @@ module TerminateWorkspaces = {
   type response = {
 @as("FailedRequests") failedRequests: failedTerminateWorkspaceRequests
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "TerminateWorkspacesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "TerminateWorkspacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -635,7 +635,7 @@ module StopWorkspaces = {
   type response = {
 @as("FailedRequests") failedRequests: failedStopWorkspaceRequests
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "StopWorkspacesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "StopWorkspacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -647,7 +647,7 @@ module StartWorkspaces = {
   type response = {
 @as("FailedRequests") failedRequests: failedStartWorkspaceRequests
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "StartWorkspacesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "StartWorkspacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -662,7 +662,7 @@ module RegisterWorkspaceDirectory = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "RegisterWorkspaceDirectoryCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "RegisterWorkspaceDirectoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -674,7 +674,7 @@ module RebuildWorkspaces = {
   type response = {
 @as("FailedRequests") failedRequests: failedRebuildWorkspaceRequests
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "RebuildWorkspacesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "RebuildWorkspacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -686,7 +686,7 @@ module RebootWorkspaces = {
   type response = {
 @as("FailedRequests") failedRequests: failedRebootWorkspaceRequests
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "RebootWorkspacesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "RebootWorkspacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -703,7 +703,7 @@ module ImportWorkspaceImage = {
   type response = {
 @as("ImageId") imageId: workspaceImageId
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "ImportWorkspaceImageCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "ImportWorkspaceImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -717,7 +717,7 @@ module DescribeWorkspacesConnectionStatus = {
 @as("NextToken") nextToken: paginationToken,
 @as("WorkspacesConnectionStatus") workspacesConnectionStatus: workspaceConnectionStatusList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkspacesConnectionStatusCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeWorkspacesConnectionStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -730,7 +730,7 @@ module DescribeWorkspaceSnapshots = {
 @as("RestoreSnapshots") restoreSnapshots: snapshotList,
 @as("RebuildSnapshots") rebuildSnapshots: snapshotList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkspaceSnapshotsCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeWorkspaceSnapshotsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -746,7 +746,7 @@ module DescribeWorkspaceImagePermissions = {
 @as("ImagePermissions") imagePermissions: imagePermissions,
 @as("ImageId") imageId: workspaceImageId
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkspaceImagePermissionsCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeWorkspaceImagePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -758,7 +758,7 @@ module DescribeTags = {
   type response = {
 @as("TagList") tagList: tagList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeTagsCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -774,7 +774,7 @@ module DescribeConnectionAliasPermissions = {
 @as("ConnectionAliasPermissions") connectionAliasPermissions: connectionAliasPermissions,
 @as("AliasId") aliasId: connectionAliasId
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeConnectionAliasPermissionsCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeConnectionAliasPermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -787,7 +787,7 @@ module DescribeAccountModifications = {
 @as("NextToken") nextToken: paginationToken,
 @as("AccountModifications") accountModifications: accountModificationList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountModificationsCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeAccountModificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -805,7 +805,7 @@ module CreateWorkspaceBundle = {
   type response = {
 @as("WorkspaceBundle") workspaceBundle: workspaceBundle
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "CreateWorkspaceBundleCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "CreateWorkspaceBundleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -816,7 +816,7 @@ module CreateTags = {
 @as("ResourceId") resourceId: option<nonEmptyString>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "CreateTagsCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "CreateTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -831,7 +831,7 @@ module CreateIpGroup = {
   type response = {
 @as("GroupId") groupId: ipGroupId
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "CreateIpGroupCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "CreateIpGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -844,7 +844,7 @@ module CreateConnectionAlias = {
   type response = {
 @as("AliasId") aliasId: connectionAliasId
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "CreateConnectionAliasCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "CreateConnectionAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -860,7 +860,7 @@ module CopyWorkspaceImage = {
   type response = {
 @as("ImageId") imageId: workspaceImageId
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "CopyWorkspaceImageCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "CopyWorkspaceImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -871,7 +871,7 @@ module AuthorizeIpRules = {
 @as("GroupId") groupId: option<ipGroupId>
 }
   type response = unit
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "AuthorizeIpRulesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "AuthorizeIpRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -887,7 +887,7 @@ module DescribeWorkspaceImages = {
 @as("NextToken") nextToken: paginationToken,
 @as("Images") images: workspaceImageList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkspaceImagesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeWorkspaceImagesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -902,7 +902,7 @@ module DescribeWorkspaceDirectories = {
 @as("NextToken") nextToken: paginationToken,
 @as("Directories") directories: directoryList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkspaceDirectoriesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeWorkspaceDirectoriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -917,7 +917,7 @@ module DescribeWorkspaceBundles = {
 @as("NextToken") nextToken: paginationToken,
 @as("Bundles") bundles: bundleList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkspaceBundlesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeWorkspaceBundlesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -929,7 +929,7 @@ module DescribeClientProperties = {
   type response = {
 @as("ClientPropertiesList") clientPropertiesList: clientPropertiesList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeClientPropertiesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeClientPropertiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -947,7 +947,7 @@ module DescribeWorkspaces = {
 @as("NextToken") nextToken: paginationToken,
 @as("Workspaces") workspaces: workspaceList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkspacesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeWorkspacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -962,7 +962,7 @@ module DescribeIpGroups = {
 @as("NextToken") nextToken: paginationToken,
 @as("Result") result: workspacesIpGroupsList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeIpGroupsCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeIpGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -978,7 +978,7 @@ module DescribeConnectionAliases = {
 @as("NextToken") nextToken: paginationToken,
 @as("ConnectionAliases") connectionAliases: connectionAliasList
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "DescribeConnectionAliasesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "DescribeConnectionAliasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -991,6 +991,6 @@ module CreateWorkspaces = {
 @as("PendingRequests") pendingRequests: workspaceList,
 @as("FailedRequests") failedRequests: failedCreateWorkspaceRequests
 }
-  @module("@aws-sdk/client-workspaces") @new external new_: (Js.Promise.t<request>) => t = "CreateWorkspacesCommand";
+  @module("@aws-sdk/client-workspaces") @new external new_: (request) => t = "CreateWorkspacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

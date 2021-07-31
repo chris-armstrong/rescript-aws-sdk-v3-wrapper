@@ -67,6 +67,6 @@ module ListRealtimeContactAnalysisSegments = {
 @as("NextToken") nextToken: nextToken,
 @as("Segments") segments: option<realtimeContactAnalysisSegments>
 }
-  @module("@aws-sdk/client-connect") @new external new_: (Js.Promise.t<request>) => t = "ListRealtimeContactAnalysisSegmentsCommand";
+  @module("@aws-sdk/client-connect") @new external new_: (request) => t = "ListRealtimeContactAnalysisSegmentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

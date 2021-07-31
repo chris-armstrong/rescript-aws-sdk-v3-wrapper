@@ -783,7 +783,7 @@ module GetFunction = {
 @as("ETag") eTag: amazonawsString,
 @as("FunctionCode") functionCode: functionBlob
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetFunctionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetFunctionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -794,7 +794,7 @@ module DeleteStreamingDistribution = {
 @as("Id") id: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeleteStreamingDistributionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeleteStreamingDistributionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -805,7 +805,7 @@ module DeleteRealtimeLogConfig = {
 @as("Name") name: amazonawsString
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeleteRealtimeLogConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeleteRealtimeLogConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -816,7 +816,7 @@ module DeletePublicKey = {
 @as("Id") id: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeletePublicKeyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeletePublicKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -827,7 +827,7 @@ module DeleteOriginRequestPolicy = {
 @as("Id") id: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeleteOriginRequestPolicyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeleteOriginRequestPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -837,7 +837,7 @@ module DeleteMonitoringSubscription = {
 @as("DistributionId") distributionId: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeleteMonitoringSubscriptionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeleteMonitoringSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -848,7 +848,7 @@ module DeleteKeyGroup = {
 @as("Id") id: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeleteKeyGroupCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeleteKeyGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -859,7 +859,7 @@ module DeleteFunction = {
 @as("Name") name: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeleteFunctionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeleteFunctionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -870,7 +870,7 @@ module DeleteFieldLevelEncryptionProfile = {
 @as("Id") id: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeleteFieldLevelEncryptionProfileCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeleteFieldLevelEncryptionProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -881,7 +881,7 @@ module DeleteFieldLevelEncryptionConfig = {
 @as("Id") id: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeleteFieldLevelEncryptionConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeleteFieldLevelEncryptionConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -892,7 +892,7 @@ module DeleteDistribution = {
 @as("Id") id: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeleteDistributionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeleteDistributionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -903,7 +903,7 @@ module DeleteCloudFrontOriginAccessIdentity = {
 @as("Id") id: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeleteCloudFrontOriginAccessIdentityCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeleteCloudFrontOriginAccessIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -914,7 +914,7 @@ module DeleteCachePolicy = {
 @as("Id") id: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DeleteCachePolicyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DeleteCachePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -927,7 +927,7 @@ module GetPublicKeyConfig = {
 @as("ETag") eTag: amazonawsString,
 @as("PublicKeyConfig") publicKeyConfig: publicKeyConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetPublicKeyConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetPublicKeyConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -940,7 +940,7 @@ module GetCloudFrontOriginAccessIdentityConfig = {
 @as("ETag") eTag: amazonawsString,
 @as("CloudFrontOriginAccessIdentityConfig") cloudFrontOriginAccessIdentityConfig: cloudFrontOriginAccessIdentityConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetCloudFrontOriginAccessIdentityConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetCloudFrontOriginAccessIdentityConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -955,7 +955,7 @@ module UpdatePublicKey = {
 @as("ETag") eTag: amazonawsString,
 @as("PublicKey") publicKey: publicKey
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UpdatePublicKeyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UpdatePublicKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -971,7 +971,7 @@ module UpdateFunction = {
 @as("ETag") eTag: amazonawsString,
 @as("FunctionSummary") functionSummary: functionSummary
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UpdateFunctionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UpdateFunctionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -986,7 +986,7 @@ module UpdateCloudFrontOriginAccessIdentity = {
 @as("ETag") eTag: amazonawsString,
 @as("CloudFrontOriginAccessIdentity") cloudFrontOriginAccessIdentity: cloudFrontOriginAccessIdentity
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UpdateCloudFrontOriginAccessIdentityCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UpdateCloudFrontOriginAccessIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -997,7 +997,7 @@ module UntagResource = {
 @as("Resource") resource: option<resourceARN>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1010,7 +1010,7 @@ module PublishFunction = {
   type response = {
 @as("FunctionSummary") functionSummary: functionSummary
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "PublishFunctionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "PublishFunctionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1024,7 +1024,7 @@ module ListDistributionsByOriginRequestPolicyId = {
   type response = {
 @as("DistributionIdList") distributionIdList: distributionIdList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListDistributionsByOriginRequestPolicyIdCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListDistributionsByOriginRequestPolicyIdCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1038,7 +1038,7 @@ module ListDistributionsByKeyGroup = {
   type response = {
 @as("DistributionIdList") distributionIdList: distributionIdList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListDistributionsByKeyGroupCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListDistributionsByKeyGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1052,7 +1052,7 @@ module ListDistributionsByCachePolicyId = {
   type response = {
 @as("DistributionIdList") distributionIdList: distributionIdList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListDistributionsByCachePolicyIdCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListDistributionsByCachePolicyIdCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1065,7 +1065,7 @@ module GetPublicKey = {
 @as("ETag") eTag: amazonawsString,
 @as("PublicKey") publicKey: publicKey
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetPublicKeyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetPublicKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1077,7 +1077,7 @@ module GetMonitoringSubscription = {
   type response = {
 @as("MonitoringSubscription") monitoringSubscription: monitoringSubscription
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetMonitoringSubscriptionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetMonitoringSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1090,7 +1090,7 @@ module GetKeyGroupConfig = {
 @as("ETag") eTag: amazonawsString,
 @as("KeyGroupConfig") keyGroupConfig: keyGroupConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetKeyGroupConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetKeyGroupConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1103,7 +1103,7 @@ module GetCloudFrontOriginAccessIdentity = {
 @as("ETag") eTag: amazonawsString,
 @as("CloudFrontOriginAccessIdentity") cloudFrontOriginAccessIdentity: cloudFrontOriginAccessIdentity
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetCloudFrontOriginAccessIdentityCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetCloudFrontOriginAccessIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1117,7 +1117,7 @@ module DescribeFunction = {
 @as("ETag") eTag: amazonawsString,
 @as("FunctionSummary") functionSummary: functionSummary
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "DescribeFunctionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "DescribeFunctionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1131,7 +1131,7 @@ module CreatePublicKey = {
 @as("Location") location: amazonawsString,
 @as("PublicKey") publicKey: publicKey
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreatePublicKeyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreatePublicKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1144,7 +1144,7 @@ module CreateMonitoringSubscription = {
   type response = {
 @as("MonitoringSubscription") monitoringSubscription: monitoringSubscription
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateMonitoringSubscriptionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateMonitoringSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1160,7 +1160,7 @@ module CreateFunction = {
 @as("Location") location: amazonawsString,
 @as("FunctionSummary") functionSummary: functionSummary
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateFunctionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateFunctionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1174,7 +1174,7 @@ module CreateCloudFrontOriginAccessIdentity = {
 @as("Location") location: amazonawsString,
 @as("CloudFrontOriginAccessIdentity") cloudFrontOriginAccessIdentity: cloudFrontOriginAccessIdentity
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateCloudFrontOriginAccessIdentityCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateCloudFrontOriginAccessIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1189,7 +1189,7 @@ module UpdateKeyGroup = {
 @as("ETag") eTag: amazonawsString,
 @as("KeyGroup") keyGroup: keyGroup
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UpdateKeyGroupCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UpdateKeyGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1204,7 +1204,7 @@ module TestFunction = {
   type response = {
 @as("TestResult") testResult: testResult
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "TestFunctionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "TestFunctionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1215,7 +1215,7 @@ module TagResource = {
 @as("Resource") resource: option<resourceARN>
 }
   
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1227,7 +1227,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: option<tags>
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1240,7 +1240,7 @@ module ListPublicKeys = {
   type response = {
 @as("PublicKeyList") publicKeyList: publicKeyList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListPublicKeysCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListPublicKeysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1254,7 +1254,7 @@ module ListInvalidations = {
   type response = {
 @as("InvalidationList") invalidationList: invalidationList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListInvalidationsCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListInvalidationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1267,7 +1267,7 @@ module ListCloudFrontOriginAccessIdentities = {
   type response = {
 @as("CloudFrontOriginAccessIdentityList") cloudFrontOriginAccessIdentityList: cloudFrontOriginAccessIdentityList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListCloudFrontOriginAccessIdentitiesCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListCloudFrontOriginAccessIdentitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1280,7 +1280,7 @@ module GetStreamingDistributionConfig = {
 @as("ETag") eTag: amazonawsString,
 @as("StreamingDistributionConfig") streamingDistributionConfig: streamingDistributionConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetStreamingDistributionConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetStreamingDistributionConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1293,7 +1293,7 @@ module GetKeyGroup = {
 @as("ETag") eTag: amazonawsString,
 @as("KeyGroup") keyGroup: keyGroup
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetKeyGroupCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetKeyGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1307,7 +1307,7 @@ module CreateKeyGroup = {
 @as("Location") location: amazonawsString,
 @as("KeyGroup") keyGroup: keyGroup
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateKeyGroupCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateKeyGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1323,7 +1323,7 @@ module UpdateRealtimeLogConfig = {
   type response = {
 @as("RealtimeLogConfig") realtimeLogConfig: realtimeLogConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UpdateRealtimeLogConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UpdateRealtimeLogConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1337,7 +1337,7 @@ module ListFunctions = {
   type response = {
 @as("FunctionList") functionList: functionList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListFunctionsCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListFunctionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1350,7 +1350,7 @@ module GetRealtimeLogConfig = {
   type response = {
 @as("RealtimeLogConfig") realtimeLogConfig: realtimeLogConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetRealtimeLogConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetRealtimeLogConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1363,7 +1363,7 @@ module GetOriginRequestPolicyConfig = {
 @as("ETag") eTag: amazonawsString,
 @as("OriginRequestPolicyConfig") originRequestPolicyConfig: originRequestPolicyConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetOriginRequestPolicyConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetOriginRequestPolicyConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1376,7 +1376,7 @@ module GetInvalidation = {
   type response = {
 @as("Invalidation") invalidation: invalidation
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetInvalidationCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetInvalidationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1391,7 +1391,7 @@ module CreateRealtimeLogConfig = {
   type response = {
 @as("RealtimeLogConfig") realtimeLogConfig: realtimeLogConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateRealtimeLogConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateRealtimeLogConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1405,7 +1405,7 @@ module CreateInvalidation = {
 @as("Invalidation") invalidation: invalidation,
 @as("Location") location: amazonawsString
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateInvalidationCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateInvalidationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1420,7 +1420,7 @@ module UpdateOriginRequestPolicy = {
 @as("ETag") eTag: amazonawsString,
 @as("OriginRequestPolicy") originRequestPolicy: originRequestPolicy
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UpdateOriginRequestPolicyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UpdateOriginRequestPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1433,7 +1433,7 @@ module ListStreamingDistributions = {
   type response = {
 @as("StreamingDistributionList") streamingDistributionList: streamingDistributionList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListStreamingDistributionsCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListStreamingDistributionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1446,7 +1446,7 @@ module GetOriginRequestPolicy = {
 @as("ETag") eTag: amazonawsString,
 @as("OriginRequestPolicy") originRequestPolicy: originRequestPolicy
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetOriginRequestPolicyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetOriginRequestPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1459,7 +1459,7 @@ module GetFieldLevelEncryptionConfig = {
 @as("ETag") eTag: amazonawsString,
 @as("FieldLevelEncryptionConfig") fieldLevelEncryptionConfig: fieldLevelEncryptionConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetFieldLevelEncryptionConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetFieldLevelEncryptionConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1472,7 +1472,7 @@ module GetCachePolicyConfig = {
 @as("ETag") eTag: amazonawsString,
 @as("CachePolicyConfig") cachePolicyConfig: cachePolicyConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetCachePolicyConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetCachePolicyConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1486,7 +1486,7 @@ module CreateOriginRequestPolicy = {
 @as("Location") location: amazonawsString,
 @as("OriginRequestPolicy") originRequestPolicy: originRequestPolicy
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateOriginRequestPolicyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateOriginRequestPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1501,7 +1501,7 @@ module UpdateStreamingDistribution = {
 @as("ETag") eTag: amazonawsString,
 @as("StreamingDistribution") streamingDistribution: streamingDistribution
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UpdateStreamingDistributionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UpdateStreamingDistributionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1516,7 +1516,7 @@ module UpdateFieldLevelEncryptionConfig = {
 @as("ETag") eTag: amazonawsString,
 @as("FieldLevelEncryption") fieldLevelEncryption: fieldLevelEncryption
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UpdateFieldLevelEncryptionConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UpdateFieldLevelEncryptionConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1531,7 +1531,7 @@ module UpdateCachePolicy = {
 @as("ETag") eTag: amazonawsString,
 @as("CachePolicy") cachePolicy: cachePolicy
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UpdateCachePolicyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UpdateCachePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1544,7 +1544,7 @@ module ListRealtimeLogConfigs = {
   type response = {
 @as("RealtimeLogConfigs") realtimeLogConfigs: realtimeLogConfigs
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListRealtimeLogConfigsCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListRealtimeLogConfigsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1557,7 +1557,7 @@ module ListKeyGroups = {
   type response = {
 @as("KeyGroupList") keyGroupList: keyGroupList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListKeyGroupsCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListKeyGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1570,7 +1570,7 @@ module GetStreamingDistribution = {
 @as("ETag") eTag: amazonawsString,
 @as("StreamingDistribution") streamingDistribution: streamingDistribution
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetStreamingDistributionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetStreamingDistributionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1583,7 +1583,7 @@ module GetFieldLevelEncryptionProfileConfig = {
 @as("ETag") eTag: amazonawsString,
 @as("FieldLevelEncryptionProfileConfig") fieldLevelEncryptionProfileConfig: fieldLevelEncryptionProfileConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetFieldLevelEncryptionProfileConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetFieldLevelEncryptionProfileConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1596,7 +1596,7 @@ module GetFieldLevelEncryption = {
 @as("ETag") eTag: amazonawsString,
 @as("FieldLevelEncryption") fieldLevelEncryption: fieldLevelEncryption
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetFieldLevelEncryptionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetFieldLevelEncryptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1609,7 +1609,7 @@ module GetCachePolicy = {
 @as("ETag") eTag: amazonawsString,
 @as("CachePolicy") cachePolicy: cachePolicy
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetCachePolicyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetCachePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1623,7 +1623,7 @@ module CreateStreamingDistributionWithTags = {
 @as("Location") location: amazonawsString,
 @as("StreamingDistribution") streamingDistribution: streamingDistribution
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateStreamingDistributionWithTagsCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateStreamingDistributionWithTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1637,7 +1637,7 @@ module CreateStreamingDistribution = {
 @as("Location") location: amazonawsString,
 @as("StreamingDistribution") streamingDistribution: streamingDistribution
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateStreamingDistributionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateStreamingDistributionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1651,7 +1651,7 @@ module CreateFieldLevelEncryptionConfig = {
 @as("Location") location: amazonawsString,
 @as("FieldLevelEncryption") fieldLevelEncryption: fieldLevelEncryption
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateFieldLevelEncryptionConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateFieldLevelEncryptionConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1665,7 +1665,7 @@ module CreateCachePolicy = {
 @as("Location") location: amazonawsString,
 @as("CachePolicy") cachePolicy: cachePolicy
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateCachePolicyCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateCachePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1680,7 +1680,7 @@ module UpdateFieldLevelEncryptionProfile = {
 @as("ETag") eTag: amazonawsString,
 @as("FieldLevelEncryptionProfile") fieldLevelEncryptionProfile: fieldLevelEncryptionProfile
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UpdateFieldLevelEncryptionProfileCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UpdateFieldLevelEncryptionProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1693,7 +1693,7 @@ module ListFieldLevelEncryptionConfigs = {
   type response = {
 @as("FieldLevelEncryptionList") fieldLevelEncryptionList: fieldLevelEncryptionList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListFieldLevelEncryptionConfigsCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListFieldLevelEncryptionConfigsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1706,7 +1706,7 @@ module GetFieldLevelEncryptionProfile = {
 @as("ETag") eTag: amazonawsString,
 @as("FieldLevelEncryptionProfile") fieldLevelEncryptionProfile: fieldLevelEncryptionProfile
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetFieldLevelEncryptionProfileCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetFieldLevelEncryptionProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1720,7 +1720,7 @@ module CreateFieldLevelEncryptionProfile = {
 @as("Location") location: amazonawsString,
 @as("FieldLevelEncryptionProfile") fieldLevelEncryptionProfile: fieldLevelEncryptionProfile
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateFieldLevelEncryptionProfileCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateFieldLevelEncryptionProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1734,7 +1734,7 @@ module ListOriginRequestPolicies = {
   type response = {
 @as("OriginRequestPolicyList") originRequestPolicyList: originRequestPolicyList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListOriginRequestPoliciesCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListOriginRequestPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1747,7 +1747,7 @@ module ListFieldLevelEncryptionProfiles = {
   type response = {
 @as("FieldLevelEncryptionProfileList") fieldLevelEncryptionProfileList: fieldLevelEncryptionProfileList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListFieldLevelEncryptionProfilesCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListFieldLevelEncryptionProfilesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1760,7 +1760,7 @@ module GetDistributionConfig = {
 @as("ETag") eTag: amazonawsString,
 @as("DistributionConfig") distributionConfig: distributionConfig
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetDistributionConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetDistributionConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1775,7 +1775,7 @@ module UpdateDistribution = {
 @as("ETag") eTag: amazonawsString,
 @as("Distribution") distribution: distribution
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "UpdateDistributionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "UpdateDistributionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1789,7 +1789,7 @@ module ListCachePolicies = {
   type response = {
 @as("CachePolicyList") cachePolicyList: cachePolicyList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListCachePoliciesCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListCachePoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1802,7 +1802,7 @@ module GetDistribution = {
 @as("ETag") eTag: amazonawsString,
 @as("Distribution") distribution: distribution
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "GetDistributionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "GetDistributionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1816,7 +1816,7 @@ module CreateDistributionWithTags = {
 @as("Location") location: amazonawsString,
 @as("Distribution") distribution: distribution
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateDistributionWithTagsCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateDistributionWithTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1830,7 +1830,7 @@ module CreateDistribution = {
 @as("Location") location: amazonawsString,
 @as("Distribution") distribution: distribution
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "CreateDistributionCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "CreateDistributionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1844,7 +1844,7 @@ module ListDistributionsByWebACLId = {
   type response = {
 @as("DistributionList") distributionList: distributionList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListDistributionsByWebACLIdCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListDistributionsByWebACLIdCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1859,7 +1859,7 @@ module ListDistributionsByRealtimeLogConfig = {
   type response = {
 @as("DistributionList") distributionList: distributionList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListDistributionsByRealtimeLogConfigCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListDistributionsByRealtimeLogConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1872,6 +1872,6 @@ module ListDistributions = {
   type response = {
 @as("DistributionList") distributionList: distributionList
 }
-  @module("@aws-sdk/client-cloudfront") @new external new_: (Js.Promise.t<request>) => t = "ListDistributionsCommand";
+  @module("@aws-sdk/client-cloudfront") @new external new_: (request) => t = "ListDistributionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

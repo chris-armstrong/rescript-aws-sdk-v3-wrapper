@@ -300,7 +300,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -311,7 +311,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -328,7 +328,7 @@ module ListUpdates = {
 @as("nextToken") nextToken: amazonawsString,
 @as("updateIds") updateIds: stringList
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "ListUpdatesCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListUpdatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -340,7 +340,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -355,7 +355,7 @@ module ListNodegroups = {
 @as("nextToken") nextToken: amazonawsString,
 @as("nodegroups") nodegroups: stringList
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "ListNodegroupsCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListNodegroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -370,7 +370,7 @@ module ListFargateProfiles = {
 @as("nextToken") nextToken: amazonawsString,
 @as("fargateProfileNames") fargateProfileNames: stringList
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "ListFargateProfilesCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListFargateProfilesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -384,7 +384,7 @@ module ListClusters = {
 @as("nextToken") nextToken: amazonawsString,
 @as("clusters") clusters: stringList
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "ListClustersCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListClustersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -399,7 +399,7 @@ module ListAddons = {
 @as("nextToken") nextToken: amazonawsString,
 @as("addons") addons: stringList
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "ListAddonsCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListAddonsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -414,7 +414,7 @@ module ListIdentityProviderConfigs = {
 @as("nextToken") nextToken: amazonawsString,
 @as("identityProviderConfigs") identityProviderConfigs: identityProviderConfigs
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "ListIdentityProviderConfigsCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "ListIdentityProviderConfigsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -427,7 +427,7 @@ module DescribeIdentityProviderConfig = {
   type response = {
 @as("identityProviderConfig") identityProviderConfig: identityProviderConfigResponse
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DescribeIdentityProviderConfigCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeIdentityProviderConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -445,7 +445,7 @@ module UpdateNodegroupVersion = {
   type response = {
 @as("update") update: update
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "UpdateNodegroupVersionCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UpdateNodegroupVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -462,7 +462,7 @@ module UpdateNodegroupConfig = {
   type response = {
 @as("update") update: update
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "UpdateNodegroupConfigCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UpdateNodegroupConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -476,7 +476,7 @@ module UpdateClusterVersion = {
   type response = {
 @as("update") update: update
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "UpdateClusterVersionCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UpdateClusterVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -491,7 +491,7 @@ module UpdateClusterConfig = {
   type response = {
 @as("update") update: update
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "UpdateClusterConfigCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UpdateClusterConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -508,7 +508,7 @@ module UpdateAddon = {
   type response = {
 @as("update") update: update
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "UpdateAddonCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "UpdateAddonCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -522,7 +522,7 @@ module DisassociateIdentityProviderConfig = {
   type response = {
 @as("update") update: update
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DisassociateIdentityProviderConfigCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DisassociateIdentityProviderConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -537,7 +537,7 @@ module DescribeUpdate = {
   type response = {
 @as("update") update: update
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DescribeUpdateCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeUpdateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -550,7 +550,7 @@ module DescribeFargateProfile = {
   type response = {
 @as("fargateProfile") fargateProfile: fargateProfile
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DescribeFargateProfileCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeFargateProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -563,7 +563,7 @@ module DeleteFargateProfile = {
   type response = {
 @as("fargateProfile") fargateProfile: fargateProfile
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DeleteFargateProfileCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DeleteFargateProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -581,7 +581,7 @@ module CreateFargateProfile = {
   type response = {
 @as("fargateProfile") fargateProfile: fargateProfile
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "CreateFargateProfileCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "CreateFargateProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -597,7 +597,7 @@ module AssociateIdentityProviderConfig = {
 @as("tags") tags: tagMap,
 @as("update") update: update
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "AssociateIdentityProviderConfigCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "AssociateIdentityProviderConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -611,7 +611,7 @@ module AssociateEncryptionConfig = {
   type response = {
 @as("update") update: update
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "AssociateEncryptionConfigCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "AssociateEncryptionConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -624,7 +624,7 @@ module DescribeNodegroup = {
   type response = {
 @as("nodegroup") nodegroup: nodegroup
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DescribeNodegroupCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeNodegroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -636,7 +636,7 @@ module DescribeCluster = {
   type response = {
 @as("cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DescribeClusterCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -649,7 +649,7 @@ module DescribeAddon = {
   type response = {
 @as("addon") addon: addon
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DescribeAddonCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeAddonCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -662,7 +662,7 @@ module DeleteNodegroup = {
   type response = {
 @as("nodegroup") nodegroup: nodegroup
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DeleteNodegroupCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DeleteNodegroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -674,7 +674,7 @@ module DeleteCluster = {
   type response = {
 @as("cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DeleteClusterCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DeleteClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -687,7 +687,7 @@ module DeleteAddon = {
   type response = {
 @as("addon") addon: addon
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DeleteAddonCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DeleteAddonCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -715,7 +715,7 @@ module CreateNodegroup = {
   type response = {
 @as("nodegroup") nodegroup: nodegroup
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "CreateNodegroupCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "CreateNodegroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -735,7 +735,7 @@ module CreateCluster = {
   type response = {
 @as("cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "CreateClusterCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "CreateClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -753,7 +753,7 @@ module CreateAddon = {
   type response = {
 @as("addon") addon: addon
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "CreateAddonCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "CreateAddonCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -769,6 +769,6 @@ module DescribeAddonVersions = {
 @as("nextToken") nextToken: amazonawsString,
 @as("addons") addons: addons
 }
-  @module("@aws-sdk/client-eks") @new external new_: (Js.Promise.t<request>) => t = "DescribeAddonVersionsCommand";
+  @module("@aws-sdk/client-eks") @new external new_: (request) => t = "DescribeAddonVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

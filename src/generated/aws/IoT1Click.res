@@ -78,7 +78,7 @@ module DisassociateDeviceFromPlacement = {
 @as("projectName") projectName: option<projectName>
 }
   type response = unit
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "DisassociateDeviceFromPlacementCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "DisassociateDeviceFromPlacementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -88,7 +88,7 @@ module DeleteProject = {
 @as("projectName") projectName: option<projectName>
 }
   type response = unit
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "DeleteProjectCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "DeleteProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -99,7 +99,7 @@ module DeletePlacement = {
 @as("placementName") placementName: option<placementName>
 }
   type response = unit
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "DeletePlacementCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "DeletePlacementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -112,7 +112,7 @@ module AssociateDeviceWithPlacement = {
 @as("projectName") projectName: option<projectName>
 }
   type response = unit
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "AssociateDeviceWithPlacementCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "AssociateDeviceWithPlacementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -124,7 +124,7 @@ module UpdatePlacement = {
 @as("placementName") placementName: option<placementName>
 }
   type response = unit
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "UpdatePlacementCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "UpdatePlacementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -135,7 +135,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<projectArn>
 }
   type response = unit
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -146,7 +146,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<projectArn>
 }
   type response = unit
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -158,7 +158,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -171,7 +171,7 @@ module GetDevicesInPlacement = {
   type response = {
 @as("devices") devices: option<deviceMap>
 }
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "GetDevicesInPlacementCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "GetDevicesInPlacementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -183,7 +183,7 @@ module CreatePlacement = {
 @as("placementName") placementName: option<placementName>
 }
   type response = unit
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "CreatePlacementCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "CreatePlacementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -198,7 +198,7 @@ module ListPlacements = {
 @as("nextToken") nextToken: nextToken,
 @as("placements") placements: option<placementSummaryList>
 }
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "ListPlacementsCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "ListPlacementsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -211,7 +211,7 @@ module DescribePlacement = {
   type response = {
 @as("placement") placement: option<placementDescription>
 }
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "DescribePlacementCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "DescribePlacementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -225,7 +225,7 @@ module ListProjects = {
 @as("nextToken") nextToken: nextToken,
 @as("projects") projects: option<projectSummaryList>
 }
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "ListProjectsCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "ListProjectsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -237,7 +237,7 @@ module UpdateProject = {
 @as("projectName") projectName: option<projectName>
 }
   type response = unit
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "UpdateProjectCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "UpdateProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -250,7 +250,7 @@ module CreateProject = {
 @as("projectName") projectName: option<projectName>
 }
   type response = unit
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "CreateProjectCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "CreateProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -262,6 +262,6 @@ module DescribeProject = {
   type response = {
 @as("project") project: option<projectDescription>
 }
-  @module("@aws-sdk/client-iot1click") @new external new_: (Js.Promise.t<request>) => t = "DescribeProjectCommand";
+  @module("@aws-sdk/client-iot1click") @new external new_: (request) => t = "DescribeProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

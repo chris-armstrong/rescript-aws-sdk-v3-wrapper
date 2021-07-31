@@ -96,7 +96,7 @@ module DescribeEntity = {
 @as("EntityIdentifier") entityIdentifier: identifier,
 @as("EntityType") entityType: entityType
 }
-  @module("@aws-sdk/client-aws-marketplace") @new external new_: (Js.Promise.t<request>) => t = "DescribeEntityCommand";
+  @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "DescribeEntityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -110,7 +110,7 @@ module CancelChangeSet = {
 @as("ChangeSetArn") changeSetArn: aRN,
 @as("ChangeSetId") changeSetId: resourceId
 }
-  @module("@aws-sdk/client-aws-marketplace") @new external new_: (Js.Promise.t<request>) => t = "CancelChangeSetCommand";
+  @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "CancelChangeSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -126,7 +126,7 @@ module StartChangeSet = {
 @as("ChangeSetArn") changeSetArn: aRN,
 @as("ChangeSetId") changeSetId: resourceId
 }
-  @module("@aws-sdk/client-aws-marketplace") @new external new_: (Js.Promise.t<request>) => t = "StartChangeSetCommand";
+  @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "StartChangeSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -144,7 +144,7 @@ module ListEntities = {
 @as("NextToken") nextToken: nextToken,
 @as("EntitySummaryList") entitySummaryList: entitySummaryList
 }
-  @module("@aws-sdk/client-aws-marketplace") @new external new_: (Js.Promise.t<request>) => t = "ListEntitiesCommand";
+  @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "ListEntitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -161,7 +161,7 @@ module ListChangeSets = {
 @as("NextToken") nextToken: nextToken,
 @as("ChangeSetSummaryList") changeSetSummaryList: changeSetSummaryList
 }
-  @module("@aws-sdk/client-aws-marketplace") @new external new_: (Js.Promise.t<request>) => t = "ListChangeSetsCommand";
+  @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "ListChangeSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -182,6 +182,6 @@ module DescribeChangeSet = {
 @as("ChangeSetArn") changeSetArn: aRN,
 @as("ChangeSetId") changeSetId: resourceId
 }
-  @module("@aws-sdk/client-aws-marketplace") @new external new_: (Js.Promise.t<request>) => t = "DescribeChangeSetCommand";
+  @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "DescribeChangeSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

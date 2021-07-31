@@ -41,7 +41,7 @@ module GetDeviceRegistration = {
 @as("CacheTTL") cacheTTL: cacheTTLSeconds,
 @as("DeviceRegistration") deviceRegistration: deviceRegistration
 }
-  @module("@aws-sdk/client-sagemaker") @new external new_: (Js.Promise.t<request>) => t = "GetDeviceRegistrationCommand";
+  @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "GetDeviceRegistrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -55,6 +55,6 @@ module SendHeartbeat = {
 @as("AgentMetrics") agentMetrics: edgeMetrics
 }
   
-  @module("@aws-sdk/client-sagemaker") @new external new_: (Js.Promise.t<request>) => t = "SendHeartbeatCommand";
+  @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "SendHeartbeatCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }

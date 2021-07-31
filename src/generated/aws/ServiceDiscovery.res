@@ -203,7 +203,7 @@ module UpdateInstanceCustomHealthStatus = {
 @as("ServiceId") serviceId: option<resourceId>
 }
   
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "UpdateInstanceCustomHealthStatusCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "UpdateInstanceCustomHealthStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -216,7 +216,7 @@ module DeregisterInstance = {
   type response = {
 @as("OperationId") operationId: operationId
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "DeregisterInstanceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "DeregisterInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -226,7 +226,7 @@ module DeleteService = {
 @as("Id") id: option<resourceId>
 }
   type response = unit
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "DeleteServiceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "DeleteServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -238,7 +238,7 @@ module DeleteNamespace = {
   type response = {
 @as("OperationId") operationId: operationId
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "DeleteNamespaceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "DeleteNamespaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -249,7 +249,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -264,7 +264,7 @@ module RegisterInstance = {
   type response = {
 @as("OperationId") operationId: operationId
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "RegisterInstanceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "RegisterInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -280,7 +280,7 @@ module GetInstancesHealthStatus = {
 @as("NextToken") nextToken: nextToken,
 @as("Status") status: instanceHealthStatusMap
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "GetInstancesHealthStatusCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "GetInstancesHealthStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -291,7 +291,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -303,7 +303,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -315,7 +315,7 @@ module GetOperation = {
   type response = {
 @as("Operation") operation: operation
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "GetOperationCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "GetOperationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -328,7 +328,7 @@ module GetInstance = {
   type response = {
 @as("Instance") instance: instance
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "GetInstanceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "GetInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -343,7 +343,7 @@ module CreatePublicDnsNamespace = {
   type response = {
 @as("OperationId") operationId: operationId
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "CreatePublicDnsNamespaceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "CreatePublicDnsNamespaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -359,7 +359,7 @@ module CreatePrivateDnsNamespace = {
   type response = {
 @as("OperationId") operationId: operationId
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "CreatePrivateDnsNamespaceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "CreatePrivateDnsNamespaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -374,7 +374,7 @@ module CreateHttpNamespace = {
   type response = {
 @as("OperationId") operationId: operationId
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "CreateHttpNamespaceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "CreateHttpNamespaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -389,7 +389,7 @@ module ListOperations = {
 @as("NextToken") nextToken: nextToken,
 @as("Operations") operations: operationSummaryList
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "ListOperationsCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "ListOperationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -404,7 +404,7 @@ module ListInstances = {
 @as("NextToken") nextToken: nextToken,
 @as("Instances") instances: instanceSummaryList
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "ListInstancesCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "ListInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -416,7 +416,7 @@ module GetNamespace = {
   type response = {
 @as("Namespace") namespace: namespace
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "GetNamespaceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "GetNamespaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -433,7 +433,7 @@ module DiscoverInstances = {
   type response = {
 @as("Instances") instances: httpInstanceSummaryList
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "DiscoverInstancesCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "DiscoverInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -446,7 +446,7 @@ module UpdateService = {
   type response = {
 @as("OperationId") operationId: operationId
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "UpdateServiceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "UpdateServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -461,7 +461,7 @@ module ListNamespaces = {
 @as("NextToken") nextToken: nextToken,
 @as("Namespaces") namespaces: namespaceSummariesList
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "ListNamespacesCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "ListNamespacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -473,7 +473,7 @@ module GetService = {
   type response = {
 @as("Service") service: service
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "GetServiceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "GetServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -493,7 +493,7 @@ module CreateService = {
   type response = {
 @as("Service") service: service
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "CreateServiceCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "CreateServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -508,6 +508,6 @@ module ListServices = {
 @as("NextToken") nextToken: nextToken,
 @as("Services") services: serviceSummariesList
 }
-  @module("@aws-sdk/client-servicediscovery") @new external new_: (Js.Promise.t<request>) => t = "ListServicesCommand";
+  @module("@aws-sdk/client-servicediscovery") @new external new_: (request) => t = "ListServicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -85,7 +85,7 @@ module NotifyApplicationState = {
 @as("ApplicationId") applicationId: option<applicationId>
 }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "NotifyApplicationStateCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "NotifyApplicationStateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -97,7 +97,7 @@ module ImportMigrationTask = {
 @as("ProgressUpdateStream") progressUpdateStream: option<progressUpdateStream>
 }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "ImportMigrationTaskCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "ImportMigrationTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -110,7 +110,7 @@ module DisassociateDiscoveredResource = {
 @as("ProgressUpdateStream") progressUpdateStream: option<progressUpdateStream>
 }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "DisassociateDiscoveredResourceCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "DisassociateDiscoveredResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -123,7 +123,7 @@ module DisassociateCreatedArtifact = {
 @as("ProgressUpdateStream") progressUpdateStream: option<progressUpdateStream>
 }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "DisassociateCreatedArtifactCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "DisassociateCreatedArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -136,7 +136,7 @@ module DescribeApplicationState = {
 @as("LastUpdatedTime") lastUpdatedTime: updateDateTime,
 @as("ApplicationStatus") applicationStatus: applicationStatus
 }
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "DescribeApplicationStateCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "DescribeApplicationStateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -147,7 +147,7 @@ module DeleteProgressUpdateStream = {
 @as("ProgressUpdateStreamName") progressUpdateStreamName: option<progressUpdateStream>
 }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "DeleteProgressUpdateStreamCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "DeleteProgressUpdateStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -158,7 +158,7 @@ module CreateProgressUpdateStream = {
 @as("ProgressUpdateStreamName") progressUpdateStreamName: option<progressUpdateStream>
 }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "CreateProgressUpdateStreamCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "CreateProgressUpdateStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -173,7 +173,7 @@ module NotifyMigrationTaskState = {
 @as("ProgressUpdateStream") progressUpdateStream: option<progressUpdateStream>
 }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "NotifyMigrationTaskStateCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "NotifyMigrationTaskStateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -186,7 +186,7 @@ module AssociateDiscoveredResource = {
 @as("ProgressUpdateStream") progressUpdateStream: option<progressUpdateStream>
 }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "AssociateDiscoveredResourceCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "AssociateDiscoveredResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -199,7 +199,7 @@ module AssociateCreatedArtifact = {
 @as("ProgressUpdateStream") progressUpdateStream: option<progressUpdateStream>
 }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "AssociateCreatedArtifactCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "AssociateCreatedArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -212,7 +212,7 @@ module PutResourceAttributes = {
 @as("ProgressUpdateStream") progressUpdateStream: option<progressUpdateStream>
 }
   type response = unit
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "PutResourceAttributesCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "PutResourceAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -226,7 +226,7 @@ module ListProgressUpdateStreams = {
 @as("NextToken") nextToken: token,
 @as("ProgressUpdateStreamSummaryList") progressUpdateStreamSummaryList: progressUpdateStreamSummaryList
 }
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "ListProgressUpdateStreamsCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "ListProgressUpdateStreamsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -241,7 +241,7 @@ module ListMigrationTasks = {
 @as("MigrationTaskSummaryList") migrationTaskSummaryList: migrationTaskSummaryList,
 @as("NextToken") nextToken: token
 }
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "ListMigrationTasksCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "ListMigrationTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -257,7 +257,7 @@ module ListDiscoveredResources = {
 @as("DiscoveredResourceList") discoveredResourceList: discoveredResourceList,
 @as("NextToken") nextToken: token
 }
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "ListDiscoveredResourcesCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "ListDiscoveredResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -273,7 +273,7 @@ module ListCreatedArtifacts = {
 @as("CreatedArtifactList") createdArtifactList: createdArtifactList,
 @as("NextToken") nextToken: token
 }
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "ListCreatedArtifactsCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "ListCreatedArtifactsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -288,7 +288,7 @@ module ListApplicationStates = {
 @as("NextToken") nextToken: token,
 @as("ApplicationStateList") applicationStateList: applicationStateList
 }
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationStatesCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "ListApplicationStatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -301,6 +301,6 @@ module DescribeMigrationTask = {
   type response = {
 @as("MigrationTask") migrationTask: migrationTask
 }
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "DescribeMigrationTaskCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "DescribeMigrationTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

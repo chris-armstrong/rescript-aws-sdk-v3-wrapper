@@ -66,7 +66,7 @@ module DeleteConfigurationSetEventDestination = {
 @as("ConfigurationSetName") configurationSetName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-sms-voice") @new external new_: (Js.Promise.t<request>) => t = "DeleteConfigurationSetEventDestinationCommand";
+  @module("@aws-sdk/client-sms-voice") @new external new_: (request) => t = "DeleteConfigurationSetEventDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -76,7 +76,7 @@ module DeleteConfigurationSet = {
 @as("ConfigurationSetName") configurationSetName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-sms-voice") @new external new_: (Js.Promise.t<request>) => t = "DeleteConfigurationSetCommand";
+  @module("@aws-sdk/client-sms-voice") @new external new_: (request) => t = "DeleteConfigurationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -86,7 +86,7 @@ module CreateConfigurationSet = {
 @as("ConfigurationSetName") configurationSetName: wordCharactersWithDelimiters
 }
   type response = unit
-  @module("@aws-sdk/client-sms-voice") @new external new_: (Js.Promise.t<request>) => t = "CreateConfigurationSetCommand";
+  @module("@aws-sdk/client-sms-voice") @new external new_: (request) => t = "CreateConfigurationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -100,7 +100,7 @@ module ListConfigurationSets = {
 @as("NextToken") nextToken: nextTokenString,
 @as("ConfigurationSets") configurationSets: configurationSets
 }
-  @module("@aws-sdk/client-sms-voice") @new external new_: (Js.Promise.t<request>) => t = "ListConfigurationSetsCommand";
+  @module("@aws-sdk/client-sms-voice") @new external new_: (request) => t = "ListConfigurationSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -112,7 +112,7 @@ module UpdateConfigurationSetEventDestination = {
 @as("ConfigurationSetName") configurationSetName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-sms-voice") @new external new_: (Js.Promise.t<request>) => t = "UpdateConfigurationSetEventDestinationCommand";
+  @module("@aws-sdk/client-sms-voice") @new external new_: (request) => t = "UpdateConfigurationSetEventDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -128,7 +128,7 @@ module SendVoiceMessage = {
   type response = {
 @as("MessageId") messageId: amazonawsString
 }
-  @module("@aws-sdk/client-sms-voice") @new external new_: (Js.Promise.t<request>) => t = "SendVoiceMessageCommand";
+  @module("@aws-sdk/client-sms-voice") @new external new_: (request) => t = "SendVoiceMessageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -140,7 +140,7 @@ module CreateConfigurationSetEventDestination = {
 @as("ConfigurationSetName") configurationSetName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-sms-voice") @new external new_: (Js.Promise.t<request>) => t = "CreateConfigurationSetEventDestinationCommand";
+  @module("@aws-sdk/client-sms-voice") @new external new_: (request) => t = "CreateConfigurationSetEventDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -152,6 +152,6 @@ module GetConfigurationSetEventDestinations = {
   type response = {
 @as("EventDestinations") eventDestinations: eventDestinations
 }
-  @module("@aws-sdk/client-sms-voice") @new external new_: (Js.Promise.t<request>) => t = "GetConfigurationSetEventDestinationsCommand";
+  @module("@aws-sdk/client-sms-voice") @new external new_: (request) => t = "GetConfigurationSetEventDestinationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

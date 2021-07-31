@@ -40,7 +40,7 @@ module StartDeviceAuthorization = {
 @as("userCode") userCode: userCode,
 @as("deviceCode") deviceCode: deviceCode
 }
-  @module("@aws-sdk/client-awsssooidc") @new external new_: (Js.Promise.t<request>) => t = "StartDeviceAuthorizationCommand";
+  @module("@aws-sdk/client-awsssooidc") @new external new_: (request) => t = "StartDeviceAuthorizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -59,7 +59,7 @@ module RegisterClient = {
 @as("clientSecret") clientSecret: clientSecret,
 @as("clientId") clientId: clientId
 }
-  @module("@aws-sdk/client-awsssooidc") @new external new_: (Js.Promise.t<request>) => t = "RegisterClientCommand";
+  @module("@aws-sdk/client-awsssooidc") @new external new_: (request) => t = "RegisterClientCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -82,6 +82,6 @@ module CreateToken = {
 @as("tokenType") tokenType: tokenType,
 @as("accessToken") accessToken: accessToken
 }
-  @module("@aws-sdk/client-awsssooidc") @new external new_: (Js.Promise.t<request>) => t = "CreateTokenCommand";
+  @module("@aws-sdk/client-awsssooidc") @new external new_: (request) => t = "CreateTokenCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

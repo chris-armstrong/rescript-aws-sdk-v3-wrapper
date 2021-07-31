@@ -286,7 +286,7 @@ module GetExport = {
 @as("version") version: numericalVersion,
 @as("name") name: name
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetExportCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetExportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -297,7 +297,7 @@ module DeleteUtterances = {
 @as("botName") botName: option<botName>
 }
   
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "DeleteUtterancesCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteUtterancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -309,7 +309,7 @@ module DeleteBotChannelAssociation = {
 @as("name") name: option<botChannelName>
 }
   
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "DeleteBotChannelAssociationCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteBotChannelAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -320,7 +320,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -338,7 +338,7 @@ module GetImport = {
 @as("resourceType") resourceType: resourceType,
 @as("name") name: name
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetImportCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetImportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -360,7 +360,7 @@ module GetBotChannelAssociation = {
 @as("description") description: description,
 @as("name") name: botChannelName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetBotChannelAssociationCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetBotChannelAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -371,7 +371,7 @@ module DeleteSlotTypeVersion = {
 @as("name") name: option<slotTypeName>
 }
   
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "DeleteSlotTypeVersionCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteSlotTypeVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -381,7 +381,7 @@ module DeleteSlotType = {
 @as("name") name: option<slotTypeName>
 }
   
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "DeleteSlotTypeCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteSlotTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -392,7 +392,7 @@ module DeleteIntentVersion = {
 @as("name") name: option<intentName>
 }
   
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "DeleteIntentVersionCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteIntentVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -402,7 +402,7 @@ module DeleteIntent = {
 @as("name") name: option<intentName>
 }
   
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "DeleteIntentCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteIntentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -413,7 +413,7 @@ module DeleteBotVersion = {
 @as("name") name: option<botName>
 }
   
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "DeleteBotVersionCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteBotVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -424,7 +424,7 @@ module DeleteBotAlias = {
 @as("name") name: option<aliasName>
 }
   
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "DeleteBotAliasCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteBotAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -434,7 +434,7 @@ module DeleteBot = {
 @as("name") name: option<botName>
 }
   
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "DeleteBotCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteBotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -445,7 +445,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -466,7 +466,7 @@ module StartImport = {
 @as("resourceType") resourceType: resourceType,
 @as("name") name: name
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "StartImportCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "StartImportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -478,7 +478,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -493,7 +493,7 @@ module GetSlotTypes = {
 @as("nextToken") nextToken: nextToken,
 @as("slotTypes") slotTypes: slotTypeMetadataList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetSlotTypesCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetSlotTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -508,7 +508,7 @@ module GetSlotTypeVersions = {
 @as("nextToken") nextToken: nextToken,
 @as("slotTypes") slotTypes: slotTypeMetadataList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetSlotTypeVersionsCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetSlotTypeVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -523,7 +523,7 @@ module GetIntents = {
 @as("nextToken") nextToken: nextToken,
 @as("intents") intents: intentMetadataList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetIntentsCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetIntentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -538,7 +538,7 @@ module GetIntentVersions = {
 @as("nextToken") nextToken: nextToken,
 @as("intents") intents: intentMetadataList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetIntentVersionsCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetIntentVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -552,7 +552,7 @@ module GetBuiltinIntent = {
 @as("supportedLocales") supportedLocales: localeList,
 @as("signature") signature: builtinIntentSignature
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetBuiltinIntentCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetBuiltinIntentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -567,7 +567,7 @@ module GetBots = {
 @as("nextToken") nextToken: nextToken,
 @as("bots") bots: botMetadataList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetBotsCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetBotsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -582,7 +582,7 @@ module GetBotVersions = {
 @as("nextToken") nextToken: nextToken,
 @as("bots") bots: botMetadataList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetBotVersionsCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetBotVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -611,7 +611,7 @@ module PutSlotType = {
 @as("description") description: description,
 @as("name") name: slotTypeName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "PutSlotTypeCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "PutSlotTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -637,7 +637,7 @@ module PutBotAlias = {
 @as("description") description: description,
 @as("name") name: aliasName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "PutBotAliasCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "PutBotAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -683,7 +683,7 @@ module PutBot = {
 @as("description") description: description,
 @as("name") name: botName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "PutBotCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "PutBotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -705,7 +705,7 @@ module GetSlotType = {
 @as("description") description: description,
 @as("name") name: slotTypeName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetSlotTypeCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetSlotTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -721,7 +721,7 @@ module GetBuiltinSlotTypes = {
 @as("nextToken") nextToken: nextToken,
 @as("slotTypes") slotTypes: builtinSlotTypeMetadataList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetBuiltinSlotTypesCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetBuiltinSlotTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -737,7 +737,7 @@ module GetBuiltinIntents = {
 @as("nextToken") nextToken: nextToken,
 @as("intents") intents: builtinIntentMetadataList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetBuiltinIntentsCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetBuiltinIntentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -754,7 +754,7 @@ module GetBotChannelAssociations = {
 @as("nextToken") nextToken: nextToken,
 @as("botChannelAssociations") botChannelAssociations: botChannelAssociationList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetBotChannelAssociationsCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetBotChannelAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -774,7 +774,7 @@ module GetBotAlias = {
 @as("description") description: description,
 @as("name") name: aliasName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetBotAliasCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetBotAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -804,7 +804,7 @@ module GetBot = {
 @as("description") description: description,
 @as("name") name: botName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetBotCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetBotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -826,7 +826,7 @@ module CreateSlotTypeVersion = {
 @as("description") description: description,
 @as("name") name: slotTypeName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "CreateSlotTypeVersionCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateSlotTypeVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -855,7 +855,7 @@ module CreateBotVersion = {
 @as("description") description: description,
 @as("name") name: botName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "CreateBotVersionCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateBotVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -870,7 +870,7 @@ module GetUtterancesView = {
 @as("utterances") utterances: listsOfUtterances,
 @as("botName") botName: botName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetUtterancesViewCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetUtterancesViewCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -915,7 +915,7 @@ module PutIntent = {
 @as("description") description: description,
 @as("name") name: intentName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "PutIntentCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "PutIntentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -945,7 +945,7 @@ module GetIntent = {
 @as("description") description: description,
 @as("name") name: intentName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetIntentCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetIntentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -961,7 +961,7 @@ module GetBotAliases = {
 @as("nextToken") nextToken: nextToken,
 @as("BotAliases") botAliases: botAliasMetadataList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetBotAliasesCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetBotAliasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -991,6 +991,6 @@ module CreateIntentVersion = {
 @as("description") description: description,
 @as("name") name: intentName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "CreateIntentVersionCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "CreateIntentVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -82,7 +82,7 @@ module SyncResource = {
 @as("resourceArn") resourceArn: arn,
 @as("applicationArn") applicationArn: applicationArn
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "SyncResourceCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "SyncResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -97,7 +97,7 @@ module DisassociateResource = {
 @as("resourceArn") resourceArn: arn,
 @as("applicationArn") applicationArn: applicationArn
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DisassociateResourceCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DisassociateResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -111,7 +111,7 @@ module DisassociateAttributeGroup = {
 @as("attributeGroupArn") attributeGroupArn: attributeGroupArn,
 @as("applicationArn") applicationArn: applicationArn
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DisassociateAttributeGroupCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DisassociateAttributeGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -126,7 +126,7 @@ module AssociateResource = {
 @as("resourceArn") resourceArn: arn,
 @as("applicationArn") applicationArn: applicationArn
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "AssociateResourceCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "AssociateResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -140,7 +140,7 @@ module AssociateAttributeGroup = {
 @as("attributeGroupArn") attributeGroupArn: attributeGroupArn,
 @as("applicationArn") applicationArn: applicationArn
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "AssociateAttributeGroupCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "AssociateAttributeGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -151,7 +151,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -162,7 +162,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -174,7 +174,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tags
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -189,7 +189,7 @@ module ListAssociatedAttributeGroups = {
 @as("nextToken") nextToken: nextToken,
 @as("attributeGroups") attributeGroups: attributeGroupIds
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListAssociatedAttributeGroupsCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListAssociatedAttributeGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -208,7 +208,7 @@ module GetAttributeGroup = {
 @as("arn") arn: attributeGroupArn,
 @as("id") id: attributeGroupId
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "GetAttributeGroupCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "GetAttributeGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -227,7 +227,7 @@ module GetApplication = {
 @as("arn") arn: applicationArn,
 @as("id") id: applicationId
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "GetApplicationCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "GetApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -239,7 +239,7 @@ module DeleteAttributeGroup = {
   type response = {
 @as("attributeGroup") attributeGroup: attributeGroupSummary
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DeleteAttributeGroupCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeleteAttributeGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -251,7 +251,7 @@ module DeleteApplication = {
   type response = {
 @as("application") application: applicationSummary
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeleteApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -266,7 +266,7 @@ module UpdateAttributeGroup = {
   type response = {
 @as("attributeGroup") attributeGroup: attributeGroup
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UpdateAttributeGroupCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdateAttributeGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -280,7 +280,7 @@ module UpdateApplication = {
   type response = {
 @as("application") application: application
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UpdateApplicationCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -294,7 +294,7 @@ module ListAttributeGroups = {
 @as("nextToken") nextToken: nextToken,
 @as("attributeGroups") attributeGroups: attributeGroupSummaries
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListAttributeGroupsCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListAttributeGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -309,7 +309,7 @@ module ListAssociatedResources = {
 @as("nextToken") nextToken: nextToken,
 @as("resources") resources: resources
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListAssociatedResourcesCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListAssociatedResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -323,7 +323,7 @@ module ListApplications = {
 @as("nextToken") nextToken: nextToken,
 @as("applications") applications: applicationSummaries
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationsCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListApplicationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -339,7 +339,7 @@ module CreateAttributeGroup = {
   type response = {
 @as("attributeGroup") attributeGroup: attributeGroup
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "CreateAttributeGroupCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreateAttributeGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -354,6 +354,6 @@ module CreateApplication = {
   type response = {
 @as("application") application: application
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "CreateApplicationCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

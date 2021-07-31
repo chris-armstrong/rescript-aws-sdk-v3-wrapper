@@ -560,7 +560,7 @@ module UpdateSkillGroup = {
 @as("SkillGroupArn") skillGroupArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UpdateSkillGroupCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UpdateSkillGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -574,7 +574,7 @@ module UpdateRoom = {
 @as("RoomArn") roomArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UpdateRoomCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UpdateRoomCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -586,7 +586,7 @@ module UpdateGatewayGroup = {
 @as("GatewayGroupArn") gatewayGroupArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UpdateGatewayGroupCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UpdateGatewayGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -599,7 +599,7 @@ module UpdateGateway = {
 @as("GatewayArn") gatewayArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UpdateGatewayCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UpdateGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -610,7 +610,7 @@ module UpdateDevice = {
 @as("DeviceArn") deviceArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UpdateDeviceCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UpdateDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -622,7 +622,7 @@ module UpdateAddressBook = {
 @as("AddressBookArn") addressBookArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UpdateAddressBookCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UpdateAddressBookCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -632,7 +632,7 @@ module StartSmartHomeApplianceDiscovery = {
 @as("RoomArn") roomArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "StartSmartHomeApplianceDiscoveryCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "StartSmartHomeApplianceDiscoveryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -642,7 +642,7 @@ module SendInvitation = {
 @as("UserArn") userArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "SendInvitationCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "SendInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -653,7 +653,7 @@ module RevokeInvitation = {
 @as("UserArn") userArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "RevokeInvitationCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "RevokeInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -663,7 +663,7 @@ module RejectSkill = {
 @as("SkillId") skillId: option<skillId>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "RejectSkillCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "RejectSkillCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -673,7 +673,7 @@ module ForgetSmartHomeAppliances = {
 @as("RoomArn") roomArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ForgetSmartHomeAppliancesCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ForgetSmartHomeAppliancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -684,7 +684,7 @@ module DisassociateSkillGroupFromRoom = {
 @as("SkillGroupArn") skillGroupArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DisassociateSkillGroupFromRoomCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DisassociateSkillGroupFromRoomCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -694,7 +694,7 @@ module DisassociateSkillFromUsers = {
 @as("SkillId") skillId: option<skillId>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DisassociateSkillFromUsersCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DisassociateSkillFromUsersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -705,7 +705,7 @@ module DisassociateSkillFromSkillGroup = {
 @as("SkillGroupArn") skillGroupArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DisassociateSkillFromSkillGroupCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DisassociateSkillFromSkillGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -715,7 +715,7 @@ module DisassociateDeviceFromRoom = {
 @as("DeviceArn") deviceArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DisassociateDeviceFromRoomCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DisassociateDeviceFromRoomCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -726,7 +726,7 @@ module DisassociateContactFromAddressBook = {
 @as("ContactArn") contactArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DisassociateContactFromAddressBookCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DisassociateContactFromAddressBookCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -737,7 +737,7 @@ module DeleteUser = {
 @as("UserArn") userArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -747,7 +747,7 @@ module DeleteSkillGroup = {
 @as("SkillGroupArn") skillGroupArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteSkillGroupCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteSkillGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -758,7 +758,7 @@ module DeleteSkillAuthorization = {
 @as("SkillId") skillId: option<skillId>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteSkillAuthorizationCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteSkillAuthorizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -770,7 +770,7 @@ module DeleteRoomSkillParameter = {
 @as("RoomArn") roomArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteRoomSkillParameterCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteRoomSkillParameterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -780,7 +780,7 @@ module DeleteRoom = {
 @as("RoomArn") roomArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteRoomCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteRoomCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -790,7 +790,7 @@ module DeleteProfile = {
 @as("ProfileArn") profileArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteProfileCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -800,7 +800,7 @@ module DeleteNetworkProfile = {
 @as("NetworkProfileArn") networkProfileArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteNetworkProfileCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteNetworkProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -810,7 +810,7 @@ module DeleteGatewayGroup = {
 @as("GatewayGroupArn") gatewayGroupArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteGatewayGroupCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteGatewayGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -821,7 +821,7 @@ module DeleteDeviceUsageData = {
 @as("DeviceArn") deviceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteDeviceUsageDataCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteDeviceUsageDataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -831,7 +831,7 @@ module DeleteDevice = {
 @as("DeviceArn") deviceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteDeviceCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -841,7 +841,7 @@ module DeleteContact = {
 @as("ContactArn") contactArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteContactCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -851,7 +851,7 @@ module DeleteConferenceProvider = {
 @as("ConferenceProviderArn") conferenceProviderArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteConferenceProviderCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteConferenceProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -861,7 +861,7 @@ module DeleteBusinessReportSchedule = {
 @as("ScheduleArn") scheduleArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteBusinessReportScheduleCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteBusinessReportScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -871,7 +871,7 @@ module DeleteAddressBook = {
 @as("AddressBookArn") addressBookArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "DeleteAddressBookCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "DeleteAddressBookCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -881,7 +881,7 @@ module AssociateSkillWithUsers = {
 @as("SkillId") skillId: option<skillId>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "AssociateSkillWithUsersCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "AssociateSkillWithUsersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -892,7 +892,7 @@ module AssociateSkillWithSkillGroup = {
 @as("SkillGroupArn") skillGroupArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "AssociateSkillWithSkillGroupCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "AssociateSkillWithSkillGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -903,7 +903,7 @@ module AssociateSkillGroupWithRoom = {
 @as("SkillGroupArn") skillGroupArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "AssociateSkillGroupWithRoomCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "AssociateSkillGroupWithRoomCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -914,7 +914,7 @@ module AssociateDeviceWithRoom = {
 @as("DeviceArn") deviceArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "AssociateDeviceWithRoomCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "AssociateDeviceWithRoomCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -925,7 +925,7 @@ module AssociateDeviceWithNetworkProfile = {
 @as("DeviceArn") deviceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "AssociateDeviceWithNetworkProfileCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "AssociateDeviceWithNetworkProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -936,7 +936,7 @@ module AssociateContactWithAddressBook = {
 @as("ContactArn") contactArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "AssociateContactWithAddressBookCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "AssociateContactWithAddressBookCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -946,7 +946,7 @@ module ApproveSkill = {
 @as("SkillId") skillId: option<skillId>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ApproveSkillCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ApproveSkillCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -962,7 +962,7 @@ module UpdateNetworkProfile = {
 @as("NetworkProfileArn") networkProfileArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UpdateNetworkProfileCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UpdateNetworkProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -976,7 +976,7 @@ module UpdateConferenceProvider = {
 @as("ConferenceProviderArn") conferenceProviderArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UpdateConferenceProviderCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UpdateConferenceProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -991,7 +991,7 @@ module UpdateBusinessReportSchedule = {
 @as("ScheduleArn") scheduleArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UpdateBusinessReportScheduleCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UpdateBusinessReportScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1002,7 +1002,7 @@ module UntagResource = {
 @as("Arn") arn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1014,7 +1014,7 @@ module StartDeviceSync = {
 @as("RoomArn") roomArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "StartDeviceSyncCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "StartDeviceSyncCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1026,7 +1026,7 @@ module PutSkillAuthorization = {
 @as("AuthorizationResult") authorizationResult: option<authorizationResult>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "PutSkillAuthorizationCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "PutSkillAuthorizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1038,7 +1038,7 @@ module PutRoomSkillParameter = {
 @as("RoomArn") roomArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "PutRoomSkillParameterCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "PutRoomSkillParameterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1050,7 +1050,7 @@ module PutInvitationConfiguration = {
 @as("OrganizationName") organizationName: option<organizationName>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "PutInvitationConfigurationCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "PutInvitationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1060,7 +1060,7 @@ module PutConferencePreference = {
 @as("ConferencePreference") conferencePreference: option<conferencePreference>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "PutConferencePreferenceCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "PutConferencePreferenceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1072,7 +1072,7 @@ module GetSkillGroup = {
   type response = {
 @as("SkillGroup") skillGroup: skillGroup
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetSkillGroupCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetSkillGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1086,7 +1086,7 @@ module GetRoomSkillParameter = {
   type response = {
 @as("RoomSkillParameter") roomSkillParameter: roomSkillParameter
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetRoomSkillParameterCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetRoomSkillParameterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1098,7 +1098,7 @@ module GetRoom = {
   type response = {
 @as("Room") room: room
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetRoomCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetRoomCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1110,7 +1110,7 @@ module GetInvitationConfiguration = {
 @as("ContactEmail") contactEmail: email,
 @as("OrganizationName") organizationName: organizationName
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetInvitationConfigurationCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetInvitationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1122,7 +1122,7 @@ module GetGatewayGroup = {
   type response = {
 @as("GatewayGroup") gatewayGroup: gatewayGroup
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetGatewayGroupCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetGatewayGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1134,7 +1134,7 @@ module GetGateway = {
   type response = {
 @as("Gateway") gateway: gateway
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetGatewayCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1144,7 +1144,7 @@ module GetConferencePreference = {
   type response = {
 @as("Preference") preference: conferencePreference
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetConferencePreferenceCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetConferencePreferenceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1156,7 +1156,7 @@ module GetAddressBook = {
   type response = {
 @as("AddressBook") addressBook: addressBook
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetAddressBookCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetAddressBookCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1172,7 +1172,7 @@ module UpdateContact = {
 @as("ContactArn") contactArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UpdateContactCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UpdateContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1183,7 +1183,7 @@ module TagResource = {
 @as("Arn") arn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1198,7 +1198,7 @@ module ResolveRoom = {
 @as("RoomName") roomName: roomName,
 @as("RoomArn") roomArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ResolveRoomCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ResolveRoomCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1216,7 +1216,7 @@ module RegisterAVSDevice = {
   type response = {
 @as("DeviceArn") deviceArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "RegisterAVSDeviceCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "RegisterAVSDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1231,7 +1231,7 @@ module ListTags = {
 @as("NextToken") nextToken: nextToken,
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ListTagsCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ListTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1246,7 +1246,7 @@ module ListSmartHomeAppliances = {
 @as("NextToken") nextToken: nextToken,
 @as("SmartHomeAppliances") smartHomeAppliances: smartHomeApplianceList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ListSmartHomeAppliancesCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ListSmartHomeAppliancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1260,7 +1260,7 @@ module ListSkillsStoreCategories = {
 @as("NextToken") nextToken: nextToken,
 @as("CategoryList") categoryList: categoryList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ListSkillsStoreCategoriesCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ListSkillsStoreCategoriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1277,7 +1277,7 @@ module ListSkills = {
 @as("NextToken") nextToken: nextToken,
 @as("SkillSummaries") skillSummaries: skillSummaryList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ListSkillsCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ListSkillsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1292,7 +1292,7 @@ module ListGateways = {
 @as("NextToken") nextToken: nextToken,
 @as("Gateways") gateways: gatewaySummaries
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ListGatewaysCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ListGatewaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1306,7 +1306,7 @@ module ListGatewayGroups = {
 @as("NextToken") nextToken: nextToken,
 @as("GatewayGroups") gatewayGroups: gatewayGroupSummaries
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ListGatewayGroupsCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ListGatewayGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1322,7 +1322,7 @@ module ListDeviceEvents = {
 @as("NextToken") nextToken: nextToken,
 @as("DeviceEvents") deviceEvents: deviceEventList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ListDeviceEventsCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ListDeviceEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1334,7 +1334,7 @@ module GetNetworkProfile = {
   type response = {
 @as("NetworkProfile") networkProfile: networkProfile
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetNetworkProfileCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetNetworkProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1346,7 +1346,7 @@ module GetConferenceProvider = {
   type response = {
 @as("ConferenceProvider") conferenceProvider: conferenceProvider
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetConferenceProviderCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetConferenceProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1363,7 +1363,7 @@ module CreateUser = {
   type response = {
 @as("UserArn") userArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "CreateUserCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "CreateUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1378,7 +1378,7 @@ module CreateSkillGroup = {
   type response = {
 @as("SkillGroupArn") skillGroupArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "CreateSkillGroupCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "CreateSkillGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1395,7 +1395,7 @@ module CreateRoom = {
   type response = {
 @as("RoomArn") roomArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "CreateRoomCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "CreateRoomCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1417,7 +1417,7 @@ module CreateNetworkProfile = {
   type response = {
 @as("NetworkProfileArn") networkProfileArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "CreateNetworkProfileCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "CreateNetworkProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1432,7 +1432,7 @@ module CreateGatewayGroup = {
   type response = {
 @as("GatewayGroupArn") gatewayGroupArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "CreateGatewayGroupCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "CreateGatewayGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1451,7 +1451,7 @@ module CreateContact = {
   type response = {
 @as("ContactArn") contactArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "CreateContactCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "CreateContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1469,7 +1469,7 @@ module CreateConferenceProvider = {
   type response = {
 @as("ConferenceProviderArn") conferenceProviderArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "CreateConferenceProviderCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "CreateConferenceProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1488,7 +1488,7 @@ module CreateBusinessReportSchedule = {
   type response = {
 @as("ScheduleArn") scheduleArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "CreateBusinessReportScheduleCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "CreateBusinessReportScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1503,7 +1503,7 @@ module CreateAddressBook = {
   type response = {
 @as("AddressBookArn") addressBookArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "CreateAddressBookCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "CreateAddressBookCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1526,7 +1526,7 @@ module UpdateProfile = {
 @as("ProfileArn") profileArn: arn
 }
   type response = unit
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "UpdateProfileCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "UpdateProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1541,7 +1541,7 @@ module SendAnnouncement = {
   type response = {
 @as("AnnouncementArn") announcementArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "SendAnnouncementCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "SendAnnouncementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1558,7 +1558,7 @@ module SearchUsers = {
 @as("NextToken") nextToken: nextToken,
 @as("Users") users: userDataList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "SearchUsersCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "SearchUsersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1575,7 +1575,7 @@ module SearchSkillGroups = {
 @as("NextToken") nextToken: nextToken,
 @as("SkillGroups") skillGroups: skillGroupDataList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "SearchSkillGroupsCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "SearchSkillGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1592,7 +1592,7 @@ module SearchRooms = {
 @as("NextToken") nextToken: nextToken,
 @as("Rooms") rooms: roomDataList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "SearchRoomsCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "SearchRoomsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1609,7 +1609,7 @@ module SearchProfiles = {
 @as("NextToken") nextToken: nextToken,
 @as("Profiles") profiles: profileDataList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "SearchProfilesCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "SearchProfilesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1626,7 +1626,7 @@ module SearchNetworkProfiles = {
 @as("NextToken") nextToken: nextToken,
 @as("NetworkProfiles") networkProfiles: networkProfileDataList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "SearchNetworkProfilesCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "SearchNetworkProfilesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1643,7 +1643,7 @@ module SearchAddressBooks = {
 @as("NextToken") nextToken: nextToken,
 @as("AddressBooks") addressBooks: addressBookDataList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "SearchAddressBooksCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "SearchAddressBooksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1657,7 +1657,7 @@ module ListConferenceProviders = {
 @as("NextToken") nextToken: nextToken,
 @as("ConferenceProviders") conferenceProviders: conferenceProvidersList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ListConferenceProvidersCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ListConferenceProvidersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1669,7 +1669,7 @@ module GetContact = {
   type response = {
 @as("Contact") contact: contact
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetContactCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1694,7 +1694,7 @@ module CreateProfile = {
   type response = {
 @as("ProfileArn") profileArn: arn
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "CreateProfileCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "CreateProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1711,7 +1711,7 @@ module SearchContacts = {
 @as("NextToken") nextToken: nextToken,
 @as("Contacts") contacts: contactDataList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "SearchContactsCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "SearchContactsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1726,7 +1726,7 @@ module ListSkillsStoreSkillsByCategory = {
 @as("NextToken") nextToken: nextToken,
 @as("SkillsStoreSkills") skillsStoreSkills: skillsStoreSkillList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ListSkillsStoreSkillsByCategoryCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ListSkillsStoreSkillsByCategoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1740,7 +1740,7 @@ module ListBusinessReportSchedules = {
 @as("NextToken") nextToken: nextToken,
 @as("BusinessReportSchedules") businessReportSchedules: businessReportScheduleList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "ListBusinessReportSchedulesCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "ListBusinessReportSchedulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1752,7 +1752,7 @@ module GetProfile = {
   type response = {
 @as("Profile") profile: profile
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetProfileCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1764,7 +1764,7 @@ module GetDevice = {
   type response = {
 @as("Device") device: device
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "GetDeviceCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "GetDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1781,6 +1781,6 @@ module SearchDevices = {
 @as("NextToken") nextToken: nextToken,
 @as("Devices") devices: deviceDataList
 }
-  @module("@aws-sdk/client-a4b") @new external new_: (Js.Promise.t<request>) => t = "SearchDevicesCommand";
+  @module("@aws-sdk/client-a4b") @new external new_: (request) => t = "SearchDevicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

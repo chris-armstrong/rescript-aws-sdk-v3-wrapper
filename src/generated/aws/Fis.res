@@ -245,7 +245,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -256,7 +256,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -268,7 +268,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -282,7 +282,7 @@ module ListExperiments = {
 @as("nextToken") nextToken: nextToken,
 @as("experiments") experiments: experimentSummaryList
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "ListExperimentsCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "ListExperimentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -296,7 +296,7 @@ module ListExperimentTemplates = {
 @as("nextToken") nextToken: nextToken,
 @as("experimentTemplates") experimentTemplates: experimentTemplateSummaryList
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "ListExperimentTemplatesCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "ListExperimentTemplatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -308,7 +308,7 @@ module GetAction = {
   type response = {
 @as("action") action: action
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "GetActionCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "GetActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -322,7 +322,7 @@ module ListActions = {
 @as("nextToken") nextToken: nextToken,
 @as("actions") actions: actionSummaryList
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "ListActionsCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "ListActionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -339,7 +339,7 @@ module UpdateExperimentTemplate = {
   type response = {
 @as("experimentTemplate") experimentTemplate: experimentTemplate
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "UpdateExperimentTemplateCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "UpdateExperimentTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -351,7 +351,7 @@ module StopExperiment = {
   type response = {
 @as("experiment") experiment: experiment
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "StopExperimentCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "StopExperimentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -365,7 +365,7 @@ module StartExperiment = {
   type response = {
 @as("experiment") experiment: experiment
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "StartExperimentCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "StartExperimentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -377,7 +377,7 @@ module GetExperimentTemplate = {
   type response = {
 @as("experimentTemplate") experimentTemplate: experimentTemplate
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "GetExperimentTemplateCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "GetExperimentTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -389,7 +389,7 @@ module GetExperiment = {
   type response = {
 @as("experiment") experiment: experiment
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "GetExperimentCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "GetExperimentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -401,7 +401,7 @@ module DeleteExperimentTemplate = {
   type response = {
 @as("experimentTemplate") experimentTemplate: experimentTemplate
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "DeleteExperimentTemplateCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "DeleteExperimentTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -419,6 +419,6 @@ module CreateExperimentTemplate = {
   type response = {
 @as("experimentTemplate") experimentTemplate: experimentTemplate
 }
-  @module("@aws-sdk/client-fis") @new external new_: (Js.Promise.t<request>) => t = "CreateExperimentTemplateCommand";
+  @module("@aws-sdk/client-fis") @new external new_: (request) => t = "CreateExperimentTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -196,7 +196,7 @@ module UpdateTimelineEvent = {
 @as("clientToken") clientToken: option<clientToken>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "UpdateTimelineEventCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateTimelineEventCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -208,7 +208,7 @@ module UpdateDeletionProtection = {
 @as("arn") arn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "UpdateDeletionProtectionCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateDeletionProtectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -221,7 +221,7 @@ module PutResourcePolicy = {
   type response = {
 @as("policyId") policyId: option<policyId>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "PutResourcePolicyCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "PutResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -232,7 +232,7 @@ module DeleteTimelineEvent = {
 @as("incidentRecordArn") incidentRecordArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "DeleteTimelineEventCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "DeleteTimelineEventCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -242,7 +242,7 @@ module DeleteResponsePlan = {
 @as("arn") arn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "DeleteResponsePlanCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "DeleteResponsePlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -253,7 +253,7 @@ module DeleteResourcePolicy = {
 @as("resourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "DeleteResourcePolicyCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "DeleteResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -263,7 +263,7 @@ module DeleteReplicationSet = {
 @as("arn") arn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "DeleteReplicationSetCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "DeleteReplicationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -273,7 +273,7 @@ module DeleteIncidentRecord = {
 @as("arn") arn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "DeleteIncidentRecordCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "DeleteIncidentRecordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -290,7 +290,7 @@ module CreateTimelineEvent = {
 @as("eventId") eventId: option<uUID>,
 @as("incidentRecordArn") incidentRecordArn: option<arn>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "CreateTimelineEventCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "CreateTimelineEventCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -301,7 +301,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<apiString>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -312,7 +312,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<apiString>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -324,7 +324,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: option<tagMap>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -338,7 +338,7 @@ module ListReplicationSets = {
 @as("nextToken") nextToken: nextToken,
 @as("replicationSetArns") replicationSetArns: option<replicationSetArnList>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "ListReplicationSetsCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListReplicationSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -351,7 +351,7 @@ module GetTimelineEvent = {
   type response = {
 @as("event") event: option<timelineEvent>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "GetTimelineEventCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "GetTimelineEventCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -368,7 +368,7 @@ module UpdateIncidentRecord = {
 @as("clientToken") clientToken: clientToken
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "UpdateIncidentRecordCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateIncidentRecordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -382,7 +382,7 @@ module ListResponsePlans = {
 @as("nextToken") nextToken: nextToken,
 @as("responsePlanSummaries") responsePlanSummaries: option<responsePlanSummaryList>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "ListResponsePlansCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListResponsePlansCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -397,7 +397,7 @@ module GetResourcePolicies = {
 @as("nextToken") nextToken: nextToken,
 @as("resourcePolicies") resourcePolicies: option<resourcePolicyList>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "GetResourcePoliciesCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "GetResourcePoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -410,7 +410,7 @@ module CreateReplicationSet = {
   type response = {
 @as("arn") arn: option<arn>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "CreateReplicationSetCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "CreateReplicationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -422,7 +422,7 @@ module UpdateReplicationSet = {
 @as("arn") arn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "UpdateReplicationSetCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateReplicationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -434,7 +434,7 @@ module GetReplicationSet = {
   type response = {
 @as("replicationSet") replicationSet: option<replicationSet>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "GetReplicationSetCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "GetReplicationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -446,7 +446,7 @@ module GetIncidentRecord = {
   type response = {
 @as("incidentRecord") incidentRecord: option<incidentRecord>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "GetIncidentRecordCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "GetIncidentRecordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -466,7 +466,7 @@ module UpdateResponsePlan = {
 @as("clientToken") clientToken: clientToken
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "UpdateResponsePlanCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateResponsePlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -478,7 +478,7 @@ module UpdateRelatedItems = {
 @as("clientToken") clientToken: clientToken
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "UpdateRelatedItemsCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "UpdateRelatedItemsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -495,7 +495,7 @@ module StartIncident = {
   type response = {
 @as("incidentRecordArn") incidentRecordArn: option<arn>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "StartIncidentCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "StartIncidentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -513,7 +513,7 @@ module ListTimelineEvents = {
 @as("nextToken") nextToken: nextToken,
 @as("eventSummaries") eventSummaries: option<eventSummaryList>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "ListTimelineEventsCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListTimelineEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -528,7 +528,7 @@ module ListRelatedItems = {
 @as("nextToken") nextToken: nextToken,
 @as("relatedItems") relatedItems: option<relatedItemList>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "ListRelatedItemsCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListRelatedItemsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -543,7 +543,7 @@ module ListIncidentRecords = {
 @as("nextToken") nextToken: nextToken,
 @as("incidentRecordSummaries") incidentRecordSummaries: option<incidentRecordSummaryList>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "ListIncidentRecordsCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "ListIncidentRecordsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -561,7 +561,7 @@ module GetResponsePlan = {
 @as("name") name: option<responsePlanName>,
 @as("arn") arn: option<arn>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "GetResponsePlanCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "GetResponsePlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -580,6 +580,6 @@ module CreateResponsePlan = {
   type response = {
 @as("arn") arn: option<arn>
 }
-  @module("@aws-sdk/client-ssm-incidents") @new external new_: (Js.Promise.t<request>) => t = "CreateResponsePlanCommand";
+  @module("@aws-sdk/client-ssm-incidents") @new external new_: (request) => t = "CreateResponsePlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

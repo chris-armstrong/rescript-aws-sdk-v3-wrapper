@@ -150,7 +150,7 @@ module PutFileSystemPolicy = {
 @as("Policy") policy: policy,
 @as("FileSystemId") fileSystemId: fileSystemId
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "PutFileSystemPolicyCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "PutFileSystemPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -163,7 +163,7 @@ module DescribeFileSystemPolicy = {
 @as("Policy") policy: policy,
 @as("FileSystemId") fileSystemId: fileSystemId
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DescribeFileSystemPolicyCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeFileSystemPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -173,7 +173,7 @@ module DeleteMountTarget = {
 @as("MountTargetId") mountTargetId: option<mountTargetId>
 }
   
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DeleteMountTargetCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DeleteMountTargetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -183,7 +183,7 @@ module DeleteFileSystemPolicy = {
 @as("FileSystemId") fileSystemId: option<fileSystemId>
 }
   
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DeleteFileSystemPolicyCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DeleteFileSystemPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -193,7 +193,7 @@ module DeleteFileSystem = {
 @as("FileSystemId") fileSystemId: option<fileSystemId>
 }
   
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DeleteFileSystemCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DeleteFileSystemCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -203,7 +203,7 @@ module DeleteAccessPoint = {
 @as("AccessPointId") accessPointId: option<accessPointId>
 }
   
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DeleteAccessPointCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DeleteAccessPointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -214,7 +214,7 @@ module UntagResource = {
 @as("ResourceId") resourceId: option<resourceId>
 }
   
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -227,7 +227,7 @@ module PutBackupPolicy = {
   type response = {
 @as("BackupPolicy") backupPolicy: backupPolicy
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "PutBackupPolicyCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "PutBackupPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -238,7 +238,7 @@ module ModifyMountTargetSecurityGroups = {
 @as("MountTargetId") mountTargetId: option<mountTargetId>
 }
   
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "ModifyMountTargetSecurityGroupsCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "ModifyMountTargetSecurityGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -250,7 +250,7 @@ module DescribeMountTargetSecurityGroups = {
   type response = {
 @as("SecurityGroups") securityGroups: option<securityGroups>
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DescribeMountTargetSecurityGroupsCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeMountTargetSecurityGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -262,7 +262,7 @@ module DescribeBackupPolicy = {
   type response = {
 @as("BackupPolicy") backupPolicy: backupPolicy
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DescribeBackupPolicyCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeBackupPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -273,7 +273,7 @@ module DeleteTags = {
 @as("FileSystemId") fileSystemId: option<fileSystemId>
 }
   
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DeleteTagsCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DeleteTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -286,7 +286,7 @@ module CreateMountTarget = {
 @as("FileSystemId") fileSystemId: option<fileSystemId>
 }
   type response = mountTargetDescription;
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "CreateMountTargetCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "CreateMountTargetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -298,7 +298,7 @@ module UpdateFileSystem = {
 @as("FileSystemId") fileSystemId: option<fileSystemId>
 }
   type response = fileSystemDescription;
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "UpdateFileSystemCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "UpdateFileSystemCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -309,7 +309,7 @@ module TagResource = {
 @as("ResourceId") resourceId: option<resourceId>
 }
   
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -322,7 +322,7 @@ module PutLifecycleConfiguration = {
   type response = {
 @as("LifecyclePolicies") lifecyclePolicies: lifecyclePolicies
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "PutLifecycleConfigurationCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "PutLifecycleConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -334,7 +334,7 @@ module PutAccountPreferences = {
   type response = {
 @as("ResourceIdPreference") resourceIdPreference: resourceIdPreference
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "PutAccountPreferencesCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "PutAccountPreferencesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -349,7 +349,7 @@ module ListTagsForResource = {
 @as("NextToken") nextToken: token,
 @as("Tags") tags: tags
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -365,7 +365,7 @@ module DescribeTags = {
 @as("Tags") tags: option<tags>,
 @as("Marker") marker: marker
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DescribeTagsCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -383,7 +383,7 @@ module DescribeMountTargets = {
 @as("MountTargets") mountTargets: mountTargetDescriptions,
 @as("Marker") marker: marker
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DescribeMountTargetsCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeMountTargetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -395,7 +395,7 @@ module DescribeLifecycleConfiguration = {
   type response = {
 @as("LifecyclePolicies") lifecyclePolicies: lifecyclePolicies
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DescribeLifecycleConfigurationCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeLifecycleConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -409,7 +409,7 @@ module DescribeAccountPreferences = {
 @as("NextToken") nextToken: token,
 @as("ResourceIdPreference") resourceIdPreference: resourceIdPreference
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountPreferencesCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeAccountPreferencesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -420,7 +420,7 @@ module CreateTags = {
 @as("FileSystemId") fileSystemId: option<fileSystemId>
 }
   
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "CreateTagsCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "CreateTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -438,7 +438,7 @@ module CreateFileSystem = {
 @as("CreationToken") creationToken: option<creationToken>
 }
   type response = fileSystemDescription;
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "CreateFileSystemCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "CreateFileSystemCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -452,7 +452,7 @@ module CreateAccessPoint = {
 @as("ClientToken") clientToken: option<clientToken>
 }
   type response = accessPointDescription;
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "CreateAccessPointCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "CreateAccessPointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -469,7 +469,7 @@ module DescribeFileSystems = {
 @as("FileSystems") fileSystems: fileSystemDescriptions,
 @as("Marker") marker: marker
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DescribeFileSystemsCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeFileSystemsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -485,6 +485,6 @@ module DescribeAccessPoints = {
 @as("NextToken") nextToken: token,
 @as("AccessPoints") accessPoints: accessPointDescriptions
 }
-  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccessPointsCommand";
+  @module("@aws-sdk/client-elasticfilesystem") @new external new_: (request) => t = "DescribeAccessPointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

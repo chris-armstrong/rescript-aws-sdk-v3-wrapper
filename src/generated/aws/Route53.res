@@ -352,7 +352,7 @@ module GetTrafficPolicyInstanceCount = {
   type response = {
 @as("TrafficPolicyInstanceCount") trafficPolicyInstanceCount: option<trafficPolicyInstanceCount>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetTrafficPolicyInstanceCountCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetTrafficPolicyInstanceCountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -362,7 +362,7 @@ module GetHostedZoneCount = {
   type response = {
 @as("HostedZoneCount") hostedZoneCount: option<hostedZoneCount>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetHostedZoneCountCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetHostedZoneCountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -372,7 +372,7 @@ module GetHealthCheckCount = {
   type response = {
 @as("HealthCheckCount") healthCheckCount: option<healthCheckCount>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetHealthCheckCountCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetHealthCheckCountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -382,7 +382,7 @@ module DeleteTrafficPolicyInstance = {
 @as("Id") id: option<trafficPolicyInstanceId>
 }
   type response = unit
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "DeleteTrafficPolicyInstanceCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "DeleteTrafficPolicyInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -393,7 +393,7 @@ module DeleteTrafficPolicy = {
 @as("Id") id: option<trafficPolicyId>
 }
   type response = unit
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "DeleteTrafficPolicyCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "DeleteTrafficPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -403,7 +403,7 @@ module DeleteReusableDelegationSet = {
 @as("Id") id: option<resourceId>
 }
   type response = unit
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "DeleteReusableDelegationSetCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "DeleteReusableDelegationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -413,7 +413,7 @@ module DeleteQueryLoggingConfig = {
 @as("Id") id: option<queryLoggingConfigId>
 }
   type response = unit
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "DeleteQueryLoggingConfigCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "DeleteQueryLoggingConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -423,7 +423,7 @@ module DeleteHealthCheck = {
 @as("HealthCheckId") healthCheckId: option<healthCheckId>
 }
   type response = unit
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "DeleteHealthCheckCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "DeleteHealthCheckCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -438,7 +438,7 @@ module UpdateTrafficPolicyInstance = {
   type response = {
 @as("TrafficPolicyInstance") trafficPolicyInstance: option<trafficPolicyInstance>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "UpdateTrafficPolicyInstanceCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "UpdateTrafficPolicyInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -452,7 +452,7 @@ module UpdateTrafficPolicyComment = {
   type response = {
 @as("TrafficPolicy") trafficPolicy: option<trafficPolicy>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "UpdateTrafficPolicyCommentCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "UpdateTrafficPolicyCommentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -474,7 +474,7 @@ module TestDNSAnswer = {
 @as("RecordName") recordName: option<dNSName>,
 @as("Nameserver") nameserver: option<nameserver>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "TestDNSAnswerCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "TestDNSAnswerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -486,7 +486,7 @@ module GetTrafficPolicyInstance = {
   type response = {
 @as("TrafficPolicyInstance") trafficPolicyInstance: option<trafficPolicyInstance>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetTrafficPolicyInstanceCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetTrafficPolicyInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -499,7 +499,7 @@ module GetTrafficPolicy = {
   type response = {
 @as("TrafficPolicy") trafficPolicy: option<trafficPolicy>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetTrafficPolicyCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetTrafficPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -513,7 +513,7 @@ module GetReusableDelegationSetLimit = {
 @as("Count") count: option<usageCount>,
 @as("Limit") limit: option<reusableDelegationSetLimit>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetReusableDelegationSetLimitCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetReusableDelegationSetLimitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -525,7 +525,7 @@ module GetQueryLoggingConfig = {
   type response = {
 @as("QueryLoggingConfig") queryLoggingConfig: option<queryLoggingConfig>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetQueryLoggingConfigCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetQueryLoggingConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -539,7 +539,7 @@ module GetHostedZoneLimit = {
 @as("Count") count: option<usageCount>,
 @as("Limit") limit: option<hostedZoneLimit>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetHostedZoneLimitCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetHostedZoneLimitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -553,7 +553,7 @@ module GetGeoLocation = {
   type response = {
 @as("GeoLocationDetails") geoLocationDetails: option<geoLocationDetails>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetGeoLocationCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetGeoLocationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -563,7 +563,7 @@ module GetCheckerIpRanges = {
   type response = {
 @as("CheckerIpRanges") checkerIpRanges: option<checkerIpRanges>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetCheckerIpRangesCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetCheckerIpRangesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -575,7 +575,7 @@ module GetChange = {
   type response = {
 @as("ChangeInfo") changeInfo: option<changeInfo>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetChangeCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetChangeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -588,7 +588,7 @@ module GetAccountLimit = {
 @as("Count") count: option<usageCount>,
 @as("Limit") limit: option<accountLimit>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetAccountLimitCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetAccountLimitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -600,7 +600,7 @@ module EnableHostedZoneDNSSEC = {
   type response = {
 @as("ChangeInfo") changeInfo: option<changeInfo>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "EnableHostedZoneDNSSECCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "EnableHostedZoneDNSSECCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -614,7 +614,7 @@ module DisassociateVPCFromHostedZone = {
   type response = {
 @as("ChangeInfo") changeInfo: option<changeInfo>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "DisassociateVPCFromHostedZoneCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "DisassociateVPCFromHostedZoneCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -626,7 +626,7 @@ module DisableHostedZoneDNSSEC = {
   type response = {
 @as("ChangeInfo") changeInfo: option<changeInfo>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "DisableHostedZoneDNSSECCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "DisableHostedZoneDNSSECCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -637,7 +637,7 @@ module DeleteVPCAssociationAuthorization = {
 @as("HostedZoneId") hostedZoneId: option<resourceId>
 }
   type response = unit
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "DeleteVPCAssociationAuthorizationCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "DeleteVPCAssociationAuthorizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -650,7 +650,7 @@ module DeleteKeySigningKey = {
   type response = {
 @as("ChangeInfo") changeInfo: option<changeInfo>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "DeleteKeySigningKeyCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "DeleteKeySigningKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -662,7 +662,7 @@ module DeleteHostedZone = {
   type response = {
 @as("ChangeInfo") changeInfo: option<changeInfo>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "DeleteHostedZoneCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "DeleteHostedZoneCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -675,7 +675,7 @@ module DeactivateKeySigningKey = {
   type response = {
 @as("ChangeInfo") changeInfo: option<changeInfo>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "DeactivateKeySigningKeyCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "DeactivateKeySigningKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -689,7 +689,7 @@ module CreateVPCAssociationAuthorization = {
 @as("VPC") vPC: option<vPC>,
 @as("HostedZoneId") hostedZoneId: option<resourceId>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "CreateVPCAssociationAuthorizationCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "CreateVPCAssociationAuthorizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -704,7 +704,7 @@ module CreateTrafficPolicyVersion = {
 @as("Location") location: option<resourceURI>,
 @as("TrafficPolicy") trafficPolicy: option<trafficPolicy>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "CreateTrafficPolicyVersionCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "CreateTrafficPolicyVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -721,7 +721,7 @@ module CreateTrafficPolicyInstance = {
 @as("Location") location: option<resourceURI>,
 @as("TrafficPolicyInstance") trafficPolicyInstance: option<trafficPolicyInstance>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "CreateTrafficPolicyInstanceCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "CreateTrafficPolicyInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -736,7 +736,7 @@ module CreateTrafficPolicy = {
 @as("Location") location: option<resourceURI>,
 @as("TrafficPolicy") trafficPolicy: option<trafficPolicy>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "CreateTrafficPolicyCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "CreateTrafficPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -750,7 +750,7 @@ module CreateQueryLoggingConfig = {
 @as("Location") location: option<resourceURI>,
 @as("QueryLoggingConfig") queryLoggingConfig: option<queryLoggingConfig>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "CreateQueryLoggingConfigCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "CreateQueryLoggingConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -768,7 +768,7 @@ module CreateKeySigningKey = {
 @as("KeySigningKey") keySigningKey: option<keySigningKey>,
 @as("ChangeInfo") changeInfo: option<changeInfo>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "CreateKeySigningKeyCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "CreateKeySigningKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -782,7 +782,7 @@ module AssociateVPCWithHostedZone = {
   type response = {
 @as("ChangeInfo") changeInfo: option<changeInfo>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "AssociateVPCWithHostedZoneCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "AssociateVPCWithHostedZoneCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -795,7 +795,7 @@ module ActivateKeySigningKey = {
   type response = {
 @as("ChangeInfo") changeInfo: option<changeInfo>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ActivateKeySigningKeyCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ActivateKeySigningKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -808,7 +808,7 @@ module UpdateHostedZoneComment = {
   type response = {
 @as("HostedZone") hostedZone: option<hostedZone>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "UpdateHostedZoneCommentCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "UpdateHostedZoneCommentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -824,7 +824,7 @@ module ListVPCAssociationAuthorizations = {
 @as("NextToken") nextToken: paginationToken,
 @as("HostedZoneId") hostedZoneId: option<resourceId>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListVPCAssociationAuthorizationsCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListVPCAssociationAuthorizationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -841,7 +841,7 @@ module ListTrafficPolicyVersions = {
 @as("IsTruncated") isTruncated: option<pageTruncated>,
 @as("TrafficPolicies") trafficPolicies: option<trafficPolicies>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListTrafficPolicyVersionsCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListTrafficPolicyVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -863,7 +863,7 @@ module ListTrafficPolicyInstancesByPolicy = {
 @as("HostedZoneIdMarker") hostedZoneIdMarker: resourceId,
 @as("TrafficPolicyInstances") trafficPolicyInstances: option<trafficPolicyInstances>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListTrafficPolicyInstancesByPolicyCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListTrafficPolicyInstancesByPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -882,7 +882,7 @@ module ListTrafficPolicyInstancesByHostedZone = {
 @as("TrafficPolicyInstanceNameMarker") trafficPolicyInstanceNameMarker: dNSName,
 @as("TrafficPolicyInstances") trafficPolicyInstances: option<trafficPolicyInstances>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListTrafficPolicyInstancesByHostedZoneCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListTrafficPolicyInstancesByHostedZoneCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -902,7 +902,7 @@ module ListTrafficPolicyInstances = {
 @as("HostedZoneIdMarker") hostedZoneIdMarker: resourceId,
 @as("TrafficPolicyInstances") trafficPolicyInstances: option<trafficPolicyInstances>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListTrafficPolicyInstancesCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListTrafficPolicyInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -918,7 +918,7 @@ module ListTrafficPolicies = {
 @as("IsTruncated") isTruncated: option<pageTruncated>,
 @as("TrafficPolicySummaries") trafficPolicySummaries: option<trafficPolicySummaries>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListTrafficPoliciesCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListTrafficPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -933,7 +933,7 @@ module ListQueryLoggingConfigs = {
 @as("NextToken") nextToken: paginationToken,
 @as("QueryLoggingConfigs") queryLoggingConfigs: option<queryLoggingConfigs>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListQueryLoggingConfigsCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListQueryLoggingConfigsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -953,7 +953,7 @@ module ListGeoLocations = {
 @as("IsTruncated") isTruncated: option<pageTruncated>,
 @as("GeoLocationDetailsList") geoLocationDetailsList: option<geoLocationDetailsList>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListGeoLocationsCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListGeoLocationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -965,7 +965,7 @@ module GetReusableDelegationSet = {
   type response = {
 @as("DelegationSet") delegationSet: option<delegationSet>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetReusableDelegationSetCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetReusableDelegationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -979,7 +979,7 @@ module GetHostedZone = {
 @as("DelegationSet") delegationSet: delegationSet,
 @as("HostedZone") hostedZone: option<hostedZone>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetHostedZoneCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetHostedZoneCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -992,7 +992,7 @@ module GetDNSSEC = {
 @as("KeySigningKeys") keySigningKeys: option<keySigningKeys>,
 @as("Status") status: option<dNSSECStatus>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetDNSSECCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetDNSSECCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1006,7 +1006,7 @@ module CreateReusableDelegationSet = {
 @as("Location") location: option<resourceURI>,
 @as("DelegationSet") delegationSet: option<delegationSet>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "CreateReusableDelegationSetCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "CreateReusableDelegationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1026,7 +1026,7 @@ module CreateHostedZone = {
 @as("ChangeInfo") changeInfo: option<changeInfo>,
 @as("HostedZone") hostedZone: option<hostedZone>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "CreateHostedZoneCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "CreateHostedZoneCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1039,7 +1039,7 @@ module ChangeTagsForResource = {
 @as("ResourceType") resourceType: option<tagResourceType>
 }
   type response = unit
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ChangeTagsForResourceCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ChangeTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1052,7 +1052,7 @@ module ListTagsForResource = {
   type response = {
 @as("ResourceTagSet") resourceTagSet: option<resourceTagSet>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1069,7 +1069,7 @@ module ListReusableDelegationSets = {
 @as("Marker") marker: option<pageMarker>,
 @as("DelegationSets") delegationSets: option<delegationSets>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListReusableDelegationSetsCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListReusableDelegationSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1086,7 +1086,7 @@ module ListHostedZonesByVPC = {
 @as("MaxItems") maxItems: option<apiInteger>,
 @as("HostedZoneSummaries") hostedZoneSummaries: option<hostedZoneSummaries>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListHostedZonesByVPCCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListHostedZonesByVPCCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1106,7 +1106,7 @@ module ListHostedZonesByName = {
 @as("DNSName") dNSName: dNSName,
 @as("HostedZones") hostedZones: option<hostedZones>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListHostedZonesByNameCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListHostedZonesByNameCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1124,7 +1124,7 @@ module ListHostedZones = {
 @as("Marker") marker: option<pageMarker>,
 @as("HostedZones") hostedZones: option<hostedZones>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListHostedZonesCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListHostedZonesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1136,7 +1136,7 @@ module GetHealthCheckStatus = {
   type response = {
 @as("HealthCheckObservations") healthCheckObservations: option<healthCheckObservations>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetHealthCheckStatusCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetHealthCheckStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1148,7 +1148,7 @@ module GetHealthCheckLastFailureReason = {
   type response = {
 @as("HealthCheckObservations") healthCheckObservations: option<healthCheckObservations>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetHealthCheckLastFailureReasonCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetHealthCheckLastFailureReasonCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1176,7 +1176,7 @@ module UpdateHealthCheck = {
   type response = {
 @as("HealthCheck") healthCheck: option<healthCheck>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "UpdateHealthCheckCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "UpdateHealthCheckCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1189,7 +1189,7 @@ module ListTagsForResources = {
   type response = {
 @as("ResourceTagSets") resourceTagSets: option<resourceTagSetList>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourcesCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListTagsForResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1210,7 +1210,7 @@ module ListResourceRecordSets = {
 @as("IsTruncated") isTruncated: option<pageTruncated>,
 @as("ResourceRecordSets") resourceRecordSets: option<resourceRecordSets>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListResourceRecordSetsCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListResourceRecordSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1222,7 +1222,7 @@ module GetHealthCheck = {
   type response = {
 @as("HealthCheck") healthCheck: option<healthCheck>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "GetHealthCheckCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "GetHealthCheckCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1236,7 +1236,7 @@ module CreateHealthCheck = {
 @as("Location") location: option<resourceURI>,
 @as("HealthCheck") healthCheck: option<healthCheck>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "CreateHealthCheckCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "CreateHealthCheckCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1253,7 +1253,7 @@ module ListHealthChecks = {
 @as("Marker") marker: option<pageMarker>,
 @as("HealthChecks") healthChecks: option<healthChecks>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ListHealthChecksCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ListHealthChecksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1266,6 +1266,6 @@ module ChangeResourceRecordSets = {
   type response = {
 @as("ChangeInfo") changeInfo: option<changeInfo>
 }
-  @module("@aws-sdk/client-route53") @new external new_: (Js.Promise.t<request>) => t = "ChangeResourceRecordSetsCommand";
+  @module("@aws-sdk/client-route53") @new external new_: (request) => t = "ChangeResourceRecordSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

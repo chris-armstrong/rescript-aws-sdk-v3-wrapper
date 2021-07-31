@@ -36,6 +36,6 @@ module QueryForecast = {
   type response = {
 @as("Forecast") forecast: forecast
 }
-  @module("@aws-sdk/client-forecast") @new external new_: (Js.Promise.t<request>) => t = "QueryForecastCommand";
+  @module("@aws-sdk/client-forecast") @new external new_: (request) => t = "QueryForecastCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

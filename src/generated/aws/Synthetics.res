@@ -141,7 +141,7 @@ module StopCanary = {
 @as("Name") name: option<canaryName>
 }
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "StopCanaryCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "StopCanaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -151,7 +151,7 @@ module StartCanary = {
 @as("Name") name: option<canaryName>
 }
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "StartCanaryCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "StartCanaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -161,7 +161,7 @@ module DeleteCanary = {
 @as("Name") name: option<canaryName>
 }
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "DeleteCanaryCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "DeleteCanaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -172,7 +172,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<canaryArn>
 }
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -183,7 +183,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<canaryArn>
 }
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -195,7 +195,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -213,7 +213,7 @@ module UpdateCanary = {
 @as("Name") name: option<canaryName>
 }
   type response = unit
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "UpdateCanaryCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "UpdateCanaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -227,7 +227,7 @@ module DescribeRuntimeVersions = {
 @as("NextToken") nextToken: token,
 @as("RuntimeVersions") runtimeVersions: runtimeVersionList
 }
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "DescribeRuntimeVersionsCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "DescribeRuntimeVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -242,7 +242,7 @@ module GetCanaryRuns = {
 @as("NextToken") nextToken: token,
 @as("CanaryRuns") canaryRuns: canaryRuns
 }
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "GetCanaryRunsCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "GetCanaryRunsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -254,7 +254,7 @@ module GetCanary = {
   type response = {
 @as("Canary") canary: canary
 }
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "GetCanaryCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "GetCanaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -276,7 +276,7 @@ module CreateCanary = {
   type response = {
 @as("Canary") canary: canary
 }
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "CreateCanaryCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "CreateCanaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -290,7 +290,7 @@ module DescribeCanariesLastRun = {
 @as("NextToken") nextToken: token,
 @as("CanariesLastRun") canariesLastRun: canariesLastRun
 }
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "DescribeCanariesLastRunCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "DescribeCanariesLastRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -304,6 +304,6 @@ module DescribeCanaries = {
 @as("NextToken") nextToken: token,
 @as("Canaries") canaries: canaries
 }
-  @module("@aws-sdk/client-synthetics") @new external new_: (Js.Promise.t<request>) => t = "DescribeCanariesCommand";
+  @module("@aws-sdk/client-synthetics") @new external new_: (request) => t = "DescribeCanariesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

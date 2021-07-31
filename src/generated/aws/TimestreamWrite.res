@@ -87,7 +87,7 @@ module DeleteTable = {
 @as("DatabaseName") databaseName: option<resourceName>
 }
   
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "DeleteTableCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "DeleteTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -97,7 +97,7 @@ module DeleteDatabase = {
 @as("DatabaseName") databaseName: option<resourceName>
 }
   
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "DeleteDatabaseCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "DeleteDatabaseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -110,7 +110,7 @@ module UpdateDatabase = {
   type response = {
 @as("Database") database: database
 }
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "UpdateDatabaseCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "UpdateDatabaseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -121,7 +121,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -133,7 +133,7 @@ module DescribeDatabase = {
   type response = {
 @as("Database") database: database
 }
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "DescribeDatabaseCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "DescribeDatabaseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -147,7 +147,7 @@ module UpdateTable = {
   type response = {
 @as("Table") table: table
 }
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "UpdateTableCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "UpdateTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -158,7 +158,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -170,7 +170,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -184,7 +184,7 @@ module ListDatabases = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Databases") databases: databaseList
 }
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "ListDatabasesCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "ListDatabasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -197,7 +197,7 @@ module DescribeTable = {
   type response = {
 @as("Table") table: table
 }
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "DescribeTableCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "DescribeTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -207,7 +207,7 @@ module DescribeEndpoints = {
   type response = {
 @as("Endpoints") endpoints: option<endpoints>
 }
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "DescribeEndpointsCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "DescribeEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -222,7 +222,7 @@ module CreateTable = {
   type response = {
 @as("Table") table: table
 }
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "CreateTableCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "CreateTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -236,7 +236,7 @@ module CreateDatabase = {
   type response = {
 @as("Database") database: database
 }
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "CreateDatabaseCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "CreateDatabaseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -251,7 +251,7 @@ module ListTables = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Tables") tables: tableList
 }
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "ListTablesCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "ListTablesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -264,6 +264,6 @@ module WriteRecords = {
 @as("DatabaseName") databaseName: option<resourceName>
 }
   
-  @module("@aws-sdk/client-timestream") @new external new_: (Js.Promise.t<request>) => t = "WriteRecordsCommand";
+  @module("@aws-sdk/client-timestream") @new external new_: (request) => t = "WriteRecordsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }

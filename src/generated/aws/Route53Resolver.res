@@ -270,7 +270,7 @@ module PutResolverRulePolicy = {
   type response = {
 @as("ReturnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "PutResolverRulePolicyCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "PutResolverRulePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -283,7 +283,7 @@ module PutResolverQueryLogConfigPolicy = {
   type response = {
 @as("ReturnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "PutResolverQueryLogConfigPolicyCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "PutResolverQueryLogConfigPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -296,7 +296,7 @@ module PutFirewallRuleGroupPolicy = {
   type response = {
 @as("ReturnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "PutFirewallRuleGroupPolicyCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "PutFirewallRuleGroupPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -313,7 +313,7 @@ module ImportFirewallDomains = {
 @as("Name") name: name,
 @as("Id") id: resourceId
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ImportFirewallDomainsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ImportFirewallDomainsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -325,7 +325,7 @@ module GetResolverRulePolicy = {
   type response = {
 @as("ResolverRulePolicy") resolverRulePolicy: resolverRulePolicy
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetResolverRulePolicyCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverRulePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -337,7 +337,7 @@ module GetResolverQueryLogConfigPolicy = {
   type response = {
 @as("ResolverQueryLogConfigPolicy") resolverQueryLogConfigPolicy: resolverQueryLogConfigPolicy
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetResolverQueryLogConfigPolicyCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverQueryLogConfigPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -349,7 +349,7 @@ module GetFirewallRuleGroupPolicy = {
   type response = {
 @as("FirewallRuleGroupPolicy") firewallRuleGroupPolicy: firewallRuleGroupPolicy
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetFirewallRuleGroupPolicyCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetFirewallRuleGroupPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -362,7 +362,7 @@ module UpdateResolverDnssecConfig = {
   type response = {
 @as("ResolverDNSSECConfig") resolverDNSSECConfig: resolverDnssecConfig
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "UpdateResolverDnssecConfigCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateResolverDnssecConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -377,7 +377,7 @@ module UpdateFirewallRuleGroupAssociation = {
   type response = {
 @as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: firewallRuleGroupAssociation
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "UpdateFirewallRuleGroupAssociationCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateFirewallRuleGroupAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -397,7 +397,7 @@ module UpdateFirewallRule = {
   type response = {
 @as("FirewallRule") firewallRule: firewallRule
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "UpdateFirewallRuleCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateFirewallRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -414,7 +414,7 @@ module UpdateFirewallDomains = {
 @as("Name") name: name,
 @as("Id") id: resourceId
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "UpdateFirewallDomainsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateFirewallDomainsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -427,7 +427,7 @@ module UpdateFirewallConfig = {
   type response = {
 @as("FirewallConfig") firewallConfig: firewallConfig
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "UpdateFirewallConfigCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateFirewallConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -438,7 +438,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -453,7 +453,7 @@ module ListFirewallDomains = {
 @as("Domains") domains: firewallDomains,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListFirewallDomainsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallDomainsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -465,7 +465,7 @@ module GetResolverRuleAssociation = {
   type response = {
 @as("ResolverRuleAssociation") resolverRuleAssociation: resolverRuleAssociation
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetResolverRuleAssociationCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverRuleAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -477,7 +477,7 @@ module GetResolverQueryLogConfigAssociation = {
   type response = {
 @as("ResolverQueryLogConfigAssociation") resolverQueryLogConfigAssociation: resolverQueryLogConfigAssociation
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetResolverQueryLogConfigAssociationCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverQueryLogConfigAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -489,7 +489,7 @@ module GetResolverQueryLogConfig = {
   type response = {
 @as("ResolverQueryLogConfig") resolverQueryLogConfig: resolverQueryLogConfig
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetResolverQueryLogConfigCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverQueryLogConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -501,7 +501,7 @@ module GetResolverDnssecConfig = {
   type response = {
 @as("ResolverDNSSECConfig") resolverDNSSECConfig: resolverDnssecConfig
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetResolverDnssecConfigCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverDnssecConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -513,7 +513,7 @@ module GetFirewallRuleGroupAssociation = {
   type response = {
 @as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: firewallRuleGroupAssociation
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetFirewallRuleGroupAssociationCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetFirewallRuleGroupAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -525,7 +525,7 @@ module GetFirewallRuleGroup = {
   type response = {
 @as("FirewallRuleGroup") firewallRuleGroup: firewallRuleGroup
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetFirewallRuleGroupCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetFirewallRuleGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -537,7 +537,7 @@ module GetFirewallDomainList = {
   type response = {
 @as("FirewallDomainList") firewallDomainList: firewallDomainList
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetFirewallDomainListCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetFirewallDomainListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -549,7 +549,7 @@ module GetFirewallConfig = {
   type response = {
 @as("FirewallConfig") firewallConfig: firewallConfig
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetFirewallConfigCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetFirewallConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -562,7 +562,7 @@ module DisassociateResolverRule = {
   type response = {
 @as("ResolverRuleAssociation") resolverRuleAssociation: resolverRuleAssociation
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "DisassociateResolverRuleCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DisassociateResolverRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -575,7 +575,7 @@ module DisassociateResolverQueryLogConfig = {
   type response = {
 @as("ResolverQueryLogConfigAssociation") resolverQueryLogConfigAssociation: resolverQueryLogConfigAssociation
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "DisassociateResolverQueryLogConfigCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DisassociateResolverQueryLogConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -587,7 +587,7 @@ module DisassociateFirewallRuleGroup = {
   type response = {
 @as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: firewallRuleGroupAssociation
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "DisassociateFirewallRuleGroupCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DisassociateFirewallRuleGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -599,7 +599,7 @@ module DeleteResolverQueryLogConfig = {
   type response = {
 @as("ResolverQueryLogConfig") resolverQueryLogConfig: resolverQueryLogConfig
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "DeleteResolverQueryLogConfigCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteResolverQueryLogConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -611,7 +611,7 @@ module DeleteFirewallRuleGroup = {
   type response = {
 @as("FirewallRuleGroup") firewallRuleGroup: firewallRuleGroup
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "DeleteFirewallRuleGroupCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteFirewallRuleGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -624,7 +624,7 @@ module DeleteFirewallRule = {
   type response = {
 @as("FirewallRule") firewallRule: firewallRule
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "DeleteFirewallRuleCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteFirewallRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -636,7 +636,7 @@ module DeleteFirewallDomainList = {
   type response = {
 @as("FirewallDomainList") firewallDomainList: firewallDomainList
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "DeleteFirewallDomainListCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteFirewallDomainListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -657,7 +657,7 @@ module CreateFirewallRule = {
   type response = {
 @as("FirewallRule") firewallRule: firewallRule
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "CreateFirewallRuleCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateFirewallRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -671,7 +671,7 @@ module AssociateResolverRule = {
   type response = {
 @as("ResolverRuleAssociation") resolverRuleAssociation: resolverRuleAssociation
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "AssociateResolverRuleCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "AssociateResolverRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -684,7 +684,7 @@ module AssociateResolverQueryLogConfig = {
   type response = {
 @as("ResolverQueryLogConfigAssociation") resolverQueryLogConfigAssociation: resolverQueryLogConfigAssociation
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "AssociateResolverQueryLogConfigCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "AssociateResolverQueryLogConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -697,7 +697,7 @@ module UpdateResolverEndpoint = {
   type response = {
 @as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "UpdateResolverEndpointCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateResolverEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -708,7 +708,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -723,7 +723,7 @@ module ListTagsForResource = {
 @as("NextToken") nextToken: nextToken,
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -739,7 +739,7 @@ module ListResolverEndpointIpAddresses = {
 @as("MaxResults") maxResults: maxResults,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListResolverEndpointIpAddressesCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverEndpointIpAddressesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -756,7 +756,7 @@ module ListFirewallRules = {
 @as("FirewallRules") firewallRules: firewallRules,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListFirewallRulesCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -770,7 +770,7 @@ module ListFirewallRuleGroups = {
 @as("FirewallRuleGroups") firewallRuleGroups: firewallRuleGroupMetadataList,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListFirewallRuleGroupsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallRuleGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -788,7 +788,7 @@ module ListFirewallRuleGroupAssociations = {
 @as("FirewallRuleGroupAssociations") firewallRuleGroupAssociations: firewallRuleGroupAssociations,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListFirewallRuleGroupAssociationsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallRuleGroupAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -802,7 +802,7 @@ module ListFirewallDomainLists = {
 @as("FirewallDomainLists") firewallDomainLists: firewallDomainListMetadataList,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListFirewallDomainListsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallDomainListsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -816,7 +816,7 @@ module ListFirewallConfigs = {
 @as("FirewallConfigs") firewallConfigs: firewallConfigList,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListFirewallConfigsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListFirewallConfigsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -828,7 +828,7 @@ module GetResolverEndpoint = {
   type response = {
 @as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetResolverEndpointCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -841,7 +841,7 @@ module DisassociateResolverEndpointIpAddress = {
   type response = {
 @as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "DisassociateResolverEndpointIpAddressCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DisassociateResolverEndpointIpAddressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -853,7 +853,7 @@ module DeleteResolverEndpoint = {
   type response = {
 @as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "DeleteResolverEndpointCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteResolverEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -868,7 +868,7 @@ module CreateResolverQueryLogConfig = {
   type response = {
 @as("ResolverQueryLogConfig") resolverQueryLogConfig: resolverQueryLogConfig
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "CreateResolverQueryLogConfigCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateResolverQueryLogConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -885,7 +885,7 @@ module CreateResolverEndpoint = {
   type response = {
 @as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "CreateResolverEndpointCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateResolverEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -899,7 +899,7 @@ module CreateFirewallRuleGroup = {
   type response = {
 @as("FirewallRuleGroup") firewallRuleGroup: firewallRuleGroup
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "CreateFirewallRuleGroupCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateFirewallRuleGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -913,7 +913,7 @@ module CreateFirewallDomainList = {
   type response = {
 @as("FirewallDomainList") firewallDomainList: firewallDomainList
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "CreateFirewallDomainListCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateFirewallDomainListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -926,7 +926,7 @@ module AssociateResolverEndpointIpAddress = {
   type response = {
 @as("ResolverEndpoint") resolverEndpoint: resolverEndpoint
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "AssociateResolverEndpointIpAddressCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "AssociateResolverEndpointIpAddressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -944,7 +944,7 @@ module AssociateFirewallRuleGroup = {
   type response = {
 @as("FirewallRuleGroupAssociation") firewallRuleGroupAssociation: firewallRuleGroupAssociation
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "AssociateFirewallRuleGroupCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "AssociateFirewallRuleGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -957,7 +957,7 @@ module UpdateResolverRule = {
   type response = {
 @as("ResolverRule") resolverRule: resolverRule
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "UpdateResolverRuleCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "UpdateResolverRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -973,7 +973,7 @@ module ListResolverRuleAssociations = {
 @as("MaxResults") maxResults: maxResults,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListResolverRuleAssociationsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverRuleAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -992,7 +992,7 @@ module ListResolverQueryLogConfigs = {
 @as("TotalCount") totalCount: count,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListResolverQueryLogConfigsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverQueryLogConfigsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1011,7 +1011,7 @@ module ListResolverQueryLogConfigAssociations = {
 @as("TotalCount") totalCount: count,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListResolverQueryLogConfigAssociationsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverQueryLogConfigAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1027,7 +1027,7 @@ module ListResolverEndpoints = {
 @as("MaxResults") maxResults: maxResults,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListResolverEndpointsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1042,7 +1042,7 @@ module ListResolverDnssecConfigs = {
 @as("ResolverDnssecConfigs") resolverDnssecConfigs: resolverDnssecConfigList,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListResolverDnssecConfigsCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverDnssecConfigsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1054,7 +1054,7 @@ module GetResolverRule = {
   type response = {
 @as("ResolverRule") resolverRule: resolverRule
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "GetResolverRuleCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "GetResolverRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1066,7 +1066,7 @@ module DeleteResolverRule = {
   type response = {
 @as("ResolverRule") resolverRule: resolverRule
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "DeleteResolverRuleCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "DeleteResolverRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1084,7 +1084,7 @@ module CreateResolverRule = {
   type response = {
 @as("ResolverRule") resolverRule: resolverRule
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "CreateResolverRuleCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "CreateResolverRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1100,6 +1100,6 @@ module ListResolverRules = {
 @as("MaxResults") maxResults: maxResults,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-route53resolver") @new external new_: (Js.Promise.t<request>) => t = "ListResolverRulesCommand";
+  @module("@aws-sdk/client-route53resolver") @new external new_: (request) => t = "ListResolverRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

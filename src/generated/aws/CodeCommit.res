@@ -491,7 +491,7 @@ module UpdateRepositoryName = {
 @as("oldName") oldName: option<repositoryName>
 }
   
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdateRepositoryNameCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdateRepositoryNameCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -502,7 +502,7 @@ module UpdateRepositoryDescription = {
 @as("repositoryName") repositoryName: option<repositoryName>
 }
   
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdateRepositoryDescriptionCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdateRepositoryDescriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -514,7 +514,7 @@ module UpdatePullRequestApprovalState = {
 @as("pullRequestId") pullRequestId: option<pullRequestId>
 }
   
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdatePullRequestApprovalStateCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdatePullRequestApprovalStateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -525,7 +525,7 @@ module UpdateDefaultBranch = {
 @as("repositoryName") repositoryName: option<repositoryName>
 }
   
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdateDefaultBranchCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdateDefaultBranchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -547,7 +547,7 @@ module PutFile = {
 @as("blobId") blobId: option<objectId>,
 @as("commitId") commitId: option<objectId>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "PutFileCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "PutFileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -558,7 +558,7 @@ module PutCommentReaction = {
 @as("commentId") commentId: option<commentId>
 }
   
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "PutCommentReactionCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "PutCommentReactionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -570,7 +570,7 @@ module OverridePullRequestApprovalRules = {
 @as("pullRequestId") pullRequestId: option<pullRequestId>
 }
   
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "OverridePullRequestApprovalRulesCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "OverridePullRequestApprovalRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -586,7 +586,7 @@ module MergeBranchesByFastForward = {
 @as("treeId") treeId: objectId,
 @as("commitId") commitId: objectId
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "MergeBranchesByFastForwardCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "MergeBranchesByFastForwardCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -600,7 +600,7 @@ module GetPullRequestOverrideState = {
 @as("overrider") overrider: arn,
 @as("overridden") overridden: overridden
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetPullRequestOverrideStateCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetPullRequestOverrideStateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -619,7 +619,7 @@ module GetMergeCommit = {
 @as("destinationCommitId") destinationCommitId: objectId,
 @as("sourceCommitId") sourceCommitId: objectId
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetMergeCommitCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetMergeCommitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -638,7 +638,7 @@ module GetFile = {
 @as("blobId") blobId: option<objectId>,
 @as("commitId") commitId: option<objectId>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetFileCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetFileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -651,7 +651,7 @@ module GetBlob = {
   type response = {
 @as("content") content: option<blob>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetBlobCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetBlobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -662,7 +662,7 @@ module DisassociateApprovalRuleTemplateFromRepository = {
 @as("approvalRuleTemplateName") approvalRuleTemplateName: option<approvalRuleTemplateName>
 }
   
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "DisassociateApprovalRuleTemplateFromRepositoryCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "DisassociateApprovalRuleTemplateFromRepositoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -674,7 +674,7 @@ module DeleteRepository = {
   type response = {
 @as("repositoryId") repositoryId: repositoryId
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "DeleteRepositoryCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "DeleteRepositoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -687,7 +687,7 @@ module DeletePullRequestApprovalRule = {
   type response = {
 @as("approvalRuleId") approvalRuleId: option<approvalRuleId>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "DeletePullRequestApprovalRuleCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "DeletePullRequestApprovalRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -709,7 +709,7 @@ module DeleteFile = {
 @as("blobId") blobId: option<objectId>,
 @as("commitId") commitId: option<objectId>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "DeleteFileCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "DeleteFileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -721,7 +721,7 @@ module DeleteApprovalRuleTemplate = {
   type response = {
 @as("approvalRuleTemplateId") approvalRuleTemplateId: option<approvalRuleTemplateId>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "DeleteApprovalRuleTemplateCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "DeleteApprovalRuleTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -733,7 +733,7 @@ module CreateBranch = {
 @as("repositoryName") repositoryName: option<repositoryName>
 }
   
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "CreateBranchCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "CreateBranchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -744,7 +744,7 @@ module AssociateApprovalRuleTemplateWithRepository = {
 @as("approvalRuleTemplateName") approvalRuleTemplateName: option<approvalRuleTemplateName>
 }
   
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "AssociateApprovalRuleTemplateWithRepositoryCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "AssociateApprovalRuleTemplateWithRepositoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -757,7 +757,7 @@ module UpdateApprovalRuleTemplateName = {
   type response = {
 @as("approvalRuleTemplate") approvalRuleTemplate: option<approvalRuleTemplate>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdateApprovalRuleTemplateNameCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdateApprovalRuleTemplateNameCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -770,7 +770,7 @@ module UpdateApprovalRuleTemplateDescription = {
   type response = {
 @as("approvalRuleTemplate") approvalRuleTemplate: option<approvalRuleTemplate>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdateApprovalRuleTemplateDescriptionCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdateApprovalRuleTemplateDescriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -784,7 +784,7 @@ module UpdateApprovalRuleTemplateContent = {
   type response = {
 @as("approvalRuleTemplate") approvalRuleTemplate: option<approvalRuleTemplate>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdateApprovalRuleTemplateContentCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdateApprovalRuleTemplateContentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -795,7 +795,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<resourceArn>
 }
   
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -806,7 +806,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<resourceArn>
 }
   
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -820,7 +820,7 @@ module ListTagsForResource = {
 @as("nextToken") nextToken: nextToken,
 @as("tags") tags: tagsMap
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -835,7 +835,7 @@ module ListRepositoriesForApprovalRuleTemplate = {
 @as("nextToken") nextToken: nextToken,
 @as("repositoryNames") repositoryNames: repositoryNameList
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "ListRepositoriesForApprovalRuleTemplateCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "ListRepositoriesForApprovalRuleTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -852,7 +852,7 @@ module ListPullRequests = {
 @as("nextToken") nextToken: nextToken,
 @as("pullRequestIds") pullRequestIds: option<pullRequestIdList>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "ListPullRequestsCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "ListPullRequestsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -866,7 +866,7 @@ module ListBranches = {
 @as("nextToken") nextToken: nextToken,
 @as("branches") branches: branchNameList
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "ListBranchesCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "ListBranchesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -881,7 +881,7 @@ module ListAssociatedApprovalRuleTemplatesForRepository = {
 @as("nextToken") nextToken: nextToken,
 @as("approvalRuleTemplateNames") approvalRuleTemplateNames: approvalRuleTemplateNameList
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "ListAssociatedApprovalRuleTemplatesForRepositoryCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "ListAssociatedApprovalRuleTemplatesForRepositoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -895,7 +895,7 @@ module ListApprovalRuleTemplates = {
 @as("nextToken") nextToken: nextToken,
 @as("approvalRuleTemplateNames") approvalRuleTemplateNames: approvalRuleTemplateNameList
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "ListApprovalRuleTemplatesCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "ListApprovalRuleTemplatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -907,7 +907,7 @@ module GetRepository = {
   type response = {
 @as("repositoryMetadata") repositoryMetadata: repositoryMetadata
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetRepositoryCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetRepositoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -926,7 +926,7 @@ module GetMergeOptions = {
 @as("sourceCommitId") sourceCommitId: option<objectId>,
 @as("mergeOptions") mergeOptions: option<mergeOptions>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetMergeOptionsCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetMergeOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -939,7 +939,7 @@ module GetBranch = {
   type response = {
 @as("branch") branch: branchInfo
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetBranchCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetBranchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -951,7 +951,7 @@ module GetApprovalRuleTemplate = {
   type response = {
 @as("approvalRuleTemplate") approvalRuleTemplate: option<approvalRuleTemplate>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetApprovalRuleTemplateCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetApprovalRuleTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -964,7 +964,7 @@ module DeleteBranch = {
   type response = {
 @as("deletedBranch") deletedBranch: branchInfo
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "DeleteBranchCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "DeleteBranchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -978,7 +978,7 @@ module CreateRepository = {
   type response = {
 @as("repositoryMetadata") repositoryMetadata: repositoryMetadata
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "CreateRepositoryCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "CreateRepositoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -992,7 +992,7 @@ module CreateApprovalRuleTemplate = {
   type response = {
 @as("approvalRuleTemplate") approvalRuleTemplate: option<approvalRuleTemplate>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "CreateApprovalRuleTemplateCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "CreateApprovalRuleTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1007,7 +1007,7 @@ module UpdatePullRequestApprovalRuleContent = {
   type response = {
 @as("approvalRule") approvalRule: option<approvalRule>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdatePullRequestApprovalRuleContentCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdatePullRequestApprovalRuleContentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1020,7 +1020,7 @@ module UpdateComment = {
   type response = {
 @as("comment") comment: comment
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdateCommentCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdateCommentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1034,7 +1034,7 @@ module PostCommentReply = {
   type response = {
 @as("comment") comment: comment
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "PostCommentReplyCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "PostCommentReplyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1059,7 +1059,7 @@ module PostCommentForPullRequest = {
 @as("pullRequestId") pullRequestId: pullRequestId,
 @as("repositoryName") repositoryName: repositoryName
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "PostCommentForPullRequestCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "PostCommentForPullRequestCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1082,7 +1082,7 @@ module PostCommentForComparedCommit = {
 @as("beforeCommitId") beforeCommitId: commitId,
 @as("repositoryName") repositoryName: repositoryName
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "PostCommentForComparedCommitCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "PostCommentForComparedCommitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1097,7 +1097,7 @@ module ListRepositories = {
 @as("nextToken") nextToken: nextToken,
 @as("repositories") repositories: repositoryNameIdPairList
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "ListRepositoriesCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "ListRepositoriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1110,7 +1110,7 @@ module GetPullRequestApprovalStates = {
   type response = {
 @as("approvals") approvals: approvalList
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetPullRequestApprovalStatesCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetPullRequestApprovalStatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1130,7 +1130,7 @@ module GetFolder = {
 @as("folderPath") folderPath: option<path>,
 @as("commitId") commitId: option<objectId>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetFolderCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetFolderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1143,7 +1143,7 @@ module GetCommit = {
   type response = {
 @as("commit") commit: option<commit>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetCommitCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetCommitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1155,7 +1155,7 @@ module GetComment = {
   type response = {
 @as("comment") comment: comment
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetCommentCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetCommentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1168,7 +1168,7 @@ module EvaluatePullRequestApprovalRules = {
   type response = {
 @as("evaluation") evaluation: option<evaluation>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "EvaluatePullRequestApprovalRulesCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "EvaluatePullRequestApprovalRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1180,7 +1180,7 @@ module DeleteCommentContent = {
   type response = {
 @as("comment") comment: comment
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "DeleteCommentContentCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "DeleteCommentContentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1194,7 +1194,7 @@ module CreatePullRequestApprovalRule = {
   type response = {
 @as("approvalRule") approvalRule: option<approvalRule>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "CreatePullRequestApprovalRuleCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "CreatePullRequestApprovalRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1207,7 +1207,7 @@ module BatchGetRepositories = {
 @as("repositoriesNotFound") repositoriesNotFound: repositoryNotFoundList,
 @as("repositories") repositories: repositoryMetadataList
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "BatchGetRepositoriesCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "BatchGetRepositoriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1221,7 +1221,7 @@ module BatchDisassociateApprovalRuleTemplateFromRepositories = {
 @as("errors") errors: option<batchDisassociateApprovalRuleTemplateFromRepositoriesErrorsList>,
 @as("disassociatedRepositoryNames") disassociatedRepositoryNames: option<repositoryNameList>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "BatchDisassociateApprovalRuleTemplateFromRepositoriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1235,7 +1235,7 @@ module BatchAssociateApprovalRuleTemplateWithRepositories = {
 @as("errors") errors: option<batchAssociateApprovalRuleTemplateWithRepositoriesErrorsList>,
 @as("associatedRepositoryNames") associatedRepositoryNames: option<repositoryNameList>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "BatchAssociateApprovalRuleTemplateWithRepositoriesCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "BatchAssociateApprovalRuleTemplateWithRepositoriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1249,7 +1249,7 @@ module TestRepositoryTriggers = {
 @as("failedExecutions") failedExecutions: repositoryTriggerExecutionFailureList,
 @as("successfulExecutions") successfulExecutions: repositoryTriggerNameList
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "TestRepositoryTriggersCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "TestRepositoryTriggersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1262,7 +1262,7 @@ module PutRepositoryTriggers = {
   type response = {
 @as("configurationId") configurationId: repositoryTriggersConfigurationId
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "PutRepositoryTriggersCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "PutRepositoryTriggersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1285,7 +1285,7 @@ module MergeBranchesByThreeWay = {
 @as("treeId") treeId: objectId,
 @as("commitId") commitId: objectId
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "MergeBranchesByThreeWayCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "MergeBranchesByThreeWayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1308,7 +1308,7 @@ module MergeBranchesBySquash = {
 @as("treeId") treeId: objectId,
 @as("commitId") commitId: objectId
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "MergeBranchesBySquashCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "MergeBranchesBySquashCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1321,7 +1321,7 @@ module GetRepositoryTriggers = {
 @as("triggers") triggers: repositoryTriggersList,
 @as("configurationId") configurationId: repositoryTriggersConfigurationId
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetRepositoryTriggersCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetRepositoryTriggersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1345,7 +1345,7 @@ module GetMergeConflicts = {
 @as("destinationCommitId") destinationCommitId: option<objectId>,
 @as("mergeable") mergeable: option<isMergeable>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetMergeConflictsCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetMergeConflictsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1364,7 +1364,7 @@ module GetDifferences = {
 @as("NextToken") nextToken: nextToken,
 @as("differences") differences: differenceList
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetDifferencesCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetDifferencesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1380,7 +1380,7 @@ module GetCommentReactions = {
 @as("nextToken") nextToken: nextToken,
 @as("reactionsForComment") reactionsForComment: option<reactionsForCommentList>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetCommentReactionsCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetCommentReactionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1405,7 +1405,7 @@ module DescribeMergeConflicts = {
 @as("mergeHunks") mergeHunks: option<mergeHunks>,
 @as("conflictMetadata") conflictMetadata: option<conflictMetadata>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "DescribeMergeConflictsCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "DescribeMergeConflictsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1428,7 +1428,7 @@ module CreateUnreferencedMergeCommit = {
 @as("treeId") treeId: objectId,
 @as("commitId") commitId: objectId
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "CreateUnreferencedMergeCommitCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "CreateUnreferencedMergeCommitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1453,7 +1453,7 @@ module CreateCommit = {
 @as("treeId") treeId: objectId,
 @as("commitId") commitId: objectId
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "CreateCommitCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "CreateCommitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1467,7 +1467,7 @@ module BatchGetCommits = {
 @as("errors") errors: batchGetCommitsErrorsList,
 @as("commits") commits: commitObjectsList
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "BatchGetCommitsCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "BatchGetCommitsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1480,7 +1480,7 @@ module UpdatePullRequestTitle = {
   type response = {
 @as("pullRequest") pullRequest: option<pullRequest>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdatePullRequestTitleCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdatePullRequestTitleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1493,7 +1493,7 @@ module UpdatePullRequestStatus = {
   type response = {
 @as("pullRequest") pullRequest: option<pullRequest>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdatePullRequestStatusCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdatePullRequestStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1506,7 +1506,7 @@ module UpdatePullRequestDescription = {
   type response = {
 @as("pullRequest") pullRequest: option<pullRequest>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "UpdatePullRequestDescriptionCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "UpdatePullRequestDescriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1527,7 +1527,7 @@ module MergePullRequestByThreeWay = {
   type response = {
 @as("pullRequest") pullRequest: pullRequest
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "MergePullRequestByThreeWayCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "MergePullRequestByThreeWayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1548,7 +1548,7 @@ module MergePullRequestBySquash = {
   type response = {
 @as("pullRequest") pullRequest: pullRequest
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "MergePullRequestBySquashCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "MergePullRequestBySquashCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1562,7 +1562,7 @@ module MergePullRequestByFastForward = {
   type response = {
 @as("pullRequest") pullRequest: pullRequest
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "MergePullRequestByFastForwardCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "MergePullRequestByFastForwardCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1574,7 +1574,7 @@ module GetPullRequest = {
   type response = {
 @as("pullRequest") pullRequest: option<pullRequest>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetPullRequestCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetPullRequestCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1591,7 +1591,7 @@ module DescribePullRequestEvents = {
 @as("nextToken") nextToken: nextToken,
 @as("pullRequestEvents") pullRequestEvents: option<pullRequestEventList>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "DescribePullRequestEventsCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "DescribePullRequestEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1606,7 +1606,7 @@ module CreatePullRequest = {
   type response = {
 @as("pullRequest") pullRequest: option<pullRequest>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "CreatePullRequestCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "CreatePullRequestCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1624,7 +1624,7 @@ module GetCommentsForPullRequest = {
 @as("nextToken") nextToken: nextToken,
 @as("commentsForPullRequestData") commentsForPullRequestData: commentsForPullRequestData
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetCommentsForPullRequestCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetCommentsForPullRequestCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1641,7 +1641,7 @@ module GetCommentsForComparedCommit = {
 @as("nextToken") nextToken: nextToken,
 @as("commentsForComparedCommitData") commentsForComparedCommitData: commentsForComparedCommitData
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "GetCommentsForComparedCommitCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "GetCommentsForComparedCommitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1667,6 +1667,6 @@ module BatchDescribeMergeConflicts = {
 @as("nextToken") nextToken: nextToken,
 @as("conflicts") conflicts: option<conflicts>
 }
-  @module("@aws-sdk/client-codecommit") @new external new_: (Js.Promise.t<request>) => t = "BatchDescribeMergeConflictsCommand";
+  @module("@aws-sdk/client-codecommit") @new external new_: (request) => t = "BatchDescribeMergeConflictsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

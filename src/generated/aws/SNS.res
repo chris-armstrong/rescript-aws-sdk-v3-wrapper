@@ -103,7 +103,7 @@ module VerifySMSSandboxPhoneNumber = {
 @as("PhoneNumber") phoneNumber: option<phoneNumberString>
 }
   type response = unit
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "VerifySMSSandboxPhoneNumberCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "VerifySMSSandboxPhoneNumberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -113,7 +113,7 @@ module Unsubscribe = {
 @as("SubscriptionArn") subscriptionArn: option<subscriptionARN>
 }
   
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "UnsubscribeCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "UnsubscribeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -125,7 +125,7 @@ module SetTopicAttributes = {
 @as("TopicArn") topicArn: option<topicARN>
 }
   
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "SetTopicAttributesCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "SetTopicAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -137,7 +137,7 @@ module SetSubscriptionAttributes = {
 @as("SubscriptionArn") subscriptionArn: option<subscriptionARN>
 }
   
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "SetSubscriptionAttributesCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "SetSubscriptionAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -148,7 +148,7 @@ module RemovePermission = {
 @as("TopicArn") topicArn: option<topicARN>
 }
   
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "RemovePermissionCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "RemovePermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -158,7 +158,7 @@ module OptInPhoneNumber = {
 @as("phoneNumber") phoneNumber: option<phoneNumber>
 }
   type response = unit
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "OptInPhoneNumberCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "OptInPhoneNumberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -168,7 +168,7 @@ module GetSMSSandboxAccountStatus = {
   type response = {
 @as("IsInSandbox") isInSandbox: option<boolean>
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "GetSMSSandboxAccountStatusCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "GetSMSSandboxAccountStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -178,7 +178,7 @@ module DeleteTopic = {
 @as("TopicArn") topicArn: option<topicARN>
 }
   
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "DeleteTopicCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "DeleteTopicCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -188,7 +188,7 @@ module DeleteSMSSandboxPhoneNumber = {
 @as("PhoneNumber") phoneNumber: option<phoneNumberString>
 }
   type response = unit
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "DeleteSMSSandboxPhoneNumberCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "DeleteSMSSandboxPhoneNumberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -198,7 +198,7 @@ module DeletePlatformApplication = {
 @as("PlatformApplicationArn") platformApplicationArn: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "DeletePlatformApplicationCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "DeletePlatformApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -208,7 +208,7 @@ module DeleteEndpoint = {
 @as("EndpointArn") endpointArn: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "DeleteEndpointCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "DeleteEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -219,7 +219,7 @@ module CreateSMSSandboxPhoneNumber = {
 @as("PhoneNumber") phoneNumber: option<phoneNumberString>
 }
   type response = unit
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "CreateSMSSandboxPhoneNumberCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "CreateSMSSandboxPhoneNumberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -233,7 +233,7 @@ module ConfirmSubscription = {
   type response = {
 @as("SubscriptionArn") subscriptionArn: subscriptionARN
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "ConfirmSubscriptionCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ConfirmSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -245,7 +245,7 @@ module CheckIfPhoneNumberIsOptedOut = {
   type response = {
 @as("isOptedOut") isOptedOut: boolean
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "CheckIfPhoneNumberIsOptedOutCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "CheckIfPhoneNumberIsOptedOutCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -256,7 +256,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -272,7 +272,7 @@ module Subscribe = {
   type response = {
 @as("SubscriptionArn") subscriptionArn: subscriptionARN
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "SubscribeCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "SubscribeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -282,7 +282,7 @@ module SetSMSAttributes = {
 @as("attributes") attributes: option<mapStringToString>
 }
   type response = unit
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "SetSMSAttributesCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "SetSMSAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -293,7 +293,7 @@ module SetPlatformApplicationAttributes = {
 @as("PlatformApplicationArn") platformApplicationArn: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "SetPlatformApplicationAttributesCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "SetPlatformApplicationAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -304,7 +304,7 @@ module SetEndpointAttributes = {
 @as("EndpointArn") endpointArn: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "SetEndpointAttributesCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "SetEndpointAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -317,7 +317,7 @@ module ListPhoneNumbersOptedOut = {
 @as("nextToken") nextToken: amazonawsString,
 @as("phoneNumbers") phoneNumbers: phoneNumberList
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "ListPhoneNumbersOptedOutCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListPhoneNumbersOptedOutCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -329,7 +329,7 @@ module GetTopicAttributes = {
   type response = {
 @as("Attributes") attributes: topicAttributesMap
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "GetTopicAttributesCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "GetTopicAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -341,7 +341,7 @@ module GetSubscriptionAttributes = {
   type response = {
 @as("Attributes") attributes: subscriptionAttributesMap
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "GetSubscriptionAttributesCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "GetSubscriptionAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -353,7 +353,7 @@ module GetSMSAttributes = {
   type response = {
 @as("attributes") attributes: mapStringToString
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "GetSMSAttributesCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "GetSMSAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -365,7 +365,7 @@ module GetPlatformApplicationAttributes = {
   type response = {
 @as("Attributes") attributes: mapStringToString
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "GetPlatformApplicationAttributesCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "GetPlatformApplicationAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -377,7 +377,7 @@ module GetEndpointAttributes = {
   type response = {
 @as("Attributes") attributes: mapStringToString
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "GetEndpointAttributesCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "GetEndpointAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -392,7 +392,7 @@ module CreatePlatformEndpoint = {
   type response = {
 @as("EndpointArn") endpointArn: amazonawsString
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "CreatePlatformEndpointCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "CreatePlatformEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -406,7 +406,7 @@ module CreatePlatformApplication = {
   type response = {
 @as("PlatformApplicationArn") platformApplicationArn: amazonawsString
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "CreatePlatformApplicationCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "CreatePlatformApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -419,7 +419,7 @@ module AddPermission = {
 @as("TopicArn") topicArn: option<topicARN>
 }
   
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "AddPermissionCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "AddPermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -430,7 +430,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -451,7 +451,7 @@ module Publish = {
 @as("SequenceNumber") sequenceNumber: amazonawsString,
 @as("MessageId") messageId: messageId
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "PublishCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "PublishCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -464,7 +464,7 @@ module ListTopics = {
 @as("NextToken") nextToken: nextToken,
 @as("Topics") topics: topicsList
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "ListTopicsCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListTopicsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -476,7 +476,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -490,7 +490,7 @@ module ListSubscriptionsByTopic = {
 @as("NextToken") nextToken: nextToken,
 @as("Subscriptions") subscriptions: subscriptionsList
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "ListSubscriptionsByTopicCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListSubscriptionsByTopicCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -503,7 +503,7 @@ module ListSubscriptions = {
 @as("NextToken") nextToken: nextToken,
 @as("Subscriptions") subscriptions: subscriptionsList
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "ListSubscriptionsCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListSubscriptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -517,7 +517,7 @@ module ListSMSSandboxPhoneNumbers = {
 @as("NextToken") nextToken: amazonawsString,
 @as("PhoneNumbers") phoneNumbers: option<sMSSandboxPhoneNumberList>
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "ListSMSSandboxPhoneNumbersCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListSMSSandboxPhoneNumbersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -531,7 +531,7 @@ module CreateTopic = {
   type response = {
 @as("TopicArn") topicArn: topicARN
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "CreateTopicCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "CreateTopicCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -544,7 +544,7 @@ module ListPlatformApplications = {
 @as("NextToken") nextToken: amazonawsString,
 @as("PlatformApplications") platformApplications: listOfPlatformApplications
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "ListPlatformApplicationsCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListPlatformApplicationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -558,7 +558,7 @@ module ListOriginationNumbers = {
 @as("PhoneNumbers") phoneNumbers: phoneNumberInformationList,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "ListOriginationNumbersCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListOriginationNumbersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -572,6 +572,6 @@ module ListEndpointsByPlatformApplication = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Endpoints") endpoints: listOfEndpoints
 }
-  @module("@aws-sdk/client-sns") @new external new_: (Js.Promise.t<request>) => t = "ListEndpointsByPlatformApplicationCommand";
+  @module("@aws-sdk/client-sns") @new external new_: (request) => t = "ListEndpointsByPlatformApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

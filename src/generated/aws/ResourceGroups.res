@@ -120,7 +120,7 @@ module UpdateGroup = {
   type response = {
 @as("Group") group: group
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "UpdateGroupCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "UpdateGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -134,7 +134,7 @@ module Untag = {
 @as("Keys") keys: tagKeyList,
 @as("Arn") arn: groupArn
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "UntagCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "UntagCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -148,7 +148,7 @@ module Tag = {
 @as("Tags") tags: tags,
 @as("Arn") arn: groupArn
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "TagCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "TagCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -161,7 +161,7 @@ module GetTags = {
 @as("Tags") tags: tags,
 @as("Arn") arn: groupArn
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "GetTagsCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "GetTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -174,7 +174,7 @@ module GetGroup = {
   type response = {
 @as("Group") group: group
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "GetGroupCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "GetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -187,7 +187,7 @@ module DeleteGroup = {
   type response = {
 @as("Group") group: group
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "DeleteGroupCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "DeleteGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -201,7 +201,7 @@ module UpdateGroupQuery = {
   type response = {
 @as("GroupQuery") groupQuery: groupQuery
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "UpdateGroupQueryCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "UpdateGroupQueryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -216,7 +216,7 @@ module UngroupResources = {
 @as("Failed") failed: failedResourceList,
 @as("Succeeded") succeeded: resourceArnList
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "UngroupResourcesCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "UngroupResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -232,7 +232,7 @@ module SearchResources = {
 @as("NextToken") nextToken: nextToken,
 @as("ResourceIdentifiers") resourceIdentifiers: resourceIdentifierList
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "SearchResourcesCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "SearchResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -247,7 +247,7 @@ module GroupResources = {
 @as("Failed") failed: failedResourceList,
 @as("Succeeded") succeeded: resourceArnList
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "GroupResourcesCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "GroupResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -260,7 +260,7 @@ module GetGroupQuery = {
   type response = {
 @as("GroupQuery") groupQuery: groupQuery
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "GetGroupQueryCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "GetGroupQueryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -276,7 +276,7 @@ module ListGroups = {
 @as("Groups") groups: groupList,
 @as("GroupIdentifiers") groupIdentifiers: groupIdentifierList
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "ListGroupsCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "ListGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -295,7 +295,7 @@ module ListGroupResources = {
 @as("ResourceIdentifiers") resourceIdentifiers: resourceIdentifierList,
 @as("Resources") resources: listGroupResourcesItemList
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "ListGroupResourcesCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "ListGroupResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -306,7 +306,7 @@ module PutGroupConfiguration = {
 @as("Group") group: groupString
 }
   type response = unit
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "PutGroupConfigurationCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "PutGroupConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -318,7 +318,7 @@ module GetGroupConfiguration = {
   type response = {
 @as("GroupConfiguration") groupConfiguration: groupConfiguration
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "GetGroupConfigurationCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "GetGroupConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -337,6 +337,6 @@ module CreateGroup = {
 @as("ResourceQuery") resourceQuery: resourceQuery,
 @as("Group") group: group
 }
-  @module("@aws-sdk/client-resource-groups") @new external new_: (Js.Promise.t<request>) => t = "CreateGroupCommand";
+  @module("@aws-sdk/client-resource-groups") @new external new_: (request) => t = "CreateGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

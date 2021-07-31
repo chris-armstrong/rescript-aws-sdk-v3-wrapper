@@ -448,7 +448,7 @@ module UpdateArchive = {
 @as("State") state: archiveState,
 @as("ArchiveArn") archiveArn: archiveArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "UpdateArchiveCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "UpdateArchiveCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -468,7 +468,7 @@ module UpdateApiDestination = {
 @as("ApiDestinationState") apiDestinationState: apiDestinationState,
 @as("ApiDestinationArn") apiDestinationArn: apiDestinationArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "UpdateApiDestinationCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "UpdateApiDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -481,7 +481,7 @@ module TestEventPattern = {
   type response = {
 @as("Result") result: amazonawsBoolean
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "TestEventPatternCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "TestEventPatternCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -493,7 +493,7 @@ module RemovePermission = {
 @as("StatementId") statementId: statementId
 }
   
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "RemovePermissionCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "RemovePermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -504,7 +504,7 @@ module EnableRule = {
 @as("Name") name: option<ruleName>
 }
   
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "EnableRuleCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "EnableRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -515,7 +515,7 @@ module DisableRule = {
 @as("Name") name: option<ruleName>
 }
   
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DisableRuleCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DisableRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -537,7 +537,7 @@ module DescribeRule = {
 @as("Arn") arn: ruleArn,
 @as("Name") name: ruleName
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DescribeRuleCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DescribeRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -550,7 +550,7 @@ module DescribePartnerEventSource = {
 @as("Name") name: amazonawsString,
 @as("Arn") arn: amazonawsString
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DescribePartnerEventSourceCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DescribePartnerEventSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -567,7 +567,7 @@ module DescribeEventSource = {
 @as("CreatedBy") createdBy: amazonawsString,
 @as("Arn") arn: amazonawsString
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventSourceCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DescribeEventSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -581,7 +581,7 @@ module DescribeEventBus = {
 @as("Arn") arn: amazonawsString,
 @as("Name") name: amazonawsString
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventBusCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DescribeEventBusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -603,7 +603,7 @@ module DescribeArchive = {
 @as("ArchiveName") archiveName: archiveName,
 @as("ArchiveArn") archiveArn: archiveArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DescribeArchiveCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DescribeArchiveCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -624,7 +624,7 @@ module DescribeApiDestination = {
 @as("Name") name: apiDestinationName,
 @as("ApiDestinationArn") apiDestinationArn: apiDestinationArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DescribeApiDestinationCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DescribeApiDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -636,7 +636,7 @@ module DeleteRule = {
 @as("Name") name: option<ruleName>
 }
   
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DeleteRuleCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DeleteRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -647,7 +647,7 @@ module DeletePartnerEventSource = {
 @as("Name") name: option<eventSourceName>
 }
   
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DeletePartnerEventSourceCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DeletePartnerEventSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -657,7 +657,7 @@ module DeleteEventBus = {
 @as("Name") name: option<eventBusName>
 }
   
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DeleteEventBusCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DeleteEventBusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -673,7 +673,7 @@ module DeleteConnection = {
 @as("ConnectionState") connectionState: connectionState,
 @as("ConnectionArn") connectionArn: connectionArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DeleteConnectionCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DeleteConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -683,7 +683,7 @@ module DeleteArchive = {
 @as("ArchiveName") archiveName: option<archiveName>
 }
   type response = unit
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DeleteArchiveCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DeleteArchiveCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -693,7 +693,7 @@ module DeleteApiDestination = {
 @as("Name") name: option<apiDestinationName>
 }
   type response = unit
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DeleteApiDestinationCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DeleteApiDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -709,7 +709,7 @@ module DeauthorizeConnection = {
 @as("ConnectionState") connectionState: connectionState,
 @as("ConnectionArn") connectionArn: connectionArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DeauthorizeConnectionCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DeauthorizeConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -719,7 +719,7 @@ module DeactivateEventSource = {
 @as("Name") name: option<eventSourceName>
 }
   
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DeactivateEventSourceCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DeactivateEventSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -732,7 +732,7 @@ module CreatePartnerEventSource = {
   type response = {
 @as("EventSourceArn") eventSourceArn: amazonawsString
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "CreatePartnerEventSourceCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "CreatePartnerEventSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -751,7 +751,7 @@ module CreateArchive = {
 @as("State") state: archiveState,
 @as("ArchiveArn") archiveArn: archiveArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "CreateArchiveCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "CreateArchiveCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -771,7 +771,7 @@ module CreateApiDestination = {
 @as("ApiDestinationState") apiDestinationState: apiDestinationState,
 @as("ApiDestinationArn") apiDestinationArn: apiDestinationArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "CreateApiDestinationCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "CreateApiDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -785,7 +785,7 @@ module CancelReplay = {
 @as("State") state: replayState,
 @as("ReplayArn") replayArn: replayArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "CancelReplayCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "CancelReplayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -795,7 +795,7 @@ module ActivateEventSource = {
 @as("Name") name: option<eventSourceName>
 }
   
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ActivateEventSourceCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ActivateEventSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -806,7 +806,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -821,7 +821,7 @@ module PutPermission = {
 @as("EventBusName") eventBusName: nonPartnerEventBusName
 }
   
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "PutPermissionCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "PutPermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -837,7 +837,7 @@ module ListRuleNamesByTarget = {
 @as("NextToken") nextToken: nextToken,
 @as("RuleNames") ruleNames: ruleNameList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListRuleNamesByTargetCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListRuleNamesByTargetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -848,7 +848,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -868,7 +868,7 @@ module StartReplay = {
 @as("State") state: replayState,
 @as("ReplayArn") replayArn: replayArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "StartReplayCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "StartReplayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -884,7 +884,7 @@ module RemoveTargets = {
 @as("FailedEntries") failedEntries: removeTargetsResultEntryList,
 @as("FailedEntryCount") failedEntryCount: amazonawsInteger
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "RemoveTargetsCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "RemoveTargetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -903,7 +903,7 @@ module PutRule = {
   type response = {
 @as("RuleArn") ruleArn: ruleArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "PutRuleCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "PutRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -915,7 +915,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -931,7 +931,7 @@ module ListRules = {
 @as("NextToken") nextToken: nextToken,
 @as("Rules") rules: ruleResponseList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListRulesCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -948,7 +948,7 @@ module ListReplays = {
 @as("NextToken") nextToken: nextToken,
 @as("Replays") replays: replayList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListReplaysCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListReplaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -963,7 +963,7 @@ module ListPartnerEventSources = {
 @as("NextToken") nextToken: nextToken,
 @as("PartnerEventSources") partnerEventSources: partnerEventSourceList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListPartnerEventSourcesCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListPartnerEventSourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -978,7 +978,7 @@ module ListPartnerEventSourceAccounts = {
 @as("NextToken") nextToken: nextToken,
 @as("PartnerEventSourceAccounts") partnerEventSourceAccounts: partnerEventSourceAccountList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListPartnerEventSourceAccountsCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListPartnerEventSourceAccountsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -993,7 +993,7 @@ module ListEventSources = {
 @as("NextToken") nextToken: nextToken,
 @as("EventSources") eventSources: eventSourceList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListEventSourcesCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListEventSourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1008,7 +1008,7 @@ module ListEventBuses = {
 @as("NextToken") nextToken: nextToken,
 @as("EventBuses") eventBuses: eventBusList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListEventBusesCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListEventBusesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1024,7 +1024,7 @@ module ListConnections = {
 @as("NextToken") nextToken: nextToken,
 @as("Connections") connections: connectionResponseList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListConnectionsCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1041,7 +1041,7 @@ module ListArchives = {
 @as("NextToken") nextToken: nextToken,
 @as("Archives") archives: archiveResponseList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListArchivesCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListArchivesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1057,7 +1057,7 @@ module ListApiDestinations = {
 @as("NextToken") nextToken: nextToken,
 @as("ApiDestinations") apiDestinations: apiDestinationResponseList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListApiDestinationsCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListApiDestinationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1080,7 +1080,7 @@ module DescribeReplay = {
 @as("ReplayArn") replayArn: replayArn,
 @as("ReplayName") replayName: replayName
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DescribeReplayCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DescribeReplayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1094,7 +1094,7 @@ module CreateEventBus = {
   type response = {
 @as("EventBusArn") eventBusArn: amazonawsString
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "CreateEventBusCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "CreateEventBusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1107,7 +1107,7 @@ module PutPartnerEvents = {
 @as("Entries") entries: putPartnerEventsResultEntryList,
 @as("FailedEntryCount") failedEntryCount: amazonawsInteger
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "PutPartnerEventsCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "PutPartnerEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1120,7 +1120,7 @@ module PutEvents = {
 @as("Entries") entries: putEventsResultEntryList,
 @as("FailedEntryCount") failedEntryCount: amazonawsInteger
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "PutEventsCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "PutEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1139,7 +1139,7 @@ module UpdateConnection = {
 @as("ConnectionState") connectionState: connectionState,
 @as("ConnectionArn") connectionArn: connectionArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "UpdateConnectionCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "UpdateConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1161,7 +1161,7 @@ module DescribeConnection = {
 @as("Name") name: connectionName,
 @as("ConnectionArn") connectionArn: connectionArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "DescribeConnectionCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "DescribeConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1179,7 +1179,7 @@ module CreateConnection = {
 @as("ConnectionState") connectionState: connectionState,
 @as("ConnectionArn") connectionArn: connectionArn
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "CreateConnectionCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "CreateConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1194,7 +1194,7 @@ module PutTargets = {
 @as("FailedEntries") failedEntries: putTargetsResultEntryList,
 @as("FailedEntryCount") failedEntryCount: amazonawsInteger
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "PutTargetsCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "PutTargetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1210,6 +1210,6 @@ module ListTargetsByRule = {
 @as("NextToken") nextToken: nextToken,
 @as("Targets") targets: targetList
 }
-  @module("@aws-sdk/client-events") @new external new_: (Js.Promise.t<request>) => t = "ListTargetsByRuleCommand";
+  @module("@aws-sdk/client-events") @new external new_: (request) => t = "ListTargetsByRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

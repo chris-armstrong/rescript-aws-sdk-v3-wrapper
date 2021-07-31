@@ -206,7 +206,7 @@ module DeleteListener = {
 @as("ListenerArn") listenerArn: option<genericString>
 }
   
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DeleteListenerCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DeleteListenerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -216,7 +216,7 @@ module DeleteEndpointGroup = {
 @as("EndpointGroupArn") endpointGroupArn: option<genericString>
 }
   
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DeleteEndpointGroupCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DeleteEndpointGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -226,7 +226,7 @@ module DeleteCustomRoutingListener = {
 @as("ListenerArn") listenerArn: option<genericString>
 }
   
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DeleteCustomRoutingListenerCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DeleteCustomRoutingListenerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -236,7 +236,7 @@ module DeleteCustomRoutingEndpointGroup = {
 @as("EndpointGroupArn") endpointGroupArn: option<genericString>
 }
   
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DeleteCustomRoutingEndpointGroupCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DeleteCustomRoutingEndpointGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -246,7 +246,7 @@ module DeleteCustomRoutingAccelerator = {
 @as("AcceleratorArn") acceleratorArn: option<genericString>
 }
   
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DeleteCustomRoutingAcceleratorCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DeleteCustomRoutingAcceleratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -256,7 +256,7 @@ module DeleteAccelerator = {
 @as("AcceleratorArn") acceleratorArn: option<genericString>
 }
   
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DeleteAcceleratorCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DeleteAcceleratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -271,7 +271,7 @@ module UpdateCustomRoutingAcceleratorAttributes = {
   type response = {
 @as("AcceleratorAttributes") acceleratorAttributes: customRoutingAcceleratorAttributes
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "UpdateCustomRoutingAcceleratorAttributesCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "UpdateCustomRoutingAcceleratorAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -286,7 +286,7 @@ module UpdateAcceleratorAttributes = {
   type response = {
 @as("AcceleratorAttributes") acceleratorAttributes: acceleratorAttributes
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "UpdateAcceleratorAttributesCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "UpdateAcceleratorAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -297,7 +297,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -308,7 +308,7 @@ module RemoveCustomRoutingEndpoints = {
 @as("EndpointIds") endpointIds: option<endpointIds>
 }
   
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "RemoveCustomRoutingEndpointsCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "RemoveCustomRoutingEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -320,7 +320,7 @@ module DescribeCustomRoutingAcceleratorAttributes = {
   type response = {
 @as("AcceleratorAttributes") acceleratorAttributes: customRoutingAcceleratorAttributes
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DescribeCustomRoutingAcceleratorAttributesCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DescribeCustomRoutingAcceleratorAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -332,7 +332,7 @@ module DescribeAcceleratorAttributes = {
   type response = {
 @as("AcceleratorAttributes") acceleratorAttributes: acceleratorAttributes
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DescribeAcceleratorAttributesCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DescribeAcceleratorAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -346,7 +346,7 @@ module DenyCustomRoutingTraffic = {
 @as("EndpointGroupArn") endpointGroupArn: option<genericString>
 }
   
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DenyCustomRoutingTrafficCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DenyCustomRoutingTrafficCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -360,7 +360,7 @@ module AllowCustomRoutingTraffic = {
 @as("EndpointGroupArn") endpointGroupArn: option<genericString>
 }
   
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "AllowCustomRoutingTrafficCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "AllowCustomRoutingTrafficCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -371,7 +371,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -383,7 +383,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tags
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -397,7 +397,7 @@ module AddCustomRoutingEndpoints = {
 @as("EndpointGroupArn") endpointGroupArn: genericString,
 @as("EndpointDescriptions") endpointDescriptions: customRoutingEndpointDescriptions
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "AddCustomRoutingEndpointsCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "AddCustomRoutingEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -409,7 +409,7 @@ module WithdrawByoipCidr = {
   type response = {
 @as("ByoipCidr") byoipCidr: byoipCidr
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "WithdrawByoipCidrCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "WithdrawByoipCidrCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -424,7 +424,7 @@ module UpdateListener = {
   type response = {
 @as("Listener") listener: listener
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "UpdateListenerCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "UpdateListenerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -444,7 +444,7 @@ module UpdateEndpointGroup = {
   type response = {
 @as("EndpointGroup") endpointGroup: endpointGroup
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "UpdateEndpointGroupCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "UpdateEndpointGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -457,7 +457,7 @@ module UpdateCustomRoutingListener = {
   type response = {
 @as("Listener") listener: customRoutingListener
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "UpdateCustomRoutingListenerCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "UpdateCustomRoutingListenerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -470,7 +470,7 @@ module ProvisionByoipCidr = {
   type response = {
 @as("ByoipCidr") byoipCidr: byoipCidr
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "ProvisionByoipCidrCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "ProvisionByoipCidrCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -486,7 +486,7 @@ module ListCustomRoutingPortMappings = {
 @as("NextToken") nextToken: genericString,
 @as("PortMappings") portMappings: portMappings
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "ListCustomRoutingPortMappingsCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "ListCustomRoutingPortMappingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -498,7 +498,7 @@ module DescribeListener = {
   type response = {
 @as("Listener") listener: listener
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DescribeListenerCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DescribeListenerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -510,7 +510,7 @@ module DescribeEndpointGroup = {
   type response = {
 @as("EndpointGroup") endpointGroup: endpointGroup
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DescribeEndpointGroupCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DescribeEndpointGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -522,7 +522,7 @@ module DescribeCustomRoutingListener = {
   type response = {
 @as("Listener") listener: customRoutingListener
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DescribeCustomRoutingListenerCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DescribeCustomRoutingListenerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -534,7 +534,7 @@ module DeprovisionByoipCidr = {
   type response = {
 @as("ByoipCidr") byoipCidr: byoipCidr
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DeprovisionByoipCidrCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DeprovisionByoipCidrCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -550,7 +550,7 @@ module CreateListener = {
   type response = {
 @as("Listener") listener: listener
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "CreateListenerCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "CreateListenerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -572,7 +572,7 @@ module CreateEndpointGroup = {
   type response = {
 @as("EndpointGroup") endpointGroup: endpointGroup
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "CreateEndpointGroupCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "CreateEndpointGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -586,7 +586,7 @@ module CreateCustomRoutingListener = {
   type response = {
 @as("Listener") listener: customRoutingListener
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "CreateCustomRoutingListenerCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "CreateCustomRoutingListenerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -598,7 +598,7 @@ module AdvertiseByoipCidr = {
   type response = {
 @as("ByoipCidr") byoipCidr: byoipCidr
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "AdvertiseByoipCidrCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "AdvertiseByoipCidrCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -613,7 +613,7 @@ module UpdateCustomRoutingAccelerator = {
   type response = {
 @as("Accelerator") accelerator: customRoutingAccelerator
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "UpdateCustomRoutingAcceleratorCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "UpdateCustomRoutingAcceleratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -628,7 +628,7 @@ module UpdateAccelerator = {
   type response = {
 @as("Accelerator") accelerator: accelerator
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "UpdateAcceleratorCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "UpdateAcceleratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -643,7 +643,7 @@ module ListListeners = {
 @as("NextToken") nextToken: genericString,
 @as("Listeners") listeners: listeners
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "ListListenersCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "ListListenersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -658,7 +658,7 @@ module ListEndpointGroups = {
 @as("NextToken") nextToken: genericString,
 @as("EndpointGroups") endpointGroups: endpointGroups
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "ListEndpointGroupsCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "ListEndpointGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -674,7 +674,7 @@ module ListCustomRoutingPortMappingsByDestination = {
 @as("NextToken") nextToken: genericString,
 @as("DestinationPortMappings") destinationPortMappings: destinationPortMappings
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "ListCustomRoutingPortMappingsByDestinationCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "ListCustomRoutingPortMappingsByDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -689,7 +689,7 @@ module ListCustomRoutingListeners = {
 @as("NextToken") nextToken: genericString,
 @as("Listeners") listeners: customRoutingListeners
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "ListCustomRoutingListenersCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "ListCustomRoutingListenersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -703,7 +703,7 @@ module ListByoipCidrs = {
 @as("NextToken") nextToken: genericString,
 @as("ByoipCidrs") byoipCidrs: byoipCidrs
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "ListByoipCidrsCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "ListByoipCidrsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -715,7 +715,7 @@ module DescribeCustomRoutingEndpointGroup = {
   type response = {
 @as("EndpointGroup") endpointGroup: customRoutingEndpointGroup
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DescribeCustomRoutingEndpointGroupCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DescribeCustomRoutingEndpointGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -727,7 +727,7 @@ module DescribeCustomRoutingAccelerator = {
   type response = {
 @as("Accelerator") accelerator: customRoutingAccelerator
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DescribeCustomRoutingAcceleratorCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DescribeCustomRoutingAcceleratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -739,7 +739,7 @@ module DescribeAccelerator = {
   type response = {
 @as("Accelerator") accelerator: accelerator
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "DescribeAcceleratorCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "DescribeAcceleratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -754,7 +754,7 @@ module CreateCustomRoutingEndpointGroup = {
   type response = {
 @as("EndpointGroup") endpointGroup: customRoutingEndpointGroup
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "CreateCustomRoutingEndpointGroupCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "CreateCustomRoutingEndpointGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -771,7 +771,7 @@ module CreateCustomRoutingAccelerator = {
   type response = {
 @as("Accelerator") accelerator: customRoutingAccelerator
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "CreateCustomRoutingAcceleratorCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "CreateCustomRoutingAcceleratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -788,7 +788,7 @@ module CreateAccelerator = {
   type response = {
 @as("Accelerator") accelerator: accelerator
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "CreateAcceleratorCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "CreateAcceleratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -803,7 +803,7 @@ module ListCustomRoutingEndpointGroups = {
 @as("NextToken") nextToken: genericString,
 @as("EndpointGroups") endpointGroups: customRoutingEndpointGroups
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "ListCustomRoutingEndpointGroupsCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "ListCustomRoutingEndpointGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -817,7 +817,7 @@ module ListCustomRoutingAccelerators = {
 @as("NextToken") nextToken: genericString,
 @as("Accelerators") accelerators: customRoutingAccelerators
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "ListCustomRoutingAcceleratorsCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "ListCustomRoutingAcceleratorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -831,6 +831,6 @@ module ListAccelerators = {
 @as("NextToken") nextToken: genericString,
 @as("Accelerators") accelerators: accelerators
 }
-  @module("@aws-sdk/client-globalaccelerator") @new external new_: (Js.Promise.t<request>) => t = "ListAcceleratorsCommand";
+  @module("@aws-sdk/client-globalaccelerator") @new external new_: (request) => t = "ListAcceleratorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

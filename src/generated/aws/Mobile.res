@@ -75,7 +75,7 @@ module ExportProject = {
 @as("shareUrl") shareUrl: shareUrl,
 @as("downloadUrl") downloadUrl: downloadUrl
 }
-  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (Js.Promise.t<request>) => t = "ExportProjectCommand";
+  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (request) => t = "ExportProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -89,7 +89,7 @@ module ExportBundle = {
   type response = {
 @as("downloadUrl") downloadUrl: downloadUrl
 }
-  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (Js.Promise.t<request>) => t = "ExportBundleCommand";
+  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (request) => t = "ExportBundleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -103,7 +103,7 @@ module ListProjects = {
 @as("nextToken") nextToken: nextToken,
 @as("projects") projects: projectSummaries
 }
-  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (Js.Promise.t<request>) => t = "ListProjectsCommand";
+  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (request) => t = "ListProjectsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -115,7 +115,7 @@ module DescribeBundle = {
   type response = {
 @as("details") details: bundleDetails
 }
-  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (Js.Promise.t<request>) => t = "DescribeBundleCommand";
+  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (request) => t = "DescribeBundleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -129,7 +129,7 @@ module ListBundles = {
 @as("nextToken") nextToken: nextToken,
 @as("bundleList") bundleList: bundleList
 }
-  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (Js.Promise.t<request>) => t = "ListBundlesCommand";
+  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (request) => t = "ListBundlesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -142,7 +142,7 @@ module DeleteProject = {
 @as("orphanedResources") orphanedResources: resources,
 @as("deletedResources") deletedResources: resources
 }
-  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (Js.Promise.t<request>) => t = "DeleteProjectCommand";
+  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (request) => t = "DeleteProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -155,7 +155,7 @@ module UpdateProject = {
   type response = {
 @as("details") details: projectDetails
 }
-  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (Js.Promise.t<request>) => t = "UpdateProjectCommand";
+  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (request) => t = "UpdateProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -168,7 +168,7 @@ module DescribeProject = {
   type response = {
 @as("details") details: projectDetails
 }
-  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (Js.Promise.t<request>) => t = "DescribeProjectCommand";
+  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (request) => t = "DescribeProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -183,6 +183,6 @@ module CreateProject = {
   type response = {
 @as("details") details: projectDetails
 }
-  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (Js.Promise.t<request>) => t = "CreateProjectCommand";
+  @module("@aws-sdk/client-awsmobilehubservice") @new external new_: (request) => t = "CreateProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

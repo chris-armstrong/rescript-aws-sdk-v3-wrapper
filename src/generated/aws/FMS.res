@@ -289,7 +289,7 @@ module PutNotificationChannel = {
 @as("SnsTopicArn") snsTopicArn: option<resourceArn>
 }
   
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "PutNotificationChannelCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "PutNotificationChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -309,7 +309,7 @@ module GetProtectionStatus = {
 @as("ServiceType") serviceType: securityServiceType,
 @as("AdminAccountId") adminAccountId: aWSAccountId
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "GetProtectionStatusCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetProtectionStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -320,7 +320,7 @@ module GetNotificationChannel = {
 @as("SnsRoleName") snsRoleName: resourceArn,
 @as("SnsTopicArn") snsTopicArn: resourceArn
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "GetNotificationChannelCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetNotificationChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -331,7 +331,7 @@ module GetAdminAccount = {
 @as("RoleStatus") roleStatus: accountRoleStatus,
 @as("AdminAccount") adminAccount: aWSAccountId
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "GetAdminAccountCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetAdminAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -339,7 +339,7 @@ module DisassociateAdminAccount = {
   type t;
   type request = unit
   
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "DisassociateAdminAccountCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "DisassociateAdminAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -349,7 +349,7 @@ module DeleteProtocolsList = {
 @as("ListId") listId: option<listId>
 }
   
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "DeleteProtocolsListCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "DeleteProtocolsListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -360,7 +360,7 @@ module DeletePolicy = {
 @as("PolicyId") policyId: option<policyId>
 }
   
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "DeletePolicyCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "DeletePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -368,7 +368,7 @@ module DeleteNotificationChannel = {
   type t;
   type request = unit
   
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "DeleteNotificationChannelCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "DeleteNotificationChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -378,7 +378,7 @@ module DeleteAppsList = {
 @as("ListId") listId: option<listId>
 }
   
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "DeleteAppsListCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "DeleteAppsListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -388,7 +388,7 @@ module AssociateAdminAccount = {
 @as("AdminAccount") adminAccount: option<aWSAccountId>
 }
   
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "AssociateAdminAccountCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "AssociateAdminAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -399,7 +399,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -413,7 +413,7 @@ module ListMemberAccounts = {
 @as("NextToken") nextToken: paginationToken,
 @as("MemberAccounts") memberAccounts: memberAccounts
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "ListMemberAccountsCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListMemberAccountsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -424,7 +424,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -436,7 +436,7 @@ module ListTagsForResource = {
   type response = {
 @as("TagList") tagList: tagList
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -450,7 +450,7 @@ module ListPolicies = {
 @as("NextToken") nextToken: paginationToken,
 @as("PolicyList") policyList: policySummaryList
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "ListPoliciesCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -464,7 +464,7 @@ module PutProtocolsList = {
 @as("ProtocolsListArn") protocolsListArn: resourceArn,
 @as("ProtocolsList") protocolsList: protocolsListData
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "PutProtocolsListCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "PutProtocolsListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -478,7 +478,7 @@ module PutPolicy = {
 @as("PolicyArn") policyArn: resourceArn,
 @as("Policy") policy: policy
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "PutPolicyCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "PutPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -493,7 +493,7 @@ module ListProtocolsLists = {
 @as("NextToken") nextToken: paginationToken,
 @as("ProtocolsLists") protocolsLists: protocolsListsData
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "ListProtocolsListsCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListProtocolsListsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -507,7 +507,7 @@ module GetProtocolsList = {
 @as("ProtocolsListArn") protocolsListArn: resourceArn,
 @as("ProtocolsList") protocolsList: protocolsListData
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "GetProtocolsListCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetProtocolsListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -520,7 +520,7 @@ module GetPolicy = {
 @as("PolicyArn") policyArn: resourceArn,
 @as("Policy") policy: policy
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "GetPolicyCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -533,7 +533,7 @@ module GetComplianceDetail = {
   type response = {
 @as("PolicyComplianceDetail") policyComplianceDetail: policyComplianceDetail
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "GetComplianceDetailCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetComplianceDetailCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -547,7 +547,7 @@ module PutAppsList = {
 @as("AppsListArn") appsListArn: resourceArn,
 @as("AppsList") appsList: appsListData
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "PutAppsListCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "PutAppsListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -562,7 +562,7 @@ module ListComplianceStatus = {
 @as("NextToken") nextToken: paginationToken,
 @as("PolicyComplianceStatusList") policyComplianceStatusList: policyComplianceStatusList
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "ListComplianceStatusCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListComplianceStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -577,7 +577,7 @@ module ListAppsLists = {
 @as("NextToken") nextToken: paginationToken,
 @as("AppsLists") appsLists: appsListsData
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "ListAppsListsCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "ListAppsListsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -591,7 +591,7 @@ module GetAppsList = {
 @as("AppsListArn") appsListArn: resourceArn,
 @as("AppsList") appsList: appsListData
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "GetAppsListCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetAppsListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -606,6 +606,6 @@ module GetViolationDetails = {
   type response = {
 @as("ViolationDetail") violationDetail: violationDetail
 }
-  @module("@aws-sdk/client-fms") @new external new_: (Js.Promise.t<request>) => t = "GetViolationDetailsCommand";
+  @module("@aws-sdk/client-fms") @new external new_: (request) => t = "GetViolationDetailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

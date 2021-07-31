@@ -171,7 +171,7 @@ module RevokeSigningProfile = {
 @as("profileName") profileName: option<profileName>
 }
   
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "RevokeSigningProfileCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "RevokeSigningProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -183,7 +183,7 @@ module RevokeSignature = {
 @as("jobId") jobId: option<jobId>
 }
   
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "RevokeSignatureCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "RevokeSignatureCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -197,7 +197,7 @@ module RemoveProfilePermission = {
   type response = {
 @as("revisionId") revisionId: amazonawsString
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "RemoveProfilePermissionCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "RemoveProfilePermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -207,7 +207,7 @@ module CancelSigningProfile = {
 @as("profileName") profileName: option<profileName>
 }
   
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "CancelSigningProfileCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "CancelSigningProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -224,7 +224,7 @@ module AddProfilePermission = {
   type response = {
 @as("revisionId") revisionId: amazonawsString
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "AddProfilePermissionCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "AddProfilePermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -235,7 +235,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -246,7 +246,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -258,7 +258,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -275,7 +275,7 @@ module StartSigningJob = {
 @as("jobOwner") jobOwner: accountId,
 @as("jobId") jobId: jobId
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "StartSigningJobCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "StartSigningJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -295,7 +295,7 @@ module PutSigningProfile = {
 @as("profileVersion") profileVersion: profileVersion,
 @as("arn") arn: amazonawsString
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "PutSigningProfileCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "PutSigningProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -311,7 +311,7 @@ module ListProfilePermissions = {
 @as("policySizeBytes") policySizeBytes: policySizeBytes,
 @as("revisionId") revisionId: amazonawsString
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "ListProfilePermissionsCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "ListProfilePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -337,7 +337,7 @@ module GetSigningProfile = {
 @as("profileVersion") profileVersion: profileVersion,
 @as("profileName") profileName: profileName
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "GetSigningProfileCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "GetSigningProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -367,7 +367,7 @@ module DescribeSigningJob = {
 @as("source") source: source,
 @as("jobId") jobId: jobId
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "DescribeSigningJobCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "DescribeSigningJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -384,7 +384,7 @@ module ListSigningProfiles = {
 @as("nextToken") nextToken: nextToken,
 @as("profiles") profiles: signingProfiles
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "ListSigningProfilesCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "ListSigningProfilesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -404,7 +404,7 @@ module GetSigningPlatform = {
 @as("displayName") displayName: displayName,
 @as("platformId") platformId: platformId
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "GetSigningPlatformCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "GetSigningPlatformCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -425,7 +425,7 @@ module ListSigningJobs = {
 @as("nextToken") nextToken: nextToken,
 @as("jobs") jobs: signingJobs
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "ListSigningJobsCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "ListSigningJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -442,6 +442,6 @@ module ListSigningPlatforms = {
 @as("nextToken") nextToken: amazonawsString,
 @as("platforms") platforms: signingPlatforms
 }
-  @module("@aws-sdk/client-signer") @new external new_: (Js.Promise.t<request>) => t = "ListSigningPlatformsCommand";
+  @module("@aws-sdk/client-signer") @new external new_: (request) => t = "ListSigningPlatformsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

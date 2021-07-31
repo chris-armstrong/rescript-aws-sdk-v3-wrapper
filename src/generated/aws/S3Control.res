@@ -459,7 +459,7 @@ module UpdateJobStatus = {
 @as("Status") status: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "UpdateJobStatusCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "UpdateJobStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -474,7 +474,7 @@ module UpdateJobPriority = {
 @as("Priority") priority: option<jobPriority>,
 @as("JobId") jobId: option<jobId>
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "UpdateJobPriorityCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "UpdateJobPriorityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -487,7 +487,7 @@ module PutBucketPolicy = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketPolicyCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -499,7 +499,7 @@ module PutAccessPointPolicyForObjectLambda = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutAccessPointPolicyForObjectLambdaCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutAccessPointPolicyForObjectLambdaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -511,7 +511,7 @@ module PutAccessPointPolicy = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutAccessPointPolicyCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutAccessPointPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -524,7 +524,7 @@ module GetBucketPolicy = {
   type response = {
 @as("Policy") policy: policy
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketPolicyCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -539,7 +539,7 @@ module GetBucket = {
 @as("PublicAccessBlockEnabled") publicAccessBlockEnabled: publicAccessBlockEnabled,
 @as("Bucket") bucket: bucketName
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -552,7 +552,7 @@ module GetAccessPointPolicyForObjectLambda = {
   type response = {
 @as("Policy") policy: objectLambdaPolicy
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetAccessPointPolicyForObjectLambdaCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointPolicyForObjectLambdaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -565,7 +565,7 @@ module GetAccessPointPolicy = {
   type response = {
 @as("Policy") policy: policy
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetAccessPointPolicyCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -576,7 +576,7 @@ module DeleteStorageLensConfigurationTagging = {
 @as("ConfigId") configId: option<configId>
 }
   type response = unit
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteStorageLensConfigurationTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteStorageLensConfigurationTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -587,7 +587,7 @@ module DeleteStorageLensConfiguration = {
 @as("ConfigId") configId: option<configId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteStorageLensConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteStorageLensConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -597,7 +597,7 @@ module DeletePublicAccessBlock = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeletePublicAccessBlockCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeletePublicAccessBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -608,7 +608,7 @@ module DeleteJobTagging = {
 @as("AccountId") accountId: option<accountId>
 }
   type response = unit
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteJobTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteJobTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -619,7 +619,7 @@ module DeleteBucketTagging = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -630,7 +630,7 @@ module DeleteBucketPolicy = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketPolicyCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -641,7 +641,7 @@ module DeleteBucketLifecycleConfiguration = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketLifecycleConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketLifecycleConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -652,7 +652,7 @@ module DeleteBucket = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -663,7 +663,7 @@ module DeleteAccessPointPolicyForObjectLambda = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteAccessPointPolicyForObjectLambdaCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteAccessPointPolicyForObjectLambdaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -674,7 +674,7 @@ module DeleteAccessPointPolicy = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteAccessPointPolicyCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteAccessPointPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -685,7 +685,7 @@ module DeleteAccessPointForObjectLambda = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteAccessPointForObjectLambdaCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteAccessPointForObjectLambdaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -696,7 +696,7 @@ module DeleteAccessPoint = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteAccessPointCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteAccessPointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -707,7 +707,7 @@ module PutPublicAccessBlock = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutPublicAccessBlockCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutPublicAccessBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -719,7 +719,7 @@ module GetPublicAccessBlock = {
   type response = {
 @as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: publicAccessBlockConfiguration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetPublicAccessBlockCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetPublicAccessBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -732,7 +732,7 @@ module GetAccessPointPolicyStatusForObjectLambda = {
   type response = {
 @as("PolicyStatus") policyStatus: policyStatus
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetAccessPointPolicyStatusForObjectLambdaCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointPolicyStatusForObjectLambdaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -745,7 +745,7 @@ module GetAccessPointPolicyStatus = {
   type response = {
 @as("PolicyStatus") policyStatus: policyStatus
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetAccessPointPolicyStatusCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointPolicyStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -760,7 +760,7 @@ module GetAccessPointForObjectLambda = {
 @as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: publicAccessBlockConfiguration,
 @as("Name") name: objectLambdaAccessPointName
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetAccessPointForObjectLambdaCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointForObjectLambdaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -778,7 +778,7 @@ module GetAccessPoint = {
 @as("Bucket") bucket: bucketName,
 @as("Name") name: accessPointName
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetAccessPointCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -800,7 +800,7 @@ module CreateBucket = {
 @as("BucketArn") bucketArn: s3RegionalBucketArn,
 @as("Location") location: location
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "CreateBucketCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateBucketCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -816,7 +816,7 @@ module CreateAccessPoint = {
   type response = {
 @as("AccessPointArn") accessPointArn: s3AccessPointArn
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "CreateAccessPointCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateAccessPointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -828,7 +828,7 @@ module PutStorageLensConfigurationTagging = {
 @as("ConfigId") configId: option<configId>
 }
   type response = unit
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutStorageLensConfigurationTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutStorageLensConfigurationTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -840,7 +840,7 @@ module PutJobTagging = {
 @as("AccountId") accountId: option<accountId>
 }
   type response = unit
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutJobTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutJobTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -854,7 +854,7 @@ module ListStorageLensConfigurations = {
 @as("StorageLensConfigurationList") storageLensConfigurationList: storageLensConfigurationList,
 @as("NextToken") nextToken: continuationToken
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListStorageLensConfigurationsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListStorageLensConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -870,7 +870,7 @@ module ListRegionalBuckets = {
 @as("NextToken") nextToken: nonEmptyMaxLength1024String,
 @as("RegionalBucketList") regionalBucketList: regionalBucketList
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListRegionalBucketsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListRegionalBucketsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -885,7 +885,7 @@ module ListAccessPointsForObjectLambda = {
 @as("NextToken") nextToken: nonEmptyMaxLength1024String,
 @as("ObjectLambdaAccessPointList") objectLambdaAccessPointList: objectLambdaAccessPointList
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListAccessPointsForObjectLambdaCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListAccessPointsForObjectLambdaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -898,7 +898,7 @@ module GetStorageLensConfigurationTagging = {
   type response = {
 @as("Tags") tags: storageLensTags
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetStorageLensConfigurationTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetStorageLensConfigurationTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -911,7 +911,7 @@ module GetJobTagging = {
   type response = {
 @as("Tags") tags: s3TagSet
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetJobTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetJobTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -924,7 +924,7 @@ module GetBucketTagging = {
   type response = {
 @as("TagSet") tagSet: option<s3TagSet>
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -936,7 +936,7 @@ module PutBucketTagging = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -952,7 +952,7 @@ module ListJobs = {
 @as("Jobs") jobs: jobListDescriptorList,
 @as("NextToken") nextToken: stringForNextToken
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListJobsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -968,7 +968,7 @@ module ListAccessPoints = {
 @as("NextToken") nextToken: nonEmptyMaxLength1024String,
 @as("AccessPointList") accessPointList: accessPointList
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListAccessPointsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListAccessPointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -980,7 +980,7 @@ module PutAccessPointConfigurationForObjectLambda = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutAccessPointConfigurationForObjectLambdaCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutAccessPointConfigurationForObjectLambdaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -993,7 +993,7 @@ module GetAccessPointConfigurationForObjectLambda = {
   type response = {
 @as("Configuration") configuration: objectLambdaConfiguration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetAccessPointConfigurationForObjectLambdaCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetAccessPointConfigurationForObjectLambdaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1007,7 +1007,7 @@ module CreateAccessPointForObjectLambda = {
   type response = {
 @as("ObjectLambdaAccessPointArn") objectLambdaAccessPointArn: objectLambdaAccessPointArn
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "CreateAccessPointForObjectLambdaCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateAccessPointForObjectLambdaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1020,7 +1020,7 @@ module PutStorageLensConfiguration = {
 @as("ConfigId") configId: option<configId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutStorageLensConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutStorageLensConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1033,7 +1033,7 @@ module GetStorageLensConfiguration = {
   type response = {
 @as("StorageLensConfiguration") storageLensConfiguration: storageLensConfiguration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetStorageLensConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetStorageLensConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1046,7 +1046,7 @@ module GetBucketLifecycleConfiguration = {
   type response = {
 @as("Rules") rules: lifecycleRules
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketLifecycleConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketLifecycleConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1058,7 +1058,7 @@ module PutBucketLifecycleConfiguration = {
 @as("AccountId") accountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketLifecycleConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketLifecycleConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1079,7 +1079,7 @@ module CreateJob = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "CreateJobCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1092,6 +1092,6 @@ module DescribeJob = {
   type response = {
 @as("Job") job: jobDescriptor
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DescribeJobCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DescribeJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

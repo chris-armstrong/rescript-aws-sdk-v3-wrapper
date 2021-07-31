@@ -112,7 +112,7 @@ module GetAssociationForServiceQuotaTemplate = {
   type response = {
 @as("ServiceQuotaTemplateAssociationStatus") serviceQuotaTemplateAssociationStatus: serviceQuotaTemplateAssociationStatus
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "GetAssociationForServiceQuotaTemplateCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "GetAssociationForServiceQuotaTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -120,7 +120,7 @@ module DisassociateServiceQuotaTemplate = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "DisassociateServiceQuotaTemplateCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "DisassociateServiceQuotaTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -132,7 +132,7 @@ module DeleteServiceQuotaIncreaseRequestFromTemplate = {
 @as("ServiceCode") serviceCode: option<serviceCode>
 }
   type response = unit
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "DeleteServiceQuotaIncreaseRequestFromTemplateCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "DeleteServiceQuotaIncreaseRequestFromTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -140,7 +140,7 @@ module AssociateServiceQuotaTemplate = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "AssociateServiceQuotaTemplateCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "AssociateServiceQuotaTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -151,7 +151,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -165,7 +165,7 @@ module RequestServiceQuotaIncrease = {
   type response = {
 @as("RequestedQuota") requestedQuota: requestedServiceQuotaChange
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "RequestServiceQuotaIncreaseCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "RequestServiceQuotaIncreaseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -180,7 +180,7 @@ module PutServiceQuotaIncreaseRequestIntoTemplate = {
   type response = {
 @as("ServiceQuotaIncreaseRequestInTemplate") serviceQuotaIncreaseRequestInTemplate: serviceQuotaIncreaseRequestInTemplate
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "PutServiceQuotaIncreaseRequestIntoTemplateCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "PutServiceQuotaIncreaseRequestIntoTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -194,7 +194,7 @@ module GetServiceQuotaIncreaseRequestFromTemplate = {
   type response = {
 @as("ServiceQuotaIncreaseRequestInTemplate") serviceQuotaIncreaseRequestInTemplate: serviceQuotaIncreaseRequestInTemplate
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "GetServiceQuotaIncreaseRequestFromTemplateCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "GetServiceQuotaIncreaseRequestFromTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -206,7 +206,7 @@ module GetRequestedServiceQuotaChange = {
   type response = {
 @as("RequestedQuota") requestedQuota: requestedServiceQuotaChange
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "GetRequestedServiceQuotaChangeCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "GetRequestedServiceQuotaChangeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -217,7 +217,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -229,7 +229,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: outputTags
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -243,7 +243,7 @@ module ListServices = {
 @as("Services") services: serviceInfoListDefinition,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "ListServicesCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "ListServicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -259,7 +259,7 @@ module ListServiceQuotaIncreaseRequestsInTemplate = {
 @as("NextToken") nextToken: nextToken,
 @as("ServiceQuotaIncreaseRequestInTemplateList") serviceQuotaIncreaseRequestInTemplateList: serviceQuotaIncreaseRequestInTemplateList
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "ListServiceQuotaIncreaseRequestsInTemplateCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "ListServiceQuotaIncreaseRequestsInTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -276,7 +276,7 @@ module ListRequestedServiceQuotaChangeHistoryByQuota = {
 @as("RequestedQuotas") requestedQuotas: requestedServiceQuotaChangeHistoryListDefinition,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "ListRequestedServiceQuotaChangeHistoryByQuotaCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "ListRequestedServiceQuotaChangeHistoryByQuotaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -292,7 +292,7 @@ module ListRequestedServiceQuotaChangeHistory = {
 @as("RequestedQuotas") requestedQuotas: requestedServiceQuotaChangeHistoryListDefinition,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "ListRequestedServiceQuotaChangeHistoryCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "ListRequestedServiceQuotaChangeHistoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -305,7 +305,7 @@ module GetServiceQuota = {
   type response = {
 @as("Quota") quota: serviceQuota
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "GetServiceQuotaCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "GetServiceQuotaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -318,7 +318,7 @@ module GetAWSDefaultServiceQuota = {
   type response = {
 @as("Quota") quota: serviceQuota
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "GetAWSDefaultServiceQuotaCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "GetAWSDefaultServiceQuotaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -333,7 +333,7 @@ module ListServiceQuotas = {
 @as("Quotas") quotas: serviceQuotaListDefinition,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "ListServiceQuotasCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "ListServiceQuotasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -348,6 +348,6 @@ module ListAWSDefaultServiceQuotas = {
 @as("Quotas") quotas: serviceQuotaListDefinition,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-servicequotas") @new external new_: (Js.Promise.t<request>) => t = "ListAWSDefaultServiceQuotasCommand";
+  @module("@aws-sdk/client-servicequotas") @new external new_: (request) => t = "ListAWSDefaultServiceQuotasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

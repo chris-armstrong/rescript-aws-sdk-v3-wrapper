@@ -1,6 +1,24 @@
 open Belt
 open Util
 
+let reservedWords = [
+"open",
+"private",
+"as",
+"external",
+"public",
+"protected",
+"string",
+"bool",
+"integer",
+"object",
+"type",
+"let",
+"and",
+"open",
+""
+]
+
 let safeMemberName = name => switch name {
   | "type" => "type_"
   | "Type" => "type_"
@@ -173,7 +191,7 @@ let generateOperationModule = (
   let commandName = `${symbolName(name)}Command`
   let request = generateOperationStructureType("request", input)
   let response = generateOperationStructureType("response", output)
-  let inputType = isOperationStructureNone(input) ? "Js.Promise.t<unit>" : "Js.Promise.t<request>"
+  let inputType = isOperationStructureNone(input) ? "unit" : "request"
   let outputType = isOperationStructureNone(output)? "Js.Promise.t<unit>" : "Js.Promise.t<response>"
   `module ${symbolName(name)} = {\n` ++
   `  type t;\n` ++

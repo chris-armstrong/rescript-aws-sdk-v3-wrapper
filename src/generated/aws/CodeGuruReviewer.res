@@ -174,7 +174,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<associationArn>
 }
   type response = unit
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -185,7 +185,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<associationArn>
 }
   type response = unit
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -197,7 +197,7 @@ module PutRecommendationFeedback = {
 @as("CodeReviewArn") codeReviewArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "PutRecommendationFeedbackCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "PutRecommendationFeedbackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -209,7 +209,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -227,7 +227,7 @@ module ListRepositoryAssociations = {
 @as("NextToken") nextToken: nextToken,
 @as("RepositoryAssociationSummaries") repositoryAssociationSummaries: repositoryAssociationSummaries
 }
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "ListRepositoryAssociationsCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "ListRepositoryAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -242,7 +242,7 @@ module ListRecommendations = {
 @as("NextToken") nextToken: nextToken,
 @as("RecommendationSummaries") recommendationSummaries: recommendationSummaries
 }
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "ListRecommendationsCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "ListRecommendationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -255,7 +255,7 @@ module DisassociateRepository = {
 @as("Tags") tags: tagMap,
 @as("RepositoryAssociation") repositoryAssociation: repositoryAssociation
 }
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "DisassociateRepositoryCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "DisassociateRepositoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -268,7 +268,7 @@ module DescribeRepositoryAssociation = {
 @as("Tags") tags: tagMap,
 @as("RepositoryAssociation") repositoryAssociation: repositoryAssociation
 }
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "DescribeRepositoryAssociationCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "DescribeRepositoryAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -282,7 +282,7 @@ module DescribeRecommendationFeedback = {
   type response = {
 @as("RecommendationFeedback") recommendationFeedback: recommendationFeedback
 }
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "DescribeRecommendationFeedbackCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "DescribeRecommendationFeedbackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -298,7 +298,7 @@ module AssociateRepository = {
 @as("Tags") tags: tagMap,
 @as("RepositoryAssociation") repositoryAssociation: repositoryAssociation
 }
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "AssociateRepositoryCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "AssociateRepositoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -315,7 +315,7 @@ module ListRecommendationFeedback = {
 @as("NextToken") nextToken: nextToken,
 @as("RecommendationFeedbackSummaries") recommendationFeedbackSummaries: recommendationFeedbackSummaries
 }
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "ListRecommendationFeedbackCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "ListRecommendationFeedbackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -333,7 +333,7 @@ module ListCodeReviews = {
 @as("NextToken") nextToken: nextToken,
 @as("CodeReviewSummaries") codeReviewSummaries: codeReviewSummaries
 }
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "ListCodeReviewsCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "ListCodeReviewsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -345,7 +345,7 @@ module DescribeCodeReview = {
   type response = {
 @as("CodeReview") codeReview: codeReview
 }
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "DescribeCodeReviewCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "DescribeCodeReviewCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -360,6 +360,6 @@ module CreateCodeReview = {
   type response = {
 @as("CodeReview") codeReview: codeReview
 }
-  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (Js.Promise.t<request>) => t = "CreateCodeReviewCommand";
+  @module("@aws-sdk/client-codeguru-reviewer") @new external new_: (request) => t = "CreateCodeReviewCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

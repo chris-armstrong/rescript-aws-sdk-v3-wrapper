@@ -39,7 +39,7 @@ module GetRecommendations = {
 @as("recommendationId") recommendationId: recommendationID,
 @as("itemList") itemList: itemList
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "GetRecommendationsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "GetRecommendationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -57,6 +57,6 @@ module GetPersonalizedRanking = {
 @as("recommendationId") recommendationId: recommendationID,
 @as("personalizedRanking") personalizedRanking: itemList
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "GetPersonalizedRankingCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "GetPersonalizedRankingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

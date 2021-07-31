@@ -1775,7 +1775,7 @@ module DisassociateCertificate = {
 @as("Arn") arn: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "DisassociateCertificateCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "DisassociateCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1785,7 +1785,7 @@ module DeleteQueue = {
 @as("Name") name: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "DeleteQueueCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "DeleteQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1795,7 +1795,7 @@ module DeletePreset = {
 @as("Name") name: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "DeletePresetCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "DeletePresetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1805,7 +1805,7 @@ module DeleteJobTemplate = {
 @as("Name") name: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "DeleteJobTemplateCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "DeleteJobTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1815,7 +1815,7 @@ module CancelJob = {
 @as("Id") id: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "CancelJobCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "CancelJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1825,7 +1825,7 @@ module AssociateCertificate = {
 @as("Arn") arn: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "AssociateCertificateCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "AssociateCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1836,7 +1836,7 @@ module UntagResource = {
 @as("Arn") arn: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1847,7 +1847,7 @@ module TagResource = {
 @as("Arn") arn: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1862,7 +1862,7 @@ module UpdateQueue = {
   type response = {
 @as("Queue") queue: queue
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "UpdateQueueCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "UpdateQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1874,7 +1874,7 @@ module ListTagsForResource = {
   type response = {
 @as("ResourceTags") resourceTags: resourceTags
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1886,7 +1886,7 @@ module GetQueue = {
   type response = {
 @as("Queue") queue: queue
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "GetQueueCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "GetQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1901,7 +1901,7 @@ module DescribeEndpoints = {
 @as("NextToken") nextToken: __string,
 @as("Endpoints") endpoints: __listOfEndpoint
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "DescribeEndpointsCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "DescribeEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1918,7 +1918,7 @@ module CreateQueue = {
   type response = {
 @as("Queue") queue: queue
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "CreateQueueCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "CreateQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1934,7 +1934,7 @@ module ListQueues = {
 @as("Queues") queues: __listOfQueue,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "ListQueuesCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "ListQueuesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1949,7 +1949,7 @@ module UpdatePreset = {
   type response = {
 @as("Preset") preset: preset
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "UpdatePresetCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "UpdatePresetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1961,7 +1961,7 @@ module GetPreset = {
   type response = {
 @as("Preset") preset: preset
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "GetPresetCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "GetPresetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1977,7 +1977,7 @@ module CreatePreset = {
   type response = {
 @as("Preset") preset: preset
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "CreatePresetCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "CreatePresetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1994,7 +1994,7 @@ module ListPresets = {
 @as("Presets") presets: __listOfPreset,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "ListPresetsCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "ListPresetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2014,7 +2014,7 @@ module UpdateJobTemplate = {
   type response = {
 @as("JobTemplate") jobTemplate: jobTemplate
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "UpdateJobTemplateCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "UpdateJobTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2026,7 +2026,7 @@ module GetJobTemplate = {
   type response = {
 @as("JobTemplate") jobTemplate: jobTemplate
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "GetJobTemplateCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "GetJobTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2038,7 +2038,7 @@ module GetJob = {
   type response = {
 @as("Job") job: job
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "GetJobCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "GetJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2059,7 +2059,7 @@ module CreateJobTemplate = {
   type response = {
 @as("JobTemplate") jobTemplate: jobTemplate
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "CreateJobTemplateCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "CreateJobTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2083,7 +2083,7 @@ module CreateJob = {
   type response = {
 @as("Job") job: job
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "CreateJobCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "CreateJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2100,7 +2100,7 @@ module ListJobs = {
 @as("NextToken") nextToken: __string,
 @as("Jobs") jobs: __listOfJob
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "ListJobsCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "ListJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2117,6 +2117,6 @@ module ListJobTemplates = {
 @as("NextToken") nextToken: __string,
 @as("JobTemplates") jobTemplates: __listOfJobTemplate
 }
-  @module("@aws-sdk/client-mediaconvert") @new external new_: (Js.Promise.t<request>) => t = "ListJobTemplatesCommand";
+  @module("@aws-sdk/client-mediaconvert") @new external new_: (request) => t = "ListJobTemplatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

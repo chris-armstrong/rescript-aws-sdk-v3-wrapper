@@ -41,7 +41,7 @@ module DescribeUser = {
 @as("UserId") userId: option<resourceId>,
 @as("UserName") userName: option<userName>
 }
-  @module("@aws-sdk/client-identitystore") @new external new_: (Js.Promise.t<request>) => t = "DescribeUserCommand";
+  @module("@aws-sdk/client-identitystore") @new external new_: (request) => t = "DescribeUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -55,7 +55,7 @@ module DescribeGroup = {
 @as("DisplayName") displayName: option<groupDisplayName>,
 @as("GroupId") groupId: option<resourceId>
 }
-  @module("@aws-sdk/client-identitystore") @new external new_: (Js.Promise.t<request>) => t = "DescribeGroupCommand";
+  @module("@aws-sdk/client-identitystore") @new external new_: (request) => t = "DescribeGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -71,7 +71,7 @@ module ListUsers = {
 @as("NextToken") nextToken: nextToken,
 @as("Users") users: option<users>
 }
-  @module("@aws-sdk/client-identitystore") @new external new_: (Js.Promise.t<request>) => t = "ListUsersCommand";
+  @module("@aws-sdk/client-identitystore") @new external new_: (request) => t = "ListUsersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -87,6 +87,6 @@ module ListGroups = {
 @as("NextToken") nextToken: nextToken,
 @as("Groups") groups: option<groups>
 }
-  @module("@aws-sdk/client-identitystore") @new external new_: (Js.Promise.t<request>) => t = "ListGroupsCommand";
+  @module("@aws-sdk/client-identitystore") @new external new_: (request) => t = "ListGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

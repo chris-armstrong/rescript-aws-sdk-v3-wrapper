@@ -35,6 +35,6 @@ module InvokeEndpoint = {
 @as("ContentType") contentType: header,
 @as("Body") body: option<bodyBlob>
 }
-  @module("@aws-sdk/client-sagemaker") @new external new_: (Js.Promise.t<request>) => t = "InvokeEndpointCommand";
+  @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "InvokeEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

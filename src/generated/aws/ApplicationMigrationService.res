@@ -265,7 +265,7 @@ module GetLaunchConfiguration = {
 @as("name") name: smallBoundedString,
 @as("sourceServerID") sourceServerID: sourceServerID
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "GetLaunchConfigurationCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "GetLaunchConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -275,7 +275,7 @@ module DeleteSourceServer = {
 @as("sourceServerID") sourceServerID: option<sourceServerID>
 }
   type response = unit
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "DeleteSourceServerCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "DeleteSourceServerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -285,7 +285,7 @@ module DeleteReplicationConfigurationTemplate = {
 @as("replicationConfigurationTemplateID") replicationConfigurationTemplateID: option<replicationConfigurationTemplateID>
 }
   type response = unit
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "DeleteReplicationConfigurationTemplateCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "DeleteReplicationConfigurationTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -295,7 +295,7 @@ module DeleteJob = {
 @as("jobID") jobID: option<jobID>
 }
   type response = unit
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "DeleteJobCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "DeleteJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -318,7 +318,7 @@ module UpdateReplicationConfigurationTemplate = {
 @as("replicationConfigurationTemplateID") replicationConfigurationTemplateID: option<replicationConfigurationTemplateID>
 }
   type response = replicationConfigurationTemplate;
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "UpdateReplicationConfigurationTemplateCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "UpdateReplicationConfigurationTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -358,7 +358,7 @@ module UpdateReplicationConfiguration = {
 @as("name") name: smallBoundedString,
 @as("sourceServerID") sourceServerID: sourceServerID
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "UpdateReplicationConfigurationCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "UpdateReplicationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -383,7 +383,7 @@ module UpdateLaunchConfiguration = {
 @as("name") name: smallBoundedString,
 @as("sourceServerID") sourceServerID: sourceServerID
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "UpdateLaunchConfigurationCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "UpdateLaunchConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -394,7 +394,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<aRN>
 }
   
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -405,7 +405,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<aRN>
 }
   
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -417,7 +417,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagsMap
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -425,7 +425,7 @@ module InitializeService = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "InitializeServiceCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "InitializeServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -451,7 +451,7 @@ module GetReplicationConfiguration = {
 @as("name") name: smallBoundedString,
 @as("sourceServerID") sourceServerID: sourceServerID
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "GetReplicationConfigurationCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "GetReplicationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -473,7 +473,7 @@ module CreateReplicationConfigurationTemplate = {
 @as("stagingAreaSubnetId") stagingAreaSubnetId: option<subnetID>
 }
   type response = replicationConfigurationTemplate;
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "CreateReplicationConfigurationTemplateCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "CreateReplicationConfigurationTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -486,7 +486,7 @@ module TerminateTargetInstances = {
   type response = {
 @as("job") job: job
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "TerminateTargetInstancesCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "TerminateTargetInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -499,7 +499,7 @@ module StartTest = {
   type response = {
 @as("job") job: job
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "StartTestCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "StartTestCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -512,7 +512,7 @@ module StartCutover = {
   type response = {
 @as("job") job: job
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "StartCutoverCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "StartCutoverCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -527,7 +527,7 @@ module DescribeReplicationConfigurationTemplates = {
 @as("nextToken") nextToken: paginationToken,
 @as("items") items: replicationConfigurationTemplates
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "DescribeReplicationConfigurationTemplatesCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "DescribeReplicationConfigurationTemplatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -542,7 +542,7 @@ module DescribeJobLogItems = {
 @as("nextToken") nextToken: paginationToken,
 @as("items") items: jobLogs
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "DescribeJobLogItemsCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "DescribeJobLogItemsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -552,7 +552,7 @@ module RetryDataReplication = {
 @as("sourceServerID") sourceServerID: option<sourceServerID>
 }
   type response = sourceServer;
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "RetryDataReplicationCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "RetryDataReplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -562,7 +562,7 @@ module MarkAsArchived = {
 @as("sourceServerID") sourceServerID: option<sourceServerID>
 }
   type response = sourceServer;
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "MarkAsArchivedCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "MarkAsArchivedCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -572,7 +572,7 @@ module FinalizeCutover = {
 @as("sourceServerID") sourceServerID: option<sourceServerID>
 }
   type response = sourceServer;
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "FinalizeCutoverCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "FinalizeCutoverCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -582,7 +582,7 @@ module DisconnectFromService = {
 @as("sourceServerID") sourceServerID: option<sourceServerID>
 }
   type response = sourceServer;
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "DisconnectFromServiceCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "DisconnectFromServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -597,7 +597,7 @@ module DescribeJobs = {
 @as("nextToken") nextToken: paginationToken,
 @as("items") items: jobsList
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "DescribeJobsCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "DescribeJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -608,7 +608,7 @@ module ChangeServerLifeCycleState = {
 @as("sourceServerID") sourceServerID: option<sourceServerID>
 }
   type response = sourceServer;
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "ChangeServerLifeCycleStateCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "ChangeServerLifeCycleStateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -623,6 +623,6 @@ module DescribeSourceServers = {
 @as("nextToken") nextToken: paginationToken,
 @as("items") items: sourceServersList
 }
-  @module("@aws-sdk/client-mgn") @new external new_: (Js.Promise.t<request>) => t = "DescribeSourceServersCommand";
+  @module("@aws-sdk/client-mgn") @new external new_: (request) => t = "DescribeSourceServersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

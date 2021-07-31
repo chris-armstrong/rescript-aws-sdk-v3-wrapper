@@ -525,7 +525,7 @@ module StopDeliveryStreamEncryption = {
 @as("DeliveryStreamName") deliveryStreamName: option<deliveryStreamName>
 }
   type response = unit
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "StopDeliveryStreamEncryptionCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "StopDeliveryStreamEncryptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -536,7 +536,7 @@ module DeleteDeliveryStream = {
 @as("DeliveryStreamName") deliveryStreamName: option<deliveryStreamName>
 }
   type response = unit
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "DeleteDeliveryStreamCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "DeleteDeliveryStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -547,7 +547,7 @@ module UntagDeliveryStream = {
 @as("DeliveryStreamName") deliveryStreamName: option<deliveryStreamName>
 }
   type response = unit
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "UntagDeliveryStreamCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "UntagDeliveryStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -558,7 +558,7 @@ module StartDeliveryStreamEncryption = {
 @as("DeliveryStreamName") deliveryStreamName: option<deliveryStreamName>
 }
   type response = unit
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "StartDeliveryStreamEncryptionCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "StartDeliveryStreamEncryptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -572,7 +572,7 @@ module PutRecord = {
 @as("Encrypted") encrypted: booleanObject,
 @as("RecordId") recordId: option<putResponseRecordId>
 }
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "PutRecordCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "PutRecordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -587,7 +587,7 @@ module ListDeliveryStreams = {
 @as("HasMoreDeliveryStreams") hasMoreDeliveryStreams: option<booleanObject>,
 @as("DeliveryStreamNames") deliveryStreamNames: option<deliveryStreamNameList>
 }
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "ListDeliveryStreamsCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "ListDeliveryStreamsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -598,7 +598,7 @@ module TagDeliveryStream = {
 @as("DeliveryStreamName") deliveryStreamName: option<deliveryStreamName>
 }
   type response = unit
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "TagDeliveryStreamCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "TagDeliveryStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -613,7 +613,7 @@ module PutRecordBatch = {
 @as("Encrypted") encrypted: booleanObject,
 @as("FailedPutCount") failedPutCount: option<nonNegativeIntegerObject>
 }
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "PutRecordBatchCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "PutRecordBatchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -628,7 +628,7 @@ module ListTagsForDeliveryStream = {
 @as("HasMoreTags") hasMoreTags: option<booleanObject>,
 @as("Tags") tags: option<listTagsForDeliveryStreamOutputTagList>
 }
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForDeliveryStreamCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "ListTagsForDeliveryStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -646,7 +646,7 @@ module UpdateDestination = {
 @as("DeliveryStreamName") deliveryStreamName: option<deliveryStreamName>
 }
   type response = unit
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "UpdateDestinationCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "UpdateDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -668,7 +668,7 @@ module CreateDeliveryStream = {
   type response = {
 @as("DeliveryStreamARN") deliveryStreamARN: deliveryStreamARN
 }
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "CreateDeliveryStreamCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "CreateDeliveryStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -682,6 +682,6 @@ module DescribeDeliveryStream = {
   type response = {
 @as("DeliveryStreamDescription") deliveryStreamDescription: option<deliveryStreamDescription>
 }
-  @module("@aws-sdk/client-firehose") @new external new_: (Js.Promise.t<request>) => t = "DescribeDeliveryStreamCommand";
+  @module("@aws-sdk/client-firehose") @new external new_: (request) => t = "DescribeDeliveryStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

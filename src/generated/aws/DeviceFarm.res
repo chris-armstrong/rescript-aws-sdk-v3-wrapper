@@ -518,7 +518,7 @@ module DeleteVPCEConfiguration = {
 @as("arn") arn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "DeleteVPCEConfigurationCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "DeleteVPCEConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -528,7 +528,7 @@ module DeleteUpload = {
 @as("arn") arn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "DeleteUploadCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "DeleteUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -538,7 +538,7 @@ module DeleteTestGridProject = {
 @as("projectArn") projectArn: option<deviceFarmArn>
 }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "DeleteTestGridProjectCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "DeleteTestGridProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -548,7 +548,7 @@ module DeleteRun = {
 @as("arn") arn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "DeleteRunCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "DeleteRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -558,7 +558,7 @@ module DeleteRemoteAccessSession = {
 @as("arn") arn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "DeleteRemoteAccessSessionCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "DeleteRemoteAccessSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -568,7 +568,7 @@ module DeleteProject = {
 @as("arn") arn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "DeleteProjectCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "DeleteProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -578,7 +578,7 @@ module DeleteNetworkProfile = {
 @as("arn") arn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "DeleteNetworkProfileCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "DeleteNetworkProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -588,7 +588,7 @@ module DeleteInstanceProfile = {
 @as("arn") arn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "DeleteInstanceProfileCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "DeleteInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -598,7 +598,7 @@ module DeleteDevicePool = {
 @as("arn") arn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "DeleteDevicePoolCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "DeleteDevicePoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -612,7 +612,7 @@ module CreateTestGridUrl = {
 @as("expires") expires: dateTime,
 @as("url") url: sensitiveString
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "CreateTestGridUrlCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "CreateTestGridUrlCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -628,7 +628,7 @@ module UpdateVPCEConfiguration = {
   type response = {
 @as("vpceConfiguration") vpceConfiguration: vPCEConfiguration
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "UpdateVPCEConfigurationCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "UpdateVPCEConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -643,7 +643,7 @@ module UpdateUpload = {
   type response = {
 @as("upload") upload: upload
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "UpdateUploadCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "UpdateUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -657,7 +657,7 @@ module UpdateProject = {
   type response = {
 @as("project") project: project
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "UpdateProjectCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "UpdateProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -680,7 +680,7 @@ module UpdateNetworkProfile = {
   type response = {
 @as("networkProfile") networkProfile: networkProfile
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "UpdateNetworkProfileCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "UpdateNetworkProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -691,7 +691,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<deviceFarmArn>
 }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -704,7 +704,7 @@ module InstallToRemoteAccessSession = {
   type response = {
 @as("appUpload") appUpload: upload
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "InstallToRemoteAccessSessionCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "InstallToRemoteAccessSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -716,7 +716,7 @@ module GetVPCEConfiguration = {
   type response = {
 @as("vpceConfiguration") vpceConfiguration: vPCEConfiguration
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetVPCEConfigurationCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetVPCEConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -728,7 +728,7 @@ module GetUpload = {
   type response = {
 @as("upload") upload: upload
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetUploadCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -742,7 +742,7 @@ module GetTestGridSession = {
   type response = {
 @as("testGridSession") testGridSession: testGridSession
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetTestGridSessionCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetTestGridSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -754,7 +754,7 @@ module GetProject = {
   type response = {
 @as("project") project: project
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetProjectCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -766,7 +766,7 @@ module GetNetworkProfile = {
   type response = {
 @as("networkProfile") networkProfile: networkProfile
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetNetworkProfileCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetNetworkProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -781,7 +781,7 @@ module CreateVPCEConfiguration = {
   type response = {
 @as("vpceConfiguration") vpceConfiguration: vPCEConfiguration
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "CreateVPCEConfigurationCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "CreateVPCEConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -796,7 +796,7 @@ module CreateUpload = {
   type response = {
 @as("upload") upload: upload
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "CreateUploadCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "CreateUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -809,7 +809,7 @@ module CreateProject = {
   type response = {
 @as("project") project: project
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "CreateProjectCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "CreateProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -832,7 +832,7 @@ module CreateNetworkProfile = {
   type response = {
 @as("networkProfile") networkProfile: networkProfile
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "CreateNetworkProfileCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "CreateNetworkProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -849,7 +849,7 @@ module UpdateInstanceProfile = {
   type response = {
 @as("instanceProfile") instanceProfile: instanceProfile
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "UpdateInstanceProfileCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "UpdateInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -860,7 +860,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<deviceFarmArn>
 }
   type response = unit
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -874,7 +874,7 @@ module ListVPCEConfigurations = {
 @as("nextToken") nextToken: paginationToken,
 @as("vpceConfigurations") vpceConfigurations: vPCEConfigurations
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListVPCEConfigurationsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListVPCEConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -889,7 +889,7 @@ module ListUploads = {
 @as("nextToken") nextToken: paginationToken,
 @as("uploads") uploads: uploads
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListUploadsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListUploadsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -909,7 +909,7 @@ module ListTestGridSessions = {
 @as("nextToken") nextToken: paginationToken,
 @as("testGridSessions") testGridSessions: testGridSessions
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListTestGridSessionsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListTestGridSessionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -925,7 +925,7 @@ module ListTestGridSessionArtifacts = {
 @as("nextToken") nextToken: paginationToken,
 @as("artifacts") artifacts: testGridSessionArtifacts
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListTestGridSessionArtifactsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListTestGridSessionArtifactsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -940,7 +940,7 @@ module ListTestGridSessionActions = {
 @as("nextToken") nextToken: paginationToken,
 @as("actions") actions: testGridSessionActions
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListTestGridSessionActionsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListTestGridSessionActionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -952,7 +952,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -966,7 +966,7 @@ module ListSamples = {
 @as("nextToken") nextToken: paginationToken,
 @as("samples") samples: samples
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListSamplesCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListSamplesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -980,7 +980,7 @@ module ListProjects = {
 @as("nextToken") nextToken: paginationToken,
 @as("projects") projects: projects
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListProjectsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListProjectsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -993,7 +993,7 @@ module ListOfferingPromotions = {
 @as("nextToken") nextToken: paginationToken,
 @as("offeringPromotions") offeringPromotions: offeringPromotions
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListOfferingPromotionsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListOfferingPromotionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1008,7 +1008,7 @@ module ListNetworkProfiles = {
 @as("nextToken") nextToken: paginationToken,
 @as("networkProfiles") networkProfiles: networkProfiles
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListNetworkProfilesCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListNetworkProfilesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1023,7 +1023,7 @@ module ListArtifacts = {
 @as("nextToken") nextToken: paginationToken,
 @as("artifacts") artifacts: artifacts
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListArtifactsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListArtifactsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1035,7 +1035,7 @@ module GetTest = {
   type response = {
 @as("test") test: test
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetTestCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetTestCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1047,7 +1047,7 @@ module GetSuite = {
   type response = {
 @as("suite") suite: suite
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetSuiteCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetSuiteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1059,7 +1059,7 @@ module GetInstanceProfile = {
   type response = {
 @as("instanceProfile") instanceProfile: instanceProfile
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetInstanceProfileCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1069,7 +1069,7 @@ module GetAccountSettings = {
   type response = {
 @as("accountSettings") accountSettings: accountSettings
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetAccountSettingsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetAccountSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1085,7 +1085,7 @@ module CreateInstanceProfile = {
   type response = {
 @as("instanceProfile") instanceProfile: instanceProfile
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "CreateInstanceProfileCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "CreateInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1100,7 +1100,7 @@ module UpdateTestGridProject = {
   type response = {
 @as("testGridProject") testGridProject: testGridProject
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "UpdateTestGridProjectCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "UpdateTestGridProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1117,7 +1117,7 @@ module UpdateDevicePool = {
   type response = {
 @as("devicePool") devicePool: devicePool
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "UpdateDevicePoolCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "UpdateDevicePoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1131,7 +1131,7 @@ module UpdateDeviceInstance = {
   type response = {
 @as("deviceInstance") deviceInstance: deviceInstance
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "UpdateDeviceInstanceCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "UpdateDeviceInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1145,7 +1145,7 @@ module ListTests = {
 @as("nextToken") nextToken: paginationToken,
 @as("tests") tests: tests
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListTestsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListTestsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1159,7 +1159,7 @@ module ListSuites = {
 @as("nextToken") nextToken: paginationToken,
 @as("suites") suites: suites
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListSuitesCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListSuitesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1173,7 +1173,7 @@ module ListInstanceProfiles = {
 @as("nextToken") nextToken: paginationToken,
 @as("instanceProfiles") instanceProfiles: instanceProfiles
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListInstanceProfilesCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListInstanceProfilesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1185,7 +1185,7 @@ module GetTestGridProject = {
   type response = {
 @as("testGridProject") testGridProject: testGridProject
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetTestGridProjectCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetTestGridProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1197,7 +1197,7 @@ module GetDevicePool = {
   type response = {
 @as("devicePool") devicePool: devicePool
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetDevicePoolCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetDevicePoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1209,7 +1209,7 @@ module GetDeviceInstance = {
   type response = {
 @as("deviceInstance") deviceInstance: deviceInstance
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetDeviceInstanceCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetDeviceInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1223,7 +1223,7 @@ module CreateTestGridProject = {
   type response = {
 @as("testGridProject") testGridProject: testGridProject
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "CreateTestGridProjectCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "CreateTestGridProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1239,7 +1239,7 @@ module CreateDevicePool = {
   type response = {
 @as("devicePool") devicePool: devicePool
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "CreateDevicePoolCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "CreateDevicePoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1253,7 +1253,7 @@ module ListTestGridProjects = {
 @as("nextToken") nextToken: paginationToken,
 @as("testGridProjects") testGridProjects: testGridProjects
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListTestGridProjectsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListTestGridProjectsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1268,7 +1268,7 @@ module ListDevicePools = {
 @as("nextToken") nextToken: paginationToken,
 @as("devicePools") devicePools: devicePools
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListDevicePoolsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListDevicePoolsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1282,7 +1282,7 @@ module ListDeviceInstances = {
 @as("nextToken") nextToken: paginationToken,
 @as("deviceInstances") deviceInstances: deviceInstances
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListDeviceInstancesCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListDeviceInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1294,7 +1294,7 @@ module StopRun = {
   type response = {
 @as("run") run: run
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "StopRunCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "StopRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1313,7 +1313,7 @@ module ScheduleRun = {
   type response = {
 @as("run") run: run
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ScheduleRunCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ScheduleRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1326,7 +1326,7 @@ module ListOfferings = {
 @as("nextToken") nextToken: paginationToken,
 @as("offerings") offerings: offerings
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListOfferingsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListOfferingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1338,7 +1338,7 @@ module GetRun = {
   type response = {
 @as("run") run: run
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetRunCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1350,7 +1350,7 @@ module GetDevice = {
   type response = {
 @as("device") device: device
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetDeviceCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1362,7 +1362,7 @@ module StopRemoteAccessSession = {
   type response = {
 @as("remoteAccessSession") remoteAccessSession: remoteAccessSession
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "StopRemoteAccessSessionCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "StopRemoteAccessSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1374,7 +1374,7 @@ module StopJob = {
   type response = {
 @as("job") job: job
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "StopJobCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "StopJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1387,7 +1387,7 @@ module RenewOffering = {
   type response = {
 @as("offeringTransaction") offeringTransaction: offeringTransaction
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "RenewOfferingCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "RenewOfferingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1401,7 +1401,7 @@ module PurchaseOffering = {
   type response = {
 @as("offeringTransaction") offeringTransaction: offeringTransaction
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "PurchaseOfferingCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "PurchaseOfferingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1415,7 +1415,7 @@ module ListRuns = {
 @as("nextToken") nextToken: paginationToken,
 @as("runs") runs: runs
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListRunsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListRunsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1430,7 +1430,7 @@ module ListDevices = {
 @as("nextToken") nextToken: paginationToken,
 @as("devices") devices: devices
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListDevicesCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListDevicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1442,7 +1442,7 @@ module GetRemoteAccessSession = {
   type response = {
 @as("remoteAccessSession") remoteAccessSession: remoteAccessSession
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetRemoteAccessSessionCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetRemoteAccessSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1456,7 +1456,7 @@ module GetOfferingStatus = {
 @as("nextPeriod") nextPeriod: offeringStatusMap,
 @as("current") current: offeringStatusMap
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetOfferingStatusCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetOfferingStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1468,7 +1468,7 @@ module GetJob = {
   type response = {
 @as("job") job: job
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetJobCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1491,7 +1491,7 @@ module CreateRemoteAccessSession = {
   type response = {
 @as("remoteAccessSession") remoteAccessSession: remoteAccessSession
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "CreateRemoteAccessSessionCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "CreateRemoteAccessSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1505,7 +1505,7 @@ module ListRemoteAccessSessions = {
 @as("nextToken") nextToken: paginationToken,
 @as("remoteAccessSessions") remoteAccessSessions: remoteAccessSessions
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListRemoteAccessSessionsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListRemoteAccessSessionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1518,7 +1518,7 @@ module ListOfferingTransactions = {
 @as("nextToken") nextToken: paginationToken,
 @as("offeringTransactions") offeringTransactions: offeringTransactions
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListOfferingTransactionsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListOfferingTransactionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1532,7 +1532,7 @@ module ListJobs = {
 @as("nextToken") nextToken: paginationToken,
 @as("jobs") jobs: jobs
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListJobsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1549,7 +1549,7 @@ module GetDevicePoolCompatibility = {
 @as("incompatibleDevices") incompatibleDevices: devicePoolCompatibilityResults,
 @as("compatibleDevices") compatibleDevices: devicePoolCompatibilityResults
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "GetDevicePoolCompatibilityCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "GetDevicePoolCompatibilityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1563,6 +1563,6 @@ module ListUniqueProblems = {
 @as("nextToken") nextToken: paginationToken,
 @as("uniqueProblems") uniqueProblems: uniqueProblemsByExecutionResultMap
 }
-  @module("@aws-sdk/client-devicefarm") @new external new_: (Js.Promise.t<request>) => t = "ListUniqueProblemsCommand";
+  @module("@aws-sdk/client-devicefarm") @new external new_: (request) => t = "ListUniqueProblemsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

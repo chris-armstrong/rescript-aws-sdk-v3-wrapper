@@ -466,7 +466,7 @@ module UpdateEmailIdentityPolicy = {
 @as("EmailIdentity") emailIdentity: option<identity>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "UpdateEmailIdentityPolicyCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateEmailIdentityPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -481,7 +481,7 @@ module UpdateCustomVerificationEmailTemplate = {
 @as("TemplateName") templateName: option<emailTemplateName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "UpdateCustomVerificationEmailTemplateCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateCustomVerificationEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -494,7 +494,7 @@ module TestRenderEmailTemplate = {
   type response = {
 @as("RenderedTemplate") renderedTemplate: option<renderedEmailTemplate>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "TestRenderEmailTemplateCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "TestRenderEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -508,7 +508,7 @@ module SendCustomVerificationEmail = {
   type response = {
 @as("MessageId") messageId: outboundMessageId
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "SendCustomVerificationEmailCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "SendCustomVerificationEmailCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -519,7 +519,7 @@ module PutSuppressedDestination = {
 @as("EmailAddress") emailAddress: option<emailAddress>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutSuppressedDestinationCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutSuppressedDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -531,7 +531,7 @@ module PutEmailIdentityMailFromAttributes = {
 @as("EmailIdentity") emailIdentity: option<identity>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutEmailIdentityMailFromAttributesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutEmailIdentityMailFromAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -542,7 +542,7 @@ module PutEmailIdentityFeedbackAttributes = {
 @as("EmailIdentity") emailIdentity: option<identity>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutEmailIdentityFeedbackAttributesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutEmailIdentityFeedbackAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -553,7 +553,7 @@ module PutEmailIdentityDkimAttributes = {
 @as("EmailIdentity") emailIdentity: option<identity>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutEmailIdentityDkimAttributesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutEmailIdentityDkimAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -564,7 +564,7 @@ module PutEmailIdentityConfigurationSetAttributes = {
 @as("EmailIdentity") emailIdentity: option<identity>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutEmailIdentityConfigurationSetAttributesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutEmailIdentityConfigurationSetAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -575,7 +575,7 @@ module PutDedicatedIpWarmupAttributes = {
 @as("Ip") ip: option<ip>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutDedicatedIpWarmupAttributesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutDedicatedIpWarmupAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -586,7 +586,7 @@ module PutDedicatedIpInPool = {
 @as("Ip") ip: option<ip>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutDedicatedIpInPoolCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutDedicatedIpInPoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -597,7 +597,7 @@ module PutConfigurationSetTrackingOptions = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutConfigurationSetTrackingOptionsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutConfigurationSetTrackingOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -608,7 +608,7 @@ module PutConfigurationSetSendingOptions = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutConfigurationSetSendingOptionsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutConfigurationSetSendingOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -619,7 +619,7 @@ module PutConfigurationSetReputationOptions = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutConfigurationSetReputationOptionsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutConfigurationSetReputationOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -631,7 +631,7 @@ module PutConfigurationSetDeliveryOptions = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutConfigurationSetDeliveryOptionsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutConfigurationSetDeliveryOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -641,7 +641,7 @@ module PutAccountSendingAttributes = {
 @as("SendingEnabled") sendingEnabled: enabled
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutAccountSendingAttributesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutAccountSendingAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -651,7 +651,7 @@ module PutAccountDedicatedIpWarmupAttributes = {
 @as("AutoWarmupEnabled") autoWarmupEnabled: enabled
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutAccountDedicatedIpWarmupAttributesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutAccountDedicatedIpWarmupAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -668,7 +668,7 @@ module GetCustomVerificationEmailTemplate = {
 @as("FromEmailAddress") fromEmailAddress: emailAddress,
 @as("TemplateName") templateName: emailTemplateName
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetCustomVerificationEmailTemplateCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetCustomVerificationEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -678,7 +678,7 @@ module DeleteSuppressedDestination = {
 @as("EmailAddress") emailAddress: option<emailAddress>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "DeleteSuppressedDestinationCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteSuppressedDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -688,7 +688,7 @@ module DeleteEmailTemplate = {
 @as("TemplateName") templateName: option<emailTemplateName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "DeleteEmailTemplateCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -699,7 +699,7 @@ module DeleteEmailIdentityPolicy = {
 @as("EmailIdentity") emailIdentity: option<identity>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "DeleteEmailIdentityPolicyCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteEmailIdentityPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -709,7 +709,7 @@ module DeleteEmailIdentity = {
 @as("EmailIdentity") emailIdentity: option<identity>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "DeleteEmailIdentityCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteEmailIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -719,7 +719,7 @@ module DeleteDedicatedIpPool = {
 @as("PoolName") poolName: option<poolName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "DeleteDedicatedIpPoolCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteDedicatedIpPoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -729,7 +729,7 @@ module DeleteCustomVerificationEmailTemplate = {
 @as("TemplateName") templateName: option<emailTemplateName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "DeleteCustomVerificationEmailTemplateCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteCustomVerificationEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -739,7 +739,7 @@ module DeleteContactList = {
 @as("ContactListName") contactListName: option<contactListName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "DeleteContactListCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteContactListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -750,7 +750,7 @@ module DeleteContact = {
 @as("ContactListName") contactListName: option<contactListName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "DeleteContactCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -761,7 +761,7 @@ module DeleteConfigurationSetEventDestination = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "DeleteConfigurationSetEventDestinationCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteConfigurationSetEventDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -771,7 +771,7 @@ module DeleteConfigurationSet = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "DeleteConfigurationSetCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "DeleteConfigurationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -783,7 +783,7 @@ module CreateEmailIdentityPolicy = {
 @as("EmailIdentity") emailIdentity: option<identity>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "CreateEmailIdentityPolicyCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateEmailIdentityPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -798,7 +798,7 @@ module CreateCustomVerificationEmailTemplate = {
 @as("TemplateName") templateName: option<emailTemplateName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "CreateCustomVerificationEmailTemplateCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateCustomVerificationEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -809,7 +809,7 @@ module UpdateEmailTemplate = {
 @as("TemplateName") templateName: option<emailTemplateName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "UpdateEmailTemplateCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -820,7 +820,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -835,7 +835,7 @@ module PutEmailIdentityDkimSigningAttributes = {
 @as("DkimTokens") dkimTokens: dnsTokenList,
 @as("DkimStatus") dkimStatus: dkimStatus
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutEmailIdentityDkimSigningAttributesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutEmailIdentityDkimSigningAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -846,7 +846,7 @@ module PutConfigurationSetSuppressionOptions = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutConfigurationSetSuppressionOptionsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutConfigurationSetSuppressionOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -856,7 +856,7 @@ module PutAccountSuppressionAttributes = {
 @as("SuppressedReasons") suppressedReasons: suppressionListReasons
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutAccountSuppressionAttributesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutAccountSuppressionAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -871,7 +871,7 @@ module PutAccountDetails = {
 @as("MailType") mailType: option<mailType>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutAccountDetailsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutAccountDetailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -885,7 +885,7 @@ module ListDedicatedIpPools = {
 @as("NextToken") nextToken: nextToken,
 @as("DedicatedIpPools") dedicatedIpPools: listOfDedicatedIpPools
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListDedicatedIpPoolsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListDedicatedIpPoolsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -899,7 +899,7 @@ module ListConfigurationSets = {
 @as("NextToken") nextToken: nextToken,
 @as("ConfigurationSets") configurationSets: configurationSetNameList
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListConfigurationSetsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListConfigurationSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -912,7 +912,7 @@ module GetEmailTemplate = {
 @as("TemplateContent") templateContent: option<emailTemplateContent>,
 @as("TemplateName") templateName: option<emailTemplateName>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetEmailTemplateCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -924,7 +924,7 @@ module GetEmailIdentityPolicies = {
   type response = {
 @as("Policies") policies: policyMap
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetEmailIdentityPoliciesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetEmailIdentityPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -936,7 +936,7 @@ module GetDedicatedIp = {
   type response = {
 @as("DedicatedIp") dedicatedIp: dedicatedIp
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetDedicatedIpCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetDedicatedIpCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -947,7 +947,7 @@ module CreateEmailTemplate = {
 @as("TemplateName") templateName: option<emailTemplateName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "CreateEmailTemplateCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -959,7 +959,7 @@ module UpdateContactList = {
 @as("ContactListName") contactListName: option<contactListName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "UpdateContactListCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateContactListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -973,7 +973,7 @@ module UpdateContact = {
 @as("ContactListName") contactListName: option<contactListName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "UpdateContactCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -984,7 +984,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -996,7 +996,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: option<tagList>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1013,7 +1013,7 @@ module ListSuppressedDestinations = {
 @as("NextToken") nextToken: nextToken,
 @as("SuppressedDestinationSummaries") suppressedDestinationSummaries: suppressedDestinationSummaries
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListSuppressedDestinationsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListSuppressedDestinationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1027,7 +1027,7 @@ module ListEmailTemplates = {
 @as("NextToken") nextToken: nextToken,
 @as("TemplatesMetadata") templatesMetadata: emailTemplateMetadataList
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListEmailTemplatesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListEmailTemplatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1041,7 +1041,7 @@ module ListEmailIdentities = {
 @as("NextToken") nextToken: nextToken,
 @as("EmailIdentities") emailIdentities: identityInfoList
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListEmailIdentitiesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListEmailIdentitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1055,7 +1055,7 @@ module ListDeliverabilityTestReports = {
 @as("NextToken") nextToken: nextToken,
 @as("DeliverabilityTestReports") deliverabilityTestReports: option<deliverabilityTestReports>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListDeliverabilityTestReportsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListDeliverabilityTestReportsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1069,7 +1069,7 @@ module ListCustomVerificationEmailTemplates = {
 @as("NextToken") nextToken: nextToken,
 @as("CustomVerificationEmailTemplates") customVerificationEmailTemplates: customVerificationEmailTemplatesList
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListCustomVerificationEmailTemplatesCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListCustomVerificationEmailTemplatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1083,7 +1083,7 @@ module ListContactLists = {
 @as("NextToken") nextToken: nextToken,
 @as("ContactLists") contactLists: listOfContactLists
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListContactListsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListContactListsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1095,7 +1095,7 @@ module GetSuppressedDestination = {
   type response = {
 @as("SuppressedDestination") suppressedDestination: option<suppressedDestination>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetSuppressedDestinationCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetSuppressedDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1115,7 +1115,7 @@ module GetImportJob = {
 @as("ImportDestination") importDestination: importDestination,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetImportJobCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetImportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1134,7 +1134,7 @@ module GetEmailIdentity = {
 @as("FeedbackForwardingStatus") feedbackForwardingStatus: enabled,
 @as("IdentityType") identityType: identityType
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetEmailIdentityCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetEmailIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1146,7 +1146,7 @@ module GetDomainDeliverabilityCampaign = {
   type response = {
 @as("DomainDeliverabilityCampaign") domainDeliverabilityCampaign: option<domainDeliverabilityCampaign>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetDomainDeliverabilityCampaignCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetDomainDeliverabilityCampaignCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1161,7 +1161,7 @@ module GetDedicatedIps = {
 @as("NextToken") nextToken: nextToken,
 @as("DedicatedIps") dedicatedIps: dedicatedIpList
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetDedicatedIpsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetDedicatedIpsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1178,7 +1178,7 @@ module GetContactList = {
 @as("Topics") topics: topics,
 @as("ContactListName") contactListName: contactListName
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetContactListCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetContactListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1198,7 +1198,7 @@ module GetContact = {
 @as("EmailAddress") emailAddress: emailAddress,
 @as("ContactListName") contactListName: contactListName
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetContactCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1216,7 +1216,7 @@ module GetConfigurationSet = {
 @as("TrackingOptions") trackingOptions: trackingOptions,
 @as("ConfigurationSetName") configurationSetName: configurationSetName
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetConfigurationSetCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetConfigurationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1232,7 +1232,7 @@ module GetAccount = {
 @as("EnforcementStatus") enforcementStatus: generalEnforcementStatus,
 @as("DedicatedIpAutoWarmupEnabled") dedicatedIpAutoWarmupEnabled: enabled
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetAccountCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1245,7 +1245,7 @@ module CreateImportJob = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "CreateImportJobCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateImportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1262,7 +1262,7 @@ module CreateEmailIdentity = {
 @as("VerifiedForSendingStatus") verifiedForSendingStatus: enabled,
 @as("IdentityType") identityType: identityType
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "CreateEmailIdentityCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateEmailIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1273,7 +1273,7 @@ module CreateDedicatedIpPool = {
 @as("PoolName") poolName: option<poolName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "CreateDedicatedIpPoolCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateDedicatedIpPoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1286,7 +1286,7 @@ module CreateContactList = {
 @as("ContactListName") contactListName: option<contactListName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "CreateContactListCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateContactListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1300,7 +1300,7 @@ module CreateContact = {
 @as("ContactListName") contactListName: option<contactListName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "CreateContactCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1316,7 +1316,7 @@ module CreateConfigurationSet = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "CreateConfigurationSetCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateConfigurationSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1333,7 +1333,7 @@ module ListDomainDeliverabilityCampaigns = {
 @as("NextToken") nextToken: nextToken,
 @as("DomainDeliverabilityCampaigns") domainDeliverabilityCampaigns: option<domainDeliverabilityCampaignList>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListDomainDeliverabilityCampaignsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListDomainDeliverabilityCampaignsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1349,7 +1349,7 @@ module GetDeliverabilityTestReport = {
 @as("OverallPlacement") overallPlacement: option<placementStatistics>,
 @as("DeliverabilityTestReport") deliverabilityTestReport: option<deliverabilityTestReport>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetDeliverabilityTestReportCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetDeliverabilityTestReportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1361,7 +1361,7 @@ module GetBlacklistReports = {
   type response = {
 @as("BlacklistReport") blacklistReport: option<blacklistReport>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetBlacklistReportsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetBlacklistReportsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1373,7 +1373,7 @@ module UpdateConfigurationSetEventDestination = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "UpdateConfigurationSetEventDestinationCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "UpdateConfigurationSetEventDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1394,7 +1394,7 @@ module SendEmail = {
   type response = {
 @as("MessageId") messageId: outboundMessageId
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "SendEmailCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "SendEmailCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1414,7 +1414,7 @@ module SendBulkEmail = {
   type response = {
 @as("BulkEmailEntryResults") bulkEmailEntryResults: option<bulkEmailEntryResultList>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "SendBulkEmailCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "SendBulkEmailCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1425,7 +1425,7 @@ module PutDeliverabilityDashboardOption = {
 @as("DashboardEnabled") dashboardEnabled: option<enabled>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "PutDeliverabilityDashboardOptionCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "PutDeliverabilityDashboardOptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1440,7 +1440,7 @@ module ListImportJobs = {
 @as("NextToken") nextToken: nextToken,
 @as("ImportJobs") importJobs: importJobSummaryList
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListImportJobsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListImportJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1456,7 +1456,7 @@ module ListContacts = {
 @as("NextToken") nextToken: nextToken,
 @as("Contacts") contacts: listOfContacts
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "ListContactsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "ListContactsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1471,7 +1471,7 @@ module GetDomainStatisticsReport = {
 @as("DailyVolumes") dailyVolumes: option<dailyVolumes>,
 @as("OverallVolume") overallVolume: option<overallVolume>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetDomainStatisticsReportCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetDomainStatisticsReportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1485,7 +1485,7 @@ module GetDeliverabilityDashboardOptions = {
 @as("SubscriptionExpiryDate") subscriptionExpiryDate: amazonawsTimestamp,
 @as("DashboardEnabled") dashboardEnabled: option<enabled>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetDeliverabilityDashboardOptionsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetDeliverabilityDashboardOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1501,7 +1501,7 @@ module CreateDeliverabilityTestReport = {
 @as("DeliverabilityTestStatus") deliverabilityTestStatus: option<deliverabilityTestStatus>,
 @as("ReportId") reportId: option<reportId>
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "CreateDeliverabilityTestReportCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateDeliverabilityTestReportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1513,7 +1513,7 @@ module CreateConfigurationSetEventDestination = {
 @as("ConfigurationSetName") configurationSetName: option<configurationSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "CreateConfigurationSetEventDestinationCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "CreateConfigurationSetEventDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1525,6 +1525,6 @@ module GetConfigurationSetEventDestinations = {
   type response = {
 @as("EventDestinations") eventDestinations: eventDestinations
 }
-  @module("@aws-sdk/client-ses") @new external new_: (Js.Promise.t<request>) => t = "GetConfigurationSetEventDestinationsCommand";
+  @module("@aws-sdk/client-ses") @new external new_: (request) => t = "GetConfigurationSetEventDestinationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -4516,7 +4516,7 @@ module StartVpcEndpointServicePrivateDnsVerification = {
   type response = {
 @as("ReturnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "StartVpcEndpointServicePrivateDnsVerificationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "StartVpcEndpointServicePrivateDnsVerificationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4527,7 +4527,7 @@ module SendDiagnosticInterrupt = {
 @as("InstanceId") instanceId: option<instanceId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "SendDiagnosticInterruptCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "SendDiagnosticInterruptCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4541,7 +4541,7 @@ module RestoreAddressToClassic = {
 @as("Status") status: status,
 @as("PublicIp") publicIp: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RestoreAddressToClassicCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RestoreAddressToClassicCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4553,7 +4553,7 @@ module ResetSnapshotAttribute = {
 @as("Attribute") attribute: option<snapshotAttributeName>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ResetSnapshotAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ResetSnapshotAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4565,7 +4565,7 @@ module ResetNetworkInterfaceAttribute = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ResetNetworkInterfaceAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ResetNetworkInterfaceAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4577,7 +4577,7 @@ module ResetInstanceAttribute = {
 @as("Attribute") attribute: option<instanceAttributeName>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ResetInstanceAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ResetInstanceAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4589,7 +4589,7 @@ module ResetImageAttribute = {
 @as("Attribute") attribute: option<resetImageAttributeName>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ResetImageAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ResetImageAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4603,7 +4603,7 @@ module ResetFpgaImageAttribute = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ResetFpgaImageAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ResetFpgaImageAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4615,7 +4615,7 @@ module ResetEbsDefaultKmsKeyId = {
   type response = {
 @as("KmsKeyId") kmsKeyId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ResetEbsDefaultKmsKeyIdCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ResetEbsDefaultKmsKeyIdCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4640,7 +4640,7 @@ module ReplaceRoute = {
 @as("DestinationCidrBlock") destinationCidrBlock: amazonawsString
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ReplaceRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ReplaceRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4654,7 +4654,7 @@ module ReplaceNetworkAclAssociation = {
   type response = {
 @as("NewAssociationId") newAssociationId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ReplaceNetworkAclAssociationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ReplaceNetworkAclAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4667,7 +4667,7 @@ module ReleaseAddress = {
 @as("AllocationId") allocationId: allocationId
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ReleaseAddressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ReleaseAddressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4680,7 +4680,7 @@ module RejectVpcPeeringConnection = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RejectVpcPeeringConnectionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RejectVpcPeeringConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4694,7 +4694,7 @@ module MoveAddressToVpc = {
 @as("Status") status: status,
 @as("AllocationId") allocationId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "MoveAddressToVpcCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "MoveAddressToVpcCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4708,7 +4708,7 @@ module ModifyVpcTenancy = {
   type response = {
 @as("ReturnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVpcTenancyCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVpcTenancyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4726,7 +4726,7 @@ module ModifyInstancePlacement = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyInstancePlacementCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyInstancePlacementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4738,7 +4738,7 @@ module ModifyIdentityIdFormat = {
 @as("PrincipalArn") principalArn: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyIdentityIdFormatCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyIdentityIdFormatCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4749,7 +4749,7 @@ module ModifyIdFormat = {
 @as("Resource") resource: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyIdFormatCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyIdFormatCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4762,7 +4762,7 @@ module ModifyEbsDefaultKmsKeyId = {
   type response = {
 @as("KmsKeyId") kmsKeyId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyEbsDefaultKmsKeyIdCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyEbsDefaultKmsKeyIdCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4779,7 +4779,7 @@ module ModifyCapacityReservation = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyCapacityReservationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyCapacityReservationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4793,7 +4793,7 @@ module ModifyAvailabilityZoneGroup = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyAvailabilityZoneGroupCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyAvailabilityZoneGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4807,7 +4807,7 @@ module ImportClientVpnClientCertificateRevocationList = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ImportClientVpnClientCertificateRevocationListCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ImportClientVpnClientCertificateRevocationListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4819,7 +4819,7 @@ module GetSerialConsoleAccessStatus = {
   type response = {
 @as("SerialConsoleAccessEnabled") serialConsoleAccessEnabled: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetSerialConsoleAccessStatusCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetSerialConsoleAccessStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4834,7 +4834,7 @@ module GetPasswordData = {
 @as("PasswordData") passwordData: amazonawsString,
 @as("InstanceId") instanceId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetPasswordDataCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetPasswordDataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4846,7 +4846,7 @@ module GetEbsEncryptionByDefault = {
   type response = {
 @as("EbsEncryptionByDefault") ebsEncryptionByDefault: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetEbsEncryptionByDefaultCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetEbsEncryptionByDefaultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4858,7 +4858,7 @@ module GetEbsDefaultKmsKeyId = {
   type response = {
 @as("KmsKeyId") kmsKeyId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetEbsDefaultKmsKeyIdCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetEbsDefaultKmsKeyIdCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4873,7 +4873,7 @@ module GetConsoleScreenshot = {
 @as("InstanceId") instanceId: amazonawsString,
 @as("ImageData") imageData: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetConsoleScreenshotCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetConsoleScreenshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4889,7 +4889,7 @@ module GetConsoleOutput = {
 @as("Output") output: amazonawsString,
 @as("InstanceId") instanceId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetConsoleOutputCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetConsoleOutputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4902,7 +4902,7 @@ module ExportClientVpnClientConfiguration = {
   type response = {
 @as("ClientConfiguration") clientConfiguration: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ExportClientVpnClientConfigurationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ExportClientVpnClientConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4914,7 +4914,7 @@ module EnableVpcClassicLinkDnsSupport = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "EnableVpcClassicLinkDnsSupportCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "EnableVpcClassicLinkDnsSupportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4927,7 +4927,7 @@ module EnableVpcClassicLink = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "EnableVpcClassicLinkCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "EnableVpcClassicLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4938,7 +4938,7 @@ module EnableVolumeIO = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "EnableVolumeIOCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "EnableVolumeIOCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4950,7 +4950,7 @@ module EnableVgwRoutePropagation = {
 @as("GatewayId") gatewayId: option<vpnGatewayId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "EnableVgwRoutePropagationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "EnableVgwRoutePropagationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4962,7 +4962,7 @@ module EnableSerialConsoleAccess = {
   type response = {
 @as("SerialConsoleAccessEnabled") serialConsoleAccessEnabled: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "EnableSerialConsoleAccessCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "EnableSerialConsoleAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4974,7 +4974,7 @@ module EnableEbsEncryptionByDefault = {
   type response = {
 @as("EbsEncryptionByDefault") ebsEncryptionByDefault: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "EnableEbsEncryptionByDefaultCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "EnableEbsEncryptionByDefaultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -4985,7 +4985,7 @@ module DisassociateRouteTable = {
 @as("AssociationId") associationId: option<routeTableAssociationId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateRouteTableCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisassociateRouteTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -4999,7 +4999,7 @@ module DisassociateEnclaveCertificateIamRole = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateEnclaveCertificateIamRoleCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisassociateEnclaveCertificateIamRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5011,7 +5011,7 @@ module DisassociateAddress = {
 @as("AssociationId") associationId: elasticIpAssociationId
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateAddressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisassociateAddressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5023,7 +5023,7 @@ module DisableVpcClassicLinkDnsSupport = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisableVpcClassicLinkDnsSupportCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisableVpcClassicLinkDnsSupportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5036,7 +5036,7 @@ module DisableVpcClassicLink = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisableVpcClassicLinkCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisableVpcClassicLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5048,7 +5048,7 @@ module DisableVgwRoutePropagation = {
 @as("GatewayId") gatewayId: option<vpnGatewayId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisableVgwRoutePropagationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisableVgwRoutePropagationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5060,7 +5060,7 @@ module DisableSerialConsoleAccess = {
   type response = {
 @as("SerialConsoleAccessEnabled") serialConsoleAccessEnabled: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisableSerialConsoleAccessCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisableSerialConsoleAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5072,7 +5072,7 @@ module DisableEbsEncryptionByDefault = {
   type response = {
 @as("EbsEncryptionByDefault") ebsEncryptionByDefault: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisableEbsEncryptionByDefaultCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisableEbsEncryptionByDefaultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5084,7 +5084,7 @@ module DetachVpnGateway = {
 @as("VpcId") vpcId: option<vpcId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DetachVpnGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DetachVpnGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5098,7 +5098,7 @@ module DetachVolume = {
 @as("Device") device: amazonawsString
 }
   type response = volumeAttachment;
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DetachVolumeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DetachVolumeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5110,7 +5110,7 @@ module DetachNetworkInterface = {
 @as("AttachmentId") attachmentId: option<networkInterfaceAttachmentId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DetachNetworkInterfaceCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DetachNetworkInterfaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5122,7 +5122,7 @@ module DetachInternetGateway = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DetachInternetGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DetachInternetGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5136,7 +5136,7 @@ module DetachClassicLinkVpc = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DetachClassicLinkVpcCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DetachClassicLinkVpcCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5147,7 +5147,7 @@ module DeregisterImage = {
 @as("ImageId") imageId: option<imageId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeregisterImageCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeregisterImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5158,7 +5158,7 @@ module DeleteVpnGateway = {
 @as("VpnGatewayId") vpnGatewayId: option<vpnGatewayId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpnGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteVpnGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5169,7 +5169,7 @@ module DeleteVpnConnectionRoute = {
 @as("DestinationCidrBlock") destinationCidrBlock: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpnConnectionRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteVpnConnectionRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5180,7 +5180,7 @@ module DeleteVpnConnection = {
 @as("VpnConnectionId") vpnConnectionId: option<vpnConnectionId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpnConnectionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteVpnConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5193,7 +5193,7 @@ module DeleteVpcPeeringConnection = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpcPeeringConnectionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteVpcPeeringConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5204,7 +5204,7 @@ module DeleteVpc = {
 @as("VpcId") vpcId: option<vpcId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpcCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteVpcCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5215,7 +5215,7 @@ module DeleteVolume = {
 @as("VolumeId") volumeId: option<volumeId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteVolumeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteVolumeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5228,7 +5228,7 @@ module DeleteTrafficMirrorTarget = {
   type response = {
 @as("TrafficMirrorTargetId") trafficMirrorTargetId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTrafficMirrorTargetCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTrafficMirrorTargetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5241,7 +5241,7 @@ module DeleteTrafficMirrorSession = {
   type response = {
 @as("TrafficMirrorSessionId") trafficMirrorSessionId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTrafficMirrorSessionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTrafficMirrorSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5254,7 +5254,7 @@ module DeleteTrafficMirrorFilterRule = {
   type response = {
 @as("TrafficMirrorFilterRuleId") trafficMirrorFilterRuleId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTrafficMirrorFilterRuleCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTrafficMirrorFilterRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5267,7 +5267,7 @@ module DeleteTrafficMirrorFilter = {
   type response = {
 @as("TrafficMirrorFilterId") trafficMirrorFilterId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTrafficMirrorFilterCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTrafficMirrorFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5278,7 +5278,7 @@ module DeleteSubnet = {
 @as("SubnetId") subnetId: option<subnetId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteSubnetCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteSubnetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5288,7 +5288,7 @@ module DeleteSpotDatafeedSubscription = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteSpotDatafeedSubscriptionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteSpotDatafeedSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5299,7 +5299,7 @@ module DeleteSnapshot = {
 @as("SnapshotId") snapshotId: option<snapshotId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteSnapshotCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5311,7 +5311,7 @@ module DeleteSecurityGroup = {
 @as("GroupId") groupId: securityGroupId
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteSecurityGroupCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteSecurityGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5322,7 +5322,7 @@ module DeleteRouteTable = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteRouteTableCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteRouteTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5336,7 +5336,7 @@ module DeleteRoute = {
 @as("DestinationCidrBlock") destinationCidrBlock: amazonawsString
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5347,7 +5347,7 @@ module DeletePlacementGroup = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeletePlacementGroupCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeletePlacementGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5361,7 +5361,7 @@ module DeleteNetworkInterfacePermission = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteNetworkInterfacePermissionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteNetworkInterfacePermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5372,7 +5372,7 @@ module DeleteNetworkInterface = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteNetworkInterfaceCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteNetworkInterfaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5385,7 +5385,7 @@ module DeleteNetworkInsightsPath = {
   type response = {
 @as("NetworkInsightsPathId") networkInsightsPathId: networkInsightsPathId
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteNetworkInsightsPathCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteNetworkInsightsPathCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5398,7 +5398,7 @@ module DeleteNetworkInsightsAnalysis = {
   type response = {
 @as("NetworkInsightsAnalysisId") networkInsightsAnalysisId: networkInsightsAnalysisId
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteNetworkInsightsAnalysisCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteNetworkInsightsAnalysisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5411,7 +5411,7 @@ module DeleteNetworkAclEntry = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteNetworkAclEntryCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteNetworkAclEntryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5422,7 +5422,7 @@ module DeleteNetworkAcl = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteNetworkAclCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteNetworkAclCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5435,7 +5435,7 @@ module DeleteNatGateway = {
   type response = {
 @as("NatGatewayId") natGatewayId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteNatGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteNatGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5447,7 +5447,7 @@ module DeleteKeyPair = {
 @as("KeyName") keyName: keyPairName
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteKeyPairCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteKeyPairCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5458,7 +5458,7 @@ module DeleteInternetGateway = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteInternetGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteInternetGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5471,7 +5471,7 @@ module DeleteFpgaImage = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteFpgaImageCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteFpgaImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5484,7 +5484,7 @@ module DeleteEgressOnlyInternetGateway = {
   type response = {
 @as("ReturnCode") returnCode: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteEgressOnlyInternetGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteEgressOnlyInternetGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5495,7 +5495,7 @@ module DeleteDhcpOptions = {
 @as("DhcpOptionsId") dhcpOptionsId: option<dhcpOptionsId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteDhcpOptionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteDhcpOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5506,7 +5506,7 @@ module DeleteCustomerGateway = {
 @as("CustomerGatewayId") customerGatewayId: option<customerGatewayId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteCustomerGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteCustomerGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5517,7 +5517,7 @@ module CreateVpnConnectionRoute = {
 @as("DestinationCidrBlock") destinationCidrBlock: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateVpnConnectionRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateVpnConnectionRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5543,7 +5543,7 @@ module CreateRoute = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5563,7 +5563,7 @@ module CopyImage = {
   type response = {
 @as("ImageId") imageId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CopyImageCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CopyImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5580,7 +5580,7 @@ module CopyFpgaImage = {
   type response = {
 @as("FpgaImageId") fpgaImageId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CopyFpgaImageCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CopyFpgaImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5595,7 +5595,7 @@ module ConfirmProductInstance = {
 @as("Return") return: amazonawsBoolean,
 @as("OwnerId") ownerId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ConfirmProductInstanceCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ConfirmProductInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5611,7 +5611,7 @@ module CancelImportTask = {
 @as("PreviousState") previousState: amazonawsString,
 @as("ImportTaskId") importTaskId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CancelImportTaskCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CancelImportTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5621,7 +5621,7 @@ module CancelExportTask = {
 @as("ExportTaskId") exportTaskId: option<exportVmTaskId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CancelExportTaskCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CancelExportTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5633,7 +5633,7 @@ module CancelConversionTask = {
 @as("ConversionTaskId") conversionTaskId: option<conversionTaskId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CancelConversionTaskCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CancelConversionTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5646,7 +5646,7 @@ module CancelCapacityReservation = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CancelCapacityReservationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CancelCapacityReservationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5659,7 +5659,7 @@ module AttachVolume = {
 @as("Device") device: option<amazonawsString>
 }
   type response = volumeAttachment;
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AttachVolumeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AttachVolumeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5676,7 +5676,7 @@ module AttachNetworkInterface = {
 @as("NetworkCardIndex") networkCardIndex: amazonawsInteger,
 @as("AttachmentId") attachmentId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AttachNetworkInterfaceCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AttachNetworkInterfaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5688,7 +5688,7 @@ module AttachInternetGateway = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AttachInternetGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AttachInternetGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5704,7 +5704,7 @@ module AssociateEnclaveCertificateIamRole = {
 @as("CertificateS3ObjectKey") certificateS3ObjectKey: amazonawsString,
 @as("CertificateS3BucketName") certificateS3BucketName: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssociateEnclaveCertificateIamRoleCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssociateEnclaveCertificateIamRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5716,7 +5716,7 @@ module AssociateDhcpOptions = {
 @as("DhcpOptionsId") dhcpOptionsId: option<defaultingDhcpOptionsId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssociateDhcpOptionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssociateDhcpOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5734,7 +5734,7 @@ module AssociateAddress = {
   type response = {
 @as("AssociationId") associationId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssociateAddressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssociateAddressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5747,7 +5747,7 @@ module WithdrawByoipCidr = {
   type response = {
 @as("ByoipCidr") byoipCidr: byoipCidr
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "WithdrawByoipCidrCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "WithdrawByoipCidrCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5758,7 +5758,7 @@ module UnassignPrivateIpAddresses = {
 @as("NetworkInterfaceId") networkInterfaceId: option<networkInterfaceId>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "UnassignPrivateIpAddressesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "UnassignPrivateIpAddressesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5772,7 +5772,7 @@ module UnassignIpv6Addresses = {
 @as("UnassignedIpv6Addresses") unassignedIpv6Addresses: ipv6AddressList,
 @as("NetworkInterfaceId") networkInterfaceId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "UnassignIpv6AddressesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "UnassignIpv6AddressesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5788,7 +5788,7 @@ module RevokeClientVpnIngress = {
   type response = {
 @as("Status") status: clientVpnAuthorizationRuleStatus
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RevokeClientVpnIngressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RevokeClientVpnIngressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5804,7 +5804,7 @@ module ReportInstanceStatus = {
 @as("Description") description: amazonawsString
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ReportInstanceStatusCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ReportInstanceStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5819,7 +5819,7 @@ module ReplaceRouteTableAssociation = {
 @as("AssociationState") associationState: routeTableAssociationState,
 @as("NewAssociationId") newAssociationId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ReplaceRouteTableAssociationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ReplaceRouteTableAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5838,7 +5838,7 @@ module ReplaceNetworkAclEntry = {
 @as("CidrBlock") cidrBlock: amazonawsString
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ReplaceNetworkAclEntryCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ReplaceNetworkAclEntryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5849,7 +5849,7 @@ module RebootInstances = {
 @as("InstanceIds") instanceIds: option<instanceIdStringList>
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RebootInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RebootInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5865,7 +5865,7 @@ module PurchaseReservedInstancesOffering = {
   type response = {
 @as("ReservedInstancesId") reservedInstancesId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "PurchaseReservedInstancesOfferingCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "PurchaseReservedInstancesOfferingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5881,7 +5881,7 @@ module ModifyVpcPeeringConnectionOptions = {
 @as("RequesterPeeringConnectionOptions") requesterPeeringConnectionOptions: peeringConnectionOptions,
 @as("AccepterPeeringConnectionOptions") accepterPeeringConnectionOptions: peeringConnectionOptions
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVpcPeeringConnectionOptionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVpcPeeringConnectionOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5896,7 +5896,7 @@ module ModifyVpcEndpointServicePermissions = {
   type response = {
 @as("ReturnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVpcEndpointServicePermissionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVpcEndpointServicePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5916,7 +5916,7 @@ module ModifyVpcEndpointServiceConfiguration = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVpcEndpointServiceConfigurationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVpcEndpointServiceConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5931,7 +5931,7 @@ module ModifyVpcEndpointConnectionNotification = {
   type response = {
 @as("ReturnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVpcEndpointConnectionNotificationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVpcEndpointConnectionNotificationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5953,7 +5953,7 @@ module ModifyVpcEndpoint = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVpcEndpointCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVpcEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -5965,7 +5965,7 @@ module ModifyVpcAttribute = {
 @as("EnableDnsHostnames") enableDnsHostnames: attributeBooleanValue
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVpcAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVpcAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5977,7 +5977,7 @@ module ModifyVolumeAttribute = {
 @as("AutoEnableIO") autoEnableIO: attributeBooleanValue
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVolumeAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVolumeAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -5995,7 +5995,7 @@ module ModifyVolume = {
   type response = {
 @as("VolumeModification") volumeModification: volumeModification
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVolumeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVolumeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6009,7 +6009,7 @@ module ModifySubnetAttribute = {
 @as("AssignIpv6AddressOnCreation") assignIpv6AddressOnCreation: attributeBooleanValue
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifySubnetAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifySubnetAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -6024,7 +6024,7 @@ module ModifyNetworkInterfaceAttribute = {
 @as("Attachment") attachment: networkInterfaceAttachmentChanges
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyNetworkInterfaceAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyNetworkInterfaceAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -6041,7 +6041,7 @@ module ModifyInstanceMetadataOptions = {
 @as("InstanceMetadataOptions") instanceMetadataOptions: instanceMetadataOptionsResponse,
 @as("InstanceId") instanceId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyInstanceMetadataOptionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyInstanceMetadataOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6056,7 +6056,7 @@ module ModifyInstanceEventStartTime = {
   type response = {
 @as("Event") event: instanceStatusEvent
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyInstanceEventStartTimeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyInstanceEventStartTimeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6070,7 +6070,7 @@ module ModifyDefaultCreditSpecification = {
   type response = {
 @as("InstanceFamilyCreditSpecification") instanceFamilyCreditSpecification: instanceFamilyCreditSpecification
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyDefaultCreditSpecificationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyDefaultCreditSpecificationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6083,7 +6083,7 @@ module GetDefaultCreditSpecification = {
   type response = {
 @as("InstanceFamilyCreditSpecification") instanceFamilyCreditSpecification: instanceFamilyCreditSpecification
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetDefaultCreditSpecificationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetDefaultCreditSpecificationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6097,7 +6097,7 @@ module ExportClientVpnClientCertificateRevocationList = {
 @as("Status") status: clientCertificateRevocationListStatus,
 @as("CertificateRevocationList") certificateRevocationList: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ExportClientVpnClientCertificateRevocationListCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ExportClientVpnClientCertificateRevocationListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6111,7 +6111,7 @@ module EnableTransitGatewayRouteTablePropagation = {
   type response = {
 @as("Propagation") propagation: transitGatewayPropagation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "EnableTransitGatewayRouteTablePropagationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "EnableTransitGatewayRouteTablePropagationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6125,7 +6125,7 @@ module DisassociateTransitGatewayRouteTable = {
   type response = {
 @as("Association") association: transitGatewayAssociation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateTransitGatewayRouteTableCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisassociateTransitGatewayRouteTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6140,7 +6140,7 @@ module DisassociateClientVpnTargetNetwork = {
 @as("Status") status: associationStatus,
 @as("AssociationId") associationId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateClientVpnTargetNetworkCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisassociateClientVpnTargetNetworkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6154,7 +6154,7 @@ module DisableTransitGatewayRouteTablePropagation = {
   type response = {
 @as("Propagation") propagation: transitGatewayPropagation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisableTransitGatewayRouteTablePropagationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisableTransitGatewayRouteTablePropagationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6170,7 +6170,7 @@ module DescribeVpcAttribute = {
 @as("EnableDnsHostnames") enableDnsHostnames: attributeBooleanValue,
 @as("VpcId") vpcId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpcAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6183,7 +6183,7 @@ module DeprovisionByoipCidr = {
   type response = {
 @as("ByoipCidr") byoipCidr: byoipCidr
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeprovisionByoipCidrCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeprovisionByoipCidrCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6197,7 +6197,7 @@ module DeleteLocalGatewayRoute = {
   type response = {
 @as("Route") route: localGatewayRoute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteLocalGatewayRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteLocalGatewayRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6212,7 +6212,7 @@ module DeleteClientVpnRoute = {
   type response = {
 @as("Status") status: clientVpnRouteStatus
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteClientVpnRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteClientVpnRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6225,7 +6225,7 @@ module DeleteClientVpnEndpoint = {
   type response = {
 @as("Status") status: clientVpnEndpointStatus
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteClientVpnEndpointCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteClientVpnEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6244,7 +6244,7 @@ module CreateNetworkAclEntry = {
 @as("CidrBlock") cidrBlock: amazonawsString
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateNetworkAclEntryCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateNetworkAclEntryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -6259,7 +6259,7 @@ module CreateLocalGatewayRoute = {
   type response = {
 @as("Route") route: localGatewayRoute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateLocalGatewayRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateLocalGatewayRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6276,7 +6276,7 @@ module CreateClientVpnRoute = {
   type response = {
 @as("Status") status: clientVpnRouteStatus
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateClientVpnRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateClientVpnRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6294,7 +6294,7 @@ module AuthorizeClientVpnIngress = {
   type response = {
 @as("Status") status: clientVpnAuthorizationRuleStatus
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AuthorizeClientVpnIngressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AuthorizeClientVpnIngressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6308,7 +6308,7 @@ module AttachVpnGateway = {
   type response = {
 @as("VpcAttachment") vpcAttachment: vpcAttachment
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AttachVpnGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AttachVpnGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6323,7 +6323,7 @@ module AttachClassicLinkVpc = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AttachClassicLinkVpcCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AttachClassicLinkVpcCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6337,7 +6337,7 @@ module AssociateTransitGatewayRouteTable = {
   type response = {
 @as("Association") association: transitGatewayAssociation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssociateTransitGatewayRouteTableCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssociateTransitGatewayRouteTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6353,7 +6353,7 @@ module AssociateRouteTable = {
 @as("AssociationState") associationState: routeTableAssociationState,
 @as("AssociationId") associationId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssociateRouteTableCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssociateRouteTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6369,7 +6369,7 @@ module AssociateClientVpnTargetNetwork = {
 @as("Status") status: associationStatus,
 @as("AssociationId") associationId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssociateClientVpnTargetNetworkCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssociateClientVpnTargetNetworkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6384,7 +6384,7 @@ module AssignIpv6Addresses = {
 @as("NetworkInterfaceId") networkInterfaceId: amazonawsString,
 @as("AssignedIpv6Addresses") assignedIpv6Addresses: ipv6AddressList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssignIpv6AddressesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssignIpv6AddressesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6399,7 +6399,7 @@ module ApplySecurityGroupsToClientVpnTargetNetwork = {
   type response = {
 @as("SecurityGroupIds") securityGroupIds: clientVpnSecurityGroupIdSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ApplySecurityGroupsToClientVpnTargetNetworkCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ApplySecurityGroupsToClientVpnTargetNetworkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6412,7 +6412,7 @@ module AdvertiseByoipCidr = {
   type response = {
 @as("ByoipCidr") byoipCidr: byoipCidr
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AdvertiseByoipCidrCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AdvertiseByoipCidrCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6426,7 +6426,7 @@ module ResetAddressAttribute = {
   type response = {
 @as("Address") address: addressAttribute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ResetAddressAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ResetAddressAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6439,7 +6439,7 @@ module ReplaceIamInstanceProfileAssociation = {
   type response = {
 @as("IamInstanceProfileAssociation") iamInstanceProfileAssociation: iamInstanceProfileAssociation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ReplaceIamInstanceProfileAssociationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ReplaceIamInstanceProfileAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6454,7 +6454,7 @@ module RegisterTransitGatewayMulticastGroupSources = {
   type response = {
 @as("RegisteredMulticastGroupSources") registeredMulticastGroupSources: transitGatewayMulticastRegisteredGroupSources
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RegisterTransitGatewayMulticastGroupSourcesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RegisterTransitGatewayMulticastGroupSourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6469,7 +6469,7 @@ module RegisterTransitGatewayMulticastGroupMembers = {
   type response = {
 @as("RegisteredMulticastGroupMembers") registeredMulticastGroupMembers: transitGatewayMulticastRegisteredGroupMembers
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RegisterTransitGatewayMulticastGroupMembersCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RegisterTransitGatewayMulticastGroupMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6482,7 +6482,7 @@ module RegisterInstanceEventNotificationAttributes = {
   type response = {
 @as("InstanceTagAttribute") instanceTagAttribute: instanceTagNotificationAttribute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RegisterInstanceEventNotificationAttributesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RegisterInstanceEventNotificationAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6498,7 +6498,7 @@ module ModifyTransitGatewayPrefixListReference = {
   type response = {
 @as("TransitGatewayPrefixListReference") transitGatewayPrefixListReference: transitGatewayPrefixListReference
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyTransitGatewayPrefixListReferenceCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyTransitGatewayPrefixListReferenceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6521,7 +6521,7 @@ module ModifyTrafficMirrorFilterRule = {
   type response = {
 @as("TrafficMirrorFilterRule") trafficMirrorFilterRule: trafficMirrorFilterRule
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyTrafficMirrorFilterRuleCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyTrafficMirrorFilterRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6535,7 +6535,7 @@ module ModifyReservedInstances = {
   type response = {
 @as("ReservedInstancesModificationId") reservedInstancesModificationId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyReservedInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyReservedInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6549,7 +6549,7 @@ module ModifyInstanceCapacityReservationAttributes = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyInstanceCapacityReservationAttributesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyInstanceCapacityReservationAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6572,7 +6572,7 @@ module ModifyClientVpnEndpoint = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyClientVpnEndpointCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyClientVpnEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6586,7 +6586,7 @@ module ModifyAddressAttribute = {
   type response = {
 @as("Address") address: addressAttribute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyAddressAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyAddressAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6603,7 +6603,7 @@ module GetManagedPrefixListEntries = {
 @as("NextToken") nextToken: nextToken,
 @as("Entries") entries: prefixListEntrySet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetManagedPrefixListEntriesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetManagedPrefixListEntriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6619,7 +6619,7 @@ module GetManagedPrefixListAssociations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("PrefixListAssociations") prefixListAssociations: prefixListAssociationSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetManagedPrefixListAssociationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetManagedPrefixListAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6635,7 +6635,7 @@ module GetGroupsForCapacityReservation = {
 @as("CapacityReservationGroups") capacityReservationGroups: capacityReservationGroupSet,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetGroupsForCapacityReservationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetGroupsForCapacityReservationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6656,7 +6656,7 @@ module GetCapacityReservationUsage = {
 @as("CapacityReservationId") capacityReservationId: amazonawsString,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetCapacityReservationUsageCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetCapacityReservationUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6672,7 +6672,7 @@ module GetAssociatedIpv6PoolCidrs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Ipv6CidrAssociations") ipv6CidrAssociations: ipv6CidrAssociationSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetAssociatedIpv6PoolCidrsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetAssociatedIpv6PoolCidrsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6685,7 +6685,7 @@ module GetAssociatedEnclaveCertificateIamRoles = {
   type response = {
 @as("AssociatedRoles") associatedRoles: associatedRolesList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetAssociatedEnclaveCertificateIamRolesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetAssociatedEnclaveCertificateIamRolesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6699,7 +6699,7 @@ module DisassociateVpcCidrBlock = {
 @as("CidrBlockAssociation") cidrBlockAssociation: vpcCidrBlockAssociation,
 @as("Ipv6CidrBlockAssociation") ipv6CidrBlockAssociation: vpcIpv6CidrBlockAssociation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateVpcCidrBlockCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisassociateVpcCidrBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6712,7 +6712,7 @@ module DisassociateSubnetCidrBlock = {
 @as("SubnetId") subnetId: amazonawsString,
 @as("Ipv6CidrBlockAssociation") ipv6CidrBlockAssociation: subnetIpv6CidrBlockAssociation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateSubnetCidrBlockCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisassociateSubnetCidrBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6724,7 +6724,7 @@ module DisassociateIamInstanceProfile = {
   type response = {
 @as("IamInstanceProfileAssociation") iamInstanceProfileAssociation: iamInstanceProfileAssociation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateIamInstanceProfileCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisassociateIamInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6739,7 +6739,7 @@ module DescribeVpcClassicLinkDnsSupport = {
 @as("Vpcs") vpcs: classicLinkDnsSupportList,
 @as("NextToken") nextToken: describeVpcClassicLinkDnsSupportNextToken
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcClassicLinkDnsSupportCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpcClassicLinkDnsSupportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6755,7 +6755,7 @@ module DescribeVolumeAttribute = {
 @as("ProductCodes") productCodes: productCodeList,
 @as("AutoEnableIO") autoEnableIO: attributeBooleanValue
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVolumeAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVolumeAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6772,7 +6772,7 @@ module DescribeSpotFleetInstances = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ActiveInstances") activeInstances: activeInstanceSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeSpotFleetInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeSpotFleetInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6784,7 +6784,7 @@ module DescribeSpotDatafeedSubscription = {
   type response = {
 @as("SpotDatafeedSubscription") spotDatafeedSubscription: spotDatafeedSubscription
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeSpotDatafeedSubscriptionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeSpotDatafeedSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6800,7 +6800,7 @@ module DescribeSnapshotAttribute = {
 @as("ProductCodes") productCodes: productCodeList,
 @as("CreateVolumePermissions") createVolumePermissions: createVolumePermissionList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeSnapshotAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeSnapshotAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6813,7 +6813,7 @@ module DescribeSecurityGroupReferences = {
   type response = {
 @as("SecurityGroupReferenceSet") securityGroupReferenceSet: securityGroupReferences
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeSecurityGroupReferencesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeSecurityGroupReferencesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6831,7 +6831,7 @@ module DescribeNetworkInterfaceAttribute = {
 @as("Description") description: attributeValue,
 @as("Attachment") attachment: networkInterfaceAttachment
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeNetworkInterfaceAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeNetworkInterfaceAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6843,7 +6843,7 @@ module DescribeInstanceEventNotificationAttributes = {
   type response = {
 @as("InstanceTagAttribute") instanceTagAttribute: instanceTagNotificationAttribute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeInstanceEventNotificationAttributesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeInstanceEventNotificationAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6856,7 +6856,7 @@ module DescribeIdentityIdFormat = {
   type response = {
 @as("Statuses") statuses: idFormatList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeIdentityIdFormatCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeIdentityIdFormatCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6868,7 +6868,7 @@ module DescribeIdFormat = {
   type response = {
 @as("Statuses") statuses: idFormatList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeIdFormatCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeIdFormatCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6883,7 +6883,7 @@ module DescribeByoipCidrs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ByoipCidrs") byoipCidrs: byoipCidrSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeByoipCidrsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeByoipCidrsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6896,7 +6896,7 @@ module DescribeAggregateIdFormat = {
 @as("Statuses") statuses: idFormatList,
 @as("UseLongIdsAggregated") useLongIdsAggregated: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeAggregateIdFormatCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeAggregateIdFormatCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6911,7 +6911,7 @@ module DeregisterTransitGatewayMulticastGroupSources = {
   type response = {
 @as("DeregisteredMulticastGroupSources") deregisteredMulticastGroupSources: transitGatewayMulticastDeregisteredGroupSources
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeregisterTransitGatewayMulticastGroupSourcesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeregisterTransitGatewayMulticastGroupSourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6926,7 +6926,7 @@ module DeregisterTransitGatewayMulticastGroupMembers = {
   type response = {
 @as("DeregisteredMulticastGroupMembers") deregisteredMulticastGroupMembers: transitGatewayMulticastDeregisteredGroupMembers
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeregisterTransitGatewayMulticastGroupMembersCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeregisterTransitGatewayMulticastGroupMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6939,7 +6939,7 @@ module DeregisterInstanceEventNotificationAttributes = {
   type response = {
 @as("InstanceTagAttribute") instanceTagAttribute: instanceTagNotificationAttribute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeregisterInstanceEventNotificationAttributesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeregisterInstanceEventNotificationAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6953,7 +6953,7 @@ module DeleteTransitGatewayPrefixListReference = {
   type response = {
 @as("TransitGatewayPrefixListReference") transitGatewayPrefixListReference: transitGatewayPrefixListReference
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTransitGatewayPrefixListReferenceCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTransitGatewayPrefixListReferenceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6965,7 +6965,7 @@ module DeleteTags = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTagsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -6983,7 +6983,7 @@ module CreateVpcEndpointConnectionNotification = {
 @as("ClientToken") clientToken: amazonawsString,
 @as("ConnectionNotification") connectionNotification: connectionNotification
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateVpcEndpointConnectionNotificationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateVpcEndpointConnectionNotificationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -6999,7 +6999,7 @@ module CreateTransitGatewayPrefixListReference = {
   type response = {
 @as("TransitGatewayPrefixListReference") transitGatewayPrefixListReference: transitGatewayPrefixListReference
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTransitGatewayPrefixListReferenceCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTransitGatewayPrefixListReferenceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7023,7 +7023,7 @@ module CreateTrafficMirrorFilterRule = {
 @as("ClientToken") clientToken: amazonawsString,
 @as("TrafficMirrorFilterRule") trafficMirrorFilterRule: trafficMirrorFilterRule
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTrafficMirrorFilterRuleCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTrafficMirrorFilterRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7035,7 +7035,7 @@ module CreateTags = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTagsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -7050,7 +7050,7 @@ module CreateStoreImageTask = {
   type response = {
 @as("ObjectKey") objectKey: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateStoreImageTaskCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateStoreImageTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7064,7 +7064,7 @@ module CreateSpotDatafeedSubscription = {
   type response = {
 @as("SpotDatafeedSubscription") spotDatafeedSubscription: spotDatafeedSubscription
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateSpotDatafeedSubscriptionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateSpotDatafeedSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7080,7 +7080,7 @@ module CreateNetworkInterfacePermission = {
   type response = {
 @as("InterfacePermission") interfacePermission: networkInterfacePermission
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateNetworkInterfacePermissionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateNetworkInterfacePermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7093,7 +7093,7 @@ module CancelSpotInstanceRequests = {
   type response = {
 @as("CancelledSpotInstanceRequests") cancelledSpotInstanceRequests: cancelledSpotInstanceRequestList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CancelSpotInstanceRequestsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CancelSpotInstanceRequestsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7112,7 +7112,7 @@ module AssociateVpcCidrBlock = {
 @as("CidrBlockAssociation") cidrBlockAssociation: vpcCidrBlockAssociation,
 @as("Ipv6CidrBlockAssociation") ipv6CidrBlockAssociation: vpcIpv6CidrBlockAssociation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssociateVpcCidrBlockCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssociateVpcCidrBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7126,7 +7126,7 @@ module AssociateSubnetCidrBlock = {
 @as("SubnetId") subnetId: amazonawsString,
 @as("Ipv6CidrBlockAssociation") ipv6CidrBlockAssociation: subnetIpv6CidrBlockAssociation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssociateSubnetCidrBlockCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssociateSubnetCidrBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7139,7 +7139,7 @@ module AssociateIamInstanceProfile = {
   type response = {
 @as("IamInstanceProfileAssociation") iamInstanceProfileAssociation: iamInstanceProfileAssociation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssociateIamInstanceProfileCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssociateIamInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7155,7 +7155,7 @@ module AssignPrivateIpAddresses = {
 @as("AssignedPrivateIpAddresses") assignedPrivateIpAddresses: assignedPrivateIpAddressList,
 @as("NetworkInterfaceId") networkInterfaceId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssignPrivateIpAddressesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssignPrivateIpAddressesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7169,7 +7169,7 @@ module AcceptReservedInstancesExchangeQuote = {
   type response = {
 @as("ExchangeId") exchangeId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AcceptReservedInstancesExchangeQuoteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AcceptReservedInstancesExchangeQuoteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7182,7 +7182,7 @@ module UnmonitorInstances = {
   type response = {
 @as("InstanceMonitorings") instanceMonitorings: instanceMonitoringList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "UnmonitorInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "UnmonitorInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7195,7 +7195,7 @@ module TerminateInstances = {
   type response = {
 @as("TerminatingInstances") terminatingInstances: instanceStateChangeList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "TerminateInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "TerminateInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7212,7 +7212,7 @@ module TerminateClientVpnConnections = {
 @as("Username") username: amazonawsString,
 @as("ClientVpnEndpointId") clientVpnEndpointId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "TerminateClientVpnConnectionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "TerminateClientVpnConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7227,7 +7227,7 @@ module StopInstances = {
   type response = {
 @as("StoppingInstances") stoppingInstances: instanceStateChangeList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "StopInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "StopInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7241,7 +7241,7 @@ module StartInstances = {
   type response = {
 @as("StartingInstances") startingInstances: instanceStateChangeList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "StartInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "StartInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7258,7 +7258,7 @@ module SearchTransitGatewayMulticastGroups = {
 @as("NextToken") nextToken: amazonawsString,
 @as("MulticastGroups") multicastGroups: transitGatewayMulticastGroupList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "SearchTransitGatewayMulticastGroupsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "SearchTransitGatewayMulticastGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7275,7 +7275,7 @@ module SearchLocalGatewayRoutes = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Routes") routes: localGatewayRouteList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "SearchLocalGatewayRoutesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "SearchLocalGatewayRoutesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7290,7 +7290,7 @@ module RestoreManagedPrefixListVersion = {
   type response = {
 @as("PrefixList") prefixList: managedPrefixList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RestoreManagedPrefixListVersionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RestoreManagedPrefixListVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7306,7 +7306,7 @@ module ReplaceTransitGatewayRoute = {
   type response = {
 @as("Route") route: transitGatewayRoute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ReplaceTransitGatewayRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ReplaceTransitGatewayRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7319,7 +7319,7 @@ module ReleaseHosts = {
 @as("Unsuccessful") unsuccessful: unsuccessfulItemList,
 @as("Successful") successful: responseHostIdList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ReleaseHostsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ReleaseHostsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7333,7 +7333,7 @@ module RejectVpcEndpointConnections = {
   type response = {
 @as("Unsuccessful") unsuccessful: unsuccessfulItemSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RejectVpcEndpointConnectionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RejectVpcEndpointConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7346,7 +7346,7 @@ module RejectTransitGatewayVpcAttachment = {
   type response = {
 @as("TransitGatewayVpcAttachment") transitGatewayVpcAttachment: transitGatewayVpcAttachment
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RejectTransitGatewayVpcAttachmentCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RejectTransitGatewayVpcAttachmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7359,7 +7359,7 @@ module RejectTransitGatewayPeeringAttachment = {
   type response = {
 @as("TransitGatewayPeeringAttachment") transitGatewayPeeringAttachment: transitGatewayPeeringAttachment
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RejectTransitGatewayPeeringAttachmentCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RejectTransitGatewayPeeringAttachmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7374,7 +7374,7 @@ module RejectTransitGatewayMulticastDomainAssociations = {
   type response = {
 @as("Associations") associations: transitGatewayMulticastDomainAssociations
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RejectTransitGatewayMulticastDomainAssociationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RejectTransitGatewayMulticastDomainAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7399,7 +7399,7 @@ module RegisterImage = {
   type response = {
 @as("ImageId") imageId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RegisterImageCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RegisterImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7412,7 +7412,7 @@ module MonitorInstances = {
   type response = {
 @as("InstanceMonitorings") instanceMonitorings: instanceMonitoringList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "MonitorInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "MonitorInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7428,7 +7428,7 @@ module ModifyTransitGatewayVpcAttachment = {
   type response = {
 @as("TransitGatewayVpcAttachment") transitGatewayVpcAttachment: transitGatewayVpcAttachment
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyTransitGatewayVpcAttachmentCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyTransitGatewayVpcAttachmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7443,7 +7443,7 @@ module ModifyTransitGateway = {
   type response = {
 @as("TransitGateway") transitGateway: transitGateway
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyTransitGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyTransitGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7463,7 +7463,7 @@ module ModifyTrafficMirrorSession = {
   type response = {
 @as("TrafficMirrorSession") trafficMirrorSession: trafficMirrorSession
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyTrafficMirrorSessionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyTrafficMirrorSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7479,7 +7479,7 @@ module ModifySnapshotAttribute = {
 @as("Attribute") attribute: snapshotAttributeName
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifySnapshotAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifySnapshotAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -7496,7 +7496,7 @@ module ModifyManagedPrefixList = {
   type response = {
 @as("PrefixList") prefixList: managedPrefixList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyManagedPrefixListCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyManagedPrefixListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7512,7 +7512,7 @@ module ModifyLaunchTemplate = {
   type response = {
 @as("LaunchTemplate") launchTemplate: launchTemplate
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyLaunchTemplateCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyLaunchTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7527,7 +7527,7 @@ module ModifyInstanceCreditSpecification = {
 @as("UnsuccessfulInstanceCreditSpecifications") unsuccessfulInstanceCreditSpecifications: unsuccessfulInstanceCreditSpecificationSet,
 @as("SuccessfulInstanceCreditSpecifications") successfulInstanceCreditSpecifications: successfulInstanceCreditSpecificationSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyInstanceCreditSpecificationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyInstanceCreditSpecificationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7552,7 +7552,7 @@ module ModifyInstanceAttribute = {
 @as("SourceDestCheck") sourceDestCheck: attributeBooleanValue
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyInstanceAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyInstanceAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -7571,7 +7571,7 @@ module ModifyImageAttribute = {
 @as("Attribute") attribute: amazonawsString
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyImageAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyImageAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -7588,7 +7588,7 @@ module ModifyHosts = {
 @as("Unsuccessful") unsuccessful: unsuccessfulItemList,
 @as("Successful") successful: responseHostIdList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyHostsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyHostsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7609,7 +7609,7 @@ module ModifyFpgaImageAttribute = {
   type response = {
 @as("FpgaImageAttribute") fpgaImageAttribute: fpgaImageAttribute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyFpgaImageAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyFpgaImageAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7626,7 +7626,7 @@ module GetTransitGatewayRouteTablePropagations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayRouteTablePropagations") transitGatewayRouteTablePropagations: transitGatewayRouteTablePropagationList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetTransitGatewayRouteTablePropagationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetTransitGatewayRouteTablePropagationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7643,7 +7643,7 @@ module GetTransitGatewayRouteTableAssociations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Associations") associations: transitGatewayRouteTableAssociationList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetTransitGatewayRouteTableAssociationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetTransitGatewayRouteTableAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7660,7 +7660,7 @@ module GetTransitGatewayPrefixListReferences = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayPrefixListReferences") transitGatewayPrefixListReferences: transitGatewayPrefixListReferenceSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetTransitGatewayPrefixListReferencesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetTransitGatewayPrefixListReferencesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7677,7 +7677,7 @@ module GetTransitGatewayMulticastDomainAssociations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("MulticastDomainAssociations") multicastDomainAssociations: transitGatewayMulticastDomainAssociationList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetTransitGatewayMulticastDomainAssociationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetTransitGatewayMulticastDomainAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7694,7 +7694,7 @@ module GetTransitGatewayAttachmentPropagations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayAttachmentPropagations") transitGatewayAttachmentPropagations: transitGatewayAttachmentPropagationList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetTransitGatewayAttachmentPropagationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetTransitGatewayAttachmentPropagationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7716,7 +7716,7 @@ module GetReservedInstancesExchangeQuote = {
 @as("IsValidExchange") isValidExchange: amazonawsBoolean,
 @as("CurrencyCode") currencyCode: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetReservedInstancesExchangeQuoteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetReservedInstancesExchangeQuoteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7732,7 +7732,7 @@ module GetHostReservationPurchasePreview = {
 @as("Purchase") purchase: purchaseSet,
 @as("CurrencyCode") currencyCode: currencyCodeValues
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetHostReservationPurchasePreviewCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetHostReservationPurchasePreviewCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7747,7 +7747,7 @@ module GetFlowLogsIntegrationTemplate = {
   type response = {
 @as("Result") result: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetFlowLogsIntegrationTemplateCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetFlowLogsIntegrationTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7765,7 +7765,7 @@ module GetCoipPoolUsage = {
 @as("CoipAddressUsages") coipAddressUsages: coipAddressUsageSet,
 @as("CoipPoolId") coipPoolId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetCoipPoolUsageCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetCoipPoolUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7780,7 +7780,7 @@ module ExportTransitGatewayRoutes = {
   type response = {
 @as("S3Location") s3Location: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ExportTransitGatewayRoutesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ExportTransitGatewayRoutesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7795,7 +7795,7 @@ module DisassociateTransitGatewayMulticastDomain = {
   type response = {
 @as("Associations") associations: transitGatewayMulticastDomainAssociations
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateTransitGatewayMulticastDomainCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisassociateTransitGatewayMulticastDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7812,7 +7812,7 @@ module DescribeVpcEndpointServicePermissions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("AllowedPrincipals") allowedPrincipals: allowedPrincipalSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcEndpointServicePermissionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpcEndpointServicePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7829,7 +7829,7 @@ module DescribeVpcEndpointConnectionNotifications = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ConnectionNotificationSet") connectionNotificationSet: connectionNotificationSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcEndpointConnectionNotificationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpcEndpointConnectionNotificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7846,7 +7846,7 @@ module DescribeVolumesModifications = {
 @as("NextToken") nextToken: amazonawsString,
 @as("VolumesModifications") volumesModifications: volumeModificationList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVolumesModificationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVolumesModificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7862,7 +7862,7 @@ module DescribeTags = {
 @as("Tags") tags: tagDescriptionList,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTagsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7879,7 +7879,7 @@ module DescribeStoreImageTasks = {
 @as("NextToken") nextToken: amazonawsString,
 @as("StoreImageTaskResults") storeImageTaskResults: storeImageTaskResultSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeStoreImageTasksCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeStoreImageTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7900,7 +7900,7 @@ module DescribeSpotPriceHistory = {
 @as("SpotPriceHistory") spotPriceHistory: spotPriceHistoryList,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeSpotPriceHistoryCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeSpotPriceHistoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7921,7 +7921,7 @@ module DescribeSpotFleetRequestHistory = {
 @as("LastEvaluatedTime") lastEvaluatedTime: dateTime,
 @as("HistoryRecords") historyRecords: historyRecords
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeSpotFleetRequestHistoryCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeSpotFleetRequestHistoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7936,7 +7936,7 @@ module DescribeRegions = {
   type response = {
 @as("Regions") regions: regionList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeRegionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeRegionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7953,7 +7953,7 @@ module DescribePrefixLists = {
 @as("PrefixLists") prefixLists: prefixListSet,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribePrefixListsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribePrefixListsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7969,7 +7969,7 @@ module DescribeNetworkInterfacePermissions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("NetworkInterfacePermissions") networkInterfacePermissions: networkInterfacePermissionList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeNetworkInterfacePermissionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeNetworkInterfacePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -7986,7 +7986,7 @@ module DescribeMovingAddresses = {
 @as("NextToken") nextToken: amazonawsString,
 @as("MovingAddressStatuses") movingAddressStatuses: movingAddressStatusSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeMovingAddressesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeMovingAddressesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8003,7 +8003,7 @@ module DescribeInstanceTypeOfferings = {
 @as("NextToken") nextToken: nextToken,
 @as("InstanceTypeOfferings") instanceTypeOfferings: instanceTypeOfferingsList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeInstanceTypeOfferingsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeInstanceTypeOfferingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8020,7 +8020,7 @@ module DescribeInstanceCreditSpecifications = {
 @as("NextToken") nextToken: amazonawsString,
 @as("InstanceCreditSpecifications") instanceCreditSpecifications: instanceCreditSpecificationList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeInstanceCreditSpecificationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeInstanceCreditSpecificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8049,7 +8049,7 @@ module DescribeInstanceAttribute = {
 @as("BlockDeviceMappings") blockDeviceMappings: instanceBlockDeviceMappingList,
 @as("Groups") groups: groupIdentifierList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeInstanceAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeInstanceAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8071,7 +8071,7 @@ module DescribeImageAttribute = {
 @as("ImageId") imageId: amazonawsString,
 @as("BlockDeviceMappings") blockDeviceMappings: blockDeviceMappingList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeImageAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeImageAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8087,7 +8087,7 @@ module DescribeIamInstanceProfileAssociations = {
 @as("NextToken") nextToken: nextToken,
 @as("IamInstanceProfileAssociations") iamInstanceProfileAssociations: iamInstanceProfileAssociationSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeIamInstanceProfileAssociationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeIamInstanceProfileAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8105,7 +8105,7 @@ module DescribeHostReservationOfferings = {
 @as("OfferingSet") offeringSet: hostOfferingSet,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeHostReservationOfferingsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeHostReservationOfferingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8119,7 +8119,7 @@ module DescribeFpgaImageAttribute = {
   type response = {
 @as("FpgaImageAttribute") fpgaImageAttribute: fpgaImageAttribute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeFpgaImageAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeFpgaImageAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8137,7 +8137,7 @@ module DescribeFleetInstances = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ActiveInstances") activeInstances: activeInstanceSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeFleetInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8158,7 +8158,7 @@ module DescribeFleetHistory = {
 @as("LastEvaluatedTime") lastEvaluatedTime: dateTime,
 @as("HistoryRecords") historyRecords: historyRecordSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetHistoryCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeFleetHistoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8174,7 +8174,7 @@ module DescribeFastSnapshotRestores = {
 @as("NextToken") nextToken: nextToken,
 @as("FastSnapshotRestores") fastSnapshotRestores: describeFastSnapshotRestoreSuccessSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeFastSnapshotRestoresCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeFastSnapshotRestoresCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8192,7 +8192,7 @@ module DescribeClientVpnTargetNetworks = {
 @as("NextToken") nextToken: nextToken,
 @as("ClientVpnTargetNetworks") clientVpnTargetNetworks: targetNetworkSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeClientVpnTargetNetworksCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeClientVpnTargetNetworksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8209,7 +8209,7 @@ module DescribeClientVpnRoutes = {
 @as("NextToken") nextToken: nextToken,
 @as("Routes") routes: clientVpnRouteSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeClientVpnRoutesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeClientVpnRoutesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8226,7 +8226,7 @@ module DescribeClientVpnConnections = {
 @as("NextToken") nextToken: nextToken,
 @as("Connections") connections: clientVpnConnectionSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeClientVpnConnectionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeClientVpnConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8243,7 +8243,7 @@ module DescribeClientVpnAuthorizationRules = {
 @as("NextToken") nextToken: nextToken,
 @as("AuthorizationRules") authorizationRules: authorizationRuleSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeClientVpnAuthorizationRulesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeClientVpnAuthorizationRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8260,7 +8260,7 @@ module DescribeAddressesAttribute = {
 @as("NextToken") nextToken: nextToken,
 @as("Addresses") addresses: addressSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeAddressesAttributeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeAddressesAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8273,7 +8273,7 @@ module DeleteVpcEndpoints = {
   type response = {
 @as("Unsuccessful") unsuccessful: unsuccessfulItemSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpcEndpointsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteVpcEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8286,7 +8286,7 @@ module DeleteVpcEndpointServiceConfigurations = {
   type response = {
 @as("Unsuccessful") unsuccessful: unsuccessfulItemSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpcEndpointServiceConfigurationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteVpcEndpointServiceConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8299,7 +8299,7 @@ module DeleteVpcEndpointConnectionNotifications = {
   type response = {
 @as("Unsuccessful") unsuccessful: unsuccessfulItemSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpcEndpointConnectionNotificationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteVpcEndpointConnectionNotificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8312,7 +8312,7 @@ module DeleteTransitGatewayVpcAttachment = {
   type response = {
 @as("TransitGatewayVpcAttachment") transitGatewayVpcAttachment: transitGatewayVpcAttachment
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTransitGatewayVpcAttachmentCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTransitGatewayVpcAttachmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8325,7 +8325,7 @@ module DeleteTransitGatewayRouteTable = {
   type response = {
 @as("TransitGatewayRouteTable") transitGatewayRouteTable: transitGatewayRouteTable
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTransitGatewayRouteTableCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTransitGatewayRouteTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8339,7 +8339,7 @@ module DeleteTransitGatewayRoute = {
   type response = {
 @as("Route") route: transitGatewayRoute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTransitGatewayRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTransitGatewayRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8352,7 +8352,7 @@ module DeleteTransitGatewayPeeringAttachment = {
   type response = {
 @as("TransitGatewayPeeringAttachment") transitGatewayPeeringAttachment: transitGatewayPeeringAttachment
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTransitGatewayPeeringAttachmentCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTransitGatewayPeeringAttachmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8365,7 +8365,7 @@ module DeleteTransitGatewayMulticastDomain = {
   type response = {
 @as("TransitGatewayMulticastDomain") transitGatewayMulticastDomain: transitGatewayMulticastDomain
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTransitGatewayMulticastDomainCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTransitGatewayMulticastDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8378,7 +8378,7 @@ module DeleteTransitGatewayConnect = {
   type response = {
 @as("TransitGatewayConnect") transitGatewayConnect: transitGatewayConnect
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTransitGatewayConnectCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTransitGatewayConnectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8391,7 +8391,7 @@ module DeleteTransitGateway = {
   type response = {
 @as("TransitGateway") transitGateway: transitGateway
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTransitGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTransitGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8405,7 +8405,7 @@ module DeleteQueuedReservedInstances = {
 @as("FailedQueuedPurchaseDeletions") failedQueuedPurchaseDeletions: failedQueuedPurchaseDeletionSet,
 @as("SuccessfulQueuedPurchaseDeletions") successfulQueuedPurchaseDeletions: successfulQueuedPurchaseDeletionSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteQueuedReservedInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteQueuedReservedInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8418,7 +8418,7 @@ module DeleteManagedPrefixList = {
   type response = {
 @as("PrefixList") prefixList: managedPrefixList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteManagedPrefixListCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteManagedPrefixListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8431,7 +8431,7 @@ module DeleteLocalGatewayRouteTableVpcAssociation = {
   type response = {
 @as("LocalGatewayRouteTableVpcAssociation") localGatewayRouteTableVpcAssociation: localGatewayRouteTableVpcAssociation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteLocalGatewayRouteTableVpcAssociationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteLocalGatewayRouteTableVpcAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8447,7 +8447,7 @@ module DeleteLaunchTemplateVersions = {
 @as("UnsuccessfullyDeletedLaunchTemplateVersions") unsuccessfullyDeletedLaunchTemplateVersions: deleteLaunchTemplateVersionsResponseErrorSet,
 @as("SuccessfullyDeletedLaunchTemplateVersions") successfullyDeletedLaunchTemplateVersions: deleteLaunchTemplateVersionsResponseSuccessSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteLaunchTemplateVersionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteLaunchTemplateVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8461,7 +8461,7 @@ module DeleteLaunchTemplate = {
   type response = {
 @as("LaunchTemplate") launchTemplate: launchTemplate
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteLaunchTemplateCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteLaunchTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8474,7 +8474,7 @@ module DeleteFlowLogs = {
   type response = {
 @as("Unsuccessful") unsuccessful: unsuccessfulItemSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteFlowLogsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteFlowLogsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8489,7 +8489,7 @@ module DeleteFleets = {
 @as("UnsuccessfulFleetDeletions") unsuccessfulFleetDeletions: deleteFleetErrorSet,
 @as("SuccessfulFleetDeletions") successfulFleetDeletions: deleteFleetSuccessSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteFleetsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteFleetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8502,7 +8502,7 @@ module DeleteCarrierGateway = {
   type response = {
 @as("CarrierGateway") carrierGateway: carrierGateway
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteCarrierGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteCarrierGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8518,7 +8518,7 @@ module CreateTransitGatewayRoute = {
   type response = {
 @as("Route") route: transitGatewayRoute
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTransitGatewayRouteCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTransitGatewayRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8533,7 +8533,7 @@ module CancelSpotFleetRequests = {
 @as("UnsuccessfulFleetRequests") unsuccessfulFleetRequests: cancelSpotFleetRequestsErrorSet,
 @as("SuccessfulFleetRequests") successfulFleetRequests: cancelSpotFleetRequestsSuccessSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CancelSpotFleetRequestsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CancelSpotFleetRequestsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8546,7 +8546,7 @@ module CancelBundleTask = {
   type response = {
 @as("BundleTask") bundleTask: bundleTask
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CancelBundleTaskCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CancelBundleTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8560,7 +8560,7 @@ module BundleInstance = {
   type response = {
 @as("BundleTask") bundleTask: bundleTask
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "BundleInstanceCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "BundleInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8575,7 +8575,7 @@ module AssociateTransitGatewayMulticastDomain = {
   type response = {
 @as("Associations") associations: transitGatewayMulticastDomainAssociations
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AssociateTransitGatewayMulticastDomainCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AssociateTransitGatewayMulticastDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8589,7 +8589,7 @@ module AcceptVpcEndpointConnections = {
   type response = {
 @as("Unsuccessful") unsuccessful: unsuccessfulItemSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AcceptVpcEndpointConnectionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AcceptVpcEndpointConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8602,7 +8602,7 @@ module AcceptTransitGatewayVpcAttachment = {
   type response = {
 @as("TransitGatewayVpcAttachment") transitGatewayVpcAttachment: transitGatewayVpcAttachment
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AcceptTransitGatewayVpcAttachmentCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AcceptTransitGatewayVpcAttachmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8615,7 +8615,7 @@ module AcceptTransitGatewayPeeringAttachment = {
   type response = {
 @as("TransitGatewayPeeringAttachment") transitGatewayPeeringAttachment: transitGatewayPeeringAttachment
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AcceptTransitGatewayPeeringAttachmentCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AcceptTransitGatewayPeeringAttachmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8630,7 +8630,7 @@ module AcceptTransitGatewayMulticastDomainAssociations = {
   type response = {
 @as("Associations") associations: transitGatewayMulticastDomainAssociations
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AcceptTransitGatewayMulticastDomainAssociationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AcceptTransitGatewayMulticastDomainAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8645,7 +8645,7 @@ module UpdateSecurityGroupRuleDescriptionsIngress = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "UpdateSecurityGroupRuleDescriptionsIngressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "UpdateSecurityGroupRuleDescriptionsIngressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8660,7 +8660,7 @@ module UpdateSecurityGroupRuleDescriptionsEgress = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "UpdateSecurityGroupRuleDescriptionsEgressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "UpdateSecurityGroupRuleDescriptionsEgressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8676,7 +8676,7 @@ module SearchTransitGatewayRoutes = {
 @as("AdditionalRoutesAvailable") additionalRoutesAvailable: amazonawsBoolean,
 @as("Routes") routes: transitGatewayRouteList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "SearchTransitGatewayRoutesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "SearchTransitGatewayRoutesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8698,7 +8698,7 @@ module RevokeSecurityGroupIngress = {
 @as("UnknownIpPermissions") unknownIpPermissions: ipPermissionList,
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RevokeSecurityGroupIngressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RevokeSecurityGroupIngressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8719,7 +8719,7 @@ module RevokeSecurityGroupEgress = {
 @as("UnknownIpPermissions") unknownIpPermissions: ipPermissionList,
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RevokeSecurityGroupEgressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RevokeSecurityGroupEgressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8733,7 +8733,7 @@ module PurchaseScheduledInstances = {
   type response = {
 @as("ScheduledInstanceSet") scheduledInstanceSet: purchasedScheduledInstanceSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "PurchaseScheduledInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "PurchaseScheduledInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8754,7 +8754,7 @@ module PurchaseHostReservation = {
 @as("CurrencyCode") currencyCode: currencyCodeValues,
 @as("ClientToken") clientToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "PurchaseHostReservationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "PurchaseHostReservationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8771,7 +8771,7 @@ module ProvisionByoipCidr = {
   type response = {
 @as("ByoipCidr") byoipCidr: byoipCidr
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ProvisionByoipCidrCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ProvisionByoipCidrCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8786,7 +8786,7 @@ module ModifyTrafficMirrorFilterNetworkServices = {
   type response = {
 @as("TrafficMirrorFilter") trafficMirrorFilter: trafficMirrorFilter
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyTrafficMirrorFilterNetworkServicesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyTrafficMirrorFilterNetworkServicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8802,7 +8802,7 @@ module ModifySpotFleetRequest = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifySpotFleetRequestCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifySpotFleetRequestCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8825,7 +8825,7 @@ module ImportSnapshot = {
 @as("ImportTaskId") importTaskId: amazonawsString,
 @as("Description") description: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ImportSnapshotCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ImportSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8843,7 +8843,7 @@ module ImportKeyPair = {
 @as("KeyName") keyName: amazonawsString,
 @as("KeyFingerprint") keyFingerprint: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ImportKeyPairCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ImportKeyPairCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8882,7 +8882,7 @@ module ImportImage = {
 @as("Description") description: amazonawsString,
 @as("Architecture") architecture: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ImportImageCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ImportImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8910,7 +8910,7 @@ module ExportImage = {
 @as("DiskImageFormat") diskImageFormat: diskImageFormat,
 @as("Description") description: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ExportImageCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ExportImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8924,7 +8924,7 @@ module DescribeVpnGateways = {
   type response = {
 @as("VpnGateways") vpnGateways: vpnGatewayList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpnGatewaysCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpnGatewaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8941,7 +8941,7 @@ module DescribeVpcEndpoints = {
 @as("NextToken") nextToken: amazonawsString,
 @as("VpcEndpoints") vpcEndpoints: vpcEndpointSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcEndpointsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpcEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8959,7 +8959,7 @@ module DescribeVpcEndpointServices = {
 @as("ServiceDetails") serviceDetails: serviceDetailSet,
 @as("ServiceNames") serviceNames: valueStringList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcEndpointServicesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpcEndpointServicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8976,7 +8976,7 @@ module DescribeVpcEndpointServiceConfigurations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ServiceConfigurations") serviceConfigurations: serviceConfigurationSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcEndpointServiceConfigurationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpcEndpointServiceConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -8992,7 +8992,7 @@ module DescribeVpcEndpointConnections = {
 @as("NextToken") nextToken: amazonawsString,
 @as("VpcEndpointConnections") vpcEndpointConnections: vpcEndpointConnectionSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcEndpointConnectionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpcEndpointConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9006,7 +9006,7 @@ module DescribeVpcClassicLink = {
   type response = {
 @as("Vpcs") vpcs: vpcClassicLinkList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcClassicLinkCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpcClassicLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9023,7 +9023,7 @@ module DescribeVolumes = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Volumes") volumes: volumeList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVolumesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVolumesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9040,7 +9040,7 @@ module DescribeTransitGateways = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGateways") transitGateways: transitGatewayList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTransitGatewaysCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTransitGatewaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9057,7 +9057,7 @@ module DescribeTransitGatewayVpcAttachments = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayVpcAttachments") transitGatewayVpcAttachments: transitGatewayVpcAttachmentList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTransitGatewayVpcAttachmentsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTransitGatewayVpcAttachmentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9074,7 +9074,7 @@ module DescribeTransitGatewayRouteTables = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayRouteTables") transitGatewayRouteTables: transitGatewayRouteTableList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTransitGatewayRouteTablesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTransitGatewayRouteTablesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9091,7 +9091,7 @@ module DescribeTransitGatewayPeeringAttachments = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayPeeringAttachments") transitGatewayPeeringAttachments: transitGatewayPeeringAttachmentList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTransitGatewayPeeringAttachmentsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTransitGatewayPeeringAttachmentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9108,7 +9108,7 @@ module DescribeTransitGatewayMulticastDomains = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayMulticastDomains") transitGatewayMulticastDomains: transitGatewayMulticastDomainList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTransitGatewayMulticastDomainsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTransitGatewayMulticastDomainsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9125,7 +9125,7 @@ module DescribeTransitGatewayConnects = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayConnects") transitGatewayConnects: transitGatewayConnectList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTransitGatewayConnectsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTransitGatewayConnectsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9142,7 +9142,7 @@ module DescribeTransitGatewayAttachments = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayAttachments") transitGatewayAttachments: transitGatewayAttachmentList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTransitGatewayAttachmentsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTransitGatewayAttachmentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9159,7 +9159,7 @@ module DescribeTrafficMirrorTargets = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TrafficMirrorTargets") trafficMirrorTargets: trafficMirrorTargetSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTrafficMirrorTargetsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTrafficMirrorTargetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9176,7 +9176,7 @@ module DescribeTrafficMirrorSessions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TrafficMirrorSessions") trafficMirrorSessions: trafficMirrorSessionSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTrafficMirrorSessionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTrafficMirrorSessionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9195,7 +9195,7 @@ module DescribeSnapshots = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Snapshots") snapshots: snapshotList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeSnapshotsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeSnapshotsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9213,7 +9213,7 @@ module DescribeScheduledInstances = {
 @as("ScheduledInstanceSet") scheduledInstanceSet: scheduledInstanceSet,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeScheduledInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeScheduledInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9233,7 +9233,7 @@ module DescribeScheduledInstanceAvailability = {
 @as("ScheduledInstanceAvailabilitySet") scheduledInstanceAvailabilitySet: scheduledInstanceAvailabilitySet,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeScheduledInstanceAvailabilityCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeScheduledInstanceAvailabilityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9260,7 +9260,7 @@ module DescribeReservedInstancesOfferings = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ReservedInstancesOfferings") reservedInstancesOfferings: reservedInstancesOfferingList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeReservedInstancesOfferingsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeReservedInstancesOfferingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9274,7 +9274,7 @@ module DescribeReservedInstancesListings = {
   type response = {
 @as("ReservedInstancesListings") reservedInstancesListings: reservedInstancesListingList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeReservedInstancesListingsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeReservedInstancesListingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9290,7 +9290,7 @@ module DescribeReservedInstances = {
   type response = {
 @as("ReservedInstances") reservedInstances: reservedInstancesList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeReservedInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeReservedInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9307,7 +9307,7 @@ module DescribeReplaceRootVolumeTasks = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ReplaceRootVolumeTasks") replaceRootVolumeTasks: replaceRootVolumeTasks
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeReplaceRootVolumeTasksCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeReplaceRootVolumeTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9323,7 +9323,7 @@ module DescribePublicIpv4Pools = {
 @as("NextToken") nextToken: amazonawsString,
 @as("PublicIpv4Pools") publicIpv4Pools: publicIpv4PoolSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribePublicIpv4PoolsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribePublicIpv4PoolsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9339,7 +9339,7 @@ module DescribePrincipalIdFormat = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Principals") principals: principalIdFormatList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribePrincipalIdFormatCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribePrincipalIdFormatCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9354,7 +9354,7 @@ module DescribePlacementGroups = {
   type response = {
 @as("PlacementGroups") placementGroups: placementGroupList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribePlacementGroupsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribePlacementGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9371,7 +9371,7 @@ module DescribeNetworkInsightsPaths = {
 @as("NextToken") nextToken: amazonawsString,
 @as("NetworkInsightsPaths") networkInsightsPaths: networkInsightsPathList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeNetworkInsightsPathsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeNetworkInsightsPathsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9388,7 +9388,7 @@ module DescribeNatGateways = {
 @as("NextToken") nextToken: amazonawsString,
 @as("NatGateways") natGateways: natGatewayList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeNatGatewaysCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeNatGatewaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9405,7 +9405,7 @@ module DescribeManagedPrefixLists = {
 @as("PrefixLists") prefixLists: managedPrefixListSet,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeManagedPrefixListsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeManagedPrefixListsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9422,7 +9422,7 @@ module DescribeLocalGateways = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LocalGateways") localGateways: localGatewaySet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocalGatewaysCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeLocalGatewaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9439,7 +9439,7 @@ module DescribeLocalGatewayVirtualInterfaces = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LocalGatewayVirtualInterfaces") localGatewayVirtualInterfaces: localGatewayVirtualInterfaceSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocalGatewayVirtualInterfacesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeLocalGatewayVirtualInterfacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9456,7 +9456,7 @@ module DescribeLocalGatewayVirtualInterfaceGroups = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LocalGatewayVirtualInterfaceGroups") localGatewayVirtualInterfaceGroups: localGatewayVirtualInterfaceGroupSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocalGatewayVirtualInterfaceGroupsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeLocalGatewayVirtualInterfaceGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9473,7 +9473,7 @@ module DescribeLocalGatewayRouteTables = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LocalGatewayRouteTables") localGatewayRouteTables: localGatewayRouteTableSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocalGatewayRouteTablesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeLocalGatewayRouteTablesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9490,7 +9490,7 @@ module DescribeLocalGatewayRouteTableVpcAssociations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LocalGatewayRouteTableVpcAssociations") localGatewayRouteTableVpcAssociations: localGatewayRouteTableVpcAssociationSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocalGatewayRouteTableVpcAssociationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeLocalGatewayRouteTableVpcAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9507,7 +9507,7 @@ module DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LocalGatewayRouteTableVirtualInterfaceGroupAssociations") localGatewayRouteTableVirtualInterfaceGroupAssociations: localGatewayRouteTableVirtualInterfaceGroupAssociationSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9525,7 +9525,7 @@ module DescribeLaunchTemplates = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LaunchTemplates") launchTemplates: launchTemplateSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeLaunchTemplatesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeLaunchTemplatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9540,7 +9540,7 @@ module DescribeKeyPairs = {
   type response = {
 @as("KeyPairs") keyPairs: keyPairList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeKeyPairsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeKeyPairsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9557,7 +9557,7 @@ module DescribeIpv6Pools = {
 @as("NextToken") nextToken: nextToken,
 @as("Ipv6Pools") ipv6Pools: ipv6PoolSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeIpv6PoolsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeIpv6PoolsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9574,7 +9574,7 @@ module DescribeInternetGateways = {
 @as("NextToken") nextToken: amazonawsString,
 @as("InternetGateways") internetGateways: internetGatewayList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeInternetGatewaysCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeInternetGatewaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9591,7 +9591,7 @@ module DescribeImportSnapshotTasks = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ImportSnapshotTasks") importSnapshotTasks: importSnapshotTaskList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeImportSnapshotTasksCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeImportSnapshotTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9607,7 +9607,7 @@ module DescribeHostReservations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("HostReservationSet") hostReservationSet: hostReservationSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeHostReservationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeHostReservationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9625,7 +9625,7 @@ module DescribeFpgaImages = {
 @as("NextToken") nextToken: nextToken,
 @as("FpgaImages") fpgaImages: fpgaImageList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeFpgaImagesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeFpgaImagesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9642,7 +9642,7 @@ module DescribeFlowLogs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("FlowLogs") flowLogs: flowLogSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeFlowLogsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeFlowLogsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9655,7 +9655,7 @@ module DescribeExportTasks = {
   type response = {
 @as("ExportTasks") exportTasks: exportTaskList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeExportTasksCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeExportTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9672,7 +9672,7 @@ module DescribeExportImageTasks = {
 @as("NextToken") nextToken: nextToken,
 @as("ExportImageTasks") exportImageTasks: exportImageTaskList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeExportImageTasksCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeExportImageTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9690,7 +9690,7 @@ module DescribeElasticGpus = {
 @as("MaxResults") maxResults: amazonawsInteger,
 @as("ElasticGpuSet") elasticGpuSet: elasticGpuSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeElasticGpusCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeElasticGpusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9707,7 +9707,7 @@ module DescribeEgressOnlyInternetGateways = {
 @as("NextToken") nextToken: amazonawsString,
 @as("EgressOnlyInternetGateways") egressOnlyInternetGateways: egressOnlyInternetGatewayList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeEgressOnlyInternetGatewaysCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeEgressOnlyInternetGatewaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9721,7 +9721,7 @@ module DescribeCustomerGateways = {
   type response = {
 @as("CustomerGateways") customerGateways: customerGatewayList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeCustomerGatewaysCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeCustomerGatewaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9738,7 +9738,7 @@ module DescribeCoipPools = {
 @as("NextToken") nextToken: amazonawsString,
 @as("CoipPools") coipPools: coipPoolSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeCoipPoolsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeCoipPoolsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9755,7 +9755,7 @@ module DescribeClassicLinkInstances = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Instances") instances: classicLinkInstanceList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeClassicLinkInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeClassicLinkInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9772,7 +9772,7 @@ module DescribeCarrierGateways = {
 @as("NextToken") nextToken: amazonawsString,
 @as("CarrierGateways") carrierGateways: carrierGatewaySet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeCarrierGatewaysCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeCarrierGatewaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9789,7 +9789,7 @@ module DescribeCapacityReservations = {
 @as("CapacityReservations") capacityReservations: capacityReservationSet,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeCapacityReservationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeCapacityReservationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9803,7 +9803,7 @@ module DescribeBundleTasks = {
   type response = {
 @as("BundleTasks") bundleTasks: bundleTaskList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeBundleTasksCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeBundleTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9819,7 +9819,7 @@ module DescribeAvailabilityZones = {
   type response = {
 @as("AvailabilityZones") availabilityZones: availabilityZoneList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeAvailabilityZonesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeAvailabilityZonesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9834,7 +9834,7 @@ module DescribeAddresses = {
   type response = {
 @as("Addresses") addresses: addressList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeAddressesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeAddressesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9847,7 +9847,7 @@ module DescribeAccountAttributes = {
   type response = {
 @as("AccountAttributes") accountAttributes: accountAttributeList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountAttributesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeAccountAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9860,7 +9860,7 @@ module DeleteTransitGatewayConnectPeer = {
   type response = {
 @as("TransitGatewayConnectPeer") transitGatewayConnectPeer: transitGatewayConnectPeer
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DeleteTransitGatewayConnectPeerCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DeleteTransitGatewayConnectPeerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9876,7 +9876,7 @@ module CreateVpnGateway = {
   type response = {
 @as("VpnGateway") vpnGateway: vpnGateway
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateVpnGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateVpnGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9893,7 +9893,7 @@ module CreateVpcPeeringConnection = {
   type response = {
 @as("VpcPeeringConnection") vpcPeeringConnection: vpcPeeringConnection
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateVpcPeeringConnectionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateVpcPeeringConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9912,7 +9912,7 @@ module CreateVpcEndpointServiceConfiguration = {
 @as("ClientToken") clientToken: amazonawsString,
 @as("ServiceConfiguration") serviceConfiguration: serviceConfiguration
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateVpcEndpointServiceConfigurationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateVpcEndpointServiceConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9935,7 +9935,7 @@ module CreateVpcEndpoint = {
 @as("ClientToken") clientToken: amazonawsString,
 @as("VpcEndpoint") vpcEndpoint: vpcEndpoint
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateVpcEndpointCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateVpcEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9954,7 +9954,7 @@ module CreateVpc = {
   type response = {
 @as("Vpc") vpc: vpc
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateVpcCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateVpcCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9975,7 +9975,7 @@ module CreateVolume = {
 @as("AvailabilityZone") availabilityZone: option<amazonawsString>
 }
   type response = volume;
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateVolumeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateVolumeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -9992,7 +9992,7 @@ module CreateTransitGatewayVpcAttachment = {
   type response = {
 @as("TransitGatewayVpcAttachment") transitGatewayVpcAttachment: transitGatewayVpcAttachment
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTransitGatewayVpcAttachmentCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTransitGatewayVpcAttachmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10006,7 +10006,7 @@ module CreateTransitGatewayRouteTable = {
   type response = {
 @as("TransitGatewayRouteTable") transitGatewayRouteTable: transitGatewayRouteTable
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTransitGatewayRouteTableCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTransitGatewayRouteTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10023,7 +10023,7 @@ module CreateTransitGatewayPeeringAttachment = {
   type response = {
 @as("TransitGatewayPeeringAttachment") transitGatewayPeeringAttachment: transitGatewayPeeringAttachment
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTransitGatewayPeeringAttachmentCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTransitGatewayPeeringAttachmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10038,7 +10038,7 @@ module CreateTransitGatewayMulticastDomain = {
   type response = {
 @as("TransitGatewayMulticastDomain") transitGatewayMulticastDomain: transitGatewayMulticastDomain
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTransitGatewayMulticastDomainCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTransitGatewayMulticastDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10056,7 +10056,7 @@ module CreateTransitGatewayConnectPeer = {
   type response = {
 @as("TransitGatewayConnectPeer") transitGatewayConnectPeer: transitGatewayConnectPeer
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTransitGatewayConnectPeerCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTransitGatewayConnectPeerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10071,7 +10071,7 @@ module CreateTransitGatewayConnect = {
   type response = {
 @as("TransitGatewayConnect") transitGatewayConnect: transitGatewayConnect
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTransitGatewayConnectCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTransitGatewayConnectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10086,7 +10086,7 @@ module CreateTransitGateway = {
   type response = {
 @as("TransitGateway") transitGateway: transitGateway
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTransitGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTransitGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10104,7 +10104,7 @@ module CreateTrafficMirrorTarget = {
 @as("ClientToken") clientToken: amazonawsString,
 @as("TrafficMirrorTarget") trafficMirrorTarget: trafficMirrorTarget
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTrafficMirrorTargetCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTrafficMirrorTargetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10126,7 +10126,7 @@ module CreateTrafficMirrorSession = {
 @as("ClientToken") clientToken: amazonawsString,
 @as("TrafficMirrorSession") trafficMirrorSession: trafficMirrorSession
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTrafficMirrorSessionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTrafficMirrorSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10142,7 +10142,7 @@ module CreateTrafficMirrorFilter = {
 @as("ClientToken") clientToken: amazonawsString,
 @as("TrafficMirrorFilter") trafficMirrorFilter: trafficMirrorFilter
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateTrafficMirrorFilterCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateTrafficMirrorFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10161,7 +10161,7 @@ module CreateSubnet = {
   type response = {
 @as("Subnet") subnet: subnet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateSubnetCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateSubnetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10178,7 +10178,7 @@ module CreateSnapshots = {
   type response = {
 @as("Snapshots") snapshots: snapshotSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateSnapshotsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateSnapshotsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10192,7 +10192,7 @@ module CreateSnapshot = {
 @as("Description") description: amazonawsString
 }
   type response = snapshot;
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateSnapshotCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10209,7 +10209,7 @@ module CreateSecurityGroup = {
 @as("Tags") tags: tagList,
 @as("GroupId") groupId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateSecurityGroupCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateSecurityGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10223,7 +10223,7 @@ module CreateRouteTable = {
   type response = {
 @as("RouteTable") routeTable: routeTable
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateRouteTableCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateRouteTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10239,7 +10239,7 @@ module CreateRestoreImageTask = {
   type response = {
 @as("ImageId") imageId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateRestoreImageTaskCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateRestoreImageTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10254,7 +10254,7 @@ module CreateReservedInstancesListing = {
   type response = {
 @as("ReservedInstancesListings") reservedInstancesListings: reservedInstancesListingList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateReservedInstancesListingCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateReservedInstancesListingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10270,7 +10270,7 @@ module CreateReplaceRootVolumeTask = {
   type response = {
 @as("ReplaceRootVolumeTask") replaceRootVolumeTask: replaceRootVolumeTask
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateReplaceRootVolumeTaskCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateReplaceRootVolumeTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10286,7 +10286,7 @@ module CreatePlacementGroup = {
   type response = {
 @as("PlacementGroup") placementGroup: placementGroup
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreatePlacementGroupCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreatePlacementGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10310,7 +10310,7 @@ module CreateNetworkInterface = {
 @as("ClientToken") clientToken: amazonawsString,
 @as("NetworkInterface") networkInterface: networkInterface
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateNetworkInterfaceCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateNetworkInterfaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10330,7 +10330,7 @@ module CreateNetworkInsightsPath = {
   type response = {
 @as("NetworkInsightsPath") networkInsightsPath: networkInsightsPath
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateNetworkInsightsPathCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateNetworkInsightsPathCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10344,7 +10344,7 @@ module CreateNetworkAcl = {
   type response = {
 @as("NetworkAcl") networkAcl: networkAcl
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateNetworkAclCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateNetworkAclCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10361,7 +10361,7 @@ module CreateNatGateway = {
 @as("NatGateway") natGateway: natGateway,
 @as("ClientToken") clientToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateNatGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateNatGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10379,7 +10379,7 @@ module CreateManagedPrefixList = {
   type response = {
 @as("PrefixList") prefixList: managedPrefixList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateManagedPrefixListCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateManagedPrefixListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10394,7 +10394,7 @@ module CreateLocalGatewayRouteTableVpcAssociation = {
   type response = {
 @as("LocalGatewayRouteTableVpcAssociation") localGatewayRouteTableVpcAssociation: localGatewayRouteTableVpcAssociation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateLocalGatewayRouteTableVpcAssociationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateLocalGatewayRouteTableVpcAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10412,7 +10412,7 @@ module CreateKeyPair = {
 @as("KeyMaterial") keyMaterial: sensitiveUserData,
 @as("KeyFingerprint") keyFingerprint: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateKeyPairCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateKeyPairCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10425,7 +10425,7 @@ module CreateInternetGateway = {
   type response = {
 @as("InternetGateway") internetGateway: internetGateway
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateInternetGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateInternetGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10441,7 +10441,7 @@ module CreateInstanceExportTask = {
   type response = {
 @as("ExportTask") exportTask: exportTask
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateInstanceExportTaskCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateInstanceExportTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10459,7 +10459,7 @@ module CreateImage = {
   type response = {
 @as("ImageId") imageId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateImageCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10478,7 +10478,7 @@ module CreateFpgaImage = {
 @as("FpgaImageGlobalId") fpgaImageGlobalId: amazonawsString,
 @as("FpgaImageId") fpgaImageId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateFpgaImageCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateFpgaImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10503,7 +10503,7 @@ module CreateFlowLogs = {
 @as("FlowLogIds") flowLogIds: valueStringList,
 @as("ClientToken") clientToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateFlowLogsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateFlowLogsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10519,7 +10519,7 @@ module CreateEgressOnlyInternetGateway = {
 @as("EgressOnlyInternetGateway") egressOnlyInternetGateway: egressOnlyInternetGateway,
 @as("ClientToken") clientToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateEgressOnlyInternetGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateEgressOnlyInternetGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10531,7 +10531,7 @@ module CreateDefaultVpc = {
   type response = {
 @as("Vpc") vpc: vpc
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateDefaultVpcCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateDefaultVpcCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10544,7 +10544,7 @@ module CreateDefaultSubnet = {
   type response = {
 @as("Subnet") subnet: subnet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateDefaultSubnetCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateDefaultSubnetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10562,7 +10562,7 @@ module CreateCustomerGateway = {
   type response = {
 @as("CustomerGateway") customerGateway: customerGateway
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateCustomerGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateCustomerGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10591,7 +10591,7 @@ module CreateClientVpnEndpoint = {
 @as("Status") status: clientVpnEndpointStatus,
 @as("ClientVpnEndpointId") clientVpnEndpointId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateClientVpnEndpointCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateClientVpnEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10606,7 +10606,7 @@ module CreateCarrierGateway = {
   type response = {
 @as("CarrierGateway") carrierGateway: carrierGateway
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateCarrierGatewayCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateCarrierGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10632,7 +10632,7 @@ module CreateCapacityReservation = {
   type response = {
 @as("CapacityReservation") capacityReservation: capacityReservation
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateCapacityReservationCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateCapacityReservationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10654,7 +10654,7 @@ module CopySnapshot = {
 @as("Tags") tags: tagList,
 @as("SnapshotId") snapshotId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CopySnapshotCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CopySnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10666,7 +10666,7 @@ module CancelReservedInstancesListing = {
   type response = {
 @as("ReservedInstancesListings") reservedInstancesListings: reservedInstancesListingList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CancelReservedInstancesListingCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CancelReservedInstancesListingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10685,7 +10685,7 @@ module AuthorizeSecurityGroupIngress = {
 @as("CidrIp") cidrIp: amazonawsString
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AuthorizeSecurityGroupIngressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AuthorizeSecurityGroupIngressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -10703,7 +10703,7 @@ module AuthorizeSecurityGroupEgress = {
 @as("DryRun") dryRun: amazonawsBoolean
 }
   
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AuthorizeSecurityGroupEgressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AuthorizeSecurityGroupEgressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -10722,7 +10722,7 @@ module AllocateHosts = {
   type response = {
 @as("HostIds") hostIds: responseHostIdList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AllocateHostsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AllocateHostsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10747,7 +10747,7 @@ module AllocateAddress = {
 @as("AllocationId") allocationId: amazonawsString,
 @as("PublicIp") publicIp: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AllocateAddressCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AllocateAddressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10760,7 +10760,7 @@ module AcceptVpcPeeringConnection = {
   type response = {
 @as("VpcPeeringConnection") vpcPeeringConnection: vpcPeeringConnection
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "AcceptVpcPeeringConnectionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "AcceptVpcPeeringConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10776,7 +10776,7 @@ module RunScheduledInstances = {
   type response = {
 @as("InstanceIdSet") instanceIdSet: instanceIdSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RunScheduledInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RunScheduledInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10792,7 +10792,7 @@ module ModifyFleet = {
   type response = {
 @as("Return") return: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyFleetCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10808,7 +10808,7 @@ module ImportVolume = {
   type response = {
 @as("ConversionTask") conversionTask: conversionTask
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ImportVolumeCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ImportVolumeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10824,7 +10824,7 @@ module ImportInstance = {
   type response = {
 @as("ConversionTask") conversionTask: conversionTask
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ImportInstanceCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ImportInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10837,7 +10837,7 @@ module GetLaunchTemplateData = {
   type response = {
 @as("LaunchTemplateData") launchTemplateData: responseLaunchTemplateData
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "GetLaunchTemplateDataCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "GetLaunchTemplateDataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10852,7 +10852,7 @@ module EnableFastSnapshotRestores = {
 @as("Unsuccessful") unsuccessful: enableFastSnapshotRestoreErrorSet,
 @as("Successful") successful: enableFastSnapshotRestoreSuccessSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "EnableFastSnapshotRestoresCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "EnableFastSnapshotRestoresCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10867,7 +10867,7 @@ module DisableFastSnapshotRestores = {
 @as("Unsuccessful") unsuccessful: disableFastSnapshotRestoreErrorSet,
 @as("Successful") successful: disableFastSnapshotRestoreSuccessSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DisableFastSnapshotRestoresCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DisableFastSnapshotRestoresCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10884,7 +10884,7 @@ module DescribeVpcs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Vpcs") vpcs: vpcList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpcsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10901,7 +10901,7 @@ module DescribeVpcPeeringConnections = {
 @as("NextToken") nextToken: amazonawsString,
 @as("VpcPeeringConnections") vpcPeeringConnections: vpcPeeringConnectionList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcPeeringConnectionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpcPeeringConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10918,7 +10918,7 @@ module DescribeVolumeStatus = {
 @as("VolumeStatuses") volumeStatuses: volumeStatusList,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVolumeStatusCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVolumeStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10935,7 +10935,7 @@ module DescribeTransitGatewayConnectPeers = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayConnectPeers") transitGatewayConnectPeers: transitGatewayConnectPeerList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTransitGatewayConnectPeersCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTransitGatewayConnectPeersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10952,7 +10952,7 @@ module DescribeTrafficMirrorFilters = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TrafficMirrorFilters") trafficMirrorFilters: trafficMirrorFilterSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeTrafficMirrorFiltersCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeTrafficMirrorFiltersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10969,7 +10969,7 @@ module DescribeSubnets = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Subnets") subnets: subnetList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeSubnetsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeSubnetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -10986,7 +10986,7 @@ module DescribeRouteTables = {
 @as("NextToken") nextToken: amazonawsString,
 @as("RouteTables") routeTables: routeTableList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeRouteTablesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeRouteTablesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11001,7 +11001,7 @@ module DescribeReservedInstancesModifications = {
 @as("ReservedInstancesModifications") reservedInstancesModifications: reservedInstancesModificationList,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeReservedInstancesModificationsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeReservedInstancesModificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11018,7 +11018,7 @@ module DescribeNetworkInterfaces = {
 @as("NextToken") nextToken: amazonawsString,
 @as("NetworkInterfaces") networkInterfaces: networkInterfaceList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeNetworkInterfacesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeNetworkInterfacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11035,7 +11035,7 @@ module DescribeNetworkAcls = {
 @as("NextToken") nextToken: amazonawsString,
 @as("NetworkAcls") networkAcls: networkAclList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeNetworkAclsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeNetworkAclsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11053,7 +11053,7 @@ module DescribeInstanceStatus = {
 @as("NextToken") nextToken: amazonawsString,
 @as("InstanceStatuses") instanceStatuses: instanceStatusList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeInstanceStatusCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeInstanceStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11070,7 +11070,7 @@ module DescribeImportImageTasks = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ImportImageTasks") importImageTasks: importImageTaskList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeImportImageTasksCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeImportImageTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11086,7 +11086,7 @@ module DescribeImages = {
   type response = {
 @as("Images") images: imageList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeImagesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeImagesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11102,7 +11102,7 @@ module DescribeHosts = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Hosts") hosts: hostList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeHostsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeHostsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11119,7 +11119,7 @@ module DescribeClientVpnEndpoints = {
 @as("NextToken") nextToken: nextToken,
 @as("ClientVpnEndpoints") clientVpnEndpoints: endpointSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeClientVpnEndpointsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeClientVpnEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11137,7 +11137,7 @@ module CreateLaunchTemplate = {
 @as("Warning") warning: validationWarning,
 @as("LaunchTemplate") launchTemplate: launchTemplate
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateLaunchTemplateCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateLaunchTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11163,7 +11163,7 @@ module CreateFleet = {
 @as("Errors") errors: createFleetErrorsSet,
 @as("FleetId") fleetId: fleetId
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateFleetCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11177,7 +11177,7 @@ module CreateDhcpOptions = {
   type response = {
 @as("DhcpOptions") dhcpOptions: dhcpOptions
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateDhcpOptionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateDhcpOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11193,7 +11193,7 @@ module StartNetworkInsightsAnalysis = {
   type response = {
 @as("NetworkInsightsAnalysis") networkInsightsAnalysis: networkInsightsAnalysis
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "StartNetworkInsightsAnalysisCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "StartNetworkInsightsAnalysisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11208,7 +11208,7 @@ module ModifyVpnTunnelOptions = {
   type response = {
 @as("VpnConnection") vpnConnection: vpnConnection
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVpnTunnelOptionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVpnTunnelOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11222,7 +11222,7 @@ module ModifyVpnTunnelCertificate = {
   type response = {
 @as("VpnConnection") vpnConnection: vpnConnection
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVpnTunnelCertificateCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVpnTunnelCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11239,7 +11239,7 @@ module ModifyVpnConnectionOptions = {
   type response = {
 @as("VpnConnection") vpnConnection: vpnConnection
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVpnConnectionOptionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVpnConnectionOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11255,7 +11255,7 @@ module ModifyVpnConnection = {
   type response = {
 @as("VpnConnection") vpnConnection: vpnConnection
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "ModifyVpnConnectionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "ModifyVpnConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11271,7 +11271,7 @@ module DescribeStaleSecurityGroups = {
 @as("StaleSecurityGroupSet") staleSecurityGroupSet: staleSecurityGroupSet,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeStaleSecurityGroupsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeStaleSecurityGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11289,7 +11289,7 @@ module DescribeSecurityGroups = {
 @as("NextToken") nextToken: amazonawsString,
 @as("SecurityGroups") securityGroups: securityGroupList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeSecurityGroupsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeSecurityGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11306,7 +11306,7 @@ module DescribeInstanceTypes = {
 @as("NextToken") nextToken: nextToken,
 @as("InstanceTypes") instanceTypes: instanceTypeInfoList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeInstanceTypesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeInstanceTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11323,7 +11323,7 @@ module DescribeDhcpOptions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("DhcpOptions") dhcpOptions: dhcpOptionsList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeDhcpOptionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeDhcpOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11336,7 +11336,7 @@ module DescribeConversionTasks = {
   type response = {
 @as("ConversionTasks") conversionTasks: describeConversionTaskList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeConversionTasksCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeConversionTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11354,7 +11354,7 @@ module CreateVpnConnection = {
   type response = {
 @as("VpnConnection") vpnConnection: vpnConnection
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateVpnConnectionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateVpnConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11373,7 +11373,7 @@ module CreateLaunchTemplateVersion = {
 @as("Warning") warning: validationWarning,
 @as("LaunchTemplateVersion") launchTemplateVersion: launchTemplateVersion
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "CreateLaunchTemplateVersionCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "CreateLaunchTemplateVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11419,7 +11419,7 @@ module RunInstances = {
 @as("BlockDeviceMappings") blockDeviceMappings: blockDeviceMappingRequestList
 }
   type response = reservation;
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RunInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RunInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11443,7 +11443,7 @@ module RequestSpotInstances = {
   type response = {
 @as("SpotInstanceRequests") spotInstanceRequests: spotInstanceRequestList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RequestSpotInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RequestSpotInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11456,7 +11456,7 @@ module RequestSpotFleet = {
   type response = {
 @as("SpotFleetRequestId") spotFleetRequestId: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "RequestSpotFleetCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "RequestSpotFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11470,7 +11470,7 @@ module DescribeVpnConnections = {
   type response = {
 @as("VpnConnections") vpnConnections: vpnConnectionList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpnConnectionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeVpnConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11487,7 +11487,7 @@ module DescribeSpotInstanceRequests = {
 @as("NextToken") nextToken: amazonawsString,
 @as("SpotInstanceRequests") spotInstanceRequests: spotInstanceRequestList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeSpotInstanceRequestsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeSpotInstanceRequestsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11507,7 +11507,7 @@ module DescribeNetworkInsightsAnalyses = {
 @as("NextToken") nextToken: amazonawsString,
 @as("NetworkInsightsAnalyses") networkInsightsAnalyses: networkInsightsAnalysisList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeNetworkInsightsAnalysesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeNetworkInsightsAnalysesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11528,7 +11528,7 @@ module DescribeLaunchTemplateVersions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LaunchTemplateVersions") launchTemplateVersions: launchTemplateVersionSet
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeLaunchTemplateVersionsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeLaunchTemplateVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11545,7 +11545,7 @@ module DescribeFleets = {
 @as("Fleets") fleets: fleetSet,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeFleetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11561,7 +11561,7 @@ module DescribeSpotFleetRequests = {
 @as("SpotFleetRequestConfigs") spotFleetRequestConfigs: spotFleetRequestConfigSet,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeSpotFleetRequestsCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeSpotFleetRequestsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -11578,6 +11578,6 @@ module DescribeInstances = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Reservations") reservations: reservationList
 }
-  @module("@aws-sdk/client-ec2") @new external new_: (Js.Promise.t<request>) => t = "DescribeInstancesCommand";
+  @module("@aws-sdk/client-ec2") @new external new_: (request) => t = "DescribeInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

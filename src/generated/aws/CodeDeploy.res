@@ -487,7 +487,7 @@ module UpdateApplication = {
 @as("applicationName") applicationName: applicationName
 }
   
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "UpdateApplicationCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "UpdateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -501,7 +501,7 @@ module StopDeployment = {
 @as("statusMessage") statusMessage: message,
 @as("status") status: stopStatus
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "StopDeploymentCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "StopDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -511,7 +511,7 @@ module SkipWaitTimeForInstanceTermination = {
 @as("deploymentId") deploymentId: deploymentId
 }
   
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "SkipWaitTimeForInstanceTerminationCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "SkipWaitTimeForInstanceTerminationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -523,7 +523,7 @@ module RegisterOnPremisesInstance = {
 @as("instanceName") instanceName: option<instanceName>
 }
   
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "RegisterOnPremisesInstanceCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "RegisterOnPremisesInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -537,7 +537,7 @@ module PutLifecycleEventHookExecutionStatus = {
   type response = {
 @as("lifecycleEventHookExecutionId") lifecycleEventHookExecutionId: lifecycleEventHookExecutionId
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "PutLifecycleEventHookExecutionStatusCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "PutLifecycleEventHookExecutionStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -547,7 +547,7 @@ module DeregisterOnPremisesInstance = {
 @as("instanceName") instanceName: option<instanceName>
 }
   
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "DeregisterOnPremisesInstanceCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeregisterOnPremisesInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -557,7 +557,7 @@ module DeleteResourcesByExternalId = {
 @as("externalId") externalId: externalId
 }
   type response = unit
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "DeleteResourcesByExternalIdCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeleteResourcesByExternalIdCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -569,7 +569,7 @@ module DeleteGitHubAccountToken = {
   type response = {
 @as("tokenName") tokenName: gitHubAccountTokenName
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "DeleteGitHubAccountTokenCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeleteGitHubAccountTokenCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -579,7 +579,7 @@ module DeleteDeploymentConfig = {
 @as("deploymentConfigName") deploymentConfigName: option<deploymentConfigName>
 }
   
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "DeleteDeploymentConfigCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeleteDeploymentConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -589,7 +589,7 @@ module DeleteApplication = {
 @as("applicationName") applicationName: option<applicationName>
 }
   
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeleteApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -600,7 +600,7 @@ module ContinueDeployment = {
 @as("deploymentId") deploymentId: deploymentId
 }
   
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "ContinueDeploymentCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ContinueDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -611,7 +611,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -624,7 +624,7 @@ module ListGitHubAccountTokenNames = {
 @as("nextToken") nextToken: nextToken,
 @as("tokenNameList") tokenNameList: gitHubAccountTokenNameList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "ListGitHubAccountTokenNamesCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListGitHubAccountTokenNamesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -642,7 +642,7 @@ module ListDeployments = {
 @as("nextToken") nextToken: nextToken,
 @as("deployments") deployments: deploymentsList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "ListDeploymentsCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListDeploymentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -658,7 +658,7 @@ module ListDeploymentInstances = {
 @as("nextToken") nextToken: nextToken,
 @as("instancesList") instancesList: instancesList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "ListDeploymentInstancesCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListDeploymentInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -673,7 +673,7 @@ module ListDeploymentGroups = {
 @as("deploymentGroups") deploymentGroups: deploymentGroupsList,
 @as("applicationName") applicationName: applicationName
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "ListDeploymentGroupsCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListDeploymentGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -686,7 +686,7 @@ module ListDeploymentConfigs = {
 @as("nextToken") nextToken: nextToken,
 @as("deploymentConfigsList") deploymentConfigsList: deploymentConfigsList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "ListDeploymentConfigsCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListDeploymentConfigsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -699,7 +699,7 @@ module ListApplications = {
 @as("nextToken") nextToken: nextToken,
 @as("applications") applications: applicationsList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationsCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListApplicationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -711,7 +711,7 @@ module GetApplication = {
   type response = {
 @as("application") application: applicationInfo
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "GetApplicationCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -722,7 +722,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -733,7 +733,7 @@ module RemoveTagsFromOnPremisesInstances = {
 @as("tags") tags: option<tagList>
 }
   
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "RemoveTagsFromOnPremisesInstancesCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "RemoveTagsFromOnPremisesInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -745,7 +745,7 @@ module RegisterApplicationRevision = {
 @as("applicationName") applicationName: option<applicationName>
 }
   
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "RegisterApplicationRevisionCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "RegisterApplicationRevisionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -759,7 +759,7 @@ module ListTagsForResource = {
 @as("NextToken") nextToken: nextToken,
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -774,7 +774,7 @@ module ListOnPremisesInstances = {
 @as("nextToken") nextToken: nextToken,
 @as("instanceNames") instanceNames: instanceNameList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "ListOnPremisesInstancesCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListOnPremisesInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -789,7 +789,7 @@ module ListDeploymentTargets = {
 @as("nextToken") nextToken: nextToken,
 @as("targetIds") targetIds: targetIdList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "ListDeploymentTargetsCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListDeploymentTargetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -804,7 +804,7 @@ module GetApplicationRevision = {
 @as("revision") revision: revisionLocation,
 @as("applicationName") applicationName: applicationName
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "GetApplicationRevisionCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetApplicationRevisionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -817,7 +817,7 @@ module DeleteDeploymentGroup = {
   type response = {
 @as("hooksNotCleanedUp") hooksNotCleanedUp: autoScalingGroupList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "DeleteDeploymentGroupCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "DeleteDeploymentGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -832,7 +832,7 @@ module CreateDeploymentConfig = {
   type response = {
 @as("deploymentConfigId") deploymentConfigId: deploymentConfigId
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "CreateDeploymentConfigCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "CreateDeploymentConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -846,7 +846,7 @@ module CreateApplication = {
   type response = {
 @as("applicationId") applicationId: applicationId
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "CreateApplicationCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "CreateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -858,7 +858,7 @@ module BatchGetApplications = {
   type response = {
 @as("applicationsInfo") applicationsInfo: applicationsInfoList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "BatchGetApplicationsCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetApplicationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -869,7 +869,7 @@ module AddTagsToOnPremisesInstances = {
 @as("tags") tags: option<tagList>
 }
   
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "AddTagsToOnPremisesInstancesCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "AddTagsToOnPremisesInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -888,7 +888,7 @@ module ListApplicationRevisions = {
 @as("nextToken") nextToken: nextToken,
 @as("revisions") revisions: revisionLocationList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationRevisionsCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "ListApplicationRevisionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -900,7 +900,7 @@ module GetOnPremisesInstance = {
   type response = {
 @as("instanceInfo") instanceInfo: instanceInfo
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "GetOnPremisesInstanceCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetOnPremisesInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -912,7 +912,7 @@ module GetDeploymentConfig = {
   type response = {
 @as("deploymentConfigInfo") deploymentConfigInfo: deploymentConfigInfo
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentConfigCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetDeploymentConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -925,7 +925,7 @@ module GetDeploymentInstance = {
   type response = {
 @as("instanceSummary") instanceSummary: instanceSummary
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentInstanceCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetDeploymentInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -937,7 +937,7 @@ module BatchGetOnPremisesInstances = {
   type response = {
 @as("instanceInfos") instanceInfos: instanceInfoList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "BatchGetOnPremisesInstancesCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetOnPremisesInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -952,7 +952,7 @@ module BatchGetApplicationRevisions = {
 @as("errorMessage") errorMessage: errorMessage,
 @as("applicationName") applicationName: applicationName
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "BatchGetApplicationRevisionsCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetApplicationRevisionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -981,7 +981,7 @@ module UpdateDeploymentGroup = {
   type response = {
 @as("hooksNotCleanedUp") hooksNotCleanedUp: autoScalingGroupList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "UpdateDeploymentGroupCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "UpdateDeploymentGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -994,7 +994,7 @@ module GetDeploymentTarget = {
   type response = {
 @as("deploymentTarget") deploymentTarget: deploymentTarget
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentTargetCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetDeploymentTargetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1023,7 +1023,7 @@ module CreateDeploymentGroup = {
   type response = {
 @as("deploymentGroupId") deploymentGroupId: deploymentGroupId
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "CreateDeploymentGroupCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "CreateDeploymentGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1044,7 +1044,7 @@ module CreateDeployment = {
   type response = {
 @as("deploymentId") deploymentId: deploymentId
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "CreateDeploymentCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "CreateDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1058,7 +1058,7 @@ module BatchGetDeploymentInstances = {
 @as("errorMessage") errorMessage: errorMessage,
 @as("instancesSummary") instancesSummary: instanceSummaryList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "BatchGetDeploymentInstancesCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetDeploymentInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1071,7 +1071,7 @@ module GetDeploymentGroup = {
   type response = {
 @as("deploymentGroupInfo") deploymentGroupInfo: deploymentGroupInfo
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentGroupCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetDeploymentGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1083,7 +1083,7 @@ module GetDeployment = {
   type response = {
 @as("deploymentInfo") deploymentInfo: deploymentInfo
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "GetDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1096,7 +1096,7 @@ module BatchGetDeploymentTargets = {
   type response = {
 @as("deploymentTargets") deploymentTargets: deploymentTargetList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "BatchGetDeploymentTargetsCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetDeploymentTargetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1108,7 +1108,7 @@ module BatchGetDeployments = {
   type response = {
 @as("deploymentsInfo") deploymentsInfo: deploymentsInfoList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "BatchGetDeploymentsCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetDeploymentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1122,6 +1122,6 @@ module BatchGetDeploymentGroups = {
 @as("errorMessage") errorMessage: errorMessage,
 @as("deploymentGroupsInfo") deploymentGroupsInfo: deploymentGroupInfoList
 }
-  @module("@aws-sdk/client-codedeploy") @new external new_: (Js.Promise.t<request>) => t = "BatchGetDeploymentGroupsCommand";
+  @module("@aws-sdk/client-codedeploy") @new external new_: (request) => t = "BatchGetDeploymentGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

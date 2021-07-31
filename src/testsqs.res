@@ -1,13 +1,12 @@
-
-let client = Sqs.createClient();
+let client = SQS.createClient();
 let res = {
-  open Sqs.CreateQueue;
+  open SQS.CreateQueue;
   let command = new_({
     queueName: Some("test-queue"),
     attributes: Js.Dict.fromArray([("KmsMasterKeyId", "alias/aws/sqs")]),
     tags: Js.Dict.empty()
   })
-  send(client, command)|>Js.Promise.then_(
+  rawSend(client, command)|>Js.Promise.then_(
     result => {Js.log2("SQS success", result)
     Js.Promise.resolve()
     })

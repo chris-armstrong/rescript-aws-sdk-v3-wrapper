@@ -387,7 +387,7 @@ module TerminateJob = {
 @as("jobId") jobId: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "TerminateJobCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "TerminateJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -397,7 +397,7 @@ module DeregisterJobDefinition = {
 @as("jobDefinition") jobDefinition: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "DeregisterJobDefinitionCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "DeregisterJobDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -407,7 +407,7 @@ module DeleteJobQueue = {
 @as("jobQueue") jobQueue: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "DeleteJobQueueCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "DeleteJobQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -417,7 +417,7 @@ module DeleteComputeEnvironment = {
 @as("computeEnvironment") computeEnvironment: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "DeleteComputeEnvironmentCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "DeleteComputeEnvironmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -428,7 +428,7 @@ module CancelJob = {
 @as("jobId") jobId: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "CancelJobCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "CancelJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -439,7 +439,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -450,7 +450,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -462,7 +462,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagrisTagsMap
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -478,7 +478,7 @@ module UpdateJobQueue = {
 @as("jobQueueArn") jobQueueArn: amazonawsString,
 @as("jobQueueName") jobQueueName: amazonawsString
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "UpdateJobQueueCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "UpdateJobQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -494,7 +494,7 @@ module UpdateComputeEnvironment = {
 @as("computeEnvironmentArn") computeEnvironmentArn: amazonawsString,
 @as("computeEnvironmentName") computeEnvironmentName: amazonawsString
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "UpdateComputeEnvironmentCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "UpdateComputeEnvironmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -511,7 +511,7 @@ module CreateJobQueue = {
 @as("jobQueueArn") jobQueueArn: option<amazonawsString>,
 @as("jobQueueName") jobQueueName: option<amazonawsString>
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "CreateJobQueueCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "CreateJobQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -529,7 +529,7 @@ module ListJobs = {
 @as("nextToken") nextToken: amazonawsString,
 @as("jobSummaryList") jobSummaryList: option<jobSummaryList>
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "ListJobsCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "ListJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -547,7 +547,7 @@ module CreateComputeEnvironment = {
 @as("computeEnvironmentArn") computeEnvironmentArn: amazonawsString,
 @as("computeEnvironmentName") computeEnvironmentName: amazonawsString
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "CreateComputeEnvironmentCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "CreateComputeEnvironmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -562,7 +562,7 @@ module DescribeJobQueues = {
 @as("nextToken") nextToken: amazonawsString,
 @as("jobQueues") jobQueues: jobQueueDetailList
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "DescribeJobQueuesCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "DescribeJobQueuesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -577,7 +577,7 @@ module DescribeComputeEnvironments = {
 @as("nextToken") nextToken: amazonawsString,
 @as("computeEnvironments") computeEnvironments: computeEnvironmentDetailList
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "DescribeComputeEnvironmentsCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "DescribeComputeEnvironmentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -602,7 +602,7 @@ module SubmitJob = {
 @as("jobName") jobName: option<amazonawsString>,
 @as("jobArn") jobArn: amazonawsString
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "SubmitJobCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "SubmitJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -625,7 +625,7 @@ module RegisterJobDefinition = {
 @as("jobDefinitionArn") jobDefinitionArn: option<amazonawsString>,
 @as("jobDefinitionName") jobDefinitionName: option<amazonawsString>
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "RegisterJobDefinitionCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "RegisterJobDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -637,7 +637,7 @@ module DescribeJobs = {
   type response = {
 @as("jobs") jobs: jobDetailList
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "DescribeJobsCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "DescribeJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -654,6 +654,6 @@ module DescribeJobDefinitions = {
 @as("nextToken") nextToken: amazonawsString,
 @as("jobDefinitions") jobDefinitions: jobDefinitionList
 }
-  @module("@aws-sdk/client-batch") @new external new_: (Js.Promise.t<request>) => t = "DescribeJobDefinitionsCommand";
+  @module("@aws-sdk/client-batch") @new external new_: (request) => t = "DescribeJobDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

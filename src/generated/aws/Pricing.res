@@ -41,7 +41,7 @@ module GetProducts = {
 @as("PriceList") priceList: priceList,
 @as("FormatVersion") formatVersion: amazonawsString
 }
-  @module("@aws-sdk/client-pricing") @new external new_: (Js.Promise.t<request>) => t = "GetProductsCommand";
+  @module("@aws-sdk/client-pricing") @new external new_: (request) => t = "GetProductsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -57,7 +57,7 @@ module GetAttributeValues = {
 @as("NextToken") nextToken: amazonawsString,
 @as("AttributeValues") attributeValues: attributeValueList
 }
-  @module("@aws-sdk/client-pricing") @new external new_: (Js.Promise.t<request>) => t = "GetAttributeValuesCommand";
+  @module("@aws-sdk/client-pricing") @new external new_: (request) => t = "GetAttributeValuesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -74,6 +74,6 @@ module DescribeServices = {
 @as("FormatVersion") formatVersion: amazonawsString,
 @as("Services") services: serviceList
 }
-  @module("@aws-sdk/client-pricing") @new external new_: (Js.Promise.t<request>) => t = "DescribeServicesCommand";
+  @module("@aws-sdk/client-pricing") @new external new_: (request) => t = "DescribeServicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

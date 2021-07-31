@@ -534,7 +534,7 @@ module UpdateUser = {
 @as("UserName") userName: option<existingUserNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateUserCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -546,7 +546,7 @@ module UpdateSigningCertificate = {
 @as("UserName") userName: existingUserNameType
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateSigningCertificateCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateSigningCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -558,7 +558,7 @@ module UpdateServiceSpecificCredential = {
 @as("UserName") userName: userNameType
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateServiceSpecificCredentialCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateServiceSpecificCredentialCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -570,7 +570,7 @@ module UpdateServerCertificate = {
 @as("ServerCertificateName") serverCertificateName: option<serverCertificateNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateServerCertificateCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateServerCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -582,7 +582,7 @@ module UpdateSSHPublicKey = {
 @as("UserName") userName: option<userNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateSSHPublicKeyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateSSHPublicKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -595,7 +595,7 @@ module UpdateSAMLProvider = {
   type response = {
 @as("SAMLProviderArn") sAMLProviderArn: arnType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateSAMLProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateSAMLProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -607,7 +607,7 @@ module UpdateRole = {
 @as("RoleName") roleName: option<roleNameType>
 }
   type response = unit
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateRoleCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -619,7 +619,7 @@ module UpdateLoginProfile = {
 @as("UserName") userName: option<userNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateLoginProfileCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateLoginProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -631,7 +631,7 @@ module UpdateGroup = {
 @as("GroupName") groupName: option<groupNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateGroupCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -642,7 +642,7 @@ module UpdateAssumeRolePolicy = {
 @as("RoleName") roleName: option<roleNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateAssumeRolePolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateAssumeRolePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -660,7 +660,7 @@ module UpdateAccountPasswordPolicy = {
 @as("MinimumPasswordLength") minimumPasswordLength: minimumPasswordLengthType
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateAccountPasswordPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateAccountPasswordPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -672,7 +672,7 @@ module UpdateAccessKey = {
 @as("UserName") userName: existingUserNameType
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateAccessKeyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateAccessKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -682,7 +682,7 @@ module SetSecurityTokenServicePreferences = {
 @as("GlobalEndpointTokenVersion") globalEndpointTokenVersion: option<globalEndpointTokenVersion>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "SetSecurityTokenServicePreferencesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "SetSecurityTokenServicePreferencesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -693,7 +693,7 @@ module SetDefaultPolicyVersion = {
 @as("PolicyArn") policyArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "SetDefaultPolicyVersionCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "SetDefaultPolicyVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -706,7 +706,7 @@ module ResyncMFADevice = {
 @as("UserName") userName: option<existingUserNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ResyncMFADeviceCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ResyncMFADeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -717,7 +717,7 @@ module RemoveUserFromGroup = {
 @as("GroupName") groupName: option<groupNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "RemoveUserFromGroupCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "RemoveUserFromGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -728,7 +728,7 @@ module RemoveRoleFromInstanceProfile = {
 @as("InstanceProfileName") instanceProfileName: option<instanceProfileNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "RemoveRoleFromInstanceProfileCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "RemoveRoleFromInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -739,7 +739,7 @@ module RemoveClientIDFromOpenIDConnectProvider = {
 @as("OpenIDConnectProviderArn") openIDConnectProviderArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "RemoveClientIDFromOpenIDConnectProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "RemoveClientIDFromOpenIDConnectProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -751,7 +751,7 @@ module PutUserPolicy = {
 @as("UserName") userName: option<existingUserNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "PutUserPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "PutUserPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -762,7 +762,7 @@ module PutUserPermissionsBoundary = {
 @as("UserName") userName: option<userNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "PutUserPermissionsBoundaryCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "PutUserPermissionsBoundaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -774,7 +774,7 @@ module PutRolePolicy = {
 @as("RoleName") roleName: option<roleNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "PutRolePolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "PutRolePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -785,7 +785,7 @@ module PutRolePermissionsBoundary = {
 @as("RoleName") roleName: option<roleNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "PutRolePermissionsBoundaryCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "PutRolePermissionsBoundaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -797,7 +797,7 @@ module PutGroupPolicy = {
 @as("GroupName") groupName: option<groupNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "PutGroupPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "PutGroupPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -812,7 +812,7 @@ module GetUserPolicy = {
 @as("PolicyName") policyName: option<policyNameType>,
 @as("UserName") userName: option<existingUserNameType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetUserPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetUserPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -827,7 +827,7 @@ module GetRolePolicy = {
 @as("PolicyName") policyName: option<policyNameType>,
 @as("RoleName") roleName: option<roleNameType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetRolePolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetRolePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -842,7 +842,7 @@ module GetGroupPolicy = {
 @as("PolicyName") policyName: option<policyNameType>,
 @as("GroupName") groupName: option<groupNameType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetGroupPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetGroupPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -854,7 +854,7 @@ module GetCredentialReport = {
 @as("ReportFormat") reportFormat: reportFormatType,
 @as("Content") content: reportContentType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<unit>) => t = "GetCredentialReportCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (unit) => t = "GetCredentialReportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -867,7 +867,7 @@ module GenerateServiceLastAccessedDetails = {
   type response = {
 @as("JobId") jobId: jobIDType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GenerateServiceLastAccessedDetailsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GenerateServiceLastAccessedDetailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -880,7 +880,7 @@ module GenerateOrganizationsAccessReport = {
   type response = {
 @as("JobId") jobId: jobIDType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GenerateOrganizationsAccessReportCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GenerateOrganizationsAccessReportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -891,7 +891,7 @@ module GenerateCredentialReport = {
 @as("Description") description: reportStateDescriptionType,
 @as("State") state: reportStateType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<unit>) => t = "GenerateCredentialReportCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (unit) => t = "GenerateCredentialReportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -904,7 +904,7 @@ module EnableMFADevice = {
 @as("UserName") userName: option<existingUserNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "EnableMFADeviceCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "EnableMFADeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -915,7 +915,7 @@ module DetachUserPolicy = {
 @as("UserName") userName: option<userNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DetachUserPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DetachUserPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -926,7 +926,7 @@ module DetachRolePolicy = {
 @as("RoleName") roleName: option<roleNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DetachRolePolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DetachRolePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -937,7 +937,7 @@ module DetachGroupPolicy = {
 @as("GroupName") groupName: option<groupNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DetachGroupPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DetachGroupPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -947,7 +947,7 @@ module DeleteVirtualMFADevice = {
 @as("SerialNumber") serialNumber: option<serialNumberType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteVirtualMFADeviceCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteVirtualMFADeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -958,7 +958,7 @@ module DeleteUserPolicy = {
 @as("UserName") userName: option<existingUserNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteUserPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -968,7 +968,7 @@ module DeleteUserPermissionsBoundary = {
 @as("UserName") userName: option<userNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserPermissionsBoundaryCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteUserPermissionsBoundaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -978,7 +978,7 @@ module DeleteUser = {
 @as("UserName") userName: option<existingUserNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -989,7 +989,7 @@ module DeleteSigningCertificate = {
 @as("UserName") userName: existingUserNameType
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteSigningCertificateCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteSigningCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1000,7 +1000,7 @@ module DeleteServiceSpecificCredential = {
 @as("UserName") userName: userNameType
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteServiceSpecificCredentialCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteServiceSpecificCredentialCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1012,7 +1012,7 @@ module DeleteServiceLinkedRole = {
   type response = {
 @as("DeletionTaskId") deletionTaskId: option<deletionTaskIdType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteServiceLinkedRoleCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteServiceLinkedRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1022,7 +1022,7 @@ module DeleteServerCertificate = {
 @as("ServerCertificateName") serverCertificateName: option<serverCertificateNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteServerCertificateCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteServerCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1033,7 +1033,7 @@ module DeleteSSHPublicKey = {
 @as("UserName") userName: option<userNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteSSHPublicKeyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteSSHPublicKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1043,7 +1043,7 @@ module DeleteSAMLProvider = {
 @as("SAMLProviderArn") sAMLProviderArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteSAMLProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteSAMLProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1054,7 +1054,7 @@ module DeleteRolePolicy = {
 @as("RoleName") roleName: option<roleNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteRolePolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteRolePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1064,7 +1064,7 @@ module DeleteRolePermissionsBoundary = {
 @as("RoleName") roleName: option<roleNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteRolePermissionsBoundaryCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteRolePermissionsBoundaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1074,7 +1074,7 @@ module DeleteRole = {
 @as("RoleName") roleName: option<roleNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteRoleCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1085,7 +1085,7 @@ module DeletePolicyVersion = {
 @as("PolicyArn") policyArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeletePolicyVersionCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeletePolicyVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1095,7 +1095,7 @@ module DeletePolicy = {
 @as("PolicyArn") policyArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeletePolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeletePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1105,7 +1105,7 @@ module DeleteOpenIDConnectProvider = {
 @as("OpenIDConnectProviderArn") openIDConnectProviderArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteOpenIDConnectProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteOpenIDConnectProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1115,7 +1115,7 @@ module DeleteLoginProfile = {
 @as("UserName") userName: option<userNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteLoginProfileCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteLoginProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1125,7 +1125,7 @@ module DeleteInstanceProfile = {
 @as("InstanceProfileName") instanceProfileName: option<instanceProfileNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteInstanceProfileCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1136,7 +1136,7 @@ module DeleteGroupPolicy = {
 @as("GroupName") groupName: option<groupNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteGroupPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteGroupPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1146,7 +1146,7 @@ module DeleteGroup = {
 @as("GroupName") groupName: option<groupNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteGroupCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1154,7 +1154,7 @@ module DeleteAccountPasswordPolicy = {
   type t;
   
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<unit>) => t = "DeleteAccountPasswordPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (unit) => t = "DeleteAccountPasswordPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1164,7 +1164,7 @@ module DeleteAccountAlias = {
 @as("AccountAlias") accountAlias: option<accountAliasType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteAccountAliasCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteAccountAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1175,7 +1175,7 @@ module DeleteAccessKey = {
 @as("UserName") userName: existingUserNameType
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeleteAccessKeyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeleteAccessKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1186,7 +1186,7 @@ module DeactivateMFADevice = {
 @as("UserName") userName: option<existingUserNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "DeactivateMFADeviceCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "DeactivateMFADeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1196,7 +1196,7 @@ module CreateAccountAlias = {
 @as("AccountAlias") accountAlias: option<accountAliasType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateAccountAliasCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateAccountAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1207,7 +1207,7 @@ module ChangePassword = {
 @as("OldPassword") oldPassword: option<passwordType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ChangePasswordCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ChangePasswordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1218,7 +1218,7 @@ module AttachUserPolicy = {
 @as("UserName") userName: option<userNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "AttachUserPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "AttachUserPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1229,7 +1229,7 @@ module AttachRolePolicy = {
 @as("RoleName") roleName: option<roleNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "AttachRolePolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "AttachRolePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1240,7 +1240,7 @@ module AttachGroupPolicy = {
 @as("GroupName") groupName: option<groupNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "AttachGroupPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "AttachGroupPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1251,7 +1251,7 @@ module AddUserToGroup = {
 @as("GroupName") groupName: option<groupNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "AddUserToGroupCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "AddUserToGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1262,7 +1262,7 @@ module AddRoleToInstanceProfile = {
 @as("InstanceProfileName") instanceProfileName: option<instanceProfileNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "AddRoleToInstanceProfileCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "AddRoleToInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1273,7 +1273,7 @@ module AddClientIDToOpenIDConnectProvider = {
 @as("OpenIDConnectProviderArn") openIDConnectProviderArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "AddClientIDToOpenIDConnectProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "AddClientIDToOpenIDConnectProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1286,7 +1286,7 @@ module UploadSigningCertificate = {
   type response = {
 @as("Certificate") certificate: option<signingCertificate>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UploadSigningCertificateCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UploadSigningCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1299,7 +1299,7 @@ module UploadSSHPublicKey = {
   type response = {
 @as("SSHPublicKey") sSHPublicKey: sSHPublicKey
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UploadSSHPublicKeyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UploadSSHPublicKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1310,7 +1310,7 @@ module UpdateOpenIDConnectProviderThumbprint = {
 @as("OpenIDConnectProviderArn") openIDConnectProviderArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateOpenIDConnectProviderThumbprintCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateOpenIDConnectProviderThumbprintCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1321,7 +1321,7 @@ module UntagUser = {
 @as("UserName") userName: option<existingUserNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UntagUserCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UntagUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1332,7 +1332,7 @@ module UntagServerCertificate = {
 @as("ServerCertificateName") serverCertificateName: option<serverCertificateNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UntagServerCertificateCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UntagServerCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1343,7 +1343,7 @@ module UntagSAMLProvider = {
 @as("SAMLProviderArn") sAMLProviderArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UntagSAMLProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UntagSAMLProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1354,7 +1354,7 @@ module UntagRole = {
 @as("RoleName") roleName: option<roleNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UntagRoleCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UntagRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1365,7 +1365,7 @@ module UntagPolicy = {
 @as("PolicyArn") policyArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UntagPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UntagPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1376,7 +1376,7 @@ module UntagOpenIDConnectProvider = {
 @as("OpenIDConnectProviderArn") openIDConnectProviderArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UntagOpenIDConnectProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UntagOpenIDConnectProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1387,7 +1387,7 @@ module UntagMFADevice = {
 @as("SerialNumber") serialNumber: option<serialNumberType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UntagMFADeviceCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UntagMFADeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1398,7 +1398,7 @@ module UntagInstanceProfile = {
 @as("InstanceProfileName") instanceProfileName: option<instanceProfileNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UntagInstanceProfileCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UntagInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1411,7 +1411,7 @@ module ResetServiceSpecificCredential = {
   type response = {
 @as("ServiceSpecificCredential") serviceSpecificCredential: serviceSpecificCredential
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ResetServiceSpecificCredentialCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ResetServiceSpecificCredentialCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1427,7 +1427,7 @@ module ListUserPolicies = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("PolicyNames") policyNames: option<policyNameListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListUserPoliciesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListUserPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1443,7 +1443,7 @@ module ListRolePolicies = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("PolicyNames") policyNames: option<policyNameListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListRolePoliciesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListRolePoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1459,7 +1459,7 @@ module ListGroupPolicies = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("PolicyNames") policyNames: option<policyNameListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListGroupPoliciesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListGroupPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1474,7 +1474,7 @@ module ListAccountAliases = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("AccountAliases") accountAliases: option<accountAliasListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListAccountAliasesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListAccountAliasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1488,7 +1488,7 @@ module GetSSHPublicKey = {
   type response = {
 @as("SSHPublicKey") sSHPublicKey: sSHPublicKey
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetSSHPublicKeyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetSSHPublicKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1501,7 +1501,7 @@ module GetPolicyVersion = {
   type response = {
 @as("PolicyVersion") policyVersion: policyVersion
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetPolicyVersionCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetPolicyVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1513,7 +1513,7 @@ module GetLoginProfile = {
   type response = {
 @as("LoginProfile") loginProfile: option<loginProfile>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetLoginProfileCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetLoginProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1526,7 +1526,7 @@ module GetContextKeysForPrincipalPolicy = {
   type response = {
 @as("ContextKeyNames") contextKeyNames: contextKeyNamesResultListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetContextKeysForPrincipalPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetContextKeysForPrincipalPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1538,7 +1538,7 @@ module GetContextKeysForCustomPolicy = {
   type response = {
 @as("ContextKeyNames") contextKeyNames: contextKeyNamesResultListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetContextKeysForCustomPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetContextKeysForCustomPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1548,7 +1548,7 @@ module GetAccountSummary = {
   type response = {
 @as("SummaryMap") summaryMap: summaryMapType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<unit>) => t = "GetAccountSummaryCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (unit) => t = "GetAccountSummaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1558,7 +1558,7 @@ module GetAccountPasswordPolicy = {
   type response = {
 @as("PasswordPolicy") passwordPolicy: option<passwordPolicy>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<unit>) => t = "GetAccountPasswordPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (unit) => t = "GetAccountPasswordPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1571,7 +1571,7 @@ module GetAccessKeyLastUsed = {
 @as("AccessKeyLastUsed") accessKeyLastUsed: accessKeyLastUsed,
 @as("UserName") userName: existingUserNameType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetAccessKeyLastUsedCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetAccessKeyLastUsedCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1584,7 +1584,7 @@ module CreateServiceSpecificCredential = {
   type response = {
 @as("ServiceSpecificCredential") serviceSpecificCredential: serviceSpecificCredential
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateServiceSpecificCredentialCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateServiceSpecificCredentialCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1598,7 +1598,7 @@ module CreatePolicyVersion = {
   type response = {
 @as("PolicyVersion") policyVersion: policyVersion
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreatePolicyVersionCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreatePolicyVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1612,7 +1612,7 @@ module CreateLoginProfile = {
   type response = {
 @as("LoginProfile") loginProfile: option<loginProfile>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateLoginProfileCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateLoginProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1625,7 +1625,7 @@ module CreateGroup = {
   type response = {
 @as("Group") group: option<group>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateGroupCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1637,7 +1637,7 @@ module CreateAccessKey = {
   type response = {
 @as("AccessKey") accessKey: option<accessKey>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateAccessKeyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateAccessKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1655,7 +1655,7 @@ module UploadServerCertificate = {
 @as("Tags") tags: tagListType,
 @as("ServerCertificateMetadata") serverCertificateMetadata: serverCertificateMetadata
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UploadServerCertificateCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UploadServerCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1666,7 +1666,7 @@ module TagUser = {
 @as("UserName") userName: option<existingUserNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "TagUserCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "TagUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1677,7 +1677,7 @@ module TagServerCertificate = {
 @as("ServerCertificateName") serverCertificateName: option<serverCertificateNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "TagServerCertificateCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "TagServerCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1688,7 +1688,7 @@ module TagSAMLProvider = {
 @as("SAMLProviderArn") sAMLProviderArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "TagSAMLProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "TagSAMLProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1699,7 +1699,7 @@ module TagRole = {
 @as("RoleName") roleName: option<roleNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "TagRoleCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "TagRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1710,7 +1710,7 @@ module TagPolicy = {
 @as("PolicyArn") policyArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "TagPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "TagPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1721,7 +1721,7 @@ module TagOpenIDConnectProvider = {
 @as("OpenIDConnectProviderArn") openIDConnectProviderArn: option<arnType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "TagOpenIDConnectProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "TagOpenIDConnectProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1732,7 +1732,7 @@ module TagMFADevice = {
 @as("SerialNumber") serialNumber: option<serialNumberType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "TagMFADeviceCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "TagMFADeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1743,7 +1743,7 @@ module TagInstanceProfile = {
 @as("InstanceProfileName") instanceProfileName: option<instanceProfileNameType>
 }
   
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "TagInstanceProfileCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "TagInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1759,7 +1759,7 @@ module ListUserTags = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Tags") tags: option<tagListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListUserTagsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListUserTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1775,7 +1775,7 @@ module ListSigningCertificates = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Certificates") certificates: option<certificateListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListSigningCertificatesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListSigningCertificatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1788,7 +1788,7 @@ module ListServiceSpecificCredentials = {
   type response = {
 @as("ServiceSpecificCredentials") serviceSpecificCredentials: serviceSpecificCredentialsListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListServiceSpecificCredentialsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListServiceSpecificCredentialsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1804,7 +1804,7 @@ module ListServerCertificates = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("ServerCertificateMetadataList") serverCertificateMetadataList: option<serverCertificateMetadataListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListServerCertificatesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListServerCertificatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1820,7 +1820,7 @@ module ListServerCertificateTags = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Tags") tags: option<tagListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListServerCertificateTagsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListServerCertificateTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1836,7 +1836,7 @@ module ListSSHPublicKeys = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("SSHPublicKeys") sSHPublicKeys: sSHPublicKeyListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListSSHPublicKeysCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListSSHPublicKeysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1846,7 +1846,7 @@ module ListSAMLProviders = {
   type response = {
 @as("SAMLProviderList") sAMLProviderList: sAMLProviderListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListSAMLProvidersCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListSAMLProvidersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1862,7 +1862,7 @@ module ListSAMLProviderTags = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Tags") tags: option<tagListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListSAMLProviderTagsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListSAMLProviderTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1878,7 +1878,7 @@ module ListRoleTags = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Tags") tags: option<tagListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListRoleTagsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListRoleTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1894,7 +1894,7 @@ module ListPolicyVersions = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Versions") versions: policyDocumentVersionListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListPolicyVersionsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListPolicyVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1910,7 +1910,7 @@ module ListPolicyTags = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Tags") tags: option<tagListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListPolicyTagsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListPolicyTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1920,7 +1920,7 @@ module ListOpenIDConnectProviders = {
   type response = {
 @as("OpenIDConnectProviderList") openIDConnectProviderList: openIDConnectProviderListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListOpenIDConnectProvidersCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListOpenIDConnectProvidersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1936,7 +1936,7 @@ module ListOpenIDConnectProviderTags = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Tags") tags: option<tagListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListOpenIDConnectProviderTagsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListOpenIDConnectProviderTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1952,7 +1952,7 @@ module ListMFADevices = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("MFADevices") mFADevices: option<mfaDeviceListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListMFADevicesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListMFADevicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1968,7 +1968,7 @@ module ListMFADeviceTags = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Tags") tags: option<tagListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListMFADeviceTagsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListMFADeviceTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1984,7 +1984,7 @@ module ListInstanceProfileTags = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Tags") tags: option<tagListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListInstanceProfileTagsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListInstanceProfileTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2000,7 +2000,7 @@ module ListGroupsForUser = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Groups") groups: option<groupListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListGroupsForUserCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListGroupsForUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2016,7 +2016,7 @@ module ListGroups = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Groups") groups: option<groupListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListGroupsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2037,7 +2037,7 @@ module ListEntitiesForPolicy = {
 @as("PolicyUsers") policyUsers: policyUserListType,
 @as("PolicyGroups") policyGroups: policyGroupListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListEntitiesForPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListEntitiesForPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2054,7 +2054,7 @@ module ListAttachedUserPolicies = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("AttachedPolicies") attachedPolicies: attachedPoliciesListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListAttachedUserPoliciesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListAttachedUserPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2071,7 +2071,7 @@ module ListAttachedRolePolicies = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("AttachedPolicies") attachedPolicies: attachedPoliciesListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListAttachedRolePoliciesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListAttachedRolePoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2088,7 +2088,7 @@ module ListAttachedGroupPolicies = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("AttachedPolicies") attachedPolicies: attachedPoliciesListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListAttachedGroupPoliciesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListAttachedGroupPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2104,7 +2104,7 @@ module ListAccessKeys = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("AccessKeyMetadata") accessKeyMetadata: option<accessKeyMetadataListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListAccessKeysCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListAccessKeysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2119,7 +2119,7 @@ module GetSAMLProvider = {
 @as("CreateDate") createDate: dateType,
 @as("SAMLMetadataDocument") sAMLMetadataDocument: sAMLMetadataDocumentType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetSAMLProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetSAMLProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2142,7 +2142,7 @@ module GetOrganizationsAccessReport = {
 @as("JobCreationDate") jobCreationDate: option<dateType>,
 @as("JobStatus") jobStatus: option<jobStatusType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetOrganizationsAccessReportCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetOrganizationsAccessReportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2158,7 +2158,7 @@ module GetOpenIDConnectProvider = {
 @as("ClientIDList") clientIDList: clientIDListType,
 @as("Url") url: openIDConnectProviderUrlType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetOpenIDConnectProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetOpenIDConnectProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2173,7 +2173,7 @@ module CreateSAMLProvider = {
 @as("Tags") tags: tagListType,
 @as("SAMLProviderArn") sAMLProviderArn: arnType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateSAMLProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateSAMLProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2189,7 +2189,7 @@ module CreateOpenIDConnectProvider = {
 @as("Tags") tags: tagListType,
 @as("OpenIDConnectProviderArn") openIDConnectProviderArn: arnType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateOpenIDConnectProviderCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateOpenIDConnectProviderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2202,7 +2202,7 @@ module UpdateRoleDescription = {
   type response = {
 @as("Role") role: role
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "UpdateRoleDescriptionCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "UpdateRoleDescriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2214,7 +2214,7 @@ module GetUser = {
   type response = {
 @as("User") user: option<user>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetUserCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2235,7 +2235,7 @@ module GetServiceLastAccessedDetailsWithEntities = {
 @as("JobCreationDate") jobCreationDate: option<dateType>,
 @as("JobStatus") jobStatus: option<jobStatusType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetServiceLastAccessedDetailsWithEntitiesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetServiceLastAccessedDetailsWithEntitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2247,7 +2247,7 @@ module GetServerCertificate = {
   type response = {
 @as("ServerCertificate") serverCertificate: option<serverCertificate>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetServerCertificateCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetServerCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2259,7 +2259,7 @@ module GetRole = {
   type response = {
 @as("Role") role: option<role>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetRoleCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2271,7 +2271,7 @@ module GetPolicy = {
   type response = {
 @as("Policy") policy: policy
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2286,7 +2286,7 @@ module CreateUser = {
   type response = {
 @as("User") user: user
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateUserCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2300,7 +2300,7 @@ module CreateServiceLinkedRole = {
   type response = {
 @as("Role") role: role
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateServiceLinkedRoleCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateServiceLinkedRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2318,7 +2318,7 @@ module CreateRole = {
   type response = {
 @as("Role") role: option<role>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateRoleCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2334,7 +2334,7 @@ module CreatePolicy = {
   type response = {
 @as("Policy") policy: policy
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreatePolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreatePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2350,7 +2350,7 @@ module ListUsers = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Users") users: option<userListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListUsersCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListUsersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2366,7 +2366,7 @@ module ListRoles = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Roles") roles: option<roleListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListRolesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListRolesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2382,7 +2382,7 @@ module ListPoliciesGrantingServiceAccess = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("PoliciesGrantingServiceAccess") policiesGrantingServiceAccess: option<listPolicyGrantingServiceAccessResponseListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListPoliciesGrantingServiceAccessCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListPoliciesGrantingServiceAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2401,7 +2401,7 @@ module ListPolicies = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("Policies") policies: policyListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListPoliciesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2414,7 +2414,7 @@ module GetServiceLinkedRoleDeletionStatus = {
 @as("Reason") reason: deletionTaskFailureReasonType,
 @as("Status") status: option<deletionTaskStatusType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetServiceLinkedRoleDeletionStatusCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetServiceLinkedRoleDeletionStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2435,7 +2435,7 @@ module GetServiceLastAccessedDetails = {
 @as("JobType") jobType: accessAdvisorUsageGranularityType,
 @as("JobStatus") jobStatus: option<jobStatusType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetServiceLastAccessedDetailsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetServiceLastAccessedDetailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2452,7 +2452,7 @@ module GetGroup = {
 @as("Users") users: option<userListType>,
 @as("Group") group: option<group>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetGroupCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2466,7 +2466,7 @@ module CreateVirtualMFADevice = {
   type response = {
 @as("VirtualMFADevice") virtualMFADevice: option<virtualMFADevice>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateVirtualMFADeviceCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateVirtualMFADeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2482,7 +2482,7 @@ module ListVirtualMFADevices = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("VirtualMFADevices") virtualMFADevices: option<virtualMFADeviceListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListVirtualMFADevicesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListVirtualMFADevicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2494,7 +2494,7 @@ module GetInstanceProfile = {
   type response = {
 @as("InstanceProfile") instanceProfile: option<instanceProfile>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetInstanceProfileCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2508,7 +2508,7 @@ module CreateInstanceProfile = {
   type response = {
 @as("InstanceProfile") instanceProfile: option<instanceProfile>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "CreateInstanceProfileCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "CreateInstanceProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2524,7 +2524,7 @@ module ListInstanceProfilesForRole = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("InstanceProfiles") instanceProfiles: option<instanceProfileListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListInstanceProfilesForRoleCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListInstanceProfilesForRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2540,7 +2540,7 @@ module ListInstanceProfiles = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("InstanceProfiles") instanceProfiles: option<instanceProfileListType>
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "ListInstanceProfilesCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "ListInstanceProfilesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2565,7 +2565,7 @@ module SimulatePrincipalPolicy = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("EvaluationResults") evaluationResults: evaluationResultsListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "SimulatePrincipalPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "SimulatePrincipalPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2589,7 +2589,7 @@ module SimulateCustomPolicy = {
 @as("IsTruncated") isTruncated: booleanType,
 @as("EvaluationResults") evaluationResults: evaluationResultsListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "SimulateCustomPolicyCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "SimulateCustomPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2608,6 +2608,6 @@ module GetAccountAuthorizationDetails = {
 @as("GroupDetailList") groupDetailList: groupDetailListType,
 @as("UserDetailList") userDetailList: userDetailListType
 }
-  @module("@aws-sdk/client-iam") @new external new_: (Js.Promise.t<request>) => t = "GetAccountAuthorizationDetailsCommand";
+  @module("@aws-sdk/client-iam") @new external new_: (request) => t = "GetAccountAuthorizationDetailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

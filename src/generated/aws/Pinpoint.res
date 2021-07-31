@@ -1459,7 +1459,7 @@ module UpdateVoiceChannel = {
   type response = {
 @as("VoiceChannelResponse") voiceChannelResponse: option<voiceChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateVoiceChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateVoiceChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1473,7 +1473,7 @@ module UpdateTemplateActiveVersion = {
   type response = {
 @as("MessageBody") messageBody: option<messageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateTemplateActiveVersionCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateTemplateActiveVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1486,7 +1486,7 @@ module UpdateSmsChannel = {
   type response = {
 @as("SMSChannelResponse") sMSChannelResponse: option<sMSChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateSmsChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateSmsChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1499,7 +1499,7 @@ module UpdateGcmChannel = {
   type response = {
 @as("GCMChannelResponse") gCMChannelResponse: option<gCMChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateGcmChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateGcmChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1512,7 +1512,7 @@ module UpdateEmailChannel = {
   type response = {
 @as("EmailChannelResponse") emailChannelResponse: option<emailChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateEmailChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateEmailChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1525,7 +1525,7 @@ module UpdateBaiduChannel = {
   type response = {
 @as("BaiduChannelResponse") baiduChannelResponse: option<baiduChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateBaiduChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateBaiduChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1538,7 +1538,7 @@ module UpdateApnsVoipSandboxChannel = {
   type response = {
 @as("APNSVoipSandboxChannelResponse") aPNSVoipSandboxChannelResponse: option<aPNSVoipSandboxChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateApnsVoipSandboxChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateApnsVoipSandboxChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1551,7 +1551,7 @@ module UpdateApnsVoipChannel = {
   type response = {
 @as("APNSVoipChannelResponse") aPNSVoipChannelResponse: option<aPNSVoipChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateApnsVoipChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateApnsVoipChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1564,7 +1564,7 @@ module UpdateApnsSandboxChannel = {
   type response = {
 @as("APNSSandboxChannelResponse") aPNSSandboxChannelResponse: option<aPNSSandboxChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateApnsSandboxChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateApnsSandboxChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1577,7 +1577,7 @@ module UpdateApnsChannel = {
   type response = {
 @as("APNSChannelResponse") aPNSChannelResponse: option<aPNSChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateApnsChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateApnsChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1590,7 +1590,7 @@ module UpdateAdmChannel = {
   type response = {
 @as("ADMChannelResponse") aDMChannelResponse: option<aDMChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateAdmChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateAdmChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1601,7 +1601,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1614,7 +1614,7 @@ module PutEventStream = {
   type response = {
 @as("EventStream") eventStream: option<eventStream>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "PutEventStreamCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "PutEventStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1626,7 +1626,7 @@ module PhoneNumberValidate = {
   type response = {
 @as("NumberValidateResponse") numberValidateResponse: option<numberValidateResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "PhoneNumberValidateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "PhoneNumberValidateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1638,7 +1638,7 @@ module GetVoiceChannel = {
   type response = {
 @as("VoiceChannelResponse") voiceChannelResponse: option<voiceChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetVoiceChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetVoiceChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1650,7 +1650,7 @@ module GetSmsChannel = {
   type response = {
 @as("SMSChannelResponse") sMSChannelResponse: option<sMSChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetSmsChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetSmsChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1662,7 +1662,7 @@ module GetGcmChannel = {
   type response = {
 @as("GCMChannelResponse") gCMChannelResponse: option<gCMChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetGcmChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetGcmChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1674,7 +1674,7 @@ module GetEventStream = {
   type response = {
 @as("EventStream") eventStream: option<eventStream>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetEventStreamCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetEventStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1686,7 +1686,7 @@ module GetEmailChannel = {
   type response = {
 @as("EmailChannelResponse") emailChannelResponse: option<emailChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetEmailChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetEmailChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1698,7 +1698,7 @@ module GetBaiduChannel = {
   type response = {
 @as("BaiduChannelResponse") baiduChannelResponse: option<baiduChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetBaiduChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetBaiduChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1710,7 +1710,7 @@ module GetApnsVoipSandboxChannel = {
   type response = {
 @as("APNSVoipSandboxChannelResponse") aPNSVoipSandboxChannelResponse: option<aPNSVoipSandboxChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetApnsVoipSandboxChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetApnsVoipSandboxChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1722,7 +1722,7 @@ module GetApnsVoipChannel = {
   type response = {
 @as("APNSVoipChannelResponse") aPNSVoipChannelResponse: option<aPNSVoipChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetApnsVoipChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetApnsVoipChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1734,7 +1734,7 @@ module GetApnsSandboxChannel = {
   type response = {
 @as("APNSSandboxChannelResponse") aPNSSandboxChannelResponse: option<aPNSSandboxChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetApnsSandboxChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetApnsSandboxChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1746,7 +1746,7 @@ module GetApnsChannel = {
   type response = {
 @as("APNSChannelResponse") aPNSChannelResponse: option<aPNSChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetApnsChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetApnsChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1758,7 +1758,7 @@ module GetAdmChannel = {
   type response = {
 @as("ADMChannelResponse") aDMChannelResponse: option<aDMChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetAdmChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetAdmChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1771,7 +1771,7 @@ module DeleteVoiceTemplate = {
   type response = {
 @as("MessageBody") messageBody: option<messageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteVoiceTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteVoiceTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1783,7 +1783,7 @@ module DeleteVoiceChannel = {
   type response = {
 @as("VoiceChannelResponse") voiceChannelResponse: option<voiceChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteVoiceChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteVoiceChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1796,7 +1796,7 @@ module DeleteSmsTemplate = {
   type response = {
 @as("MessageBody") messageBody: option<messageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteSmsTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteSmsTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1808,7 +1808,7 @@ module DeleteSmsChannel = {
   type response = {
 @as("SMSChannelResponse") sMSChannelResponse: option<sMSChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteSmsChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteSmsChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1821,7 +1821,7 @@ module DeletePushTemplate = {
   type response = {
 @as("MessageBody") messageBody: option<messageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeletePushTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeletePushTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1833,7 +1833,7 @@ module DeleteGcmChannel = {
   type response = {
 @as("GCMChannelResponse") gCMChannelResponse: option<gCMChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteGcmChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteGcmChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1845,7 +1845,7 @@ module DeleteEventStream = {
   type response = {
 @as("EventStream") eventStream: option<eventStream>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteEventStreamCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteEventStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1858,7 +1858,7 @@ module DeleteEmailTemplate = {
   type response = {
 @as("MessageBody") messageBody: option<messageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteEmailTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1870,7 +1870,7 @@ module DeleteEmailChannel = {
   type response = {
 @as("EmailChannelResponse") emailChannelResponse: option<emailChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteEmailChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteEmailChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1882,7 +1882,7 @@ module DeleteBaiduChannel = {
   type response = {
 @as("BaiduChannelResponse") baiduChannelResponse: option<baiduChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteBaiduChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteBaiduChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1894,7 +1894,7 @@ module DeleteApnsVoipSandboxChannel = {
   type response = {
 @as("APNSVoipSandboxChannelResponse") aPNSVoipSandboxChannelResponse: option<aPNSVoipSandboxChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteApnsVoipSandboxChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteApnsVoipSandboxChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1906,7 +1906,7 @@ module DeleteApnsVoipChannel = {
   type response = {
 @as("APNSVoipChannelResponse") aPNSVoipChannelResponse: option<aPNSVoipChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteApnsVoipChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteApnsVoipChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1918,7 +1918,7 @@ module DeleteApnsSandboxChannel = {
   type response = {
 @as("APNSSandboxChannelResponse") aPNSSandboxChannelResponse: option<aPNSSandboxChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteApnsSandboxChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteApnsSandboxChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1930,7 +1930,7 @@ module DeleteApnsChannel = {
   type response = {
 @as("APNSChannelResponse") aPNSChannelResponse: option<aPNSChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteApnsChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteApnsChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1942,7 +1942,7 @@ module DeleteAdmChannel = {
   type response = {
 @as("ADMChannelResponse") aDMChannelResponse: option<aDMChannelResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteAdmChannelCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteAdmChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1957,7 +1957,7 @@ module UpdateVoiceTemplate = {
   type response = {
 @as("MessageBody") messageBody: option<messageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateVoiceTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateVoiceTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1972,7 +1972,7 @@ module UpdateSmsTemplate = {
   type response = {
 @as("MessageBody") messageBody: option<messageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateSmsTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateSmsTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1985,7 +1985,7 @@ module UpdateRecommenderConfiguration = {
   type response = {
 @as("RecommenderConfigurationResponse") recommenderConfigurationResponse: option<recommenderConfigurationResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateRecommenderConfigurationCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateRecommenderConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2000,7 +2000,7 @@ module UpdatePushTemplate = {
   type response = {
 @as("MessageBody") messageBody: option<messageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdatePushTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdatePushTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2015,7 +2015,7 @@ module UpdateEmailTemplate = {
   type response = {
 @as("MessageBody") messageBody: option<messageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateEmailTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2028,7 +2028,7 @@ module UpdateApplicationSettings = {
   type response = {
 @as("ApplicationSettingsResource") applicationSettingsResource: option<applicationSettingsResource>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateApplicationSettingsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateApplicationSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2039,7 +2039,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2053,7 +2053,7 @@ module RemoveAttributes = {
   type response = {
 @as("AttributesResource") attributesResource: option<attributesResource>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "RemoveAttributesCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "RemoveAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2065,7 +2065,7 @@ module ListTagsForResource = {
   type response = {
 @as("TagsModel") tagsModel: option<tagsModel>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2078,7 +2078,7 @@ module GetVoiceTemplate = {
   type response = {
 @as("VoiceTemplateResponse") voiceTemplateResponse: option<voiceTemplateResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetVoiceTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetVoiceTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2091,7 +2091,7 @@ module GetSmsTemplate = {
   type response = {
 @as("SMSTemplateResponse") sMSTemplateResponse: option<sMSTemplateResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetSmsTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetSmsTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2103,7 +2103,7 @@ module GetRecommenderConfiguration = {
   type response = {
 @as("RecommenderConfigurationResponse") recommenderConfigurationResponse: option<recommenderConfigurationResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetRecommenderConfigurationCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetRecommenderConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2116,7 +2116,7 @@ module GetPushTemplate = {
   type response = {
 @as("PushNotificationTemplateResponse") pushNotificationTemplateResponse: option<pushNotificationTemplateResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetPushTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetPushTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2131,7 +2131,7 @@ module GetJourneyExecutionMetrics = {
   type response = {
 @as("JourneyExecutionMetricsResponse") journeyExecutionMetricsResponse: option<journeyExecutionMetricsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetJourneyExecutionMetricsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetJourneyExecutionMetricsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2147,7 +2147,7 @@ module GetJourneyExecutionActivityMetrics = {
   type response = {
 @as("JourneyExecutionActivityMetricsResponse") journeyExecutionActivityMetricsResponse: option<journeyExecutionActivityMetricsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetJourneyExecutionActivityMetricsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetJourneyExecutionActivityMetricsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2160,7 +2160,7 @@ module GetImportJob = {
   type response = {
 @as("ImportJobResponse") importJobResponse: option<importJobResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetImportJobCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetImportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2173,7 +2173,7 @@ module GetExportJob = {
   type response = {
 @as("ExportJobResponse") exportJobResponse: option<exportJobResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetExportJobCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetExportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2186,7 +2186,7 @@ module GetEmailTemplate = {
   type response = {
 @as("EmailTemplateResponse") emailTemplateResponse: option<emailTemplateResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetEmailTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2198,7 +2198,7 @@ module GetApplicationSettings = {
   type response = {
 @as("ApplicationSettingsResource") applicationSettingsResource: option<applicationSettingsResource>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetApplicationSettingsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetApplicationSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2210,7 +2210,7 @@ module GetApp = {
   type response = {
 @as("ApplicationResponse") applicationResponse: option<applicationResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetAppCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetAppCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2222,7 +2222,7 @@ module DeleteRecommenderConfiguration = {
   type response = {
 @as("RecommenderConfigurationResponse") recommenderConfigurationResponse: option<recommenderConfigurationResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteRecommenderConfigurationCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteRecommenderConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2234,7 +2234,7 @@ module DeleteApp = {
   type response = {
 @as("ApplicationResponse") applicationResponse: option<applicationResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteAppCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteAppCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2247,7 +2247,7 @@ module CreateVoiceTemplate = {
   type response = {
 @as("CreateTemplateMessageBody") createTemplateMessageBody: option<createTemplateMessageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "CreateVoiceTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "CreateVoiceTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2260,7 +2260,7 @@ module CreateSmsTemplate = {
   type response = {
 @as("CreateTemplateMessageBody") createTemplateMessageBody: option<createTemplateMessageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "CreateSmsTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "CreateSmsTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2272,7 +2272,7 @@ module CreateRecommenderConfiguration = {
   type response = {
 @as("RecommenderConfigurationResponse") recommenderConfigurationResponse: option<recommenderConfigurationResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "CreateRecommenderConfigurationCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "CreateRecommenderConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2285,7 +2285,7 @@ module CreatePushTemplate = {
   type response = {
 @as("CreateTemplateMessageBody") createTemplateMessageBody: option<createTemplateMessageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "CreatePushTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "CreatePushTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2298,7 +2298,7 @@ module CreateImportJob = {
   type response = {
 @as("ImportJobResponse") importJobResponse: option<importJobResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "CreateImportJobCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "CreateImportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2311,7 +2311,7 @@ module CreateExportJob = {
   type response = {
 @as("ExportJobResponse") exportJobResponse: option<exportJobResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "CreateExportJobCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "CreateExportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2324,7 +2324,7 @@ module CreateEmailTemplate = {
   type response = {
 @as("CreateTemplateMessageBody") createTemplateMessageBody: option<createTemplateMessageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "CreateEmailTemplateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "CreateEmailTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2336,7 +2336,7 @@ module CreateApp = {
   type response = {
 @as("ApplicationResponse") applicationResponse: option<applicationResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "CreateAppCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "CreateAppCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2351,7 +2351,7 @@ module ListTemplateVersions = {
   type response = {
 @as("TemplateVersionsResponse") templateVersionsResponse: option<templateVersionsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "ListTemplateVersionsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "ListTemplateVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2363,7 +2363,7 @@ module GetChannels = {
   type response = {
 @as("ChannelsResponse") channelsResponse: option<channelsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetChannelsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetChannelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2378,7 +2378,7 @@ module GetCampaignActivities = {
   type response = {
 @as("ActivitiesResponse") activitiesResponse: option<activitiesResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetCampaignActivitiesCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetCampaignActivitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2392,7 +2392,7 @@ module UpdateEndpoint = {
   type response = {
 @as("MessageBody") messageBody: option<messageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateEndpointCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2407,7 +2407,7 @@ module ListTemplates = {
   type response = {
 @as("TemplatesResponse") templatesResponse: option<templatesResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "ListTemplatesCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "ListTemplatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2422,7 +2422,7 @@ module GetSegmentImportJobs = {
   type response = {
 @as("ImportJobsResponse") importJobsResponse: option<importJobsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetSegmentImportJobsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetSegmentImportJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2437,7 +2437,7 @@ module GetSegmentExportJobs = {
   type response = {
 @as("ExportJobsResponse") exportJobsResponse: option<exportJobsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetSegmentExportJobsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetSegmentExportJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2450,7 +2450,7 @@ module GetRecommenderConfigurations = {
   type response = {
 @as("ListRecommenderConfigurationsResponse") listRecommenderConfigurationsResponse: option<listRecommenderConfigurationsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetRecommenderConfigurationsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetRecommenderConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2464,7 +2464,7 @@ module GetImportJobs = {
   type response = {
 @as("ImportJobsResponse") importJobsResponse: option<importJobsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetImportJobsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetImportJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2478,7 +2478,7 @@ module GetExportJobs = {
   type response = {
 @as("ExportJobsResponse") exportJobsResponse: option<exportJobsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetExportJobsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetExportJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2491,7 +2491,7 @@ module GetEndpoint = {
   type response = {
 @as("EndpointResponse") endpointResponse: option<endpointResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetEndpointCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2504,7 +2504,7 @@ module GetApps = {
   type response = {
 @as("ApplicationsResponse") applicationsResponse: option<applicationsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetAppsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetAppsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2517,7 +2517,7 @@ module DeleteEndpoint = {
   type response = {
 @as("EndpointResponse") endpointResponse: option<endpointResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteEndpointCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2530,7 +2530,7 @@ module SendUsersMessages = {
   type response = {
 @as("SendUsersMessageResponse") sendUsersMessageResponse: option<sendUsersMessageResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "SendUsersMessagesCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "SendUsersMessagesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2543,7 +2543,7 @@ module SendMessages = {
   type response = {
 @as("MessageResponse") messageResponse: option<messageResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "SendMessagesCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "SendMessagesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2556,7 +2556,7 @@ module UpdateEndpointsBatch = {
   type response = {
 @as("MessageBody") messageBody: option<messageBody>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateEndpointsBatchCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateEndpointsBatchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2569,7 +2569,7 @@ module GetUserEndpoints = {
   type response = {
 @as("EndpointsResponse") endpointsResponse: option<endpointsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetUserEndpointsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetUserEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2587,7 +2587,7 @@ module GetJourneyDateRangeKpi = {
   type response = {
 @as("JourneyDateRangeKpiResponse") journeyDateRangeKpiResponse: option<journeyDateRangeKpiResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetJourneyDateRangeKpiCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetJourneyDateRangeKpiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2605,7 +2605,7 @@ module GetCampaignDateRangeKpi = {
   type response = {
 @as("CampaignDateRangeKpiResponse") campaignDateRangeKpiResponse: option<campaignDateRangeKpiResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetCampaignDateRangeKpiCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetCampaignDateRangeKpiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2622,7 +2622,7 @@ module GetApplicationDateRangeKpi = {
   type response = {
 @as("ApplicationDateRangeKpiResponse") applicationDateRangeKpiResponse: option<applicationDateRangeKpiResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetApplicationDateRangeKpiCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetApplicationDateRangeKpiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2635,7 +2635,7 @@ module DeleteUserEndpoints = {
   type response = {
 @as("EndpointsResponse") endpointsResponse: option<endpointsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserEndpointsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteUserEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2648,7 +2648,7 @@ module PutEvents = {
   type response = {
 @as("EventsResponse") eventsResponse: option<eventsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "PutEventsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "PutEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2662,7 +2662,7 @@ module UpdateSegment = {
   type response = {
 @as("SegmentResponse") segmentResponse: option<segmentResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateSegmentCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateSegmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2676,7 +2676,7 @@ module UpdateCampaign = {
   type response = {
 @as("CampaignResponse") campaignResponse: option<campaignResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateCampaignCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateCampaignCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2690,7 +2690,7 @@ module GetSegmentVersion = {
   type response = {
 @as("SegmentResponse") segmentResponse: option<segmentResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetSegmentVersionCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetSegmentVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2703,7 +2703,7 @@ module GetSegment = {
   type response = {
 @as("SegmentResponse") segmentResponse: option<segmentResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetSegmentCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetSegmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2717,7 +2717,7 @@ module GetCampaignVersion = {
   type response = {
 @as("CampaignResponse") campaignResponse: option<campaignResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetCampaignVersionCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetCampaignVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2730,7 +2730,7 @@ module GetCampaign = {
   type response = {
 @as("CampaignResponse") campaignResponse: option<campaignResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetCampaignCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetCampaignCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2743,7 +2743,7 @@ module DeleteSegment = {
   type response = {
 @as("SegmentResponse") segmentResponse: option<segmentResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteSegmentCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteSegmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2756,7 +2756,7 @@ module DeleteCampaign = {
   type response = {
 @as("CampaignResponse") campaignResponse: option<campaignResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteCampaignCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteCampaignCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2769,7 +2769,7 @@ module CreateSegment = {
   type response = {
 @as("SegmentResponse") segmentResponse: option<segmentResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "CreateSegmentCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "CreateSegmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2782,7 +2782,7 @@ module CreateCampaign = {
   type response = {
 @as("CampaignResponse") campaignResponse: option<campaignResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "CreateCampaignCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "CreateCampaignCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2796,7 +2796,7 @@ module GetSegments = {
   type response = {
 @as("SegmentsResponse") segmentsResponse: option<segmentsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetSegmentsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetSegmentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2811,7 +2811,7 @@ module GetSegmentVersions = {
   type response = {
 @as("SegmentsResponse") segmentsResponse: option<segmentsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetSegmentVersionsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetSegmentVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2825,7 +2825,7 @@ module GetCampaigns = {
   type response = {
 @as("CampaignsResponse") campaignsResponse: option<campaignsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetCampaignsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetCampaignsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2840,7 +2840,7 @@ module GetCampaignVersions = {
   type response = {
 @as("CampaignsResponse") campaignsResponse: option<campaignsResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetCampaignVersionsCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetCampaignVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2854,7 +2854,7 @@ module UpdateJourneyState = {
   type response = {
 @as("JourneyResponse") journeyResponse: option<journeyResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateJourneyStateCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateJourneyStateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2868,7 +2868,7 @@ module UpdateJourney = {
   type response = {
 @as("JourneyResponse") journeyResponse: option<journeyResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "UpdateJourneyCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "UpdateJourneyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2881,7 +2881,7 @@ module GetJourney = {
   type response = {
 @as("JourneyResponse") journeyResponse: option<journeyResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "GetJourneyCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "GetJourneyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2894,7 +2894,7 @@ module DeleteJourney = {
   type response = {
 @as("JourneyResponse") journeyResponse: option<journeyResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "DeleteJourneyCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "DeleteJourneyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2907,7 +2907,7 @@ module CreateJourney = {
   type response = {
 @as("JourneyResponse") journeyResponse: option<journeyResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "CreateJourneyCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "CreateJourneyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2921,6 +2921,6 @@ module ListJourneys = {
   type response = {
 @as("JourneysResponse") journeysResponse: option<journeysResponse>
 }
-  @module("@aws-sdk/client-mobiletargeting") @new external new_: (Js.Promise.t<request>) => t = "ListJourneysCommand";
+  @module("@aws-sdk/client-mobiletargeting") @new external new_: (request) => t = "ListJourneysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

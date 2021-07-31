@@ -366,7 +366,7 @@ module DeletePreset = {
 @as("Id") id: option<id>
 }
   type response = unit
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "DeletePresetCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "DeletePresetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -376,7 +376,7 @@ module DeletePipeline = {
 @as("Id") id: option<id>
 }
   type response = unit
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "DeletePipelineCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "DeletePipelineCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -386,7 +386,7 @@ module CancelJob = {
 @as("Id") id: option<id>
 }
   type response = unit
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "CancelJobCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "CancelJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -402,7 +402,7 @@ module TestRole = {
 @as("Messages") messages: exceptionMessages,
 @as("Success") success: success
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "TestRoleCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "TestRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -414,7 +414,7 @@ module ReadPreset = {
   type response = {
 @as("Preset") preset: preset
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "ReadPresetCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "ReadPresetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -432,7 +432,7 @@ module CreatePreset = {
 @as("Warning") warning: amazonawsString,
 @as("Preset") preset: preset
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "CreatePresetCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "CreatePresetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -445,7 +445,7 @@ module UpdatePipelineStatus = {
   type response = {
 @as("Pipeline") pipeline: pipeline
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "UpdatePipelineStatusCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "UpdatePipelineStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -458,7 +458,7 @@ module UpdatePipelineNotifications = {
   type response = {
 @as("Pipeline") pipeline: pipeline
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "UpdatePipelineNotificationsCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "UpdatePipelineNotificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -478,7 +478,7 @@ module UpdatePipeline = {
 @as("Warnings") warnings: warnings,
 @as("Pipeline") pipeline: pipeline
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "UpdatePipelineCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "UpdatePipelineCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -491,7 +491,7 @@ module ReadPipeline = {
 @as("Warnings") warnings: warnings,
 @as("Pipeline") pipeline: pipeline
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "ReadPipelineCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "ReadPipelineCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -505,7 +505,7 @@ module ListPresets = {
 @as("NextPageToken") nextPageToken: id,
 @as("Presets") presets: presets
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "ListPresetsCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "ListPresetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -525,7 +525,7 @@ module CreatePipeline = {
 @as("Warnings") warnings: warnings,
 @as("Pipeline") pipeline: pipeline
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "CreatePipelineCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "CreatePipelineCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -539,7 +539,7 @@ module ListPipelines = {
 @as("NextPageToken") nextPageToken: id,
 @as("Pipelines") pipelines: pipelines
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "ListPipelinesCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "ListPipelinesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -551,7 +551,7 @@ module ReadJob = {
   type response = {
 @as("Job") job: job
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "ReadJobCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "ReadJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -570,7 +570,7 @@ module CreateJob = {
   type response = {
 @as("Job") job: job
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "CreateJobCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "CreateJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -585,7 +585,7 @@ module ListJobsByStatus = {
 @as("NextPageToken") nextPageToken: id,
 @as("Jobs") jobs: jobs
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "ListJobsByStatusCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "ListJobsByStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -600,6 +600,6 @@ module ListJobsByPipeline = {
 @as("NextPageToken") nextPageToken: id,
 @as("Jobs") jobs: jobs
 }
-  @module("@aws-sdk/client-elastictranscoder") @new external new_: (Js.Promise.t<request>) => t = "ListJobsByPipelineCommand";
+  @module("@aws-sdk/client-elastictranscoder") @new external new_: (request) => t = "ListJobsByPipelineCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

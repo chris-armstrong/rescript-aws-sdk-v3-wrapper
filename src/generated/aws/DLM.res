@@ -178,7 +178,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<policyArn>
 }
   type response = unit
-  @module("@aws-sdk/client-dlm") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -189,7 +189,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<policyArn>
 }
   type response = unit
-  @module("@aws-sdk/client-dlm") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -201,7 +201,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-dlm") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -211,7 +211,7 @@ module DeleteLifecyclePolicy = {
 @as("PolicyId") policyId: option<policyId>
 }
   type response = unit
-  @module("@aws-sdk/client-dlm") @new external new_: (Js.Promise.t<request>) => t = "DeleteLifecyclePolicyCommand";
+  @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "DeleteLifecyclePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -227,7 +227,7 @@ module GetLifecyclePolicies = {
   type response = {
 @as("Policies") policies: lifecyclePolicySummaryList
 }
-  @module("@aws-sdk/client-dlm") @new external new_: (Js.Promise.t<request>) => t = "GetLifecyclePoliciesCommand";
+  @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "GetLifecyclePoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -241,7 +241,7 @@ module UpdateLifecyclePolicy = {
 @as("PolicyId") policyId: option<policyId>
 }
   type response = unit
-  @module("@aws-sdk/client-dlm") @new external new_: (Js.Promise.t<request>) => t = "UpdateLifecyclePolicyCommand";
+  @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "UpdateLifecyclePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -257,7 +257,7 @@ module CreateLifecyclePolicy = {
   type response = {
 @as("PolicyId") policyId: policyId
 }
-  @module("@aws-sdk/client-dlm") @new external new_: (Js.Promise.t<request>) => t = "CreateLifecyclePolicyCommand";
+  @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "CreateLifecyclePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -269,6 +269,6 @@ module GetLifecyclePolicy = {
   type response = {
 @as("Policy") policy: lifecyclePolicy
 }
-  @module("@aws-sdk/client-dlm") @new external new_: (Js.Promise.t<request>) => t = "GetLifecyclePolicyCommand";
+  @module("@aws-sdk/client-dlm") @new external new_: (request) => t = "GetLifecyclePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

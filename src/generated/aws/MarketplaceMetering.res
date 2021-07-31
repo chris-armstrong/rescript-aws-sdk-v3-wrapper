@@ -53,7 +53,7 @@ module ResolveCustomer = {
 @as("ProductCode") productCode: productCode,
 @as("CustomerIdentifier") customerIdentifier: customerIdentifier
 }
-  @module("@aws-sdk/client-aws-marketplace") @new external new_: (Js.Promise.t<request>) => t = "ResolveCustomerCommand";
+  @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "ResolveCustomerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -68,7 +68,7 @@ module RegisterUsage = {
 @as("Signature") signature: nonEmptyString,
 @as("PublicKeyRotationTimestamp") publicKeyRotationTimestamp: amazonawsTimestamp
 }
-  @module("@aws-sdk/client-aws-marketplace") @new external new_: (Js.Promise.t<request>) => t = "RegisterUsageCommand";
+  @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "RegisterUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -85,7 +85,7 @@ module MeterUsage = {
   type response = {
 @as("MeteringRecordId") meteringRecordId: amazonawsString
 }
-  @module("@aws-sdk/client-aws-marketplace") @new external new_: (Js.Promise.t<request>) => t = "MeterUsageCommand";
+  @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "MeterUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -99,6 +99,6 @@ module BatchMeterUsage = {
 @as("UnprocessedRecords") unprocessedRecords: usageRecordList,
 @as("Results") results: usageRecordResultList
 }
-  @module("@aws-sdk/client-aws-marketplace") @new external new_: (Js.Promise.t<request>) => t = "BatchMeterUsageCommand";
+  @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "BatchMeterUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

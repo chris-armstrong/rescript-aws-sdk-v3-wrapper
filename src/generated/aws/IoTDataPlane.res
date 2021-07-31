@@ -26,7 +26,7 @@ module UpdateThingShadow = {
   type response = {
 @as("payload") payload: jsonDocument
 }
-  @module("@aws-sdk/client-iotdata") @new external new_: (Js.Promise.t<request>) => t = "UpdateThingShadowCommand";
+  @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "UpdateThingShadowCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -38,7 +38,7 @@ module Publish = {
 @as("topic") topic: option<topic>
 }
   
-  @module("@aws-sdk/client-iotdata") @new external new_: (Js.Promise.t<request>) => t = "PublishCommand";
+  @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "PublishCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -51,7 +51,7 @@ module GetThingShadow = {
   type response = {
 @as("payload") payload: jsonDocument
 }
-  @module("@aws-sdk/client-iotdata") @new external new_: (Js.Promise.t<request>) => t = "GetThingShadowCommand";
+  @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "GetThingShadowCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -64,7 +64,7 @@ module DeleteThingShadow = {
   type response = {
 @as("payload") payload: option<jsonDocument>
 }
-  @module("@aws-sdk/client-iotdata") @new external new_: (Js.Promise.t<request>) => t = "DeleteThingShadowCommand";
+  @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "DeleteThingShadowCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -80,6 +80,6 @@ module ListNamedShadowsForThing = {
 @as("nextToken") nextToken: nextToken,
 @as("results") results: namedShadowList
 }
-  @module("@aws-sdk/client-iotdata") @new external new_: (Js.Promise.t<request>) => t = "ListNamedShadowsForThingCommand";
+  @module("@aws-sdk/client-iotdata") @new external new_: (request) => t = "ListNamedShadowsForThingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

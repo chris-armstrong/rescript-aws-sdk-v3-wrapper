@@ -122,7 +122,7 @@ module UpdateUserProfile = {
 @as("displayName") displayName: userProfileDisplayName,
 @as("userArn") userArn: option<userArn>
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "UpdateUserProfileCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "UpdateUserProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -139,7 +139,7 @@ module UpdateTeamMember = {
 @as("projectRole") projectRole: role,
 @as("userArn") userArn: userArn
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "UpdateTeamMemberCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "UpdateTeamMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -151,7 +151,7 @@ module UpdateProject = {
 @as("id") id: option<projectId>
 }
   type response = unit
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "UpdateProjectCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "UpdateProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -162,7 +162,7 @@ module DisassociateTeamMember = {
 @as("projectId") projectId: option<projectId>
 }
   type response = unit
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "DisassociateTeamMemberCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "DisassociateTeamMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -179,7 +179,7 @@ module DescribeUserProfile = {
 @as("displayName") displayName: userProfileDisplayName,
 @as("userArn") userArn: option<userArn>
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "DescribeUserProfileCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "DescribeUserProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -191,7 +191,7 @@ module DeleteUserProfile = {
   type response = {
 @as("userArn") userArn: option<userArn>
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserProfileCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "DeleteUserProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -206,7 +206,7 @@ module DeleteProject = {
 @as("projectArn") projectArn: projectArn,
 @as("stackId") stackId: stackId
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "DeleteProjectCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "DeleteProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -226,7 +226,7 @@ module CreateUserProfile = {
 @as("displayName") displayName: userProfileDisplayName,
 @as("userArn") userArn: option<userArn>
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "CreateUserProfileCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "CreateUserProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -242,7 +242,7 @@ module AssociateTeamMember = {
   type response = {
 @as("clientRequestToken") clientRequestToken: clientRequestToken
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "AssociateTeamMemberCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "AssociateTeamMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -253,7 +253,7 @@ module UntagProject = {
 @as("id") id: option<projectId>
 }
   type response = unit
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "UntagProjectCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "UntagProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -266,7 +266,7 @@ module TagProject = {
   type response = {
 @as("tags") tags: tags
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "TagProjectCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "TagProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -281,7 +281,7 @@ module ListTagsForProject = {
 @as("nextToken") nextToken: paginationToken,
 @as("tags") tags: tags
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForProjectCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "ListTagsForProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -301,7 +301,7 @@ module DescribeProject = {
 @as("id") id: projectId,
 @as("name") name: projectName
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "DescribeProjectCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "DescribeProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -315,7 +315,7 @@ module ListUserProfiles = {
 @as("nextToken") nextToken: paginationToken,
 @as("userProfiles") userProfiles: option<userProfilesList>
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "ListUserProfilesCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "ListUserProfilesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -330,7 +330,7 @@ module ListTeamMembers = {
 @as("nextToken") nextToken: paginationToken,
 @as("teamMembers") teamMembers: option<teamMemberResult>
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "ListTeamMembersCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "ListTeamMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -345,7 +345,7 @@ module ListResources = {
 @as("nextToken") nextToken: paginationToken,
 @as("resources") resources: resourcesResult
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "ListResourcesCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "ListResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -359,7 +359,7 @@ module ListProjects = {
 @as("nextToken") nextToken: paginationToken,
 @as("projects") projects: option<projectsList>
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "ListProjectsCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "ListProjectsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -380,6 +380,6 @@ module CreateProject = {
 @as("arn") arn: option<projectArn>,
 @as("id") id: option<projectId>
 }
-  @module("@aws-sdk/client-codestar") @new external new_: (Js.Promise.t<request>) => t = "CreateProjectCommand";
+  @module("@aws-sdk/client-codestar") @new external new_: (request) => t = "CreateProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

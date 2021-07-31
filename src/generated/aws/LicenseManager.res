@@ -310,7 +310,7 @@ module RejectGrant = {
 @as("Status") status: grantStatus,
 @as("GrantArn") grantArn: arn
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "RejectGrantCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "RejectGrantCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -324,7 +324,7 @@ module ExtendLicenseConsumption = {
 @as("Expiration") expiration: iSO8601DateTime,
 @as("LicenseConsumptionToken") licenseConsumptionToken: amazonawsString
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ExtendLicenseConsumptionCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ExtendLicenseConsumptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -334,7 +334,7 @@ module DeleteToken = {
 @as("TokenId") tokenId: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "DeleteTokenCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "DeleteTokenCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -344,7 +344,7 @@ module DeleteLicenseManagerReportGenerator = {
 @as("LicenseManagerReportGeneratorArn") licenseManagerReportGeneratorArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "DeleteLicenseManagerReportGeneratorCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "DeleteLicenseManagerReportGeneratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -354,7 +354,7 @@ module DeleteLicenseConfiguration = {
 @as("LicenseConfigurationArn") licenseConfigurationArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "DeleteLicenseConfigurationCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "DeleteLicenseConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -368,7 +368,7 @@ module DeleteLicense = {
 @as("DeletionDate") deletionDate: iSO8601DateTime,
 @as("Status") status: licenseDeletionStatus
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "DeleteLicenseCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "DeleteLicenseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -383,7 +383,7 @@ module DeleteGrant = {
 @as("Status") status: grantStatus,
 @as("GrantArn") grantArn: arn
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "DeleteGrantCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "DeleteGrantCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -394,7 +394,7 @@ module CheckInLicense = {
 @as("LicenseConsumptionToken") licenseConsumptionToken: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "CheckInLicenseCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "CheckInLicenseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -408,7 +408,7 @@ module AcceptGrant = {
 @as("Status") status: grantStatus,
 @as("GrantArn") grantArn: arn
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "AcceptGrantCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "AcceptGrantCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -421,7 +421,7 @@ module UpdateServiceSettings = {
 @as("S3BucketArn") s3BucketArn: amazonawsString
 }
   type response = unit
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "UpdateServiceSettingsCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "UpdateServiceSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -432,7 +432,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -446,7 +446,7 @@ module GetServiceSettings = {
 @as("SnsTopicArn") snsTopicArn: amazonawsString,
 @as("S3BucketArn") s3BucketArn: amazonawsString
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "GetServiceSettingsCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "GetServiceSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -459,7 +459,7 @@ module GetAccessToken = {
   type response = {
 @as("AccessToken") accessToken: tokenString
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "GetAccessTokenCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "GetAccessTokenCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -477,7 +477,7 @@ module CreateToken = {
 @as("TokenType") tokenType: tokenType,
 @as("TokenId") tokenId: amazonawsString
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "CreateTokenCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "CreateTokenCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -496,7 +496,7 @@ module CreateGrantVersion = {
 @as("Status") status: grantStatus,
 @as("GrantArn") grantArn: arn
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "CreateGrantVersionCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "CreateGrantVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -515,7 +515,7 @@ module CreateGrant = {
 @as("Status") status: grantStatus,
 @as("GrantArn") grantArn: arn
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "CreateGrantCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "CreateGrantCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -527,7 +527,7 @@ module UpdateLicenseSpecificationsForResource = {
 @as("ResourceArn") resourceArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "UpdateLicenseSpecificationsForResourceCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "UpdateLicenseSpecificationsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -543,7 +543,7 @@ module UpdateLicenseManagerReportGenerator = {
 @as("LicenseManagerReportGeneratorArn") licenseManagerReportGeneratorArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "UpdateLicenseManagerReportGeneratorCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "UpdateLicenseManagerReportGeneratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -554,7 +554,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -566,7 +566,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -581,7 +581,7 @@ module ListResourceInventory = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ResourceInventoryList") resourceInventoryList: resourceInventoryList
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListResourceInventoryCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListResourceInventoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -596,7 +596,7 @@ module ListLicenseSpecificationsForResource = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LicenseSpecifications") licenseSpecifications: licenseSpecifications
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListLicenseSpecificationsForResourceCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListLicenseSpecificationsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -611,7 +611,7 @@ module ListAssociationsForLicenseConfiguration = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LicenseConfigurationAssociations") licenseConfigurationAssociations: licenseConfigurationAssociations
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListAssociationsForLicenseConfigurationCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListAssociationsForLicenseConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -624,7 +624,7 @@ module GetGrant = {
   type response = {
 @as("Grant") grant: grant
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "GetGrantCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "GetGrantCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -649,7 +649,7 @@ module CreateLicenseVersion = {
 @as("Version") version: amazonawsString,
 @as("LicenseArn") licenseArn: arn
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "CreateLicenseVersionCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "CreateLicenseVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -667,7 +667,7 @@ module CreateLicenseManagerReportGenerator = {
   type response = {
 @as("LicenseManagerReportGeneratorArn") licenseManagerReportGeneratorArn: amazonawsString
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "CreateLicenseManagerReportGeneratorCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "CreateLicenseManagerReportGeneratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -691,7 +691,7 @@ module CreateLicense = {
 @as("Status") status: licenseStatus,
 @as("LicenseArn") licenseArn: arn
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "CreateLicenseCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "CreateLicenseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -715,7 +715,7 @@ module CheckoutLicense = {
 @as("LicenseConsumptionToken") licenseConsumptionToken: amazonawsString,
 @as("CheckoutType") checkoutType: checkoutType
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "CheckoutLicenseCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "CheckoutLicenseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -739,7 +739,7 @@ module CheckoutBorrowLicense = {
 @as("LicenseConsumptionToken") licenseConsumptionToken: amazonawsString,
 @as("LicenseArn") licenseArn: arn
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "CheckoutBorrowLicenseCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "CheckoutBorrowLicenseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -755,7 +755,7 @@ module ListUsageForLicenseConfiguration = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LicenseConfigurationUsageList") licenseConfigurationUsageList: licenseConfigurationUsageList
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListUsageForLicenseConfigurationCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListUsageForLicenseConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -771,7 +771,7 @@ module ListTokens = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Tokens") tokens: tokenList
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListTokensCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListTokensCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -787,7 +787,7 @@ module ListReceivedGrants = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Grants") grants: grantList
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListReceivedGrantsCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListReceivedGrantsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -803,7 +803,7 @@ module ListDistributedGrants = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Grants") grants: grantList
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListDistributedGrantsCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListDistributedGrantsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -815,7 +815,7 @@ module GetLicenseUsage = {
   type response = {
 @as("LicenseUsage") licenseUsage: licenseUsage
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "GetLicenseUsageCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "GetLicenseUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -827,7 +827,7 @@ module GetLicenseManagerReportGenerator = {
   type response = {
 @as("ReportGenerator") reportGenerator: reportGenerator
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "GetLicenseManagerReportGeneratorCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "GetLicenseManagerReportGeneratorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -840,7 +840,7 @@ module GetLicense = {
   type response = {
 @as("License") license: license
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "GetLicenseCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "GetLicenseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -856,7 +856,7 @@ module ListReceivedLicenses = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Licenses") licenses: grantedLicenseList
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListReceivedLicensesCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListReceivedLicensesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -872,7 +872,7 @@ module ListLicenses = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Licenses") licenses: licenseList
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListLicensesCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListLicensesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -887,7 +887,7 @@ module ListLicenseVersions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Licenses") licenses: licenseList
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListLicenseVersionsCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListLicenseVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -902,7 +902,7 @@ module ListLicenseManagerReportGenerators = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ReportGenerators") reportGenerators: reportGeneratorList
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListLicenseManagerReportGeneratorsCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListLicenseManagerReportGeneratorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -917,7 +917,7 @@ module ListFailuresForLicenseConfigurationOperations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LicenseOperationFailureList") licenseOperationFailureList: licenseOperationFailureList
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListFailuresForLicenseConfigurationOperationsCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListFailuresForLicenseConfigurationOperationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -935,7 +935,7 @@ module UpdateLicenseConfiguration = {
 @as("LicenseConfigurationArn") licenseConfigurationArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "UpdateLicenseConfigurationCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "UpdateLicenseConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -963,7 +963,7 @@ module GetLicenseConfiguration = {
 @as("LicenseConfigurationArn") licenseConfigurationArn: amazonawsString,
 @as("LicenseConfigurationId") licenseConfigurationId: amazonawsString
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "GetLicenseConfigurationCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "GetLicenseConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -983,7 +983,7 @@ module CreateLicenseConfiguration = {
   type response = {
 @as("LicenseConfigurationArn") licenseConfigurationArn: amazonawsString
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "CreateLicenseConfigurationCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "CreateLicenseConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -999,6 +999,6 @@ module ListLicenseConfigurations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LicenseConfigurations") licenseConfigurations: licenseConfigurations
 }
-  @module("@aws-sdk/client-license-manager") @new external new_: (Js.Promise.t<request>) => t = "ListLicenseConfigurationsCommand";
+  @module("@aws-sdk/client-license-manager") @new external new_: (request) => t = "ListLicenseConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

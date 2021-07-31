@@ -261,7 +261,7 @@ module VoteOnProposal = {
 @as("NetworkId") networkId: option<resourceIdString>
 }
   type response = unit
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "VoteOnProposalCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "VoteOnProposalCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -271,7 +271,7 @@ module RejectInvitation = {
 @as("InvitationId") invitationId: option<resourceIdString>
 }
   type response = unit
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "RejectInvitationCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "RejectInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -283,7 +283,7 @@ module DeleteNode = {
 @as("NetworkId") networkId: option<resourceIdString>
 }
   type response = unit
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "DeleteNodeCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "DeleteNodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -294,7 +294,7 @@ module DeleteMember = {
 @as("NetworkId") networkId: option<resourceIdString>
 }
   type response = unit
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "DeleteMemberCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "DeleteMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -305,7 +305,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<arnString>
 }
   type response = unit
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -316,7 +316,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<arnString>
 }
   type response = unit
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -328,7 +328,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: outputTagMap
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -343,7 +343,7 @@ module ListProposals = {
 @as("NextToken") nextToken: paginationToken,
 @as("Proposals") proposals: proposalSummaryList
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "ListProposalsCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "ListProposalsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -359,7 +359,7 @@ module ListProposalVotes = {
 @as("NextToken") nextToken: paginationToken,
 @as("ProposalVotes") proposalVotes: proposalVoteList
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "ListProposalVotesCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "ListProposalVotesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -376,7 +376,7 @@ module ListNodes = {
 @as("NextToken") nextToken: paginationToken,
 @as("Nodes") nodes: nodeSummaryList
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "ListNodesCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "ListNodesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -393,7 +393,7 @@ module ListNetworks = {
 @as("NextToken") nextToken: paginationToken,
 @as("Networks") networks: networkSummaryList
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "ListNetworksCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "ListNetworksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -411,7 +411,7 @@ module ListMembers = {
 @as("NextToken") nextToken: paginationToken,
 @as("Members") members: memberSummaryList
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "ListMembersCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "ListMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -425,7 +425,7 @@ module ListInvitations = {
 @as("NextToken") nextToken: paginationToken,
 @as("Invitations") invitations: invitationList
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "ListInvitationsCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "ListInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -437,7 +437,7 @@ module GetNetwork = {
   type response = {
 @as("Network") network: network
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "GetNetworkCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "GetNetworkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -454,7 +454,7 @@ module CreateProposal = {
   type response = {
 @as("ProposalId") proposalId: resourceIdString
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "CreateProposalCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "CreateProposalCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -467,7 +467,7 @@ module UpdateNode = {
 @as("NetworkId") networkId: option<resourceIdString>
 }
   type response = unit
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "UpdateNodeCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "UpdateNodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -479,7 +479,7 @@ module UpdateMember = {
 @as("NetworkId") networkId: option<resourceIdString>
 }
   type response = unit
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "UpdateMemberCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "UpdateMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -492,7 +492,7 @@ module GetProposal = {
   type response = {
 @as("Proposal") proposal: proposal
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "GetProposalCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "GetProposalCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -506,7 +506,7 @@ module GetNode = {
   type response = {
 @as("Node") node: node
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "GetNodeCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "GetNodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -519,7 +519,7 @@ module GetMember = {
   type response = {
 @as("Member") member: member
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "GetMemberCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "GetMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -535,7 +535,7 @@ module CreateNode = {
   type response = {
 @as("NodeId") nodeId: resourceIdString
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "CreateNodeCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "CreateNodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -556,7 +556,7 @@ module CreateNetwork = {
 @as("MemberId") memberId: resourceIdString,
 @as("NetworkId") networkId: resourceIdString
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "CreateNetworkCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "CreateNetworkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -571,6 +571,6 @@ module CreateMember = {
   type response = {
 @as("MemberId") memberId: resourceIdString
 }
-  @module("@aws-sdk/client-managedblockchain") @new external new_: (Js.Promise.t<request>) => t = "CreateMemberCommand";
+  @module("@aws-sdk/client-managedblockchain") @new external new_: (request) => t = "CreateMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

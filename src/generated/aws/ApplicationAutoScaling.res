@@ -146,7 +146,7 @@ module DeregisterScalableTarget = {
 @as("ServiceNamespace") serviceNamespace: option<serviceNamespace>
 }
   type response = unit
-  @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeregisterScalableTargetCommand";
+  @module("@aws-sdk/client-application-autoscaling") @new external new_: (request) => t = "DeregisterScalableTargetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -159,7 +159,7 @@ module DeleteScheduledAction = {
 @as("ServiceNamespace") serviceNamespace: option<serviceNamespace>
 }
   type response = unit
-  @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeleteScheduledActionCommand";
+  @module("@aws-sdk/client-application-autoscaling") @new external new_: (request) => t = "DeleteScheduledActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -172,7 +172,7 @@ module DeleteScalingPolicy = {
 @as("PolicyName") policyName: option<resourceIdMaxLen1600>
 }
   type response = unit
-  @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DeleteScalingPolicyCommand";
+  @module("@aws-sdk/client-application-autoscaling") @new external new_: (request) => t = "DeleteScalingPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -188,7 +188,7 @@ module RegisterScalableTarget = {
 @as("ServiceNamespace") serviceNamespace: option<serviceNamespace>
 }
   type response = unit
-  @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "RegisterScalableTargetCommand";
+  @module("@aws-sdk/client-application-autoscaling") @new external new_: (request) => t = "RegisterScalableTargetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -206,7 +206,7 @@ module PutScheduledAction = {
 @as("ServiceNamespace") serviceNamespace: option<serviceNamespace>
 }
   type response = unit
-  @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "PutScheduledActionCommand";
+  @module("@aws-sdk/client-application-autoscaling") @new external new_: (request) => t = "PutScheduledActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -223,7 +223,7 @@ module DescribeScalingActivities = {
 @as("NextToken") nextToken: xmlString,
 @as("ScalingActivities") scalingActivities: scalingActivities
 }
-  @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeScalingActivitiesCommand";
+  @module("@aws-sdk/client-application-autoscaling") @new external new_: (request) => t = "DescribeScalingActivitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -241,7 +241,7 @@ module DescribeScheduledActions = {
 @as("NextToken") nextToken: xmlString,
 @as("ScheduledActions") scheduledActions: scheduledActions
 }
-  @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeScheduledActionsCommand";
+  @module("@aws-sdk/client-application-autoscaling") @new external new_: (request) => t = "DescribeScheduledActionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -258,7 +258,7 @@ module DescribeScalableTargets = {
 @as("NextToken") nextToken: xmlString,
 @as("ScalableTargets") scalableTargets: scalableTargets
 }
-  @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeScalableTargetsCommand";
+  @module("@aws-sdk/client-application-autoscaling") @new external new_: (request) => t = "DescribeScalableTargetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -277,7 +277,7 @@ module PutScalingPolicy = {
 @as("Alarms") alarms: alarms,
 @as("PolicyARN") policyARN: option<resourceIdMaxLen1600>
 }
-  @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "PutScalingPolicyCommand";
+  @module("@aws-sdk/client-application-autoscaling") @new external new_: (request) => t = "PutScalingPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -295,6 +295,6 @@ module DescribeScalingPolicies = {
 @as("NextToken") nextToken: xmlString,
 @as("ScalingPolicies") scalingPolicies: scalingPolicies
 }
-  @module("@aws-sdk/client-application-autoscaling") @new external new_: (Js.Promise.t<request>) => t = "DescribeScalingPoliciesCommand";
+  @module("@aws-sdk/client-application-autoscaling") @new external new_: (request) => t = "DescribeScalingPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

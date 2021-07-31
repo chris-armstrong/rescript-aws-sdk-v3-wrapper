@@ -248,7 +248,7 @@ module UpdatePreparedStatement = {
 @as("StatementName") statementName: option<statementName>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "UpdatePreparedStatementCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "UpdatePreparedStatementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -258,7 +258,7 @@ module StopQueryExecution = {
 @as("QueryExecutionId") queryExecutionId: option<queryExecutionId>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "StopQueryExecutionCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "StopQueryExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -269,7 +269,7 @@ module DeleteWorkGroup = {
 @as("WorkGroup") workGroup: option<workGroupName>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "DeleteWorkGroupCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "DeleteWorkGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -280,7 +280,7 @@ module DeletePreparedStatement = {
 @as("StatementName") statementName: option<statementName>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "DeletePreparedStatementCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "DeletePreparedStatementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -290,7 +290,7 @@ module DeleteNamedQuery = {
 @as("NamedQueryId") namedQueryId: option<namedQueryId>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "DeleteNamedQueryCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "DeleteNamedQueryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -300,7 +300,7 @@ module DeleteDataCatalog = {
 @as("Name") name: option<catalogNameString>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "DeleteDataCatalogCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "DeleteDataCatalogCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -313,7 +313,7 @@ module CreatePreparedStatement = {
 @as("StatementName") statementName: option<statementName>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "CreatePreparedStatementCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "CreatePreparedStatementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -330,7 +330,7 @@ module CreateNamedQuery = {
   type response = {
 @as("NamedQueryId") namedQueryId: namedQueryId
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "CreateNamedQueryCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "CreateNamedQueryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -343,7 +343,7 @@ module UpdateDataCatalog = {
 @as("Name") name: option<catalogNameString>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "UpdateDataCatalogCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "UpdateDataCatalogCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -354,7 +354,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -369,7 +369,7 @@ module ListQueryExecutions = {
 @as("NextToken") nextToken: token,
 @as("QueryExecutionIds") queryExecutionIds: queryExecutionIdList
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "ListQueryExecutionsCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "ListQueryExecutionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -384,7 +384,7 @@ module ListNamedQueries = {
 @as("NextToken") nextToken: token,
 @as("NamedQueryIds") namedQueryIds: namedQueryIdList
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "ListNamedQueriesCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "ListNamedQueriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -397,7 +397,7 @@ module GetPreparedStatement = {
   type response = {
 @as("PreparedStatement") preparedStatement: preparedStatement
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "GetPreparedStatementCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "GetPreparedStatementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -409,7 +409,7 @@ module GetNamedQuery = {
   type response = {
 @as("NamedQuery") namedQuery: namedQuery
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "GetNamedQueryCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "GetNamedQueryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -420,7 +420,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -436,7 +436,7 @@ module StartQueryExecution = {
   type response = {
 @as("QueryExecutionId") queryExecutionId: queryExecutionId
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "StartQueryExecutionCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "StartQueryExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -451,7 +451,7 @@ module ListTagsForResource = {
 @as("NextToken") nextToken: token,
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -466,7 +466,7 @@ module ListPreparedStatements = {
 @as("NextToken") nextToken: token,
 @as("PreparedStatements") preparedStatements: preparedStatementsList
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "ListPreparedStatementsCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "ListPreparedStatementsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -480,7 +480,7 @@ module ListEngineVersions = {
 @as("NextToken") nextToken: token,
 @as("EngineVersions") engineVersions: engineVersionsList
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "ListEngineVersionsCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "ListEngineVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -494,7 +494,7 @@ module ListDataCatalogs = {
 @as("NextToken") nextToken: token,
 @as("DataCatalogsSummary") dataCatalogsSummary: dataCatalogSummaryList
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "ListDataCatalogsCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "ListDataCatalogsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -507,7 +507,7 @@ module GetDatabase = {
   type response = {
 @as("Database") database: database
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "GetDatabaseCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "GetDatabaseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -519,7 +519,7 @@ module GetDataCatalog = {
   type response = {
 @as("DataCatalog") dataCatalog: dataCatalog
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "GetDataCatalogCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "GetDataCatalogCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -533,7 +533,7 @@ module CreateDataCatalog = {
 @as("Name") name: option<catalogNameString>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "CreateDataCatalogCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "CreateDataCatalogCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -546,7 +546,7 @@ module BatchGetNamedQuery = {
 @as("UnprocessedNamedQueryIds") unprocessedNamedQueryIds: unprocessedNamedQueryIdList,
 @as("NamedQueries") namedQueries: namedQueryList
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "BatchGetNamedQueryCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "BatchGetNamedQueryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -559,7 +559,7 @@ module UpdateWorkGroup = {
 @as("WorkGroup") workGroup: option<workGroupName>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "UpdateWorkGroupCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "UpdateWorkGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -573,7 +573,7 @@ module ListWorkGroups = {
 @as("NextToken") nextToken: token,
 @as("WorkGroups") workGroups: workGroupsList
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "ListWorkGroupsCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "ListWorkGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -588,7 +588,7 @@ module ListDatabases = {
 @as("NextToken") nextToken: token,
 @as("DatabaseList") databaseList: databaseList
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "ListDatabasesCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "ListDatabasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -602,7 +602,7 @@ module GetTableMetadata = {
   type response = {
 @as("TableMetadata") tableMetadata: tableMetadata
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "GetTableMetadataCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "GetTableMetadataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -614,7 +614,7 @@ module GetQueryExecution = {
   type response = {
 @as("QueryExecution") queryExecution: queryExecution
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "GetQueryExecutionCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "GetQueryExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -627,7 +627,7 @@ module CreateWorkGroup = {
 @as("Name") name: option<workGroupName>
 }
   type response = unit
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "CreateWorkGroupCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "CreateWorkGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -644,7 +644,7 @@ module ListTableMetadata = {
 @as("NextToken") nextToken: token,
 @as("TableMetadataList") tableMetadataList: tableMetadataList
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "ListTableMetadataCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "ListTableMetadataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -656,7 +656,7 @@ module GetWorkGroup = {
   type response = {
 @as("WorkGroup") workGroup: workGroup
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "GetWorkGroupCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "GetWorkGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -669,7 +669,7 @@ module BatchGetQueryExecution = {
 @as("UnprocessedQueryExecutionIds") unprocessedQueryExecutionIds: unprocessedQueryExecutionIdList,
 @as("QueryExecutions") queryExecutions: queryExecutionList
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "BatchGetQueryExecutionCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "BatchGetQueryExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -685,6 +685,6 @@ module GetQueryResults = {
 @as("ResultSet") resultSet: resultSet,
 @as("UpdateCount") updateCount: amazonawsLong
 }
-  @module("@aws-sdk/client-athena") @new external new_: (Js.Promise.t<request>) => t = "GetQueryResultsCommand";
+  @module("@aws-sdk/client-athena") @new external new_: (request) => t = "GetQueryResultsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

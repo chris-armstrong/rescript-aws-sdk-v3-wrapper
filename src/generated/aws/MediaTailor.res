@@ -191,7 +191,7 @@ module StopChannel = {
 @as("ChannelName") channelName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "StopChannelCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "StopChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -201,7 +201,7 @@ module StartChannel = {
 @as("ChannelName") channelName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "StartChannelCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "StartChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -212,7 +212,7 @@ module PutChannelPolicy = {
 @as("ChannelName") channelName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "PutChannelPolicyCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "PutChannelPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -224,7 +224,7 @@ module GetChannelPolicy = {
   type response = {
 @as("Policy") policy: __string
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "GetChannelPolicyCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "GetChannelPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -235,7 +235,7 @@ module DeleteVodSource = {
 @as("SourceLocationName") sourceLocationName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "DeleteVodSourceCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "DeleteVodSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -245,7 +245,7 @@ module DeleteSourceLocation = {
 @as("SourceLocationName") sourceLocationName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "DeleteSourceLocationCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "DeleteSourceLocationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -256,7 +256,7 @@ module DeleteProgram = {
 @as("ChannelName") channelName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "DeleteProgramCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "DeleteProgramCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -266,7 +266,7 @@ module DeletePlaybackConfiguration = {
 @as("Name") name: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "DeletePlaybackConfigurationCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "DeletePlaybackConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -276,7 +276,7 @@ module DeleteChannelPolicy = {
 @as("ChannelName") channelName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "DeleteChannelPolicyCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "DeleteChannelPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -286,7 +286,7 @@ module DeleteChannel = {
 @as("ChannelName") channelName: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "DeleteChannelCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "DeleteChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -308,7 +308,7 @@ module UpdateSourceLocation = {
 @as("Arn") arn: __string,
 @as("AccessConfiguration") accessConfiguration: accessConfiguration
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "UpdateSourceLocationCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "UpdateSourceLocationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -319,7 +319,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -330,7 +330,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -342,7 +342,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: __mapOf__string
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -361,7 +361,7 @@ module DescribeSourceLocation = {
 @as("Arn") arn: __string,
 @as("AccessConfiguration") accessConfiguration: accessConfiguration
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "DescribeSourceLocationCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "DescribeSourceLocationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -384,7 +384,7 @@ module CreateSourceLocation = {
 @as("Arn") arn: __string,
 @as("AccessConfiguration") accessConfiguration: accessConfiguration
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "CreateSourceLocationCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "CreateSourceLocationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -404,7 +404,7 @@ module UpdateVodSource = {
 @as("CreationTime") creationTime: __timestampUnix,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "UpdateVodSourceCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "UpdateVodSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -446,7 +446,7 @@ module PutPlaybackConfiguration = {
 @as("AvailSuppression") availSuppression: availSuppression,
 @as("AdDecisionServerUrl") adDecisionServerUrl: __string
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "PutPlaybackConfigurationCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "PutPlaybackConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -475,7 +475,7 @@ module GetPlaybackConfiguration = {
 @as("AvailSuppression") availSuppression: availSuppression,
 @as("AdDecisionServerUrl") adDecisionServerUrl: __string
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "GetPlaybackConfigurationCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "GetPlaybackConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -491,7 +491,7 @@ module GetChannelSchedule = {
 @as("NextToken") nextToken: __string,
 @as("Items") items: __listOfScheduleEntry
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "GetChannelScheduleCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "GetChannelScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -510,7 +510,7 @@ module DescribeVodSource = {
 @as("CreationTime") creationTime: __timestampUnix,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "DescribeVodSourceCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "DescribeVodSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -531,7 +531,7 @@ module CreateVodSource = {
 @as("CreationTime") creationTime: __timestampUnix,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "CreateVodSourceCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "CreateVodSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -551,7 +551,7 @@ module UpdateChannel = {
 @as("ChannelName") channelName: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "UpdateChannelCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "UpdateChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -565,7 +565,7 @@ module ListSourceLocations = {
 @as("NextToken") nextToken: __string,
 @as("Items") items: __listOfSourceLocation
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "ListSourceLocationsCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "ListSourceLocationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -584,7 +584,7 @@ module DescribeProgram = {
 @as("Arn") arn: __string,
 @as("AdBreaks") adBreaks: __listOfAdBreak
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "DescribeProgramCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "DescribeProgramCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -603,7 +603,7 @@ module DescribeChannel = {
 @as("ChannelName") channelName: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "DescribeChannelCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "DescribeChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -626,7 +626,7 @@ module CreateProgram = {
 @as("Arn") arn: __string,
 @as("AdBreaks") adBreaks: __listOfAdBreak
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "CreateProgramCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "CreateProgramCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -648,7 +648,7 @@ module CreateChannel = {
 @as("ChannelName") channelName: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "CreateChannelCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "CreateChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -663,7 +663,7 @@ module ListVodSources = {
 @as("NextToken") nextToken: __string,
 @as("Items") items: __listOfVodSource
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "ListVodSourcesCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "ListVodSourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -677,7 +677,7 @@ module ListPlaybackConfigurations = {
 @as("NextToken") nextToken: __string,
 @as("Items") items: __listOfPlaybackConfiguration
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "ListPlaybackConfigurationsCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "ListPlaybackConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -691,6 +691,6 @@ module ListChannels = {
 @as("NextToken") nextToken: __string,
 @as("Items") items: __listOfChannel
 }
-  @module("@aws-sdk/client-mediatailor") @new external new_: (Js.Promise.t<request>) => t = "ListChannelsCommand";
+  @module("@aws-sdk/client-mediatailor") @new external new_: (request) => t = "ListChannelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -237,7 +237,7 @@ module UpdateMLModel = {
   type response = {
 @as("MLModelId") mLModelId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "UpdateMLModelCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "UpdateMLModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -250,7 +250,7 @@ module UpdateEvaluation = {
   type response = {
 @as("EvaluationId") evaluationId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "UpdateEvaluationCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "UpdateEvaluationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -263,7 +263,7 @@ module UpdateDataSource = {
   type response = {
 @as("DataSourceId") dataSourceId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "UpdateDataSourceCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "UpdateDataSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -276,7 +276,7 @@ module UpdateBatchPrediction = {
   type response = {
 @as("BatchPredictionId") batchPredictionId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "UpdateBatchPredictionCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "UpdateBatchPredictionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -304,7 +304,7 @@ module GetBatchPrediction = {
 @as("MLModelId") mLModelId: entityId,
 @as("BatchPredictionId") batchPredictionId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "GetBatchPredictionCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "GetBatchPredictionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -316,7 +316,7 @@ module DeleteMLModel = {
   type response = {
 @as("MLModelId") mLModelId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "DeleteMLModelCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "DeleteMLModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -328,7 +328,7 @@ module DeleteEvaluation = {
   type response = {
 @as("EvaluationId") evaluationId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "DeleteEvaluationCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "DeleteEvaluationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -340,7 +340,7 @@ module DeleteDataSource = {
   type response = {
 @as("DataSourceId") dataSourceId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "DeleteDataSourceCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "DeleteDataSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -352,7 +352,7 @@ module DeleteBatchPrediction = {
   type response = {
 @as("BatchPredictionId") batchPredictionId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "DeleteBatchPredictionCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "DeleteBatchPredictionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -367,7 +367,7 @@ module CreateEvaluation = {
   type response = {
 @as("EvaluationId") evaluationId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "CreateEvaluationCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "CreateEvaluationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -383,7 +383,7 @@ module CreateBatchPrediction = {
   type response = {
 @as("BatchPredictionId") batchPredictionId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "CreateBatchPredictionCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "CreateBatchPredictionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -416,7 +416,7 @@ module GetMLModel = {
 @as("TrainingDataSourceId") trainingDataSourceId: entityId,
 @as("MLModelId") mLModelId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "GetMLModelCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "GetMLModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -431,7 +431,7 @@ module DeleteTags = {
 @as("ResourceType") resourceType: taggableResourceType,
 @as("ResourceId") resourceId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "DeleteTagsCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "DeleteTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -444,7 +444,7 @@ module DeleteRealtimeEndpoint = {
 @as("RealtimeEndpointInfo") realtimeEndpointInfo: realtimeEndpointInfo,
 @as("MLModelId") mLModelId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "DeleteRealtimeEndpointCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "DeleteRealtimeEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -457,7 +457,7 @@ module CreateRealtimeEndpoint = {
 @as("RealtimeEndpointInfo") realtimeEndpointInfo: realtimeEndpointInfo,
 @as("MLModelId") mLModelId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "CreateRealtimeEndpointCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "CreateRealtimeEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -475,7 +475,7 @@ module CreateMLModel = {
   type response = {
 @as("MLModelId") mLModelId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "CreateMLModelCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "CreateMLModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -490,7 +490,7 @@ module CreateDataSourceFromS3 = {
   type response = {
 @as("DataSourceId") dataSourceId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "CreateDataSourceFromS3Command";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "CreateDataSourceFromS3Command";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -504,7 +504,7 @@ module Predict = {
   type response = {
 @as("Prediction") prediction: prediction
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "PredictCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "PredictCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -530,7 +530,7 @@ module GetEvaluation = {
 @as("MLModelId") mLModelId: entityId,
 @as("EvaluationId") evaluationId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "GetEvaluationCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "GetEvaluationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -562,7 +562,7 @@ module GetDataSource = {
 @as("DataLocationS3") dataLocationS3: s3Url,
 @as("DataSourceId") dataSourceId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "GetDataSourceCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "GetDataSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -577,7 +577,7 @@ module DescribeTags = {
 @as("ResourceType") resourceType: taggableResourceType,
 @as("ResourceId") resourceId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "DescribeTagsCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "DescribeTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -600,7 +600,7 @@ module DescribeBatchPredictions = {
 @as("NextToken") nextToken: stringType,
 @as("Results") results: batchPredictions
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "DescribeBatchPredictionsCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "DescribeBatchPredictionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -616,7 +616,7 @@ module CreateDataSourceFromRedshift = {
   type response = {
 @as("DataSourceId") dataSourceId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "CreateDataSourceFromRedshiftCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "CreateDataSourceFromRedshiftCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -632,7 +632,7 @@ module CreateDataSourceFromRDS = {
   type response = {
 @as("DataSourceId") dataSourceId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "CreateDataSourceFromRDSCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "CreateDataSourceFromRDSCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -647,7 +647,7 @@ module AddTags = {
 @as("ResourceType") resourceType: taggableResourceType,
 @as("ResourceId") resourceId: entityId
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "AddTagsCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "AddTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -670,7 +670,7 @@ module DescribeMLModels = {
 @as("NextToken") nextToken: stringType,
 @as("Results") results: mLModels
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "DescribeMLModelsCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "DescribeMLModelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -693,7 +693,7 @@ module DescribeEvaluations = {
 @as("NextToken") nextToken: stringType,
 @as("Results") results: evaluations
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "DescribeEvaluationsCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "DescribeEvaluationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -716,6 +716,6 @@ module DescribeDataSources = {
 @as("NextToken") nextToken: stringType,
 @as("Results") results: dataSources
 }
-  @module("@aws-sdk/client-machinelearning") @new external new_: (Js.Promise.t<request>) => t = "DescribeDataSourcesCommand";
+  @module("@aws-sdk/client-machinelearning") @new external new_: (request) => t = "DescribeDataSourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

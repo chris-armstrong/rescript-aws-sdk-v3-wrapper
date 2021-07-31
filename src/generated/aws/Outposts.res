@@ -62,7 +62,7 @@ module DeleteSite = {
 @as("SiteId") siteId: option<siteId>
 }
   type response = unit
-  @module("@aws-sdk/client-outposts") @new external new_: (Js.Promise.t<request>) => t = "DeleteSiteCommand";
+  @module("@aws-sdk/client-outposts") @new external new_: (request) => t = "DeleteSiteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -72,7 +72,7 @@ module DeleteOutpost = {
 @as("OutpostId") outpostId: option<outpostId>
 }
   type response = unit
-  @module("@aws-sdk/client-outposts") @new external new_: (Js.Promise.t<request>) => t = "DeleteOutpostCommand";
+  @module("@aws-sdk/client-outposts") @new external new_: (request) => t = "DeleteOutpostCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -83,7 +83,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-outposts") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-outposts") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -94,7 +94,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-outposts") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-outposts") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -106,7 +106,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-outposts") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-outposts") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -123,7 +123,7 @@ module GetOutpostInstanceTypes = {
 @as("NextToken") nextToken: token,
 @as("InstanceTypes") instanceTypes: instanceTypeListDefinition
 }
-  @module("@aws-sdk/client-outposts") @new external new_: (Js.Promise.t<request>) => t = "GetOutpostInstanceTypesCommand";
+  @module("@aws-sdk/client-outposts") @new external new_: (request) => t = "GetOutpostInstanceTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -135,7 +135,7 @@ module GetOutpost = {
   type response = {
 @as("Outpost") outpost: outpost
 }
-  @module("@aws-sdk/client-outposts") @new external new_: (Js.Promise.t<request>) => t = "GetOutpostCommand";
+  @module("@aws-sdk/client-outposts") @new external new_: (request) => t = "GetOutpostCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -152,7 +152,7 @@ module CreateOutpost = {
   type response = {
 @as("Outpost") outpost: outpost
 }
-  @module("@aws-sdk/client-outposts") @new external new_: (Js.Promise.t<request>) => t = "CreateOutpostCommand";
+  @module("@aws-sdk/client-outposts") @new external new_: (request) => t = "CreateOutpostCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -166,7 +166,7 @@ module ListSites = {
 @as("NextToken") nextToken: token,
 @as("Sites") sites: siteListDefinition
 }
-  @module("@aws-sdk/client-outposts") @new external new_: (Js.Promise.t<request>) => t = "ListSitesCommand";
+  @module("@aws-sdk/client-outposts") @new external new_: (request) => t = "ListSitesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -180,6 +180,6 @@ module ListOutposts = {
 @as("NextToken") nextToken: token,
 @as("Outposts") outposts: outpostListDefinition
 }
-  @module("@aws-sdk/client-outposts") @new external new_: (Js.Promise.t<request>) => t = "ListOutpostsCommand";
+  @module("@aws-sdk/client-outposts") @new external new_: (request) => t = "ListOutpostsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

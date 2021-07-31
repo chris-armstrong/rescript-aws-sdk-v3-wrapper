@@ -270,7 +270,7 @@ module UpdateThingRuntimeConfiguration = {
 @as("TelemetryConfiguration") telemetryConfiguration: telemetryConfigurationUpdate
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UpdateThingRuntimeConfigurationCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UpdateThingRuntimeConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -281,7 +281,7 @@ module UpdateSubscriptionDefinition = {
 @as("Name") name: __string
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UpdateSubscriptionDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UpdateSubscriptionDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -292,7 +292,7 @@ module UpdateResourceDefinition = {
 @as("Name") name: __string
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UpdateResourceDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UpdateResourceDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -303,7 +303,7 @@ module UpdateLoggerDefinition = {
 @as("LoggerDefinitionId") loggerDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UpdateLoggerDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UpdateLoggerDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -318,7 +318,7 @@ module UpdateGroupCertificateConfiguration = {
 @as("CertificateExpiryInMilliseconds") certificateExpiryInMilliseconds: __string,
 @as("CertificateAuthorityExpiryInMilliseconds") certificateAuthorityExpiryInMilliseconds: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UpdateGroupCertificateConfigurationCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UpdateGroupCertificateConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -329,7 +329,7 @@ module UpdateGroup = {
 @as("GroupId") groupId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UpdateGroupCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UpdateGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -340,7 +340,7 @@ module UpdateFunctionDefinition = {
 @as("FunctionDefinitionId") functionDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UpdateFunctionDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UpdateFunctionDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -351,7 +351,7 @@ module UpdateDeviceDefinition = {
 @as("DeviceDefinitionId") deviceDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UpdateDeviceDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UpdateDeviceDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -362,7 +362,7 @@ module UpdateCoreDefinition = {
 @as("CoreDefinitionId") coreDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UpdateCoreDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UpdateCoreDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -373,7 +373,7 @@ module UpdateConnectorDefinition = {
 @as("ConnectorDefinitionId") connectorDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UpdateConnectorDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UpdateConnectorDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -387,7 +387,7 @@ module UpdateConnectivityInfo = {
 @as("Version") version: __string,
 @as("Message") message: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UpdateConnectivityInfoCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UpdateConnectivityInfoCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -398,7 +398,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -409,7 +409,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -419,7 +419,7 @@ module StopBulkDeployment = {
 @as("BulkDeploymentId") bulkDeploymentId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "StopBulkDeploymentCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "StopBulkDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -435,7 +435,7 @@ module StartBulkDeployment = {
 @as("BulkDeploymentId") bulkDeploymentId: __string,
 @as("BulkDeploymentArn") bulkDeploymentArn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "StartBulkDeploymentCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "StartBulkDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -450,7 +450,7 @@ module ResetDeployments = {
 @as("DeploymentId") deploymentId: __string,
 @as("DeploymentArn") deploymentArn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ResetDeploymentsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ResetDeploymentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -462,7 +462,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tags
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -477,7 +477,7 @@ module ListSubscriptionDefinitionVersions = {
 @as("Versions") versions: __listOfVersionInformation,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListSubscriptionDefinitionVersionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListSubscriptionDefinitionVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -492,7 +492,7 @@ module ListResourceDefinitionVersions = {
 @as("Versions") versions: __listOfVersionInformation,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListResourceDefinitionVersionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListResourceDefinitionVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -507,7 +507,7 @@ module ListLoggerDefinitionVersions = {
 @as("Versions") versions: __listOfVersionInformation,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListLoggerDefinitionVersionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListLoggerDefinitionVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -521,7 +521,7 @@ module ListGroups = {
 @as("NextToken") nextToken: __string,
 @as("Groups") groups: __listOfGroupInformation
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListGroupsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -536,7 +536,7 @@ module ListGroupVersions = {
 @as("Versions") versions: __listOfVersionInformation,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListGroupVersionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListGroupVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -548,7 +548,7 @@ module ListGroupCertificateAuthorities = {
   type response = {
 @as("GroupCertificateAuthorities") groupCertificateAuthorities: __listOfGroupCertificateAuthorityProperties
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListGroupCertificateAuthoritiesCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListGroupCertificateAuthoritiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -563,7 +563,7 @@ module ListFunctionDefinitionVersions = {
 @as("Versions") versions: __listOfVersionInformation,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListFunctionDefinitionVersionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListFunctionDefinitionVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -578,7 +578,7 @@ module ListDeviceDefinitionVersions = {
 @as("Versions") versions: __listOfVersionInformation,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListDeviceDefinitionVersionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListDeviceDefinitionVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -593,7 +593,7 @@ module ListDeployments = {
 @as("NextToken") nextToken: __string,
 @as("Deployments") deployments: deployments
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListDeploymentsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListDeploymentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -608,7 +608,7 @@ module ListCoreDefinitionVersions = {
 @as("Versions") versions: __listOfVersionInformation,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListCoreDefinitionVersionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListCoreDefinitionVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -623,7 +623,7 @@ module ListConnectorDefinitionVersions = {
 @as("Versions") versions: __listOfVersionInformation,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListConnectorDefinitionVersionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListConnectorDefinitionVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -637,7 +637,7 @@ module ListBulkDeployments = {
 @as("NextToken") nextToken: __string,
 @as("BulkDeployments") bulkDeployments: bulkDeployments
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListBulkDeploymentsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListBulkDeploymentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -649,7 +649,7 @@ module GetThingRuntimeConfiguration = {
   type response = {
 @as("RuntimeConfiguration") runtimeConfiguration: runtimeConfiguration
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetThingRuntimeConfigurationCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetThingRuntimeConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -668,7 +668,7 @@ module GetSubscriptionDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetSubscriptionDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetSubscriptionDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -679,7 +679,7 @@ module GetServiceRoleForAccount = {
 @as("RoleArn") roleArn: __string,
 @as("AssociatedAt") associatedAt: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetServiceRoleForAccountCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetServiceRoleForAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -698,7 +698,7 @@ module GetResourceDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetResourceDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetResourceDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -717,7 +717,7 @@ module GetLoggerDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetLoggerDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetLoggerDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -734,7 +734,7 @@ module GetGroupVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetGroupVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetGroupVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -748,7 +748,7 @@ module GetGroupCertificateConfiguration = {
 @as("CertificateExpiryInMilliseconds") certificateExpiryInMilliseconds: __string,
 @as("CertificateAuthorityExpiryInMilliseconds") certificateAuthorityExpiryInMilliseconds: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetGroupCertificateConfigurationCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetGroupCertificateConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -763,7 +763,7 @@ module GetGroupCertificateAuthority = {
 @as("GroupCertificateAuthorityId") groupCertificateAuthorityId: __string,
 @as("GroupCertificateAuthorityArn") groupCertificateAuthorityArn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetGroupCertificateAuthorityCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetGroupCertificateAuthorityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -782,7 +782,7 @@ module GetGroup = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetGroupCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -801,7 +801,7 @@ module GetFunctionDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetFunctionDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetFunctionDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -820,7 +820,7 @@ module GetDeviceDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetDeviceDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetDeviceDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -837,7 +837,7 @@ module GetDeploymentStatus = {
 @as("DeploymentType") deploymentType: deploymentType,
 @as("DeploymentStatus") deploymentStatus: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentStatusCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetDeploymentStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -856,7 +856,7 @@ module GetCoreDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetCoreDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetCoreDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -875,7 +875,7 @@ module GetConnectorDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetConnectorDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetConnectorDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -888,7 +888,7 @@ module GetConnectivityInfo = {
 @as("Message") message: __string,
 @as("ConnectivityInfo") connectivityInfo: __listOfConnectivityInfo
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetConnectivityInfoCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetConnectivityInfoCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -905,7 +905,7 @@ module GetBulkDeploymentStatus = {
 @as("BulkDeploymentStatus") bulkDeploymentStatus: bulkDeploymentStatus,
 @as("BulkDeploymentMetrics") bulkDeploymentMetrics: bulkDeploymentMetrics
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetBulkDeploymentStatusCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetBulkDeploymentStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -918,7 +918,7 @@ module GetAssociatedRole = {
 @as("RoleArn") roleArn: __string,
 @as("AssociatedAt") associatedAt: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetAssociatedRoleCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetAssociatedRoleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -928,7 +928,7 @@ module DisassociateServiceRoleFromAccount = {
   type response = {
 @as("DisassociatedAt") disassociatedAt: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DisassociateServiceRoleFromAccountCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DisassociateServiceRoleFromAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -940,7 +940,7 @@ module DisassociateRoleFromGroup = {
   type response = {
 @as("DisassociatedAt") disassociatedAt: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DisassociateRoleFromGroupCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DisassociateRoleFromGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -950,7 +950,7 @@ module DeleteSubscriptionDefinition = {
 @as("SubscriptionDefinitionId") subscriptionDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DeleteSubscriptionDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteSubscriptionDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -960,7 +960,7 @@ module DeleteResourceDefinition = {
 @as("ResourceDefinitionId") resourceDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DeleteResourceDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteResourceDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -970,7 +970,7 @@ module DeleteLoggerDefinition = {
 @as("LoggerDefinitionId") loggerDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DeleteLoggerDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteLoggerDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -980,7 +980,7 @@ module DeleteGroup = {
 @as("GroupId") groupId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DeleteGroupCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -990,7 +990,7 @@ module DeleteFunctionDefinition = {
 @as("FunctionDefinitionId") functionDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DeleteFunctionDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteFunctionDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1000,7 +1000,7 @@ module DeleteDeviceDefinition = {
 @as("DeviceDefinitionId") deviceDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DeleteDeviceDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteDeviceDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1010,7 +1010,7 @@ module DeleteCoreDefinition = {
 @as("CoreDefinitionId") coreDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DeleteCoreDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteCoreDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1020,7 +1020,7 @@ module DeleteConnectorDefinition = {
 @as("ConnectorDefinitionId") connectorDefinitionId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DeleteConnectorDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteConnectorDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1037,7 +1037,7 @@ module CreateSubscriptionDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateSubscriptionDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateSubscriptionDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1057,7 +1057,7 @@ module CreateSoftwareUpdateJob = {
 @as("IotJobId") iotJobId: __string,
 @as("IotJobArn") iotJobArn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateSoftwareUpdateJobCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateSoftwareUpdateJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1074,7 +1074,7 @@ module CreateLoggerDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateLoggerDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateLoggerDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1097,7 +1097,7 @@ module CreateGroupVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateGroupVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateGroupVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1110,7 +1110,7 @@ module CreateGroupCertificateAuthority = {
   type response = {
 @as("GroupCertificateAuthorityArn") groupCertificateAuthorityArn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateGroupCertificateAuthorityCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateGroupCertificateAuthorityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1131,7 +1131,7 @@ module CreateGroup = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateGroupCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1148,7 +1148,7 @@ module CreateDeviceDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateDeviceDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateDeviceDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1165,7 +1165,7 @@ module CreateDeployment = {
 @as("DeploymentId") deploymentId: __string,
 @as("DeploymentArn") deploymentArn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateDeploymentCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1182,7 +1182,7 @@ module CreateCoreDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateCoreDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateCoreDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1194,7 +1194,7 @@ module AssociateServiceRoleToAccount = {
   type response = {
 @as("AssociatedAt") associatedAt: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "AssociateServiceRoleToAccountCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "AssociateServiceRoleToAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1207,7 +1207,7 @@ module AssociateRoleToGroup = {
   type response = {
 @as("AssociatedAt") associatedAt: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "AssociateRoleToGroupCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "AssociateRoleToGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1221,7 +1221,7 @@ module ListSubscriptionDefinitions = {
 @as("NextToken") nextToken: __string,
 @as("Definitions") definitions: __listOfDefinitionInformation
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListSubscriptionDefinitionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListSubscriptionDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1235,7 +1235,7 @@ module ListResourceDefinitions = {
 @as("NextToken") nextToken: __string,
 @as("Definitions") definitions: __listOfDefinitionInformation
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListResourceDefinitionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListResourceDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1249,7 +1249,7 @@ module ListLoggerDefinitions = {
 @as("NextToken") nextToken: __string,
 @as("Definitions") definitions: __listOfDefinitionInformation
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListLoggerDefinitionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListLoggerDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1263,7 +1263,7 @@ module ListFunctionDefinitions = {
 @as("NextToken") nextToken: __string,
 @as("Definitions") definitions: __listOfDefinitionInformation
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListFunctionDefinitionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListFunctionDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1277,7 +1277,7 @@ module ListDeviceDefinitions = {
 @as("NextToken") nextToken: __string,
 @as("Definitions") definitions: __listOfDefinitionInformation
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListDeviceDefinitionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListDeviceDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1291,7 +1291,7 @@ module ListCoreDefinitions = {
 @as("NextToken") nextToken: __string,
 @as("Definitions") definitions: __listOfDefinitionInformation
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListCoreDefinitionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListCoreDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1305,7 +1305,7 @@ module ListConnectorDefinitions = {
 @as("NextToken") nextToken: __string,
 @as("Definitions") definitions: __listOfDefinitionInformation
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListConnectorDefinitionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListConnectorDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1324,7 +1324,7 @@ module GetSubscriptionDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetSubscriptionDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetSubscriptionDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1342,7 +1342,7 @@ module GetLoggerDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetLoggerDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetLoggerDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1361,7 +1361,7 @@ module GetDeviceDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetDeviceDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetDeviceDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1379,7 +1379,7 @@ module GetCoreDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetCoreDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetCoreDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1400,7 +1400,7 @@ module CreateSubscriptionDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateSubscriptionDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateSubscriptionDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1421,7 +1421,7 @@ module CreateLoggerDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateLoggerDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateLoggerDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1442,7 +1442,7 @@ module CreateDeviceDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateDeviceDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateDeviceDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1463,7 +1463,7 @@ module CreateCoreDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateCoreDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateCoreDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1480,7 +1480,7 @@ module CreateConnectorDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateConnectorDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateConnectorDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1495,7 +1495,7 @@ module ListBulkDeploymentDetailedReports = {
 @as("NextToken") nextToken: __string,
 @as("Deployments") deployments: bulkDeploymentResults
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListBulkDeploymentDetailedReportsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListBulkDeploymentDetailedReportsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1514,7 +1514,7 @@ module GetConnectorDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetConnectorDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetConnectorDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1535,7 +1535,7 @@ module CreateConnectorDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateConnectorDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateConnectorDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1552,7 +1552,7 @@ module CreateResourceDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateResourceDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateResourceDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1569,7 +1569,7 @@ module GetResourceDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetResourceDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetResourceDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1590,7 +1590,7 @@ module CreateResourceDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateResourceDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateResourceDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1608,7 +1608,7 @@ module CreateFunctionDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateFunctionDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateFunctionDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1627,7 +1627,7 @@ module GetFunctionDefinitionVersion = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetFunctionDefinitionVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetFunctionDefinitionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1648,6 +1648,6 @@ module CreateFunctionDefinition = {
 @as("CreationTimestamp") creationTimestamp: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateFunctionDefinitionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateFunctionDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

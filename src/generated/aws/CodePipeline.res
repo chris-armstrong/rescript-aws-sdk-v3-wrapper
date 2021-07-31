@@ -548,7 +548,7 @@ module StopPipelineExecution = {
   type response = {
 @as("pipelineExecutionId") pipelineExecutionId: pipelineExecutionId
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "StopPipelineExecutionCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "StopPipelineExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -561,7 +561,7 @@ module StartPipelineExecution = {
   type response = {
 @as("pipelineExecutionId") pipelineExecutionId: pipelineExecutionId
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "StartPipelineExecutionCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "StartPipelineExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -576,7 +576,7 @@ module RetryStageExecution = {
   type response = {
 @as("pipelineExecutionId") pipelineExecutionId: pipelineExecutionId
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "RetryStageExecutionCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "RetryStageExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -586,7 +586,7 @@ module RegisterWebhookWithThirdParty = {
 @as("webhookName") webhookName: webhookName
 }
   type response = unit
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "RegisterWebhookWithThirdPartyCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "RegisterWebhookWithThirdPartyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -598,7 +598,7 @@ module EnableStageTransition = {
 @as("pipelineName") pipelineName: option<pipelineName>
 }
   
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "EnableStageTransitionCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "EnableStageTransitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -611,7 +611,7 @@ module DisableStageTransition = {
 @as("pipelineName") pipelineName: option<pipelineName>
 }
   
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "DisableStageTransitionCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "DisableStageTransitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -621,7 +621,7 @@ module DeregisterWebhookWithThirdParty = {
 @as("webhookName") webhookName: webhookName
 }
   type response = unit
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "DeregisterWebhookWithThirdPartyCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "DeregisterWebhookWithThirdPartyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -631,7 +631,7 @@ module DeleteWebhook = {
 @as("name") name: option<webhookName>
 }
   type response = unit
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "DeleteWebhookCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "DeleteWebhookCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -641,7 +641,7 @@ module DeletePipeline = {
 @as("name") name: option<pipelineName>
 }
   
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "DeletePipelineCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "DeletePipelineCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -653,7 +653,7 @@ module DeleteCustomActionType = {
 @as("category") category: option<actionCategory>
 }
   
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "DeleteCustomActionTypeCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "DeleteCustomActionTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -667,7 +667,7 @@ module AcknowledgeThirdPartyJob = {
   type response = {
 @as("status") status: jobStatus
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "AcknowledgeThirdPartyJobCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "AcknowledgeThirdPartyJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -680,7 +680,7 @@ module AcknowledgeJob = {
   type response = {
 @as("status") status: jobStatus
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "AcknowledgeJobCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "AcknowledgeJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -691,7 +691,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -705,7 +705,7 @@ module PutThirdPartyJobSuccessResult = {
 @as("jobId") jobId: option<thirdPartyJobId>
 }
   
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "PutThirdPartyJobSuccessResultCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutThirdPartyJobSuccessResultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -717,7 +717,7 @@ module PutThirdPartyJobFailureResult = {
 @as("jobId") jobId: option<thirdPartyJobId>
 }
   
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "PutThirdPartyJobFailureResultCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutThirdPartyJobFailureResultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -731,7 +731,7 @@ module PutJobSuccessResult = {
 @as("jobId") jobId: option<jobId>
 }
   
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "PutJobSuccessResultCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutJobSuccessResultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -742,7 +742,7 @@ module PutJobFailureResult = {
 @as("jobId") jobId: option<jobId>
 }
   
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "PutJobFailureResultCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutJobFailureResultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -758,7 +758,7 @@ module PutApprovalResult = {
   type response = {
 @as("approvedAt") approvedAt: amazonawsTimestamp
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "PutApprovalResultCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutApprovalResultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -774,7 +774,7 @@ module PutActionRevision = {
 @as("pipelineExecutionId") pipelineExecutionId: pipelineExecutionId,
 @as("newRevision") newRevision: amazonawsBoolean
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "PutActionRevisionCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutActionRevisionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -785,7 +785,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -798,7 +798,7 @@ module PollForThirdPartyJobs = {
   type response = {
 @as("jobs") jobs: thirdPartyJobList
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "PollForThirdPartyJobsCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PollForThirdPartyJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -813,7 +813,7 @@ module ListTagsForResource = {
 @as("nextToken") nextToken: nextToken,
 @as("tags") tags: tagList
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -827,7 +827,7 @@ module ListPipelines = {
 @as("nextToken") nextToken: nextToken,
 @as("pipelines") pipelines: pipelineList
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "ListPipelinesCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListPipelinesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -840,7 +840,7 @@ module GetPipelineExecution = {
   type response = {
 @as("pipelineExecution") pipelineExecution: pipelineExecution
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "GetPipelineExecutionCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "GetPipelineExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -860,7 +860,7 @@ module CreateCustomActionType = {
 @as("tags") tags: tagList,
 @as("actionType") actionType: option<actionType>
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "CreateCustomActionTypeCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "CreateCustomActionTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -873,7 +873,7 @@ module PutWebhook = {
   type response = {
 @as("webhook") webhook: listWebhookItem
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "PutWebhookCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PutWebhookCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -888,7 +888,7 @@ module ListPipelineExecutions = {
 @as("nextToken") nextToken: nextToken,
 @as("pipelineExecutionSummaries") pipelineExecutionSummaries: pipelineExecutionSummaryList
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "ListPipelineExecutionsCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListPipelineExecutionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -903,7 +903,7 @@ module ListActionTypes = {
 @as("nextToken") nextToken: nextToken,
 @as("actionTypes") actionTypes: option<actionTypeList>
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "ListActionTypesCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListActionTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -913,7 +913,7 @@ module UpdateActionType = {
 @as("actionType") actionType: option<actionTypeDeclaration>
 }
   
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "UpdateActionTypeCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "UpdateActionTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -927,7 +927,7 @@ module ListWebhooks = {
 @as("NextToken") nextToken: nextToken,
 @as("webhooks") webhooks: webhookList
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "ListWebhooksCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListWebhooksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -942,7 +942,7 @@ module GetActionType = {
   type response = {
 @as("actionType") actionType: actionTypeDeclaration
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "GetActionTypeCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "GetActionTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -958,7 +958,7 @@ module ListActionExecutions = {
 @as("nextToken") nextToken: nextToken,
 @as("actionExecutionDetails") actionExecutionDetails: actionExecutionDetailList
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "ListActionExecutionsCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "ListActionExecutionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -971,7 +971,7 @@ module GetThirdPartyJobDetails = {
   type response = {
 @as("jobDetails") jobDetails: thirdPartyJobDetails
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "GetThirdPartyJobDetailsCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "GetThirdPartyJobDetailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -987,7 +987,7 @@ module GetPipelineState = {
 @as("pipelineVersion") pipelineVersion: pipelineVersion,
 @as("pipelineName") pipelineName: pipelineName
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "GetPipelineStateCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "GetPipelineStateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -999,7 +999,7 @@ module GetJobDetails = {
   type response = {
 @as("jobDetails") jobDetails: jobDetails
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "GetJobDetailsCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "GetJobDetailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1011,7 +1011,7 @@ module UpdatePipeline = {
   type response = {
 @as("pipeline") pipeline: pipelineDeclaration
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "UpdatePipelineCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "UpdatePipelineCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1025,7 +1025,7 @@ module PollForJobs = {
   type response = {
 @as("jobs") jobs: jobList
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "PollForJobsCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "PollForJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1039,7 +1039,7 @@ module GetPipeline = {
 @as("metadata") metadata: pipelineMetadata,
 @as("pipeline") pipeline: pipelineDeclaration
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "GetPipelineCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "GetPipelineCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1053,6 +1053,6 @@ module CreatePipeline = {
 @as("tags") tags: tagList,
 @as("pipeline") pipeline: pipelineDeclaration
 }
-  @module("@aws-sdk/client-codepipeline") @new external new_: (Js.Promise.t<request>) => t = "CreatePipelineCommand";
+  @module("@aws-sdk/client-codepipeline") @new external new_: (request) => t = "CreatePipelineCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

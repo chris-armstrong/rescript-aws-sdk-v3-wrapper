@@ -100,7 +100,7 @@ module UploadDocuments = {
 @as("adds") adds: adds,
 @as("status") status: amazonawsString
 }
-  @module("@aws-sdk/client-cloudsearch") @new external new_: (Js.Promise.t<request>) => t = "UploadDocumentsCommand";
+  @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "UploadDocumentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -115,7 +115,7 @@ module Suggest = {
 @as("suggest") suggest: suggestModel,
 @as("status") status: suggestStatus
 }
-  @module("@aws-sdk/client-cloudsearch") @new external new_: (Js.Promise.t<request>) => t = "SuggestCommand";
+  @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "SuggestCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -143,6 +143,6 @@ module Search = {
 @as("hits") hits: hits,
 @as("status") status: searchStatus
 }
-  @module("@aws-sdk/client-cloudsearch") @new external new_: (Js.Promise.t<request>) => t = "SearchCommand";
+  @module("@aws-sdk/client-cloudsearch") @new external new_: (request) => t = "SearchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

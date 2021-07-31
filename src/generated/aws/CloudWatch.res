@@ -339,7 +339,7 @@ module SetAlarmState = {
 @as("AlarmName") alarmName: option<alarmName>
 }
   
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "SetAlarmStateCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "SetAlarmStateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -352,7 +352,7 @@ module GetMetricWidgetImage = {
   type response = {
 @as("MetricWidgetImage") metricWidgetImage: metricWidgetImage
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "GetMetricWidgetImageCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "GetMetricWidgetImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -366,7 +366,7 @@ module GetDashboard = {
 @as("DashboardBody") dashboardBody: dashboardBody,
 @as("DashboardArn") dashboardArn: dashboardArn
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "GetDashboardCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "GetDashboardCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -376,7 +376,7 @@ module DeleteMetricStream = {
 @as("Name") name: option<metricStreamName>
 }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DeleteMetricStreamCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DeleteMetricStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -387,7 +387,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -397,7 +397,7 @@ module StopMetricStreams = {
 @as("Names") names: option<metricStreamNames>
 }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "StopMetricStreamsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "StopMetricStreamsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -407,7 +407,7 @@ module StartMetricStreams = {
 @as("Names") names: option<metricStreamNames>
 }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "StartMetricStreamsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "StartMetricStreamsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -417,7 +417,7 @@ module EnableAlarmActions = {
 @as("AlarmNames") alarmNames: option<alarmNames>
 }
   
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "EnableAlarmActionsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "EnableAlarmActionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -427,7 +427,7 @@ module DisableAlarmActions = {
 @as("AlarmNames") alarmNames: option<alarmNames>
 }
   
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DisableAlarmActionsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DisableAlarmActionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -437,7 +437,7 @@ module DeleteDashboards = {
 @as("DashboardNames") dashboardNames: option<dashboardNames>
 }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DeleteDashboardsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DeleteDashboardsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -447,7 +447,7 @@ module DeleteAlarms = {
 @as("AlarmNames") alarmNames: option<alarmNames>
 }
   
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DeleteAlarmsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DeleteAlarmsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -458,7 +458,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -476,7 +476,7 @@ module PutMetricStream = {
   type response = {
 @as("Arn") arn: amazonResourceName
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "PutMetricStreamCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "PutMetricStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -489,7 +489,7 @@ module PutInsightRule = {
 @as("RuleName") ruleName: option<insightRuleName>
 }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "PutInsightRuleCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "PutInsightRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -502,7 +502,7 @@ module PutDashboard = {
   type response = {
 @as("DashboardValidationMessages") dashboardValidationMessages: dashboardValidationMessages
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "PutDashboardCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "PutDashboardCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -519,7 +519,7 @@ module PutCompositeAlarm = {
 @as("ActionsEnabled") actionsEnabled: actionsEnabled
 }
   
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "PutCompositeAlarmCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "PutCompositeAlarmCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -531,7 +531,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -545,7 +545,7 @@ module ListMetricStreams = {
 @as("Entries") entries: metricStreamEntries,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "ListMetricStreamsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "ListMetricStreamsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -559,7 +559,7 @@ module ListDashboards = {
 @as("NextToken") nextToken: nextToken,
 @as("DashboardEntries") dashboardEntries: dashboardEntries
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "ListDashboardsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "ListDashboardsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -580,7 +580,7 @@ module GetMetricStream = {
 @as("Name") name: metricStreamName,
 @as("Arn") arn: amazonResourceName
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "GetMetricStreamCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "GetMetricStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -592,7 +592,7 @@ module EnableInsightRules = {
   type response = {
 @as("Failures") failures: batchFailures
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "EnableInsightRulesCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "EnableInsightRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -604,7 +604,7 @@ module DisableInsightRules = {
   type response = {
 @as("Failures") failures: batchFailures
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DisableInsightRulesCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DisableInsightRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -618,7 +618,7 @@ module DescribeInsightRules = {
 @as("InsightRules") insightRules: insightRules,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DescribeInsightRulesCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DescribeInsightRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -638,7 +638,7 @@ module DescribeAlarmHistory = {
 @as("NextToken") nextToken: nextToken,
 @as("AlarmHistoryItems") alarmHistoryItems: alarmHistoryItems
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DescribeAlarmHistoryCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DescribeAlarmHistoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -650,7 +650,7 @@ module DeleteInsightRules = {
   type response = {
 @as("Failures") failures: batchFailures
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DeleteInsightRulesCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DeleteInsightRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -663,7 +663,7 @@ module DeleteAnomalyDetector = {
 @as("Namespace") namespace: option<namespace>
 }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DeleteAnomalyDetectorCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DeleteAnomalyDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -677,7 +677,7 @@ module PutAnomalyDetector = {
 @as("Namespace") namespace: option<namespace>
 }
   type response = unit
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "PutAnomalyDetectorCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "PutAnomalyDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -698,7 +698,7 @@ module GetMetricStatistics = {
 @as("Datapoints") datapoints: datapoints,
 @as("Label") label: metricLabel
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "GetMetricStatisticsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "GetMetricStatisticsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -709,7 +709,7 @@ module PutMetricData = {
 @as("Namespace") namespace: option<namespace>
 }
   
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "PutMetricDataCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "PutMetricDataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -726,7 +726,7 @@ module ListMetrics = {
 @as("NextToken") nextToken: nextToken,
 @as("Metrics") metrics: metrics
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "ListMetricsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "ListMetricsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -749,7 +749,7 @@ module GetInsightRuleReport = {
 @as("AggregationStatistic") aggregationStatistic: insightRuleAggregationStatistic,
 @as("KeyLabels") keyLabels: insightRuleContributorKeyLabels
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "GetInsightRuleReportCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "GetInsightRuleReportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -766,7 +766,7 @@ module DescribeAnomalyDetectors = {
 @as("NextToken") nextToken: nextToken,
 @as("AnomalyDetectors") anomalyDetectors: anomalyDetectors
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DescribeAnomalyDetectorsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DescribeAnomalyDetectorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -797,7 +797,7 @@ module PutMetricAlarm = {
 @as("AlarmName") alarmName: option<alarmName>
 }
   
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "PutMetricAlarmCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "PutMetricAlarmCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -817,7 +817,7 @@ module GetMetricData = {
 @as("NextToken") nextToken: nextToken,
 @as("MetricDataResults") metricDataResults: metricDataResults
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "GetMetricDataCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "GetMetricDataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -835,7 +835,7 @@ module DescribeAlarmsForMetric = {
   type response = {
 @as("MetricAlarms") metricAlarms: metricAlarms
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DescribeAlarmsForMetricCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DescribeAlarmsForMetricCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -857,6 +857,6 @@ module DescribeAlarms = {
 @as("MetricAlarms") metricAlarms: metricAlarms,
 @as("CompositeAlarms") compositeAlarms: compositeAlarms
 }
-  @module("@aws-sdk/client-monitoring") @new external new_: (Js.Promise.t<request>) => t = "DescribeAlarmsCommand";
+  @module("@aws-sdk/client-monitoring") @new external new_: (request) => t = "DescribeAlarmsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

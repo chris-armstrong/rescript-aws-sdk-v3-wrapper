@@ -257,7 +257,7 @@ module UpdateBrokerType = {
 @as("ClusterOperationArn") clusterOperationArn: __string,
 @as("ClusterArn") clusterArn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "UpdateBrokerTypeCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "UpdateBrokerTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -272,7 +272,7 @@ module UpdateBrokerCount = {
 @as("ClusterOperationArn") clusterOperationArn: __string,
 @as("ClusterArn") clusterArn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "UpdateBrokerCountCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "UpdateBrokerCountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -287,7 +287,7 @@ module GetBootstrapBrokers = {
 @as("BootstrapBrokerStringTls") bootstrapBrokerStringTls: __string,
 @as("BootstrapBrokerString") bootstrapBrokerString: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "GetBootstrapBrokersCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "GetBootstrapBrokersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -304,7 +304,7 @@ module DescribeConfigurationRevision = {
 @as("CreationTime") creationTime: __timestampIso8601,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "DescribeConfigurationRevisionCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "DescribeConfigurationRevisionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -317,7 +317,7 @@ module DeleteConfiguration = {
 @as("State") state: configurationState,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "DeleteConfigurationCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "DeleteConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -331,7 +331,7 @@ module DeleteCluster = {
 @as("State") state: clusterState,
 @as("ClusterArn") clusterArn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "DeleteClusterCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "DeleteClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -346,7 +346,7 @@ module UpdateConfiguration = {
 @as("LatestRevision") latestRevision: configurationRevision,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "UpdateConfigurationCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "UpdateConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -362,7 +362,7 @@ module UpdateClusterKafkaVersion = {
 @as("ClusterOperationArn") clusterOperationArn: __string,
 @as("ClusterArn") clusterArn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "UpdateClusterKafkaVersionCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "UpdateClusterKafkaVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -377,7 +377,7 @@ module UpdateClusterConfiguration = {
 @as("ClusterOperationArn") clusterOperationArn: __string,
 @as("ClusterArn") clusterArn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "UpdateClusterConfigurationCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "UpdateClusterConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -388,7 +388,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -399,7 +399,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -413,7 +413,7 @@ module RebootBroker = {
 @as("ClusterOperationArn") clusterOperationArn: __string,
 @as("ClusterArn") clusterArn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "RebootBrokerCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "RebootBrokerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -425,7 +425,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: __mapOf__string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -440,7 +440,7 @@ module ListScramSecrets = {
 @as("SecretArnList") secretArnList: __listOf__string,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "ListScramSecretsCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "ListScramSecretsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -458,7 +458,7 @@ module DescribeConfiguration = {
 @as("CreationTime") creationTime: __timestampIso8601,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "DescribeConfigurationCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "DescribeConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -477,7 +477,7 @@ module CreateConfiguration = {
 @as("CreationTime") creationTime: __timestampIso8601,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "CreateConfigurationCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "CreateConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -492,7 +492,7 @@ module UpdateBrokerStorage = {
 @as("ClusterOperationArn") clusterOperationArn: __string,
 @as("ClusterArn") clusterArn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "UpdateBrokerStorageCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "UpdateBrokerStorageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -506,7 +506,7 @@ module ListKafkaVersions = {
 @as("NextToken") nextToken: __string,
 @as("KafkaVersions") kafkaVersions: __listOfKafkaVersion
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "ListKafkaVersionsCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "ListKafkaVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -521,7 +521,7 @@ module ListConfigurationRevisions = {
 @as("Revisions") revisions: __listOfConfigurationRevision,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "ListConfigurationRevisionsCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "ListConfigurationRevisionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -535,7 +535,7 @@ module BatchDisassociateScramSecret = {
 @as("UnprocessedScramSecrets") unprocessedScramSecrets: __listOfUnprocessedScramSecret,
 @as("ClusterArn") clusterArn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "BatchDisassociateScramSecretCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "BatchDisassociateScramSecretCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -549,7 +549,7 @@ module BatchAssociateScramSecret = {
 @as("UnprocessedScramSecrets") unprocessedScramSecrets: __listOfUnprocessedScramSecret,
 @as("ClusterArn") clusterArn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "BatchAssociateScramSecretCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "BatchAssociateScramSecretCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -566,7 +566,7 @@ module UpdateMonitoring = {
 @as("ClusterOperationArn") clusterOperationArn: __string,
 @as("ClusterArn") clusterArn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "UpdateMonitoringCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "UpdateMonitoringCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -580,7 +580,7 @@ module ListConfigurations = {
 @as("NextToken") nextToken: __string,
 @as("Configurations") configurations: __listOfConfiguration
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "ListConfigurationsCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "ListConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -592,7 +592,7 @@ module GetCompatibleKafkaVersions = {
   type response = {
 @as("CompatibleKafkaVersions") compatibleKafkaVersions: __listOfCompatibleKafkaVersion
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "GetCompatibleKafkaVersionsCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "GetCompatibleKafkaVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -616,7 +616,7 @@ module CreateCluster = {
 @as("ClusterName") clusterName: __string,
 @as("ClusterArn") clusterArn: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "CreateClusterCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "CreateClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -631,7 +631,7 @@ module ListNodes = {
 @as("NodeInfoList") nodeInfoList: __listOfNodeInfo,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "ListNodesCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "ListNodesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -643,7 +643,7 @@ module DescribeCluster = {
   type response = {
 @as("ClusterInfo") clusterInfo: clusterInfo
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "DescribeClusterCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "DescribeClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -658,7 +658,7 @@ module ListClusters = {
 @as("NextToken") nextToken: __string,
 @as("ClusterInfoList") clusterInfoList: __listOfClusterInfo
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "ListClustersCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "ListClustersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -670,7 +670,7 @@ module DescribeClusterOperation = {
   type response = {
 @as("ClusterOperationInfo") clusterOperationInfo: clusterOperationInfo
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "DescribeClusterOperationCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "DescribeClusterOperationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -685,6 +685,6 @@ module ListClusterOperations = {
 @as("NextToken") nextToken: __string,
 @as("ClusterOperationInfoList") clusterOperationInfoList: __listOfClusterOperationInfo
 }
-  @module("@aws-sdk/client-kafka") @new external new_: (Js.Promise.t<request>) => t = "ListClusterOperationsCommand";
+  @module("@aws-sdk/client-kafka") @new external new_: (request) => t = "ListClusterOperationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

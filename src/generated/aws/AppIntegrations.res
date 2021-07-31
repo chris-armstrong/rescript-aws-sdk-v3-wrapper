@@ -51,7 +51,7 @@ module UpdateEventIntegration = {
 @as("Name") name: option<name>
 }
   type response = unit
-  @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "UpdateEventIntegrationCommand";
+  @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "UpdateEventIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -61,7 +61,7 @@ module DeleteEventIntegration = {
 @as("Name") name: option<name>
 }
   type response = unit
-  @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "DeleteEventIntegrationCommand";
+  @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "DeleteEventIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -72,7 +72,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -83,7 +83,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -95,7 +95,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -112,7 +112,7 @@ module GetEventIntegration = {
 @as("Description") description: description,
 @as("Name") name: name
 }
-  @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "GetEventIntegrationCommand";
+  @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "GetEventIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -129,7 +129,7 @@ module CreateEventIntegration = {
   type response = {
 @as("EventIntegrationArn") eventIntegrationArn: arn
 }
-  @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "CreateEventIntegrationCommand";
+  @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "CreateEventIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -143,7 +143,7 @@ module ListEventIntegrations = {
 @as("NextToken") nextToken: nextToken,
 @as("EventIntegrations") eventIntegrations: eventIntegrationsList
 }
-  @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "ListEventIntegrationsCommand";
+  @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "ListEventIntegrationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -158,6 +158,6 @@ module ListEventIntegrationAssociations = {
 @as("NextToken") nextToken: nextToken,
 @as("EventIntegrationAssociations") eventIntegrationAssociations: eventIntegrationAssociationsList
 }
-  @module("@aws-sdk/client-app-integrations") @new external new_: (Js.Promise.t<request>) => t = "ListEventIntegrationAssociationsCommand";
+  @module("@aws-sdk/client-app-integrations") @new external new_: (request) => t = "ListEventIntegrationAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

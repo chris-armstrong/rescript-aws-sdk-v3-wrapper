@@ -10,6 +10,24 @@ var Belt_Option = require("rescript/lib/js/belt_Option.js");
 var Caml_option = require("rescript/lib/js/caml_option.js");
 var Caml_exceptions = require("rescript/lib/js/caml_exceptions.js");
 
+var reservedWords = [
+  "open",
+  "private",
+  "as",
+  "external",
+  "public",
+  "protected",
+  "string",
+  "bool",
+  "integer",
+  "object",
+  "type",
+  "let",
+  "and",
+  "open",
+  ""
+];
+
 function safeMemberName(name) {
   switch (name) {
     case "Type" :
@@ -218,7 +236,7 @@ function generateOperationModule(moduleName, param) {
   var commandName = Util.symbolName(name) + "Command";
   var request = generateOperationStructureType("request", input);
   var response = generateOperationStructureType("response", output);
-  var inputType = isOperationStructureNone(input) ? "Js.Promise.t<unit>" : "Js.Promise.t<request>";
+  var inputType = isOperationStructureNone(input) ? "unit" : "request";
   var outputType = isOperationStructureNone(output) ? "Js.Promise.t<unit>" : "Js.Promise.t<response>";
   return "module " + Util.symbolName(name) + " = {\n" + "  type t;\n" + ("  " + request + "\n") + ("  " + response + "\n") + ("  @module(\"@aws-sdk/client-" + moduleName + "\") @new external new_: (" + inputType + ") => t = \"" + commandName + "\";\n") + ("  @send external rawSend: (clientType, t) => " + outputType + " = \"send\";\n") + "}\n";
 }
@@ -279,6 +297,7 @@ function generateRecursiveTypeBlock(serviceName, shapes) {
               }));
 }
 
+exports.reservedWords = reservedWords;
 exports.safeMemberName = safeMemberName;
 exports.safeTypeName = safeTypeName;
 exports.safeConstructorName = safeConstructorName;

@@ -183,7 +183,7 @@ module StopRxNormInferenceJob = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "StopRxNormInferenceJobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "StopRxNormInferenceJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -195,7 +195,7 @@ module StopPHIDetectionJob = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "StopPHIDetectionJobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "StopPHIDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -207,7 +207,7 @@ module StopICD10CMInferenceJob = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "StopICD10CMInferenceJobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "StopICD10CMInferenceJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -219,7 +219,7 @@ module StopEntitiesDetectionV2Job = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "StopEntitiesDetectionV2JobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "StopEntitiesDetectionV2JobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -237,7 +237,7 @@ module StartRxNormInferenceJob = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "StartRxNormInferenceJobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "StartRxNormInferenceJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -255,7 +255,7 @@ module StartPHIDetectionJob = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "StartPHIDetectionJobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "StartPHIDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -273,7 +273,7 @@ module StartICD10CMInferenceJob = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "StartICD10CMInferenceJobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "StartICD10CMInferenceJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -291,7 +291,7 @@ module StartEntitiesDetectionV2Job = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "StartEntitiesDetectionV2JobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "StartEntitiesDetectionV2JobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -303,7 +303,7 @@ module DescribeRxNormInferenceJob = {
   type response = {
 @as("ComprehendMedicalAsyncJobProperties") comprehendMedicalAsyncJobProperties: comprehendMedicalAsyncJobProperties
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "DescribeRxNormInferenceJobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "DescribeRxNormInferenceJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -315,7 +315,7 @@ module DescribePHIDetectionJob = {
   type response = {
 @as("ComprehendMedicalAsyncJobProperties") comprehendMedicalAsyncJobProperties: comprehendMedicalAsyncJobProperties
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "DescribePHIDetectionJobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "DescribePHIDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -327,7 +327,7 @@ module DescribeICD10CMInferenceJob = {
   type response = {
 @as("ComprehendMedicalAsyncJobProperties") comprehendMedicalAsyncJobProperties: comprehendMedicalAsyncJobProperties
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "DescribeICD10CMInferenceJobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "DescribeICD10CMInferenceJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -339,7 +339,7 @@ module DescribeEntitiesDetectionV2Job = {
   type response = {
 @as("ComprehendMedicalAsyncJobProperties") comprehendMedicalAsyncJobProperties: comprehendMedicalAsyncJobProperties
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "DescribeEntitiesDetectionV2JobCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "DescribeEntitiesDetectionV2JobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -354,7 +354,7 @@ module ListRxNormInferenceJobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ComprehendMedicalAsyncJobPropertiesList") comprehendMedicalAsyncJobPropertiesList: comprehendMedicalAsyncJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "ListRxNormInferenceJobsCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "ListRxNormInferenceJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -369,7 +369,7 @@ module ListPHIDetectionJobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ComprehendMedicalAsyncJobPropertiesList") comprehendMedicalAsyncJobPropertiesList: comprehendMedicalAsyncJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "ListPHIDetectionJobsCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "ListPHIDetectionJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -384,7 +384,7 @@ module ListICD10CMInferenceJobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ComprehendMedicalAsyncJobPropertiesList") comprehendMedicalAsyncJobPropertiesList: comprehendMedicalAsyncJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "ListICD10CMInferenceJobsCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "ListICD10CMInferenceJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -399,7 +399,7 @@ module ListEntitiesDetectionV2Jobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ComprehendMedicalAsyncJobPropertiesList") comprehendMedicalAsyncJobPropertiesList: comprehendMedicalAsyncJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "ListEntitiesDetectionV2JobsCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "ListEntitiesDetectionV2JobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -413,7 +413,7 @@ module InferRxNorm = {
 @as("PaginationToken") paginationToken: amazonawsString,
 @as("Entities") entities: option<rxNormEntityList>
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "InferRxNormCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "InferRxNormCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -427,7 +427,7 @@ module InferICD10CM = {
 @as("PaginationToken") paginationToken: amazonawsString,
 @as("Entities") entities: option<iCD10CMEntityList>
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "InferICD10CMCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "InferICD10CMCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -441,7 +441,7 @@ module DetectPHI = {
 @as("PaginationToken") paginationToken: amazonawsString,
 @as("Entities") entities: option<entityList>
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "DetectPHICommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "DetectPHICommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -456,7 +456,7 @@ module DetectEntitiesV2 = {
 @as("UnmappedAttributes") unmappedAttributes: unmappedAttributeList,
 @as("Entities") entities: option<entityList>
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "DetectEntitiesV2Command";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "DetectEntitiesV2Command";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -471,6 +471,6 @@ module DetectEntities = {
 @as("UnmappedAttributes") unmappedAttributes: unmappedAttributeList,
 @as("Entities") entities: option<entityList>
 }
-  @module("@aws-sdk/client-comprehendmedical") @new external new_: (Js.Promise.t<request>) => t = "DetectEntitiesCommand";
+  @module("@aws-sdk/client-comprehendmedical") @new external new_: (request) => t = "DetectEntitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

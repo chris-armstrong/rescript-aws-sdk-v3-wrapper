@@ -465,7 +465,7 @@ module DeleteGroup = {
 @as("GroupName") groupName: groupName
 }
   type response = unit
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "DeleteGroupCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "DeleteGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -476,7 +476,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -489,7 +489,7 @@ module PutEncryptionConfig = {
   type response = {
 @as("EncryptionConfig") encryptionConfig: encryptionConfig
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "PutEncryptionConfigCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "PutEncryptionConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -499,7 +499,7 @@ module GetEncryptionConfig = {
   type response = {
 @as("EncryptionConfig") encryptionConfig: encryptionConfig
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetEncryptionConfigCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetEncryptionConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -514,7 +514,7 @@ module UpdateGroup = {
   type response = {
 @as("Group") group: group
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "UpdateGroupCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "UpdateGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -525,7 +525,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -537,7 +537,7 @@ module PutTraceSegments = {
   type response = {
 @as("UnprocessedTraceSegments") unprocessedTraceSegments: unprocessedTraceSegmentList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "PutTraceSegmentsCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "PutTraceSegmentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -551,7 +551,7 @@ module ListTagsForResource = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -565,7 +565,7 @@ module GetSamplingTargets = {
 @as("LastRuleModification") lastRuleModification: amazonawsTimestamp,
 @as("SamplingTargetDocuments") samplingTargetDocuments: samplingTargetDocumentList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetSamplingTargetsCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetSamplingTargetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -578,7 +578,7 @@ module GetSamplingStatisticSummaries = {
 @as("NextToken") nextToken: amazonawsString,
 @as("SamplingStatisticSummaries") samplingStatisticSummaries: samplingStatisticSummaryList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetSamplingStatisticSummariesCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetSamplingStatisticSummariesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -591,7 +591,7 @@ module GetGroup = {
   type response = {
 @as("Group") group: group
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetGroupCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -606,7 +606,7 @@ module CreateGroup = {
   type response = {
 @as("Group") group: group
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "CreateGroupCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "CreateGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -618,7 +618,7 @@ module UpdateSamplingRule = {
   type response = {
 @as("SamplingRuleRecord") samplingRuleRecord: samplingRuleRecord
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "UpdateSamplingRuleCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "UpdateSamplingRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -631,7 +631,7 @@ module PutTelemetryRecords = {
 @as("TelemetryRecords") telemetryRecords: option<telemetryRecordList>
 }
   type response = unit
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "PutTelemetryRecordsCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "PutTelemetryRecordsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -644,7 +644,7 @@ module GetGroups = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Groups") groups: groupSummaryList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetGroupsCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -657,7 +657,7 @@ module DeleteSamplingRule = {
   type response = {
 @as("SamplingRuleRecord") samplingRuleRecord: samplingRuleRecord
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "DeleteSamplingRuleCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "DeleteSamplingRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -670,7 +670,7 @@ module CreateSamplingRule = {
   type response = {
 @as("SamplingRuleRecord") samplingRuleRecord: samplingRuleRecord
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "CreateSamplingRuleCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "CreateSamplingRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -691,7 +691,7 @@ module GetTimeSeriesServiceStatistics = {
 @as("ContainsOldGroupVersions") containsOldGroupVersions: amazonawsBoolean,
 @as("TimeSeriesServiceStatistics") timeSeriesServiceStatistics: timeSeriesServiceStatisticsList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetTimeSeriesServiceStatisticsCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetTimeSeriesServiceStatisticsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -704,7 +704,7 @@ module GetSamplingRules = {
 @as("NextToken") nextToken: amazonawsString,
 @as("SamplingRuleRecords") samplingRuleRecords: samplingRuleRecordList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetSamplingRulesCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetSamplingRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -725,7 +725,7 @@ module GetInsightImpactGraph = {
 @as("StartTime") startTime: amazonawsTimestamp,
 @as("InsightId") insightId: insightId
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetInsightImpactGraphCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetInsightImpactGraphCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -740,7 +740,7 @@ module BatchGetTraces = {
 @as("UnprocessedTraceIds") unprocessedTraceIds: unprocessedTraceIdList,
 @as("Traces") traces: traceList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "BatchGetTracesCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "BatchGetTracesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -752,7 +752,7 @@ module GetInsight = {
   type response = {
 @as("Insight") insight: insight
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetInsightCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetInsightCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -771,7 +771,7 @@ module GetInsightSummaries = {
 @as("NextToken") nextToken: token,
 @as("InsightSummaries") insightSummaries: insightSummaryList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetInsightSummariesCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetInsightSummariesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -786,7 +786,7 @@ module GetInsightEvents = {
 @as("NextToken") nextToken: token,
 @as("InsightEvents") insightEvents: insightEventList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetInsightEventsCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetInsightEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -800,7 +800,7 @@ module GetTraceGraph = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Services") services: serviceList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetTraceGraphCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetTraceGraphCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -820,7 +820,7 @@ module GetServiceGraph = {
 @as("EndTime") endTime: amazonawsTimestamp,
 @as("StartTime") startTime: amazonawsTimestamp
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetServiceGraphCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetServiceGraphCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -841,6 +841,6 @@ module GetTraceSummaries = {
 @as("ApproximateTime") approximateTime: amazonawsTimestamp,
 @as("TraceSummaries") traceSummaries: traceSummaryList
 }
-  @module("@aws-sdk/client-xray") @new external new_: (Js.Promise.t<request>) => t = "GetTraceSummariesCommand";
+  @module("@aws-sdk/client-xray") @new external new_: (request) => t = "GetTraceSummariesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

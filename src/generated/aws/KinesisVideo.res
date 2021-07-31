@@ -91,7 +91,7 @@ module UpdateStream = {
 @as("StreamName") streamName: streamName
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "UpdateStreamCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "UpdateStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -105,7 +105,7 @@ module UpdateDataRetention = {
 @as("StreamName") streamName: streamName
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "UpdateDataRetentionCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "UpdateDataRetentionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -119,7 +119,7 @@ module GetDataEndpoint = {
   type response = {
 @as("DataEndpoint") dataEndpoint: dataEndpoint
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "GetDataEndpointCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetDataEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -130,7 +130,7 @@ module DeleteStream = {
 @as("StreamARN") streamARN: option<resourceARN>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "DeleteStreamCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "DeleteStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -141,7 +141,7 @@ module DeleteSignalingChannel = {
 @as("ChannelARN") channelARN: option<resourceARN>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "DeleteSignalingChannelCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "DeleteSignalingChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -153,7 +153,7 @@ module UpdateSignalingChannel = {
 @as("ChannelARN") channelARN: option<resourceARN>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "UpdateSignalingChannelCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "UpdateSignalingChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -165,7 +165,7 @@ module UntagStream = {
 @as("StreamARN") streamARN: resourceARN
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "UntagStreamCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "UntagStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -176,7 +176,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<resourceARN>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -188,7 +188,7 @@ module TagStream = {
 @as("StreamARN") streamARN: resourceARN
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "TagStreamCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "TagStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -203,7 +203,7 @@ module ListTagsForStream = {
 @as("Tags") tags: resourceTags,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForStreamCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "ListTagsForStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -217,7 +217,7 @@ module ListTagsForResource = {
 @as("Tags") tags: resourceTags,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -230,7 +230,7 @@ module DescribeStream = {
   type response = {
 @as("StreamInfo") streamInfo: streamInfo
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "DescribeStreamCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "DescribeStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -247,7 +247,7 @@ module CreateStream = {
   type response = {
 @as("StreamARN") streamARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "CreateStreamCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "CreateStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -258,7 +258,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<resourceARN>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -273,7 +273,7 @@ module ListStreams = {
 @as("NextToken") nextToken: nextToken,
 @as("StreamInfoList") streamInfoList: streamInfoList
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "ListStreamsCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "ListStreamsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -286,7 +286,7 @@ module GetSignalingChannelEndpoint = {
   type response = {
 @as("ResourceEndpointList") resourceEndpointList: resourceEndpointList
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "GetSignalingChannelEndpointCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetSignalingChannelEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -299,7 +299,7 @@ module DescribeSignalingChannel = {
   type response = {
 @as("ChannelInfo") channelInfo: channelInfo
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "DescribeSignalingChannelCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "DescribeSignalingChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -314,7 +314,7 @@ module CreateSignalingChannel = {
   type response = {
 @as("ChannelARN") channelARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "CreateSignalingChannelCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "CreateSignalingChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -329,6 +329,6 @@ module ListSignalingChannels = {
 @as("NextToken") nextToken: nextToken,
 @as("ChannelInfoList") channelInfoList: channelInfoList
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "ListSignalingChannelsCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "ListSignalingChannelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

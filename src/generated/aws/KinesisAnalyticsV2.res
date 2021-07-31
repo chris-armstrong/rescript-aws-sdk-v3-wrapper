@@ -668,7 +668,7 @@ module StopApplication = {
 @as("ApplicationName") applicationName: option<applicationName>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "StopApplicationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "StopApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -684,7 +684,7 @@ module DeleteApplicationVpcConfiguration = {
 @as("ApplicationVersionId") applicationVersionId: applicationVersionId,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationVpcConfigurationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationVpcConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -696,7 +696,7 @@ module DeleteApplicationSnapshot = {
 @as("ApplicationName") applicationName: option<applicationName>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationSnapshotCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -711,7 +711,7 @@ module DeleteApplicationReferenceDataSource = {
 @as("ApplicationVersionId") applicationVersionId: applicationVersionId,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationReferenceDataSourceCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationReferenceDataSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -726,7 +726,7 @@ module DeleteApplicationOutput = {
 @as("ApplicationVersionId") applicationVersionId: applicationVersionId,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationOutputCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationOutputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -741,7 +741,7 @@ module DeleteApplicationInputProcessingConfiguration = {
 @as("ApplicationVersionId") applicationVersionId: applicationVersionId,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationInputProcessingConfigurationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationInputProcessingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -752,7 +752,7 @@ module DeleteApplication = {
 @as("ApplicationName") applicationName: option<applicationName>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -763,7 +763,7 @@ module CreateApplicationSnapshot = {
 @as("ApplicationName") applicationName: option<applicationName>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "CreateApplicationSnapshotCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "CreateApplicationSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -777,7 +777,7 @@ module CreateApplicationPresignedUrl = {
   type response = {
 @as("AuthorizedUrl") authorizedUrl: authorizedUrl
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "CreateApplicationPresignedUrlCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "CreateApplicationPresignedUrlCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -791,7 +791,7 @@ module UpdateApplicationMaintenanceConfiguration = {
 @as("ApplicationMaintenanceConfigurationDescription") applicationMaintenanceConfigurationDescription: applicationMaintenanceConfigurationDescription,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "UpdateApplicationMaintenanceConfigurationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "UpdateApplicationMaintenanceConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -802,7 +802,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<kinesisAnalyticsARN>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -815,7 +815,7 @@ module DescribeApplicationSnapshot = {
   type response = {
 @as("SnapshotDetails") snapshotDetails: option<snapshotDetails>
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "DescribeApplicationSnapshotCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DescribeApplicationSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -826,7 +826,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<kinesisAnalyticsARN>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -838,7 +838,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tags
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -852,7 +852,7 @@ module ListApplications = {
 @as("NextToken") nextToken: applicationName,
 @as("ApplicationSummaries") applicationSummaries: option<applicationSummaries>
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationsCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "ListApplicationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -867,7 +867,7 @@ module ListApplicationVersions = {
 @as("NextToken") nextToken: nextToken,
 @as("ApplicationVersionSummaries") applicationVersionSummaries: applicationVersionSummaries
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationVersionsCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "ListApplicationVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -882,7 +882,7 @@ module ListApplicationSnapshots = {
 @as("NextToken") nextToken: nextToken,
 @as("SnapshotSummaries") snapshotSummaries: snapshotSummaries
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationSnapshotsCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "ListApplicationSnapshotsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -899,7 +899,7 @@ module DeleteApplicationCloudWatchLoggingOption = {
 @as("ApplicationVersionId") applicationVersionId: applicationVersionId,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationCloudWatchLoggingOptionCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DeleteApplicationCloudWatchLoggingOptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -916,7 +916,7 @@ module AddApplicationVpcConfiguration = {
 @as("ApplicationVersionId") applicationVersionId: applicationVersionId,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "AddApplicationVpcConfigurationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationVpcConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -934,7 +934,7 @@ module AddApplicationInputProcessingConfiguration = {
 @as("ApplicationVersionId") applicationVersionId: applicationVersionId,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "AddApplicationInputProcessingConfigurationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationInputProcessingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -951,7 +951,7 @@ module AddApplicationCloudWatchLoggingOption = {
 @as("ApplicationVersionId") applicationVersionId: applicationVersionId,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "AddApplicationCloudWatchLoggingOptionCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationCloudWatchLoggingOptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -967,7 +967,7 @@ module AddApplicationOutput = {
 @as("ApplicationVersionId") applicationVersionId: applicationVersionId,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "AddApplicationOutputCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationOutputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -978,7 +978,7 @@ module StartApplication = {
 @as("ApplicationName") applicationName: option<applicationName>
 }
   type response = unit
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "StartApplicationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "StartApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -997,7 +997,7 @@ module DiscoverInputSchema = {
 @as("ParsedInputRecords") parsedInputRecords: parsedInputRecords,
 @as("InputSchema") inputSchema: sourceSchema
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "DiscoverInputSchemaCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DiscoverInputSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1013,7 +1013,7 @@ module AddApplicationReferenceDataSource = {
 @as("ApplicationVersionId") applicationVersionId: applicationVersionId,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "AddApplicationReferenceDataSourceCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationReferenceDataSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1029,7 +1029,7 @@ module AddApplicationInput = {
 @as("ApplicationVersionId") applicationVersionId: applicationVersionId,
 @as("ApplicationARN") applicationARN: resourceARN
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "AddApplicationInputCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "AddApplicationInputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1047,7 +1047,7 @@ module UpdateApplication = {
   type response = {
 @as("ApplicationDetail") applicationDetail: option<applicationDetail>
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "UpdateApplicationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "UpdateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1060,7 +1060,7 @@ module RollbackApplication = {
   type response = {
 @as("ApplicationDetail") applicationDetail: option<applicationDetail>
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "RollbackApplicationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "RollbackApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1073,7 +1073,7 @@ module DescribeApplicationVersion = {
   type response = {
 @as("ApplicationVersionDetail") applicationVersionDetail: applicationDetail
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "DescribeApplicationVersionCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DescribeApplicationVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1086,7 +1086,7 @@ module DescribeApplication = {
   type response = {
 @as("ApplicationDetail") applicationDetail: option<applicationDetail>
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "DescribeApplicationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "DescribeApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1105,6 +1105,6 @@ module CreateApplication = {
   type response = {
 @as("ApplicationDetail") applicationDetail: option<applicationDetail>
 }
-  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (Js.Promise.t<request>) => t = "CreateApplicationCommand";
+  @module("@aws-sdk/client-kinesisanalytics") @new external new_: (request) => t = "CreateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

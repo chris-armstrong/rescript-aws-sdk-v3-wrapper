@@ -1749,7 +1749,7 @@ module DescribeInputDeviceThumbnail = {
 @as("ContentType") contentType: contentType,
 @as("Body") body: inputDeviceThumbnail
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DescribeInputDeviceThumbnailCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DescribeInputDeviceThumbnailCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1759,7 +1759,7 @@ module DeleteSchedule = {
 @as("ChannelId") channelId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DeleteScheduleCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DeleteScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1769,7 +1769,7 @@ module DeleteInputSecurityGroup = {
 @as("InputSecurityGroupId") inputSecurityGroupId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DeleteInputSecurityGroupCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DeleteInputSecurityGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1779,7 +1779,7 @@ module DeleteInput = {
 @as("InputId") inputId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DeleteInputCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DeleteInputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1791,7 +1791,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tags
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1820,7 +1820,7 @@ module DescribeReservation = {
 @as("Count") count: __integer,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DescribeReservationCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DescribeReservationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1842,7 +1842,7 @@ module DescribeOffering = {
 @as("CurrencyCode") currencyCode: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DescribeOfferingCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DescribeOfferingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1853,7 +1853,7 @@ module DeleteTags = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DeleteTagsCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DeleteTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1882,7 +1882,7 @@ module DeleteReservation = {
 @as("Count") count: __integer,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DeleteReservationCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DeleteReservationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1893,7 +1893,7 @@ module CreateTags = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "CreateTagsCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "CreateTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1906,7 +1906,7 @@ module UpdateReservation = {
   type response = {
 @as("Reservation") reservation: reservation
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "UpdateReservationCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "UpdateReservationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1932,7 +1932,7 @@ module UpdateInputDevice = {
 @as("ConnectionState") connectionState: inputDeviceConnectionState,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "UpdateInputDeviceCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "UpdateInputDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1945,7 +1945,7 @@ module TransferInputDevice = {
 @as("InputDeviceId") inputDeviceId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "TransferInputDeviceCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "TransferInputDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1955,7 +1955,7 @@ module RejectInputDeviceTransfer = {
 @as("InputDeviceId") inputDeviceId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "RejectInputDeviceTransferCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "RejectInputDeviceTransferCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1972,7 +1972,7 @@ module PurchaseOffering = {
   type response = {
 @as("Reservation") reservation: reservation
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "PurchaseOfferingCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "PurchaseOfferingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1987,7 +1987,7 @@ module ListMultiplexPrograms = {
 @as("NextToken") nextToken: __string,
 @as("MultiplexPrograms") multiplexPrograms: __listOfMultiplexProgramSummary
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "ListMultiplexProgramsCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "ListMultiplexProgramsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2002,7 +2002,7 @@ module ListInputDeviceTransfers = {
 @as("NextToken") nextToken: __string,
 @as("InputDeviceTransfers") inputDeviceTransfers: __listOfTransferringInputDeviceSummary
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "ListInputDeviceTransfersCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "ListInputDeviceTransfersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2019,7 +2019,7 @@ module DescribeInputSecurityGroup = {
 @as("Id") id: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DescribeInputSecurityGroupCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DescribeInputSecurityGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2042,7 +2042,7 @@ module DescribeInputDevice = {
 @as("ConnectionState") connectionState: inputDeviceConnectionState,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DescribeInputDeviceCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DescribeInputDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2052,7 +2052,7 @@ module CancelInputDeviceTransfer = {
 @as("InputDeviceId") inputDeviceId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "CancelInputDeviceTransferCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "CancelInputDeviceTransferCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2066,7 +2066,7 @@ module BatchStop = {
 @as("Successful") successful: __listOfBatchSuccessfulResultModel,
 @as("Failed") failed: __listOfBatchFailedResultModel
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "BatchStopCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "BatchStopCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2080,7 +2080,7 @@ module BatchStart = {
 @as("Successful") successful: __listOfBatchSuccessfulResultModel,
 @as("Failed") failed: __listOfBatchFailedResultModel
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "BatchStartCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "BatchStartCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2096,7 +2096,7 @@ module BatchDelete = {
 @as("Successful") successful: __listOfBatchSuccessfulResultModel,
 @as("Failed") failed: __listOfBatchFailedResultModel
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "BatchDeleteCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "BatchDeleteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2106,7 +2106,7 @@ module AcceptInputDeviceTransfer = {
 @as("InputDeviceId") inputDeviceId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "AcceptInputDeviceTransferCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "AcceptInputDeviceTransferCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2120,7 +2120,7 @@ module UpdateInputSecurityGroup = {
   type response = {
 @as("SecurityGroup") securityGroup: inputSecurityGroup
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "UpdateInputSecurityGroupCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "UpdateInputSecurityGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2141,7 +2141,7 @@ module StopMultiplex = {
 @as("AvailabilityZones") availabilityZones: __listOf__string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "StopMultiplexCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "StopMultiplexCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2162,7 +2162,7 @@ module StartMultiplex = {
 @as("AvailabilityZones") availabilityZones: __listOf__string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "StartMultiplexCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "StartMultiplexCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2184,7 +2184,7 @@ module ListReservations = {
 @as("Reservations") reservations: __listOfReservation,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "ListReservationsCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "ListReservationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2208,7 +2208,7 @@ module ListOfferings = {
 @as("Offerings") offerings: __listOfOffering,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "ListOfferingsCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "ListOfferingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2222,7 +2222,7 @@ module ListMultiplexes = {
 @as("NextToken") nextToken: __string,
 @as("Multiplexes") multiplexes: __listOfMultiplexSummary
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "ListMultiplexesCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "ListMultiplexesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2239,7 +2239,7 @@ module DescribeMultiplexProgram = {
 @as("MultiplexProgramSettings") multiplexProgramSettings: multiplexProgramSettings,
 @as("ChannelId") channelId: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DescribeMultiplexProgramCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DescribeMultiplexProgramCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2260,7 +2260,7 @@ module DescribeMultiplex = {
 @as("AvailabilityZones") availabilityZones: __listOf__string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DescribeMultiplexCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DescribeMultiplexCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2287,7 +2287,7 @@ module DescribeInput = {
 @as("AttachedChannels") attachedChannels: __listOf__string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DescribeInputCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DescribeInputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2304,7 +2304,7 @@ module DeleteMultiplexProgram = {
 @as("MultiplexProgramSettings") multiplexProgramSettings: multiplexProgramSettings,
 @as("ChannelId") channelId: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DeleteMultiplexProgramCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DeleteMultiplexProgramCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2325,7 +2325,7 @@ module DeleteMultiplex = {
 @as("AvailabilityZones") availabilityZones: __listOf__string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DeleteMultiplexCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DeleteMultiplexCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2338,7 +2338,7 @@ module CreateInputSecurityGroup = {
   type response = {
 @as("SecurityGroup") securityGroup: inputSecurityGroup
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "CreateInputSecurityGroupCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "CreateInputSecurityGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2352,7 +2352,7 @@ module UpdateMultiplexProgram = {
   type response = {
 @as("MultiplexProgram") multiplexProgram: multiplexProgram
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "UpdateMultiplexProgramCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "UpdateMultiplexProgramCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2366,7 +2366,7 @@ module UpdateMultiplex = {
   type response = {
 @as("Multiplex") multiplex: multiplex
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "UpdateMultiplexCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "UpdateMultiplexCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2385,7 +2385,7 @@ module UpdateInput = {
   type response = {
 @as("Input") input: input
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "UpdateInputCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "UpdateInputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2399,7 +2399,7 @@ module ListInputSecurityGroups = {
 @as("NextToken") nextToken: __string,
 @as("InputSecurityGroups") inputSecurityGroups: __listOfInputSecurityGroup
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "ListInputSecurityGroupsCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "ListInputSecurityGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2413,7 +2413,7 @@ module ListInputDevices = {
 @as("NextToken") nextToken: __string,
 @as("InputDevices") inputDevices: __listOfInputDeviceSummary
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "ListInputDevicesCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "ListInputDevicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2427,7 +2427,7 @@ module CreatePartnerInput = {
   type response = {
 @as("Input") input: input
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "CreatePartnerInputCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "CreatePartnerInputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2442,7 +2442,7 @@ module CreateMultiplexProgram = {
   type response = {
 @as("MultiplexProgram") multiplexProgram: multiplexProgram
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "CreateMultiplexProgramCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "CreateMultiplexProgramCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2458,7 +2458,7 @@ module CreateMultiplex = {
   type response = {
 @as("Multiplex") multiplex: multiplex
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "CreateMultiplexCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "CreateMultiplexCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2480,7 +2480,7 @@ module CreateInput = {
   type response = {
 @as("Input") input: input
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "CreateInputCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "CreateInputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2494,7 +2494,7 @@ module ListInputs = {
 @as("NextToken") nextToken: __string,
 @as("Inputs") inputs: __listOfInput
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "ListInputsCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "ListInputsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2509,7 +2509,7 @@ module DescribeSchedule = {
 @as("ScheduleActions") scheduleActions: __listOfScheduleAction,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DescribeScheduleCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DescribeScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2537,7 +2537,7 @@ module StopChannel = {
 @as("CdiInputSpecification") cdiInputSpecification: cdiInputSpecification,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "StopChannelCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "StopChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2565,7 +2565,7 @@ module StartChannel = {
 @as("CdiInputSpecification") cdiInputSpecification: cdiInputSpecification,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "StartChannelCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "StartChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2593,7 +2593,7 @@ module DescribeChannel = {
 @as("CdiInputSpecification") cdiInputSpecification: cdiInputSpecification,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DescribeChannelCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DescribeChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2621,7 +2621,7 @@ module DeleteChannel = {
 @as("CdiInputSpecification") cdiInputSpecification: cdiInputSpecification,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "DeleteChannelCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "DeleteChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2636,7 +2636,7 @@ module BatchUpdateSchedule = {
 @as("Deletes") deletes: batchScheduleActionDeleteResult,
 @as("Creates") creates: batchScheduleActionCreateResult
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "BatchUpdateScheduleCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "BatchUpdateScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2650,7 +2650,7 @@ module UpdateChannelClass = {
   type response = {
 @as("Channel") channel: channel
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "UpdateChannelClassCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "UpdateChannelClassCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2670,7 +2670,7 @@ module UpdateChannel = {
   type response = {
 @as("Channel") channel: channel
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "UpdateChannelCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "UpdateChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2684,7 +2684,7 @@ module ListChannels = {
 @as("NextToken") nextToken: __string,
 @as("Channels") channels: __listOfChannelSummary
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "ListChannelsCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "ListChannelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2708,6 +2708,6 @@ module CreateChannel = {
   type response = {
 @as("Channel") channel: channel
 }
-  @module("@aws-sdk/client-medialive") @new external new_: (Js.Promise.t<request>) => t = "CreateChannelCommand";
+  @module("@aws-sdk/client-medialive") @new external new_: (request) => t = "CreateChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -849,7 +849,7 @@ module UpdateDashboardPublishedVersion = {
 @as("DashboardArn") dashboardArn: arn,
 @as("DashboardId") dashboardId: restrictiveResourceId
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateDashboardPublishedVersionCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateDashboardPublishedVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -864,7 +864,7 @@ module UpdateAccountSettings = {
 @as("Status") status: statusCode,
 @as("RequestId") requestId: amazonawsString
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateAccountSettingsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateAccountSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -880,7 +880,7 @@ module RestoreAnalysis = {
 @as("Arn") arn: arn,
 @as("Status") status: statusCode
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "RestoreAnalysisCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "RestoreAnalysisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -897,7 +897,7 @@ module GetSessionEmbedUrl = {
 @as("Status") status: statusCode,
 @as("EmbedUrl") embedUrl: embeddingUrl
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "GetSessionEmbedUrlCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "GetSessionEmbedUrlCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -912,7 +912,7 @@ module DeleteUserByPrincipalId = {
 @as("Status") status: statusCode,
 @as("RequestId") requestId: amazonawsString
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserByPrincipalIdCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteUserByPrincipalIdCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -927,7 +927,7 @@ module DeleteUser = {
 @as("Status") status: statusCode,
 @as("RequestId") requestId: amazonawsString
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -945,7 +945,7 @@ module DeleteThemeAlias = {
 @as("Arn") arn: arn,
 @as("AliasName") aliasName: aliasName
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteThemeAliasCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteThemeAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -962,7 +962,7 @@ module DeleteTheme = {
 @as("RequestId") requestId: amazonawsString,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteThemeCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteThemeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -980,7 +980,7 @@ module DeleteTemplateAlias = {
 @as("TemplateId") templateId: restrictiveResourceId,
 @as("Status") status: statusCode
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteTemplateAliasCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteTemplateAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -997,7 +997,7 @@ module DeleteTemplate = {
 @as("Arn") arn: arn,
 @as("RequestId") requestId: amazonawsString
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteTemplateCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1011,7 +1011,7 @@ module DeleteNamespace = {
 @as("Status") status: statusCode,
 @as("RequestId") requestId: amazonawsString
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteNamespaceCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteNamespaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1027,7 +1027,7 @@ module DeleteIAMPolicyAssignment = {
 @as("RequestId") requestId: amazonawsString,
 @as("AssignmentName") assignmentName: iAMPolicyAssignmentName
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteIAMPolicyAssignmentCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteIAMPolicyAssignmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1043,7 +1043,7 @@ module DeleteGroupMembership = {
 @as("Status") status: statusCode,
 @as("RequestId") requestId: amazonawsString
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteGroupMembershipCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteGroupMembershipCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1058,7 +1058,7 @@ module DeleteGroup = {
 @as("Status") status: statusCode,
 @as("RequestId") requestId: amazonawsString
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteGroupCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1074,7 +1074,7 @@ module DeleteDataSource = {
 @as("DataSourceId") dataSourceId: resourceId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteDataSourceCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteDataSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1090,7 +1090,7 @@ module DeleteDataSet = {
 @as("DataSetId") dataSetId: resourceId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteDataSetCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteDataSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1107,7 +1107,7 @@ module DeleteDashboard = {
 @as("Arn") arn: arn,
 @as("Status") status: statusCode
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteDashboardCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteDashboardCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1126,7 +1126,7 @@ module DeleteAnalysis = {
 @as("Arn") arn: arn,
 @as("Status") status: statusCode
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteAnalysisCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteAnalysisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1140,7 +1140,7 @@ module DeleteAccountCustomization = {
 @as("Status") status: statusCode,
 @as("RequestId") requestId: amazonawsString
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DeleteAccountCustomizationCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DeleteAccountCustomizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1158,7 +1158,7 @@ module CreateIngestion = {
 @as("IngestionId") ingestionId: ingestionId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateIngestionCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateIngestionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1175,7 +1175,7 @@ module CancelIngestion = {
 @as("IngestionId") ingestionId: ingestionId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CancelIngestionCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CancelIngestionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1198,7 +1198,7 @@ module UpdateUser = {
 @as("RequestId") requestId: amazonawsString,
 @as("User") user: user
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateUserCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1215,7 +1215,7 @@ module UpdateThemeAlias = {
 @as("Status") status: statusCode,
 @as("ThemeAlias") themeAlias: themeAlias
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateThemeAliasCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateThemeAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1232,7 +1232,7 @@ module UpdateTemplateAlias = {
 @as("Status") status: statusCode,
 @as("TemplateAlias") templateAlias: templateAlias
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateTemplateAliasCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateTemplateAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1249,7 +1249,7 @@ module UpdateGroup = {
 @as("RequestId") requestId: amazonawsString,
 @as("Group") group: group
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateGroupCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1268,7 +1268,7 @@ module UpdateAccountCustomization = {
 @as("AwsAccountId") awsAccountId: awsAccountId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateAccountCustomizationCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateAccountCustomizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1282,7 +1282,7 @@ module UntagResource = {
 @as("Status") status: statusCode,
 @as("RequestId") requestId: amazonawsString
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1308,7 +1308,7 @@ module RegisterUser = {
 @as("UserInvitationUrl") userInvitationUrl: amazonawsString,
 @as("User") user: user
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "RegisterUserCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "RegisterUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1331,7 +1331,7 @@ module GetDashboardEmbedUrl = {
 @as("Status") status: statusCode,
 @as("EmbedUrl") embedUrl: embeddingUrl
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "GetDashboardEmbedUrlCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "GetDashboardEmbedUrlCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1347,7 +1347,7 @@ module DescribeUser = {
 @as("RequestId") requestId: amazonawsString,
 @as("User") user: user
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeUserCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1363,7 +1363,7 @@ module DescribeThemeAlias = {
 @as("Status") status: statusCode,
 @as("ThemeAlias") themeAlias: themeAlias
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeThemeAliasCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeThemeAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1379,7 +1379,7 @@ module DescribeTemplateAlias = {
 @as("Status") status: statusCode,
 @as("TemplateAlias") templateAlias: templateAlias
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeTemplateAliasCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeTemplateAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1395,7 +1395,7 @@ module DescribeGroup = {
 @as("RequestId") requestId: amazonawsString,
 @as("Group") group: group
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeGroupCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1409,7 +1409,7 @@ module DescribeAccountSettings = {
 @as("RequestId") requestId: amazonawsString,
 @as("AccountSettings") accountSettings: accountSettings
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountSettingsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeAccountSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1428,7 +1428,7 @@ module DescribeAccountCustomization = {
 @as("AwsAccountId") awsAccountId: awsAccountId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountCustomizationCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeAccountCustomizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1445,7 +1445,7 @@ module CreateThemeAlias = {
 @as("Status") status: statusCode,
 @as("ThemeAlias") themeAlias: themeAlias
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateThemeAliasCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateThemeAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1462,7 +1462,7 @@ module CreateTemplateAlias = {
 @as("Status") status: statusCode,
 @as("TemplateAlias") templateAlias: templateAlias
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateTemplateAliasCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateTemplateAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1479,7 +1479,7 @@ module CreateGroupMembership = {
 @as("RequestId") requestId: amazonawsString,
 @as("GroupMember") groupMember: groupMember
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateGroupMembershipCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateGroupMembershipCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1496,7 +1496,7 @@ module CreateGroup = {
 @as("RequestId") requestId: amazonawsString,
 @as("Group") group: group
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateGroupCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1519,7 +1519,7 @@ module UpdateIAMPolicyAssignment = {
 @as("AssignmentId") assignmentId: amazonawsString,
 @as("AssignmentName") assignmentName: iAMPolicyAssignmentName
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateIAMPolicyAssignmentCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateIAMPolicyAssignmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1533,7 +1533,7 @@ module TagResource = {
 @as("Status") status: statusCode,
 @as("RequestId") requestId: amazonawsString
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1551,7 +1551,7 @@ module SearchDashboards = {
 @as("NextToken") nextToken: amazonawsString,
 @as("DashboardSummaryList") dashboardSummaryList: dashboardSummaryList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "SearchDashboardsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "SearchDashboardsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1569,7 +1569,7 @@ module SearchAnalyses = {
 @as("NextToken") nextToken: amazonawsString,
 @as("AnalysisSummaryList") analysisSummaryList: analysisSummaryList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "SearchAnalysesCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "SearchAnalysesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1587,7 +1587,7 @@ module ListUsers = {
 @as("NextToken") nextToken: amazonawsString,
 @as("UserList") userList: userList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListUsersCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListUsersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1606,7 +1606,7 @@ module ListUserGroups = {
 @as("NextToken") nextToken: amazonawsString,
 @as("GroupList") groupList: groupList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListUserGroupsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListUserGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1624,7 +1624,7 @@ module ListThemes = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ThemeSummaryList") themeSummaryList: themeSummaryList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListThemesCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListThemesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1642,7 +1642,7 @@ module ListThemeVersions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ThemeVersionSummaryList") themeVersionSummaryList: themeVersionSummaryList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListThemeVersionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListThemeVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1660,7 +1660,7 @@ module ListThemeAliases = {
 @as("Status") status: statusCode,
 @as("ThemeAliasList") themeAliasList: themeAliasList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListThemeAliasesCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListThemeAliasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1677,7 +1677,7 @@ module ListTemplates = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TemplateSummaryList") templateSummaryList: templateSummaryList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListTemplatesCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListTemplatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1695,7 +1695,7 @@ module ListTemplateVersions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TemplateVersionSummaryList") templateVersionSummaryList: templateVersionSummaryList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListTemplateVersionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListTemplateVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1713,7 +1713,7 @@ module ListTemplateAliases = {
 @as("Status") status: statusCode,
 @as("TemplateAliasList") templateAliasList: templateAliasList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListTemplateAliasesCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListTemplateAliasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1727,7 +1727,7 @@ module ListTagsForResource = {
 @as("RequestId") requestId: amazonawsString,
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1746,7 +1746,7 @@ module ListIAMPolicyAssignmentsForUser = {
 @as("RequestId") requestId: amazonawsString,
 @as("ActiveAssignments") activeAssignments: activeIAMPolicyAssignmentList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListIAMPolicyAssignmentsForUserCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListIAMPolicyAssignmentsForUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1765,7 +1765,7 @@ module ListIAMPolicyAssignments = {
 @as("NextToken") nextToken: amazonawsString,
 @as("IAMPolicyAssignments") iAMPolicyAssignments: iAMPolicyAssignmentSummaryList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListIAMPolicyAssignmentsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListIAMPolicyAssignmentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1783,7 +1783,7 @@ module ListGroups = {
 @as("NextToken") nextToken: amazonawsString,
 @as("GroupList") groupList: groupList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListGroupsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1802,7 +1802,7 @@ module ListGroupMemberships = {
 @as("NextToken") nextToken: amazonawsString,
 @as("GroupMemberList") groupMemberList: groupMemberList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListGroupMembershipsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListGroupMembershipsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1819,7 +1819,7 @@ module ListDashboards = {
 @as("NextToken") nextToken: amazonawsString,
 @as("DashboardSummaryList") dashboardSummaryList: dashboardSummaryList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListDashboardsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListDashboardsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1837,7 +1837,7 @@ module ListDashboardVersions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("DashboardVersionSummaryList") dashboardVersionSummaryList: dashboardVersionSummaryList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListDashboardVersionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListDashboardVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1854,7 +1854,7 @@ module ListAnalyses = {
 @as("NextToken") nextToken: amazonawsString,
 @as("AnalysisSummaryList") analysisSummaryList: analysisSummaryList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListAnalysesCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListAnalysesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1869,7 +1869,7 @@ module DescribeNamespace = {
 @as("RequestId") requestId: amazonawsString,
 @as("Namespace") namespace: namespaceInfoV2
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeNamespaceCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeNamespaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1885,7 +1885,7 @@ module DescribeIngestion = {
 @as("RequestId") requestId: amazonawsString,
 @as("Ingestion") ingestion: ingestion
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeIngestionCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeIngestionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1906,7 +1906,7 @@ module CreateNamespace = {
 @as("Name") name: namespace,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateNamespaceCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateNamespaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1929,7 +1929,7 @@ module CreateIAMPolicyAssignment = {
 @as("AssignmentId") assignmentId: amazonawsString,
 @as("AssignmentName") assignmentName: iAMPolicyAssignmentName
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateIAMPolicyAssignmentCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateIAMPolicyAssignmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1949,7 +1949,7 @@ module CreateAccountCustomization = {
 @as("AwsAccountId") awsAccountId: awsAccountId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateAccountCustomizationCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateAccountCustomizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1968,7 +1968,7 @@ module UpdateThemePermissions = {
 @as("ThemeArn") themeArn: arn,
 @as("ThemeId") themeId: restrictiveResourceId
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateThemePermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateThemePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1987,7 +1987,7 @@ module UpdateTemplatePermissions = {
 @as("TemplateArn") templateArn: arn,
 @as("TemplateId") templateId: restrictiveResourceId
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateTemplatePermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateTemplatePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2005,7 +2005,7 @@ module UpdateDataSourcePermissions = {
 @as("DataSourceId") dataSourceId: resourceId,
 @as("DataSourceArn") dataSourceArn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateDataSourcePermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateDataSourcePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2023,7 +2023,7 @@ module UpdateDataSetPermissions = {
 @as("DataSetId") dataSetId: resourceId,
 @as("DataSetArn") dataSetArn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateDataSetPermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateDataSetPermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2042,7 +2042,7 @@ module UpdateDashboardPermissions = {
 @as("DashboardId") dashboardId: restrictiveResourceId,
 @as("DashboardArn") dashboardArn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateDashboardPermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateDashboardPermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2061,7 +2061,7 @@ module UpdateAnalysisPermissions = {
 @as("AnalysisId") analysisId: restrictiveResourceId,
 @as("AnalysisArn") analysisArn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateAnalysisPermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateAnalysisPermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2078,7 +2078,7 @@ module ListNamespaces = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Namespaces") namespaces: namespaces
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListNamespacesCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListNamespacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2096,7 +2096,7 @@ module ListIngestions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Ingestions") ingestions: ingestions
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListIngestionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListIngestionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2113,7 +2113,7 @@ module ListDataSets = {
 @as("NextToken") nextToken: amazonawsString,
 @as("DataSetSummaries") dataSetSummaries: dataSetSummaryList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListDataSetsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListDataSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2130,7 +2130,7 @@ module DescribeThemePermissions = {
 @as("ThemeArn") themeArn: arn,
 @as("ThemeId") themeId: restrictiveResourceId
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeThemePermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeThemePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2147,7 +2147,7 @@ module DescribeTemplatePermissions = {
 @as("TemplateArn") templateArn: arn,
 @as("TemplateId") templateId: restrictiveResourceId
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeTemplatePermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeTemplatePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2163,7 +2163,7 @@ module DescribeIAMPolicyAssignment = {
 @as("RequestId") requestId: amazonawsString,
 @as("IAMPolicyAssignment") iAMPolicyAssignment: iAMPolicyAssignment
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeIAMPolicyAssignmentCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeIAMPolicyAssignmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2180,7 +2180,7 @@ module DescribeDataSourcePermissions = {
 @as("DataSourceId") dataSourceId: resourceId,
 @as("DataSourceArn") dataSourceArn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeDataSourcePermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeDataSourcePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2197,7 +2197,7 @@ module DescribeDataSetPermissions = {
 @as("DataSetId") dataSetId: resourceId,
 @as("DataSetArn") dataSetArn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeDataSetPermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeDataSetPermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2214,7 +2214,7 @@ module DescribeDashboardPermissions = {
 @as("DashboardArn") dashboardArn: arn,
 @as("DashboardId") dashboardId: restrictiveResourceId
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeDashboardPermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeDashboardPermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2231,7 +2231,7 @@ module DescribeAnalysisPermissions = {
 @as("AnalysisArn") analysisArn: arn,
 @as("AnalysisId") analysisId: restrictiveResourceId
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeAnalysisPermissionsCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeAnalysisPermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2246,7 +2246,7 @@ module DescribeAnalysis = {
 @as("Status") status: statusCode,
 @as("Analysis") analysis: analysis
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeAnalysisCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeAnalysisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2268,7 +2268,7 @@ module UpdateTheme = {
 @as("Arn") arn: arn,
 @as("ThemeId") themeId: restrictiveResourceId
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateThemeCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateThemeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2289,7 +2289,7 @@ module UpdateTemplate = {
 @as("Arn") arn: arn,
 @as("TemplateId") templateId: restrictiveResourceId
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateTemplateCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2313,7 +2313,7 @@ module UpdateDashboard = {
 @as("VersionArn") versionArn: arn,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateDashboardCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateDashboardCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2334,7 +2334,7 @@ module UpdateAnalysis = {
 @as("AnalysisId") analysisId: restrictiveResourceId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateAnalysisCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateAnalysisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2351,7 +2351,7 @@ module DescribeDashboard = {
 @as("Status") status: statusCode,
 @as("Dashboard") dashboard: dashboard
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeDashboardCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeDashboardCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2375,7 +2375,7 @@ module CreateTheme = {
 @as("VersionArn") versionArn: arn,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateThemeCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateThemeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2398,7 +2398,7 @@ module CreateTemplate = {
 @as("VersionArn") versionArn: arn,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateTemplateCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2424,7 +2424,7 @@ module CreateDashboard = {
 @as("VersionArn") versionArn: arn,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateDashboardCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateDashboardCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2447,7 +2447,7 @@ module CreateAnalysis = {
 @as("AnalysisId") analysisId: restrictiveResourceId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateAnalysisCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateAnalysisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2462,7 +2462,7 @@ module DescribeDataSource = {
 @as("RequestId") requestId: amazonawsString,
 @as("DataSource") dataSource: dataSource
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeDataSourceCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeDataSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2484,7 +2484,7 @@ module UpdateDataSource = {
 @as("DataSourceId") dataSourceId: resourceId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateDataSourceCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateDataSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2501,7 +2501,7 @@ module ListDataSources = {
 @as("NextToken") nextToken: amazonawsString,
 @as("DataSources") dataSources: dataSourceList
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "ListDataSourcesCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "ListDataSourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2518,7 +2518,7 @@ module DescribeTheme = {
 @as("Status") status: statusCode,
 @as("Theme") theme: theme
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeThemeCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeThemeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2543,7 +2543,7 @@ module CreateDataSource = {
 @as("DataSourceId") dataSourceId: resourceId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateDataSourceCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateDataSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2569,7 +2569,7 @@ module UpdateDataSet = {
 @as("DataSetId") dataSetId: resourceId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "UpdateDataSetCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "UpdateDataSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2586,7 +2586,7 @@ module DescribeTemplate = {
 @as("Status") status: statusCode,
 @as("Template") template: template
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeTemplateCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2614,7 +2614,7 @@ module CreateDataSet = {
 @as("DataSetId") dataSetId: resourceId,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "CreateDataSetCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "CreateDataSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2629,6 +2629,6 @@ module DescribeDataSet = {
 @as("RequestId") requestId: amazonawsString,
 @as("DataSet") dataSet: dataSet
 }
-  @module("@aws-sdk/client-quicksight") @new external new_: (Js.Promise.t<request>) => t = "DescribeDataSetCommand";
+  @module("@aws-sdk/client-quicksight") @new external new_: (request) => t = "DescribeDataSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -78,7 +78,7 @@ module ExecuteStatement = {
 @as("CreatedAt") createdAt: apiTimestamp,
 @as("Id") id: uUID
 }
-  @module("@aws-sdk/client-redshift-data") @new external new_: (Js.Promise.t<request>) => t = "ExecuteStatementCommand";
+  @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "ExecuteStatementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -105,7 +105,7 @@ module DescribeStatement = {
 @as("QueryString") queryString: statementString,
 @as("Id") id: option<uUID>
 }
-  @module("@aws-sdk/client-redshift-data") @new external new_: (Js.Promise.t<request>) => t = "DescribeStatementCommand";
+  @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "DescribeStatementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -117,7 +117,7 @@ module CancelStatement = {
   type response = {
 @as("Status") status: apiBoolean
 }
-  @module("@aws-sdk/client-redshift-data") @new external new_: (Js.Promise.t<request>) => t = "CancelStatementCommand";
+  @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "CancelStatementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -137,7 +137,7 @@ module ListSchemas = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Schemas") schemas: schemaList
 }
-  @module("@aws-sdk/client-redshift-data") @new external new_: (Js.Promise.t<request>) => t = "ListSchemasCommand";
+  @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "ListSchemasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -155,7 +155,7 @@ module ListDatabases = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Databases") databases: databaseList
 }
-  @module("@aws-sdk/client-redshift-data") @new external new_: (Js.Promise.t<request>) => t = "ListDatabasesCommand";
+  @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "ListDatabasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -176,7 +176,7 @@ module ListTables = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Tables") tables: tableList
 }
-  @module("@aws-sdk/client-redshift-data") @new external new_: (Js.Promise.t<request>) => t = "ListTablesCommand";
+  @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "ListTablesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -193,7 +193,7 @@ module ListStatements = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Statements") statements: option<statementList>
 }
-  @module("@aws-sdk/client-redshift-data") @new external new_: (Js.Promise.t<request>) => t = "ListStatementsCommand";
+  @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "ListStatementsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -215,7 +215,7 @@ module DescribeTable = {
 @as("ColumnList") columnList: columnList,
 @as("TableName") tableName: amazonawsString
 }
-  @module("@aws-sdk/client-redshift-data") @new external new_: (Js.Promise.t<request>) => t = "DescribeTableCommand";
+  @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "DescribeTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -231,6 +231,6 @@ module GetStatementResult = {
 @as("ColumnMetadata") columnMetadata: columnMetadataList,
 @as("Records") records: option<sqlRecords>
 }
-  @module("@aws-sdk/client-redshift-data") @new external new_: (Js.Promise.t<request>) => t = "GetStatementResultCommand";
+  @module("@aws-sdk/client-redshift-data") @new external new_: (request) => t = "GetStatementResultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

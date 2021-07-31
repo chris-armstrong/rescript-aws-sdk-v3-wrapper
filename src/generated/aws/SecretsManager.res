@@ -124,7 +124,7 @@ module UpdateSecretVersionStage = {
 @as("Name") name: secretNameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateSecretVersionStageCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "UpdateSecretVersionStageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -143,7 +143,7 @@ module UpdateSecret = {
 @as("Name") name: secretNameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateSecretCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "UpdateSecretCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -155,7 +155,7 @@ module StopReplicationToReplica = {
   type response = {
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "StopReplicationToReplicaCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "StopReplicationToReplicaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -168,7 +168,7 @@ module RestoreSecret = {
 @as("Name") name: secretNameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "RestoreSecretCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "RestoreSecretCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -183,7 +183,7 @@ module PutResourcePolicy = {
 @as("Name") name: nameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "PutResourcePolicyCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "PutResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -197,7 +197,7 @@ module GetResourcePolicy = {
 @as("Name") name: nameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "GetResourcePolicyCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "GetResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -216,7 +216,7 @@ module GetRandomPassword = {
   type response = {
 @as("RandomPassword") randomPassword: randomPasswordType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "GetRandomPasswordCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "GetRandomPasswordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -232,7 +232,7 @@ module DeleteSecret = {
 @as("Name") name: secretNameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "DeleteSecretCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "DeleteSecretCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -245,7 +245,7 @@ module DeleteResourcePolicy = {
 @as("Name") name: nameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "DeleteResourcePolicyCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "DeleteResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -259,7 +259,7 @@ module CancelRotateSecret = {
 @as("Name") name: secretNameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "CancelRotateSecretCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "CancelRotateSecretCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -270,7 +270,7 @@ module UntagResource = {
 @as("SecretId") secretId: option<secretIdType>
 }
   
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -287,7 +287,7 @@ module RotateSecret = {
 @as("Name") name: secretNameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "RotateSecretCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "RotateSecretCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -306,7 +306,7 @@ module PutSecretValue = {
 @as("Name") name: secretNameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "PutSecretValueCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "PutSecretValueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -326,7 +326,7 @@ module GetSecretValue = {
 @as("Name") name: secretNameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "GetSecretValueCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "GetSecretValueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -340,7 +340,7 @@ module ValidateResourcePolicy = {
 @as("ValidationErrors") validationErrors: validationErrorsType,
 @as("PolicyValidationPassed") policyValidationPassed: booleanType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "ValidateResourcePolicyCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "ValidateResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -351,7 +351,7 @@ module TagResource = {
 @as("SecretId") secretId: option<secretIdType>
 }
   
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -366,7 +366,7 @@ module ReplicateSecretToRegions = {
 @as("ReplicationStatus") replicationStatus: replicationStatusListType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "ReplicateSecretToRegionsCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "ReplicateSecretToRegionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -380,7 +380,7 @@ module RemoveRegionsFromReplication = {
 @as("ReplicationStatus") replicationStatus: replicationStatusListType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "RemoveRegionsFromReplicationCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "RemoveRegionsFromReplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -408,7 +408,7 @@ module DescribeSecret = {
 @as("Name") name: secretNameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "DescribeSecretCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "DescribeSecretCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -431,7 +431,7 @@ module CreateSecret = {
 @as("Name") name: secretNameType,
 @as("ARN") aRN: secretARNType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "CreateSecretCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "CreateSecretCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -449,7 +449,7 @@ module ListSecretVersionIds = {
 @as("NextToken") nextToken: nextTokenType,
 @as("Versions") versions: secretVersionsListType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "ListSecretVersionIdsCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "ListSecretVersionIdsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -465,6 +465,6 @@ module ListSecrets = {
 @as("NextToken") nextToken: nextTokenType,
 @as("SecretList") secretList: secretListType
 }
-  @module("@aws-sdk/client-secretsmanager") @new external new_: (Js.Promise.t<request>) => t = "ListSecretsCommand";
+  @module("@aws-sdk/client-secretsmanager") @new external new_: (request) => t = "ListSecretsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

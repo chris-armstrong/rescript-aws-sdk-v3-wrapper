@@ -118,7 +118,7 @@ module InitializeCluster = {
 @as("StateMessage") stateMessage: stateMessage,
 @as("State") state: clusterState
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "InitializeClusterCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "InitializeClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -133,7 +133,7 @@ module DeleteHsm = {
   type response = {
 @as("HsmId") hsmId: hsmId
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "DeleteHsmCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "DeleteHsmCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -144,7 +144,7 @@ module UntagResource = {
 @as("ResourceId") resourceId: option<resourceId>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -158,7 +158,7 @@ module CreateHsm = {
   type response = {
 @as("Hsm") hsm: hsm
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "CreateHsmCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "CreateHsmCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -169,7 +169,7 @@ module TagResource = {
 @as("ResourceId") resourceId: option<resourceId>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -184,7 +184,7 @@ module ListTags = {
 @as("NextToken") nextToken: nextToken,
 @as("TagList") tagList: option<tagList>
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "ListTagsCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "ListTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -198,7 +198,7 @@ module CopyBackupToRegion = {
   type response = {
 @as("DestinationBackup") destinationBackup: destinationBackup
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "CopyBackupToRegionCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "CopyBackupToRegionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -210,7 +210,7 @@ module RestoreBackup = {
   type response = {
 @as("Backup") backup: backup
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "RestoreBackupCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "RestoreBackupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -223,7 +223,7 @@ module ModifyCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "ModifyClusterCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "ModifyClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -236,7 +236,7 @@ module ModifyBackupAttributes = {
   type response = {
 @as("Backup") backup: backup
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "ModifyBackupAttributesCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "ModifyBackupAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -248,7 +248,7 @@ module DeleteCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "DeleteClusterCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "DeleteClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -260,7 +260,7 @@ module DeleteBackup = {
   type response = {
 @as("Backup") backup: backup
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "DeleteBackupCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "DeleteBackupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -276,7 +276,7 @@ module CreateCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "CreateClusterCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "CreateClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -291,7 +291,7 @@ module DescribeClusters = {
 @as("NextToken") nextToken: nextToken,
 @as("Clusters") clusters: clusters
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "DescribeClustersCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "DescribeClustersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -307,6 +307,6 @@ module DescribeBackups = {
 @as("NextToken") nextToken: nextToken,
 @as("Backups") backups: backups
 }
-  @module("@aws-sdk/client-cloudhsm") @new external new_: (Js.Promise.t<request>) => t = "DescribeBackupsCommand";
+  @module("@aws-sdk/client-cloudhsm") @new external new_: (request) => t = "DescribeBackupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -289,7 +289,7 @@ module PutProfileObject = {
   type response = {
 @as("ProfileObjectUniqueKey") profileObjectUniqueKey: string1To255
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "PutProfileObjectCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "PutProfileObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -302,7 +302,7 @@ module DeleteProfileObjectType = {
   type response = {
 @as("Message") message: option<message>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "DeleteProfileObjectTypeCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "DeleteProfileObjectTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -317,7 +317,7 @@ module DeleteProfileObject = {
   type response = {
 @as("Message") message: message
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "DeleteProfileObjectCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "DeleteProfileObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -330,7 +330,7 @@ module DeleteProfile = {
   type response = {
 @as("Message") message: message
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "DeleteProfileCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "DeleteProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -343,7 +343,7 @@ module DeleteIntegration = {
   type response = {
 @as("Message") message: option<message>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "DeleteIntegrationCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "DeleteIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -355,7 +355,7 @@ module DeleteDomain = {
   type response = {
 @as("Message") message: option<message>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "DeleteDomainCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "DeleteDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -389,7 +389,7 @@ module UpdateProfile = {
   type response = {
 @as("ProfileId") profileId: option<uuid>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "UpdateProfileCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "UpdateProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -413,7 +413,7 @@ module UpdateDomain = {
 @as("DefaultExpirationDays") defaultExpirationDays: expirationDaysInteger,
 @as("DomainName") domainName: option<name>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "UpdateDomainCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "UpdateDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -424,7 +424,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<tagArn>
 }
   type response = unit
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -435,7 +435,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<tagArn>
 }
   type response = unit
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -447,7 +447,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -465,7 +465,7 @@ module GetIntegration = {
 @as("Uri") uri: option<string1To255>,
 @as("DomainName") domainName: option<name>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "GetIntegrationCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "GetIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -485,7 +485,7 @@ module GetDomain = {
 @as("DefaultExpirationDays") defaultExpirationDays: expirationDaysInteger,
 @as("DomainName") domainName: option<name>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "GetDomainCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "GetDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -500,7 +500,7 @@ module DeleteProfileKey = {
   type response = {
 @as("Message") message: message
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "DeleteProfileKeyCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "DeleteProfileKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -533,7 +533,7 @@ module CreateProfile = {
   type response = {
 @as("ProfileId") profileId: option<uuid>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "CreateProfileCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "CreateProfileCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -557,7 +557,7 @@ module CreateDomain = {
 @as("DefaultExpirationDays") defaultExpirationDays: option<expirationDaysInteger>,
 @as("DomainName") domainName: option<name>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "CreateDomainCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "CreateDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -573,7 +573,7 @@ module AddProfileKey = {
 @as("Values") values: requestValueList,
 @as("KeyName") keyName: name
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "AddProfileKeyCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "AddProfileKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -588,7 +588,7 @@ module MergeProfiles = {
   type response = {
 @as("Message") message: message
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "MergeProfilesCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "MergeProfilesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -605,7 +605,7 @@ module ListProfileObjects = {
 @as("NextToken") nextToken: token,
 @as("Items") items: profileObjectList
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "ListProfileObjectsCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "ListProfileObjectsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -619,7 +619,7 @@ module ListProfileObjectTypeTemplates = {
 @as("NextToken") nextToken: token,
 @as("Items") items: profileObjectTypeTemplateList
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "ListProfileObjectTypeTemplatesCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "ListProfileObjectTypeTemplatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -636,7 +636,7 @@ module SearchProfiles = {
 @as("NextToken") nextToken: token,
 @as("Items") items: profileList
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "SearchProfilesCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "SearchProfilesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -651,7 +651,7 @@ module ListProfileObjectTypes = {
 @as("NextToken") nextToken: token,
 @as("Items") items: profileObjectTypeList
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "ListProfileObjectTypesCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "ListProfileObjectTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -666,7 +666,7 @@ module ListIntegrations = {
 @as("NextToken") nextToken: token,
 @as("Items") items: integrationList
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "ListIntegrationsCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "ListIntegrationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -680,7 +680,7 @@ module ListDomains = {
 @as("NextToken") nextToken: token,
 @as("Items") items: domainList
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "ListDomainsCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "ListDomainsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -695,7 +695,7 @@ module ListAccountIntegrations = {
 @as("NextToken") nextToken: token,
 @as("Items") items: integrationList
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "ListAccountIntegrationsCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "ListAccountIntegrationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -712,7 +712,7 @@ module GetMatches = {
 @as("MatchGenerationDate") matchGenerationDate: timestamp,
 @as("NextToken") nextToken: token
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "GetMatchesCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "GetMatchesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -743,7 +743,7 @@ module PutProfileObjectType = {
 @as("Description") description: option<text>,
 @as("ObjectTypeName") objectTypeName: option<typeName>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "PutProfileObjectTypeCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "PutProfileObjectTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -764,7 +764,7 @@ module PutIntegration = {
 @as("Uri") uri: option<string1To255>,
 @as("DomainName") domainName: option<name>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "PutIntegrationCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "PutIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -781,7 +781,7 @@ module GetProfileObjectTypeTemplate = {
 @as("SourceName") sourceName: name,
 @as("TemplateId") templateId: name
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "GetProfileObjectTypeTemplateCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "GetProfileObjectTypeTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -804,6 +804,6 @@ module GetProfileObjectType = {
 @as("Description") description: option<text>,
 @as("ObjectTypeName") objectTypeName: option<typeName>
 }
-  @module("@aws-sdk/client-profile") @new external new_: (Js.Promise.t<request>) => t = "GetProfileObjectTypeCommand";
+  @module("@aws-sdk/client-profile") @new external new_: (request) => t = "GetProfileObjectTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -207,7 +207,7 @@ module StartDeployment = {
   type response = {
 @as("OperationId") operationId: option<uUID>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "StartDeploymentCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "StartDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -218,7 +218,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<appRunnerResourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -230,7 +230,7 @@ module DescribeAutoScalingConfiguration = {
   type response = {
 @as("AutoScalingConfiguration") autoScalingConfiguration: option<autoScalingConfiguration>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DescribeAutoScalingConfigurationCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "DescribeAutoScalingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -242,7 +242,7 @@ module DeleteConnection = {
   type response = {
 @as("Connection") connection: connection
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DeleteConnectionCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "DeleteConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -254,7 +254,7 @@ module DeleteAutoScalingConfiguration = {
   type response = {
 @as("AutoScalingConfiguration") autoScalingConfiguration: option<autoScalingConfiguration>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DeleteAutoScalingConfigurationCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "DeleteAutoScalingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -265,7 +265,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<appRunnerResourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -277,7 +277,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -291,7 +291,7 @@ module ListServices = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ServiceSummaryList") serviceSummaryList: option<serviceSummaryList>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ListServicesCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "ListServicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -306,7 +306,7 @@ module ListOperations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("OperationSummaryList") operationSummaryList: operationSummaryList
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ListOperationsCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "ListOperationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -321,7 +321,7 @@ module ListConnections = {
 @as("NextToken") nextToken: nextToken,
 @as("ConnectionSummaryList") connectionSummaryList: option<connectionSummaryList>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ListConnectionsCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "ListConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -337,7 +337,7 @@ module ListAutoScalingConfigurations = {
 @as("NextToken") nextToken: nextToken,
 @as("AutoScalingConfigurationSummaryList") autoScalingConfigurationSummaryList: option<autoScalingConfigurationSummaryList>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ListAutoScalingConfigurationsCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "ListAutoScalingConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -351,7 +351,7 @@ module CreateConnection = {
   type response = {
 @as("Connection") connection: option<connection>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "CreateConnectionCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "CreateConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -367,7 +367,7 @@ module CreateAutoScalingConfiguration = {
   type response = {
 @as("AutoScalingConfiguration") autoScalingConfiguration: option<autoScalingConfiguration>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "CreateAutoScalingConfigurationCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "CreateAutoScalingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -382,7 +382,7 @@ module DisassociateCustomDomain = {
 @as("ServiceArn") serviceArn: option<appRunnerResourceArn>,
 @as("DNSTarget") dNSTarget: option<amazonawsString>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DisassociateCustomDomainCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "DisassociateCustomDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -398,7 +398,7 @@ module AssociateCustomDomain = {
 @as("ServiceArn") serviceArn: option<appRunnerResourceArn>,
 @as("DNSTarget") dNSTarget: option<amazonawsString>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "AssociateCustomDomainCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "AssociateCustomDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -415,7 +415,7 @@ module DescribeCustomDomains = {
 @as("ServiceArn") serviceArn: option<appRunnerResourceArn>,
 @as("DNSTarget") dNSTarget: option<amazonawsString>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DescribeCustomDomainsCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "DescribeCustomDomainsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -432,7 +432,7 @@ module UpdateService = {
 @as("OperationId") operationId: option<uUID>,
 @as("Service") service: option<service>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "UpdateServiceCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "UpdateServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -445,7 +445,7 @@ module ResumeService = {
 @as("OperationId") operationId: uUID,
 @as("Service") service: option<service>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "ResumeServiceCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "ResumeServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -458,7 +458,7 @@ module PauseService = {
 @as("OperationId") operationId: uUID,
 @as("Service") service: option<service>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "PauseServiceCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "PauseServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -470,7 +470,7 @@ module DescribeService = {
   type response = {
 @as("Service") service: option<service>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DescribeServiceCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "DescribeServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -483,7 +483,7 @@ module DeleteService = {
 @as("OperationId") operationId: option<uUID>,
 @as("Service") service: option<service>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "DeleteServiceCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "DeleteServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -502,6 +502,6 @@ module CreateService = {
 @as("OperationId") operationId: option<uUID>,
 @as("Service") service: option<service>
 }
-  @module("@aws-sdk/client-apprunner") @new external new_: (Js.Promise.t<request>) => t = "CreateServiceCommand";
+  @module("@aws-sdk/client-apprunner") @new external new_: (request) => t = "CreateServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

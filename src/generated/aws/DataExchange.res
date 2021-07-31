@@ -216,7 +216,7 @@ module UpdateRevision = {
 @as("Comment") comment: __stringMin0Max16384,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "UpdateRevisionCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "UpdateRevisionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -226,7 +226,7 @@ module StartJob = {
 @as("JobId") jobId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "StartJobCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "StartJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -237,7 +237,7 @@ module DeleteRevision = {
 @as("DataSetId") dataSetId: option<__string>
 }
   
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "DeleteRevisionCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "DeleteRevisionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -247,7 +247,7 @@ module DeleteDataSet = {
 @as("DataSetId") dataSetId: option<__string>
 }
   
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "DeleteDataSetCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "DeleteDataSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -259,7 +259,7 @@ module DeleteAsset = {
 @as("AssetId") assetId: option<__string>
 }
   
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "DeleteAssetCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "DeleteAssetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -269,7 +269,7 @@ module CancelJob = {
 @as("JobId") jobId: option<__string>
 }
   
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "CancelJobCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "CancelJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -292,7 +292,7 @@ module UpdateDataSet = {
 @as("AssetType") assetType: assetType,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "UpdateDataSetCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "UpdateDataSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -303,7 +303,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -314,7 +314,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -326,7 +326,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: mapOf__string
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -347,7 +347,7 @@ module GetRevision = {
 @as("Comment") comment: __stringMin0Max16384,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "GetRevisionCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "GetRevisionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -369,7 +369,7 @@ module GetDataSet = {
 @as("AssetType") assetType: assetType,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "GetDataSetCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "GetDataSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -391,7 +391,7 @@ module CreateRevision = {
 @as("Comment") comment: __stringMin0Max16384,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "CreateRevisionCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "CreateRevisionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -416,7 +416,7 @@ module CreateDataSet = {
 @as("AssetType") assetType: assetType,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "CreateDataSetCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "CreateDataSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -440,7 +440,7 @@ module UpdateAsset = {
 @as("AssetDetails") assetDetails: assetDetails,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "UpdateAssetCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "UpdateAssetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -455,7 +455,7 @@ module ListDataSetRevisions = {
 @as("Revisions") revisions: listOfRevisionEntry,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "ListDataSetRevisionsCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "ListDataSetRevisionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -478,7 +478,7 @@ module GetAsset = {
 @as("AssetDetails") assetDetails: assetDetails,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "GetAssetCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "GetAssetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -493,7 +493,7 @@ module ListDataSets = {
 @as("NextToken") nextToken: nextToken,
 @as("DataSets") dataSets: listOfDataSetEntry
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "ListDataSetsCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "ListDataSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -509,7 +509,7 @@ module ListRevisionAssets = {
 @as("NextToken") nextToken: nextToken,
 @as("Assets") assets: listOfAssetEntry
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "ListRevisionAssetsCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "ListRevisionAssetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -528,7 +528,7 @@ module GetJob = {
 @as("CreatedAt") createdAt: amazonawsTimestamp,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "GetJobCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "GetJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -548,7 +548,7 @@ module CreateJob = {
 @as("CreatedAt") createdAt: amazonawsTimestamp,
 @as("Arn") arn: arn
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "CreateJobCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "CreateJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -564,6 +564,6 @@ module ListJobs = {
 @as("NextToken") nextToken: nextToken,
 @as("Jobs") jobs: listOfJobEntry
 }
-  @module("@aws-sdk/client-dataexchange") @new external new_: (Js.Promise.t<request>) => t = "ListJobsCommand";
+  @module("@aws-sdk/client-dataexchange") @new external new_: (request) => t = "ListJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

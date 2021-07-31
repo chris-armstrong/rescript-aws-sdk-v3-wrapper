@@ -23,7 +23,7 @@ module DeleteRecord = {
 @as("FeatureGroupName") featureGroupName: option<featureGroupName>
 }
   
-  @module("@aws-sdk/client-sagemaker") @new external new_: (Js.Promise.t<request>) => t = "DeleteRecordCommand";
+  @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "DeleteRecordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -34,7 +34,7 @@ module PutRecord = {
 @as("FeatureGroupName") featureGroupName: option<featureGroupName>
 }
   
-  @module("@aws-sdk/client-sagemaker") @new external new_: (Js.Promise.t<request>) => t = "PutRecordCommand";
+  @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "PutRecordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -48,6 +48,6 @@ module GetRecord = {
   type response = {
 @as("Record") record: record
 }
-  @module("@aws-sdk/client-sagemaker") @new external new_: (Js.Promise.t<request>) => t = "GetRecordCommand";
+  @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "GetRecordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

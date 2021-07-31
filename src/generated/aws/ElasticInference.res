@@ -70,7 +70,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<resourceARN>
 }
   type response = unit
-  @module("@aws-sdk/client-elastic-inference") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-elastic-inference") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -81,7 +81,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<resourceARN>
 }
   type response = unit
-  @module("@aws-sdk/client-elastic-inference") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-elastic-inference") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -93,7 +93,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-elastic-inference") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-elastic-inference") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -106,7 +106,7 @@ module DescribeAcceleratorOfferings = {
   type response = {
 @as("acceleratorTypeOfferings") acceleratorTypeOfferings: acceleratorTypeOfferingList
 }
-  @module("@aws-sdk/client-elastic-inference") @new external new_: (Js.Promise.t<request>) => t = "DescribeAcceleratorOfferingsCommand";
+  @module("@aws-sdk/client-elastic-inference") @new external new_: (request) => t = "DescribeAcceleratorOfferingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -122,7 +122,7 @@ module DescribeAccelerators = {
 @as("nextToken") nextToken: nextToken,
 @as("acceleratorSet") acceleratorSet: elasticInferenceAcceleratorSet
 }
-  @module("@aws-sdk/client-elastic-inference") @new external new_: (Js.Promise.t<request>) => t = "DescribeAcceleratorsCommand";
+  @module("@aws-sdk/client-elastic-inference") @new external new_: (request) => t = "DescribeAcceleratorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -132,6 +132,6 @@ module DescribeAcceleratorTypes = {
   type response = {
 @as("acceleratorTypes") acceleratorTypes: acceleratorTypeList
 }
-  @module("@aws-sdk/client-elastic-inference") @new external new_: (Js.Promise.t<request>) => t = "DescribeAcceleratorTypesCommand";
+  @module("@aws-sdk/client-elastic-inference") @new external new_: (request) => t = "DescribeAcceleratorTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

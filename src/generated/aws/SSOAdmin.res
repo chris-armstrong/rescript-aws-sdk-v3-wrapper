@@ -131,7 +131,7 @@ module UpdatePermissionSet = {
 @as("InstanceArn") instanceArn: option<instanceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "UpdatePermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "UpdatePermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -143,7 +143,7 @@ module PutInlinePolicyToPermissionSet = {
 @as("InstanceArn") instanceArn: option<instanceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "PutInlinePolicyToPermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "PutInlinePolicyToPermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -156,7 +156,7 @@ module GetInlinePolicyForPermissionSet = {
   type response = {
 @as("InlinePolicy") inlinePolicy: permissionSetPolicyDocument
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "GetInlinePolicyForPermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "GetInlinePolicyForPermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -168,7 +168,7 @@ module DetachManagedPolicyFromPermissionSet = {
 @as("InstanceArn") instanceArn: option<instanceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "DetachManagedPolicyFromPermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DetachManagedPolicyFromPermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -179,7 +179,7 @@ module DeletePermissionSet = {
 @as("InstanceArn") instanceArn: option<instanceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "DeletePermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DeletePermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -189,7 +189,7 @@ module DeleteInstanceAccessControlAttributeConfiguration = {
 @as("InstanceArn") instanceArn: option<instanceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "DeleteInstanceAccessControlAttributeConfigurationCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DeleteInstanceAccessControlAttributeConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -200,7 +200,7 @@ module DeleteInlinePolicyFromPermissionSet = {
 @as("InstanceArn") instanceArn: option<instanceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "DeleteInlinePolicyFromPermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DeleteInlinePolicyFromPermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -212,7 +212,7 @@ module AttachManagedPolicyToPermissionSet = {
 @as("InstanceArn") instanceArn: option<instanceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "AttachManagedPolicyToPermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "AttachManagedPolicyToPermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -224,7 +224,7 @@ module UntagResource = {
 @as("InstanceArn") instanceArn: option<instanceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -239,7 +239,7 @@ module ProvisionPermissionSet = {
   type response = {
 @as("PermissionSetProvisioningStatus") permissionSetProvisioningStatus: permissionSetProvisioningStatus
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "ProvisionPermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ProvisionPermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -256,7 +256,7 @@ module ListPermissionSetsProvisionedToAccount = {
 @as("PermissionSets") permissionSets: permissionSetList,
 @as("NextToken") nextToken: token
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "ListPermissionSetsProvisionedToAccountCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListPermissionSetsProvisionedToAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -271,7 +271,7 @@ module ListPermissionSets = {
 @as("NextToken") nextToken: token,
 @as("PermissionSets") permissionSets: permissionSetList
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "ListPermissionSetsCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListPermissionSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -288,7 +288,7 @@ module ListAccountsForProvisionedPermissionSet = {
 @as("NextToken") nextToken: token,
 @as("AccountIds") accountIds: accountList
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "ListAccountsForProvisionedPermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListAccountsForProvisionedPermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -301,7 +301,7 @@ module DescribePermissionSetProvisioningStatus = {
   type response = {
 @as("PermissionSetProvisioningStatus") permissionSetProvisioningStatus: permissionSetProvisioningStatus
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "DescribePermissionSetProvisioningStatusCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DescribePermissionSetProvisioningStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -314,7 +314,7 @@ module DescribePermissionSet = {
   type response = {
 @as("PermissionSet") permissionSet: permissionSet
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "DescribePermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DescribePermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -327,7 +327,7 @@ module DescribeAccountAssignmentDeletionStatus = {
   type response = {
 @as("AccountAssignmentDeletionStatus") accountAssignmentDeletionStatus: accountAssignmentOperationStatus
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountAssignmentDeletionStatusCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DescribeAccountAssignmentDeletionStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -340,7 +340,7 @@ module DescribeAccountAssignmentCreationStatus = {
   type response = {
 @as("AccountAssignmentCreationStatus") accountAssignmentCreationStatus: accountAssignmentOperationStatus
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountAssignmentCreationStatusCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DescribeAccountAssignmentCreationStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -357,7 +357,7 @@ module DeleteAccountAssignment = {
   type response = {
 @as("AccountAssignmentDeletionStatus") accountAssignmentDeletionStatus: accountAssignmentOperationStatus
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "DeleteAccountAssignmentCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DeleteAccountAssignmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -374,7 +374,7 @@ module CreateAccountAssignment = {
   type response = {
 @as("AccountAssignmentCreationStatus") accountAssignmentCreationStatus: accountAssignmentOperationStatus
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "CreateAccountAssignmentCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "CreateAccountAssignmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -386,7 +386,7 @@ module TagResource = {
 @as("InstanceArn") instanceArn: option<instanceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -401,7 +401,7 @@ module ListTagsForResource = {
 @as("NextToken") nextToken: token,
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -417,7 +417,7 @@ module ListPermissionSetProvisioningStatus = {
 @as("NextToken") nextToken: token,
 @as("PermissionSetsProvisioningStatus") permissionSetsProvisioningStatus: permissionSetProvisioningStatusList
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "ListPermissionSetProvisioningStatusCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListPermissionSetProvisioningStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -433,7 +433,7 @@ module ListManagedPoliciesInPermissionSet = {
 @as("NextToken") nextToken: token,
 @as("AttachedManagedPolicies") attachedManagedPolicies: attachedManagedPolicyList
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "ListManagedPoliciesInPermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListManagedPoliciesInPermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -447,7 +447,7 @@ module ListInstances = {
 @as("NextToken") nextToken: token,
 @as("Instances") instances: instanceList
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "ListInstancesCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -464,7 +464,7 @@ module ListAccountAssignments = {
 @as("NextToken") nextToken: token,
 @as("AccountAssignments") accountAssignments: accountAssignmentList
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "ListAccountAssignmentsCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListAccountAssignmentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -480,7 +480,7 @@ module ListAccountAssignmentDeletionStatus = {
 @as("NextToken") nextToken: token,
 @as("AccountAssignmentsDeletionStatus") accountAssignmentsDeletionStatus: accountAssignmentOperationStatusList
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "ListAccountAssignmentDeletionStatusCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListAccountAssignmentDeletionStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -496,7 +496,7 @@ module ListAccountAssignmentCreationStatus = {
 @as("NextToken") nextToken: token,
 @as("AccountAssignmentsCreationStatus") accountAssignmentsCreationStatus: accountAssignmentOperationStatusList
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "ListAccountAssignmentCreationStatusCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "ListAccountAssignmentCreationStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -513,7 +513,7 @@ module CreatePermissionSet = {
   type response = {
 @as("PermissionSet") permissionSet: permissionSet
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "CreatePermissionSetCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "CreatePermissionSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -524,7 +524,7 @@ module UpdateInstanceAccessControlAttributeConfiguration = {
 @as("InstanceArn") instanceArn: option<instanceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "UpdateInstanceAccessControlAttributeConfigurationCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "UpdateInstanceAccessControlAttributeConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -538,7 +538,7 @@ module DescribeInstanceAccessControlAttributeConfiguration = {
 @as("StatusReason") statusReason: instanceAccessControlAttributeConfigurationStatusReason,
 @as("Status") status: instanceAccessControlAttributeConfigurationStatus
 }
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "DescribeInstanceAccessControlAttributeConfigurationCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "DescribeInstanceAccessControlAttributeConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -549,6 +549,6 @@ module CreateInstanceAccessControlAttributeConfiguration = {
 @as("InstanceArn") instanceArn: option<instanceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-sso") @new external new_: (Js.Promise.t<request>) => t = "CreateInstanceAccessControlAttributeConfigurationCommand";
+  @module("@aws-sdk/client-sso") @new external new_: (request) => t = "CreateInstanceAccessControlAttributeConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -88,7 +88,7 @@ module SendMessage = {
 @as("AbsoluteTime") absoluteTime: instant,
 @as("Id") id: chatItemId
 }
-  @module("@aws-sdk/client-connect") @new external new_: (Js.Promise.t<request>) => t = "SendMessageCommand";
+  @module("@aws-sdk/client-connect") @new external new_: (request) => t = "SendMessageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -104,7 +104,7 @@ module SendEvent = {
 @as("AbsoluteTime") absoluteTime: instant,
 @as("Id") id: chatItemId
 }
-  @module("@aws-sdk/client-connect") @new external new_: (Js.Promise.t<request>) => t = "SendEventCommand";
+  @module("@aws-sdk/client-connect") @new external new_: (request) => t = "SendEventCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -118,7 +118,7 @@ module GetAttachment = {
 @as("UrlExpiry") urlExpiry: iSO8601Datetime,
 @as("Url") url: preSignedAttachmentUrl
 }
-  @module("@aws-sdk/client-connect") @new external new_: (Js.Promise.t<request>) => t = "GetAttachmentCommand";
+  @module("@aws-sdk/client-connect") @new external new_: (request) => t = "GetAttachmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -129,7 +129,7 @@ module DisconnectParticipant = {
 @as("ClientToken") clientToken: clientToken
 }
   type response = unit
-  @module("@aws-sdk/client-connect") @new external new_: (Js.Promise.t<request>) => t = "DisconnectParticipantCommand";
+  @module("@aws-sdk/client-connect") @new external new_: (request) => t = "DisconnectParticipantCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -143,7 +143,7 @@ module CreateParticipantConnection = {
 @as("ConnectionCredentials") connectionCredentials: connectionCredentials,
 @as("Websocket") websocket: websocket
 }
-  @module("@aws-sdk/client-connect") @new external new_: (Js.Promise.t<request>) => t = "CreateParticipantConnectionCommand";
+  @module("@aws-sdk/client-connect") @new external new_: (request) => t = "CreateParticipantConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -155,7 +155,7 @@ module CompleteAttachmentUpload = {
 @as("AttachmentIds") attachmentIds: option<attachmentIdList>
 }
   type response = unit
-  @module("@aws-sdk/client-connect") @new external new_: (Js.Promise.t<request>) => t = "CompleteAttachmentUploadCommand";
+  @module("@aws-sdk/client-connect") @new external new_: (request) => t = "CompleteAttachmentUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -172,7 +172,7 @@ module StartAttachmentUpload = {
 @as("UploadMetadata") uploadMetadata: uploadMetadata,
 @as("AttachmentId") attachmentId: artifactId
 }
-  @module("@aws-sdk/client-connect") @new external new_: (Js.Promise.t<request>) => t = "StartAttachmentUploadCommand";
+  @module("@aws-sdk/client-connect") @new external new_: (request) => t = "StartAttachmentUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -192,6 +192,6 @@ module GetTranscript = {
 @as("Transcript") transcript: transcript,
 @as("InitialContactId") initialContactId: contactId
 }
-  @module("@aws-sdk/client-connect") @new external new_: (Js.Promise.t<request>) => t = "GetTranscriptCommand";
+  @module("@aws-sdk/client-connect") @new external new_: (request) => t = "GetTranscriptCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

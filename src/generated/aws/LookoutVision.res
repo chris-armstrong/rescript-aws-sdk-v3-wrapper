@@ -154,7 +154,7 @@ module UpdateDatasetEntries = {
   type response = {
 @as("Status") status: datasetStatus
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "UpdateDatasetEntriesCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "UpdateDatasetEntriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -168,7 +168,7 @@ module StopModel = {
   type response = {
 @as("Status") status: modelHostingStatus
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "StopModelCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "StopModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -183,7 +183,7 @@ module StartModel = {
   type response = {
 @as("Status") status: modelHostingStatus
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "StartModelCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "StartModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -196,7 +196,7 @@ module DeleteProject = {
   type response = {
 @as("ProjectArn") projectArn: projectArn
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "DeleteProjectCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "DeleteProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -210,7 +210,7 @@ module DeleteModel = {
   type response = {
 @as("ModelArn") modelArn: modelArn
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "DeleteModelCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "DeleteModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -222,7 +222,7 @@ module DeleteDataset = {
 @as("ProjectName") projectName: option<projectName>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "DeleteDatasetCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "DeleteDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -233,7 +233,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<tagArn>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -254,7 +254,7 @@ module ListDatasetEntries = {
 @as("NextToken") nextToken: paginationToken,
 @as("DatasetEntries") datasetEntries: datasetEntryList
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "ListDatasetEntriesCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "ListDatasetEntriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -267,7 +267,7 @@ module CreateProject = {
   type response = {
 @as("ProjectMetadata") projectMetadata: projectMetadata
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "CreateProjectCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "CreateProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -278,7 +278,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<tagArn>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -290,7 +290,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -304,7 +304,7 @@ module ListProjects = {
 @as("NextToken") nextToken: paginationToken,
 @as("Projects") projects: projectMetadataList
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "ListProjectsCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "ListProjectsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -319,7 +319,7 @@ module DetectAnomalies = {
   type response = {
 @as("DetectAnomalyResult") detectAnomalyResult: detectAnomalyResult
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "DetectAnomaliesCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "DetectAnomaliesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -332,7 +332,7 @@ module DescribeDataset = {
   type response = {
 @as("DatasetDescription") datasetDescription: datasetDescription
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "DescribeDatasetCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "DescribeDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -349,7 +349,7 @@ module CreateModel = {
   type response = {
 @as("ModelMetadata") modelMetadata: modelMetadata
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "CreateModelCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "CreateModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -364,7 +364,7 @@ module ListModels = {
 @as("NextToken") nextToken: paginationToken,
 @as("Models") models: modelMetadataList
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "ListModelsCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "ListModelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -376,7 +376,7 @@ module DescribeProject = {
   type response = {
 @as("ProjectDescription") projectDescription: projectDescription
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "DescribeProjectCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "DescribeProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -389,7 +389,7 @@ module DescribeModel = {
   type response = {
 @as("ModelDescription") modelDescription: modelDescription
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "DescribeModelCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "DescribeModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -404,6 +404,6 @@ module CreateDataset = {
   type response = {
 @as("DatasetMetadata") datasetMetadata: datasetMetadata
 }
-  @module("@aws-sdk/client-lookoutvision") @new external new_: (Js.Promise.t<request>) => t = "CreateDatasetCommand";
+  @module("@aws-sdk/client-lookoutvision") @new external new_: (request) => t = "CreateDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

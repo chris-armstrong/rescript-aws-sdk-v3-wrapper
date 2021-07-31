@@ -446,7 +446,7 @@ module StopSolutionVersionCreation = {
 @as("solutionVersionArn") solutionVersionArn: option<arn>
 }
   
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "StopSolutionVersionCreationCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "StopSolutionVersionCreationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -456,7 +456,7 @@ module DeleteSolution = {
 @as("solutionArn") solutionArn: option<arn>
 }
   
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DeleteSolutionCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteSolutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -466,7 +466,7 @@ module DeleteSchema = {
 @as("schemaArn") schemaArn: option<arn>
 }
   
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DeleteSchemaCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -476,7 +476,7 @@ module DeleteFilter = {
 @as("filterArn") filterArn: option<arn>
 }
   
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DeleteFilterCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -486,7 +486,7 @@ module DeleteEventTracker = {
 @as("eventTrackerArn") eventTrackerArn: option<arn>
 }
   
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DeleteEventTrackerCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteEventTrackerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -496,7 +496,7 @@ module DeleteDatasetGroup = {
 @as("datasetGroupArn") datasetGroupArn: option<arn>
 }
   
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DeleteDatasetGroupCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteDatasetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -506,7 +506,7 @@ module DeleteDataset = {
 @as("datasetArn") datasetArn: option<arn>
 }
   
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DeleteDatasetCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -516,7 +516,7 @@ module DeleteCampaign = {
 @as("campaignArn") campaignArn: option<arn>
 }
   
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DeleteCampaignCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DeleteCampaignCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -529,7 +529,7 @@ module CreateSolutionVersion = {
   type response = {
 @as("solutionVersionArn") solutionVersionArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "CreateSolutionVersionCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateSolutionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -542,7 +542,7 @@ module CreateSchema = {
   type response = {
 @as("schemaArn") schemaArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "CreateSchemaCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -556,7 +556,7 @@ module CreateFilter = {
   type response = {
 @as("filterArn") filterArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "CreateFilterCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -570,7 +570,7 @@ module CreateEventTracker = {
 @as("trackingId") trackingId: trackingId,
 @as("eventTrackerArn") eventTrackerArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "CreateEventTrackerCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateEventTrackerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -584,7 +584,7 @@ module CreateDatasetGroup = {
   type response = {
 @as("datasetGroupArn") datasetGroupArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "CreateDatasetGroupCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateDatasetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -599,7 +599,7 @@ module CreateDataset = {
   type response = {
 @as("datasetArn") datasetArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "CreateDatasetCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -612,7 +612,7 @@ module GetSolutionMetrics = {
 @as("metrics") metrics: metrics,
 @as("solutionVersionArn") solutionVersionArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "GetSolutionMetricsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "GetSolutionMetricsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -624,7 +624,7 @@ module DescribeSchema = {
   type response = {
 @as("schema") schema: datasetSchema
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeSchemaCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -636,7 +636,7 @@ module DescribeRecipe = {
   type response = {
 @as("recipe") recipe: recipe
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeRecipeCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeRecipeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -648,7 +648,7 @@ module DescribeFilter = {
   type response = {
 @as("filter") filter: filter
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeFilterCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -660,7 +660,7 @@ module DescribeEventTracker = {
   type response = {
 @as("eventTracker") eventTracker: eventTracker
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventTrackerCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeEventTrackerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -672,7 +672,7 @@ module DescribeDatasetGroup = {
   type response = {
 @as("datasetGroup") datasetGroup: datasetGroup
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeDatasetGroupCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeDatasetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -684,7 +684,7 @@ module DescribeDataset = {
   type response = {
 @as("dataset") dataset: dataset
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeDatasetCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -699,7 +699,7 @@ module CreateDatasetImportJob = {
   type response = {
 @as("datasetImportJobArn") datasetImportJobArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "CreateDatasetImportJobCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateDatasetImportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -714,7 +714,7 @@ module UpdateCampaign = {
   type response = {
 @as("campaignArn") campaignArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "UpdateCampaignCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "UpdateCampaignCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -729,7 +729,7 @@ module ListSolutions = {
 @as("nextToken") nextToken: nextToken,
 @as("solutions") solutions: solutions
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListSolutionsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListSolutionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -744,7 +744,7 @@ module ListSolutionVersions = {
 @as("nextToken") nextToken: nextToken,
 @as("solutionVersions") solutionVersions: solutionVersions
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListSolutionVersionsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListSolutionVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -758,7 +758,7 @@ module ListSchemas = {
 @as("nextToken") nextToken: nextToken,
 @as("schemas") schemas: schemas
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListSchemasCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListSchemasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -773,7 +773,7 @@ module ListRecipes = {
 @as("nextToken") nextToken: nextToken,
 @as("recipes") recipes: recipes
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListRecipesCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListRecipesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -788,7 +788,7 @@ module ListFilters = {
 @as("nextToken") nextToken: nextToken,
 @as("Filters") filters: filters
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListFiltersCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListFiltersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -803,7 +803,7 @@ module ListEventTrackers = {
 @as("nextToken") nextToken: nextToken,
 @as("eventTrackers") eventTrackers: eventTrackers
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListEventTrackersCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListEventTrackersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -818,7 +818,7 @@ module ListDatasets = {
 @as("nextToken") nextToken: nextToken,
 @as("datasets") datasets: datasets
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListDatasetsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -833,7 +833,7 @@ module ListDatasetImportJobs = {
 @as("nextToken") nextToken: nextToken,
 @as("datasetImportJobs") datasetImportJobs: datasetImportJobs
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListDatasetImportJobsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetImportJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -847,7 +847,7 @@ module ListDatasetGroups = {
 @as("nextToken") nextToken: nextToken,
 @as("datasetGroups") datasetGroups: datasetGroups
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListDatasetGroupsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -862,7 +862,7 @@ module ListDatasetExportJobs = {
 @as("nextToken") nextToken: nextToken,
 @as("datasetExportJobs") datasetExportJobs: datasetExportJobs
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListDatasetExportJobsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListDatasetExportJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -877,7 +877,7 @@ module ListCampaigns = {
 @as("nextToken") nextToken: nextToken,
 @as("campaigns") campaigns: campaigns
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListCampaignsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListCampaignsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -892,7 +892,7 @@ module ListBatchInferenceJobs = {
 @as("nextToken") nextToken: nextToken,
 @as("batchInferenceJobs") batchInferenceJobs: batchInferenceJobs
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "ListBatchInferenceJobsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "ListBatchInferenceJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -904,7 +904,7 @@ module DescribeFeatureTransformation = {
   type response = {
 @as("featureTransformation") featureTransformation: featureTransformation
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeFeatureTransformationCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeFeatureTransformationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -916,7 +916,7 @@ module DescribeDatasetImportJob = {
   type response = {
 @as("datasetImportJob") datasetImportJob: datasetImportJob
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeDatasetImportJobCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeDatasetImportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -932,7 +932,7 @@ module CreateDatasetExportJob = {
   type response = {
 @as("datasetExportJobArn") datasetExportJobArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "CreateDatasetExportJobCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateDatasetExportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -947,7 +947,7 @@ module CreateCampaign = {
   type response = {
 @as("campaignArn") campaignArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "CreateCampaignCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateCampaignCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -966,7 +966,7 @@ module CreateBatchInferenceJob = {
   type response = {
 @as("batchInferenceJobArn") batchInferenceJobArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "CreateBatchInferenceJobCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateBatchInferenceJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -978,7 +978,7 @@ module DescribeDatasetExportJob = {
   type response = {
 @as("datasetExportJob") datasetExportJob: datasetExportJob
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeDatasetExportJobCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeDatasetExportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -990,7 +990,7 @@ module DescribeBatchInferenceJob = {
   type response = {
 @as("batchInferenceJob") batchInferenceJob: batchInferenceJob
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeBatchInferenceJobCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeBatchInferenceJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1002,7 +1002,7 @@ module DescribeCampaign = {
   type response = {
 @as("campaign") campaign: campaign
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeCampaignCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeCampaignCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1014,7 +1014,7 @@ module DescribeAlgorithm = {
   type response = {
 @as("algorithm") algorithm: algorithm
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeAlgorithmCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeAlgorithmCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1032,7 +1032,7 @@ module CreateSolution = {
   type response = {
 @as("solutionArn") solutionArn: arn
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "CreateSolutionCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "CreateSolutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1044,7 +1044,7 @@ module DescribeSolutionVersion = {
   type response = {
 @as("solutionVersion") solutionVersion: solutionVersion
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeSolutionVersionCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeSolutionVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1056,6 +1056,6 @@ module DescribeSolution = {
   type response = {
 @as("solution") solution: solution
 }
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "DescribeSolutionCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "DescribeSolutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

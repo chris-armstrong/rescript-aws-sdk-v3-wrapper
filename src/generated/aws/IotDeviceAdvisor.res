@@ -95,7 +95,7 @@ module StopSuiteRun = {
 @as("suiteDefinitionId") suiteDefinitionId: option<uUID>
 }
   type response = unit
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "StopSuiteRunCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "StopSuiteRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -108,7 +108,7 @@ module GetSuiteRunReport = {
   type response = {
 @as("qualificationReportDownloadUrl") qualificationReportDownloadUrl: qualificationReportDownloadUrl
 }
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "GetSuiteRunReportCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "GetSuiteRunReportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -118,7 +118,7 @@ module DeleteSuiteDefinition = {
 @as("suiteDefinitionId") suiteDefinitionId: option<uUID>
 }
   type response = unit
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "DeleteSuiteDefinitionCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "DeleteSuiteDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -129,7 +129,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -140,7 +140,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -152,7 +152,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -169,7 +169,7 @@ module StartSuiteRun = {
 @as("suiteRunArn") suiteRunArn: amazonResourceName,
 @as("suiteRunId") suiteRunId: uUID
 }
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "StartSuiteRunCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "StartSuiteRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -185,7 +185,7 @@ module ListSuiteRuns = {
 @as("nextToken") nextToken: token,
 @as("suiteRunsList") suiteRunsList: suiteRunsList
 }
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "ListSuiteRunsCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "ListSuiteRunsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -203,7 +203,7 @@ module UpdateSuiteDefinition = {
 @as("suiteDefinitionArn") suiteDefinitionArn: amazonResourceName,
 @as("suiteDefinitionId") suiteDefinitionId: uUID
 }
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "UpdateSuiteDefinitionCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "UpdateSuiteDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -223,7 +223,7 @@ module GetSuiteDefinition = {
 @as("suiteDefinitionArn") suiteDefinitionArn: amazonResourceName,
 @as("suiteDefinitionId") suiteDefinitionId: uUID
 }
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "GetSuiteDefinitionCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "GetSuiteDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -239,7 +239,7 @@ module CreateSuiteDefinition = {
 @as("suiteDefinitionArn") suiteDefinitionArn: amazonResourceName,
 @as("suiteDefinitionId") suiteDefinitionId: uUID
 }
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "CreateSuiteDefinitionCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "CreateSuiteDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -253,7 +253,7 @@ module ListSuiteDefinitions = {
 @as("nextToken") nextToken: token,
 @as("suiteDefinitionInformationList") suiteDefinitionInformationList: suiteDefinitionInformationList
 }
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "ListSuiteDefinitionsCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "ListSuiteDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -276,6 +276,6 @@ module GetSuiteRun = {
 @as("suiteDefinitionVersion") suiteDefinitionVersion: suiteDefinitionVersion,
 @as("suiteDefinitionId") suiteDefinitionId: uUID
 }
-  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (Js.Promise.t<request>) => t = "GetSuiteRunCommand";
+  @module("@aws-sdk/client-iotdeviceadvisor") @new external new_: (request) => t = "GetSuiteRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

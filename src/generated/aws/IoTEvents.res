@@ -423,7 +423,7 @@ module DescribeDetectorModelAnalysis = {
   type response = {
 @as("status") status: analysisStatus
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "DescribeDetectorModelAnalysisCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DescribeDetectorModelAnalysisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -433,7 +433,7 @@ module DeleteInput = {
 @as("inputName") inputName: option<inputName>
 }
   type response = unit
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "DeleteInputCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DeleteInputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -443,7 +443,7 @@ module DeleteDetectorModel = {
 @as("detectorModelName") detectorModelName: option<detectorModelName>
 }
   type response = unit
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "DeleteDetectorModelCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DeleteDetectorModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -453,7 +453,7 @@ module DeleteAlarmModel = {
 @as("alarmModelName") alarmModelName: option<alarmModelName>
 }
   type response = unit
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "DeleteAlarmModelCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DeleteAlarmModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -464,7 +464,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -475,7 +475,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -487,7 +487,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tags
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -501,7 +501,7 @@ module ListInputs = {
 @as("nextToken") nextToken: nextToken,
 @as("inputSummaries") inputSummaries: inputSummaries
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "ListInputsCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListInputsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -515,7 +515,7 @@ module ListDetectorModels = {
 @as("nextToken") nextToken: nextToken,
 @as("detectorModelSummaries") detectorModelSummaries: detectorModelSummaries
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "ListDetectorModelsCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListDetectorModelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -530,7 +530,7 @@ module ListDetectorModelVersions = {
 @as("nextToken") nextToken: nextToken,
 @as("detectorModelVersionSummaries") detectorModelVersionSummaries: detectorModelVersionSummaries
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "ListDetectorModelVersionsCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListDetectorModelVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -544,7 +544,7 @@ module ListAlarmModels = {
 @as("nextToken") nextToken: nextToken,
 @as("alarmModelSummaries") alarmModelSummaries: alarmModelSummaries
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "ListAlarmModelsCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListAlarmModelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -559,7 +559,7 @@ module ListAlarmModelVersions = {
 @as("nextToken") nextToken: nextToken,
 @as("alarmModelVersionSummaries") alarmModelVersionSummaries: alarmModelVersionSummaries
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "ListAlarmModelVersionsCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListAlarmModelVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -573,7 +573,7 @@ module UpdateInput = {
   type response = {
 @as("inputConfiguration") inputConfiguration: inputConfiguration
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "UpdateInputCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "UpdateInputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -583,7 +583,7 @@ module PutLoggingOptions = {
 @as("loggingOptions") loggingOptions: option<loggingOptions>
 }
   
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "PutLoggingOptionsCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "PutLoggingOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -598,7 +598,7 @@ module ListInputRoutings = {
 @as("nextToken") nextToken: nextToken,
 @as("routedResources") routedResources: routedResources
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "ListInputRoutingsCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "ListInputRoutingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -608,7 +608,7 @@ module DescribeLoggingOptions = {
   type response = {
 @as("loggingOptions") loggingOptions: loggingOptions
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "DescribeLoggingOptionsCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DescribeLoggingOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -623,7 +623,7 @@ module CreateInput = {
   type response = {
 @as("inputConfiguration") inputConfiguration: inputConfiguration
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "CreateInputCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "CreateInputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -638,7 +638,7 @@ module GetDetectorModelAnalysisResults = {
 @as("nextToken") nextToken: nextToken,
 @as("analysisResults") analysisResults: analysisResults
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "GetDetectorModelAnalysisResultsCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "GetDetectorModelAnalysisResultsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -650,7 +650,7 @@ module DescribeInput = {
   type response = {
 @as("input") input: input
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "DescribeInputCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DescribeInputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -673,7 +673,7 @@ module UpdateAlarmModel = {
 @as("alarmModelArn") alarmModelArn: alarmModelArn,
 @as("creationTime") creationTime: amazonawsTimestamp
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "UpdateAlarmModelCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "UpdateAlarmModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -700,7 +700,7 @@ module DescribeAlarmModel = {
 @as("alarmModelArn") alarmModelArn: alarmModelArn,
 @as("creationTime") creationTime: amazonawsTimestamp
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "DescribeAlarmModelCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DescribeAlarmModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -725,7 +725,7 @@ module CreateAlarmModel = {
 @as("alarmModelArn") alarmModelArn: alarmModelArn,
 @as("creationTime") creationTime: amazonawsTimestamp
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "CreateAlarmModelCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "CreateAlarmModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -741,7 +741,7 @@ module UpdateDetectorModel = {
   type response = {
 @as("detectorModelConfiguration") detectorModelConfiguration: detectorModelConfiguration
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "UpdateDetectorModelCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "UpdateDetectorModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -753,7 +753,7 @@ module StartDetectorModelAnalysis = {
   type response = {
 @as("analysisId") analysisId: analysisId
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "StartDetectorModelAnalysisCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "StartDetectorModelAnalysisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -771,7 +771,7 @@ module CreateDetectorModel = {
   type response = {
 @as("detectorModelConfiguration") detectorModelConfiguration: detectorModelConfiguration
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "CreateDetectorModelCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "CreateDetectorModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -784,6 +784,6 @@ module DescribeDetectorModel = {
   type response = {
 @as("detectorModel") detectorModel: detectorModel
 }
-  @module("@aws-sdk/client-iotevents") @new external new_: (Js.Promise.t<request>) => t = "DescribeDetectorModelCommand";
+  @module("@aws-sdk/client-iotevents") @new external new_: (request) => t = "DescribeDetectorModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -153,7 +153,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<resourceARN>
 }
   type response = unit
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -164,7 +164,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<resourceARN>
 }
   type response = unit
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -177,7 +177,7 @@ module RegisterTransitGateway = {
   type response = {
 @as("TransitGatewayRegistration") transitGatewayRegistration: transitGatewayRegistration
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "RegisterTransitGatewayCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "RegisterTransitGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -189,7 +189,7 @@ module ListTagsForResource = {
   type response = {
 @as("TagList") tagList: tagList
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -205,7 +205,7 @@ module GetTransitGatewayConnectPeerAssociations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayConnectPeerAssociations") transitGatewayConnectPeerAssociations: transitGatewayConnectPeerAssociationList
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "GetTransitGatewayConnectPeerAssociationsCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetTransitGatewayConnectPeerAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -222,7 +222,7 @@ module GetLinkAssociations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("LinkAssociations") linkAssociations: linkAssociationList
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "GetLinkAssociationsCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetLinkAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -238,7 +238,7 @@ module GetCustomerGatewayAssociations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("CustomerGatewayAssociations") customerGatewayAssociations: customerGatewayAssociationList
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "GetCustomerGatewayAssociationsCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetCustomerGatewayAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -251,7 +251,7 @@ module DisassociateTransitGatewayConnectPeer = {
   type response = {
 @as("TransitGatewayConnectPeerAssociation") transitGatewayConnectPeerAssociation: transitGatewayConnectPeerAssociation
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "DisassociateTransitGatewayConnectPeerCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "DisassociateTransitGatewayConnectPeerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -265,7 +265,7 @@ module DisassociateLink = {
   type response = {
 @as("LinkAssociation") linkAssociation: linkAssociation
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "DisassociateLinkCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "DisassociateLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -278,7 +278,7 @@ module DisassociateCustomerGateway = {
   type response = {
 @as("CustomerGatewayAssociation") customerGatewayAssociation: customerGatewayAssociation
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "DisassociateCustomerGatewayCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "DisassociateCustomerGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -291,7 +291,7 @@ module DeregisterTransitGateway = {
   type response = {
 @as("TransitGatewayRegistration") transitGatewayRegistration: transitGatewayRegistration
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "DeregisterTransitGatewayCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "DeregisterTransitGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -306,7 +306,7 @@ module AssociateTransitGatewayConnectPeer = {
   type response = {
 @as("TransitGatewayConnectPeerAssociation") transitGatewayConnectPeerAssociation: transitGatewayConnectPeerAssociation
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "AssociateTransitGatewayConnectPeerCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "AssociateTransitGatewayConnectPeerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -320,7 +320,7 @@ module AssociateLink = {
   type response = {
 @as("LinkAssociation") linkAssociation: linkAssociation
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "AssociateLinkCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "AssociateLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -335,7 +335,7 @@ module AssociateCustomerGateway = {
   type response = {
 @as("CustomerGatewayAssociation") customerGatewayAssociation: customerGatewayAssociation
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "AssociateCustomerGatewayCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "AssociateCustomerGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -350,7 +350,7 @@ module UpdateSite = {
   type response = {
 @as("Site") site: site
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateSiteCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "UpdateSiteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -367,7 +367,7 @@ module UpdateLink = {
   type response = {
 @as("Link") link: link
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateLinkCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "UpdateLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -380,7 +380,7 @@ module UpdateGlobalNetwork = {
   type response = {
 @as("GlobalNetwork") globalNetwork: globalNetwork
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateGlobalNetworkCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "UpdateGlobalNetworkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -401,7 +401,7 @@ module UpdateDevice = {
   type response = {
 @as("Device") device: device
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateDeviceCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "UpdateDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -417,7 +417,7 @@ module UpdateConnection = {
   type response = {
 @as("Connection") connection: connection
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "UpdateConnectionCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "UpdateConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -433,7 +433,7 @@ module GetTransitGatewayRegistrations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TransitGatewayRegistrations") transitGatewayRegistrations: transitGatewayRegistrationList
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "GetTransitGatewayRegistrationsCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetTransitGatewayRegistrationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -446,7 +446,7 @@ module DeleteSite = {
   type response = {
 @as("Site") site: site
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "DeleteSiteCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "DeleteSiteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -459,7 +459,7 @@ module DeleteLink = {
   type response = {
 @as("Link") link: link
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "DeleteLinkCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "DeleteLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -471,7 +471,7 @@ module DeleteGlobalNetwork = {
   type response = {
 @as("GlobalNetwork") globalNetwork: globalNetwork
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "DeleteGlobalNetworkCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "DeleteGlobalNetworkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -484,7 +484,7 @@ module DeleteDevice = {
   type response = {
 @as("Device") device: device
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "DeleteDeviceCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "DeleteDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -497,7 +497,7 @@ module DeleteConnection = {
   type response = {
 @as("Connection") connection: connection
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "DeleteConnectionCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "DeleteConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -512,7 +512,7 @@ module CreateSite = {
   type response = {
 @as("Site") site: site
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "CreateSiteCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "CreateSiteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -530,7 +530,7 @@ module CreateLink = {
   type response = {
 @as("Link") link: link
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "CreateLinkCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "CreateLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -543,7 +543,7 @@ module CreateGlobalNetwork = {
   type response = {
 @as("GlobalNetwork") globalNetwork: globalNetwork
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "CreateGlobalNetworkCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "CreateGlobalNetworkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -564,7 +564,7 @@ module CreateDevice = {
   type response = {
 @as("Device") device: device
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "CreateDeviceCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "CreateDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -582,7 +582,7 @@ module CreateConnection = {
   type response = {
 @as("Connection") connection: connection
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "CreateConnectionCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "CreateConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -598,7 +598,7 @@ module GetSites = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Sites") sites: siteList
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "GetSitesCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetSitesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -617,7 +617,7 @@ module GetLinks = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Links") links: linkList
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "GetLinksCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetLinksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -634,7 +634,7 @@ module GetDevices = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Devices") devices: deviceList
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "GetDevicesCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetDevicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -651,7 +651,7 @@ module GetConnections = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Connections") connections: connectionList
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "GetConnectionsCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "GetConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -666,6 +666,6 @@ module DescribeGlobalNetworks = {
 @as("NextToken") nextToken: amazonawsString,
 @as("GlobalNetworks") globalNetworks: globalNetworkList
 }
-  @module("@aws-sdk/client-networkmanager") @new external new_: (Js.Promise.t<request>) => t = "DescribeGlobalNetworksCommand";
+  @module("@aws-sdk/client-networkmanager") @new external new_: (request) => t = "DescribeGlobalNetworksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

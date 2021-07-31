@@ -141,7 +141,7 @@ module StopStream = {
 @as("channelArn") channelArn: option<channelArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "StopStreamCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "StopStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -152,7 +152,7 @@ module PutMetadata = {
 @as("channelArn") channelArn: option<channelArn>
 }
   
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "PutMetadataCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "PutMetadataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -162,7 +162,7 @@ module DeleteStreamKey = {
 @as("arn") arn: option<streamKeyArn>
 }
   
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "DeleteStreamKeyCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "DeleteStreamKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -172,7 +172,7 @@ module DeleteRecordingConfiguration = {
 @as("arn") arn: option<recordingConfigurationArn>
 }
   
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "DeleteRecordingConfigurationCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "DeleteRecordingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -182,7 +182,7 @@ module DeletePlaybackKeyPair = {
 @as("arn") arn: option<playbackKeyPairArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "DeletePlaybackKeyPairCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "DeletePlaybackKeyPairCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -192,7 +192,7 @@ module DeleteChannel = {
 @as("arn") arn: option<channelArn>
 }
   
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "DeleteChannelCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "DeleteChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -203,7 +203,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -214,7 +214,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -229,7 +229,7 @@ module ListTagsForResource = {
 @as("nextToken") nextToken: amazonawsString,
 @as("tags") tags: option<tags>
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -241,7 +241,7 @@ module GetStream = {
   type response = {
 @as("stream") stream: stream
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "GetStreamCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "GetStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -258,7 +258,7 @@ module UpdateChannel = {
   type response = {
 @as("channel") channel: channel
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "UpdateChannelCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "UpdateChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -272,7 +272,7 @@ module ListStreams = {
 @as("nextToken") nextToken: paginationToken,
 @as("streams") streams: option<streamList>
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "ListStreamsCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "ListStreamsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -286,7 +286,7 @@ module ImportPlaybackKeyPair = {
   type response = {
 @as("keyPair") keyPair: playbackKeyPair
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "ImportPlaybackKeyPairCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "ImportPlaybackKeyPairCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -298,7 +298,7 @@ module GetStreamKey = {
   type response = {
 @as("streamKey") streamKey: streamKey
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "GetStreamKeyCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "GetStreamKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -310,7 +310,7 @@ module GetPlaybackKeyPair = {
   type response = {
 @as("keyPair") keyPair: playbackKeyPair
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "GetPlaybackKeyPairCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "GetPlaybackKeyPairCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -322,7 +322,7 @@ module GetChannel = {
   type response = {
 @as("channel") channel: channel
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "GetChannelCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "GetChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -335,7 +335,7 @@ module CreateStreamKey = {
   type response = {
 @as("streamKey") streamKey: streamKey
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "CreateStreamKeyCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "CreateStreamKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -353,7 +353,7 @@ module CreateChannel = {
 @as("streamKey") streamKey: streamKey,
 @as("channel") channel: channel
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "CreateChannelCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "CreateChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -368,7 +368,7 @@ module ListStreamKeys = {
 @as("nextToken") nextToken: paginationToken,
 @as("streamKeys") streamKeys: option<streamKeyList>
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "ListStreamKeysCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "ListStreamKeysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -382,7 +382,7 @@ module ListPlaybackKeyPairs = {
 @as("nextToken") nextToken: paginationToken,
 @as("keyPairs") keyPairs: option<playbackKeyPairList>
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "ListPlaybackKeyPairsCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "ListPlaybackKeyPairsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -398,7 +398,7 @@ module ListChannels = {
 @as("nextToken") nextToken: paginationToken,
 @as("channels") channels: option<channelList>
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "ListChannelsCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "ListChannelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -410,7 +410,7 @@ module GetRecordingConfiguration = {
   type response = {
 @as("recordingConfiguration") recordingConfiguration: recordingConfiguration
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "GetRecordingConfigurationCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "GetRecordingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -424,7 +424,7 @@ module CreateRecordingConfiguration = {
   type response = {
 @as("recordingConfiguration") recordingConfiguration: recordingConfiguration
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "CreateRecordingConfigurationCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "CreateRecordingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -437,7 +437,7 @@ module BatchGetStreamKey = {
 @as("errors") errors: batchErrors,
 @as("streamKeys") streamKeys: streamKeys
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "BatchGetStreamKeyCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "BatchGetStreamKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -450,7 +450,7 @@ module BatchGetChannel = {
 @as("errors") errors: batchErrors,
 @as("channels") channels: channels
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "BatchGetChannelCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "BatchGetChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -464,6 +464,6 @@ module ListRecordingConfigurations = {
 @as("nextToken") nextToken: paginationToken,
 @as("recordingConfigurations") recordingConfigurations: option<recordingConfigurationList>
 }
-  @module("@aws-sdk/client-ivs") @new external new_: (Js.Promise.t<request>) => t = "ListRecordingConfigurationsCommand";
+  @module("@aws-sdk/client-ivs") @new external new_: (request) => t = "ListRecordingConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

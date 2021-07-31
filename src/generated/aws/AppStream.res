@@ -310,7 +310,7 @@ module StopFleet = {
 @as("Name") name: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "StopFleetCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "StopFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -320,7 +320,7 @@ module StartFleet = {
 @as("Name") name: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "StartFleetCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "StartFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -330,7 +330,7 @@ module ExpireSession = {
 @as("SessionId") sessionId: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "ExpireSessionCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "ExpireSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -341,7 +341,7 @@ module EnableUser = {
 @as("UserName") userName: option<username>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "EnableUserCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "EnableUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -352,7 +352,7 @@ module DisassociateFleet = {
 @as("FleetName") fleetName: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DisassociateFleetCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DisassociateFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -363,7 +363,7 @@ module DisableUser = {
 @as("UserName") userName: option<username>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DisableUserCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DisableUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -374,7 +374,7 @@ module DeleteUser = {
 @as("UserName") userName: option<username>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DeleteUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -382,7 +382,7 @@ module DeleteUsageReportSubscription = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DeleteUsageReportSubscriptionCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DeleteUsageReportSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -392,7 +392,7 @@ module DeleteStack = {
 @as("Name") name: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DeleteStackCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DeleteStackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -403,7 +403,7 @@ module DeleteImagePermissions = {
 @as("Name") name: option<name>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DeleteImagePermissionsCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DeleteImagePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -413,7 +413,7 @@ module DeleteFleet = {
 @as("Name") name: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DeleteFleetCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DeleteFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -423,7 +423,7 @@ module DeleteDirectoryConfig = {
 @as("DirectoryName") directoryName: option<directoryName>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DeleteDirectoryConfigCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DeleteDirectoryConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -437,7 +437,7 @@ module CreateUser = {
 @as("UserName") userName: option<username>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "CreateUserCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "CreateUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -448,7 +448,7 @@ module CreateUsageReportSubscription = {
 @as("Schedule") schedule: usageReportSchedule,
 @as("S3BucketName") s3BucketName: amazonawsString
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "CreateUsageReportSubscriptionCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "CreateUsageReportSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -466,7 +466,7 @@ module CreateStreamingURL = {
 @as("Expires") expires: amazonawsTimestamp,
 @as("StreamingURL") streamingURL: amazonawsString
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "CreateStreamingURLCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "CreateStreamingURLCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -480,7 +480,7 @@ module CreateImageBuilderStreamingURL = {
 @as("Expires") expires: amazonawsTimestamp,
 @as("StreamingURL") streamingURL: amazonawsString
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "CreateImageBuilderStreamingURLCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "CreateImageBuilderStreamingURLCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -495,7 +495,7 @@ module CopyImage = {
   type response = {
 @as("DestinationImageName") destinationImageName: name
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "CopyImageCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "CopyImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -506,7 +506,7 @@ module AssociateFleet = {
 @as("FleetName") fleetName: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "AssociateFleetCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "AssociateFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -518,7 +518,7 @@ module UpdateImagePermissions = {
 @as("Name") name: option<name>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "UpdateImagePermissionsCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "UpdateImagePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -529,7 +529,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -540,7 +540,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -552,7 +552,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tags
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -566,7 +566,7 @@ module ListAssociatedStacks = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Names") names: stringList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "ListAssociatedStacksCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "ListAssociatedStacksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -580,7 +580,7 @@ module ListAssociatedFleets = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Names") names: stringList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "ListAssociatedFleetsCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "ListAssociatedFleetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -594,7 +594,7 @@ module UpdateDirectoryConfig = {
   type response = {
 @as("DirectoryConfig") directoryConfig: directoryConfig
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "UpdateDirectoryConfigCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "UpdateDirectoryConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -609,7 +609,7 @@ module DescribeUsers = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Users") users: userList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DescribeUsersCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DescribeUsersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -626,7 +626,7 @@ module DescribeUserStackAssociations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("UserStackAssociations") userStackAssociations: userStackAssociationList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DescribeUserStackAssociationsCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DescribeUserStackAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -640,7 +640,7 @@ module CreateDirectoryConfig = {
   type response = {
 @as("DirectoryConfig") directoryConfig: directoryConfig
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "CreateDirectoryConfigCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "CreateDirectoryConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -668,7 +668,7 @@ module UpdateFleet = {
   type response = {
 @as("Fleet") fleet: fleet
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "UpdateFleetCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "UpdateFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -680,7 +680,7 @@ module StopImageBuilder = {
   type response = {
 @as("ImageBuilder") imageBuilder: imageBuilder
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "StopImageBuilderCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "StopImageBuilderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -693,7 +693,7 @@ module StartImageBuilder = {
   type response = {
 @as("ImageBuilder") imageBuilder: imageBuilder
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "StartImageBuilderCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "StartImageBuilderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -711,7 +711,7 @@ module DescribeSessions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Sessions") sessions: sessionList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DescribeSessionsCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DescribeSessionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -728,7 +728,7 @@ module DescribeImagePermissions = {
 @as("SharedImagePermissionsList") sharedImagePermissionsList: sharedImagePermissionsList,
 @as("Name") name: name
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DescribeImagePermissionsCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DescribeImagePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -743,7 +743,7 @@ module DescribeDirectoryConfigs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("DirectoryConfigs") directoryConfigs: directoryConfigList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DescribeDirectoryConfigsCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DescribeDirectoryConfigsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -755,7 +755,7 @@ module DeleteImageBuilder = {
   type response = {
 @as("ImageBuilder") imageBuilder: imageBuilder
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DeleteImageBuilderCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DeleteImageBuilderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -779,7 +779,7 @@ module CreateImageBuilder = {
   type response = {
 @as("ImageBuilder") imageBuilder: imageBuilder
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "CreateImageBuilderCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "CreateImageBuilderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -807,7 +807,7 @@ module CreateFleet = {
   type response = {
 @as("Fleet") fleet: fleet
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "CreateFleetCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "CreateFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -819,7 +819,7 @@ module BatchDisassociateUserStack = {
   type response = {
 @as("errors") errors: userStackAssociationErrorList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "BatchDisassociateUserStackCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "BatchDisassociateUserStackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -831,7 +831,7 @@ module BatchAssociateUserStack = {
   type response = {
 @as("errors") errors: userStackAssociationErrorList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "BatchAssociateUserStackCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "BatchAssociateUserStackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -854,7 +854,7 @@ module UpdateStack = {
   type response = {
 @as("Stack") stack: stack
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "UpdateStackCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "UpdateStackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -868,7 +868,7 @@ module DescribeUsageReportSubscriptions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("UsageReportSubscriptions") usageReportSubscriptions: usageReportSubscriptionList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DescribeUsageReportSubscriptionsCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DescribeUsageReportSubscriptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -883,7 +883,7 @@ module DescribeImageBuilders = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ImageBuilders") imageBuilders: imageBuilderList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DescribeImageBuildersCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DescribeImageBuildersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -897,7 +897,7 @@ module DescribeFleets = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Fleets") fleets: fleetList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetsCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DescribeFleetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -909,7 +909,7 @@ module DeleteImage = {
   type response = {
 @as("Image") image: image
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DeleteImageCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DeleteImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -927,7 +927,7 @@ module CreateUpdatedImage = {
 @as("canUpdateImage") canUpdateImage: amazonawsBoolean,
 @as("image") image: image
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "CreateUpdatedImageCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "CreateUpdatedImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -949,7 +949,7 @@ module CreateStack = {
   type response = {
 @as("Stack") stack: stack
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "CreateStackCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "CreateStackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -963,7 +963,7 @@ module DescribeStacks = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Stacks") stacks: stackList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DescribeStacksCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DescribeStacksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -980,6 +980,6 @@ module DescribeImages = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Images") images: imageList
 }
-  @module("@aws-sdk/client-appstream") @new external new_: (Js.Promise.t<request>) => t = "DescribeImagesCommand";
+  @module("@aws-sdk/client-appstream") @new external new_: (request) => t = "DescribeImagesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -587,7 +587,7 @@ module UpdateTerminationProtection = {
   type response = {
 @as("StackId") stackId: stackId
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "UpdateTerminationProtectionCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "UpdateTerminationProtectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -599,7 +599,7 @@ module StopStackSetOperation = {
 @as("StackSetName") stackSetName: option<stackSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "StopStackSetOperationCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "StopStackSetOperationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -612,7 +612,7 @@ module SignalResource = {
 @as("StackName") stackName: option<stackNameOrId>
 }
   
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "SignalResourceCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "SignalResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -625,7 +625,7 @@ module SetTypeDefaultVersion = {
 @as("Arn") arn: privateTypeArn
 }
   type response = unit
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "SetTypeDefaultVersionCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "SetTypeDefaultVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -637,7 +637,7 @@ module SetStackPolicy = {
 @as("StackName") stackName: option<stackName>
 }
   
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "SetStackPolicyCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "SetStackPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -653,7 +653,7 @@ module RecordHandlerProgress = {
 @as("BearerToken") bearerToken: option<clientToken>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "RecordHandlerProgressCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "RecordHandlerProgressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -665,7 +665,7 @@ module GetStackPolicy = {
   type response = {
 @as("StackPolicyBody") stackPolicyBody: stackPolicyBody
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "GetStackPolicyCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "GetStackPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -677,7 +677,7 @@ module ExecuteChangeSet = {
 @as("ChangeSetName") changeSetName: option<changeSetNameOrId>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ExecuteChangeSetCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ExecuteChangeSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -692,7 +692,7 @@ module DescribeTypeRegistration = {
 @as("Description") description: description,
 @as("ProgressStatus") progressStatus: registrationStatus
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeTypeRegistrationCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeTypeRegistrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -710,7 +710,7 @@ module DescribeStackDriftDetectionStatus = {
 @as("StackDriftDetectionId") stackDriftDetectionId: option<stackDriftDetectionId>,
 @as("StackId") stackId: option<stackId>
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeStackDriftDetectionStatusCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeStackDriftDetectionStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -723,7 +723,7 @@ module DeregisterType = {
 @as("Arn") arn: privateTypeArn
 }
   type response = unit
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DeregisterTypeCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DeregisterTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -734,7 +734,7 @@ module DeleteStackSet = {
 @as("StackSetName") stackSetName: option<stackSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DeleteStackSetCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DeleteStackSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -745,7 +745,7 @@ module DeleteChangeSet = {
 @as("ChangeSetName") changeSetName: option<changeSetNameOrId>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DeleteChangeSetCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DeleteChangeSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -756,7 +756,7 @@ module CancelUpdateStack = {
 @as("StackName") stackName: option<stackName>
 }
   
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "CancelUpdateStackCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "CancelUpdateStackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -773,7 +773,7 @@ module RegisterType = {
   type response = {
 @as("RegistrationToken") registrationToken: registrationToken
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "RegisterTypeCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "RegisterTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -791,7 +791,7 @@ module ListTypeRegistrations = {
 @as("NextToken") nextToken: nextToken,
 @as("RegistrationTokenList") registrationTokenList: registrationTokenList
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListTypeRegistrationsCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListTypeRegistrationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -805,7 +805,7 @@ module ListImports = {
 @as("NextToken") nextToken: nextToken,
 @as("Imports") imports: imports
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListImportsCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListImportsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -820,7 +820,7 @@ module GetTemplate = {
 @as("StagesAvailable") stagesAvailable: stageList,
 @as("TemplateBody") templateBody: templateBody
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "GetTemplateCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "GetTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -833,7 +833,7 @@ module DetectStackDrift = {
   type response = {
 @as("StackDriftDetectionId") stackDriftDetectionId: option<stackDriftDetectionId>
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DetectStackDriftCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DetectStackDriftCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -863,7 +863,7 @@ module DescribeType = {
 @as("Type") type_: registryType,
 @as("Arn") arn: typeArn
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeTypeCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -876,7 +876,7 @@ module DeleteStack = {
 @as("StackName") stackName: option<stackName>
 }
   
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DeleteStackCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DeleteStackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -889,7 +889,7 @@ module ContinueUpdateRollback = {
 @as("StackName") stackName: option<stackNameOrId>
 }
   type response = unit
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ContinueUpdateRollbackCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ContinueUpdateRollbackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -906,7 +906,7 @@ module ValidateTemplate = {
 @as("Description") description: description,
 @as("Parameters") parameters: templateParameters
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ValidateTemplateCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ValidateTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -935,7 +935,7 @@ module UpdateStackSet = {
   type response = {
 @as("OperationId") operationId: clientRequestToken
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "UpdateStackSetCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "UpdateStackSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -954,7 +954,7 @@ module UpdateStackInstances = {
   type response = {
 @as("OperationId") operationId: clientRequestToken
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "UpdateStackInstancesCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "UpdateStackInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -972,7 +972,7 @@ module ListTypes = {
 @as("NextToken") nextToken: nextToken,
 @as("TypeSummaries") typeSummaries: typeSummaries
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListTypesCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -990,7 +990,7 @@ module ListTypeVersions = {
 @as("NextToken") nextToken: nextToken,
 @as("TypeVersionSummaries") typeVersionSummaries: typeVersionSummaries
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListTypeVersionsCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListTypeVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1006,7 +1006,7 @@ module ListStackSetOperations = {
 @as("NextToken") nextToken: nextToken,
 @as("Summaries") summaries: stackSetOperationSummaries
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListStackSetOperationsCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListStackSetOperationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1019,7 +1019,7 @@ module ListExports = {
 @as("NextToken") nextToken: nextToken,
 @as("Exports") exports: exports
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListExportsCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListExportsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1033,7 +1033,7 @@ module ListChangeSets = {
 @as("NextToken") nextToken: nextToken,
 @as("Summaries") summaries: changeSetSummaries
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListChangeSetsCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListChangeSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1047,7 +1047,7 @@ module EstimateTemplateCost = {
   type response = {
 @as("Url") url: url
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "EstimateTemplateCostCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "EstimateTemplateCostCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1062,7 +1062,7 @@ module DetectStackSetDrift = {
   type response = {
 @as("OperationId") operationId: clientRequestToken
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DetectStackSetDriftCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DetectStackSetDriftCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1075,7 +1075,7 @@ module DescribeStackResource = {
   type response = {
 @as("StackResourceDetail") stackResourceDetail: stackResourceDetail
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeStackResourceCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeStackResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1089,7 +1089,7 @@ module DescribeStackEvents = {
 @as("NextToken") nextToken: nextToken,
 @as("StackEvents") stackEvents: stackEvents
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeStackEventsCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeStackEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1102,7 +1102,7 @@ module DescribeAccountLimits = {
 @as("NextToken") nextToken: nextToken,
 @as("AccountLimits") accountLimits: accountLimitList
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountLimitsCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeAccountLimitsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1121,7 +1121,7 @@ module DeleteStackInstances = {
   type response = {
 @as("OperationId") operationId: clientRequestToken
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DeleteStackInstancesCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DeleteStackInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1145,7 +1145,7 @@ module CreateStackSet = {
   type response = {
 @as("StackSetId") stackSetId: stackSetId
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "CreateStackSetCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "CreateStackSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1164,7 +1164,7 @@ module CreateStackInstances = {
   type response = {
 @as("OperationId") operationId: clientRequestToken
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "CreateStackInstancesCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "CreateStackInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1191,7 +1191,7 @@ module UpdateStack = {
   type response = {
 @as("StackId") stackId: stackId
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "UpdateStackCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "UpdateStackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1205,7 +1205,7 @@ module ListStacks = {
 @as("NextToken") nextToken: nextToken,
 @as("StackSummaries") stackSummaries: stackSummaries
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListStacksCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListStacksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1221,7 +1221,7 @@ module ListStackSets = {
 @as("NextToken") nextToken: nextToken,
 @as("Summaries") summaries: stackSetSummaries
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListStackSetsCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListStackSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1238,7 +1238,7 @@ module ListStackSetOperationResults = {
 @as("NextToken") nextToken: nextToken,
 @as("Summaries") summaries: stackSetOperationResultSummaries
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListStackSetOperationResultsCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListStackSetOperationResultsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1252,7 +1252,7 @@ module ListStackResources = {
 @as("NextToken") nextToken: nextToken,
 @as("StackResourceSummaries") stackResourceSummaries: stackResourceSummaries
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListStackResourcesCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListStackResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1271,7 +1271,7 @@ module ListStackInstances = {
 @as("NextToken") nextToken: nextToken,
 @as("Summaries") summaries: stackInstanceSummaries
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "ListStackInstancesCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "ListStackInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1284,7 +1284,7 @@ module DetectStackResourceDrift = {
   type response = {
 @as("StackResourceDrift") stackResourceDrift: option<stackResourceDrift>
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DetectStackResourceDriftCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DetectStackResourceDriftCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1298,7 +1298,7 @@ module DescribeStackSetOperation = {
   type response = {
 @as("StackSetOperation") stackSetOperation: stackSetOperation
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeStackSetOperationCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeStackSetOperationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1311,7 +1311,7 @@ module DescribeStackSet = {
   type response = {
 @as("StackSet") stackSet: stackSet
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeStackSetCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeStackSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1325,7 +1325,7 @@ module DescribeStackResources = {
   type response = {
 @as("StackResources") stackResources: stackResources
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeStackResourcesCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeStackResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1340,7 +1340,7 @@ module DescribeStackInstance = {
   type response = {
 @as("StackInstance") stackInstance: stackInstance
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeStackInstanceCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeStackInstanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1368,7 +1368,7 @@ module CreateStack = {
   type response = {
 @as("StackId") stackId: stackId
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "CreateStackCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "CreateStackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1397,7 +1397,7 @@ module CreateChangeSet = {
 @as("StackId") stackId: stackId,
 @as("Id") id: changeSetId
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "CreateChangeSetCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "CreateChangeSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1421,7 +1421,7 @@ module GetTemplateSummary = {
 @as("Description") description: description,
 @as("Parameters") parameters: parameterDeclarations
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "GetTemplateSummaryCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "GetTemplateSummaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1437,7 +1437,7 @@ module DescribeStackResourceDrifts = {
 @as("NextToken") nextToken: nextToken,
 @as("StackResourceDrifts") stackResourceDrifts: option<stackResourceDrifts>
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeStackResourceDriftsCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeStackResourceDriftsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1451,7 +1451,7 @@ module DescribeStacks = {
 @as("NextToken") nextToken: nextToken,
 @as("Stacks") stacks: stacks
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeStacksCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeStacksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1483,6 +1483,6 @@ module DescribeChangeSet = {
 @as("ChangeSetId") changeSetId: changeSetId,
 @as("ChangeSetName") changeSetName: changeSetName
 }
-  @module("@aws-sdk/client-cloudformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeChangeSetCommand";
+  @module("@aws-sdk/client-cloudformation") @new external new_: (request) => t = "DescribeChangeSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

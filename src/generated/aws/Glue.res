@@ -1270,7 +1270,7 @@ module UpdateCrawlerSchedule = {
 @as("CrawlerName") crawlerName: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateCrawlerScheduleCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateCrawlerScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1281,7 +1281,7 @@ module StopWorkflowRun = {
 @as("Name") name: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StopWorkflowRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StopWorkflowRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1293,7 +1293,7 @@ module StopTrigger = {
   type response = {
 @as("Name") name: nameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StopTriggerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StopTriggerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1303,7 +1303,7 @@ module StopCrawlerSchedule = {
 @as("CrawlerName") crawlerName: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StopCrawlerScheduleCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StopCrawlerScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1313,7 +1313,7 @@ module StopCrawler = {
 @as("Name") name: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StopCrawlerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StopCrawlerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1325,7 +1325,7 @@ module StartWorkflowRun = {
   type response = {
 @as("RunId") runId: idString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StartWorkflowRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StartWorkflowRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1337,7 +1337,7 @@ module StartTrigger = {
   type response = {
 @as("Name") name: nameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StartTriggerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StartTriggerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1350,7 +1350,7 @@ module StartMLLabelingSetGenerationTaskRun = {
   type response = {
 @as("TaskRunId") taskRunId: hashString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StartMLLabelingSetGenerationTaskRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StartMLLabelingSetGenerationTaskRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1362,7 +1362,7 @@ module StartMLEvaluationTaskRun = {
   type response = {
 @as("TaskRunId") taskRunId: hashString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StartMLEvaluationTaskRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StartMLEvaluationTaskRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1376,7 +1376,7 @@ module StartImportLabelsTaskRun = {
   type response = {
 @as("TaskRunId") taskRunId: hashString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StartImportLabelsTaskRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StartImportLabelsTaskRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1389,7 +1389,7 @@ module StartExportLabelsTaskRun = {
   type response = {
 @as("TaskRunId") taskRunId: hashString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StartExportLabelsTaskRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StartExportLabelsTaskRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1399,7 +1399,7 @@ module StartCrawlerSchedule = {
 @as("CrawlerName") crawlerName: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StartCrawlerScheduleCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StartCrawlerScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1409,7 +1409,7 @@ module StartCrawler = {
 @as("Name") name: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StartCrawlerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StartCrawlerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1425,7 +1425,7 @@ module PutResourcePolicy = {
   type response = {
 @as("PolicyHash") policyHash: hashString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "PutResourcePolicyCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "PutResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1435,7 +1435,7 @@ module ImportCatalogToGlue = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ImportCatalogToGlueCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ImportCatalogToGlueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1450,7 +1450,7 @@ module GetResourcePolicy = {
 @as("PolicyHash") policyHash: hashString,
 @as("PolicyInJson") policyInJson: policyJsonString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetResourcePolicyCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1462,7 +1462,7 @@ module DeleteWorkflow = {
   type response = {
 @as("Name") name: nameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteWorkflowCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteWorkflowCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1474,7 +1474,7 @@ module DeleteUserDefinedFunction = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserDefinedFunctionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteUserDefinedFunctionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1486,7 +1486,7 @@ module DeleteTrigger = {
   type response = {
 @as("Name") name: nameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteTriggerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteTriggerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1499,7 +1499,7 @@ module DeleteTableVersion = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteTableVersionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteTableVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1511,7 +1511,7 @@ module DeleteTable = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteTableCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1521,7 +1521,7 @@ module DeleteSecurityConfiguration = {
 @as("Name") name: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteSecurityConfigurationCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteSecurityConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1532,7 +1532,7 @@ module DeleteResourcePolicy = {
 @as("PolicyHashCondition") policyHashCondition: hashString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteResourcePolicyCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1545,7 +1545,7 @@ module DeletePartitionIndex = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeletePartitionIndexCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeletePartitionIndexCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1557,7 +1557,7 @@ module DeleteMLTransform = {
   type response = {
 @as("TransformId") transformId: hashString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteMLTransformCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteMLTransformCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1569,7 +1569,7 @@ module DeleteJob = {
   type response = {
 @as("JobName") jobName: nameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteJobCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1579,7 +1579,7 @@ module DeleteDevEndpoint = {
 @as("EndpointName") endpointName: option<genericString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteDevEndpointCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteDevEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1590,7 +1590,7 @@ module DeleteDatabase = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteDatabaseCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteDatabaseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1600,7 +1600,7 @@ module DeleteCrawler = {
 @as("Name") name: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteCrawlerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteCrawlerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1611,7 +1611,7 @@ module DeleteConnection = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteConnectionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1624,7 +1624,7 @@ module DeleteColumnStatisticsForTable = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteColumnStatisticsForTableCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteColumnStatisticsForTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1634,7 +1634,7 @@ module DeleteClassifier = {
 @as("Name") name: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteClassifierCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteClassifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1648,7 +1648,7 @@ module CheckSchemaVersionValidity = {
 @as("Error") error: schemaValidationError,
 @as("Valid") valid: isVersionValid
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CheckSchemaVersionValidityCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CheckSchemaVersionValidityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1663,7 +1663,7 @@ module CancelMLTaskRun = {
 @as("TaskRunId") taskRunId: hashString,
 @as("TransformId") transformId: hashString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CancelMLTaskRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CancelMLTaskRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1678,7 +1678,7 @@ module UpdateWorkflow = {
   type response = {
 @as("Name") name: nameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateWorkflowCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateWorkflowCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1695,7 +1695,7 @@ module UpdateSchema = {
 @as("SchemaName") schemaName: schemaRegistryNameString,
 @as("SchemaArn") schemaArn: glueResourceArn
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateSchemaCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1709,7 +1709,7 @@ module UpdateRegistry = {
 @as("RegistryArn") registryArn: glueResourceArn,
 @as("RegistryName") registryName: schemaRegistryNameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateRegistryCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateRegistryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1726,7 +1726,7 @@ module UpdateDevEndpoint = {
 @as("EndpointName") endpointName: option<genericString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateDevEndpointCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateDevEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1737,7 +1737,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<glueResourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1748,7 +1748,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<glueResourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1769,7 +1769,7 @@ module StartJobRun = {
   type response = {
 @as("JobRunId") jobRunId: idString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "StartJobRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "StartJobRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1784,7 +1784,7 @@ module ResumeWorkflowRun = {
 @as("NodeIds") nodeIds: nodeIdList,
 @as("RunId") runId: idString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ResumeWorkflowRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ResumeWorkflowRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1797,7 +1797,7 @@ module ResetJobBookmark = {
   type response = {
 @as("JobBookmarkEntry") jobBookmarkEntry: jobBookmarkEntry
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ResetJobBookmarkCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ResetJobBookmarkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1819,7 +1819,7 @@ module RemoveSchemaVersionMetadata = {
 @as("SchemaName") schemaName: schemaRegistryNameString,
 @as("SchemaArn") schemaArn: glueResourceArn
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "RemoveSchemaVersionMetadataCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "RemoveSchemaVersionMetadataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1834,7 +1834,7 @@ module RegisterSchemaVersion = {
 @as("VersionNumber") versionNumber: versionLongNumber,
 @as("SchemaVersionId") schemaVersionId: schemaVersionIdString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "RegisterSchemaVersionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "RegisterSchemaVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1846,7 +1846,7 @@ module PutWorkflowRunProperties = {
 @as("Name") name: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "PutWorkflowRunPropertiesCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "PutWorkflowRunPropertiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1868,7 +1868,7 @@ module PutSchemaVersionMetadata = {
 @as("SchemaName") schemaName: schemaRegistryNameString,
 @as("SchemaArn") schemaArn: glueResourceArn
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "PutSchemaVersionMetadataCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "PutSchemaVersionMetadataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1882,7 +1882,7 @@ module ListWorkflows = {
 @as("NextToken") nextToken: genericString,
 @as("Workflows") workflows: workflowNames
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ListWorkflowsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ListWorkflowsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1898,7 +1898,7 @@ module ListTriggers = {
 @as("NextToken") nextToken: genericString,
 @as("TriggerNames") triggerNames: triggerNameList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ListTriggersCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ListTriggersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1913,7 +1913,7 @@ module ListJobs = {
 @as("NextToken") nextToken: genericString,
 @as("JobNames") jobNames: jobNameList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ListJobsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ListJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1928,7 +1928,7 @@ module ListDevEndpoints = {
 @as("NextToken") nextToken: genericString,
 @as("DevEndpointNames") devEndpointNames: devEndpointNameList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ListDevEndpointsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ListDevEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1943,7 +1943,7 @@ module ListCrawlers = {
 @as("NextToken") nextToken: token,
 @as("CrawlerNames") crawlerNames: crawlerNameList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ListCrawlersCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ListCrawlersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1956,7 +1956,7 @@ module GetWorkflowRunProperties = {
   type response = {
 @as("RunProperties") runProperties: workflowRunProperties
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetWorkflowRunPropertiesCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetWorkflowRunPropertiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1968,7 +1968,7 @@ module GetTags = {
   type response = {
 @as("Tags") tags: tagsMap
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetTagsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1983,7 +1983,7 @@ module GetSchemaVersionsDiff = {
   type response = {
 @as("Diff") diff: schemaDefinitionDiff
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetSchemaVersionsDiffCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetSchemaVersionsDiffCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2003,7 +2003,7 @@ module GetSchemaVersion = {
 @as("SchemaDefinition") schemaDefinition: schemaDefinitionString,
 @as("SchemaVersionId") schemaVersionId: schemaVersionIdString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetSchemaVersionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetSchemaVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2020,7 +2020,7 @@ module GetSchemaByDefinition = {
 @as("SchemaArn") schemaArn: glueResourceArn,
 @as("SchemaVersionId") schemaVersionId: schemaVersionIdString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetSchemaByDefinitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetSchemaByDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2044,7 +2044,7 @@ module GetSchema = {
 @as("RegistryArn") registryArn: glueResourceArn,
 @as("RegistryName") registryName: schemaRegistryNameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetSchemaCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2061,7 +2061,7 @@ module GetRegistry = {
 @as("RegistryArn") registryArn: glueResourceArn,
 @as("RegistryName") registryName: schemaRegistryNameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetRegistryCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetRegistryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2074,7 +2074,7 @@ module GetJobBookmark = {
   type response = {
 @as("JobBookmarkEntry") jobBookmarkEntry: jobBookmarkEntry
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetJobBookmarkCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetJobBookmarkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2086,7 +2086,7 @@ module GetCatalogImportStatus = {
   type response = {
 @as("ImportStatus") importStatus: catalogImportStatus
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetCatalogImportStatusCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetCatalogImportStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2100,7 +2100,7 @@ module DeleteSchema = {
 @as("SchemaName") schemaName: schemaRegistryNameString,
 @as("SchemaArn") schemaArn: glueResourceArn
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteSchemaCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2114,7 +2114,7 @@ module DeleteRegistry = {
 @as("RegistryArn") registryArn: glueResourceArn,
 @as("RegistryName") registryName: schemaRegistryNameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteRegistryCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteRegistryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2127,7 +2127,7 @@ module DeletePartition = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeletePartitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeletePartitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2141,7 +2141,7 @@ module DeleteColumnStatisticsForPartition = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteColumnStatisticsForPartitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteColumnStatisticsForPartitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2157,7 +2157,7 @@ module CreateWorkflow = {
   type response = {
 @as("Name") name: nameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateWorkflowCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateWorkflowCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2188,7 +2188,7 @@ module CreateSchema = {
 @as("RegistryArn") registryArn: glueResourceArn,
 @as("RegistryName") registryName: schemaRegistryNameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateSchemaCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2205,7 +2205,7 @@ module CreateRegistry = {
 @as("RegistryName") registryName: schemaRegistryNameString,
 @as("RegistryArn") registryArn: glueResourceArn
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateRegistryCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateRegistryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2249,7 +2249,7 @@ module CreateDevEndpoint = {
 @as("Status") status: genericString,
 @as("EndpointName") endpointName: genericString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateDevEndpointCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateDevEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2271,7 +2271,7 @@ module UpdateMLTransform = {
   type response = {
 @as("TransformId") transformId: hashString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateMLTransformCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateMLTransformCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2284,7 +2284,7 @@ module UpdateClassifier = {
 @as("GrokClassifier") grokClassifier: updateGrokClassifierRequest
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateClassifierCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateClassifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2295,7 +2295,7 @@ module PutDataCatalogEncryptionSettings = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "PutDataCatalogEncryptionSettingsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "PutDataCatalogEncryptionSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2310,7 +2310,7 @@ module ListSchemas = {
 @as("NextToken") nextToken: schemaRegistryTokenString,
 @as("Schemas") schemas: schemaListDefinition
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ListSchemasCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ListSchemasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2325,7 +2325,7 @@ module ListSchemaVersions = {
 @as("NextToken") nextToken: schemaRegistryTokenString,
 @as("Schemas") schemas: schemaVersionList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ListSchemaVersionsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ListSchemaVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2339,7 +2339,7 @@ module ListRegistries = {
 @as("NextToken") nextToken: schemaRegistryTokenString,
 @as("Registries") registries: registryListDefinition
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ListRegistriesCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ListRegistriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2353,7 +2353,7 @@ module GetResourcePolicies = {
 @as("NextToken") nextToken: token,
 @as("GetResourcePoliciesResponseList") getResourcePoliciesResponseList: getResourcePoliciesResponseList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetResourcePoliciesCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetResourcePoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2375,7 +2375,7 @@ module GetMLTaskRun = {
 @as("TaskRunId") taskRunId: hashString,
 @as("TransformId") transformId: hashString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetMLTaskRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetMLTaskRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2387,7 +2387,7 @@ module GetDevEndpoint = {
   type response = {
 @as("DevEndpoint") devEndpoint: devEndpoint
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetDevEndpointCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetDevEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2399,7 +2399,7 @@ module GetDataCatalogEncryptionSettings = {
   type response = {
 @as("DataCatalogEncryptionSettings") dataCatalogEncryptionSettings: dataCatalogEncryptionSettings
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetDataCatalogEncryptionSettingsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetDataCatalogEncryptionSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2414,7 +2414,7 @@ module GetCrawlerMetrics = {
 @as("NextToken") nextToken: token,
 @as("CrawlerMetricsList") crawlerMetricsList: crawlerMetricsList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetCrawlerMetricsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetCrawlerMetricsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2427,7 +2427,7 @@ module CreatePartitionIndex = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreatePartitionIndexCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreatePartitionIndexCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2451,7 +2451,7 @@ module CreateMLTransform = {
   type response = {
 @as("TransformId") transformId: hashString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateMLTransformCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateMLTransformCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2481,7 +2481,7 @@ module CreateJob = {
   type response = {
 @as("Name") name: nameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateJobCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2494,7 +2494,7 @@ module CreateClassifier = {
 @as("GrokClassifier") grokClassifier: createGrokClassifierRequest
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateClassifierCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateClassifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2508,7 +2508,7 @@ module BatchDeleteConnection = {
 @as("Errors") errors: errorByName,
 @as("Succeeded") succeeded: nameStringList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchDeleteConnectionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchDeleteConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2521,7 +2521,7 @@ module UpdateUserDefinedFunction = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateUserDefinedFunctionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateUserDefinedFunctionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2534,7 +2534,7 @@ module UpdateJob = {
   type response = {
 @as("JobName") jobName: nameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateJobCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2546,7 +2546,7 @@ module UpdateConnection = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateConnectionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2563,7 +2563,7 @@ module ListMLTransforms = {
 @as("NextToken") nextToken: paginationToken,
 @as("TransformIds") transformIds: option<transformIdList>
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "ListMLTransformsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "ListMLTransformsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2577,7 +2577,7 @@ module GetUserDefinedFunction = {
   type response = {
 @as("UserDefinedFunction") userDefinedFunction: userDefinedFunction
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetUserDefinedFunctionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetUserDefinedFunctionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2595,7 +2595,7 @@ module GetPlan = {
 @as("ScalaCode") scalaCode: scalaCode,
 @as("PythonScript") pythonScript: pythonScript
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetPlanCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetPlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2609,7 +2609,7 @@ module GetMapping = {
   type response = {
 @as("Mapping") mapping: option<mappingList>
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetMappingCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetMappingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2623,7 +2623,7 @@ module GetJobRun = {
   type response = {
 @as("JobRun") jobRun: jobRun
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetJobRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetJobRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2635,7 +2635,7 @@ module GetJob = {
   type response = {
 @as("Job") job: job
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetJobCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2649,7 +2649,7 @@ module GetDevEndpoints = {
 @as("NextToken") nextToken: genericString,
 @as("DevEndpoints") devEndpoints: devEndpointList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetDevEndpointsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetDevEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2663,7 +2663,7 @@ module GetConnection = {
   type response = {
 @as("Connection") connection: connection
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetConnectionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2675,7 +2675,7 @@ module GetClassifier = {
   type response = {
 @as("Classifier") classifier: classifier
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetClassifierCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetClassifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2688,7 +2688,7 @@ module DeleteSchemaVersions = {
   type response = {
 @as("SchemaVersionErrors") schemaVersionErrors: schemaVersionErrorList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "DeleteSchemaVersionsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "DeleteSchemaVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2700,7 +2700,7 @@ module CreateUserDefinedFunction = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateUserDefinedFunctionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateUserDefinedFunctionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2720,7 +2720,7 @@ module CreateTrigger = {
   type response = {
 @as("Name") name: nameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateTriggerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateTriggerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2734,7 +2734,7 @@ module CreateSecurityConfiguration = {
 @as("CreatedTimestamp") createdTimestamp: timestampValue,
 @as("Name") name: nameString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateSecurityConfigurationCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateSecurityConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2745,7 +2745,7 @@ module CreateConnection = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateConnectionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2759,7 +2759,7 @@ module BatchStopJobRun = {
 @as("Errors") errors: batchStopJobRunErrorList,
 @as("SuccessfulSubmissions") successfulSubmissions: batchStopJobRunSuccessfulSubmissionList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchStopJobRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchStopJobRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2772,7 +2772,7 @@ module BatchGetDevEndpoints = {
 @as("DevEndpointsNotFound") devEndpointsNotFound: devEndpointNames,
 @as("DevEndpoints") devEndpoints: devEndpointList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchGetDevEndpointsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchGetDevEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2787,7 +2787,7 @@ module BatchDeleteTableVersion = {
   type response = {
 @as("Errors") errors: tableVersionErrors
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchDeleteTableVersionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchDeleteTableVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2801,7 +2801,7 @@ module BatchDeleteTable = {
   type response = {
 @as("Errors") errors: tableErrors
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchDeleteTableCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchDeleteTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2816,7 +2816,7 @@ module BatchDeletePartition = {
   type response = {
 @as("Errors") errors: partitionErrors
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchDeletePartitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchDeletePartitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2829,7 +2829,7 @@ module UpdateTrigger = {
   type response = {
 @as("Trigger") trigger: trigger
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateTriggerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateTriggerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2841,7 +2841,7 @@ module UpdateDatabase = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateDatabaseCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateDatabaseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2863,7 +2863,7 @@ module UpdateCrawler = {
 @as("Name") name: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateCrawlerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateCrawlerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2882,7 +2882,7 @@ module QuerySchemaVersionMetadata = {
 @as("SchemaVersionId") schemaVersionId: schemaVersionIdString,
 @as("MetadataInfoMap") metadataInfoMap: metadataInfoMap
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "QuerySchemaVersionMetadataCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "QuerySchemaVersionMetadataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2899,7 +2899,7 @@ module GetUserDefinedFunctions = {
 @as("NextToken") nextToken: token,
 @as("UserDefinedFunctions") userDefinedFunctions: userDefinedFunctionList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetUserDefinedFunctionsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetUserDefinedFunctionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2911,7 +2911,7 @@ module GetTrigger = {
   type response = {
 @as("Trigger") trigger: trigger
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetTriggerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetTriggerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2923,7 +2923,7 @@ module GetSecurityConfiguration = {
   type response = {
 @as("SecurityConfiguration") securityConfiguration: securityConfiguration
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetSecurityConfigurationCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetSecurityConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2953,7 +2953,7 @@ module GetMLTransform = {
 @as("Name") name: nameString,
 @as("TransformId") transformId: hashString
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetMLTransformCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetMLTransformCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2970,7 +2970,7 @@ module GetMLTaskRuns = {
 @as("NextToken") nextToken: paginationToken,
 @as("TaskRuns") taskRuns: taskRunList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetMLTaskRunsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetMLTaskRunsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2984,7 +2984,7 @@ module GetJobs = {
 @as("NextToken") nextToken: genericString,
 @as("Jobs") jobs: jobList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetJobsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2999,7 +2999,7 @@ module GetJobRuns = {
 @as("NextToken") nextToken: genericString,
 @as("JobRuns") jobRuns: jobRunList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetJobRunsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetJobRunsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3012,7 +3012,7 @@ module GetDataflowGraph = {
 @as("DagEdges") dagEdges: dagEdges,
 @as("DagNodes") dagNodes: dagNodes
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetDataflowGraphCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetDataflowGraphCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3025,7 +3025,7 @@ module GetDatabase = {
   type response = {
 @as("Database") database: database
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetDatabaseCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetDatabaseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3042,7 +3042,7 @@ module GetConnections = {
 @as("NextToken") nextToken: token,
 @as("ConnectionList") connectionList: connectionList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetConnectionsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3056,7 +3056,7 @@ module GetClassifiers = {
 @as("NextToken") nextToken: token,
 @as("Classifiers") classifiers: classifierList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetClassifiersCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetClassifiersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3071,7 +3071,7 @@ module CreateScript = {
 @as("ScalaCode") scalaCode: scalaCode,
 @as("PythonScript") pythonScript: pythonScript
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateScriptCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateScriptCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3082,7 +3082,7 @@ module CreateDatabase = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateDatabaseCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateDatabaseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3105,7 +3105,7 @@ module CreateCrawler = {
 @as("Name") name: option<nameString>
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateCrawlerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateCrawlerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3118,7 +3118,7 @@ module BatchGetJobs = {
 @as("JobsNotFound") jobsNotFound: jobNameList,
 @as("Jobs") jobs: jobList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchGetJobsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchGetJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3131,7 +3131,7 @@ module UpdateTable = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateTableCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3145,7 +3145,7 @@ module UpdatePartition = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdatePartitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdatePartitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3160,7 +3160,7 @@ module GetTriggers = {
 @as("NextToken") nextToken: genericString,
 @as("Triggers") triggers: triggerList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetTriggersCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetTriggersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3174,7 +3174,7 @@ module GetTable = {
   type response = {
 @as("Table") table: table
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetTableCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3188,7 +3188,7 @@ module GetSecurityConfigurations = {
 @as("NextToken") nextToken: genericString,
 @as("SecurityConfigurations") securityConfigurations: securityConfigurationList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetSecurityConfigurationsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetSecurityConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3203,7 +3203,7 @@ module GetPartition = {
   type response = {
 @as("Partition") partition: partition
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetPartitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetPartitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3219,7 +3219,7 @@ module GetDatabases = {
 @as("NextToken") nextToken: token,
 @as("DatabaseList") databaseList: option<databaseList>
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetDatabasesCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetDatabasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3231,7 +3231,7 @@ module GetCrawler = {
   type response = {
 @as("Crawler") crawler: crawler
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetCrawlerCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetCrawlerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3247,7 +3247,7 @@ module GetColumnStatisticsForTable = {
 @as("Errors") errors: columnErrors,
 @as("ColumnStatisticsList") columnStatisticsList: columnStatisticsList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetColumnStatisticsForTableCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetColumnStatisticsForTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3264,7 +3264,7 @@ module GetColumnStatisticsForPartition = {
 @as("Errors") errors: columnErrors,
 @as("ColumnStatisticsList") columnStatisticsList: columnStatisticsList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetColumnStatisticsForPartitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetColumnStatisticsForPartitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3277,7 +3277,7 @@ module CreateTable = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreateTableCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreateTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3290,7 +3290,7 @@ module CreatePartition = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "CreatePartitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "CreatePartitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3303,7 +3303,7 @@ module BatchGetTriggers = {
 @as("TriggersNotFound") triggersNotFound: triggerNameList,
 @as("Triggers") triggers: triggerList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchGetTriggersCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchGetTriggersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3318,7 +3318,7 @@ module UpdateColumnStatisticsForTable = {
   type response = {
 @as("Errors") errors: columnStatisticsErrors
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateColumnStatisticsForTableCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateColumnStatisticsForTableCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3334,7 +3334,7 @@ module UpdateColumnStatisticsForPartition = {
   type response = {
 @as("Errors") errors: columnStatisticsErrors
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "UpdateColumnStatisticsForPartitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "UpdateColumnStatisticsForPartitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3353,7 +3353,7 @@ module SearchTables = {
 @as("TableList") tableList: tableList,
 @as("NextToken") nextToken: token
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "SearchTablesCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "SearchTablesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3370,7 +3370,7 @@ module GetTables = {
 @as("NextToken") nextToken: token,
 @as("TableList") tableList: tableList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetTablesCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetTablesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3385,7 +3385,7 @@ module GetTableVersion = {
   type response = {
 @as("TableVersion") tableVersion: tableVersion
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetTableVersionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetTableVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3405,7 +3405,7 @@ module GetPartitions = {
 @as("NextToken") nextToken: token,
 @as("Partitions") partitions: partitionList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetPartitionsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetPartitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3421,7 +3421,7 @@ module GetMLTransforms = {
 @as("NextToken") nextToken: paginationToken,
 @as("Transforms") transforms: option<transformList>
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetMLTransformsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetMLTransformsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3435,7 +3435,7 @@ module GetCrawlers = {
 @as("NextToken") nextToken: token,
 @as("Crawlers") crawlers: crawlerList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetCrawlersCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetCrawlersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3451,7 +3451,7 @@ module BatchGetPartition = {
 @as("UnprocessedKeys") unprocessedKeys: batchGetPartitionValueList,
 @as("Partitions") partitions: partitionList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchGetPartitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchGetPartitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3464,7 +3464,7 @@ module BatchGetCrawlers = {
 @as("CrawlersNotFound") crawlersNotFound: crawlerNameList,
 @as("Crawlers") crawlers: crawlerList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchGetCrawlersCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchGetCrawlersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3479,7 +3479,7 @@ module BatchCreatePartition = {
   type response = {
 @as("Errors") errors: partitionErrors
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchCreatePartitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchCreatePartitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3496,7 +3496,7 @@ module GetTableVersions = {
 @as("NextToken") nextToken: token,
 @as("TableVersions") tableVersions: getTableVersionsList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetTableVersionsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetTableVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3512,7 +3512,7 @@ module GetPartitionIndexes = {
 @as("NextToken") nextToken: token,
 @as("PartitionIndexDescriptorList") partitionIndexDescriptorList: partitionIndexDescriptorList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetPartitionIndexesCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetPartitionIndexesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3527,7 +3527,7 @@ module BatchUpdatePartition = {
   type response = {
 @as("Errors") errors: batchUpdatePartitionFailureList
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchUpdatePartitionCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchUpdatePartitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3541,7 +3541,7 @@ module GetWorkflowRun = {
   type response = {
 @as("Run") run: workflowRun
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetWorkflowRunCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetWorkflowRunCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3557,7 +3557,7 @@ module GetWorkflowRuns = {
 @as("NextToken") nextToken: genericString,
 @as("Runs") runs: workflowRuns
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetWorkflowRunsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetWorkflowRunsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3570,7 +3570,7 @@ module GetWorkflow = {
   type response = {
 @as("Workflow") workflow: workflow
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "GetWorkflowCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "GetWorkflowCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -3584,6 +3584,6 @@ module BatchGetWorkflows = {
 @as("MissingWorkflows") missingWorkflows: workflowNames,
 @as("Workflows") workflows: workflows
 }
-  @module("@aws-sdk/client-glue") @new external new_: (Js.Promise.t<request>) => t = "BatchGetWorkflowsCommand";
+  @module("@aws-sdk/client-glue") @new external new_: (request) => t = "BatchGetWorkflowsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

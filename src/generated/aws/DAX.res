@@ -138,7 +138,7 @@ module DeleteSubnetGroup = {
   type response = {
 @as("DeletionMessage") deletionMessage: amazonawsString
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "DeleteSubnetGroupCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "DeleteSubnetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -150,7 +150,7 @@ module DeleteParameterGroup = {
   type response = {
 @as("DeletionMessage") deletionMessage: amazonawsString
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "DeleteParameterGroupCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "DeleteParameterGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -163,7 +163,7 @@ module CreateParameterGroup = {
   type response = {
 @as("ParameterGroup") parameterGroup: parameterGroup
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "CreateParameterGroupCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "CreateParameterGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -176,7 +176,7 @@ module UpdateParameterGroup = {
   type response = {
 @as("ParameterGroup") parameterGroup: parameterGroup
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "UpdateParameterGroupCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "UpdateParameterGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -189,7 +189,7 @@ module UntagResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -202,7 +202,7 @@ module TagResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -216,7 +216,7 @@ module ListTags = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "ListTagsCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "ListTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -231,7 +231,7 @@ module DescribeParameterGroups = {
 @as("ParameterGroups") parameterGroups: parameterGroupList,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "DescribeParameterGroupsCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "DescribeParameterGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -250,7 +250,7 @@ module DescribeEvents = {
 @as("Events") events: eventList,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventsCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "DescribeEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -264,7 +264,7 @@ module UpdateSubnetGroup = {
   type response = {
 @as("SubnetGroup") subnetGroup: subnetGroup
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "UpdateSubnetGroupCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "UpdateSubnetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -278,7 +278,7 @@ module CreateSubnetGroup = {
   type response = {
 @as("SubnetGroup") subnetGroup: subnetGroup
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "CreateSubnetGroupCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "CreateSubnetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -296,7 +296,7 @@ module UpdateCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "UpdateClusterCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "UpdateClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -309,7 +309,7 @@ module RebootNode = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "RebootNodeCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "RebootNodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -323,7 +323,7 @@ module IncreaseReplicationFactor = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "IncreaseReplicationFactorCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "IncreaseReplicationFactorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -338,7 +338,7 @@ module DescribeSubnetGroups = {
 @as("SubnetGroups") subnetGroups: subnetGroupList,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "DescribeSubnetGroupsCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "DescribeSubnetGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -354,7 +354,7 @@ module DescribeParameters = {
 @as("Parameters") parameters: parameterList,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "DescribeParametersCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "DescribeParametersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -368,7 +368,7 @@ module DescribeDefaultParameters = {
 @as("Parameters") parameters: parameterList,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "DescribeDefaultParametersCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "DescribeDefaultParametersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -380,7 +380,7 @@ module DeleteCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "DeleteClusterCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "DeleteClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -395,7 +395,7 @@ module DecreaseReplicationFactor = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "DecreaseReplicationFactorCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "DecreaseReplicationFactorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -419,7 +419,7 @@ module CreateCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "CreateClusterCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "CreateClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -434,6 +434,6 @@ module DescribeClusters = {
 @as("Clusters") clusters: clusterList,
 @as("NextToken") nextToken: amazonawsString
 }
-  @module("@aws-sdk/client-dax") @new external new_: (Js.Promise.t<request>) => t = "DescribeClustersCommand";
+  @module("@aws-sdk/client-dax") @new external new_: (request) => t = "DescribeClustersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

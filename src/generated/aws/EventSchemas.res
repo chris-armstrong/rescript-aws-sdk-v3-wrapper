@@ -73,7 +73,7 @@ module StopDiscoverer = {
 @as("State") state: discovererState,
 @as("DiscovererId") discovererId: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "StopDiscovererCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "StopDiscovererCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -86,7 +86,7 @@ module StartDiscoverer = {
 @as("State") state: discovererState,
 @as("DiscovererId") discovererId: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "StartDiscovererCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "StartDiscovererCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -101,7 +101,7 @@ module PutResourcePolicy = {
 @as("RevisionId") revisionId: __string,
 @as("Policy") policy: synthesizedJson__string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "PutResourcePolicyCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "PutResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -119,7 +119,7 @@ module PutCodeBinding = {
 @as("LastModified") lastModified: __timestampIso8601,
 @as("CreationDate") creationDate: __timestampIso8601
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "PutCodeBindingCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "PutCodeBindingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -132,7 +132,7 @@ module GetResourcePolicy = {
 @as("RevisionId") revisionId: __string,
 @as("Policy") policy: synthesizedJson__string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "GetResourcePolicyCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "GetResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -147,7 +147,7 @@ module GetCodeBindingSource = {
   type response = {
 @as("Body") body: body
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "GetCodeBindingSourceCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "GetCodeBindingSourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -166,7 +166,7 @@ module ExportSchema = {
 @as("SchemaArn") schemaArn: __string,
 @as("Content") content: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "ExportSchemaCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "ExportSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -184,7 +184,7 @@ module DescribeCodeBinding = {
 @as("LastModified") lastModified: __timestampIso8601,
 @as("CreationDate") creationDate: __timestampIso8601
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "DescribeCodeBindingCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "DescribeCodeBindingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -196,7 +196,7 @@ module DeleteSchemaVersion = {
 @as("RegistryName") registryName: option<__string>
 }
   
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "DeleteSchemaVersionCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "DeleteSchemaVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -207,7 +207,7 @@ module DeleteSchema = {
 @as("RegistryName") registryName: option<__string>
 }
   
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "DeleteSchemaCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "DeleteSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -217,7 +217,7 @@ module DeleteResourcePolicy = {
 @as("RegistryName") registryName: __string
 }
   
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "DeleteResourcePolicyCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "DeleteResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -227,7 +227,7 @@ module DeleteRegistry = {
 @as("RegistryName") registryName: option<__string>
 }
   
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "DeleteRegistryCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "DeleteRegistryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -237,7 +237,7 @@ module DeleteDiscoverer = {
 @as("DiscovererId") discovererId: option<__string>
 }
   
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "DeleteDiscovererCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "DeleteDiscovererCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -261,7 +261,7 @@ module UpdateSchema = {
 @as("LastModified") lastModified: __timestampIso8601,
 @as("Description") description: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "UpdateSchemaCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "UpdateSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -277,7 +277,7 @@ module UpdateRegistry = {
 @as("RegistryArn") registryArn: __string,
 @as("Description") description: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "UpdateRegistryCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "UpdateRegistryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -295,7 +295,7 @@ module UpdateDiscoverer = {
 @as("DiscovererArn") discovererArn: __string,
 @as("Description") description: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "UpdateDiscovererCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "UpdateDiscovererCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -306,7 +306,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -317,7 +317,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -329,7 +329,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tags
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -342,7 +342,7 @@ module GetDiscoveredSchema = {
   type response = {
 @as("Content") content: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "GetDiscoveredSchemaCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "GetDiscoveredSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -364,7 +364,7 @@ module DescribeSchema = {
 @as("Description") description: __string,
 @as("Content") content: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "DescribeSchemaCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "DescribeSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -379,7 +379,7 @@ module DescribeRegistry = {
 @as("RegistryArn") registryArn: __string,
 @as("Description") description: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "DescribeRegistryCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "DescribeRegistryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -396,7 +396,7 @@ module DescribeDiscoverer = {
 @as("DiscovererArn") discovererArn: __string,
 @as("Description") description: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "DescribeDiscovererCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "DescribeDiscovererCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -420,7 +420,7 @@ module CreateSchema = {
 @as("LastModified") lastModified: __timestampIso8601,
 @as("Description") description: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "CreateSchemaCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "CreateSchemaCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -437,7 +437,7 @@ module CreateRegistry = {
 @as("RegistryArn") registryArn: __string,
 @as("Description") description: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "CreateRegistryCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "CreateRegistryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -456,7 +456,7 @@ module CreateDiscoverer = {
 @as("DiscovererArn") discovererArn: __string,
 @as("Description") description: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "CreateDiscovererCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "CreateDiscovererCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -472,7 +472,7 @@ module ListSchemaVersions = {
 @as("SchemaVersions") schemaVersions: __listOfSchemaVersionSummary,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "ListSchemaVersionsCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "ListSchemaVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -488,7 +488,7 @@ module ListSchemas = {
 @as("Schemas") schemas: __listOfSchemaSummary,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "ListSchemasCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "ListSchemasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -504,7 +504,7 @@ module ListRegistries = {
 @as("Registries") registries: __listOfRegistrySummary,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "ListRegistriesCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "ListRegistriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -520,7 +520,7 @@ module ListDiscoverers = {
 @as("NextToken") nextToken: __string,
 @as("Discoverers") discoverers: __listOfDiscovererSummary
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "ListDiscoverersCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "ListDiscoverersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -536,6 +536,6 @@ module SearchSchemas = {
 @as("Schemas") schemas: __listOfSearchSchemaSummary,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-schemas") @new external new_: (Js.Promise.t<request>) => t = "SearchSchemasCommand";
+  @module("@aws-sdk/client-schemas") @new external new_: (request) => t = "SearchSchemasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

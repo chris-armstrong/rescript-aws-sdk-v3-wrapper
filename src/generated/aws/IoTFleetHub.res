@@ -40,7 +40,7 @@ module UpdateApplication = {
 @as("applicationId") applicationId: option<id>
 }
   type response = unit
-  @module("@aws-sdk/client-iotfleethub") @new external new_: (Js.Promise.t<request>) => t = "UpdateApplicationCommand";
+  @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "UpdateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -51,7 +51,7 @@ module DeleteApplication = {
 @as("applicationId") applicationId: option<id>
 }
   type response = unit
-  @module("@aws-sdk/client-iotfleethub") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationCommand";
+  @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "DeleteApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -62,7 +62,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-iotfleethub") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -73,7 +73,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-iotfleethub") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -85,7 +85,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-iotfleethub") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -108,7 +108,7 @@ module DescribeApplication = {
 @as("applicationArn") applicationArn: option<arn>,
 @as("applicationId") applicationId: option<id>
 }
-  @module("@aws-sdk/client-iotfleethub") @new external new_: (Js.Promise.t<request>) => t = "DescribeApplicationCommand";
+  @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "DescribeApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -125,7 +125,7 @@ module CreateApplication = {
 @as("applicationArn") applicationArn: option<arn>,
 @as("applicationId") applicationId: option<id>
 }
-  @module("@aws-sdk/client-iotfleethub") @new external new_: (Js.Promise.t<request>) => t = "CreateApplicationCommand";
+  @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "CreateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -138,6 +138,6 @@ module ListApplications = {
 @as("nextToken") nextToken: nextToken,
 @as("applicationSummaries") applicationSummaries: applicationSummaries
 }
-  @module("@aws-sdk/client-iotfleethub") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationsCommand";
+  @module("@aws-sdk/client-iotfleethub") @new external new_: (request) => t = "ListApplicationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

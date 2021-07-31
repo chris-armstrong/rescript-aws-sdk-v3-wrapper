@@ -256,7 +256,7 @@ module RemoveResourcePermission = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "RemoveResourcePermissionCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "RemoveResourcePermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -267,7 +267,7 @@ module RemoveAllResourcePermissions = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "RemoveAllResourcePermissionsCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "RemoveAllResourcePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -281,7 +281,7 @@ module UpdateFolder = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "UpdateFolderCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "UpdateFolderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -294,7 +294,7 @@ module UpdateDocumentVersion = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "UpdateDocumentVersionCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "UpdateDocumentVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -308,7 +308,7 @@ module UpdateDocument = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "UpdateDocumentCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "UpdateDocumentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -319,7 +319,7 @@ module DeleteUser = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DeleteUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -330,7 +330,7 @@ module DeleteNotificationSubscription = {
 @as("SubscriptionId") subscriptionId: option<idType>
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DeleteNotificationSubscriptionCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DeleteNotificationSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -343,7 +343,7 @@ module DeleteLabels = {
 @as("ResourceId") resourceId: option<resourceIdType>
 }
   type response = unit
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DeleteLabelsCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DeleteLabelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -354,7 +354,7 @@ module DeleteFolderContents = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DeleteFolderContentsCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DeleteFolderContentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -365,7 +365,7 @@ module DeleteFolder = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DeleteFolderCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DeleteFolderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -376,7 +376,7 @@ module DeleteDocument = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DeleteDocumentCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DeleteDocumentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -390,7 +390,7 @@ module DeleteCustomMetadata = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   type response = unit
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DeleteCustomMetadataCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DeleteCustomMetadataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -403,7 +403,7 @@ module DeleteComment = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DeleteCommentCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DeleteCommentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -414,7 +414,7 @@ module DeactivateUser = {
 @as("UserId") userId: option<idType>
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DeactivateUserCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DeactivateUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -429,7 +429,7 @@ module CreateNotificationSubscription = {
   type response = {
 @as("Subscription") subscription: subscription
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "CreateNotificationSubscriptionCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "CreateNotificationSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -441,7 +441,7 @@ module CreateLabels = {
 @as("ResourceId") resourceId: option<resourceIdType>
 }
   type response = unit
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "CreateLabelsCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "CreateLabelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -454,7 +454,7 @@ module CreateCustomMetadata = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   type response = unit
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "CreateCustomMetadataCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "CreateCustomMetadataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -466,7 +466,7 @@ module AbortDocumentVersionUpload = {
 @as("AuthenticationToken") authenticationToken: authenticationHeaderType
 }
   
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "AbortDocumentVersionUploadCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "AbortDocumentVersionUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -481,7 +481,7 @@ module GetFolder = {
 @as("CustomMetadata") customMetadata: customMetadataMap,
 @as("Metadata") metadata: folderMetadata
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "GetFolderCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "GetFolderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -498,7 +498,7 @@ module GetDocumentVersion = {
 @as("CustomMetadata") customMetadata: customMetadataMap,
 @as("Metadata") metadata: documentVersionMetadata
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "GetDocumentVersionCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "GetDocumentVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -513,7 +513,7 @@ module DescribeNotificationSubscriptions = {
 @as("Marker") marker: pageMarkerType,
 @as("Subscriptions") subscriptions: subscriptionList
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DescribeNotificationSubscriptionsCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DescribeNotificationSubscriptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -530,7 +530,7 @@ module DescribeGroups = {
 @as("Marker") marker: markerType,
 @as("Groups") groups: groupMetadataList
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DescribeGroupsCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DescribeGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -544,7 +544,7 @@ module CreateFolder = {
   type response = {
 @as("Metadata") metadata: folderMetadata
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "CreateFolderCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "CreateFolderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -559,7 +559,7 @@ module AddResourcePermissions = {
   type response = {
 @as("ShareResults") shareResults: shareResultsList
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "AddResourcePermissionsCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "AddResourcePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -579,7 +579,7 @@ module UpdateUser = {
   type response = {
 @as("User") user: user
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "UpdateUserCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "UpdateUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -599,7 +599,7 @@ module InitiateDocumentVersionUpload = {
 @as("UploadMetadata") uploadMetadata: uploadMetadata,
 @as("Metadata") metadata: documentMetadata
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "InitiateDocumentVersionUploadCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "InitiateDocumentVersionUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -615,7 +615,7 @@ module GetFolderPath = {
   type response = {
 @as("Path") path: resourcePath
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "GetFolderPathCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "GetFolderPathCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -631,7 +631,7 @@ module GetDocumentPath = {
   type response = {
 @as("Path") path: resourcePath
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "GetDocumentPathCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "GetDocumentPathCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -646,7 +646,7 @@ module GetDocument = {
 @as("CustomMetadata") customMetadata: customMetadataMap,
 @as("Metadata") metadata: documentMetadata
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "GetDocumentCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "GetDocumentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -658,7 +658,7 @@ module GetCurrentUser = {
   type response = {
 @as("User") user: user
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "GetCurrentUserCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "GetCurrentUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -673,7 +673,7 @@ module DescribeRootFolders = {
 @as("Marker") marker: pageMarkerType,
 @as("Folders") folders: folderMetadataList
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DescribeRootFoldersCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DescribeRootFoldersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -691,7 +691,7 @@ module DescribeDocumentVersions = {
 @as("Marker") marker: pageMarkerType,
 @as("DocumentVersions") documentVersions: documentVersionMetadataList
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DescribeDocumentVersionsCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DescribeDocumentVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -711,7 +711,7 @@ module CreateUser = {
   type response = {
 @as("User") user: user
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "CreateUserCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "CreateUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -724,7 +724,7 @@ module ActivateUser = {
   type response = {
 @as("User") user: user
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "ActivateUserCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "ActivateUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -742,7 +742,7 @@ module GetResources = {
 @as("Documents") documents: documentMetadataList,
 @as("Folders") folders: folderMetadataList
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "GetResourcesCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "GetResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -765,7 +765,7 @@ module DescribeUsers = {
 @as("TotalNumberOfUsers") totalNumberOfUsers: sizeType,
 @as("Users") users: organizationUserList
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DescribeUsersCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DescribeUsersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -782,7 +782,7 @@ module DescribeResourcePermissions = {
 @as("Marker") marker: pageMarkerType,
 @as("Principals") principals: principalList
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DescribeResourcePermissionsCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DescribeResourcePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -803,7 +803,7 @@ module DescribeFolderContents = {
 @as("Documents") documents: documentMetadataList,
 @as("Folders") folders: folderMetadataList
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DescribeFolderContentsCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DescribeFolderContentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -822,7 +822,7 @@ module CreateComment = {
   type response = {
 @as("Comment") comment: comment
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "CreateCommentCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "CreateCommentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -839,7 +839,7 @@ module DescribeComments = {
 @as("Marker") marker: markerType,
 @as("Comments") comments: commentList
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DescribeCommentsCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DescribeCommentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -861,6 +861,6 @@ module DescribeActivities = {
 @as("Marker") marker: markerType,
 @as("UserActivities") userActivities: userActivities
 }
-  @module("@aws-sdk/client-workdocs") @new external new_: (Js.Promise.t<request>) => t = "DescribeActivitiesCommand";
+  @module("@aws-sdk/client-workdocs") @new external new_: (request) => t = "DescribeActivitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

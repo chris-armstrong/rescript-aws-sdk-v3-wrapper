@@ -27,7 +27,7 @@ module GetRawMessageContent = {
   type response = {
 @as("messageContent") messageContent: option<messageContentBlob>
 }
-  @module("@aws-sdk/client-workmailmessageflow") @new external new_: (Js.Promise.t<request>) => t = "GetRawMessageContentCommand";
+  @module("@aws-sdk/client-workmailmessageflow") @new external new_: (request) => t = "GetRawMessageContentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -38,6 +38,6 @@ module PutRawMessageContent = {
 @as("messageId") messageId: option<messageIdType>
 }
   type response = unit
-  @module("@aws-sdk/client-workmailmessageflow") @new external new_: (Js.Promise.t<request>) => t = "PutRawMessageContentCommand";
+  @module("@aws-sdk/client-workmailmessageflow") @new external new_: (request) => t = "PutRawMessageContentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

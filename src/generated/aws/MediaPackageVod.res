@@ -140,7 +140,7 @@ module DeletePackagingGroup = {
 @as("Id") id: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "DeletePackagingGroupCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "DeletePackagingGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -150,7 +150,7 @@ module DeletePackagingConfiguration = {
 @as("Id") id: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "DeletePackagingConfigurationCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "DeletePackagingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -160,7 +160,7 @@ module DeleteAsset = {
 @as("Id") id: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "DeleteAssetCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "DeleteAssetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -178,7 +178,7 @@ module UpdatePackagingGroup = {
 @as("Authorization") authorization: authorization,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "UpdatePackagingGroupCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "UpdatePackagingGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -189,7 +189,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -200,7 +200,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -212,7 +212,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: __mapOf__string
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -229,7 +229,7 @@ module DescribePackagingGroup = {
 @as("Authorization") authorization: authorization,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "DescribePackagingGroupCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "DescribePackagingGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -249,7 +249,7 @@ module CreatePackagingGroup = {
 @as("Authorization") authorization: authorization,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "CreatePackagingGroupCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "CreatePackagingGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -267,7 +267,7 @@ module ConfigureLogs = {
 @as("Authorization") authorization: authorization,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "ConfigureLogsCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "ConfigureLogsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -287,7 +287,7 @@ module DescribeAsset = {
 @as("CreatedAt") createdAt: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "DescribeAssetCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "DescribeAssetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -312,7 +312,7 @@ module CreateAsset = {
 @as("CreatedAt") createdAt: __string,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "CreateAssetCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "CreateAssetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -326,7 +326,7 @@ module ListPackagingGroups = {
 @as("PackagingGroups") packagingGroups: __listOfPackagingGroup,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "ListPackagingGroupsCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "ListPackagingGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -341,7 +341,7 @@ module ListAssets = {
 @as("NextToken") nextToken: __string,
 @as("Assets") assets: __listOfAssetShallow
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "ListAssetsCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "ListAssetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -360,7 +360,7 @@ module DescribePackagingConfiguration = {
 @as("CmafPackage") cmafPackage: cmafPackage,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "DescribePackagingConfigurationCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "DescribePackagingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -385,7 +385,7 @@ module CreatePackagingConfiguration = {
 @as("CmafPackage") cmafPackage: cmafPackage,
 @as("Arn") arn: __string
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "CreatePackagingConfigurationCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "CreatePackagingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -400,6 +400,6 @@ module ListPackagingConfigurations = {
 @as("PackagingConfigurations") packagingConfigurations: __listOfPackagingConfiguration,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (Js.Promise.t<request>) => t = "ListPackagingConfigurationsCommand";
+  @module("@aws-sdk/client-mediapackage-vod") @new external new_: (request) => t = "ListPackagingConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -92,7 +92,7 @@ module UnsubscribeFromDataset = {
 @as("IdentityPoolId") identityPoolId: option<identityPoolId>
 }
   type response = unit
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "UnsubscribeFromDatasetCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "UnsubscribeFromDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -105,7 +105,7 @@ module SubscribeToDataset = {
 @as("IdentityPoolId") identityPoolId: option<identityPoolId>
 }
   type response = unit
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "SubscribeToDatasetCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "SubscribeToDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -120,7 +120,7 @@ module RegisterDevice = {
   type response = {
 @as("DeviceId") deviceId: deviceId
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "RegisterDeviceCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "RegisterDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -136,7 +136,7 @@ module GetBulkPublishDetails = {
 @as("BulkPublishStartTime") bulkPublishStartTime: date,
 @as("IdentityPoolId") identityPoolId: identityPoolId
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "GetBulkPublishDetailsCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "GetBulkPublishDetailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -148,7 +148,7 @@ module BulkPublish = {
   type response = {
 @as("IdentityPoolId") identityPoolId: identityPoolId
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "BulkPublishCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "BulkPublishCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -159,7 +159,7 @@ module SetCognitoEvents = {
 @as("IdentityPoolId") identityPoolId: option<identityPoolId>
 }
   
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "SetCognitoEventsCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "SetCognitoEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -171,7 +171,7 @@ module GetCognitoEvents = {
   type response = {
 @as("Events") events: events
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "GetCognitoEventsCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "GetCognitoEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -184,7 +184,7 @@ module DescribeIdentityUsage = {
   type response = {
 @as("IdentityUsage") identityUsage: identityUsage
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "DescribeIdentityUsageCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "DescribeIdentityUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -196,7 +196,7 @@ module DescribeIdentityPoolUsage = {
   type response = {
 @as("IdentityPoolUsage") identityPoolUsage: identityPoolUsage
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "DescribeIdentityPoolUsageCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "DescribeIdentityPoolUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -210,7 +210,7 @@ module DescribeDataset = {
   type response = {
 @as("Dataset") dataset: dataset
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "DescribeDatasetCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "DescribeDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -224,7 +224,7 @@ module DeleteDataset = {
   type response = {
 @as("Dataset") dataset: dataset
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "DeleteDatasetCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "DeleteDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -242,7 +242,7 @@ module UpdateRecords = {
   type response = {
 @as("Records") records: recordList
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "UpdateRecordsCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "UpdateRecordsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -258,7 +258,7 @@ module SetIdentityPoolConfiguration = {
 @as("PushSync") pushSync: pushSync,
 @as("IdentityPoolId") identityPoolId: identityPoolId
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "SetIdentityPoolConfigurationCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "SetIdentityPoolConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -284,7 +284,7 @@ module ListRecords = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Records") records: recordList
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "ListRecordsCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "ListRecordsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -300,7 +300,7 @@ module ListIdentityPoolUsage = {
 @as("MaxResults") maxResults: amazonawsInteger,
 @as("IdentityPoolUsages") identityPoolUsages: identityPoolUsageList
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "ListIdentityPoolUsageCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "ListIdentityPoolUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -317,7 +317,7 @@ module ListDatasets = {
 @as("Count") count: amazonawsInteger,
 @as("Datasets") datasets: datasetList
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "ListDatasetsCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "ListDatasetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -331,6 +331,6 @@ module GetIdentityPoolConfiguration = {
 @as("PushSync") pushSync: pushSync,
 @as("IdentityPoolId") identityPoolId: identityPoolId
 }
-  @module("@aws-sdk/client-cognito-sync") @new external new_: (Js.Promise.t<request>) => t = "GetIdentityPoolConfigurationCommand";
+  @module("@aws-sdk/client-cognito-sync") @new external new_: (request) => t = "GetIdentityPoolConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

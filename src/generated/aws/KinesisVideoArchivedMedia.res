@@ -83,7 +83,7 @@ module GetMediaForFragmentList = {
 @as("Payload") payload: payload,
 @as("ContentType") contentType: contentType
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "GetMediaForFragmentListCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetMediaForFragmentListCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -100,7 +100,7 @@ module ListFragments = {
 @as("NextToken") nextToken: nextToken,
 @as("Fragments") fragments: fragmentList
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "ListFragmentsCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "ListFragmentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -120,7 +120,7 @@ module GetHLSStreamingSessionURL = {
   type response = {
 @as("HLSStreamingSessionURL") hLSStreamingSessionURL: hLSStreamingSessionURL
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "GetHLSStreamingSessionURLCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetHLSStreamingSessionURLCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -139,7 +139,7 @@ module GetDASHStreamingSessionURL = {
   type response = {
 @as("DASHStreamingSessionURL") dASHStreamingSessionURL: dASHStreamingSessionURL
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "GetDASHStreamingSessionURLCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetDASHStreamingSessionURLCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -154,6 +154,6 @@ module GetClip = {
 @as("Payload") payload: payload,
 @as("ContentType") contentType: contentType
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "GetClipCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetClipCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

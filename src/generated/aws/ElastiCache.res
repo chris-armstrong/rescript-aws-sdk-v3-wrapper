@@ -605,7 +605,7 @@ module DeleteCacheSubnetGroup = {
 @as("CacheSubnetGroupName") cacheSubnetGroupName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DeleteCacheSubnetGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DeleteCacheSubnetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -615,7 +615,7 @@ module DeleteCacheSecurityGroup = {
 @as("CacheSecurityGroupName") cacheSecurityGroupName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DeleteCacheSecurityGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DeleteCacheSecurityGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -625,7 +625,7 @@ module DeleteCacheParameterGroup = {
 @as("CacheParameterGroupName") cacheParameterGroupName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DeleteCacheParameterGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DeleteCacheParameterGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -639,7 +639,7 @@ module ModifyUser = {
 @as("UserId") userId: option<userId>
 }
   type response = user;
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "ModifyUserCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "ModifyUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -653,7 +653,7 @@ module ListAllowedNodeTypeModifications = {
 @as("ScaleDownModifications") scaleDownModifications: nodeTypeList,
 @as("ScaleUpModifications") scaleUpModifications: nodeTypeList
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "ListAllowedNodeTypeModificationsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "ListAllowedNodeTypeModificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -663,7 +663,7 @@ module DeleteUser = {
 @as("UserId") userId: option<userId>
 }
   type response = user;
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DeleteUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -677,7 +677,7 @@ module ResetCacheParameterGroup = {
   type response = {
 @as("CacheParameterGroupName") cacheParameterGroupName: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "ResetCacheParameterGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "ResetCacheParameterGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -690,7 +690,7 @@ module RemoveTagsFromResource = {
   type response = {
 @as("TagList") tagList: tagList
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "RemoveTagsFromResourceCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "RemoveTagsFromResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -702,7 +702,7 @@ module ModifyUserGroup = {
 @as("UserGroupId") userGroupId: option<amazonawsString>
 }
   type response = userGroup;
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "ModifyUserGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "ModifyUserGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -715,7 +715,7 @@ module ModifyCacheParameterGroup = {
   type response = {
 @as("CacheParameterGroupName") cacheParameterGroupName: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "ModifyCacheParameterGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "ModifyCacheParameterGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -727,7 +727,7 @@ module ListTagsForResource = {
   type response = {
 @as("TagList") tagList: tagList
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -743,7 +743,7 @@ module DescribeServiceUpdates = {
 @as("ServiceUpdates") serviceUpdates: serviceUpdateList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeServiceUpdatesCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeServiceUpdatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -762,7 +762,7 @@ module DescribeEvents = {
 @as("Events") events: eventList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -777,7 +777,7 @@ module DescribeCacheParameterGroups = {
 @as("CacheParameterGroups") cacheParameterGroups: cacheParameterGroupList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeCacheParameterGroupsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeCacheParameterGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -795,7 +795,7 @@ module DescribeCacheEngineVersions = {
 @as("CacheEngineVersions") cacheEngineVersions: cacheEngineVersionList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeCacheEngineVersionsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeCacheEngineVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -805,7 +805,7 @@ module DeleteUserGroup = {
 @as("UserGroupId") userGroupId: option<amazonawsString>
 }
   type response = userGroup;
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DeleteUserGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DeleteUserGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -818,7 +818,7 @@ module CreateUserGroup = {
 @as("UserGroupId") userGroupId: option<amazonawsString>
 }
   type response = userGroup;
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "CreateUserGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "CreateUserGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -834,7 +834,7 @@ module CreateUser = {
 @as("UserId") userId: option<userId>
 }
   type response = user;
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "CreateUserCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "CreateUserCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -849,7 +849,7 @@ module CreateCacheParameterGroup = {
   type response = {
 @as("CacheParameterGroup") cacheParameterGroup: cacheParameterGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "CreateCacheParameterGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "CreateCacheParameterGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -864,7 +864,7 @@ module BatchStopUpdateAction = {
 @as("UnprocessedUpdateActions") unprocessedUpdateActions: unprocessedUpdateActionList,
 @as("ProcessedUpdateActions") processedUpdateActions: processedUpdateActionList
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "BatchStopUpdateActionCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "BatchStopUpdateActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -879,7 +879,7 @@ module BatchApplyUpdateAction = {
 @as("UnprocessedUpdateActions") unprocessedUpdateActions: unprocessedUpdateActionList,
 @as("ProcessedUpdateActions") processedUpdateActions: processedUpdateActionList
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "BatchApplyUpdateActionCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "BatchApplyUpdateActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -892,7 +892,7 @@ module AddTagsToResource = {
   type response = {
 @as("TagList") tagList: tagList
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "AddTagsToResourceCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "AddTagsToResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -906,7 +906,7 @@ module RevokeCacheSecurityGroupIngress = {
   type response = {
 @as("CacheSecurityGroup") cacheSecurityGroup: cacheSecurityGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "RevokeCacheSecurityGroupIngressCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "RevokeCacheSecurityGroupIngressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -919,7 +919,7 @@ module RebalanceSlotsInGlobalReplicationGroup = {
   type response = {
 @as("GlobalReplicationGroup") globalReplicationGroup: globalReplicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "RebalanceSlotsInGlobalReplicationGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "RebalanceSlotsInGlobalReplicationGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -934,7 +934,7 @@ module PurchaseReservedCacheNodesOffering = {
   type response = {
 @as("ReservedCacheNode") reservedCacheNode: reservedCacheNode
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "PurchaseReservedCacheNodesOfferingCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "PurchaseReservedCacheNodesOfferingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -952,7 +952,7 @@ module ModifyGlobalReplicationGroup = {
   type response = {
 @as("GlobalReplicationGroup") globalReplicationGroup: globalReplicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "ModifyGlobalReplicationGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "ModifyGlobalReplicationGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -966,7 +966,7 @@ module FailoverGlobalReplicationGroup = {
   type response = {
 @as("GlobalReplicationGroup") globalReplicationGroup: globalReplicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "FailoverGlobalReplicationGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "FailoverGlobalReplicationGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -980,7 +980,7 @@ module DisassociateGlobalReplicationGroup = {
   type response = {
 @as("GlobalReplicationGroup") globalReplicationGroup: globalReplicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DisassociateGlobalReplicationGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DisassociateGlobalReplicationGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -997,7 +997,7 @@ module DescribeUsers = {
 @as("Marker") marker: amazonawsString,
 @as("Users") users: userList
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeUsersCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeUsersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1010,7 +1010,7 @@ module DeleteGlobalReplicationGroup = {
   type response = {
 @as("GlobalReplicationGroup") globalReplicationGroup: globalReplicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DeleteGlobalReplicationGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DeleteGlobalReplicationGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1026,7 +1026,7 @@ module DecreaseNodeGroupsInGlobalReplicationGroup = {
   type response = {
 @as("GlobalReplicationGroup") globalReplicationGroup: globalReplicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DecreaseNodeGroupsInGlobalReplicationGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DecreaseNodeGroupsInGlobalReplicationGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1040,7 +1040,7 @@ module CreateGlobalReplicationGroup = {
   type response = {
 @as("GlobalReplicationGroup") globalReplicationGroup: globalReplicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "CreateGlobalReplicationGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "CreateGlobalReplicationGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1054,7 +1054,7 @@ module CreateCacheSecurityGroup = {
   type response = {
 @as("CacheSecurityGroup") cacheSecurityGroup: cacheSecurityGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "CreateCacheSecurityGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "CreateCacheSecurityGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1068,7 +1068,7 @@ module AuthorizeCacheSecurityGroupIngress = {
   type response = {
 @as("CacheSecurityGroup") cacheSecurityGroup: cacheSecurityGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "AuthorizeCacheSecurityGroupIngressCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "AuthorizeCacheSecurityGroupIngressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1082,7 +1082,7 @@ module ModifyCacheSubnetGroup = {
   type response = {
 @as("CacheSubnetGroup") cacheSubnetGroup: cacheSubnetGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "ModifyCacheSubnetGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "ModifyCacheSubnetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1097,7 +1097,7 @@ module DescribeUserGroups = {
 @as("Marker") marker: amazonawsString,
 @as("UserGroups") userGroups: userGroupList
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeUserGroupsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeUserGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1116,7 +1116,7 @@ module DescribeReservedCacheNodesOfferings = {
 @as("ReservedCacheNodesOfferings") reservedCacheNodesOfferings: reservedCacheNodesOfferingList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeReservedCacheNodesOfferingsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeReservedCacheNodesOfferingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1136,7 +1136,7 @@ module DescribeReservedCacheNodes = {
 @as("ReservedCacheNodes") reservedCacheNodes: reservedCacheNodeList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeReservedCacheNodesCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeReservedCacheNodesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1152,7 +1152,7 @@ module DescribeGlobalReplicationGroups = {
 @as("GlobalReplicationGroups") globalReplicationGroups: globalReplicationGroupList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeGlobalReplicationGroupsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeGlobalReplicationGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1167,7 +1167,7 @@ module DescribeCacheSecurityGroups = {
 @as("CacheSecurityGroups") cacheSecurityGroups: cacheSecurityGroups,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeCacheSecurityGroupsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeCacheSecurityGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1184,7 +1184,7 @@ module DescribeCacheParameters = {
 @as("Parameters") parameters: parametersList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeCacheParametersCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeCacheParametersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1199,7 +1199,7 @@ module CreateCacheSubnetGroup = {
   type response = {
 @as("CacheSubnetGroup") cacheSubnetGroup: cacheSubnetGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "CreateCacheSubnetGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "CreateCacheSubnetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1214,7 +1214,7 @@ module IncreaseNodeGroupsInGlobalReplicationGroup = {
   type response = {
 @as("GlobalReplicationGroup") globalReplicationGroup: globalReplicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "IncreaseNodeGroupsInGlobalReplicationGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "IncreaseNodeGroupsInGlobalReplicationGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1228,7 +1228,7 @@ module DescribeEngineDefaultParameters = {
   type response = {
 @as("EngineDefaults") engineDefaults: engineDefaults
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeEngineDefaultParametersCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeEngineDefaultParametersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1243,7 +1243,7 @@ module DescribeCacheSubnetGroups = {
 @as("CacheSubnetGroups") cacheSubnetGroups: cacheSubnetGroups,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeCacheSubnetGroupsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeCacheSubnetGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1255,7 +1255,7 @@ module DeleteSnapshot = {
   type response = {
 @as("Snapshot") snapshot: snapshot
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DeleteSnapshotCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DeleteSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1271,7 +1271,7 @@ module CreateSnapshot = {
   type response = {
 @as("Snapshot") snapshot: snapshot
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "CreateSnapshotCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "CreateSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1287,7 +1287,7 @@ module CopySnapshot = {
   type response = {
 @as("Snapshot") snapshot: snapshot
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "CopySnapshotCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "CopySnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1300,7 +1300,7 @@ module TestFailover = {
   type response = {
 @as("ReplicationGroup") replicationGroup: replicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "TestFailoverCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "TestFailoverCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1313,7 +1313,7 @@ module StartMigration = {
   type response = {
 @as("ReplicationGroup") replicationGroup: replicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "StartMigrationCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "StartMigrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1326,7 +1326,7 @@ module RebootCacheCluster = {
   type response = {
 @as("CacheCluster") cacheCluster: cacheCluster
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "RebootCacheClusterCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "RebootCacheClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1343,7 +1343,7 @@ module ModifyReplicationGroupShardConfiguration = {
   type response = {
 @as("ReplicationGroup") replicationGroup: replicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "ModifyReplicationGroupShardConfigurationCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "ModifyReplicationGroupShardConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1379,7 +1379,7 @@ module ModifyReplicationGroup = {
   type response = {
 @as("ReplicationGroup") replicationGroup: replicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "ModifyReplicationGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "ModifyReplicationGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1410,7 +1410,7 @@ module ModifyCacheCluster = {
   type response = {
 @as("CacheCluster") cacheCluster: cacheCluster
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "ModifyCacheClusterCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "ModifyCacheClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1425,7 +1425,7 @@ module IncreaseReplicaCount = {
   type response = {
 @as("ReplicationGroup") replicationGroup: replicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "IncreaseReplicaCountCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "IncreaseReplicaCountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1447,7 +1447,7 @@ module DescribeUpdateActions = {
 @as("UpdateActions") updateActions: updateActionList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeUpdateActionsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeUpdateActionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1466,7 +1466,7 @@ module DescribeSnapshots = {
 @as("Snapshots") snapshots: snapshotList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeSnapshotsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeSnapshotsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1480,7 +1480,7 @@ module DeleteReplicationGroup = {
   type response = {
 @as("ReplicationGroup") replicationGroup: replicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DeleteReplicationGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DeleteReplicationGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1493,7 +1493,7 @@ module DeleteCacheCluster = {
   type response = {
 @as("CacheCluster") cacheCluster: cacheCluster
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DeleteCacheClusterCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DeleteCacheClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1509,7 +1509,7 @@ module DecreaseReplicaCount = {
   type response = {
 @as("ReplicationGroup") replicationGroup: replicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DecreaseReplicaCountCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DecreaseReplicaCountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1553,7 +1553,7 @@ module CreateReplicationGroup = {
   type response = {
 @as("ReplicationGroup") replicationGroup: replicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "CreateReplicationGroupCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "CreateReplicationGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1591,7 +1591,7 @@ module CreateCacheCluster = {
   type response = {
 @as("CacheCluster") cacheCluster: cacheCluster
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "CreateCacheClusterCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "CreateCacheClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1604,7 +1604,7 @@ module CompleteMigration = {
   type response = {
 @as("ReplicationGroup") replicationGroup: replicationGroup
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "CompleteMigrationCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "CompleteMigrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1619,7 +1619,7 @@ module DescribeReplicationGroups = {
 @as("ReplicationGroups") replicationGroups: replicationGroupList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeReplicationGroupsCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeReplicationGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1636,6 +1636,6 @@ module DescribeCacheClusters = {
 @as("CacheClusters") cacheClusters: cacheClusterList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-elasticache") @new external new_: (Js.Promise.t<request>) => t = "DescribeCacheClustersCommand";
+  @module("@aws-sdk/client-elasticache") @new external new_: (request) => t = "DescribeCacheClustersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

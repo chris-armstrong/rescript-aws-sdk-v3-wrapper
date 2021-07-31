@@ -48,7 +48,7 @@ module PutObject = {
 @as("ETag") eTag: eTag,
 @as("ContentSHA256") contentSHA256: sHA256Hash
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "PutObjectCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "PutObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -68,7 +68,7 @@ module GetObject = {
 @as("CacheControl") cacheControl: stringPrimitive,
 @as("Body") body: payloadBlob
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "GetObjectCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "GetObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -84,7 +84,7 @@ module DescribeObject = {
 @as("ContentType") contentType: contentType,
 @as("ETag") eTag: eTag
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "DescribeObjectCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "DescribeObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -94,7 +94,7 @@ module DeleteObject = {
 @as("Path") path: option<pathNaming>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "DeleteObjectCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "DeleteObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -109,6 +109,6 @@ module ListItems = {
 @as("NextToken") nextToken: paginationToken,
 @as("Items") items: itemList
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "ListItemsCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "ListItemsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

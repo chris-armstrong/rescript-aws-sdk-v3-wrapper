@@ -365,7 +365,7 @@ module PutPermissionPolicy = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "PutPermissionPolicyCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "PutPermissionPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -377,7 +377,7 @@ module GetPermissionPolicy = {
   type response = {
 @as("Policy") policy: policyString
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetPermissionPolicyCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetPermissionPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -389,7 +389,7 @@ module GetChangeTokenStatus = {
   type response = {
 @as("ChangeTokenStatus") changeTokenStatus: changeTokenStatus
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetChangeTokenStatusCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetChangeTokenStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -399,7 +399,7 @@ module GetChangeToken = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetChangeTokenCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetChangeTokenCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -409,7 +409,7 @@ module DisassociateWebACL = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DisassociateWebACLCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DisassociateWebACLCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -422,7 +422,7 @@ module DeleteXssMatchSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteXssMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteXssMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -435,7 +435,7 @@ module DeleteWebACL = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteWebACLCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteWebACLCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -448,7 +448,7 @@ module DeleteSqlInjectionMatchSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteSqlInjectionMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteSqlInjectionMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -461,7 +461,7 @@ module DeleteSizeConstraintSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteSizeConstraintSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteSizeConstraintSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -474,7 +474,7 @@ module DeleteRuleGroup = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteRuleGroupCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteRuleGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -487,7 +487,7 @@ module DeleteRule = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteRuleCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -500,7 +500,7 @@ module DeleteRegexPatternSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteRegexPatternSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteRegexPatternSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -513,7 +513,7 @@ module DeleteRegexMatchSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteRegexMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteRegexMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -526,7 +526,7 @@ module DeleteRateBasedRule = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteRateBasedRuleCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteRateBasedRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -536,7 +536,7 @@ module DeletePermissionPolicy = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeletePermissionPolicyCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeletePermissionPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -546,7 +546,7 @@ module DeleteLoggingConfiguration = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteLoggingConfigurationCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteLoggingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -559,7 +559,7 @@ module DeleteIPSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteIPSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteIPSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -572,7 +572,7 @@ module DeleteGeoMatchSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteGeoMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteGeoMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -585,7 +585,7 @@ module DeleteByteMatchSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "DeleteByteMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "DeleteByteMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -599,7 +599,7 @@ module CreateWebACLMigrationStack = {
   type response = {
 @as("S3ObjectUrl") s3ObjectUrl: option<s3ObjectUrl>
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateWebACLMigrationStackCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateWebACLMigrationStackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -610,7 +610,7 @@ module AssociateWebACL = {
 @as("WebACLId") webACLId: option<resourceId>
 }
   type response = unit
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "AssociateWebACLCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "AssociateWebACLCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -621,7 +621,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -634,7 +634,7 @@ module ListResourcesForWebACL = {
   type response = {
 @as("ResourceArns") resourceArns: resourceArns
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListResourcesForWebACLCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListResourcesForWebACLCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -646,7 +646,7 @@ module GetWebACLForResource = {
   type response = {
 @as("WebACLSummary") webACLSummary: webACLSummary
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetWebACLForResourceCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetWebACLForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -658,7 +658,7 @@ module GetRuleGroup = {
   type response = {
 @as("RuleGroup") ruleGroup: ruleGroup
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetRuleGroupCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetRuleGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -672,7 +672,7 @@ module GetRateBasedRuleManagedKeys = {
 @as("NextMarker") nextMarker: nextMarker,
 @as("ManagedKeys") managedKeys: managedKeys
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetRateBasedRuleManagedKeysCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetRateBasedRuleManagedKeysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -686,7 +686,7 @@ module UpdateRegexPatternSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateRegexPatternSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateRegexPatternSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -697,7 +697,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -711,7 +711,7 @@ module ListXssMatchSets = {
 @as("XssMatchSets") xssMatchSets: xssMatchSetSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListXssMatchSetsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListXssMatchSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -725,7 +725,7 @@ module ListWebACLs = {
 @as("WebACLs") webACLs: webACLSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListWebACLsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListWebACLsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -739,7 +739,7 @@ module ListSubscribedRuleGroups = {
 @as("RuleGroups") ruleGroups: subscribedRuleGroupSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListSubscribedRuleGroupsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListSubscribedRuleGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -753,7 +753,7 @@ module ListSqlInjectionMatchSets = {
 @as("SqlInjectionMatchSets") sqlInjectionMatchSets: sqlInjectionMatchSetSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListSqlInjectionMatchSetsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListSqlInjectionMatchSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -767,7 +767,7 @@ module ListSizeConstraintSets = {
 @as("SizeConstraintSets") sizeConstraintSets: sizeConstraintSetSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListSizeConstraintSetsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListSizeConstraintSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -781,7 +781,7 @@ module ListRules = {
 @as("Rules") rules: ruleSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListRulesCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -795,7 +795,7 @@ module ListRuleGroups = {
 @as("RuleGroups") ruleGroups: ruleGroupSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListRuleGroupsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListRuleGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -809,7 +809,7 @@ module ListRegexPatternSets = {
 @as("RegexPatternSets") regexPatternSets: regexPatternSetSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListRegexPatternSetsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListRegexPatternSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -823,7 +823,7 @@ module ListRegexMatchSets = {
 @as("RegexMatchSets") regexMatchSets: regexMatchSetSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListRegexMatchSetsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListRegexMatchSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -837,7 +837,7 @@ module ListRateBasedRules = {
 @as("Rules") rules: ruleSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListRateBasedRulesCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListRateBasedRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -851,7 +851,7 @@ module ListIPSets = {
 @as("IPSets") iPSets: iPSetSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListIPSetsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListIPSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -865,7 +865,7 @@ module ListGeoMatchSets = {
 @as("GeoMatchSets") geoMatchSets: geoMatchSetSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListGeoMatchSetsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListGeoMatchSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -879,7 +879,7 @@ module ListByteMatchSets = {
 @as("ByteMatchSets") byteMatchSets: byteMatchSetSummaries,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListByteMatchSetsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListByteMatchSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -891,7 +891,7 @@ module GetRegexPatternSet = {
   type response = {
 @as("RegexPatternSet") regexPatternSet: regexPatternSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetRegexPatternSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetRegexPatternSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -907,7 +907,7 @@ module CreateRuleGroup = {
 @as("ChangeToken") changeToken: changeToken,
 @as("RuleGroup") ruleGroup: ruleGroup
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateRuleGroupCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateRuleGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -921,7 +921,7 @@ module CreateRegexPatternSet = {
 @as("ChangeToken") changeToken: changeToken,
 @as("RegexPatternSet") regexPatternSet: regexPatternSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateRegexPatternSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateRegexPatternSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -935,7 +935,7 @@ module UpdateRule = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateRuleCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -950,7 +950,7 @@ module UpdateRateBasedRule = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateRateBasedRuleCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateRateBasedRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -964,7 +964,7 @@ module UpdateIPSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateIPSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateIPSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -978,7 +978,7 @@ module UpdateGeoMatchSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateGeoMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateGeoMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -990,7 +990,7 @@ module PutLoggingConfiguration = {
   type response = {
 @as("LoggingConfiguration") loggingConfiguration: loggingConfiguration
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "PutLoggingConfigurationCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "PutLoggingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1005,7 +1005,7 @@ module ListTagsForResource = {
 @as("TagInfoForResource") tagInfoForResource: tagInfoForResource,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1017,7 +1017,7 @@ module GetRule = {
   type response = {
 @as("Rule") rule: rule
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetRuleCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1029,7 +1029,7 @@ module GetRateBasedRule = {
   type response = {
 @as("Rule") rule: rateBasedRule
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetRateBasedRuleCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetRateBasedRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1041,7 +1041,7 @@ module GetLoggingConfiguration = {
   type response = {
 @as("LoggingConfiguration") loggingConfiguration: loggingConfiguration
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetLoggingConfigurationCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetLoggingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1053,7 +1053,7 @@ module GetIPSet = {
   type response = {
 @as("IPSet") iPSet: iPSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetIPSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetIPSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1065,7 +1065,7 @@ module GetGeoMatchSet = {
   type response = {
 @as("GeoMatchSet") geoMatchSet: geoMatchSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetGeoMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetGeoMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1081,7 +1081,7 @@ module CreateRule = {
 @as("ChangeToken") changeToken: changeToken,
 @as("Rule") rule: rule
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateRuleCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1099,7 +1099,7 @@ module CreateRateBasedRule = {
 @as("ChangeToken") changeToken: changeToken,
 @as("Rule") rule: rateBasedRule
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateRateBasedRuleCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateRateBasedRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1113,7 +1113,7 @@ module CreateIPSet = {
 @as("ChangeToken") changeToken: changeToken,
 @as("IPSet") iPSet: iPSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateIPSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateIPSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1127,7 +1127,7 @@ module CreateGeoMatchSet = {
 @as("ChangeToken") changeToken: changeToken,
 @as("GeoMatchSet") geoMatchSet: geoMatchSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateGeoMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateGeoMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1141,7 +1141,7 @@ module UpdateXssMatchSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateXssMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateXssMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1155,7 +1155,7 @@ module UpdateSqlInjectionMatchSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateSqlInjectionMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateSqlInjectionMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1169,7 +1169,7 @@ module UpdateSizeConstraintSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateSizeConstraintSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateSizeConstraintSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1183,7 +1183,7 @@ module UpdateRegexMatchSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateRegexMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateRegexMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1197,7 +1197,7 @@ module UpdateByteMatchSet = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateByteMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateByteMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1211,7 +1211,7 @@ module ListLoggingConfigurations = {
 @as("NextMarker") nextMarker: nextMarker,
 @as("LoggingConfigurations") loggingConfigurations: loggingConfigurations
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListLoggingConfigurationsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListLoggingConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1226,7 +1226,7 @@ module ListActivatedRulesInRuleGroup = {
 @as("ActivatedRules") activatedRules: activatedRules,
 @as("NextMarker") nextMarker: nextMarker
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "ListActivatedRulesInRuleGroupCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "ListActivatedRulesInRuleGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1238,7 +1238,7 @@ module GetXssMatchSet = {
   type response = {
 @as("XssMatchSet") xssMatchSet: xssMatchSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetXssMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetXssMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1250,7 +1250,7 @@ module GetSqlInjectionMatchSet = {
   type response = {
 @as("SqlInjectionMatchSet") sqlInjectionMatchSet: sqlInjectionMatchSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetSqlInjectionMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetSqlInjectionMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1262,7 +1262,7 @@ module GetSizeConstraintSet = {
   type response = {
 @as("SizeConstraintSet") sizeConstraintSet: sizeConstraintSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetSizeConstraintSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetSizeConstraintSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1274,7 +1274,7 @@ module GetRegexMatchSet = {
   type response = {
 @as("RegexMatchSet") regexMatchSet: regexMatchSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetRegexMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetRegexMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1286,7 +1286,7 @@ module GetByteMatchSet = {
   type response = {
 @as("ByteMatchSet") byteMatchSet: byteMatchSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetByteMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetByteMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1300,7 +1300,7 @@ module CreateXssMatchSet = {
 @as("ChangeToken") changeToken: changeToken,
 @as("XssMatchSet") xssMatchSet: xssMatchSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateXssMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateXssMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1314,7 +1314,7 @@ module CreateSqlInjectionMatchSet = {
 @as("ChangeToken") changeToken: changeToken,
 @as("SqlInjectionMatchSet") sqlInjectionMatchSet: sqlInjectionMatchSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateSqlInjectionMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateSqlInjectionMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1328,7 +1328,7 @@ module CreateSizeConstraintSet = {
 @as("ChangeToken") changeToken: changeToken,
 @as("SizeConstraintSet") sizeConstraintSet: sizeConstraintSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateSizeConstraintSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateSizeConstraintSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1342,7 +1342,7 @@ module CreateRegexMatchSet = {
 @as("ChangeToken") changeToken: changeToken,
 @as("RegexMatchSet") regexMatchSet: regexMatchSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateRegexMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateRegexMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1356,7 +1356,7 @@ module CreateByteMatchSet = {
 @as("ChangeToken") changeToken: changeToken,
 @as("ByteMatchSet") byteMatchSet: byteMatchSet
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateByteMatchSetCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateByteMatchSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1371,7 +1371,7 @@ module UpdateWebACL = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateWebACLCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateWebACLCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1385,7 +1385,7 @@ module UpdateRuleGroup = {
   type response = {
 @as("ChangeToken") changeToken: changeToken
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "UpdateRuleGroupCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "UpdateRuleGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1397,7 +1397,7 @@ module GetWebACL = {
   type response = {
 @as("WebACL") webACL: webACL
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetWebACLCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetWebACLCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1414,7 +1414,7 @@ module GetSampledRequests = {
 @as("PopulationSize") populationSize: populationSize,
 @as("SampledRequests") sampledRequests: sampledHTTPRequests
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "GetSampledRequestsCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "GetSampledRequestsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1431,6 +1431,6 @@ module CreateWebACL = {
 @as("ChangeToken") changeToken: changeToken,
 @as("WebACL") webACL: webACL
 }
-  @module("@aws-sdk/client-waf-regional") @new external new_: (Js.Promise.t<request>) => t = "CreateWebACLCommand";
+  @module("@aws-sdk/client-waf-regional") @new external new_: (request) => t = "CreateWebACLCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

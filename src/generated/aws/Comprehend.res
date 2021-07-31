@@ -492,7 +492,7 @@ module UpdateEndpoint = {
 @as("EndpointArn") endpointArn: option<comprehendEndpointArn>
 }
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "UpdateEndpointCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "UpdateEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -502,7 +502,7 @@ module StopTrainingEntityRecognizer = {
 @as("EntityRecognizerArn") entityRecognizerArn: option<entityRecognizerArn>
 }
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StopTrainingEntityRecognizerCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StopTrainingEntityRecognizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -512,7 +512,7 @@ module StopTrainingDocumentClassifier = {
 @as("DocumentClassifierArn") documentClassifierArn: option<documentClassifierArn>
 }
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StopTrainingDocumentClassifierCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StopTrainingDocumentClassifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -525,7 +525,7 @@ module StopSentimentDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StopSentimentDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StopSentimentDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -538,7 +538,7 @@ module StopPiiEntitiesDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StopPiiEntitiesDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StopPiiEntitiesDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -551,7 +551,7 @@ module StopKeyPhrasesDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StopKeyPhrasesDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StopKeyPhrasesDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -564,7 +564,7 @@ module StopEventsDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StopEventsDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StopEventsDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -577,7 +577,7 @@ module StopEntitiesDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StopEntitiesDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StopEntitiesDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -590,7 +590,7 @@ module StopDominantLanguageDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StopDominantLanguageDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StopDominantLanguageDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -600,7 +600,7 @@ module DeleteEntityRecognizer = {
 @as("EntityRecognizerArn") entityRecognizerArn: option<entityRecognizerArn>
 }
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DeleteEntityRecognizerCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DeleteEntityRecognizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -610,7 +610,7 @@ module DeleteEndpoint = {
 @as("EndpointArn") endpointArn: option<comprehendEndpointArn>
 }
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DeleteEndpointCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DeleteEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -620,7 +620,7 @@ module DeleteDocumentClassifier = {
 @as("DocumentClassifierArn") documentClassifierArn: option<documentClassifierArn>
 }
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DeleteDocumentClassifierCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DeleteDocumentClassifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -631,7 +631,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<comprehendArn>
 }
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -650,7 +650,7 @@ module StartEventsDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StartEventsDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StartEventsDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -664,7 +664,7 @@ module DetectSentiment = {
 @as("SentimentScore") sentimentScore: sentimentScore,
 @as("Sentiment") sentiment: sentimentType
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DetectSentimentCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DetectSentimentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -676,7 +676,7 @@ module DescribeEndpoint = {
   type response = {
 @as("EndpointProperties") endpointProperties: endpointProperties
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DescribeEndpointCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DescribeEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -687,7 +687,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<comprehendArn>
 }
   type response = unit
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -707,7 +707,7 @@ module StartTopicsDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StartTopicsDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StartTopicsDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -727,7 +727,7 @@ module StartSentimentDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StartSentimentDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StartSentimentDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -747,7 +747,7 @@ module StartPiiEntitiesDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StartPiiEntitiesDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StartPiiEntitiesDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -767,7 +767,7 @@ module StartKeyPhrasesDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StartKeyPhrasesDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StartKeyPhrasesDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -788,7 +788,7 @@ module StartEntitiesDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StartEntitiesDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StartEntitiesDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -807,7 +807,7 @@ module StartDominantLanguageDetectionJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StartDominantLanguageDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StartDominantLanguageDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -827,7 +827,7 @@ module StartDocumentClassificationJob = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "StartDocumentClassificationJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "StartDocumentClassificationJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -840,7 +840,7 @@ module ListTagsForResource = {
 @as("Tags") tags: tagList,
 @as("ResourceArn") resourceArn: comprehendArn
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -855,7 +855,7 @@ module ListEndpoints = {
 @as("NextToken") nextToken: amazonawsString,
 @as("EndpointPropertiesList") endpointPropertiesList: endpointPropertiesList
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListEndpointsCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListEndpointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -868,7 +868,7 @@ module DetectPiiEntities = {
   type response = {
 @as("Entities") entities: listOfPiiEntities
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DetectPiiEntitiesCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DetectPiiEntitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -881,7 +881,7 @@ module DetectKeyPhrases = {
   type response = {
 @as("KeyPhrases") keyPhrases: listOfKeyPhrases
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DetectKeyPhrasesCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DetectKeyPhrasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -895,7 +895,7 @@ module DetectEntities = {
   type response = {
 @as("Entities") entities: listOfEntities
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DetectEntitiesCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DetectEntitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -907,7 +907,7 @@ module DetectDominantLanguage = {
   type response = {
 @as("Languages") languages: listOfDominantLanguages
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DetectDominantLanguageCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DetectDominantLanguageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -919,7 +919,7 @@ module DescribeEventsDetectionJob = {
   type response = {
 @as("EventsDetectionJobProperties") eventsDetectionJobProperties: eventsDetectionJobProperties
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventsDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DescribeEventsDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -936,7 +936,7 @@ module CreateEndpoint = {
   type response = {
 @as("EndpointArn") endpointArn: comprehendEndpointArn
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "CreateEndpointCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "CreateEndpointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -949,7 +949,7 @@ module ContainsPiiEntities = {
   type response = {
 @as("Labels") labels: listOfEntityLabels
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ContainsPiiEntitiesCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ContainsPiiEntitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -963,7 +963,7 @@ module ClassifyDocument = {
 @as("Labels") labels: listOfLabels,
 @as("Classes") classes: listOfClasses
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ClassifyDocumentCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ClassifyDocumentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -978,7 +978,7 @@ module ListEventsDetectionJobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("EventsDetectionJobPropertiesList") eventsDetectionJobPropertiesList: eventsDetectionJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListEventsDetectionJobsCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListEventsDetectionJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -991,7 +991,7 @@ module DetectSyntax = {
   type response = {
 @as("SyntaxTokens") syntaxTokens: listOfSyntaxTokens
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DetectSyntaxCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DetectSyntaxCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1003,7 +1003,7 @@ module DescribeTopicsDetectionJob = {
   type response = {
 @as("TopicsDetectionJobProperties") topicsDetectionJobProperties: topicsDetectionJobProperties
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DescribeTopicsDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DescribeTopicsDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1015,7 +1015,7 @@ module DescribeSentimentDetectionJob = {
   type response = {
 @as("SentimentDetectionJobProperties") sentimentDetectionJobProperties: sentimentDetectionJobProperties
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DescribeSentimentDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DescribeSentimentDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1027,7 +1027,7 @@ module DescribePiiEntitiesDetectionJob = {
   type response = {
 @as("PiiEntitiesDetectionJobProperties") piiEntitiesDetectionJobProperties: piiEntitiesDetectionJobProperties
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DescribePiiEntitiesDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DescribePiiEntitiesDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1039,7 +1039,7 @@ module DescribeKeyPhrasesDetectionJob = {
   type response = {
 @as("KeyPhrasesDetectionJobProperties") keyPhrasesDetectionJobProperties: keyPhrasesDetectionJobProperties
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DescribeKeyPhrasesDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DescribeKeyPhrasesDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1051,7 +1051,7 @@ module DescribeEntitiesDetectionJob = {
   type response = {
 @as("EntitiesDetectionJobProperties") entitiesDetectionJobProperties: entitiesDetectionJobProperties
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DescribeEntitiesDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DescribeEntitiesDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1063,7 +1063,7 @@ module DescribeDominantLanguageDetectionJob = {
   type response = {
 @as("DominantLanguageDetectionJobProperties") dominantLanguageDetectionJobProperties: dominantLanguageDetectionJobProperties
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DescribeDominantLanguageDetectionJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DescribeDominantLanguageDetectionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1075,7 +1075,7 @@ module DescribeDocumentClassificationJob = {
   type response = {
 @as("DocumentClassificationJobProperties") documentClassificationJobProperties: documentClassificationJobProperties
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DescribeDocumentClassificationJobCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DescribeDocumentClassificationJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1089,7 +1089,7 @@ module BatchDetectSentiment = {
 @as("ErrorList") errorList: option<batchItemErrorList>,
 @as("ResultList") resultList: option<listOfDetectSentimentResult>
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "BatchDetectSentimentCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "BatchDetectSentimentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1104,7 +1104,7 @@ module ListTopicsDetectionJobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("TopicsDetectionJobPropertiesList") topicsDetectionJobPropertiesList: topicsDetectionJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListTopicsDetectionJobsCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListTopicsDetectionJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1119,7 +1119,7 @@ module ListSentimentDetectionJobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("SentimentDetectionJobPropertiesList") sentimentDetectionJobPropertiesList: sentimentDetectionJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListSentimentDetectionJobsCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListSentimentDetectionJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1134,7 +1134,7 @@ module ListPiiEntitiesDetectionJobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("PiiEntitiesDetectionJobPropertiesList") piiEntitiesDetectionJobPropertiesList: piiEntitiesDetectionJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListPiiEntitiesDetectionJobsCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListPiiEntitiesDetectionJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1149,7 +1149,7 @@ module ListKeyPhrasesDetectionJobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("KeyPhrasesDetectionJobPropertiesList") keyPhrasesDetectionJobPropertiesList: keyPhrasesDetectionJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListKeyPhrasesDetectionJobsCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListKeyPhrasesDetectionJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1164,7 +1164,7 @@ module ListEntitiesDetectionJobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("EntitiesDetectionJobPropertiesList") entitiesDetectionJobPropertiesList: entitiesDetectionJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListEntitiesDetectionJobsCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListEntitiesDetectionJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1179,7 +1179,7 @@ module ListDominantLanguageDetectionJobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("DominantLanguageDetectionJobPropertiesList") dominantLanguageDetectionJobPropertiesList: dominantLanguageDetectionJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListDominantLanguageDetectionJobsCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListDominantLanguageDetectionJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1194,7 +1194,7 @@ module ListDocumentClassificationJobs = {
 @as("NextToken") nextToken: amazonawsString,
 @as("DocumentClassificationJobPropertiesList") documentClassificationJobPropertiesList: documentClassificationJobPropertiesList
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListDocumentClassificationJobsCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListDocumentClassificationJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1214,7 +1214,7 @@ module CreateEntityRecognizer = {
   type response = {
 @as("EntityRecognizerArn") entityRecognizerArn: entityRecognizerArn
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "CreateEntityRecognizerCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "CreateEntityRecognizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1236,7 +1236,7 @@ module CreateDocumentClassifier = {
   type response = {
 @as("DocumentClassifierArn") documentClassifierArn: documentClassifierArn
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "CreateDocumentClassifierCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "CreateDocumentClassifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1250,7 +1250,7 @@ module BatchDetectKeyPhrases = {
 @as("ErrorList") errorList: option<batchItemErrorList>,
 @as("ResultList") resultList: option<listOfDetectKeyPhrasesResult>
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "BatchDetectKeyPhrasesCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "BatchDetectKeyPhrasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1264,7 +1264,7 @@ module BatchDetectEntities = {
 @as("ErrorList") errorList: option<batchItemErrorList>,
 @as("ResultList") resultList: option<listOfDetectEntitiesResult>
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "BatchDetectEntitiesCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "BatchDetectEntitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1277,7 +1277,7 @@ module BatchDetectDominantLanguage = {
 @as("ErrorList") errorList: option<batchItemErrorList>,
 @as("ResultList") resultList: option<listOfDetectDominantLanguageResult>
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "BatchDetectDominantLanguageCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "BatchDetectDominantLanguageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1289,7 +1289,7 @@ module DescribeEntityRecognizer = {
   type response = {
 @as("EntityRecognizerProperties") entityRecognizerProperties: entityRecognizerProperties
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DescribeEntityRecognizerCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DescribeEntityRecognizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1301,7 +1301,7 @@ module DescribeDocumentClassifier = {
   type response = {
 @as("DocumentClassifierProperties") documentClassifierProperties: documentClassifierProperties
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "DescribeDocumentClassifierCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "DescribeDocumentClassifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1315,7 +1315,7 @@ module BatchDetectSyntax = {
 @as("ErrorList") errorList: option<batchItemErrorList>,
 @as("ResultList") resultList: option<listOfDetectSyntaxResult>
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "BatchDetectSyntaxCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "BatchDetectSyntaxCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1330,7 +1330,7 @@ module ListEntityRecognizers = {
 @as("NextToken") nextToken: amazonawsString,
 @as("EntityRecognizerPropertiesList") entityRecognizerPropertiesList: entityRecognizerPropertiesList
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListEntityRecognizersCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListEntityRecognizersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1345,6 +1345,6 @@ module ListDocumentClassifiers = {
 @as("NextToken") nextToken: amazonawsString,
 @as("DocumentClassifierPropertiesList") documentClassifierPropertiesList: documentClassifierPropertiesList
 }
-  @module("@aws-sdk/client-comprehend") @new external new_: (Js.Promise.t<request>) => t = "ListDocumentClassifiersCommand";
+  @module("@aws-sdk/client-comprehend") @new external new_: (request) => t = "ListDocumentClassifiersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

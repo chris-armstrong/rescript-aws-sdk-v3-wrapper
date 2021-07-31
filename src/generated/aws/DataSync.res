@@ -185,7 +185,7 @@ module UpdateAgent = {
 @as("AgentArn") agentArn: option<agentArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "UpdateAgentCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "UpdateAgentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -195,7 +195,7 @@ module DeleteTask = {
 @as("TaskArn") taskArn: option<taskArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DeleteTaskCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DeleteTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -205,7 +205,7 @@ module DeleteLocation = {
 @as("LocationArn") locationArn: option<locationArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DeleteLocationCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DeleteLocationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -215,7 +215,7 @@ module DeleteAgent = {
 @as("AgentArn") agentArn: option<agentArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DeleteAgentCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DeleteAgentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -225,7 +225,7 @@ module CancelTaskExecution = {
 @as("TaskExecutionArn") taskExecutionArn: option<taskExecutionArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "CancelTaskExecutionCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "CancelTaskExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -236,7 +236,7 @@ module UpdateTaskExecution = {
 @as("TaskExecutionArn") taskExecutionArn: option<taskExecutionArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "UpdateTaskExecutionCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "UpdateTaskExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -252,7 +252,7 @@ module UpdateLocationSmb = {
 @as("LocationArn") locationArn: option<locationArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "UpdateLocationSmbCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "UpdateLocationSmbCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -268,7 +268,7 @@ module UpdateLocationObjectStorage = {
 @as("LocationArn") locationArn: option<locationArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "UpdateLocationObjectStorageCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "UpdateLocationObjectStorageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -279,7 +279,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<taggableResourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -297,7 +297,7 @@ module DescribeLocationSmb = {
 @as("LocationUri") locationUri: locationUri,
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocationSmbCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DescribeLocationSmbCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -314,7 +314,7 @@ module DescribeLocationS3 = {
 @as("LocationUri") locationUri: locationUri,
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocationS3Command";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DescribeLocationS3Command";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -332,7 +332,7 @@ module DescribeLocationObjectStorage = {
 @as("LocationUri") locationUri: locationUri,
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocationObjectStorageCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DescribeLocationObjectStorageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -349,7 +349,7 @@ module DescribeLocationFsxWindows = {
 @as("LocationUri") locationUri: locationUri,
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocationFsxWindowsCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DescribeLocationFsxWindowsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -364,7 +364,7 @@ module UpdateTask = {
 @as("TaskArn") taskArn: option<taskArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "UpdateTaskCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "UpdateTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -377,7 +377,7 @@ module UpdateLocationNfs = {
 @as("LocationArn") locationArn: option<locationArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "UpdateLocationNfsCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "UpdateLocationNfsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -388,7 +388,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<taggableResourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -402,7 +402,7 @@ module StartTaskExecution = {
   type response = {
 @as("TaskExecutionArn") taskExecutionArn: taskExecutionArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "StartTaskExecutionCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "StartTaskExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -417,7 +417,7 @@ module ListTaskExecutions = {
 @as("NextToken") nextToken: nextToken,
 @as("TaskExecutions") taskExecutions: taskExecutionList
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "ListTaskExecutionsCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "ListTaskExecutionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -432,7 +432,7 @@ module ListTagsForResource = {
 @as("NextToken") nextToken: nextToken,
 @as("Tags") tags: outputTagList
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -446,7 +446,7 @@ module ListAgents = {
 @as("NextToken") nextToken: nextToken,
 @as("Agents") agents: agentList
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "ListAgentsCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "ListAgentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -469,7 +469,7 @@ module DescribeTaskExecution = {
 @as("Status") status: taskExecutionStatus,
 @as("TaskExecutionArn") taskExecutionArn: taskExecutionArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DescribeTaskExecutionCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DescribeTaskExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -495,7 +495,7 @@ module DescribeTask = {
 @as("Status") status: taskStatus,
 @as("TaskArn") taskArn: taskArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DescribeTaskCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DescribeTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -511,7 +511,7 @@ module DescribeLocationNfs = {
 @as("LocationUri") locationUri: locationUri,
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocationNfsCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DescribeLocationNfsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -526,7 +526,7 @@ module DescribeLocationEfs = {
 @as("LocationUri") locationUri: locationUri,
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DescribeLocationEfsCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DescribeLocationEfsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -544,7 +544,7 @@ module DescribeAgent = {
 @as("Name") name: tagValue,
 @as("AgentArn") agentArn: agentArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "DescribeAgentCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "DescribeAgentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -563,7 +563,7 @@ module CreateTask = {
   type response = {
 @as("TaskArn") taskArn: taskArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "CreateTaskCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "CreateTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -582,7 +582,7 @@ module CreateLocationSmb = {
   type response = {
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "CreateLocationSmbCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "CreateLocationSmbCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -599,7 +599,7 @@ module CreateLocationS3 = {
   type response = {
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "CreateLocationS3Command";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "CreateLocationS3Command";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -619,7 +619,7 @@ module CreateLocationObjectStorage = {
   type response = {
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "CreateLocationObjectStorageCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "CreateLocationObjectStorageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -635,7 +635,7 @@ module CreateLocationNfs = {
   type response = {
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "CreateLocationNfsCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "CreateLocationNfsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -653,7 +653,7 @@ module CreateLocationFsxWindows = {
   type response = {
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "CreateLocationFsxWindowsCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "CreateLocationFsxWindowsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -668,7 +668,7 @@ module CreateLocationEfs = {
   type response = {
 @as("LocationArn") locationArn: locationArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "CreateLocationEfsCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "CreateLocationEfsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -685,7 +685,7 @@ module CreateAgent = {
   type response = {
 @as("AgentArn") agentArn: agentArn
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "CreateAgentCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "CreateAgentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -700,7 +700,7 @@ module ListTasks = {
 @as("NextToken") nextToken: nextToken,
 @as("Tasks") tasks: taskList
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "ListTasksCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "ListTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -715,6 +715,6 @@ module ListLocations = {
 @as("NextToken") nextToken: nextToken,
 @as("Locations") locations: locationList
 }
-  @module("@aws-sdk/client-datasync") @new external new_: (Js.Promise.t<request>) => t = "ListLocationsCommand";
+  @module("@aws-sdk/client-datasync") @new external new_: (request) => t = "ListLocationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -46,7 +46,7 @@ module DeleteReportDefinition = {
   type response = {
 @as("ResponseMessage") responseMessage: deleteResponseMessage
 }
-  @module("@aws-sdk/client-cur") @new external new_: (Js.Promise.t<request>) => t = "DeleteReportDefinitionCommand";
+  @module("@aws-sdk/client-cur") @new external new_: (request) => t = "DeleteReportDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -56,7 +56,7 @@ module PutReportDefinition = {
 @as("ReportDefinition") reportDefinition: option<reportDefinition>
 }
   type response = unit
-  @module("@aws-sdk/client-cur") @new external new_: (Js.Promise.t<request>) => t = "PutReportDefinitionCommand";
+  @module("@aws-sdk/client-cur") @new external new_: (request) => t = "PutReportDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -67,7 +67,7 @@ module ModifyReportDefinition = {
 @as("ReportName") reportName: option<reportName>
 }
   type response = unit
-  @module("@aws-sdk/client-cur") @new external new_: (Js.Promise.t<request>) => t = "ModifyReportDefinitionCommand";
+  @module("@aws-sdk/client-cur") @new external new_: (request) => t = "ModifyReportDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -81,6 +81,6 @@ module DescribeReportDefinitions = {
 @as("NextToken") nextToken: genericString,
 @as("ReportDefinitions") reportDefinitions: reportDefinitionList
 }
-  @module("@aws-sdk/client-cur") @new external new_: (Js.Promise.t<request>) => t = "DescribeReportDefinitionsCommand";
+  @module("@aws-sdk/client-cur") @new external new_: (request) => t = "DescribeReportDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

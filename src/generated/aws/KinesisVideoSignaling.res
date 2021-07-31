@@ -33,7 +33,7 @@ module SendAlexaOfferToMaster = {
   type response = {
 @as("Answer") answer: answer
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "SendAlexaOfferToMasterCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "SendAlexaOfferToMasterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -48,6 +48,6 @@ module GetIceServerConfig = {
   type response = {
 @as("IceServerList") iceServerList: iceServerList
 }
-  @module("@aws-sdk/client-kinesisvideo") @new external new_: (Js.Promise.t<request>) => t = "GetIceServerConfigCommand";
+  @module("@aws-sdk/client-kinesisvideo") @new external new_: (request) => t = "GetIceServerConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

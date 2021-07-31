@@ -174,7 +174,7 @@ module UpdateResource = {
 @as("RoleArn") roleArn: option<iAMRoleArn>
 }
   type response = unit
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "UpdateResourceCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "UpdateResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -186,7 +186,7 @@ module RegisterResource = {
 @as("ResourceArn") resourceArn: option<resourceArnString>
 }
   type response = unit
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "RegisterResourceCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "RegisterResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -196,7 +196,7 @@ module DeregisterResource = {
 @as("ResourceArn") resourceArn: option<resourceArnString>
 }
   type response = unit
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "DeregisterResourceCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "DeregisterResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -207,7 +207,7 @@ module DeleteLFTag = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "DeleteLFTagCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "DeleteLFTagCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -220,7 +220,7 @@ module UpdateLFTag = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "UpdateLFTagCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "UpdateLFTagCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -235,7 +235,7 @@ module GetLFTag = {
 @as("TagKey") tagKey: lFTagKey,
 @as("CatalogId") catalogId: catalogIdString
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "GetLFTagCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "GetLFTagCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -247,7 +247,7 @@ module DescribeResource = {
   type response = {
 @as("ResourceInfo") resourceInfo: resourceInfo
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "DescribeResourceCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "DescribeResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -259,7 +259,7 @@ module CreateLFTag = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "CreateLFTagCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "CreateLFTagCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -274,7 +274,7 @@ module ListResources = {
 @as("NextToken") nextToken: token,
 @as("ResourceInfoList") resourceInfoList: resourceInfoList
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "ListResourcesCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "ListResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -290,7 +290,7 @@ module ListLFTags = {
 @as("NextToken") nextToken: token,
 @as("LFTags") lFTags: lFTagsList
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "ListLFTagsCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "ListLFTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -301,7 +301,7 @@ module PutDataLakeSettings = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "PutDataLakeSettingsCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "PutDataLakeSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -313,7 +313,7 @@ module GetDataLakeSettings = {
   type response = {
 @as("DataLakeSettings") dataLakeSettings: dataLakeSettings
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "GetDataLakeSettingsCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "GetDataLakeSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -329,7 +329,7 @@ module SearchDatabasesByLFTags = {
 @as("DatabaseList") databaseList: databaseLFTagsList,
 @as("NextToken") nextToken: token
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "SearchDatabasesByLFTagsCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "SearchDatabasesByLFTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -343,7 +343,7 @@ module RevokePermissions = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "RevokePermissionsCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "RevokePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -357,7 +357,7 @@ module RemoveLFTagsFromResource = {
   type response = {
 @as("Failures") failures: lFTagErrors
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "RemoveLFTagsFromResourceCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "RemoveLFTagsFromResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -371,7 +371,7 @@ module GrantPermissions = {
 @as("CatalogId") catalogId: catalogIdString
 }
   type response = unit
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "GrantPermissionsCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "GrantPermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -387,7 +387,7 @@ module GetResourceLFTags = {
 @as("LFTagsOnTable") lFTagsOnTable: lFTagsList,
 @as("LFTagOnDatabase") lFTagOnDatabase: lFTagsList
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "GetResourceLFTagsCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "GetResourceLFTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -401,7 +401,7 @@ module AddLFTagsToResource = {
   type response = {
 @as("Failures") failures: lFTagErrors
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "AddLFTagsToResourceCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "AddLFTagsToResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -417,7 +417,7 @@ module SearchTablesByLFTags = {
 @as("TableList") tableList: tableLFTagsList,
 @as("NextToken") nextToken: token
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "SearchTablesByLFTagsCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "SearchTablesByLFTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -435,7 +435,7 @@ module ListPermissions = {
 @as("NextToken") nextToken: token,
 @as("PrincipalResourcePermissions") principalResourcePermissions: principalResourcePermissionsList
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "ListPermissionsCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "ListPermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -451,7 +451,7 @@ module GetEffectivePermissionsForPath = {
 @as("NextToken") nextToken: token,
 @as("Permissions") permissions: principalResourcePermissionsList
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "GetEffectivePermissionsForPathCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "GetEffectivePermissionsForPathCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -464,7 +464,7 @@ module BatchRevokePermissions = {
   type response = {
 @as("Failures") failures: batchPermissionsFailureList
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "BatchRevokePermissionsCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "BatchRevokePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -477,6 +477,6 @@ module BatchGrantPermissions = {
   type response = {
 @as("Failures") failures: batchPermissionsFailureList
 }
-  @module("@aws-sdk/client-lakeformation") @new external new_: (Js.Promise.t<request>) => t = "BatchGrantPermissionsCommand";
+  @module("@aws-sdk/client-lakeformation") @new external new_: (request) => t = "BatchGrantPermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

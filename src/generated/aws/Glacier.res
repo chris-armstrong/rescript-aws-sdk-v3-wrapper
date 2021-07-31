@@ -194,7 +194,7 @@ module UploadMultipartPart = {
   type response = {
 @as("checksum") checksum: amazonawsString
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "UploadMultipartPartCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "UploadMultipartPartCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -212,7 +212,7 @@ module UploadArchive = {
 @as("checksum") checksum: amazonawsString,
 @as("location") location: amazonawsString
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "UploadArchiveCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "UploadArchiveCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -224,7 +224,7 @@ module PurchaseProvisionedCapacity = {
   type response = {
 @as("capacityId") capacityId: amazonawsString
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "PurchaseProvisionedCapacityCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "PurchaseProvisionedCapacityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -240,7 +240,7 @@ module InitiateMultipartUpload = {
 @as("uploadId") uploadId: amazonawsString,
 @as("location") location: amazonawsString
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "InitiateMultipartUploadCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "InitiateMultipartUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -256,7 +256,7 @@ module GetVaultLock = {
 @as("State") state: amazonawsString,
 @as("Policy") policy: amazonawsString
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "GetVaultLockCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "GetVaultLockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -277,7 +277,7 @@ module GetJobOutput = {
 @as("checksum") checksum: amazonawsString,
 @as("body") body: stream
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "GetJobOutputCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "GetJobOutputCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -288,7 +288,7 @@ module DescribeVault = {
 @as("accountId") accountId: option<amazonawsString>
 }
   type response = describeVaultOutput;
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "DescribeVaultCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "DescribeVaultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -299,7 +299,7 @@ module DeleteVaultNotifications = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "DeleteVaultNotificationsCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "DeleteVaultNotificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -310,7 +310,7 @@ module DeleteVaultAccessPolicy = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "DeleteVaultAccessPolicyCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "DeleteVaultAccessPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -321,7 +321,7 @@ module DeleteVault = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "DeleteVaultCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "DeleteVaultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -333,7 +333,7 @@ module DeleteArchive = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "DeleteArchiveCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "DeleteArchiveCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -346,7 +346,7 @@ module CreateVault = {
   type response = {
 @as("location") location: amazonawsString
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "CreateVaultCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "CreateVaultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -358,7 +358,7 @@ module CompleteVaultLock = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "CompleteVaultLockCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "CompleteVaultLockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -376,7 +376,7 @@ module CompleteMultipartUpload = {
 @as("checksum") checksum: amazonawsString,
 @as("location") location: amazonawsString
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "CompleteMultipartUploadCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "CompleteMultipartUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -387,7 +387,7 @@ module AbortVaultLock = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "AbortVaultLockCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "AbortVaultLockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -399,7 +399,7 @@ module AbortMultipartUpload = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "AbortMultipartUploadCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "AbortMultipartUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -411,7 +411,7 @@ module SetVaultAccessPolicy = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "SetVaultAccessPolicyCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "SetVaultAccessPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -423,7 +423,7 @@ module RemoveTagsFromVault = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "RemoveTagsFromVaultCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "RemoveTagsFromVaultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -436,7 +436,7 @@ module ListTagsForVault = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForVaultCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "ListTagsForVaultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -450,7 +450,7 @@ module InitiateVaultLock = {
   type response = {
 @as("lockId") lockId: amazonawsString
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "InitiateVaultLockCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "InitiateVaultLockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -463,7 +463,7 @@ module GetVaultAccessPolicy = {
   type response = {
 @as("policy") policy: vaultAccessPolicy
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "GetVaultAccessPolicyCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "GetVaultAccessPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -475,7 +475,7 @@ module AddTagsToVault = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "AddTagsToVaultCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "AddTagsToVaultCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -487,7 +487,7 @@ module SetVaultNotifications = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "SetVaultNotificationsCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "SetVaultNotificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -502,7 +502,7 @@ module ListVaults = {
 @as("Marker") marker: amazonawsString,
 @as("VaultList") vaultList: vaultList
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "ListVaultsCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "ListVaultsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -514,7 +514,7 @@ module ListProvisionedCapacity = {
   type response = {
 @as("ProvisionedCapacityList") provisionedCapacityList: provisionedCapacityList
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "ListProvisionedCapacityCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "ListProvisionedCapacityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -536,7 +536,7 @@ module ListParts = {
 @as("VaultARN") vaultARN: amazonawsString,
 @as("MultipartUploadId") multipartUploadId: amazonawsString
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "ListPartsCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "ListPartsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -552,7 +552,7 @@ module ListMultipartUploads = {
 @as("Marker") marker: amazonawsString,
 @as("UploadsList") uploadsList: uploadsList
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "ListMultipartUploadsCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "ListMultipartUploadsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -565,7 +565,7 @@ module GetVaultNotifications = {
   type response = {
 @as("vaultNotificationConfig") vaultNotificationConfig: vaultNotificationConfig
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "GetVaultNotificationsCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "GetVaultNotificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -576,7 +576,7 @@ module SetDataRetrievalPolicy = {
 @as("accountId") accountId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "SetDataRetrievalPolicyCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "SetDataRetrievalPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -588,7 +588,7 @@ module GetDataRetrievalPolicy = {
   type response = {
 @as("Policy") policy: dataRetrievalPolicy
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "GetDataRetrievalPolicyCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "GetDataRetrievalPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -600,7 +600,7 @@ module DescribeJob = {
 @as("accountId") accountId: option<amazonawsString>
 }
   type response = glacierJobDescription;
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "DescribeJobCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "DescribeJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -616,7 +616,7 @@ module InitiateJob = {
 @as("jobId") jobId: amazonawsString,
 @as("location") location: amazonawsString
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "InitiateJobCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "InitiateJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -634,6 +634,6 @@ module ListJobs = {
 @as("Marker") marker: amazonawsString,
 @as("JobList") jobList: jobList
 }
-  @module("@aws-sdk/client-glacier") @new external new_: (Js.Promise.t<request>) => t = "ListJobsCommand";
+  @module("@aws-sdk/client-glacier") @new external new_: (request) => t = "ListJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

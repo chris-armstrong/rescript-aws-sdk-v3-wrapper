@@ -127,7 +127,7 @@ module PromoteResourceShareCreatedFromPolicy = {
   type response = {
 @as("returnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "PromoteResourceShareCreatedFromPolicyCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "PromoteResourceShareCreatedFromPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -137,7 +137,7 @@ module EnableSharingWithAwsOrganization = {
   type response = {
 @as("returnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "EnableSharingWithAwsOrganizationCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "EnableSharingWithAwsOrganizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -152,7 +152,7 @@ module DisassociateResourceSharePermission = {
 @as("clientToken") clientToken: amazonawsString,
 @as("returnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "DisassociateResourceSharePermissionCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "DisassociateResourceSharePermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -166,7 +166,7 @@ module DeleteResourceShare = {
 @as("clientToken") clientToken: amazonawsString,
 @as("returnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "DeleteResourceShareCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "DeleteResourceShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -182,7 +182,7 @@ module AssociateResourceSharePermission = {
 @as("clientToken") clientToken: amazonawsString,
 @as("returnValue") returnValue: amazonawsBoolean
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "AssociateResourceSharePermissionCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "AssociateResourceSharePermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -193,7 +193,7 @@ module UntagResource = {
 @as("resourceShareArn") resourceShareArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -209,7 +209,7 @@ module GetResourcePolicies = {
 @as("nextToken") nextToken: amazonawsString,
 @as("policies") policies: policyList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "GetResourcePoliciesCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "GetResourcePoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -222,7 +222,7 @@ module GetPermission = {
   type response = {
 @as("permission") permission: resourceSharePermissionDetail
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "GetPermissionCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "GetPermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -233,7 +233,7 @@ module TagResource = {
 @as("resourceShareArn") resourceShareArn: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -252,7 +252,7 @@ module ListResources = {
 @as("nextToken") nextToken: amazonawsString,
 @as("resources") resources: resourceList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "ListResourcesCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -266,7 +266,7 @@ module ListResourceTypes = {
 @as("nextToken") nextToken: amazonawsString,
 @as("resourceTypes") resourceTypes: serviceNameAndResourceTypeList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "ListResourceTypesCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListResourceTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -281,7 +281,7 @@ module ListResourceSharePermissions = {
 @as("nextToken") nextToken: amazonawsString,
 @as("permissions") permissions: resourceSharePermissionList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "ListResourceSharePermissionsCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListResourceSharePermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -300,7 +300,7 @@ module ListPrincipals = {
 @as("nextToken") nextToken: amazonawsString,
 @as("principals") principals: principalList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "ListPrincipalsCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListPrincipalsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -315,7 +315,7 @@ module ListPermissions = {
 @as("nextToken") nextToken: amazonawsString,
 @as("permissions") permissions: resourceSharePermissionList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "ListPermissionsCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListPermissionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -330,7 +330,7 @@ module ListPendingInvitationResources = {
 @as("nextToken") nextToken: amazonawsString,
 @as("resources") resources: resourceList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "ListPendingInvitationResourcesCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "ListPendingInvitationResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -349,7 +349,7 @@ module GetResourceShareAssociations = {
 @as("nextToken") nextToken: amazonawsString,
 @as("resourceShareAssociations") resourceShareAssociations: resourceShareAssociationList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "GetResourceShareAssociationsCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "GetResourceShareAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -365,7 +365,7 @@ module DisassociateResourceShare = {
 @as("clientToken") clientToken: amazonawsString,
 @as("resourceShareAssociations") resourceShareAssociations: resourceShareAssociationList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "DisassociateResourceShareCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "DisassociateResourceShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -381,7 +381,7 @@ module AssociateResourceShare = {
 @as("clientToken") clientToken: amazonawsString,
 @as("resourceShareAssociations") resourceShareAssociations: resourceShareAssociationList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "AssociateResourceShareCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "AssociateResourceShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -397,7 +397,7 @@ module UpdateResourceShare = {
 @as("clientToken") clientToken: amazonawsString,
 @as("resourceShare") resourceShare: resourceShare
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "UpdateResourceShareCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "UpdateResourceShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -411,7 +411,7 @@ module RejectResourceShareInvitation = {
 @as("clientToken") clientToken: amazonawsString,
 @as("resourceShareInvitation") resourceShareInvitation: resourceShareInvitation
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "RejectResourceShareInvitationCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "RejectResourceShareInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -430,7 +430,7 @@ module CreateResourceShare = {
 @as("clientToken") clientToken: amazonawsString,
 @as("resourceShare") resourceShare: resourceShare
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "CreateResourceShareCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "CreateResourceShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -444,7 +444,7 @@ module AcceptResourceShareInvitation = {
 @as("clientToken") clientToken: amazonawsString,
 @as("resourceShareInvitation") resourceShareInvitation: resourceShareInvitation
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "AcceptResourceShareInvitationCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "AcceptResourceShareInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -463,7 +463,7 @@ module GetResourceShares = {
 @as("nextToken") nextToken: amazonawsString,
 @as("resourceShares") resourceShares: resourceShareList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "GetResourceSharesCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "GetResourceSharesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -479,6 +479,6 @@ module GetResourceShareInvitations = {
 @as("nextToken") nextToken: amazonawsString,
 @as("resourceShareInvitations") resourceShareInvitations: resourceShareInvitationList
 }
-  @module("@aws-sdk/client-ram") @new external new_: (Js.Promise.t<request>) => t = "GetResourceShareInvitationsCommand";
+  @module("@aws-sdk/client-ram") @new external new_: (request) => t = "GetResourceShareInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

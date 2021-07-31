@@ -45,7 +45,7 @@ module PutUsers = {
 @as("datasetArn") datasetArn: option<arn>
 }
   
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "PutUsersCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "PutUsersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -56,7 +56,7 @@ module PutItems = {
 @as("datasetArn") datasetArn: option<arn>
 }
   
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "PutItemsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "PutItemsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -69,6 +69,6 @@ module PutEvents = {
 @as("trackingId") trackingId: option<stringType>
 }
   
-  @module("@aws-sdk/client-personalize") @new external new_: (Js.Promise.t<request>) => t = "PutEventsCommand";
+  @module("@aws-sdk/client-personalize") @new external new_: (request) => t = "PutEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }

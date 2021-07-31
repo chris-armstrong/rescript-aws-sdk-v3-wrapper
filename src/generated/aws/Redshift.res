@@ -646,7 +646,7 @@ module UpdatePartnerStatus = {
 @as("PartnerName") partnerName: partnerIntegrationPartnerName,
 @as("DatabaseName") databaseName: partnerIntegrationDatabaseName
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "UpdatePartnerStatusCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "UpdatePartnerStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -658,7 +658,7 @@ module ModifyClusterSnapshotSchedule = {
 @as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyClusterSnapshotScheduleCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterSnapshotScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -677,7 +677,7 @@ module EnableLogging = {
 @as("BucketName") bucketName: amazonawsString,
 @as("LoggingEnabled") loggingEnabled: amazonawsBoolean
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "EnableLoggingCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "EnableLoggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -694,7 +694,7 @@ module DisableLogging = {
 @as("BucketName") bucketName: amazonawsString,
 @as("LoggingEnabled") loggingEnabled: amazonawsBoolean
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DisableLoggingCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DisableLoggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -705,7 +705,7 @@ module DescribeStorage = {
 @as("TotalProvisionedStorageInMegaBytes") totalProvisionedStorageInMegaBytes: amazonawsDouble,
 @as("TotalBackupSizeInMegaBytes") totalBackupSizeInMegaBytes: amazonawsDouble
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<unit>) => t = "DescribeStorageCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (unit) => t = "DescribeStorageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -722,7 +722,7 @@ module DescribeLoggingStatus = {
 @as("BucketName") bucketName: amazonawsString,
 @as("LoggingEnabled") loggingEnabled: amazonawsBoolean
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeLoggingStatusCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeLoggingStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -732,7 +732,7 @@ module DeleteUsageLimit = {
 @as("UsageLimitId") usageLimitId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteUsageLimitCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteUsageLimitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -742,7 +742,7 @@ module DeleteSnapshotSchedule = {
 @as("ScheduleIdentifier") scheduleIdentifier: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteSnapshotScheduleCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteSnapshotScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -752,7 +752,7 @@ module DeleteSnapshotCopyGrant = {
 @as("SnapshotCopyGrantName") snapshotCopyGrantName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteSnapshotCopyGrantCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteSnapshotCopyGrantCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -762,7 +762,7 @@ module DeleteScheduledAction = {
 @as("ScheduledActionName") scheduledActionName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteScheduledActionCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteScheduledActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -778,7 +778,7 @@ module DeletePartner = {
 @as("PartnerName") partnerName: partnerIntegrationPartnerName,
 @as("DatabaseName") databaseName: partnerIntegrationDatabaseName
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeletePartnerCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeletePartnerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -788,7 +788,7 @@ module DeleteHsmConfiguration = {
 @as("HsmConfigurationIdentifier") hsmConfigurationIdentifier: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteHsmConfigurationCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteHsmConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -798,7 +798,7 @@ module DeleteHsmClientCertificate = {
 @as("HsmClientCertificateIdentifier") hsmClientCertificateIdentifier: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteHsmClientCertificateCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteHsmClientCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -808,7 +808,7 @@ module DeleteEventSubscription = {
 @as("SubscriptionName") subscriptionName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteEventSubscriptionCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteEventSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -818,7 +818,7 @@ module DeleteClusterSubnetGroup = {
 @as("ClusterSubnetGroupName") clusterSubnetGroupName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteClusterSubnetGroupCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteClusterSubnetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -828,7 +828,7 @@ module DeleteClusterSecurityGroup = {
 @as("ClusterSecurityGroupName") clusterSecurityGroupName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteClusterSecurityGroupCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteClusterSecurityGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -838,7 +838,7 @@ module DeleteClusterParameterGroup = {
 @as("ParameterGroupName") parameterGroupName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteClusterParameterGroupCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteClusterParameterGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -854,7 +854,7 @@ module AddPartner = {
 @as("PartnerName") partnerName: partnerIntegrationPartnerName,
 @as("DatabaseName") databaseName: partnerIntegrationDatabaseName
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "AddPartnerCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "AddPartnerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -867,7 +867,7 @@ module RevokeEndpointAccess = {
 @as("ClusterIdentifier") clusterIdentifier: amazonawsString
 }
   type response = endpointAuthorization;
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "RevokeEndpointAccessCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RevokeEndpointAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -887,7 +887,7 @@ module RestoreTableFromClusterSnapshot = {
   type response = {
 @as("TableRestoreStatus") tableRestoreStatus: tableRestoreStatus
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "RestoreTableFromClusterSnapshotCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RestoreTableFromClusterSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -900,7 +900,7 @@ module ModifyAquaConfiguration = {
   type response = {
 @as("AquaConfiguration") aquaConfiguration: aquaConfiguration
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyAquaConfigurationCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyAquaConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -919,7 +919,7 @@ module GetClusterCredentials = {
 @as("DbPassword") dbPassword: sensitiveString,
 @as("DbUser") dbUser: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "GetClusterCredentialsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "GetClusterCredentialsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -946,7 +946,7 @@ module DescribeResize = {
 @as("TargetNumberOfNodes") targetNumberOfNodes: integerOptional,
 @as("TargetNodeType") targetNodeType: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeResizeCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeResizeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -957,7 +957,7 @@ module DeleteTags = {
 @as("ResourceName") resourceName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteTagsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -984,7 +984,7 @@ module CancelResize = {
 @as("TargetNumberOfNodes") targetNumberOfNodes: integerOptional,
 @as("TargetNodeType") targetNodeType: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CancelResizeCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CancelResizeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -996,7 +996,7 @@ module AuthorizeEndpointAccess = {
 @as("ClusterIdentifier") clusterIdentifier: amazonawsString
 }
   type response = endpointAuthorization;
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "AuthorizeEndpointAccessCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "AuthorizeEndpointAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1011,7 +1011,7 @@ module ResetClusterParameterGroup = {
 @as("ParameterGroupStatus") parameterGroupStatus: amazonawsString,
 @as("ParameterGroupName") parameterGroupName: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ResetClusterParameterGroupCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ResetClusterParameterGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1023,7 +1023,7 @@ module ModifyUsageLimit = {
 @as("UsageLimitId") usageLimitId: option<amazonawsString>
 }
   type response = usageLimit;
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyUsageLimitCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyUsageLimitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1034,7 +1034,7 @@ module ModifySnapshotSchedule = {
 @as("ScheduleIdentifier") scheduleIdentifier: option<amazonawsString>
 }
   type response = snapshotSchedule;
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifySnapshotScheduleCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifySnapshotScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1051,7 +1051,7 @@ module ModifyScheduledAction = {
 @as("ScheduledActionName") scheduledActionName: option<amazonawsString>
 }
   type response = scheduledAction;
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyScheduledActionCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyScheduledActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1065,7 +1065,7 @@ module ModifyClusterParameterGroup = {
 @as("ParameterGroupStatus") parameterGroupStatus: amazonawsString,
 @as("ParameterGroupName") parameterGroupName: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyClusterParameterGroupCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterParameterGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1081,7 +1081,7 @@ module DescribeTableRestoreStatus = {
 @as("Marker") marker: amazonawsString,
 @as("TableRestoreStatusDetails") tableRestoreStatusDetails: tableRestoreStatusList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeTableRestoreStatusCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeTableRestoreStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1096,7 +1096,7 @@ module DescribePartners = {
   type response = {
 @as("PartnerIntegrationInfoList") partnerIntegrationInfoList: partnerIntegrationInfoList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribePartnersCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribePartnersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1112,7 +1112,7 @@ module DescribeClusterVersions = {
 @as("ClusterVersions") clusterVersions: clusterVersionList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeClusterVersionsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1128,7 +1128,7 @@ module DescribeClusterParameters = {
 @as("Marker") marker: amazonawsString,
 @as("Parameters") parameters: parametersList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeClusterParametersCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterParametersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1144,7 +1144,7 @@ module CreateUsageLimit = {
 @as("ClusterIdentifier") clusterIdentifier: option<amazonawsString>
 }
   type response = usageLimit;
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateUsageLimitCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateUsageLimitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1155,7 +1155,7 @@ module CreateTags = {
 @as("ResourceName") resourceName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateTagsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1170,7 +1170,7 @@ module CreateSnapshotSchedule = {
 @as("ScheduleDefinitions") scheduleDefinitions: scheduleDefinitionList
 }
   type response = snapshotSchedule;
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateSnapshotScheduleCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateSnapshotScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1187,7 +1187,7 @@ module CreateScheduledAction = {
 @as("ScheduledActionName") scheduledActionName: option<amazonawsString>
 }
   type response = scheduledAction;
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateScheduledActionCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateScheduledActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1202,7 +1202,7 @@ module BatchModifyClusterSnapshots = {
 @as("Errors") errors: batchSnapshotOperationErrors,
 @as("Resources") resources: snapshotIdentifierList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "BatchModifyClusterSnapshotsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "BatchModifyClusterSnapshotsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1215,7 +1215,7 @@ module BatchDeleteClusterSnapshots = {
 @as("Errors") errors: batchSnapshotOperationErrorList,
 @as("Resources") resources: snapshotIdentifierList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "BatchDeleteClusterSnapshotsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "BatchDeleteClusterSnapshotsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1229,7 +1229,7 @@ module RevokeSnapshotAccess = {
   type response = {
 @as("Snapshot") snapshot: snapshot
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "RevokeSnapshotAccessCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RevokeSnapshotAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1242,7 +1242,7 @@ module PurchaseReservedNodeOffering = {
   type response = {
 @as("ReservedNode") reservedNode: reservedNode
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "PurchaseReservedNodeOfferingCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "PurchaseReservedNodeOfferingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1260,7 +1260,7 @@ module ModifyEventSubscription = {
   type response = {
 @as("EventSubscription") eventSubscription: eventSubscription
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyEventSubscriptionCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyEventSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1271,7 +1271,7 @@ module ModifyEndpointAccess = {
 @as("EndpointName") endpointName: option<amazonawsString>
 }
   type response = endpointAccess;
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyEndpointAccessCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyEndpointAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1285,7 +1285,7 @@ module ModifyClusterSnapshot = {
   type response = {
 @as("Snapshot") snapshot: snapshot
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyClusterSnapshotCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1303,7 +1303,7 @@ module DescribeTags = {
 @as("Marker") marker: amazonawsString,
 @as("TaggedResources") taggedResources: taggedResourceList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeTagsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1322,7 +1322,7 @@ module DescribeNodeConfigurationOptions = {
 @as("Marker") marker: amazonawsString,
 @as("NodeConfigurationOptionList") nodeConfigurationOptionList: nodeConfigurationOptionList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeNodeConfigurationOptionsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeNodeConfigurationOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1341,7 +1341,7 @@ module DescribeEvents = {
 @as("Events") events: eventList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1358,7 +1358,7 @@ module DescribeEndpointAuthorization = {
 @as("Marker") marker: amazonawsString,
 @as("EndpointAuthorizationList") endpointAuthorizationList: endpointAuthorizations
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeEndpointAuthorizationCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeEndpointAuthorizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1372,7 +1372,7 @@ module DescribeDefaultClusterParameters = {
   type response = {
 @as("DefaultClusterParameters") defaultClusterParameters: defaultClusterParameters
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeDefaultClusterParametersCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeDefaultClusterParametersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1382,7 +1382,7 @@ module DeleteEndpointAccess = {
 @as("EndpointName") endpointName: option<amazonawsString>
 }
   type response = endpointAccess;
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteEndpointAccessCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteEndpointAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1392,7 +1392,7 @@ module DeleteClusterSnapshot = {
   type response = {
 @as("Snapshot") snapshot: snapshot
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteClusterSnapshotCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteClusterSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1406,7 +1406,7 @@ module CreateSnapshotCopyGrant = {
   type response = {
 @as("SnapshotCopyGrant") snapshotCopyGrant: snapshotCopyGrant
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateSnapshotCopyGrantCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateSnapshotCopyGrantCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1424,7 +1424,7 @@ module CreateHsmConfiguration = {
   type response = {
 @as("HsmConfiguration") hsmConfiguration: hsmConfiguration
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateHsmConfigurationCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateHsmConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1437,7 +1437,7 @@ module CreateHsmClientCertificate = {
   type response = {
 @as("HsmClientCertificate") hsmClientCertificate: hsmClientCertificate
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateHsmClientCertificateCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateHsmClientCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1456,7 +1456,7 @@ module CreateEventSubscription = {
   type response = {
 @as("EventSubscription") eventSubscription: eventSubscription
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateEventSubscriptionCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateEventSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1470,7 +1470,7 @@ module CreateEndpointAccess = {
 @as("ClusterIdentifier") clusterIdentifier: amazonawsString
 }
   type response = endpointAccess;
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateEndpointAccessCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateEndpointAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1485,7 +1485,7 @@ module CreateClusterSnapshot = {
   type response = {
 @as("Snapshot") snapshot: snapshot
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateClusterSnapshotCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateClusterSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1500,7 +1500,7 @@ module CreateClusterParameterGroup = {
   type response = {
 @as("ClusterParameterGroup") clusterParameterGroup: clusterParameterGroup
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateClusterParameterGroupCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateClusterParameterGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1515,7 +1515,7 @@ module CopyClusterSnapshot = {
   type response = {
 @as("Snapshot") snapshot: snapshot
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CopyClusterSnapshotCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CopyClusterSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1529,7 +1529,7 @@ module AuthorizeSnapshotAccess = {
   type response = {
 @as("Snapshot") snapshot: snapshot
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "AuthorizeSnapshotAccessCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "AuthorizeSnapshotAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1542,7 +1542,7 @@ module AcceptReservedNodeExchange = {
   type response = {
 @as("ExchangedReservedNode") exchangedReservedNode: reservedNode
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "AcceptReservedNodeExchangeCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "AcceptReservedNodeExchangeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1557,7 +1557,7 @@ module GetReservedNodeExchangeOfferings = {
 @as("ReservedNodeOfferings") reservedNodeOfferings: reservedNodeOfferingList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "GetReservedNodeExchangeOfferingsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "GetReservedNodeExchangeOfferingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1576,7 +1576,7 @@ module DescribeUsageLimits = {
 @as("Marker") marker: amazonawsString,
 @as("UsageLimits") usageLimits: usageLimits
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeUsageLimitsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeUsageLimitsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1594,7 +1594,7 @@ module DescribeSnapshotSchedules = {
 @as("Marker") marker: amazonawsString,
 @as("SnapshotSchedules") snapshotSchedules: snapshotScheduleList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeSnapshotSchedulesCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeSnapshotSchedulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1611,7 +1611,7 @@ module DescribeSnapshotCopyGrants = {
 @as("SnapshotCopyGrants") snapshotCopyGrants: snapshotCopyGrantList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeSnapshotCopyGrantsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeSnapshotCopyGrantsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1631,7 +1631,7 @@ module DescribeScheduledActions = {
 @as("ScheduledActions") scheduledActions: scheduledActionList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeScheduledActionsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeScheduledActionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1646,7 +1646,7 @@ module DescribeReservedNodes = {
 @as("ReservedNodes") reservedNodes: reservedNodeList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeReservedNodesCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeReservedNodesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1661,7 +1661,7 @@ module DescribeReservedNodeOfferings = {
 @as("ReservedNodeOfferings") reservedNodeOfferings: reservedNodeOfferingList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeReservedNodeOfferingsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeReservedNodeOfferingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1678,7 +1678,7 @@ module DescribeHsmConfigurations = {
 @as("HsmConfigurations") hsmConfigurations: hsmConfigurationList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeHsmConfigurationsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeHsmConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1695,7 +1695,7 @@ module DescribeHsmClientCertificates = {
 @as("HsmClientCertificates") hsmClientCertificates: hsmClientCertificateList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeHsmClientCertificatesCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeHsmClientCertificatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1712,7 +1712,7 @@ module DescribeEventSubscriptions = {
 @as("EventSubscriptionsList") eventSubscriptionsList: eventSubscriptionsList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventSubscriptionsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeEventSubscriptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1736,7 +1736,7 @@ module DescribeClusterSnapshots = {
 @as("Snapshots") snapshots: snapshotList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeClusterSnapshotsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterSnapshotsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1753,7 +1753,7 @@ module DescribeClusterParameterGroups = {
 @as("ParameterGroups") parameterGroups: parameterGroupList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeClusterParameterGroupsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterParameterGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1768,7 +1768,7 @@ module DescribeClusterDbRevisions = {
 @as("ClusterDbRevisions") clusterDbRevisions: clusterDbRevisionsList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeClusterDbRevisionsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterDbRevisionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1780,7 +1780,7 @@ module DescribeAccountAttributes = {
   type response = {
 @as("AccountAttributes") accountAttributes: attributeList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountAttributesCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeAccountAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1795,7 +1795,7 @@ module RevokeClusterSecurityGroupIngress = {
   type response = {
 @as("ClusterSecurityGroup") clusterSecurityGroup: clusterSecurityGroup
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "RevokeClusterSecurityGroupIngressCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RevokeClusterSecurityGroupIngressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1807,7 +1807,7 @@ module DescribeEventCategories = {
   type response = {
 @as("EventCategoriesMapList") eventCategoriesMapList: eventCategoriesMapList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventCategoriesCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeEventCategoriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1825,7 +1825,7 @@ module DescribeEndpointAccess = {
 @as("Marker") marker: amazonawsString,
 @as("EndpointAccessList") endpointAccessList: endpointAccesses
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeEndpointAccessCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeEndpointAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1839,7 +1839,7 @@ module CreateClusterSecurityGroup = {
   type response = {
 @as("ClusterSecurityGroup") clusterSecurityGroup: clusterSecurityGroup
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateClusterSecurityGroupCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateClusterSecurityGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1854,7 +1854,7 @@ module AuthorizeClusterSecurityGroupIngress = {
   type response = {
 @as("ClusterSecurityGroup") clusterSecurityGroup: clusterSecurityGroup
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "AuthorizeClusterSecurityGroupIngressCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "AuthorizeClusterSecurityGroupIngressCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1866,7 +1866,7 @@ module RotateEncryptionKey = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "RotateEncryptionKeyCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RotateEncryptionKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1876,7 +1876,7 @@ module ResumeCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ResumeClusterCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ResumeClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1915,7 +1915,7 @@ module RestoreFromClusterSnapshot = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "RestoreFromClusterSnapshotCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RestoreFromClusterSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1925,7 +1925,7 @@ module ResizeCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ResizeClusterCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ResizeClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1937,7 +1937,7 @@ module RebootCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "RebootClusterCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "RebootClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1947,7 +1947,7 @@ module PauseCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "PauseClusterCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "PauseClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1961,7 +1961,7 @@ module ModifySnapshotCopyRetentionPeriod = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifySnapshotCopyRetentionPeriodCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifySnapshotCopyRetentionPeriodCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1975,7 +1975,7 @@ module ModifyClusterSubnetGroup = {
   type response = {
 @as("ClusterSubnetGroup") clusterSubnetGroup: clusterSubnetGroup
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyClusterSubnetGroupCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterSubnetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1992,7 +1992,7 @@ module ModifyClusterMaintenance = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyClusterMaintenanceCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterMaintenanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2006,7 +2006,7 @@ module ModifyClusterIamRoles = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyClusterIamRolesCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterIamRolesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2019,7 +2019,7 @@ module ModifyClusterDbRevision = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyClusterDbRevisionCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterDbRevisionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2055,7 +2055,7 @@ module ModifyCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "ModifyClusterCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "ModifyClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2071,7 +2071,7 @@ module EnableSnapshotCopy = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "EnableSnapshotCopyCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "EnableSnapshotCopyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2083,7 +2083,7 @@ module DisableSnapshotCopy = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DisableSnapshotCopyCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DisableSnapshotCopyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2099,7 +2099,7 @@ module DescribeOrderableClusterOptions = {
 @as("Marker") marker: amazonawsString,
 @as("OrderableClusterOptions") orderableClusterOptions: orderableClusterOptionsList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeOrderableClusterOptionsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeOrderableClusterOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2114,7 +2114,7 @@ module DescribeClusterTracks = {
 @as("Marker") marker: amazonawsString,
 @as("MaintenanceTracks") maintenanceTracks: trackList
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeClusterTracksCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterTracksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2131,7 +2131,7 @@ module DescribeClusterSecurityGroups = {
 @as("ClusterSecurityGroups") clusterSecurityGroups: clusterSecurityGroups,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeClusterSecurityGroupsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterSecurityGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2146,7 +2146,7 @@ module DeleteCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DeleteClusterCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DeleteClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2161,7 +2161,7 @@ module CreateClusterSubnetGroup = {
   type response = {
 @as("ClusterSubnetGroup") clusterSubnetGroup: clusterSubnetGroup
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateClusterSubnetGroupCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateClusterSubnetGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2204,7 +2204,7 @@ module CreateCluster = {
   type response = {
 @as("Cluster") cluster: cluster
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "CreateClusterCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "CreateClusterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2221,7 +2221,7 @@ module DescribeClusters = {
 @as("Clusters") clusters: clusterList,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeClustersCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClustersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2238,6 +2238,6 @@ module DescribeClusterSubnetGroups = {
 @as("ClusterSubnetGroups") clusterSubnetGroups: clusterSubnetGroups,
 @as("Marker") marker: amazonawsString
 }
-  @module("@aws-sdk/client-redshift") @new external new_: (Js.Promise.t<request>) => t = "DescribeClusterSubnetGroupsCommand";
+  @module("@aws-sdk/client-redshift") @new external new_: (request) => t = "DescribeClusterSubnetGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

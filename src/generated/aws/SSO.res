@@ -40,7 +40,7 @@ module Logout = {
 @as("accessToken") accessToken: option<accessTokenType>
 }
   
-  @module("@aws-sdk/client-awsssoportal") @new external new_: (Js.Promise.t<request>) => t = "LogoutCommand";
+  @module("@aws-sdk/client-awsssoportal") @new external new_: (request) => t = "LogoutCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -54,7 +54,7 @@ module GetRoleCredentials = {
   type response = {
 @as("roleCredentials") roleCredentials: roleCredentials
 }
-  @module("@aws-sdk/client-awsssoportal") @new external new_: (Js.Promise.t<request>) => t = "GetRoleCredentialsCommand";
+  @module("@aws-sdk/client-awsssoportal") @new external new_: (request) => t = "GetRoleCredentialsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -69,7 +69,7 @@ module ListAccounts = {
 @as("accountList") accountList: accountListType,
 @as("nextToken") nextToken: nextTokenType
 }
-  @module("@aws-sdk/client-awsssoportal") @new external new_: (Js.Promise.t<request>) => t = "ListAccountsCommand";
+  @module("@aws-sdk/client-awsssoportal") @new external new_: (request) => t = "ListAccountsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -85,6 +85,6 @@ module ListAccountRoles = {
 @as("roleList") roleList: roleListType,
 @as("nextToken") nextToken: nextTokenType
 }
-  @module("@aws-sdk/client-awsssoportal") @new external new_: (Js.Promise.t<request>) => t = "ListAccountRolesCommand";
+  @module("@aws-sdk/client-awsssoportal") @new external new_: (request) => t = "ListAccountRolesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

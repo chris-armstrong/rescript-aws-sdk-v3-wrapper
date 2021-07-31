@@ -59,7 +59,7 @@ module GetWorkingLocation = {
 @as("s3Path") s3Path: stringValueLength1to1024,
 @as("s3Uri") s3Uri: stringValueLength1to1024
 }
-  @module("@aws-sdk/client-finspace-api") @new external new_: (Js.Promise.t<request>) => t = "GetWorkingLocationCommand";
+  @module("@aws-sdk/client-finspace-api") @new external new_: (request) => t = "GetWorkingLocationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -73,7 +73,7 @@ module GetProgrammaticAccessCredentials = {
 @as("durationInMinutes") durationInMinutes: sessionDuration,
 @as("credentials") credentials: credentials
 }
-  @module("@aws-sdk/client-finspace-api") @new external new_: (Js.Promise.t<request>) => t = "GetProgrammaticAccessCredentialsCommand";
+  @module("@aws-sdk/client-finspace-api") @new external new_: (request) => t = "GetProgrammaticAccessCredentialsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -91,6 +91,6 @@ module CreateChangeset = {
   type response = {
 @as("changeset") changeset: changesetInfo
 }
-  @module("@aws-sdk/client-finspace-api") @new external new_: (Js.Promise.t<request>) => t = "CreateChangesetCommand";
+  @module("@aws-sdk/client-finspace-api") @new external new_: (request) => t = "CreateChangesetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

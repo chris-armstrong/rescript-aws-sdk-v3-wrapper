@@ -280,7 +280,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<genericV2ARN>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -291,7 +291,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<genericV2ARN>
 }
   type response = unit
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -303,7 +303,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -318,7 +318,7 @@ module ListInstalledComponents = {
 @as("nextToken") nextToken: nextTokenString,
 @as("installedComponents") installedComponents: installedComponentList
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListInstalledComponentsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListInstalledComponentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -333,7 +333,7 @@ module ListEffectiveDeployments = {
 @as("nextToken") nextToken: nextTokenString,
 @as("effectiveDeployments") effectiveDeployments: effectiveDeploymentsList
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListEffectiveDeploymentsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListEffectiveDeploymentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -349,7 +349,7 @@ module ListDeployments = {
 @as("nextToken") nextToken: nextTokenString,
 @as("deployments") deployments: deploymentList
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListDeploymentsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListDeploymentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -365,7 +365,7 @@ module ListCoreDevices = {
 @as("nextToken") nextToken: nextTokenString,
 @as("coreDevices") coreDevices: coreDevicesList
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListCoreDevicesCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListCoreDevicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -380,7 +380,7 @@ module ListComponentVersions = {
 @as("nextToken") nextToken: nextTokenString,
 @as("componentVersions") componentVersions: componentVersionList
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListComponentVersionsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListComponentVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -398,7 +398,7 @@ module GetCoreDevice = {
 @as("coreVersion") coreVersion: gGCVersion,
 @as("coreDeviceThingName") coreDeviceThingName: coreDeviceThingName
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetCoreDeviceCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetCoreDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -411,7 +411,7 @@ module GetComponentVersionArtifact = {
   type response = {
 @as("preSignedUrl") preSignedUrl: option<nonEmptyString>
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetComponentVersionArtifactCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetComponentVersionArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -426,7 +426,7 @@ module GetComponent = {
 @as("recipe") recipe: option<recipeBlob>,
 @as("recipeOutputFormat") recipeOutputFormat: option<recipeOutputFormat>
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetComponentCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetComponentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -436,7 +436,7 @@ module DeleteCoreDevice = {
 @as("coreDeviceThingName") coreDeviceThingName: option<coreDeviceThingName>
 }
   
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DeleteCoreDeviceCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteCoreDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -446,7 +446,7 @@ module DeleteComponent = {
 @as("arn") arn: option<componentVersionARN>
 }
   
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DeleteComponentCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DeleteComponentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -458,7 +458,7 @@ module CancelDeployment = {
   type response = {
 @as("message") message: nonEmptyString
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CancelDeploymentCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CancelDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -471,7 +471,7 @@ module ResolveComponentCandidates = {
   type response = {
 @as("resolvedComponentVersions") resolvedComponentVersions: resolvedComponentVersionsList
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ResolveComponentCandidatesCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ResolveComponentCandidatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -491,7 +491,7 @@ module DescribeComponent = {
 @as("componentName") componentName: componentNameString,
 @as("arn") arn: componentVersionARN
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "DescribeComponentCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "DescribeComponentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -515,7 +515,7 @@ module GetDeployment = {
 @as("revisionId") revisionId: nonEmptyString,
 @as("targetArn") targetArn: targetARN
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "GetDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -534,7 +534,7 @@ module CreateDeployment = {
 @as("iotJobId") iotJobId: nonEmptyString,
 @as("deploymentId") deploymentId: nonEmptyString
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateDeploymentCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -549,7 +549,7 @@ module ListComponents = {
 @as("nextToken") nextToken: nextTokenString,
 @as("components") components: componentList
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "ListComponentsCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "ListComponentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -567,6 +567,6 @@ module CreateComponentVersion = {
 @as("componentName") componentName: option<componentNameString>,
 @as("arn") arn: componentVersionARN
 }
-  @module("@aws-sdk/client-greengrass") @new external new_: (Js.Promise.t<request>) => t = "CreateComponentVersionCommand";
+  @module("@aws-sdk/client-greengrass") @new external new_: (request) => t = "CreateComponentVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -169,7 +169,7 @@ module DeleteQueuedSavingsPlan = {
 @as("savingsPlanId") savingsPlanId: option<savingsPlanId>
 }
   type response = unit
-  @module("@aws-sdk/client-savingsplans") @new external new_: (Js.Promise.t<request>) => t = "DeleteQueuedSavingsPlanCommand";
+  @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "DeleteQueuedSavingsPlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -180,7 +180,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<savingsPlanArn>
 }
   type response = unit
-  @module("@aws-sdk/client-savingsplans") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -191,7 +191,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<savingsPlanArn>
 }
   type response = unit
-  @module("@aws-sdk/client-savingsplans") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -203,7 +203,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-savingsplans") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -220,7 +220,7 @@ module CreateSavingsPlan = {
   type response = {
 @as("savingsPlanId") savingsPlanId: savingsPlanId
 }
-  @module("@aws-sdk/client-savingsplans") @new external new_: (Js.Promise.t<request>) => t = "CreateSavingsPlanCommand";
+  @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "CreateSavingsPlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -238,7 +238,7 @@ module DescribeSavingsPlans = {
 @as("nextToken") nextToken: paginationToken,
 @as("savingsPlans") savingsPlans: savingsPlanList
 }
-  @module("@aws-sdk/client-savingsplans") @new external new_: (Js.Promise.t<request>) => t = "DescribeSavingsPlansCommand";
+  @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "DescribeSavingsPlansCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -263,7 +263,7 @@ module DescribeSavingsPlansOfferings = {
 @as("nextToken") nextToken: paginationToken,
 @as("searchResults") searchResults: savingsPlanOfferingsList
 }
-  @module("@aws-sdk/client-savingsplans") @new external new_: (Js.Promise.t<request>) => t = "DescribeSavingsPlansOfferingsCommand";
+  @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "DescribeSavingsPlansOfferingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -285,7 +285,7 @@ module DescribeSavingsPlansOfferingRates = {
 @as("nextToken") nextToken: paginationToken,
 @as("searchResults") searchResults: savingsPlanOfferingRatesList
 }
-  @module("@aws-sdk/client-savingsplans") @new external new_: (Js.Promise.t<request>) => t = "DescribeSavingsPlansOfferingRatesCommand";
+  @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "DescribeSavingsPlansOfferingRatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -302,6 +302,6 @@ module DescribeSavingsPlanRates = {
 @as("searchResults") searchResults: savingsPlanRateList,
 @as("savingsPlanId") savingsPlanId: savingsPlanId
 }
-  @module("@aws-sdk/client-savingsplans") @new external new_: (Js.Promise.t<request>) => t = "DescribeSavingsPlanRatesCommand";
+  @module("@aws-sdk/client-savingsplans") @new external new_: (request) => t = "DescribeSavingsPlanRatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -41,7 +41,7 @@ module StopHumanLoop = {
 @as("HumanLoopName") humanLoopName: option<humanLoopName>
 }
   type response = unit
-  @module("@aws-sdk/client-sagemaker") @new external new_: (Js.Promise.t<request>) => t = "StopHumanLoopCommand";
+  @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "StopHumanLoopCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -51,7 +51,7 @@ module DeleteHumanLoop = {
 @as("HumanLoopName") humanLoopName: option<humanLoopName>
 }
   type response = unit
-  @module("@aws-sdk/client-sagemaker") @new external new_: (Js.Promise.t<request>) => t = "DeleteHumanLoopCommand";
+  @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "DeleteHumanLoopCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -70,7 +70,7 @@ module DescribeHumanLoop = {
 @as("FailureReason") failureReason: amazonawsString,
 @as("CreationTime") creationTime: option<amazonawsTimestamp>
 }
-  @module("@aws-sdk/client-sagemaker") @new external new_: (Js.Promise.t<request>) => t = "DescribeHumanLoopCommand";
+  @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "DescribeHumanLoopCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -85,7 +85,7 @@ module StartHumanLoop = {
   type response = {
 @as("HumanLoopArn") humanLoopArn: humanLoopArn
 }
-  @module("@aws-sdk/client-sagemaker") @new external new_: (Js.Promise.t<request>) => t = "StartHumanLoopCommand";
+  @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "StartHumanLoopCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -103,6 +103,6 @@ module ListHumanLoops = {
 @as("NextToken") nextToken: nextToken,
 @as("HumanLoopSummaries") humanLoopSummaries: option<humanLoopSummaries>
 }
-  @module("@aws-sdk/client-sagemaker") @new external new_: (Js.Promise.t<request>) => t = "ListHumanLoopsCommand";
+  @module("@aws-sdk/client-sagemaker") @new external new_: (request) => t = "ListHumanLoopsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

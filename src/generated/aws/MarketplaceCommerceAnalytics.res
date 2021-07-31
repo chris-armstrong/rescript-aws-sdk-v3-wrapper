@@ -32,7 +32,7 @@ module StartSupportDataExport = {
   type response = {
 @as("dataSetRequestId") dataSetRequestId: dataSetRequestId
 }
-  @module("@aws-sdk/client-marketplacecommerceanalytics") @new external new_: (Js.Promise.t<request>) => t = "StartSupportDataExportCommand";
+  @module("@aws-sdk/client-marketplacecommerceanalytics") @new external new_: (request) => t = "StartSupportDataExportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -50,6 +50,6 @@ module GenerateDataSet = {
   type response = {
 @as("dataSetRequestId") dataSetRequestId: dataSetRequestId
 }
-  @module("@aws-sdk/client-marketplacecommerceanalytics") @new external new_: (Js.Promise.t<request>) => t = "GenerateDataSetCommand";
+  @module("@aws-sdk/client-marketplacecommerceanalytics") @new external new_: (request) => t = "GenerateDataSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

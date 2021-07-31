@@ -66,7 +66,7 @@ module PutSnapshotBlock = {
 @as("ChecksumAlgorithm") checksumAlgorithm: checksumAlgorithm,
 @as("Checksum") checksum: checksum
 }
-  @module("@aws-sdk/client-ebs") @new external new_: (Js.Promise.t<request>) => t = "PutSnapshotBlockCommand";
+  @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "PutSnapshotBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -83,7 +83,7 @@ module GetSnapshotBlock = {
 @as("BlockData") blockData: blockData,
 @as("DataLength") dataLength: dataLength
 }
-  @module("@aws-sdk/client-ebs") @new external new_: (Js.Promise.t<request>) => t = "GetSnapshotBlockCommand";
+  @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "GetSnapshotBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -99,7 +99,7 @@ module CompleteSnapshot = {
   type response = {
 @as("Status") status: status
 }
-  @module("@aws-sdk/client-ebs") @new external new_: (Js.Promise.t<request>) => t = "CompleteSnapshotCommand";
+  @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "CompleteSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -127,7 +127,7 @@ module StartSnapshot = {
 @as("SnapshotId") snapshotId: snapshotId,
 @as("Description") description: description
 }
-  @module("@aws-sdk/client-ebs") @new external new_: (Js.Promise.t<request>) => t = "StartSnapshotCommand";
+  @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "StartSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -146,7 +146,7 @@ module ListSnapshotBlocks = {
 @as("ExpiryTime") expiryTime: timeStamp,
 @as("Blocks") blocks: blocks
 }
-  @module("@aws-sdk/client-ebs") @new external new_: (Js.Promise.t<request>) => t = "ListSnapshotBlocksCommand";
+  @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "ListSnapshotBlocksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -166,6 +166,6 @@ module ListChangedBlocks = {
 @as("ExpiryTime") expiryTime: timeStamp,
 @as("ChangedBlocks") changedBlocks: changedBlocks
 }
-  @module("@aws-sdk/client-ebs") @new external new_: (Js.Promise.t<request>) => t = "ListChangedBlocksCommand";
+  @module("@aws-sdk/client-ebs") @new external new_: (request) => t = "ListChangedBlocksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

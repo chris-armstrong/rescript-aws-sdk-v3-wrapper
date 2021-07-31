@@ -57,7 +57,7 @@ module DisassociateMemberAccount = {
 @as("memberAccountId") memberAccountId: option<aWSAccountId>
 }
   
-  @module("@aws-sdk/client-macie") @new external new_: (Js.Promise.t<request>) => t = "DisassociateMemberAccountCommand";
+  @module("@aws-sdk/client-macie") @new external new_: (request) => t = "DisassociateMemberAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -67,7 +67,7 @@ module AssociateMemberAccount = {
 @as("memberAccountId") memberAccountId: option<aWSAccountId>
 }
   
-  @module("@aws-sdk/client-macie") @new external new_: (Js.Promise.t<request>) => t = "AssociateMemberAccountCommand";
+  @module("@aws-sdk/client-macie") @new external new_: (request) => t = "AssociateMemberAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -81,7 +81,7 @@ module ListMemberAccounts = {
 @as("nextToken") nextToken: nextToken,
 @as("memberAccounts") memberAccounts: memberAccounts
 }
-  @module("@aws-sdk/client-macie") @new external new_: (Js.Promise.t<request>) => t = "ListMemberAccountsCommand";
+  @module("@aws-sdk/client-macie") @new external new_: (request) => t = "ListMemberAccountsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -94,7 +94,7 @@ module UpdateS3Resources = {
   type response = {
 @as("failedS3Resources") failedS3Resources: failedS3Resources
 }
-  @module("@aws-sdk/client-macie") @new external new_: (Js.Promise.t<request>) => t = "UpdateS3ResourcesCommand";
+  @module("@aws-sdk/client-macie") @new external new_: (request) => t = "UpdateS3ResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -109,7 +109,7 @@ module ListS3Resources = {
 @as("nextToken") nextToken: nextToken,
 @as("s3Resources") s3Resources: s3ResourcesClassification
 }
-  @module("@aws-sdk/client-macie") @new external new_: (Js.Promise.t<request>) => t = "ListS3ResourcesCommand";
+  @module("@aws-sdk/client-macie") @new external new_: (request) => t = "ListS3ResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -122,7 +122,7 @@ module DisassociateS3Resources = {
   type response = {
 @as("failedS3Resources") failedS3Resources: failedS3Resources
 }
-  @module("@aws-sdk/client-macie") @new external new_: (Js.Promise.t<request>) => t = "DisassociateS3ResourcesCommand";
+  @module("@aws-sdk/client-macie") @new external new_: (request) => t = "DisassociateS3ResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -135,6 +135,6 @@ module AssociateS3Resources = {
   type response = {
 @as("failedS3Resources") failedS3Resources: failedS3Resources
 }
-  @module("@aws-sdk/client-macie") @new external new_: (Js.Promise.t<request>) => t = "AssociateS3ResourcesCommand";
+  @module("@aws-sdk/client-macie") @new external new_: (request) => t = "AssociateS3ResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

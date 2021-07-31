@@ -167,7 +167,7 @@ module ListTables = {
 @as("nextToken") nextToken: paginationToken,
 @as("tables") tables: option<tables>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "ListTablesCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "ListTablesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -183,7 +183,7 @@ module ListTableColumns = {
 @as("nextToken") nextToken: paginationToken,
 @as("tableColumns") tableColumns: option<tableColumns>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "ListTableColumnsCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "ListTableColumnsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -201,7 +201,7 @@ module InvokeScreenAutomation = {
   type response = {
 @as("workbookCursor") workbookCursor: option<workbookCursor>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "InvokeScreenAutomationCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "InvokeScreenAutomationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -217,7 +217,7 @@ module BatchDeleteTableRows = {
 @as("failedBatchItems") failedBatchItems: failedBatchItems,
 @as("workbookCursor") workbookCursor: option<workbookCursor>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "BatchDeleteTableRowsCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "BatchDeleteTableRowsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -235,7 +235,7 @@ module StartTableDataImportJob = {
 @as("jobStatus") jobStatus: option<tableDataImportJobStatus>,
 @as("jobId") jobId: option<jobId>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "StartTableDataImportJobCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "StartTableDataImportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -254,7 +254,7 @@ module QueryTableRows = {
 @as("rows") rows: option<tableRows>,
 @as("columnIds") columnIds: option<resourceIds>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "QueryTableRowsCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "QueryTableRowsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -274,7 +274,7 @@ module ListTableRows = {
 @as("rows") rows: option<tableRows>,
 @as("columnIds") columnIds: option<resourceIds>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "ListTableRowsCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "ListTableRowsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -291,7 +291,7 @@ module BatchUpsertTableRows = {
 @as("workbookCursor") workbookCursor: option<workbookCursor>,
 @as("rows") rows: option<upsertRowsResultMap>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "BatchUpsertTableRowsCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "BatchUpsertTableRowsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -307,7 +307,7 @@ module BatchUpdateTableRows = {
 @as("failedBatchItems") failedBatchItems: failedBatchItems,
 @as("workbookCursor") workbookCursor: option<workbookCursor>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "BatchUpdateTableRowsCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "BatchUpdateTableRowsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -324,7 +324,7 @@ module BatchCreateTableRows = {
 @as("createdRows") createdRows: option<createdRowsMap>,
 @as("workbookCursor") workbookCursor: option<workbookCursor>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "BatchCreateTableRowsCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "BatchCreateTableRowsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -340,7 +340,7 @@ module DescribeTableDataImportJob = {
 @as("message") message: option<tableDataImportJobMessage>,
 @as("jobStatus") jobStatus: option<tableDataImportJobStatus>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "DescribeTableDataImportJobCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "DescribeTableDataImportJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -359,6 +359,6 @@ module GetScreenData = {
 @as("workbookCursor") workbookCursor: option<workbookCursor>,
 @as("results") results: option<resultSetMap>
 }
-  @module("@aws-sdk/client-honeycode") @new external new_: (Js.Promise.t<request>) => t = "GetScreenDataCommand";
+  @module("@aws-sdk/client-honeycode") @new external new_: (request) => t = "GetScreenDataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

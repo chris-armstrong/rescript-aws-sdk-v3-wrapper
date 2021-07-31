@@ -67,7 +67,7 @@ module StopAccessLogging = {
 @as("ContainerName") containerName: option<containerName>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "StopAccessLoggingCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "StopAccessLoggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -77,7 +77,7 @@ module StartAccessLogging = {
 @as("ContainerName") containerName: option<containerName>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "StartAccessLoggingCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "StartAccessLoggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -88,7 +88,7 @@ module PutLifecyclePolicy = {
 @as("ContainerName") containerName: option<containerName>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "PutLifecyclePolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "PutLifecyclePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -99,7 +99,7 @@ module PutContainerPolicy = {
 @as("ContainerName") containerName: option<containerName>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "PutContainerPolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "PutContainerPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -111,7 +111,7 @@ module GetLifecyclePolicy = {
   type response = {
 @as("LifecyclePolicy") lifecyclePolicy: option<lifecyclePolicy>
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "GetLifecyclePolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "GetLifecyclePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -123,7 +123,7 @@ module GetContainerPolicy = {
   type response = {
 @as("Policy") policy: option<containerPolicy>
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "GetContainerPolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "GetContainerPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -133,7 +133,7 @@ module DeleteMetricPolicy = {
 @as("ContainerName") containerName: option<containerName>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "DeleteMetricPolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "DeleteMetricPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -143,7 +143,7 @@ module DeleteLifecyclePolicy = {
 @as("ContainerName") containerName: option<containerName>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "DeleteLifecyclePolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "DeleteLifecyclePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -153,7 +153,7 @@ module DeleteCorsPolicy = {
 @as("ContainerName") containerName: option<containerName>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "DeleteCorsPolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "DeleteCorsPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -163,7 +163,7 @@ module DeleteContainerPolicy = {
 @as("ContainerName") containerName: option<containerName>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "DeleteContainerPolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "DeleteContainerPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -173,7 +173,7 @@ module DeleteContainer = {
 @as("ContainerName") containerName: option<containerName>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "DeleteContainerCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "DeleteContainerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -184,7 +184,7 @@ module UntagResource = {
 @as("Resource") resource: option<containerARN>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -196,7 +196,7 @@ module DescribeContainer = {
   type response = {
 @as("Container") container: container
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "DescribeContainerCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "DescribeContainerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -207,7 +207,7 @@ module TagResource = {
 @as("Resource") resource: option<containerARN>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -219,7 +219,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -233,7 +233,7 @@ module ListContainers = {
 @as("NextToken") nextToken: paginationToken,
 @as("Containers") containers: option<containerList>
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "ListContainersCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "ListContainersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -246,7 +246,7 @@ module CreateContainer = {
   type response = {
 @as("Container") container: option<container>
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "CreateContainerCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "CreateContainerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -257,7 +257,7 @@ module PutMetricPolicy = {
 @as("ContainerName") containerName: option<containerName>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "PutMetricPolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "PutMetricPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -268,7 +268,7 @@ module PutCorsPolicy = {
 @as("ContainerName") containerName: option<containerName>
 }
   type response = unit
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "PutCorsPolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "PutCorsPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -280,7 +280,7 @@ module GetMetricPolicy = {
   type response = {
 @as("MetricPolicy") metricPolicy: option<metricPolicy>
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "GetMetricPolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "GetMetricPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -292,6 +292,6 @@ module GetCorsPolicy = {
   type response = {
 @as("CorsPolicy") corsPolicy: option<corsPolicy>
 }
-  @module("@aws-sdk/client-mediastore") @new external new_: (Js.Promise.t<request>) => t = "GetCorsPolicyCommand";
+  @module("@aws-sdk/client-mediastore") @new external new_: (request) => t = "GetCorsPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

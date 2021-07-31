@@ -129,7 +129,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -141,7 +141,7 @@ module UpdateContactChannel = {
 @as("ContactChannelId") contactChannelId: option<ssmContactsArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "UpdateContactChannelCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "UpdateContactChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -152,7 +152,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -163,7 +163,7 @@ module StopEngagement = {
 @as("EngagementId") engagementId: option<ssmContactsArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "StopEngagementCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "StopEngagementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -182,7 +182,7 @@ module StartEngagement = {
   type response = {
 @as("EngagementArn") engagementArn: option<ssmContactsArn>
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "StartEngagementCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "StartEngagementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -192,7 +192,7 @@ module SendActivationCode = {
 @as("ContactChannelId") contactChannelId: option<ssmContactsArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "SendActivationCodeCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "SendActivationCodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -203,7 +203,7 @@ module PutContactPolicy = {
 @as("ContactArn") contactArn: option<ssmContactsArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "PutContactPolicyCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "PutContactPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -215,7 +215,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagsList
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -230,7 +230,7 @@ module ListPagesByEngagement = {
 @as("Pages") pages: option<pagesList>,
 @as("NextToken") nextToken: paginationToken
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "ListPagesByEngagementCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListPagesByEngagementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -245,7 +245,7 @@ module ListPagesByContact = {
 @as("Pages") pages: option<pagesList>,
 @as("NextToken") nextToken: paginationToken
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "ListPagesByContactCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListPagesByContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -260,7 +260,7 @@ module ListPageReceipts = {
 @as("Receipts") receipts: receiptsList,
 @as("NextToken") nextToken: paginationToken
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "ListPageReceiptsCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListPageReceiptsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -276,7 +276,7 @@ module ListEngagements = {
 @as("Engagements") engagements: option<engagementsList>,
 @as("NextToken") nextToken: paginationToken
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "ListEngagementsCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListEngagementsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -292,7 +292,7 @@ module ListContacts = {
 @as("Contacts") contacts: contactsList,
 @as("NextToken") nextToken: paginationToken
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "ListContactsCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListContactsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -305,7 +305,7 @@ module GetContactPolicy = {
 @as("Policy") policy: policy,
 @as("ContactArn") contactArn: ssmContactsArn
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "GetContactPolicyCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "GetContactPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -322,7 +322,7 @@ module GetContactChannel = {
 @as("ContactChannelArn") contactChannelArn: option<ssmContactsArn>,
 @as("ContactArn") contactArn: option<ssmContactsArn>
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "GetContactChannelCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "GetContactChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -345,7 +345,7 @@ module DescribePage = {
 @as("EngagementArn") engagementArn: option<ssmContactsArn>,
 @as("PageArn") pageArn: option<ssmContactsArn>
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "DescribePageCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "DescribePageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -366,7 +366,7 @@ module DescribeEngagement = {
 @as("EngagementArn") engagementArn: option<ssmContactsArn>,
 @as("ContactArn") contactArn: option<ssmContactsArn>
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "DescribeEngagementCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "DescribeEngagementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -376,7 +376,7 @@ module DeleteContactChannel = {
 @as("ContactChannelId") contactChannelId: option<ssmContactsArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "DeleteContactChannelCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "DeleteContactChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -386,7 +386,7 @@ module DeleteContact = {
 @as("ContactId") contactId: option<ssmContactsArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "DeleteContactCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "DeleteContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -396,7 +396,7 @@ module DeactivateContactChannel = {
 @as("ContactChannelId") contactChannelId: option<ssmContactsArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "DeactivateContactChannelCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "DeactivateContactChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -413,7 +413,7 @@ module CreateContactChannel = {
   type response = {
 @as("ContactChannelArn") contactChannelArn: option<ssmContactsArn>
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "CreateContactChannelCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "CreateContactChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -424,7 +424,7 @@ module ActivateContactChannel = {
 @as("ContactChannelId") contactChannelId: option<ssmContactsArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "ActivateContactChannelCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ActivateContactChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -438,7 +438,7 @@ module AcceptPage = {
 @as("PageId") pageId: option<ssmContactsArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "AcceptPageCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "AcceptPageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -453,7 +453,7 @@ module ListContactChannels = {
 @as("ContactChannels") contactChannels: option<contactChannelList>,
 @as("NextToken") nextToken: paginationToken
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "ListContactChannelsCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "ListContactChannelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -465,7 +465,7 @@ module UpdateContact = {
 @as("ContactId") contactId: option<ssmContactsArn>
 }
   type response = unit
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "UpdateContactCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "UpdateContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -481,7 +481,7 @@ module GetContact = {
 @as("Alias") alias: option<contactAlias>,
 @as("ContactArn") contactArn: option<ssmContactsArn>
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "GetContactCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "GetContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -498,6 +498,6 @@ module CreateContact = {
   type response = {
 @as("ContactArn") contactArn: option<ssmContactsArn>
 }
-  @module("@aws-sdk/client-ssm-contacts") @new external new_: (Js.Promise.t<request>) => t = "CreateContactCommand";
+  @module("@aws-sdk/client-ssm-contacts") @new external new_: (request) => t = "CreateContactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

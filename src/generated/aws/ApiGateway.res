@@ -371,7 +371,7 @@ module GetUsagePlanKey = {
 @as("usagePlanId") usagePlanId: option<amazonawsString>
 }
   type response = usagePlanKey;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetUsagePlanKeyCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetUsagePlanKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -382,7 +382,7 @@ module GetRequestValidator = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = requestValidator;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetRequestValidatorCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetRequestValidatorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -395,7 +395,7 @@ module GetModelTemplate = {
   type response = {
 @as("value") value: amazonawsString
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetModelTemplateCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetModelTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -407,7 +407,7 @@ module GetModel = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = model;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetModelCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -418,7 +418,7 @@ module GetDocumentationVersion = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = documentationVersion;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDocumentationVersionCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDocumentationVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -429,7 +429,7 @@ module GetBasePathMapping = {
 @as("domainName") domainName: option<amazonawsString>
 }
   type response = basePathMapping;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetBasePathMappingCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetBasePathMappingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -440,7 +440,7 @@ module FlushStageCache = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "FlushStageCacheCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "FlushStageCacheCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -451,7 +451,7 @@ module FlushStageAuthorizersCache = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "FlushStageAuthorizersCacheCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "FlushStageAuthorizersCacheCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -461,7 +461,7 @@ module DeleteVpcLink = {
 @as("vpcLinkId") vpcLinkId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpcLinkCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteVpcLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -472,7 +472,7 @@ module DeleteUsagePlanKey = {
 @as("usagePlanId") usagePlanId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteUsagePlanKeyCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteUsagePlanKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -482,7 +482,7 @@ module DeleteUsagePlan = {
 @as("usagePlanId") usagePlanId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteUsagePlanCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteUsagePlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -493,7 +493,7 @@ module DeleteStage = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteStageCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteStageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -503,7 +503,7 @@ module DeleteRestApi = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteRestApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteRestApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -514,7 +514,7 @@ module DeleteResource = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteResourceCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -525,7 +525,7 @@ module DeleteRequestValidator = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteRequestValidatorCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteRequestValidatorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -536,7 +536,7 @@ module DeleteModel = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteModelCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -549,7 +549,7 @@ module DeleteMethodResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteMethodResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteMethodResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -561,7 +561,7 @@ module DeleteMethod = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteMethodCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteMethodCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -574,7 +574,7 @@ module DeleteIntegrationResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteIntegrationResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteIntegrationResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -586,7 +586,7 @@ module DeleteIntegration = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteIntegrationCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -597,7 +597,7 @@ module DeleteGatewayResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteGatewayResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteGatewayResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -607,7 +607,7 @@ module DeleteDomainName = {
 @as("domainName") domainName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteDomainNameCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteDomainNameCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -618,7 +618,7 @@ module DeleteDocumentationVersion = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteDocumentationVersionCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteDocumentationVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -629,7 +629,7 @@ module DeleteDocumentationPart = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteDocumentationPartCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteDocumentationPartCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -640,7 +640,7 @@ module DeleteDeployment = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteDeploymentCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -650,7 +650,7 @@ module DeleteClientCertificate = {
 @as("clientCertificateId") clientCertificateId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteClientCertificateCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteClientCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -661,7 +661,7 @@ module DeleteBasePathMapping = {
 @as("domainName") domainName: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteBasePathMappingCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteBasePathMappingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -672,7 +672,7 @@ module DeleteAuthorizer = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteAuthorizerCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteAuthorizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -682,7 +682,7 @@ module DeleteApiKey = {
 @as("apiKey") apiKey: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteApiKeyCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteApiKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -694,7 +694,7 @@ module CreateUsagePlanKey = {
 @as("usagePlanId") usagePlanId: option<amazonawsString>
 }
   type response = usagePlanKey;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateUsagePlanKeyCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateUsagePlanKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -707,7 +707,7 @@ module CreateRequestValidator = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = requestValidator;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateRequestValidatorCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateRequestValidatorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -721,7 +721,7 @@ module CreateModel = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = model;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateModelCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -734,7 +734,7 @@ module CreateDocumentationVersion = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = documentationVersion;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateDocumentationVersionCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateDocumentationVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -747,7 +747,7 @@ module CreateBasePathMapping = {
 @as("domainName") domainName: option<amazonawsString>
 }
   type response = basePathMapping;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateBasePathMappingCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateBasePathMappingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -758,7 +758,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -769,7 +769,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -784,7 +784,7 @@ module PutMethodResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = methodResponse;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "PutMethodResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "PutMethodResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -801,7 +801,7 @@ module PutIntegrationResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = integrationResponse;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "PutIntegrationResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "PutIntegrationResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -815,7 +815,7 @@ module PutGatewayResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = gatewayResponse;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "PutGatewayResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "PutGatewayResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -831,7 +831,7 @@ module ImportDocumentationParts = {
 @as("warnings") warnings: listOfString,
 @as("ids") ids: listOfString
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "ImportDocumentationPartsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "ImportDocumentationPartsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -846,7 +846,7 @@ module ImportApiKeys = {
 @as("warnings") warnings: listOfString,
 @as("ids") ids: listOfString
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "ImportApiKeysCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "ImportApiKeysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -856,7 +856,7 @@ module GetVpcLink = {
 @as("vpcLinkId") vpcLinkId: option<amazonawsString>
 }
   type response = vpcLink;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetVpcLinkCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetVpcLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -870,7 +870,7 @@ module GetTags = {
   type response = {
 @as("tags") tags: mapOfStringToString
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetTagsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -887,7 +887,7 @@ module GetSdk = {
 @as("contentDisposition") contentDisposition: amazonawsString,
 @as("contentType") contentType: amazonawsString
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetSdkCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetSdkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -900,7 +900,7 @@ module GetMethodResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = methodResponse;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetMethodResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetMethodResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -913,7 +913,7 @@ module GetIntegrationResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = integrationResponse;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetIntegrationResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetIntegrationResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -924,7 +924,7 @@ module GetGatewayResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = gatewayResponse;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetGatewayResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetGatewayResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -942,7 +942,7 @@ module GetExport = {
 @as("contentDisposition") contentDisposition: amazonawsString,
 @as("contentType") contentType: amazonawsString
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetExportCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetExportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -953,7 +953,7 @@ module GetDocumentationPart = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = documentationPart;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDocumentationPartCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDocumentationPartCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -963,7 +963,7 @@ module GetClientCertificate = {
 @as("clientCertificateId") clientCertificateId: option<amazonawsString>
 }
   type response = clientCertificate;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetClientCertificateCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetClientCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -974,7 +974,7 @@ module GetAuthorizer = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = authorizer;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetAuthorizerCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetAuthorizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -985,7 +985,7 @@ module GetApiKey = {
 @as("apiKey") apiKey: option<amazonawsString>
 }
   type response = apiKey;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetApiKeyCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetApiKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -998,7 +998,7 @@ module GetAccount = {
 @as("throttleSettings") throttleSettings: throttleSettings,
 @as("cloudwatchRoleArn") cloudwatchRoleArn: amazonawsString
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetAccountCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1009,7 +1009,7 @@ module GenerateClientCertificate = {
 @as("description") description: amazonawsString
 }
   type response = clientCertificate;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GenerateClientCertificateCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GenerateClientCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1022,7 +1022,7 @@ module CreateVpcLink = {
 @as("name") name: option<amazonawsString>
 }
   type response = vpcLink;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateVpcLinkCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateVpcLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1034,7 +1034,7 @@ module CreateDocumentationPart = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = documentationPart;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateDocumentationPartCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateDocumentationPartCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1053,7 +1053,7 @@ module CreateAuthorizer = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = authorizer;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateAuthorizerCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateAuthorizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1064,7 +1064,7 @@ module UpdateVpcLink = {
 @as("vpcLinkId") vpcLinkId: option<amazonawsString>
 }
   type response = vpcLink;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateVpcLinkCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateVpcLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1076,7 +1076,7 @@ module UpdateStage = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = stage;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateStageCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateStageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1087,7 +1087,7 @@ module UpdateRestApi = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = restApi;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateRestApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateRestApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1099,7 +1099,7 @@ module UpdateRequestValidator = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = requestValidator;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateRequestValidatorCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateRequestValidatorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1111,7 +1111,7 @@ module UpdateModel = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = model;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateModelCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1125,7 +1125,7 @@ module UpdateMethodResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = methodResponse;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateMethodResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateMethodResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1139,7 +1139,7 @@ module UpdateIntegrationResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = integrationResponse;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateIntegrationResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateIntegrationResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1151,7 +1151,7 @@ module UpdateGatewayResponse = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = gatewayResponse;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateGatewayResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateGatewayResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1162,7 +1162,7 @@ module UpdateDomainName = {
 @as("domainName") domainName: option<amazonawsString>
 }
   type response = domainName;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateDomainNameCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateDomainNameCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1174,7 +1174,7 @@ module UpdateDocumentationVersion = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = documentationVersion;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateDocumentationVersionCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateDocumentationVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1186,7 +1186,7 @@ module UpdateDocumentationPart = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = documentationPart;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateDocumentationPartCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateDocumentationPartCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1197,7 +1197,7 @@ module UpdateClientCertificate = {
 @as("clientCertificateId") clientCertificateId: option<amazonawsString>
 }
   type response = clientCertificate;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateClientCertificateCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateClientCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1209,7 +1209,7 @@ module UpdateBasePathMapping = {
 @as("domainName") domainName: option<amazonawsString>
 }
   type response = basePathMapping;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateBasePathMappingCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateBasePathMappingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1221,7 +1221,7 @@ module UpdateAuthorizer = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = authorizer;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateAuthorizerCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateAuthorizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1232,7 +1232,7 @@ module UpdateApiKey = {
 @as("apiKey") apiKey: option<amazonawsString>
 }
   type response = apiKey;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateApiKeyCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateApiKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1247,7 +1247,7 @@ module UpdateAccount = {
 @as("throttleSettings") throttleSettings: throttleSettings,
 @as("cloudwatchRoleArn") cloudwatchRoleArn: amazonawsString
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateAccountCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1272,7 +1272,7 @@ module TestInvokeMethod = {
 @as("body") body: amazonawsString,
 @as("status") status: amazonawsInteger
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "TestInvokeMethodCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "TestInvokeMethodCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1297,7 +1297,7 @@ module TestInvokeAuthorizer = {
 @as("log") log: amazonawsString,
 @as("clientStatus") clientStatus: amazonawsInteger
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "TestInvokeAuthorizerCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "TestInvokeAuthorizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1311,7 +1311,7 @@ module PutRestApi = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = restApi;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "PutRestApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "PutRestApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1323,7 +1323,7 @@ module ImportRestApi = {
 @as("failOnWarnings") failOnWarnings: amazonawsBoolean
 }
   type response = restApi;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "ImportRestApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "ImportRestApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1339,7 +1339,7 @@ module GetUsagePlanKeys = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfUsagePlanKey
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetUsagePlanKeysCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetUsagePlanKeysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1350,7 +1350,7 @@ module GetStage = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = stage;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetStageCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetStageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1360,7 +1360,7 @@ module GetSdkType = {
 @as("id") id: option<amazonawsString>
 }
   type response = sdkType;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetSdkTypeCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetSdkTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1370,7 +1370,7 @@ module GetRestApi = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = restApi;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetRestApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetRestApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1385,7 +1385,7 @@ module GetRequestValidators = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfRequestValidator
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetRequestValidatorsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetRequestValidatorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1400,7 +1400,7 @@ module GetModels = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfModel
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetModelsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetModelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1410,7 +1410,7 @@ module GetDomainName = {
 @as("domainName") domainName: option<amazonawsString>
 }
   type response = domainName;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDomainNameCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDomainNameCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1425,7 +1425,7 @@ module GetDocumentationVersions = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfDocumentationVersion
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDocumentationVersionsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDocumentationVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1440,7 +1440,7 @@ module GetBasePathMappings = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfBasePathMapping
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetBasePathMappingsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetBasePathMappingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1460,7 +1460,7 @@ module CreateStage = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = stage;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateStageCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateStageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1480,7 +1480,7 @@ module CreateRestApi = {
 @as("name") name: option<amazonawsString>
 }
   type response = restApi;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateRestApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateRestApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1501,7 +1501,7 @@ module CreateDomainName = {
 @as("domainName") domainName: option<amazonawsString>
 }
   type response = domainName;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateDomainNameCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateDomainNameCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1518,7 +1518,7 @@ module CreateApiKey = {
 @as("name") name: amazonawsString
 }
   type response = apiKey;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateApiKeyCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateApiKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1536,7 +1536,7 @@ module UpdateUsage = {
 @as("startDate") startDate: amazonawsString,
 @as("usagePlanId") usagePlanId: amazonawsString
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateUsageCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1549,7 +1549,7 @@ module UpdateIntegration = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = integration;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateIntegrationCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1561,7 +1561,7 @@ module UpdateDeployment = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = deployment;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateDeploymentCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1587,7 +1587,7 @@ module PutIntegration = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = integration;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "PutIntegrationCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "PutIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1601,7 +1601,7 @@ module GetVpcLinks = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfVpcLink
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetVpcLinksCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetVpcLinksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1622,7 +1622,7 @@ module GetUsage = {
 @as("startDate") startDate: amazonawsString,
 @as("usagePlanId") usagePlanId: amazonawsString
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetUsageCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1634,7 +1634,7 @@ module GetIntegration = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = integration;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetIntegrationCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1649,7 +1649,7 @@ module GetGatewayResponses = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfGatewayResponse
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetGatewayResponsesCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetGatewayResponsesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1668,7 +1668,7 @@ module GetDocumentationParts = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfDocumentationPart
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDocumentationPartsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDocumentationPartsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1680,7 +1680,7 @@ module GetDeployment = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = deployment;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1694,7 +1694,7 @@ module GetClientCertificates = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfClientCertificate
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetClientCertificatesCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetClientCertificatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1709,7 +1709,7 @@ module GetAuthorizers = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfAuthorizer
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetAuthorizersCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetAuthorizersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1727,7 +1727,7 @@ module GetApiKeys = {
 @as("items") items: listOfApiKey,
 @as("warnings") warnings: listOfString
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetApiKeysCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetApiKeysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1745,7 +1745,7 @@ module CreateDeployment = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = deployment;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateDeploymentCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1756,7 +1756,7 @@ module UpdateUsagePlan = {
 @as("usagePlanId") usagePlanId: option<amazonawsString>
 }
   type response = usagePlan;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateUsagePlanCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateUsagePlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1769,7 +1769,7 @@ module UpdateMethod = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = method;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateMethodCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateMethodCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1789,7 +1789,7 @@ module PutMethod = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = method;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "PutMethodCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "PutMethodCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1799,7 +1799,7 @@ module GetUsagePlan = {
 @as("usagePlanId") usagePlanId: option<amazonawsString>
 }
   type response = usagePlan;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetUsagePlanCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetUsagePlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1812,7 +1812,7 @@ module GetStages = {
   type response = {
 @as("item") item: listOfStage
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetStagesCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetStagesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1825,7 +1825,7 @@ module GetSdkTypes = {
   type response = {
 @as("items") items: listOfSdkType
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetSdkTypesCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetSdkTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1839,7 +1839,7 @@ module GetRestApis = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfRestApi
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetRestApisCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetRestApisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1851,7 +1851,7 @@ module GetMethod = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = method;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetMethodCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetMethodCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1865,7 +1865,7 @@ module GetDomainNames = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfDomainName
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDomainNamesCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDomainNamesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1880,7 +1880,7 @@ module CreateUsagePlan = {
 @as("name") name: option<amazonawsString>
 }
   type response = usagePlan;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateUsagePlanCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateUsagePlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1895,7 +1895,7 @@ module GetDeployments = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfDeployment
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDeploymentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1907,7 +1907,7 @@ module UpdateResource = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = resource;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateResourceCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1922,7 +1922,7 @@ module GetUsagePlans = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfUsagePlan
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetUsagePlansCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetUsagePlansCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1934,7 +1934,7 @@ module GetResource = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = resource;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetResourceCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1946,7 +1946,7 @@ module CreateResource = {
 @as("restApiId") restApiId: option<amazonawsString>
 }
   type response = resource;
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateResourceCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1962,6 +1962,6 @@ module GetResources = {
 @as("position") position: amazonawsString,
 @as("items") items: listOfResource
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetResourcesCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

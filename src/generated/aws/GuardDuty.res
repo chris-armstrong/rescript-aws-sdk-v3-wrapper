@@ -440,7 +440,7 @@ module UpdateThreatIntelSet = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "UpdateThreatIntelSetCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateThreatIntelSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -454,7 +454,7 @@ module UpdateIPSet = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "UpdateIPSetCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateIPSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -464,7 +464,7 @@ module GetInvitationsCount = {
   type response = {
 @as("InvitationsCount") invitationsCount: amazonawsInteger
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "GetInvitationsCountCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetInvitationsCountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -474,7 +474,7 @@ module EnableOrganizationAdminAccount = {
 @as("AdminAccountId") adminAccountId: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "EnableOrganizationAdminAccountCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "EnableOrganizationAdminAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -484,7 +484,7 @@ module DisassociateFromMasterAccount = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DisassociateFromMasterAccountCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DisassociateFromMasterAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -494,7 +494,7 @@ module DisableOrganizationAdminAccount = {
 @as("AdminAccountId") adminAccountId: option<amazonawsString>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DisableOrganizationAdminAccountCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DisableOrganizationAdminAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -505,7 +505,7 @@ module DeleteThreatIntelSet = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DeleteThreatIntelSetCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteThreatIntelSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -516,7 +516,7 @@ module DeletePublishingDestination = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DeletePublishingDestinationCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeletePublishingDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -527,7 +527,7 @@ module DeleteIPSet = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DeleteIPSetCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteIPSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -538,7 +538,7 @@ module DeleteFilter = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DeleteFilterCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -548,7 +548,7 @@ module DeleteDetector = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DeleteDetectorCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -560,7 +560,7 @@ module AcceptInvitation = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "AcceptInvitationCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "AcceptInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -572,7 +572,7 @@ module UpdatePublishingDestination = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "UpdatePublishingDestinationCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdatePublishingDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -585,7 +585,7 @@ module UpdateFindingsFeedback = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "UpdateFindingsFeedbackCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateFindingsFeedbackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -596,7 +596,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<guardDutyArn>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -607,7 +607,7 @@ module UnarchiveFindings = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "UnarchiveFindingsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UnarchiveFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -618,7 +618,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<guardDutyArn>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -633,7 +633,7 @@ module ListThreatIntelSets = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ThreatIntelSetIds") threatIntelSetIds: option<threatIntelSetIds>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "ListThreatIntelSetsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListThreatIntelSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -645,7 +645,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -660,7 +660,7 @@ module ListIPSets = {
 @as("NextToken") nextToken: amazonawsString,
 @as("IpSetIds") ipSetIds: option<ipSetIds>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "ListIPSetsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListIPSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -675,7 +675,7 @@ module ListFilters = {
 @as("NextToken") nextToken: amazonawsString,
 @as("FilterNames") filterNames: option<filterNames>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "ListFiltersCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListFiltersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -689,7 +689,7 @@ module ListDetectors = {
 @as("NextToken") nextToken: amazonawsString,
 @as("DetectorIds") detectorIds: option<detectorIds>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "ListDetectorsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListDetectorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -706,7 +706,7 @@ module GetThreatIntelSet = {
 @as("Format") format: option<threatIntelSetFormat>,
 @as("Name") name: option<name>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "GetThreatIntelSetCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetThreatIntelSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -718,7 +718,7 @@ module GetMasterAccount = {
   type response = {
 @as("Master") master: option<master>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "GetMasterAccountCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetMasterAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -735,7 +735,7 @@ module GetIPSet = {
 @as("Format") format: option<ipSetFormat>,
 @as("Name") name: option<name>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "GetIPSetCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetIPSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -752,7 +752,7 @@ module DescribePublishingDestination = {
 @as("DestinationType") destinationType: option<destinationType>,
 @as("DestinationId") destinationId: option<amazonawsString>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DescribePublishingDestinationCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DescribePublishingDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -770,7 +770,7 @@ module CreateThreatIntelSet = {
   type response = {
 @as("ThreatIntelSetId") threatIntelSetId: option<amazonawsString>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "CreateThreatIntelSetCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateThreatIntelSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -781,7 +781,7 @@ module CreateSampleFindings = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "CreateSampleFindingsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateSampleFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -796,7 +796,7 @@ module CreatePublishingDestination = {
   type response = {
 @as("DestinationId") destinationId: option<amazonawsString>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "CreatePublishingDestinationCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreatePublishingDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -814,7 +814,7 @@ module CreateIPSet = {
   type response = {
 @as("IpSetId") ipSetId: option<amazonawsString>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "CreateIPSetCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateIPSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -825,7 +825,7 @@ module ArchiveFindings = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "ArchiveFindingsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ArchiveFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -837,7 +837,7 @@ module UpdateOrganizationConfiguration = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "UpdateOrganizationConfigurationCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateOrganizationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -851,7 +851,7 @@ module UpdateMemberDetectors = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "UpdateMemberDetectorsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateMemberDetectorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -864,7 +864,7 @@ module UpdateDetector = {
 @as("DetectorId") detectorId: option<detectorId>
 }
   type response = unit
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "UpdateDetectorCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -877,7 +877,7 @@ module StopMonitoringMembers = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "StopMonitoringMembersCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "StopMonitoringMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -890,7 +890,7 @@ module StartMonitoringMembers = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "StartMonitoringMembersCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "StartMonitoringMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -905,7 +905,7 @@ module ListPublishingDestinations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Destinations") destinations: option<destinations>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "ListPublishingDestinationsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListPublishingDestinationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -919,7 +919,7 @@ module ListOrganizationAdminAccounts = {
 @as("NextToken") nextToken: amazonawsString,
 @as("AdminAccounts") adminAccounts: adminAccounts
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "ListOrganizationAdminAccountsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListOrganizationAdminAccountsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -935,7 +935,7 @@ module ListMembers = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Members") members: members
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "ListMembersCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -949,7 +949,7 @@ module ListInvitations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Invitations") invitations: invitations
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "ListInvitationsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -964,7 +964,7 @@ module InviteMembers = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "InviteMembersCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "InviteMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -978,7 +978,7 @@ module GetMembers = {
 @as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>,
 @as("Members") members: option<members>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "GetMembersCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -996,7 +996,7 @@ module GetDetector = {
 @as("FindingPublishingFrequency") findingPublishingFrequency: findingPublishingFrequency,
 @as("CreatedAt") createdAt: amazonawsString
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "GetDetectorCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1009,7 +1009,7 @@ module DisassociateMembers = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DisassociateMembersCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DisassociateMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1023,7 +1023,7 @@ module DescribeOrganizationConfiguration = {
 @as("MemberAccountLimitReached") memberAccountLimitReached: option<amazonawsBoolean>,
 @as("AutoEnable") autoEnable: option<amazonawsBoolean>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DescribeOrganizationConfigurationCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DescribeOrganizationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1036,7 +1036,7 @@ module DeleteMembers = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DeleteMembersCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1048,7 +1048,7 @@ module DeleteInvitations = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DeleteInvitationsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeleteInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1060,7 +1060,7 @@ module DeclineInvitations = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "DeclineInvitationsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "DeclineInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1073,7 +1073,7 @@ module CreateMembers = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "CreateMembersCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1089,7 +1089,7 @@ module CreateDetector = {
   type response = {
 @as("DetectorId") detectorId: detectorId
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "CreateDetectorCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateDetectorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1106,7 +1106,7 @@ module UpdateFilter = {
   type response = {
 @as("Name") name: option<filterName>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "UpdateFilterCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "UpdateFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1123,7 +1123,7 @@ module ListFindings = {
 @as("NextToken") nextToken: amazonawsString,
 @as("FindingIds") findingIds: option<findingIds>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "ListFindingsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "ListFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1141,7 +1141,7 @@ module GetUsageStatistics = {
 @as("NextToken") nextToken: amazonawsString,
 @as("UsageStatistics") usageStatistics: usageStatistics
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "GetUsageStatisticsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetUsageStatisticsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1155,7 +1155,7 @@ module GetMemberDetectors = {
 @as("UnprocessedAccounts") unprocessedAccounts: option<unprocessedAccounts>,
 @as("MemberDataSourceConfigurations") memberDataSourceConfigurations: option<memberDataSourceConfigurations>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "GetMemberDetectorsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetMemberDetectorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1169,7 +1169,7 @@ module GetFindingsStatistics = {
   type response = {
 @as("FindingStatistics") findingStatistics: option<findingStatistics>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "GetFindingsStatisticsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetFindingsStatisticsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1187,7 +1187,7 @@ module GetFilter = {
 @as("Description") description: filterDescription,
 @as("Name") name: option<filterName>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "GetFilterCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1206,7 +1206,7 @@ module CreateFilter = {
   type response = {
 @as("Name") name: option<filterName>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "CreateFilterCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "CreateFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1220,6 +1220,6 @@ module GetFindings = {
   type response = {
 @as("Findings") findings: option<findings>
 }
-  @module("@aws-sdk/client-guardduty") @new external new_: (Js.Promise.t<request>) => t = "GetFindingsCommand";
+  @module("@aws-sdk/client-guardduty") @new external new_: (request) => t = "GetFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

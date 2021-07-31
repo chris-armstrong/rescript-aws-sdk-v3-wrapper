@@ -138,7 +138,7 @@ module StartStreamTranscription = {
 @as("LanguageCode") languageCode: languageCode,
 @as("RequestId") requestId: requestId
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "StartStreamTranscriptionCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "StartStreamTranscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -173,6 +173,6 @@ module StartMedicalStreamTranscription = {
 @as("LanguageCode") languageCode: languageCode,
 @as("RequestId") requestId: requestId
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "StartMedicalStreamTranscriptionCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "StartMedicalStreamTranscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

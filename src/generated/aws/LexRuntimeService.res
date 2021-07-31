@@ -134,7 +134,7 @@ module PostContent = {
 @as("intentName") intentName: intentName,
 @as("contentType") contentType: httpContentType
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "PostContentCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "PostContentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -151,7 +151,7 @@ module DeleteSession = {
 @as("botAlias") botAlias: botAlias,
 @as("botName") botName: botName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "DeleteSessionCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "DeleteSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -181,7 +181,7 @@ module PutSession = {
 @as("intentName") intentName: intentName,
 @as("contentType") contentType: httpContentType
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "PutSessionCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "PutSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -200,7 +200,7 @@ module GetSession = {
 @as("sessionAttributes") sessionAttributes: stringMap,
 @as("recentIntentSummaryView") recentIntentSummaryView: intentSummaryList
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "GetSessionCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "GetSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -231,6 +231,6 @@ module PostText = {
 @as("nluIntentConfidence") nluIntentConfidence: intentConfidence,
 @as("intentName") intentName: intentName
 }
-  @module("@aws-sdk/client-lex") @new external new_: (Js.Promise.t<request>) => t = "PostTextCommand";
+  @module("@aws-sdk/client-lex") @new external new_: (request) => t = "PostTextCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

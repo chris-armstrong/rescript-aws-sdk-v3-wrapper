@@ -96,7 +96,7 @@ module UnshareApplication = {
 @as("ApplicationId") applicationId: option<__string>
 }
   
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "UnshareApplicationCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "UnshareApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -115,7 +115,7 @@ module GetCloudFormationTemplate = {
 @as("CreationTime") creationTime: __string,
 @as("ApplicationId") applicationId: __string
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "GetCloudFormationTemplateCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "GetCloudFormationTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -125,7 +125,7 @@ module DeleteApplication = {
 @as("ApplicationId") applicationId: option<__string>
 }
   
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "DeleteApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -144,7 +144,7 @@ module CreateCloudFormationTemplate = {
 @as("CreationTime") creationTime: __string,
 @as("ApplicationId") applicationId: __string
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "CreateCloudFormationTemplateCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "CreateCloudFormationTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -159,7 +159,7 @@ module ListApplicationVersions = {
 @as("Versions") versions: __listOfVersionSummary,
 @as("NextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationVersionsCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "ListApplicationVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -175,7 +175,7 @@ module ListApplicationDependencies = {
 @as("NextToken") nextToken: __string,
 @as("Dependencies") dependencies: __listOfApplicationDependencySummary
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationDependenciesCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "ListApplicationDependenciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -188,7 +188,7 @@ module PutApplicationPolicy = {
   type response = {
 @as("Statements") statements: __listOfApplicationPolicyStatement
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "PutApplicationPolicyCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "PutApplicationPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -202,7 +202,7 @@ module ListApplications = {
 @as("NextToken") nextToken: __string,
 @as("Applications") applications: __listOfApplicationSummary
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "ListApplicationsCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "ListApplicationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -214,7 +214,7 @@ module GetApplicationPolicy = {
   type response = {
 @as("Statements") statements: __listOfApplicationPolicyStatement
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "GetApplicationPolicyCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "GetApplicationPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -241,7 +241,7 @@ module CreateCloudFormationChangeSet = {
 @as("ChangeSetId") changeSetId: __string,
 @as("ApplicationId") applicationId: __string
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "CreateCloudFormationChangeSetCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "CreateCloudFormationChangeSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -266,7 +266,7 @@ module CreateApplicationVersion = {
 @as("CreationTime") creationTime: __string,
 @as("ApplicationId") applicationId: __string
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "CreateApplicationVersionCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "CreateApplicationVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -296,7 +296,7 @@ module UpdateApplication = {
 @as("Author") author: __string,
 @as("ApplicationId") applicationId: __string
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "UpdateApplicationCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "UpdateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -321,7 +321,7 @@ module GetApplication = {
 @as("Author") author: __string,
 @as("ApplicationId") applicationId: __string
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "GetApplicationCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "GetApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -359,6 +359,6 @@ module CreateApplication = {
 @as("Author") author: __string,
 @as("ApplicationId") applicationId: __string
 }
-  @module("@aws-sdk/client-serverlessrepo") @new external new_: (Js.Promise.t<request>) => t = "CreateApplicationCommand";
+  @module("@aws-sdk/client-serverlessrepo") @new external new_: (request) => t = "CreateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

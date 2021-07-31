@@ -60,7 +60,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<apiString>
 }
   type response = unit
-  @module("@aws-sdk/client-braket") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-braket") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -71,7 +71,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<apiString>
 }
   type response = unit
-  @module("@aws-sdk/client-braket") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-braket") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -83,7 +83,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagsMap
 }
-  @module("@aws-sdk/client-braket") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-braket") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -105,7 +105,7 @@ module GetQuantumTask = {
 @as("status") status: option<quantumTaskStatus>,
 @as("quantumTaskArn") quantumTaskArn: option<quantumTaskArn>
 }
-  @module("@aws-sdk/client-braket") @new external new_: (Js.Promise.t<request>) => t = "GetQuantumTaskCommand";
+  @module("@aws-sdk/client-braket") @new external new_: (request) => t = "GetQuantumTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -122,7 +122,7 @@ module GetDevice = {
 @as("deviceName") deviceName: option<apiString>,
 @as("deviceArn") deviceArn: option<deviceArn>
 }
-  @module("@aws-sdk/client-braket") @new external new_: (Js.Promise.t<request>) => t = "GetDeviceCommand";
+  @module("@aws-sdk/client-braket") @new external new_: (request) => t = "GetDeviceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -141,7 +141,7 @@ module CreateQuantumTask = {
   type response = {
 @as("quantumTaskArn") quantumTaskArn: option<quantumTaskArn>
 }
-  @module("@aws-sdk/client-braket") @new external new_: (Js.Promise.t<request>) => t = "CreateQuantumTaskCommand";
+  @module("@aws-sdk/client-braket") @new external new_: (request) => t = "CreateQuantumTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -155,7 +155,7 @@ module CancelQuantumTask = {
 @as("cancellationStatus") cancellationStatus: option<cancellationStatus>,
 @as("quantumTaskArn") quantumTaskArn: option<quantumTaskArn>
 }
-  @module("@aws-sdk/client-braket") @new external new_: (Js.Promise.t<request>) => t = "CancelQuantumTaskCommand";
+  @module("@aws-sdk/client-braket") @new external new_: (request) => t = "CancelQuantumTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -170,7 +170,7 @@ module SearchQuantumTasks = {
 @as("nextToken") nextToken: apiString,
 @as("quantumTasks") quantumTasks: option<quantumTaskSummaryList>
 }
-  @module("@aws-sdk/client-braket") @new external new_: (Js.Promise.t<request>) => t = "SearchQuantumTasksCommand";
+  @module("@aws-sdk/client-braket") @new external new_: (request) => t = "SearchQuantumTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -185,6 +185,6 @@ module SearchDevices = {
 @as("nextToken") nextToken: apiString,
 @as("devices") devices: option<deviceSummaryList>
 }
-  @module("@aws-sdk/client-braket") @new external new_: (Js.Promise.t<request>) => t = "SearchDevicesCommand";
+  @module("@aws-sdk/client-braket") @new external new_: (request) => t = "SearchDevicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

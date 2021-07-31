@@ -279,7 +279,7 @@ module UpdateModel = {
 @as("Description") description: stringWithLengthBetween0And1024,
 @as("ContentType") contentType: stringWithLengthBetween1And256
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateModelCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -298,7 +298,7 @@ module UpdateDeployment = {
 @as("CreatedDate") createdDate: __timestampIso8601,
 @as("AutoDeployed") autoDeployed: __boolean
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateDeploymentCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -317,7 +317,7 @@ module UpdateApiMapping = {
 @as("ApiMappingId") apiMappingId: id,
 @as("ApiId") apiId: id
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateApiMappingCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateApiMappingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -328,7 +328,7 @@ module ResetAuthorizersCache = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "ResetAuthorizersCacheCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "ResetAuthorizersCacheCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -341,7 +341,7 @@ module GetModelTemplate = {
   type response = {
 @as("Value") value: __string
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetModelTemplateCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetModelTemplateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -358,7 +358,7 @@ module GetModel = {
 @as("Description") description: stringWithLengthBetween0And1024,
 @as("ContentType") contentType: stringWithLengthBetween1And256
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetModelCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -376,7 +376,7 @@ module GetDeployment = {
 @as("CreatedDate") createdDate: __timestampIso8601,
 @as("AutoDeployed") autoDeployed: __boolean
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -392,7 +392,7 @@ module GetApiMapping = {
 @as("ApiMappingId") apiMappingId: id,
 @as("ApiId") apiId: id
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetApiMappingCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetApiMappingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -409,7 +409,7 @@ module ExportApi = {
   type response = {
 @as("body") body: exportedApi
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "ExportApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "ExportApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -419,7 +419,7 @@ module DeleteVpcLink = {
 @as("VpcLinkId") vpcLinkId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpcLinkCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteVpcLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -430,7 +430,7 @@ module DeleteStage = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteStageCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteStageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -442,7 +442,7 @@ module DeleteRouteSettings = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteRouteSettingsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteRouteSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -454,7 +454,7 @@ module DeleteRouteResponse = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteRouteResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteRouteResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -466,7 +466,7 @@ module DeleteRouteRequestParameter = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteRouteRequestParameterCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteRouteRequestParameterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -477,7 +477,7 @@ module DeleteRoute = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteRouteCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -488,7 +488,7 @@ module DeleteModel = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteModelCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -500,7 +500,7 @@ module DeleteIntegrationResponse = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteIntegrationResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteIntegrationResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -511,7 +511,7 @@ module DeleteIntegration = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteIntegrationCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -521,7 +521,7 @@ module DeleteDomainName = {
 @as("DomainName") domainName: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteDomainNameCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteDomainNameCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -532,7 +532,7 @@ module DeleteDeployment = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteDeploymentCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -542,7 +542,7 @@ module DeleteCorsConfiguration = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteCorsConfigurationCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteCorsConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -553,7 +553,7 @@ module DeleteAuthorizer = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteAuthorizerCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteAuthorizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -564,7 +564,7 @@ module DeleteApiMapping = {
 @as("ApiMappingId") apiMappingId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteApiMappingCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteApiMappingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -574,7 +574,7 @@ module DeleteApi = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -585,7 +585,7 @@ module DeleteAccessLogSettings = {
 @as("ApiId") apiId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteAccessLogSettingsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteAccessLogSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -605,7 +605,7 @@ module CreateModel = {
 @as("Description") description: stringWithLengthBetween0And1024,
 @as("ContentType") contentType: stringWithLengthBetween1And256
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateModelCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -624,7 +624,7 @@ module CreateDeployment = {
 @as("CreatedDate") createdDate: __timestampIso8601,
 @as("AutoDeployed") autoDeployed: __boolean
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateDeploymentCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateDeploymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -642,7 +642,7 @@ module CreateApiMapping = {
 @as("ApiMappingId") apiMappingId: id,
 @as("ApiId") apiId: id
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateApiMappingCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateApiMappingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -663,7 +663,7 @@ module UpdateVpcLink = {
 @as("Name") name: stringWithLengthBetween1And128,
 @as("CreatedDate") createdDate: __timestampIso8601
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateVpcLinkCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateVpcLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -687,7 +687,7 @@ module UpdateIntegrationResponse = {
 @as("IntegrationResponseId") integrationResponseId: id,
 @as("ContentHandlingStrategy") contentHandlingStrategy: contentHandlingStrategy
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateIntegrationResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateIntegrationResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -698,7 +698,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -709,7 +709,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -729,7 +729,7 @@ module GetVpcLink = {
 @as("Name") name: stringWithLengthBetween1And128,
 @as("CreatedDate") createdDate: __timestampIso8601
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetVpcLinkCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetVpcLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -741,7 +741,7 @@ module GetTags = {
   type response = {
 @as("Tags") tags: tags
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetTagsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -760,7 +760,7 @@ module GetIntegrationResponse = {
 @as("IntegrationResponseId") integrationResponseId: id,
 @as("ContentHandlingStrategy") contentHandlingStrategy: contentHandlingStrategy
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetIntegrationResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetIntegrationResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -783,7 +783,7 @@ module CreateVpcLink = {
 @as("Name") name: stringWithLengthBetween1And128,
 @as("CreatedDate") createdDate: __timestampIso8601
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateVpcLinkCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateVpcLinkCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -806,7 +806,7 @@ module CreateIntegrationResponse = {
 @as("IntegrationResponseId") integrationResponseId: id,
 @as("ContentHandlingStrategy") contentHandlingStrategy: contentHandlingStrategy
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateIntegrationResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateIntegrationResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -840,7 +840,7 @@ module UpdateStage = {
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean,
 @as("AccessLogSettings") accessLogSettings: accessLogSettings
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateStageCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateStageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -862,7 +862,7 @@ module UpdateRouteResponse = {
 @as("ResponseModels") responseModels: routeModels,
 @as("ModelSelectionExpression") modelSelectionExpression: selectionExpression
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateRouteResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateRouteResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -898,7 +898,7 @@ module UpdateRoute = {
 @as("ApiKeyRequired") apiKeyRequired: __boolean,
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateRouteCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -947,7 +947,7 @@ module UpdateIntegration = {
 @as("ConnectionId") connectionId: stringWithLengthBetween1And1024,
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateIntegrationCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -965,7 +965,7 @@ module UpdateDomainName = {
 @as("DomainName") domainName: stringWithLengthBetween1And512,
 @as("ApiMappingSelectionExpression") apiMappingSelectionExpression: selectionExpression
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateDomainNameCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateDomainNameCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -998,7 +998,7 @@ module UpdateAuthorizer = {
 @as("AuthorizerId") authorizerId: id,
 @as("AuthorizerCredentialsArn") authorizerCredentialsArn: arn
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateAuthorizerCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateAuthorizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1036,7 +1036,7 @@ module UpdateApi = {
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean,
 @as("ApiEndpoint") apiEndpoint: __string
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "UpdateApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1066,7 +1066,7 @@ module ReimportApi = {
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean,
 @as("ApiEndpoint") apiEndpoint: __string
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "ReimportApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "ReimportApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1095,7 +1095,7 @@ module ImportApi = {
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean,
 @as("ApiEndpoint") apiEndpoint: __string
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "ImportApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "ImportApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1121,7 +1121,7 @@ module GetStage = {
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean,
 @as("AccessLogSettings") accessLogSettings: accessLogSettings
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetStageCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetStageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1139,7 +1139,7 @@ module GetRouteResponse = {
 @as("ResponseModels") responseModels: routeModels,
 @as("ModelSelectionExpression") modelSelectionExpression: selectionExpression
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetRouteResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetRouteResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1164,7 +1164,7 @@ module GetRoute = {
 @as("ApiKeyRequired") apiKeyRequired: __boolean,
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetRouteCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1179,7 +1179,7 @@ module GetModels = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfModel
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetModelsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetModelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1211,7 +1211,7 @@ module GetIntegration = {
 @as("ConnectionId") connectionId: stringWithLengthBetween1And1024,
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetIntegrationCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1227,7 +1227,7 @@ module GetDomainName = {
 @as("DomainName") domainName: stringWithLengthBetween1And512,
 @as("ApiMappingSelectionExpression") apiMappingSelectionExpression: selectionExpression
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDomainNameCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDomainNameCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1242,7 +1242,7 @@ module GetDeployments = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfDeployment
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDeploymentsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDeploymentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1265,7 +1265,7 @@ module GetAuthorizer = {
 @as("AuthorizerId") authorizerId: id,
 @as("AuthorizerCredentialsArn") authorizerCredentialsArn: arn
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetAuthorizerCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetAuthorizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1280,7 +1280,7 @@ module GetApiMappings = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfApiMapping
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetApiMappingsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetApiMappingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1307,7 +1307,7 @@ module GetApi = {
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean,
 @as("ApiEndpoint") apiEndpoint: __string
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1342,7 +1342,7 @@ module CreateStage = {
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean,
 @as("AccessLogSettings") accessLogSettings: accessLogSettings
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateStageCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateStageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1363,7 +1363,7 @@ module CreateRouteResponse = {
 @as("ResponseModels") responseModels: routeModels,
 @as("ModelSelectionExpression") modelSelectionExpression: selectionExpression
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateRouteResponseCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateRouteResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1398,7 +1398,7 @@ module CreateRoute = {
 @as("ApiKeyRequired") apiKeyRequired: __boolean,
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateRouteCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1446,7 +1446,7 @@ module CreateIntegration = {
 @as("ConnectionId") connectionId: stringWithLengthBetween1And1024,
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateIntegrationCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1465,7 +1465,7 @@ module CreateDomainName = {
 @as("DomainName") domainName: stringWithLengthBetween1And512,
 @as("ApiMappingSelectionExpression") apiMappingSelectionExpression: selectionExpression
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateDomainNameCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateDomainNameCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1497,7 +1497,7 @@ module CreateAuthorizer = {
 @as("AuthorizerId") authorizerId: id,
 @as("AuthorizerCredentialsArn") authorizerCredentialsArn: arn
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateAuthorizerCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateAuthorizerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1536,7 +1536,7 @@ module CreateApi = {
 @as("ApiGatewayManaged") apiGatewayManaged: __boolean,
 @as("ApiEndpoint") apiEndpoint: __string
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "CreateApiCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "CreateApiCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1550,7 +1550,7 @@ module GetVpcLinks = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfVpcLink
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetVpcLinksCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetVpcLinksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1566,7 +1566,7 @@ module GetIntegrationResponses = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfIntegrationResponse
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetIntegrationResponsesCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetIntegrationResponsesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1581,7 +1581,7 @@ module GetStages = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfStage
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetStagesCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetStagesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1596,7 +1596,7 @@ module GetRoutes = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfRoute
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetRoutesCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetRoutesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1612,7 +1612,7 @@ module GetRouteResponses = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfRouteResponse
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetRouteResponsesCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetRouteResponsesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1627,7 +1627,7 @@ module GetIntegrations = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfIntegration
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetIntegrationsCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetIntegrationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1641,7 +1641,7 @@ module GetDomainNames = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfDomainName
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetDomainNamesCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetDomainNamesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1656,7 +1656,7 @@ module GetAuthorizers = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfAuthorizer
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetAuthorizersCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetAuthorizersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1670,6 +1670,6 @@ module GetApis = {
 @as("NextToken") nextToken: nextToken,
 @as("Items") items: __listOfApi
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetApisCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetApisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

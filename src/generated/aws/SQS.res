@@ -106,7 +106,7 @@ module RemovePermission = {
 @as("QueueUrl") queueUrl: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "RemovePermissionCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "RemovePermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -116,7 +116,7 @@ module PurgeQueue = {
 @as("QueueUrl") queueUrl: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "PurgeQueueCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "PurgeQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -129,7 +129,7 @@ module GetQueueUrl = {
   type response = {
 @as("QueueUrl") queueUrl: amazonawsString
 }
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "GetQueueUrlCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "GetQueueUrlCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -139,7 +139,7 @@ module DeleteQueue = {
 @as("QueueUrl") queueUrl: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "DeleteQueueCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "DeleteQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -150,7 +150,7 @@ module DeleteMessage = {
 @as("QueueUrl") queueUrl: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "DeleteMessageCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "DeleteMessageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -162,7 +162,7 @@ module ChangeMessageVisibility = {
 @as("QueueUrl") queueUrl: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "ChangeMessageVisibilityCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ChangeMessageVisibilityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -173,7 +173,7 @@ module UntagQueue = {
 @as("QueueUrl") queueUrl: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "UntagQueueCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "UntagQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -184,7 +184,7 @@ module TagQueue = {
 @as("QueueUrl") queueUrl: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "TagQueueCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "TagQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -195,7 +195,7 @@ module SetQueueAttributes = {
 @as("QueueUrl") queueUrl: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "SetQueueAttributesCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "SetQueueAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -210,7 +210,7 @@ module ListQueues = {
 @as("QueueUrls") queueUrls: queueUrlList,
 @as("NextToken") nextToken: token
 }
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "ListQueuesCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ListQueuesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -222,7 +222,7 @@ module ListQueueTags = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "ListQueueTagsCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ListQueueTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -237,7 +237,7 @@ module ListDeadLetterSourceQueues = {
 @as("NextToken") nextToken: token,
 @as("queueUrls") queueUrls: option<queueUrlList>
 }
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "ListDeadLetterSourceQueuesCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ListDeadLetterSourceQueuesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -250,7 +250,7 @@ module GetQueueAttributes = {
   type response = {
 @as("Attributes") attributes: queueAttributeMap
 }
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "GetQueueAttributesCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "GetQueueAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -264,7 +264,7 @@ module CreateQueue = {
   type response = {
 @as("QueueUrl") queueUrl: amazonawsString
 }
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "CreateQueueCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "CreateQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -277,7 +277,7 @@ module AddPermission = {
 @as("QueueUrl") queueUrl: option<amazonawsString>
 }
   
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "AddPermissionCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "AddPermissionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -291,7 +291,7 @@ module DeleteMessageBatch = {
 @as("Failed") failed: option<batchResultErrorEntryList>,
 @as("Successful") successful: option<deleteMessageBatchResultEntryList>
 }
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "DeleteMessageBatchCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "DeleteMessageBatchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -305,7 +305,7 @@ module ChangeMessageVisibilityBatch = {
 @as("Failed") failed: option<batchResultErrorEntryList>,
 @as("Successful") successful: option<changeMessageVisibilityBatchResultEntryList>
 }
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "ChangeMessageVisibilityBatchCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ChangeMessageVisibilityBatchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -327,7 +327,7 @@ module SendMessage = {
 @as("MD5OfMessageAttributes") mD5OfMessageAttributes: amazonawsString,
 @as("MD5OfMessageBody") mD5OfMessageBody: amazonawsString
 }
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "SendMessageCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "SendMessageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -341,7 +341,7 @@ module SendMessageBatch = {
 @as("Failed") failed: option<batchResultErrorEntryList>,
 @as("Successful") successful: option<sendMessageBatchResultEntryList>
 }
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "SendMessageBatchCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "SendMessageBatchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -359,6 +359,6 @@ module ReceiveMessage = {
   type response = {
 @as("Messages") messages: messageList
 }
-  @module("@aws-sdk/client-sqs") @new external new_: (Js.Promise.t<request>) => t = "ReceiveMessageCommand";
+  @module("@aws-sdk/client-sqs") @new external new_: (request) => t = "ReceiveMessageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

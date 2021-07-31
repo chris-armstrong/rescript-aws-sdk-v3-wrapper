@@ -107,7 +107,7 @@ module UnlinkDeveloperIdentity = {
 @as("IdentityId") identityId: option<identityId>
 }
   
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "UnlinkDeveloperIdentityCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "UnlinkDeveloperIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -122,7 +122,7 @@ module MergeDeveloperIdentities = {
   type response = {
 @as("IdentityId") identityId: identityId
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "MergeDeveloperIdentitiesCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "MergeDeveloperIdentitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -132,7 +132,7 @@ module DeleteIdentityPool = {
 @as("IdentityPoolId") identityPoolId: option<identityPoolId>
 }
   
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "DeleteIdentityPoolCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "DeleteIdentityPoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -143,7 +143,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<aRNString>
 }
   type response = unit
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -155,7 +155,7 @@ module UnlinkIdentity = {
 @as("IdentityId") identityId: option<identityId>
 }
   
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "UnlinkIdentityCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "UnlinkIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -166,7 +166,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<aRNString>
 }
   type response = unit
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -184,7 +184,7 @@ module SetPrincipalTagAttributeMap = {
 @as("IdentityProviderName") identityProviderName: identityProviderName,
 @as("IdentityPoolId") identityPoolId: identityPoolId
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "SetPrincipalTagAttributeMapCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "SetPrincipalTagAttributeMapCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -202,7 +202,7 @@ module LookupDeveloperIdentity = {
 @as("DeveloperUserIdentifierList") developerUserIdentifierList: developerUserIdentifierList,
 @as("IdentityId") identityId: identityId
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "LookupDeveloperIdentityCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "LookupDeveloperIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -214,7 +214,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: identityPoolTagsType
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -230,7 +230,7 @@ module GetPrincipalTagAttributeMap = {
 @as("IdentityProviderName") identityProviderName: identityProviderName,
 @as("IdentityPoolId") identityPoolId: identityPoolId
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "GetPrincipalTagAttributeMapCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "GetPrincipalTagAttributeMapCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -247,7 +247,7 @@ module GetOpenIdTokenForDeveloperIdentity = {
 @as("Token") token: oIDCToken,
 @as("IdentityId") identityId: identityId
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "GetOpenIdTokenForDeveloperIdentityCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "GetOpenIdTokenForDeveloperIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -261,7 +261,7 @@ module GetOpenIdToken = {
 @as("Token") token: oIDCToken,
 @as("IdentityId") identityId: identityId
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "GetOpenIdTokenCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "GetOpenIdTokenCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -275,7 +275,7 @@ module GetId = {
   type response = {
 @as("IdentityId") identityId: identityId
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "GetIdCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "GetIdCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -290,7 +290,7 @@ module GetCredentialsForIdentity = {
 @as("Credentials") credentials: credentials,
 @as("IdentityId") identityId: identityId
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "GetCredentialsForIdentityCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "GetCredentialsForIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -300,7 +300,7 @@ module DescribeIdentity = {
 @as("IdentityId") identityId: option<identityId>
 }
   type response = identityDescription;
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "DescribeIdentityCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "DescribeIdentityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -330,7 +330,7 @@ module UpdateIdentityPool = {
 @as("IdentityPoolName") identityPoolName: option<identityPoolName>,
 @as("IdentityPoolId") identityPoolId: option<identityPoolId>
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "UpdateIdentityPoolCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "UpdateIdentityPoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -344,7 +344,7 @@ module ListIdentityPools = {
 @as("NextToken") nextToken: paginationKey,
 @as("IdentityPools") identityPools: identityPoolsList
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "ListIdentityPoolsCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "ListIdentityPoolsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -365,7 +365,7 @@ module DescribeIdentityPool = {
 @as("IdentityPoolName") identityPoolName: option<identityPoolName>,
 @as("IdentityPoolId") identityPoolId: option<identityPoolId>
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "DescribeIdentityPoolCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "DescribeIdentityPoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -377,7 +377,7 @@ module DeleteIdentities = {
   type response = {
 @as("UnprocessedIdentityIds") unprocessedIdentityIds: unprocessedIdentityIdList
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "DeleteIdentitiesCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "DeleteIdentitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -406,7 +406,7 @@ module CreateIdentityPool = {
 @as("IdentityPoolName") identityPoolName: option<identityPoolName>,
 @as("IdentityPoolId") identityPoolId: option<identityPoolId>
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "CreateIdentityPoolCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "CreateIdentityPoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -423,7 +423,7 @@ module ListIdentities = {
 @as("Identities") identities: identitiesList,
 @as("IdentityPoolId") identityPoolId: identityPoolId
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "ListIdentitiesCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "ListIdentitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -435,7 +435,7 @@ module SetIdentityPoolRoles = {
 @as("IdentityPoolId") identityPoolId: option<identityPoolId>
 }
   
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "SetIdentityPoolRolesCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "SetIdentityPoolRolesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -449,6 +449,6 @@ module GetIdentityPoolRoles = {
 @as("Roles") roles: rolesMap,
 @as("IdentityPoolId") identityPoolId: identityPoolId
 }
-  @module("@aws-sdk/client-cognito-identity") @new external new_: (Js.Promise.t<request>) => t = "GetIdentityPoolRolesCommand";
+  @module("@aws-sdk/client-cognito-identity") @new external new_: (request) => t = "GetIdentityPoolRolesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

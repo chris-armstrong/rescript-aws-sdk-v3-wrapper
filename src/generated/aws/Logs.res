@@ -241,7 +241,7 @@ module StopQuery = {
   type response = {
 @as("success") success: success
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "StopQueryCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "StopQueryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -256,7 +256,7 @@ module PutSubscriptionFilter = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "PutSubscriptionFilterCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutSubscriptionFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -267,7 +267,7 @@ module PutRetentionPolicy = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "PutRetentionPolicyCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutRetentionPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -278,7 +278,7 @@ module PutDestinationPolicy = {
 @as("destinationName") destinationName: option<destinationName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "PutDestinationPolicyCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutDestinationPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -288,7 +288,7 @@ module DisassociateKmsKey = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DisassociateKmsKeyCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DisassociateKmsKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -299,7 +299,7 @@ module DeleteSubscriptionFilter = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DeleteSubscriptionFilterCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DeleteSubscriptionFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -309,7 +309,7 @@ module DeleteRetentionPolicy = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DeleteRetentionPolicyCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DeleteRetentionPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -319,7 +319,7 @@ module DeleteResourcePolicy = {
 @as("policyName") policyName: policyName
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DeleteResourcePolicyCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DeleteResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -331,7 +331,7 @@ module DeleteQueryDefinition = {
   type response = {
 @as("success") success: success
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DeleteQueryDefinitionCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DeleteQueryDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -342,7 +342,7 @@ module DeleteMetricFilter = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DeleteMetricFilterCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DeleteMetricFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -353,7 +353,7 @@ module DeleteLogStream = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DeleteLogStreamCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DeleteLogStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -363,7 +363,7 @@ module DeleteLogGroup = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DeleteLogGroupCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DeleteLogGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -373,7 +373,7 @@ module DeleteDestination = {
 @as("destinationName") destinationName: option<destinationName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DeleteDestinationCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DeleteDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -384,7 +384,7 @@ module CreateLogStream = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "CreateLogStreamCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "CreateLogStreamCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -402,7 +402,7 @@ module CreateExportTask = {
   type response = {
 @as("taskId") taskId: exportTaskId
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "CreateExportTaskCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "CreateExportTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -412,7 +412,7 @@ module CancelExportTask = {
 @as("taskId") taskId: option<exportTaskId>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "CancelExportTaskCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "CancelExportTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -423,7 +423,7 @@ module AssociateKmsKey = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "AssociateKmsKeyCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "AssociateKmsKeyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -434,7 +434,7 @@ module UntagLogGroup = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "UntagLogGroupCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "UntagLogGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -445,7 +445,7 @@ module TagLogGroup = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "TagLogGroupCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "TagLogGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -458,7 +458,7 @@ module PutResourcePolicy = {
   type response = {
 @as("resourcePolicy") resourcePolicy: resourcePolicy
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "PutResourcePolicyCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutResourcePolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -473,7 +473,7 @@ module PutQueryDefinition = {
   type response = {
 @as("queryDefinitionId") queryDefinitionId: queryId
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "PutQueryDefinitionCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutQueryDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -487,7 +487,7 @@ module PutDestination = {
   type response = {
 @as("destination") destination: destination
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "PutDestinationCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutDestinationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -499,7 +499,7 @@ module ListTagsLogGroup = {
   type response = {
 @as("tags") tags: tags
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "ListTagsLogGroupCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "ListTagsLogGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -511,7 +511,7 @@ module GetLogRecord = {
   type response = {
 @as("logRecord") logRecord: logRecord
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "GetLogRecordCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "GetLogRecordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -523,7 +523,7 @@ module CreateLogGroup = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "CreateLogGroupCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "CreateLogGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -540,7 +540,7 @@ module StartQuery = {
   type response = {
 @as("queryId") queryId: queryId
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "StartQueryCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "StartQueryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -556,7 +556,7 @@ module PutLogEvents = {
 @as("rejectedLogEventsInfo") rejectedLogEventsInfo: rejectedLogEventsInfo,
 @as("nextSequenceToken") nextSequenceToken: sequenceToken
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "PutLogEventsCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutLogEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -569,7 +569,7 @@ module GetLogGroupFields = {
   type response = {
 @as("logGroupFields") logGroupFields: logGroupFieldList
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "GetLogGroupFieldsCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "GetLogGroupFieldsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -589,7 +589,7 @@ module GetLogEvents = {
 @as("nextForwardToken") nextForwardToken: nextToken,
 @as("events") events: outputLogEvents
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "GetLogEventsCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "GetLogEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -611,7 +611,7 @@ module FilterLogEvents = {
 @as("searchedLogStreams") searchedLogStreams: searchedLogStreams,
 @as("events") events: filteredLogEvents
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "FilterLogEventsCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "FilterLogEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -627,7 +627,7 @@ module DescribeSubscriptionFilters = {
 @as("nextToken") nextToken: nextToken,
 @as("subscriptionFilters") subscriptionFilters: subscriptionFilters
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DescribeSubscriptionFiltersCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeSubscriptionFiltersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -641,7 +641,7 @@ module DescribeResourcePolicies = {
 @as("nextToken") nextToken: nextToken,
 @as("resourcePolicies") resourcePolicies: resourcePolicies
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DescribeResourcePoliciesCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeResourcePoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -657,7 +657,7 @@ module DescribeQueries = {
 @as("nextToken") nextToken: nextToken,
 @as("queries") queries: queryInfoList
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DescribeQueriesCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeQueriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -675,7 +675,7 @@ module DescribeLogStreams = {
 @as("nextToken") nextToken: nextToken,
 @as("logStreams") logStreams: logStreams
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DescribeLogStreamsCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeLogStreamsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -690,7 +690,7 @@ module DescribeLogGroups = {
 @as("nextToken") nextToken: nextToken,
 @as("logGroups") logGroups: logGroups
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DescribeLogGroupsCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeLogGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -705,7 +705,7 @@ module DescribeDestinations = {
 @as("nextToken") nextToken: nextToken,
 @as("destinations") destinations: destinations
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DescribeDestinationsCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeDestinationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -718,7 +718,7 @@ module TestMetricFilter = {
   type response = {
 @as("matches") matches: metricFilterMatches
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "TestMetricFilterCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "TestMetricFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -731,7 +731,7 @@ module PutMetricFilter = {
 @as("logGroupName") logGroupName: option<logGroupName>
 }
   
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "PutMetricFilterCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "PutMetricFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -745,7 +745,7 @@ module GetQueryResults = {
 @as("statistics") statistics: queryStatistics,
 @as("results") results: queryResults
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "GetQueryResultsCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "GetQueryResultsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -760,7 +760,7 @@ module DescribeQueryDefinitions = {
 @as("nextToken") nextToken: nextToken,
 @as("queryDefinitions") queryDefinitions: queryDefinitionList
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DescribeQueryDefinitionsCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeQueryDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -776,7 +776,7 @@ module DescribeExportTasks = {
 @as("nextToken") nextToken: nextToken,
 @as("exportTasks") exportTasks: exportTasks
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DescribeExportTasksCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeExportTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -794,6 +794,6 @@ module DescribeMetricFilters = {
 @as("nextToken") nextToken: nextToken,
 @as("metricFilters") metricFilters: metricFilters
 }
-  @module("@aws-sdk/client-logs") @new external new_: (Js.Promise.t<request>) => t = "DescribeMetricFiltersCommand";
+  @module("@aws-sdk/client-logs") @new external new_: (request) => t = "DescribeMetricFiltersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

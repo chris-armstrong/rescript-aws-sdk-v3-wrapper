@@ -153,7 +153,7 @@ module StopInferenceScheduler = {
 @as("ModelName") modelName: modelName,
 @as("ModelArn") modelArn: modelArn
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "StopInferenceSchedulerCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "StopInferenceSchedulerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -169,7 +169,7 @@ module StartInferenceScheduler = {
 @as("ModelName") modelName: modelName,
 @as("ModelArn") modelArn: modelArn
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "StartInferenceSchedulerCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "StartInferenceSchedulerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -179,7 +179,7 @@ module DeleteModel = {
 @as("ModelName") modelName: option<modelName>
 }
   
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "DeleteModelCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "DeleteModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -189,7 +189,7 @@ module DeleteInferenceScheduler = {
 @as("InferenceSchedulerName") inferenceSchedulerName: option<inferenceSchedulerIdentifier>
 }
   
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "DeleteInferenceSchedulerCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "DeleteInferenceSchedulerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -199,7 +199,7 @@ module DeleteDataset = {
 @as("DatasetName") datasetName: option<datasetIdentifier>
 }
   
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "DeleteDatasetCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "DeleteDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -210,7 +210,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<amazonResourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -225,7 +225,7 @@ module UpdateInferenceScheduler = {
 @as("InferenceSchedulerName") inferenceSchedulerName: option<inferenceSchedulerIdentifier>
 }
   
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "UpdateInferenceSchedulerCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "UpdateInferenceSchedulerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -236,7 +236,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<amazonResourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -252,7 +252,7 @@ module StartDataIngestionJob = {
 @as("Status") status: ingestionJobStatus,
 @as("JobId") jobId: ingestionJobId
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "StartDataIngestionJobCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "StartDataIngestionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -264,7 +264,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -281,7 +281,7 @@ module ListModels = {
 @as("ModelSummaries") modelSummaries: modelSummaries,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "ListModelsCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "ListModelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -297,7 +297,7 @@ module ListInferenceSchedulers = {
 @as("InferenceSchedulerSummaries") inferenceSchedulerSummaries: inferenceSchedulerSummaries,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "ListInferenceSchedulersCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "ListInferenceSchedulersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -312,7 +312,7 @@ module ListDatasets = {
 @as("DatasetSummaries") datasetSummaries: datasetSummaries,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "ListDatasetsCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "ListDatasetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -343,7 +343,7 @@ module DescribeModel = {
 @as("ModelArn") modelArn: modelArn,
 @as("ModelName") modelName: modelName
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "DescribeModelCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "DescribeModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -367,7 +367,7 @@ module DescribeInferenceScheduler = {
 @as("ModelName") modelName: modelName,
 @as("ModelArn") modelArn: modelArn
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "DescribeInferenceSchedulerCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "DescribeInferenceSchedulerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -386,7 +386,7 @@ module DescribeDataset = {
 @as("DatasetArn") datasetArn: datasetArn,
 @as("DatasetName") datasetName: datasetName
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "DescribeDatasetCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "DescribeDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -404,7 +404,7 @@ module DescribeDataIngestionJob = {
 @as("DatasetArn") datasetArn: datasetArn,
 @as("JobId") jobId: ingestionJobId
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "DescribeDataIngestionJobCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "DescribeDataIngestionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -429,7 +429,7 @@ module CreateModel = {
 @as("Status") status: modelStatus,
 @as("ModelArn") modelArn: modelArn
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "CreateModelCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "CreateModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -452,7 +452,7 @@ module CreateInferenceScheduler = {
 @as("InferenceSchedulerName") inferenceSchedulerName: inferenceSchedulerName,
 @as("InferenceSchedulerArn") inferenceSchedulerArn: inferenceSchedulerArn
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "CreateInferenceSchedulerCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "CreateInferenceSchedulerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -470,7 +470,7 @@ module CreateDataset = {
 @as("DatasetArn") datasetArn: datasetArn,
 @as("DatasetName") datasetName: datasetName
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "CreateDatasetCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "CreateDatasetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -488,7 +488,7 @@ module ListInferenceExecutions = {
 @as("InferenceExecutionSummaries") inferenceExecutionSummaries: inferenceExecutionSummaries,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "ListInferenceExecutionsCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "ListInferenceExecutionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -504,6 +504,6 @@ module ListDataIngestionJobs = {
 @as("DataIngestionJobSummaries") dataIngestionJobSummaries: dataIngestionJobSummaries,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-lookoutequipment") @new external new_: (Js.Promise.t<request>) => t = "ListDataIngestionJobsCommand";
+  @module("@aws-sdk/client-lookoutequipment") @new external new_: (request) => t = "ListDataIngestionJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

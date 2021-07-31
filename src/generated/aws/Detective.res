@@ -62,7 +62,7 @@ module StartMonitoringMember = {
 @as("GraphArn") graphArn: option<graphArn>
 }
   
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "StartMonitoringMemberCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "StartMonitoringMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -72,7 +72,7 @@ module RejectInvitation = {
 @as("GraphArn") graphArn: option<graphArn>
 }
   
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "RejectInvitationCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "RejectInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -82,7 +82,7 @@ module DisassociateMembership = {
 @as("GraphArn") graphArn: option<graphArn>
 }
   
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "DisassociateMembershipCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "DisassociateMembershipCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -92,7 +92,7 @@ module DeleteGraph = {
 @as("GraphArn") graphArn: option<graphArn>
 }
   
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "DeleteGraphCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "DeleteGraphCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -102,7 +102,7 @@ module AcceptInvitation = {
 @as("GraphArn") graphArn: option<graphArn>
 }
   
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "AcceptInvitationCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "AcceptInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -113,7 +113,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<graphArn>
 }
   type response = unit
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -124,7 +124,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<graphArn>
 }
   type response = unit
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -136,7 +136,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -148,7 +148,7 @@ module CreateGraph = {
   type response = {
 @as("GraphArn") graphArn: graphArn
 }
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "CreateGraphCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "CreateGraphCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -163,7 +163,7 @@ module ListMembers = {
 @as("NextToken") nextToken: paginationToken,
 @as("MemberDetails") memberDetails: memberDetailList
 }
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "ListMembersCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "ListMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -177,7 +177,7 @@ module ListInvitations = {
 @as("NextToken") nextToken: paginationToken,
 @as("Invitations") invitations: memberDetailList
 }
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "ListInvitationsCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "ListInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -191,7 +191,7 @@ module ListGraphs = {
 @as("NextToken") nextToken: paginationToken,
 @as("GraphList") graphList: graphList
 }
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "ListGraphsCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "ListGraphsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -205,7 +205,7 @@ module GetMembers = {
 @as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccountList,
 @as("MemberDetails") memberDetails: memberDetailList
 }
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "GetMembersCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "GetMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -219,7 +219,7 @@ module DeleteMembers = {
 @as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccountList,
 @as("AccountIds") accountIds: accountIdList
 }
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "DeleteMembersCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "DeleteMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -235,6 +235,6 @@ module CreateMembers = {
 @as("UnprocessedAccounts") unprocessedAccounts: unprocessedAccountList,
 @as("Members") members: memberDetailList
 }
-  @module("@aws-sdk/client-detective") @new external new_: (Js.Promise.t<request>) => t = "CreateMembersCommand";
+  @module("@aws-sdk/client-detective") @new external new_: (request) => t = "CreateMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -756,7 +756,7 @@ module StopConfigurationRecorder = {
 @as("ConfigurationRecorderName") configurationRecorderName: option<recorderName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "StopConfigurationRecorderCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "StopConfigurationRecorderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -766,7 +766,7 @@ module StartConfigurationRecorder = {
 @as("ConfigurationRecorderName") configurationRecorderName: option<recorderName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "StartConfigurationRecorderCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "StartConfigurationRecorderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -778,7 +778,7 @@ module DeliverConfigSnapshot = {
   type response = {
 @as("configSnapshotId") configSnapshotId: amazonawsString
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeliverConfigSnapshotCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeliverConfigSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -788,7 +788,7 @@ module DeleteStoredQuery = {
 @as("QueryName") queryName: option<queryName>
 }
   type response = unit
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteStoredQueryCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteStoredQueryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -798,7 +798,7 @@ module DeleteRetentionConfiguration = {
 @as("RetentionConfigurationName") retentionConfigurationName: option<retentionConfigurationName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteRetentionConfigurationCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteRetentionConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -809,7 +809,7 @@ module DeleteResourceConfig = {
 @as("ResourceType") resourceType: option<resourceTypeString>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteResourceConfigCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteResourceConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -820,7 +820,7 @@ module DeleteRemediationConfiguration = {
 @as("ConfigRuleName") configRuleName: option<configRuleName>
 }
   type response = unit
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteRemediationConfigurationCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteRemediationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -831,7 +831,7 @@ module DeletePendingAggregationRequest = {
 @as("RequesterAccountId") requesterAccountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeletePendingAggregationRequestCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeletePendingAggregationRequestCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -841,7 +841,7 @@ module DeleteOrganizationConformancePack = {
 @as("OrganizationConformancePackName") organizationConformancePackName: option<organizationConformancePackName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteOrganizationConformancePackCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteOrganizationConformancePackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -851,7 +851,7 @@ module DeleteOrganizationConfigRule = {
 @as("OrganizationConfigRuleName") organizationConfigRuleName: option<organizationConfigRuleName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteOrganizationConfigRuleCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteOrganizationConfigRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -861,7 +861,7 @@ module DeleteEvaluationResults = {
 @as("ConfigRuleName") configRuleName: option<stringWithCharLimit64>
 }
   type response = unit
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteEvaluationResultsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteEvaluationResultsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -871,7 +871,7 @@ module DeleteDeliveryChannel = {
 @as("DeliveryChannelName") deliveryChannelName: option<channelName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteDeliveryChannelCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteDeliveryChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -881,7 +881,7 @@ module DeleteConformancePack = {
 @as("ConformancePackName") conformancePackName: option<conformancePackName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteConformancePackCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteConformancePackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -891,7 +891,7 @@ module DeleteConfigurationRecorder = {
 @as("ConfigurationRecorderName") configurationRecorderName: option<recorderName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteConfigurationRecorderCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteConfigurationRecorderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -901,7 +901,7 @@ module DeleteConfigurationAggregator = {
 @as("ConfigurationAggregatorName") configurationAggregatorName: option<configurationAggregatorName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteConfigurationAggregatorCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteConfigurationAggregatorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -911,7 +911,7 @@ module DeleteConfigRule = {
 @as("ConfigRuleName") configRuleName: option<configRuleName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteConfigRuleCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteConfigRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -922,7 +922,7 @@ module DeleteAggregationAuthorization = {
 @as("AuthorizedAccountId") authorizedAccountId: option<accountId>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteAggregationAuthorizationCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteAggregationAuthorizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -933,7 +933,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<amazonResourceName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -943,7 +943,7 @@ module StartConfigRulesEvaluation = {
 @as("ConfigRuleNames") configRuleNames: reevaluateConfigRuleNames
 }
   type response = unit
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "StartConfigRulesEvaluationCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "StartConfigRulesEvaluationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -955,7 +955,7 @@ module PutRetentionConfiguration = {
   type response = {
 @as("RetentionConfiguration") retentionConfiguration: retentionConfiguration
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutRetentionConfigurationCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutRetentionConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -970,7 +970,7 @@ module PutResourceConfig = {
 @as("ResourceType") resourceType: option<resourceTypeString>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutResourceConfigCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutResourceConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -981,7 +981,7 @@ module PutExternalEvaluation = {
 @as("ConfigRuleName") configRuleName: option<configRuleName>
 }
   type response = unit
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutExternalEvaluationCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutExternalEvaluationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -993,7 +993,7 @@ module GetStoredQuery = {
   type response = {
 @as("StoredQuery") storedQuery: storedQuery
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetStoredQueryCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetStoredQueryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1004,7 +1004,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<amazonResourceName>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1018,7 +1018,7 @@ module StartRemediationExecution = {
 @as("FailedItems") failedItems: resourceKeys,
 @as("FailureMessage") failureMessage: amazonawsString
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "StartRemediationExecutionCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "StartRemediationExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1031,7 +1031,7 @@ module PutStoredQuery = {
   type response = {
 @as("QueryArn") queryArn: queryArn
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutStoredQueryCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutStoredQueryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1049,7 +1049,7 @@ module PutOrganizationConformancePack = {
   type response = {
 @as("OrganizationConformancePackArn") organizationConformancePackArn: stringWithCharLimit256
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutOrganizationConformancePackCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutOrganizationConformancePackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1064,7 +1064,7 @@ module PutOrganizationConfigRule = {
   type response = {
 @as("OrganizationConfigRuleArn") organizationConfigRuleArn: stringWithCharLimit256
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutOrganizationConfigRuleCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutOrganizationConfigRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1078,7 +1078,7 @@ module PutEvaluations = {
   type response = {
 @as("FailedEvaluations") failedEvaluations: evaluations
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutEvaluationsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutEvaluationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1088,7 +1088,7 @@ module PutDeliveryChannel = {
 @as("DeliveryChannel") deliveryChannel: option<deliveryChannel>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutDeliveryChannelCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutDeliveryChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1105,7 +1105,7 @@ module PutConformancePack = {
   type response = {
 @as("ConformancePackArn") conformancePackArn: conformancePackArn
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutConformancePackCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutConformancePackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1119,7 +1119,7 @@ module PutAggregationAuthorization = {
   type response = {
 @as("AggregationAuthorization") aggregationAuthorization: aggregationAuthorization
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutAggregationAuthorizationCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutAggregationAuthorizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1134,7 +1134,7 @@ module ListTagsForResource = {
 @as("NextToken") nextToken: nextToken,
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1148,7 +1148,7 @@ module ListStoredQueries = {
 @as("NextToken") nextToken: amazonawsString,
 @as("StoredQueryMetadata") storedQueryMetadata: storedQueryMetadataList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "ListStoredQueriesCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "ListStoredQueriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1166,7 +1166,7 @@ module ListDiscoveredResources = {
 @as("nextToken") nextToken: nextToken,
 @as("resourceIdentifiers") resourceIdentifiers: resourceIdentifierList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "ListDiscoveredResourcesCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "ListDiscoveredResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1183,7 +1183,7 @@ module ListAggregateDiscoveredResources = {
 @as("NextToken") nextToken: nextToken,
 @as("ResourceIdentifiers") resourceIdentifiers: discoveredResourceIdentifierList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "ListAggregateDiscoveredResourcesCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "ListAggregateDiscoveredResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1199,7 +1199,7 @@ module GetOrganizationConformancePackDetailedStatus = {
 @as("NextToken") nextToken: amazonawsString,
 @as("OrganizationConformancePackDetailedStatuses") organizationConformancePackDetailedStatuses: organizationConformancePackDetailedStatuses
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetOrganizationConformancePackDetailedStatusCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetOrganizationConformancePackDetailedStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1215,7 +1215,7 @@ module GetOrganizationConfigRuleDetailedStatus = {
 @as("NextToken") nextToken: amazonawsString,
 @as("OrganizationConfigRuleDetailedStatus") organizationConfigRuleDetailedStatus: organizationConfigRuleDetailedStatus
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetOrganizationConfigRuleDetailedStatusCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetOrganizationConfigRuleDetailedStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1231,7 +1231,7 @@ module GetDiscoveredResourceCounts = {
 @as("resourceCounts") resourceCounts: resourceCounts,
 @as("totalDiscoveredResources") totalDiscoveredResources: amazonawsLong
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetDiscoveredResourceCountsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetDiscoveredResourceCountsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1246,7 +1246,7 @@ module GetConformancePackComplianceSummary = {
 @as("NextToken") nextToken: nextToken,
 @as("ConformancePackComplianceSummaryList") conformancePackComplianceSummaryList: conformancePackComplianceSummaryList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetConformancePackComplianceSummaryCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetConformancePackComplianceSummaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1256,7 +1256,7 @@ module GetComplianceSummaryByConfigRule = {
   type response = {
 @as("ComplianceSummary") complianceSummary: complianceSummary
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<unit>) => t = "GetComplianceSummaryByConfigRuleCommand";
+  @module("@aws-sdk/client-config") @new external new_: (unit) => t = "GetComplianceSummaryByConfigRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1275,7 +1275,7 @@ module GetAggregateDiscoveredResourceCounts = {
 @as("GroupByKey") groupByKey: stringWithCharLimit256,
 @as("TotalDiscoveredResources") totalDiscoveredResources: option<amazonawsLong>
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetAggregateDiscoveredResourceCountsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetAggregateDiscoveredResourceCountsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1289,7 +1289,7 @@ module DescribeRetentionConfigurations = {
 @as("NextToken") nextToken: nextToken,
 @as("RetentionConfigurations") retentionConfigurations: retentionConfigurationList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeRetentionConfigurationsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeRetentionConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1305,7 +1305,7 @@ module DescribeRemediationExceptions = {
 @as("NextToken") nextToken: amazonawsString,
 @as("RemediationExceptions") remediationExceptions: remediationExceptions
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeRemediationExceptionsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeRemediationExceptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1319,7 +1319,7 @@ module DescribePendingAggregationRequests = {
 @as("NextToken") nextToken: amazonawsString,
 @as("PendingAggregationRequests") pendingAggregationRequests: pendingAggregationRequestList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribePendingAggregationRequestsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribePendingAggregationRequestsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1334,7 +1334,7 @@ module DescribeOrganizationConformancePackStatuses = {
 @as("NextToken") nextToken: amazonawsString,
 @as("OrganizationConformancePackStatuses") organizationConformancePackStatuses: organizationConformancePackStatuses
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeOrganizationConformancePackStatusesCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeOrganizationConformancePackStatusesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1349,7 +1349,7 @@ module DescribeOrganizationConfigRuleStatuses = {
 @as("NextToken") nextToken: amazonawsString,
 @as("OrganizationConfigRuleStatuses") organizationConfigRuleStatuses: organizationConfigRuleStatuses
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeOrganizationConfigRuleStatusesCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeOrganizationConfigRuleStatusesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1364,7 +1364,7 @@ module DescribeConformancePackStatus = {
 @as("NextToken") nextToken: nextToken,
 @as("ConformancePackStatusDetails") conformancePackStatusDetails: conformancePackStatusDetailsList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeConformancePackStatusCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConformancePackStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1376,7 +1376,7 @@ module DescribeConfigurationRecorderStatus = {
   type response = {
 @as("ConfigurationRecordersStatus") configurationRecordersStatus: configurationRecorderStatusList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeConfigurationRecorderStatusCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigurationRecorderStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1392,7 +1392,7 @@ module DescribeConfigurationAggregatorSourcesStatus = {
 @as("NextToken") nextToken: amazonawsString,
 @as("AggregatedSourceStatusList") aggregatedSourceStatusList: aggregatedSourceStatusList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeConfigurationAggregatorSourcesStatusCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigurationAggregatorSourcesStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1407,7 +1407,7 @@ module DescribeConfigRuleEvaluationStatus = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ConfigRulesEvaluationStatus") configRulesEvaluationStatus: configRuleEvaluationStatusList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeConfigRuleEvaluationStatusCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigRuleEvaluationStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1421,7 +1421,7 @@ module DescribeAggregationAuthorizations = {
 @as("NextToken") nextToken: amazonawsString,
 @as("AggregationAuthorizations") aggregationAuthorizations: aggregationAuthorizationList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeAggregationAuthorizationsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeAggregationAuthorizationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1437,7 +1437,7 @@ module SelectResourceConfig = {
 @as("QueryInfo") queryInfo: queryInfo,
 @as("Results") results: results
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "SelectResourceConfigCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "SelectResourceConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1455,7 +1455,7 @@ module SelectAggregateResourceConfig = {
 @as("QueryInfo") queryInfo: queryInfo,
 @as("Results") results: results
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "SelectAggregateResourceConfigCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "SelectAggregateResourceConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1465,7 +1465,7 @@ module PutConfigurationRecorder = {
 @as("ConfigurationRecorder") configurationRecorder: option<configurationRecorder>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutConfigurationRecorderCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutConfigurationRecorderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1478,7 +1478,7 @@ module GetAggregateResourceConfig = {
   type response = {
 @as("ConfigurationItem") configurationItem: configurationItem
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetAggregateResourceConfigCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetAggregateResourceConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1496,7 +1496,7 @@ module GetAggregateConformancePackComplianceSummary = {
 @as("GroupByKey") groupByKey: stringWithCharLimit256,
 @as("AggregateConformancePackComplianceSummaries") aggregateConformancePackComplianceSummaries: aggregateConformancePackComplianceSummaryList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetAggregateConformancePackComplianceSummaryCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetAggregateConformancePackComplianceSummaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1508,7 +1508,7 @@ module DescribeDeliveryChannels = {
   type response = {
 @as("DeliveryChannels") deliveryChannels: deliveryChannelList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeDeliveryChannelsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeDeliveryChannelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1520,7 +1520,7 @@ module DescribeDeliveryChannelStatus = {
   type response = {
 @as("DeliveryChannelsStatus") deliveryChannelsStatus: deliveryChannelStatusList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeDeliveryChannelStatusCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeDeliveryChannelStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1537,7 +1537,7 @@ module DescribeConformancePackCompliance = {
 @as("ConformancePackRuleComplianceList") conformancePackRuleComplianceList: option<conformancePackRuleComplianceList>,
 @as("ConformancePackName") conformancePackName: option<conformancePackName>
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeConformancePackComplianceCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConformancePackComplianceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1553,7 +1553,7 @@ module DescribeAggregateComplianceByConformancePacks = {
 @as("NextToken") nextToken: nextToken,
 @as("AggregateComplianceByConformancePacks") aggregateComplianceByConformancePacks: aggregateComplianceByConformancePackList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeAggregateComplianceByConformancePacksCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeAggregateComplianceByConformancePacksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1566,7 +1566,7 @@ module BatchGetResourceConfig = {
 @as("unprocessedResourceKeys") unprocessedResourceKeys: resourceKeys,
 @as("baseConfigurationItems") baseConfigurationItems: baseConfigurationItems
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "BatchGetResourceConfigCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "BatchGetResourceConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1580,7 +1580,7 @@ module BatchGetAggregateResourceConfig = {
 @as("UnprocessedResourceIdentifiers") unprocessedResourceIdentifiers: unprocessedResourceIdentifierList,
 @as("BaseConfigurationItems") baseConfigurationItems: baseConfigurationItems
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "BatchGetAggregateResourceConfigCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "BatchGetAggregateResourceConfigCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1595,7 +1595,7 @@ module PutRemediationExceptions = {
   type response = {
 @as("FailedBatches") failedBatches: failedRemediationExceptionBatches
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutRemediationExceptionsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutRemediationExceptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1610,7 +1610,7 @@ module PutConfigurationAggregator = {
   type response = {
 @as("ConfigurationAggregator") configurationAggregator: configurationAggregator
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutConfigurationAggregatorCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutConfigurationAggregatorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1621,7 +1621,7 @@ module PutConfigRule = {
 @as("ConfigRule") configRule: option<configRule>
 }
   
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutConfigRuleCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutConfigRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1640,7 +1640,7 @@ module GetResourceConfigHistory = {
 @as("nextToken") nextToken: nextToken,
 @as("configurationItems") configurationItems: configurationItemList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetResourceConfigHistoryCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetResourceConfigHistoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1657,7 +1657,7 @@ module GetConformancePackComplianceDetails = {
 @as("ConformancePackRuleEvaluationResults") conformancePackRuleEvaluationResults: conformancePackRuleEvaluationResultsList,
 @as("ConformancePackName") conformancePackName: option<conformancePackName>
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetConformancePackComplianceDetailsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetConformancePackComplianceDetailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1669,7 +1669,7 @@ module GetComplianceSummaryByResourceType = {
   type response = {
 @as("ComplianceSummariesByResourceType") complianceSummariesByResourceType: complianceSummariesByResourceType
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetComplianceSummaryByResourceTypeCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetComplianceSummaryByResourceTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1685,7 +1685,7 @@ module GetComplianceDetailsByResource = {
 @as("NextToken") nextToken: amazonawsString,
 @as("EvaluationResults") evaluationResults: evaluationResults
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetComplianceDetailsByResourceCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetComplianceDetailsByResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1701,7 +1701,7 @@ module GetComplianceDetailsByConfigRule = {
 @as("NextToken") nextToken: nextToken,
 @as("EvaluationResults") evaluationResults: evaluationResults
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetComplianceDetailsByConfigRuleCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetComplianceDetailsByConfigRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1719,7 +1719,7 @@ module GetAggregateConfigRuleComplianceSummary = {
 @as("AggregateComplianceCounts") aggregateComplianceCounts: aggregateComplianceCountList,
 @as("GroupByKey") groupByKey: stringWithCharLimit256
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetAggregateConfigRuleComplianceSummaryCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetAggregateConfigRuleComplianceSummaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1738,7 +1738,7 @@ module GetAggregateComplianceDetailsByConfigRule = {
 @as("NextToken") nextToken: nextToken,
 @as("AggregateEvaluationResults") aggregateEvaluationResults: aggregateEvaluationResultList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "GetAggregateComplianceDetailsByConfigRuleCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "GetAggregateComplianceDetailsByConfigRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1754,7 +1754,7 @@ module DescribeRemediationExecutionStatus = {
 @as("NextToken") nextToken: amazonawsString,
 @as("RemediationExecutionStatuses") remediationExecutionStatuses: remediationExecutionStatuses
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeRemediationExecutionStatusCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeRemediationExecutionStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1769,7 +1769,7 @@ module DescribeOrganizationConformancePacks = {
 @as("NextToken") nextToken: amazonawsString,
 @as("OrganizationConformancePacks") organizationConformancePacks: organizationConformancePacks
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeOrganizationConformancePacksCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeOrganizationConformancePacksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1784,7 +1784,7 @@ module DescribeOrganizationConfigRules = {
 @as("NextToken") nextToken: amazonawsString,
 @as("OrganizationConfigRules") organizationConfigRules: organizationConfigRules
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeOrganizationConfigRulesCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeOrganizationConfigRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1799,7 +1799,7 @@ module DescribeConformancePacks = {
 @as("NextToken") nextToken: nextToken,
 @as("ConformancePackDetails") conformancePackDetails: conformancePackDetailList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeConformancePacksCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConformancePacksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1811,7 +1811,7 @@ module DescribeConfigurationRecorders = {
   type response = {
 @as("ConfigurationRecorders") configurationRecorders: configurationRecorderList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeConfigurationRecordersCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigurationRecordersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1828,7 +1828,7 @@ module DescribeComplianceByResource = {
 @as("NextToken") nextToken: nextToken,
 @as("ComplianceByResources") complianceByResources: complianceByResources
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeComplianceByResourceCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeComplianceByResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1843,7 +1843,7 @@ module DescribeComplianceByConfigRule = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ComplianceByConfigRules") complianceByConfigRules: complianceByConfigRules
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeComplianceByConfigRuleCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeComplianceByConfigRuleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1859,7 +1859,7 @@ module DescribeAggregateComplianceByConfigRules = {
 @as("NextToken") nextToken: nextToken,
 @as("AggregateComplianceByConfigRules") aggregateComplianceByConfigRules: aggregateComplianceByConfigRuleList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeAggregateComplianceByConfigRulesCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeAggregateComplianceByConfigRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1872,7 +1872,7 @@ module DeleteRemediationExceptions = {
   type response = {
 @as("FailedBatches") failedBatches: failedDeleteRemediationExceptionsBatches
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DeleteRemediationExceptionsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DeleteRemediationExceptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1887,7 +1887,7 @@ module DescribeConfigurationAggregators = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ConfigurationAggregators") configurationAggregators: configurationAggregatorList
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeConfigurationAggregatorsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigurationAggregatorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1901,7 +1901,7 @@ module DescribeConfigRules = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ConfigRules") configRules: configRules
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeConfigRulesCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeConfigRulesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1913,7 +1913,7 @@ module DescribeRemediationConfigurations = {
   type response = {
 @as("RemediationConfigurations") remediationConfigurations: remediationConfigurations
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "DescribeRemediationConfigurationsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "DescribeRemediationConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1925,6 +1925,6 @@ module PutRemediationConfigurations = {
   type response = {
 @as("FailedBatches") failedBatches: failedRemediationBatches
 }
-  @module("@aws-sdk/client-config") @new external new_: (Js.Promise.t<request>) => t = "PutRemediationConfigurationsCommand";
+  @module("@aws-sdk/client-config") @new external new_: (request) => t = "PutRemediationConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

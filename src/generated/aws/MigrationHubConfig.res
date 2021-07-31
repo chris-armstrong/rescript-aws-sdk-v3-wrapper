@@ -32,7 +32,7 @@ module GetHomeRegion = {
   type response = {
 @as("HomeRegion") homeRegion: homeRegion
 }
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "GetHomeRegionCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "GetHomeRegionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -46,7 +46,7 @@ module CreateHomeRegionControl = {
   type response = {
 @as("HomeRegionControl") homeRegionControl: homeRegionControl
 }
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "CreateHomeRegionControlCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "CreateHomeRegionControlCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -63,6 +63,6 @@ module DescribeHomeRegionControls = {
 @as("NextToken") nextToken: token,
 @as("HomeRegionControls") homeRegionControls: homeRegionControls
 }
-  @module("@aws-sdk/client-mgh") @new external new_: (Js.Promise.t<request>) => t = "DescribeHomeRegionControlsCommand";
+  @module("@aws-sdk/client-mgh") @new external new_: (request) => t = "DescribeHomeRegionControlsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

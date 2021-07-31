@@ -584,7 +584,7 @@ module RejectPortfolioShare = {
 @as("AcceptLanguage") acceptLanguage: acceptLanguage
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "RejectPortfolioShareCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "RejectPortfolioShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -594,7 +594,7 @@ module GetAWSOrganizationsAccessStatus = {
   type response = {
 @as("AccessStatus") accessStatus: accessStatus
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "GetAWSOrganizationsAccessStatusCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "GetAWSOrganizationsAccessStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -602,7 +602,7 @@ module EnableAWSOrganizationsAccess = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "EnableAWSOrganizationsAccessCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "EnableAWSOrganizationsAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -613,7 +613,7 @@ module DisassociateTagOptionFromResource = {
 @as("ResourceId") resourceId: option<resourceId>
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DisassociateTagOptionFromResourceCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DisassociateTagOptionFromResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -626,7 +626,7 @@ module DisassociateServiceActionFromProvisioningArtifact = {
 @as("ProductId") productId: option<id>
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DisassociateServiceActionFromProvisioningArtifactCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DisassociateServiceActionFromProvisioningArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -638,7 +638,7 @@ module DisassociateProductFromPortfolio = {
 @as("AcceptLanguage") acceptLanguage: acceptLanguage
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DisassociateProductFromPortfolioCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DisassociateProductFromPortfolioCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -650,7 +650,7 @@ module DisassociatePrincipalFromPortfolio = {
 @as("AcceptLanguage") acceptLanguage: acceptLanguage
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DisassociatePrincipalFromPortfolioCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DisassociatePrincipalFromPortfolioCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -661,7 +661,7 @@ module DisassociateBudgetFromResource = {
 @as("BudgetName") budgetName: option<budgetName>
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DisassociateBudgetFromResourceCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DisassociateBudgetFromResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -669,7 +669,7 @@ module DisableAWSOrganizationsAccess = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DisableAWSOrganizationsAccessCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DisableAWSOrganizationsAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -684,7 +684,7 @@ module DescribeCopyProductStatus = {
 @as("TargetProductId") targetProductId: id,
 @as("CopyProductStatus") copyProductStatus: copyProductStatus
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeCopyProductStatusCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeCopyProductStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -694,7 +694,7 @@ module DeleteTagOption = {
 @as("Id") id: option<tagOptionId>
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DeleteTagOptionCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeleteTagOptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -705,7 +705,7 @@ module DeleteServiceAction = {
 @as("Id") id: option<id>
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DeleteServiceActionCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeleteServiceActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -717,7 +717,7 @@ module DeleteProvisioningArtifact = {
 @as("AcceptLanguage") acceptLanguage: acceptLanguage
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DeleteProvisioningArtifactCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeleteProvisioningArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -729,7 +729,7 @@ module DeleteProvisionedProductPlan = {
 @as("AcceptLanguage") acceptLanguage: acceptLanguage
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DeleteProvisionedProductPlanCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeleteProvisionedProductPlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -740,7 +740,7 @@ module DeleteProduct = {
 @as("AcceptLanguage") acceptLanguage: acceptLanguage
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DeleteProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeleteProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -751,7 +751,7 @@ module DeletePortfolio = {
 @as("AcceptLanguage") acceptLanguage: acceptLanguage
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DeletePortfolioCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeletePortfolioCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -762,7 +762,7 @@ module DeleteConstraint = {
 @as("AcceptLanguage") acceptLanguage: acceptLanguage
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DeleteConstraintCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeleteConstraintCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -773,7 +773,7 @@ module AssociateTagOptionWithResource = {
 @as("ResourceId") resourceId: option<resourceId>
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "AssociateTagOptionWithResourceCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "AssociateTagOptionWithResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -786,7 +786,7 @@ module AssociateServiceActionWithProvisioningArtifact = {
 @as("ProductId") productId: option<id>
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "AssociateServiceActionWithProvisioningArtifactCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "AssociateServiceActionWithProvisioningArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -799,7 +799,7 @@ module AssociateProductWithPortfolio = {
 @as("AcceptLanguage") acceptLanguage: acceptLanguage
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "AssociateProductWithPortfolioCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "AssociateProductWithPortfolioCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -812,7 +812,7 @@ module AssociatePrincipalWithPortfolio = {
 @as("AcceptLanguage") acceptLanguage: acceptLanguage
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "AssociatePrincipalWithPortfolioCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "AssociatePrincipalWithPortfolioCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -823,7 +823,7 @@ module AssociateBudgetWithResource = {
 @as("BudgetName") budgetName: option<budgetName>
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "AssociateBudgetWithResourceCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "AssociateBudgetWithResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -835,7 +835,7 @@ module AcceptPortfolioShare = {
 @as("AcceptLanguage") acceptLanguage: acceptLanguage
 }
   type response = unit
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "AcceptPortfolioShareCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "AcceptPortfolioShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -849,7 +849,7 @@ module UpdateTagOption = {
   type response = {
 @as("TagOptionDetail") tagOptionDetail: tagOptionDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UpdateTagOptionCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdateTagOptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -869,7 +869,7 @@ module UpdateProvisioningArtifact = {
 @as("Info") info: provisioningArtifactInfo,
 @as("ProvisioningArtifactDetail") provisioningArtifactDetail: provisioningArtifactDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UpdateProvisioningArtifactCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdateProvisioningArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -887,7 +887,7 @@ module UpdateProvisionedProductProperties = {
 @as("ProvisionedProductProperties") provisionedProductProperties: provisionedProductProperties,
 @as("ProvisionedProductId") provisionedProductId: id
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UpdateProvisionedProductPropertiesCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdateProvisionedProductPropertiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -904,7 +904,7 @@ module UpdatePortfolioShare = {
 @as("Status") status: shareStatus,
 @as("PortfolioShareToken") portfolioShareToken: id
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UpdatePortfolioShareCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdatePortfolioShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -921,7 +921,7 @@ module UpdateConstraint = {
 @as("ConstraintParameters") constraintParameters: constraintParameters,
 @as("ConstraintDetail") constraintDetail: constraintDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UpdateConstraintCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdateConstraintCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -938,7 +938,7 @@ module ListPortfolioAccess = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("AccountIds") accountIds: accountIds
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListPortfolioAccessCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListPortfolioAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -950,7 +950,7 @@ module DescribeTagOption = {
   type response = {
 @as("TagOptionDetail") tagOptionDetail: tagOptionDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeTagOptionCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeTagOptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -969,7 +969,7 @@ module DescribeProvisioningArtifact = {
 @as("Info") info: provisioningArtifactInfo,
 @as("ProvisioningArtifactDetail") provisioningArtifactDetail: provisioningArtifactDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeProvisioningArtifactCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeProvisioningArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -984,7 +984,7 @@ module DescribeConstraint = {
 @as("ConstraintParameters") constraintParameters: constraintParameters,
 @as("ConstraintDetail") constraintDetail: constraintDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeConstraintCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeConstraintCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -999,7 +999,7 @@ module DeletePortfolioShare = {
   type response = {
 @as("PortfolioShareToken") portfolioShareToken: id
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DeletePortfolioShareCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DeletePortfolioShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1012,7 +1012,7 @@ module CreateTagOption = {
   type response = {
 @as("TagOptionDetail") tagOptionDetail: tagOptionDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "CreateTagOptionCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreateTagOptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1028,7 +1028,7 @@ module CreatePortfolioShare = {
   type response = {
 @as("PortfolioShareToken") portfolioShareToken: id
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "CreatePortfolioShareCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreatePortfolioShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1048,7 +1048,7 @@ module CreateConstraint = {
 @as("ConstraintParameters") constraintParameters: constraintParameters,
 @as("ConstraintDetail") constraintDetail: constraintDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "CreateConstraintCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreateConstraintCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1064,7 +1064,7 @@ module UpdateServiceAction = {
   type response = {
 @as("ServiceActionDetail") serviceActionDetail: serviceActionDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UpdateServiceActionCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdateServiceActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1087,7 +1087,7 @@ module UpdateProduct = {
 @as("Tags") tags: tags,
 @as("ProductViewDetail") productViewDetail: productViewDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UpdateProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdateProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1106,7 +1106,7 @@ module UpdatePortfolio = {
 @as("Tags") tags: tags,
 @as("PortfolioDetail") portfolioDetail: portfolioDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UpdatePortfolioCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdatePortfolioCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1122,7 +1122,7 @@ module ScanProvisionedProducts = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("ProvisionedProducts") provisionedProducts: provisionedProductDetails
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ScanProvisionedProductsCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ScanProvisionedProductsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1137,7 +1137,7 @@ module ListTagOptions = {
 @as("PageToken") pageToken: pageToken,
 @as("TagOptionDetails") tagOptionDetails: tagOptionDetails
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListTagOptionsCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListTagOptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1153,7 +1153,7 @@ module ListStackInstancesForProvisionedProduct = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("StackInstances") stackInstances: stackInstances
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListStackInstancesForProvisionedProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListStackInstancesForProvisionedProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1170,7 +1170,7 @@ module ListServiceActionsForProvisioningArtifact = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("ServiceActionSummaries") serviceActionSummaries: serviceActionSummaries
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListServiceActionsForProvisioningArtifactCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListServiceActionsForProvisioningArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1185,7 +1185,7 @@ module ListServiceActions = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("ServiceActionSummaries") serviceActionSummaries: serviceActionSummaries
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListServiceActionsCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListServiceActionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1201,7 +1201,7 @@ module ListResourcesForTagOption = {
 @as("PageToken") pageToken: pageToken,
 @as("ResourceDetails") resourceDetails: resourceDetails
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListResourcesForTagOptionCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListResourcesForTagOptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1215,7 +1215,7 @@ module ListProvisioningArtifacts = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("ProvisioningArtifactDetails") provisioningArtifactDetails: provisioningArtifactDetails
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListProvisioningArtifactsCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListProvisioningArtifactsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1232,7 +1232,7 @@ module ListProvisionedProductPlans = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("ProvisionedProductPlans") provisionedProductPlans: provisionedProductPlans
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListProvisionedProductPlansCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListProvisionedProductPlansCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1248,7 +1248,7 @@ module ListPrincipalsForPortfolio = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("Principals") principals: principals
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListPrincipalsForPortfolioCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListPrincipalsForPortfolioCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1264,7 +1264,7 @@ module ListPortfoliosForProduct = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("PortfolioDetails") portfolioDetails: portfolioDetails
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListPortfoliosForProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListPortfoliosForProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1279,7 +1279,7 @@ module ListPortfolios = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("PortfolioDetails") portfolioDetails: portfolioDetails
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListPortfoliosCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListPortfoliosCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1296,7 +1296,7 @@ module ListOrganizationPortfolioAccess = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("OrganizationNodes") organizationNodes: organizationNodes
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListOrganizationPortfolioAccessCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListOrganizationPortfolioAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1313,7 +1313,7 @@ module ListConstraintsForPortfolio = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("ConstraintDetails") constraintDetails: constraintDetails
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListConstraintsForPortfolioCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListConstraintsForPortfolioCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1329,7 +1329,7 @@ module ListBudgetsForResource = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("Budgets") budgets: budgets
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListBudgetsForResourceCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListBudgetsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1345,7 +1345,7 @@ module ListAcceptedPortfolioShares = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("PortfolioDetails") portfolioDetails: portfolioDetails
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListAcceptedPortfolioSharesCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListAcceptedPortfolioSharesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1363,7 +1363,7 @@ module GetProvisionedProductOutputs = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("Outputs") outputs: recordOutputs
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "GetProvisionedProductOutputsCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "GetProvisionedProductOutputsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1376,7 +1376,7 @@ module DescribeServiceAction = {
   type response = {
 @as("ServiceActionDetail") serviceActionDetail: serviceActionDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeServiceActionCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeServiceActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1391,7 +1391,7 @@ module DescribeProvisionedProduct = {
 @as("CloudWatchDashboards") cloudWatchDashboards: cloudWatchDashboards,
 @as("ProvisionedProductDetail") provisionedProductDetail: provisionedProductDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeProvisionedProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeProvisionedProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1405,7 +1405,7 @@ module DescribeProductView = {
 @as("ProvisioningArtifacts") provisioningArtifacts: provisioningArtifacts,
 @as("ProductViewSummary") productViewSummary: productViewSummary
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeProductViewCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeProductViewCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1422,7 +1422,7 @@ module DescribeProduct = {
 @as("ProvisioningArtifacts") provisioningArtifacts: provisioningArtifacts,
 @as("ProductViewSummary") productViewSummary: productViewSummary
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1438,7 +1438,7 @@ module DescribePortfolioShares = {
 @as("PortfolioShareDetails") portfolioShareDetails: portfolioShareDetails,
 @as("NextPageToken") nextPageToken: pageToken
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribePortfolioSharesCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribePortfolioSharesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1454,7 +1454,7 @@ module DescribePortfolio = {
 @as("Tags") tags: tags,
 @as("PortfolioDetail") portfolioDetail: portfolioDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribePortfolioCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribePortfolioCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1471,7 +1471,7 @@ module CreateServiceAction = {
   type response = {
 @as("ServiceActionDetail") serviceActionDetail: serviceActionDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "CreateServiceActionCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreateServiceActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1488,7 +1488,7 @@ module CreateProvisioningArtifact = {
 @as("Info") info: provisioningArtifactInfo,
 @as("ProvisioningArtifactDetail") provisioningArtifactDetail: provisioningArtifactDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "CreateProvisioningArtifactCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreateProvisioningArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1514,7 +1514,7 @@ module CreateProvisionedProductPlan = {
 @as("PlanId") planId: id,
 @as("PlanName") planName: provisionedProductPlanName
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "CreateProvisionedProductPlanCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreateProvisionedProductPlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1539,7 +1539,7 @@ module CreateProduct = {
 @as("ProvisioningArtifactDetail") provisioningArtifactDetail: provisioningArtifactDetail,
 @as("ProductViewDetail") productViewDetail: productViewDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "CreateProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreateProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1557,7 +1557,7 @@ module CreatePortfolio = {
 @as("Tags") tags: tags,
 @as("PortfolioDetail") portfolioDetail: portfolioDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "CreatePortfolioCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CreatePortfolioCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1575,7 +1575,7 @@ module CopyProduct = {
   type response = {
 @as("CopyProductToken") copyProductToken: id
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "CopyProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "CopyProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1588,7 +1588,7 @@ module BatchDisassociateServiceActionFromProvisioningArtifact = {
   type response = {
 @as("FailedServiceActionAssociations") failedServiceActionAssociations: failedServiceActionAssociations
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "BatchDisassociateServiceActionFromProvisioningArtifactCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "BatchDisassociateServiceActionFromProvisioningArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1601,7 +1601,7 @@ module BatchAssociateServiceActionWithProvisioningArtifact = {
   type response = {
 @as("FailedServiceActionAssociations") failedServiceActionAssociations: failedServiceActionAssociations
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "BatchAssociateServiceActionWithProvisioningArtifactCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "BatchAssociateServiceActionWithProvisioningArtifactCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1625,7 +1625,7 @@ module UpdateProvisionedProduct = {
   type response = {
 @as("RecordDetail") recordDetail: recordDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "UpdateProvisionedProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "UpdateProvisionedProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1642,7 +1642,7 @@ module TerminateProvisionedProduct = {
   type response = {
 @as("RecordDetail") recordDetail: recordDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "TerminateProvisionedProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "TerminateProvisionedProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1662,7 +1662,7 @@ module SearchProductsAsAdmin = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("ProductViewDetails") productViewDetails: productViewDetails
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "SearchProductsAsAdminCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "SearchProductsAsAdminCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1681,7 +1681,7 @@ module SearchProducts = {
 @as("ProductViewAggregations") productViewAggregations: productViewAggregations,
 @as("ProductViewSummaries") productViewSummaries: productViewSummaries
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "SearchProductsCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "SearchProductsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1705,7 +1705,7 @@ module ProvisionProduct = {
   type response = {
 @as("RecordDetail") recordDetail: recordDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ProvisionProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ProvisionProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1721,7 +1721,7 @@ module ListProvisioningArtifactsForServiceAction = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("ProvisioningArtifactViews") provisioningArtifactViews: provisioningArtifactViews
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListProvisioningArtifactsForServiceActionCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListProvisioningArtifactsForServiceActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1738,7 +1738,7 @@ module ImportAsProvisionedProduct = {
   type response = {
 @as("RecordDetail") recordDetail: recordDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ImportAsProvisionedProductCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ImportAsProvisionedProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1754,7 +1754,7 @@ module ExecuteProvisionedProductServiceAction = {
   type response = {
 @as("RecordDetail") recordDetail: recordDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ExecuteProvisionedProductServiceActionCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ExecuteProvisionedProductServiceActionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1768,7 +1768,7 @@ module ExecuteProvisionedProductPlan = {
   type response = {
 @as("RecordDetail") recordDetail: recordDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ExecuteProvisionedProductPlanCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ExecuteProvisionedProductPlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1782,7 +1782,7 @@ module DescribeServiceActionExecutionParameters = {
   type response = {
 @as("ServiceActionParameters") serviceActionParameters: executionParameters
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeServiceActionExecutionParametersCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeServiceActionExecutionParametersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1799,7 +1799,7 @@ module DescribeRecord = {
 @as("RecordOutputs") recordOutputs: recordOutputs,
 @as("RecordDetail") recordDetail: recordDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeRecordCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeRecordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1818,7 +1818,7 @@ module DescribeProductAsAdmin = {
 @as("ProvisioningArtifactSummaries") provisioningArtifactSummaries: provisioningArtifactSummaries,
 @as("ProductViewDetail") productViewDetail: productViewDetail
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeProductAsAdminCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeProductAsAdminCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1838,7 +1838,7 @@ module SearchProvisionedProducts = {
 @as("TotalResultsCount") totalResultsCount: totalResultsCount,
 @as("ProvisionedProducts") provisionedProducts: provisionedProductAttributes
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "SearchProvisionedProductsCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "SearchProvisionedProductsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1855,7 +1855,7 @@ module ListRecordHistory = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("RecordDetails") recordDetails: recordDetails
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListRecordHistoryCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListRecordHistoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1871,7 +1871,7 @@ module ListLaunchPaths = {
 @as("NextPageToken") nextPageToken: pageToken,
 @as("LaunchPathSummaries") launchPathSummaries: launchPathSummaries
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "ListLaunchPathsCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "ListLaunchPathsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1894,7 +1894,7 @@ module DescribeProvisioningParameters = {
 @as("ConstraintSummaries") constraintSummaries: constraintSummaries,
 @as("ProvisioningArtifactParameters") provisioningArtifactParameters: provisioningArtifactParameters
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeProvisioningParametersCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeProvisioningParametersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1910,7 +1910,7 @@ module DescribePortfolioShareStatus = {
 @as("PortfolioId") portfolioId: id,
 @as("PortfolioShareToken") portfolioShareToken: id
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribePortfolioShareStatusCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribePortfolioShareStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1927,6 +1927,6 @@ module DescribeProvisionedProductPlan = {
 @as("ResourceChanges") resourceChanges: resourceChanges,
 @as("ProvisionedProductPlanDetails") provisionedProductPlanDetails: provisionedProductPlanDetails
 }
-  @module("@aws-sdk/client-servicecatalog") @new external new_: (Js.Promise.t<request>) => t = "DescribeProvisionedProductPlanCommand";
+  @module("@aws-sdk/client-servicecatalog") @new external new_: (request) => t = "DescribeProvisionedProductPlanCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

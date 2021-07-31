@@ -619,7 +619,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -630,7 +630,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<arn>
 }
   type response = unit
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -646,7 +646,7 @@ module ListVirtualServices = {
 @as("nextToken") nextToken: apiString,
 @as("virtualServices") virtualServices: option<virtualServiceList>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "ListVirtualServicesCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListVirtualServicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -662,7 +662,7 @@ module ListVirtualRouters = {
 @as("nextToken") nextToken: apiString,
 @as("virtualRouters") virtualRouters: option<virtualRouterList>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "ListVirtualRoutersCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListVirtualRoutersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -678,7 +678,7 @@ module ListVirtualNodes = {
 @as("nextToken") nextToken: apiString,
 @as("virtualNodes") virtualNodes: option<virtualNodeList>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "ListVirtualNodesCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListVirtualNodesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -694,7 +694,7 @@ module ListVirtualGateways = {
 @as("nextToken") nextToken: apiString,
 @as("virtualGateways") virtualGateways: option<virtualGatewayList>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "ListVirtualGatewaysCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListVirtualGatewaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -709,7 +709,7 @@ module ListTagsForResource = {
 @as("nextToken") nextToken: apiString,
 @as("tags") tags: option<tagList>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -726,7 +726,7 @@ module ListRoutes = {
 @as("nextToken") nextToken: apiString,
 @as("routes") routes: option<routeList>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "ListRoutesCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListRoutesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -740,7 +740,7 @@ module ListMeshes = {
 @as("nextToken") nextToken: apiString,
 @as("meshes") meshes: option<meshList>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "ListMeshesCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListMeshesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -757,7 +757,7 @@ module ListGatewayRoutes = {
 @as("nextToken") nextToken: apiString,
 @as("gatewayRoutes") gatewayRoutes: option<gatewayRouteList>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "ListGatewayRoutesCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "ListGatewayRoutesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -771,7 +771,7 @@ module UpdateMesh = {
   type response = {
 @as("mesh") mesh: option<meshData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "UpdateMeshCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "UpdateMeshCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -784,7 +784,7 @@ module DescribeMesh = {
   type response = {
 @as("mesh") mesh: option<meshData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DescribeMeshCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DescribeMeshCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -796,7 +796,7 @@ module DeleteMesh = {
   type response = {
 @as("mesh") mesh: option<meshData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DeleteMeshCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DeleteMeshCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -811,7 +811,7 @@ module CreateMesh = {
   type response = {
 @as("mesh") mesh: option<meshData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "CreateMeshCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "CreateMeshCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -827,7 +827,7 @@ module UpdateVirtualService = {
   type response = {
 @as("virtualService") virtualService: option<virtualServiceData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "UpdateVirtualServiceCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "UpdateVirtualServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -841,7 +841,7 @@ module DescribeVirtualService = {
   type response = {
 @as("virtualService") virtualService: option<virtualServiceData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DescribeVirtualServiceCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DescribeVirtualServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -855,7 +855,7 @@ module DeleteVirtualService = {
   type response = {
 @as("virtualService") virtualService: option<virtualServiceData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DeleteVirtualServiceCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DeleteVirtualServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -872,7 +872,7 @@ module CreateVirtualService = {
   type response = {
 @as("virtualService") virtualService: option<virtualServiceData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "CreateVirtualServiceCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "CreateVirtualServiceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -888,7 +888,7 @@ module UpdateVirtualRouter = {
   type response = {
 @as("virtualRouter") virtualRouter: option<virtualRouterData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "UpdateVirtualRouterCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "UpdateVirtualRouterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -902,7 +902,7 @@ module DescribeVirtualRouter = {
   type response = {
 @as("virtualRouter") virtualRouter: option<virtualRouterData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DescribeVirtualRouterCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DescribeVirtualRouterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -916,7 +916,7 @@ module DeleteVirtualRouter = {
   type response = {
 @as("virtualRouter") virtualRouter: option<virtualRouterData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DeleteVirtualRouterCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DeleteVirtualRouterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -933,7 +933,7 @@ module CreateVirtualRouter = {
   type response = {
 @as("virtualRouter") virtualRouter: option<virtualRouterData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "CreateVirtualRouterCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "CreateVirtualRouterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -950,7 +950,7 @@ module UpdateGatewayRoute = {
   type response = {
 @as("gatewayRoute") gatewayRoute: option<gatewayRouteData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "UpdateGatewayRouteCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "UpdateGatewayRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -965,7 +965,7 @@ module DescribeGatewayRoute = {
   type response = {
 @as("gatewayRoute") gatewayRoute: option<gatewayRouteData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DescribeGatewayRouteCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DescribeGatewayRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -980,7 +980,7 @@ module DeleteGatewayRoute = {
   type response = {
 @as("gatewayRoute") gatewayRoute: option<gatewayRouteData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DeleteGatewayRouteCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DeleteGatewayRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -998,7 +998,7 @@ module CreateGatewayRoute = {
   type response = {
 @as("gatewayRoute") gatewayRoute: option<gatewayRouteData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "CreateGatewayRouteCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "CreateGatewayRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1015,7 +1015,7 @@ module UpdateRoute = {
   type response = {
 @as("route") route: option<routeData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "UpdateRouteCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "UpdateRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1030,7 +1030,7 @@ module DescribeRoute = {
   type response = {
 @as("route") route: option<routeData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DescribeRouteCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DescribeRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1045,7 +1045,7 @@ module DeleteRoute = {
   type response = {
 @as("route") route: option<routeData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DeleteRouteCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DeleteRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1063,7 +1063,7 @@ module CreateRoute = {
   type response = {
 @as("route") route: option<routeData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "CreateRouteCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "CreateRouteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1079,7 +1079,7 @@ module UpdateVirtualGateway = {
   type response = {
 @as("virtualGateway") virtualGateway: option<virtualGatewayData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "UpdateVirtualGatewayCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "UpdateVirtualGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1093,7 +1093,7 @@ module DescribeVirtualGateway = {
   type response = {
 @as("virtualGateway") virtualGateway: option<virtualGatewayData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DescribeVirtualGatewayCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DescribeVirtualGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1107,7 +1107,7 @@ module DeleteVirtualGateway = {
   type response = {
 @as("virtualGateway") virtualGateway: option<virtualGatewayData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DeleteVirtualGatewayCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DeleteVirtualGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1124,7 +1124,7 @@ module CreateVirtualGateway = {
   type response = {
 @as("virtualGateway") virtualGateway: option<virtualGatewayData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "CreateVirtualGatewayCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "CreateVirtualGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1140,7 +1140,7 @@ module UpdateVirtualNode = {
   type response = {
 @as("virtualNode") virtualNode: option<virtualNodeData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "UpdateVirtualNodeCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "UpdateVirtualNodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1154,7 +1154,7 @@ module DescribeVirtualNode = {
   type response = {
 @as("virtualNode") virtualNode: option<virtualNodeData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DescribeVirtualNodeCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DescribeVirtualNodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1168,7 +1168,7 @@ module DeleteVirtualNode = {
   type response = {
 @as("virtualNode") virtualNode: option<virtualNodeData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "DeleteVirtualNodeCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "DeleteVirtualNodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1185,6 +1185,6 @@ module CreateVirtualNode = {
   type response = {
 @as("virtualNode") virtualNode: option<virtualNodeData>
 }
-  @module("@aws-sdk/client-appmesh") @new external new_: (Js.Promise.t<request>) => t = "CreateVirtualNodeCommand";
+  @module("@aws-sdk/client-appmesh") @new external new_: (request) => t = "CreateVirtualNodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

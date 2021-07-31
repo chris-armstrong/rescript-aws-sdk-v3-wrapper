@@ -716,7 +716,7 @@ module UpdateOrganizationConfiguration = {
 @as("autoEnable") autoEnable: option<__boolean>
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "UpdateOrganizationConfigurationCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UpdateOrganizationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -727,7 +727,7 @@ module UpdateMemberSession = {
 @as("id") id: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "UpdateMemberSessionCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UpdateMemberSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -738,7 +738,7 @@ module UpdateMacieSession = {
 @as("findingPublishingFrequency") findingPublishingFrequency: findingPublishingFrequency
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "UpdateMacieSessionCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UpdateMacieSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -749,7 +749,7 @@ module UpdateClassificationJob = {
 @as("jobId") jobId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "UpdateClassificationJobCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UpdateClassificationJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -763,7 +763,7 @@ module GetMacieSession = {
 @as("findingPublishingFrequency") findingPublishingFrequency: findingPublishingFrequency,
 @as("createdAt") createdAt: __timestampIso8601
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetMacieSessionCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetMacieSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -773,7 +773,7 @@ module GetInvitationsCount = {
   type response = {
 @as("invitationsCount") invitationsCount: __long
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetInvitationsCountCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetInvitationsCountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -784,7 +784,7 @@ module EnableOrganizationAdminAccount = {
 @as("adminAccountId") adminAccountId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "EnableOrganizationAdminAccountCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "EnableOrganizationAdminAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -796,7 +796,7 @@ module EnableMacie = {
 @as("clientToken") clientToken: __string
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "EnableMacieCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "EnableMacieCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -806,7 +806,7 @@ module DisassociateMember = {
 @as("id") id: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateMemberCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DisassociateMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -814,7 +814,7 @@ module DisassociateFromMasterAccount = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateFromMasterAccountCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DisassociateFromMasterAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -822,7 +822,7 @@ module DisassociateFromAdministratorAccount = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DisassociateFromAdministratorAccountCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DisassociateFromAdministratorAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -832,7 +832,7 @@ module DisableOrganizationAdminAccount = {
 @as("adminAccountId") adminAccountId: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DisableOrganizationAdminAccountCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DisableOrganizationAdminAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -840,7 +840,7 @@ module DisableMacie = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DisableMacieCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DisableMacieCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -851,7 +851,7 @@ module DescribeOrganizationConfiguration = {
 @as("maxAccountLimitReached") maxAccountLimitReached: __boolean,
 @as("autoEnable") autoEnable: __boolean
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DescribeOrganizationConfigurationCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DescribeOrganizationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -861,7 +861,7 @@ module DeleteMember = {
 @as("id") id: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DeleteMemberCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DeleteMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -871,7 +871,7 @@ module DeleteFindingsFilter = {
 @as("id") id: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DeleteFindingsFilterCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DeleteFindingsFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -881,7 +881,7 @@ module DeleteCustomDataIdentifier = {
 @as("id") id: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DeleteCustomDataIdentifierCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DeleteCustomDataIdentifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -893,7 +893,7 @@ module AcceptInvitation = {
 @as("administratorAccountId") administratorAccountId: __string
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "AcceptInvitationCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "AcceptInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -904,7 +904,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -920,7 +920,7 @@ module TestCustomDataIdentifier = {
   type response = {
 @as("matchCount") matchCount: __integer
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "TestCustomDataIdentifierCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "TestCustomDataIdentifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -931,7 +931,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<__string>
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -942,7 +942,7 @@ module PutFindingsPublicationConfiguration = {
 @as("clientToken") clientToken: __string
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "PutFindingsPublicationConfigurationCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "PutFindingsPublicationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -954,7 +954,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -974,7 +974,7 @@ module GetMember = {
 @as("administratorAccountId") administratorAccountId: __string,
 @as("accountId") accountId: __string
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetMemberCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -984,7 +984,7 @@ module GetMasterAccount = {
   type response = {
 @as("master") master: invitation
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetMasterAccountCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetMasterAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -994,7 +994,7 @@ module GetFindingsPublicationConfiguration = {
   type response = {
 @as("securityHubConfiguration") securityHubConfiguration: securityHubConfiguration
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetFindingsPublicationConfigurationCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetFindingsPublicationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1016,7 +1016,7 @@ module GetCustomDataIdentifier = {
 @as("createdAt") createdAt: __timestampIso8601,
 @as("arn") arn: __string
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetCustomDataIdentifierCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetCustomDataIdentifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1040,7 +1040,7 @@ module GetBucketStatistics = {
 @as("bucketCountByEffectivePermission") bucketCountByEffectivePermission: bucketCountByEffectivePermission,
 @as("bucketCount") bucketCount: __long
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetBucketStatisticsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetBucketStatisticsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1050,7 +1050,7 @@ module GetAdministratorAccount = {
   type response = {
 @as("administrator") administrator: invitation
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetAdministratorAccountCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetAdministratorAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1060,7 +1060,7 @@ module CreateSampleFindings = {
 @as("findingTypes") findingTypes: __listOfFindingType
 }
   type response = unit
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "CreateSampleFindingsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateSampleFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1073,7 +1073,7 @@ module CreateMember = {
   type response = {
 @as("arn") arn: __string
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "CreateMemberCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateMemberCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1092,7 +1092,7 @@ module CreateCustomDataIdentifier = {
   type response = {
 @as("customDataIdentifierId") customDataIdentifierId: __string
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "CreateCustomDataIdentifierCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateCustomDataIdentifierCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1104,7 +1104,7 @@ module PutClassificationExportConfiguration = {
   type response = {
 @as("configuration") configuration: classificationExportConfiguration
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "PutClassificationExportConfigurationCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "PutClassificationExportConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1118,7 +1118,7 @@ module ListOrganizationAdminAccounts = {
 @as("nextToken") nextToken: __string,
 @as("adminAccounts") adminAccounts: __listOfAdminAccount
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "ListOrganizationAdminAccountsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListOrganizationAdminAccountsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1132,7 +1132,7 @@ module ListInvitations = {
 @as("nextToken") nextToken: __string,
 @as("invitations") invitations: __listOfInvitation
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "ListInvitationsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1146,7 +1146,7 @@ module ListCustomDataIdentifiers = {
 @as("nextToken") nextToken: __string,
 @as("items") items: __listOfCustomDataIdentifierSummary
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "ListCustomDataIdentifiersCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListCustomDataIdentifiersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1159,7 +1159,7 @@ module GetUsageTotals = {
 @as("usageTotals") usageTotals: __listOfUsageTotal,
 @as("timeRange") timeRange: timeRange
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetUsageTotalsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetUsageTotalsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1169,7 +1169,7 @@ module GetClassificationExportConfiguration = {
   type response = {
 @as("configuration") configuration: classificationExportConfiguration
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetClassificationExportConfigurationCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetClassificationExportConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1181,7 +1181,7 @@ module DeleteInvitations = {
   type response = {
 @as("unprocessedAccounts") unprocessedAccounts: __listOfUnprocessedAccount
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DeleteInvitationsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DeleteInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1193,7 +1193,7 @@ module DeclineInvitations = {
   type response = {
 @as("unprocessedAccounts") unprocessedAccounts: __listOfUnprocessedAccount
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DeclineInvitationsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DeclineInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1207,7 +1207,7 @@ module CreateInvitations = {
   type response = {
 @as("unprocessedAccounts") unprocessedAccounts: __listOfUnprocessedAccount
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "CreateInvitationsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1220,7 +1220,7 @@ module BatchGetCustomDataIdentifiers = {
 @as("notFoundIdentifierIds") notFoundIdentifierIds: __listOf__string,
 @as("customDataIdentifiers") customDataIdentifiers: __listOfBatchGetCustomDataIdentifierSummary
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "BatchGetCustomDataIdentifiersCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "BatchGetCustomDataIdentifiersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1235,7 +1235,7 @@ module ListMembers = {
 @as("nextToken") nextToken: __string,
 @as("members") members: __listOfMember
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "ListMembersCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1249,7 +1249,7 @@ module ListFindingsFilters = {
 @as("nextToken") nextToken: __string,
 @as("findingsFilterListItems") findingsFilterListItems: __listOfFindingsFilterListItem
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "ListFindingsFiltersCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListFindingsFiltersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1267,7 +1267,7 @@ module UpdateFindingsFilter = {
 @as("id") id: __string,
 @as("arn") arn: __string
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "UpdateFindingsFilterCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "UpdateFindingsFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1283,7 +1283,7 @@ module ListFindings = {
 @as("nextToken") nextToken: __string,
 @as("findingIds") findingIds: __listOf__string
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "ListFindingsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1302,7 +1302,7 @@ module GetFindingsFilter = {
 @as("arn") arn: __string,
 @as("action") action: findingsFilterAction
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetFindingsFilterCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetFindingsFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1317,7 +1317,7 @@ module GetFindingStatistics = {
   type response = {
 @as("countsByGroup") countsByGroup: __listOfGroupCount
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetFindingStatisticsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetFindingStatisticsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1336,7 +1336,7 @@ module CreateFindingsFilter = {
 @as("id") id: __string,
 @as("arn") arn: __string
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "CreateFindingsFilterCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateFindingsFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1354,7 +1354,7 @@ module GetUsageStatistics = {
 @as("records") records: __listOfUsageRecord,
 @as("nextToken") nextToken: __string
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetUsageStatisticsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetUsageStatisticsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1370,7 +1370,7 @@ module DescribeBuckets = {
 @as("nextToken") nextToken: __string,
 @as("buckets") buckets: __listOfBucketMetadata
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DescribeBucketsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DescribeBucketsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1386,7 +1386,7 @@ module SearchResources = {
 @as("nextToken") nextToken: __string,
 @as("matchingResources") matchingResources: __listOfMatchingResource
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "SearchResourcesCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "SearchResourcesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1415,7 +1415,7 @@ module DescribeClassificationJob = {
 @as("createdAt") createdAt: __timestampIso8601,
 @as("clientToken") clientToken: __string
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "DescribeClassificationJobCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "DescribeClassificationJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1437,7 +1437,7 @@ module CreateClassificationJob = {
 @as("jobId") jobId: __string,
 @as("jobArn") jobArn: __string
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "CreateClassificationJobCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "CreateClassificationJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1453,7 +1453,7 @@ module ListClassificationJobs = {
 @as("nextToken") nextToken: __string,
 @as("items") items: __listOfJobSummary
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "ListClassificationJobsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "ListClassificationJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1466,6 +1466,6 @@ module GetFindings = {
   type response = {
 @as("findings") findings: __listOfFinding
 }
-  @module("@aws-sdk/client-macie2") @new external new_: (Js.Promise.t<request>) => t = "GetFindingsCommand";
+  @module("@aws-sdk/client-macie2") @new external new_: (request) => t = "GetFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

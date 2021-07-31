@@ -64,7 +64,7 @@ module DeleteHost = {
 @as("HostArn") hostArn: option<hostArn>
 }
   type response = unit
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "DeleteHostCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "DeleteHostCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -74,7 +74,7 @@ module DeleteConnection = {
 @as("ConnectionArn") connectionArn: option<connectionArn>
 }
   type response = unit
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "DeleteConnectionCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "DeleteConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -85,7 +85,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -97,7 +97,7 @@ module GetConnection = {
   type response = {
 @as("Connection") connection: connection
 }
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "GetConnectionCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "GetConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -109,7 +109,7 @@ module UpdateHost = {
 @as("HostArn") hostArn: option<hostArn>
 }
   type response = unit
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "UpdateHostCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "UpdateHostCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -120,7 +120,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -132,7 +132,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -148,7 +148,7 @@ module ListConnections = {
 @as("NextToken") nextToken: nextToken,
 @as("Connections") connections: connectionList
 }
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "ListConnectionsCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "ListConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -164,7 +164,7 @@ module GetHost = {
 @as("Status") status: hostStatus,
 @as("Name") name: hostName
 }
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "GetHostCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "GetHostCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -181,7 +181,7 @@ module CreateHost = {
 @as("Tags") tags: tagList,
 @as("HostArn") hostArn: hostArn
 }
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "CreateHostCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "CreateHostCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -197,7 +197,7 @@ module CreateConnection = {
 @as("Tags") tags: tagList,
 @as("ConnectionArn") connectionArn: option<connectionArn>
 }
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "CreateConnectionCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "CreateConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -211,6 +211,6 @@ module ListHosts = {
 @as("NextToken") nextToken: nextToken,
 @as("Hosts") hosts: hostList
 }
-  @module("@aws-sdk/client-codestar-connections") @new external new_: (Js.Promise.t<request>) => t = "ListHostsCommand";
+  @module("@aws-sdk/client-codestar-connections") @new external new_: (request) => t = "ListHostsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

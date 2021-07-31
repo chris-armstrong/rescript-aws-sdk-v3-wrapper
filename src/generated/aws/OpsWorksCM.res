@@ -120,7 +120,7 @@ module DeleteServer = {
 @as("ServerName") serverName: option<serverName>
 }
   type response = unit
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "DeleteServerCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "DeleteServerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -130,7 +130,7 @@ module DeleteBackup = {
 @as("BackupId") backupId: option<backupId>
 }
   type response = unit
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "DeleteBackupCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "DeleteBackupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -141,7 +141,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<aWSOpsWorksCMResourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -152,7 +152,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<aWSOpsWorksCMResourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -167,7 +167,7 @@ module ListTagsForResource = {
 @as("NextToken") nextToken: nextToken,
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -182,7 +182,7 @@ module ExportServerEngineAttribute = {
 @as("ServerName") serverName: serverName,
 @as("EngineAttribute") engineAttribute: engineAttribute
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "ExportServerEngineAttributeCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "ExportServerEngineAttributeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -196,7 +196,7 @@ module DisassociateNode = {
   type response = {
 @as("NodeAssociationStatusToken") nodeAssociationStatusToken: nodeAssociationStatusToken
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "DisassociateNodeCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "DisassociateNodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -210,7 +210,7 @@ module DescribeNodeAssociationStatus = {
 @as("EngineAttributes") engineAttributes: engineAttributes,
 @as("NodeAssociationStatus") nodeAssociationStatus: nodeAssociationStatus
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "DescribeNodeAssociationStatusCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "DescribeNodeAssociationStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -225,7 +225,7 @@ module DescribeEvents = {
 @as("NextToken") nextToken: amazonawsString,
 @as("ServerEvents") serverEvents: serverEvents
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventsCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "DescribeEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -235,7 +235,7 @@ module DescribeAccountAttributes = {
   type response = {
 @as("Attributes") attributes: accountAttributes
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountAttributesCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "DescribeAccountAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -249,7 +249,7 @@ module CreateBackup = {
   type response = {
 @as("Backup") backup: backup
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "CreateBackupCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "CreateBackupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -263,7 +263,7 @@ module AssociateNode = {
   type response = {
 @as("NodeAssociationStatusToken") nodeAssociationStatusToken: nodeAssociationStatusToken
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "AssociateNodeCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "AssociateNodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -277,7 +277,7 @@ module UpdateServerEngineAttributes = {
   type response = {
 @as("Server") server: server
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "UpdateServerEngineAttributesCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "UpdateServerEngineAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -293,7 +293,7 @@ module UpdateServer = {
   type response = {
 @as("Server") server: server
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "UpdateServerCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "UpdateServerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -306,7 +306,7 @@ module StartMaintenance = {
   type response = {
 @as("Server") server: server
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "StartMaintenanceCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "StartMaintenanceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -321,7 +321,7 @@ module RestoreServer = {
   type response = {
 @as("Server") server: server
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "RestoreServerCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "RestoreServerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -337,7 +337,7 @@ module DescribeBackups = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Backups") backups: backups
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "DescribeBackupsCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "DescribeBackupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -369,7 +369,7 @@ module CreateServer = {
   type response = {
 @as("Server") server: server
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "CreateServerCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "CreateServerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -384,6 +384,6 @@ module DescribeServers = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Servers") servers: servers
 }
-  @module("@aws-sdk/client-opsworks-cm") @new external new_: (Js.Promise.t<request>) => t = "DescribeServersCommand";
+  @module("@aws-sdk/client-opsworks-cm") @new external new_: (request) => t = "DescribeServersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

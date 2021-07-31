@@ -273,7 +273,7 @@ module UntagResource = {
 @as("WorkloadArn") workloadArn: option<workloadArn>
 }
   type response = unit
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -284,7 +284,7 @@ module TagResource = {
 @as("WorkloadArn") workloadArn: option<workloadArn>
 }
   type response = unit
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -296,7 +296,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -309,7 +309,7 @@ module UpgradeLensReview = {
 @as("WorkloadId") workloadId: option<workloadId>
 }
   
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "UpgradeLensReviewCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "UpgradeLensReviewCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -324,7 +324,7 @@ module UpdateWorkloadShare = {
 @as("WorkloadShare") workloadShare: workloadShare,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "UpdateWorkloadShareCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "UpdateWorkloadShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -350,7 +350,7 @@ module UpdateWorkload = {
   type response = {
 @as("Workload") workload: workload
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "UpdateWorkloadCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "UpdateWorkloadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -363,7 +363,7 @@ module UpdateShareInvitation = {
   type response = {
 @as("ShareInvitation") shareInvitation: shareInvitation
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "UpdateShareInvitationCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "UpdateShareInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -380,7 +380,7 @@ module ListWorkloadShares = {
 @as("WorkloadShareSummaries") workloadShareSummaries: workloadShareSummaries,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "ListWorkloadSharesCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "ListWorkloadSharesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -395,7 +395,7 @@ module ListShareInvitations = {
 @as("NextToken") nextToken: nextToken,
 @as("ShareInvitationSummaries") shareInvitationSummaries: shareInvitationSummaries
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "ListShareInvitationsCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "ListShareInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -409,7 +409,7 @@ module ListLenses = {
 @as("NextToken") nextToken: nextToken,
 @as("LensSummaries") lensSummaries: lensSummaries
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "ListLensesCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "ListLensesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -430,7 +430,7 @@ module ListLensReviewImprovements = {
 @as("MilestoneNumber") milestoneNumber: milestoneNumber,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "ListLensReviewImprovementsCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "ListLensReviewImprovementsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -442,7 +442,7 @@ module GetWorkload = {
   type response = {
 @as("Workload") workload: workload
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "GetWorkloadCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "GetWorkloadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -458,7 +458,7 @@ module GetLensReviewReport = {
 @as("MilestoneNumber") milestoneNumber: milestoneNumber,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "GetLensReviewReportCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "GetLensReviewReportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -469,7 +469,7 @@ module DisassociateLenses = {
 @as("WorkloadId") workloadId: option<workloadId>
 }
   
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "DisassociateLensesCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "DisassociateLensesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -481,7 +481,7 @@ module DeleteWorkloadShare = {
 @as("ShareId") shareId: option<shareId>
 }
   
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "DeleteWorkloadShareCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "DeleteWorkloadShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -492,7 +492,7 @@ module DeleteWorkload = {
 @as("WorkloadId") workloadId: option<workloadId>
 }
   
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "DeleteWorkloadCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "DeleteWorkloadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -508,7 +508,7 @@ module CreateWorkloadShare = {
 @as("ShareId") shareId: shareId,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "CreateWorkloadShareCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "CreateWorkloadShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -535,7 +535,7 @@ module CreateWorkload = {
 @as("WorkloadArn") workloadArn: workloadArn,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "CreateWorkloadCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "CreateWorkloadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -550,7 +550,7 @@ module CreateMilestone = {
 @as("MilestoneNumber") milestoneNumber: milestoneNumber,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "CreateMilestoneCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "CreateMilestoneCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -561,7 +561,7 @@ module AssociateLenses = {
 @as("WorkloadId") workloadId: option<workloadId>
 }
   
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "AssociateLensesCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "AssociateLensesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -580,7 +580,7 @@ module UpdateAnswer = {
 @as("LensAlias") lensAlias: lensAlias,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "UpdateAnswerCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "UpdateAnswerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -595,7 +595,7 @@ module ListWorkloads = {
 @as("NextToken") nextToken: nextToken,
 @as("WorkloadSummaries") workloadSummaries: workloadSummaries
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "ListWorkloadsCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "ListWorkloadsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -610,7 +610,7 @@ module ListNotifications = {
 @as("NextToken") nextToken: nextToken,
 @as("NotificationSummaries") notificationSummaries: notificationSummaries
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "ListNotificationsCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "ListNotificationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -628,7 +628,7 @@ module ListLensReviews = {
 @as("MilestoneNumber") milestoneNumber: milestoneNumber,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "ListLensReviewsCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "ListLensReviewsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -642,7 +642,7 @@ module GetMilestone = {
 @as("Milestone") milestone: milestone,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "GetMilestoneCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "GetMilestoneCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -660,7 +660,7 @@ module GetAnswer = {
 @as("MilestoneNumber") milestoneNumber: milestoneNumber,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "GetAnswerCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "GetAnswerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -676,7 +676,7 @@ module UpdateLensReview = {
 @as("LensReview") lensReview: lensReview,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "UpdateLensReviewCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "UpdateLensReviewCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -692,7 +692,7 @@ module ListMilestones = {
 @as("MilestoneSummaries") milestoneSummaries: milestoneSummaries,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "ListMilestonesCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "ListMilestonesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -713,7 +713,7 @@ module ListAnswers = {
 @as("MilestoneNumber") milestoneNumber: milestoneNumber,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "ListAnswersCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "ListAnswersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -729,7 +729,7 @@ module GetLensReview = {
 @as("MilestoneNumber") milestoneNumber: milestoneNumber,
 @as("WorkloadId") workloadId: workloadId
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "GetLensReviewCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "GetLensReviewCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -745,6 +745,6 @@ module GetLensVersionDifference = {
 @as("BaseLensVersion") baseLensVersion: lensVersion,
 @as("LensAlias") lensAlias: lensAlias
 }
-  @module("@aws-sdk/client-wellarchitected") @new external new_: (Js.Promise.t<request>) => t = "GetLensVersionDifferenceCommand";
+  @module("@aws-sdk/client-wellarchitected") @new external new_: (request) => t = "GetLensVersionDifferenceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

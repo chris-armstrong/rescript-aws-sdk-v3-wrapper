@@ -543,7 +543,7 @@ module StopStreamProcessor = {
 @as("Name") name: option<streamProcessorName>
 }
   type response = unit
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StopStreamProcessorCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StopStreamProcessorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -555,7 +555,7 @@ module StopProjectVersion = {
   type response = {
 @as("Status") status: projectVersionStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StopProjectVersionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StopProjectVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -565,7 +565,7 @@ module StartStreamProcessor = {
 @as("Name") name: option<streamProcessorName>
 }
   type response = unit
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StartStreamProcessorCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartStreamProcessorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -578,7 +578,7 @@ module StartProjectVersion = {
   type response = {
 @as("Status") status: projectVersionStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StartProjectVersionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartProjectVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -593,7 +593,7 @@ module DescribeCollection = {
 @as("FaceModelVersion") faceModelVersion: amazonawsString,
 @as("FaceCount") faceCount: uLong
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DescribeCollectionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DescribeCollectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -603,7 +603,7 @@ module DeleteStreamProcessor = {
 @as("Name") name: option<streamProcessorName>
 }
   type response = unit
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DeleteStreamProcessorCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DeleteStreamProcessorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -615,7 +615,7 @@ module DeleteProjectVersion = {
   type response = {
 @as("Status") status: projectVersionStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DeleteProjectVersionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DeleteProjectVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -627,7 +627,7 @@ module DeleteProject = {
   type response = {
 @as("Status") status: projectStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DeleteProjectCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DeleteProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -639,7 +639,7 @@ module DeleteCollection = {
   type response = {
 @as("StatusCode") statusCode: uInteger
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DeleteCollectionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DeleteCollectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -651,7 +651,7 @@ module CreateProject = {
   type response = {
 @as("ProjectArn") projectArn: projectArn
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "CreateProjectCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "CreateProjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -662,7 +662,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -673,7 +673,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -685,7 +685,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -700,7 +700,7 @@ module ListCollections = {
 @as("NextToken") nextToken: paginationToken,
 @as("CollectionIds") collectionIds: collectionIdList
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "ListCollectionsCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "ListCollectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -713,7 +713,7 @@ module GetCelebrityInfo = {
 @as("Name") name: amazonawsString,
 @as("Urls") urls: urls
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "GetCelebrityInfoCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetCelebrityInfoCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -726,7 +726,7 @@ module DeleteFaces = {
   type response = {
 @as("DeletedFaces") deletedFaces: faceIdList
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DeleteFacesCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DeleteFacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -741,7 +741,7 @@ module CreateCollection = {
 @as("CollectionArn") collectionArn: amazonawsString,
 @as("StatusCode") statusCode: uInteger
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "CreateCollectionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "CreateCollectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -758,7 +758,7 @@ module StartSegmentDetection = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StartSegmentDetectionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartSegmentDetectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -773,7 +773,7 @@ module StartPersonTracking = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StartPersonTrackingCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartPersonTrackingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -789,7 +789,7 @@ module StartLabelDetection = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StartLabelDetectionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartLabelDetectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -806,7 +806,7 @@ module StartFaceSearch = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StartFaceSearchCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartFaceSearchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -822,7 +822,7 @@ module StartFaceDetection = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StartFaceDetectionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartFaceDetectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -838,7 +838,7 @@ module StartContentModeration = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StartContentModerationCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartContentModerationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -853,7 +853,7 @@ module StartCelebrityRecognition = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StartCelebrityRecognitionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartCelebrityRecognitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -867,7 +867,7 @@ module ListStreamProcessors = {
 @as("StreamProcessors") streamProcessors: streamProcessorList,
 @as("NextToken") nextToken: paginationToken
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "ListStreamProcessorsCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "ListStreamProcessorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -888,7 +888,7 @@ module DescribeStreamProcessor = {
 @as("StreamProcessorArn") streamProcessorArn: streamProcessorArn,
 @as("Name") name: streamProcessorName
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DescribeStreamProcessorCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DescribeStreamProcessorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -902,7 +902,7 @@ module DescribeProjects = {
 @as("NextToken") nextToken: extendedPaginationToken,
 @as("ProjectDescriptions") projectDescriptions: projectDescriptions
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DescribeProjectsCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DescribeProjectsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -919,7 +919,7 @@ module CreateStreamProcessor = {
   type response = {
 @as("StreamProcessorArn") streamProcessorArn: streamProcessorArn
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "CreateStreamProcessorCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "CreateStreamProcessorCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -935,7 +935,7 @@ module ListFaces = {
 @as("NextToken") nextToken: amazonawsString,
 @as("Faces") faces: faceList
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "ListFacesCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "ListFacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -955,7 +955,7 @@ module GetSegmentDetection = {
 @as("StatusMessage") statusMessage: statusMessage,
 @as("JobStatus") jobStatus: videoJobStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "GetSegmentDetectionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetSegmentDetectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -975,7 +975,7 @@ module GetContentModeration = {
 @as("StatusMessage") statusMessage: statusMessage,
 @as("JobStatus") jobStatus: videoJobStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "GetContentModerationCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetContentModerationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -991,7 +991,7 @@ module DetectModerationLabels = {
 @as("ModerationModelVersion") moderationModelVersion: amazonawsString,
 @as("ModerationLabels") moderationLabels: moderationLabels
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DetectModerationLabelsCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectModerationLabelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1007,7 +1007,7 @@ module StartTextDetection = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "StartTextDetectionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "StartTextDetectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1026,7 +1026,7 @@ module SearchFacesByImage = {
 @as("SearchedFaceConfidence") searchedFaceConfidence: percent,
 @as("SearchedFaceBoundingBox") searchedFaceBoundingBox: boundingBox
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "SearchFacesByImageCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "SearchFacesByImageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1043,7 +1043,7 @@ module SearchFaces = {
 @as("FaceMatches") faceMatches: faceMatchList,
 @as("SearchedFaceId") searchedFaceId: faceId
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "SearchFacesCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "SearchFacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1057,7 +1057,7 @@ module DetectFaces = {
 @as("OrientationCorrection") orientationCorrection: orientationCorrection,
 @as("FaceDetails") faceDetails: faceDetailList
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DetectFacesCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectFacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1071,7 +1071,7 @@ module RecognizeCelebrities = {
 @as("UnrecognizedFaces") unrecognizedFaces: comparedFaceList,
 @as("CelebrityFaces") celebrityFaces: celebrityList
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "RecognizeCelebritiesCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "RecognizeCelebritiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1091,7 +1091,7 @@ module IndexFaces = {
 @as("OrientationCorrection") orientationCorrection: orientationCorrection,
 @as("FaceRecords") faceRecords: faceRecordList
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "IndexFacesCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "IndexFacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1109,7 +1109,7 @@ module GetFaceDetection = {
 @as("StatusMessage") statusMessage: statusMessage,
 @as("JobStatus") jobStatus: videoJobStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "GetFaceDetectionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetFaceDetectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1123,7 +1123,7 @@ module DetectText = {
 @as("TextModelVersion") textModelVersion: amazonawsString,
 @as("TextDetections") textDetections: textDetectionList
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DetectTextCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectTextCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1139,7 +1139,7 @@ module DetectLabels = {
 @as("OrientationCorrection") orientationCorrection: orientationCorrection,
 @as("Labels") labels: labels
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DetectLabelsCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectLabelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1154,7 +1154,7 @@ module DetectCustomLabels = {
   type response = {
 @as("CustomLabels") customLabels: customLabels
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DetectCustomLabelsCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectCustomLabelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1172,7 +1172,7 @@ module CreateProjectVersion = {
   type response = {
 @as("ProjectVersionArn") projectVersionArn: projectVersionArn
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "CreateProjectVersionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "CreateProjectVersionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1191,7 +1191,7 @@ module CompareFaces = {
 @as("FaceMatches") faceMatches: compareFacesMatchList,
 @as("SourceImageFace") sourceImageFace: comparedSourceImageFace
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "CompareFacesCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "CompareFacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1210,7 +1210,7 @@ module GetTextDetection = {
 @as("StatusMessage") statusMessage: statusMessage,
 @as("JobStatus") jobStatus: videoJobStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "GetTextDetectionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetTextDetectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1229,7 +1229,7 @@ module GetPersonTracking = {
 @as("StatusMessage") statusMessage: statusMessage,
 @as("JobStatus") jobStatus: videoJobStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "GetPersonTrackingCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetPersonTrackingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1249,7 +1249,7 @@ module GetLabelDetection = {
 @as("StatusMessage") statusMessage: statusMessage,
 @as("JobStatus") jobStatus: videoJobStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "GetLabelDetectionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetLabelDetectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1268,7 +1268,7 @@ module GetFaceSearch = {
 @as("StatusMessage") statusMessage: statusMessage,
 @as("JobStatus") jobStatus: videoJobStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "GetFaceSearchCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetFaceSearchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1287,7 +1287,7 @@ module GetCelebrityRecognition = {
 @as("StatusMessage") statusMessage: statusMessage,
 @as("JobStatus") jobStatus: videoJobStatus
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "GetCelebrityRecognitionCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "GetCelebrityRecognitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1302,7 +1302,7 @@ module DetectProtectiveEquipment = {
 @as("Persons") persons: protectiveEquipmentPersons,
 @as("ProtectiveEquipmentModelVersion") protectiveEquipmentModelVersion: amazonawsString
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DetectProtectiveEquipmentCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DetectProtectiveEquipmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1318,6 +1318,6 @@ module DescribeProjectVersions = {
 @as("NextToken") nextToken: extendedPaginationToken,
 @as("ProjectVersionDescriptions") projectVersionDescriptions: projectVersionDescriptions
 }
-  @module("@aws-sdk/client-rekognition") @new external new_: (Js.Promise.t<request>) => t = "DescribeProjectVersionsCommand";
+  @module("@aws-sdk/client-rekognition") @new external new_: (request) => t = "DescribeProjectVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -666,7 +666,7 @@ module UndeprecateDomain = {
 @as("name") name: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "UndeprecateDomainCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "UndeprecateDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -681,7 +681,7 @@ module TerminateWorkflowExecution = {
 @as("domain") domain: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "TerminateWorkflowExecutionCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "TerminateWorkflowExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -695,7 +695,7 @@ module SignalWorkflowExecution = {
 @as("domain") domain: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "SignalWorkflowExecutionCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "SignalWorkflowExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -707,7 +707,7 @@ module RespondActivityTaskFailed = {
 @as("taskToken") taskToken: option<taskToken>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "RespondActivityTaskFailedCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "RespondActivityTaskFailedCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -718,7 +718,7 @@ module RespondActivityTaskCompleted = {
 @as("taskToken") taskToken: option<taskToken>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "RespondActivityTaskCompletedCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "RespondActivityTaskCompletedCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -729,7 +729,7 @@ module RespondActivityTaskCanceled = {
 @as("taskToken") taskToken: option<taskToken>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "RespondActivityTaskCanceledCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "RespondActivityTaskCanceledCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -741,7 +741,7 @@ module RequestCancelWorkflowExecution = {
 @as("domain") domain: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "RequestCancelWorkflowExecutionCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "RequestCancelWorkflowExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -754,7 +754,7 @@ module RecordActivityTaskHeartbeat = {
   type response = {
 @as("cancelRequested") cancelRequested: option<canceled>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "RecordActivityTaskHeartbeatCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "RecordActivityTaskHeartbeatCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -764,7 +764,7 @@ module DeprecateDomain = {
 @as("name") name: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "DeprecateDomainCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "DeprecateDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -775,7 +775,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<arn>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -786,7 +786,7 @@ module UndeprecateWorkflowType = {
 @as("domain") domain: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "UndeprecateWorkflowTypeCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "UndeprecateWorkflowTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -797,7 +797,7 @@ module UndeprecateActivityType = {
 @as("domain") domain: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "UndeprecateActivityTypeCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "UndeprecateActivityTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -819,7 +819,7 @@ module StartWorkflowExecution = {
   type response = {
 @as("runId") runId: workflowRunId
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "StartWorkflowExecutionCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "StartWorkflowExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -838,7 +838,7 @@ module RegisterWorkflowType = {
 @as("domain") domain: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "RegisterWorkflowTypeCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "RegisterWorkflowTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -857,7 +857,7 @@ module RegisterActivityType = {
 @as("domain") domain: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "RegisterActivityTypeCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "RegisterActivityTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -876,7 +876,7 @@ module PollForActivityTask = {
 @as("activityId") activityId: option<activityId>,
 @as("taskToken") taskToken: option<taskToken>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "PollForActivityTaskCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "PollForActivityTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -889,7 +889,7 @@ module DescribeDomain = {
 @as("configuration") configuration: option<domainConfiguration>,
 @as("domainInfo") domainInfo: option<domainInfo>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "DescribeDomainCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "DescribeDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -900,7 +900,7 @@ module DeprecateWorkflowType = {
 @as("domain") domain: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "DeprecateWorkflowTypeCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "DeprecateWorkflowTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -911,7 +911,7 @@ module DeprecateActivityType = {
 @as("domain") domain: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "DeprecateActivityTypeCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "DeprecateActivityTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -925,7 +925,7 @@ module CountPendingDecisionTasks = {
 @as("truncated") truncated: truncated,
 @as("count") count: option<count>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "CountPendingDecisionTasksCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "CountPendingDecisionTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -939,7 +939,7 @@ module CountPendingActivityTasks = {
 @as("truncated") truncated: truncated,
 @as("count") count: option<count>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "CountPendingActivityTasksCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "CountPendingActivityTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -956,7 +956,7 @@ module CountOpenWorkflowExecutions = {
 @as("truncated") truncated: truncated,
 @as("count") count: option<count>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "CountOpenWorkflowExecutionsCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "CountOpenWorkflowExecutionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -975,7 +975,7 @@ module CountClosedWorkflowExecutions = {
 @as("truncated") truncated: truncated,
 @as("count") count: option<count>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "CountClosedWorkflowExecutionsCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "CountClosedWorkflowExecutionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -986,7 +986,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<arn>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -999,7 +999,7 @@ module RegisterDomain = {
 @as("name") name: option<domainName>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "RegisterDomainCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "RegisterDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1011,7 +1011,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: resourceTagList
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1027,7 +1027,7 @@ module ListDomains = {
 @as("nextPageToken") nextPageToken: pageToken,
 @as("domainInfos") domainInfos: option<domainInfoList>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "ListDomainsCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "ListDomainsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1041,7 +1041,7 @@ module DescribeWorkflowType = {
 @as("configuration") configuration: option<workflowTypeConfiguration>,
 @as("typeInfo") typeInfo: option<workflowTypeInfo>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkflowTypeCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "DescribeWorkflowTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1058,7 +1058,7 @@ module DescribeWorkflowExecution = {
 @as("executionConfiguration") executionConfiguration: option<workflowExecutionConfiguration>,
 @as("executionInfo") executionInfo: option<workflowExecutionInfo>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkflowExecutionCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "DescribeWorkflowExecutionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1072,7 +1072,7 @@ module DescribeActivityType = {
 @as("configuration") configuration: option<activityTypeConfiguration>,
 @as("typeInfo") typeInfo: option<activityTypeInfo>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "DescribeActivityTypeCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "DescribeActivityTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1090,7 +1090,7 @@ module ListWorkflowTypes = {
 @as("nextPageToken") nextPageToken: pageToken,
 @as("typeInfos") typeInfos: option<workflowTypeInfoList>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "ListWorkflowTypesCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "ListWorkflowTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1110,7 +1110,7 @@ module ListOpenWorkflowExecutions = {
 @as("nextPageToken") nextPageToken: pageToken,
 @as("executionInfos") executionInfos: option<workflowExecutionInfoList>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "ListOpenWorkflowExecutionsCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "ListOpenWorkflowExecutionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1132,7 +1132,7 @@ module ListClosedWorkflowExecutions = {
 @as("nextPageToken") nextPageToken: pageToken,
 @as("executionInfos") executionInfos: option<workflowExecutionInfoList>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "ListClosedWorkflowExecutionsCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "ListClosedWorkflowExecutionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1150,7 +1150,7 @@ module ListActivityTypes = {
 @as("nextPageToken") nextPageToken: pageToken,
 @as("typeInfos") typeInfos: option<activityTypeInfoList>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "ListActivityTypesCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "ListActivityTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1162,7 +1162,7 @@ module RespondDecisionTaskCompleted = {
 @as("taskToken") taskToken: option<taskToken>
 }
   
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "RespondDecisionTaskCompletedCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "RespondDecisionTaskCompletedCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1185,7 +1185,7 @@ module PollForDecisionTask = {
 @as("startedEventId") startedEventId: option<eventId>,
 @as("taskToken") taskToken: option<taskToken>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "PollForDecisionTaskCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "PollForDecisionTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1202,6 +1202,6 @@ module GetWorkflowExecutionHistory = {
 @as("nextPageToken") nextPageToken: pageToken,
 @as("events") events: option<historyEventList>
 }
-  @module("@aws-sdk/client-swf") @new external new_: (Js.Promise.t<request>) => t = "GetWorkflowExecutionHistoryCommand";
+  @module("@aws-sdk/client-swf") @new external new_: (request) => t = "GetWorkflowExecutionHistoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

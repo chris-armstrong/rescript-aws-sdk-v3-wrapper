@@ -19,7 +19,7 @@ module PostToConnection = {
 @as("Data") data: option<data>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "PostToConnectionCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "PostToConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -29,7 +29,7 @@ module DeleteConnection = {
 @as("ConnectionId") connectionId: option<__string>
 }
   
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteConnectionCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "DeleteConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -43,6 +43,6 @@ module GetConnection = {
 @as("Identity") identity: identity,
 @as("ConnectedAt") connectedAt: __timestampIso8601
 }
-  @module("@aws-sdk/client-apigateway") @new external new_: (Js.Promise.t<request>) => t = "GetConnectionCommand";
+  @module("@aws-sdk/client-apigateway") @new external new_: (request) => t = "GetConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

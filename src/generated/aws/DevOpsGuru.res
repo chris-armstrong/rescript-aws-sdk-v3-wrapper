@@ -389,7 +389,7 @@ module UpdateServiceIntegration = {
 @as("ServiceIntegration") serviceIntegration: option<updateServiceIntegrationConfig>
 }
   type response = unit
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "UpdateServiceIntegrationCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "UpdateServiceIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -399,7 +399,7 @@ module RemoveNotificationChannel = {
 @as("Id") id: option<notificationChannelId>
 }
   type response = unit
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "RemoveNotificationChannelCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "RemoveNotificationChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -409,7 +409,7 @@ module PutFeedback = {
 @as("InsightFeedback") insightFeedback: insightFeedback
 }
   type response = unit
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "PutFeedbackCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "PutFeedbackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -419,7 +419,7 @@ module DescribeServiceIntegration = {
   type response = {
 @as("ServiceIntegration") serviceIntegration: serviceIntegrationConfig
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "DescribeServiceIntegrationCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeServiceIntegrationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -431,7 +431,7 @@ module DescribeFeedback = {
   type response = {
 @as("InsightFeedback") insightFeedback: insightFeedback
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "DescribeFeedbackCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeFeedbackCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -446,7 +446,7 @@ module DescribeAccountOverview = {
 @as("ProactiveInsights") proactiveInsights: option<numProactiveInsights>,
 @as("ReactiveInsights") reactiveInsights: option<numReactiveInsights>
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountOverviewCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeAccountOverviewCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -459,7 +459,7 @@ module DescribeAccountHealth = {
 @as("OpenProactiveInsights") openProactiveInsights: option<numOpenProactiveInsights>,
 @as("OpenReactiveInsights") openReactiveInsights: option<numOpenReactiveInsights>
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "DescribeAccountHealthCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeAccountHealthCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -471,7 +471,7 @@ module AddNotificationChannel = {
   type response = {
 @as("Id") id: option<notificationChannelId>
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "AddNotificationChannelCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "AddNotificationChannelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -482,7 +482,7 @@ module UpdateResourceCollection = {
 @as("Action") action: option<updateResourceCollectionAction>
 }
   type response = unit
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "UpdateResourceCollectionCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "UpdateResourceCollectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -493,7 +493,7 @@ module StartCostEstimation = {
 @as("ResourceCollection") resourceCollection: option<costEstimationResourceCollectionFilter>
 }
   type response = unit
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "StartCostEstimationCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "StartCostEstimationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -507,7 +507,7 @@ module GetResourceCollection = {
 @as("NextToken") nextToken: uuidNextToken,
 @as("ResourceCollection") resourceCollection: resourceCollectionFilter
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "GetResourceCollectionCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "GetResourceCollectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -524,7 +524,7 @@ module GetCostEstimation = {
 @as("Status") status: costEstimationStatus,
 @as("ResourceCollection") resourceCollection: costEstimationResourceCollectionFilter
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "GetCostEstimationCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "GetCostEstimationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -539,7 +539,7 @@ module DescribeResourceCollectionHealth = {
 @as("Service") service: serviceHealths,
 @as("CloudFormation") cloudFormation: option<cloudFormationHealths>
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "DescribeResourceCollectionHealthCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeResourceCollectionHealthCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -552,7 +552,7 @@ module ListNotificationChannels = {
 @as("NextToken") nextToken: uuidNextToken,
 @as("Channels") channels: channels
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "ListNotificationChannelsCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "ListNotificationChannelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -565,7 +565,7 @@ module DescribeInsight = {
 @as("ReactiveInsight") reactiveInsight: reactiveInsight,
 @as("ProactiveInsight") proactiveInsight: proactiveInsight
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "DescribeInsightCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeInsightCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -583,7 +583,7 @@ module SearchInsights = {
 @as("ReactiveInsights") reactiveInsights: reactiveInsights,
 @as("ProactiveInsights") proactiveInsights: proactiveInsights
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "SearchInsightsCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "SearchInsightsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -599,7 +599,7 @@ module ListInsights = {
 @as("ReactiveInsights") reactiveInsights: reactiveInsights,
 @as("ProactiveInsights") proactiveInsights: proactiveInsights
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "ListInsightsCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "ListInsightsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -614,7 +614,7 @@ module ListEvents = {
 @as("NextToken") nextToken: uuidNextToken,
 @as("Events") events: option<events>
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "ListEventsCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "ListEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -627,7 +627,7 @@ module DescribeAnomaly = {
 @as("ReactiveAnomaly") reactiveAnomaly: reactiveAnomaly,
 @as("ProactiveAnomaly") proactiveAnomaly: proactiveAnomaly
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "DescribeAnomalyCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "DescribeAnomalyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -644,7 +644,7 @@ module ListAnomaliesForInsight = {
 @as("ReactiveAnomalies") reactiveAnomalies: reactiveAnomalies,
 @as("ProactiveAnomalies") proactiveAnomalies: proactiveAnomalies
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "ListAnomaliesForInsightCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "ListAnomaliesForInsightCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -659,6 +659,6 @@ module ListRecommendations = {
 @as("NextToken") nextToken: uuidNextToken,
 @as("Recommendations") recommendations: recommendations
 }
-  @module("@aws-sdk/client-devops-guru") @new external new_: (Js.Promise.t<request>) => t = "ListRecommendationsCommand";
+  @module("@aws-sdk/client-devops-guru") @new external new_: (request) => t = "ListRecommendationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

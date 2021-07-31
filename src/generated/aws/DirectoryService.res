@@ -380,7 +380,7 @@ module VerifyTrust = {
   type response = {
 @as("TrustId") trustId: trustId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "VerifyTrustCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "VerifyTrustCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -394,7 +394,7 @@ module UpdateTrust = {
 @as("TrustId") trustId: trustId,
 @as("RequestId") requestId: requestId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "UpdateTrustCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "UpdateTrustCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -405,7 +405,7 @@ module UpdateNumberOfDomainControllers = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "UpdateNumberOfDomainControllersCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "UpdateNumberOfDomainControllersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -420,7 +420,7 @@ module StartSchemaExtension = {
   type response = {
 @as("SchemaExtensionId") schemaExtensionId: schemaExtensionId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "StartSchemaExtensionCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "StartSchemaExtensionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -430,7 +430,7 @@ module RestoreFromSnapshot = {
 @as("SnapshotId") snapshotId: option<snapshotId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "RestoreFromSnapshotCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RestoreFromSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -442,7 +442,7 @@ module ResetUserPassword = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "ResetUserPasswordCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ResetUserPasswordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -452,7 +452,7 @@ module RemoveRegion = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "RemoveRegionCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RemoveRegionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -464,7 +464,7 @@ module RejectSharedDirectory = {
   type response = {
 @as("SharedDirectoryId") sharedDirectoryId: directoryId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "RejectSharedDirectoryCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RejectSharedDirectoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -475,7 +475,7 @@ module RegisterEventTopic = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "RegisterEventTopicCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RegisterEventTopicCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -487,7 +487,7 @@ module EnableSso = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "EnableSsoCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "EnableSsoCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -498,7 +498,7 @@ module EnableLDAPS = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "EnableLDAPSCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "EnableLDAPSCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -509,7 +509,7 @@ module EnableClientAuthentication = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "EnableClientAuthenticationCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "EnableClientAuthenticationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -521,7 +521,7 @@ module DisableSso = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DisableSsoCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DisableSsoCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -531,7 +531,7 @@ module DisableRadius = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DisableRadiusCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DisableRadiusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -542,7 +542,7 @@ module DisableLDAPS = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DisableLDAPSCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DisableLDAPSCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -553,7 +553,7 @@ module DisableClientAuthentication = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DisableClientAuthenticationCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DisableClientAuthenticationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -564,7 +564,7 @@ module DeregisterEventTopic = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DeregisterEventTopicCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeregisterEventTopicCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -575,7 +575,7 @@ module DeregisterCertificate = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DeregisterCertificateCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeregisterCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -588,7 +588,7 @@ module DeleteTrust = {
   type response = {
 @as("TrustId") trustId: trustId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DeleteTrustCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeleteTrustCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -600,7 +600,7 @@ module DeleteSnapshot = {
   type response = {
 @as("SnapshotId") snapshotId: snapshotId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DeleteSnapshotCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeleteSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -610,7 +610,7 @@ module DeleteLogSubscription = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DeleteLogSubscriptionCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeleteLogSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -622,7 +622,7 @@ module DeleteDirectory = {
   type response = {
 @as("DirectoryId") directoryId: directoryId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DeleteDirectoryCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeleteDirectoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -633,7 +633,7 @@ module DeleteConditionalForwarder = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DeleteConditionalForwarderCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DeleteConditionalForwarderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -646,7 +646,7 @@ module CreateSnapshot = {
   type response = {
 @as("SnapshotId") snapshotId: snapshotId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "CreateSnapshotCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -657,7 +657,7 @@ module CreateLogSubscription = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "CreateLogSubscriptionCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateLogSubscriptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -671,7 +671,7 @@ module CreateAlias = {
 @as("Alias") alias: aliasName,
 @as("DirectoryId") directoryId: directoryId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "CreateAliasCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -682,7 +682,7 @@ module CancelSchemaExtension = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "CancelSchemaExtensionCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CancelSchemaExtensionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -694,7 +694,7 @@ module UpdateConditionalForwarder = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "UpdateConditionalForwarderCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "UpdateConditionalForwarderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -707,7 +707,7 @@ module UnshareDirectory = {
   type response = {
 @as("SharedDirectoryId") sharedDirectoryId: directoryId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "UnshareDirectoryCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "UnshareDirectoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -722,7 +722,7 @@ module ShareDirectory = {
   type response = {
 @as("SharedDirectoryId") sharedDirectoryId: directoryId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "ShareDirectoryCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ShareDirectoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -733,7 +733,7 @@ module RemoveTagsFromResource = {
 @as("ResourceId") resourceId: option<resourceId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "RemoveTagsFromResourceCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RemoveTagsFromResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -744,7 +744,7 @@ module RemoveIpRoutes = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "RemoveIpRoutesCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RemoveIpRoutesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -759,7 +759,7 @@ module RegisterCertificate = {
   type response = {
 @as("CertificateId") certificateId: certificateId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "RegisterCertificateCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "RegisterCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -771,7 +771,7 @@ module GetSnapshotLimits = {
   type response = {
 @as("SnapshotLimits") snapshotLimits: snapshotLimits
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "GetSnapshotLimitsCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "GetSnapshotLimitsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -781,7 +781,7 @@ module GetDirectoryLimits = {
   type response = {
 @as("DirectoryLimits") directoryLimits: directoryLimits
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "GetDirectoryLimitsCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "GetDirectoryLimitsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -799,7 +799,7 @@ module CreateTrust = {
   type response = {
 @as("TrustId") trustId: trustId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "CreateTrustCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateTrustCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -811,7 +811,7 @@ module CreateConditionalForwarder = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "CreateConditionalForwarderCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateConditionalForwarderCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -823,7 +823,7 @@ module AcceptSharedDirectory = {
   type response = {
 @as("SharedDirectory") sharedDirectory: sharedDirectory
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "AcceptSharedDirectoryCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "AcceptSharedDirectoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -834,7 +834,7 @@ module UpdateRadius = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "UpdateRadiusCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "UpdateRadiusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -849,7 +849,7 @@ module ListTagsForResource = {
 @as("NextToken") nextToken: nextToken,
 @as("Tags") tags: tags
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -864,7 +864,7 @@ module ListSchemaExtensions = {
 @as("NextToken") nextToken: nextToken,
 @as("SchemaExtensionsInfo") schemaExtensionsInfo: schemaExtensionsInfo
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "ListSchemaExtensionsCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ListSchemaExtensionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -879,7 +879,7 @@ module ListLogSubscriptions = {
 @as("NextToken") nextToken: nextToken,
 @as("LogSubscriptions") logSubscriptions: logSubscriptions
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "ListLogSubscriptionsCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ListLogSubscriptionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -894,7 +894,7 @@ module ListIpRoutes = {
 @as("NextToken") nextToken: nextToken,
 @as("IpRoutesInfo") ipRoutesInfo: ipRoutesInfo
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "ListIpRoutesCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ListIpRoutesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -909,7 +909,7 @@ module ListCertificates = {
 @as("CertificatesInfo") certificatesInfo: certificatesInfo,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "ListCertificatesCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ListCertificatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -920,7 +920,7 @@ module EnableRadius = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "EnableRadiusCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "EnableRadiusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -936,7 +936,7 @@ module DescribeTrusts = {
 @as("NextToken") nextToken: nextToken,
 @as("Trusts") trusts: trusts
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DescribeTrustsCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeTrustsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -952,7 +952,7 @@ module DescribeSnapshots = {
 @as("NextToken") nextToken: nextToken,
 @as("Snapshots") snapshots: snapshots
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DescribeSnapshotsCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeSnapshotsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -968,7 +968,7 @@ module DescribeSharedDirectories = {
 @as("NextToken") nextToken: nextToken,
 @as("SharedDirectories") sharedDirectories: sharedDirectories
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DescribeSharedDirectoriesCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeSharedDirectoriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -984,7 +984,7 @@ module DescribeLDAPSSettings = {
 @as("NextToken") nextToken: nextToken,
 @as("LDAPSSettingsInfo") lDAPSSettingsInfo: lDAPSSettingsInfo
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DescribeLDAPSSettingsCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeLDAPSSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -997,7 +997,7 @@ module DescribeEventTopics = {
   type response = {
 @as("EventTopics") eventTopics: eventTopics
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventTopicsCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeEventTopicsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1013,7 +1013,7 @@ module DescribeDomainControllers = {
 @as("NextToken") nextToken: nextToken,
 @as("DomainControllers") domainControllers: domainControllers
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DescribeDomainControllersCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeDomainControllersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1026,7 +1026,7 @@ module DescribeCertificate = {
   type response = {
 @as("Certificate") certificate: certificate
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DescribeCertificateCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeCertificateCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1044,7 +1044,7 @@ module CreateMicrosoftAD = {
   type response = {
 @as("DirectoryId") directoryId: directoryId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "CreateMicrosoftADCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateMicrosoftADCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1062,7 +1062,7 @@ module CreateDirectory = {
   type response = {
 @as("DirectoryId") directoryId: directoryId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "CreateDirectoryCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateDirectoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1080,7 +1080,7 @@ module ConnectDirectory = {
   type response = {
 @as("DirectoryId") directoryId: directoryId
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "ConnectDirectoryCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "ConnectDirectoryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1091,7 +1091,7 @@ module AddTagsToResource = {
 @as("ResourceId") resourceId: option<resourceId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "AddTagsToResourceCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "AddTagsToResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1103,7 +1103,7 @@ module AddRegion = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "AddRegionCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "AddRegionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1115,7 +1115,7 @@ module AddIpRoutes = {
 @as("DirectoryId") directoryId: option<directoryId>
 }
   type response = unit
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "AddIpRoutesCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "AddIpRoutesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1128,7 +1128,7 @@ module DescribeConditionalForwarders = {
   type response = {
 @as("ConditionalForwarders") conditionalForwarders: conditionalForwarders
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DescribeConditionalForwardersCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeConditionalForwardersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1144,7 +1144,7 @@ module CreateComputer = {
   type response = {
 @as("Computer") computer: computer
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "CreateComputerCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "CreateComputerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1159,7 +1159,7 @@ module DescribeRegions = {
 @as("NextToken") nextToken: nextToken,
 @as("RegionsDescription") regionsDescription: regionsDescription
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DescribeRegionsCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeRegionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1174,6 +1174,6 @@ module DescribeDirectories = {
 @as("NextToken") nextToken: nextToken,
 @as("DirectoryDescriptions") directoryDescriptions: directoryDescriptions
 }
-  @module("@aws-sdk/client-ds") @new external new_: (Js.Promise.t<request>) => t = "DescribeDirectoriesCommand";
+  @module("@aws-sdk/client-ds") @new external new_: (request) => t = "DescribeDirectoriesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

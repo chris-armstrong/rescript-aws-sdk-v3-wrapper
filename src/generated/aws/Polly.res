@@ -94,7 +94,7 @@ module PutLexicon = {
 @as("Name") name: option<lexiconName>
 }
   type response = unit
-  @module("@aws-sdk/client-polly") @new external new_: (Js.Promise.t<request>) => t = "PutLexiconCommand";
+  @module("@aws-sdk/client-polly") @new external new_: (request) => t = "PutLexiconCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -104,7 +104,7 @@ module DeleteLexicon = {
 @as("Name") name: option<lexiconName>
 }
   type response = unit
-  @module("@aws-sdk/client-polly") @new external new_: (Js.Promise.t<request>) => t = "DeleteLexiconCommand";
+  @module("@aws-sdk/client-polly") @new external new_: (request) => t = "DeleteLexiconCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -126,7 +126,7 @@ module SynthesizeSpeech = {
 @as("ContentType") contentType: contentType,
 @as("AudioStream") audioStream: audioStream
 }
-  @module("@aws-sdk/client-polly") @new external new_: (Js.Promise.t<request>) => t = "SynthesizeSpeechCommand";
+  @module("@aws-sdk/client-polly") @new external new_: (request) => t = "SynthesizeSpeechCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -139,7 +139,7 @@ module GetLexicon = {
 @as("LexiconAttributes") lexiconAttributes: lexiconAttributes,
 @as("Lexicon") lexicon: lexicon
 }
-  @module("@aws-sdk/client-polly") @new external new_: (Js.Promise.t<request>) => t = "GetLexiconCommand";
+  @module("@aws-sdk/client-polly") @new external new_: (request) => t = "GetLexiconCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -162,7 +162,7 @@ module StartSpeechSynthesisTask = {
   type response = {
 @as("SynthesisTask") synthesisTask: synthesisTask
 }
-  @module("@aws-sdk/client-polly") @new external new_: (Js.Promise.t<request>) => t = "StartSpeechSynthesisTaskCommand";
+  @module("@aws-sdk/client-polly") @new external new_: (request) => t = "StartSpeechSynthesisTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -174,7 +174,7 @@ module GetSpeechSynthesisTask = {
   type response = {
 @as("SynthesisTask") synthesisTask: synthesisTask
 }
-  @module("@aws-sdk/client-polly") @new external new_: (Js.Promise.t<request>) => t = "GetSpeechSynthesisTaskCommand";
+  @module("@aws-sdk/client-polly") @new external new_: (request) => t = "GetSpeechSynthesisTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -189,7 +189,7 @@ module ListSpeechSynthesisTasks = {
 @as("SynthesisTasks") synthesisTasks: synthesisTasks,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-polly") @new external new_: (Js.Promise.t<request>) => t = "ListSpeechSynthesisTasksCommand";
+  @module("@aws-sdk/client-polly") @new external new_: (request) => t = "ListSpeechSynthesisTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -202,7 +202,7 @@ module ListLexicons = {
 @as("NextToken") nextToken: nextToken,
 @as("Lexicons") lexicons: lexiconDescriptionList
 }
-  @module("@aws-sdk/client-polly") @new external new_: (Js.Promise.t<request>) => t = "ListLexiconsCommand";
+  @module("@aws-sdk/client-polly") @new external new_: (request) => t = "ListLexiconsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -218,6 +218,6 @@ module DescribeVoices = {
 @as("NextToken") nextToken: nextToken,
 @as("Voices") voices: voiceList
 }
-  @module("@aws-sdk/client-polly") @new external new_: (Js.Promise.t<request>) => t = "DescribeVoicesCommand";
+  @module("@aws-sdk/client-polly") @new external new_: (request) => t = "DescribeVoicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

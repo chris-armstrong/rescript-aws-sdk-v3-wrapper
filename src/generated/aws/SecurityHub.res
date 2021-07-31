@@ -2109,7 +2109,7 @@ module UpdateStandardsControl = {
 @as("StandardsControlArn") standardsControlArn: option<nonEmptyString>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "UpdateStandardsControlCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "UpdateStandardsControlCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2119,7 +2119,7 @@ module UpdateSecurityHubConfiguration = {
 @as("AutoEnableControls") autoEnableControls: amazonawsBoolean
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "UpdateSecurityHubConfigurationCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "UpdateSecurityHubConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2129,7 +2129,7 @@ module UpdateOrganizationConfiguration = {
 @as("AutoEnable") autoEnable: option<amazonawsBoolean>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "UpdateOrganizationConfigurationCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "UpdateOrganizationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2141,7 +2141,7 @@ module UpdateActionTarget = {
 @as("ActionTargetArn") actionTargetArn: option<nonEmptyString>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "UpdateActionTargetCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "UpdateActionTargetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2151,7 +2151,7 @@ module GetInvitationsCount = {
   type response = {
 @as("InvitationsCount") invitationsCount: amazonawsInteger
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "GetInvitationsCountCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "GetInvitationsCountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2161,7 +2161,7 @@ module EnableOrganizationAdminAccount = {
 @as("AdminAccountId") adminAccountId: option<nonEmptyString>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "EnableOrganizationAdminAccountCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "EnableOrganizationAdminAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2173,7 +2173,7 @@ module EnableImportFindingsForProduct = {
   type response = {
 @as("ProductSubscriptionArn") productSubscriptionArn: nonEmptyString
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "EnableImportFindingsForProductCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "EnableImportFindingsForProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2181,7 +2181,7 @@ module DisassociateFromMasterAccount = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DisassociateFromMasterAccountCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DisassociateFromMasterAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2189,7 +2189,7 @@ module DisassociateFromAdministratorAccount = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DisassociateFromAdministratorAccountCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DisassociateFromAdministratorAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2197,7 +2197,7 @@ module DisableSecurityHub = {
   type t;
   type request = unit
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DisableSecurityHubCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DisableSecurityHubCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2207,7 +2207,7 @@ module DisableOrganizationAdminAccount = {
 @as("AdminAccountId") adminAccountId: option<nonEmptyString>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DisableOrganizationAdminAccountCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DisableOrganizationAdminAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2217,7 +2217,7 @@ module DisableImportFindingsForProduct = {
 @as("ProductSubscriptionArn") productSubscriptionArn: option<nonEmptyString>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DisableImportFindingsForProductCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DisableImportFindingsForProductCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2228,7 +2228,7 @@ module DescribeOrganizationConfiguration = {
 @as("MemberAccountLimitReached") memberAccountLimitReached: amazonawsBoolean,
 @as("AutoEnable") autoEnable: amazonawsBoolean
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DescribeOrganizationConfigurationCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DescribeOrganizationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2242,7 +2242,7 @@ module DescribeHub = {
 @as("SubscribedAt") subscribedAt: nonEmptyString,
 @as("HubArn") hubArn: nonEmptyString
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DescribeHubCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DescribeHubCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2254,7 +2254,7 @@ module DeleteInsight = {
   type response = {
 @as("InsightArn") insightArn: option<nonEmptyString>
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DeleteInsightCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DeleteInsightCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2266,7 +2266,7 @@ module DeleteActionTarget = {
   type response = {
 @as("ActionTargetArn") actionTargetArn: option<nonEmptyString>
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DeleteActionTargetCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DeleteActionTargetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2280,7 +2280,7 @@ module CreateActionTarget = {
   type response = {
 @as("ActionTargetArn") actionTargetArn: option<nonEmptyString>
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "CreateActionTargetCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "CreateActionTargetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2291,7 +2291,7 @@ module AcceptInvitation = {
 @as("MasterId") masterId: option<nonEmptyString>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "AcceptInvitationCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "AcceptInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2302,7 +2302,7 @@ module AcceptAdministratorInvitation = {
 @as("AdministratorId") administratorId: option<nonEmptyString>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "AcceptAdministratorInvitationCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "AcceptAdministratorInvitationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2313,7 +2313,7 @@ module UntagResource = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2324,7 +2324,7 @@ module TagResource = {
 @as("ResourceArn") resourceArn: option<resourceArn>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2336,7 +2336,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagMap
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2350,7 +2350,7 @@ module ListEnabledProductsForImport = {
 @as("NextToken") nextToken: nextToken,
 @as("ProductSubscriptions") productSubscriptions: productSubscriptionArnList
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "ListEnabledProductsForImportCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "ListEnabledProductsForImportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2360,7 +2360,7 @@ module GetMasterAccount = {
   type response = {
 @as("Master") master: invitation
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "GetMasterAccountCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "GetMasterAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2370,7 +2370,7 @@ module GetAdministratorAccount = {
   type response = {
 @as("Administrator") administrator: invitation
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "GetAdministratorAccountCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "GetAdministratorAccountCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2381,7 +2381,7 @@ module EnableSecurityHub = {
 @as("Tags") tags: tagMap
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "EnableSecurityHubCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "EnableSecurityHubCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2391,7 +2391,7 @@ module DisassociateMembers = {
 @as("AccountIds") accountIds: option<accountIdList>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DisassociateMembersCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DisassociateMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2405,7 +2405,7 @@ module ListOrganizationAdminAccounts = {
 @as("NextToken") nextToken: nextToken,
 @as("AdminAccounts") adminAccounts: adminAccounts
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "ListOrganizationAdminAccountsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "ListOrganizationAdminAccountsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2420,7 +2420,7 @@ module ListMembers = {
 @as("NextToken") nextToken: nonEmptyString,
 @as("Members") members: memberList
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "ListMembersCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "ListMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2434,7 +2434,7 @@ module ListInvitations = {
 @as("NextToken") nextToken: nonEmptyString,
 @as("Invitations") invitations: invitationList
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "ListInvitationsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "ListInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2446,7 +2446,7 @@ module InviteMembers = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: resultList
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "InviteMembersCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "InviteMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2459,7 +2459,7 @@ module GetMembers = {
 @as("UnprocessedAccounts") unprocessedAccounts: resultList,
 @as("Members") members: memberList
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "GetMembersCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "GetMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2473,7 +2473,7 @@ module DescribeStandards = {
 @as("NextToken") nextToken: nextToken,
 @as("Standards") standards: standards
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DescribeStandardsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DescribeStandardsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2488,7 +2488,7 @@ module DescribeActionTargets = {
 @as("NextToken") nextToken: nextToken,
 @as("ActionTargets") actionTargets: option<actionTargetList>
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DescribeActionTargetsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DescribeActionTargetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2500,7 +2500,7 @@ module DeleteMembers = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: resultList
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DeleteMembersCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DeleteMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2512,7 +2512,7 @@ module DeleteInvitations = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: resultList
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DeleteInvitationsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DeleteInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2524,7 +2524,7 @@ module DeclineInvitations = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: resultList
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DeclineInvitationsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DeclineInvitationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2536,7 +2536,7 @@ module CreateMembers = {
   type response = {
 @as("UnprocessedAccounts") unprocessedAccounts: resultList
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "CreateMembersCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "CreateMembersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2548,7 +2548,7 @@ module GetInsightResults = {
   type response = {
 @as("InsightResults") insightResults: option<insightResults>
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "GetInsightResultsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "GetInsightResultsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2563,7 +2563,7 @@ module GetEnabledStandards = {
 @as("NextToken") nextToken: nextToken,
 @as("StandardsSubscriptions") standardsSubscriptions: standardsSubscriptions
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "GetEnabledStandardsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "GetEnabledStandardsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2578,7 +2578,7 @@ module DescribeStandardsControls = {
 @as("NextToken") nextToken: nextToken,
 @as("Controls") controls: standardsControls
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DescribeStandardsControlsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DescribeStandardsControlsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2593,7 +2593,7 @@ module DescribeProducts = {
 @as("NextToken") nextToken: nextToken,
 @as("Products") products: option<productsList>
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "DescribeProductsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "DescribeProductsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2615,7 +2615,7 @@ module BatchUpdateFindings = {
 @as("UnprocessedFindings") unprocessedFindings: option<batchUpdateFindingsUnprocessedFindingsList>,
 @as("ProcessedFindings") processedFindings: option<awsSecurityFindingIdentifierList>
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "BatchUpdateFindingsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "BatchUpdateFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2627,7 +2627,7 @@ module BatchEnableStandards = {
   type response = {
 @as("StandardsSubscriptions") standardsSubscriptions: standardsSubscriptions
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "BatchEnableStandardsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "BatchEnableStandardsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2639,7 +2639,7 @@ module BatchDisableStandards = {
   type response = {
 @as("StandardsSubscriptions") standardsSubscriptions: standardsSubscriptions
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "BatchDisableStandardsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "BatchDisableStandardsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2652,7 +2652,7 @@ module UpdateInsight = {
 @as("InsightArn") insightArn: option<nonEmptyString>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "UpdateInsightCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "UpdateInsightCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2664,7 +2664,7 @@ module UpdateFindings = {
 @as("Filters") filters: option<awsSecurityFindingFilters>
 }
   type response = unit
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "UpdateFindingsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "UpdateFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2678,7 +2678,7 @@ module CreateInsight = {
   type response = {
 @as("InsightArn") insightArn: option<nonEmptyString>
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "CreateInsightCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "CreateInsightCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2693,7 +2693,7 @@ module GetInsights = {
 @as("NextToken") nextToken: nextToken,
 @as("Insights") insights: option<insightList>
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "GetInsightsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "GetInsightsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2709,7 +2709,7 @@ module GetFindings = {
 @as("NextToken") nextToken: nextToken,
 @as("Findings") findings: option<awsSecurityFindingList>
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "GetFindingsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "GetFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2723,6 +2723,6 @@ module BatchImportFindings = {
 @as("SuccessCount") successCount: option<amazonawsInteger>,
 @as("FailedCount") failedCount: option<amazonawsInteger>
 }
-  @module("@aws-sdk/client-securityhub") @new external new_: (Js.Promise.t<request>) => t = "BatchImportFindingsCommand";
+  @module("@aws-sdk/client-securityhub") @new external new_: (request) => t = "BatchImportFindingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

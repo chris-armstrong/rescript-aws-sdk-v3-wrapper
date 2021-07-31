@@ -73,7 +73,7 @@ module DescribeDimensionKeys = {
 @as("AlignedEndTime") alignedEndTime: iSOTimestamp,
 @as("AlignedStartTime") alignedStartTime: iSOTimestamp
 }
-  @module("@aws-sdk/client-pi") @new external new_: (Js.Promise.t<request>) => t = "DescribeDimensionKeysCommand";
+  @module("@aws-sdk/client-pi") @new external new_: (request) => t = "DescribeDimensionKeysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -96,6 +96,6 @@ module GetResourceMetrics = {
 @as("AlignedEndTime") alignedEndTime: iSOTimestamp,
 @as("AlignedStartTime") alignedStartTime: iSOTimestamp
 }
-  @module("@aws-sdk/client-pi") @new external new_: (Js.Promise.t<request>) => t = "GetResourceMetricsCommand";
+  @module("@aws-sdk/client-pi") @new external new_: (request) => t = "GetResourceMetricsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

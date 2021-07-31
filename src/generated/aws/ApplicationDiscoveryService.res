@@ -203,7 +203,7 @@ module UpdateApplication = {
 @as("configurationId") configurationId: option<applicationId>
 }
   type response = unit
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "UpdateApplicationCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "UpdateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -216,7 +216,7 @@ module StopContinuousExport = {
 @as("stopTime") stopTime: timeStamp,
 @as("startTime") startTime: timeStamp
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "StopContinuousExportCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "StopContinuousExportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -226,7 +226,7 @@ module ExportConfigurations = {
   type response = {
 @as("exportId") exportId: configurationsExportId
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<unit>) => t = "ExportConfigurationsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (unit) => t = "ExportConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -239,7 +239,7 @@ module CreateApplication = {
   type response = {
 @as("configurationId") configurationId: amazonawsString
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "CreateApplicationCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "CreateApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -253,7 +253,7 @@ module StartImportTask = {
   type response = {
 @as("task") task: importTask
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "StartImportTaskCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "StartImportTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -267,7 +267,7 @@ module StartContinuousExport = {
 @as("s3Bucket") s3Bucket: s3Bucket,
 @as("exportId") exportId: configurationsExportId
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "StartContinuousExportCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "StartContinuousExportCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -282,7 +282,7 @@ module GetDiscoverySummary = {
 @as("applications") applications: amazonawsLong,
 @as("servers") servers: amazonawsLong
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "GetDiscoverySummaryCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "GetDiscoverySummaryCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -293,7 +293,7 @@ module DisassociateConfigurationItemsFromApplication = {
 @as("applicationConfigurationId") applicationConfigurationId: option<applicationId>
 }
   type response = unit
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "DisassociateConfigurationItemsFromApplicationCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "DisassociateConfigurationItemsFromApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -303,7 +303,7 @@ module DeleteApplications = {
 @as("configurationIds") configurationIds: option<applicationIdsList>
 }
   type response = unit
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "DeleteApplicationsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "DeleteApplicationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -314,7 +314,7 @@ module AssociateConfigurationItemsToApplication = {
 @as("applicationConfigurationId") applicationConfigurationId: option<applicationId>
 }
   type response = unit
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "AssociateConfigurationItemsToApplicationCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "AssociateConfigurationItemsToApplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -326,7 +326,7 @@ module StopDataCollectionByAgentIds = {
   type response = {
 @as("agentsConfigurationStatus") agentsConfigurationStatus: agentConfigurationStatusList
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "StopDataCollectionByAgentIdsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "StopDataCollectionByAgentIdsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -338,7 +338,7 @@ module StartDataCollectionByAgentIds = {
   type response = {
 @as("agentsConfigurationStatus") agentsConfigurationStatus: agentConfigurationStatusList
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "StartDataCollectionByAgentIdsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "StartDataCollectionByAgentIdsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -356,7 +356,7 @@ module ListServerNeighbors = {
 @as("nextToken") nextToken: amazonawsString,
 @as("neighbors") neighbors: option<neighborDetailsList>
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "ListServerNeighborsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "ListServerNeighborsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -371,7 +371,7 @@ module DescribeExportConfigurations = {
 @as("nextToken") nextToken: nextToken,
 @as("exportsInfo") exportsInfo: exportsInfo
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "DescribeExportConfigurationsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "DescribeExportConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -383,7 +383,7 @@ module DescribeConfigurations = {
   type response = {
 @as("configurations") configurations: describeConfigurationsAttributes
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "DescribeConfigurationsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "DescribeConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -394,7 +394,7 @@ module DeleteTags = {
 @as("configurationIds") configurationIds: option<configurationIdList>
 }
   type response = unit
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "DeleteTagsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "DeleteTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -405,7 +405,7 @@ module CreateTags = {
 @as("configurationIds") configurationIds: option<configurationIdList>
 }
   type response = unit
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "CreateTagsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "CreateTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -417,7 +417,7 @@ module BatchDeleteImportData = {
   type response = {
 @as("errors") errors: batchDeleteImportDataErrorList
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "BatchDeleteImportDataCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "BatchDeleteImportDataCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -432,7 +432,7 @@ module StartExportTask = {
   type response = {
 @as("exportId") exportId: configurationsExportId
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "StartExportTaskCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "StartExportTaskCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -449,7 +449,7 @@ module ListConfigurations = {
 @as("nextToken") nextToken: nextToken,
 @as("configurations") configurations: configurations
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "ListConfigurationsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "ListConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -464,7 +464,7 @@ module DescribeTags = {
 @as("nextToken") nextToken: nextToken,
 @as("tags") tags: configurationTagSet
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "DescribeTagsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "DescribeTagsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -479,7 +479,7 @@ module DescribeImportTasks = {
 @as("tasks") tasks: importTaskList,
 @as("nextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "DescribeImportTasksCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "DescribeImportTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -495,7 +495,7 @@ module DescribeExportTasks = {
 @as("nextToken") nextToken: nextToken,
 @as("exportsInfo") exportsInfo: exportsInfo
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "DescribeExportTasksCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "DescribeExportTasksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -510,7 +510,7 @@ module DescribeContinuousExports = {
 @as("nextToken") nextToken: nextToken,
 @as("descriptions") descriptions: continuousExportDescriptions
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "DescribeContinuousExportsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "DescribeContinuousExportsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -526,6 +526,6 @@ module DescribeAgents = {
 @as("nextToken") nextToken: nextToken,
 @as("agentsInfo") agentsInfo: agentsInfo
 }
-  @module("@aws-sdk/client-discovery") @new external new_: (Js.Promise.t<request>) => t = "DescribeAgentsCommand";
+  @module("@aws-sdk/client-discovery") @new external new_: (request) => t = "DescribeAgentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -134,7 +134,7 @@ module StartDocumentTextDetection = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-textract") @new external new_: (Js.Promise.t<request>) => t = "StartDocumentTextDetectionCommand";
+  @module("@aws-sdk/client-textract") @new external new_: (request) => t = "StartDocumentTextDetectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -152,7 +152,7 @@ module StartDocumentAnalysis = {
   type response = {
 @as("JobId") jobId: jobId
 }
-  @module("@aws-sdk/client-textract") @new external new_: (Js.Promise.t<request>) => t = "StartDocumentAnalysisCommand";
+  @module("@aws-sdk/client-textract") @new external new_: (request) => t = "StartDocumentAnalysisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -172,7 +172,7 @@ module GetDocumentTextDetection = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("DocumentMetadata") documentMetadata: documentMetadata
 }
-  @module("@aws-sdk/client-textract") @new external new_: (Js.Promise.t<request>) => t = "GetDocumentTextDetectionCommand";
+  @module("@aws-sdk/client-textract") @new external new_: (request) => t = "GetDocumentTextDetectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -192,7 +192,7 @@ module GetDocumentAnalysis = {
 @as("JobStatus") jobStatus: jobStatus,
 @as("DocumentMetadata") documentMetadata: documentMetadata
 }
-  @module("@aws-sdk/client-textract") @new external new_: (Js.Promise.t<request>) => t = "GetDocumentAnalysisCommand";
+  @module("@aws-sdk/client-textract") @new external new_: (request) => t = "GetDocumentAnalysisCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -206,7 +206,7 @@ module DetectDocumentText = {
 @as("Blocks") blocks: blockList,
 @as("DocumentMetadata") documentMetadata: documentMetadata
 }
-  @module("@aws-sdk/client-textract") @new external new_: (Js.Promise.t<request>) => t = "DetectDocumentTextCommand";
+  @module("@aws-sdk/client-textract") @new external new_: (request) => t = "DetectDocumentTextCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -223,6 +223,6 @@ module AnalyzeDocument = {
 @as("Blocks") blocks: blockList,
 @as("DocumentMetadata") documentMetadata: documentMetadata
 }
-  @module("@aws-sdk/client-textract") @new external new_: (Js.Promise.t<request>) => t = "AnalyzeDocumentCommand";
+  @module("@aws-sdk/client-textract") @new external new_: (request) => t = "AnalyzeDocumentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

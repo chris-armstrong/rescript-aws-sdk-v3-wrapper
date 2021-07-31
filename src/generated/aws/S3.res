@@ -834,7 +834,7 @@ module UploadPart = {
 @as("ETag") eTag: eTag,
 @as("ServerSideEncryption") serverSideEncryption: serverSideEncryption
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "UploadPartCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "UploadPartCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -848,7 +848,7 @@ module PutBucketPolicy = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketPolicyCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -859,7 +859,7 @@ module HeadBucket = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "HeadBucketCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "HeadBucketCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -875,7 +875,7 @@ module GetObjectTorrent = {
 @as("RequestCharged") requestCharged: requestCharged,
 @as("Body") body: streamingBlob
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetObjectTorrentCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectTorrentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -889,7 +889,7 @@ module GetBucketVersioning = {
 @as("MFADelete") mFADelete: mFADeleteStatus,
 @as("Status") status: bucketVersioningStatus
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketVersioningCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketVersioningCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -902,7 +902,7 @@ module GetBucketRequestPayment = {
   type response = {
 @as("Payer") payer: payer
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketRequestPaymentCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketRequestPaymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -915,7 +915,7 @@ module GetBucketPolicy = {
   type response = {
 @as("Policy") policy: policy
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketPolicyCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -928,7 +928,7 @@ module GetBucketLocation = {
   type response = {
 @as("LocationConstraint") locationConstraint: bucketLocationConstraint
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketLocationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketLocationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -941,7 +941,7 @@ module GetBucketAccelerateConfiguration = {
   type response = {
 @as("Status") status: bucketAccelerateStatus
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketAccelerateConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketAccelerateConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -952,7 +952,7 @@ module DeletePublicAccessBlock = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeletePublicAccessBlockCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeletePublicAccessBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -967,7 +967,7 @@ module DeleteObjectTagging = {
   type response = {
 @as("VersionId") versionId: objectVersionId
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteObjectTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteObjectTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -987,7 +987,7 @@ module DeleteObject = {
 @as("VersionId") versionId: objectVersionId,
 @as("DeleteMarker") deleteMarker: deleteMarker
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteObjectCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -998,7 +998,7 @@ module DeleteBucketWebsite = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketWebsiteCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketWebsiteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1009,7 +1009,7 @@ module DeleteBucketTagging = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1020,7 +1020,7 @@ module DeleteBucketReplication = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketReplicationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketReplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1031,7 +1031,7 @@ module DeleteBucketPolicy = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketPolicyCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1042,7 +1042,7 @@ module DeleteBucketOwnershipControls = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketOwnershipControlsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketOwnershipControlsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1054,7 +1054,7 @@ module DeleteBucketMetricsConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketMetricsConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketMetricsConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1065,7 +1065,7 @@ module DeleteBucketLifecycle = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketLifecycleCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketLifecycleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1077,7 +1077,7 @@ module DeleteBucketInventoryConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketInventoryConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketInventoryConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1088,7 +1088,7 @@ module DeleteBucketIntelligentTieringConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketIntelligentTieringConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketIntelligentTieringConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1099,7 +1099,7 @@ module DeleteBucketEncryption = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketEncryptionCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketEncryptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1110,7 +1110,7 @@ module DeleteBucketCors = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketCorsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketCorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1122,7 +1122,7 @@ module DeleteBucketAnalyticsConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketAnalyticsConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketAnalyticsConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1133,7 +1133,7 @@ module DeleteBucket = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteBucketCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteBucketCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1149,7 +1149,7 @@ module AbortMultipartUpload = {
   type response = {
 @as("RequestCharged") requestCharged: requestCharged
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "AbortMultipartUploadCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "AbortMultipartUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1194,7 +1194,7 @@ module WriteGetObjectResponse = {
 @as("RequestRoute") requestRoute: option<requestRoute>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "WriteGetObjectResponseCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "WriteGetObjectResponseCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1231,7 +1231,7 @@ module UploadPartCopy = {
 @as("CopyPartResult") copyPartResult: copyPartResult,
 @as("CopySourceVersionId") copySourceVersionId: copySourceVersionId
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "UploadPartCopyCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "UploadPartCopyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1244,7 +1244,7 @@ module PutPublicAccessBlock = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutPublicAccessBlockCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutPublicAccessBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1263,7 +1263,7 @@ module PutObjectRetention = {
   type response = {
 @as("RequestCharged") requestCharged: requestCharged
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutObjectRetentionCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectRetentionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1281,7 +1281,7 @@ module PutObjectLegalHold = {
   type response = {
 @as("RequestCharged") requestCharged: requestCharged
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutObjectLegalHoldCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectLegalHoldCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1333,7 +1333,7 @@ module PutObject = {
 @as("ETag") eTag: eTag,
 @as("Expiration") expiration: expiration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutObjectCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1347,7 +1347,7 @@ module PutBucketVersioning = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketVersioningCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketVersioningCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1360,7 +1360,7 @@ module PutBucketRequestPayment = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketRequestPaymentCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketRequestPaymentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1372,7 +1372,7 @@ module PutBucketAccelerateConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketAccelerateConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketAccelerateConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1426,7 +1426,7 @@ module HeadObject = {
 @as("AcceptRanges") acceptRanges: acceptRanges,
 @as("DeleteMarker") deleteMarker: deleteMarker
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "HeadObjectCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "HeadObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1439,7 +1439,7 @@ module GetPublicAccessBlock = {
   type response = {
 @as("PublicAccessBlockConfiguration") publicAccessBlockConfiguration: publicAccessBlockConfiguration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetPublicAccessBlockCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetPublicAccessBlockCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1455,7 +1455,7 @@ module GetObjectRetention = {
   type response = {
 @as("Retention") retention: objectLockRetention
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetObjectRetentionCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectRetentionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1471,7 +1471,7 @@ module GetObjectLegalHold = {
   type response = {
 @as("LegalHold") legalHold: objectLockLegalHold
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetObjectLegalHoldCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectLegalHoldCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1533,7 +1533,7 @@ module GetObject = {
 @as("DeleteMarker") deleteMarker: deleteMarker,
 @as("Body") body: streamingBlob
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetObjectCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1546,7 +1546,7 @@ module GetBucketPolicyStatus = {
   type response = {
 @as("PolicyStatus") policyStatus: policyStatus
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketPolicyStatusCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketPolicyStatusCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1597,7 +1597,7 @@ module CreateMultipartUpload = {
 @as("AbortRuleId") abortRuleId: abortRuleId,
 @as("AbortDate") abortDate: abortDate
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "CreateMultipartUploadCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateMultipartUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1617,7 +1617,7 @@ module CreateBucket = {
   type response = {
 @as("Location") location: location
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "CreateBucketCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CreateBucketCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1678,7 +1678,7 @@ module CopyObject = {
 @as("Expiration") expiration: expiration,
 @as("CopyObjectResult") copyObjectResult: copyObjectResult
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "CopyObjectCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CopyObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1709,7 +1709,7 @@ module ListParts = {
 @as("AbortRuleId") abortRuleId: abortRuleId,
 @as("AbortDate") abortDate: abortDate
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListPartsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListPartsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1720,7 +1720,7 @@ module ListBuckets = {
 @as("Owner") owner: owner,
 @as("Buckets") buckets: buckets
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<unit>) => t = "ListBucketsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (unit) => t = "ListBucketsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1737,7 +1737,7 @@ module GetObjectTagging = {
 @as("TagSet") tagSet: option<tagSet>,
 @as("VersionId") versionId: objectVersionId
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetObjectTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1750,7 +1750,7 @@ module GetBucketTagging = {
   type response = {
 @as("TagSet") tagSet: option<tagSet>
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1773,7 +1773,7 @@ module SelectObjectContent = {
   type response = {
 @as("Payload") payload: selectObjectContentEventStream
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "SelectObjectContentCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "SelectObjectContentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1791,7 +1791,7 @@ module PutObjectTagging = {
   type response = {
 @as("VersionId") versionId: objectVersionId
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutObjectTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1808,7 +1808,7 @@ module PutObjectLockConfiguration = {
   type response = {
 @as("RequestCharged") requestCharged: requestCharged
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutObjectLockConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectLockConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1821,7 +1821,7 @@ module PutBucketTagging = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketTaggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketTaggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1834,7 +1834,7 @@ module PutBucketOwnershipControls = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketOwnershipControlsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketOwnershipControlsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -1866,7 +1866,7 @@ module ListObjectsV2 = {
 @as("Contents") contents: objectList,
 @as("IsTruncated") isTruncated: isTruncated
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListObjectsV2Command";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListObjectsV2Command";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1894,7 +1894,7 @@ module ListObjects = {
 @as("Marker") marker: marker,
 @as("IsTruncated") isTruncated: isTruncated
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListObjectsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListObjectsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1925,7 +1925,7 @@ module ListObjectVersions = {
 @as("KeyMarker") keyMarker: keyMarker,
 @as("IsTruncated") isTruncated: isTruncated
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListObjectVersionsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListObjectVersionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1955,7 +1955,7 @@ module ListMultipartUploads = {
 @as("KeyMarker") keyMarker: keyMarker,
 @as("Bucket") bucket: bucketName
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListMultipartUploadsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListMultipartUploadsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1968,7 +1968,7 @@ module GetObjectLockConfiguration = {
   type response = {
 @as("ObjectLockConfiguration") objectLockConfiguration: objectLockConfiguration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetObjectLockConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectLockConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1986,7 +1986,7 @@ module GetObjectAcl = {
 @as("Grants") grants: grants,
 @as("Owner") owner: owner
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetObjectAclCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetObjectAclCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2002,7 +2002,7 @@ module GetBucketWebsite = {
 @as("IndexDocument") indexDocument: indexDocument,
 @as("RedirectAllRequestsTo") redirectAllRequestsTo: redirectAllRequestsTo
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketWebsiteCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketWebsiteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2015,7 +2015,7 @@ module GetBucketOwnershipControls = {
   type response = {
 @as("OwnershipControls") ownershipControls: ownershipControls
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketOwnershipControlsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketOwnershipControlsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2028,7 +2028,7 @@ module GetBucketCors = {
   type response = {
 @as("CORSRules") cORSRules: cORSRules
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketCorsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketCorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2042,7 +2042,7 @@ module GetBucketAcl = {
 @as("Grants") grants: grants,
 @as("Owner") owner: owner
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketAclCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketAclCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2061,7 +2061,7 @@ module DeleteObjects = {
 @as("RequestCharged") requestCharged: requestCharged,
 @as("Deleted") deleted: deletedObjects
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "DeleteObjectsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "DeleteObjectsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2087,7 +2087,7 @@ module CompleteMultipartUpload = {
 @as("Bucket") bucket: bucketName,
 @as("Location") location: location
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "CompleteMultipartUploadCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "CompleteMultipartUploadCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2111,7 +2111,7 @@ module PutObjectAcl = {
   type response = {
 @as("RequestCharged") requestCharged: requestCharged
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutObjectAclCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutObjectAclCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2124,7 +2124,7 @@ module PutBucketWebsite = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketWebsiteCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketWebsiteCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2137,7 +2137,7 @@ module PutBucketEncryption = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketEncryptionCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketEncryptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2150,7 +2150,7 @@ module PutBucketCors = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketCorsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketCorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2169,7 +2169,7 @@ module PutBucketAcl = {
 @as("ACL") aCL: bucketCannedACL
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketAclCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketAclCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2182,7 +2182,7 @@ module GetBucketLogging = {
   type response = {
 @as("LoggingEnabled") loggingEnabled: loggingEnabled
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketLoggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketLoggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2195,7 +2195,7 @@ module GetBucketEncryption = {
   type response = {
 @as("ServerSideEncryptionConfiguration") serverSideEncryptionConfiguration: serverSideEncryptionConfiguration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketEncryptionCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketEncryptionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2208,7 +2208,7 @@ module PutBucketMetricsConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketMetricsConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketMetricsConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2221,7 +2221,7 @@ module PutBucketLogging = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketLoggingCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketLoggingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2234,7 +2234,7 @@ module PutBucketInventoryConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketInventoryConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketInventoryConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2246,7 +2246,7 @@ module PutBucketIntelligentTieringConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketIntelligentTieringConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketIntelligentTieringConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2259,7 +2259,7 @@ module PutBucketAnalyticsConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketAnalyticsConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketAnalyticsConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2273,7 +2273,7 @@ module GetBucketMetricsConfiguration = {
   type response = {
 @as("MetricsConfiguration") metricsConfiguration: metricsConfiguration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketMetricsConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketMetricsConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2287,7 +2287,7 @@ module GetBucketInventoryConfiguration = {
   type response = {
 @as("InventoryConfiguration") inventoryConfiguration: inventoryConfiguration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketInventoryConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketInventoryConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2300,7 +2300,7 @@ module GetBucketIntelligentTieringConfiguration = {
   type response = {
 @as("IntelligentTieringConfiguration") intelligentTieringConfiguration: intelligentTieringConfiguration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketIntelligentTieringConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketIntelligentTieringConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2314,7 +2314,7 @@ module GetBucketAnalyticsConfiguration = {
   type response = {
 @as("AnalyticsConfiguration") analyticsConfiguration: analyticsConfiguration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketAnalyticsConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketAnalyticsConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2332,7 +2332,7 @@ module RestoreObject = {
 @as("RestoreOutputPath") restoreOutputPath: restoreOutputPath,
 @as("RequestCharged") requestCharged: requestCharged
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "RestoreObjectCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "RestoreObjectCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2349,7 +2349,7 @@ module ListBucketMetricsConfigurations = {
 @as("ContinuationToken") continuationToken: token,
 @as("IsTruncated") isTruncated: isTruncated
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListBucketMetricsConfigurationsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListBucketMetricsConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2366,7 +2366,7 @@ module ListBucketInventoryConfigurations = {
 @as("InventoryConfigurationList") inventoryConfigurationList: inventoryConfigurationList,
 @as("ContinuationToken") continuationToken: token
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListBucketInventoryConfigurationsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListBucketInventoryConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2382,7 +2382,7 @@ module ListBucketIntelligentTieringConfigurations = {
 @as("ContinuationToken") continuationToken: token,
 @as("IsTruncated") isTruncated: isTruncated
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListBucketIntelligentTieringConfigurationsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListBucketIntelligentTieringConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2399,7 +2399,7 @@ module ListBucketAnalyticsConfigurations = {
 @as("ContinuationToken") continuationToken: token,
 @as("IsTruncated") isTruncated: isTruncated
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "ListBucketAnalyticsConfigurationsCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "ListBucketAnalyticsConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2410,7 +2410,7 @@ module GetBucketNotificationConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   type response = notificationConfiguration;
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketNotificationConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketNotificationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2423,7 +2423,7 @@ module GetBucketLifecycleConfiguration = {
   type response = {
 @as("Rules") rules: lifecycleRules
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketLifecycleConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketLifecycleConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -2437,7 +2437,7 @@ module PutBucketReplication = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketReplicationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketReplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2449,7 +2449,7 @@ module PutBucketNotificationConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketNotificationConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketNotificationConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2461,7 +2461,7 @@ module PutBucketLifecycleConfiguration = {
 @as("Bucket") bucket: option<bucketName>
 }
   
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "PutBucketLifecycleConfigurationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "PutBucketLifecycleConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -2474,6 +2474,6 @@ module GetBucketReplication = {
   type response = {
 @as("ReplicationConfiguration") replicationConfiguration: replicationConfiguration
 }
-  @module("@aws-sdk/client-s3") @new external new_: (Js.Promise.t<request>) => t = "GetBucketReplicationCommand";
+  @module("@aws-sdk/client-s3") @new external new_: (request) => t = "GetBucketReplicationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -609,7 +609,7 @@ module ValidateMatchmakingRuleSet = {
   type response = {
 @as("Valid") valid: booleanModel
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "ValidateMatchmakingRuleSetCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "ValidateMatchmakingRuleSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -627,7 +627,7 @@ module UpdateFleetCapacity = {
 @as("FleetArn") fleetArn: fleetArn,
 @as("FleetId") fleetId: fleetId
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateFleetCapacityCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateFleetCapacityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -637,7 +637,7 @@ module StopMatchmaking = {
 @as("TicketId") ticketId: option<matchmakingIdStringModel>
 }
   type response = unit
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "StopMatchmakingCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "StopMatchmakingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -650,7 +650,7 @@ module ResolveAlias = {
 @as("FleetArn") fleetArn: fleetArn,
 @as("FleetId") fleetId: fleetId
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "ResolveAliasCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "ResolveAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -662,7 +662,7 @@ module GetGameSessionLogUrl = {
   type response = {
 @as("PreSignedUrl") preSignedUrl: nonZeroAndMaxString
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "GetGameSessionLogUrlCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "GetGameSessionLogUrlCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -673,7 +673,7 @@ module DeregisterGameServer = {
 @as("GameServerGroupName") gameServerGroupName: option<gameServerGroupNameOrArn>
 }
   
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeregisterGameServerCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeregisterGameServerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -684,7 +684,7 @@ module DeleteVpcPeeringConnection = {
 @as("FleetId") fleetId: option<fleetId>
 }
   type response = unit
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpcPeeringConnectionCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteVpcPeeringConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -695,7 +695,7 @@ module DeleteVpcPeeringAuthorization = {
 @as("GameLiftAwsAccountId") gameLiftAwsAccountId: option<nonZeroAndMaxString>
 }
   type response = unit
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteVpcPeeringAuthorizationCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteVpcPeeringAuthorizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -705,7 +705,7 @@ module DeleteScript = {
 @as("ScriptId") scriptId: option<scriptIdOrArn>
 }
   
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteScriptCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteScriptCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -716,7 +716,7 @@ module DeleteScalingPolicy = {
 @as("Name") name: option<nonZeroAndMaxString>
 }
   
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteScalingPolicyCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteScalingPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -726,7 +726,7 @@ module DeleteMatchmakingRuleSet = {
 @as("Name") name: option<matchmakingRuleSetName>
 }
   type response = unit
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteMatchmakingRuleSetCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteMatchmakingRuleSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -736,7 +736,7 @@ module DeleteMatchmakingConfiguration = {
 @as("Name") name: option<matchmakingConfigurationName>
 }
   type response = unit
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteMatchmakingConfigurationCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteMatchmakingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -746,7 +746,7 @@ module DeleteGameSessionQueue = {
 @as("Name") name: option<gameSessionQueueNameOrArn>
 }
   type response = unit
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteGameSessionQueueCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteGameSessionQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -756,7 +756,7 @@ module DeleteFleet = {
 @as("FleetId") fleetId: option<fleetIdOrArn>
 }
   
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteFleetCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -766,7 +766,7 @@ module DeleteBuild = {
 @as("BuildId") buildId: option<buildIdOrArn>
 }
   
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteBuildCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteBuildCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -776,7 +776,7 @@ module DeleteAlias = {
 @as("AliasId") aliasId: option<aliasIdOrArn>
 }
   
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteAliasCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -788,7 +788,7 @@ module CreateVpcPeeringConnection = {
 @as("FleetId") fleetId: option<fleetId>
 }
   type response = unit
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateVpcPeeringConnectionCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateVpcPeeringConnectionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -804,7 +804,7 @@ module UpdateGameServer = {
   type response = {
 @as("GameServer") gameServer: gameServer
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateGameServerCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateGameServerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -821,7 +821,7 @@ module UpdateFleetAttributes = {
   type response = {
 @as("FleetId") fleetId: fleetId
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateFleetAttributesCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateFleetAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -835,7 +835,7 @@ module UpdateBuild = {
   type response = {
 @as("Build") build: build
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateBuildCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateBuildCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -846,7 +846,7 @@ module UntagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -861,7 +861,7 @@ module StopFleetActions = {
 @as("FleetArn") fleetArn: fleetArn,
 @as("FleetId") fleetId: fleetId
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "StopFleetActionsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "StopFleetActionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -876,7 +876,7 @@ module StartFleetActions = {
 @as("FleetArn") fleetArn: fleetArn,
 @as("FleetId") fleetId: fleetId
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "StartFleetActionsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "StartFleetActionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -889,7 +889,7 @@ module RequestUploadCredentials = {
 @as("StorageLocation") storageLocation: s3Location,
 @as("UploadCredentials") uploadCredentials: awsCredentials
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "RequestUploadCredentialsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "RequestUploadCredentialsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -905,7 +905,7 @@ module RegisterGameServer = {
   type response = {
 @as("GameServer") gameServer: gameServer
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "RegisterGameServerCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "RegisterGameServerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -926,7 +926,7 @@ module PutScalingPolicy = {
   type response = {
 @as("Name") name: nonZeroAndMaxString
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "PutScalingPolicyCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "PutScalingPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -942,7 +942,7 @@ module ListFleets = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("FleetIds") fleetIds: fleetIdList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "ListFleetsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "ListFleetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -955,7 +955,7 @@ module DescribeGameServer = {
   type response = {
 @as("GameServer") gameServer: gameServer
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeGameServerCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeGameServerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -968,7 +968,7 @@ module DescribeFleetLocationUtilization = {
   type response = {
 @as("FleetUtilization") fleetUtilization: fleetUtilization
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetLocationUtilizationCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeFleetLocationUtilizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -980,7 +980,7 @@ module DescribeBuild = {
   type response = {
 @as("Build") build: build
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeBuildCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeBuildCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -993,7 +993,7 @@ module CreateVpcPeeringAuthorization = {
   type response = {
 @as("VpcPeeringAuthorization") vpcPeeringAuthorization: vpcPeeringAuthorization
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateVpcPeeringAuthorizationCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateVpcPeeringAuthorizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1007,7 +1007,7 @@ module CreatePlayerSession = {
   type response = {
 @as("PlayerSession") playerSession: playerSession
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreatePlayerSessionCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreatePlayerSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1021,7 +1021,7 @@ module ClaimGameServer = {
   type response = {
 @as("GameServer") gameServer: gameServer
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "ClaimGameServerCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "ClaimGameServerCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1033,7 +1033,7 @@ module AcceptMatch = {
 @as("TicketId") ticketId: option<matchmakingIdStringModel>
 }
   type response = unit
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "AcceptMatchCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "AcceptMatchCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1049,7 +1049,7 @@ module UpdateScript = {
   type response = {
 @as("Script") script: script
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateScriptCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateScriptCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1063,7 +1063,7 @@ module UpdateFleetPortSettings = {
   type response = {
 @as("FleetId") fleetId: fleetId
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateFleetPortSettingsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateFleetPortSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1078,7 +1078,7 @@ module UpdateAlias = {
   type response = {
 @as("Alias") alias: alias
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateAliasCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1089,7 +1089,7 @@ module TagResource = {
 @as("ResourceARN") resourceARN: option<amazonResourceName>
 }
   type response = unit
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1101,7 +1101,7 @@ module ListTagsForResource = {
   type response = {
 @as("Tags") tags: tagList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1117,7 +1117,7 @@ module ListGameServers = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("GameServers") gameServers: gameServers
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "ListGameServersCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "ListGameServersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1132,7 +1132,7 @@ module ListBuilds = {
 @as("NextToken") nextToken: nonEmptyString,
 @as("Builds") builds: buildList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "ListBuildsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "ListBuildsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1145,7 +1145,7 @@ module GetInstanceAccess = {
   type response = {
 @as("InstanceAccess") instanceAccess: instanceAccess
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "GetInstanceAccessCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "GetInstanceAccessCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1155,7 +1155,7 @@ module DescribeVpcPeeringAuthorizations = {
   type response = {
 @as("VpcPeeringAuthorizations") vpcPeeringAuthorizations: vpcPeeringAuthorizationList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcPeeringAuthorizationsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeVpcPeeringAuthorizationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1167,7 +1167,7 @@ module DescribeScript = {
   type response = {
 @as("Script") script: script
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeScriptCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeScriptCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1185,7 +1185,7 @@ module DescribePlayerSessions = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("PlayerSessions") playerSessions: playerSessionList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribePlayerSessionsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribePlayerSessionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1200,7 +1200,7 @@ module DescribeMatchmakingRuleSets = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("RuleSets") ruleSets: option<matchmakingRuleSetList>
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeMatchmakingRuleSetsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeMatchmakingRuleSetsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1217,7 +1217,7 @@ module DescribeInstances = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("Instances") instances: instanceList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeInstancesCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1233,7 +1233,7 @@ module DescribeGameServerInstances = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("GameServerInstances") gameServerInstances: gameServerInstances
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeGameServerInstancesCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeGameServerInstancesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1248,7 +1248,7 @@ module DescribeFleetUtilization = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("FleetUtilization") fleetUtilization: fleetUtilizationList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetUtilizationCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeFleetUtilizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1265,7 +1265,7 @@ module DescribeFleetPortSettings = {
 @as("FleetArn") fleetArn: fleetArn,
 @as("FleetId") fleetId: fleetId
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetPortSettingsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeFleetPortSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1278,7 +1278,7 @@ module DescribeFleetLocationCapacity = {
   type response = {
 @as("FleetCapacity") fleetCapacity: fleetCapacity
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetLocationCapacityCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeFleetLocationCapacityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1295,7 +1295,7 @@ module DescribeFleetEvents = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("Events") events: eventList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetEventsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeFleetEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1308,7 +1308,7 @@ module DescribeEC2InstanceLimits = {
   type response = {
 @as("EC2InstanceLimits") eC2InstanceLimits: eC2InstanceLimitList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeEC2InstanceLimitsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeEC2InstanceLimitsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1320,7 +1320,7 @@ module DescribeAlias = {
   type response = {
 @as("Alias") alias: alias
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeAliasCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1335,7 +1335,7 @@ module DeleteFleetLocations = {
 @as("FleetArn") fleetArn: fleetArn,
 @as("FleetId") fleetId: fleetIdOrArn
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteFleetLocationsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteFleetLocationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1351,7 +1351,7 @@ module CreateScript = {
   type response = {
 @as("Script") script: script
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateScriptCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateScriptCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1365,7 +1365,7 @@ module CreatePlayerSessions = {
   type response = {
 @as("PlayerSessions") playerSessions: playerSessionList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreatePlayerSessionsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreatePlayerSessionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1379,7 +1379,7 @@ module CreateMatchmakingRuleSet = {
   type response = {
 @as("RuleSet") ruleSet: option<matchmakingRuleSet>
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateMatchmakingRuleSetCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateMatchmakingRuleSetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1394,7 +1394,7 @@ module CreateFleetLocations = {
 @as("FleetArn") fleetArn: fleetArn,
 @as("FleetId") fleetId: fleetIdOrArn
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateFleetLocationsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateFleetLocationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1412,7 +1412,7 @@ module CreateBuild = {
 @as("UploadCredentials") uploadCredentials: awsCredentials,
 @as("Build") build: build
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateBuildCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateBuildCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1427,7 +1427,7 @@ module CreateAlias = {
   type response = {
 @as("Alias") alias: alias
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateAliasCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1440,7 +1440,7 @@ module UpdateRuntimeConfiguration = {
   type response = {
 @as("RuntimeConfiguration") runtimeConfiguration: runtimeConfiguration
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateRuntimeConfigurationCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateRuntimeConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1465,7 +1465,7 @@ module UpdateMatchmakingConfiguration = {
   type response = {
 @as("Configuration") configuration: matchmakingConfiguration
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateMatchmakingConfigurationCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateMatchmakingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1484,7 +1484,7 @@ module UpdateGameSessionQueue = {
   type response = {
 @as("GameSessionQueue") gameSessionQueue: gameSessionQueue
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateGameSessionQueueCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateGameSessionQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1500,7 +1500,7 @@ module UpdateGameSession = {
   type response = {
 @as("GameSession") gameSession: gameSession
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateGameSessionCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateGameSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1516,7 +1516,7 @@ module UpdateGameServerGroup = {
   type response = {
 @as("GameServerGroup") gameServerGroup: gameServerGroup
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "UpdateGameServerGroupCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "UpdateGameServerGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1529,7 +1529,7 @@ module SuspendGameServerGroup = {
   type response = {
 @as("GameServerGroup") gameServerGroup: gameServerGroup
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "SuspendGameServerGroupCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "SuspendGameServerGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1541,7 +1541,7 @@ module StopGameSessionPlacement = {
   type response = {
 @as("GameSessionPlacement") gameSessionPlacement: gameSessionPlacement
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "StopGameSessionPlacementCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "StopGameSessionPlacementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1560,7 +1560,7 @@ module StartGameSessionPlacement = {
   type response = {
 @as("GameSessionPlacement") gameSessionPlacement: gameSessionPlacement
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "StartGameSessionPlacementCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "StartGameSessionPlacementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1573,7 +1573,7 @@ module ResumeGameServerGroup = {
   type response = {
 @as("GameServerGroup") gameServerGroup: gameServerGroup
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "ResumeGameServerGroupCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "ResumeGameServerGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1587,7 +1587,7 @@ module ListScripts = {
 @as("NextToken") nextToken: nonEmptyString,
 @as("Scripts") scripts: scriptList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "ListScriptsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "ListScriptsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1603,7 +1603,7 @@ module ListAliases = {
 @as("NextToken") nextToken: nonEmptyString,
 @as("Aliases") aliases: aliasList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "ListAliasesCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "ListAliasesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1615,7 +1615,7 @@ module DescribeVpcPeeringConnections = {
   type response = {
 @as("VpcPeeringConnections") vpcPeeringConnections: vpcPeeringConnectionList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeVpcPeeringConnectionsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeVpcPeeringConnectionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1632,7 +1632,7 @@ module DescribeScalingPolicies = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("ScalingPolicies") scalingPolicies: scalingPolicyList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeScalingPoliciesCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeScalingPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1644,7 +1644,7 @@ module DescribeRuntimeConfiguration = {
   type response = {
 @as("RuntimeConfiguration") runtimeConfiguration: runtimeConfiguration
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeRuntimeConfigurationCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeRuntimeConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1656,7 +1656,7 @@ module DescribeGameSessionPlacement = {
   type response = {
 @as("GameSessionPlacement") gameSessionPlacement: gameSessionPlacement
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeGameSessionPlacementCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeGameSessionPlacementCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1668,7 +1668,7 @@ module DescribeGameServerGroup = {
   type response = {
 @as("GameServerGroup") gameServerGroup: gameServerGroup
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeGameServerGroupCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeGameServerGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1686,7 +1686,7 @@ module DescribeFleetLocationAttributes = {
 @as("FleetArn") fleetArn: fleetArn,
 @as("FleetId") fleetId: fleetIdOrArn
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetLocationAttributesCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeFleetLocationAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1701,7 +1701,7 @@ module DescribeFleetCapacity = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("FleetCapacity") fleetCapacity: fleetCapacityList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetCapacityCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeFleetCapacityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1716,7 +1716,7 @@ module DescribeFleetAttributes = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("FleetAttributes") fleetAttributes: fleetAttributesList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeFleetAttributesCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeFleetAttributesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1729,7 +1729,7 @@ module DeleteGameServerGroup = {
   type response = {
 @as("GameServerGroup") gameServerGroup: gameServerGroup
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DeleteGameServerGroupCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DeleteGameServerGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1755,7 +1755,7 @@ module CreateMatchmakingConfiguration = {
   type response = {
 @as("Configuration") configuration: matchmakingConfiguration
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateMatchmakingConfigurationCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateMatchmakingConfigurationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1775,7 +1775,7 @@ module CreateGameSessionQueue = {
   type response = {
 @as("GameSessionQueue") gameSessionQueue: gameSessionQueue
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateGameSessionQueueCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateGameSessionQueueCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1796,7 +1796,7 @@ module CreateGameSession = {
   type response = {
 @as("GameSession") gameSession: gameSession
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateGameSessionCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateGameSessionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1818,7 +1818,7 @@ module CreateGameServerGroup = {
   type response = {
 @as("GameServerGroup") gameServerGroup: gameServerGroup
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateGameServerGroupCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateGameServerGroupCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1850,7 +1850,7 @@ module CreateFleet = {
 @as("LocationStates") locationStates: locationStateList,
 @as("FleetAttributes") fleetAttributes: fleetAttributes
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "CreateFleetCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "CreateFleetCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1869,7 +1869,7 @@ module SearchGameSessions = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("GameSessions") gameSessions: gameSessionList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "SearchGameSessionsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "SearchGameSessionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1883,7 +1883,7 @@ module ListGameServerGroups = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("GameServerGroups") gameServerGroups: gameServerGroups
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "ListGameServerGroupsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "ListGameServerGroupsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1899,7 +1899,7 @@ module DescribeMatchmakingConfigurations = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("Configurations") configurations: matchmakingConfigurationList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeMatchmakingConfigurationsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeMatchmakingConfigurationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1918,7 +1918,7 @@ module DescribeGameSessions = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("GameSessions") gameSessions: gameSessionList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeGameSessionsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeGameSessionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1933,7 +1933,7 @@ module DescribeGameSessionQueues = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("GameSessionQueues") gameSessionQueues: gameSessionQueueList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeGameSessionQueuesCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeGameSessionQueuesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1952,7 +1952,7 @@ module DescribeGameSessionDetails = {
 @as("NextToken") nextToken: nonZeroAndMaxString,
 @as("GameSessionDetails") gameSessionDetails: gameSessionDetailList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeGameSessionDetailsCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeGameSessionDetailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1966,7 +1966,7 @@ module StartMatchmaking = {
   type response = {
 @as("MatchmakingTicket") matchmakingTicket: matchmakingTicket
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "StartMatchmakingCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "StartMatchmakingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1981,7 +1981,7 @@ module StartMatchBackfill = {
   type response = {
 @as("MatchmakingTicket") matchmakingTicket: matchmakingTicket
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "StartMatchBackfillCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "StartMatchBackfillCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1993,6 +1993,6 @@ module DescribeMatchmaking = {
   type response = {
 @as("TicketList") ticketList: matchmakingTicketList
 }
-  @module("@aws-sdk/client-gamelift") @new external new_: (Js.Promise.t<request>) => t = "DescribeMatchmakingCommand";
+  @module("@aws-sdk/client-gamelift") @new external new_: (request) => t = "DescribeMatchmakingCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

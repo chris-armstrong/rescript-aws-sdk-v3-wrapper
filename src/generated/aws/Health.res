@@ -197,7 +197,7 @@ module EnableHealthServiceAccessForOrganization = {
   type t;
   
   
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<unit>) => t = "EnableHealthServiceAccessForOrganizationCommand";
+  @module("@aws-sdk/client-health") @new external new_: (unit) => t = "EnableHealthServiceAccessForOrganizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -205,7 +205,7 @@ module DisableHealthServiceAccessForOrganization = {
   type t;
   
   
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<unit>) => t = "DisableHealthServiceAccessForOrganizationCommand";
+  @module("@aws-sdk/client-health") @new external new_: (unit) => t = "DisableHealthServiceAccessForOrganizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -215,7 +215,7 @@ module DescribeHealthServiceStatusForOrganization = {
   type response = {
 @as("healthServiceAccessStatusForOrganization") healthServiceAccessStatusForOrganization: healthServiceAccessStatusForOrganization
 }
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<unit>) => t = "DescribeHealthServiceStatusForOrganizationCommand";
+  @module("@aws-sdk/client-health") @new external new_: (unit) => t = "DescribeHealthServiceStatusForOrganizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -231,7 +231,7 @@ module DescribeAffectedAccountsForOrganization = {
 @as("eventScopeCode") eventScopeCode: eventScopeCode,
 @as("affectedAccounts") affectedAccounts: affectedAccountsList
 }
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<request>) => t = "DescribeAffectedAccountsForOrganizationCommand";
+  @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeAffectedAccountsForOrganizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -247,7 +247,7 @@ module DescribeEventsForOrganization = {
 @as("nextToken") nextToken: nextToken,
 @as("events") events: organizationEventList
 }
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventsForOrganizationCommand";
+  @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventsForOrganizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -263,7 +263,7 @@ module DescribeEventTypes = {
 @as("nextToken") nextToken: nextToken,
 @as("eventTypes") eventTypes: eventTypeList
 }
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventTypesCommand";
+  @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventTypesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -275,7 +275,7 @@ module DescribeEntityAggregates = {
   type response = {
 @as("entityAggregates") entityAggregates: entityAggregateList
 }
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<request>) => t = "DescribeEntityAggregatesCommand";
+  @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEntityAggregatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -291,7 +291,7 @@ module DescribeEvents = {
 @as("nextToken") nextToken: nextToken,
 @as("events") events: eventList
 }
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventsCommand";
+  @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -305,7 +305,7 @@ module DescribeEventDetailsForOrganization = {
 @as("failedSet") failedSet: describeEventDetailsForOrganizationFailedSet,
 @as("successfulSet") successfulSet: describeEventDetailsForOrganizationSuccessfulSet
 }
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventDetailsForOrganizationCommand";
+  @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventDetailsForOrganizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -319,7 +319,7 @@ module DescribeEventDetails = {
 @as("failedSet") failedSet: describeEventDetailsFailedSet,
 @as("successfulSet") successfulSet: describeEventDetailsSuccessfulSet
 }
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventDetailsCommand";
+  @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventDetailsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -335,7 +335,7 @@ module DescribeEventAggregates = {
 @as("nextToken") nextToken: nextToken,
 @as("eventAggregates") eventAggregates: eventAggregateList
 }
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<request>) => t = "DescribeEventAggregatesCommand";
+  @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeEventAggregatesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -352,7 +352,7 @@ module DescribeAffectedEntitiesForOrganization = {
 @as("failedSet") failedSet: describeAffectedEntitiesForOrganizationFailedSet,
 @as("entities") entities: entityList
 }
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<request>) => t = "DescribeAffectedEntitiesForOrganizationCommand";
+  @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeAffectedEntitiesForOrganizationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -368,6 +368,6 @@ module DescribeAffectedEntities = {
 @as("nextToken") nextToken: nextToken,
 @as("entities") entities: entityList
 }
-  @module("@aws-sdk/client-health") @new external new_: (Js.Promise.t<request>) => t = "DescribeAffectedEntitiesCommand";
+  @module("@aws-sdk/client-health") @new external new_: (request) => t = "DescribeAffectedEntitiesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

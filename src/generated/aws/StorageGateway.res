@@ -436,7 +436,7 @@ module UpdateVTLDeviceType = {
   type response = {
 @as("VTLDeviceARN") vTLDeviceARN: vTLDeviceARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateVTLDeviceTypeCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateVTLDeviceTypeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -452,7 +452,7 @@ module UpdateSnapshotSchedule = {
   type response = {
 @as("VolumeARN") volumeARN: volumeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateSnapshotScheduleCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateSnapshotScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -465,7 +465,7 @@ module UpdateSMBSecurityStrategy = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateSMBSecurityStrategyCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateSMBSecurityStrategyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -478,7 +478,7 @@ module UpdateSMBFileShareVisibility = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateSMBFileShareVisibilityCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateSMBFileShareVisibilityCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -507,7 +507,7 @@ module UpdateSMBFileShare = {
   type response = {
 @as("FileShareARN") fileShareARN: fileShareARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateSMBFileShareCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateSMBFileShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -532,7 +532,7 @@ module UpdateNFSFileShare = {
   type response = {
 @as("FileShareARN") fileShareARN: fileShareARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateNFSFileShareCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateNFSFileShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -548,7 +548,7 @@ module UpdateMaintenanceStartTime = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateMaintenanceStartTimeCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateMaintenanceStartTimeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -560,7 +560,7 @@ module UpdateGatewaySoftwareNow = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateGatewaySoftwareNowCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateGatewaySoftwareNowCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -576,7 +576,7 @@ module UpdateGatewayInformation = {
 @as("GatewayName") gatewayName: amazonawsString,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateGatewayInformationCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateGatewayInformationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -592,7 +592,7 @@ module UpdateFileSystemAssociation = {
   type response = {
 @as("FileSystemAssociationARN") fileSystemAssociationARN: fileSystemAssociationARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateFileSystemAssociationCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateFileSystemAssociationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -608,7 +608,7 @@ module UpdateChapCredentials = {
 @as("InitiatorName") initiatorName: iqnName,
 @as("TargetARN") targetARN: targetARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateChapCredentialsCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateChapCredentialsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -622,7 +622,7 @@ module UpdateBandwidthRateLimit = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateBandwidthRateLimitCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateBandwidthRateLimitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -635,7 +635,7 @@ module UpdateAutomaticTapeCreationPolicy = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateAutomaticTapeCreationPolicyCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateAutomaticTapeCreationPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -647,7 +647,7 @@ module StartGateway = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "StartGatewayCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "StartGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -659,7 +659,7 @@ module StartAvailabilityMonitorTest = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "StartAvailabilityMonitorTestCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "StartAvailabilityMonitorTestCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -671,7 +671,7 @@ module ShutdownGateway = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ShutdownGatewayCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ShutdownGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -684,7 +684,7 @@ module SetSMBGuestPassword = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "SetSMBGuestPasswordCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "SetSMBGuestPasswordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -697,7 +697,7 @@ module SetLocalConsolePassword = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "SetLocalConsolePasswordCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "SetLocalConsolePasswordCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -710,7 +710,7 @@ module RetrieveTapeRecoveryPoint = {
   type response = {
 @as("TapeARN") tapeARN: tapeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "RetrieveTapeRecoveryPointCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "RetrieveTapeRecoveryPointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -723,7 +723,7 @@ module RetrieveTapeArchive = {
   type response = {
 @as("TapeARN") tapeARN: tapeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "RetrieveTapeArchiveCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "RetrieveTapeArchiveCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -735,7 +735,7 @@ module ResetCache = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ResetCacheCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ResetCacheCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -748,7 +748,7 @@ module RemoveTagsFromResource = {
   type response = {
 @as("ResourceARN") resourceARN: resourceARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "RemoveTagsFromResourceCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "RemoveTagsFromResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -763,7 +763,7 @@ module RefreshCache = {
 @as("NotificationId") notificationId: notificationId,
 @as("FileShareARN") fileShareARN: fileShareARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "RefreshCacheCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "RefreshCacheCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -776,7 +776,7 @@ module NotifyWhenUploaded = {
 @as("NotificationId") notificationId: notificationId,
 @as("FileShareARN") fileShareARN: fileShareARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "NotifyWhenUploadedCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "NotifyWhenUploadedCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -792,7 +792,7 @@ module ListVolumes = {
 @as("Marker") marker: marker,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ListVolumesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListVolumesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -805,7 +805,7 @@ module ListVolumeRecoveryPoints = {
 @as("VolumeRecoveryPointInfos") volumeRecoveryPointInfos: volumeRecoveryPointInfos,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ListVolumeRecoveryPointsCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListVolumeRecoveryPointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -817,7 +817,7 @@ module ListVolumeInitiators = {
   type response = {
 @as("Initiators") initiators: initiators
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ListVolumeInitiatorsCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListVolumeInitiatorsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -832,7 +832,7 @@ module ListTapes = {
 @as("Marker") marker: marker,
 @as("TapeInfos") tapeInfos: tapeInfos
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ListTapesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListTapesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -847,7 +847,7 @@ module ListTapePools = {
 @as("Marker") marker: marker,
 @as("PoolInfos") poolInfos: poolInfos
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ListTapePoolsCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListTapePoolsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -863,7 +863,7 @@ module ListTagsForResource = {
 @as("Marker") marker: marker,
 @as("ResourceARN") resourceARN: resourceARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -877,7 +877,7 @@ module ListGateways = {
 @as("Marker") marker: marker,
 @as("Gateways") gateways: gateways
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ListGatewaysCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListGatewaysCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -893,7 +893,7 @@ module ListFileSystemAssociations = {
 @as("NextMarker") nextMarker: marker,
 @as("Marker") marker: marker
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ListFileSystemAssociationsCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListFileSystemAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -909,7 +909,7 @@ module ListFileShares = {
 @as("NextMarker") nextMarker: marker,
 @as("Marker") marker: marker
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ListFileSharesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListFileSharesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -928,7 +928,7 @@ module JoinDomain = {
 @as("ActiveDirectoryStatus") activeDirectoryStatus: activeDirectoryStatus,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "JoinDomainCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "JoinDomainCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -941,7 +941,7 @@ module DisassociateFileSystem = {
   type response = {
 @as("FileSystemAssociationARN") fileSystemAssociationARN: fileSystemAssociationARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DisassociateFileSystemCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DisassociateFileSystemCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -953,7 +953,7 @@ module DisableGateway = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DisableGatewayCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DisableGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -966,7 +966,7 @@ module DetachVolume = {
   type response = {
 @as("VolumeARN") volumeARN: volumeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DetachVolumeCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DetachVolumeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -981,7 +981,7 @@ module DescribeWorkingStorage = {
 @as("DiskIds") diskIds: diskIds,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkingStorageCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeWorkingStorageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -996,7 +996,7 @@ module DescribeUploadBuffer = {
 @as("DiskIds") diskIds: diskIds,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeUploadBufferCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeUploadBufferCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1012,7 +1012,7 @@ module DescribeTapes = {
 @as("Marker") marker: marker,
 @as("Tapes") tapes: tapes
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeTapesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeTapesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1028,7 +1028,7 @@ module DescribeTapeRecoveryPoints = {
 @as("TapeRecoveryPointInfos") tapeRecoveryPointInfos: tapeRecoveryPointInfos,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeTapeRecoveryPointsCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeTapeRecoveryPointsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1043,7 +1043,7 @@ module DescribeTapeArchives = {
 @as("Marker") marker: marker,
 @as("TapeArchives") tapeArchives: tapeArchives
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeTapeArchivesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeTapeArchivesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1060,7 +1060,7 @@ module DescribeSnapshotSchedule = {
 @as("StartAt") startAt: hourOfDay,
 @as("VolumeARN") volumeARN: volumeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeSnapshotScheduleCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeSnapshotScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1077,7 +1077,7 @@ module DescribeSMBSettings = {
 @as("DomainName") domainName: domainName,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeSMBSettingsCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeSMBSettingsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1094,7 +1094,7 @@ module DescribeMaintenanceStartTime = {
 @as("HourOfDay") hourOfDay: hourOfDay,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeMaintenanceStartTimeCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeMaintenanceStartTimeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1123,7 +1123,7 @@ module DescribeGatewayInformation = {
 @as("GatewayId") gatewayId: gatewayId,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeGatewayInformationCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeGatewayInformationCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1135,7 +1135,7 @@ module DescribeChapCredentials = {
   type response = {
 @as("ChapCredentials") chapCredentials: chapCredentials
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeChapCredentialsCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeChapCredentialsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1153,7 +1153,7 @@ module DescribeCache = {
 @as("DiskIds") diskIds: diskIds,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeCacheCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeCacheCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1167,7 +1167,7 @@ module DescribeBandwidthRateLimit = {
 @as("AverageUploadRateLimitInBitsPerSec") averageUploadRateLimitInBitsPerSec: bandwidthUploadRateLimit,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeBandwidthRateLimitCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeBandwidthRateLimitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1181,7 +1181,7 @@ module DescribeAvailabilityMonitorTest = {
 @as("Status") status: availabilityMonitorTestStatus,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeAvailabilityMonitorTestCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeAvailabilityMonitorTestCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1193,7 +1193,7 @@ module DeleteVolume = {
   type response = {
 @as("VolumeARN") volumeARN: volumeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteVolumeCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DeleteVolumeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1205,7 +1205,7 @@ module DeleteTapePool = {
   type response = {
 @as("PoolARN") poolARN: poolARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteTapePoolCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DeleteTapePoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1218,7 +1218,7 @@ module DeleteTapeArchive = {
   type response = {
 @as("TapeARN") tapeARN: tapeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteTapeArchiveCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DeleteTapeArchiveCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1232,7 +1232,7 @@ module DeleteTape = {
   type response = {
 @as("TapeARN") tapeARN: tapeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteTapeCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DeleteTapeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1244,7 +1244,7 @@ module DeleteSnapshotSchedule = {
   type response = {
 @as("VolumeARN") volumeARN: volumeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteSnapshotScheduleCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DeleteSnapshotScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1256,7 +1256,7 @@ module DeleteGateway = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteGatewayCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DeleteGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1269,7 +1269,7 @@ module DeleteFileShare = {
   type response = {
 @as("FileShareARN") fileShareARN: fileShareARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteFileShareCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DeleteFileShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1283,7 +1283,7 @@ module DeleteChapCredentials = {
 @as("InitiatorName") initiatorName: iqnName,
 @as("TargetARN") targetARN: targetARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteChapCredentialsCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DeleteChapCredentialsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1296,7 +1296,7 @@ module DeleteBandwidthRateLimit = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteBandwidthRateLimitCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DeleteBandwidthRateLimitCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1308,7 +1308,7 @@ module DeleteAutomaticTapeCreationPolicy = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DeleteAutomaticTapeCreationPolicyCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DeleteAutomaticTapeCreationPolicyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1329,7 +1329,7 @@ module CreateTapes = {
   type response = {
 @as("TapeARNs") tapeARNs: tapeARNs
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "CreateTapesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateTapesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1348,7 +1348,7 @@ module CreateTapeWithBarcode = {
   type response = {
 @as("TapeARN") tapeARN: tapeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "CreateTapeWithBarcodeCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateTapeWithBarcodeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1364,7 +1364,7 @@ module CreateTapePool = {
   type response = {
 @as("PoolARN") poolARN: poolARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "CreateTapePoolCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateTapePoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1386,7 +1386,7 @@ module CreateStorediSCSIVolume = {
 @as("VolumeSizeInBytes") volumeSizeInBytes: long,
 @as("VolumeARN") volumeARN: volumeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "CreateStorediSCSIVolumeCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateStorediSCSIVolumeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1402,7 +1402,7 @@ module CreateSnapshotFromVolumeRecoveryPoint = {
 @as("VolumeARN") volumeARN: volumeARN,
 @as("SnapshotId") snapshotId: snapshotId
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "CreateSnapshotFromVolumeRecoveryPointCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateSnapshotFromVolumeRecoveryPointCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1417,7 +1417,7 @@ module CreateSnapshot = {
 @as("SnapshotId") snapshotId: snapshotId,
 @as("VolumeARN") volumeARN: volumeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "CreateSnapshotCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateSnapshotCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1451,7 +1451,7 @@ module CreateSMBFileShare = {
   type response = {
 @as("FileShareARN") fileShareARN: fileShareARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "CreateSMBFileShareCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateSMBFileShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1480,7 +1480,7 @@ module CreateNFSFileShare = {
   type response = {
 @as("FileShareARN") fileShareARN: fileShareARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "CreateNFSFileShareCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateNFSFileShareCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1502,7 +1502,7 @@ module CreateCachediSCSIVolume = {
 @as("TargetARN") targetARN: targetARN,
 @as("VolumeARN") volumeARN: volumeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "CreateCachediSCSIVolumeCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CreateCachediSCSIVolumeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1515,7 +1515,7 @@ module CancelRetrieval = {
   type response = {
 @as("TapeARN") tapeARN: tapeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "CancelRetrievalCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CancelRetrievalCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1528,7 +1528,7 @@ module CancelArchival = {
   type response = {
 @as("TapeARN") tapeARN: tapeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "CancelArchivalCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "CancelArchivalCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1545,7 +1545,7 @@ module AttachVolume = {
 @as("TargetARN") targetARN: targetARN,
 @as("VolumeARN") volumeARN: volumeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "AttachVolumeCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "AttachVolumeCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1564,7 +1564,7 @@ module AssociateFileSystem = {
   type response = {
 @as("FileSystemAssociationARN") fileSystemAssociationARN: fileSystemAssociationARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "AssociateFileSystemCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "AssociateFileSystemCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1578,7 +1578,7 @@ module AssignTapePool = {
   type response = {
 @as("TapeARN") tapeARN: tapeARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "AssignTapePoolCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "AssignTapePoolCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1591,7 +1591,7 @@ module AddWorkingStorage = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "AddWorkingStorageCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "AddWorkingStorageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1604,7 +1604,7 @@ module AddUploadBuffer = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "AddUploadBufferCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "AddUploadBufferCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1617,7 +1617,7 @@ module AddTagsToResource = {
   type response = {
 @as("ResourceARN") resourceARN: resourceARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "AddTagsToResourceCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "AddTagsToResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1630,7 +1630,7 @@ module AddCache = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "AddCacheCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "AddCacheCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1649,7 +1649,7 @@ module ActivateGateway = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ActivateGatewayCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ActivateGatewayCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1662,7 +1662,7 @@ module UpdateBandwidthRateLimitSchedule = {
   type response = {
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "UpdateBandwidthRateLimitScheduleCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "UpdateBandwidthRateLimitScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1675,7 +1675,7 @@ module ListLocalDisks = {
 @as("Disks") disks: disks,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ListLocalDisksCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListLocalDisksCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1692,7 +1692,7 @@ module DescribeVTLDevices = {
 @as("VTLDevices") vTLDevices: vTLDevices,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeVTLDevicesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeVTLDevicesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1704,7 +1704,7 @@ module DescribeStorediSCSIVolumes = {
   type response = {
 @as("StorediSCSIVolumes") storediSCSIVolumes: storediSCSIVolumes
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeStorediSCSIVolumesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeStorediSCSIVolumesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1716,7 +1716,7 @@ module DescribeCachediSCSIVolumes = {
   type response = {
 @as("CachediSCSIVolumes") cachediSCSIVolumes: cachediSCSIVolumes
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeCachediSCSIVolumesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeCachediSCSIVolumesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1729,7 +1729,7 @@ module DescribeBandwidthRateLimitSchedule = {
 @as("BandwidthRateLimitIntervals") bandwidthRateLimitIntervals: bandwidthRateLimitIntervals,
 @as("GatewayARN") gatewayARN: gatewayARN
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeBandwidthRateLimitScheduleCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeBandwidthRateLimitScheduleCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1741,7 +1741,7 @@ module ListAutomaticTapeCreationPolicies = {
   type response = {
 @as("AutomaticTapeCreationPolicyInfos") automaticTapeCreationPolicyInfos: automaticTapeCreationPolicyInfos
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "ListAutomaticTapeCreationPoliciesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "ListAutomaticTapeCreationPoliciesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1753,7 +1753,7 @@ module DescribeSMBFileShares = {
   type response = {
 @as("SMBFileShareInfoList") sMBFileShareInfoList: sMBFileShareInfoList
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeSMBFileSharesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeSMBFileSharesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1765,7 +1765,7 @@ module DescribeNFSFileShares = {
   type response = {
 @as("NFSFileShareInfoList") nFSFileShareInfoList: nFSFileShareInfoList
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeNFSFileSharesCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeNFSFileSharesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -1777,6 +1777,6 @@ module DescribeFileSystemAssociations = {
   type response = {
 @as("FileSystemAssociationInfoList") fileSystemAssociationInfoList: fileSystemAssociationInfoList
 }
-  @module("@aws-sdk/client-storagegateway") @new external new_: (Js.Promise.t<request>) => t = "DescribeFileSystemAssociationsCommand";
+  @module("@aws-sdk/client-storagegateway") @new external new_: (request) => t = "DescribeFileSystemAssociationsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

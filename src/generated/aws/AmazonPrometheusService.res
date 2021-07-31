@@ -46,7 +46,7 @@ module UpdateWorkspaceAlias = {
 @as("workspaceId") workspaceId: option<workspaceId>
 }
   
-  @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "UpdateWorkspaceAliasCommand";
+  @module("@aws-sdk/client-aps") @new external new_: (request) => t = "UpdateWorkspaceAliasCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -57,7 +57,7 @@ module DeleteWorkspace = {
 @as("workspaceId") workspaceId: option<workspaceId>
 }
   
-  @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "DeleteWorkspaceCommand";
+  @module("@aws-sdk/client-aps") @new external new_: (request) => t = "DeleteWorkspaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -72,7 +72,7 @@ module CreateWorkspace = {
 @as("arn") arn: option<workspaceArn>,
 @as("workspaceId") workspaceId: option<workspaceId>
 }
-  @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "CreateWorkspaceCommand";
+  @module("@aws-sdk/client-aps") @new external new_: (request) => t = "CreateWorkspaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -84,7 +84,7 @@ module DescribeWorkspace = {
   type response = {
 @as("workspace") workspace: option<workspaceDescription>
 }
-  @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "DescribeWorkspaceCommand";
+  @module("@aws-sdk/client-aps") @new external new_: (request) => t = "DescribeWorkspaceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -99,6 +99,6 @@ module ListWorkspaces = {
 @as("nextToken") nextToken: paginationToken,
 @as("workspaces") workspaces: option<workspaceSummaryList>
 }
-  @module("@aws-sdk/client-aps") @new external new_: (Js.Promise.t<request>) => t = "ListWorkspacesCommand";
+  @module("@aws-sdk/client-aps") @new external new_: (request) => t = "ListWorkspacesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -55,7 +55,7 @@ module DeleteEnvironment = {
 @as("environmentId") environmentId: option<idType>
 }
   type response = unit
-  @module("@aws-sdk/client-finspace") @new external new_: (Js.Promise.t<request>) => t = "DeleteEnvironmentCommand";
+  @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "DeleteEnvironmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -66,7 +66,7 @@ module UntagResource = {
 @as("resourceArn") resourceArn: option<environmentArn>
 }
   type response = unit
-  @module("@aws-sdk/client-finspace") @new external new_: (Js.Promise.t<request>) => t = "UntagResourceCommand";
+  @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "UntagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -77,7 +77,7 @@ module TagResource = {
 @as("resourceArn") resourceArn: option<environmentArn>
 }
   type response = unit
-  @module("@aws-sdk/client-finspace") @new external new_: (Js.Promise.t<request>) => t = "TagResourceCommand";
+  @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "TagResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -89,7 +89,7 @@ module ListTagsForResource = {
   type response = {
 @as("tags") tags: tagMap
 }
-  @module("@aws-sdk/client-finspace") @new external new_: (Js.Promise.t<request>) => t = "ListTagsForResourceCommand";
+  @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "ListTagsForResourceCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -108,7 +108,7 @@ module CreateEnvironment = {
 @as("environmentArn") environmentArn: environmentArn,
 @as("environmentId") environmentId: idType
 }
-  @module("@aws-sdk/client-finspace") @new external new_: (Js.Promise.t<request>) => t = "CreateEnvironmentCommand";
+  @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "CreateEnvironmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -124,7 +124,7 @@ module UpdateEnvironment = {
   type response = {
 @as("environment") environment: environment
 }
-  @module("@aws-sdk/client-finspace") @new external new_: (Js.Promise.t<request>) => t = "UpdateEnvironmentCommand";
+  @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "UpdateEnvironmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -136,7 +136,7 @@ module GetEnvironment = {
   type response = {
 @as("environment") environment: environment
 }
-  @module("@aws-sdk/client-finspace") @new external new_: (Js.Promise.t<request>) => t = "GetEnvironmentCommand";
+  @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "GetEnvironmentCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -150,6 +150,6 @@ module ListEnvironments = {
 @as("nextToken") nextToken: paginationToken,
 @as("environments") environments: environmentList
 }
-  @module("@aws-sdk/client-finspace") @new external new_: (Js.Promise.t<request>) => t = "ListEnvironmentsCommand";
+  @module("@aws-sdk/client-finspace") @new external new_: (request) => t = "ListEnvironmentsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

@@ -191,7 +191,7 @@ module UpdateMedicalVocabulary = {
 @as("LanguageCode") languageCode: languageCode,
 @as("VocabularyName") vocabularyName: vocabularyName
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "UpdateMedicalVocabularyCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "UpdateMedicalVocabularyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -206,7 +206,7 @@ module GetVocabularyFilter = {
 @as("LanguageCode") languageCode: languageCode,
 @as("VocabularyFilterName") vocabularyFilterName: vocabularyFilterName
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "GetVocabularyFilterCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "GetVocabularyFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -223,7 +223,7 @@ module GetVocabulary = {
 @as("LanguageCode") languageCode: languageCode,
 @as("VocabularyName") vocabularyName: vocabularyName
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "GetVocabularyCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "GetVocabularyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -240,7 +240,7 @@ module GetMedicalVocabulary = {
 @as("LanguageCode") languageCode: languageCode,
 @as("VocabularyName") vocabularyName: vocabularyName
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "GetMedicalVocabularyCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "GetMedicalVocabularyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -250,7 +250,7 @@ module DeleteVocabularyFilter = {
 @as("VocabularyFilterName") vocabularyFilterName: option<vocabularyFilterName>
 }
   
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "DeleteVocabularyFilterCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "DeleteVocabularyFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -260,7 +260,7 @@ module DeleteVocabulary = {
 @as("VocabularyName") vocabularyName: option<vocabularyName>
 }
   
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "DeleteVocabularyCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "DeleteVocabularyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -270,7 +270,7 @@ module DeleteTranscriptionJob = {
 @as("TranscriptionJobName") transcriptionJobName: option<transcriptionJobName>
 }
   
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "DeleteTranscriptionJobCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "DeleteTranscriptionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -280,7 +280,7 @@ module DeleteMedicalVocabulary = {
 @as("VocabularyName") vocabularyName: option<vocabularyName>
 }
   
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "DeleteMedicalVocabularyCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "DeleteMedicalVocabularyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -290,7 +290,7 @@ module DeleteMedicalTranscriptionJob = {
 @as("MedicalTranscriptionJobName") medicalTranscriptionJobName: option<transcriptionJobName>
 }
   
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "DeleteMedicalTranscriptionJobCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "DeleteMedicalTranscriptionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -300,7 +300,7 @@ module DeleteLanguageModel = {
 @as("ModelName") modelName: option<modelName>
 }
   
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "DeleteLanguageModelCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "DeleteLanguageModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<unit> = "send";
 }
 
@@ -318,7 +318,7 @@ module CreateMedicalVocabulary = {
 @as("LanguageCode") languageCode: languageCode,
 @as("VocabularyName") vocabularyName: vocabularyName
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "CreateMedicalVocabularyCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "CreateMedicalVocabularyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -334,7 +334,7 @@ module UpdateVocabularyFilter = {
 @as("LanguageCode") languageCode: languageCode,
 @as("VocabularyFilterName") vocabularyFilterName: vocabularyFilterName
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "UpdateVocabularyFilterCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "UpdateVocabularyFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -352,7 +352,7 @@ module UpdateVocabulary = {
 @as("LanguageCode") languageCode: languageCode,
 @as("VocabularyName") vocabularyName: vocabularyName
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "UpdateVocabularyCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "UpdateVocabularyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -369,7 +369,7 @@ module CreateVocabularyFilter = {
 @as("LanguageCode") languageCode: languageCode,
 @as("VocabularyFilterName") vocabularyFilterName: vocabularyFilterName
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "CreateVocabularyFilterCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "CreateVocabularyFilterCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -388,7 +388,7 @@ module CreateVocabulary = {
 @as("LanguageCode") languageCode: languageCode,
 @as("VocabularyName") vocabularyName: vocabularyName
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "CreateVocabularyCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "CreateVocabularyCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -407,7 +407,7 @@ module CreateLanguageModel = {
 @as("BaseModelName") baseModelName: baseModelName,
 @as("LanguageCode") languageCode: cLMLanguageCode
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "CreateLanguageModelCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "CreateLanguageModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -432,7 +432,7 @@ module StartTranscriptionJob = {
   type response = {
 @as("TranscriptionJob") transcriptionJob: transcriptionJob
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "StartTranscriptionJobCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "StartTranscriptionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -455,7 +455,7 @@ module StartMedicalTranscriptionJob = {
   type response = {
 @as("MedicalTranscriptionJob") medicalTranscriptionJob: medicalTranscriptionJob
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "StartMedicalTranscriptionJobCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "StartMedicalTranscriptionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -470,7 +470,7 @@ module ListVocabularyFilters = {
 @as("VocabularyFilters") vocabularyFilters: vocabularyFilters,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "ListVocabularyFiltersCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "ListVocabularyFiltersCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -487,7 +487,7 @@ module ListVocabularies = {
 @as("NextToken") nextToken: nextToken,
 @as("Status") status: vocabularyState
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "ListVocabulariesCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "ListVocabulariesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -504,7 +504,7 @@ module ListMedicalVocabularies = {
 @as("NextToken") nextToken: nextToken,
 @as("Status") status: vocabularyState
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "ListMedicalVocabulariesCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "ListMedicalVocabulariesCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -521,7 +521,7 @@ module ListMedicalTranscriptionJobs = {
 @as("NextToken") nextToken: nextToken,
 @as("Status") status: transcriptionJobStatus
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "ListMedicalTranscriptionJobsCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "ListMedicalTranscriptionJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -533,7 +533,7 @@ module GetTranscriptionJob = {
   type response = {
 @as("TranscriptionJob") transcriptionJob: transcriptionJob
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "GetTranscriptionJobCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "GetTranscriptionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -545,7 +545,7 @@ module GetMedicalTranscriptionJob = {
   type response = {
 @as("MedicalTranscriptionJob") medicalTranscriptionJob: medicalTranscriptionJob
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "GetMedicalTranscriptionJobCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "GetMedicalTranscriptionJobCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -557,7 +557,7 @@ module DescribeLanguageModel = {
   type response = {
 @as("LanguageModel") languageModel: languageModel
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "DescribeLanguageModelCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "DescribeLanguageModelCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -574,7 +574,7 @@ module ListTranscriptionJobs = {
 @as("NextToken") nextToken: nextToken,
 @as("Status") status: transcriptionJobStatus
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "ListTranscriptionJobsCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "ListTranscriptionJobsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -590,6 +590,6 @@ module ListLanguageModels = {
 @as("Models") models: models,
 @as("NextToken") nextToken: nextToken
 }
-  @module("@aws-sdk/client-transcribe") @new external new_: (Js.Promise.t<request>) => t = "ListLanguageModelsCommand";
+  @module("@aws-sdk/client-transcribe") @new external new_: (request) => t = "ListLanguageModelsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

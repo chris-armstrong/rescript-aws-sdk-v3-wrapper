@@ -38,6 +38,6 @@ module GetEntitlements = {
 @as("NextToken") nextToken: nonEmptyString,
 @as("Entitlements") entitlements: entitlementList
 }
-  @module("@aws-sdk/client-aws-marketplace") @new external new_: (Js.Promise.t<request>) => t = "GetEntitlementsCommand";
+  @module("@aws-sdk/client-aws-marketplace") @new external new_: (request) => t = "GetEntitlementsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }

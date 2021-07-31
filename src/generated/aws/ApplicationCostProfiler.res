@@ -45,7 +45,7 @@ module DeleteReportDefinition = {
   type response = {
 @as("reportId") reportId: reportId
 }
-  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (Js.Promise.t<request>) => t = "DeleteReportDefinitionCommand";
+  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "DeleteReportDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -61,7 +61,7 @@ module UpdateReportDefinition = {
   type response = {
 @as("reportId") reportId: reportId
 }
-  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (Js.Promise.t<request>) => t = "UpdateReportDefinitionCommand";
+  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "UpdateReportDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -77,7 +77,7 @@ module PutReportDefinition = {
   type response = {
 @as("reportId") reportId: reportId
 }
-  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (Js.Promise.t<request>) => t = "PutReportDefinitionCommand";
+  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "PutReportDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -89,7 +89,7 @@ module ImportApplicationUsage = {
   type response = {
 @as("importId") importId: option<importId>
 }
-  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (Js.Promise.t<request>) => t = "ImportApplicationUsageCommand";
+  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "ImportApplicationUsageCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -107,7 +107,7 @@ module GetReportDefinition = {
 @as("reportDescription") reportDescription: option<reportDescription>,
 @as("reportId") reportId: option<reportId>
 }
-  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (Js.Promise.t<request>) => t = "GetReportDefinitionCommand";
+  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "GetReportDefinitionCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
 
@@ -121,6 +121,6 @@ module ListReportDefinitions = {
 @as("nextToken") nextToken: token,
 @as("reportDefinitions") reportDefinitions: reportDefinitionList
 }
-  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (Js.Promise.t<request>) => t = "ListReportDefinitionsCommand";
+  @module("@aws-sdk/client-application-cost-profiler") @new external new_: (request) => t = "ListReportDefinitionsCommand";
   @send external rawSend: (clientType, t) => Js.Promise.t<response> = "send";
 }
