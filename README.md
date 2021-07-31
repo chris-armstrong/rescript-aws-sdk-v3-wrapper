@@ -6,3 +6,5 @@ A set of bindings for the AWS JavaScript SDK v3 for use with ReScript.
 
 The bindings are still experimental as a number of outstanding issues with generation
 need to be resolved (see the [TODO](TODO.md) for more details).
+
+Copright (C) 2021 Chris Armstrong - see [LICENSE](LICENSE.md) for more details on licensing
