@@ -27,13 +27,15 @@ module Decode = {
     | RecordParseError(string, string)
     | CustomError(string)
 
-  let jsonParseErrorToString = error =>switch error {
+  let jsonParseErrorToString = error =>
+    switch error {
     | SyntaxError(error) => `Syntax Error: ${error}`
     | WrongType(path, expected) => `Wrong Type Error: ${expected} was expected at path ${path}`
     | NoValueError(path) => `No Value Error: expected a value at ${path}`
-    | RecordParseError(path, suberror) => `Record parse error: at path ${path} received record parse error - ${suberror}`
+    | RecordParseError(path, suberror) =>
+      `Record parse error: at path ${path} received record parse error - ${suberror}`
     | CustomError(error) => `Other parse error: ${error}`
-  }
+    }
 
   let parseJson = (jsonString, rootParser) => {
     let treeResult = try Ok(parseExn(jsonString)) catch {

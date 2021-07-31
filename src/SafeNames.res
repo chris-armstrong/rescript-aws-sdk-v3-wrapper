@@ -53,12 +53,13 @@ let translateReserved = name => {
 }
 
 let stripLeadingNumbers = name => {
-  if String.length(name) == 0 { name }
-  else  {
-  switch String.get(name, 0) {
-  | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' => `x${name}`
-  | _ => name
-  }
+  if String.length(name) == 0 {
+    name
+  } else {
+    switch String.get(name, 0) {
+    | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' => `x${name}`
+    | _ => name
+    }
   }
 }
 
@@ -108,8 +109,12 @@ let safeVariantName = name => {
   ->Js.String2.replaceByRe(variantReplaceRe, "_")
   ->Js.String2.replace("*", "Star")
   ->Js.String2.split("_")
-  ->Array.keepMap(x => String.length(x) > 0 ? {
-    Some(camelCase(x))
-  } : None)
+  ->Array.keepMap(x =>
+    String.length(x) > 0
+      ? {
+          Some(camelCase(x))
+        }
+      : None
+  )
   ->Array.joinWith("_", x => x)
 }

@@ -112,11 +112,11 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
   | "smithy.api#timestampFormat" =>
     value->parseString->map(timestampFormat => Trait.TimestampFormatTrait(timestampFormat))
   | "smithy.api#range" => {
-    let obj = value->parseObject;
-    let min = optional(obj->field("min"))->mapOptional(parseInteger);
-    let max = optional(obj->field("max"))->mapOptional(parseInteger);
-    map2(min, max, (min, max) => Trait.RangeTrait(min, max))
-  }
+      let obj = value->parseObject
+      let min = optional(obj->field("min"))->mapOptional(parseInteger)
+      let max = optional(obj->field("max"))->mapOptional(parseInteger)
+      map2(min, max, (min, max) => Trait.RangeTrait(min, max))
+    }
   | "smithy.api#length" => {
       let record = value->parseObject
       map2(
@@ -130,9 +130,8 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
   | "smithy.api#box" => Ok(Trait.BoxTrait)
   | "smithy.api#sensitive" => Ok(Trait.SensitiveTrait)
   | "aws.api#arnReference" => parseArnReferenceTrait(value)->map(arnNamespace => arnNamespace)
-  | "smithy.api#references" => value
-    ->parseArray(parseReference)
-    ->map(references => Trait.ReferencesTrait(references))
+  | "smithy.api#references" =>
+    value->parseArray(parseReference)->map(references => Trait.ReferencesTrait(references))
   | "smithy.api#jsonName" => parseString(value)->map(jsonName => Trait.JsonNameTrait(jsonName))
   | "smithy.api#httpPayload" => Ok(Trait.HttpPayloadTrait)
   | "smithy.api#httpQueryParams" => Ok(Trait.HttpQueryParams)
@@ -141,27 +140,38 @@ let parseTrait = (name, value: Result.t<jsonTreeRef, jsonParseError>) => {
   | "smithy.api#mediaType" => parseString(value)->map(mediaType => Trait.MediaTypeTrait(mediaType))
   | "aws.protocols#restXml" => Ok(Trait.AwsProtocolRestXmlTrait)
   | "aws.api#clientEndpointDiscovery" => {
-    let obj = parseObject(value)
-    let operation = obj->field("operation")->parseString
-    let error = obj->field("error")->parseString
-    map2(operation, error, (operation, error) => Trait.AwsApiClientEndpointDiscoveryTrait({ operation, error }))
-  }
-  | "aws.protocols#ec2QueryName" => value->parseString->map(queryName => Trait.AwsProtocolEc2QueryNameTrait(queryName))
+      let obj = parseObject(value)
+      let operation = obj->field("operation")->parseString
+      let error = obj->field("error")->parseString
+      map2(operation, error, (operation, error) => Trait.AwsApiClientEndpointDiscoveryTrait({
+        operation: operation,
+        error: error,
+      }))
+    }
+  | "aws.protocols#ec2QueryName" =>
+    value->parseString->map(queryName => Trait.AwsProtocolEc2QueryNameTrait(queryName))
   | "aws.protocols#ec2Query" => Ok(Trait.AwsProtocolEc2QueryTrait)
   | "smithy.api#httpResponseCode" => Ok(Trait.HttpResponseCodeTrait)
   | "smithy.api#streaming" => Ok(Trait.StreamingTrait)
   | "smithy.api#hostLabel" => Ok(Trait.HostLabelTrait)
-  | "smithy.api#httpPrefixHeaders" => value->parseString->map(httpPrefixHeader => Trait.HttpPrefixHeadersTrait(httpPrefixHeader))
+  | "smithy.api#httpPrefixHeaders" =>
+    value->parseString->map(httpPrefixHeader => Trait.HttpPrefixHeadersTrait(httpPrefixHeader))
   | "smithy.api#xmlAttribute" => Ok(Trait.XmlAttributeTrait)
   | "smithy.api#externalDocumentation" => {
-    let documentation = value->parseObject->field("Documentation")
-    let specification = value->parseObject->field("Specification")
-    switch (documentation, specification) {
-      | (Ok(link), _) => Ok(link)->parseString->map(link => Trait.ExternalDocumentationTrait(Trait.DocumentationLink(link)))
-      | (_, Ok(link)) => Ok(link)->parseString->map(link => Trait.ExternalDocumentationTrait(Trait.SpecificationLink(link)))
+      let documentation = value->parseObject->field("Documentation")
+      let specification = value->parseObject->field("Specification")
+      switch (documentation, specification) {
+      | (Ok(link), _) =>
+        Ok(link)
+        ->parseString
+        ->map(link => Trait.ExternalDocumentationTrait(Trait.DocumentationLink(link)))
+      | (_, Ok(link)) =>
+        Ok(link)
+        ->parseString
+        ->map(link => Trait.ExternalDocumentationTrait(Trait.SpecificationLink(link)))
       | (Error(x), Error(_)) => Error(x)
+      }
     }
-  }
   | "smithy.api#eventPayload" => Ok(Trait.EventPayloadTrait)
   | _ => raise(UnknownTrait(name))
   }
@@ -273,9 +283,10 @@ let parsePrimitive = shapeDict => {
 let parseResourceShape = _ => Ok(Shape.ResourceShape)
 
 let parseSetShape = shapeDict => {
-  let target = shapeDict->field("member")->parseObject->field("target")->parseString;
-  let traits = optional(shapeDict->field("traits"))->mapOptional(traits => traits->parseRecord(parseTrait))
-  map2(target, traits, (target, traits) => Shape.SetShape({ target, traits }))
+  let target = shapeDict->field("member")->parseObject->field("target")->parseString
+  let traits =
+    optional(shapeDict->field("traits"))->mapOptional(traits => traits->parseRecord(parseTrait))
+  map2(target, traits, (target, traits) => Shape.SetShape({target: target, traits: traits}))
 }
 
 let parseTimestampShape = shapeDict => {

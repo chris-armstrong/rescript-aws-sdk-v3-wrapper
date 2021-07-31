@@ -157,7 +157,7 @@ let rec order_ = (remaining: array<shapeWithTarget>, ordered: array<shapeWithTar
     let (free, unfree) = Array.partition(remaining, ({targets}) => containsAll(ordered, targets))
     if Array.length(free) === 0 {
       let cycles = findCycles(unfree)
-      if Array.length(cycles) ==0 {
+      if Array.length(cycles) == 0 {
         raise(CycleError(getShapeWithTargetNames(free), getShapeWithTargetNames(unfree)))
       }
       // 1. Create recursive object

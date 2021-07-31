@@ -132,8 +132,7 @@ let convert = (parsed: Result.t<array<Shape.t>, 'r>) => {
                   descriptor: shape.descriptor,
                 }),
               )
-            | None =>
-              generateTypeBlock({name: shape.name, descriptor: shape.descriptor})
+            | None => generateTypeBlock({name: shape.name, descriptor: shape.descriptor})
             }
           })
           // let recursiveCodeSnippets = generateRecursiveTypeBlock(packagingName, Array.map(recursiveShapes, (s):Shape.t => { name: s.name, descriptor: s.descriptor}))

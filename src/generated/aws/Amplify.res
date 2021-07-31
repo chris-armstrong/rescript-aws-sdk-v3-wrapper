@@ -1,24 +1,25 @@
 type responseMetadata = {
-httpStatusCode: option<float>,
+  httpStatusCode: option<float>,
   requestId: option<string>,
   extendedRequestId: option<string>,
   cfId: option<string>,
   attempts: option<int>,
-  totalRetryDelay: option<int>
+  totalRetryDelay: option<int>,
 }
-type awsServiceClient;
-@module("@aws-sdk/client-amplify") @new external createClient: unit => awsServiceClient = "AmplifyClient";
+type awsServiceClient
+@module("@aws-sdk/client-amplify") @new
+external createClient: unit => awsServiceClient = "AmplifyClient"
 type baseString = string
 type baseBoolean = bool
 type baseInteger = int
-type baseTimestamp = Js.Date.t;
+type baseTimestamp = Js.Date.t
 type baseLong = float
 type webhookUrl = string
 type webhookId = string
 type webhookArn = string
 type verified = bool
 type uploadUrl = string
-type updateTime = Js.Date.t;
+type updateTime = Js.Date.t
 type totalNumberOfJobs = string
 type thumbnailUrl = string
 type thumbnailName = string
@@ -31,8 +32,14 @@ type ttl = string
 type stepName = string
 type statusReason = string
 type status = string
-type startTime = Js.Date.t;
-type stage = [@as("PULL_REQUEST") #PULL_REQUEST | @as("EXPERIMENTAL") #EXPERIMENTAL | @as("DEVELOPMENT") #DEVELOPMENT | @as("BETA") #BETA | @as("PRODUCTION") #PRODUCTION]
+type startTime = Js.Date.t
+type stage = [
+  | @as("PULL_REQUEST") #PULL_REQUEST
+  | @as("EXPERIMENTAL") #EXPERIMENTAL
+  | @as("DEVELOPMENT") #DEVELOPMENT
+  | @as("BETA") #BETA
+  | @as("PRODUCTION") #PRODUCTION
+]
 type stackName = string
 type sourceUrl = string
 type source = string
@@ -47,9 +54,22 @@ type name = string
 type maxResults = int
 type md5Hash = string
 type logUrl = string
-type lastDeployTime = Js.Date.t;
-type jobType = [@as("WEB_HOOK") #WEB_HOOK | @as("MANUAL") #MANUAL | @as("RETRY") #RETRY | @as("RELEASE") #RELEASE]
-type jobStatus = [@as("CANCELLED") #CANCELLED | @as("CANCELLING") #CANCELLING | @as("SUCCEED") #SUCCEED | @as("FAILED") #FAILED | @as("RUNNING") #RUNNING | @as("PROVISIONING") #PROVISIONING | @as("PENDING") #PENDING]
+type lastDeployTime = Js.Date.t
+type jobType = [
+  | @as("WEB_HOOK") #WEB_HOOK
+  | @as("MANUAL") #MANUAL
+  | @as("RETRY") #RETRY
+  | @as("RELEASE") #RELEASE
+]
+type jobStatus = [
+  | @as("CANCELLED") #CANCELLED
+  | @as("CANCELLING") #CANCELLING
+  | @as("SUCCEED") #SUCCEED
+  | @as("FAILED") #FAILED
+  | @as("RUNNING") #RUNNING
+  | @as("PROVISIONING") #PROVISIONING
+  | @as("PENDING") #PENDING
+]
 type jobReason = string
 type jobId = string
 type jobArn = string
@@ -59,7 +79,7 @@ type errorMessage = string
 type environmentName = string
 type envValue = string
 type envKey = string
-type endTime = Js.Date.t;
+type endTime = Js.Date.t
 type enablePullRequestPreview = bool
 type enablePerformanceMode = bool
 type enableNotification = bool
@@ -69,7 +89,16 @@ type enableBasicAuth = bool
 type enableAutoSubDomain = bool
 type enableAutoBuild = bool
 type enableAutoBranchCreation = bool
-type domainStatus = [@as("UPDATING") #UPDATING | @as("REQUESTING_CERTIFICATE") #REQUESTING_CERTIFICATE | @as("CREATING") #CREATING | @as("FAILED") #FAILED | @as("PENDING_DEPLOYMENT") #PENDING_DEPLOYMENT | @as("AVAILABLE") #AVAILABLE | @as("IN_PROGRESS") #IN_PROGRESS | @as("PENDING_VERIFICATION") #PENDING_VERIFICATION]
+type domainStatus = [
+  | @as("UPDATING") #UPDATING
+  | @as("REQUESTING_CERTIFICATE") #REQUESTING_CERTIFICATE
+  | @as("CREATING") #CREATING
+  | @as("FAILED") #FAILED
+  | @as("PENDING_DEPLOYMENT") #PENDING_DEPLOYMENT
+  | @as("AVAILABLE") #AVAILABLE
+  | @as("IN_PROGRESS") #IN_PROGRESS
+  | @as("PENDING_VERIFICATION") #PENDING_VERIFICATION
+]
 type domainPrefix = string
 type domainName = string
 type domainAssociationArn = string
@@ -80,10 +109,10 @@ type defaultDomain = string
 type dnsrecord = string
 type customHeaders = string
 type customDomain = string
-type createTime = Js.Date.t;
+type createTime = Js.Date.t
 type context = string
 type condition = string
-type commitTime = Js.Date.t;
+type commitTime = Js.Date.t
 type commitMessage = string
 type commitId = string
 type code = string
@@ -106,29 +135,29 @@ type appArn = string
 type activeJobId = string
 type accessToken = string
 type webhook = {
-updateTime: updateTime,
+  updateTime: updateTime,
   createTime: createTime,
   description: description,
   branchName: branchName,
   webhookUrl: webhookUrl,
   webhookId: webhookId,
-  webhookArn: webhookArn
+  webhookArn: webhookArn,
 }
 type tagMap = Js.Dict.t<tagValue>
 type tagKeyList = array<tagKey>
 type subDomainSetting = {
-branchName: branchName,
-  prefix: domainPrefix
+  branchName: branchName,
+  prefix: domainPrefix,
 }
 type screenshots = Js.Dict.t<thumbnailUrl>
 type productionBranch = {
-branchName: option<branchName>,
+  branchName: option<branchName>,
   thumbnailUrl: option<thumbnailUrl>,
   status: option<status>,
-  lastDeployTime: option<lastDeployTime>
+  lastDeployTime: option<lastDeployTime>,
 }
 type jobSummary = {
-jobType: jobType,
+  jobType: jobType,
   endTime: option<endTime>,
   status: jobStatus,
   startTime: startTime,
@@ -136,42 +165,42 @@ jobType: jobType,
   commitMessage: commitMessage,
   commitId: commitId,
   jobId: jobId,
-  jobArn: jobArn
+  jobArn: jobArn,
 }
 type fileUploadUrls = Js.Dict.t<uploadUrl>
 type fileMap = Js.Dict.t<md5Hash>
 type environmentVariables = Js.Dict.t<envValue>
 type customRule = {
-condition: option<condition>,
+  condition: option<condition>,
   status: option<status>,
   target: target,
-  source: source
+  source: source,
 }
 type customDomains = array<customDomain>
 type backendEnvironment = {
-updateTime: updateTime,
+  updateTime: updateTime,
   createTime: createTime,
   deploymentArtifacts: option<deploymentArtifacts>,
   stackName: option<stackName>,
   environmentName: environmentName,
-  backendEnvironmentArn: backendEnvironmentArn
+  backendEnvironmentArn: backendEnvironmentArn,
 }
 type autoSubDomainCreationPatterns = array<autoSubDomainCreationPattern>
 type autoBranchCreationPatterns = array<autoBranchCreationPattern>
 type associatedResources = array<associatedResource>
 type artifact = {
-artifactId: artifactId,
-  artifactFileName: artifactFileName
+  artifactId: artifactId,
+  artifactFileName: artifactFileName,
 }
 type webhooks = array<webhook>
 type subDomainSettings = array<subDomainSetting>
 type subDomain = {
-dnsRecord: dnsrecord,
+  dnsRecord: dnsrecord,
   verified: verified,
-  subDomainSetting: subDomainSetting
+  subDomainSetting: subDomainSetting,
 }
 type step = {
-context: option<context>,
+  context: option<context>,
   statusReason: option<statusReason>,
   screenshots: option<screenshots>,
   testConfigUrl: option<testConfigUrl>,
@@ -181,12 +210,12 @@ context: option<context>,
   endTime: endTime,
   status: jobStatus,
   startTime: startTime,
-  stepName: stepName
+  stepName: stepName,
 }
 type jobSummaries = array<jobSummary>
 type customRules = array<customRule>
 type branch = {
-backendEnvironmentArn: option<backendEnvironmentArn>,
+  backendEnvironmentArn: option<backendEnvironmentArn>,
   sourceBranch: option<branchName>,
   destinationBranch: option<branchName>,
   pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
@@ -212,11 +241,11 @@ backendEnvironmentArn: option<backendEnvironmentArn>,
   tags: option<tagMap>,
   description: description,
   branchName: branchName,
-  branchArn: branchArn
+  branchArn: branchArn,
 }
 type backendEnvironments = array<backendEnvironment>
 type autoBranchCreationConfig = {
-pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
+  pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
   enablePullRequestPreview: option<enablePullRequestPreview>,
   buildSpec: option<buildSpec>,
   enablePerformanceMode: option<enablePerformanceMode>,
@@ -225,14 +254,14 @@ pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
   environmentVariables: option<environmentVariables>,
   enableAutoBuild: option<enableAutoBuild>,
   framework: option<framework>,
-  stage: option<stage>
+  stage: option<stage>,
 }
 type artifacts = array<artifact>
 type subDomains = array<subDomain>
 type steps = array<step>
 type branches = array<branch>
 type app = {
-autoBranchCreationConfig: option<autoBranchCreationConfig>,
+  autoBranchCreationConfig: option<autoBranchCreationConfig>,
   autoBranchCreationPatterns: option<autoBranchCreationPatterns>,
   enableAutoBranchCreation: option<enableAutoBranchCreation>,
   customHeaders: option<customHeaders>,
@@ -254,14 +283,14 @@ autoBranchCreationConfig: option<autoBranchCreationConfig>,
   tags: option<tagMap>,
   name: name,
   appArn: appArn,
-  appId: appId
+  appId: appId,
 }
 type job = {
-steps: steps,
-  summary: jobSummary
+  steps: steps,
+  summary: jobSummary,
 }
 type domainAssociation = {
-subDomains: subDomains,
+  subDomains: subDomains,
   certificateVerificationDNSRecord: option<certificateVerificationDNSRecord>,
   statusReason: statusReason,
   domainStatus: domainStatus,
@@ -269,589 +298,534 @@ subDomains: subDomains,
   autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
   enableAutoSubDomain: enableAutoSubDomain,
   domainName: domainName,
-  domainAssociationArn: domainAssociationArn
+  domainAssociationArn: domainAssociationArn,
 }
 type apps = array<app>
 type domainAssociations = array<domainAssociation>
 
 module GetArtifactUrl = {
-  type t;
-  type request = {
-artifactId: artifactId
-}
+  type t
+  type request = {artifactId: artifactId}
   type response = {
-artifactUrl: artifactUrl,
-  artifactId: artifactId
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "GetArtifactUrlCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    artifactUrl: artifactUrl,
+    artifactId: artifactId,
+  }
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GetArtifactUrlCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GenerateAccessLogs = {
-  type t;
+  type t
   type request = {
-appId: appId,
-  domainName: domainName,
-  endTime: option<endTime>,
-  startTime: option<startTime>
-}
-  type response = {
-logUrl: option<logUrl>
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "GenerateAccessLogsCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    appId: appId,
+    domainName: domainName,
+    endTime: option<endTime>,
+    startTime: option<startTime>,
+  }
+  type response = {logUrl: option<logUrl>}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GenerateAccessLogsCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateWebhook = {
-  type t;
+  type t
   type request = {
-description: option<description>,
-  branchName: option<branchName>,
-  webhookId: webhookId
-}
-  type response = {
-webhook: webhook
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "UpdateWebhookCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    description: option<description>,
+    branchName: option<branchName>,
+    webhookId: webhookId,
+  }
+  type response = {webhook: webhook}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "UpdateWebhookCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UntagResource = {
-  type t;
+  type t
   type request = {
-tagKeys: tagKeyList,
-  resourceArn: resourceArn
-}
+    tagKeys: tagKeyList,
+    resourceArn: resourceArn,
+  }
   type response = unit
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "UntagResourceCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "UntagResourceCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module TagResource = {
-  type t;
+  type t
   type request = {
-tags: tagMap,
-  resourceArn: resourceArn
-}
+    tags: tagMap,
+    resourceArn: resourceArn,
+  }
   type response = unit
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "TagResourceCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "TagResourceCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StopJob = {
-  type t;
+  type t
   type request = {
-jobId: jobId,
-  branchName: branchName,
-  appId: appId
-}
-  type response = {
-jobSummary: jobSummary
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "StopJobCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    jobId: jobId,
+    branchName: branchName,
+    appId: appId,
+  }
+  type response = {jobSummary: jobSummary}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "StopJobCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartJob = {
-  type t;
+  type t
   type request = {
-commitTime: option<commitTime>,
-  commitMessage: option<commitMessage>,
-  commitId: option<commitId>,
-  jobReason: option<jobReason>,
-  jobType: jobType,
-  jobId: option<jobId>,
-  branchName: branchName,
-  appId: appId
-}
-  type response = {
-jobSummary: jobSummary
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "StartJobCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    commitTime: option<commitTime>,
+    commitMessage: option<commitMessage>,
+    commitId: option<commitId>,
+    jobReason: option<jobReason>,
+    jobType: jobType,
+    jobId: option<jobId>,
+    branchName: branchName,
+    appId: appId,
+  }
+  type response = {jobSummary: jobSummary}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "StartJobCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module StartDeployment = {
-  type t;
+  type t
   type request = {
-sourceUrl: option<sourceUrl>,
-  jobId: option<jobId>,
-  branchName: branchName,
-  appId: appId
-}
-  type response = {
-jobSummary: jobSummary
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "StartDeploymentCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    sourceUrl: option<sourceUrl>,
+    jobId: option<jobId>,
+    branchName: branchName,
+    appId: appId,
+  }
+  type response = {jobSummary: jobSummary}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "StartDeploymentCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListTagsForResource = {
-  type t;
-  type request = {
-resourceArn: resourceArn
-}
-  type response = {
-tags: option<tagMap>
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListTagsForResourceCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+  type t
+  type request = {resourceArn: resourceArn}
+  type response = {tags: option<tagMap>}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListTagsForResourceCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetWebhook = {
-  type t;
-  type request = {
-webhookId: webhookId
-}
-  type response = {
-webhook: webhook
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "GetWebhookCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+  type t
+  type request = {webhookId: webhookId}
+  type response = {webhook: webhook}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GetWebhookCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBackendEnvironment = {
-  type t;
+  type t
   type request = {
-environmentName: environmentName,
-  appId: appId
-}
-  type response = {
-backendEnvironment: backendEnvironment
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "GetBackendEnvironmentCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    environmentName: environmentName,
+    appId: appId,
+  }
+  type response = {backendEnvironment: backendEnvironment}
+  @module("@aws-sdk/client-amplify") @new
+  external new_: request => t = "GetBackendEnvironmentCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteWebhook = {
-  type t;
-  type request = {
-webhookId: webhookId
-}
-  type response = {
-webhook: webhook
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "DeleteWebhookCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+  type t
+  type request = {webhookId: webhookId}
+  type response = {webhook: webhook}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "DeleteWebhookCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteJob = {
-  type t;
+  type t
   type request = {
-jobId: jobId,
-  branchName: branchName,
-  appId: appId
-}
-  type response = {
-jobSummary: jobSummary
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "DeleteJobCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    jobId: jobId,
+    branchName: branchName,
+    appId: appId,
+  }
+  type response = {jobSummary: jobSummary}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "DeleteJobCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBackendEnvironment = {
-  type t;
+  type t
   type request = {
-environmentName: environmentName,
-  appId: appId
-}
-  type response = {
-backendEnvironment: backendEnvironment
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "DeleteBackendEnvironmentCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    environmentName: environmentName,
+    appId: appId,
+  }
+  type response = {backendEnvironment: backendEnvironment}
+  @module("@aws-sdk/client-amplify") @new
+  external new_: request => t = "DeleteBackendEnvironmentCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateWebhook = {
-  type t;
+  type t
   type request = {
-description: option<description>,
-  branchName: branchName,
-  appId: appId
-}
-  type response = {
-webhook: webhook
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "CreateWebhookCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    description: option<description>,
+    branchName: branchName,
+    appId: appId,
+  }
+  type response = {webhook: webhook}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "CreateWebhookCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDeployment = {
-  type t;
+  type t
   type request = {
-fileMap: option<fileMap>,
-  branchName: branchName,
-  appId: appId
-}
+    fileMap: option<fileMap>,
+    branchName: branchName,
+    appId: appId,
+  }
   type response = {
-zipUploadUrl: uploadUrl,
-  fileUploadUrls: fileUploadUrls,
-  jobId: option<jobId>
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "CreateDeploymentCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    zipUploadUrl: uploadUrl,
+    fileUploadUrls: fileUploadUrls,
+    jobId: option<jobId>,
+  }
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "CreateDeploymentCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBackendEnvironment = {
-  type t;
+  type t
   type request = {
-deploymentArtifacts: option<deploymentArtifacts>,
-  stackName: option<stackName>,
-  environmentName: environmentName,
-  appId: appId
-}
-  type response = {
-backendEnvironment: backendEnvironment
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "CreateBackendEnvironmentCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    deploymentArtifacts: option<deploymentArtifacts>,
+    stackName: option<stackName>,
+    environmentName: environmentName,
+    appId: appId,
+  }
+  type response = {backendEnvironment: backendEnvironment}
+  @module("@aws-sdk/client-amplify") @new
+  external new_: request => t = "CreateBackendEnvironmentCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateBranch = {
-  type t;
+  type t
   type request = {
-backendEnvironmentArn: option<backendEnvironmentArn>,
-  pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
-  enablePullRequestPreview: option<enablePullRequestPreview>,
-  displayName: option<displayName>,
-  ttl: option<ttl>,
-  buildSpec: option<buildSpec>,
-  enablePerformanceMode: option<enablePerformanceMode>,
-  enableBasicAuth: option<enableBasicAuth>,
-  basicAuthCredentials: option<basicAuthCredentials>,
-  environmentVariables: option<environmentVariables>,
-  enableAutoBuild: option<enableAutoBuild>,
-  enableNotification: option<enableNotification>,
-  stage: option<stage>,
-  framework: option<framework>,
-  description: option<description>,
-  branchName: branchName,
-  appId: appId
-}
-  type response = {
-branch: branch
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "UpdateBranchCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    backendEnvironmentArn: option<backendEnvironmentArn>,
+    pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
+    enablePullRequestPreview: option<enablePullRequestPreview>,
+    displayName: option<displayName>,
+    ttl: option<ttl>,
+    buildSpec: option<buildSpec>,
+    enablePerformanceMode: option<enablePerformanceMode>,
+    enableBasicAuth: option<enableBasicAuth>,
+    basicAuthCredentials: option<basicAuthCredentials>,
+    environmentVariables: option<environmentVariables>,
+    enableAutoBuild: option<enableAutoBuild>,
+    enableNotification: option<enableNotification>,
+    stage: option<stage>,
+    framework: option<framework>,
+    description: option<description>,
+    branchName: branchName,
+    appId: appId,
+  }
+  type response = {branch: branch}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "UpdateBranchCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListWebhooks = {
-  type t;
+  type t
   type request = {
-maxResults: option<maxResults>,
-  nextToken: option<nextToken>,
-  appId: appId
-}
+    maxResults: option<maxResults>,
+    nextToken: option<nextToken>,
+    appId: appId,
+  }
   type response = {
-nextToken: option<nextToken>,
-  webhooks: webhooks
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListWebhooksCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    nextToken: option<nextToken>,
+    webhooks: webhooks,
+  }
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListWebhooksCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListJobs = {
-  type t;
+  type t
   type request = {
-maxResults: option<maxResults>,
-  nextToken: option<nextToken>,
-  branchName: branchName,
-  appId: appId
-}
+    maxResults: option<maxResults>,
+    nextToken: option<nextToken>,
+    branchName: branchName,
+    appId: appId,
+  }
   type response = {
-nextToken: option<nextToken>,
-  jobSummaries: jobSummaries
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListJobsCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    nextToken: option<nextToken>,
+    jobSummaries: jobSummaries,
+  }
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListJobsCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBackendEnvironments = {
-  type t;
+  type t
   type request = {
-maxResults: option<maxResults>,
-  nextToken: option<nextToken>,
-  environmentName: option<environmentName>,
-  appId: appId
-}
+    maxResults: option<maxResults>,
+    nextToken: option<nextToken>,
+    environmentName: option<environmentName>,
+    appId: appId,
+  }
   type response = {
-nextToken: option<nextToken>,
-  backendEnvironments: backendEnvironments
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListBackendEnvironmentsCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    nextToken: option<nextToken>,
+    backendEnvironments: backendEnvironments,
+  }
+  @module("@aws-sdk/client-amplify") @new
+  external new_: request => t = "ListBackendEnvironmentsCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListArtifacts = {
-  type t;
+  type t
   type request = {
-maxResults: option<maxResults>,
-  nextToken: option<nextToken>,
-  jobId: jobId,
-  branchName: branchName,
-  appId: appId
-}
+    maxResults: option<maxResults>,
+    nextToken: option<nextToken>,
+    jobId: jobId,
+    branchName: branchName,
+    appId: appId,
+  }
   type response = {
-nextToken: option<nextToken>,
-  artifacts: artifacts
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListArtifactsCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    nextToken: option<nextToken>,
+    artifacts: artifacts,
+  }
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListArtifactsCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetBranch = {
-  type t;
+  type t
   type request = {
-branchName: branchName,
-  appId: appId
-}
-  type response = {
-branch: branch
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "GetBranchCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    branchName: branchName,
+    appId: appId,
+  }
+  type response = {branch: branch}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GetBranchCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteBranch = {
-  type t;
+  type t
   type request = {
-branchName: branchName,
-  appId: appId
-}
-  type response = {
-branch: branch
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "DeleteBranchCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    branchName: branchName,
+    appId: appId,
+  }
+  type response = {branch: branch}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "DeleteBranchCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateBranch = {
-  type t;
+  type t
   type request = {
-backendEnvironmentArn: option<backendEnvironmentArn>,
-  pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
-  enablePullRequestPreview: option<enablePullRequestPreview>,
-  displayName: option<displayName>,
-  ttl: option<ttl>,
-  buildSpec: option<buildSpec>,
-  tags: option<tagMap>,
-  enablePerformanceMode: option<enablePerformanceMode>,
-  enableBasicAuth: option<enableBasicAuth>,
-  basicAuthCredentials: option<basicAuthCredentials>,
-  environmentVariables: option<environmentVariables>,
-  enableAutoBuild: option<enableAutoBuild>,
-  enableNotification: option<enableNotification>,
-  framework: option<framework>,
-  stage: option<stage>,
-  description: option<description>,
-  branchName: branchName,
-  appId: appId
-}
-  type response = {
-branch: branch
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "CreateBranchCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    backendEnvironmentArn: option<backendEnvironmentArn>,
+    pullRequestEnvironmentName: option<pullRequestEnvironmentName>,
+    enablePullRequestPreview: option<enablePullRequestPreview>,
+    displayName: option<displayName>,
+    ttl: option<ttl>,
+    buildSpec: option<buildSpec>,
+    tags: option<tagMap>,
+    enablePerformanceMode: option<enablePerformanceMode>,
+    enableBasicAuth: option<enableBasicAuth>,
+    basicAuthCredentials: option<basicAuthCredentials>,
+    environmentVariables: option<environmentVariables>,
+    enableAutoBuild: option<enableAutoBuild>,
+    enableNotification: option<enableNotification>,
+    framework: option<framework>,
+    stage: option<stage>,
+    description: option<description>,
+    branchName: branchName,
+    appId: appId,
+  }
+  type response = {branch: branch}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "CreateBranchCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateApp = {
-  type t;
+  type t
   type request = {
-accessToken: option<accessToken>,
-  oauthToken: option<oauthToken>,
-  repository: option<repository>,
-  autoBranchCreationConfig: option<autoBranchCreationConfig>,
-  autoBranchCreationPatterns: option<autoBranchCreationPatterns>,
-  enableAutoBranchCreation: option<enableAutoBranchCreation>,
-  customHeaders: option<customHeaders>,
-  buildSpec: option<buildSpec>,
-  customRules: option<customRules>,
-  basicAuthCredentials: option<basicAuthCredentials>,
-  enableBasicAuth: option<enableBasicAuth>,
-  enableBranchAutoDeletion: option<enableBranchAutoDeletion>,
-  enableBranchAutoBuild: option<enableAutoBuild>,
-  environmentVariables: option<environmentVariables>,
-  iamServiceRoleArn: option<serviceRoleArn>,
-  platform: option<platform>,
-  description: option<description>,
-  name: option<name>,
-  appId: appId
-}
-  type response = {
-app: app
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "UpdateAppCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    accessToken: option<accessToken>,
+    oauthToken: option<oauthToken>,
+    repository: option<repository>,
+    autoBranchCreationConfig: option<autoBranchCreationConfig>,
+    autoBranchCreationPatterns: option<autoBranchCreationPatterns>,
+    enableAutoBranchCreation: option<enableAutoBranchCreation>,
+    customHeaders: option<customHeaders>,
+    buildSpec: option<buildSpec>,
+    customRules: option<customRules>,
+    basicAuthCredentials: option<basicAuthCredentials>,
+    enableBasicAuth: option<enableBasicAuth>,
+    enableBranchAutoDeletion: option<enableBranchAutoDeletion>,
+    enableBranchAutoBuild: option<enableAutoBuild>,
+    environmentVariables: option<environmentVariables>,
+    iamServiceRoleArn: option<serviceRoleArn>,
+    platform: option<platform>,
+    description: option<description>,
+    name: option<name>,
+    appId: appId,
+  }
+  type response = {app: app}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "UpdateAppCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListBranches = {
-  type t;
+  type t
   type request = {
-maxResults: option<maxResults>,
-  nextToken: option<nextToken>,
-  appId: appId
-}
+    maxResults: option<maxResults>,
+    nextToken: option<nextToken>,
+    appId: appId,
+  }
   type response = {
-nextToken: option<nextToken>,
-  branches: branches
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListBranchesCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    nextToken: option<nextToken>,
+    branches: branches,
+  }
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListBranchesCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetApp = {
-  type t;
-  type request = {
-appId: appId
-}
-  type response = {
-app: app
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "GetAppCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+  type t
+  type request = {appId: appId}
+  type response = {app: app}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GetAppCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteApp = {
-  type t;
-  type request = {
-appId: appId
-}
-  type response = {
-app: app
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "DeleteAppCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+  type t
+  type request = {appId: appId}
+  type response = {app: app}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "DeleteAppCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateApp = {
-  type t;
+  type t
   type request = {
-autoBranchCreationConfig: option<autoBranchCreationConfig>,
-  autoBranchCreationPatterns: option<autoBranchCreationPatterns>,
-  enableAutoBranchCreation: option<enableAutoBranchCreation>,
-  customHeaders: option<customHeaders>,
-  buildSpec: option<buildSpec>,
-  tags: option<tagMap>,
-  customRules: option<customRules>,
-  basicAuthCredentials: option<basicAuthCredentials>,
-  enableBasicAuth: option<enableBasicAuth>,
-  enableBranchAutoDeletion: option<enableBranchAutoDeletion>,
-  enableBranchAutoBuild: option<enableBranchAutoBuild>,
-  environmentVariables: option<environmentVariables>,
-  accessToken: option<accessToken>,
-  oauthToken: option<oauthToken>,
-  iamServiceRoleArn: option<serviceRoleArn>,
-  platform: option<platform>,
-  repository: option<repository>,
-  description: option<description>,
-  name: name
-}
-  type response = {
-app: app
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "CreateAppCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    autoBranchCreationConfig: option<autoBranchCreationConfig>,
+    autoBranchCreationPatterns: option<autoBranchCreationPatterns>,
+    enableAutoBranchCreation: option<enableAutoBranchCreation>,
+    customHeaders: option<customHeaders>,
+    buildSpec: option<buildSpec>,
+    tags: option<tagMap>,
+    customRules: option<customRules>,
+    basicAuthCredentials: option<basicAuthCredentials>,
+    enableBasicAuth: option<enableBasicAuth>,
+    enableBranchAutoDeletion: option<enableBranchAutoDeletion>,
+    enableBranchAutoBuild: option<enableBranchAutoBuild>,
+    environmentVariables: option<environmentVariables>,
+    accessToken: option<accessToken>,
+    oauthToken: option<oauthToken>,
+    iamServiceRoleArn: option<serviceRoleArn>,
+    platform: option<platform>,
+    repository: option<repository>,
+    description: option<description>,
+    name: name,
+  }
+  type response = {app: app}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "CreateAppCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module UpdateDomainAssociation = {
-  type t;
+  type t
   type request = {
-autoSubDomainIAMRole: option<autoSubDomainIAMRole>,
-  autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
-  subDomainSettings: subDomainSettings,
-  enableAutoSubDomain: option<enableAutoSubDomain>,
-  domainName: domainName,
-  appId: appId
-}
-  type response = {
-domainAssociation: domainAssociation
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "UpdateDomainAssociationCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    autoSubDomainIAMRole: option<autoSubDomainIAMRole>,
+    autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
+    subDomainSettings: subDomainSettings,
+    enableAutoSubDomain: option<enableAutoSubDomain>,
+    domainName: domainName,
+    appId: appId,
+  }
+  type response = {domainAssociation: domainAssociation}
+  @module("@aws-sdk/client-amplify") @new
+  external new_: request => t = "UpdateDomainAssociationCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListApps = {
-  type t;
+  type t
   type request = {
-maxResults: option<maxResults>,
-  nextToken: option<nextToken>
-}
+    maxResults: option<maxResults>,
+    nextToken: option<nextToken>,
+  }
   type response = {
-nextToken: option<nextToken>,
-  apps: apps
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListAppsCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    nextToken: option<nextToken>,
+    apps: apps,
+  }
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "ListAppsCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetJob = {
-  type t;
+  type t
   type request = {
-jobId: jobId,
-  branchName: branchName,
-  appId: appId
-}
-  type response = {
-job: job
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "GetJobCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    jobId: jobId,
+    branchName: branchName,
+    appId: appId,
+  }
+  type response = {job: job}
+  @module("@aws-sdk/client-amplify") @new external new_: request => t = "GetJobCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module GetDomainAssociation = {
-  type t;
+  type t
   type request = {
-domainName: domainName,
-  appId: appId
-}
-  type response = {
-domainAssociation: domainAssociation
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "GetDomainAssociationCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    domainName: domainName,
+    appId: appId,
+  }
+  type response = {domainAssociation: domainAssociation}
+  @module("@aws-sdk/client-amplify") @new
+  external new_: request => t = "GetDomainAssociationCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DeleteDomainAssociation = {
-  type t;
+  type t
   type request = {
-domainName: domainName,
-  appId: appId
-}
-  type response = {
-domainAssociation: domainAssociation
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "DeleteDomainAssociationCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    domainName: domainName,
+    appId: appId,
+  }
+  type response = {domainAssociation: domainAssociation}
+  @module("@aws-sdk/client-amplify") @new
+  external new_: request => t = "DeleteDomainAssociationCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module CreateDomainAssociation = {
-  type t;
+  type t
   type request = {
-autoSubDomainIAMRole: option<autoSubDomainIAMRole>,
-  autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
-  subDomainSettings: subDomainSettings,
-  enableAutoSubDomain: option<enableAutoSubDomain>,
-  domainName: domainName,
-  appId: appId
-}
-  type response = {
-domainAssociation: domainAssociation
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "CreateDomainAssociationCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    autoSubDomainIAMRole: option<autoSubDomainIAMRole>,
+    autoSubDomainCreationPatterns: option<autoSubDomainCreationPatterns>,
+    subDomainSettings: subDomainSettings,
+    enableAutoSubDomain: option<enableAutoSubDomain>,
+    domainName: domainName,
+    appId: appId,
+  }
+  type response = {domainAssociation: domainAssociation}
+  @module("@aws-sdk/client-amplify") @new
+  external new_: request => t = "CreateDomainAssociationCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListDomainAssociations = {
-  type t;
+  type t
   type request = {
-maxResults: option<maxResults>,
-  nextToken: option<nextToken>,
-  appId: appId
-}
+    maxResults: option<maxResults>,
+    nextToken: option<nextToken>,
+    appId: appId,
+  }
   type response = {
-nextToken: option<nextToken>,
-  domainAssociations: domainAssociations
-}
-  @module("@aws-sdk/client-amplify") @new external new_: (request) => t = "ListDomainAssociationsCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    nextToken: option<nextToken>,
+    domainAssociations: domainAssociations,
+  }
+  @module("@aws-sdk/client-amplify") @new
+  external new_: request => t = "ListDomainAssociationsCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

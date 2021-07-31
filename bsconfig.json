@@ -1,5 +1,6 @@
 {
-  "name": "rescript-project-template",
+  "name": "rescript-aws-sdk-v3",
+  "namespace": "aws-sdk-v3",
   "version": "0.0.1",
   "sources": {
     "dir" : "src",
@@ -16,5 +17,5 @@
   ],
   "warnings": {
     "error" : "+101"
-  },
+  }
 }

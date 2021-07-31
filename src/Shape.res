@@ -40,9 +40,7 @@ type mapShapeDetails = {
   mapValue: mapKeyValue,
 }
 
-type timestampShapeDetails = {
-  traits: option<array<Trait.t>>
-}
+type timestampShapeDetails = {traits: option<array<Trait.t>>}
 
 type shapeDescriptor =
   | ListShape(listShapeDetails)
@@ -65,7 +63,7 @@ type shapeDescriptor =
 
 type t = {
   name: string,
-  descriptor: shapeDescriptor
+  descriptor: shapeDescriptor,
 }
 
 let isServiceShape = shape =>

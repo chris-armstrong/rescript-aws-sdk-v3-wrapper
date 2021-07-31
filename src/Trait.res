@@ -19,7 +19,7 @@ type arnReferenceDetails = {
   resource: option<string>,
 }
 
-type reference = { resource: string, service: option<string> };
+type reference = {resource: string, service: option<string>}
 
 type clientEndpointDiscoveryDetails = {operation: string, error: string}
 

@@ -1,8 +1,8 @@
 # TODO
 
-* Cycle detection and type rec code generation for same
+* ~~Cycle detection and type rec code generation for same~~ (a naive cycle detection has been added to unlock important cases but there is still some cycle detections not working)
 * Union types
-* Improve field name generation with multiple capital letters
+* ~~Improve field name generation with multiple capital letters~~
 * Consistent polymorphic variant generation (convert kebab-case, snake-case, space case etc. to consistent title case identifiers)
 * Reserved word filtering and processing for field and type names and variant types
 * Replace exceptions with Errors

@@ -1,17 +1,18 @@
 type responseMetadata = {
-httpStatusCode: option<float>,
+  httpStatusCode: option<float>,
   requestId: option<string>,
   extendedRequestId: option<string>,
   cfId: option<string>,
   attempts: option<int>,
-  totalRetryDelay: option<int>
+  totalRetryDelay: option<int>,
 }
-type awsServiceClient;
-@module("@aws-sdk/client-awsssoportal") @new external createClient: unit => awsServiceClient = "SSOClient";
+type awsServiceClient
+@module("@aws-sdk/client-awsssoportal") @new
+external createClient: unit => awsServiceClient = "SSOClient"
 type baseString = string
 type baseBoolean = bool
 type baseInteger = int
-type baseTimestamp = Js.Date.t;
+type baseTimestamp = Js.Date.t
 type baseLong = float
 type sessionTokenType = string
 type secretAccessKeyType = string
@@ -26,74 +27,72 @@ type accountIdType = string
 type accessTokenType = string
 type accessKeyType = string
 type roleInfo = {
-accountId: option<accountIdType>,
-  roleName: option<roleNameType>
+  accountId: option<accountIdType>,
+  roleName: option<roleNameType>,
 }
 type roleCredentials = {
-expiration: option<expirationTimestampType>,
+  expiration: option<expirationTimestampType>,
   sessionToken: option<sessionTokenType>,
   secretAccessKey: option<secretAccessKeyType>,
-  accessKeyId: option<accessKeyType>
+  accessKeyId: option<accessKeyType>,
 }
 type accountInfo = {
-emailAddress: option<emailAddressType>,
+  emailAddress: option<emailAddressType>,
   accountName: option<accountNameType>,
-  accountId: option<accountIdType>
+  accountId: option<accountIdType>,
 }
 type roleListType = array<roleInfo>
 type accountListType = array<accountInfo>
 
 module Logout = {
-  type t;
-  type request = {
-accessToken: accessTokenType
-}
-  
-  @module("@aws-sdk/client-awsssoportal") @new external new_: (request) => t = "LogoutCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send";
+  type t
+  type request = {accessToken: accessTokenType}
+
+  @module("@aws-sdk/client-awsssoportal") @new external new_: request => t = "LogoutCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<unit> = "send"
 }
 
 module GetRoleCredentials = {
-  type t;
+  type t
   type request = {
-accessToken: accessTokenType,
-  accountId: accountIdType,
-  roleName: roleNameType
-}
-  type response = {
-roleCredentials: option<roleCredentials>
-}
-  @module("@aws-sdk/client-awsssoportal") @new external new_: (request) => t = "GetRoleCredentialsCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    accessToken: accessTokenType,
+    accountId: accountIdType,
+    roleName: roleNameType,
+  }
+  type response = {roleCredentials: option<roleCredentials>}
+  @module("@aws-sdk/client-awsssoportal") @new
+  external new_: request => t = "GetRoleCredentialsCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAccounts = {
-  type t;
+  type t
   type request = {
-accessToken: accessTokenType,
-  maxResults: option<maxResultType>,
-  nextToken: option<nextTokenType>
-}
+    accessToken: accessTokenType,
+    maxResults: option<maxResultType>,
+    nextToken: option<nextTokenType>,
+  }
   type response = {
-accountList: option<accountListType>,
-  nextToken: option<nextTokenType>
-}
-  @module("@aws-sdk/client-awsssoportal") @new external new_: (request) => t = "ListAccountsCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    accountList: option<accountListType>,
+    nextToken: option<nextTokenType>,
+  }
+  @module("@aws-sdk/client-awsssoportal") @new external new_: request => t = "ListAccountsCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListAccountRoles = {
-  type t;
+  type t
   type request = {
-accountId: accountIdType,
-  accessToken: accessTokenType,
-  maxResults: option<maxResultType>,
-  nextToken: option<nextTokenType>
-}
+    accountId: accountIdType,
+    accessToken: accessTokenType,
+    maxResults: option<maxResultType>,
+    nextToken: option<nextTokenType>,
+  }
   type response = {
-roleList: option<roleListType>,
-  nextToken: option<nextTokenType>
-}
-  @module("@aws-sdk/client-awsssoportal") @new external new_: (request) => t = "ListAccountRolesCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    roleList: option<roleListType>,
+    nextToken: option<nextTokenType>,
+  }
+  @module("@aws-sdk/client-awsssoportal") @new
+  external new_: request => t = "ListAccountRolesCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }

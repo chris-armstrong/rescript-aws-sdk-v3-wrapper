@@ -11,7 +11,8 @@ let generateField = (~asName=?, fieldName, typeName) =>
       fieldName,
     )}: ${typeName}`
 
-let generateRecordTypeDefinition = members => Array.length(members) == 0 ? "unit" : `{\n${Array.joinWith(members, ",\n  ", x => x)}\n}`
+let generateRecordTypeDefinition = members =>
+  Array.length(members) == 0 ? "unit" : `{\n${Array.joinWith(members, ",\n  ", x => x)}\n}`
 
 let generateIntegerShape = () => "int"
 let generateLongShape = () => "float"
@@ -34,18 +35,18 @@ let generateResponseMetadata = () => {
   )
 }
 
-let generateExceptionType = (members) => {
-    generateRecordTypeDefinition(
-      Array.concat(
-        [
-          generateField("name", "string"),
-          generateField(~asName="$fault", "fault", "[#client | #server]"),
-          generateField(~asName="$service", "service", "option<string>"),
-          generateField(~asName="$metadata", "metadata", "responseMetadata"),
-        ],
-        members,
-      ),
-    )
+let generateExceptionType = members => {
+  generateRecordTypeDefinition(
+    Array.concat(
+      [
+        generateField("name", "string"),
+        generateField(~asName="$fault", "fault", "[#client | #server]"),
+        generateField(~asName="$service", "service", "option<string>"),
+        generateField(~asName="$metadata", "metadata", "responseMetadata"),
+      ],
+      members,
+    ),
+  )
 }
 
 let generateStringShape = (details: Shape.primitiveShapeDetails) => {
@@ -90,8 +91,7 @@ let generateUnionShape = (details: Shape.structureShapeDetails) => {
   generateStructureShape(details, ())
 }
 
-let generateListShape = (target) =>
-  `array<${safeTypeName(target)}>`
+let generateListShape = target => `array<${safeTypeName(target)}>`
 
 let generateMapShape = (_, mapValue: Shape.mapKeyValue) => {
   let valueType = safeTypeName(mapValue.target)
@@ -139,7 +139,8 @@ type operationStructure =
   | OperationStructureNone
 let generateOperationStructureType = (varName, opStruct) =>
   switch opStruct {
-  | OperationStructure(details) => generateType(`#${varName}`, generateStructureShape(details, ~indent=2, ()))
+  | OperationStructure(details) =>
+    generateType(`#${varName}`, generateStructureShape(details, ~indent=2, ()))
   | OperationStructureRef(name) => generateType(`#${varName}`, safeTypeName(name))
   | OperationStructureNone => ""
   }
@@ -167,7 +168,7 @@ let generateOperationModule = (
   `  @send external rawSend: (awsServiceClient, t) => ${outputType} = "send";\n` ++ `}\n`
 }
 
-let generateTypeTarget = (descriptor) => {
+let generateTypeTarget = descriptor => {
   open Shape
   // Js.log(name)
   switch descriptor {
@@ -197,6 +198,8 @@ let generateTypeBlock = ({name, descriptor}: Shape.t) => {
 }
 
 let generateRecursiveTypeBlock = (shapes: array<Shape.t>) => {
-  let shapeTypes = Array.map(shapes, shape => `${safeTypeName(shape.name)} = ${generateTypeTarget(shape.descriptor)}`)
+  let shapeTypes = Array.map(shapes, shape =>
+    `${safeTypeName(shape.name)} = ${generateTypeTarget(shape.descriptor)}`
+  )
   "type rec " ++ Array.joinWith(shapeTypes, " and ", block => block)
 }

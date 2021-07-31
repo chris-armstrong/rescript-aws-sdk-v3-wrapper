@@ -1,21 +1,26 @@
 type responseMetadata = {
-httpStatusCode: option<float>,
+  httpStatusCode: option<float>,
   requestId: option<string>,
   extendedRequestId: option<string>,
   cfId: option<string>,
   attempts: option<int>,
-  totalRetryDelay: option<int>
+  totalRetryDelay: option<int>,
 }
-type awsServiceClient;
-@module("@aws-sdk/client-identitystore") @new external createClient: unit => awsServiceClient = "IdentitystoreClient";
+type awsServiceClient
+@module("@aws-sdk/client-identitystore") @new
+external createClient: unit => awsServiceClient = "IdentitystoreClient"
 type baseString = string
 type baseBoolean = bool
 type baseInteger = int
-type baseTimestamp = Js.Date.t;
+type baseTimestamp = Js.Date.t
 type baseLong = float
 type userName = string
 type sensitiveStringType = string
-type resourceType = [@as("IDENTITY_STORE") #IDENTITY_STORE | @as("USER") #USER | @as("GROUP") #GROUP]
+type resourceType = [
+  | @as("IDENTITY_STORE") #IDENTITY_STORE
+  | @as("USER") #USER
+  | @as("GROUP") #GROUP
+]
 type resourceId = string
 type requestId = string
 type nextToken = string
@@ -25,77 +30,77 @@ type identityStoreId = string
 type groupDisplayName = string
 type attributePath = string
 type user = {
-@as("UserId") userId: resourceId,
-  @as("UserName") userName: userName
+  @as("UserId") userId: resourceId,
+  @as("UserName") userName: userName,
 }
 type group = {
-@as("DisplayName") displayName: groupDisplayName,
-  @as("GroupId") groupId: resourceId
+  @as("DisplayName") displayName: groupDisplayName,
+  @as("GroupId") groupId: resourceId,
 }
 type filter = {
-@as("AttributeValue") attributeValue: sensitiveStringType,
-  @as("AttributePath") attributePath: attributePath
+  @as("AttributeValue") attributeValue: sensitiveStringType,
+  @as("AttributePath") attributePath: attributePath,
 }
 type users = array<user>
 type groups = array<group>
 type filters = array<filter>
 
 module DescribeUser = {
-  type t;
+  type t
   type request = {
-@as("UserId") userId: resourceId,
-  @as("IdentityStoreId") identityStoreId: identityStoreId
-}
+    @as("UserId") userId: resourceId,
+    @as("IdentityStoreId") identityStoreId: identityStoreId,
+  }
   type response = {
-@as("UserId") userId: resourceId,
-  @as("UserName") userName: userName
-}
-  @module("@aws-sdk/client-identitystore") @new external new_: (request) => t = "DescribeUserCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    @as("UserId") userId: resourceId,
+    @as("UserName") userName: userName,
+  }
+  @module("@aws-sdk/client-identitystore") @new external new_: request => t = "DescribeUserCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module DescribeGroup = {
-  type t;
+  type t
   type request = {
-@as("GroupId") groupId: resourceId,
-  @as("IdentityStoreId") identityStoreId: identityStoreId
-}
+    @as("GroupId") groupId: resourceId,
+    @as("IdentityStoreId") identityStoreId: identityStoreId,
+  }
   type response = {
-@as("DisplayName") displayName: groupDisplayName,
-  @as("GroupId") groupId: resourceId
-}
-  @module("@aws-sdk/client-identitystore") @new external new_: (request) => t = "DescribeGroupCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    @as("DisplayName") displayName: groupDisplayName,
+    @as("GroupId") groupId: resourceId,
+  }
+  @module("@aws-sdk/client-identitystore") @new external new_: request => t = "DescribeGroupCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListUsers = {
-  type t;
+  type t
   type request = {
-@as("Filters") filters: option<filters>,
-  @as("NextToken") nextToken: option<nextToken>,
-  @as("MaxResults") maxResults: option<maxResults>,
-  @as("IdentityStoreId") identityStoreId: identityStoreId
-}
+    @as("Filters") filters: option<filters>,
+    @as("NextToken") nextToken: option<nextToken>,
+    @as("MaxResults") maxResults: option<maxResults>,
+    @as("IdentityStoreId") identityStoreId: identityStoreId,
+  }
   type response = {
-@as("NextToken") nextToken: option<nextToken>,
-  @as("Users") users: users
-}
-  @module("@aws-sdk/client-identitystore") @new external new_: (request) => t = "ListUsersCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    @as("NextToken") nextToken: option<nextToken>,
+    @as("Users") users: users,
+  }
+  @module("@aws-sdk/client-identitystore") @new external new_: request => t = "ListUsersCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
 
 module ListGroups = {
-  type t;
+  type t
   type request = {
-@as("Filters") filters: option<filters>,
-  @as("NextToken") nextToken: option<nextToken>,
-  @as("MaxResults") maxResults: option<maxResults>,
-  @as("IdentityStoreId") identityStoreId: identityStoreId
-}
+    @as("Filters") filters: option<filters>,
+    @as("NextToken") nextToken: option<nextToken>,
+    @as("MaxResults") maxResults: option<maxResults>,
+    @as("IdentityStoreId") identityStoreId: identityStoreId,
+  }
   type response = {
-@as("NextToken") nextToken: option<nextToken>,
-  @as("Groups") groups: groups
-}
-  @module("@aws-sdk/client-identitystore") @new external new_: (request) => t = "ListGroupsCommand";
-  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send";
+    @as("NextToken") nextToken: option<nextToken>,
+    @as("Groups") groups: groups,
+  }
+  @module("@aws-sdk/client-identitystore") @new external new_: request => t = "ListGroupsCommand"
+  @send external rawSend: (awsServiceClient, t) => Js.Promise.t<response> = "send"
 }
